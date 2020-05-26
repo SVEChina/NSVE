@@ -7,6 +7,8 @@
 #include <sys/time.h>
 #include "SVThreadPool.h"
 
+using namespace sv;
+
 SVThreadPool::SVThreadPool(){
 }
 

@@ -10,8 +10,9 @@
 
 
 #include "SVMtlCore.h"
+
 namespace sv {
-    
+
     namespace mtl{
         
         class SVMtlBillboard : public SVMtlCore {
@@ -26,16 +27,16 @@ namespace sv {
             
             virtual SVMtlCorePtr clone();
             
-            void setObjectPos(FVec3 &_pos);//物体世界位置
+            void setObjectPos(util::FVec3 &_pos);//物体世界位置
             
-            void setViewPos(FVec3 &_viewPos);
+            void setViewPos(util::FVec3 &_viewPos);
             
             void setUp(FVec3 &_up);
         protected:
-            virtual void _submitUniform(SVRendererPtr _render);
-            FVec3 m_objPos;
-            FVec3 m_viewPos;
-            FVec3 m_up;
+            virtual void _submitUniform(render::SVRendererPtr _render);
+            util::FVec3 m_objPos;
+            util::FVec3 m_viewPos;
+            util::FVec3 m_up;
         };
 
     }//!namespace mtl

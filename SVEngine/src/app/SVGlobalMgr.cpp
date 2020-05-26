@@ -19,7 +19,6 @@
 #include "../basesys/SVPhysicsWorldMgr.h"
 #include "../module/SVModuleSys.h"
 #include "../light/SVLightSys.h"
-#include "../ui/SVUIMgr.h"
 #include "../file/SVFileMgr.h"
 #include "../event/SVEventMgr.h"
 #include "../mtl/SVTexMgr.h"
@@ -105,9 +104,6 @@ void SVGlobalMgr::init() {
     //灯光系统
     m_pLightSys = MakeSharedPtr<SVLightSys>(mApp);
     m_pLightSys->init();
-    //UI系统
-    m_pUIMgr = MakeSharedPtr<SVUIMgr>(mApp);
-    m_pUIMgr->init();
     //组件系统
     m_pModuleSys = MakeSharedPtr<SVModuleSys>(mApp);
     m_pModuleSys->init();

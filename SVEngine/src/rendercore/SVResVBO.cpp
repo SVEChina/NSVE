@@ -68,13 +68,13 @@ SVResVBO::~SVResVBO(){
     mApp->m_IDPool.returnUID(m_uid);
 }
 
-void SVResVBO::create(SVRendererPtr _renderer) {
+void SVResVBO::create(render::SVRendererPtr _renderer) {
 }
 
-void SVResVBO::destroy(SVRendererPtr _renderer) {
+void SVResVBO::destroy(render::SVRendererPtr _renderer) {
 }
 
-void SVResVBO::render(SVRendererPtr _renderer) {
+void SVResVBO::render(render::SVRendererPtr _renderer) {
     
 }
 

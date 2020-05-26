@@ -81,14 +81,14 @@ SVDeformImageMove::~SVDeformImageMove(){
     m_pIUMP = nullptr;
     m_dataPoint = nullptr;
     m_fbo = nullptr;
-    SVRendererPtr t_renderer = mApp->getRenderer();
+    render::SVRendererPtr t_renderer = mApp->getRenderer();
     if(t_renderer) {
         t_renderer->destroySVTex(E_TEX_FILTER_DEFORM02);
     }
 }
 
 void SVDeformImageMove::init(SVTexturePtr _intex,SVTexturePtr _texout){
-    SVRendererPtr t_renderer =  mApp->getRenderer();
+    render::SVRendererPtr t_renderer =  mApp->getRenderer();
     if(t_renderer && _intex && _texout){
         m_tt_w = _intex->getwidth();
         m_tt_h = _intex->getheight();

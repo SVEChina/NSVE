@@ -15,6 +15,11 @@
 #include "../core/SVGeoGen.h"
 #include "../mtl/SVMtlNocolor.h"
 
+using namespace sv::node;
+using namespace sv::mtl;
+using namespace sv::render;
+using namespace sv::util;
+
 SV3DBox::SV3DBox(SVInst *_app)
 : SVNode(_app) {
     ntype = "SV3DBox";

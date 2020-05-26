@@ -20,7 +20,7 @@ namespace sv {
             
             ~SVStringHelper();
             
-            static SVString jsonFormat(const SVString inString);
+            static util::SVString jsonFormat(const util::SVString inString);
             
             static void encrypt(c8 *_str, s32 *_keys, u32 _keyCount);
             

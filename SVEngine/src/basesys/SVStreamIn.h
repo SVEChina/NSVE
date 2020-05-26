@@ -48,14 +48,14 @@ namespace sv {
             void _updateTrans();
             bool m_useGPU;
             SVTransPtr m_trans;
-            SVNodePtr m_showNode;
+            node::SVNodePtr m_showNode;
             SVTEXTYPE m_tt;
             PICFORMATE m_formate;
             //
-            SVTexturePtr m_texResult;
-            SVTexturePtr m_tex0;
-            SVTexturePtr m_tex1;
-            SVTexturePtr m_tex2;
+            mtl::SVTexturePtr m_texResult;
+            mtl::SVTexturePtr m_tex0;
+            mtl::SVTexturePtr m_tex1;
+            mtl::SVTexturePtr m_tex2;
         };
         
         //
@@ -85,7 +85,7 @@ namespace sv {
             
         protected:
             //SVTEXTYPE
-            typedef SVMap<SVString,StreamInCorePtr> TEXMAP;
+            typedef util::SVMap<util::SVString,StreamInCorePtr> TEXMAP;
             TEXMAP m_TexMap;
             //
             SVLockPtr m_streamLock;

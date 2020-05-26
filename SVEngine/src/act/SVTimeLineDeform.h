@@ -23,12 +23,12 @@ namespace sv {
             
             void initKey();
             
-            void enter(SVNodePtr _nodePtr);
+            void enter(node::SVNodePtr _nodePtr);
             
-            void exit(SVNodePtr _nodePtr);
+            void exit(node::SVNodePtr _nodePtr);
             
         protected:
-            void _execkey(SVNodePtr _nodePtr,f32 _dt);
+            void _execkey(node::SVNodePtr _nodePtr,f32 _dt);
             
         };
         

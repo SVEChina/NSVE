@@ -24,7 +24,7 @@ namespace sv{
         void update(f32 _dt){}
         
     protected:
-        SVString m_subProcType;
+        util::SVString m_subProcType;
     };
     
 }//!namespace sv

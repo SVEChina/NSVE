@@ -34,7 +34,7 @@ SVParseMain::SVParseMain(SVInst *_app)
     m_app = _app;
     _registDictionary("SVSpineNode", SVParseAnimate::parseAnim);
     _registDictionary("SVFrameAniNode", SVParseFrameAni::parseFrameAni);
-    _registDictionary("SV2DFaceMaskSTNode", SVParseMask::parseMask);
+//    _registDictionary("SV2DFaceMaskSTNode", SVParseMask::parseMask);
     _registDictionary("SVSpriteNode", SVParseSprite::parseSprite);
     _registDictionary("SVBitFontNode", SVParseBitfont::parseBitfont);
     _registDictionary("SVBMFontNode", SVParseBMFont::parseBMFont);

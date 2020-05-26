@@ -64,7 +64,7 @@ void SVMtlStreak::update(f32 dt) {
     m_accTime += dt;
 }
 
-void SVMtlStreak::_submitUniform(SVRendererPtr _render) {
+void SVMtlStreak::_submitUniform(render::SVRendererPtr _render) {
     SVMtlCore::_submitUniform(_render);
     _render->submitUniformf("lerp", m_lerp);
 }

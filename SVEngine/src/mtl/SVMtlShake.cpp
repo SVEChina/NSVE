@@ -61,7 +61,7 @@ void SVMtlShake::setSpeed(f32 _speed){
     }
 }
 
-void SVMtlShake::_submitUniform(SVRendererPtr _render) {
+void SVMtlShake::_submitUniform(render::SVRendererPtr _render) {
     SVMtlCore::_submitUniform(_render);
     _render->submitUniformf("time", m_time);
     _render->submitUniformf("amount", m_amount);

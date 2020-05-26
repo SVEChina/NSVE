@@ -30,21 +30,21 @@ namespace sv {
         
         SVFaceDataMeshPtr getFaceDataMesh();
         
-        SVRenderMeshPtr generateAdaptScreenMesh(f32 _fromW, f32 _fromH, f32 _toW, f32 _toH);
+        render::SVRenderMeshPtr generateAdaptScreenMesh(f32 _fromW, f32 _fromH, f32 _toW, f32 _toH);
         
-        SVRenderMeshPtr generatePatchMesh(FVec3 &_corner00, FVec3 &_corner10, FVec3 &_corner01, FVec3 &_corner11, s32 _rx = 2, s32 _ry = 2);
+        render::SVRenderMeshPtr generatePatchMesh(util::FVec3 &_corner00, util::FVec3 &_corner10, util::FVec3 &_corner01, util::FVec3 &_corner11, s32 _rx = 2, s32 _ry = 2);
     public:
-        SVRenderMeshPtr m_screenMesh;
-        SVRenderMeshPtr m_screenMeshRot90;
-        SVRenderMeshPtr m_screenMeshRot180;
-        SVRenderMeshPtr m_screenMeshRot270;
-        SVRenderMeshPtr m_screenLTMesh;
-        SVRenderMeshPtr m_screenLBMesh;
-        SVRenderMeshPtr m_screenRTMesh;
-        SVRenderMeshPtr m_screenRBMesh;
-        SVRenderMeshPtr m_screenTwoDivisionMesh;
-        SVRenderMeshPtr m_screenFourDivisionMesh;
-        SVRenderMeshPtr m_screenFourXDivisionMesh;
+        render::SVRenderMeshPtr m_screenMesh;
+        render::SVRenderMeshPtr m_screenMeshRot90;
+        render::SVRenderMeshPtr m_screenMeshRot180;
+        render::SVRenderMeshPtr m_screenMeshRot270;
+        render::SVRenderMeshPtr m_screenLTMesh;
+        render::SVRenderMeshPtr m_screenLBMesh;
+        render::SVRenderMeshPtr m_screenRTMesh;
+        render::SVRenderMeshPtr m_screenRBMesh;
+        render::SVRenderMeshPtr m_screenTwoDivisionMesh;
+        render::SVRenderMeshPtr m_screenFourDivisionMesh;
+        render::SVRenderMeshPtr m_screenFourXDivisionMesh;
         static V3_C_T0 m_baseRect[6];
     protected:
         void _initBaseRect();
@@ -56,7 +56,7 @@ namespace sv {
         void _initFourDivisionMesh_X();
     protected:
         SVFaceDataMeshPtr m_faceDataMesh;
-        SVRenderMeshPtr   m_screenAdaptMesh;
+        render::SVRenderMeshPtr   m_screenAdaptMesh;
     };
     
 }//!namespace

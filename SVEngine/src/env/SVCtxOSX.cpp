@@ -23,7 +23,7 @@ SVCtxOSXGL::~SVCtxOSXGL() {
     m_pGLContext = nullptr;
 }
 
-SVRendererPtr SVCtxOSXGL::createRenderer(SVInstPtr _handle) {
+render::SVRendererPtr SVCtxOSXGL::createRenderer(SVInstPtr _handle) {
     SVRendererGLPtr t_renderer = MakeSharedPtr<SVRendererGL>(_handle);
     return t_renderer;
 }
@@ -53,7 +53,7 @@ SVCtxOSXMetal::SVCtxOSXMetal()
 SVCtxOSXMetal::~SVCtxOSXMetal() {
 }
 
-SVRendererPtr SVCtxOSXMetal::createRenderer(SVInstPtr _handle) {
+render::SVRendererPtr SVCtxOSXMetal::createRenderer(SVInstPtr _handle) {
     SVRendererMetalPtr t_renderer = MakeSharedPtr<SVRendererMetal>(nullptr);
     return t_renderer;
 }

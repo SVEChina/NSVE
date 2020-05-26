@@ -9,6 +9,9 @@
 #include "../app/SVInst.h"
 #include "../work/SVThread.h"
 #include "../work/SVThreadPool.h"
+
+using namespace sv;
+
 //空跑模式
 void process_wt_null(SVInst* _app,SVThread* _thread,SV_THREAD_STAGE _stage){
 }

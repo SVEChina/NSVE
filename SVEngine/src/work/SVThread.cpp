@@ -2,6 +2,8 @@
 #include "SVThread.h"
 #include "SVMis.h"
 
+using namespace sv;
+
 SVThread::SVThread(){
     m_mis = nullptr;
     m_misclean = true;

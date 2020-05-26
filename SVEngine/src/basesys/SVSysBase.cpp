@@ -7,9 +7,11 @@
 
 #include "SVSysBase.h"
 
+using namespace sv;
+
 SVSysBase::SVSysBase(SVInst *_app)
 :SVEventProc(_app) {
-    m_subsysType = "SVSysBase";
+    m_subsysType = 0;
 }
 SVSysBase::~SVSysBase() {
 }

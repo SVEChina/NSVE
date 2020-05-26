@@ -29,7 +29,7 @@ SVSharpFilter::~SVSharpFilter(){
 }
 
 bool SVSharpFilter::create(){
-    SVRendererPtr t_renderer = mApp->getRenderer();
+    render::SVRendererPtr t_renderer = mApp->getRenderer();
     if(!t_renderer)
         return false;
     SVTexturePtr t_tex = t_renderer->getSVTex(E_TEX_MAIN);

@@ -15,81 +15,76 @@ SVCameraNode::SVCameraNode(SVInst *_app)
 : SVEventProc(_app) {
     m_dirty = true;
     m_resLock = MakeSharedPtr<SVLock>();
-    //视矩阵
-    SVCamCtrlProjPtr t_pCtrl =  MakeSharedPtr<SVCamCtrlProj>(_app);
-    f32 t_pos_z = (1280.0f*0.5f) / tan(30.0f * DEGTORAD);
-    t_pCtrl->setPosition(0.0f, 0.0,t_pos_z);
-    t_pCtrl->setTarget(0.0f, 0.0f, 0.0f);
-    t_pCtrl->setUp(0.0f,1.0f,0.0f);
-    m_pCtrl = t_pCtrl;
-    //投影矩阵
-    m_pProjMethod = MakeSharedPtr<SVProject>();
-    m_pProjMethod->reset();
-    //更新矩阵
-    m_pos = m_pCtrl->getPos();
-    m_mat_v = m_pCtrl->getMat();
-    m_mat_p = m_pProjMethod->getMat();
-    //
-    updateViewProj();
+//    //视矩阵
+//    SVCamCtrlProjPtr t_pCtrl =  MakeSharedPtr<SVCamCtrlProj>(_app);
+//    f32 t_pos_z = (1280.0f*0.5f) / tan(30.0f * DEGTORAD);
+//    t_pCtrl->setPosition(0.0f, 0.0,t_pos_z);
+//    t_pCtrl->setTarget(0.0f, 0.0f, 0.0f);
+//    t_pCtrl->setUp(0.0f,1.0f,0.0f);
+//    m_pCtrl = t_pCtrl;
+//    //投影矩阵
+//    m_pProjMethod = MakeSharedPtr<SVProject>();
+//    m_pProjMethod->reset();
+//    //更新矩阵
+//    m_pos = m_pCtrl->getPos();
+//    m_mat_v = m_pCtrl->getMat();
+//    m_mat_p = m_pProjMethod->getMat();
+//    //
+//    updateViewProj();
 }
 
 SVCameraNode::~SVCameraNode() {
-    m_fbobjectPool.destroy();
-    m_resLock = nullptr;
-    m_pCtrl = nullptr;
-    m_pProjMethod = nullptr;
 }
 
 void SVCameraNode::init() {
-    if(m_pCtrl) {
-        m_pCtrl->bind(THIS_TO_SHAREPTR(SVCameraNode));
-    }
+//    if(m_pCtrl) {
+//        m_pCtrl->bind(THIS_TO_SHAREPTR(SVCameraNode));
+//    }
 }
 
 void SVCameraNode::destroy() {
-    if(m_pCtrl) {
-        m_pCtrl->unbind();
-    }
+//    if(m_pCtrl) {
+//        m_pCtrl->unbind();
+//    }
 }
 
 void SVCameraNode::project() {
-    if(m_pProjMethod) {
-        SVProjectPtr tt = MakeSharedPtr<SVProject>();
-        tt->setWidth(m_pProjMethod->getWidth());
-        tt->setHeight(m_pProjMethod->getHeight());
-        tt->setNear(m_pProjMethod->getNear());
-        tt->setFar(m_pProjMethod->getFar());
-        tt->setFovy(60.0f);
-        tt->refresh();
-        m_pProjMethod = tt;
-    }else {
-        m_pProjMethod = MakeSharedPtr<SVProject>();
-        m_pProjMethod->reset();
-    }
-    //
-    m_mat_p = m_pProjMethod->getMat();
-    //设置透视ctrl
-    
+//    if(m_pProjMethod) {
+//        SVProjectPtr tt = MakeSharedPtr<SVProject>();
+//        tt->setWidth(m_pProjMethod->getWidth());
+//        tt->setHeight(m_pProjMethod->getHeight());
+//        tt->setNear(m_pProjMethod->getNear());
+//        tt->setFar(m_pProjMethod->getFar());
+//        tt->setFovy(60.0f);
+//        tt->refresh();
+//        m_pProjMethod = tt;
+//    }else {
+//        m_pProjMethod = MakeSharedPtr<SVProject>();
+//        m_pProjMethod->reset();
+//    }
+//    //
+//    m_mat_p = m_pProjMethod->getMat();
+//    //设置透视ctrl
 }
 
 void SVCameraNode::ortho() {
-    if(m_pProjMethod) {
-        SVOrthoPtr tt = MakeSharedPtr<SVOrtho>();
-        tt->setWidth(tt->getWidth());
-        tt->setHeight(tt->getHeight());
-        tt->setNear(tt->getNear());
-        tt->setFar(tt->getFar());
-        tt->refresh();
-        m_pProjMethod = tt;
-    }else {
-        m_pProjMethod = MakeSharedPtr<SVOrtho>();
-        m_pProjMethod = MakeSharedPtr<SVProject>();
-        m_pProjMethod->reset();
-    }
-    //
-    m_mat_p = m_pProjMethod->getMat();
-    //设置正交ctrl
-    m_pCtrl =  MakeSharedPtr<SVCamCtrlOrtho>(mApp);
+//    if(m_pProjMethod) {
+//        SVOrthoPtr tt = MakeSharedPtr<SVOrtho>();
+//        tt->setWidth(tt->getWidth());
+//        tt->setHeight(tt->getHeight());
+//        tt->setNear(tt->getNear());
+//        tt->setFar(tt->getFar());
+//        tt->refresh();
+//        m_pProjMethod = tt;
+//    }else {
+//        m_pProjMethod = MakeSharedPtr<SVOrtho>();
+//        m_pProjMethod = MakeSharedPtr<SVProject>();
+//        m_pProjMethod->reset();
+//    }
+//    //
+//    m_mat_p = m_pProjMethod->getMat();
+//    //设置正交ctrl
+//    m_pCtrl =  MakeSharedPtr<SVCamCtrlOrtho>(mApp);
 }
 
 ////LINK FBO
@@ -105,17 +100,17 @@ void SVCameraNode::ortho() {
 //}
 
 void SVCameraNode::_removeUnuseLinkFboObject(){
-    m_resLock->lock();
-    //小心复值引用计数会加 1！！！！！！！！！！！！！！ 晓帆。。
-    for(s32 i=0;i<m_fbobjectPool.size();) {
-        if(m_fbobjectPool[i].use_count() == 2) {
-            m_fbobjectPool.remove(i);
-        }else{
-            i++;
-        }
-    }
-    m_fbobjectPool.reserveForce(m_fbobjectPool.size());
-    m_resLock->unlock();
+//    m_resLock->lock();
+//    //小心复值引用计数会加 1！！！！！！！！！！！！！！ 晓帆。。
+//    for(s32 i=0;i<m_fbobjectPool.size();) {
+//        if(m_fbobjectPool[i].use_count() == 2) {
+//            m_fbobjectPool.remove(i);
+//        }else{
+//            i++;
+//        }
+//    }
+//    m_fbobjectPool.reserveForce(m_fbobjectPool.size());
+//    m_resLock->unlock();
 }
 
 //bool SVCameraNode::removeLinkFboObject(SVFboObjectPtr _fbo){
@@ -132,26 +127,26 @@ void SVCameraNode::_removeUnuseLinkFboObject(){
 
 //
 void SVCameraNode::update(f32 _dt) {
-    //移除关联fbo
-    _removeUnuseLinkFboObject();
-    //数据更新
-    if(m_pCtrl && m_pProjMethod) {
-        //控制器接管
-        bool t_flag = m_pCtrl->run(THIS_TO_SHAREPTR(SVCameraNode),_dt);
-        if (m_dirty || t_flag) {
-            m_pos = m_pCtrl->getPos();
-            m_mat_v = m_pCtrl->getMat();
-            m_mat_p = m_pProjMethod->getMat();
-            updateViewProj();  // 更新vp矩阵
-        }
-        //关联fbo
-        for (s32 i = 0; i < m_fbobjectPool.size(); i++) {
-            SVFboObjectPtr t_fbo = m_fbobjectPool[i];
-            t_fbo->setLink(true);
-            t_fbo->setViewMat(m_mat_v);
-            t_fbo->setProjMat(m_mat_p);
-        }
-    }
+//    //移除关联fbo
+//    _removeUnuseLinkFboObject();
+//    //数据更新
+//    if(m_pCtrl && m_pProjMethod) {
+//        //控制器接管
+//        bool t_flag = m_pCtrl->run(THIS_TO_SHAREPTR(SVCameraNode),_dt);
+//        if (m_dirty || t_flag) {
+//            m_pos = m_pCtrl->getPos();
+//            m_mat_v = m_pCtrl->getMat();
+//            m_mat_p = m_pProjMethod->getMat();
+//            updateViewProj();  // 更新vp矩阵
+//        }
+//        //关联fbo
+//        for (s32 i = 0; i < m_fbobjectPool.size(); i++) {
+//            SVFboObjectPtr t_fbo = m_fbobjectPool[i];
+//            t_fbo->setLink(true);
+//            t_fbo->setViewMat(m_mat_v);
+//            t_fbo->setProjMat(m_mat_p);
+//        }
+//    }
 }
 
 void SVCameraNode::_updateForce() {
@@ -162,45 +157,44 @@ void SVCameraNode::_updateForce() {
     m_pos = m_pCtrl->getPos();
     m_mat_v = m_pCtrl->getMat();
     m_mat_p = m_pProjMethod->getMat();
-    //
     m_dirty = false;
 }
 
 void SVCameraNode::resetDefaultCamera() {
-    //控制重制
-    if(m_pCtrl){
-        m_pCtrl->reset();
-    }
-    //投影充值
-    if(m_pProjMethod) {
-        m_pProjMethod->reset();
-    }
-    //
-    m_pos = m_pCtrl->getPos();
-    m_mat_v = m_pCtrl->getMat();
-    m_mat_p = m_pProjMethod->getMat();
+//    //控制重制
+//    if(m_pCtrl){
+//        m_pCtrl->reset();
+//    }
+//    //投影充值
+//    if(m_pProjMethod) {
+//        m_pProjMethod->reset();
+//    }
+//    //
+//    m_pos = m_pCtrl->getPos();
+//    m_mat_v = m_pCtrl->getMat();
+//    m_mat_p = m_pProjMethod->getMat();
 }
 
 void SVCameraNode::resetCamera(f32 w, f32 h) {
-    //主要是改变投影
-    if(m_pProjMethod) {
-        m_pProjMethod->setWidth(w);
-        m_pProjMethod->setHeight(h);
-    }
-    if(m_pCtrl) {
-        m_pCtrl->reset(w,h);
-    }
-    _updateForce();
+//    //主要是改变投影
+//    if(m_pProjMethod) {
+//        m_pProjMethod->setWidth(w);
+//        m_pProjMethod->setHeight(h);
+//    }
+//    if(m_pCtrl) {
+//        m_pCtrl->reset(w,h);
+//    }
+//    _updateForce();
 }
 
 //设置远进裁
 void SVCameraNode::setZ(f32 _near, f32 _far) {
-    if(m_pProjMethod) {
-        m_pProjMethod->setNear(_near);
-        m_pProjMethod->setFar(_far);
-        m_pProjMethod->refresh();
-        m_mat_p = m_pProjMethod->getMat();
-    }
+//    if(m_pProjMethod) {
+//        m_pProjMethod->setNear(_near);
+//        m_pProjMethod->setFar(_far);
+//        m_pProjMethod->refresh();
+//        m_mat_p = m_pProjMethod->getMat();
+//    }
 }
 
 FVec3& SVCameraNode::getPosition() {
@@ -235,32 +229,6 @@ FMat4& SVCameraNode::getVPMatObj(){
 SVCameraCtrlPtr SVCameraNode::getCtrl(){
     return m_pCtrl;
 }
-
-//设置控制器
-void SVCameraNode::setCtrl(SVCameraCtrlPtr _ctr) {
-    if(!_ctr){
-        //error 不允许没有
-        return ;
-    }
-    m_pCtrl->unbind();
-    m_pCtrl = _ctr;
-    m_pCtrl->bind(THIS_TO_SHAREPTR(SVCameraNode));
-    //
-    m_pos = m_pCtrl->getPos();
-    m_mat_v = m_pCtrl->getMat();
-}
-
-void SVCameraNode::setProjMethod(SVProjMethodPtr _proj) {
-    if(!_proj){
-        return ;//error 不允许没有
-    }
-    m_pProjMethod = _proj;
-}
-
-SVProjMethodPtr SVCameraNode::getProjMethod() {
-    return m_pProjMethod;
-}
-
 
 void SVCameraNode::updateViewProj() {
     m_mat_vp =m_mat_p*m_mat_v;

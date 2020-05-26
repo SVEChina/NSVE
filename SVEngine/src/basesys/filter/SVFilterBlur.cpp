@@ -29,7 +29,7 @@ SVFilterBlur::~SVFilterBlur(){
 }
 
 bool SVFilterBlur::create(SVTEXTYPE _inType,SVTEXTYPE _outType){
-    SVRendererPtr t_renderer = mApp->getRenderer();
+    render::SVRendererPtr t_renderer = mApp->getRenderer();
     if(!t_renderer)
         return false;
     SVTexturePtr t_tex = t_renderer->getSVTex(_inType);
@@ -84,7 +84,7 @@ void SVFilterBlur::destroy(){
     }
     m_pPassNode = nullptr;
     
-    SVRendererPtr t_renderer = mApp->getRenderer();
+    render::SVRendererPtr t_renderer = mApp->getRenderer();
     if(t_renderer){
         t_renderer->destroySVTex(E_TEX_FILTER_GLOW_2);
         t_renderer->destroySVTex(E_TEX_FILTER_GLOW_3);

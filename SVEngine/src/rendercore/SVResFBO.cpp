@@ -19,11 +19,11 @@ SVResFBO:: ~SVResFBO(){
     mApp->m_IDPool.returnUID(m_uid);
 }
 
-void SVResFBO::create(SVRendererPtr _renderer){
+void SVResFBO::create(render::SVRendererPtr _renderer){
     
 }
 
-void SVResFBO::destroy(SVRendererPtr _renderer){
+void SVResFBO::destroy(render::SVRendererPtr _renderer){
     
 }
 

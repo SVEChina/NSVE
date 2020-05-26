@@ -25,7 +25,7 @@ namespace sv {
             
             virtual SVMtlCorePtr genMtl(SVInst *_app);
             
-            SVString m_shader;
+            s32 m_shader;
         };
         
         //
@@ -104,8 +104,8 @@ namespace sv {
             void reloadShader(cptr8 _shader);
             
         public:
-            SVString m_mtlname;
-            SVResShaderPtr m_pShader;
+            util::SVString m_mtlname;
+            s32 m_pShader;                  //shaderid
             s32 m_LogicMtlFlag0;                         //MTLFLAG0;
             SVMatrixParam m_LogicParamMatrix;            //矩阵信息
             SVTextureParam m_LogicParamTex;              //纹理参数
@@ -121,17 +121,10 @@ namespace sv {
             void _loadShader();
             virtual void _refreshMatrix();
             virtual void _refreshModify();
-            virtual void _submitUniform(SVRendererPtr _render);
-            virtual void _submitState(SVRendererPtr _render);
-            virtual void _submitMtl(SVRendererPtr _render);
+            virtual void _submitUniform(render::SVRendererPtr _render);
+            virtual void _submitState(render::SVRendererPtr _render);
+            virtual void _submitMtl(render::SVRendererPtr _render);
             
-        public:
-            void addModify(SVModifyPtr _modify);
-            
-        protected:
-            typedef SVArray<SVModifyPtr> MODPOOL;
-            MODPOOL* m_renderPool;
-            MODPOOL* m_logicPool;
             
         public:
             virtual void toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator,

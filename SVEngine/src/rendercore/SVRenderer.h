@@ -67,17 +67,17 @@ namespace sv {
             //获取渲染到纹理
             SVRenderTexturePtr getRenderTexture();
             //创建内置纹理
-            virtual SVTexturePtr createSVTex(SVTEXTYPE _type,s32 _w,s32 _h,s32 _formate, bool _enableMipMap = false);
+            virtual mtl::SVTexturePtr createSVTex(SVTEXTYPE _type,s32 _w,s32 _h,s32 _formate, bool _enableMipMap = false);
             //创建内置纹理
-            virtual SVTexturePtr createSVTex(SVTEXTYPE _type,s32 _w,s32 _h,s32 _informate,s32 _daformate, bool _enableMipMap = false);
+            virtual mtl::SVTexturePtr createSVTex(SVTEXTYPE _type,s32 _w,s32 _h,s32 _informate,s32 _daformate, bool _enableMipMap = false);
             //创建内置纹理
-            virtual SVTexturePtr createSVTexIOS(SVTEXTYPE _type,s32 _w,s32 _h,s32 _formate, bool _enableMipMap = false);
+            virtual mtl::SVTexturePtr createSVTexIOS(SVTEXTYPE _type,s32 _w,s32 _h,s32 _formate, bool _enableMipMap = false);
             //创建内置纹理 ios
-            virtual SVTexturePtr createSVTexIOS(SVTEXTYPE _type,s32 _w,s32 _h,s32 _informate,s32 _daformate, bool _enableMipMap = false);
+            virtual mtl::SVTexturePtr createSVTexIOS(SVTEXTYPE _type,s32 _w,s32 _h,s32 _informate,s32 _daformate, bool _enableMipMap = false);
             //销毁内置纹理
             void destroySVTex(SVTEXTYPE _type);
             //获取内置纹理
-            SVTexturePtr getSVTex(SVTEXTYPE _type);
+            mtl::SVTexturePtr getSVTex(SVTEXTYPE _type);
             //是否存在内置纹理
             bool hasSVTex(SVTEXTYPE _type);
             //获取渲染状态
@@ -85,16 +85,16 @@ namespace sv {
             //重置状态
             void resetState();
             //投影矩阵
-            void pushProjMat(FMat4 _mat);
-            FMat4 getProjMat();
+            void pushProjMat(util::FMat4 _mat);
+            util::FMat4 getProjMat();
             void popProjMat();
             //视矩阵
-            void pushViewMat(FMat4 _mat);
-            FMat4 getViewMat();
+            void pushViewMat(util::FMat4 _mat);
+            util::FMat4 getViewMat();
             void popViewMat();
             //vp矩阵
-            void pushVPMat(FMat4 _mat);
-            FMat4 getVPMat();
+            void pushVPMat(util::FMat4 _mat);
+            util::FMat4 getVPMat();
             void popVPMat();
             //
             void clearMatStack();
@@ -108,18 +108,18 @@ namespace sv {
             //主FBO
             SVRenderTexturePtr m_pRenderTex;
             //各种内置纹理
-            SVTexturePtr m_svTex[E_TEX_END];
+            mtl::SVTexturePtr m_svTex[E_TEX_END];
             //渲染内核资源
-            typedef SVArray<SVRObjBasePtr> ROBJLIST;
+            typedef util::SVArray<SVRObjBasePtr> ROBJLIST;
             ROBJLIST m_robjList;
             //资源锁
             SVLockPtr m_resLock;
             //渲染状态
             SVRenderStatePtr m_pRState;
             //渲染VP
-            SVStack<VPParam,10> m_vpStack;  //viewport堆栈
+            util::SVStack<VPParam,10> m_vpStack;  //viewport堆栈
             //
-            typedef SVStack<FMat4,10> MAT4STACK;//注意：栈最大支持的矩阵个数为10个
+            typedef util::SVStack<util::FMat4,10> MAT4STACK;//注意：栈最大支持的矩阵个数为10个
             MAT4STACK m_stack_proj;
             MAT4STACK m_stack_view;
             MAT4STACK m_stack_vp;
@@ -132,7 +132,7 @@ namespace sv {
             
         public:
             //提交纹理
-            virtual void submitTex(u32 _channel,TexUnit& _unit){}
+            virtual void submitTex(u32 _channel,mtl::TexUnit& _unit){}
             //提交unifrom matrix
             virtual void submitUniformMatrix(cptr8 _name,f32* _data){}
             //提交unifrom matrix array
@@ -170,15 +170,15 @@ namespace sv {
             //提交unifrom f32 v4
             virtual void submitUniformf4v(cptr8 _name,f32* _data,s32 _size = 1){}
             //提交融合参数
-            virtual void submitBlend(SVBlendParam& _param){}
+            virtual void submitBlend(mtl::SVBlendParam& _param){}
             //提交模板参数
-            virtual void submitStencil(SVStencilParam& _param){}
+            virtual void submitStencil(mtl::SVStencilParam& _param){}
             //提交深度参数
-            virtual void submitDepth(SVDepthParam& _param){}
+            virtual void submitDepth(mtl::SVDepthParam& _param){}
             //提交隐藏面参数
-            virtual void submitCull(SVCullFaceParam& _param){}
+            virtual void submitCull(mtl::SVCullFaceParam& _param){}
             //提交zfighting
-            virtual void submitZOff(SVZOffParam& _param){}
+            virtual void submitZOff(mtl::SVZOffParam& _param){}
             //提交线宽
             virtual void submitLineWidth(f32 _width){}
             //提交点大小

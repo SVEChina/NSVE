@@ -10,7 +10,7 @@
 
 SVPythonSys::SVPythonSys(SVInst *_app)
 :SVSysBase(_app) {
-    m_subsysType = "SVBasicSys";
+    m_subsysType = 1;
 }
 
 SVPythonSys::~SVPythonSys() {

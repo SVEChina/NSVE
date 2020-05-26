@@ -28,7 +28,7 @@ SVRResMetalTex::SVRResMetalTex(SVInst* _app)
 SVRResMetalTex::~SVRResMetalTex(){
 }
 
-void SVRResMetalTex:: create(SVRendererPtr _renderer) {
+void SVRResMetalTex:: create(render::SVRendererPtr _renderer) {
     SVResTex::create(_renderer);
     SVRendererMetalPtr t_rendeMetalPtr = std::dynamic_pointer_cast<SVRendererMetal>(_renderer);
     if (t_rendeMetalPtr) {
@@ -63,7 +63,7 @@ void SVRResMetalTex:: create(SVRendererPtr _renderer) {
     ////        }
 }
 
-void SVRResMetalTex::destroy(SVRendererPtr _renderer) {
+void SVRResMetalTex::destroy(render::SVRendererPtr _renderer) {
     SVResTex::destroy(_renderer);
     if(m_id>0){
         //        glDeleteTextures(1, &m_id);
@@ -125,7 +125,7 @@ SVRResMetalShader::SVRResMetalShader(SVInst* _app)
 SVRResMetalShader::~SVRResMetalShader() {
 }
 
-void SVRResMetalShader::create(SVRendererPtr _renderer) {
+void SVRResMetalShader::create(render::SVRendererPtr _renderer) {
     SVRendererMetalPtr t_rendeMetalPtr = std::dynamic_pointer_cast<SVRendererMetal>(_renderer);
     if (t_rendeMetalPtr && t_rendeMetalPtr->m_pLibrary) {
         NSString* t_vsname = [NSString stringWithFormat:@"%s",m_vs_fname.c_str()];
@@ -143,10 +143,10 @@ void SVRResMetalShader::create(SVRendererPtr _renderer) {
     //self.commandQueue = [self.mtkView.device newCommandQueue]; // CommandQueue是渲染指令队列，保证渲染指令有序地提交到GPU
 }
 
-void SVRResMetalShader::destroy(SVRendererPtr _renderer) {
+void SVRResMetalShader::destroy(render::SVRendererPtr _renderer) {
     //
 }
 
-bool SVRResMetalShader::active(SVRendererPtr _render) {
+bool SVRResMetalShader::active(render::SVRendererPtr _render) {
     return false;
 }

@@ -11,7 +11,7 @@
 
 SVActionMgr::SVActionMgr(SVInst *_app)
 :SVSysBase(_app) {
-    m_subsysType = "SVActionMgr";
+    m_subsysType = 0;
     m_lock = MakeSharedPtr<SVLock>();
 }
 

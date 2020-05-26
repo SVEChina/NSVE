@@ -33,7 +33,7 @@ void SVMtlStrokeBase::reset() {
     
 }
 
-void SVMtlStrokeBase::_submitUniform(SVRendererPtr _render) {
+void SVMtlStrokeBase::_submitUniform(render::SVRendererPtr _render) {
     SVMtlCore::_submitUniform(_render);
 }
 

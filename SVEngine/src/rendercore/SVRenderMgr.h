@@ -36,27 +36,27 @@ namespace sv {
         
         void recycleRes();  //回收GL资源
         
-        SVRenderMeshPtr createMeshRObj();
+        render::SVRenderMeshPtr createMeshRObj();
         
-        void setRenderer(SVRendererPtr _renderer);  //设置渲染器
+        void setRenderer(render::SVRendererPtr _renderer);  //设置渲染器
         
-        SVRendererPtr getRenderer();    //获取渲染器
+        render::SVRendererPtr getRenderer();    //获取渲染器
         
-        SVRenderScenePtr getRenderScene();
+        render::SVRenderScenePtr getRenderScene();
         
-        void pushRCmdCreate(SVRObjBasePtr _robj);
+        void pushRCmdCreate(render::SVRObjBasePtr _robj);
         
-        void setRenderTarget(cptr8 _name,SVRenderTargetPtr _rt);
+        void setRenderTarget(cptr8 _name,render::SVRenderTargetPtr _rt);
         
-        SVRenderTargetPtr getRenderTarget(cptr8 _name);
+        render::SVRenderTargetPtr getRenderTarget(cptr8 _name);
     
     protected:
         void _adapt();
         s32 m_adaptMode;
         //渲染器
-        SVRendererPtr m_pRenderer;
+        render::SVRendererPtr m_pRenderer;
         //渲染流(缓存流)
-        SVRenderStreamPtr m_RStreamCache;
+        render::SVRenderStreamPtr m_RStreamCache;
         //
         SVLockPtr m_renderLock;
         SVLockPtr m_logicLock;

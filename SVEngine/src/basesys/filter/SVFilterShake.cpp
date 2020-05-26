@@ -29,7 +29,7 @@ SVFilterShake::~SVFilterShake(){
 }
 
 bool SVFilterShake::create(){
-    SVRendererPtr t_renderer = mApp->getRenderer();
+    render::SVRendererPtr t_renderer = mApp->getRenderer();
     if(!t_renderer)
         return false;
     SVTexturePtr t_tex = t_renderer->getSVTex(E_TEX_MAIN);
@@ -64,7 +64,7 @@ void SVFilterShake::destroy(){
     if(m_pPassNode){
         m_pPassNode->removeFromParent();
     }
-    SVRendererPtr t_renderer = mApp->getRenderer();
+    render::SVRendererPtr t_renderer = mApp->getRenderer();
     if(t_renderer){
         t_renderer->destroySVTex(E_TEX_FILTER_SHAKE);
     }

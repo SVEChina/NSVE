@@ -15,7 +15,9 @@
 #include "../rendercore/SVResShader.h"
 
 namespace sv {
-    
+    /*
+     尽量采用数组的方式
+     */
     class SVShaderMgr : public SVSysBase {
     public:
         SVShaderMgr(SVInst *_app);
@@ -26,7 +28,7 @@ namespace sv {
         
         void destroy();
 
-        SVResShaderPtr getShader(cptr8 _name);
+        render::SVResShaderPtr getShader(cptr8 _name);
         
     private:
         void loadAllShader();
@@ -34,7 +36,7 @@ namespace sv {
         void clearAllShader();
         
     protected:
-        typedef SVMap<SVString,SVResShaderPtr> SHADERPOOL;
+        typedef util::SVMap<util::SVString,render::SVResShaderPtr> SHADERPOOL;
         SHADERPOOL ShaderMap;
     };
     

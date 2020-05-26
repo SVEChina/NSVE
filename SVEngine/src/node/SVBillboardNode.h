@@ -42,15 +42,13 @@ namespace sv {
             
             virtual void setTexture(SVTEXTYPE _textype);
             
-            virtual void setTexture(SVTexturePtr _tex);
+            virtual void setTexture(mtl::SVTexturePtr _tex);
             
-            void setMesh(SVRenderMeshPtr _mesh);
+            void setMesh(render::SVRenderMeshPtr _mesh);
+
+            void setViewPos(util::FVec3 &_pos);
             
-            void setMtl(SVMtlCorePtr _mtl);
-            
-            void setViewPos(FVec3 &_pos);
-            
-            void setUp(FVec3 &_up);
+            void setUp(util::FVec3 &_up);
             
             //序列化接口
             void toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator, RAPIDJSON_NAMESPACE::Value &_objValue);
@@ -61,16 +59,16 @@ namespace sv {
             f32 m_height;
             f32 m_texcoordX;
             f32 m_texcoordY;
-            FVec3 m_viewPos;
-            FVec3 m_up;
-            SVString m_pTexPath;
+            util::FVec3 m_viewPos;
+            util::FVec3 m_up;
+            util::SVString m_pTexPath;
             SVTEXTYPE m_inTexType;
             //运行时属性
-            SVTexturePtr m_pTex;
-            SVRenderMeshPtr m_pMesh;
-            SVRenderObjectPtr m_pRenderObj;
+            mtl::SVTexturePtr m_pTex;
+            render::SVRenderMeshPtr m_pMesh;
+            render::SVRenderObjectPtr m_pRenderObj;
         private:
-            SVString m_pTexName;
+            util::SVString m_pTexName;
         };
 
     }//!namespace node

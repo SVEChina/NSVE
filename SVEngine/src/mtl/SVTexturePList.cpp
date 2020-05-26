@@ -43,11 +43,11 @@ void SVTexturePList::init(cptr8 _name, s32 _type, s32 _width, s32 _height, s32 _
 }
 
 
-void SVTexturePList::create(SVRendererPtr _renderer){
+void SVTexturePList::create(render::SVRendererPtr _renderer){
     SVRObjBase::create(_renderer);
     if (!m_bCreated) {
         m_bCreated = true;
-        SVRendererPtr t_renderBasePtr = mApp->getRenderer();
+        render::SVRendererPtr t_renderBasePtr = mApp->getRenderer();
         SVRendererGLPtr t_renderGLPtr = std::dynamic_pointer_cast<SVRendererGL>(t_renderBasePtr);
         if (t_renderGLPtr) {
             //渲染器类型E_RENDERER_GLES,
@@ -67,7 +67,7 @@ void SVTexturePList::create(SVRendererPtr _renderer){
     }
 }
 
-void SVTexturePList::destroy(SVRendererPtr _renderer){
+void SVTexturePList::destroy(render::SVRendererPtr _renderer){
     SVRObjBase::destroy(_renderer);
 }
 
@@ -195,8 +195,8 @@ void SVTextureSet::init(cptr8 _name, s32 _type, s32 _width, s32 _height, s32 _in
     m_dataformate = _dateformate;
 }
 
-void SVTextureSet::create(SVRendererPtr _renderer){
-    SVRendererPtr t_renderBasePtr = mApp->getRenderer();
+void SVTextureSet::create(render::SVRendererPtr _renderer){
+    render::SVRendererPtr t_renderBasePtr = mApp->getRenderer();
     SVRendererGLPtr t_renderGLPtr = std::dynamic_pointer_cast<SVRendererGL>(t_renderBasePtr);
     if (t_renderGLPtr) {
         //渲染器类型E_RENDERER_GLES,
@@ -215,7 +215,7 @@ void SVTextureSet::create(SVRendererPtr _renderer){
 //    }
 }
 
-void SVTextureSet::destroy(SVRendererPtr _renderer){
+void SVTextureSet::destroy(render::SVRendererPtr _renderer){
     SVRObjBase::destroy(_renderer);
 }
 

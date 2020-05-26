@@ -40,7 +40,7 @@ namespace sv {
     //回调
     DECLARE_SHAREPTR(SVCallbackBase);
     DECLARE_SHAREPTR(SVOpCallback);
-    DECLARE_SHAREPTR(SVThreadCallback);
+    //DECLARE_SHAREPTR(SVThreadCallback);
     
     //sysbase - event
     DECLARE_SHAREPTR(SVEventProc);
@@ -54,7 +54,6 @@ namespace sv {
     DECLARE_SHAREPTR(SVDeformMgr);
     DECLARE_SHAREPTR(SVCameraMgr);
     DECLARE_SHAREPTR(SVTexMgr);
-    DECLARE_SHAREPTR(SVUIMgr);
     DECLARE_SHAREPTR(SVLightSys);
     DECLARE_SHAREPTR(SVPythonSys);
     DECLARE_SHAREPTR(SVModelMgr);

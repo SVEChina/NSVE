@@ -25,23 +25,23 @@ namespace sv {
             static void st_faceOutlinePointExtWithFaceLandMark(f32 *faceLandMark, s32 &markIndex);
         };
         
-        class SV2DFaceMaskSTNode : public SV2DFaceMaskNode {
-        public:
-            SV2DFaceMaskSTNode(SVInst *_app);
-            
-            ~SV2DFaceMaskSTNode();
-            
-            void update(f32 dt);
-            
-            void render();
-            
-            //序列化接口
-            void toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator, RAPIDJSON_NAMESPACE::Value &_objValue);
-            
-            void fromJSON(RAPIDJSON_NAMESPACE::Value &item);
-        protected:
-            void _updateVerts();
-        };
+//        class SV2DFaceMaskSTNode : public SV2DFaceMaskNode {
+//        public:
+//            SV2DFaceMaskSTNode(SVInst *_app);
+//            
+//            ~SV2DFaceMaskSTNode();
+//            
+//            void update(f32 dt);
+//            
+//            void render();
+//            
+//            //序列化接口
+//            void toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator, RAPIDJSON_NAMESPACE::Value &_objValue);
+//            
+//            void fromJSON(RAPIDJSON_NAMESPACE::Value &item);
+//        protected:
+//            void _updateVerts();
+//        };
         
     }//!namespace node
     

@@ -12,12 +12,12 @@
 
 namespace sv {
     
-    class SVThreadCallback : public SVCallbackBase {
-    public:
-        SVThreadCallback(SVInst* _app);
-
-        ~SVThreadCallback();
-    };
+//    class SVThreadCallback : public SVCallbackBase {
+//    public:
+//        SVThreadCallback(SVInst* _app);
+//
+//        ~SVThreadCallback();
+//    };
     
 }//!namespace sv
 

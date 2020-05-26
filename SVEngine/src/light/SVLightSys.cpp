@@ -12,7 +12,7 @@
 
 SVLightSys::SVLightSys(SVInst *_app)
 :SVSysBase(_app) {
-    m_subsysType = "SVLightSys";
+    m_subsysType = 7;
 }
 
 SVLightSys::~SVLightSys() {

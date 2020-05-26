@@ -10,6 +10,10 @@
 #include "SVKeyFrame.h"
 #include "../base/SVUtils.h"
 
+using namespace sv::logic;
+using namespace sv::node;
+using namespace sv::util;
+
 u32 SVTimeLine::maxFrame(f32 _time,s32 _rate) {
     u32 t_value = u32(_time*_rate);
 //    if(_time*_rate - t_value > 0) {

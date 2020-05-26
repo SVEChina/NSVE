@@ -129,12 +129,6 @@ SVSceneMgrPtr SVInst::getSceneMgr(){
     return m_pGlobalMgr->m_pSceneMgr;
 }
 
-SVUIMgrPtr SVInst::getUIMgr(){
-    if(!m_pGlobalMgr)
-        return nullptr;
-    return m_pGlobalMgr->m_pUIMgr;
-}
-
 SVLightSysPtr SVInst::getLightSys() {
     if(!m_pGlobalMgr)
         return nullptr;
@@ -199,7 +193,7 @@ SVPhysicsWorldMgrPtr SVInst::getPhysicsWorldMgr(){
     return m_pGlobalMgr->m_pPhysicSys;
 }
 
-SVRendererPtr SVInst::getRenderer() {
+render::SVRendererPtr SVInst::getRenderer() {
     if(!m_pGlobalMgr)
         return nullptr;
     if(!m_pGlobalMgr->m_pRenderMgr)

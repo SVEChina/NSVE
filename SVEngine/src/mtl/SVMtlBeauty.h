@@ -29,7 +29,7 @@ namespace sv {
             void setBGSize(s32 _width, s32 _height);
 
         protected:
-            virtual void _submitMtl(SVRendererPtr _render);
+            virtual void _submitMtl(render::SVRendererPtr _render);
             //
             f32 m_lSmoothSize;
             f32 m_lImgW;

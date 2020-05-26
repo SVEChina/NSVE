@@ -25,17 +25,18 @@ namespace sv {
             
             virtual void render();
             
-            void setMesh(SVRenderMeshPtr _pMesh);
+            void setMesh(render::SVRenderMeshPtr _pMesh);
             
             void randomInit();
             
-            SVMtlCorePtr getMtl();
+            mtl::SVMtlCorePtr getMtl();
             
-            SVMtlGeo3dPtr m_mtl_box;
+            mtl::SVMtlGeo3dPtr m_mtl_box;
+
         public:
-            SVRenderObjectPtr m_pRenderObj;
+            render::SVRenderObjectPtr m_pRenderObj;
             
-            SVRenderMeshPtr m_pMesh;
+            render::SVRenderMeshPtr m_pMesh;
             
             SVColor m_color;
         };

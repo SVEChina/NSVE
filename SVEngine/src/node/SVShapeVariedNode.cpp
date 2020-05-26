@@ -52,7 +52,7 @@ void SVShapeVariedNode::clearPass() {
 }
 
 void SVShapeVariedNode::init(){
-    SVRendererPtr t_renderer = mApp->getRenderer();
+    render::SVRendererPtr t_renderer = mApp->getRenderer();
     if(!t_renderer)
         return ;
     SVTexturePtr t_tex = mApp->getTexMgr()->createUnctrlTexture(mApp->m_pGlobalParam->m_inner_width, mApp->m_pGlobalParam->m_inner_height,GL_RGBA, GL_RGBA);

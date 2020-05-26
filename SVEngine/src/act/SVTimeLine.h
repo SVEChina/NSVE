@@ -31,11 +31,11 @@ namespace sv {
   
             TIMELINETYPE getType();
             
-            void enter(SVNodePtr _nodePtr);
+            void enter(node::SVNodePtr _nodePtr);
             
-            void exit(SVNodePtr _nodePtr);
+            void exit(node::SVNodePtr _nodePtr);
             
-            void update(SVNodePtr _nodePtr,f32 _dt);
+            void update(node::SVNodePtr _nodePtr,f32 _dt);
             
             virtual void addKey(SVKeyFramePtr _key);
             
@@ -58,7 +58,7 @@ namespace sv {
             void setRate(s32 _rate);
             
             //刷新节点
-            void refreshNode(SVNodePtr _nodePtr);
+            void refreshNode(node::SVNodePtr _nodePtr);
             
         public:
             void toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator,
@@ -76,13 +76,13 @@ namespace sv {
             //
             f32 indexToTime(u32 _index);
             //
-            virtual void _execkey(SVNodePtr _nodePtr,f32 _dt);
+            virtual void _execkey(node::SVNodePtr _nodePtr,f32 _dt);
             //
             TIMELINETYPE m_type;
             //
             SVLockPtr m_keyLock;
             //中间帧
-            typedef SVArray<SVKeyFramePtr> KEYPOOL;
+            typedef util::SVArray<SVKeyFramePtr> KEYPOOL;
             KEYPOOL m_keyPool;
             //累计时间
             f32 m_accTime;

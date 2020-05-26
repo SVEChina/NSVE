@@ -16,7 +16,7 @@
 
 SVBasicSys::SVBasicSys(SVInst *_app)
 :SVSysBase(_app) {
-    m_subsysType = "SVBasicSys";
+    m_subsysType = 2;
     m_pRecycleModule = nullptr;
     m_pPickModule = nullptr;
     m_pFontModule = nullptr;

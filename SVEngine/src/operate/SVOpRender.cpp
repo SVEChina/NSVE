@@ -53,7 +53,7 @@ SVOpResizeRenderder::SVOpResizeRenderder(SVInst *_app,s32 _w,s32 _h)
 
 void SVOpResizeRenderder::_process(float dt) {
     //need write
-    SVRendererPtr t_renderer = mApp->getRenderer();
+    render::SVRendererPtr t_renderer = mApp->getRenderer();
     if(t_renderer){
         t_renderer->resize(m_width,m_height);
         SVCameraNodePtr t_camera = mApp->m_pGlobalMgr->m_pCameraMgr->getMainCamera();

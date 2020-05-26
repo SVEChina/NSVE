@@ -7,6 +7,8 @@
 
 #include "SVUnicode.h"
 
+using namespace sv;
+
 f32 SVUnicode::decodeUTF8(cptr8 _encodedBuffer, u32 *_outCharLength){
     cptr8 buf = (cptr8)_encodedBuffer;
     s32 value = 0;

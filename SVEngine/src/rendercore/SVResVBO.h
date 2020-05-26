@@ -58,11 +58,11 @@ namespace sv {
             
             virtual ~SVResVBO();
             
-            virtual void create(SVRendererPtr _renderer);
+            virtual void create(render::SVRendererPtr _renderer);
             
-            virtual void destroy(SVRendererPtr _renderer);
+            virtual void destroy(render::SVRendererPtr _renderer);
             
-            virtual void render(SVRendererPtr _renderer);
+            virtual void render(render::SVRendererPtr _renderer);
             
             virtual void updateConf(RENDERMESHCONF& _conf);
             

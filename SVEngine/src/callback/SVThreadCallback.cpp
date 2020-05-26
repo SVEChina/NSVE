@@ -6,10 +6,12 @@
 //
 
 #include "SVThreadCallback.h"
-SVThreadCallback::SVThreadCallback(SVInst *_app)
-:SVCallbackBase(_app) {
-}
 
-SVThreadCallback::~SVThreadCallback() {
-}
+
+//SVThreadCallback::SVThreadCallback(SVInst *_app)
+//:SVCallbackBase(_app) {
+//}
+//
+//SVThreadCallback::~SVThreadCallback() {
+//}
 

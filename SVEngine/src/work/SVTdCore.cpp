@@ -2,6 +2,8 @@
 #include <fcntl.h>
 #include <cerrno>
 
+using namespace sv;
+
 SVLockSpin::SVLockSpin(){
 }
 

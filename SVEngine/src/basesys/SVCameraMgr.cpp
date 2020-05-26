@@ -17,7 +17,7 @@
 
 SVCameraMgr::SVCameraMgr(SVInst *_app)
 :SVSysBase(_app) {
-    m_subsysType = "SVCameraMgr";
+    m_subsysType = 3;
     m_cameraLock = MakeSharedPtr<SVLock>();
 }
 
@@ -55,7 +55,7 @@ void SVCameraMgr::update(f32 dt) {
         m_mainCamera->update(dt);
         //
         SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
-        SVRendererPtr t_renderer = mApp->getRenderer();
+        render::SVRendererPtr t_renderer = mApp->getRenderer();
         if(t_renderer && t_renderer->getRenderTexture() ) {
         }
         if(t_rs && t_renderer) {
@@ -73,7 +73,7 @@ void SVCameraMgr::update(f32 dt) {
         m_uiCamera->update(dt);
         //
         SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
-        SVRendererPtr t_renderer = mApp->getRenderer();
+        render::SVRendererPtr t_renderer = mApp->getRenderer();
         if(t_rs && t_renderer) {
             FMat4 t_vm = m_uiCamera->getViewMatObj();
             FMat4 t_pm = m_uiCamera->getProjectMatObj();

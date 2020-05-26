@@ -38,7 +38,7 @@ SVCtxIOS::~SVCtxIOS() {
     SV_LOG_INFO("destroy context ios\n");
 }
 
-SVRendererPtr SVCtxIOS::createRenderer(SVInstPtr _handle) {
+render::SVRendererPtr SVCtxIOS::createRenderer(SVInstPtr _handle) {
     return nullptr;
 }
 
@@ -72,7 +72,7 @@ SVCtxIOSMetal::SVCtxIOSMetal()
 SVCtxIOSMetal::~SVCtxIOSMetal() {
 }
 
-SVRendererPtr SVCtxIOSMetal::createRenderer(SVInstPtr _handle) {
+render::SVRendererPtr SVCtxIOSMetal::createRenderer(SVInstPtr _handle) {
     return nullptr;
 }
 

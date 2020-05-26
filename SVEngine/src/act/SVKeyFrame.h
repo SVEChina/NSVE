@@ -58,9 +58,9 @@ namespace sv {
             
             ~SVKeyDeform();
             
-            FVec3 m_pos;
-            FVec3 m_rot;
-            FVec3 m_scale;
+            util::FVec3 m_pos;
+            util::FVec3 m_rot;
+            util::FVec3 m_scale;
             
             void toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_alloc,
                         RAPIDJSON_NAMESPACE::Value &_obj);
@@ -76,7 +76,7 @@ namespace sv {
             
             ~SVKeyMtl();
             
-            SVMtlCorePtr m_mtl;
+            mtl::SVMtlCorePtr m_mtl;
             
             void toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_alloc,
                         RAPIDJSON_NAMESPACE::Value &_obj);

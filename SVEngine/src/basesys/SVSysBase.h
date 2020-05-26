@@ -20,7 +20,7 @@ namespace sv {
         ~SVSysBase();
         
     protected:
-        SVString m_subsysType;
+        s32 m_subsysType;
     };
     
 }//!namespace sv

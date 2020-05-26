@@ -23,7 +23,7 @@
 
 SVSceneMgr::SVSceneMgr(SVInst *_app)
 :SVSysBase(_app) {
-    m_subsysType = "SVSceneMgr";
+    m_subsysType = 6;
     m_pMainScene = nullptr;
     m_sceneLock = MakeSharedPtr<SVLock>();
 }

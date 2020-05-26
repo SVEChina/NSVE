@@ -16,7 +16,7 @@ namespace sv {
     
     namespace mtl {
         
-        class SVTexture : public SVRObjBase {
+        class SVTexture : public render::SVRObjBase {
         public:
             SVTexture(SVInst *_app);
             
@@ -24,9 +24,9 @@ namespace sv {
             
             virtual void init(cptr8 _name, s32 _type, s32 _width, s32 _height, s32 _informate, s32 _dateformate, bool _enableMipMap = false);
             
-            virtual void create(SVRendererPtr _renderer);
+            virtual void create(render::SVRendererPtr _renderer);
             
-            virtual void destroy(SVRendererPtr _renderer);
+            virtual void destroy(render::SVRendererPtr _renderer);
             
             virtual void setTexData(void *_data, s32 _len);
             
@@ -50,12 +50,12 @@ namespace sv {
             
             s32 getdataformate();
             
-            SVResTexPtr getResTex();
+            render::SVResTexPtr getResTex();
             
         protected:
             void _updateData();
-            SVResTexPtr m_objTexPtr;
-            SVString m_name;
+            render::SVResTexPtr m_objTexPtr;
+            util::SVString m_name;
             s32   m_type;
             s32   m_width;
             s32   m_height;
@@ -81,9 +81,9 @@ namespace sv {
             
             virtual void init(cptr8 _name, s32 _type, s32 _width, s32 _height, s32 _informate, s32 _dateformate, bool _enableMipMap = false);
             
-            virtual void create(SVRendererPtr _renderer);
+            virtual void create(render::SVRendererPtr _renderer);
             
-            virtual void destroy(SVRendererPtr _renderer);
+            virtual void destroy(render::SVRendererPtr _renderer);
             
             void setTexID(u32 _texID);
         protected:

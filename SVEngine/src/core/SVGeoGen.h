@@ -19,37 +19,37 @@ namespace sv {
     class SVGeoGen {
     public:
         //三角形
-        static SVRenderMeshPtr genTri(SVInst* _app,f32 _len,SVBoundBox& _aabb);
+        static render::SVRenderMeshPtr genTri(SVInst* _app,f32 _len,util::SVBoundBox& _aabb);
         
         //方形
-        static SVRenderMeshPtr genRect(SVInst* _app,f32 _w,f32 _h,f32 _inx,f32 _iny,f32 _inw,f32 _inh,SVBoundBox& _aabb);
+        static render::SVRenderMeshPtr genRect(SVInst* _app,f32 _w,f32 _h,f32 _inx,f32 _iny,f32 _inw,f32 _inh,util::SVBoundBox& _aabb);
         
         //
-        static SVRenderMeshPtr genRectARCHO(SVInst* _app,f32 _w,f32 _h,EUIARCHO _archo,SVBoundBox& _aabb);
+        static render::SVRenderMeshPtr genRectARCHO(SVInst* _app,f32 _w,f32 _h,EUIARCHO _archo,util::SVBoundBox& _aabb);
         
         //菱形
-        static SVRenderMeshPtr genLing(SVInst* _app,f32 _len,SVBoundBox& _aabb);
+        static render::SVRenderMeshPtr genLing(SVInst* _app,f32 _len,util::SVBoundBox& _aabb);
         
         //五边
-        static SVRenderMeshPtr genFiveEdage(SVInst* _app,f32 _len,SVBoundBox& _aabb);
+        static render::SVRenderMeshPtr genFiveEdage(SVInst* _app,f32 _len,util::SVBoundBox& _aabb);
         
         //六边
-        static SVRenderMeshPtr genSixEdage(SVInst* _app,f32 _len,SVBoundBox& _aabb);
+        static render::SVRenderMeshPtr genSixEdage(SVInst* _app,f32 _len,util::SVBoundBox& _aabb);
         
         //圆形
-        static SVRenderMeshPtr genCircle(SVInst* _app,f32 _len,SVBoundBox& _aabb);
+        static render::SVRenderMeshPtr genCircle(SVInst* _app,f32 _len,util::SVBoundBox& _aabb);
         
         //AABB盒
-        static SVRenderMeshPtr genAABB(SVInst* _app,SVBoundBox& _aabb);
+        static render::SVRenderMeshPtr genAABB(SVInst* _app,util::SVBoundBox& _aabb);
         
         //创建矩形mesh
-        static SVRenderMeshPtr createRectMesh(SVInst* _app,f32 _w ,f32 _h , s32 _wPointCount , s32 _hPointCont);
+        static render::SVRenderMeshPtr createRectMesh(SVInst* _app,f32 _w ,f32 _h , s32 _wPointCount , s32 _hPointCont);
         
         //
-        static SVRenderMeshPtr createNetGrid(SVInst* _app,s32 _size,s32 _axis);
+        static render::SVRenderMeshPtr createNetGrid(SVInst* _app,s32 _size,s32 _axis);
         
     private:
-        static SVRenderMeshPtr _getPolygonDiy(SVInst* _app,s32 _edagenum,f32 _startangle,f32 _len,SVBoundBox& _aabb);
+        static render::SVRenderMeshPtr _getPolygonDiy(SVInst* _app,s32 _edagenum,f32 _startangle,f32 _len,util::SVBoundBox& _aabb);
     };
     
 }

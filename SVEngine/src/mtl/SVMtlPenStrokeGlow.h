@@ -28,7 +28,7 @@ namespace sv {
     
             void setColor(FVec4 &_color);
         protected:
-            virtual void _submitUniform(SVRendererPtr _render);
+            virtual void _submitUniform(render::SVRendererPtr _render);
             FVec4 m_strokeColor;
         };
 

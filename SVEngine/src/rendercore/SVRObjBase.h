@@ -24,9 +24,9 @@ namespace sv {
             
             virtual ~SVRObjBase();
             
-            virtual void create(SVRendererPtr _renderer);
+            virtual void create(render::SVRendererPtr _renderer);
             
-            virtual void destroy(SVRendererPtr _renderer);
+            virtual void destroy(render::SVRendererPtr _renderer);
             
             virtual void setData(SVDataSwapPtr _pdata);
             

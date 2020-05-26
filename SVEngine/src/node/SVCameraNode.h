@@ -52,14 +52,6 @@ namespace sv {
     
             virtual void updateViewProj();
 
-            //设置控制器
-            void setCtrl(SVCameraCtrlPtr _ctr);
-            //获取控制器,相机控制,主要是产生视矩阵
-            SVCameraCtrlPtr getCtrl();
-            //设置投影方法
-            void setProjMethod(SVProjMethodPtr _proj);
-            //投影方法
-            SVProjMethodPtr getProjMethod();
             //
             void project();
             //
@@ -78,13 +70,6 @@ namespace sv {
             util::FMat4 m_mat_vp;
             //
             SVLockPtr m_resLock;
-            //
-            SVCameraCtrlPtr m_pCtrl;
-            //
-            SVProjMethodPtr m_pProjMethod;
-            //
-            typedef SVArray<SVFboObjectPtr> FBOBJECTPOOL;
-            FBOBJECTPOOL m_fbobjectPool;
             //
             bool m_dirty;
         };

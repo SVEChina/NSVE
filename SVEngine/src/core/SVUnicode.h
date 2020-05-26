@@ -9,6 +9,7 @@
 #define SV_SVUNICODE_H
 #include "../base/SVBase.h"
 namespace sv {
+
     class SVUnicode {
     public:
         enum SVUNICODEBYTEORDER{

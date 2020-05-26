@@ -14,7 +14,6 @@
 #include "../basesys/SVCameraMgr.h"
 #include "../node/SVScene.h"
 #include "../node/SVCameraNode.h"
-#include "../ui/SVUIMgr.h"
 
 //获取射线求教节点
 SVVisitRayPick::SVVisitRayPick(FVec3& _rayStart,FVec3& _rayEnd)

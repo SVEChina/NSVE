@@ -36,7 +36,7 @@ void SVMtlAni2D::reset() {
     m_LogicParamBlendMode.reset();
 }
 
-void SVMtlAni2D::_submitUniform(SVRendererPtr _render) {
+void SVMtlAni2D::_submitUniform(render::SVRendererPtr _render) {
     SVMtlCore::_submitUniform(_render);
     if((m_LogicMtlFlag0&MTL_F0_BLENDMODE)>0){
         _render->submitUniformi(NAME_BLENDMODE, m_LogicParamBlendMode.m_blendmode);

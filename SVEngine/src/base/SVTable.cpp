@@ -7,6 +7,10 @@
 
 #include "SVTable.h"
 
+using namespace sv;
+using namespace sv::util;
+using namespace sv::logic;
+
 SVTableCell::SVTableCell() {
     m_str_value = "";
     m_f_value = 0.0f;

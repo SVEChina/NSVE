@@ -14,7 +14,7 @@
 #include "../third/rapidjson/writer.h"
 
 SVConfig::SVConfig(SVInst *_app) : SVGBase(_app) {
-    //m_subsysType = "SVConfig";
+    //m_subsysType = 5;
     width = 720;
     height = 1280;
     designWidth = 720;

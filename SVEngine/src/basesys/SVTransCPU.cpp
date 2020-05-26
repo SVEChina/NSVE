@@ -7,6 +7,8 @@
 
 #include "SVTransCPU.h"
 
+using namespace sv::logic;
+
 SVTransCPU::SVTransCPU(SVInst *_app)
 :SVTrans(_app){
 }

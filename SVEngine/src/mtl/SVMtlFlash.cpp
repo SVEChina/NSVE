@@ -61,7 +61,7 @@ void SVMtlFlash::update(f32 dt) {
     m_accTime += dt;
 }
 
-void SVMtlFlash::_submitUniform(SVRendererPtr _render) {
+void SVMtlFlash::_submitUniform(render::SVRendererPtr _render) {
     SVMtlCore::_submitUniform(_render);
     _render->submitUniformf("lerp", m_lerp);
 }

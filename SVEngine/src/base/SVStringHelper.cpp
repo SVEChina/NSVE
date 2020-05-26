@@ -7,6 +7,10 @@
 
 #include "SVStringHelper.h"
 
+using namespace sv;
+using namespace sv::util;
+using namespace sv::logic;
+
 SVStringHelper::SVStringHelper()
 : SVObject(){
  

@@ -25,7 +25,7 @@ namespace sv {
         
         ~SVCtxOSXGL();
         
-        virtual SVRendererPtr createRenderer(SVInstPtr _handle);
+        virtual render::SVRendererPtr createRenderer(SVInstPtr _handle);
         
         virtual bool activeContext();
         
@@ -41,7 +41,7 @@ namespace sv {
         
         ~SVCtxOSXMetal();
         
-        virtual SVRendererPtr createRenderer(SVInstPtr _handle);
+        virtual render::SVRendererPtr createRenderer(SVInstPtr _handle);
         
         virtual bool activeContext();
         

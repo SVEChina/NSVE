@@ -21,6 +21,14 @@
 #include "../rendercore/SVRenderMgr.h"
 #include "../rendercore/SVRenderer.h"
 #include "../basesys/SVStaticData.h"
+
+using namespace sv;
+using namespace sv::node;
+using namespace sv::util;
+using namespace sv::render;
+using namespace sv::mtl;
+//using namespace sv::;
+
 //
 SVSpriteNode::SVSpriteNode(SVInst *_app)
 :SVNode(_app) {

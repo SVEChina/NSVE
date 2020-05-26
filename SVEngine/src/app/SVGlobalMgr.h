@@ -29,7 +29,7 @@ namespace sv {
         
     public:
         //渲染器
-        //SVRendererPtr m_pRenderer;
+        //render::SVRendererPtr m_pRenderer;
         //渲染技术
         SVRenderMgrPtr m_pRenderMgr;
         
@@ -45,8 +45,6 @@ namespace sv {
         SVSceneMgrPtr m_pSceneMgr;
         //相机管理
         SVCameraMgrPtr m_pCameraMgr;
-        //UI部分
-        SVUIMgrPtr m_pUIMgr;
         //模块(插件)部分
         SVModuleSysPtr m_pModuleSys;
         //灯光部分

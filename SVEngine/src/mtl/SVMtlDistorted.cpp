@@ -42,7 +42,7 @@ void SVMtlDistorted::update(f32 dt) {
     m_accTime += dt;
 }
 
-void SVMtlDistorted::_submitUniform(SVRendererPtr _render) {
+void SVMtlDistorted::_submitUniform(render::SVRendererPtr _render) {
     SVMtlCore::_submitUniform(_render);
     _render->submitUniformf("time", m_accTime/m_time);
 }

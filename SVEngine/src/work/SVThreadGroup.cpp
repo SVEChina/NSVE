@@ -6,6 +6,8 @@
 
 #include "SVThreadGroup.h"
 
+using namespace sv;
+
 SVThreadGroup::SVThreadGroup(){
     pthread_mutex_init(&m_mutex, nullptr);
     m_cond = MakeSharedPtr<SVCond>();

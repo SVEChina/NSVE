@@ -19,10 +19,10 @@ namespace sv {
         class SVTransGPU : public SVTrans {
         public:
             SVTransGPU(SVInst *_app,
-                       SVTexturePtr _t0,
-                       SVTexturePtr _t1,
-                       SVTexturePtr _t2,
-                       SVTexturePtr _tOut);
+                       mtl::SVTexturePtr _t0,
+                       mtl::SVTexturePtr _t1,
+                       mtl::SVTexturePtr _t2,
+                       mtl::SVTexturePtr _tOut);
             
             virtual ~SVTransGPU();
             
@@ -37,15 +37,15 @@ namespace sv {
             void setAngle(f32 _angle);
             
         protected:
-            SVTexturePtr m_tex0;
-            SVTexturePtr m_tex1;
-            SVTexturePtr m_tex2;
-            SVTexturePtr m_texOut;
+            mtl::SVTexturePtr m_tex0;
+            mtl::SVTexturePtr m_tex1;
+            mtl::SVTexturePtr m_tex2;
+            mtl::SVTexturePtr m_texOut;
             f32 m_angle;
-            SVMultPassNodePtr m_passNode;
-            SVRenderObjectPtr m_pRenderObj;
-            SVRenderMeshPtr m_pMesh;
-            SVMtlCorePtr m_pMtl;
+            node::SVMultPassNodePtr m_passNode;
+            render::SVRenderObjectPtr m_pRenderObj;
+            render::SVRenderMeshPtr m_pMesh;
+            mtl::SVMtlCorePtr m_pMtl;
 
             void createPass(s32 _w, s32 _h, f32 _angle, SVTEXTYPE _tt);
         };

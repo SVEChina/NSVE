@@ -7,6 +7,12 @@
 
 #include "SVTrans.h"
 
+using namespace sv::logic;
+using namespace sv::node;
+using namespace sv::mtl;
+using namespace sv::render;
+using namespace sv::util;
+
 SVTrans::SVTrans(SVInst *_app)
 :SVGBase(_app){
     m_width = 0;

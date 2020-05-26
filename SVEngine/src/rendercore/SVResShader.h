@@ -88,11 +88,11 @@ namespace sv {
             
             virtual ~SVResShader();
             
-            virtual void create(SVRendererPtr _renderer){}
+            virtual void create(render::SVRendererPtr _renderer){}
             
-            virtual void destroy(SVRendererPtr _renderer){}
+            virtual void destroy(render::SVRendererPtr _renderer){}
             
-            virtual bool active(SVRendererPtr _render){ return false; }
+            virtual bool active(render::SVRendererPtr _render){ return false; }
             
             void setAF(cptr8 _af);
             
@@ -117,21 +117,21 @@ namespace sv {
             void setTSEFName(cptr8 _filename);
 
         protected:
-            SVString m_programme_fname;
+            util::SVString m_programme_fname;
             
-            SVString m_vs_fname;
+            util::SVString m_vs_fname;
             
-            SVString m_fs_fname;
+            util::SVString m_fs_fname;
             
-            SVString m_gs_fname;
+            util::SVString m_gs_fname;
             
-            SVString m_cs_fname;
+            util::SVString m_cs_fname;
             
-            SVString m_tsc_fname;
+            util::SVString m_tsc_fname;
             
-            SVString m_tse_fname;
+            util::SVString m_tse_fname;
             
-            SVString m_attri_formate;
+            util::SVString m_attri_formate;
         };
         
     }//!namespace render

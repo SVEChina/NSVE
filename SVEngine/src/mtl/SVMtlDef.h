@@ -43,10 +43,6 @@ namespace sv {
 #define SV_INCR                           0x1E02
 #define SV_DECR                           0x1E03
     
-    class SVInst;
-    
-    typedef SVMtlCore *(*mtl_new_func)(SVInst *_app);
-
     enum TEXTUREPARAM{
         E_T_PARAM_FILTER_MAG = 0,
         E_T_PARAM_FILTER_MIN,

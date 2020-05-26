@@ -13,6 +13,7 @@
 #include "../rendercore/SVRenderDef.h"
 #include "../base/SVVec3.h"
 #include "../base/SVVec4.h"
+
 #define KEY_SCREEN_WIDTH  "width"
 #define KEY_SCREEN_HEIGHT "height"
 #define KEY_DESIGN_WIDTH  "designwidth"
@@ -115,15 +116,15 @@ namespace sv {
         SV_OUTSTEAMFORMATE dataoutFormate;            //数据输出格式
         //画笔参数相关
         f32 m_strokeWidth;
-        FVec4 m_strokeColor;
+        util::FVec4 m_strokeColor;
         f32 m_strokeGlowWidth;
-        FVec4 m_strokeGlowColor;
+        util::FVec4 m_strokeGlowColor;
         
         s32 glVersion;
         bool cameraMirror;      //相机输入数据是否镜像
         CfgFilter m_cfgFilter;
         bool mirror; //是否镜像显示,即进来什么样就是什么样，不进行翻转
-        SVString m_tag;
+        util::SVString m_tag;
     private:
         void _adaptScale();
         //适配模式

@@ -9,6 +9,10 @@
 #include "SVTimeLineDeform.h"
 #include "../base/SVQuat.h"
 
+using namespace sv::logic;
+using namespace sv::node;
+using namespace sv::util;
+
 SVTimeLineDeform::SVTimeLineDeform(SVInst* _app,f32 _time,s32 _rate)
 :SVTimeLine(_app,_time,_rate){
     m_type = E_TL_T_DEFORM;

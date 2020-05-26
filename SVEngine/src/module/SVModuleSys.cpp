@@ -10,7 +10,7 @@
 #include "../work/SVTdCore.h"
 SVModuleSys::SVModuleSys(SVInst *_app)
 :SVSysBase(_app) {
-    m_subsysType = "SVModuleSys";
+    m_subsysType = 8;
     m_moduleLock = MakeSharedPtr<SVLock>();
 }
 

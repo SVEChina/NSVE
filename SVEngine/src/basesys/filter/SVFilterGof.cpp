@@ -28,7 +28,7 @@ SVFilterGof::~SVFilterGof(){
 }
 
 bool SVFilterGof::create(){
-    SVRendererPtr t_renderer = mApp->getRenderer();
+    render::SVRendererPtr t_renderer = mApp->getRenderer();
     if(!t_renderer)
         return false;
     SVTexturePtr t_tex = t_renderer->getSVTex(E_TEX_MAIN);
@@ -99,7 +99,7 @@ void SVFilterGof::destroy(){
     }
     m_pPassNode = nullptr;
     
-    SVRendererPtr t_renderer = mApp->getRenderer();
+    render::SVRendererPtr t_renderer = mApp->getRenderer();
     if(t_renderer){
         t_renderer->destroySVTex(E_TEX_FILTER_MIP_1);
     }

@@ -11,7 +11,7 @@
 #include "../physics/SVPhysicsWorld.h"
 SVPhysicsWorldMgr::SVPhysicsWorldMgr(SVInst *_app)
 :SVSysBase(_app) {
-    m_subsysType = "SVPhysicsWorldMgr";
+    m_subsysType = 4;
     m_rigidWorld = nullptr;
     m_softWorld = nullptr;
 }

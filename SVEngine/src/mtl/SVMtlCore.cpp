@@ -31,14 +31,10 @@ SVMtlCore::SVMtlCore(SVInst *_app, cptr8 _shader)
 ,m_pShader(nullptr)
 ,m_mtlname(_shader){
     reset();
-    m_renderPool = new MODPOOL();
-    m_logicPool = new MODPOOL();
 }
 
 SVMtlCore::SVMtlCore(SVMtlCore* _mtl)
 :SVGBase(_mtl->mApp){
-    m_renderPool = new MODPOOL();
-    m_logicPool = new MODPOOL();
     m_mtlname = _mtl->m_mtlname;
     m_pShader = _mtl->m_pShader;
     m_LogicMtlFlag0 = _mtl->m_LogicMtlFlag0;
@@ -55,17 +51,6 @@ SVMtlCore::SVMtlCore(SVMtlCore* _mtl)
 
 SVMtlCore::~SVMtlCore() {
     reset();
-    //
-    if(m_renderPool){
-        m_renderPool->destroy();
-        delete m_renderPool;
-        m_renderPool = nullptr;
-    }
-    if(m_logicPool){
-        m_logicPool->destroy();
-        delete m_logicPool;
-        m_logicPool = nullptr;
-    }
 }
 
 SVMtlCorePtr SVMtlCore::clone() {
@@ -147,7 +132,7 @@ void SVMtlCore::reloadShader(cptr8 _shader){
 bool SVMtlCore::submitMtl() {
 //    //单线程(交换改变池)
 //    swap();
-    SVRendererPtr t_renderer = mApp->getRenderer();
+    render::SVRendererPtr t_renderer = mApp->getRenderer();
     if(!t_renderer)
         return false;
     if (!m_pShader){
@@ -170,7 +155,7 @@ bool SVMtlCore::submitMtl() {
 }
 
 void SVMtlCore::recoverMtl() {
-    SVRendererPtr t_renderer = mApp->getRenderer();
+    render::SVRendererPtr t_renderer = mApp->getRenderer();
     if(!t_renderer)
         return ;
     //状态回滚 先
@@ -205,31 +190,20 @@ void SVMtlCore::recoverMtl() {
     }
 }
 
-//增加修正
-void SVMtlCore::addModify(SVModifyPtr _modify) {
-    if(_modify && m_logicPool){
-        m_logicPool->append(_modify);
-    }
-}
 
 //交换
 void SVMtlCore::swap() {
-    if(m_renderPool && m_logicPool) {
-        MODPOOL* tmp = m_renderPool;
-        m_renderPool = m_logicPool;
-        m_logicPool = tmp;
-    }
 }
 
 void SVMtlCore::_loadShader() {
-    SVRendererPtr t_renderer = mApp->getRenderer();
+    render::SVRendererPtr t_renderer = mApp->getRenderer();
     if(t_renderer){
         m_pShader = mApp->getShaderMgr()->getShader(m_mtlname.c_str());
     }
 }
 
 void SVMtlCore::_refreshMatrix(){
-    SVRendererPtr t_renderer = mApp->getRenderer();
+    render::SVRendererPtr t_renderer = mApp->getRenderer();
     if(t_renderer){
         if( m_LogicParamMatrix.m_self_view == 0 ) {
             //使用堆栈的
@@ -256,15 +230,9 @@ void SVMtlCore::_refreshMatrix(){
 
 //执行修正系统
 void SVMtlCore::_refreshModify(){
-    if(m_renderPool){
-        for(s32 i=0;i<m_renderPool->size();i++) {
-            (*m_renderPool)[i]->exec( shared_from_this() );
-        }
-        m_renderPool->destroy();
-    }
 }
 
-void SVMtlCore::_submitUniform(SVRendererPtr _render) {
+void SVMtlCore::_submitUniform(render::SVRendererPtr _render) {
     //get uniform
     if((m_LogicMtlFlag0&MTL_F0_MAT_M)>0){
         _render->submitUniformMatrix(NAME_M_MATRIX, m_LogicParamMatrix.m_mat_model);
@@ -303,7 +271,7 @@ void SVMtlCore::_submitUniform(SVRendererPtr _render) {
     }
 }
 
-void SVMtlCore::_submitState(SVRendererPtr _render) {
+void SVMtlCore::_submitState(render::SVRendererPtr _render) {
     //更新纹理
     if((m_LogicMtlFlag0&MTL_F0_TEX0)>0){
         _render->submitTex(0, m_LogicParamTex.m_texUnit[0]);
@@ -360,7 +328,7 @@ void SVMtlCore::_submitState(SVRendererPtr _render) {
     }
 }
 
-void SVMtlCore::_submitMtl(SVRendererPtr _render) {
+void SVMtlCore::_submitMtl(render::SVRendererPtr _render) {
 }
 
 void SVMtlCore::setTexture(s32 _chanel,SVTexturePtr _texture) {
