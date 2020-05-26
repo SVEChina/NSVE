@@ -40,8 +40,6 @@ void SVFrameOutNode::update(float _dt) {
 }
 
 void SVFrameOutNode::render() {
-    if (!mApp->m_pGlobalParam->m_curScene)
-        return;
 }
 
 void SVFrameOutNode::lockData() {

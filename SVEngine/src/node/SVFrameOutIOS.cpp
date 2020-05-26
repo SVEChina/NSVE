@@ -101,17 +101,17 @@ void SVFrameOutIOS::update(f32 _dt) {
 
 void SVFrameOutIOS::render() {
     //输出到目标纹理 然后读取数据
-    SVRendererPtr t_renderer = mApp->getRenderer();
-    SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
-    if( t_renderer && t_rs) {
-        SVTexturePtr t_out_tex = t_renderer->getSVTex(E_TEX_OUTSTREAM);
-        SVRenderCmdStreamOutIOSPtr t_cmd = MakeSharedPtr<SVRenderCmdStreamOutIOS>(mApp);
-        t_cmd->mTag = "SVFrameOutIOS";
-        t_cmd->setParam(m_outStreamFbo,t_out_tex,m_dataswap,m_pOutStreamCB);
-        t_cmd->setMesh(m_mesh);
-        t_cmd->setMaterial(m_pMtl);
-        t_rs->pushRenderCmd(m_rsType, t_cmd);
-    }
+//    SVRendererPtr t_renderer = mApp->getRenderer();
+//    SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
+//    if( t_renderer && t_rs) {
+//        SVTexturePtr t_out_tex = t_renderer->getSVTex(E_TEX_OUTSTREAM);
+//        SVRenderCmdStreamOutIOSPtr t_cmd = MakeSharedPtr<SVRenderCmdStreamOutIOS>(mApp);
+//        t_cmd->mTag = "SVFrameOutIOS";
+//        t_cmd->setParam(m_outStreamFbo,t_out_tex,m_dataswap,m_pOutStreamCB);
+//        t_cmd->setMesh(m_mesh);
+//        t_cmd->setMaterial(m_pMtl);
+//        t_rs->pushRenderCmd(m_rsType, t_cmd);
+//    }
 }
 
 void SVFrameOutIOS::lockData() {

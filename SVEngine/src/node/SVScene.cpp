@@ -194,8 +194,6 @@ SVScene::SVScene(SVInst *_app,cptr8 _name)
     m_worldD = 0;
     //场景树
     m_pSceneTree = MakeSharedPtr<SVTree4>(_app);
-    //渲染场景
-    m_pRenderScene = MakeSharedPtr<SVRenderScene>(_app);
 }
 
 SVScene::~SVScene() {
@@ -203,7 +201,6 @@ SVScene::~SVScene() {
         m_pSceneTree->destroy();
         m_pSceneTree = nullptr;
     }
-    m_pRenderScene = nullptr;
 }
 
 void SVScene::create(f32 _worldw ,f32 _worldh,s32 _depth){
@@ -269,35 +266,31 @@ void SVScene::update(f32 dt) {
     if(m_pSceneTree){
         m_pSceneTree->update(dt);
     }
-    //
-    SVRendererPtr t_renderer = mApp->getRenderer();
-    if( t_renderer && t_renderer->hasSVTex(E_TEX_MAIN) ){
-        if (m_pRenderScene && false == m_pRenderScene->isSuspend() ) {
-            SVRenderCmdFboBindPtr t_fbo_bind = MakeSharedPtr<SVRenderCmdFboBind>(t_renderer->getRenderTexture());
-            t_fbo_bind->mTag = "main_frame_bind";
-            m_pRenderScene->pushRenderCmd(RST_SCENE_BEGIN, t_fbo_bind);
-            //
-            SVRenderCmdClearPtr t_clear = MakeSharedPtr<SVRenderCmdClear>();
-            t_clear->mTag = "main_frame_clear";
-            t_clear->setRenderer(t_renderer);
-            t_clear->setClearColor(m_color.r, m_color.g, m_color.b, m_color.a);
-            m_pRenderScene->pushRenderCmd(RST_SCENE_BEGIN, t_clear);
-            //
-            SVRenderCmdFboUnbindPtr t_fbo_unbind = MakeSharedPtr<SVRenderCmdFboUnbind>(t_renderer->getRenderTexture());
-            t_fbo_unbind->mTag = "main_frame_unbind";
-            m_pRenderScene->pushRenderCmd(RST_SCENE_END, t_fbo_unbind);
-        }
-    }
+//    //
+//    SVRendererPtr t_renderer = mApp->getRenderer();
+//    if( t_renderer && t_renderer->hasSVTex(E_TEX_MAIN) ){
+//        if (m_pRenderScene && false == m_pRenderScene->isSuspend() ) {
+//            SVRenderCmdFboBindPtr t_fbo_bind = MakeSharedPtr<SVRenderCmdFboBind>(t_renderer->getRenderTexture());
+//            t_fbo_bind->mTag = "main_frame_bind";
+//            m_pRenderScene->pushRenderCmd(RST_SCENE_BEGIN, t_fbo_bind);
+//            //
+//            SVRenderCmdClearPtr t_clear = MakeSharedPtr<SVRenderCmdClear>();
+//            t_clear->mTag = "main_frame_clear";
+//            t_clear->setRenderer(t_renderer);
+//            t_clear->setClearColor(m_color.r, m_color.g, m_color.b, m_color.a);
+//            m_pRenderScene->pushRenderCmd(RST_SCENE_BEGIN, t_clear);
+//            //
+//            SVRenderCmdFboUnbindPtr t_fbo_unbind = MakeSharedPtr<SVRenderCmdFboUnbind>(t_renderer->getRenderTexture());
+//            t_fbo_unbind->mTag = "main_frame_unbind";
+//            m_pRenderScene->pushRenderCmd(RST_SCENE_END, t_fbo_unbind);
+//        }
+//    }
 }
 
 void SVScene::visit(SVVisitorBasePtr _visitor){
     if( m_pSceneTree ){
         m_pSceneTree->visit(_visitor);
     }
-}
-
-SVRenderScenePtr SVScene::getRenderRS(){
-    return m_pRenderScene;
 }
 
 bool SVScene::procEvent(SVEventPtr _event) {

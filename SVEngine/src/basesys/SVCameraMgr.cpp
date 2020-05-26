@@ -57,7 +57,6 @@ void SVCameraMgr::update(f32 dt) {
         SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
         SVRendererPtr t_renderer = mApp->getRenderer();
         if(t_renderer && t_renderer->getRenderTexture() ) {
-            m_mainCamera->addLinkFboObject( t_renderer->getRenderTexture() );
         }
         if(t_rs && t_renderer) {
             //这不知道要写到哪，先写这了. 晓帆

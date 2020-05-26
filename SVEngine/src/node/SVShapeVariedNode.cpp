@@ -97,8 +97,6 @@ void SVShapeVariedNode::update(f32 _dt){
 }
 
 void SVShapeVariedNode::render(){
-    if (!mApp->m_pGlobalParam->m_curScene)
-        return;
     SVPersonPtr t_person = mApp->getDetectMgr()->getPersonModule()->getPerson(1);
     if( t_person && t_person->getExist() ){
         t_person->getFaceData();

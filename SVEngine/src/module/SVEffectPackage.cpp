@@ -89,14 +89,14 @@ void SVEffectUnit::init(SVNodePtr _node){
 }
 
 void SVEffectUnit::_attachToPeople(SVNodePtr _node){
-    //跟随人脸
-    SVActFollowPersonPtr t_fllowPerson = MakeSharedPtr<SVActFollowPerson>(mApp, _node->getPersonID());
-    t_fllowPerson->setFllowIndex(_node->getBindIndex());
-    t_fllowPerson->setBindOffset(_node->getBindOffset().x, _node->getBindOffset().y, _node->getBindOffset().z);
-    t_fllowPerson->setScale(_node->getScale().x, _node->getScale().y, _node->getScale().z);
-    t_fllowPerson->setRotation(_node->getRotation().x, _node->getRotation().y, _node->getRotation().z);
-    m_personAct = mApp->getActionMgr()->addAction(t_fllowPerson, _node);
-    m_personAct->play();
+//    //跟随人脸
+//    SVActFollowPersonPtr t_fllowPerson = MakeSharedPtr<SVActFollowPerson>(mApp, _node->getPersonID());
+//    t_fllowPerson->setFllowIndex(_node->getBindIndex());
+//    t_fllowPerson->setBindOffset(_node->getBindOffset().x, _node->getBindOffset().y, _node->getBindOffset().z);
+//    t_fllowPerson->setScale(_node->getScale().x, _node->getScale().y, _node->getScale().z);
+//    t_fllowPerson->setRotation(_node->getRotation().x, _node->getRotation().y, _node->getRotation().z);
+//    m_personAct = mApp->getActionMgr()->addAction(t_fllowPerson, _node);
+//    m_personAct->play();
 }
 
 void SVEffectUnit::destroy(){
@@ -298,10 +298,10 @@ bool SVEffectPackage::_hasAttachment(SVAniTexAttachmentPtr _attachment){
 
 void SVEffectPackage::addAttachment(SVAniTexAttachmentPtr _attachment){
     m_lock->lock();
-    if (_attachment && !_hasAttachment(_attachment)) {
-        mApp->getActionMgr()->addAni(_attachment);
-        m_attachmentPool.append(_attachment);
-    }
+//    if (_attachment && !_hasAttachment(_attachment)) {
+//        mApp->getActionMgr()->addAni(_attachment);
+//        m_attachmentPool.append(_attachment);
+//    }
     m_lock->unlock();
 }
 

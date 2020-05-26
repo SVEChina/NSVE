@@ -92,17 +92,17 @@ void SVCameraNode::ortho() {
     m_pCtrl =  MakeSharedPtr<SVCamCtrlOrtho>(mApp);
 }
 
-//LINK FBO
-void SVCameraNode::addLinkFboObject(SVFboObjectPtr _fbo){
-    if (_fbo) {
-        for(s32 i=0;i<m_fbobjectPool.size();i++) {
-            if(m_fbobjectPool[i] == _fbo) {
-                return ;
-            }
-        }
-        m_fbobjectPool.append(_fbo);
-    }
-}
+////LINK FBO
+//void SVCameraNode::addLinkFboObject(SVFboObjectPtr _fbo){
+//    if (_fbo) {
+//        for(s32 i=0;i<m_fbobjectPool.size();i++) {
+//            if(m_fbobjectPool[i] == _fbo) {
+//                return ;
+//            }
+//        }
+//        m_fbobjectPool.append(_fbo);
+//    }
+//}
 
 void SVCameraNode::_removeUnuseLinkFboObject(){
     m_resLock->lock();
@@ -118,17 +118,17 @@ void SVCameraNode::_removeUnuseLinkFboObject(){
     m_resLock->unlock();
 }
 
-bool SVCameraNode::removeLinkFboObject(SVFboObjectPtr _fbo){
-    if (_fbo) {
-        for (s32 i = 0; i < m_fbobjectPool.size(); i++) {
-            if (m_fbobjectPool[i] == _fbo) {
-                m_fbobjectPool.removeForce(i);
-                return true;
-            }
-        }
-    }
-    return false;
-}
+//bool SVCameraNode::removeLinkFboObject(SVFboObjectPtr _fbo){
+//    if (_fbo) {
+//        for (s32 i = 0; i < m_fbobjectPool.size(); i++) {
+//            if (m_fbobjectPool[i] == _fbo) {
+//                m_fbobjectPool.removeForce(i);
+//                return true;
+//            }
+//        }
+//    }
+//    return false;
+//}
 
 //
 void SVCameraNode::update(f32 _dt) {

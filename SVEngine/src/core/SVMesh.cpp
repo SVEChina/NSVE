@@ -83,46 +83,46 @@ void SVMesh::update(f32 _dt,FMat4& _mat) {
 }
 
 void SVMesh::render() {
-    //先渲染自己
-    SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
-    if(m_pRenderMesh && t_rs) {
-        SVRenderCmdNorPtr t_cmd = MakeSharedPtr<SVRenderCmdNor>();
-        if(m_pMtl) {
-            t_cmd->setMaterial(m_pMtl->clone());
-        }else{
-            //走默认材质
-            SVMtlCorePtr t_mtl_default = SVMtlLib::getSkinMtl(mApp);
-            t_cmd->setMaterial(t_mtl_default);
-        }
-        t_cmd->setMesh(m_pRenderMesh);
-        t_cmd->setRenderer(mApp->getRenderer());
-        t_cmd->mTag = "SVMesh";
-        t_rs->pushRenderCmd(RST_MASK2D, t_cmd);
-    }
+//    //先渲染自己
+//    SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
+//    if(m_pRenderMesh && t_rs) {
+//        SVRenderCmdNorPtr t_cmd = MakeSharedPtr<SVRenderCmdNor>();
+//        if(m_pMtl) {
+//            //t_cmd->setMaterial(m_pMtl->clone());
+//        }else{
+////            //走默认材质
+////            SVMtlCorePtr t_mtl_default = SVMtlLib::getSkinMtl(mApp);
+////            t_cmd->setMaterial(t_mtl_default);
+//        }
+//        t_cmd->setMesh(m_pRenderMesh);
+//        t_cmd->setRenderer(mApp->getRenderer());
+//        t_cmd->mTag = "SVMesh";
+//        t_rs->pushRenderCmd(RST_MASK2D, t_cmd);
+//    }
 }
 
 //
 void SVMesh::createShadow() {
-    //先渲染自己
-    SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
-    if(m_pRenderMesh && t_rs) {
-        SVRenderCmdNorPtr t_cmd = MakeSharedPtr<SVRenderCmdNor>();
-        if(m_pMtl) {
-            SVMtlCorePtr t_mtl= MakeSharedPtr<SVMtlCore>(mApp,"depth3d");
-            t_mtl->setModelMatrix(m_pMtl->m_LogicParamMatrix.m_mat_model);
-            t_mtl->setBlendEnable(true);
-            t_mtl->setDepthEnable(true);
-            t_cmd->setMaterial(t_mtl);
-        }else{
-            //走默认材质
-            SVMtlCorePtr t_mtl_default = SVMtlLib::getSkinMtl(mApp);
-            t_cmd->setMaterial(t_mtl_default);
-        }
-        t_cmd->setMesh(m_pRenderMesh);
-        t_cmd->setRenderer(mApp->getRenderer());
-        t_cmd->mTag = "SVMeshShadow";
-        t_rs->pushRenderCmd(RST_SHADOW, t_cmd);
-    }
+//    //先渲染自己
+//    SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
+//    if(m_pRenderMesh && t_rs) {
+//        SVRenderCmdNorPtr t_cmd = MakeSharedPtr<SVRenderCmdNor>();
+//        if(m_pMtl) {
+//            SVMtlCorePtr t_mtl= MakeSharedPtr<SVMtlCore>(mApp,"depth3d");
+//            t_mtl->setModelMatrix(m_pMtl->m_LogicParamMatrix.m_mat_model);
+//            t_mtl->setBlendEnable(true);
+//            t_mtl->setDepthEnable(true);
+//            t_cmd->setMaterial(t_mtl);
+//        }else{
+//            //走默认材质
+//            SVMtlCorePtr t_mtl_default = SVMtlLib::getSkinMtl(mApp);
+//            t_cmd->setMaterial(t_mtl_default);
+//        }
+//        t_cmd->setMesh(m_pRenderMesh);
+//        t_cmd->setRenderer(mApp->getRenderer());
+//        t_cmd->mTag = "SVMeshShadow";
+//        t_rs->pushRenderCmd(RST_SHADOW, t_cmd);
+//    }
 }
 
 //Morph动画的mesh

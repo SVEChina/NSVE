@@ -14,6 +14,9 @@
 		5FD7F211247D0FE000A53A1D /* libsve_s_mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FD7F20E247D06B800A53A1D /* libsve_s_mac.a */; };
 		5FD7F213247D0FF600A53A1D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FD7F212247D0FF600A53A1D /* QuartzCore.framework */; };
 		5FD7F215247D100100A53A1D /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FD7F214247D100100A53A1D /* CoreMedia.framework */; };
+		5FD7F21C247D294F00A53A1D /* CGUI.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5FD7F218247D294F00A53A1D /* CGUI.mm */; };
+		5FD7F21D247D294F00A53A1D /* CGInst.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5FD7F219247D294F00A53A1D /* CGInst.mm */; };
+		5FD7F21E247D294F00A53A1D /* CGState.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5FD7F21A247D294F00A53A1D /* CGState.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +62,12 @@
 		5FD7F1FF247D06B700A53A1D /* SVEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SVEngine.xcodeproj; path = ../SVEngine/platIOS/SVEngine.xcodeproj; sourceTree = "<group>"; };
 		5FD7F212247D0FF600A53A1D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		5FD7F214247D100100A53A1D /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		5FD7F216247D294F00A53A1D /* CGState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGState.h; sourceTree = "<group>"; };
+		5FD7F217247D294F00A53A1D /* CGInst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGInst.h; sourceTree = "<group>"; };
+		5FD7F218247D294F00A53A1D /* CGUI.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = CGUI.mm; sourceTree = "<group>"; };
+		5FD7F219247D294F00A53A1D /* CGInst.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = CGInst.mm; sourceTree = "<group>"; };
+		5FD7F21A247D294F00A53A1D /* CGState.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = CGState.mm; sourceTree = "<group>"; };
+		5FD7F21B247D294F00A53A1D /* CGUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGUI.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,10 +87,10 @@
 		5FD7F1E2247D064F00A53A1D = {
 			isa = PBXGroup;
 			children = (
-				5FD7F1ED247D064F00A53A1D /* SVETools */,
+				5FD7F210247D0FE000A53A1D /* Frameworks */,
 				5FD7F1EC247D064F00A53A1D /* Products */,
 				5FD7F1FF247D06B700A53A1D /* SVEngine.xcodeproj */,
-				5FD7F210247D0FE000A53A1D /* Frameworks */,
+				5FD7F1ED247D064F00A53A1D /* SVETools */,
 			);
 			sourceTree = "<group>";
 		};
@@ -96,6 +105,12 @@
 		5FD7F1ED247D064F00A53A1D /* SVETools */ = {
 			isa = PBXGroup;
 			children = (
+				5FD7F217247D294F00A53A1D /* CGInst.h */,
+				5FD7F219247D294F00A53A1D /* CGInst.mm */,
+				5FD7F216247D294F00A53A1D /* CGState.h */,
+				5FD7F21A247D294F00A53A1D /* CGState.mm */,
+				5FD7F21B247D294F00A53A1D /* CGUI.h */,
+				5FD7F218247D294F00A53A1D /* CGUI.mm */,
 				5FD7F1EE247D064F00A53A1D /* AppDelegate.h */,
 				5FD7F1EF247D064F00A53A1D /* AppDelegate.m */,
 				5FD7F1F1247D065000A53A1D /* Assets.xcassets */,
@@ -233,8 +248,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5FD7F21C247D294F00A53A1D /* CGUI.mm in Sources */,
+				5FD7F21D247D294F00A53A1D /* CGInst.mm in Sources */,
 				5FD7F1F8247D065000A53A1D /* main.m in Sources */,
 				5FD7F1F0247D064F00A53A1D /* AppDelegate.m in Sources */,
+				5FD7F21E247D294F00A53A1D /* CGState.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -375,7 +393,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = xrkj.SVETools;
+				PRODUCT_BUNDLE_IDENTIFIER = "-com.xrkj.SVETools";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -392,7 +410,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = xrkj.SVETools;
+				PRODUCT_BUNDLE_IDENTIFIER = "-com.xrkj.SVETools";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

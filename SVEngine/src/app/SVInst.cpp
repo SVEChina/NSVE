@@ -184,9 +184,7 @@ SVStaticDataPtr SVInst::getDataMgr(){
 }
 
 SVActionMgrPtr SVInst::getActionMgr(){
-    if(!m_pGlobalMgr)
-        return nullptr;
-    return m_pGlobalMgr->m_pActionMgr;
+    return nullptr;
 }
 
 SVModelMgrPtr SVInst::getModelMgr(){

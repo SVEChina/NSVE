@@ -105,7 +105,7 @@ void SVBitFontNode::setAlpha(f32 _alpha){
 }
 
 void SVBitFontNode::render() {
-    if (mApp->m_pGlobalParam->m_curScene && m_visible ){
+    if ( m_visible ){
         SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
         if (m_pRenderObj && m_pMesh) {
             m_pRenderObj->pushCmd(t_rs, RST_SOLID_3D, "SVBitFontNode");

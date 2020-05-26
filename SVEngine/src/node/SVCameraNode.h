@@ -24,11 +24,6 @@ namespace sv {
             void init();
             
             void destroy();
-
-            //link fbo相关
-            void addLinkFboObject(SVFboObjectPtr _fbo);
-            
-            bool removeLinkFboObject(SVFboObjectPtr _fbo);
             
             //更新
             void update(f32 _dt);
@@ -47,13 +42,13 @@ namespace sv {
             
             f32 *getVPMat();
             
-            FVec3& getPosition();
+            util::FVec3& getPosition();
             
-            FMat4& getProjectMatObj();
+            util::FMat4& getProjectMatObj();
             
-            FMat4& getViewMatObj();
+            util::FMat4& getViewMatObj();
             
-            FMat4& getVPMatObj();
+            util::FMat4& getVPMatObj();
     
             virtual void updateViewProj();
 
@@ -77,10 +72,10 @@ namespace sv {
             void _removeUnuseLinkFboObject();
 
             //各种矩阵
-            FVec3 m_pos;
-            FMat4 m_mat_v;
-            FMat4 m_mat_p;
-            FMat4 m_mat_vp;
+            util::FVec3 m_pos;
+            util::FMat4 m_mat_v;
+            util::FMat4 m_mat_p;
+            util::FMat4 m_mat_vp;
             //
             SVLockPtr m_resLock;
             //

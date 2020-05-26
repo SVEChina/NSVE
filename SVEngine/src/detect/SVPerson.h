@@ -9,10 +9,12 @@
 #define SV_PERSON_H
 
 #include "../base/SVListenBase.h"
+#include "../base/SVRect.h"
+#include "../base/SVVec3.h"
 #include "../base/SVDatatDef.h"
 #include "../app/SVInst.h"
-#include "SVPersonTracker.h"
 #include "../work/SVTdCore.h"
+#include "SVPersonTracker.h"
 
 //最大支持面部400个点
 #define MAX_FACE_PT_NUM 200
@@ -41,11 +43,11 @@ namespace sv {
             
             void setFaceRect(f32 _left,f32 _top,f32 _right,f32 _bottom);
             
-            SVRect getFaceRect();
+            util::SVRect getFaceRect();
             
             void setFaceRot(f32 _yaw,f32 _pitch,f32 _roll);
             
-            FVec3 getFaceRot();
+            util::FVec3 getFaceRot();
             
             f32 *getFaceData();
             
@@ -80,8 +82,8 @@ namespace sv {
             f32 *m_pFaceData;   //识别数据
             f32 *m_pFaceDataOriginal; 
             s32 m_personID;
-            FVec3 m_facerot;
-            SVRect m_facerect;
+            util::FVec3 m_facerot;
+            util::SVRect m_facerect;
             SVLock m_dataLock;
         };
         

@@ -44,11 +44,11 @@ void SV2DFaceMaskNode::update(f32 dt) {
 void SV2DFaceMaskNode::render() {
     SVNode::render();
 }
-
-void SV2DFaceMaskNode::setMaterial(SVMtlFace2DPtr _mtlFace2D){
-    m_mtlFace2D = _mtlFace2D;
-}
-
-SVMtlFace2DPtr SV2DFaceMaskNode::getMaterial(){
-    return m_mtlFace2D;
-}
+//
+//void SV2DFaceMaskNode::setMaterial(SVMtlFace2DPtr _mtlFace2D){
+//    m_mtlFace2D = _mtlFace2D;
+//}
+//
+//SVMtlFace2DPtr SV2DFaceMaskNode::getMaterial(){
+//    return m_mtlFace2D;
+//}

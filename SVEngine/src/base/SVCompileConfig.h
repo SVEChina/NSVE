@@ -100,13 +100,13 @@ namespace sv{ namespace node{ } };
 namespace sv{ namespace ui{ } };
 namespace sv{ namespace detect{ } };
 
-using namespace sv;
-using namespace sv::util;
-using namespace sv::logic;
-using namespace sv::render;
-using namespace sv::mtl;
-using namespace sv::node;
-using namespace sv::ui;
-using namespace sv::detect;
+//using namespace sv;
+//using namespace sv::util;
+//using namespace sv::logic;
+//using namespace sv::render;
+//using namespace sv::mtl;
+//using namespace sv::node;
+//using namespace sv::ui;
+//using namespace sv::detect;
 
 #endif // SV_CORE_COMPILE_CONFIG_H

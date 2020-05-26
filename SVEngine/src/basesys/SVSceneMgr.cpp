@@ -45,7 +45,6 @@ void SVSceneMgr::setScene(SVScenePtr _scene){
     m_pMainScene = _scene;
     m_sceneLock->unlock();
     if(m_pMainScene){
-        mApp->getRenderMgr()->setRenderScene( m_pMainScene->getRenderRS() );
     }
 }
 
@@ -64,11 +63,11 @@ void SVSceneMgr::update(f32 dt) {
     m_sceneLock->lock();
     if(m_pMainScene){
         //激活场景
-        mApp->m_pGlobalParam->m_curScene = m_pMainScene;
-        m_pMainScene->active();
-        m_pMainScene->update(dt);
-        m_pMainScene->unactive();
-        mApp->m_pGlobalParam->m_curScene = nullptr;
+//        mApp->m_pGlobalParam->m_curScene = m_pMainScene;
+//        m_pMainScene->active();
+//        m_pMainScene->update(dt);
+//        m_pMainScene->unactive();
+//        mApp->m_pGlobalParam->m_curScene = nullptr;
     }
     m_sceneLock->unlock();
 }

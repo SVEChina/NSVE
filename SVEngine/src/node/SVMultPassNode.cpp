@@ -56,29 +56,29 @@ void SVMultPassNode::update(f32 dt) {
 }
 
 void SVMultPassNode::render() {
-    SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
-    if (t_rs && false  == t_rs->isSuspend() && m_visible ) {
-        for(s32 i=0;i<m_passPool.size();i++){
-            if(m_passPool[i]->m_pMtl){
-                SVRenderCmdPassPtr t_cmd = MakeSharedPtr<SVRenderCmdPass>();
-                t_cmd->mTag = m_passPool[i]->mTag;
-                t_cmd->setFbo(m_fbo);
-                if( m_passPool[i]->m_outTexType == E_TEX_END ) {
-                    t_cmd->setTexture(m_passPool[i]->m_outTex);
-                }else{
-                    SVTexturePtr t_tex = mApp->getRenderer()->getSVTex(m_passPool[i]->m_outTexType);
-                    t_cmd->setTexture(t_tex);
-                }
-                if(m_passPool[i]->m_pMesh){
-                    t_cmd->setMesh(m_passPool[i]->m_pMesh);
-                }else{
-                    t_cmd->setMesh(mApp->getDataMgr()->m_screenMesh);
-                }
-                t_cmd->setMaterial(m_passPool[i]->m_pMtl);
-                t_rs->pushRenderCmd(m_rsType, t_cmd);
-            }
-        }
-    }
+//    SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
+//    if (t_rs && false  == t_rs->isSuspend() && m_visible ) {
+//        for(s32 i=0;i<m_passPool.size();i++){
+//            if(m_passPool[i]->m_pMtl){
+//                SVRenderCmdPassPtr t_cmd = MakeSharedPtr<SVRenderCmdPass>();
+//                t_cmd->mTag = m_passPool[i]->mTag;
+//                t_cmd->setFbo(m_fbo);
+//                if( m_passPool[i]->m_outTexType == E_TEX_END ) {
+//                    t_cmd->setTexture(m_passPool[i]->m_outTex);
+//                }else{
+//                    SVTexturePtr t_tex = mApp->getRenderer()->getSVTex(m_passPool[i]->m_outTexType);
+//                    t_cmd->setTexture(t_tex);
+//                }
+//                if(m_passPool[i]->m_pMesh){
+//                    t_cmd->setMesh(m_passPool[i]->m_pMesh);
+//                }else{
+//                    t_cmd->setMesh(mApp->getDataMgr()->m_screenMesh);
+//                }
+//                t_cmd->setMaterial(m_passPool[i]->m_pMtl);
+//                t_rs->pushRenderCmd(m_rsType, t_cmd);
+//            }
+//        }
+//    }
 }
 
 void SVMultPassNode::addPass(SVPassPtr _pass) {

@@ -54,17 +54,17 @@ SVRenderMeshPtr SVRenderMgr::createMeshRObj(){
 void SVRenderMgr::swapData(){
     m_logicLock->lock();
     m_renderLock->lock();
-    //交换全局(逻辑流,渲染流)
-    if(m_pRenderScene && m_pRenderer){
-        //准备的cache推送到流中
-        for(s32 i=0;i<m_RStreamCache->m_cmdArray.size();i++){
-            m_RStreamCache->m_cmdArray[i]->setRenderer(m_pRenderer);
-            m_pRenderScene->pushCacheCmd(RST_BEGIN,m_RStreamCache->m_cmdArray[i]);
-        }
-        m_RStreamCache->clearSVRenderCmd();
-        //交换管线
-        m_pRenderScene->swapPipline();
-    }
+//    //交换全局(逻辑流,渲染流)
+//    if(m_pRenderScene && m_pRenderer){
+//        //准备的cache推送到流中
+//        for(s32 i=0;i<m_RStreamCache->m_cmdArray.size();i++){
+//            m_RStreamCache->m_cmdArray[i]->setRenderer(m_pRenderer);
+//            m_pRenderScene->pushCacheCmd(RST_BEGIN,m_RStreamCache->m_cmdArray[i]);
+//        }
+//        m_RStreamCache->clearSVRenderCmd();
+//        //交换管线
+//        m_pRenderScene->swapPipline();
+//    }
     m_renderLock->unlock();
     m_logicLock->unlock();
 }
@@ -86,14 +86,8 @@ SVRendererPtr SVRenderMgr::getRenderer(){
     return m_pRenderer;
 }
 
-void SVRenderMgr::setRenderScene(SVRenderScenePtr _rs){
-    m_renderLock->lock();
-    m_pRenderScene = _rs;
-    m_renderLock->unlock();
-}
-
 SVRenderScenePtr SVRenderMgr::getRenderScene() {
-    return m_pRenderScene;
+    return nullptr;
 }
 
 void SVRenderMgr::setRenderTarget(cptr8 _name,SVRenderTargetPtr _rt) {
@@ -113,7 +107,6 @@ void SVRenderMgr::render(){
         if( m_pRenderer ) {
             m_pRenderer->renderBegin();     //渲染器开始
             _adapt();                       //适配
-            m_pRenderScene->render();       //渲染
             m_pRenderer->resetState();      //重置状态
             m_pRenderer->removeUnuseRes();  //资源释放
             m_pRenderer->renderEnd();       //渲染器结束
@@ -165,7 +158,6 @@ void SVRenderMgr::_adapt() {
             t_cmd->setWinSize(mApp->m_pGlobalParam->m_inner_width,mApp->m_pGlobalParam->m_inner_height);
             t_cmd->setMesh(mApp->getDataMgr()->m_screenMesh);
             t_cmd->setMaterial(t_pMtl->clone());
-            m_pRenderScene->getPiplineRead()->pushRenderCmd(RST_ADAPT_SCENE, t_cmd);
 
         }else if(m_adaptMode == 1) {
             //非形变 固定
@@ -184,10 +176,6 @@ void SVRenderMgr::clear() {
     if (m_RStreamCache) {
         m_RStreamCache->clearSVRenderCmd();
         m_RStreamCache = nullptr;
-    }
-    if (m_pRenderScene) {
-        m_pRenderScene->clearRenderCmd();
-        m_pRenderScene = nullptr;
     }
     m_renderLock->unlock();
 }

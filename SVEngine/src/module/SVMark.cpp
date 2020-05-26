@@ -58,26 +58,26 @@ void SVMark::destroy(){
 
 void SVMark::open(){
     SVModuleBase::open();
-    SVScenePtr t_scene = mApp->getSceneMgr()->getScene();
-    if(m_bmFontNode && t_scene){
-        t_scene->addNode(m_bmFontNode);
-    }
-    //
-    SVActAlphaPtr t_actAlpha = MakeSharedPtr<SVActAlpha>(mApp);
-    t_actAlpha->setSrcAlpha(m_srcAlpha);
-    t_actAlpha->setTarAlpha(m_tarAlpha);
-    t_actAlpha->setTime(m_alphaTime);
-    m_actAlphaUnit = mApp->getActionMgr()->addAction(t_actAlpha, m_bmFontNode);
-    m_actAlphaUnit->play();
-    //
-    SVActPositionPtr t_actPos = MakeSharedPtr<SVActPosition>(mApp);
-    s32 t_w =  mApp->m_pGlobalParam->m_inner_width;
-    s32 t_h =  mApp->m_pGlobalParam->m_inner_height;
-    t_actPos->setMinPosition(FVec3(-t_w*0.4f, -t_h*0.4f, 0.0f));
-    t_actPos->setMaxPosition(FVec3(t_w*0.4f, t_h*0.4f, 0.0f));
-    t_actPos->setTime(m_appearTime);
-    m_actPositionUnit = mApp->getActionMgr()->addAction(t_actPos, m_bmFontNode);
-    m_actPositionUnit->play();
+//    SVScenePtr t_scene = mApp->getSceneMgr()->getScene();
+//    if(m_bmFontNode && t_scene){
+//        t_scene->addNode(m_bmFontNode);
+//    }
+//    //
+//    SVActAlphaPtr t_actAlpha = MakeSharedPtr<SVActAlpha>(mApp);
+//    t_actAlpha->setSrcAlpha(m_srcAlpha);
+//    t_actAlpha->setTarAlpha(m_tarAlpha);
+//    t_actAlpha->setTime(m_alphaTime);
+//    m_actAlphaUnit = mApp->getActionMgr()->addAction(t_actAlpha, m_bmFontNode);
+//    m_actAlphaUnit->play();
+//    //
+//    SVActPositionPtr t_actPos = MakeSharedPtr<SVActPosition>(mApp);
+//    s32 t_w =  mApp->m_pGlobalParam->m_inner_width;
+//    s32 t_h =  mApp->m_pGlobalParam->m_inner_height;
+//    t_actPos->setMinPosition(FVec3(-t_w*0.4f, -t_h*0.4f, 0.0f));
+//    t_actPos->setMaxPosition(FVec3(t_w*0.4f, t_h*0.4f, 0.0f));
+//    t_actPos->setTime(m_appearTime);
+//    m_actPositionUnit = mApp->getActionMgr()->addAction(t_actPos, m_bmFontNode);
+//    m_actPositionUnit->play();
 }
 
 void SVMark::close() {

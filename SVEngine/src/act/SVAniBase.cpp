@@ -36,8 +36,4 @@ bool SVAniBase::isEnd(){
 }
 
 void SVAniBase::removeFromActionMgr(){
-    SVActionMgrPtr t_actSys = mApp->getActionMgr();
-    if (t_actSys) {
-        t_actSys->removeAni(THIS_TO_SHAREPTR(SVAniBase));
-    }
 }

@@ -96,27 +96,25 @@ void SVFaceShapeNode::update(f32 _dt){
 }
 
 void SVFaceShapeNode::render(){
-    if (!mApp->m_pGlobalParam->m_curScene)
-        return;
-    SVPersonPtr t_person = mApp->getDetectMgr()->getPersonModule()->getPerson(1);
-    if( t_person && t_person->getExist() ){
-        t_person->getFaceData();
-        //t_person->getFaceData()
-        SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
-        if (t_rs && false  == t_rs->isSuspend() ) {
-            for(s32 i=0;i<m_passPool.size();i++){
-                if(m_passPool[i]->m_pMtl){
-                    SVRenderCmdPassPtr t_cmd = MakeSharedPtr<SVRenderCmdPass>();
-                    t_cmd->mTag = "SVFaceShapeNode";
-                    t_cmd->setFbo(m_fbo);
-                    t_cmd->setTexture(m_passPool[i]->m_outTex);
-                    t_cmd->setMesh(m_passPool[i]->m_pMesh);
-                    t_cmd->setMaterial(m_passPool[i]->m_pMtl);
-                    t_rs->pushRenderCmd(RST_FACEMORPH, t_cmd);
-                }
-            }
-        }
-    }
+//    SVPersonPtr t_person = mApp->getDetectMgr()->getPersonModule()->getPerson(1);
+//    if( t_person && t_person->getExist() ){
+//        t_person->getFaceData();
+//        //t_person->getFaceData()
+//        SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
+//        if (t_rs && false  == t_rs->isSuspend() ) {
+//            for(s32 i=0;i<m_passPool.size();i++){
+//                if(m_passPool[i]->m_pMtl){
+//                    SVRenderCmdPassPtr t_cmd = MakeSharedPtr<SVRenderCmdPass>();
+//                    t_cmd->mTag = "SVFaceShapeNode";
+//                    t_cmd->setFbo(m_fbo);
+//                    t_cmd->setTexture(m_passPool[i]->m_outTex);
+//                    t_cmd->setMesh(m_passPool[i]->m_pMesh);
+//                    t_cmd->setMaterial(m_passPool[i]->m_pMtl);
+//                    t_rs->pushRenderCmd(RST_FACEMORPH, t_cmd);
+//                }
+//            }
+//        }
+//    }
 }
 
 bool SVFaceShapeNode::procEvent(SVEventPtr _event){

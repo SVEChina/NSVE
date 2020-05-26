@@ -52,7 +52,7 @@ void SVBGRAInstreamNode::setSpriteSize(f32 _w,f32 _h) {
 }
 
 void SVBGRAInstreamNode::setMaterial(SVMtlCorePtr _mtl){
-    m_pMtl = _mtl;
+    //m_pMtl = _mtl;
 }
 
 void SVBGRAInstreamNode::setTexture(SVTexturePtr _tex){
@@ -88,7 +88,7 @@ void SVBGRAInstreamNode::update(f32 dt) {
 }
 
 void SVBGRAInstreamNode::render() {
-    if (mApp->m_pGlobalParam->m_curScene && m_visible ){
+    if (m_visible ){
         SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
         if (m_pRenderObj) {
             m_pRenderObj->pushCmd(t_rs, m_rsType, "SVBGRAInstreamNode");

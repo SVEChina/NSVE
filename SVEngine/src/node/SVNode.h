@@ -52,11 +52,11 @@ namespace sv {
             //选择访问 用于子访问
             void select_visit(SVVisitorBasePtr _visit);
             
-            FMat4& getLocalMat();
+            util::FMat4& getLocalMat();
             
-            FMat4& getAbsoluteMat();
+            util::FMat4& getAbsoluteMat();
             
-            FMat4& getIAbsoluteMat();
+            util::FMat4& getIAbsoluteMat();
             
             virtual void setPosition(f32 x, f32 y, f32 z);
             
@@ -64,21 +64,21 @@ namespace sv {
             
             virtual void setRotation(f32 x, f32 y, f32 z);
             
-            virtual void setQuat(SVQuat& _quat);
+            virtual void setQuat(util::SVQuat& _quat);
             
             virtual void setScale(f32 x, f32 y, f32 z);
             
-            virtual void setPosition(FVec3& _pos);
+            virtual void setPosition(util::FVec3& _pos);
             
-            virtual void setOffset(FVec3& _pos);
+            virtual void setOffset(util::FVec3& _pos);
             
-            virtual void setRotation(FVec3& _rot);
+            virtual void setRotation(util::FVec3& _rot);
             
-            virtual void setScale(FVec3& _scale);
+            virtual void setScale(util::FVec3& _scale);
             
             virtual void setAlpha(f32 _alpha);
             
-            virtual void setBindOffset(FVec3& _offset);
+            virtual void setBindOffset(util::FVec3& _offset);
             
             virtual void setBindOffset(f32 _offsetX, f32 _offsetY, f32 _offsetZ);
             
@@ -92,7 +92,7 @@ namespace sv {
             
             s32  getBindIndex();
             
-            FVec3& getBindOffset();
+            util::FVec3& getBindOffset();
             
             void enableMipMap();
             
@@ -108,25 +108,25 @@ namespace sv {
             
             SVNodePtr getParent();
             
-            FVec3& getPosition();
+            util::FVec3& getPosition();
             
-            FVec3& getOffset();
+            util::FVec3& getOffset();
             
-            FVec3& getRotation();
+            util::FVec3& getRotation();
             
-            FVec3& getScale();
+            util::FVec3& getScale();
 
-            SVQuat getQuat();
+            util::SVQuat getQuat();
             
-            void setAABB(SVBoundBox& _aabb);
+            void setAABB(util::SVBoundBox& _aabb);
             
-            SVBoundBox& getAABB();
+            util::SVBoundBox& getAABB();
             
-            SVBoundBox& getAABBSW();
+            util::SVBoundBox& getAABBSW();
             //设置z顺序
             void setZOrder(s32 _zorder);
             
-            void setLocalMatrix(FMat4 &_mat);
+            void setLocalMatrix(util::FMat4 &_mat);
             
             inline cptr8 getType(){ return ntype.c_str(); }
             inline s32 getuid(){ return uid; }
@@ -143,10 +143,10 @@ namespace sv {
             inline s32  getPersonID(){ return m_personID; }
             inline bool getIsMipMap(){ return m_enableMipMap; }
             //设置材质
-            void setMtl(SVMtlCorePtr _mtl);
+            void setMtl(mtl::SVMtlCorePtr _mtl);
             
             //获取材质
-            SVMtlCorePtr getMtl();
+            mtl::SVMtlCorePtr getMtl();
             
         protected:
             //更新
@@ -156,8 +156,8 @@ namespace sv {
             //渲染
             virtual void render();
             //
-            SVString ntype;         //节点类型
-            SVString m_name;        //唯一名称
+            util::SVString ntype;         //节点类型
+            util::SVString m_name;        //唯一名称
             s32 uid;                //唯一ID
             s32 m_personID;         //角色ID
             s32 m_iZOrder;          //Z值
@@ -166,24 +166,24 @@ namespace sv {
             bool m_visible;         //是否可见
             bool m_drawBox;         //是否渲染包围盒
             RENDERSTREAMTYPE m_rsType;      //渲染流类型
-            FVec3 m_postion;        //位置
-            FVec3 m_rotation;       //旋转
-            FVec3 m_scale;          //缩放
-            FVec3 m_offpos;         //偏移
+            util::FVec3 m_postion;        //位置
+            util::FVec3 m_rotation;       //旋转
+            util::FVec3 m_scale;          //缩放
+            util::FVec3 m_offpos;         //偏移
             s32 m_bindIndex;        //绑定索引
             f32 m_alpha;
-            FVec3 m_bindOffset;
+            util::FVec3 m_bindOffset;
             bool m_enableMipMap;     //是否开启mipmap，//先写到这里了。
             //
             bool m_dirty;
             bool m_beSelect;        //是否被选择
             bool m_adaptDesign;
-            SVBoundBox m_aabbBox;   //AABB包围盒
-            SVBoundBox m_aabbBox_sw;//AABB世界包围盒
-            FMat4 m_localMat;       //本地矩阵
-            FMat4 m_absolutMat;     //绝对世界矩阵
-            FMat4 m_iabsolutMat;    //逆绝对世界矩阵
-            SVMtlCorePtr m_pMtl;    //材质
+            util::SVBoundBox m_aabbBox;   //AABB包围盒
+            util::SVBoundBox m_aabbBox_sw;//AABB世界包围盒
+            util::FMat4 m_localMat;       //本地矩阵
+            util::FMat4 m_absolutMat;     //绝对世界矩阵
+            util::FMat4 m_iabsolutMat;    //逆绝对世界矩阵
+            mtl::SVMtlCorePtr m_pMtl;    //材质
 
         public:
             //节点模块
@@ -209,7 +209,7 @@ namespace sv {
             //父节点
             SVNodePtr m_parent;
              //子节点池
-            typedef SVArray<SVNodePtr> NODEPOOL;
+            typedef util::SVArray<SVNodePtr> NODEPOOL;
             NODEPOOL m_childNodePool;
             //排序
             void _sort_child();
@@ -217,7 +217,7 @@ namespace sv {
             
             //序列化接口
         public:
-            SVString m_rootPath;
+            util::SVString m_rootPath;
             virtual void toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator,
                                 RAPIDJSON_NAMESPACE::Value &_objValue);
             

@@ -80,7 +80,6 @@ bool SVMovie::isEnd(){
 void SVMovie::play() {
     m_state = E_MV_ST_PLAY;
     enter();
-//    mApp->getActionMgr()->addActionUnit(THIS_TO_SHAREPTR(SVMovie));
 }
 
 void SVMovie::pause() {
@@ -92,7 +91,6 @@ void SVMovie::stop() {
     //推出到action中
     if(m_state == E_MV_ST_PLAY || m_state == E_MV_ST_PAUSE){
         m_state = E_MV_ST_READY;
-//        mApp->getActionMgr()->removeActionUnit(THIS_TO_SHAREPTR(SVMovie));
         exit();
     }
 }

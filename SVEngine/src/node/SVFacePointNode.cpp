@@ -55,8 +55,6 @@ void SVFacePointNode::update(f32 _dt){
 }
 
 void SVFacePointNode::render(){
-    if (!mApp->m_pGlobalParam->m_curScene)
-        return;
     SVPersonPtr t_person = mApp->getDetectMgr()->getPersonModule()->getPerson(1);
     if (t_person->getExist()) {
         SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();

@@ -124,17 +124,17 @@ void SVFrameOutRead::update(f32 _dt){
 }
 
 void SVFrameOutRead::render(){
-    SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
-    SVRendererPtr t_renderer = mApp->getRenderer();
-    SVTexturePtr t_out_tex = t_renderer->getSVTex(E_TEX_OUTSTREAM);
-    if (t_out_tex && t_rs && false  == t_rs->isSuspend() ) {
-        SVRenderCmdStreamOutNorPtr t_cmd = MakeSharedPtr<SVRenderCmdStreamOutNor>(mApp);
-        t_cmd->mTag = "SVFrameOutRead::render";
-        t_cmd->setParam(m_fbo,t_out_tex,m_pDataSwap,nullptr);
-        t_cmd->setMesh(mApp->getDataMgr()->m_screenMesh);
-        t_cmd->setMaterial(m_pMtl->clone());
-        t_rs->pushRenderCmd(RST_MAGIC_OUT, t_cmd);
-    }
+//    SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
+//    SVRendererPtr t_renderer = mApp->getRenderer();
+//    SVTexturePtr t_out_tex = t_renderer->getSVTex(E_TEX_OUTSTREAM);
+//    if (t_out_tex && t_rs && false  == t_rs->isSuspend() ) {
+//        SVRenderCmdStreamOutNorPtr t_cmd = MakeSharedPtr<SVRenderCmdStreamOutNor>(mApp);
+//        t_cmd->mTag = "SVFrameOutRead::render";
+//        t_cmd->setParam(m_fbo,t_out_tex,m_pDataSwap,nullptr);
+//        t_cmd->setMesh(mApp->getDataMgr()->m_screenMesh);
+//        t_cmd->setMaterial(m_pMtl->clone());
+//        t_rs->pushRenderCmd(RST_MAGIC_OUT, t_cmd);
+//    }
 }
 
 void SVFrameOutRead::lockData() {

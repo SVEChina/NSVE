@@ -37,9 +37,6 @@ namespace sv {
         
         f64 getRandomDouble(f64 from,f64 to) ;
         
-        //当前场景
-        SVScenePtr m_curScene;
-        
         //内部宽高
         s32 m_inner_width;
         

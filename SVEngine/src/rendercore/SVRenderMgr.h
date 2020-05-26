@@ -42,8 +42,6 @@ namespace sv {
         
         SVRendererPtr getRenderer();    //获取渲染器
         
-        void setRenderScene(SVRenderScenePtr _rs);  //设置渲染场景
-        
         SVRenderScenePtr getRenderScene();
         
         void pushRCmdCreate(SVRObjBasePtr _robj);
@@ -55,8 +53,6 @@ namespace sv {
     protected:
         void _adapt();
         s32 m_adaptMode;
-        //渲染场景
-        SVRenderScenePtr m_pRenderScene;
         //渲染器
         SVRendererPtr m_pRenderer;
         //渲染流(缓存流)

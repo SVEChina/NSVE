@@ -47,8 +47,6 @@ void SVModelNode::update(f32 dt) {
 void SVModelNode::render() {
     if (!m_visible)
         return;
-    if (!mApp->m_pGlobalParam->m_curScene)
-        return;
     if(m_pModel) {
         m_pModel->render();
     }
@@ -57,8 +55,6 @@ void SVModelNode::render() {
 
 void SVModelNode::createShadow(){
     if (!m_visible)
-        return;
-    if (!mApp->m_pGlobalParam->m_curScene)
         return;
     if(m_pModel) {
         m_pModel->createShadow();

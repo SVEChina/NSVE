@@ -335,12 +335,10 @@ void SVOpCreateTestLine::_process(f32 dt) {
         SVPhysicsBodyRopePtr t_bodyRope = MakeSharedPtr<SVPhysicsBodyRope>(mApp, t_softWorld->getWorldInfo(), t_from, t_to, 30, 1);
         t_bodyRope->setTimeScale(2);
         t_softWorld->addSoftBody(t_bodyRope);
-        
-        
-        SVActBodyRopePtr t_actRope = MakeSharedPtr<SVActBodyRope>(mApp, t_bodyRope);
-         SVActionMgrPtr t_actSys = mApp->getActionMgr();
-         SVActionUnitPtr t_unit = t_actSys->addAction(t_actRope, t_lineNode);
-         t_unit->play();
+//        SVActBodyRopePtr t_actRope = MakeSharedPtr<SVActBodyRope>(mApp, t_bodyRope);
+//         SVActionMgrPtr t_actSys = mApp->getActionMgr();
+//         SVActionUnitPtr t_unit = t_actSys->addAction(t_actRope, t_lineNode);
+//         t_unit->play();
     }
 }
 
@@ -374,11 +372,11 @@ void SVOpCreateTestPatch::_process(f32 dt) {
         SVPhysicsBodyClothPtr t_bodyPatch = MakeSharedPtr<SVPhysicsBodyCloth>(mApp, t_softWorld->getWorldInfo(), t_corner00, t_corner10, t_corner01, t_corner11, 20, 20);
         t_bodyPatch->setTimeScale(3);
         t_softWorld->addSoftBody(t_bodyPatch);
-        
-        SVActBodyClothPtr t_actCloth = MakeSharedPtr<SVActBodyCloth>(mApp, t_bodyPatch);
-        SVActionMgrPtr t_actSys = mApp->getActionMgr();
-        m_actUnit = t_actSys->addAction(t_actCloth, t_patchNode);
-        m_actUnit->play();
+//        
+//        SVActBodyClothPtr t_actCloth = MakeSharedPtr<SVActBodyCloth>(mApp, t_bodyPatch);
+//        SVActionMgrPtr t_actSys = mApp->getActionMgr();
+//        m_actUnit = t_actSys->addAction(t_actCloth, t_patchNode);
+//        m_actUnit->play();
     }
 }
 
@@ -437,12 +435,12 @@ void SVOpCreateTestMianSha::_process(f32 dt) {
                 t_patchNode->setPatchIndexData(t_indcesData, t_indcesNum);
                 t_patchNode->setPatchVertexData(t_vertexData, t_vertexNum);
                 //
-                
-                SVActBodyClothPtr t_actCloth = MakeSharedPtr<SVActBodyCloth>(mApp, t_bodyPatch);
-                SVActionMgrPtr t_actSys = mApp->getActionMgr();
-                SVActionUnitPtr t_actUnit = t_actSys->addAction(t_actCloth, t_patchNode);
-                t_actUnit->play();
-                
+//                
+//                SVActBodyClothPtr t_actCloth = MakeSharedPtr<SVActBodyCloth>(mApp, t_bodyPatch);
+//                SVActionMgrPtr t_actSys = mApp->getActionMgr();
+//                SVActionUnitPtr t_actUnit = t_actSys->addAction(t_actCloth, t_patchNode);
+//                t_actUnit->play();
+//                
                 //跟人
 //                SVActFollowPerson3dPtr t_fllowPerson = MakeSharedPtr<SVActFollowPerson3d>(mApp, 1);
 //                t_fllowPerson->setFllowIndex(46);//43

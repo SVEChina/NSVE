@@ -292,7 +292,6 @@ void SVDeformImageMove::render(){
             }else{
                 t_cmd->addMtlMesh(m_passDeform->m_pMtl,mApp->getDataMgr()->m_screenMesh);
             }
-            //t_cmd->setMaterial(m_passDeform->m_pMtl);
             if(m_passPoint->m_pMtl&&m_is_point){
                  t_cmd->addMtlMesh(m_passPoint->m_pMtl,m_passPoint->m_pMesh);
             }
@@ -310,7 +309,7 @@ void SVDeformImageMove::render(){
             }else{
                 m_passBack->m_pMtl->setTexcoordFlip(1.0f, 1.0f);
             }
-            t_cmd->setMaterial(m_passBack->m_pMtl);
+//            t_cmd->setMaterial(m_passBack->m_pMtl);
             t_rs->pushRenderCmd(RST_FACEMORPH, t_cmd);
         }
     }

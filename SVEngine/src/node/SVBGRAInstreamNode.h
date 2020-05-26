@@ -32,8 +32,6 @@ namespace sv {
             
             inline f32 getHeight(){ return m_height; }
             
-            void setMaterial(SVMtlCorePtr _mtl);
-            
             void setTexture(SVTexturePtr _tex);
             
         protected:

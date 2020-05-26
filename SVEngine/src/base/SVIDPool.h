@@ -6,6 +6,7 @@
 #define SV_IDPOOL_H
 
 #include "SVObject.h"
+#include "SVArray.h"
 
 //唯一ID池
 
@@ -33,7 +34,7 @@ namespace sv {
         
         u64 m_seed;
         
-        typedef SVArray<s32> IDPOOL;
+        typedef util::SVArray<s32> IDPOOL;
         IDPOOL m_idpool;
     };
     

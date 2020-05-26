@@ -20,9 +20,9 @@ SVDivisonFilter::~SVDivisonFilter() {
 }
 
 void SVDivisonFilter::init() {
-    m_backgroundNode = MakeSharedPtr<SVSpriteNode>(mApp,100, 100);
-    SVMtlCorePtr t_pMtl = MakeSharedPtr<SVMtlCore>(mApp,"screennorbgra");
-    m_backgroundNode->setMaterial(t_pMtl);
+//    m_backgroundNode = MakeSharedPtr<SVSpriteNode>(mApp,100, 100);
+//    SVMtlCorePtr t_pMtl = MakeSharedPtr<SVMtlCore>(mApp,"screennorbgra");
+//    m_backgroundNode->setMaterial(t_pMtl);
 }
 
 void SVDivisonFilter::destroy() {

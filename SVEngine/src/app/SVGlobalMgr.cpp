@@ -46,7 +46,6 @@ SVGlobalMgr::SVGlobalMgr(SVInst *_app)
     m_pRenderMgr = nullptr;
     m_pDetectMgr = nullptr;
     m_pStaticData = nullptr;
-    m_pActionMgr = nullptr;
     m_pModelMgr = nullptr;
     m_pDeformSys = nullptr;
     m_pPhysicSys =nullptr;
@@ -66,7 +65,6 @@ SVGlobalMgr::~SVGlobalMgr() {
     m_pRenderMgr = nullptr;
     m_pDetectMgr = nullptr;
     m_pStaticData = nullptr;
-    m_pActionMgr = nullptr;
     m_pModelMgr = nullptr;
     m_pDeformSys = nullptr;
     m_pPhysicSys =nullptr;
@@ -116,9 +114,6 @@ void SVGlobalMgr::init() {
     //shader程序初始化
     m_pShaderMgr = MakeSharedPtr<SVShaderMgr>(mApp);
     m_pShaderMgr->init();
-    //动画运动管理系统
-    m_pActionMgr = MakeSharedPtr<SVActionMgr>(mApp);
-    m_pActionMgr->init();
     //模型管理部分
     m_pModelMgr = MakeSharedPtr<SVModelMgr>(mApp);
     m_pModelMgr->init();
@@ -174,11 +169,6 @@ void SVGlobalMgr::destroy() {
         //shader 析构都要用到渲染模块
         m_pShaderMgr->destroy();
         SV_LOG_ERROR("SVShaderMgr:destroy sucess");
-    }
-    //动画运动析构
-    if (m_pActionMgr) {
-        m_pActionMgr->destroy();
-        SV_LOG_ERROR("SVAnimateSysPtr:destroy sucess");
     }
     //模型析构
     if (m_pModelMgr) {
@@ -239,8 +229,6 @@ void SVGlobalMgr::update(f32 dt) {
     timeTag(false,"basesys cost");
     m_pEventMgr->update(dt);            //事件处理系统更新
     timeTag(false,"event cost");
-    m_pActionMgr->update(dt);           //运动系统
-    timeTag(false,"action cost");
     m_pModelMgr->update(dt);            //模型管理
     timeTag(false,"model cost");
     m_pPhysicSys->update(dt);             //物理更新

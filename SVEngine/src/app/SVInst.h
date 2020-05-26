@@ -9,6 +9,7 @@
 #define SV_INST_H
 
 #include "../base/SVIDPool.h"
+#include "../rendercore/SVRenderDeclare.h"
 #include "SVGlobalMgr.h"
 #include "SVGlobalParam.h"
 
@@ -85,11 +86,9 @@ namespace sv {
         SVDetectMgrPtr getDetectMgr();
         SVDeformMgrPtr getDeformMgr();
         SVStaticDataPtr getDataMgr();
-        SVActionMgrPtr getActionMgr();
         SVModelMgrPtr getModelMgr();
         SVPhysicsWorldMgrPtr getPhysicsWorldMgr();
-        SVRendererPtr getRenderer();
-        SVRenderStatePtr getRenderState();
+        render::SVRendererPtr getRenderer();
     };
     
 }//!namespace sv

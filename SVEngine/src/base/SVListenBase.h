@@ -6,6 +6,7 @@
 #define SV_LISTENBASE_H
 
 #include "SVGBase.h"
+#include "SVArray.h"
 
 namespace sv {
     
@@ -33,7 +34,7 @@ namespace sv {
         
         virtual void _notice(float dt);
         
-        typedef SVArray<LISTENFUNC> LISTENFUNCPOOL;
+        typedef util::SVArray<LISTENFUNC> LISTENFUNCPOOL;
         LISTENFUNCPOOL m_listenfunc_pool;
         SVLockPtr m_listenlock;
         bool m_listenDirty;
