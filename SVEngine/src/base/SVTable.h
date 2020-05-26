@@ -18,7 +18,7 @@
  */
 namespace sv {
     
-    namespace util {
+   
         
         class SVTableCell {
         public:
@@ -90,7 +90,7 @@ namespace sv {
         };
         
         
-    }//!namespace util
+    
     
 }//!namespace sv
 

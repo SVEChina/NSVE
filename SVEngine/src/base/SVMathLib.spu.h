@@ -66,7 +66,7 @@
 
 namespace sv {
     
-    namespace util {
+   
         
         //
         struct FVec3;
@@ -1693,7 +1693,7 @@ namespace sv {
             };
         };
 
-    }//!namespace util
+    
 
 }//!namespace sv
 

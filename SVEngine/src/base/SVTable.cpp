@@ -8,8 +8,8 @@
 #include "SVTable.h"
 
 using namespace sv;
-using namespace sv::util;
-using namespace sv::logic;
+
+using namespace sv;
 
 SVTableCell::SVTableCell() {
     m_str_value = "";

@@ -12,7 +12,7 @@
 
 namespace sv {
     
-    namespace mtl{
+    
         
         class SVMtlDistorted : public SVMtlADFilterBase {
         public:
@@ -28,11 +28,11 @@ namespace sv {
             
             void update(f32 dt);
         protected:
-            virtual void _submitUniform(render::SVRendererPtr _render);
+            virtual void _submitUniform(SVRendererPtr _render);
             void _resetTime();
         };
 
-    }//!namespace mtl
+    
     
 }//!namespace sv
 

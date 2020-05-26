@@ -17,7 +17,7 @@
 
 namespace sv {
     
-    namespace node{
+    
         
         class SVFrameOutIOS : public SVFrameOutNode {
         public:
@@ -48,7 +48,7 @@ namespace sv {
             cb_out_stream m_pOutStreamCB;
         };
         
-    }//!namespace node
+    
     
 }//!namespace sv
 

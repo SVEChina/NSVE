@@ -47,7 +47,7 @@ SVRResGLShader::~SVRResGLShader(){
     m_cs = 0;
 }
 
-void SVRResGLShader::create(render::SVRendererPtr _renderer) {
+void SVRResGLShader::create(SVRendererPtr _renderer) {
     SVRObjBase::create(_renderer);
     if( m_use_tech ) {
         _parseTech();
@@ -449,14 +449,14 @@ void SVRResGLShader::_clearShaderRes(){
     }
 }
 
-void SVRResGLShader::destroy(render::SVRendererPtr _renderer) {
+void SVRResGLShader::destroy(SVRendererPtr _renderer) {
     if(m_programm != 0){
         glDeleteProgram(m_programm);
     }
     SVRObjBase::destroy(_renderer);
 }
 
-bool SVRResGLShader::active(render::SVRendererPtr _render) {
+bool SVRResGLShader::active(SVRendererPtr _render) {
     SVRenderStatePtr t_state = _render->getState();
     if(m_programm>0) {
         glUseProgram(m_programm);

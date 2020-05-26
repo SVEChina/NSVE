@@ -13,24 +13,21 @@
 
 namespace sv {
     
-    namespace render{
-        
         class SVResFBO: public SVRObjBase{
         public:
             SVResFBO(SVInst* _app);
             
             virtual ~SVResFBO();
             
-            virtual void create(render::SVRendererPtr _renderer);
+            virtual void create(SVRendererPtr _renderer);
             
-            virtual void destroy(render::SVRendererPtr _renderer);
+            virtual void destroy(SVRendererPtr _renderer);
             
         protected:
             u32     m_uid;          //唯一ID对象
             SVLockPtr m_texLock;
         };
         
-    }//!namespace render
 }//!namespace sv
 
 

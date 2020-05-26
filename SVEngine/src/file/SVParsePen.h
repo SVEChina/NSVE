@@ -12,7 +12,7 @@
 
 namespace sv {
     
-    namespace logic{
+    
         
         class SVParsePen : public SVParseData {
         public:
@@ -24,7 +24,7 @@ namespace sv {
         protected:
             void _parsePen(SVInst *_app, RAPIDJSON_NAMESPACE::Value &_item, s32 _resid,cptr8 _path);
         };
-    }//!namespace logic
+    
 }//!namespace sv
 
 #endif //SV_PARSEPEN_H

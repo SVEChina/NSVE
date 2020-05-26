@@ -12,7 +12,7 @@
 
 namespace sv {
     
-    namespace node{
+    
         
         //虚拟节点 主要用于 人脸坐标系统
         class SVDummyNode: public SVNode{
@@ -20,7 +20,7 @@ namespace sv {
             SVDummyNode(SVInst *_app);
         };
         
-    }//!namespace node
+    
     
 }//!namespace sv
 

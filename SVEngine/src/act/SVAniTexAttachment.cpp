@@ -42,7 +42,7 @@ void SVAniTexAttachment::init() {
 }
 
 void SVAniTexAttachment::destroy() {
-    render::SVRendererPtr t_renderer = mApp->getRenderer();
+    SVRendererPtr t_renderer = mApp->getRenderer();
     SVTEXTYPE t_texType = SVTEXTYPE(E_TEX_AVATAR_0 + m_param.channel);
     if (t_renderer->hasSVTex(t_texType)) {
         t_renderer->destroySVTex(t_texType);
@@ -161,7 +161,7 @@ cptr8 SVAniTexAttachment::getMataData(){
 
 void SVAniTexAttachment::_genTexture(){
     if (m_texInfo.dataSwap) {
-        render::SVRendererPtr t_renderer = mApp->getRenderer();
+        SVRendererPtr t_renderer = mApp->getRenderer();
         SVTEXTYPE t_texType = SVTEXTYPE(E_TEX_AVATAR_0 + m_param.channel);
         if (t_renderer->hasSVTex(t_texType)) {
             m_texture = t_renderer->getSVTex(t_texType);

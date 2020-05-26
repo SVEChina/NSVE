@@ -34,7 +34,7 @@ namespace sv {
         
         virtual void _notice(float dt);
         
-        typedef util::SVArray<LISTENFUNC> LISTENFUNCPOOL;
+        typedef SVArray<LISTENFUNC> LISTENFUNCPOOL;
         LISTENFUNCPOOL m_listenfunc_pool;
         SVLockPtr m_listenlock;
         bool m_listenDirty;

@@ -93,7 +93,7 @@ void SVMtlGlitch::update(f32 dt) {
     m_accTime += dt;
 }
 
-void SVMtlGlitch::_submitUniform(render::SVRendererPtr _render) {
+void SVMtlGlitch::_submitUniform(SVRendererPtr _render) {
     SVMtlADFilterBase::_submitUniform(_render);
     _render->submitUniformf("uColorDrift", m_drift[m_curFrame]);
     _render->submitUniformf2("uScanLineJitter", m_jitter[m_curFrame], m_threshHold[m_curFrame]);

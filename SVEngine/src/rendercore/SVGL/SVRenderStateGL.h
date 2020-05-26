@@ -15,7 +15,7 @@
 
 namespace sv {
     
-    namespace render{
+    
         
         class SVRenderStateGL : public SVRenderState {
         public:
@@ -83,7 +83,7 @@ namespace sv {
             TexState m_texState[8];
         };
         
-    }//!namespace render
+    
     
 }//!namespace sv
 

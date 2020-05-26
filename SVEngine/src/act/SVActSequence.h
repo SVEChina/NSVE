@@ -13,7 +13,7 @@
 
 namespace sv {
     
-    namespace logic {
+    
         
         class SVActSequence : public SVActBase {
         public:
@@ -38,7 +38,7 @@ namespace sv {
             s32 m_curIndex;
         };
 
-    }//!namespace logic
+    
     
 }//!namespace sv
 

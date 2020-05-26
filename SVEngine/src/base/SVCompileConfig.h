@@ -90,23 +90,7 @@
 
 
 //namesapce
-
 namespace sv{ };
-namespace sv{ namespace util{ } };
-namespace sv{ namespace logic{ } };
-namespace sv{ namespace render{ } };
-namespace sv{ namespace mtl{ } };
-namespace sv{ namespace node{ } };
-namespace sv{ namespace ui{ } };
-namespace sv{ namespace detect{ } };
 
-//using namespace sv;
-//using namespace sv::util;
-//using namespace sv::logic;
-//using namespace sv::render;
-//using namespace sv::mtl;
-//using namespace sv::node;
-//using namespace sv::ui;
-//using namespace sv::detect;
 
 #endif // SV_CORE_COMPILE_CONFIG_H

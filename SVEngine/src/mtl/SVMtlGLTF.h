@@ -16,7 +16,7 @@
 //GLTF材质
 namespace sv {
     
-    namespace mtl{
+    
         
         class SVMtlGLTF : public SVMtlCore {
         public:
@@ -74,7 +74,7 @@ namespace sv {
             void unbindSke();
             
         protected:
-            virtual void _submitUniform(render::SVRendererPtr _render);
+            virtual void _submitUniform(SVRendererPtr _render);
             //
             f32 m_vecBoneMatrix[MAX_BONES_DATA];
             //关联骨架
@@ -82,7 +82,7 @@ namespace sv {
         };
 
 
-    }//!namespace mtl
+    
     
 }//!namespace sv
 

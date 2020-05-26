@@ -6,7 +6,7 @@
 
 namespace sv {
     
-    namespace util {
+   
 
         /******************************************************************************\
         *
@@ -1886,7 +1886,5 @@ namespace sv {
 
         const FMat4 &(*hardwareProjection)(const FMat4 &projection,s32 width,s32 height) = hardwareProjectionGL;
 
-
-    }//!namesapce util
     
 }//!namespace sv

@@ -16,7 +16,7 @@
 
 namespace sv {
     
-    namespace mtl{
+    
         
         class SVMtlParam : public SVObject {
         public:
@@ -239,7 +239,7 @@ namespace sv {
         };
         
         
-    }//!namespace mtl
+    
 }//!namespace sv
 
 

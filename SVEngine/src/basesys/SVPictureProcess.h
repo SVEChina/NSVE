@@ -15,7 +15,7 @@
 
 namespace sv {
 
-    namespace logic {
+    
         
         //图片处理
         class SVPictureProcess : public SVProcess {
@@ -50,7 +50,7 @@ namespace sv {
             FilterArray m_filterArray;
         };
         
-    }//!namespace logic
+    
 
 }//!namespace sv
 

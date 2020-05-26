@@ -12,7 +12,7 @@
 
 namespace sv {
     
-    namespace mtl{
+    
         
         class SVMtlFlashWhite : public SVMtlCore {
         public:
@@ -32,7 +32,7 @@ namespace sv {
             
             void setCycle(f32 _cycle);
         protected:
-            virtual void _submitUniform(render::SVRendererPtr _render);
+            virtual void _submitUniform(SVRendererPtr _render);
             
             f32 m_time;
             
@@ -40,7 +40,7 @@ namespace sv {
             
         };
 
-    }//!namespace mtl
+    
     
 }//!namespace sv
 

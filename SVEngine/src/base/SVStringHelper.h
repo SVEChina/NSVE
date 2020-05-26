@@ -11,7 +11,7 @@
 #include "SVObject.h"
 namespace sv {
     
-    namespace logic{
+    
         
         //数据基准类型
         class SVStringHelper : public SVObject{
@@ -20,7 +20,7 @@ namespace sv {
             
             ~SVStringHelper();
             
-            static util::SVString jsonFormat(const util::SVString inString);
+            static SVString jsonFormat(const SVString inString);
             
             static void encrypt(c8 *_str, s32 *_keys, u32 _keyCount);
             
@@ -28,7 +28,7 @@ namespace sv {
         };
         
         
-    }//!namespace logic
+    
     
 }//!namespace sv
 

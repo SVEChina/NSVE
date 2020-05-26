@@ -6,7 +6,7 @@
 
 namespace sv {
     
-    namespace util {
+   
         
         class SVString;
         class SVStringArray;
@@ -348,7 +348,7 @@ namespace sv {
         s32 operator>=(const SVString &s0,cptr8 s1);
         s32 operator>=(cptr8 s0,const SVString &s1);
             
-    }//!namespace util
+    
     
 }//!namespace sv
 

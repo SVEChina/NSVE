@@ -11,7 +11,7 @@
 
 namespace sv {
     
-    namespace util {
+   
         
         template <class Type,s32 Capacity> class SVStack {
         public:
@@ -96,7 +96,7 @@ namespace sv {
             Type *m_stack;
         };
         
-    }//!namespace util
+    
     
 }//!namespace sv
 

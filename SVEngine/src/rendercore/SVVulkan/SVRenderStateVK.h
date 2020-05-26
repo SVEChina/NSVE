@@ -15,7 +15,7 @@
 
 namespace sv {
     
-    namespace render{
+    
         
         class SVRenderStateVK : public SVRenderState {
         public:
@@ -26,7 +26,7 @@ namespace sv {
             
         };
         
-    }//!namespace render
+    
     
 }//!namespace sv
 

@@ -12,7 +12,7 @@
 #include "../act/SVActDeclare.h"
 namespace sv {
     
-    namespace logic{
+    
         
         class SVParseAniTrigger : public SVParseData {
         public:
@@ -20,7 +20,7 @@ namespace sv {
         };
 
         
-    }//!namespace logic
+    
     
 }//!namespace sv
 #endif //SV_FILE_PARSEANITRIGGER_H

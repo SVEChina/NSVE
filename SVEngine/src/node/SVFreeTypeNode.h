@@ -14,7 +14,7 @@
 
 namespace sv {
     
-    namespace node{
+    
         
         class SVFreeTypeNode : public SVNode {
         public:
@@ -42,7 +42,7 @@ namespace sv {
             SVString m_Text;
         };
 
-    }//!namespace node
+    
     
 }//!namespace sv
 

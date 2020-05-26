@@ -3,6 +3,7 @@
 #include "../base/SVUtils.h"
 #include "../base/SVNoise.h"
 #include "../core/SVImage.h"
+
 #define PARTICLES_IFPS		(1.0f / 30.0f)
 
 SVParticles::SVParticles(SVInst *_app) : SVGBase(_app) {
@@ -1218,7 +1219,7 @@ void SVParticles::sort_particles(const FVec3 &camera) {
         t_d.index = i;
     }
     ParticlesDistanceCompare compare;
-    sv::util::quickSort(distances.begin(),distances.end(),compare);
+    sv::quickSort(distances.begin(),distances.end(),compare);
 }
 
 //

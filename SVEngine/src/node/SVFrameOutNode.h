@@ -17,7 +17,7 @@
 
 namespace sv {
     
-    namespace node{
+    
         
         class SVFrameOutNode : public SVNode {
         public:
@@ -43,7 +43,7 @@ namespace sv {
             void* m_pData;
         };
         
-    }//!namespace node
+    
     
 }//!namespace sv
 

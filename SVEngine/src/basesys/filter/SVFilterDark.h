@@ -11,7 +11,7 @@
 #include "SVFilterBase.h"
 
 namespace sv {
-    namespace logic {
+    
         
         class SVFilterDark : public SVFilterBase {
         public:

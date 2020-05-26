@@ -16,7 +16,7 @@
 
 namespace sv {
     
-    namespace logic {
+    
         
         //电影和剧本的关系
         
@@ -108,7 +108,7 @@ namespace sv {
             
         };//class SVMovie
         
-    }//!namespace logic
+    
     
 }//!namespace sv
 

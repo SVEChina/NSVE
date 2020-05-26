@@ -54,7 +54,7 @@ namespace sv {
         };
     }
     
-    namespace logic{
+    
         
         class SVPickProcess : public SVProcess {
         public:
@@ -102,7 +102,7 @@ namespace sv {
             SVNodePtr m_curPickUI;
         };
         
-    }//!namespace logic
+    
 
 }//!namespace sv
 

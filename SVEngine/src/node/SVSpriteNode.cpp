@@ -23,10 +23,10 @@
 #include "../basesys/SVStaticData.h"
 
 using namespace sv;
-using namespace sv::node;
-using namespace sv::util;
-using namespace sv::render;
-using namespace sv::mtl;
+
+
+
+
 //using namespace sv::;
 
 //
@@ -87,14 +87,6 @@ void SVSpriteNode::syncTexSize() {
 void SVSpriteNode::setTexcoord(f32 _x,f32 _y){
     m_texcoordX=_x;
     m_texcoordY=_y;
-}
-
-void SVSpriteNode::setMaterial(SVMtlCorePtr _mtl){
-    m_pMtl = _mtl;
-}
-
-SVMtlCorePtr SVSpriteNode::getMaterial(){
-    return m_pMtl;
 }
 
 f32 SVSpriteNode::getRelativeWidth(){

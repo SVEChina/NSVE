@@ -15,7 +15,7 @@
 
 namespace sv {
     
-    namespace render{
+    
 
         class SVRenderPipline : public SVGBase {
         public:
@@ -34,7 +34,7 @@ namespace sv {
             RSTREAMVEC m_rstream_vec;
         };
         
-    }//!namespace render
+    
     
 }//!namespace sv
 

@@ -88,7 +88,7 @@ namespace sv {
             void fromJSON(RAPIDJSON_NAMESPACE::Value &item);
         };
         
-    }//!namespace node
+    
     
 }//!namespace sv
 

@@ -16,7 +16,7 @@
 
 namespace sv {
     
-    namespace util{
+    
         
         class SVParamDeform{
         public:
@@ -152,7 +152,7 @@ namespace sv {
        
         };
 
-    }//!namespace util
+    
     
 }//!namespace sv
 

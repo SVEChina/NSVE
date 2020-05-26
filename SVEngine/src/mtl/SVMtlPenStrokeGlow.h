@@ -12,7 +12,7 @@
 #include "SVMtlBillboard.h"
 namespace sv {
     
-    namespace mtl{
+    
         
         class SVMtlPenStrokeGlow : public SVMtlBillboard {
         public:
@@ -28,11 +28,11 @@ namespace sv {
     
             void setColor(FVec4 &_color);
         protected:
-            virtual void _submitUniform(render::SVRendererPtr _render);
+            virtual void _submitUniform(SVRendererPtr _render);
             FVec4 m_strokeColor;
         };
 
-    }//!namespace mtl
+    
     
 }//!namespace sv
 

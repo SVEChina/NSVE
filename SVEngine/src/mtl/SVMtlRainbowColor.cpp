@@ -48,7 +48,7 @@ void SVMtlRainbowColor::update(f32 dt) {
     m_accTime += dt;
 }
 
-void SVMtlRainbowColor::_submitUniform(render::SVRendererPtr _render) {
+void SVMtlRainbowColor::_submitUniform(SVRendererPtr _render) {
     SVMtlADFilterBase::_submitUniform(_render);
     _render->submitUniformf("lerp", m_lerp);
 }

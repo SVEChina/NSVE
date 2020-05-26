@@ -15,8 +15,6 @@
 
 namespace sv {
     
-    namespace logic {
-        
         class SVActParam : public SVObject {
         public:
             SVActParam();
@@ -31,23 +29,23 @@ namespace sv {
             
             ~SVActBase();
             
-            virtual void run(node::SVNodePtr _nodePtr, f32 dt);  //循环action
+            virtual void run(SVNodePtr _nodePtr, f32 dt);  //循环action
             
-            virtual void enter(node::SVNodePtr _nodePtr);   //进入action
+            virtual void enter(SVNodePtr _nodePtr);   //进入action
             
-            virtual void exit(node::SVNodePtr _nodePtr);    //退出action
+            virtual void exit(SVNodePtr _nodePtr);    //退出action
             
             virtual bool isEnd();
             
             virtual void reset();
             
         protected:
-            util::SVString m_acttype;
+            SVString m_acttype;
             
         };
 
         
-    }//!namespace logic
+    
     
 }//!namespace sv
 

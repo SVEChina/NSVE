@@ -13,8 +13,6 @@
 
 namespace sv {
     
-    namespace node{
-        
         class SV3DBox : public SVNode {
         public:
             SV3DBox(SVInst *_app);
@@ -25,23 +23,21 @@ namespace sv {
             
             virtual void render();
             
-            void setMesh(render::SVRenderMeshPtr _pMesh);
+            void setMesh(SVRenderMeshPtr _pMesh);
             
             void randomInit();
             
-            mtl::SVMtlCorePtr getMtl();
+            SVMtlCorePtr getMtl();
             
-            mtl::SVMtlGeo3dPtr m_mtl_box;
+            SVMtlGeo3dPtr m_mtl_box;
 
         public:
-            render::SVRenderObjectPtr m_pRenderObj;
+            SVRenderObjectPtr m_pRenderObj;
             
-            render::SVRenderMeshPtr m_pMesh;
+            SVRenderMeshPtr m_pMesh;
             
             SVColor m_color;
         };
-        
-    }//!namespace node
     
 }//!namespace sv
 

@@ -9,6 +9,8 @@
 #include "SVSpine.h"
 #include <spine/extension.h>
 
+using namespace sv;
+
 void animationCallback (spAnimationState* state, spEventType type, spTrackEntry* entry, spEvent* event) {
     SVSpine* t_spine = (SVSpine*)state->rendererObject;
     if( t_spine ) {

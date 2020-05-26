@@ -12,7 +12,7 @@
 #include "SVMtlCore.h"
 namespace sv {
     
-    namespace mtl{
+    
         
         class SVMtlStrokeBase : public SVMtlCore {
         public:
@@ -26,10 +26,10 @@ namespace sv {
             
             virtual SVMtlCorePtr clone();
         protected:
-            virtual void _submitUniform(render::SVRendererPtr _render);
+            virtual void _submitUniform(SVRendererPtr _render);
         };
 
-    }//!namespace mtl
+    
     
 }//!namespace sv
 

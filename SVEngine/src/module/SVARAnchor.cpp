@@ -53,7 +53,7 @@ SVARAnchor::~SVARAnchor(){
 void SVARAnchor::init(){
     SVModuleBase::init();
     startListen();
-    render::SVRendererPtr t_renderer = mApp->getRenderer();
+    SVRendererPtr t_renderer = mApp->getRenderer();
     if (t_renderer) {
         SVTexturePtr t_tex = t_renderer->getSVTex(E_TEX_MAIN);
         s32 t_w = t_tex->getwidth();
@@ -96,7 +96,7 @@ bool SVARAnchor::isOpen(){
 
 void SVARAnchor::update(f32 _dt) {
     SVModuleBase::update(_dt);
-    render::SVRendererPtr t_renderer = mApp->getRenderer();
+    SVRendererPtr t_renderer = mApp->getRenderer();
     SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
     if (t_rs && t_renderer && m_fbo) {
         SVRenderCmdFboBindPtr t_fbo_bind = MakeSharedPtr<SVRenderCmdFboBind>(m_fbo);

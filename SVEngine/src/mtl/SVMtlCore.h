@@ -17,7 +17,7 @@
 
 namespace sv {
     
-    namespace mtl{
+    
         
         class SVMtlCoreParam : public SVObject {
         public:
@@ -104,7 +104,7 @@ namespace sv {
             void reloadShader(cptr8 _shader);
             
         public:
-            util::SVString m_mtlname;
+            SVString m_mtlname;
             s32 m_pShader;                  //shaderid
             s32 m_LogicMtlFlag0;                         //MTLFLAG0;
             SVMatrixParam m_LogicParamMatrix;            //矩阵信息
@@ -121,9 +121,9 @@ namespace sv {
             void _loadShader();
             virtual void _refreshMatrix();
             virtual void _refreshModify();
-            virtual void _submitUniform(render::SVRendererPtr _render);
-            virtual void _submitState(render::SVRendererPtr _render);
-            virtual void _submitMtl(render::SVRendererPtr _render);
+            virtual void _submitUniform(SVRendererPtr _render);
+            virtual void _submitState(SVRendererPtr _render);
+            virtual void _submitMtl(SVRendererPtr _render);
             
             
         public:
@@ -138,7 +138,7 @@ namespace sv {
             virtual void _fromJsonData(RAPIDJSON_NAMESPACE::Value &item);
         };
 
-    }//!namespace mtl
+    
     
 }//!namespace sv
 

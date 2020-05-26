@@ -14,7 +14,7 @@
 //2D动画材质
 namespace sv {
     
-    namespace mtl{
+    
         
         class SVMtl2D : public SVMtlCore {
         public:
@@ -31,11 +31,11 @@ namespace sv {
             void setAlpha(f32 _alpha);
             
         protected:
-            virtual void _submitUniform(render::SVRendererPtr _render);
+            virtual void _submitUniform(SVRendererPtr _render);
             f32  m_alpha;
         };
 
-    }//!namespace mtl
+    
     
 }//!namespace sv
 

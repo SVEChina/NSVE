@@ -12,7 +12,7 @@
 
 namespace sv {
     
-    namespace logic {
+    
         
         //回收系统
         
@@ -28,7 +28,7 @@ namespace sv {
             virtual bool procEvent(SVEventPtr _event);
         };
 
-    }//!namespace logic
+    
 }//!namespace sv
 
 

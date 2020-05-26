@@ -14,7 +14,7 @@
 
 namespace sv {
     
-    namespace logic{
+    
         
         class SVSensorProcess : public SVProcess {
         public:
@@ -34,7 +34,7 @@ namespace sv {
             SVARProjPtr m_pARProj;
         };
         
-    }//!namespace logic
+    
 
 }//!namespace sv
 

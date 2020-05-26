@@ -21,11 +21,11 @@ SVResTex:: ~SVResTex(){
     m_texLock = nullptr;
 }
 
-void SVResTex::create(render::SVRendererPtr _renderer){
+void SVResTex::create(SVRendererPtr _renderer){
     
 }
 
-void SVResTex::destroy(render::SVRendererPtr _renderer){
+void SVResTex::destroy(SVRendererPtr _renderer){
     
 }
 

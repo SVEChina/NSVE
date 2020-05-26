@@ -15,7 +15,7 @@
 
 namespace sv {
     
-    namespace util{
+    
         
         class SVBMFont : public SVFont {
         public:
@@ -98,7 +98,7 @@ namespace sv {
             s32 m_fontHeight;// total height of the font
         };
         
-    }//!namespace util
+    
     
 }//!namespace sv
 

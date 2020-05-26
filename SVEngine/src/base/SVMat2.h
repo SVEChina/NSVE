@@ -5,7 +5,7 @@
 
 namespace sv {
     
-    namespace util {
+   
 
         struct FMat2;
         struct FMat3;
@@ -151,7 +151,7 @@ namespace sv {
         FMat2 inverse(const FMat2 &m);
         FMat2 inverse(const FMat2 &m,f32 det);
         
-    }//!namespace util
+    
     
 }//!namespace sv
 

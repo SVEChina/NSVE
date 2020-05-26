@@ -14,7 +14,7 @@
 
 namespace sv {
     
-    namespace util{
+    
         
         /*
             morph 动画
@@ -28,7 +28,7 @@ namespace sv {
 
         };
 
-    }//namespace util
+    
     
 }//!namespace sv
 

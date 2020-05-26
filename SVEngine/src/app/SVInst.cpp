@@ -193,7 +193,7 @@ SVPhysicsWorldMgrPtr SVInst::getPhysicsWorldMgr(){
     return m_pGlobalMgr->m_pPhysicSys;
 }
 
-render::SVRendererPtr SVInst::getRenderer() {
+SVRendererPtr SVInst::getRenderer() {
     if(!m_pGlobalMgr)
         return nullptr;
     if(!m_pGlobalMgr->m_pRenderMgr)

@@ -19,27 +19,27 @@
 
 namespace sv {
     
-    namespace render{
+    
      
         class SVRenderObjInst{
         public:
             static void pushLineCmd(SVRenderScenePtr _rs,
                                     RENDERSTREAMTYPE streamtype,
-                                    util::FVec3 _start,
-                                    util::FVec3 _end,
-                                    mtl::SVMtlCorePtr _mtl,
+                                    FVec3 _start,
+                                    FVec3 _end,
+                                    SVMtlCorePtr _mtl,
                                     cptr8 tag = "null");
             
             static void pushRectCmd(SVRenderScenePtr _rs,
                                     RENDERSTREAMTYPE streamtype,
-                                    util::SVRect& _rect,
-                                    mtl::SVMtlCorePtr _mtl,
+                                    SVRect& _rect,
+                                    SVMtlCorePtr _mtl,
                                     cptr8 tag = "null");
             
             static void pushAABBCmd(SVRenderScenePtr _rs,
                                     RENDERSTREAMTYPE streamtype,
-                                    util::SVBoundBox& _aabb,
-                                    mtl::SVMtlCorePtr _mtl,
+                                    SVBoundBox& _aabb,
+                                    SVMtlCorePtr _mtl,
                                     cptr8 tag = "null");
         };
         
@@ -56,16 +56,16 @@ namespace sv {
             
             void setMesh(SVRenderMeshPtr _mesh);
             
-            void setMtl(mtl::SVMtlCorePtr _mtl,bool _copy = true);
+            void setMtl(SVMtlCorePtr _mtl,bool _copy = true);
             
             SVRenderMeshPtr getMesh(){ return m_pMesh; };
             
-            mtl::SVMtlCorePtr getMtl(){ return m_pMtl; }
+            SVMtlCorePtr getMtl(){ return m_pMtl; }
             
         protected:
-            render::SVRenderMeshPtr m_pMesh;
+            SVRenderMeshPtr m_pMesh;
             
-            mtl::SVMtlCorePtr m_pMtl;
+            SVMtlCorePtr m_pMtl;
         };
         
         //多Pass
@@ -75,15 +75,15 @@ namespace sv {
             
             ~SVMultPassRenderObject();
             
-            void setParam(SVRenderTexturePtr _fbo,mtl::SVTexturePtr _tex);
+            void setParam(SVRenderTexturePtr _fbo,SVTexturePtr _tex);
             
             virtual void pushCmd(SVRenderScenePtr _rs,
                                  RENDERSTREAMTYPE streamtype,
                                  cptr8 tag = "null");
             
         protected:
-            render::SVRenderTexturePtr m_fbo;
-            mtl::SVTexturePtr m_aimTex;
+            SVRenderTexturePtr m_fbo;
+            SVTexturePtr m_aimTex;
         };
         
         //多mesh
@@ -102,7 +102,7 @@ namespace sv {
             void clearMesh();
             
         private:
-            typedef util::SVArray<SVRenderMeshPtr> MESHPOOL;
+            typedef SVArray<SVRenderMeshPtr> MESHPOOL;
             MESHPOOL m_objMeshPool;
         };
         
@@ -117,18 +117,18 @@ namespace sv {
                                  RENDERSTREAMTYPE streamtype,
                                  cptr8 tag = "null");
             
-            void addRenderObj(SVRenderMeshPtr _pMesh, mtl::SVMtlCorePtr _pMtl);
+            void addRenderObj(SVRenderMeshPtr _pMesh, SVMtlCorePtr _pMtl);
             
             void clearMesh();
             
         private:
-            typedef util::SVArray<SVRenderMeshPtr> MESHPOOL;
+            typedef SVArray<SVRenderMeshPtr> MESHPOOL;
             MESHPOOL m_objMeshPool;
-            typedef util::SVArray<mtl::SVMtlCorePtr> MATPOOL;
+            typedef SVArray<SVMtlCorePtr> MATPOOL;
             MATPOOL m_objMaterialPool;
         };
         
-    }//!namespace render
+    
     
 }//!namespace sv
 

@@ -16,7 +16,7 @@
 
 namespace sv {
 
-    namespace render{
+    
 
         /*GL-VBO资源*/
         class SVResGLVBO: public SVResVBO {
@@ -25,11 +25,11 @@ namespace sv {
 
             virtual ~SVResGLVBO();
 
-            virtual void create(render::SVRendererPtr _renderer);
+            virtual void create(SVRendererPtr _renderer);
 
-            virtual void destroy(render::SVRendererPtr _renderer);
+            virtual void destroy(SVRendererPtr _renderer);
             
-            virtual void render(render::SVRendererPtr _renderer);
+            virtual void render(SVRendererPtr _renderer);
         };
         
         //mesh
@@ -39,11 +39,11 @@ namespace sv {
 
             ~SVResGLRenderMesh();
 
-            virtual void create(render::SVRendererPtr _renderer);
+            virtual void create(SVRendererPtr _renderer);
 
-            virtual void destroy(render::SVRendererPtr _renderer);
+            virtual void destroy(SVRendererPtr _renderer);
 
-            virtual void render(render::SVRendererPtr _renderer);
+            virtual void render(SVRendererPtr _renderer);
             
             virtual void updateConf(RENDERMESHCONF& _conf);
             
@@ -97,11 +97,11 @@ namespace sv {
 
             ~SVResGLRenderMeshDvid();
 
-            virtual void create(render::SVRendererPtr _renderer);
+            virtual void create(SVRendererPtr _renderer);
 
-            virtual void destroy(render::SVRendererPtr _renderer);
+            virtual void destroy(SVRendererPtr _renderer);
 
-            virtual void render(render::SVRendererPtr _renderer);
+            virtual void render(SVRendererPtr _renderer);
             
             virtual void updateData(RENDERMESHDATA& _data);
 
@@ -146,7 +146,7 @@ namespace sv {
             u32 btagentID;
         };
        
-    }//!namespace render
+    
 
 }//!namespace sv
 

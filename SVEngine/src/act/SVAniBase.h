@@ -13,7 +13,7 @@
 
 namespace sv{
     
-    namespace logic {
+    
         
         class SVAniBase : public SVGBase {
         public:
@@ -37,7 +37,7 @@ namespace sv{
 
         };
         
-    }//!namespace logic
+    
 }//!namespace sv
 
 

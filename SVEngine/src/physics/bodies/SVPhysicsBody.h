@@ -13,7 +13,7 @@
 
 namespace sv {
 
-    namespace logic {
+    
         enum PHYSICSBODYTYPE {
             E_PHYSICS_BODY_BASE = 0,
             E_PHYSICS_BODY_RIGID,
@@ -45,7 +45,7 @@ namespace sv {
             SVNodePtr m_pNode;
         };
 
-    }//!namespace logic
+    
 
 }//!namespace sv
 

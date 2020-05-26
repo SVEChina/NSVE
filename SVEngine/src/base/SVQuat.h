@@ -6,7 +6,7 @@
 
 namespace sv {
     
-    namespace util {
+   
         
         /******************************************************************************\
          *
@@ -263,7 +263,7 @@ namespace sv {
         void decomposeTransform(const FMat4 &m,SVQuat &q0,SVQuat &q1);
         FMat4 &composeTransform(FMat4 &ret,const SVQuat &q0,const SVQuat &q1);
         
-    }//!namespace util
+    
     
 }//!namespace sv
 

@@ -6,7 +6,7 @@
 
 namespace sv {
     
-    namespace util {
+   
 
         /******************************************************************************\
         *
@@ -961,6 +961,5 @@ namespace sv {
             return ret;
         }
 
-    }//!namesapce util
     
 }//!namespace sv

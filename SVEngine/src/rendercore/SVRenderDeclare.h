@@ -13,8 +13,6 @@
 
 namespace sv {
     
-    namespace render {
-
         //渲染资源
         DECLARE_SHAREPTR(SVRRes);
         DECLARE_SHAREPTR(SVResTex);
@@ -102,7 +100,6 @@ namespace sv {
         DECLARE_SHAREPTR(SVMultMeshRenderObject);
         DECLARE_SHAREPTR(SVMultMeshMtlRenderObject);
 
-    }//!namespace render
 
 }//!namespace sv
 

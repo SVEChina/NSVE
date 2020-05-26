@@ -12,7 +12,7 @@
 
 namespace sv {
     
-    namespace logic {
+
         
         DECLARE_SHAREPTR(SVTrans);
         DECLARE_SHAREPTR(SVTransCPU);
@@ -21,7 +21,7 @@ namespace sv {
         DECLARE_SHAREPTR(StreamInCore);
         //
         
-    }//!namespace logic
+
     
     //
     DECLARE_SHAREPTR(SVOutMission);

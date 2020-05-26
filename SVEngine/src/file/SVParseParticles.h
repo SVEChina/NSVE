@@ -11,14 +11,14 @@
 #include "SVParseData.h"
 namespace sv {
     
-    namespace logic{
+    
         
         class SVParseParticles : public SVParseData {
         public:
             static SVNodePtr parseParticles(SVInst *app, RAPIDJSON_NAMESPACE::Value &item, s32 _resid, cptr8 _path);
         };
         
-    }//!namespace logic
+    
     
 }//!namespace sv
 #endif //SV_PARSEPARTICLES_H

@@ -53,7 +53,7 @@ void SVMtlFlashWhite::setCycle(f32 _cycle){
     }
 }
 
-void SVMtlFlashWhite::_submitUniform(render::SVRendererPtr _render) {
+void SVMtlFlashWhite::_submitUniform(SVRendererPtr _render) {
     SVMtlCore::_submitUniform(_render);
     _render->submitUniformf("time", m_time);
     _render->submitUniformf("cycle", m_cycle);

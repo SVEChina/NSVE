@@ -142,7 +142,7 @@ void SVMtlFaceShapeVaried::update(f32 dt){
     }
 }
 
-void SVMtlFaceShapeVaried::_submitMtl(render::SVRendererPtr _render){
+void SVMtlFaceShapeVaried::_submitMtl(SVRendererPtr _render){
     _render->submitUniformf2v("startPoint", m_startPoint,24);
     _render->submitUniformf2v("endPoint", m_endPoint,24);
     _render->submitUniformf1v("actionType", m_actionType,24);

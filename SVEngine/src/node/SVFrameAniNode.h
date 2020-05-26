@@ -14,7 +14,7 @@
 typedef void (*sv_frameani_callback)(SVFrameAniNodePtr _node,void* _obj,s32 _status);
 namespace sv {
     
-    namespace node{
+    
         
         /*
          帧动画节点
@@ -113,7 +113,7 @@ namespace sv {
             sv_frameani_callback m_frameani_callback;
         };
         
-    }//!namespace node
+    
     
 }//!namespace sv
 

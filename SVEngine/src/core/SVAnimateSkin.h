@@ -18,7 +18,7 @@
 
 namespace sv {
     
-    namespace util{
+    
         
         enum SVChanType {
             E_CN_T_TRANS = 0,
@@ -199,7 +199,7 @@ namespace sv {
             SKINPOOL m_skinPool;
         };
 
-    }//namespace util
+    
     
 }//!namespace sv
 

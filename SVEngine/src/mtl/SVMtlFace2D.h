@@ -14,7 +14,7 @@
 //2D面具材质
 namespace sv {
     
-    namespace mtl{
+    
         
         class SVMtlFace2D : public SVMtlCore {
         public:
@@ -36,7 +36,7 @@ namespace sv {
             SVTexturePtr m_pMaskTexture;
         };
 
-    }//!namespace mtl
+    
     
 }//!namespace sv
 

@@ -18,6 +18,7 @@
 #include "../rendercore/SVRenderScene.h"
 #include "../rendercore/SVRenderCmdOut.h"
 
+using namespace sv;
 
 SVStreamOut::SVStreamOut(SVInst *_app)
 :SVProcess(_app){
@@ -59,12 +60,12 @@ bool SVStreamOut::openOutStream() {
         SV_LOG_INFO("please set outstream type! \n");
         return false;
     }else if( m_outMethod == E_OUT_M_READPIEXL) {
-        SVFrameOutReadPtr t_streamNode = MakeSharedPtr<SVFrameOutRead>(mApp);
-        if(t_streamNode) {
-            t_streamNode->create(m_outWidth,m_outHeight);
-            t_streamNode->setFormat(m_outFormat);
-        }
-        m_pFrameOut = t_streamNode;
+//        SVFrameOutReadPtr t_streamNode = MakeSharedPtr<SVFrameOutRead>(mApp);
+//        if(t_streamNode) {
+//            t_streamNode->create(m_outWidth,m_outHeight);
+//            t_streamNode->setFormat(m_outFormat);
+//        }
+//        m_pFrameOut = t_streamNode;
     }else if( m_outMethod == E_OUT_M_MAP) {
         
     }else if( m_outMethod == E_OUT_M_PBO) {
@@ -212,10 +213,10 @@ void SVStreamOut::unactive() {
 
 /*************************输出任务***************************/
 s32 SVStreamOut::getTexId(){
-    SVFrameOutTexPtr t_streamNode = std::dynamic_pointer_cast<SVFrameOutTex>(m_pFrameOut);
-    if(t_streamNode){
-        return  t_streamNode->getTexId();
-    }
+//    SVFrameOutTexPtr t_streamNode = std::dynamic_pointer_cast<SVFrameOutTex>(m_pFrameOut);
+//    if(t_streamNode){
+//        return  t_streamNode->getTexId();
+//    }
     return 0;
 }
 

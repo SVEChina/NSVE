@@ -13,7 +13,7 @@
 
 namespace sv {
     
-    namespace logic{
+    
         
         class SVParseData : public SVGBase {
         public:
@@ -44,7 +44,7 @@ namespace sv {
             SVArray<SVNodePtr> m_Nodes;
         };
         
-    }//!namespace logic
+    
     
 }//!namespace sv
 

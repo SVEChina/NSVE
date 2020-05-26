@@ -16,8 +16,6 @@
 
 namespace sv {
     
-    namespace logic {
-        
         class SVTimeLine : public SVGBase {
         public:
             static u32 maxFrame(f32 _time,s32 _rate);
@@ -31,11 +29,11 @@ namespace sv {
   
             TIMELINETYPE getType();
             
-            void enter(node::SVNodePtr _nodePtr);
+            void enter(SVNodePtr _nodePtr);
             
-            void exit(node::SVNodePtr _nodePtr);
+            void exit(SVNodePtr _nodePtr);
             
-            void update(node::SVNodePtr _nodePtr,f32 _dt);
+            void update(SVNodePtr _nodePtr,f32 _dt);
             
             virtual void addKey(SVKeyFramePtr _key);
             
@@ -58,7 +56,7 @@ namespace sv {
             void setRate(s32 _rate);
             
             //刷新节点
-            void refreshNode(node::SVNodePtr _nodePtr);
+            void refreshNode(SVNodePtr _nodePtr);
             
         public:
             void toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator,
@@ -76,13 +74,13 @@ namespace sv {
             //
             f32 indexToTime(u32 _index);
             //
-            virtual void _execkey(node::SVNodePtr _nodePtr,f32 _dt);
+            virtual void _execkey(SVNodePtr _nodePtr,f32 _dt);
             //
             TIMELINETYPE m_type;
             //
             SVLockPtr m_keyLock;
             //中间帧
-            typedef util::SVArray<SVKeyFramePtr> KEYPOOL;
+            typedef SVArray<SVKeyFramePtr> KEYPOOL;
             KEYPOOL m_keyPool;
             //累计时间
             f32 m_accTime;
@@ -94,7 +92,7 @@ namespace sv {
             u32 m_maxFrame;
         };
         
-    }//!namespace logic
+    
     
 }//!namespace sv
 

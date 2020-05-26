@@ -12,7 +12,7 @@
 
 namespace sv {
     
-    namespace mtl{
+    
         
         class SVMtlGlitch : public SVMtlADFilterBase {
         public:
@@ -29,7 +29,7 @@ namespace sv {
             
             void update(f32 dt);
         protected:
-            virtual void _submitUniform(render::SVRendererPtr _render);
+            virtual void _submitUniform(SVRendererPtr _render);
             void _initializeParameter();
             void _destroyParameter();
             void _resetTime();
@@ -40,7 +40,7 @@ namespace sv {
             f32 *m_threshHold;
         };
 
-    }//!namespace mtl
+    
     
 }//!namespace sv
 

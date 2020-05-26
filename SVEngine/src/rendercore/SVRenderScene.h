@@ -14,7 +14,7 @@
 
 namespace sv {
     
-    namespace render{
+    
 
         class SVRenderScene : public SVGBase {
         public:
@@ -56,7 +56,7 @@ namespace sv {
             SVRenderPiplinePtr m_cachePipline;  //缓存管线
         };
         
-    }//!namespace render
+    
     
 }//!namespace sv
 

@@ -13,7 +13,7 @@
 
 namespace sv {
     
-    namespace render{
+    
         
         class SVRenderStream : public SVObject {
             friend class sv::SVRenderMgr;
@@ -34,7 +34,7 @@ namespace sv {
             CMDPOOL m_cmdArray;
         };
         
-    }//!namespace render
+    
     
 }//!namespace sv
 

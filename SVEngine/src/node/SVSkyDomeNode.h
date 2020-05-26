@@ -11,7 +11,7 @@
 
 namespace sv {
     
-    namespace node{
+    
         
         class SVSkyDomeNode : public SVNode {
         public:
@@ -36,7 +36,7 @@ namespace sv {
             SVRenderObjectPtr m_renderObject;
         };
         
-    }//!namespace node
+    
     
 }//!namespace sv
 

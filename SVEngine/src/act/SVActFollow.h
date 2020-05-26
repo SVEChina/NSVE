@@ -14,7 +14,7 @@
 
 namespace sv {
     
-    namespace logic {
+    
         
         class SVActFollow : public SVActBase {
         public:
@@ -107,7 +107,7 @@ namespace sv {
             f32 m_src_eyedis;
         };
         
-    }//!namespace node
+    
     
 }//!namespace sv
 

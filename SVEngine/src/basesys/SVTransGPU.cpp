@@ -21,6 +21,8 @@
 #include "../mtl/SVMtlCore.h"
 #include "../core/SVGeoGen.h"
 
+using namespace sv;
+
 SVTransGPU::SVTransGPU(SVInst *_app,
                        SVTexturePtr _t0,
                        SVTexturePtr _t1,

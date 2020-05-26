@@ -15,7 +15,7 @@
 
 namespace sv {
     
-    namespace render{
+    
                 
         class SVRenderMesh : public SVRObjBase {
         public:
@@ -29,11 +29,11 @@ namespace sv {
             
             ~SVRenderMesh();
             
-            virtual void create(render::SVRendererPtr _renderer);
+            virtual void create(SVRendererPtr _renderer);
             
-            virtual void destroy(render::SVRendererPtr _renderer);
+            virtual void destroy(SVRendererPtr _renderer);
         
-            virtual void render(render::SVRendererPtr _renderer);
+            virtual void render(SVRendererPtr _renderer);
             
             void setIndexPoolType(u32 itype);
             
@@ -88,9 +88,9 @@ namespace sv {
             
             ~SVRenderMeshDvid();
             
-            virtual void create(render::SVRendererPtr _renderer);
+            virtual void create(SVRendererPtr _renderer);
             
-            virtual void destroy(render::SVRendererPtr _renderer);
+            virtual void destroy(SVRendererPtr _renderer);
             
             virtual void setVertexDataNum(s32 _vertexNum);
             
@@ -125,7 +125,7 @@ namespace sv {
             virtual void _resetMeshData();
         };
         
-    }//!namespace render
+    
     
 }//!namespace sv
 

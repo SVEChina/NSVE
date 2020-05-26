@@ -13,15 +13,11 @@
 
 namespace sv {
     
-    namespace logic{
-        
         class SVParseLUTFilter : public SVParseData {
         public:
             static SVFilterBasePtr parseLUT(SVInst *_app,cptr8 _path, s32 resid);
         };
-        
-    }//!namespace logic
-    
+
 }//!namespace sv
 
 

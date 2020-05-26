@@ -2,7 +2,7 @@
 
 namespace sv {
     
-    namespace util {
+   
 
         /******************************************************************************\
         *
@@ -187,6 +187,5 @@ namespace sv {
             return lerp(ret,v0,v1,k);
         }
 
-    }//!namesapce util
     
 }//!namespace sv

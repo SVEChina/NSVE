@@ -12,7 +12,7 @@
 
 namespace sv {
     
-    namespace render{
+    
         
         class SVResTex: public SVRObjBase{
         public:
@@ -20,9 +20,9 @@ namespace sv {
             
             virtual ~SVResTex();
             
-            virtual void create(render::SVRendererPtr _renderer);
+            virtual void create(SVRendererPtr _renderer);
             
-            virtual void destroy(render::SVRendererPtr _renderer);
+            virtual void destroy(SVRendererPtr _renderer);
             
             virtual void setTexData(void *_data, s32 _len);
             
@@ -48,7 +48,7 @@ namespace sv {
             inline bool getMipMap(){ return m_enableMipMap; }
             
         protected:
-            util::SVString m_name;
+            SVString m_name;
             SVLockPtr m_texLock;
             u32     m_uid;          //唯一ID对象
             u32     m_id;           //纹理ID
@@ -61,7 +61,7 @@ namespace sv {
             bool    m_enableMipMap;
         };
         
-    }//!namespace render
+    
 }//!namespace sv
 
 

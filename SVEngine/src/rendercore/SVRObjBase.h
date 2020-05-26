@@ -15,29 +15,25 @@
 //渲染中间件基类
 
 namespace sv {
-    
-    namespace render{
         
-        class SVRObjBase: public SVGBase {
-        public:
-            SVRObjBase(SVInst* _app);
-            
-            virtual ~SVRObjBase();
-            
-            virtual void create(render::SVRendererPtr _renderer);
-            
-            virtual void destroy(render::SVRendererPtr _renderer);
-            
-            virtual void setData(SVDataSwapPtr _pdata);
-            
-            virtual void process();     //处理
-            
-        protected:
-            SVDataSwapPtr m_pData;      //数据
-        };
+    class SVRObjBase: public SVGBase {
+    public:
+        SVRObjBase(SVInst* _app);
         
-    }//!namespace render
-    
+        virtual ~SVRObjBase();
+        
+        virtual void create(SVRendererPtr _renderer);
+        
+        virtual void destroy(SVRendererPtr _renderer);
+        
+        virtual void setData(SVDataSwapPtr _pdata);
+        
+        virtual void process();     //处理
+        
+    protected:
+        SVDataSwapPtr m_pData;      //数据
+    };
+        
 }//!namespace sv
 
 

@@ -13,7 +13,7 @@
 
 namespace sv {
     
-    namespace logic{
+    
         
         class SVParseAnimate : public SVParseData {
         public:
@@ -25,7 +25,7 @@ namespace sv {
             static SVNodePtr parseGLTF(SVInst *app, RAPIDJSON_NAMESPACE::Value &item, s32 _resid, cptr8 _path);
         };
         
-    }//!namespace logic
+    
     
 }//!namespace sv
 

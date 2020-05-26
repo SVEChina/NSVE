@@ -15,7 +15,7 @@
 
 namespace sv {
     
-    namespace util {
+   
         
         /******************************************************************************\
          *
@@ -1342,7 +1342,7 @@ namespace sv {
             radix_sort_global<Type,Buffer,Batch>(pointer,size,compare);
         }
         
-    }//!namespace util
+    
     
 }//namespace sv
 

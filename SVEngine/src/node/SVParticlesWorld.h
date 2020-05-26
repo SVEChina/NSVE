@@ -8,7 +8,7 @@
 
 namespace sv {
     
-    namespace node{
+    
     
         //
         class SVParticlesWorld : public SVParticlesWorldBase {
@@ -35,7 +35,7 @@ namespace sv {
             SVParticlesNodePtr m_particleNode;
         };
         
-    }//!namespace node
+    
     
 }//!namespace sv
 

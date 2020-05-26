@@ -8,8 +8,8 @@
 #include "SVStringHelper.h"
 
 using namespace sv;
-using namespace sv::util;
-using namespace sv::logic;
+
+using namespace sv;
 
 SVStringHelper::SVStringHelper()
 : SVObject(){

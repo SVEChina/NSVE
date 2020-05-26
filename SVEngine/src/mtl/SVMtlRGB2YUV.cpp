@@ -43,7 +43,7 @@ void SVMtlRGB2YUV::setTex(f32 _w, f32 _h) {
     m_tex_h = _h;
 }
 
-void SVMtlRGB2YUV::_submitMtl(render::SVRendererPtr _render) {
+void SVMtlRGB2YUV::_submitMtl(SVRendererPtr _render) {
     _render->submitUniformf("width", m_tex_w);
     _render->submitUniformf("height", m_tex_h);
 }

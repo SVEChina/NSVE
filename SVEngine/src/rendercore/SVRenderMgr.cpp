@@ -78,11 +78,11 @@ void SVRenderMgr::pushRCmdCreate(SVRObjBasePtr _robj){
     m_logicLock->unlock();
 }
 
-void SVRenderMgr::setRenderer(render::SVRendererPtr _renderer){
+void SVRenderMgr::setRenderer(SVRendererPtr _renderer){
     m_pRenderer = _renderer;
 }
 
-render::SVRendererPtr SVRenderMgr::getRenderer(){
+SVRendererPtr SVRenderMgr::getRenderer(){
     return m_pRenderer;
 }
 

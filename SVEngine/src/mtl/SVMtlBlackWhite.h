@@ -12,7 +12,7 @@
 
 namespace sv {
     
-    namespace mtl{
+    
         
         class SVMtlBlackWhite : public SVMtlCore {
         public:
@@ -28,12 +28,12 @@ namespace sv {
             
             void update(f32 dt);
         protected:
-            virtual void _submitUniform(render::SVRendererPtr _render);
+            virtual void _submitUniform(SVRendererPtr _render);
             
             f32 m_mode;
         };
 
-    }//!namespace mtl
+    
     
 }//!namespace sv
 

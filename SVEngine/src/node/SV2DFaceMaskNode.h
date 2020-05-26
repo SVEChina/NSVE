@@ -15,8 +15,6 @@
 
 namespace sv {
     
-    namespace node{
-    
 //        class SV2DFaceMaskNode : public SVNode {
 //        public :
 //            SV2DFaceMaskNode(SVInst *_app);
@@ -48,8 +46,6 @@ namespace sv {
 ////            f32 m_texwidth;
 ////            f32 m_texheight;
 //        };
-        
-    }//!namespace node
     
 }//!namespace sv
 

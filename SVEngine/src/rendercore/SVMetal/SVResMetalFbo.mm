@@ -29,11 +29,11 @@ SVResMetalFBO::~SVResMetalFBO() {
     
 }
 
-void SVResMetalFBO::create(render::SVRendererPtr _renderer) {
+void SVResMetalFBO::create(SVRendererPtr _renderer) {
     
 }
 
-void SVResMetalFBO::destroy(render::SVRendererPtr _renderer) {
+void SVResMetalFBO::destroy(SVRendererPtr _renderer) {
     
 }
 

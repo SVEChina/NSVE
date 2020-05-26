@@ -11,7 +11,7 @@
 #include "SVPhysicsShape.h"
 namespace sv {
     
-    namespace logic {
+    
         
         class SVPhysicsShapeSphere : public SVPhysicsShape {
         public:
@@ -34,7 +34,7 @@ namespace sv {
             f32 m_radius;
         };
             
-    }//!namespace logic
+    
     
 }//!namespace sv
 

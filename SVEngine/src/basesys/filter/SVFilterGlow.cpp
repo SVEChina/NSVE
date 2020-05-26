@@ -28,7 +28,7 @@ SVFilterGlow::~SVFilterGlow(){
 }
 
 bool SVFilterGlow::create(SVTEXTYPE _inType,SVTEXTYPE _outType){
-    render::SVRendererPtr t_renderer = mApp->getRenderer();
+    SVRendererPtr t_renderer = mApp->getRenderer();
     if(!t_renderer)
         return false;
     SVTexturePtr t_tex = t_renderer->getSVTex(_inType);
@@ -97,7 +97,7 @@ void SVFilterGlow::destroy(){
     }
     m_pPassNode = nullptr;
     
-    render::SVRendererPtr t_renderer = mApp->getRenderer();
+    SVRendererPtr t_renderer = mApp->getRenderer();
     if(t_renderer){
         t_renderer->destroySVTex(E_TEX_FILTER_GLOW_1);
     }

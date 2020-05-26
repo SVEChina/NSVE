@@ -14,7 +14,7 @@
 
 namespace sv {
     
-    namespace render{
+    
         
         class SVRenderState: public SVGBase {
         public:
@@ -27,7 +27,7 @@ namespace sv {
             u32 m_shaderID;
         };
         
-    }//!namespace render
+    
     
 }//!namespace sv
 

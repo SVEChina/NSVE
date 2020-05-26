@@ -12,7 +12,7 @@
 
 namespace sv {
     
-    namespace mtl{
+    
         
         class SVMtlFlash : public SVMtlADFilterBase {
         public:
@@ -28,14 +28,14 @@ namespace sv {
             
             void update(f32 dt);
         protected:
-            virtual void _submitUniform(render::SVRendererPtr _render);
+            virtual void _submitUniform(SVRendererPtr _render);
             void _resetTime();
             f32 m_accTime;
             f32 m_time;//周期
             f32 m_lerp;
         };
 
-    }//!namespace mtl
+    
     
 }//!namespace sv
 

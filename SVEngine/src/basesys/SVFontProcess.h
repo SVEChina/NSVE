@@ -22,7 +22,7 @@ typedef signed int FT_Int;
 
 namespace sv {
     
-    namespace logic{
+    
         
         class SVFontProcess : public SVProcess {
         public:
@@ -61,7 +61,7 @@ namespace sv {
             SVArray<SVBMFontPtr> m_bmFonts;
         };
         
-    }//!namespace logic
+    
     
 }//!namespace sv
 

@@ -14,7 +14,7 @@
 #include "BulletSoftBody/btSoftBodyHelpers.h"
 #include "BulletSoftBody/btSoftBody.h"
 namespace sv {
-    namespace logic {
+    
         
         typedef SVArray<btSoftBody::Cluster*> SVSoftBodyClusterArray;
         typedef SVArray<btSoftBody::Note> SVSoftBodyNoteArray;//Note!!
@@ -67,7 +67,7 @@ namespace sv {
             
         };
 
-    }//!namespace logic
+    
 
 }//!namespace sv
 #endif //SV_PHYSICS_BODYSOFT_H

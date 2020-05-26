@@ -11,7 +11,7 @@
 #include "SVNode.h"
 namespace sv {
     
-    namespace node{
+    
         
         class SVLineNode : public SVNode {
         public:
@@ -35,7 +35,7 @@ namespace sv {
             SVColor m_color;
         };
         
-    }//!namespace node
+    
     
 }//!namespace sv
 

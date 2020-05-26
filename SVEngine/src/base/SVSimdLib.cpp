@@ -2,7 +2,7 @@
 
 namespace sv {
     
-    namespace util {
+   
         /******************************************************************************\
          *
          * Generic simd processor
@@ -3648,7 +3648,7 @@ namespace sv {
             simd->eliminate(ret,column,factor,rows,num);
         }
 
-    }//!namespace util
+    
     
 }//namespace sv
 

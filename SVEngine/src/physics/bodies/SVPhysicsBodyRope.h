@@ -11,7 +11,7 @@
 #include "../../base/SVVec3.h"
 namespace sv {
     
-    namespace logic {
+    
         
         class SVPhysicsBodyRope : public SVPhysicsBodySoft {
         public:
@@ -37,7 +37,7 @@ namespace sv {
             SVDataSwapPtr m_pVertexData;
 
         };
-    }//!namespace logic
+    
 }//!namespace sv
 
 #endif //SV_BODIES_PHYSICSBODYROPE_H

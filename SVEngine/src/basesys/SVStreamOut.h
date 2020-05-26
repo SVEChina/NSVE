@@ -15,7 +15,7 @@
 #include "../rendercore/SVRenderDef.h"
 namespace sv {
 
-    namespace logic {
+    
         
         enum OUTMETHOD{
             E_OUT_M_NULL = 0,
@@ -106,7 +106,7 @@ namespace sv {
             MISSIONPOOL m_mission;
         };
         
-    }//!namespace logic
+    
 
 }//!namespace sv
 

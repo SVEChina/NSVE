@@ -8,11 +8,9 @@
 
 #include "SVTimeLine.h"
 #include "SVKeyFrame.h"
-#include "../base/SVUtils.h"
+//#include "../base/SVUtils.h"
 
-using namespace sv::logic;
-using namespace sv::node;
-using namespace sv::util;
+using namespace sv;
 
 u32 SVTimeLine::maxFrame(f32 _time,s32 _rate) {
     u32 t_value = u32(_time*_rate);
@@ -112,7 +110,7 @@ void SVTimeLine::_refreshKey() {
             }
         };
         KeyTimeCompareInc t_compare;
-        quickSort(it1,it2,t_compare);
+        //quickSort(it1,it2,t_compare);
     } else {
         struct KeyTimeCompareDec {
             inline s32 operator()(SVKeyFramePtr f1,SVKeyFramePtr f2) const {
@@ -120,7 +118,7 @@ void SVTimeLine::_refreshKey() {
             }
         };
         KeyTimeCompareDec t_compare;
-        quickSort(it1,it2,t_compare);
+        //quickSort(it1,it2,t_compare);
     }
 }
 

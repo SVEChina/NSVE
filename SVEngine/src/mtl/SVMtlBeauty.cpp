@@ -31,7 +31,7 @@ SVMtlCorePtr SVMtlBeauty::clone() {
     return PointerSharedPtr<SVMtlBeauty>(new SVMtlBeauty(this));
 }
 
-void SVMtlBeauty::_submitMtl(render::SVRendererPtr _render) {
+void SVMtlBeauty::_submitMtl(SVRendererPtr _render) {
     SVMtlCore::_submitMtl(_render);
     _render->submitUniformf("softenStrength", m_lSmoothSize);
     _render->submitUniformf2("imageSize", m_lImgW,m_lImgH);

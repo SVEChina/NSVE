@@ -13,8 +13,7 @@
 
 namespace sv {
     //
-    namespace logic {
-        //
+
         DECLARE_SHAREPTR(SVAniBase);
         DECLARE_SHAREPTR(SVActionMgr);
         DECLARE_SHAREPTR(SVActionUnit);
@@ -57,7 +56,7 @@ namespace sv {
         DECLARE_SHAREPTR(SVKeyMtl);
         DECLARE_SHAREPTR(SVKeyEvent);
         
-    }//!namespace logic
+
 }
 
 

@@ -5,7 +5,7 @@
 
 namespace sv {
     
-    namespace util {
+   
         
         struct FMat2;
         struct FMat3;
@@ -199,7 +199,7 @@ namespace sv {
         //
         FMat3 jacobi(const FMat3 &m,FMat3 &v);
         
-    }//!namespace util
+    
     
 }//!namespace sv
 

@@ -6,7 +6,7 @@
 
 namespace sv {
     
-    namespace util {
+   
         
         struct FVec2;
         struct FVec3;
@@ -752,7 +752,7 @@ namespace sv {
         IVec2 clamp(const IVec2 &v,const IVec2 &v0,const IVec2 &v1);
         IVec2 lerp(const IVec2 &v0,const IVec2 &v1,s32 k);
         
-    }//!namespace util
+    
     
 }//!namespace sv
 

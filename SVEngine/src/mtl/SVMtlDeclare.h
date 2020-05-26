@@ -11,9 +11,7 @@
 #include "../base/SVPreDeclare.h"
 
 namespace sv {
-    
-    namespace mtl {
-        
+
         DECLARE_SHAREPTR(SVMtlCoreParam);
         //mtl
         DECLARE_SHAREPTR(SVMtlCore);
@@ -90,8 +88,6 @@ namespace sv {
         DECLARE_SHAREPTR(SVGLModifyShader);
         DECLARE_SHAREPTR(SVGLModifyUnif32);
         DECLARE_SHAREPTR(SVGLModifyUniMatrix);
-        
-    }//!namespace mtl
     
 }//!namespace sv
 

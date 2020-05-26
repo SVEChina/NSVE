@@ -13,7 +13,7 @@
 
 namespace sv {
     
-    namespace node{
+    
         
         class SVDeformNode : public SVNode {
             public :

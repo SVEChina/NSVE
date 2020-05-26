@@ -11,9 +11,9 @@
 #include "../rendercore/SVGL/SVRendererGL.h"
 
 using namespace sv;
-using namespace sv::mtl;
-using namespace sv::util;
-using namespace sv::render;
+
+
+
 
 SVTextureIOS::SVTextureIOS(SVInst *_app)
 :SVTexture(_app) {
@@ -37,11 +37,11 @@ void SVTextureIOS::init(cptr8 _name, s32 _type, s32 _width, s32 _height, s32 _in
 }
 
 
-void SVTextureIOS::create(render::SVRendererPtr _renderer){
+void SVTextureIOS::create(SVRendererPtr _renderer){
     SVRObjBase::create(_renderer);
     if (!m_bCreated) {
         m_bCreated = true;
-        render::SVRendererPtr t_renderBasePtr = mApp->getRenderer();
+        SVRendererPtr t_renderBasePtr = mApp->getRenderer();
         SVRendererGLPtr t_renderGLPtr = std::dynamic_pointer_cast<SVRendererGL>(t_renderBasePtr);
         if (t_renderGLPtr) {
             //渲染器类型E_RENDERER_GLES,
@@ -61,7 +61,7 @@ void SVTextureIOS::create(render::SVRendererPtr _renderer){
     }
 }
 
-void SVTextureIOS::destroy(render::SVRendererPtr _renderer){
+void SVTextureIOS::destroy(SVRendererPtr _renderer){
     if (m_objTexPtr) {
         m_objTexPtr->destroy(_renderer);
     }

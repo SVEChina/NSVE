@@ -8,7 +8,7 @@
 
 namespace sv {
     
-    namespace node{
+    
         //
         class SVParticlesNode : public SVNode {
         public:
@@ -122,7 +122,7 @@ namespace sv {
             virtual void fromJSON(RAPIDJSON_NAMESPACE::Value &item);
         };
 
-    }//!namespace node
+    
     
 }//!namespace sv
 

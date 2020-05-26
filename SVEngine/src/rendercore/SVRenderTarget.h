@@ -12,7 +12,7 @@
 
 namespace sv {
     
-    namespace render{
+    
         
         class SVRenderTarget : public SVFboObject {
         public:
@@ -20,9 +20,9 @@ namespace sv {
             
             ~SVRenderTarget();
             
-            void create(render::SVRendererPtr _renderer);
+            void create(SVRendererPtr _renderer);
             
-            void destroy(render::SVRendererPtr _renderer);
+            void destroy(SVRendererPtr _renderer);
             
             int getColorID();
             
@@ -40,9 +40,9 @@ namespace sv {
             
             ~SVRenderTargetDefault();
             
-            void create(render::SVRendererPtr _renderer);
+            void create(SVRendererPtr _renderer);
             
-            void destroy(render::SVRendererPtr _renderer);
+            void destroy(SVRendererPtr _renderer);
         private:
             s32 m_w;
             s32 m_h;
@@ -55,9 +55,9 @@ namespace sv {
             
             ~SVRenderTargetOut();
             
-            void create(render::SVRendererPtr _renderer);
+            void create(SVRendererPtr _renderer);
             
-            void destroy(render::SVRendererPtr _renderer);
+            void destroy(SVRendererPtr _renderer);
         private:
             s32 m_w;
             s32 m_h;
@@ -71,16 +71,16 @@ namespace sv {
 
             ~SVRenderTargetOutTexture();
 
-            void create(render::SVRendererPtr _renderer);
+            void create(SVRendererPtr _renderer);
 
-            void destroy(render::SVRendererPtr _renderer);
+            void destroy(SVRendererPtr _renderer);
         private:
             s32 m_w;
             s32 m_h;
             u32 m_texid;
         };
         
-    }//!namespace render
+    
     
 }//!namespace sv
 

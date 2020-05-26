@@ -14,7 +14,7 @@
 //2D动画材质
 namespace sv {
     
-    namespace mtl{
+    
         
         class SVMtlAni2D : public SVMtlCore {
         public:
@@ -37,12 +37,12 @@ namespace sv {
             void setBlendMode(SVMTLBLENDMODE _blendMode);
             
         protected:
-            virtual void _submitUniform(render::SVRendererPtr _render);
+            virtual void _submitUniform(SVRendererPtr _render);
 
             SVBlendModeParam m_LogicParamBlendMode;      //融合模式参数
         };
 
-    }//!namespace mtl
+    
     
 }//!namespace sv
 

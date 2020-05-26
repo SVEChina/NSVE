@@ -12,7 +12,7 @@
 
 namespace sv {
     
-    namespace node{
+    
         
         class SVBillboardNode : public SVSpriteNode {
         public:
@@ -42,13 +42,13 @@ namespace sv {
             
             virtual void setTexture(SVTEXTYPE _textype);
             
-            virtual void setTexture(mtl::SVTexturePtr _tex);
+            virtual void setTexture(SVTexturePtr _tex);
             
-            void setMesh(render::SVRenderMeshPtr _mesh);
+            void setMesh(SVRenderMeshPtr _mesh);
 
-            void setViewPos(util::FVec3 &_pos);
+            void setViewPos(FVec3 &_pos);
             
-            void setUp(util::FVec3 &_up);
+            void setUp(FVec3 &_up);
             
             //序列化接口
             void toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator, RAPIDJSON_NAMESPACE::Value &_objValue);
@@ -59,19 +59,19 @@ namespace sv {
             f32 m_height;
             f32 m_texcoordX;
             f32 m_texcoordY;
-            util::FVec3 m_viewPos;
-            util::FVec3 m_up;
-            util::SVString m_pTexPath;
+            FVec3 m_viewPos;
+            FVec3 m_up;
+            SVString m_pTexPath;
             SVTEXTYPE m_inTexType;
             //运行时属性
-            mtl::SVTexturePtr m_pTex;
-            render::SVRenderMeshPtr m_pMesh;
-            render::SVRenderObjectPtr m_pRenderObj;
+            SVTexturePtr m_pTex;
+            SVRenderMeshPtr m_pMesh;
+            SVRenderObjectPtr m_pRenderObj;
         private:
-            util::SVString m_pTexName;
+            SVString m_pTexName;
         };
 
-    }//!namespace node
+    
     
 }//!namespace sv
 

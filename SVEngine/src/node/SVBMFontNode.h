@@ -12,7 +12,7 @@
 
 namespace sv {
     
-    namespace node{
+    
         //
         class SVBMFontNode : public SVNode {
             //纹理坐标
@@ -81,7 +81,7 @@ namespace sv {
             SVString m_text;
             bool m_textDirty;
         };
-    }//!namespace node
+    
     
 }//!namespace sv
 

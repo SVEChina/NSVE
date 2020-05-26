@@ -28,7 +28,7 @@ namespace sv {
         
         virtual bool swap();
         
-        virtual render::SVRendererPtr createRenderer(SVInstPtr _handle){ return nullptr;}
+        virtual SVRendererPtr createRenderer(SVInstPtr _handle){ return nullptr;}
     };
     
 }//!namespace sv

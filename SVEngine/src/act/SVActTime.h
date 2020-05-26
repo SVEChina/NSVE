@@ -13,7 +13,7 @@
 #include "SVActBase.h"
 namespace sv {
     
-    namespace logic {
+    
         class SVActTime : public SVActBase {
         public:
             SVActTime(SVInst *_app);
@@ -55,7 +55,7 @@ namespace sv {
             virtual void exit(SVNodePtr _node);    //退出action
         };
         
-    }//!namespace logic
+    
     
 }//!namespace sv
 

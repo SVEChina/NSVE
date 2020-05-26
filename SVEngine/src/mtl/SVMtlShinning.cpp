@@ -62,7 +62,7 @@ void SVMtlShinning::update(f32 dt) {
     m_accTime += dt;
 }
 
-void SVMtlShinning::_submitUniform(render::SVRendererPtr _render) {
+void SVMtlShinning::_submitUniform(SVRendererPtr _render) {
     SVMtlADFilterBase::_submitUniform(_render);
     _render->submitUniformf("lerp", m_lerp);
 }

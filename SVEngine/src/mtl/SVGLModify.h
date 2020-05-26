@@ -13,8 +13,6 @@
 //GL渲染命令
 
 namespace sv {
-
-    namespace mtl{
         
         class SVGLModify: public SVModify {
         public:
@@ -141,7 +139,7 @@ namespace sv {
             f32 m_mat_model[16];
         };
         
-    }//!namespace render
+    
     
 }//!namespace sv
 

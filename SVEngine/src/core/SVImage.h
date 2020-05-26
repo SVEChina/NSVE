@@ -12,7 +12,7 @@
 #include "../base/SVPreDeclare.h"
 namespace sv {
     
-    namespace util {
+   
         class SVImage : public SVGBase {
         public:
             struct Pixeli{
@@ -172,7 +172,7 @@ namespace sv {
             SVDataSwapPtr m_pData;
         };
         
-    }//!namespace util
+    
     
 }//!namespace sv
 

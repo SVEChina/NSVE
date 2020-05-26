@@ -14,7 +14,7 @@
 //3D材质
 namespace sv {
     
-    namespace mtl{
+    
         
         class SVMtl3D : public SVMtlCore {
         public:
@@ -44,7 +44,7 @@ namespace sv {
             
             FVec3& getLightPos();
         protected:
-            void _submitMtl(render::SVRendererPtr _render);
+            void _submitMtl(SVRendererPtr _render);
             f32   m_ambientStrength;
             FVec3 m_ambient_color;
             FVec3 m_lightPos;
@@ -56,7 +56,7 @@ namespace sv {
             virtual void fromJSON(RAPIDJSON_NAMESPACE::Value &item);
         };
 
-    }//!namespace mtl
+    
     
 }//!namespace sv
 

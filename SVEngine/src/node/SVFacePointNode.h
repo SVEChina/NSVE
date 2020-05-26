@@ -13,7 +13,7 @@
 
 namespace sv {
     
-    namespace node{
+    
         
         class SVFacePointNode : public SVNode {
             public :

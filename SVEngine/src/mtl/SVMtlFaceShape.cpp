@@ -166,7 +166,7 @@ void SVMtlFaceShape::update(f32 dt){
     }
 }
 
-void SVMtlFaceShape::_submitMtl(render::SVRendererPtr _render){
+void SVMtlFaceShape::_submitMtl(SVRendererPtr _render){
     _render->submitUniformf2v("location0", m_location0);
     _render->submitUniformf2v("location1", m_location1);
     _render->submitUniformf2v("location2", m_location2);

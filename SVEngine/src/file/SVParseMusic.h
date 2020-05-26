@@ -12,14 +12,14 @@
 #include "../module/SVModuleDef.h"
 namespace sv {
     
-    namespace logic{
+    
         
         class SVParseMusic : public SVParseData {
         public:
             static SVEffectMusicPtr parseMusic(SVInst *app, RAPIDJSON_NAMESPACE::Value &item, s32 _resid, cptr8 _path);
         };
         
-    }//!namespace logic
+    
     
 }//!namespace sv
 #endif //SV_PARSEMUSIC_H

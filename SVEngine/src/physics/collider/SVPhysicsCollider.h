@@ -11,7 +11,7 @@
 #include "../../base/SVGBase.h"
 namespace sv {
     
-    namespace logic {
+    
         
         class SVPhysicsCollider : public SVGBase {
         public:
@@ -28,7 +28,7 @@ namespace sv {
             
         };
             
-    }//!namespace logic
+    
     
 }//!namespace sv
 

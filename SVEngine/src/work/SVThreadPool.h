@@ -31,7 +31,7 @@ namespace sv {
         
         SVThreadPtr getThread(s32 && _index);
         
-        util::SVArray<SVThreadPtr> m_threadPool;
+        SVArray<SVThreadPtr> m_threadPool;
     };
     
 }//!namespace sv

@@ -15,11 +15,10 @@ struct spSlot;
 struct spBone;
 
 //回调
-typedef void (*sv_spine_callback)(SVSpineNodePtr _node,void* _obj,s32 _status);
+typedef void (*sv_spine_callback)(sv::SVSpineNodePtr _node,void* _obj,s32 _status);
 
 namespace sv {
     
-    namespace node{
         /*
          2D骨骼动画
          */
@@ -112,8 +111,6 @@ namespace sv {
             void fromJSON(RAPIDJSON_NAMESPACE::Value &item);
         };
         
-    }//!namespace node
-    
 }//!namespace sv
 
 

@@ -55,7 +55,7 @@ void SVCameraMgr::update(f32 dt) {
         m_mainCamera->update(dt);
         //
         SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
-        render::SVRendererPtr t_renderer = mApp->getRenderer();
+        SVRendererPtr t_renderer = mApp->getRenderer();
         if(t_renderer && t_renderer->getRenderTexture() ) {
         }
         if(t_rs && t_renderer) {
@@ -73,7 +73,7 @@ void SVCameraMgr::update(f32 dt) {
         m_uiCamera->update(dt);
         //
         SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
-        render::SVRendererPtr t_renderer = mApp->getRenderer();
+        SVRendererPtr t_renderer = mApp->getRenderer();
         if(t_rs && t_renderer) {
             FMat4 t_vm = m_uiCamera->getViewMatObj();
             FMat4 t_pm = m_uiCamera->getProjectMatObj();

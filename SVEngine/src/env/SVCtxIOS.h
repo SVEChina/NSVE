@@ -28,7 +28,7 @@ namespace sv {
         
         virtual bool swap();
         
-        virtual render::SVRendererPtr createRenderer(SVInstPtr _handle);
+        virtual SVRendererPtr createRenderer(SVInstPtr _handle);
         
     protected:
         s32 m_glversion;
@@ -46,7 +46,7 @@ namespace sv {
         
         virtual bool swap();
         
-        virtual render::SVRendererPtr createRenderer(SVInstPtr _handle);
+        virtual SVRendererPtr createRenderer(SVInstPtr _handle);
         
     protected:
         s32 m_glversion;

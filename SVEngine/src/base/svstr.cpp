@@ -2,7 +2,7 @@
 
 namespace sv {
     
-    namespace util {
+   
         
         const SVString SVString::null;
 
@@ -1394,7 +1394,7 @@ namespace sv {
                 return ret;
             }
             
-    }//!namespace util
+    
     
 }//!namespace sv
 

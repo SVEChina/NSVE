@@ -12,7 +12,7 @@
 
 namespace sv {
     
-    namespace node{
+    
         /*
          normal 3d node
          */
@@ -49,7 +49,7 @@ namespace sv {
             SVModelPtr m_pModel;
         };
         
-    }//!namespace node
+    
     
 }//!namespace sv
 

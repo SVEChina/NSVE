@@ -148,7 +148,7 @@
 
 namespace sv {
     
-    namespace util {
+   
 
         //************************************ Type conversion ******************************************
         //
@@ -171,7 +171,7 @@ namespace sv {
             u32 ui[2];
         };
         
-    }//!namespace util
+    
     
 }//!namespace sv
 

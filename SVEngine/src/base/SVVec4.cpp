@@ -2,7 +2,7 @@
 
 namespace sv {
     
-    namespace util {
+   
 
         //*********************************FVec4*********************************************
         //
@@ -241,7 +241,5 @@ namespace sv {
             ret.w = clamp(v.w,v0.w,v1.w);
             return ret;
         }
-
-    }//!namesapce util
     
 }//!namespace sv

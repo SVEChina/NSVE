@@ -2,7 +2,7 @@
 
 namespace sv {
     
-    namespace util {
+   
         
         //************************************** Orthonormal transformation ****************************************\
         //
@@ -1122,6 +1122,6 @@ namespace sv {
             }
             return 1;
         }
-    } //!namespace util
+    
     
 }//!namespace sv

@@ -13,7 +13,7 @@
 
 namespace sv {
     
-    namespace mtl{
+    
         
         class SVMtlFaceShape : public SVMtlCore {
         public:
@@ -40,7 +40,7 @@ namespace sv {
             virtual void update(f32 dt);
             
         protected:
-            void _submitMtl(render::SVRendererPtr _render); 
+            void _submitMtl(SVRendererPtr _render); 
 
             f32 m_location0[2];
             f32 m_location1[2];
@@ -72,7 +72,7 @@ namespace sv {
 
         };
         
-    }//!namespace mtl
+    
     
 }//!namespace sv
 

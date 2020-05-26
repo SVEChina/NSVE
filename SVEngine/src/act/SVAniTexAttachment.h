@@ -13,7 +13,7 @@
 #include "../mtl/SVMtlDeclare.h"
 namespace sv{
     
-    namespace logic {
+    
         
         class SVAniTexAttachment : public SVAniBase {
         public:
@@ -97,6 +97,6 @@ namespace sv{
             bool            m_dirty;
         };
         
-    }//!namespace logic
+    
 }//!namespace sv
 #endif //SV_ACT_TEXATTACHMENT_H

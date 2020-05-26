@@ -153,51 +153,48 @@ namespace sv {
     DECLARE_SHAREPTR(SVOpSetRenderMirror);
     DECLARE_SHAREPTR(SVOpAppMode);
     
-
     //核心实用库
-    namespace util {
+    //util
+    DECLARE_SHAREPTR(SpineMeshData);
+    DECLARE_SHAREPTR(SVBone);
+    DECLARE_SHAREPTR(SVSkeleton);
+    
+    DECLARE_SHAREPTR(SVASKey);
+    DECLARE_SHAREPTR(SVChannel);
+    DECLARE_SHAREPTR(SVAnimateSkin);
+    DECLARE_SHAREPTR(SVSkinMgr);
+    DECLARE_SHAREPTR(SVAnimateMorph);
+    DECLARE_SHAREPTR(SVSpine);
+    DECLARE_SHAREPTR(SVParticlesWorldBase);
+    DECLARE_SHAREPTR(SVParticles);
+    DECLARE_SHAREPTR(SVImageUsingMove);
+    //
+    DECLARE_SHAREPTR(SVMesh);
+    DECLARE_SHAREPTR(SVModel);
+    //
+    DECLARE_SHAREPTR(SVPass);
+    DECLARE_SHAREPTR(SVParamDeform);
+    DECLARE_SHAREPTR(SVDeformScale);
+    DECLARE_SHAREPTR(SVDeformImageMove);
+    //font
+    DECLARE_SHAREPTR(SVFont);
+    DECLARE_SHAREPTR(SVBMFont);
+    //image
+    DECLARE_SHAREPTR(SVImage);
+    
+    DECLARE_SHAREPTR(SVNoise);
 
-        DECLARE_SHAREPTR(SpineMeshData);
-        DECLARE_SHAREPTR(SVBone);
-        DECLARE_SHAREPTR(SVSkeleton);
-        
-        DECLARE_SHAREPTR(SVASKey);
-        DECLARE_SHAREPTR(SVChannel);
-        DECLARE_SHAREPTR(SVAnimateSkin);
-        DECLARE_SHAREPTR(SVSkinMgr);
-        DECLARE_SHAREPTR(SVAnimateMorph);
-        DECLARE_SHAREPTR(SVSpine);
-        DECLARE_SHAREPTR(SVParticlesWorldBase);
-        DECLARE_SHAREPTR(SVParticles);
-        DECLARE_SHAREPTR(SVImageUsingMove);
-        //
-        DECLARE_SHAREPTR(SVMesh);
-        DECLARE_SHAREPTR(SVModel);
-        //
-        DECLARE_SHAREPTR(SVPass);
-        DECLARE_SHAREPTR(SVParamDeform);
-        DECLARE_SHAREPTR(SVDeformScale);
-        DECLARE_SHAREPTR(SVDeformImageMove);
-        //font
-        DECLARE_SHAREPTR(SVFont);
-        DECLARE_SHAREPTR(SVBMFont);
-        //image
-        DECLARE_SHAREPTR(SVImage);
-        
-        DECLARE_SHAREPTR(SVNoise);
-    }//!namespace util
     
     //
-    namespace detect {
+    // detect
         DECLARE_SHAREPTR(SVDetectBase);
         DECLARE_SHAREPTR(SVDetectST);
         DECLARE_SHAREPTR(SVPerson);
         DECLARE_SHAREPTR(SVPersonModule);
         DECLARE_SHAREPTR(SVPersonTracker);
         DECLARE_SHAREPTR(SVPersonExpressionExt);
-    }//!namespace detect
-    //
-    namespace logic {
+    
+    //logic
         
         //逻辑系统下的模块
         DECLARE_SHAREPTR(SVRecycleProcess);
@@ -264,7 +261,7 @@ namespace sv {
         DECLARE_SHAREPTR(SVPhysicsShapeSphere);
         DECLARE_SHAREPTR(SVPhysicsJoint);
         DECLARE_SHAREPTR(SVPhysicsCollider);
-    }//!namespace logic
+
     
     DECLARE_SHAREPTR(SVLoaderGLTF);
     

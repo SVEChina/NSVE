@@ -12,7 +12,7 @@
 #include "../node/SVNodeDeclare.h"
 namespace sv{
     
-    namespace logic {
+    
         
         class SVAniTrigger : public SVGBase {
         public:
@@ -44,6 +44,6 @@ namespace sv{
             ANITRIGGERPARAM m_triggerParam;
         };
         
-    }//!namespace logic
+    
 }//!namespace sv
 #endif //SV_ACT_ANITRIGGER_H

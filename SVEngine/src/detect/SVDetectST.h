@@ -13,7 +13,7 @@
 #define ST_POINT_NUM 106
 namespace sv {
     
-    namespace detect{
+    
         struct ST_PT {
             f32 x;
             f32 y;
@@ -53,7 +53,7 @@ namespace sv {
             void _parseData(void *data);
         };
 
-    }//!namespace detect
+    
     
 }//!namespace sv
 

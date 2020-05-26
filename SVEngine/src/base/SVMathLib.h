@@ -5,7 +5,7 @@
 
 namespace sv {
     
-    namespace util {
+   
 
         /******************************************************************************\
          *
@@ -718,7 +718,7 @@ namespace sv {
             return v0 + (((v1 - v0) * k) >> 16);
         }
 
-    }//!namespace util
+    
     
 }//!namespace sv
 

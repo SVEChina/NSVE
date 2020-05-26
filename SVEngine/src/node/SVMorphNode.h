@@ -14,7 +14,7 @@
 
 namespace sv {
     
-    namespace node{
+    
         
         //morph动画节点
         
@@ -27,7 +27,7 @@ namespace sv {
             
         };
         
-    }//!namespace node
+    
     
 }//!namespace sv
 

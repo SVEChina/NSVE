@@ -15,7 +15,7 @@
 
 namespace sv {
     
-    namespace logic {
+    
         
         class SVActMtl : public SVActTime {
         public:
@@ -32,7 +32,7 @@ namespace sv {
             SVMtlCorePtr m_pOldMtl;
         };
         
-    }//!namespace node
+    
     
 }//!namespace sv
 

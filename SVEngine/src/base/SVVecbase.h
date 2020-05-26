@@ -5,7 +5,7 @@
 
 namespace sv {
     
-    namespace util {
+   
         
         //******************************** Vectors ******************************************
         sv_inline f32 dot33(const f32 * sv_restrict v0,const f32 * sv_restrict v1) {
@@ -379,7 +379,7 @@ namespace sv {
         
 #endif
     
-    }//!namespace util
+    
     
 }//!namespace sv
 

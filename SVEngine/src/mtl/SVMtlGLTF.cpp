@@ -146,7 +146,7 @@ void SVMtlGLTFSkin::refresh() {
     SVMtlGLTF::refresh();
 }
 
-void SVMtlGLTFSkin::_submitUniform(render::SVRendererPtr _render){
+void SVMtlGLTFSkin::_submitUniform(SVRendererPtr _render){
     SVMtlCore::_submitUniform(_render);
     //传递骨骼数据
     _render->submitUniformMatrixArray("uBoneMatrix", m_vecBoneMatrix,MAX_BONES);

@@ -13,7 +13,7 @@
 
 namespace sv {
     
-    namespace logic {
+    
         
         class SVFilterLUT : public SVFilterBase {
         public:

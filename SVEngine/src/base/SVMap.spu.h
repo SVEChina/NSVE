@@ -5,7 +5,7 @@
 
 namespace sv {
     
-    namespace util {
+   
         //
         template <class Type> class MapData {
         public:
@@ -61,7 +61,7 @@ namespace sv {
             }
         };
         
-    }//!namespace util
+    
     
 }//!namespace sv
 

@@ -30,7 +30,7 @@ bool SVADFilterBase::create(){
     if (!m_mtl) {
         return false;
     }
-    render::SVRendererPtr t_renderer = mApp->getRenderer();
+    SVRendererPtr t_renderer = mApp->getRenderer();
     if(!t_renderer)
         return false;
     SVTexturePtr t_tex = t_renderer->getSVTex(E_TEX_MAIN);
@@ -64,7 +64,7 @@ void SVADFilterBase::destroy(){
     if(m_pPassNode){
         m_pPassNode->removeFromParent();
     }
-    render::SVRendererPtr t_renderer = mApp->getRenderer();
+    SVRendererPtr t_renderer = mApp->getRenderer();
     if(t_renderer){
         t_renderer->destroySVTex(E_TEX_FILTER_1);
     }
@@ -96,7 +96,7 @@ void SVADFilterBase::toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_alloc
 
 void SVADFilterBase::fromJSON(RAPIDJSON_NAMESPACE::Value &item) {
 //    if (item.HasMember("data") && item["data"].IsString()) {
-//        render::SVRendererPtr t_renderer = mApp->getRenderer();
+//        SVRendererPtr t_renderer = mApp->getRenderer();
 //        if(t_renderer){
 //            t_renderer->createSVTex(E_TEX_FILTER_LUT, 512, 512, GL_RGBA,GL_RGBA);
 //            SVTexturePtr t_tex=t_renderer->getSVTex(E_TEX_FILTER_LUT);

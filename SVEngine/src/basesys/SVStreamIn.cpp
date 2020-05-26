@@ -25,6 +25,9 @@
 #include "../rendercore/SVRenderScene.h"
 #include "../mtl/SVTexture.h"
 #include "../mtl/SVTexMgr.h"
+
+using namespace sv;
+
 //
 StreamInCore::StreamInCore(SVInst* _app)
 :SVGBase(_app){
@@ -48,148 +51,147 @@ StreamInCore::~StreamInCore() {
     m_tex2 = nullptr;
 }
 
-//
 void StreamInCore::init(s32 _w,s32 _h,PICFORMATE _fromate,f32 _angle,bool _show) {
-    for(s32 t_tt = E_TEX_INSTREAM ;t_tt<E_TEX_OUTSTREAM; t_tt++ ) {
-        if(!mApp->getRenderer()->getSVTex( SVTEXTYPE(t_tt) ) ){
-            init(_w,_h,_fromate,_angle,_show,SVTEXTYPE(t_tt) );
-            return ;
-        }
-    }
+//    for(s32 t_tt = E_TEX_INSTREAM ;t_tt<E_TEX_OUTSTREAM; t_tt++ ) {
+//        if(!mApp->getRenderer()->getSVTex( SVTEXTYPE(t_tt) ) ){
+//            init(_w,_h,_fromate,_angle,_show,SVTEXTYPE(t_tt) );
+//            return ;
+//        }
+//    }
 }
 
 void StreamInCore::init(s32 _w,s32 _h,PICFORMATE _fromate,f32 _angle,bool _show,SVTEXTYPE _tex){
-    m_tt = _tex;
-    //创建稳定的合成后的流
-    m_formate = _fromate;
-    m_texResult = mApp->getRenderer()->createSVTex(m_tt,_w,_h,GL_RGBA);
-    //创建输入流
-    if(_fromate == SV_PF_GRAY8) {
-        //m_gray
-        m_tex0 = mApp->getTexMgr()->createUnctrlTexture(_w,_h,GL_LUMINANCE,GL_LUMINANCE);
-    }else if(_fromate == SV_PF_YV12) {
-        //m_texY
-        m_tex0 = mApp->getTexMgr()->createUnctrlTexture(_w, _h, GL_LUMINANCE,GL_LUMINANCE);
-        //m_texUV
-        m_tex1 = mApp->getTexMgr()->createUnctrlTexture(_w/2, _h/2,GL_LUMINANCE_ALPHA,GL_LUMINANCE_ALPHA);
-    }else if(_fromate == SV_PF_I420) {
-        m_tex0 = mApp->getTexMgr()->createUnctrlTexture(_w, _h, GL_LUMINANCE, GL_LUMINANCE);
-        m_tex1 = mApp->getTexMgr()->createUnctrlTexture(_w,_h,  GL_LUMINANCE, GL_LUMINANCE);
-        m_tex2 = mApp->getTexMgr()->createUnctrlTexture(_w, _h, GL_LUMINANCE, GL_LUMINANCE);
-    }else if(_fromate == SV_PF_NV12) {
-        //m_texY
-        m_tex0 = mApp->getTexMgr()->createUnctrlTexture(_w,  _h, GL_LUMINANCE, GL_LUMINANCE);
-        //m_texUV
-        m_tex1 = mApp->getTexMgr()->createUnctrlTexture(_w / 2,_h / 2, GL_LUMINANCE_ALPHA, GL_LUMINANCE_ALPHA);
-    }else if(_fromate == SV_PF_NV21) {
-        //m_texY
-        m_tex0 = mApp->getTexMgr()->createUnctrlTexture(_w, _h, GL_LUMINANCE, GL_LUMINANCE);
-        //m_texUV
-        m_tex1 = mApp->getTexMgr()->createUnctrlTexture(_w / 2, _h / 2, GL_LUMINANCE_ALPHA, GL_LUMINANCE_ALPHA);
-    }else if(_fromate == SV_PF_BGRA) {
-        m_tex0 = mApp->getTexMgr()->createUnctrlTexture(_w,_h,GL_RGBA,GL_RGBA);
-    }else if(_fromate == SV_PF_RGBA) {
-        m_tex0 = mApp->getTexMgr()->createUnctrlTexture(_w,_h,GL_RGBA,GL_RGBA);
-    }
-    //转换方式
-    if(m_useGPU) {
-        m_trans = MakeSharedPtr<SVTransGPU>(mApp,m_tex0,m_tex1,m_tex2,m_texResult);
-        m_trans->init(_w, _h,_angle,_fromate,m_tt);
-    } else {
-        
-    }
-    //
-    if(_show && m_trans) {
-#ifdef SV_IOS
-        m_showNode = MakeSharedPtr<SVIOSInstreamNode>(mApp);
-        SVIOSInstreamNodePtr tmpNode = std::dynamic_pointer_cast<SVIOSInstreamNode>(m_showNode);
-        if(tmpNode){
-            tmpNode->init(m_tt);
-        }
-#endif
-        
-#ifdef SV_ANDROID
-        m_showNode = MakeSharedPtr<SVSpriteNode>(mApp,(f32)_h,(f32)_w);
-        SVSpriteNodePtr tmpNode = std::dynamic_pointer_cast<SVSpriteNode>(m_showNode);
-        if(tmpNode){
-            tmpNode->setTexture(m_tt);
-            tmpNode->setRSType(RST_SKY);
-        }
-#endif
-        
-    }
+//    m_tt = _tex;
+//    //创建稳定的合成后的流
+//    m_formate = _fromate;
+//    m_texResult = mApp->getRenderer()->createSVTex(m_tt,_w,_h,GL_RGBA);
+//    //创建输入流
+//    if(_fromate == SV_PF_GRAY8) {
+//        //m_gray
+//        m_tex0 = mApp->getTexMgr()->createUnctrlTexture(_w,_h,GL_LUMINANCE,GL_LUMINANCE);
+//    }else if(_fromate == SV_PF_YV12) {
+//        //m_texY
+//        m_tex0 = mApp->getTexMgr()->createUnctrlTexture(_w, _h, GL_LUMINANCE,GL_LUMINANCE);
+//        //m_texUV
+//        m_tex1 = mApp->getTexMgr()->createUnctrlTexture(_w/2, _h/2,GL_LUMINANCE_ALPHA,GL_LUMINANCE_ALPHA);
+//    }else if(_fromate == SV_PF_I420) {
+//        m_tex0 = mApp->getTexMgr()->createUnctrlTexture(_w, _h, GL_LUMINANCE, GL_LUMINANCE);
+//        m_tex1 = mApp->getTexMgr()->createUnctrlTexture(_w,_h,  GL_LUMINANCE, GL_LUMINANCE);
+//        m_tex2 = mApp->getTexMgr()->createUnctrlTexture(_w, _h, GL_LUMINANCE, GL_LUMINANCE);
+//    }else if(_fromate == SV_PF_NV12) {
+//        //m_texY
+//        m_tex0 = mApp->getTexMgr()->createUnctrlTexture(_w,  _h, GL_LUMINANCE, GL_LUMINANCE);
+//        //m_texUV
+//        m_tex1 = mApp->getTexMgr()->createUnctrlTexture(_w / 2,_h / 2, GL_LUMINANCE_ALPHA, GL_LUMINANCE_ALPHA);
+//    }else if(_fromate == SV_PF_NV21) {
+//        //m_texY
+//        m_tex0 = mApp->getTexMgr()->createUnctrlTexture(_w, _h, GL_LUMINANCE, GL_LUMINANCE);
+//        //m_texUV
+//        m_tex1 = mApp->getTexMgr()->createUnctrlTexture(_w / 2, _h / 2, GL_LUMINANCE_ALPHA, GL_LUMINANCE_ALPHA);
+//    }else if(_fromate == SV_PF_BGRA) {
+//        m_tex0 = mApp->getTexMgr()->createUnctrlTexture(_w,_h,GL_RGBA,GL_RGBA);
+//    }else if(_fromate == SV_PF_RGBA) {
+//        m_tex0 = mApp->getTexMgr()->createUnctrlTexture(_w,_h,GL_RGBA,GL_RGBA);
+//    }
+//    //转换方式
+//    if(m_useGPU) {
+//        m_trans = MakeSharedPtr<SVTransGPU>(mApp,m_tex0,m_tex1,m_tex2,m_texResult);
+//        m_trans->init(_w, _h,_angle,_fromate,m_tt);
+//    } else {
+//
+//    }
+//    //
+//    if(_show && m_trans) {
+//#ifdef SV_IOS
+//        m_showNode = MakeSharedPtr<SVIOSInstreamNode>(mApp);
+//        SVIOSInstreamNodePtr tmpNode = std::dynamic_pointer_cast<SVIOSInstreamNode>(m_showNode);
+//        if(tmpNode){
+//            tmpNode->init(m_tt);
+//        }
+//#endif
+//
+//#ifdef SV_ANDROID
+//        m_showNode = MakeSharedPtr<SVSpriteNode>(mApp,(f32)_h,(f32)_w);
+//        SVSpriteNodePtr tmpNode = std::dynamic_pointer_cast<SVSpriteNode>(m_showNode);
+//        if(tmpNode){
+//            tmpNode->setTexture(m_tt);
+//            tmpNode->setRSType(RST_SKY);
+//        }
+//#endif
+//
+//    }
 }
 
 //
 void StreamInCore::init(u32 _tex0ID, u32 _tex1ID, u32 _tex2ID, s32 _w,s32 _h,PICFORMATE _fromate,f32 _angle,bool _show) {
-    for(s32 t_tt = E_TEX_INSTREAM ;t_tt<E_TEX_OUTSTREAM; t_tt++ ) {
-        if(!mApp->getRenderer()->getSVTex( SVTEXTYPE(t_tt) ) ){
-            init(_tex0ID, _tex1ID, _tex2ID,  _w,_h,_fromate,_angle,_show,SVTEXTYPE(t_tt) );
-            return ;
-        }
-    }
+//    for(s32 t_tt = E_TEX_INSTREAM ;t_tt<E_TEX_OUTSTREAM; t_tt++ ) {
+//        if(!mApp->getRenderer()->getSVTex( SVTEXTYPE(t_tt) ) ){
+//            init(_tex0ID, _tex1ID, _tex2ID,  _w,_h,_fromate,_angle,_show,SVTEXTYPE(t_tt) );
+//            return ;
+//        }
+//    }
 }
 
 void StreamInCore::init(u32 _tex0ID, u32 _tex1ID, u32 _tex2ID, s32 _w,s32 _h,PICFORMATE _fromate,f32 _angle,bool _show,SVTEXTYPE _tex){
-    m_tt = _tex;
-    //创建稳定的合成后的流
-    m_formate = _fromate;
-    m_texResult = mApp->getRenderer()->createSVTex(m_tt,_w,_h,GL_RGBA);
-    //创建输入流
-    if(_fromate == SV_PF_GRAY8) {
-        //m_gray
-        m_tex0 = mApp->getTexMgr()->createUnctrlTextureWithTexID(_tex0ID, _w,_h,GL_LUMINANCE,GL_LUMINANCE);
-    }else if(_fromate == SV_PF_YV12) {
-        //m_texY
-        m_tex0 = mApp->getTexMgr()->createUnctrlTextureWithTexID(_tex0ID, _w, _h, GL_LUMINANCE,GL_LUMINANCE);
-        //m_texUV
-        m_tex1 = mApp->getTexMgr()->createUnctrlTextureWithTexID(_tex1ID, _w/2, _h/2,GL_LUMINANCE_ALPHA,GL_LUMINANCE_ALPHA);
-    }else if(_fromate == SV_PF_I420) {
-        m_tex0 = mApp->getTexMgr()->createUnctrlTextureWithTexID(_tex0ID, _w, _h, GL_LUMINANCE, GL_LUMINANCE);
-        m_tex1 = mApp->getTexMgr()->createUnctrlTextureWithTexID(_tex1ID, _w,_h,  GL_LUMINANCE, GL_LUMINANCE);
-        m_tex2 = mApp->getTexMgr()->createUnctrlTextureWithTexID(_tex2ID, _w, _h, GL_LUMINANCE, GL_LUMINANCE);
-    }else if(_fromate == SV_PF_NV12) {
-        //m_texY
-        m_tex0 = mApp->getTexMgr()->createUnctrlTextureWithTexID(_tex0ID, _w,  _h, GL_LUMINANCE, GL_LUMINANCE);
-        //m_texUV
-        m_tex1 = mApp->getTexMgr()->createUnctrlTextureWithTexID(_tex1ID, _w / 2,_h / 2, GL_LUMINANCE_ALPHA, GL_LUMINANCE_ALPHA);
-    }else if(_fromate == SV_PF_NV21) {
-        //m_texY
-        m_tex0 = mApp->getTexMgr()->createUnctrlTextureWithTexID(_tex0ID, _w, _h, GL_LUMINANCE, GL_LUMINANCE);
-        //m_texUV
-        m_tex1 = mApp->getTexMgr()->createUnctrlTextureWithTexID(_tex1ID, _w / 2, _h / 2, GL_LUMINANCE_ALPHA, GL_LUMINANCE_ALPHA);
-    }else if(_fromate == SV_PF_BGRA) {
-        m_tex0 = mApp->getTexMgr()->createUnctrlTextureWithTexID(_tex0ID, _w,_h,GL_RGBA,GL_RGBA);
-    }else if(_fromate == SV_PF_RGBA) {
-        m_tex0 = mApp->getTexMgr()->createUnctrlTextureWithTexID(_tex0ID, _w,_h,GL_RGBA,GL_RGBA);
-    }
-    //转换方式
-    if(m_useGPU) {
-        m_trans = MakeSharedPtr<SVTransGPU>(mApp,m_tex0,m_tex1,m_tex2,m_texResult);
-        m_trans->init(_w, _h,_angle,_fromate,m_tt);
-    } else {
-        
-    }
-    //
-    if(_show && m_trans) {
-#ifdef SV_IOS
-        m_showNode = MakeSharedPtr<SVIOSInstreamNode>(mApp);
-        SVIOSInstreamNodePtr tmpNode = std::dynamic_pointer_cast<SVIOSInstreamNode>(m_showNode);
-        if(tmpNode){
-            tmpNode->init(m_tt);
-        }
-#endif
-        
-#ifdef SV_ANDROID
-        m_showNode = MakeSharedPtr<SVSpriteNode>(mApp,(f32)_h,(f32)_w);
-        SVSpriteNodePtr tmpNode = std::dynamic_pointer_cast<SVSpriteNode>(m_showNode);
-        if(tmpNode){
-            tmpNode->setTexture(m_tt);
-            tmpNode->setRSType(RST_SKY);
-        }
-#endif
-        
-    }
+//    m_tt = _tex;
+//    //创建稳定的合成后的流
+//    m_formate = _fromate;
+//    m_texResult = mApp->getRenderer()->createSVTex(m_tt,_w,_h,GL_RGBA);
+//    //创建输入流
+//    if(_fromate == SV_PF_GRAY8) {
+//        //m_gray
+//        m_tex0 = mApp->getTexMgr()->createUnctrlTextureWithTexID(_tex0ID, _w,_h,GL_LUMINANCE,GL_LUMINANCE);
+//    }else if(_fromate == SV_PF_YV12) {
+//        //m_texY
+//        m_tex0 = mApp->getTexMgr()->createUnctrlTextureWithTexID(_tex0ID, _w, _h, GL_LUMINANCE,GL_LUMINANCE);
+//        //m_texUV
+//        m_tex1 = mApp->getTexMgr()->createUnctrlTextureWithTexID(_tex1ID, _w/2, _h/2,GL_LUMINANCE_ALPHA,GL_LUMINANCE_ALPHA);
+//    }else if(_fromate == SV_PF_I420) {
+//        m_tex0 = mApp->getTexMgr()->createUnctrlTextureWithTexID(_tex0ID, _w, _h, GL_LUMINANCE, GL_LUMINANCE);
+//        m_tex1 = mApp->getTexMgr()->createUnctrlTextureWithTexID(_tex1ID, _w,_h,  GL_LUMINANCE, GL_LUMINANCE);
+//        m_tex2 = mApp->getTexMgr()->createUnctrlTextureWithTexID(_tex2ID, _w, _h, GL_LUMINANCE, GL_LUMINANCE);
+//    }else if(_fromate == SV_PF_NV12) {
+//        //m_texY
+//        m_tex0 = mApp->getTexMgr()->createUnctrlTextureWithTexID(_tex0ID, _w,  _h, GL_LUMINANCE, GL_LUMINANCE);
+//        //m_texUV
+//        m_tex1 = mApp->getTexMgr()->createUnctrlTextureWithTexID(_tex1ID, _w / 2,_h / 2, GL_LUMINANCE_ALPHA, GL_LUMINANCE_ALPHA);
+//    }else if(_fromate == SV_PF_NV21) {
+//        //m_texY
+//        m_tex0 = mApp->getTexMgr()->createUnctrlTextureWithTexID(_tex0ID, _w, _h, GL_LUMINANCE, GL_LUMINANCE);
+//        //m_texUV
+//        m_tex1 = mApp->getTexMgr()->createUnctrlTextureWithTexID(_tex1ID, _w / 2, _h / 2, GL_LUMINANCE_ALPHA, GL_LUMINANCE_ALPHA);
+//    }else if(_fromate == SV_PF_BGRA) {
+//        m_tex0 = mApp->getTexMgr()->createUnctrlTextureWithTexID(_tex0ID, _w,_h,GL_RGBA,GL_RGBA);
+//    }else if(_fromate == SV_PF_RGBA) {
+//        m_tex0 = mApp->getTexMgr()->createUnctrlTextureWithTexID(_tex0ID, _w,_h,GL_RGBA,GL_RGBA);
+//    }
+//    //转换方式
+//    if(m_useGPU) {
+//        m_trans = MakeSharedPtr<SVTransGPU>(mApp,m_tex0,m_tex1,m_tex2,m_texResult);
+//        m_trans->init(_w, _h,_angle,_fromate,m_tt);
+//    } else {
+//
+//    }
+//    //
+//    if(_show && m_trans) {
+//#ifdef SV_IOS
+//        m_showNode = MakeSharedPtr<SVIOSInstreamNode>(mApp);
+//        SVIOSInstreamNodePtr tmpNode = std::dynamic_pointer_cast<SVIOSInstreamNode>(m_showNode);
+//        if(tmpNode){
+//            tmpNode->init(m_tt);
+//        }
+//#endif
+//
+//#ifdef SV_ANDROID
+//        m_showNode = MakeSharedPtr<SVSpriteNode>(mApp,(f32)_h,(f32)_w);
+//        SVSpriteNodePtr tmpNode = std::dynamic_pointer_cast<SVSpriteNode>(m_showNode);
+//        if(tmpNode){
+//            tmpNode->setTexture(m_tt);
+//            tmpNode->setRSType(RST_SKY);
+//        }
+//#endif
+//
+//    }
 }
 
 void StreamInCore::destroy() {
@@ -205,7 +207,7 @@ void StreamInCore::destroy() {
     m_trans = nullptr;
     m_tt = E_TEX_END;
     if(mApp->getRenderer()) {
-        mApp->getRenderer()->destroySVTex(m_tt);
+        //mApp->getRenderer()->destroySVTex(m_tt);
     }
 }
 
@@ -229,94 +231,94 @@ void StreamInCore::update(f32 _dt) {
 }
 
 void StreamInCore::pushData(u8* _srcPtr,s32 width,s32 height,s32 pixelFormat,s32 _angle) {
-    if(m_trans) {
-        m_trans->setAngle(_angle);
-    }
-    //
-    if (m_formate == SV_PF_GRAY8) {
-
-    } else if (m_formate == SV_PF_YV12) {
-        m_tex0->setTexData(_srcPtr, width * height);
-        m_tex1->setTexData(_srcPtr + width * height, width * height / 2);
-    } else if (m_formate == SV_PF_I420) {
-//        m_tex0->setTexData(_srcPtr, width * m_height);
-//        m_tex1->setTexData(_srcPtr+width*height,width*height/2);
-//        m_tex2->setTexData(_srcPtr+width*height,width*height/2);
-    } else if (m_formate == SV_PF_NV12) {
-        m_tex0->setTexData(_srcPtr, width * height);
-        m_tex1->setTexData(_srcPtr + width * height, width * height / 2);
-    } else if (m_formate == SV_PF_NV21) {
-        m_tex0->setTexData(_srcPtr, width * height);
-        m_tex1->setTexData(_srcPtr + width * height, width * height / 2);
-    } else if (m_formate == SV_PF_BGRA) {
-        m_tex0->setTexData(_srcPtr, width*height*4);
-    } else if (m_formate == SV_PF_RGBA) {
-        m_tex0->setTexData(_srcPtr, width*height*4);
-    } else if (m_formate == SV_PF_RGB) {
-    }
-    
-   _updateTrans();
+//    if(m_trans) {
+//        m_trans->setAngle(_angle);
+//    }
+//    //
+//    if (m_formate == SV_PF_GRAY8) {
+//
+//    } else if (m_formate == SV_PF_YV12) {
+//        m_tex0->setTexData(_srcPtr, width * height);
+//        m_tex1->setTexData(_srcPtr + width * height, width * height / 2);
+//    } else if (m_formate == SV_PF_I420) {
+////        m_tex0->setTexData(_srcPtr, width * m_height);
+////        m_tex1->setTexData(_srcPtr+width*height,width*height/2);
+////        m_tex2->setTexData(_srcPtr+width*height,width*height/2);
+//    } else if (m_formate == SV_PF_NV12) {
+//        m_tex0->setTexData(_srcPtr, width * height);
+//        m_tex1->setTexData(_srcPtr + width * height, width * height / 2);
+//    } else if (m_formate == SV_PF_NV21) {
+//        m_tex0->setTexData(_srcPtr, width * height);
+//        m_tex1->setTexData(_srcPtr + width * height, width * height / 2);
+//    } else if (m_formate == SV_PF_BGRA) {
+//        m_tex0->setTexData(_srcPtr, width*height*4);
+//    } else if (m_formate == SV_PF_RGBA) {
+//        m_tex0->setTexData(_srcPtr, width*height*4);
+//    } else if (m_formate == SV_PF_RGB) {
+//    }
+//    
+//   _updateTrans();
  }
 
 void StreamInCore::pushTexture(u32 _tex0ID, u32 _tex1ID, u32 _tex2ID,s32 width,s32 height,s32 pixelFormat,s32 _angle){
-    if(m_trans) {
-        m_trans->setAngle(_angle);
-    }
-    //
-    if (m_formate == SV_PF_GRAY8) {
-        
-    } else if (m_formate == SV_PF_YV12) {
-        SVTextureInputTexIDPtr t_tex0 = DYN_TO_SHAREPTR(SVTextureInputTexID, m_tex0);
-        SVTextureInputTexIDPtr t_tex1 = DYN_TO_SHAREPTR(SVTextureInputTexID, m_tex1);
-        if (t_tex0 && t_tex1) {
-            t_tex0->setTexID(_tex0ID);
-            t_tex1->setTexID(_tex1ID);
-        }
-    } else if (m_formate == SV_PF_I420) {
-        SVTextureInputTexIDPtr t_tex0 = DYN_TO_SHAREPTR(SVTextureInputTexID, m_tex0);
-        SVTextureInputTexIDPtr t_tex1 = DYN_TO_SHAREPTR(SVTextureInputTexID, m_tex1);
-        SVTextureInputTexIDPtr t_tex2 = DYN_TO_SHAREPTR(SVTextureInputTexID, m_tex2);
-        if (t_tex0 && t_tex1 && t_tex2) {
-            t_tex0->setTexID(_tex0ID);
-            t_tex1->setTexID(_tex1ID);
-            t_tex2->setTexID(_tex2ID);
-        }
-    } else if (m_formate == SV_PF_NV12) {
-        SVTextureInputTexIDPtr t_tex0 = DYN_TO_SHAREPTR(SVTextureInputTexID, m_tex0);
-        SVTextureInputTexIDPtr t_tex1 = DYN_TO_SHAREPTR(SVTextureInputTexID, m_tex1);
-        if (t_tex0 && t_tex1) {
-            t_tex0->setTexID(_tex0ID);
-            t_tex1->setTexID(_tex1ID);
-        }
-    } else if (m_formate == SV_PF_NV21) {
-        SVTextureInputTexIDPtr t_tex0 = DYN_TO_SHAREPTR(SVTextureInputTexID, m_tex0);
-        SVTextureInputTexIDPtr t_tex1 = DYN_TO_SHAREPTR(SVTextureInputTexID, m_tex1);
-        if (t_tex0 && t_tex1) {
-            t_tex0->setTexID(_tex0ID);
-            t_tex1->setTexID(_tex1ID);
-        }
-    } else if (m_formate == SV_PF_BGRA) {
-        SVTextureInputTexIDPtr t_tex0 = DYN_TO_SHAREPTR(SVTextureInputTexID, m_tex0);
-        if (t_tex0) {
-            t_tex0->setTexID(_tex0ID);
-        }
-    } else if (m_formate == SV_PF_RGBA) {
-        SVTextureInputTexIDPtr t_tex0 = DYN_TO_SHAREPTR(SVTextureInputTexID, m_tex0);
-        if (t_tex0) {
-            t_tex0->setTexID(_tex0ID);
-        }
-    } else if (m_formate == SV_PF_RGB) {
-    }
-    _updateTrans();
+//    if(m_trans) {
+//        m_trans->setAngle(_angle);
+//    }
+//    //
+//    if (m_formate == SV_PF_GRAY8) {
+//        
+//    } else if (m_formate == SV_PF_YV12) {
+//        SVTextureInputTexIDPtr t_tex0 = DYN_TO_SHAREPTR(SVTextureInputTexID, m_tex0);
+//        SVTextureInputTexIDPtr t_tex1 = DYN_TO_SHAREPTR(SVTextureInputTexID, m_tex1);
+//        if (t_tex0 && t_tex1) {
+//            t_tex0->setTexID(_tex0ID);
+//            t_tex1->setTexID(_tex1ID);
+//        }
+//    } else if (m_formate == SV_PF_I420) {
+//        SVTextureInputTexIDPtr t_tex0 = DYN_TO_SHAREPTR(SVTextureInputTexID, m_tex0);
+//        SVTextureInputTexIDPtr t_tex1 = DYN_TO_SHAREPTR(SVTextureInputTexID, m_tex1);
+//        SVTextureInputTexIDPtr t_tex2 = DYN_TO_SHAREPTR(SVTextureInputTexID, m_tex2);
+//        if (t_tex0 && t_tex1 && t_tex2) {
+//            t_tex0->setTexID(_tex0ID);
+//            t_tex1->setTexID(_tex1ID);
+//            t_tex2->setTexID(_tex2ID);
+//        }
+//    } else if (m_formate == SV_PF_NV12) {
+//        SVTextureInputTexIDPtr t_tex0 = DYN_TO_SHAREPTR(SVTextureInputTexID, m_tex0);
+//        SVTextureInputTexIDPtr t_tex1 = DYN_TO_SHAREPTR(SVTextureInputTexID, m_tex1);
+//        if (t_tex0 && t_tex1) {
+//            t_tex0->setTexID(_tex0ID);
+//            t_tex1->setTexID(_tex1ID);
+//        }
+//    } else if (m_formate == SV_PF_NV21) {
+//        SVTextureInputTexIDPtr t_tex0 = DYN_TO_SHAREPTR(SVTextureInputTexID, m_tex0);
+//        SVTextureInputTexIDPtr t_tex1 = DYN_TO_SHAREPTR(SVTextureInputTexID, m_tex1);
+//        if (t_tex0 && t_tex1) {
+//            t_tex0->setTexID(_tex0ID);
+//            t_tex1->setTexID(_tex1ID);
+//        }
+//    } else if (m_formate == SV_PF_BGRA) {
+//        SVTextureInputTexIDPtr t_tex0 = DYN_TO_SHAREPTR(SVTextureInputTexID, m_tex0);
+//        if (t_tex0) {
+//            t_tex0->setTexID(_tex0ID);
+//        }
+//    } else if (m_formate == SV_PF_RGBA) {
+//        SVTextureInputTexIDPtr t_tex0 = DYN_TO_SHAREPTR(SVTextureInputTexID, m_tex0);
+//        if (t_tex0) {
+//            t_tex0->setTexID(_tex0ID);
+//        }
+//    } else if (m_formate == SV_PF_RGB) {
+//    }
+//    _updateTrans();
 }
 
 void StreamInCore::_updateTrans(){
-    //trans render
-    SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
-    SVRenderCmdTransGPUPtr transCmd = MakeSharedPtr<SVRenderCmdTransGPU>(m_trans);
-    if(t_rs){
-        t_rs->pushRenderCmd(RST_SKY, transCmd);
-    }
+//    //trans render
+//    SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
+//    SVRenderCmdTransGPUPtr transCmd = MakeSharedPtr<SVRenderCmdTransGPU>(m_trans);
+//    if(t_rs){
+//        t_rs->pushRenderCmd(RST_SKY, transCmd);
+//    }
 }
 
 /*

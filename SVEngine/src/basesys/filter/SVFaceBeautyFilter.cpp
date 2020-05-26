@@ -117,7 +117,7 @@ SVFairDataBlur::~SVFairDataBlur() {
 }
 
 bool SVFairDataBlur::create() {
-    render::SVRendererPtr t_renderer = mApp->getRenderer();
+    SVRendererPtr t_renderer = mApp->getRenderer();
     if (!t_renderer)
         return false;
     s32 t_w = mApp->m_pGlobalParam->m_inner_width;
@@ -238,7 +238,7 @@ void SVFairDataBlur::destroy() {
         m_pPassNode->removeFromParent();
         m_pPassNode = nullptr;
     }
-    render::SVRendererPtr t_renderer = mApp->getRenderer();
+    SVRendererPtr t_renderer = mApp->getRenderer();
     if (!t_renderer) {
         return;
     }
@@ -354,7 +354,7 @@ SVFairLtraLow::~SVFairLtraLow() {
 }
 
 bool SVFairLtraLow::create() {
-    render::SVRendererPtr t_renderer = mApp->getRenderMgr()->getRenderer();
+    SVRendererPtr t_renderer = mApp->getRenderMgr()->getRenderer();
     if (!t_renderer)
         return false;
     s32 t_w = mApp->m_pGlobalParam->m_inner_width;

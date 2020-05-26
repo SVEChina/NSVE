@@ -14,7 +14,7 @@
 
 namespace sv {
     
-    namespace util{
+    
         
         //指定了输出纹理，输入纹理和材质的 一个pass
         
@@ -46,7 +46,8 @@ namespace sv {
             
             SVString mTag;
         };
-    };
+
+
 };
 
 #endif /* SV_PASS_H */

@@ -12,7 +12,7 @@
 
 namespace sv {
     
-    namespace mtl{
+    
         
         class SVMtlFaceShapeVaried : public SVMtlCore {
         public:
@@ -27,7 +27,7 @@ namespace sv {
             virtual void update(f32 dt);
             
         protected:
-            void _submitMtl(render::SVRendererPtr _render); 
+            void _submitMtl(SVRendererPtr _render); 
 
             f32 m_startPoint[48];
             f32 m_endPoint[48];
@@ -45,7 +45,7 @@ namespace sv {
             f32 m_inv_surfaceHeight;
         };
         
-    }//!namespace mtl
+    
     
 }//!namespace sv
 

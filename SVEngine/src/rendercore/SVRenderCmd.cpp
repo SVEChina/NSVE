@@ -31,7 +31,7 @@ SVRenderCmd::~SVRenderCmd() {
     m_pRenderer = nullptr;
 }
 
-void SVRenderCmd::setRenderer(render::SVRendererPtr _renderer) {
+void SVRenderCmd::setRenderer(SVRendererPtr _renderer) {
     m_pRenderer = _renderer;
 }
 

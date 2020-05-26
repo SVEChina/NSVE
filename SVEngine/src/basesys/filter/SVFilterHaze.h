@@ -13,7 +13,7 @@
 
 namespace sv {
     
-    namespace logic {
+    
         
         class SVFilterHaze : public SVFilterBase {
         public:

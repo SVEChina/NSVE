@@ -14,7 +14,7 @@
 
 namespace sv {
     
-    namespace util{
+    
         
         class SVDeformScale :public SVObject{
             
@@ -38,7 +38,7 @@ namespace sv {
             SVLockPtr m_lock;
         };
         
-    }//!namespace util
+    
     
 }//!namespace sv
 

@@ -11,7 +11,7 @@
 
 namespace sv {
     
-    namespace node{
+    
         
         class SVMultPassNode : public SVNode {
         public:
@@ -42,7 +42,7 @@ namespace sv {
             SVRenderTexturePtr m_fbo;
         };
 
-    }//!namespace node
+    
 
 }//!namespace sv
 

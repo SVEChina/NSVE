@@ -44,7 +44,7 @@ void SVFrameOutRead::create(s32 _width,s32 _height) {
     m_width = _width;
     m_height = _height;
     //创建fbo
-    render::SVRendererPtr t_renderer = mApp->getRenderer();
+    SVRendererPtr t_renderer = mApp->getRenderer();
     if( t_renderer ) {
 #if defined(SV_IOS)
         SVTexturePtr t_tex = t_renderer->createSVTexIOS(E_TEX_OUTSTREAM,
@@ -66,7 +66,7 @@ void SVFrameOutRead::create(s32 _width,s32 _height) {
 }
 
 void SVFrameOutRead::destroy(){
-    render::SVRendererPtr t_renderer = mApp->getRenderer();
+    SVRendererPtr t_renderer = mApp->getRenderer();
     if( t_renderer ) {
         m_fbo = nullptr;
         t_renderer->destroySVTex(E_TEX_OUTSTREAM);
@@ -113,7 +113,7 @@ void SVFrameOutRead::_resize() {
 
 void SVFrameOutRead::update(f32 _dt){
     SVFrameOutNode::update(_dt);
-    render::SVRendererPtr t_renderer = mApp->getRenderer();
+    SVRendererPtr t_renderer = mApp->getRenderer();
     if(m_pMtl){
         m_pMtl->setModelMatrix(m_absolutMat.get());
         m_pMtl->setTexture(0,E_TEX_MAIN);    //那第一张纹理
@@ -125,7 +125,7 @@ void SVFrameOutRead::update(f32 _dt){
 
 void SVFrameOutRead::render(){
 //    SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
-//    render::SVRendererPtr t_renderer = mApp->getRenderer();
+//    SVRendererPtr t_renderer = mApp->getRenderer();
 //    SVTexturePtr t_out_tex = t_renderer->getSVTex(E_TEX_OUTSTREAM);
 //    if (t_out_tex && t_rs && false  == t_rs->isSuspend() ) {
 //        SVRenderCmdStreamOutNorPtr t_cmd = MakeSharedPtr<SVRenderCmdStreamOutNor>(mApp);

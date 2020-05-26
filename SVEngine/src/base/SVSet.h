@@ -5,7 +5,7 @@
 
 namespace sv {
     
-    namespace util {
+   
         struct SetData {
             
         };
@@ -31,7 +31,7 @@ namespace sv {
             }
         };
         
-    }//!namespace util
+    
     
 }//!namespace sv
 

@@ -50,7 +50,7 @@ f32 SVPersonTracker::getNoiseStdScale(){
     return t_scale;
 }
 
-void SVPersonTracker::track_st(void *_data, s32 _ptnum, util::SVRect &_rect, f32 yaw, f32 pitch, f32 roll, s32 personID) {
+void SVPersonTracker::track_st(void *_data, s32 _ptnum, SVRect &_rect, f32 yaw, f32 pitch, f32 roll, s32 personID) {
     m_pFacedata = (f32 *) _data;
     m_personID = personID;
     m_yaw = yaw;

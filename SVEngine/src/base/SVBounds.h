@@ -8,8 +8,6 @@
 
 namespace sv {
     
-    namespace util {
-        
         class SVBoundSphere;
         class SVBoundBox;
         class SVBoundFrustum;
@@ -893,9 +891,6 @@ namespace sv {
             return inside_portals(bf.points,8);
         }
 
-        
-    } //!namespace util
-    
 }//!namespace sv
 
 

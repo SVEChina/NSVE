@@ -30,7 +30,7 @@ namespace sv {
         void clearRespath();
         
         //获取文件全名 包含路径
-        util::SVString getFileFullName(cptr8 _fname);
+        SVString getFileFullName(cptr8 _fname);
         
         bool loadFileContent(SVDataChunk *_datachunk, cptr8 _fname);
         
@@ -44,7 +44,7 @@ namespace sv {
         bool writeFileData(SVDataChunk *_datachunk, cptr8 _fpath, u32 _size, bool _clearData = true);
         
     protected:
-        typedef util::SVArray<SVString> SEARCHPATHPOOL;
+        typedef SVArray<SVString> SEARCHPATHPOOL;
         SEARCHPATHPOOL m_searchPathPool;
         
         SVLockPtr m_fileLock;

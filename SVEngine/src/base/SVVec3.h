@@ -5,7 +5,7 @@
 
 namespace sv {
     
-    namespace util {
+   
         
         /******************************************************************************\
          *
@@ -976,7 +976,7 @@ namespace sv {
         IVec3 clamp(const IVec3 &v,const IVec3 &v0,const IVec3 &v1);
         IVec3 lerp(const IVec3 &v0,const IVec3 &v1,s32 k);
 
-    }//!namespace util
+    
     
 }//!namespace sv
 

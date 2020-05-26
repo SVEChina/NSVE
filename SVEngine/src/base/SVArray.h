@@ -6,7 +6,7 @@
 //
 namespace sv {
     
-    namespace util {
+   
         
         //
         template <class Type,class Counter = s32> class SVArray {
@@ -535,7 +535,7 @@ namespace sv {
             Type stack_data[Capacity];
         };
         
-    }//!namespace util
+    
     
 }//!namespace sv
 

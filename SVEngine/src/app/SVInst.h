@@ -87,7 +87,7 @@ namespace sv {
         SVStaticDataPtr getDataMgr();
         SVModelMgrPtr getModelMgr();
         SVPhysicsWorldMgrPtr getPhysicsWorldMgr();
-        render::SVRendererPtr getRenderer();
+        SVRendererPtr getRenderer();
     };
     
 }//!namespace sv

@@ -19,7 +19,7 @@
 
 namespace sv {
 
-    namespace render{
+    
 
         
         /*
@@ -32,11 +32,11 @@ namespace sv {
 
             virtual ~SVRResGLShader();
 
-            virtual void create(render::SVRendererPtr _renderer);
+            virtual void create(SVRendererPtr _renderer);
 
-            virtual void destroy(render::SVRendererPtr _renderer);
+            virtual void destroy(SVRendererPtr _renderer);
             
-            virtual bool active(render::SVRendererPtr _render);
+            virtual bool active(SVRendererPtr _render);
 
             void setTechFName(cptr8 _filename);
 
@@ -85,7 +85,7 @@ namespace sv {
         };
         
 
-    }//!namespace render
+    
 
 }//!namespace sv
 

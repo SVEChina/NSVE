@@ -21,8 +21,6 @@
 
 namespace sv {
     
-    namespace util{
-        
         // 粒子类型
         enum PARTICLETYPE {
             TYPE_BILLBOARD = 0,
@@ -655,7 +653,6 @@ namespace sv {
             virtual void fromJSON(RAPIDJSON_NAMESPACE::Value &item);
         };
         
-    }//namespace util
     
 }//namesapce sv
 

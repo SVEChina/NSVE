@@ -11,7 +11,7 @@
 #include "SVMtlCore.h"
 
 namespace sv {
-    namespace mtl{
+    
         
         class SVMtlRGB2YUV : public SVMtlCore {
         public:
@@ -25,14 +25,14 @@ namespace sv {
             
             void setTex(f32 _w, f32 _h);
             
-            void _submitMtl(render::SVRendererPtr _render); 
+            void _submitMtl(SVRendererPtr _render); 
             
         private:
             s32 m_tex_w;
             s32 m_tex_h;
         };
         
-    }//!namespace mtl
+    
 }//!namespace sv
 
 

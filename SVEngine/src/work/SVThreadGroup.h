@@ -115,7 +115,7 @@ namespace sv {
             bool m_misclean;
         };
         //
-        util::SVArray<inThreadPtr> threadIDPool; //内部线程数组
+        SVArray<inThreadPtr> threadIDPool; //内部线程数组
     };
     
 }//!namespace sv

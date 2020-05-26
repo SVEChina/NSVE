@@ -15,7 +15,7 @@
 
 namespace sv {
     
-    namespace util {
+   
 
         /* 模型 由多个mesh构成 */
         class SVModel : public SVGBase {
@@ -58,7 +58,7 @@ namespace sv {
             MESHPOOL m_meshPool;
         };
         
-    }//!namespace util
+    
     
 }//!namespace sv
 

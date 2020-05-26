@@ -12,8 +12,6 @@
 
 namespace sv {
 
-    namespace logic {
-        
         class SVTransCPU : public SVTrans {
         public:
             SVTransCPU(SVInst *_app);
@@ -28,10 +26,6 @@ namespace sv {
             
             void render();
         };
-        
-    } //!namespace logic
-    
-    
 
 }//!namespace sv
 

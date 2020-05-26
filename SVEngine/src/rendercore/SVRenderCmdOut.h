@@ -15,7 +15,7 @@
 
 namespace sv {
     
-    namespace render{
+    
         
         //普通的流输出
         class SVRenderCmdStreamOutNor : public SVRenderCmdNor {
@@ -54,7 +54,7 @@ namespace sv {
         };
         
 
-    }//!namespace render
+    
     
 }//!namespace sv
 

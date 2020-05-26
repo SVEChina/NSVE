@@ -12,7 +12,7 @@
 
 namespace sv {
     
-    namespace node{
+    
         
         class SVIOSInstreamNode : public SVNode {
         public:
@@ -34,7 +34,7 @@ namespace sv {
             SVTEXTYPE m_tt;
         };
 
-    }//!namespace node
+    
     
 }//!namespace sv
 

@@ -11,7 +11,7 @@
 #include "../../base/SVGBase.h"
 namespace sv {
     
-    namespace logic {
+    
         
         class SVPhysicsJoint : public SVGBase {
         public:
@@ -26,7 +26,7 @@ namespace sv {
             void update(f32 _dt);
         };
             
-    }//!namespace logic
+    
     
 }//!namespace sv
 

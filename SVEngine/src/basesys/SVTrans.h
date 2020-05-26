@@ -12,8 +12,6 @@
 
 namespace sv {
 
-    namespace logic {
-        
         class SVTrans : public SVGBase {
         public:
             SVTrans(SVInst *_app);
@@ -37,7 +35,6 @@ namespace sv {
             f32 m_angle;
             SVTEXTYPE m_texTT;
         };
-    }
     
 }//!namespace sv
 

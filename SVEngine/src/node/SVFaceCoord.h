@@ -13,7 +13,7 @@
 
 namespace sv {
     
-    namespace node{
+    
         
         class SVFaceCoord : public SVNode {
         public:
@@ -57,7 +57,7 @@ namespace sv {
             bool m_isScreen;    //是否在屏幕空间
         };
         
-    }//!namespace node
+    
     
 }//!namespace sv
 

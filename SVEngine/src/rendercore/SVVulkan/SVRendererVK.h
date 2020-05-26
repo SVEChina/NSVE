@@ -12,7 +12,7 @@
 
 namespace sv {
     
-    namespace render{
+    
         
         class SVRendererVK : public SVRenderer {
         public:
@@ -51,7 +51,7 @@ namespace sv {
             
         };
         
-    }//!namespace render
+    
     
 }//!namespace sv
 

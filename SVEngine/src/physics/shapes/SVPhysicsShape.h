@@ -13,7 +13,7 @@
 #include "BulletCollision/CollisionShapes/btCollisionShape.h"
 namespace sv {
     
-    namespace logic {
+    
         enum PHYSICSSHAPETYPE{
             E_PHYSICS_SHAPE_BASE = 0,
             E_PHYSICS_SHAPE_BOX,
@@ -60,7 +60,7 @@ namespace sv {
             
         };
             
-    }//!namespace logic
+    
     
 }//!namespace sv
 

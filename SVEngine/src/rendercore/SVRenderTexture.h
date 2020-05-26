@@ -13,7 +13,7 @@
 
 namespace sv {
     
-    namespace render{
+    
         
         class SVRenderTexture : public SVFboObject {
         public:
@@ -21,9 +21,9 @@ namespace sv {
             
             ~SVRenderTexture();
             
-            void create(render::SVRendererPtr _renderer);
+            void create(SVRendererPtr _renderer);
             
-            void destroy(render::SVRendererPtr _renderer);
+            void destroy(SVRendererPtr _renderer);
             
             void setTexture(SVTexturePtr _tex);
             
@@ -34,7 +34,7 @@ namespace sv {
             bool m_stencil;
         };
         
-    }//!namespace render
+    
     
 }//!namespace sv
 

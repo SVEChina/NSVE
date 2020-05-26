@@ -8,7 +8,7 @@
 
 namespace sv {
     
-    namespace util {
+   
         
         SVBoundSphere::SVBoundSphere() {
             clear();
@@ -1603,6 +1603,6 @@ namespace sv {
             return 0;
         }
 
-    } //!namespace util
+    
 
 }//!namespace sv

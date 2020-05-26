@@ -12,7 +12,7 @@
 
 namespace sv {
     
-    namespace mtl{
+    
         
         class SVMtlShake : public SVMtlCore {
         public:
@@ -34,14 +34,14 @@ namespace sv {
             
             void setSpeed(f32 _speed);
         protected:
-            virtual void _submitUniform(render::SVRendererPtr _render);
+            virtual void _submitUniform(SVRendererPtr _render);
             
             f32 m_time;
             f32 m_amount;
             f32 m_speed;
         };
 
-    }//!namespace mtl
+    
     
 }//!namespace sv
 

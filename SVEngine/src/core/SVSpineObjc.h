@@ -13,24 +13,23 @@
 #include "../mtl/SVMtlDeclare.h"
 
 extern "C" {
+
     namespace sv{
-        namespace mtl{
-            class SVSpineObjc{
-            public:
-                SVSpineObjc();
-                ~SVSpineObjc();
-                SVTexturePtr m_texture;
-            };
-        }
-        
+    
+        class SVSpineObjc{
+        public:
+            SVSpineObjc();
+            ~SVSpineObjc();
+            SVTexturePtr m_texture;
+        };
     }
+
+    char *_spUtil_readFile(void *_app, const char *path, int *length);
     
-char *_spUtil_readFile(void *_app, const char *path, int *length);
+    void _spAtlasPage_createTexture(void *_app, spAtlasPage *self, const char *path, char enableMipMap);
     
-void _spAtlasPage_createTexture(void *_app, spAtlasPage *self, const char *path, char enableMipMap);
-    
-void _spAtlasPage_disposeTexture(spAtlasPage *self);
-    
-};
+    void _spAtlasPage_disposeTexture(spAtlasPage *self);
+
+}
 
 #endif //SV_MASPINEOBJC_H

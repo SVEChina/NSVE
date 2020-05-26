@@ -26,7 +26,9 @@
 #include "../mtl/SVTexture.h"
 #include "../basesys/SVConfig.h"
 #include "../rendercore/SVRenderer.h"
-//
+
+using namespace sv;
+
 SVSpineNode::SVSpineNode(SVInst *_app)
 :SVNode(_app) {
     ntype = "SVSpineNode";
@@ -123,64 +125,64 @@ void SVSpineNode::setSpineCallback(sv_spine_callback _cb,void* _obj) {
 
 //
 void SVSpineNode::update(f32 dt) {
-    if (!m_visible)
-        return;
-    if (m_state == E_ANISTATE::tANI_STATE_STOP) {
-        return;
-    }
-    if( m_pRObj && m_spine) {
-        //spine更新
-        m_spine->update(dt);
-        _computeAABBBox();
-        SVNode::update(dt);
-        //更新模型
-        m_pRObj->clearMesh();
-        
-        for (s32 i = 0, n = m_spine->m_pSkeleton->slotsCount; i < n; i++) {
-            spSlot *t_slot = m_spine->m_pSkeleton->drawOrder[i];
-            if (!t_slot->attachment) {
-                continue;   //没有挂在项目
-            }
-            SpineMeshDataPtr pMeshData = m_spine->m_spineDataPool[i];
-            SVMtlAni2DPtr t_mtl = MakeSharedPtr<SVMtlAni2D>(mApp);
-            t_mtl->setModelMatrix(m_absolutMat.get());
-            t_mtl->setTexture(0,pMeshData->m_pTex);
-            t_mtl->setBlendEnable(true);
-            t_mtl->setBlendState(MTL_BLEND_ONE, MTL_BLEND_ONE_MINUS_SRC_ALPHA);
-            t_mtl->setBlendMode(SVMtlAni2D::SV_MTL_BLENDMODE_NORMAL);
-            
-            switch (pMeshData->m_blendMode) {
-                case SP_BLEND_MODE_NORMAL:{
-                    if(m_spine->m_preMultAlpha){
-                        t_mtl->setBlendState(MTL_BLEND_ONE, MTL_BLEND_ONE_MINUS_SRC_ALPHA);
-                    }else{
-                        t_mtl->setBlendState(MTL_BLEND_ONE, MTL_BLEND_ONE_MINUS_SRC_ALPHA);
-                    }
-                    break;
-                }
-                case SP_BLEND_MODE_ADDITIVE:{
-                    t_mtl->setBlendState(m_spine->m_preMultAlpha ? MTL_BLEND_ONE : MTL_BLEND_SRC_ALPHA, MTL_BLEND_ONE);
-                    t_mtl->setBlendMode(SVMtlAni2D::SV_MTL_BLENDMODE_ADDITIVE);
-                    break;
-                }
-                case SP_BLEND_MODE_MULTIPLY:{
-                    t_mtl->setBlendState(MTL_BLEND_DEST_COLOR, MTL_BLEND_ONE_MINUS_SRC_ALPHA);
-                    t_mtl->setBlendMode(SVMtlAni2D::SV_MTL_BLENDMODE_MULTIPLY);
-                    break;
-                }
-                case SP_BLEND_MODE_SCREEN:{
-                    t_mtl->setBlendState(MTL_BLEND_ONE, MTL_BLEND_ONE_MINUS_SRC_COLOR);
-                    t_mtl->setBlendMode(SVMtlAni2D::SV_MTL_BLENDMODE_SCREEN);
-                    break;
-                }
-                default:{
-                    t_mtl->setBlendState(m_spine->m_preMultAlpha ? MTL_BLEND_ONE : MTL_BLEND_SRC_ALPHA, MTL_BLEND_ONE_MINUS_SRC_ALPHA);
-                    break;
-                }
-            }
-            m_pRObj->addRenderObj(pMeshData->m_pRenderMesh,t_mtl);
-        }
-    }
+//    if (!m_visible)
+//        return;
+//    if (m_state == E_ANISTATE::tANI_STATE_STOP) {
+//        return;
+//    }
+//    if( m_pRObj && m_spine) {
+//        //spine更新
+//        m_spine->update(dt);
+//        _computeAABBBox();
+//        SVNode::update(dt);
+//        //更新模型
+//        m_pRObj->clearMesh();
+//
+//        for (s32 i = 0, n = m_spine->m_pSkeleton->slotsCount; i < n; i++) {
+//            spSlot *t_slot = m_spine->m_pSkeleton->drawOrder[i];
+//            if (!t_slot->attachment) {
+//                continue;   //没有挂在项目
+//            }
+//            SpineMeshDataPtr pMeshData = m_spine->m_spineDataPool[i];
+//            SVMtlAni2DPtr t_mtl = MakeSharedPtr<SVMtlAni2D>(mApp);
+//            t_mtl->setModelMatrix(m_absolutMat.get());
+//            t_mtl->setTexture(0,pMeshData->m_pTex);
+//            t_mtl->setBlendEnable(true);
+//            t_mtl->setBlendState(MTL_BLEND_ONE, MTL_BLEND_ONE_MINUS_SRC_ALPHA);
+//            t_mtl->setBlendMode(SVMtlAni2D::SV_MTL_BLENDMODE_NORMAL);
+//
+//            switch (pMeshData->m_blendMode) {
+//                case SP_BLEND_MODE_NORMAL:{
+//                    if(m_spine->m_preMultAlpha){
+//                        t_mtl->setBlendState(MTL_BLEND_ONE, MTL_BLEND_ONE_MINUS_SRC_ALPHA);
+//                    }else{
+//                        t_mtl->setBlendState(MTL_BLEND_ONE, MTL_BLEND_ONE_MINUS_SRC_ALPHA);
+//                    }
+//                    break;
+//                }
+//                case SP_BLEND_MODE_ADDITIVE:{
+//                    t_mtl->setBlendState(m_spine->m_preMultAlpha ? MTL_BLEND_ONE : MTL_BLEND_SRC_ALPHA, MTL_BLEND_ONE);
+//                    t_mtl->setBlendMode(SVMtlAni2D::SV_MTL_BLENDMODE_ADDITIVE);
+//                    break;
+//                }
+//                case SP_BLEND_MODE_MULTIPLY:{
+//                    t_mtl->setBlendState(MTL_BLEND_DEST_COLOR, MTL_BLEND_ONE_MINUS_SRC_ALPHA);
+//                    t_mtl->setBlendMode(SVMtlAni2D::SV_MTL_BLENDMODE_MULTIPLY);
+//                    break;
+//                }
+//                case SP_BLEND_MODE_SCREEN:{
+//                    t_mtl->setBlendState(MTL_BLEND_ONE, MTL_BLEND_ONE_MINUS_SRC_COLOR);
+//                    t_mtl->setBlendMode(SVMtlAni2D::SV_MTL_BLENDMODE_SCREEN);
+//                    break;
+//                }
+//                default:{
+//                    t_mtl->setBlendState(m_spine->m_preMultAlpha ? MTL_BLEND_ONE : MTL_BLEND_SRC_ALPHA, MTL_BLEND_ONE_MINUS_SRC_ALPHA);
+//                    break;
+//                }
+//            }
+//            m_pRObj->addRenderObj(pMeshData->m_pRenderMesh,t_mtl);
+//        }
+//    }
 }
 
 void SVSpineNode::render() {
@@ -267,12 +269,12 @@ void SVSpineNode::_spine_stop() {
 
 //发送事件
 void SVSpineNode::_sendAniEvent(cptr8 _eventName) {
-    SVString t_eventName = m_name + SVString("_") + SVString(_eventName);
-    SVAnimateEventPtr t_event = MakeSharedPtr<SVAnimateEvent>();
-    t_event->personID = m_personID;
-    t_event->m_AnimateName = m_spine->getSpineName();
-    t_event->eventName = t_eventName;
-    mApp->getEventMgr()->pushEventToSecondPool(t_event);
+//    SVString t_eventName = m_name + SVString("_") + SVString(_eventName);
+//    SVAnimateEventPtr t_event = MakeSharedPtr<SVAnimateEvent>();
+//    t_event->personID = m_personID;
+//    t_event->m_AnimateName = m_spine->getSpineName();
+//    t_event->eventName = t_eventName;
+//    mApp->getEventMgr()->pushEventToSecondPool(t_event);
 }
 
 void SVSpineNode::setAlpha(f32 _alpha){

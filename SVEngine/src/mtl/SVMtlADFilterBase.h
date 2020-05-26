@@ -12,7 +12,7 @@
 
 namespace sv {
     
-    namespace mtl{
+    
         
         class SVMtlADFilterBase : public SVMtlCore {
         public:
@@ -33,7 +33,7 @@ namespace sv {
             
             void update(f32 dt);
         protected:
-            virtual void _submitUniform(render::SVRendererPtr _render);
+            virtual void _submitUniform(SVRendererPtr _render);
             void _resetTime();
             MTLADFILTERSTATE m_state;
             f32 m_time;
@@ -41,7 +41,7 @@ namespace sv {
             f32 m_intervalTime;
         };
 
-    }//!namespace mtl
+    
     
 }//!namespace sv
 

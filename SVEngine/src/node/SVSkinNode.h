@@ -13,7 +13,7 @@
 
 namespace sv {
     
-    namespace node{
+    
         
         /*
          3d骨骼动画节点
@@ -73,8 +73,6 @@ namespace sv {
             SVQuat m_fileRot;
         };
         
-    }//!namespace node
-    
 }//!namespace sv
 
 //

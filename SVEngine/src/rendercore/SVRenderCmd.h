@@ -18,8 +18,6 @@
 
 namespace sv {
     
-    namespace render{
-        
         //渲染命令基类
         class SVRenderCmd : public SVObject {
         public:
@@ -27,26 +25,26 @@ namespace sv {
             
             ~SVRenderCmd();
             
-            void setRenderer(render::SVRendererPtr _renderer);
+            void setRenderer(SVRendererPtr _renderer);
             
             virtual void render();
             
-            util::SVString mTag;
+            SVString mTag;
             
         protected:
-            render::SVRendererPtr m_pRenderer;
+            SVRendererPtr m_pRenderer;
         };
         
         class SVRenderCmdTransGPU : public SVRenderCmd {
         public:
-            SVRenderCmdTransGPU(logic::SVTransPtr _trans);
+            SVRenderCmdTransGPU(SVTransPtr _trans);
             
             ~SVRenderCmdTransGPU();
             
             virtual void render();
             
         protected:
-            logic::SVTransPtr m_trans;
+            SVTransPtr m_trans;
         };
         
         //创建指令
@@ -73,11 +71,11 @@ namespace sv {
             
             void setMesh(SVRenderMeshPtr _mesh);
             
-            void setMaterial(mtl::SVMtlCorePtr _material);
+            void setMaterial(SVMtlCorePtr _material);
             
         protected:
             SVRenderMeshPtr m_pMesh;
-            mtl::SVMtlCorePtr m_pMtl;
+            SVMtlCorePtr m_pMtl;
         };
         
         //清空命令
@@ -126,12 +124,12 @@ namespace sv {
             
             void setFbo(SVRenderTexturePtr _fbo);
             
-            void setTexture(mtl::SVTexturePtr _tex);
+            void setTexture(SVTexturePtr _tex);
             
         protected:
             SVRenderTexturePtr m_fbo;
             
-            mtl::SVTexturePtr m_tex;
+            SVTexturePtr m_tex;
         };
         
         //多批次渲染命令集合
@@ -145,17 +143,17 @@ namespace sv {
             
             void setFbo(SVRenderTexturePtr _fbo);
             
-            void setTexture(mtl::SVTexturePtr _tex);
+            void setTexture(SVTexturePtr _tex);
             
-            void addMtlMesh(mtl::SVMtlCorePtr _mtl ,SVRenderMeshPtr _mesh);
+            void addMtlMesh(SVMtlCorePtr _mtl ,SVRenderMeshPtr _mesh);
             
         protected:
             SVRenderTexturePtr m_fbo;
             
-            mtl::SVTexturePtr m_tex;
+            SVTexturePtr m_tex;
             
-            util::SVArray<mtl::SVMtlCorePtr> m_MtlArray;
-            util::SVArray<SVRenderMeshPtr> m_MeshArray;
+            SVArray<SVMtlCorePtr> m_MtlArray;
+            SVArray<SVRenderMeshPtr> m_MeshArray;
         };
         
         //FBO绑定(推送FBO)
@@ -186,15 +184,15 @@ namespace sv {
         //
         class SVRenderCmdPushVPMat : public SVRenderCmd {
         public:
-            SVRenderCmdPushVPMat(util::FMat4& _vm,util::FMat4& _pm);
+            SVRenderCmdPushVPMat(FMat4& _vm,FMat4& _pm);
             
             ~SVRenderCmdPushVPMat();
             
             virtual void render();
             
         protected:
-            util::FMat4 m_vm;
-            util::FMat4 m_pm;
+            FMat4 m_vm;
+            FMat4 m_pm;
         };
         
         //
@@ -211,14 +209,14 @@ namespace sv {
         class SVRenderCmdPushMat : public SVRenderCmd {
         public:
             //0: vm 1:pm
-            SVRenderCmdPushMat(util::FMat4& _mat,s32 _type);
+            SVRenderCmdPushMat(FMat4& _mat,s32 _type);
             
             ~SVRenderCmdPushMat();
             
             virtual void render();
             
         protected:
-            util::FMat4 m_mat;
+            FMat4 m_mat;
             s32 m_type;
         };
         
@@ -236,13 +234,8 @@ namespace sv {
             s32 m_type;
         };
         
-       
-    }//!namespace render
-    
+
 }//!namespace sv
-
-
-
 
 //
 #endif //SV_RENDERCMD_H

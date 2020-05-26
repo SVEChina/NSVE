@@ -25,7 +25,7 @@ static const u16 quadTriangles[6] = {0, 1, 2, 2, 3, 0};
 
 namespace sv {
     
-    namespace util{
+    
     
         class SpineMeshData :public SVObject{
         public:
@@ -34,12 +34,12 @@ namespace sv {
             s32                     m_blendMode;
             s32                     m_indexCount;
             s32                     m_vertexCount;
-            render::SVRenderMeshPtr         m_pRenderMesh;
+            SVRenderMeshPtr         m_pRenderMesh;
             SVDataSwapPtr           m_pRenderVertex;
             SVDataSwapPtr           m_pRenderIndex;
             SVArray<V2_C_T0>        m_aRenderVecData;
             SVArray<u16>            m_aRenderIndexData;
-            mtl::SVTexturePtr            m_pTex;
+            SVTexturePtr            m_pTex;
         };
         
         //spine对象
@@ -171,7 +171,7 @@ namespace sv {
             void fromJSON(RAPIDJSON_NAMESPACE::Value &item);
         };
         
-    }//!namespace util
+    
     
 }//!namespace sv
 

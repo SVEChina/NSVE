@@ -20,7 +20,7 @@
 
 namespace sv {
     
-    namespace util {
+   
         
         //普通mesh
         
@@ -70,7 +70,7 @@ namespace sv {
             virtual ~SVMorphMesh();
         };
         
-    }//!namespace util
+    
     
 }//!namespace sv
 

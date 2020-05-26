@@ -12,7 +12,7 @@
 
 namespace sv {
     
-    namespace node{
+    
         
         //笛卡尔坐标系
         
@@ -44,7 +44,7 @@ namespace sv {
         
         
         
-    }//!namespace node
+    
     
 }//!namespace sv
 

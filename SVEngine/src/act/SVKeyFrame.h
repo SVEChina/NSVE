@@ -19,8 +19,6 @@
 
 namespace sv {
     
-    namespace logic {
-        
         class SVKeyFrame : public SVGBase {
         public:
             SVKeyFrame(SVInst* _app,u32 _index);
@@ -58,9 +56,9 @@ namespace sv {
             
             ~SVKeyDeform();
             
-            util::FVec3 m_pos;
-            util::FVec3 m_rot;
-            util::FVec3 m_scale;
+            FVec3 m_pos;
+            FVec3 m_rot;
+            FVec3 m_scale;
             
             void toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_alloc,
                         RAPIDJSON_NAMESPACE::Value &_obj);
@@ -76,7 +74,7 @@ namespace sv {
             
             ~SVKeyMtl();
             
-            mtl::SVMtlCorePtr m_mtl;
+            SVMtlCorePtr m_mtl;
             
             void toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_alloc,
                         RAPIDJSON_NAMESPACE::Value &_obj);
@@ -97,7 +95,7 @@ namespace sv {
             void fromJSON(RAPIDJSON_NAMESPACE::Value &item);
         };
         
-    }//!namespace logic
+    
     
 }//!namespace sv
 

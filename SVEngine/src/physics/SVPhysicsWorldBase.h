@@ -15,7 +15,7 @@
 #define PHYSICSWORLDSTEP 1.0f/30.0f
 namespace sv {
     
-    namespace logic {
+    
         enum SV_PHYSICSWORLDTYPE {
             E_PHYSICS_WORLD_BASE = 0,
             E_PHYSICS_WORLD_RIGID,
@@ -45,7 +45,7 @@ namespace sv {
             SVLockPtr m_lock;
         };
             
-    }//!namespace logic
+    
     
 }//!namespace sv
 

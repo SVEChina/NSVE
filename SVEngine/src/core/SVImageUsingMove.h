@@ -14,7 +14,7 @@
 
 namespace sv {
     
-    namespace util{
+    
         
         class SVImageUsingMove :public SVObject{
         public:
@@ -39,7 +39,7 @@ namespace sv {
              SVLockPtr m_lock;
         };
         
-    }//!namespace util
+    
     
 }//!namespace sv
 

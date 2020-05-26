@@ -6,7 +6,7 @@
 
 namespace sv {
     
-    namespace util {
+   
 
         /******************************************************************************\
         *
@@ -317,6 +317,5 @@ namespace sv {
             return inverse(ret,m,det);
         }
 
-    }//!namesapce util
     
 }//!namespace sv

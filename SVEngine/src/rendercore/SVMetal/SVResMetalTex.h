@@ -17,7 +17,7 @@
 
 namespace sv {
 
-    namespace render{
+    
 
 
         /*
@@ -29,9 +29,9 @@ namespace sv {
             
             virtual ~SVRResMetalTex();
             
-            virtual void create(render::SVRendererPtr _renderer);
+            virtual void create(SVRendererPtr _renderer);
             
-            virtual void destroy(render::SVRendererPtr _renderer);
+            virtual void destroy(SVRendererPtr _renderer);
             
             virtual void setTexData(void *_data, s32 _len);
             
@@ -56,11 +56,11 @@ namespace sv {
             
             virtual ~SVRResMetalShader();
             
-            virtual void create(render::SVRendererPtr _renderer);
+            virtual void create(SVRendererPtr _renderer);
             
-            virtual void destroy(render::SVRendererPtr _renderer);
+            virtual void destroy(SVRendererPtr _renderer);
             
-            virtual bool active(render::SVRendererPtr _render);
+            virtual bool active(SVRendererPtr _render);
             
         protected:
             id<MTLFunction> m_pVS;
@@ -68,7 +68,7 @@ namespace sv {
             id<MTLRenderPipelineState> m_pProgram;
         };
         
-    }//!namespace render
+    
 
 }//!namespace sv
 

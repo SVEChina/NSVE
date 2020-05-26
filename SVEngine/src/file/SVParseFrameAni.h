@@ -13,14 +13,14 @@
 
 namespace sv {
     
-    namespace logic{
+    
         
         class SVParseFrameAni : public SVParseData {
         public:
             static SVNodePtr parseFrameAni(SVInst *app, RAPIDJSON_NAMESPACE::Value &item, s32 _resid, cptr8 _path);
         };
         
-    }//!namespace logic
+    
     
 }//!namespace sv
 

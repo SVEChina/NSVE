@@ -13,8 +13,6 @@
 
 namespace sv {
 
-    namespace util {
-
         struct SVRect {
 
             SVRect()
@@ -225,8 +223,6 @@ namespace sv {
             FVec2 m_rt_pt;
         };
         
-    //!namespace util
-    }
 }//!namespace sv
 
 #endif

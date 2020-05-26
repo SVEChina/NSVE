@@ -5,7 +5,7 @@
 
 namespace sv {
     
-    namespace util {
+   
         
         //
         class SetData {
@@ -33,7 +33,7 @@ namespace sv {
             }
         };
         
-    }//!namespace util
+    
     
 }//!namespace sv
 

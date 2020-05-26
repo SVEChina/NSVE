@@ -12,7 +12,7 @@
 #include "SVFilterBase.h"
 
 namespace sv {
-    namespace logic {
+    
         
         class SVGenLUTParam :public SVObject {
         public:

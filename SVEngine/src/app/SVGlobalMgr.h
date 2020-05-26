@@ -29,7 +29,7 @@ namespace sv {
         
     public:
         //渲染器
-        //render::SVRendererPtr m_pRenderer;
+        //SVRendererPtr m_pRenderer;
         //渲染技术
         SVRenderMgrPtr m_pRenderMgr;
         

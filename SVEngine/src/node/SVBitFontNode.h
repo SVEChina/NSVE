@@ -12,7 +12,7 @@
 
 namespace sv {
     
-    namespace node{
+    
         //
         class SVBitFontNode : public SVNode {
             //纹理坐标
@@ -99,7 +99,7 @@ namespace sv {
         };
 
         
-    }//!namespace node
+    
     
 }//!namespace sv
 

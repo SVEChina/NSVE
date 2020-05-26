@@ -14,7 +14,7 @@
 
 namespace sv {
     
-    namespace render{
+    
         
         class SVRenderStateMetal : public SVRenderState {
         public:
@@ -23,7 +23,7 @@ namespace sv {
             ~SVRenderStateMetal();
         };
         
-    }//!namespace render
+    
     
 }//!namespace sv
 

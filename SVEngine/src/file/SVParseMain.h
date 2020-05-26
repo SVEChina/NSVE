@@ -14,7 +14,7 @@
 
 namespace sv {
     
-    namespace logic{
+    
         
         class SVParseMain : public SVGBase {
         public:
@@ -40,7 +40,7 @@ namespace sv {
         };
 
         
-    }//!namespace logic
+    
     
 }//!namespace sv
 

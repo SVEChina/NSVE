@@ -5,7 +5,7 @@
 
 namespace sv {
     
-    namespace util {
+   
         
         template <class Key,class Data,u16 Capacity> class SVCoreTree {
             
@@ -368,7 +368,7 @@ namespace sv {
         };
 
         
-    }//!namespace util
+    
     
 }//!namespace sv
 

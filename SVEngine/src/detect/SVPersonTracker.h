@@ -19,7 +19,7 @@
 
 namespace sv {
     
-    namespace detect{
+    
         
         class SVPersonTracker : public SVGBase {
         public:
@@ -27,7 +27,7 @@ namespace sv {
             
             virtual ~SVPersonTracker();
             
-            void track_st(void *_data, s32 _ptnum, util::SVRect &_rect, f32 yaw, f32 pitch, f32 roll, s32 personID);
+            void track_st(void *_data, s32 _ptnum, SVRect &_rect, f32 yaw, f32 pitch, f32 roll, s32 personID);
             
             void setEnableExpression(bool _enable);
             
@@ -37,15 +37,15 @@ namespace sv {
             
             f32 getNoiseStdScale();
         public:
-            util::FVec3 m_facecenter;
-            util::FVec3 m_noisecenter;
-            util::FVec3 m_eyecenter;
-            util::FVec3 m_jawbottompos;
-            util::FVec3 m_noiseup;
-            util::FVec3 m_noisedown;
-            util::FVec3 m_leftEyePos;
-            util::FVec3 m_rightEyePos;
-            util::SVRect m_faceRect;
+            FVec3 m_facecenter;
+            FVec3 m_noisecenter;
+            FVec3 m_eyecenter;
+            FVec3 m_jawbottompos;
+            FVec3 m_noiseup;
+            FVec3 m_noisedown;
+            FVec3 m_leftEyePos;
+            FVec3 m_rightEyePos;
+            SVRect m_faceRect;
             f32 *m_pFacedata;
             s32 m_personID;
             f32 m_img_w;
@@ -59,7 +59,7 @@ namespace sv {
             f32 m_noisetd_scale;
             f32 m_eye_angle;
             
-            util::SVBoundBox m_bound;
+            SVBoundBox m_bound;
             
         protected:
             void _sendExpressionEvent(SV_EVENT_TYPE _type);
@@ -80,7 +80,7 @@ namespace sv {
             bool m_enableExpression;
         };
         
-    }//!namespace detect
+    
     
 }//!namespace sv
 

@@ -11,7 +11,7 @@
 #include "SVActBase.h"
 namespace sv {
     
-    namespace logic {
+    
         
         class SVActPhysics : public SVActBase {
         public:
@@ -57,7 +57,7 @@ namespace sv {
             
         };
         
-    }//!namespace logic
+    
     
 }//!namespace sv
 

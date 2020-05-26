@@ -18,7 +18,7 @@
 
 namespace sv {
     
-    namespace render{
+    
     
         /*
         Metal渲染器
@@ -116,7 +116,7 @@ namespace sv {
             //MTLRenderPipelineDescriptor *m_pRPDes;
         };
         
-    }//!namespace render
+    
     
 }//!namespace sv
 //

@@ -15,7 +15,7 @@
 #include "BulletDynamics/ConstraintSolver/btSequentialImpulseConstraintSolver.h"
 namespace sv {
     
-    namespace logic {
+    
         
         class SVPhysicsSoftRigidWorld : public SVPhysicsWorldBase {
         public:
@@ -52,7 +52,7 @@ namespace sv {
             SOFTBODYPOOL m_bodies;
         };
             
-    }//!namespace logic
+    
     
 }//!namespace sv
 

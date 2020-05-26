@@ -34,7 +34,7 @@ void SVMtlGradientMap::setSmooth(f32 _smooth){
     }
 }
 
-void SVMtlGradientMap::_submitMtl(render::SVRendererPtr _render){
+void SVMtlGradientMap::_submitMtl(SVRendererPtr _render){
     SVMtlCore::_submitMtl(_render);
     _render->submitUniformf("softenStrength", m_lSmoothSize);
 }

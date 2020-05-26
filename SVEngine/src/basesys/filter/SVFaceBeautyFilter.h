@@ -15,7 +15,7 @@
 
 namespace sv {
 
-    namespace logic {
+    
         
         class SVGenFBParam : public SVObject {
             

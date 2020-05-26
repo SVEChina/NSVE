@@ -13,7 +13,7 @@
 
 namespace sv {
     
-    namespace render{
+    
         
         /*
          GL渲染器
@@ -30,7 +30,7 @@ namespace sv {
             virtual void resize(s32 _w,s32 _);
             
             //提交纹理
-            virtual void submitTex(u32 _channel,mtl::TexUnit& _unit);
+            virtual void submitTex(u32 _channel,TexUnit& _unit);
             //提交unifrom matrix
             virtual void submitUniformMatrix(cptr8 _name,f32* _data);
             //提交unifrom matrix array
@@ -68,15 +68,15 @@ namespace sv {
             //提交unifrom f32 v4
             virtual void submitUniformf4v(cptr8 _name,f32* _data,s32 _size = 1);
             //提交融合参数
-            virtual void submitBlend(mtl::SVBlendParam& _param);
+            virtual void submitBlend(SVBlendParam& _param);
             //提交模板参数
-            virtual void submitStencil(mtl::SVStencilParam& _param);
+            virtual void submitStencil(SVStencilParam& _param);
             //提交深度参数
-            virtual void submitDepth(mtl::SVDepthParam& _param);
+            virtual void submitDepth(SVDepthParam& _param);
             //提交隐藏面参数
-            virtual void submitCull(mtl::SVCullFaceParam& _param);
+            virtual void submitCull(SVCullFaceParam& _param);
             //提交zfighting
-            virtual void submitZOff(mtl::SVZOffParam& _param);
+            virtual void submitZOff(SVZOffParam& _param);
             //提交线宽
             virtual void submitLineWidth(f32 _width);
             //提交点大小
@@ -110,7 +110,7 @@ namespace sv {
             //shader资源
         };
 
-    }//!namespace render
+    
     
 }//!namespace sv
 

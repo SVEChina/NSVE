@@ -5,7 +5,7 @@
 
 namespace sv {
     
-    namespace util {
+   
 
         //****************************** FVec4 ********************************************
         SVE_ALIGNED16(struct) FVec4 {
@@ -1390,7 +1390,7 @@ namespace sv {
         
         BVec4 clamp(const BVec4 &v,const BVec4 &v0,const BVec4 &v1);
 
-    }//!namespace util
+    
     
 }//!namespace sv
 

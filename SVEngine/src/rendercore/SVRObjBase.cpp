@@ -18,11 +18,11 @@ SVRObjBase::~SVRObjBase(){
     m_pData = nullptr;
 }
 
-void SVRObjBase::create(render::SVRendererPtr _renderer){
+void SVRObjBase::create(SVRendererPtr _renderer){
     
 }
 
-void SVRObjBase::destroy(render::SVRendererPtr _renderer){
+void SVRObjBase::destroy(SVRendererPtr _renderer){
     
 }
 

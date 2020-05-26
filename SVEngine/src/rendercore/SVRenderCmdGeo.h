@@ -16,7 +16,7 @@
 
 namespace sv {
     
-    namespace render{
+    
         
         //线绘制
         class SVRenderCmdGeo : public SVRenderCmd {
@@ -102,7 +102,7 @@ namespace sv {
             SVBoundBox m_aabb;
         };
         
-    }//!namespace render
+    
     
 }//!namespace sv
 

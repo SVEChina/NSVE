@@ -13,7 +13,7 @@
 
 namespace sv{
     
-    namespace logic {
+    
         enum SVACTIONSTATE{
             SV_ACTION_STATE_WAIT,
             SV_ACTION_STATE_PLAY,
@@ -49,7 +49,7 @@ namespace sv{
             SVNodePtr m_nodePtr;
         };
         
-    }//!namespace logic
+    
 }//!namespace sv
 
 

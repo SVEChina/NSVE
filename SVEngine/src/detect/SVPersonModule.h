@@ -11,7 +11,7 @@
 #include "../event/SVEventProc.h"
 namespace sv {
     
-    namespace detect{
+    
         
         class SVPersonModule : public SVEventProc {
         public:
@@ -28,7 +28,7 @@ namespace sv {
             SVPersonPtr m_persons[SV_SUPPORT_MAX_PERSON_NUM];
         };
         
-    }//!namespace detect
+    
     
 }//!namespace sv
 

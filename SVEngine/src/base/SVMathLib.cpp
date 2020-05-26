@@ -2,7 +2,7 @@
 
 namespace sv {
     
-    namespace util {
+   
         
         //
         Math::Math() {
@@ -516,6 +516,4 @@ namespace sv {
             //hardwareProjection = hardwareProjectionD3D10;
         }
 
-    }//!namesapce util
-    
 }//!namespace sv

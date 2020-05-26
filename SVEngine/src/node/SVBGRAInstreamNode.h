@@ -12,7 +12,7 @@
 
 namespace sv {
     
-    namespace node{
+    
         //
         class SVBGRAInstreamNode : public SVNode {
         public:
@@ -42,7 +42,7 @@ namespace sv {
             SVTexturePtr m_pTex;
         };
         
-    }//!namespace node
+    
     
 }//!namespace sv
 

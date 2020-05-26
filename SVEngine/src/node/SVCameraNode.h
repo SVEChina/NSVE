@@ -12,7 +12,7 @@
 
 namespace sv {
     
-    namespace node{
+    
     
         //相机节点 不是节点
         class SVCameraNode : public SVEventProc {
@@ -42,13 +42,13 @@ namespace sv {
             
             f32 *getVPMat();
             
-            util::FVec3& getPosition();
+            FVec3& getPosition();
             
-            util::FMat4& getProjectMatObj();
+            FMat4& getProjectMatObj();
             
-            util::FMat4& getViewMatObj();
+            FMat4& getViewMatObj();
             
-            util::FMat4& getVPMatObj();
+            FMat4& getVPMatObj();
     
             virtual void updateViewProj();
 
@@ -64,10 +64,10 @@ namespace sv {
             void _removeUnuseLinkFboObject();
 
             //各种矩阵
-            util::FVec3 m_pos;
-            util::FMat4 m_mat_v;
-            util::FMat4 m_mat_p;
-            util::FMat4 m_mat_vp;
+            FVec3 m_pos;
+            FMat4 m_mat_v;
+            FMat4 m_mat_p;
+            FMat4 m_mat_vp;
             //
             SVLockPtr m_resLock;
             //
@@ -75,7 +75,7 @@ namespace sv {
         };
         
 
-    }//!namespace node
+    
     
 }//!namespace sv
 

@@ -15,8 +15,6 @@
 
 namespace sv {
     
-    namespace util {
-        
         /******************************************************************************\
          *
          * min/max/clamp/lerp
@@ -825,9 +823,10 @@ namespace sv {
                 radix_sort_function_compare<typename Iterator::DataType,Ret,Ret (*)(A0,A1)> compare(func);
                 RadixSort<typename Iterator::DataType,radix_sort_function_compare<typename Iterator::DataType,Ret,Ret (*)(A0,A1)> > radix_sort(&(*begin),size,compare);
             }
-        
-    }
-}
+            
+        };
+
+}//!namespace sv;
 
 
 #endif /* SV_UTILS_H */

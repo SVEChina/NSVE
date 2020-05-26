@@ -14,7 +14,7 @@
  */
 namespace sv {
     
-    namespace util {
+   
         
         class SVNoise{
             
@@ -64,7 +64,7 @@ namespace sv {
         };
         
         
-    }//!namespace util
+    
     
 }//!namespace sv
 

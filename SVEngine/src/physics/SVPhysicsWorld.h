@@ -12,7 +12,7 @@
 
 namespace sv {
     
-    namespace logic {
+    
         
         class SVPhysicsWorld : public SVPhysicsWorldBase {
         public:
@@ -58,8 +58,6 @@ namespace sv {
             
         };
             
-    }//!namespace logic
-    
 }//!namespace sv
 
 

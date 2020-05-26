@@ -13,7 +13,7 @@
 
 namespace sv {
     
-    namespace node{
+    
         
         class SVVisitorBase : public SVObject {
         public:
@@ -71,7 +71,7 @@ namespace sv {
             SVString m_nodeName;
         };
         
-    }//!namespace node
+    
     
 }//!namespace sv
 

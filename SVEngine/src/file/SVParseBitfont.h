@@ -12,7 +12,7 @@
 
 namespace sv {
     
-    namespace logic{
+    
         
         class SVParseBitfont : public SVParseData {
         public:
@@ -20,7 +20,7 @@ namespace sv {
         };
 
         
-    }//!namespace logic
+    
     
 }//!namespace sv
 

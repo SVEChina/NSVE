@@ -12,7 +12,7 @@
 #include "../base/SVColor.h"
 namespace sv {
     
-    namespace mtl{
+    
         
         class SVMtlColor : public SVMtlCore {
         public:
@@ -30,13 +30,13 @@ namespace sv {
             
             void setColor(f32 _r, f32 _g, f32 _b, f32 _a);
         protected:
-            virtual void _submitUniform(render::SVRendererPtr _render);
+            virtual void _submitUniform(SVRendererPtr _render);
             
             SVColor m_color;
             
         };
 
-    }//!namespace mtl
+    
     
 }//!namespace sv
 

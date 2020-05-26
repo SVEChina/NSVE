@@ -11,7 +11,7 @@
 #include "SVPhysicsShape.h"
 namespace sv {
     
-    namespace logic {
+    
         
         class SVPhysicsShapeBox : public SVPhysicsShape {
         public:
@@ -32,7 +32,7 @@ namespace sv {
             const FVec3& getSize() const;
         };
             
-    }//!namespace logic
+    
     
 }//!namespace sv
 

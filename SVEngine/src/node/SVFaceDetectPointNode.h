@@ -11,7 +11,7 @@
 
 namespace sv {
     
-    namespace node{
+    
         
         class SVFaceDetectPointNode : public SVNode {
         public:
@@ -49,7 +49,7 @@ namespace sv {
             SVTexturePtr m_pTex;
         };
         
-    }//!namespace node
+    
     
 }//!namespace sv
 

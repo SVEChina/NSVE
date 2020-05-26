@@ -14,14 +14,14 @@
 
 namespace sv {
     
-    namespace logic {
+    
         
         //正交
         class SVProjMethod : public SVObject {
         public:
             SVProjMethod();
             
-            util::FMat4& getMat();
+            FMat4& getMat();
             
             f32* getMatPoint();
             
@@ -46,7 +46,7 @@ namespace sv {
             f32 getFar(){ return m_zfar; }
             
         protected:
-            util::FMat4 m_projMat;
+            FMat4 m_projMat;
             f32 m_width;
             f32 m_height;
             f32 m_zfar;
@@ -90,7 +90,7 @@ namespace sv {
             
             void refresh();
             
-            void setProjMat(util::FMat4& _mat);
+            void setProjMat(FMat4& _mat);
             
         protected:
             
@@ -103,15 +103,15 @@ namespace sv {
             
             ~SVCameraCtrl();
             
-            virtual bool run(node::SVCameraNodePtr _nodePtr, f32 dt);
+            virtual bool run(SVCameraNodePtr _nodePtr, f32 dt);
             
-            util::FMat4& getMat();
+            FMat4& getMat();
             
             f32* getMatPoint();
             
-            util::FVec3& getPos();
+            FVec3& getPos();
             
-            void bind(node::SVCameraNodePtr _cam);
+            void bind(SVCameraNodePtr _cam);
             
             void unbind();
             
@@ -120,11 +120,11 @@ namespace sv {
             virtual void reset(f32 _w,f32 _h){}
             
         protected:
-            util::FMat4 m_mat;
+            FMat4 m_mat;
             
-            util::FVec3 m_pos;
+            FVec3 m_pos;
             
-            node::SVCameraNodePtr m_linkCam;
+            SVCameraNodePtr m_linkCam;
         };
         
         //基础投影控制
@@ -138,7 +138,7 @@ namespace sv {
             
             virtual void reset(f32 _w,f32 _h);
             
-            virtual bool run(node::SVCameraNodePtr _nodePtr, f32 dt);
+            virtual bool run(SVCameraNodePtr _nodePtr, f32 dt);
             
             void setPosition(f32 _x, f32 _y, f32 _);
             
@@ -148,14 +148,14 @@ namespace sv {
             
             void setUp(f32 _x, f32 _y, f32 _z);
             
-            util::FVec3& getUp();
+            FVec3& getUp();
             
-            util::FVec3& getDirection();
+            FVec3& getDirection();
         protected:
             //目标，方向，向上 计算姿态
-            util::FVec3 m_targetEx;
-            util::FVec3 m_upEx;
-            util::FVec3 m_direction;
+            FVec3 m_targetEx;
+            FVec3 m_upEx;
+            FVec3 m_direction;
             bool m_dirty;
         };
         
@@ -170,7 +170,7 @@ namespace sv {
             
             virtual void reset(f32 _w,f32 _h);
             
-            virtual bool run(node::SVCameraNodePtr _nodePtr, f32 dt);
+            virtual bool run(SVCameraNodePtr _nodePtr, f32 dt);
             
         protected:
             f32 m_width;
@@ -186,13 +186,13 @@ namespace sv {
             
             ~SVCamCtrlAttr();
             
-            virtual bool run(node::SVCameraNodePtr _nodePtr, f32 dt);
+            virtual bool run(SVCameraNodePtr _nodePtr, f32 dt);
             
         protected:
             //姿态确认
-            util::FVec3 m_att_pos;    //位置
-            util::FVec3 m_att_rot;    //欧拉角
-            util::FVec3 m_att_scale;  //缩放
+            FVec3 m_att_pos;    //位置
+            FVec3 m_att_rot;    //欧拉角
+            FVec3 m_att_scale;  //缩放
         };
         
         //3D相机节点控制
@@ -202,7 +202,7 @@ namespace sv {
             
             ~SVNodeCtrlCamera();
             
-            virtual bool run(node::SVCameraNodePtr _nodePtr, f32 dt);
+            virtual bool run(SVCameraNodePtr _nodePtr, f32 dt);
             
             void reset();
             //
@@ -229,7 +229,7 @@ namespace sv {
             
             ~SVCtrlCamera2D();
             
-            virtual bool run(node::SVCameraNodePtr _nodePtr, f32 dt);
+            virtual bool run(SVCameraNodePtr _nodePtr, f32 dt);
             //
             void reset();
             //平移
@@ -256,13 +256,13 @@ namespace sv {
             
             ~SVCtrlCamereAR();
             
-            bool run(node::SVCameraNodePtr _nodePtr, f32 dt);
+            bool run(SVCameraNodePtr _nodePtr, f32 dt);
             
-            void setPos(util::FVec3& _pos);
+            void setPos(FVec3& _pos);
             
             void setEur(f32 _yaw,f32 _pitch,f32 _roll);
             
-            void setViewMat(util::FMat4& _mat);
+            void setViewMat(FMat4& _mat);
             
         protected:
             
@@ -275,9 +275,9 @@ namespace sv {
             
             ~SVCtrlCamereFollow2DTop();
             
-            bool run(node::SVCameraNodePtr _nodePtr, f32 dt);
+            bool run(SVCameraNodePtr _nodePtr, f32 dt);
             
-            void bindTarget(node::SVNodePtr _node);
+            void bindTarget(SVNodePtr _node);
             
             void unbindTarget();
             
@@ -286,12 +286,12 @@ namespace sv {
             void setMaxFollowDis(f32 _fdis);
             
         protected:
-            node::SVNodePtr m_bindNode;
+            SVNodePtr m_bindNode;
             f32 m_hDis;//高度
             f32 m_follow_dis;  //跟随的最大距离
         };
         
-    }//!namespace logic
+    
     
 }//!namespace sv
 

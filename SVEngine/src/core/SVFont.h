@@ -12,7 +12,7 @@
 #include "../base/SVGBase.h"
 #include "../base/SVPreDeclare.h"
 namespace sv {
-    namespace util{
+    
         class SVFont : public SVGBase {
         public:
             enum SVFONTTEXTENCODING{
@@ -35,7 +35,7 @@ namespace sv {
             SVFONTTEXTENCODING m_encoding;
         };
         
-    }//!namespace util
+    
 }//!namespace sv
 
 

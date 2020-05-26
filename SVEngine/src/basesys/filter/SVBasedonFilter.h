@@ -13,7 +13,7 @@
 #include "../../node/SVNodeDeclare.h"
 
 namespace sv {
-    namespace logic {
+    
         class SVBasedonFilter : public SVFilterBase {
         public:
             SVBasedonFilter(SVInst *_app);

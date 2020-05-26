@@ -13,7 +13,7 @@
 
 namespace sv {
     
-    namespace logic {
+    
         
         class SVFilterGlow : public SVFilterBase {
         public:

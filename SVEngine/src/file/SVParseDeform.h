@@ -14,7 +14,7 @@
 
 namespace sv {
     
-    namespace logic{
+    
         
         class SVParseDeform : public SVParseData {
         public:
@@ -22,7 +22,7 @@ namespace sv {
             static void parse(SVInst *app,cptr8 path, s32 resid,SVDeformImageMovePtr _deform);
         };
         
-    }//!namespace logic
+    
     
 }//!namespace sv
 

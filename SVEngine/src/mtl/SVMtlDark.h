@@ -12,7 +12,7 @@
 
 namespace sv {
     
-    namespace mtl{
+    
         
         class SVMtlDark : public SVMtlCore {
         public:
@@ -30,13 +30,13 @@ namespace sv {
             
             void setDarkIntensity(f32 _intensity);
         protected:
-            virtual void _submitUniform(render::SVRendererPtr _render);
+            virtual void _submitUniform(SVRendererPtr _render);
             
             f32 m_intensity;
             
         };
 
-    }//!namespace mtl
+    
     
 }//!namespace sv
 

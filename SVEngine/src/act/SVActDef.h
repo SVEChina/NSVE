@@ -12,8 +12,6 @@
 #include <memory>
 #include "SVActDeclare.h"
 
-typedef sv::logic::SVActBase *(*act_new_func)();
-
 enum TIMELINETYPE{
     E_TL_T_BASE = 0,
     E_TL_T_DEFORM,  //POS,ROT,SCALE

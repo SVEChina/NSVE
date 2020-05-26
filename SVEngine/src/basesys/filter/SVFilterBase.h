@@ -18,7 +18,7 @@
 
 namespace sv {
     
-    namespace logic {
+    
        
         class SVFilterBase : public SVGBase {
         public:

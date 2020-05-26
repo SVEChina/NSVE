@@ -5,7 +5,7 @@
 
 namespace sv {
     
-    namespace util {
+   
         
         struct DMat4;
         struct SVQuat;
@@ -256,7 +256,7 @@ namespace sv {
         const FMat4 &hardwareProjectionD3D10(const FMat4 &projection,s32 width,s32 height);
         extern const FMat4 &(*hardwareProjection)(const FMat4 &projection,s32 width,s32 height);
         
-    }//!namespace util
+    
     
 }//!namespace sv
 

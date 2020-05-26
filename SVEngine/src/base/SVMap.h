@@ -5,7 +5,7 @@
 
 namespace sv {
     
-    namespace util {
+   
         
         //
         template <class Type> struct MapData {
@@ -67,7 +67,7 @@ namespace sv {
             }
         };
         
-    }//!namespace util
+    
     
 }//!namespace sv
 

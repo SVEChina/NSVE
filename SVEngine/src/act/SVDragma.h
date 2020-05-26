@@ -15,7 +15,7 @@
 
 namespace sv {
     
-    namespace logic {
+    
         
         //SVDragma 节点和时间轴的关系
         class SVDragma : public SVGBase {
@@ -64,7 +64,7 @@ namespace sv {
             SVNodePtr m_node;
         };
         
-    }//!namespace logic
+    
     
 }//!namespace sv
 

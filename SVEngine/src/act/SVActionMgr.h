@@ -12,7 +12,7 @@
 #include "SVActDef.h"
 
 namespace sv{
-    namespace logic {
+    
         
         class SVActionMgr : public SVSysBase {
         public:
@@ -40,7 +40,7 @@ namespace sv{
             typedef SVArray<SVAniBasePtr> SVANIPOOL;
             SVANIPOOL m_aniPool;
         };
-    }//!namespace logic
+    
     
 }//!namespace sv
 

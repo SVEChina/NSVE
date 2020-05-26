@@ -13,7 +13,7 @@
 
 namespace sv {
 
-    namespace logic {
+    
         
         class SVRGBToneCurveFilter : public SVFilterBase {
         public:

@@ -12,8 +12,7 @@
 
 namespace sv {
     
-    namespace logic {
-        //
+
         DECLARE_SHAREPTR(SVProjMethod);
         DECLARE_SHAREPTR(SVProject);
         DECLARE_SHAREPTR(SVOrtho);
@@ -27,10 +26,7 @@ namespace sv {
         DECLARE_SHAREPTR(SVCtrlCamera2D);
         DECLARE_SHAREPTR(SVCtrlCamereAR);
         DECLARE_SHAREPTR(SVCtrlCamereFollow2DTop);
-    }
-    
-    namespace node {
-        
+
         //visit
         DECLARE_SHAREPTR(SVVisitorBase);
         DECLARE_SHAREPTR(SVVisitCollectResID);
@@ -91,7 +87,7 @@ namespace sv {
         DECLARE_SHAREPTR(SVUINetElem);
         DECLARE_SHAREPTR(SVUINetGrid);
         DECLARE_SHAREPTR(SVUIButton);
-    }//!namespace node
+    
     
 }//!namespace sv
 

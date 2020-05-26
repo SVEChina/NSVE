@@ -13,7 +13,7 @@
 
 namespace sv {
     
-    namespace node{
+    
         
         //四叉数进行场景管理
         class SVTree4 :public SVGBase{
@@ -23,7 +23,7 @@ namespace sv {
             ~SVTree4();
             
             //世界大小和深度
-            void create(util::SVBoundBox& _box,s32 _depth);
+            void create(SVBoundBox& _box,s32 _depth);
             
             void destroy();
             
@@ -51,10 +51,10 @@ namespace sv {
             //关联节点
             SVNodePtr m_node;
             //节点列表
-            typedef util::SVArray<SVNodePtr> NODEPOOL;
+            typedef SVArray<SVNodePtr> NODEPOOL;
             NODEPOOL m_nodePool;
             //树包围盒
-            util::SVBoundBox m_treeBox;
+            SVBoundBox m_treeBox;
         };
                 
         //场景
@@ -90,7 +90,7 @@ namespace sv {
             
         protected:
             //场景名称
-            util::SVString m_name;
+            SVString m_name;
             //世界树
             SVTree4Ptr m_pSceneTree;
             //
@@ -112,7 +112,7 @@ namespace sv {
         };
 
         
-    }//!namespace node
+    
     
 }//!namespace sv
 

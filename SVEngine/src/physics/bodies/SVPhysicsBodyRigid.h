@@ -12,7 +12,7 @@
 #include "btBulletDynamicsCommon.h"
 namespace sv {
     
-    namespace logic {
+    
         
         class SVPhysicsBodyRigid : public SVPhysicsBody {
         public:
@@ -73,7 +73,7 @@ namespace sv {
             
         };
             
-    }//!namespace logic
+    
     
 }//!namespace sv
 

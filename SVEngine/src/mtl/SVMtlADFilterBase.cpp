@@ -37,7 +37,7 @@ void SVMtlADFilterBase::update(f32 dt) {
     SVMtlCore::update(dt);
 }
 
-void SVMtlADFilterBase::_submitUniform(render::SVRendererPtr _render) {
+void SVMtlADFilterBase::_submitUniform(SVRendererPtr _render) {
     SVMtlCore::_submitUniform(_render);
     
 }

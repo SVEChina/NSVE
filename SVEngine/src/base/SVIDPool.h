@@ -34,7 +34,7 @@ namespace sv {
         
         u64 m_seed;
         
-        typedef util::SVArray<s32> IDPOOL;
+        typedef SVArray<s32> IDPOOL;
         IDPOOL m_idpool;
     };
     

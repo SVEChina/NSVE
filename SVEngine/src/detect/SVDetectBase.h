@@ -13,7 +13,7 @@
 
 namespace sv {
 
-    namespace detect{
+    
         
         class SVDetectBase : public SVListenBase {
         public:
@@ -33,7 +33,7 @@ namespace sv {
             s32 m_ptNum;
         };
         
-    }//!namespace detect
+    
     
 }//!namespace sv
 

@@ -11,7 +11,7 @@
 #include "../../base/SVVec3.h"
 namespace sv {
     
-    namespace logic {
+    
         
         class SVPhysicsBodyCloth : public SVPhysicsBodySoft {
         public:
@@ -46,7 +46,7 @@ namespace sv {
             u32 m_vertexCount;
             SVDataSwapPtr m_pVertexData;
         };
-    }//!namespace logic
+    
 }//!namespace sv
 
 #endif //SV_BODIES_PHYSICSBODYCLOTH_H

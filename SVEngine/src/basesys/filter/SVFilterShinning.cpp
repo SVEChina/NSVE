@@ -26,7 +26,7 @@ SVFilterShinning::~SVFilterShinning(){
 }
 
 bool SVFilterShinning::create(){
-    render::SVRendererPtr t_renderer = mApp->getRenderer();
+    SVRendererPtr t_renderer = mApp->getRenderer();
     if(!t_renderer)
         return false;
     SVTexturePtr t_tex = t_renderer->getSVTex(E_TEX_MAIN);
@@ -64,7 +64,7 @@ void SVFilterShinning::destroy(){
     }
     m_pPassNode = nullptr;
     m_mtlShinning = nullptr;
-    render::SVRendererPtr t_renderer = mApp->getRenderer();
+    SVRendererPtr t_renderer = mApp->getRenderer();
     if(t_renderer){
         t_renderer->destroySVTex(E_TEX_FILTER_1);
     }
@@ -84,7 +84,7 @@ void SVFilterShinning::toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_all
 
 void SVFilterShinning::fromJSON(RAPIDJSON_NAMESPACE::Value &item) {
 //    if (item.HasMember("data") && item["data"].IsString()) {
-//        render::SVRendererPtr t_renderer = mApp->getRenderer();
+//        SVRendererPtr t_renderer = mApp->getRenderer();
 //        if(t_renderer){
 //            t_renderer->createSVTex(E_TEX_FILTER_LUT, 512, 512, GL_RGBA,GL_RGBA);
 //            SVTexturePtr t_tex=t_renderer->getSVTex(E_TEX_FILTER_LUT);

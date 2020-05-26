@@ -12,8 +12,6 @@
 
 namespace sv {
     
-    namespace node{
-        
         class SVFaceShapeNode : public SVNode {
             public :
             SVFaceShapeNode(SVInst *_app);
@@ -42,7 +40,7 @@ namespace sv {
             PASSPOOL m_passPool;
             SVRenderTexturePtr m_fbo;
         };
-    }
+
 }
 
 #endif /* SV_FACESHAPENODE_H */

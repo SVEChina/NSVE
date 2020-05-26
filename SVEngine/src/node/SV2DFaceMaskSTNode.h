@@ -13,8 +13,6 @@
 
 namespace sv {
     
-    namespace node{
-        
         //sensetime
         class SVSTPointExt {
         public:
@@ -42,8 +40,6 @@ namespace sv {
 //        protected:
 //            void _updateVerts();
 //        };
-        
-    }//!namespace node
     
 }//!namespace sv
 

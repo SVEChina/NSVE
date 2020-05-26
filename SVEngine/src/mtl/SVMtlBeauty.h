@@ -12,7 +12,7 @@
 
 namespace sv {
     
-    namespace mtl{
+    
         
         class SVMtlBeauty : public SVMtlCore  {
         public:
@@ -29,14 +29,14 @@ namespace sv {
             void setBGSize(s32 _width, s32 _height);
 
         protected:
-            virtual void _submitMtl(render::SVRendererPtr _render);
+            virtual void _submitMtl(SVRendererPtr _render);
             //
             f32 m_lSmoothSize;
             f32 m_lImgW;
             f32 m_lImgH;
         };
         
-    }//!namespace mtl
+    
     
 }//!namespace sv
 
