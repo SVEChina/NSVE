@@ -15,7 +15,7 @@
 namespace sv {
     
     /*
-        不用单例的原因，是有些需求，需要启动两个引擎
+     不用单例的原因，是有些需求，需要启动两个引擎
      */
 
     class SVInst : public SVObject {
@@ -57,6 +57,8 @@ namespace sv {
     public:
         //唯一ID池
         SVIDPool m_IDPool;
+        //环境
+        //SVCtxBasePtr m_context;
         //全局对象
         SVGlobalMgrPtr m_pGlobalMgr;
         //全局参数

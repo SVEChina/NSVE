@@ -11,7 +11,41 @@
 		5FD7F1F2247D065000A53A1D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5FD7F1F1247D065000A53A1D /* Assets.xcassets */; };
 		5FD7F1F5247D065000A53A1D /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FD7F1F3247D065000A53A1D /* MainMenu.xib */; };
 		5FD7F1F8247D065000A53A1D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FD7F1F7247D065000A53A1D /* main.m */; };
+		5FD7F211247D0FE000A53A1D /* libsve_s_mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FD7F20E247D06B800A53A1D /* libsve_s_mac.a */; };
+		5FD7F213247D0FF600A53A1D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FD7F212247D0FF600A53A1D /* QuartzCore.framework */; };
+		5FD7F215247D100100A53A1D /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FD7F214247D100100A53A1D /* CoreMedia.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5FD7F207247D06B800A53A1D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5FD7F1FF247D06B700A53A1D /* SVEngine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 822A3F971E70069800CF3953;
+			remoteInfo = SVEngine;
+		};
+		5FD7F209247D06B800A53A1D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5FD7F1FF247D06B700A53A1D /* SVEngine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 82F7CB421FCD68A4009A750D;
+			remoteInfo = SVEngine_Static;
+		};
+		5FD7F20B247D06B800A53A1D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5FD7F1FF247D06B700A53A1D /* SVEngine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 82B7719220245AEB0097A0DD;
+			remoteInfo = SVEngine_Mac;
+		};
+		5FD7F20D247D06B800A53A1D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5FD7F1FF247D06B700A53A1D /* SVEngine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 023574B020E514F500F29FB8;
+			remoteInfo = sve_s_mac;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		5FD7F1EB247D064F00A53A1D /* SVETools.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SVETools.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -22,6 +56,9 @@
 		5FD7F1F6247D065000A53A1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5FD7F1F7247D065000A53A1D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5FD7F1F9247D065000A53A1D /* SVETools.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SVETools.entitlements; sourceTree = "<group>"; };
+		5FD7F1FF247D06B700A53A1D /* SVEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SVEngine.xcodeproj; path = ../SVEngine/platIOS/SVEngine.xcodeproj; sourceTree = "<group>"; };
+		5FD7F212247D0FF600A53A1D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		5FD7F214247D100100A53A1D /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +66,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5FD7F215247D100100A53A1D /* CoreMedia.framework in Frameworks */,
+				5FD7F213247D0FF600A53A1D /* QuartzCore.framework in Frameworks */,
+				5FD7F211247D0FE000A53A1D /* libsve_s_mac.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +80,8 @@
 			children = (
 				5FD7F1ED247D064F00A53A1D /* SVETools */,
 				5FD7F1EC247D064F00A53A1D /* Products */,
+				5FD7F1FF247D06B700A53A1D /* SVEngine.xcodeproj */,
+				5FD7F210247D0FE000A53A1D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -63,6 +105,26 @@
 				5FD7F1F9247D065000A53A1D /* SVETools.entitlements */,
 			);
 			path = SVETools;
+			sourceTree = "<group>";
+		};
+		5FD7F200247D06B700A53A1D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5FD7F208247D06B800A53A1D /* SVEngine.framework */,
+				5FD7F20A247D06B800A53A1D /* libSVEngine_Static.a */,
+				5FD7F20C247D06B800A53A1D /* SVEngine_Mac.framework */,
+				5FD7F20E247D06B800A53A1D /* libsve_s_mac.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5FD7F210247D0FE000A53A1D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5FD7F214247D100100A53A1D /* CoreMedia.framework */,
+				5FD7F212247D0FF600A53A1D /* QuartzCore.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -110,12 +172,49 @@
 			mainGroup = 5FD7F1E2247D064F00A53A1D;
 			productRefGroup = 5FD7F1EC247D064F00A53A1D /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 5FD7F200247D06B700A53A1D /* Products */;
+					ProjectRef = 5FD7F1FF247D06B700A53A1D /* SVEngine.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				5FD7F1EA247D064F00A53A1D /* SVETools */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		5FD7F208247D06B800A53A1D /* SVEngine.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SVEngine.framework;
+			remoteRef = 5FD7F207247D06B800A53A1D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5FD7F20A247D06B800A53A1D /* libSVEngine_Static.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libSVEngine_Static.a;
+			remoteRef = 5FD7F209247D06B800A53A1D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5FD7F20C247D06B800A53A1D /* SVEngine_Mac.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SVEngine_Mac.framework;
+			remoteRef = 5FD7F20B247D06B800A53A1D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5FD7F20E247D06B800A53A1D /* libsve_s_mac.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libsve_s_mac.a;
+			remoteRef = 5FD7F20D247D06B800A53A1D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		5FD7F1E9247D064F00A53A1D /* Resources */ = {
@@ -203,6 +302,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../SVEngine\"";
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -255,6 +355,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../SVEngine\"";
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
