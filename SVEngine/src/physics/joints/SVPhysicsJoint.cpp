@@ -6,6 +6,8 @@
 //
 #include "SVPhysicsJoint.h"
 
+using namespace sv;
+
 SVPhysicsJoint::SVPhysicsJoint(SVInst* _app):SVGBase(_app) {
     
 }

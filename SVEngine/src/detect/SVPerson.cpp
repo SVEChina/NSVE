@@ -69,12 +69,12 @@ s32 SVPerson::getPersonID() {
 
 void SVPerson::setDetectType(DETECTTYPE type) {
     if (m_detectType != type) {
-        //去掉原来的监听
-        SVDetectBasePtr t_detect = mApp->getDetectMgr()->getDetect();
-        t_detect->unregistListenFunc(this, &SVObject::listenData);
-        //增加新的监听
-        m_detectType = type;
-        t_detect->registListenFunc(this, &SVObject::listenData);
+//        //去掉原来的监听
+//        SVDetectBasePtr t_detect = mApp->getDetectMgr()->getDetect();
+//        t_detect->unregistListenFunc(this, &SVObject::listenData);
+//        //增加新的监听
+//        m_detectType = type;
+//        t_detect->registListenFunc(this, &SVObject::listenData);
     }
 }
 

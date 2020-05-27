@@ -6,6 +6,8 @@
 //
 #include "SVPhysicsBody.h"
 
+using namespace sv;
+
 SVPhysicsBody::SVPhysicsBody(SVInst* _app):SVGBase(_app) {
     m_type = E_PHYSICS_BODY_BASE;
     m_pNode = nullptr;

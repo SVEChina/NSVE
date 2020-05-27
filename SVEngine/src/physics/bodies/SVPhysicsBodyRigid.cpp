@@ -10,6 +10,9 @@
 #include "../../app/SVGlobalMgr.h"
 #include "../SVPhysicsWorld.h"
 #include "../../basesys/SVPhysicsWorldMgr.h"
+
+using namespace sv;
+
 SVPhysicsBodyRigid::SVPhysicsBodyRigid(SVInst* _app):SVPhysicsBody(_app) {
     m_type = E_PHYSICS_BODY_RIGID;
     m_pShape = nullptr;

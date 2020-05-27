@@ -138,28 +138,28 @@ SVActFollowPerson::~SVActFollowPerson(){
 }
 
 void SVActFollowPerson::run(SVNodePtr _nodePtr, f32 dt){
-    if (_nodePtr) {
-        SVPersonPtr t_person = mApp->getDetectMgr()->getPersonModule()->getPerson(m_personID);
-        if (t_person && t_person->getExist()) {
-            f32 t_adapt_scale = mApp->getConfig()->getDesignAdaptScale();
-            _nodePtr->setvisible(true);
-            SVPersonTrackerPtr t_personTracker = t_person->getTracker();
-            f32 t_pt_x = t_person->getFaceDataX(m_bindIndex)/t_adapt_scale;
-            f32 t_pt_y = t_person->getFaceDataY(m_bindIndex)/t_adapt_scale;
-            f32 t_yaw = t_person->getFaceRot().y;
-            f32 t_roll = t_person->getFaceRot().z;
-            f32 t_pitch = t_person->getFaceRot().x;
-            f32 t_offsetX = m_offsetX*cosf(t_roll*DEGTORAD)-m_offsetY*sinf(t_roll*DEGTORAD);
-            f32 t_offsetY = m_offsetX*sinf(t_roll*DEGTORAD)+m_offsetY*cosf(t_roll*DEGTORAD);
-            t_pt_x += t_offsetX*t_personTracker->getEyeStdScale();
-            t_pt_y += t_offsetY*t_personTracker->getNoiseStdScale();
-            _nodePtr->setPosition(t_pt_x, t_pt_y, 0.0f);
-            _nodePtr->setScale(m_scaleX*t_personTracker->getEyeStdScale(), m_scaleY*t_personTracker->getNoiseStdScale(), 1.0f);
-            _nodePtr->setRotation(t_pitch+m_rotX, -t_yaw+m_rotY, t_roll+m_rotZ);
-        }else{
-            _nodePtr->setvisible(false);
-        }
-    }
+//    if (_nodePtr) {
+//        SVPersonPtr t_person = mApp->getDetectMgr()->getPersonModule()->getPerson(m_personID);
+//        if (t_person && t_person->getExist()) {
+//            f32 t_adapt_scale = mApp->getConfig()->getDesignAdaptScale();
+//            _nodePtr->setvisible(true);
+//            SVPersonTrackerPtr t_personTracker = t_person->getTracker();
+//            f32 t_pt_x = t_person->getFaceDataX(m_bindIndex)/t_adapt_scale;
+//            f32 t_pt_y = t_person->getFaceDataY(m_bindIndex)/t_adapt_scale;
+//            f32 t_yaw = t_person->getFaceRot().y;
+//            f32 t_roll = t_person->getFaceRot().z;
+//            f32 t_pitch = t_person->getFaceRot().x;
+//            f32 t_offsetX = m_offsetX*cosf(t_roll*DEGTORAD)-m_offsetY*sinf(t_roll*DEGTORAD);
+//            f32 t_offsetY = m_offsetX*sinf(t_roll*DEGTORAD)+m_offsetY*cosf(t_roll*DEGTORAD);
+//            t_pt_x += t_offsetX*t_personTracker->getEyeStdScale();
+//            t_pt_y += t_offsetY*t_personTracker->getNoiseStdScale();
+//            _nodePtr->setPosition(t_pt_x, t_pt_y, 0.0f);
+//            _nodePtr->setScale(m_scaleX*t_personTracker->getEyeStdScale(), m_scaleY*t_personTracker->getNoiseStdScale(), 1.0f);
+//            _nodePtr->setRotation(t_pitch+m_rotX, -t_yaw+m_rotY, t_roll+m_rotZ);
+//        }else{
+//            _nodePtr->setvisible(false);
+//        }
+//    }
 }
 
 bool SVActFollowPerson::isEnd(){

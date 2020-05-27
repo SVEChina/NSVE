@@ -7,6 +7,9 @@
 #include "SVPhysicsBodySoft.h"
 #include "SVPhysicsBodyRigid.h"
 #include "../../base/SVVec3.h"
+
+using namespace sv;
+
 SVPhysicsBodySoft::SVPhysicsBodySoft(SVInst* _app):SVPhysicsBody(_app) {
     m_type = E_PHYSICS_BODY_SOFT;
     m_softBody = nullptr;

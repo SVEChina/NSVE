@@ -26,7 +26,7 @@ SVRenderMgr::SVRenderMgr(SVInst *_app)
     m_RStreamCache =  MakeSharedPtr<SVRenderStream>();      //逻辑全局流
     m_renderLock = MakeSharedPtr<SVLock>();
     m_logicLock = MakeSharedPtr<SVLock>();
-    m_pRenderScene = nullptr;
+    //m_pRenderScene = nullptr;
     m_pRenderer = nullptr;
     m_adaptMode = 0;
 }
@@ -105,36 +105,36 @@ SVRenderTargetPtr SVRenderMgr::getRenderTarget(cptr8 _name) {
 void SVRenderMgr::render(){
     //
     m_renderLock->lock();
-    if(m_pRenderScene ){
-        if( m_pRenderer ) {
-            m_pRenderer->renderBegin();     //渲染器开始
-            _adapt();                       //适配
-            m_pRenderer->resetState();      //重置状态
-            m_pRenderer->removeUnuseRes();  //资源释放
-            m_pRenderer->renderEnd();       //渲染器结束
-        }else {
-            m_pRenderScene->clearRenderCmd();
-        }
-    }
+//    if(m_pRenderScene ){
+//        if( m_pRenderer ) {
+//            m_pRenderer->renderBegin();     //渲染器开始
+//            _adapt();                       //适配
+//            m_pRenderer->resetState();      //重置状态
+//            m_pRenderer->removeUnuseRes();  //资源释放
+//            m_pRenderer->renderEnd();       //渲染器结束
+//        }else {
+//            m_pRenderScene->clearRenderCmd();
+//        }
+//    }
     m_renderLock->unlock();
 }
 
 void SVRenderMgr::clearScreen(){
     m_renderLock->lock();
-    if(m_pRenderer && m_pRenderScene ){
-//        SVCtxBasePtr t_context = m_pRenderer->getRenderContext();
-//        if( t_context && t_context->activeContext() ){
-//            m_pRenderer->renderBegin();
-//            SVRenderTargetPtr t_rt = getRenderTarget( m_pRenderScene->getName() );
-//            if( t_context->activeRenderTarget( t_rt ) ){
-//                m_pRenderer->resetState();
-//                t_context->swapRenderTarget( t_rt );   //交换场景
-//            }
-//            m_pRenderScene->clearRenderCmd();
-//            m_pRenderer->removeUnuseRes();  //资源释放
-//            m_pRenderer->renderEnd();
-//        }
-    }
+//    if(m_pRenderer && m_pRenderScene ){
+////        SVCtxBasePtr t_context = m_pRenderer->getRenderContext();
+////        if( t_context && t_context->activeContext() ){
+////            m_pRenderer->renderBegin();
+////            SVRenderTargetPtr t_rt = getRenderTarget( m_pRenderScene->getName() );
+////            if( t_context->activeRenderTarget( t_rt ) ){
+////                m_pRenderer->resetState();
+////                t_context->swapRenderTarget( t_rt );   //交换场景
+////            }
+////            m_pRenderScene->clearRenderCmd();
+////            m_pRenderer->removeUnuseRes();  //资源释放
+////            m_pRenderer->renderEnd();
+////        }
+//    }
     m_renderLock->unlock();
 }
 

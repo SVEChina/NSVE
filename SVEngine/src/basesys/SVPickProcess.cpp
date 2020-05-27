@@ -194,24 +194,23 @@ bool SVPickProcess::pickScene(SVCameraNodePtr _cam,s32 _sx,s32 _sy){
 
 //相机和屏幕坐标(都是以左下角为（0，0）)
 bool SVPickProcess::pickUI(s32 _sx,s32 _sy){
-    SVCameraNodePtr t_ui_cam = mApp->getCameraMgr()->getUICamera();
-    FVec3 t_start,t_end;
-    t_start.set(_sx, _sy, -10000.0f);
-    t_end.set(_sx, _sy, 10000.0f);
-    //构建射线
-    SVVisitRayPickUIPtr t_visit = MakeSharedPtr<SVVisitRayPickUI>(t_start,t_end);
-    mApp->getUIMgr()->visit(t_visit);
-    SVNodePtr t_pNode = t_visit->getPickNode();
-    if(t_pNode){
-        _pickUI(t_pNode);
-        return true;
-    }else{
-        SVPickGetNothingEventPtr t_event = MakeSharedPtr<SVPickGetNothingEvent>();
-        t_event->m_px = _sx;
-        t_event->m_py = _sy;
-        mApp->getEventMgr()->pushEvent(t_event);
-    }
-    
+//    SVCameraNodePtr t_ui_cam = mApp->getCameraMgr()->getUICamera();
+//    FVec3 t_start,t_end;
+//    t_start.set(_sx, _sy, -10000.0f);
+//    t_end.set(_sx, _sy, 10000.0f);
+//    //构建射线
+//    SVVisitRayPickUIPtr t_visit = MakeSharedPtr<SVVisitRayPickUI>(t_start,t_end);
+//    mApp->getUIMgr()->visit(t_visit);
+//    SVNodePtr t_pNode = t_visit->getPickNode();
+//    if(t_pNode){
+//        _pickUI(t_pNode);
+//        return true;
+//    }else{
+//        SVPickGetNothingEventPtr t_event = MakeSharedPtr<SVPickGetNothingEvent>();
+//        t_event->m_px = _sx;
+//        t_event->m_py = _sy;
+//        mApp->getEventMgr()->pushEvent(t_event);
+//    }
     return false;
 }
 

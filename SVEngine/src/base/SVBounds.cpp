@@ -151,7 +151,7 @@ namespace sv {
                 f32 x = transform.m00 * transform.m00 + transform.m10 * transform.m10 + transform.m20 * transform.m20;
                 f32 y = transform.m01 * transform.m01 + transform.m11 * transform.m11 + transform.m21 * transform.m21;
                 f32 z = transform.m02 * transform.m02 + transform.m12 * transform.m12 + transform.m22 * transform.m22;
-                f32 scale = Math::sqrtFast(::max(::max(x,y),z));
+                f32 scale = Math::sqrtFast(sv::max(sv::max(x,y),z));
                 center.w = radius * scale;
             #endif
         }
@@ -161,7 +161,7 @@ namespace sv {
         }
         //
         s32 SVBoundSphere::compare(const SVBoundSphere &bs) const {
-            return (center == bs.center && ::compare(center.w,bs.center.w));
+            return (center == bs.center && sv::compare(center.w,bs.center.w));
         }
         //
         void SVBoundSphere::expand(const FVec3 &point) {
@@ -600,9 +600,9 @@ namespace sv {
                 f32 x = transform.m00 * transform.m00 + transform.m10 * transform.m10 + transform.m20 * transform.m20;
                 f32 y = transform.m01 * transform.m01 + transform.m11 * transform.m11 + transform.m21 * transform.m21;
                 f32 z = transform.m02 * transform.m02 + transform.m12 * transform.m12 + transform.m22 * transform.m22;
-                f32 radius = Math::sqrtFast(::max(::max(x,y),z)) * bs.getRadius();
-                min = ::max(min,center - FVec3(radius));
-                max = ::min(max,center + FVec3(radius));
+                f32 radius = Math::sqrtFast(sv::max(sv::max(x,y),z)) * bs.getRadius();
+                min = sv::max(min,center - FVec3(radius));
+                max = sv::min(max,center + FVec3(radius));
             #endif
         }
 
@@ -628,8 +628,8 @@ namespace sv {
                     min.vec = vminq_f32(min.vec,point.vec);
                     max.vec = vmaxq_f32(max.vec,point.vec);
                 #else
-                    min = ::min(min,point);
-                    max = ::max(max,point);
+                    min = sv::min(min,point);
+                    max = sv::max(max,point);
                 #endif
             } else {
                 min = point - FVec3(BOUNDS_EPSILON);
@@ -651,8 +651,8 @@ namespace sv {
                     min.vec = vminq_f32(min.vec,min_.vec);
                     max.vec = vmaxq_f32(max.vec,max_.vec);
                 #else
-                    min = ::min(min,min_);
-                    max = ::max(max,max_);
+                    min = sv::min(min,min_);
+                    max = sv::max(max,max_);
                 #endif
             } else {
                 Simd::minMaxVec3(min,max,points,sizeof(FVec3),num_points);
@@ -677,8 +677,8 @@ namespace sv {
                         min.vec = vminq_f32(min.vec,vsubq_f32(center.vec,r));
                         max.vec = vmaxq_f32(max.vec,vaddq_f32(center.vec,r));
                     #else
-                        min = ::min(min,center - FVec3(radius));
-                        max = ::max(max,center + FVec3(radius));
+                        min = sv::min(min,center - FVec3(radius));
+                        max = sv::max(max,center + FVec3(radius));
                     #endif
                 } else {
                     min = center - FVec3(radius);
@@ -700,8 +700,8 @@ namespace sv {
                         min.vec = vminq_f32(min.vec,bb.min.vec);
                         max.vec = vmaxq_f32(max.vec,bb.max.vec);
                     #else
-                        min = ::min(min,bb.min);
-                        max = ::max(max,bb.max);
+                        min = sv::min(min,bb.min);
+                        max = sv::max(max,bb.max);
                     #endif
                 } else {
                     min = bb.min;

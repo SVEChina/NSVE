@@ -6,7 +6,11 @@
 //
 #include "SVPhysicsShapeBox.h"
 #include "BulletCollision/CollisionShapes/btBoxShape.h"
-SVPhysicsShapeBox::SVPhysicsShapeBox(SVInst* _app):SVPhysicsShape(_app) {
+
+using namespace sv;
+
+SVPhysicsShapeBox::SVPhysicsShapeBox(SVInst* _app)
+:SVPhysicsShape(_app) {
     m_type = E_PHYSICS_SHAPE_BOX;
     setSize(FVec3_zero);
 }

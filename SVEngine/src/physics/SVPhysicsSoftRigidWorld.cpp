@@ -8,6 +8,8 @@
 #include "bodies/SVPhysicsBodySoft.h"
 #include "../../work/SVTdCore.h"
 
+using namespace sv;
+
 SVPhysicsSoftRigidWorld::SVPhysicsSoftRigidWorld(SVInst* _app):SVPhysicsWorldBase(_app) {
     m_type = E_PHYSICS_WORLD_SOFT_RIGID;
     m_broadPhase = nullptr;

@@ -5,6 +5,9 @@
 // yizhou Fu,long Yin,longfei Lin,ziyu Xu,xiaofan Li,daming Li
 //
 #include "SVPhysicsWorldBase.h"
+
+using namespace sv;
+
 SVPhysicsWorldBase::SVPhysicsWorldBase(SVInst* _app):SVGBase(_app) {
     m_type = E_PHYSICS_WORLD_BASE;
     m_lock= MakeSharedPtr<SVLock>();

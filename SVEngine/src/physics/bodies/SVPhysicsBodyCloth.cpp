@@ -7,6 +7,9 @@
 #include "SVPhysicsBodyCloth.h"
 #include "../../base/SVDataSwap.h"
 #include "../../core/SVVertDef.h"
+
+using namespace sv;
+
 SVPhysicsBodyCloth::SVPhysicsBodyCloth(SVInst* _app, btSoftBodyWorldInfo& _worldInfo, const FVec3& _corner00,
                                        const FVec3& _corner10,
                                        const FVec3& _corner01,

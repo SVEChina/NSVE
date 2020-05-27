@@ -5,7 +5,11 @@
 // yizhou Fu,long Yin,longfei Lin,ziyu Xu,xiaofan Li,daming Li
 //
 #include "SVPhysicsShape.h"
-SVPhysicsShape::SVPhysicsShape(SVInst* _app):SVGBase(_app) {
+
+using namespace sv;
+
+SVPhysicsShape::SVPhysicsShape(SVInst* _app)
+:SVGBase(_app) {
     m_type = E_PHYSICS_SHAPE_BASE;
     m_size=FVec3(0.0,0.0,0.0);
     m_mass=0.0;
