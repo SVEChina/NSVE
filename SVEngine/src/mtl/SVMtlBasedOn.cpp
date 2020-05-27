@@ -9,6 +9,8 @@
 #include "../rendercore/SVRenderMgr.h"
 #include "../rendercore/SVRenderer.h"
 
+using namespace sv;
+
 SVMtlBasedOn::SVMtlBasedOn(SVInst *_app)
 :SVMtlCore(_app,"baseFilterAdjustment") {
     //

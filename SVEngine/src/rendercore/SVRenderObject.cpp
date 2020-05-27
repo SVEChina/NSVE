@@ -17,6 +17,8 @@
 #include "../rendercore/SVRenderCmdOut.h"
 #include "../rendercore/SVRenderCmdGeo.h"
 
+using namespace sv;
+
 //
 void SVRenderObjInst::pushLineCmd(SVRenderScenePtr _rs,
                                   RENDERSTREAMTYPE streamtype,

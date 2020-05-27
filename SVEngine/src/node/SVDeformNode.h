@@ -13,32 +13,30 @@
 
 namespace sv {
     
-    
+    class SVDeformNode : public SVNode {
+        public :
+        SVDeformNode(SVInst *_app);
         
-        class SVDeformNode : public SVNode {
-            public :
-            SVDeformNode(SVInst *_app);
-            
-            ~SVDeformNode();
-            
-            void init();
-            
-            void destroy();
-            
-            void update(f32 _dt);
-            
-            void render();
-            
-            bool procEvent(SVEventPtr _event);
-            
-            void pushDeform(SVArray<SVDeformImageMovePtr> _deformArray);
-            
-        protected:
-            typedef SVArray<SVDeformImageMovePtr> DEFORMPOOL;
-            DEFORMPOOL m_deformPool;
-      
-        };
-    }
+        ~SVDeformNode();
+        
+        void init();
+        
+        void destroy();
+        
+        void update(f32 _dt);
+        
+        void render();
+        
+        bool procEvent(SVEventPtr _event);
+        
+        void pushDeform(SVArray<SVDeformImageMovePtr> _deformArray);
+        
+    protected:
+        typedef SVArray<SVDeformImageMovePtr> DEFORMPOOL;
+        DEFORMPOOL m_deformPool;
+  
+    };
+
 }
 
 #endif /* SV_DEFORM_NODE_H */

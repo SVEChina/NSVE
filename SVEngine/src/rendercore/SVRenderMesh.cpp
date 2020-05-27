@@ -22,6 +22,8 @@
 //
 #include "SVVulkan/SVRendererVK.h"
 
+using namespace sv;
+
 SVRenderMesh::SVRenderMesh(SVInst* _app)
 :SVRObjBase(_app){
     _resetMeshConf();

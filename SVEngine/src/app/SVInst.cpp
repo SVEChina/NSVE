@@ -20,6 +20,8 @@
 #include "../operate/SVOpCreate.h"
 #include "../operate/SVOpThread.h"
 
+using namespace sv;
+
 SVInst::SVInst() {
     m_svst = SV_ST_NULL;
     m_engTimeState = ENG_TS_NOR;

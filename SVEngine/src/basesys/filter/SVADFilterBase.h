@@ -35,7 +35,7 @@ namespace sv {
             SVMtlCorePtr m_mtl;
         };
         
-    };//!namespace logic
+    
 }//!namespace sv
 
 

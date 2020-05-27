@@ -7,6 +7,8 @@
 
 #include "SVEventVideo.h"
 
+using namespace sv;
+
 SVEventVideoCtrl::SVEventVideoCtrl() {
     eventType = EVN_T_VIDEO_CTRL;
     ctrlmode = VIDEO_CTRL_NONE;

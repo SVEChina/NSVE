@@ -14,21 +14,15 @@
 
 namespace sv {
     
+    //morph动画节点
     
+    class SVMorphNode : public SVNode {
+    public:
+        SVMorphNode(SVInst *_app);
         
-        //morph动画节点
+        ~SVMorphNode();
+    };
         
-        class SVMorphNode : public SVNode {
-        public:
-            SVMorphNode(SVInst *_app);
-            
-            ~SVMorphNode();
-        
-            
-        };
-        
-    
-    
 }//!namespace sv
 
 //

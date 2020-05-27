@@ -8,6 +8,9 @@
 #include "SVFileMgr.h"
 #include "../work/SVTdCore.h"
 #include "../base/SVDataSwap.h"
+
+using namespace sv;
+
 SVFileMgr::SVFileMgr(SVInst *_app)
 :SVSysBase(_app) {
     m_fileLock = MakeSharedPtr<SVLock>();

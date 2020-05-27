@@ -34,6 +34,8 @@
 #include "../detect/SVDetectMgr.h"
 #include "../detect/SVDetectST.h"
 
+using namespace sv;
+
 SVBackGroundNode::SVBackGroundNode(SVInst *_app)
 :SVNode(_app){
     ntype = "SVBackGroundNode";

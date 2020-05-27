@@ -12,21 +12,19 @@
 
 namespace sv {
     
+    //回收系统
     
+    class SVRecycleProcess : public SVProcess {
+    public:
+        SVRecycleProcess(SVInst* _app);
         
-        //回收系统
+        ~SVRecycleProcess();
         
-        class SVRecycleProcess : public SVProcess {
-        public:
-            SVRecycleProcess(SVInst* _app);
-            
-            ~SVRecycleProcess();
-            
-            //更新
-            void update(f32 _dt);
-            
-            virtual bool procEvent(SVEventPtr _event);
-        };
+        //更新
+        void update(f32 _dt);
+        
+        virtual bool procEvent(SVEventPtr _event);
+    };
 
     
 }//!namespace sv

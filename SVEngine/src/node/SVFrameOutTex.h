@@ -12,27 +12,24 @@
 
 namespace sv {
 
-    namespace node {
-        
-        //
-        class SVFrameOutTex : public SVFrameOutNode {
-        public:
-            SVFrameOutTex(SVInst *_app);
+    class SVFrameOutTex : public SVFrameOutNode {
+    public:
+        SVFrameOutTex(SVInst *_app);
 
-            virtual ~SVFrameOutTex();
+        virtual ~SVFrameOutTex();
 
-            void update(f32 dt);
+        void update(f32 dt);
 
-            void render();
+        void render();
 
-            s32 getTexId();
+        s32 getTexId();
 
-        private:
-            SVRenderTexturePtr m_fbo;
-            SVRenderMeshPtr m_pMesh;
-            SVMtlCorePtr m_pMtl;
-        };
-    }
+    private:
+        SVRenderTexturePtr m_fbo;
+        SVRenderMeshPtr m_pMesh;
+        SVMtlCorePtr m_pMtl;
+    };
+
 }
 
 

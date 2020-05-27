@@ -16,6 +16,7 @@
 #include "../../rendercore/SVRenderer.h"
 #include "../../rendercore/SVRenderMgr.h"
 
+using namespace sv;
 
 SVFilterBlur::SVFilterBlur(SVInst *_app)
 :SVFilterBase(_app){

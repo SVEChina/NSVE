@@ -9,8 +9,6 @@
 
 using namespace sv;
 
-using namespace sv;
-
 SVStringHelper::SVStringHelper()
 : SVObject(){
  

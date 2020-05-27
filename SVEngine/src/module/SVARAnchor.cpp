@@ -28,6 +28,8 @@
 #include "../node/SV3DBox.h"
 #include "../event/SVOpEvent.h"
 
+using namespace sv;
+
 SVARAnchor::SVARAnchor(SVInst* _app)
 :SVModuleBase(_app){
     m_plane_dis = 0.3f;

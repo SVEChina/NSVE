@@ -12,9 +12,6 @@
 
 using namespace sv;
 
-
-
-
 SVTextureIOS::SVTextureIOS(SVInst *_app)
 :SVTexture(_app) {
     

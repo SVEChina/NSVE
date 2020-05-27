@@ -16,6 +16,8 @@
 #include "../rendercore/SVRenderer.h"
 #include "../rendercore/SVResShader.h"
 
+using namespace sv;
+
 SVMtlCoreParam::SVMtlCoreParam(){
     m_shader = "normal2d";
 }

@@ -9,6 +9,9 @@
 #include "SVActBase.h"
 #include "../app/SVInst.h"
 #include "SVActionMgr.h"
+
+using namespace sv;
+
 SVAniBase::SVAniBase(SVInst *_app)
 :SVGBase(_app) {
 }

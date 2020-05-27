@@ -20,6 +20,7 @@
 #include "../rendercore/SVRenderer.h"
 #include "../basesys/SVConfig.h"
 
+using namespace sv;
 
 SVSceneMgr::SVSceneMgr(SVInst *_app)
 :SVSysBase(_app) {

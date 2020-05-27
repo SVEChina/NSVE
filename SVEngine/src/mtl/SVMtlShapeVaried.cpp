@@ -15,6 +15,8 @@
 #include "../detect/SVPerson.h"
 #include "../rendercore/SVRenderer.h"
 
+using namespace sv;
+
 f32 representParam[24][9]={
     {0,1,-0.688264,-0.666764,0.226535,0.450114,95,0.809862,0.4 },
     {0,1,0.688266,-0.666764,-0.226534,0.450111,91,0.809862,0.4 },

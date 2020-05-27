@@ -9,6 +9,7 @@
 #include "SVMtlSmooth.h"
 #include "../rendercore/SVRenderer.h"
 
+using namespace sv;
 
 SVMtlSmooth::SVMtlSmooth(SVInst *_app , SVString _name)
 :SVMtlCore(_app,_name.c_str()) {

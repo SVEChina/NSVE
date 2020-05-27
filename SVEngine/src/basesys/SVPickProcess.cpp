@@ -15,6 +15,8 @@
 #include "../node/SVScene.h"
 #include "../node/SVCameraNode.h"
 
+using namespace sv;
+
 //获取射线求教节点
 SVVisitRayPick::SVVisitRayPick(FVec3& _rayStart,FVec3& _rayEnd)
 :m_rayStart(_rayStart)

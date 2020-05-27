@@ -9,6 +9,7 @@
 #include "SVMtlGradientMap.h"
 #include "../rendercore/SVRenderer.h"
 
+using namespace sv;
 
 SVMtlGradientMap::SVMtlGradientMap(SVInst *_app)
 :SVMtlCore(_app,"GradientMap") {

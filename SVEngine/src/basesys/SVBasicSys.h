@@ -59,6 +59,8 @@ namespace sv{
 
         SVSensorProcessPtr m_pSensorModule;
     };
+
+
 }//!namespace sv
 
 

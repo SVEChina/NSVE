@@ -8,6 +8,9 @@
 #include "SVPersonModule.h"
 #include "SVPerson.h"
 #include "../basesys/SVConfig.h"
+
+using namespace sv;
+
 SVPersonModule::SVPersonModule(SVInst* _app)
 :SVEventProc(_app){
     

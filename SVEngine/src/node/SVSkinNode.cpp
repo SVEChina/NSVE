@@ -13,6 +13,8 @@
 #include "../core/SVModel.h"
 #include "../core/SVAnimateSkin.h"
 
+using namespace sv;
+
 SVSkinNode::SVSkinNode(SVInst *_app)
 :SVNode(_app){
     ntype = "SVSkinNode";

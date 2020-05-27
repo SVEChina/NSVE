@@ -11,6 +11,9 @@
 #include "../mtl/SVTexMgr.h"
 #include "../app/SVInst.h"
 #include "../core/SVBMFont.h"
+
+using namespace sv;
+
 SVBMFontLoader::SVBMFontLoader(SVInst *_app)
 :SVFileLoader(_app) {
 

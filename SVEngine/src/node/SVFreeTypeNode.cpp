@@ -25,6 +25,8 @@
 #include "../rendercore/SVRenderMgr.h"
 #include "../rendercore/SVRenderMesh.h"
 
+using namespace sv;
+
 SVFreeTypeNode::SVFreeTypeNode(SVInst *_app)
 :SVNode(_app) {
     ntype = "SVFreeTypeNode";

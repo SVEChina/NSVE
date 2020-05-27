@@ -6,9 +6,6 @@
 //
 namespace sv {
     
-   
-        
-        //
         template <class Type,class Counter = s32> class SVArray {
         public:
             class Iterator {
@@ -535,7 +532,6 @@ namespace sv {
             Type stack_data[Capacity];
         };
         
-    
     
 }//!namespace sv
 

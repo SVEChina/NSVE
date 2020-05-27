@@ -9,6 +9,8 @@
 #include "../mtl/SVTexture.h"
 #include "../rendercore/SVFboObject.h"
 
+using namespace sv;
+
 SVMtlParam::SVMtlParam(){
 }
 

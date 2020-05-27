@@ -9,6 +9,8 @@
 #include "../app/SVInst.h"
 #include "../rendercore/SVRenderer.h"
 
+using namespace sv;
+
 SVMtlRGB2YUV::SVMtlRGB2YUV(SVInst *_app, SV_OUTSTEAMFORMATE formate)
 :SVMtlCore(_app,"rgb2yuvnv21") {
     if (formate == SV_OUT_STEAM_RGB2YUVNV21) {

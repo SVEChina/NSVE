@@ -10,6 +10,8 @@
 #include "../SVRenderTarget.h"
 #include "../../basesys/SVSceneMgr.h"
 
+using namespace sv;
+
 SVRenderStateVK::SVRenderStateVK(SVInst *_app)
 :SVRenderState(_app){
 }

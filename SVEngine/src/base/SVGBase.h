@@ -34,9 +34,9 @@ namespace sv {
     
     protected:
         SVInstPtr mApp;
-};
+    };
     
-}//!namespace
+}//!namespace sv
 
 
 #endif //SV_GBASE_H

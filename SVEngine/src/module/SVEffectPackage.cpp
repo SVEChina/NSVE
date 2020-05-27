@@ -31,6 +31,10 @@
 #include "../basesys/SVDeformMgr.h"
 #include "../basesys/SVConfig.h"
 #include "SVEffectMusic.h"
+
+using namespace sv;
+
+
 void spinenode_callback(SVSpineNodePtr _node,void* _obj,s32 _status) {
     SVEffectUnit *t_unit = (SVEffectUnit*)(_obj);
     if(_status == 2) {

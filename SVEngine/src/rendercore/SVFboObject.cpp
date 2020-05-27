@@ -23,6 +23,8 @@
 #include "../node/SVCameraNode.h"
 //
 
+using namespace sv;
+
 SVFboObject::SVFboObject(SVInst *_app)
 :SVRObjBase(_app)
 ,m_link(false){

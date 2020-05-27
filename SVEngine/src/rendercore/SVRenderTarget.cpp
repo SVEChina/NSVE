@@ -16,6 +16,8 @@
 #endif
 #include "SVVulkan/SVRendererVK.h"
 
+using namespace sv;
+
 //
 SVRenderTarget::SVRenderTarget(SVInst *_app, s32 _w, s32 _h, bool _depth, bool _stencil)
         : SVFboObject(_app) {

@@ -17,6 +17,8 @@
 #include "../rendercore/SVRenderMgr.h"
 #include "../rendercore/SVRenderScene.h"
 
+using namespace sv;
+
 SVMesh::SVMesh(SVInst* _app)
 :SVGBase(_app){
     m_pRenderMesh = nullptr;

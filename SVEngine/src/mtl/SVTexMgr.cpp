@@ -18,6 +18,8 @@
 #include "../rendercore/SVRenderMgr.h"
 #include "../work/SVThreadPool.h"
 
+using namespace sv;
+
 SVTexMgr::SVTexMgr(SVInst *_app)
 :SVGBase(_app) {
     mAsync = false;

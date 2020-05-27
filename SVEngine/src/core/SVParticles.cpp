@@ -4,6 +4,8 @@
 #include "../base/SVNoise.h"
 #include "../core/SVImage.h"
 
+using namespace sv;
+
 #define PARTICLES_IFPS		(1.0f / 30.0f)
 
 SVParticles::SVParticles(SVInst *_app) : SVGBase(_app) {

@@ -10,6 +10,8 @@
 #include "../mtl/SVTexture.h"
 #include "../rendercore/SVRenderer.h"
 
+using namespace sv;
+
 SVMtlFlashWhite::SVMtlFlashWhite(SVInst *_app)
 :SVMtlCore(_app,"filterflashwhite") {
     m_time = 0.0;

@@ -9,6 +9,8 @@
 #include "../rendercore/SVRenderState.h"
 #include "../rendercore/SVGL/SVRenderStateGL.h"
 
+using namespace sv;
+
 SVGlobalParam::SVGlobalParam(SVInst *_app)
 :SVGBase(_app) {
     m_inner_width = 720;

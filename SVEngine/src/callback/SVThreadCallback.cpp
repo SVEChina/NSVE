@@ -7,6 +7,7 @@
 
 #include "SVThreadCallback.h"
 
+using namespace sv;
 
 //SVThreadCallback::SVThreadCallback(SVInst *_app)
 //:SVCallbackBase(_app) {

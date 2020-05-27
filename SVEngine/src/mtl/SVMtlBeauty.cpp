@@ -9,6 +9,8 @@
 #include "../mtl/SVTexMgr.h"
 #include "../rendercore/SVRenderer.h"
 
+using namespace sv;
+
 //
 SVMtlBeauty::SVMtlBeauty(SVInst *_app)
 :SVMtlCore(_app,"beauty") {

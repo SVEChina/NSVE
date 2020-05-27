@@ -14,6 +14,9 @@
 #include "../../rendercore/SVRenderer.h"
 #include "../../mtl/SVMtlDark.h"
 #include "../../rendercore/SVRenderMgr.h"
+
+using namespace sv;
+
 SVFilterDark::SVFilterDark(SVInst *_app)
 :SVFilterBase(_app){
     m_type = SV_FUNC_DARK;

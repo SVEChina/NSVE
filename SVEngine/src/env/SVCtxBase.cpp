@@ -7,6 +7,8 @@
 
 #include "SVCtxBase.h"
 
+using namespace sv;
+
 SVCtxBase::SVCtxBase(){
 }
 

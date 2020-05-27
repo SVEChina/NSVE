@@ -8,8 +8,13 @@
 #include <math.h>
 #include <cstdlib>
 #include "SVMathHelper.h"
+
+using namespace sv;
+
 #define MAXREPT  4//积分迭代次数
 #define f(x) sqrt(10*x-x*x)
+
+
 f32 SVMathHelper::vec2Length(f32 _x1, f32 _y1, f32 _x2, f32 _y2) {
     return sqrtf((_x1 - _x2) * (_x1 - _x2) + (_y1 - _y2) * (_y1 - _y2));
 }

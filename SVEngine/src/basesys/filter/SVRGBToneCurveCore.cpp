@@ -7,6 +7,7 @@
 
 #include "SVRGBToneCurveCore.h"
 
+using namespace sv;
 
 u16 intSwap16(u16 var){
     return (u16)(((var << 8) & 0xFF00) | ((var >> 8) & 0xFF));

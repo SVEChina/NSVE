@@ -20,6 +20,9 @@
 #include "../rendercore/SVMetal/SVResMetal.h"
 #endif
 
+
+using namespace sv;
+
 SVShaderMgr::SVShaderMgr(SVInst *_app)
 :SVSysBase(_app) {
 }

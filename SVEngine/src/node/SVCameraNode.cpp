@@ -10,6 +10,8 @@
 #include "../rendercore/SVFboObject.h"
 #include "../act/SVCameraCtrl.h"
 
+using namespace sv;
+
 //
 SVCameraNode::SVCameraNode(SVInst *_app)
 : SVEventProc(_app) {

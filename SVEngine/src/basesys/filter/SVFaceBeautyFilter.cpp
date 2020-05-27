@@ -17,6 +17,7 @@
 #include "../../rendercore/SVRenderer.h"
 #include "../../rendercore/SVRenderMgr.h"
 
+using namespace sv;
 
 SVFaceBeautyBase::SVFaceBeautyBase(SVInst *_app)
         : SVFilterBase(_app) {

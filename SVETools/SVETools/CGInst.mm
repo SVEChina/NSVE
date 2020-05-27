@@ -75,9 +75,10 @@ static CGInst *mInst;
     }
 }
 
--(void*) getSVE {
-    return m_pSVE.get();
-}
+//-(void) getSVE {
+//    //return m_pSVE.get();
+//    return nullptr;
+//}
 
 ////数据重置
 //-(void)reset {

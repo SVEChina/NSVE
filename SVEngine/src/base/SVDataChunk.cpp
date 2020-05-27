@@ -7,6 +7,8 @@
 
 #include "SVDataChunk.h"
 
+using namespace sv;
+
 //数据块
 SVDataChunk::SVDataChunk()
 :m_size(0)

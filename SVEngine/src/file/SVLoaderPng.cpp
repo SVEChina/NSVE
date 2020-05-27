@@ -11,6 +11,8 @@
 #include "../mtl/SVTexMgr.h"
 #include "../app/SVInst.h"
 
+using namespace sv;
+
 static void pngReadCallback(png_structp png_ptr, png_bytep data, png_size_t length) {
     tImageSource *isource = (tImageSource *) png_get_io_ptr(png_ptr);
     if ((s32) (isource->offset + length) <= isource->size) {

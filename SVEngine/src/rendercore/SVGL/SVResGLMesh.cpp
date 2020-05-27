@@ -21,6 +21,8 @@
 #include "../SVGL/SVRendererGL.h"
 #include "../SVResShader.h"
 
+using namespace sv;
+
 SVResGLVBO::SVResGLVBO(SVInst* _app)
 :SVResVBO(_app){
 }

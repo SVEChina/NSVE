@@ -9,6 +9,8 @@
 #include "SVMesh.h"
 #include "../mtl/SVMtlGLTF.h"
 
+using namespace sv;
+
 SVModel::SVModel(SVInst* _app)
 :SVGBase(_app){
     m_meshPool.clear();

@@ -6,6 +6,8 @@
 //
 #include "SVEGLContext.h"
 
+using namespace sv;
+
 
 #ifdef SV_ANDROID
 SVEGLContext::SVEGLContextvoid* _window,void* _context,s32 _glversion)

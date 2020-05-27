@@ -8,6 +8,8 @@
 #include "SVMtlFace2D.h"
 #include "../mtl/SVTexture.h"
 
+using namespace sv;
+
 SVMtlFace2D::SVMtlFace2D(SVInst *_app)
 :SVMtlCore(_app,"mask2d")
 ,m_pMaskTexture(nullptr) {

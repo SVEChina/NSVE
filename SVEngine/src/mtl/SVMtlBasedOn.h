@@ -102,5 +102,5 @@ namespace sv {
             //
             f32 m_acutance;
         };
-    }
-}
+
+}//!namespace sv

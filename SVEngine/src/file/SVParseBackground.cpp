@@ -10,6 +10,8 @@
 #include "../node/SVBackGroundNode.h"
 #include "../core/SVDeformImageMove.h"
 
+using namespace sv;
+
 SVNodePtr SVParseBackground::parseDeform(SVInst *app, RAPIDJSON_NAMESPACE::Value &item, s32 _resid, cptr8 _path){
     SVBackGroundNodePtr t_node=MakeSharedPtr<SVBackGroundNode>(app);
     t_node = MakeSharedPtr<SVBackGroundNode>(app);

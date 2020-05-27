@@ -21,6 +21,8 @@
 #include "../basesys/SVTrans.h"
 #include <sys/time.h>
 
+using namespace sv;
+
 //
 SVRenderCmd::SVRenderCmd() {
     mTag = "SVRenderCmd";

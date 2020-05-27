@@ -17,6 +17,9 @@
 #include "../mtl/SVTexture.h"
 #include "../rendercore/SVRenderMgr.h"
 #include "../rendercore/SVRenderer.h"
+
+using namespace sv;
+
 SVAniTexAttachment::SVAniTexAttachment(SVInst *_app)
 :SVAniBase(_app) {
     m_srcNode = nullptr;

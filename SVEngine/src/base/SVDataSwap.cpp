@@ -7,6 +7,8 @@
 #include "SVDataSwap.h"
 #include <stdlib.h>
 
+using namespace sv;
+
 SVDataSwap::SVDataSwap()
 :m_pData(nullptr)
 ,m_cacheSize(0)

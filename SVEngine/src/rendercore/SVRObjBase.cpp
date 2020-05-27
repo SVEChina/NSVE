@@ -9,6 +9,8 @@
 #include "../app/SVInst.h"
 #include "../base/SVDataSwap.h"
 
+using namespace sv;
+
 SVRObjBase::SVRObjBase(SVInst* _app)
 :SVGBase(_app)
 ,m_pData(nullptr){

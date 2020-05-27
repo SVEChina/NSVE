@@ -7,6 +7,8 @@
 
 #include "SVNoise.h"
 
+using namespace sv;
+
 /*
  */
 SVNoise::SVNoise(){

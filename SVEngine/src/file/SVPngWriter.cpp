@@ -8,7 +8,10 @@
 #include "SVPngWriter.h"
 #include <png.h>
 
-SVPngWriter::SVPngWriter(SVInst *_app) : SVFileWriter(_app) {
+using namespace sv;
+
+SVPngWriter::SVPngWriter(SVInst *_app)
+: SVFileWriter(_app) {
 
 }
 

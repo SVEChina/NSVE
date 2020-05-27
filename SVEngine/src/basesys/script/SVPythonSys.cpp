@@ -8,6 +8,8 @@
 
 #include "SVPythonSys.h"
 
+using namespace sv;
+
 SVPythonSys::SVPythonSys(SVInst *_app)
 :SVSysBase(_app) {
     m_subsysType = 1;

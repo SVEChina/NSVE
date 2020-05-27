@@ -37,7 +37,7 @@ namespace sv {
         SVLockPtr m_sceneLock;
     };
     
-}//!namespace
+}//!namespace sv
 
 
 

@@ -42,7 +42,7 @@ namespace sv {
             SVMtlSmoothPtr m_lkMtl02;
         };
         
-    };//!namespace logic
+    
     
 }//!namespace sv
 

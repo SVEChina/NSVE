@@ -17,6 +17,8 @@
 #include "SVRObjBase.h"
 #include "SVRenderState.h"
 
+using namespace sv;
+
 SVRenderer::SVRenderer(SVInstPtr _app)
 :SVGBaseEx(_app)
 ,m_pRenderTex(nullptr)

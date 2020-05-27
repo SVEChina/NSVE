@@ -11,6 +11,8 @@
 #include "../app/SVInst.h"
 #include "../basesys/SVSceneMgr.h"
 
+using namespace sv;
+
 SVRenderState::SVRenderState(SVInst *_app)
 :SVGBase(_app){
     m_shaderID = 0;

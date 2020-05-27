@@ -40,7 +40,7 @@ namespace sv {
             bool m_dirtyLUT;
         };
         
-    };//!namespace logic
+    
     
 }//!namespace sv
 

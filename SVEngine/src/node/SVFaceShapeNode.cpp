@@ -27,6 +27,7 @@
 #include "../detect/SVDetectMgr.h"
 #include "../detect/SVDetectST.h"
 
+using namespace sv;
 
 SVFaceShapeNode::SVFaceShapeNode(SVInst *_app)
 :SVNode(_app){

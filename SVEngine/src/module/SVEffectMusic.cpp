@@ -10,6 +10,9 @@
 #include "../event/SVEventMgr.h"
 #include "../event/SVEvent.h"
 #include "../app/SVInst.h"
+
+using namespace sv;
+
 SVEffectMusic::SVEffectMusic(SVInst* _app)
 :SVModuleBase(_app){
     m_lock = MakeSharedPtr<SVLock>();

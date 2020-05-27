@@ -51,6 +51,8 @@ namespace sv {
     protected:
         SV_ENGCORE m_engCore;   //引擎内核
     };
+
+
 }//!namespace sv
 
 

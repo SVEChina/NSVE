@@ -9,6 +9,8 @@
 #include "SVEvent.h"
 #include "SVEventProc.h"
 
+using namespace sv;
+
 SVEventMgr::SVEventMgr(SVInst *_app)
 : SVSysBase(_app) {
     mActiveEventPool = nullptr;

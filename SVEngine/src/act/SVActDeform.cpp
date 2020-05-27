@@ -9,6 +9,8 @@
 #include "../node/SVNode.h"
 /********************************************************/
 
+using namespace sv;
+
 SVActDeform::SVActDeform(SVInst *_app):SVActTime(_app) {
     m_acttype = "SVActDeform";
 }

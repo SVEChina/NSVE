@@ -7,6 +7,7 @@
 
 #include "SVAnimateMorph.h"
  
+using namespace sv;
 
 SVAnimateMorph::SVAnimateMorph() {
     

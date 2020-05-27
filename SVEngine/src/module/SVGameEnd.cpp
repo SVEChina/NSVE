@@ -7,6 +7,8 @@
 
 #include "SVGameEnd.h"
 
+using namespace sv;
+
 SVGameEnd::SVGameEnd(SVInst *_app)
 :SVGamePart(_app) {
 }

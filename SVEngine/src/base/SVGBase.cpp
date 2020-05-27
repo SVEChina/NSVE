@@ -1,6 +1,8 @@
 #include "SVGBase.h"
 #include "../app/SVInst.h"
 
+using namespace sv;
+
 SVGBase::SVGBase(SVInst* _app)
 :mApp(_app){
 }

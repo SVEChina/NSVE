@@ -10,6 +10,8 @@
 #include "../work/SVTdCore.h"
 #include "SVRenderer.h"
 
+using namespace sv;
+
 SVResShader::SVResShader(SVInst* _app)
 :SVRObjBase(_app){
     m_attri_formate = "all";

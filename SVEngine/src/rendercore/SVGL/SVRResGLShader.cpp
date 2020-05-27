@@ -21,6 +21,8 @@
 #include "../SVRenderState.h"
 #include "../SVGL/SVRendererGL.h"
 
+using namespace sv;
+
 /*
 GL Shader
 */

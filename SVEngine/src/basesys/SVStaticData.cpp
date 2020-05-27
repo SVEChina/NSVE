@@ -13,6 +13,8 @@
 #include "../rendercore/SVRenderCmd.h"
 #include "../rendercore/SVRenderMgr.h"
 
+using namespace sv;
+
 V3_C_T0 SVStaticData::m_baseRect[6];
 
 SVStaticData::SVStaticData(SVInst* _app)

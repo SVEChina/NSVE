@@ -21,6 +21,8 @@
 #include "../rendercore/SVRenderer.h"
 #include "../basesys/SVStaticData.h"
 
+using namespace sv;
+
 //
 SVBGRAInstreamNode::SVBGRAInstreamNode(SVInst *_app)
 :SVNode(_app) {

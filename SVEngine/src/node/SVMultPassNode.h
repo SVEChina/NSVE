@@ -11,38 +11,34 @@
 
 namespace sv {
     
-    
+    class SVMultPassNode : public SVNode {
+    public:
+        SVMultPassNode(SVInst *_app);
         
-        class SVMultPassNode : public SVNode {
-        public:
-            SVMultPassNode(SVInst *_app);
-            
-            ~SVMultPassNode();
-            
-            void create(s32 _w,s32 _h);
-            
-            void setFbo(SVRenderTexturePtr _fbo);
-            
-            void destroy();
-            
-            void update(f32 dt);
-            
-            void render();
+        ~SVMultPassNode();
         
-            void addPass(SVPassPtr _pass);
-            
-            void clearPass();
-            
-            SVPassPtr getPass(s32 _index);
-            
-        protected:
-            typedef SVArray<SVPassPtr> PASSPOOL;
-            PASSPOOL m_passPool;
-            //
-            SVRenderTexturePtr m_fbo;
-        };
-
+        void create(s32 _w,s32 _h);
+        
+        void setFbo(SVRenderTexturePtr _fbo);
+        
+        void destroy();
+        
+        void update(f32 dt);
+        
+        void render();
     
+        void addPass(SVPassPtr _pass);
+        
+        void clearPass();
+        
+        SVPassPtr getPass(s32 _index);
+        
+    protected:
+        typedef SVArray<SVPassPtr> PASSPOOL;
+        PASSPOOL m_passPool;
+        //
+        SVRenderTexturePtr m_fbo;
+    };
 
 }//!namespace sv
 

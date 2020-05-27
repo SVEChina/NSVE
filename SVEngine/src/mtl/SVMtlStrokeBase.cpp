@@ -10,6 +10,9 @@
 #include "../rendercore/SVRenderer.h"
 #include "../basesys/SVCameraMgr.h"
 #include "../node/SVCameraNode.h"
+
+using namespace sv;
+
 SVMtlStrokeBase::SVMtlStrokeBase(SVInst *_app, cptr8 _shader)
 :SVMtlCore(_app,_shader) {
   

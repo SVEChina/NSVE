@@ -14,6 +14,8 @@
 #include "../../rendercore/SVRenderer.h"
 #include "../../rendercore/SVRenderMgr.h"
 
+using namespace sv;
+
 SVBasedonFilter::SVBasedonFilter(SVInst *_app)
 :SVFilterBase(_app){
     m_baseOnmtl = nullptr;

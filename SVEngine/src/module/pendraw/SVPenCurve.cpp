@@ -6,6 +6,9 @@
 //
 
 #include "SVPenCurve.h"
+
+using namespace sv;
+
 SVPenCurve::SVPenCurve(SVInst *_app)
 :SVGBase(_app) {
     m_bPushSamePoint = false;

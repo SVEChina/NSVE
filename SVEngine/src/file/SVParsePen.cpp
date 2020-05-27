@@ -12,6 +12,9 @@
 #include "../operate/SVOpParse.h"
 #include "../module/pendraw/SVPenDraw.h"
 #include "../module/SVModuleSys.h"
+
+using namespace sv;
+
 SVParsePen::SVParsePen(SVInst *_app)
 :SVParseData(_app) {
     

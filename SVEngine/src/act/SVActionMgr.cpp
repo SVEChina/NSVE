@@ -9,6 +9,8 @@
 #include "../work/SVTdCore.h"
 #include "SVActionUnit.h"
 
+using namespace sv;
+
 SVActionMgr::SVActionMgr(SVInst *_app)
 :SVSysBase(_app) {
     m_subsysType = 0;

@@ -14,26 +14,24 @@
 
 namespace sv {
     
+    class SVSensorProcess : public SVProcess {
+    public:
+        SVSensorProcess(SVInst* _app);
+        
+        ~SVSensorProcess();
+        //
+        virtual bool procEvent(SVEventPtr _event);
+        
+        void update(f32 _dt);
+        
+        SVCameraNodePtr getARCamera(){ return m_pARCamera; }
+        
+    protected:
+        SVCameraNodePtr m_pARCamera;
+        SVCtrlCamereARPtr m_pARCtrl;
+        SVARProjPtr m_pARProj;
+    };
     
-        
-        class SVSensorProcess : public SVProcess {
-        public:
-            SVSensorProcess(SVInst* _app);
-            
-            ~SVSensorProcess();
-            //
-            virtual bool procEvent(SVEventPtr _event);
-            
-            void update(f32 _dt);
-            
-            SVCameraNodePtr getARCamera(){ return m_pARCamera; }
-            
-        protected:
-            SVCameraNodePtr m_pARCamera;
-            SVCtrlCamereARPtr m_pARCtrl;
-            SVARProjPtr m_pARProj;
-        };
-        
     
 
 }//!namespace sv

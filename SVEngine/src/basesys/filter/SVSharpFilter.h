@@ -41,7 +41,7 @@ namespace sv {
             SVMtlSmoothPtr m_mtl_smooth;
         };
         
-    };//!namespace logic
+    
     
 }//!namespace sv
 

@@ -7750,20 +7750,6 @@
 			name = "Recovered References";
 			sourceTree = "<group>";
 		};
-		5F5A50C8231FA66000D8931F /* facecoord */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = facecoord;
-			sourceTree = "<group>";
-		};
-		5F5A50C9231FA66B00D8931F /* bjl-ls */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "bjl-ls";
-			sourceTree = "<group>";
-		};
 		5F7D5D5A215F407700803BCF /* src */ = {
 			isa = PBXGroup;
 			children = (
@@ -8258,8 +8244,6 @@
 		5F7D5E7C215F407700803BCF /* module */ = {
 			isa = PBXGroup;
 			children = (
-				5F5A50C9231FA66B00D8931F /* bjl-ls */,
-				5F5A50C8231FA66000D8931F /* facecoord */,
 				5FD9AFF02256096400522317 /* pendraw */,
 				5F7D5E89215F407700803BCF /* SVDivisonFilter.cpp */,
 				5F7D5E8D215F407700803BCF /* SVDivisonFilter.h */,

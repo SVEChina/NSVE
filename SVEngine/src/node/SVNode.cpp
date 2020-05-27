@@ -17,6 +17,9 @@
 #include "../basesys/SVConfig.h"
 #include "../rendercore/SVRenderObject.h"
 #include "../rendercore/SVRenderMgr.h"
+
+using namespace sv;
+
 //
 SVNode::SVNode(SVInst *_app)
 :SVEventProc(_app) {

@@ -16,6 +16,8 @@
 #include "../rendercore/SVRenderScene.h"
 #include "../rendercore/SVRenderMgr.h"
 
+using namespace sv;
+
 SVFrameAniNode::SVFrameAniNode(SVInst *_app)
 :SVNode(_app){
     ntype = "SVFrameAniNode";

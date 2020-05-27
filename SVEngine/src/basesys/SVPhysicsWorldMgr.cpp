@@ -9,6 +9,9 @@
 #include "../physics/SVPhysicsWorldBase.h"
 #include "../physics/SVPhysicsSoftRigidWorld.h"
 #include "../physics/SVPhysicsWorld.h"
+
+using namespace sv;
+
 SVPhysicsWorldMgr::SVPhysicsWorldMgr(SVInst *_app)
 :SVSysBase(_app) {
     m_subsysType = 4;

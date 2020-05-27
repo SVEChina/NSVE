@@ -8,6 +8,9 @@
 #include "SVActTime.h"
 #include "../node/SVNode.h"
 //动作
+
+using namespace sv;
+
 SVActTime::SVActTime(SVInst *_app):SVActBase(_app) {
     m_acttype = "SVActTime";
     m_time = 0.0f;

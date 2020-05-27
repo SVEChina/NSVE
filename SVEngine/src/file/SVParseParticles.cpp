@@ -7,6 +7,9 @@
 
 #include "SVParseParticles.h"
 #include "../node/SVParticlesNode.h"
+
+using namespace sv;
+
 SVNodePtr
 SVParseParticles::parseParticles(SVInst *_app, RAPIDJSON_NAMESPACE::Value &item, s32 _resid, cptr8 _path) {
     SVParticlesNodePtr t_particlesNode = MakeSharedPtr<SVParticlesNode>(_app);

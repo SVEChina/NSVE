@@ -10,6 +10,8 @@
 #include "../mtl/SVTexMgr.h"
 #include "../rendercore/SVRenderer.h"
 
+using namespace sv;
+
 SVMtlBrightnessContrast::SVMtlBrightnessContrast(SVInst *_app)
 :SVMtlCore(_app,"BrightnessContrast") {
     m_brightness=0.0f;

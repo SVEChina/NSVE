@@ -11,6 +11,8 @@
 #include "../event/SVEventMgr.h"
 #include "../app/SVInst.h"
 
+using namespace sv;
+
 #define STANDARD_EYE_STD 311
 #define STANDARD_NOISE_STD 225
 

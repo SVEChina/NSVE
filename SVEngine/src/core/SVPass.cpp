@@ -11,6 +11,8 @@
 #include "../rendercore/SVRenderTexture.h"
 #include "../rendercore/SVRenderer.h"
 
+using namespace sv;
+
 SVPass::SVPass(){
     mTag = "SVPass";
     m_pMtl = nullptr;

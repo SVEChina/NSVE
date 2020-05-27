@@ -6,6 +6,9 @@
 //
 
 #include "SVOpCallback.h"
+
+using namespace sv;
+
 SVOpCallback::SVOpCallback(SVInst *_app)
 :SVCallbackBase(_app) {
 }

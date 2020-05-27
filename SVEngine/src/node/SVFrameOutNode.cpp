@@ -17,6 +17,7 @@
 #include "../rendercore/SVRenderMgr.h"
 #include "../mtl/SVTexture.h"
 
+using namespace sv;
 
 SVFrameOutNode::SVFrameOutNode(SVInst *_app)
 :SVNode(_app) {

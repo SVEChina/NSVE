@@ -10,6 +10,9 @@
 #include "../rendercore/SVRenderer.h"
 #include "../basesys/SVCameraMgr.h"
 #include "../node/SVCameraNode.h"
+
+using namespace sv;
+
 SVMtlBillboard::SVMtlBillboard(SVInst *_app)
 :SVMtlCore(_app,"normal3d_billboard") {
     m_objPos.set(0, 0, 0);

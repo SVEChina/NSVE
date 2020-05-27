@@ -15,6 +15,7 @@
 #include "../../rendercore/SVRenderer.h"
 #include "../../rendercore/SVRenderMgr.h"
 
+using namespace sv;
 
 SVFilterHaze::SVFilterHaze(SVInst *_app)
 :SVFilterBase(_app){

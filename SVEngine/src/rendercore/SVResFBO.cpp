@@ -10,6 +10,8 @@
 #include "../work/SVTdCore.h"
 #include "SVRenderer.h"
 
+using namespace sv;
+
 SVResFBO::SVResFBO(SVInst* _app)
 :SVRObjBase(_app){
     m_uid = mApp->m_IDPool.applyUID();

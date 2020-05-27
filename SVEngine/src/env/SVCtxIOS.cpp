@@ -8,6 +8,8 @@
 #include "SVCtxIOS.h"
 #include "../app/SVInst.h"
 
+using namespace sv;
+
 #ifdef SV_IOS
 
 //设备上下文 真的不能随意切换啊 否则这这个设备上下文中创建的所有GL资源全部都失效

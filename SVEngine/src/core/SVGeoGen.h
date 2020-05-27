@@ -51,8 +51,9 @@ namespace sv {
     private:
         static SVRenderMeshPtr _getPolygonDiy(SVInst* _app,s32 _edagenum,f32 _startangle,f32 _len,SVBoundBox& _aabb);
     };
-    
-}
+
+
+}//!namespace
 
 
 

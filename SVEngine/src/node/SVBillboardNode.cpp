@@ -21,6 +21,9 @@
 #include "../rendercore/SVRenderMgr.h"
 #include "../rendercore/SVRenderer.h"
 #include "../basesys/SVStaticData.h"
+
+using namespace sv;
+
 //
 SVBillboardNode::SVBillboardNode(SVInst *_app)
 :SVSpriteNode(_app) {

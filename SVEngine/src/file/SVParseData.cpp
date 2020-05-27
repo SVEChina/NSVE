@@ -11,6 +11,8 @@
 #include "../node/SVScene.h"
 #include "../basesys/SVSceneMgr.h"
 
+using namespace sv;
+
 //解析基本数据
 SVParseData::SVParseData(SVInst *_app)
 : SVGBase(_app) {

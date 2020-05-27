@@ -9,6 +9,9 @@
 #include "../../app/SVInst.h"
 #include "../../base/SVDataSwap.h"
 #include "../../file/SVFileMgr.h"
+
+using namespace sv;
+
 SVPenPackData::SVPenPackData(SVInst *_app)
 :SVGBase(_app) {
     

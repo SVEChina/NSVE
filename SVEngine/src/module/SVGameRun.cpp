@@ -7,6 +7,8 @@
 
 #include "SVGameRun.h"
 
+using namespace sv;
+
 SVGameRun::SVGameRun(SVInst *_app)
 :SVGamePart(_app) {
 }

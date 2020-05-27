@@ -10,6 +10,8 @@
 #include "../app/SVGlobalParam.h"
 #include "../rendercore/SVRenderer.h"
 
+using namespace sv;
+
 //
 SVMtlFilterBrilaterl::SVMtlFilterBrilaterl(SVInst *_app)
 :SVMtlCore(_app,"brilateralfilter") {

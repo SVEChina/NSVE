@@ -15,6 +15,9 @@
 #include "../basesys/SVCameraMgr.h"
 #include "../node/SVCameraNode.h"
 #include <sys/time.h>
+
+using namespace sv;
+
 //
 SVRenderPipline::SVRenderPipline(SVInst *_app)
 :SVGBase(_app) {

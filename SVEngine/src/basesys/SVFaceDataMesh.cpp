@@ -13,6 +13,8 @@
 #include "../third/rapidjson/stringbuffer.h"
 #include "../third/rapidjson/writer.h"
 
+using namespace sv;
+
 SVFaceDataMesh::SVFaceDataMesh(SVInst *_app)
 :SVGBase(_app){
     

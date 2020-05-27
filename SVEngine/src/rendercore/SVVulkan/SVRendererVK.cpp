@@ -9,6 +9,8 @@
 #include "../../app/SVInst.h"
 #include "../../base/SVDataSwap.h"
 
+using namespace sv;
+
 SVRendererVK::SVRendererVK(SVInstPtr _app)
 :SVRenderer(_app){
     

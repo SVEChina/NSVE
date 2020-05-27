@@ -12,6 +12,9 @@
 #include "../../../file/SVFileMgr.h"
 #include "../../../app/SVInst.h"
 #include "SVSpine.h"
+
+using namespace sv;
+
 SVSpineObjc::SVSpineObjc(){
     m_texture = nullptr;
 }

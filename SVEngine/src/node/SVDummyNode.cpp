@@ -8,6 +8,8 @@
 #include "SVDummyNode.h"
 #include "../app/SVInst.h"
 
+using namespace sv;
+
 SVDummyNode::SVDummyNode(SVInst *_app)
 :SVNode(_app) {
 

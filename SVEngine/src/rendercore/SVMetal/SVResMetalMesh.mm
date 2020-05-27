@@ -22,6 +22,8 @@
 SVResMetalBuf
  */
 
+using namespace sv;
+
 SVResMetalBuf::SVResMetalBuf(SVInst* _app)
 :SVResVBO(_app){
     m_pVerBuf = nullptr;

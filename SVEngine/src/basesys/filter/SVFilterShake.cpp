@@ -14,6 +14,9 @@
 #include "../../rendercore/SVRenderer.h"
 #include "../../mtl/SVMtlShake.h"
 #include "../../rendercore/SVRenderMgr.h"
+
+using namespace sv;
+
 SVFilterShake::SVFilterShake(SVInst *_app)
 :SVFilterBase(_app){
     m_type = SV_FUNC_SHAKE;

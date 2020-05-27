@@ -34,7 +34,7 @@ namespace sv {
             f32 m_cycle;
         };
         
-    };//!namespace logic
+    
 }//!namespace sv
 
 

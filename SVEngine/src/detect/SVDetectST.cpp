@@ -8,6 +8,9 @@
 #include "SVDetectST.h"
 #include "SVPerson.h"
 #include "../basesys/SVConfig.h"
+
+using namespace sv;
+
 SVDetectST::SVDetectST(SVInst *_app)
 :SVDetectBase(_app) {
      memset(stData, 0, SUPPORT_MAX_PERSON_NUM * sizeof(PERSON_STDATA));

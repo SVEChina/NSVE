@@ -14,6 +14,7 @@
 #include "../work/SVTdCore.h"
 #include <sys/time.h>
 
+using namespace sv;
 //
 SVRenderScene::SVRenderScene(SVInst *_app)
 :SVGBase(_app){

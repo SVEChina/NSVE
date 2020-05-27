@@ -14,6 +14,9 @@
 #include "../rendercore/SVRenderObject.h"
 #include "../rendercore/SVRenderMesh.h"
 #include "../rendercore/SVRenderMgr.h"
+
+using namespace sv;
+
 SVPatchNode::SVPatchNode(SVInst *_app)
 : SVNode(_app) {
     ntype = "SVPatchNode";

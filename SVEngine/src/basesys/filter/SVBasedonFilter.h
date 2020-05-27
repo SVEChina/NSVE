@@ -206,6 +206,6 @@ namespace sv {
             f32 m_temperature;
             f32 m_tint;
         };
-    };//!namespace logic
+    
 }//!namespace sv
 #endif /* SV_BASEDONFILTER_H */

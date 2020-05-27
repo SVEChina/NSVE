@@ -13,29 +13,26 @@
 namespace sv {
     
     
+    class SVIOSInstreamNode : public SVNode {
+    public:
+        SVIOSInstreamNode(SVInst *_app);
         
-        class SVIOSInstreamNode : public SVNode {
-        public:
-            SVIOSInstreamNode(SVInst *_app);
-            
-            virtual ~SVIOSInstreamNode();
-            
-            void init(SVTEXTYPE _tt);
-            
-            void destroy();
-            
-            void update(f32 dt);
-            
-            void render();
-            
-        protected:
-            SVRenderObjectPtr m_pRenderObj;
-            SVMtlCorePtr m_pMtl;
-            SVTEXTYPE m_tt;
-        };
+        virtual ~SVIOSInstreamNode();
+        
+        void init(SVTEXTYPE _tt);
+        
+        void destroy();
+        
+        void update(f32 dt);
+        
+        void render();
+        
+    protected:
+        SVRenderObjectPtr m_pRenderObj;
+        SVMtlCorePtr m_pMtl;
+        SVTEXTYPE m_tt;
+    };
 
-    
-    
 }//!namespace sv
 
 

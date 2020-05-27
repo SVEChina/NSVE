@@ -19,6 +19,9 @@
 #include "SVVulkan/SVRendererVK.h"
 #include <iostream>
 #include <memory>
+
+using namespace sv;
+
 //
 SVRenderTexture::SVRenderTexture(SVInst *_app,SVTexturePtr _tex ,bool _depth,bool _stencil)
 :SVFboObject(_app){

@@ -10,8 +10,11 @@
 #include "../app/SVInst.h"
 #include "../basesys/SVConfig.h"
 
+using namespace sv;
+
 #define DETECT_RESULT_BUFFER_SIZE 4000
 #define STANDARDEYEDIS 190
+
 SVDetectMgr::SVDetectMgr(SVInst *_app)
 : SVSysBase(_app) {
     m_detectType = DETECT_T_NULL;

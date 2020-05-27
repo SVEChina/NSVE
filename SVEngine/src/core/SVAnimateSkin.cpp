@@ -8,6 +8,7 @@
 #include "SVAnimateSkin.h"
 
 //清理
+using namespace sv;
 
 SVBone::SVBone() {
     m_name = "";

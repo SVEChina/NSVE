@@ -13,6 +13,8 @@
 #include "../rendercore/SVRenderCmd.h"
 #include "../app/SVInst.h"
 
+using namespace sv;
+
 //三角形
 SVRenderMeshPtr SVGeoGen::genTri(SVInst* _app,
                                      f32 _len,

@@ -11,6 +11,8 @@
 #include "../detect/SVPerson.h"
 #include "../rendercore/SVRenderer.h"
 
+using namespace sv;
+
 SVMtlFaceShape::SVMtlFaceShape(SVInst *_app)
 :SVMtlCore(_app,"faceShape"){
     memset(m_location0,0,2*sizeof(f32));

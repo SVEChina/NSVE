@@ -34,6 +34,8 @@
 #include "../basesys/SVModelMgr.h"
 #include "../rendercore/SVResVBO.h"
 
+using namespace sv;
+
 SVLoaderGLTF::SVLoaderGLTF(SVInst *_app)
 :SVGBase(_app) {
 }

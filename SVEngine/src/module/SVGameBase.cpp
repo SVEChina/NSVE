@@ -10,6 +10,7 @@
 #include "SVGameRun.h"
 #include "SVGameEnd.h"
 
+using namespace sv;
 
 SVGameBase::SVGameBase(SVInst *_app)
 :SVModuleBase(_app) {

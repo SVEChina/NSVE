@@ -18,6 +18,7 @@
 #include "../../rendercore/SVRenderMgr.h"
 #include "../SVRenderer.h"
 
+using namespace sv;
 
 SVResMetalFBO::SVResMetalFBO(SVInst* _app)
 :SVResFBO(_app)

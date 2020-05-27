@@ -20,6 +20,8 @@
 #include "../detect/SVDetectMgr.h"
 #include "SVScene.h"
 
+using namespace sv;
+
 ////ST masknode
 //SV2DFaceMaskSTNode::SV2DFaceMaskSTNode(SVInst *_app)
 //: SV2DFaceMaskNode(_app) {

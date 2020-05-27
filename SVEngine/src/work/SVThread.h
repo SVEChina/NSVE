@@ -54,8 +54,8 @@ namespace sv {
         bool m_misclean;
     };
     
-//!namespace
-}
+
+}//!namespace sv
 
 
 

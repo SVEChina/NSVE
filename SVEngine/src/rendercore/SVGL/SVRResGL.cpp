@@ -20,6 +20,8 @@
 #include "../SVRenderer.h"
 #include "../SVGL/SVRendererGL.h"
 
+using namespace sv;
+
 SVRResGLTex::SVRResGLTex(SVInst* _app)
         :SVResTex(_app){
     m_bLoad = false;

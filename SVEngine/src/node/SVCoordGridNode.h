@@ -13,7 +13,6 @@
 namespace sv {
     
     
-        
         //笛卡尔坐标系
         
         class SVCoordGridNode : public SVNode {
@@ -43,8 +42,6 @@ namespace sv {
         };
         
         
-        
-    
     
 }//!namespace sv
 

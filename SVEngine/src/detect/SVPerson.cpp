@@ -10,6 +10,8 @@
 #include "SVDetectMgr.h"
 #include "SVDetectST.h"
 
+using namespace sv;
+
 SVPerson::SVPerson(SVInst* _app)
 :SVListenBase(_app){
     m_facePtNum = 0;

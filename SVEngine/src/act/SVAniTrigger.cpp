@@ -10,6 +10,9 @@
 #include "../node/SVScene.h"
 #include "../node/SVNodeVisit.h"
 #include "../node/SVSpineNode.h"
+
+using namespace sv;
+
 SVAniTrigger::SVAniTrigger(SVInst *_app)
 :SVGBase(_app) {
 

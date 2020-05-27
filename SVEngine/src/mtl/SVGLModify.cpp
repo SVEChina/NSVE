@@ -7,6 +7,8 @@
 
 #include "SVGLModify.h"
 
+using namespace sv;
+
 //
 SVGLModify::SVGLModify(SVInst *_app)
 :SVModify(_app){

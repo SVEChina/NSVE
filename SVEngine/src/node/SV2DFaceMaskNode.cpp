@@ -18,6 +18,8 @@
 #include "../app/SVGlobalMgr.h"
 #include "../rendercore/SVRenderMgr.h"
 
+using namespace sv;
+
 //SV2DFaceMaskNode::SV2DFaceMaskNode(SVInst *_app)
 //:SVNode(_app) {
 //    ntype = "SV2DFaceMaskNode";

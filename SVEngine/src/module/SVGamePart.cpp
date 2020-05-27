@@ -7,6 +7,8 @@
 
 #include "SVGamePart.h"
 
+using namespace sv;
+
 SVGamePart::SVGamePart(SVInst *_app)
 :SVGBase(_app) {
 }

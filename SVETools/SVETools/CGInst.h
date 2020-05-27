@@ -20,9 +20,7 @@
 -(void)cgInit;
 
 -(void)cgDestroy;
-
--(void*) getSVE {
-    return m_pSVE;
-}
+//
+//-(void)getSVE;
 
 @end

@@ -8,6 +8,9 @@
 
 #include "SVActBase.h"
 #include "../node/SVNode.h"
+
+using namespace sv;
+
 SVActParam::SVActParam(){
     
 }

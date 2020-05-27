@@ -35,6 +35,9 @@
 #include "../../file/SVFileMgr.h"
 #include "../../base/SVStringHelper.h"
 #include "SVPenPackData.h"
+
+using namespace sv;
+
 SVPenDraw::SVPenDraw(SVInst *_app)
 :SVGameBase(_app)
 ,m_curStroke(nullptr){

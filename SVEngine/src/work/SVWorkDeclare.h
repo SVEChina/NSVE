@@ -19,8 +19,6 @@ namespace sv {
     DECLARE_SHAREPTR(SVThread);
     DECLARE_SHAREPTR(SVThreadGroup);
     DECLARE_SHAREPTR(SVThreadPool);
-
-    //
     DECLARE_SHAREPTR(SVMis);
 
 }//!namespace sv

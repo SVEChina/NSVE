@@ -10,6 +10,8 @@
 #include "../rendercore/SVRenderer.h"
 #include "../core/SVAnimateSkin.h"
 
+using namespace sv;
+
 SVMtlGLTF::SVMtlGLTF(SVInst *_app)
 :SVMtlCore(_app,"gltf3d") {
     m_pBaseColorTex = nullptr;

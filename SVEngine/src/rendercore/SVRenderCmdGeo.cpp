@@ -11,6 +11,8 @@
 #include "../core/SVVertDef.h"
 #include "../mtl/SVMtlCore.h"
 
+using namespace sv;
+
 SVRenderCmdGeo::SVRenderCmdGeo()
 :m_pMtl(nullptr){
 }

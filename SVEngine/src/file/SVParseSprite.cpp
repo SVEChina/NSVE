@@ -7,6 +7,9 @@
 
 #include "SVParseSprite.h"
 #include "../node/SVSpriteNode.h"
+
+using namespace sv;
+
 SVNodePtr
 SVParseSprite::parseSprite(SVInst *_app, RAPIDJSON_NAMESPACE::Value &item, s32 _resid, cptr8 _path) {
     SVSpriteNodePtr t_spriteNode = MakeSharedPtr<SVSpriteNode>(_app);

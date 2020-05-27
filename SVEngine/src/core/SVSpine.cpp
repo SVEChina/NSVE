@@ -26,6 +26,8 @@
 #include <spine/Attachment.h>
 #include "SVSpineObjc.h"
 
+using namespace sv;
+
 #define MESH_MAX_VERTEXNUM 1000
 
 //

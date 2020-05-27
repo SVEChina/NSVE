@@ -21,6 +21,8 @@
 #include "../mtl/SVMtlCore.h"
 #include "../basesys/SVConfig.h"
 
+using namespace sv;
+
 #ifdef SV_IOS
 
 SVFrameOutIOS::SVFrameOutIOS(SVInst *_app)

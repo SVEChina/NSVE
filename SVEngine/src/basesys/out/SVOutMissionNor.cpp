@@ -7,6 +7,8 @@
 
 #include "SVOutMissionNor.h"
 
+using namespace sv;
+
 SVOutMissionNor::SVOutMissionNor(SVInst* _app,cptr8 _name)
 :SVOutMission(_app,_name)
 ,m_end(false){

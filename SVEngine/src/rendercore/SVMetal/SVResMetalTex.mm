@@ -18,6 +18,8 @@
 #include "../../rendercore/SVRenderMgr.h"
 #include "../SVRenderer.h"
 
+using namespace sv;
+
 //tex资源
 SVRResMetalTex::SVRResMetalTex(SVInst* _app)
 :SVResTex(_app)

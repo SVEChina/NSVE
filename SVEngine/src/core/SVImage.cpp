@@ -8,6 +8,9 @@
 #include "SVImage.h"
 #include "../base/SVDataSwap.h"
 #include "../file/SVLoaderPng.h"
+
+using namespace sv;
+
 /*
  */
 static cptr8 type_names[] = {

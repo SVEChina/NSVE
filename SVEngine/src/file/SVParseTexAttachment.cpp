@@ -7,6 +7,9 @@
 
 #include "SVParseTexAttachment.h"
 #include "../act/SVAniTexAttachment.h"
+
+using namespace sv;
+
 SVAniTexAttachmentPtr SVParseTexAttachment::parseTexAttachmet(SVInst *_app, RAPIDJSON_NAMESPACE::Value &item, s32 _resid, cptr8 _path) {
     SVAniTexAttachmentPtr attachment = MakeSharedPtr<SVAniTexAttachment>(_app);
     attachment->init();

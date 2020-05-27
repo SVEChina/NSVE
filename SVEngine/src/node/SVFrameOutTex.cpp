@@ -21,6 +21,7 @@
 #include "../mtl/SVMtlCore.h"
 #include "../core/SVGeoGen.h"
 
+using namespace sv;
 
 SVFrameOutTex::SVFrameOutTex(SVInst *_app)
 :SVFrameOutNode(_app){

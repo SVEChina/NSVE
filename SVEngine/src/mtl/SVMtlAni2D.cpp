@@ -10,6 +10,8 @@
 #include "../rendercore/SVRenderer.h"
 #include "../rendercore/SVGL/SVRResGL.h"
 
+using namespace sv;
+
 SVMtlAni2D::SVMtlAni2D(SVInst *_app)
 :SVMtlCore(_app,"normal2dani_c") {
     m_LogicParamDepth.enable = false;

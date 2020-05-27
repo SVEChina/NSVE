@@ -10,6 +10,8 @@
 #include "../work/SVTdCore.h"
 #include "SVRenderer.h"
 
+using namespace sv;
+
 s32 SVResVBO::getVertexFormateSize(VFTYPE _type) {
     if (_type == E_VF_V2) {
         return sizeof(V2);

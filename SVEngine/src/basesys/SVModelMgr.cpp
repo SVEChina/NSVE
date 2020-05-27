@@ -9,6 +9,9 @@
 #include "../core/SVModel.h"
 #include "../work/SVTdCore.h"
 //
+
+using namespace sv;
+
 SVModelMgr::SVModelMgr(SVInst* _app)
 :SVSysBase(_app){
     m_lock = MakeSharedPtr<SVLock>();

@@ -7,6 +7,9 @@
 
 #include "SVParseAnimate.h"
 #include "../node/SVSpineNode.h"
+
+using namespace sv;
+
 SVNodePtr
 SVParseAnimate::parseAnim(SVInst *_app, RAPIDJSON_NAMESPACE::Value &item, s32 _resid, cptr8 _path) {
     SVSpineNodePtr t_spineNode = MakeSharedPtr<SVSpineNode>(_app);

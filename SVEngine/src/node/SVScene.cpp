@@ -26,6 +26,8 @@
 #include "../mtl/SVTexMgr.h"
 #include "../mtl/SVTexture.h"
 
+using namespace sv;
+
 SVTree4::SVTree4(SVInst *_app)
 :SVGBase(_app){
     m_treeLock = MakeSharedPtr<SVLock>();

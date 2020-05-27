@@ -15,6 +15,9 @@
 #include "../mtl/SVMtlFlash.h"
 #include "../mtl/SVMtlGlitch.h"
 #include "../mtl/SVMtlDistorted.h"
+
+using namespace sv;
+
 SVFilterBasePtr
 SVParseFilter::parseFilter(SVInst *_app, RAPIDJSON_NAMESPACE::Value &item, s32 _resid, cptr8 _path) {
     SVString mtlName;

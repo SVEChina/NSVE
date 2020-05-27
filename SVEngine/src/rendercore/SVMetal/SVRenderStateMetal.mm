@@ -10,6 +10,8 @@
 #include "../SVRenderTarget.h"
 #include "../../basesys/SVSceneMgr.h"
 
+using namespace sv;
+
 SVRenderStateMetal::SVRenderStateMetal(SVInst *_app)
 :SVRenderState(_app){
 }

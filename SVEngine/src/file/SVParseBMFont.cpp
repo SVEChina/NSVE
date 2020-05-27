@@ -7,6 +7,9 @@
 
 #include "SVParseBMFont.h"
 #include "../node/SVBMFontNode.h"
+
+using namespace sv;
+
 SVNodePtr
 SVParseBMFont::parseBMFont(SVInst *_app, RAPIDJSON_NAMESPACE::Value &item, s32 _resid, cptr8 _path) {
     SVBMFontNodePtr t_bmFontNode = MakeSharedPtr<SVBMFontNode>(_app);

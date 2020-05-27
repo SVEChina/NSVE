@@ -10,6 +10,8 @@
 #include "../mtl/SVTexture.h"
 #include "../rendercore/SVRenderer.h"
 
+using namespace sv;
+
 SVMtlStreak::SVMtlStreak(SVInst *_app)
 :SVMtlADFilterBase(_app,"filterstreak2") {
     m_lerp = 0.0f;

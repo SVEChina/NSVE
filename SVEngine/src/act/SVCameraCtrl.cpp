@@ -11,6 +11,7 @@
 #include "../basesys/SVBasicSys.h"
 #include "../basesys/SVPickProcess.h"
 
+using namespace sv;
 
 SVProjMethod::SVProjMethod() {
     m_width = 720.0f;

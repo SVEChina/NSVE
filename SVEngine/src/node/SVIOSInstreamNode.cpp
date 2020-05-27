@@ -20,6 +20,8 @@
 #include "../rendercore/SVRenderer.h"
 #include "../core/SVGeoGen.h"
 
+using namespace sv;
+
 SVIOSInstreamNode::SVIOSInstreamNode(SVInst *_app)
 :SVNode(_app){
     ntype = "SVIOSInstreamNode";

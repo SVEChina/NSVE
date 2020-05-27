@@ -10,6 +10,8 @@
 #include "../mtl/SVTexture.h"
 #include "../rendercore/SVRenderer.h"
 
+using namespace sv;
+
 SVMtlADFilterBase::SVMtlADFilterBase(SVInst *_app, cptr8 _shader)
 :SVMtlCore(_app,_shader) {
     _resetTime();

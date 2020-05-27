@@ -13,6 +13,8 @@
 #include "../node/SVScene.h"
 #include "../work/SVTdCore.h"
 
+using namespace sv;
+
 SVDeformMgr::SVDeformMgr(SVInst *_app)
 :SVSysBase(_app){
     m_deformArray.clear();

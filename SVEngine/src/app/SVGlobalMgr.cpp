@@ -30,6 +30,8 @@
 #include <sys/time.h>
 //#include <Python/Python.h>
 
+using namespace sv;
+
 SVGlobalMgr::SVGlobalMgr(SVInst *_app)
 :SVGBase(_app) {
     //引擎系统和操作指令系统要先建立起来

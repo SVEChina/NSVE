@@ -10,6 +10,8 @@
 #include "../mtl/SVTexture.h"
 #include "../rendercore/SVRenderer.h"
 
+using namespace sv;
+
 SVMtlShinning::SVMtlShinning(SVInst *_app)
 :SVMtlADFilterBase(_app,"filtershinning") {
     m_lerp = 0.0f;

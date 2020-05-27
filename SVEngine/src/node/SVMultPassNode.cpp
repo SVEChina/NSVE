@@ -20,6 +20,8 @@
 #include "../mtl/SVTexMgr.h"
 #include "../core/SVPass.h"
 
+using namespace sv;
+
 //
 SVMultPassNode::SVMultPassNode(SVInst *_app)
 :SVNode(_app) {

@@ -10,6 +10,9 @@
 #include "../mtl/SVTexture.h"
 #include "../rendercore/SVRenderer.h"
 #include "../node/SVCameraNode.h"
+
+using namespace sv;
+
 SVMtl3D::SVMtl3D(SVInst *_app, cptr8 _shader)
 :SVMtlCore(_app, _shader) {
     m_LogicParamBlend.srcParam = MTL_BLEND_ONE;

@@ -10,6 +10,9 @@
 #include "../node/SVScene.h"
 #include "../basesys/SVSceneMgr.h"
 #include "../mtl/SVMtlCore.h"
+
+using namespace sv;
+
 SVDivisonFilter::SVDivisonFilter(SVInst *_app)
 :SVModuleBase(_app){
     m_module_name = "";

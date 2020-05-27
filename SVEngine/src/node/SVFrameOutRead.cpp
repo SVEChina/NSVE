@@ -23,6 +23,7 @@
 #include "../mtl/SVMtlCore.h"
 #include "../core/SVGeoGen.h"
 
+using namespace sv;
 
 SVFrameOutRead::SVFrameOutRead(SVInst *_app)
 :SVFrameOutNode(_app){

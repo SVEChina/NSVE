@@ -10,6 +10,9 @@
 #include "../detect/SVDetectMgr.h"
 #include "../detect/SVPersonTracker.h"
 #include "../basesys/SVConfig.h"
+
+using namespace sv;
+
 SVActFollow::SVActFollow(SVInst *_app):SVActBase(_app){
     m_validDis = 100.0f;
     m_speed = 300.0f;

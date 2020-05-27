@@ -12,6 +12,8 @@
 #include "SVTimeLineMtl.h"
 #include "SVTimeLineEvent.h"
 
+using namespace sv;
+
 SVDragma::SVDragma(SVInst* _app)
 :SVGBase(_app){
     m_lock = MakeSharedPtr<SVLock>();

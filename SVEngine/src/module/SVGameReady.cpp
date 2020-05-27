@@ -7,6 +7,8 @@
 
 #include "SVGameReady.h"
 
+using namespace sv;
+
 SVGameReady::SVGameReady(SVInst *_app)
 :SVGamePart(_app) {
 }

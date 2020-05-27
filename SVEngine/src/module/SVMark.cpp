@@ -20,6 +20,9 @@
 #include "../app/SVGlobalMgr.h"
 #include "../act/SVActionUnit.h"
 #include "../file/SVFileMgr.h"
+
+using namespace sv;
+
 SVMark::SVMark(SVInst* _app)
 :SVModuleBase(_app){
     m_bmFontNode = nullptr;

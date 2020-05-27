@@ -10,6 +10,8 @@
 #include "../mtl/SVTexture.h"
 #include "../rendercore/SVRenderer.h"
 
+using namespace sv;
+
 SVMtlColor::SVMtlColor(SVInst *_app)
 :SVMtlCore(_app,"color") {
     

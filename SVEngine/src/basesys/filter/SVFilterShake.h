@@ -37,7 +37,7 @@ namespace sv {
             f32 m_speed;
         };
         
-    };//!namespace logic
+    
 }//!namespace sv
 
 

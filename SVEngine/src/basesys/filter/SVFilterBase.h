@@ -65,7 +65,7 @@ namespace sv {
             RENDERSTREAMTYPE m_rstype;
         };
         
-    };//!namespace logic
+    
     
 }//!namespace sv
 

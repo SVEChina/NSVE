@@ -2,10 +2,6 @@
 
 namespace sv {
     
-   
-
-        //*********************************FVec4*********************************************
-        //
         const FVec4 FVec4_zero(0.0f);
         const FVec4 FVec4_one(1.0f);
         const FVec4 FVec4_epsilon(EPSILON);

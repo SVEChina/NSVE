@@ -10,6 +10,8 @@
 #include "../mtl/SVTexture.h"
 #include "../rendercore/SVRenderer.h"
 
+using namespace sv;
+
 SVMtlRainbowColor::SVMtlRainbowColor(SVInst *_app)
 :SVMtlADFilterBase(_app,"filterrainbowcolor") {
     _resetTime();

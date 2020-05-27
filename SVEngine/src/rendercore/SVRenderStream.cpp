@@ -8,6 +8,9 @@
 #include "SVRenderStream.h"
 #include "SVRenderCmd.h"
 #include "../work/SVTdCore.h"
+
+using namespace sv;
+
 SVRenderStream::SVRenderStream() {
     m_lock = MakeSharedPtr<SVLock>();
 }

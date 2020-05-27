@@ -7,6 +7,8 @@
 
 #include "SVProcess.h"
 
+using namespace sv;
+
 SVProcess::SVProcess(SVInst *_app)
 :SVEventProc(_app) {
     m_subProcType = "SVProcess";

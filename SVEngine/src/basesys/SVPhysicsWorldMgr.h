@@ -10,6 +10,8 @@
 
 #include "../basesys/SVSysBase.h"
 namespace sv{
+
+
         class SVPhysicsWorldMgr : public SVSysBase {
         public:
             SVPhysicsWorldMgr(SVInst* _app);
@@ -33,5 +35,7 @@ namespace sv{
             SVPhysicsWorldPtr m_rigidWorld;
             SVPhysicsSoftRigidWorldPtr m_softWorld;
         };
+
+
 }//!namespace sv
 #endif //SV_BASESYS_PHYSICSWORLDMGR_H

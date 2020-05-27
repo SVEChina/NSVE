@@ -13,7 +13,7 @@
 #include "../../base/SVDataChunk.h"
 #include "../../app/SVInst.h"
 
-
+using namespace sv;
 
 SVFilterBasePtr SVParseLUTFilter::parseLUT(SVInst *_app,cptr8 _path, s32 resid){
     RAPIDJSON_NAMESPACE::Document t_doc;

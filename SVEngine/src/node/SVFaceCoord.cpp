@@ -20,6 +20,8 @@
 #include "SVBMFontNode.h"
 #include "../core/SVBMFont.h"
 
+using namespace sv;
+
 SVFaceCoord::SVFaceCoord(SVInst *_app)
 : SVNode(_app) {
     ntype = "SVFaceCoord";

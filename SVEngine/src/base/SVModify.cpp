@@ -7,6 +7,8 @@
 
 #include "SVModify.h"
 
+using namespace sv;
+
 SVModify::SVModify(SVInst *_app)
 :SVGBase(_app){
 }

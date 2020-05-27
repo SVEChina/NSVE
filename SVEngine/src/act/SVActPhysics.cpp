@@ -16,6 +16,9 @@
 #include "../rendercore/SVRenderMgr.h"
 #include "../rendercore/SVRenderer.h"
 #include "../rendercore/SVRenderMesh.h"
+
+using namespace sv;
+
 SVActPhysics::SVActPhysics(SVInst *_app, SVPhysicsBodyPtr _physicsBody):SVActBase(_app){
     m_physicsBody = _physicsBody;
 }

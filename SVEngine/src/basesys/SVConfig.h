@@ -132,5 +132,5 @@ namespace sv {
         f32 m_designAdaptScale;
     };
 
-//!namespace
-}
+
+}//!namespace sv

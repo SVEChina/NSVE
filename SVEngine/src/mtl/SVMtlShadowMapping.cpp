@@ -10,6 +10,8 @@
 #include "../mtl/SVTexMgr.h"
 #include "../rendercore/SVRenderer.h"
 
+using namespace sv;
+
 //
 SVMtlShadowMapping::SVMtlShadowMapping(SVInst *_app)
 :SVMtlCore(_app,"depthPlan") {

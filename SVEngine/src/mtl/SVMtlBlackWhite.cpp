@@ -10,6 +10,8 @@
 #include "../mtl/SVTexture.h"
 #include "../rendercore/SVRenderer.h"
 
+using namespace sv;
+
 SVMtlBlackWhite::SVMtlBlackWhite(SVInst *_app)
 :SVMtlCore(_app,"filterblackwhite") {
     m_mode = 5.0;

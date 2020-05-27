@@ -10,6 +10,8 @@
 #include "../mtl/SVTexture.h"
 #include "../rendercore/SVRenderer.h"
 
+using namespace sv;
+
 SVMtlDark::SVMtlDark(SVInst *_app)
 :SVMtlCore(_app,"filterdark") {
     m_intensity = 1.0;

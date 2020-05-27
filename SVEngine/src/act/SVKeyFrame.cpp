@@ -8,6 +8,8 @@
 
 #include "SVKeyFrame.h"
 
+using namespace sv;
+
 SVKeyFrame::SVKeyFrame(SVInst* _app,u32 _index)
 :SVGBase(_app){
     m_uid = mApp->m_IDPool.applyUID();

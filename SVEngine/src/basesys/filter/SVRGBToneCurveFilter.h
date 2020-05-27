@@ -34,7 +34,7 @@ namespace sv {
             SVTexturePtr texrgb;
         };
         
-    };//!namespace logic
+    
     
 }//!namespace sv
 

@@ -10,6 +10,8 @@
 #include "../mtl/SVTexture.h"
 #include "../rendercore/SVRenderer.h"
 
+using namespace sv;
+
 SVMtlDistorted::SVMtlDistorted(SVInst *_app)
 :SVMtlADFilterBase(_app,"filterdistorted") {
     _resetTime();

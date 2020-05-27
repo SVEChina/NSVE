@@ -10,6 +10,8 @@
 #include "../mtl/SVTexture.h"
 #include "../rendercore/SVRenderer.h"
 
+using namespace sv;
+
 SVMtlShake::SVMtlShake(SVInst *_app)
 :SVMtlCore(_app,"filtershake") {
     m_time = 0.0f;

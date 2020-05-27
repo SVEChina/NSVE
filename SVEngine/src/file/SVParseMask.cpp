@@ -8,6 +8,9 @@
 #include "SVParseMask.h"
 #include "../node/SV2DFaceMaskSTNode.h"
 #include "../node/SV2DFaceMaskNode.h"
+
+using namespace sv;
+
 //解析面具
 SVNodePtr
 SVParseMask::parseMask(SVInst *_app, RAPIDJSON_NAMESPACE::Value &item, s32 _resid, cptr8 _path) {

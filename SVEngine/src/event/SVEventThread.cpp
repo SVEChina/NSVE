@@ -7,6 +7,8 @@
 
 #include "SVEventThread.h"
 
+using namespace sv;
+
 SVEventThread::SVEventThread() {
     m_name = "";
     m_tate = E_THREAD_S_NULL;

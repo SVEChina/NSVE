@@ -10,6 +10,8 @@
 #include "../event/SVEventMgr.h"
 #include "../event/SVEvent.h"
 
+using namespace sv;
+
 SVRecycleProcess::SVRecycleProcess(SVInst *_app)
 :SVProcess(_app) {
 }

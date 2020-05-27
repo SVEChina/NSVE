@@ -13,6 +13,8 @@
 #include "../file/SVFileMgr.h"
 #include "../file/SVBMFontLoader.h"
 
+using namespace sv;
+
 SVBMFontPtr SVBMFont::creatFnt(cptr8 _filePath, SVInst *_app){
     SVBMFontPtr font = MakeSharedPtr<SVBMFont>(_app);
     SVBMFontLoader t_loder(_app);

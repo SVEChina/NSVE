@@ -10,6 +10,8 @@
 #include "../node/SVCameraNode.h"
 #include "../act/SVCameraCtrl.h"
 
+using namespace sv;
+
 SVLightSys::SVLightSys(SVInst *_app)
 :SVSysBase(_app) {
     m_subsysType = 7;

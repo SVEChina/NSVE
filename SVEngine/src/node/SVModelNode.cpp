@@ -23,6 +23,8 @@
 #include "../core/SVModel.h"
 #include "../core/SVMesh.h"
 
+using namespace sv;
+
 //
 SVModelNode::SVModelNode(SVInst *_app)
 :SVNode(_app) {

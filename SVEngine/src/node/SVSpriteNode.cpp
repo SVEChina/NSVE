@@ -24,11 +24,6 @@
 
 using namespace sv;
 
-
-
-
-//using namespace sv::;
-
 //
 SVSpriteNode::SVSpriteNode(SVInst *_app)
 :SVNode(_app) {

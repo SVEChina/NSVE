@@ -19,6 +19,8 @@
 #include "../basesys/SVStaticData.h"
 #include "../app/SVInst.h"
 
+using namespace sv;
+
 SVRenderMgr::SVRenderMgr(SVInst *_app)
 :SVGBase(_app) {
     m_RStreamCache =  MakeSharedPtr<SVRenderStream>();      //逻辑全局流

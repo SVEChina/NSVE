@@ -8,6 +8,8 @@
 #include "SVDetectBase.h"
 #include "SVPerson.h"
 
+using namespace sv;
+
 SVDetectBase::SVDetectBase(SVInst *_app)
 :SVListenBase(_app) {
 }

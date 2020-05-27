@@ -15,6 +15,9 @@
 #include "../core/SVGeoGen.h"
 #include "../detect/SVDetectMgr.h"
 #include "../detect/SVDetectST.h"
+
+using namespace sv;
+
 SVFacePointNode::SVFacePointNode(SVInst *_app)
 :SVNode(_app){
     ntype = "SVFacePointNode";

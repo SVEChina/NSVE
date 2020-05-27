@@ -33,7 +33,7 @@ namespace sv {
             SVMtlShinningPtr m_mtlShinning;
         };
         
-    };//!namespace logic
+    
 }//!namespace sv
 
 

@@ -14,6 +14,8 @@
 #include "../rendercore/SVRenderScene.h"
 #include "../rendercore/SVRenderMgr.h"
 
+using namespace sv;
+
 #define COORD_SIZE 64*100
 
 SVCoordGridNode::SVCoordGridNode(SVInst *_app)

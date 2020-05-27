@@ -7,6 +7,9 @@
 
 #include "SVOpEvent.h"
 #include "../base/SVDataSwap.h"
+
+using namespace sv;
+
 SVTouchEvent::SVTouchEvent() {
     x = 0;
     y = 0;

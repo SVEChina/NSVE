@@ -19,6 +19,8 @@
 #include "../rendercore/SVRenderer.h"
 #include "../basesys/SVStaticData.h"
 
+using namespace sv;
+
 SVFaceDetectPointNode::SVFaceDetectPointNode(SVInst *_app):SVNode(_app) {
     ntype = "SVFaceDetectPointNode";
     m_rsType = RST_DEBUG;

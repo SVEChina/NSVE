@@ -1,6 +1,7 @@
 #include "SVParticlesWorld.h"
 #include "SVParticlesNode.h"
 
+using namespace sv;
 
 #define OBJECT_PARTICLES_EPSILON	1e-3f
 

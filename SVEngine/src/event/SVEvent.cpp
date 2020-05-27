@@ -7,6 +7,8 @@
 
 #include "SVEvent.h"
 
+using namespace sv;
+
 SVEvent::SVEvent() {
     eventType = EVN_T_NONE;
     eventName = "";

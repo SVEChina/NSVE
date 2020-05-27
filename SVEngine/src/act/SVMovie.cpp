@@ -13,6 +13,8 @@
 #include "SVTimeLineMtl.h"
 #include "SVActionMgr.h"
 
+using namespace sv;
+
 SVMovie::SVMovie(SVInst* _app)
 :SVAniBase(_app)
 ,m_loop(false)

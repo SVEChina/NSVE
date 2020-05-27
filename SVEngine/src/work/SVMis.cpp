@@ -1,6 +1,8 @@
 #include <sys/time.h>
 #include "SVMis.h"
 
+using namespace sv;
+
 SVMis::SVMis(){
 }
 

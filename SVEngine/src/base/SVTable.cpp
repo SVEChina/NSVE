@@ -9,8 +9,6 @@
 
 using namespace sv;
 
-using namespace sv;
-
 SVTableCell::SVTableCell() {
     m_str_value = "";
     m_f_value = 0.0f;

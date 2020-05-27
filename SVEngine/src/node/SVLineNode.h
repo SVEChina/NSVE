@@ -11,31 +11,28 @@
 #include "SVNode.h"
 namespace sv {
     
-    
+
+    class SVLineNode : public SVNode {
+    public:
+        SVLineNode(SVInst *_app);
         
-        class SVLineNode : public SVNode {
-        public:
-            SVLineNode(SVInst *_app);
-            
-            virtual ~SVLineNode();
-            
-            virtual void update(f32 _dt);
-            
-            virtual void render();
-            
-            void setLineData(f32 *_data, s32 _size, s32 _count);
-            
-        public:
-            SVRenderObjectPtr m_pRenderObj;
-            
-            SVRenderMeshPtr m_pMesh;
-            
-            SVMtlGeo3dPtr m_lineMtl;
-            
-            SVColor m_color;
-        };
+        virtual ~SVLineNode();
         
-    
+        virtual void update(f32 _dt);
+        
+        virtual void render();
+        
+        void setLineData(f32 *_data, s32 _size, s32 _count);
+        
+    public:
+        SVRenderObjectPtr m_pRenderObj;
+        
+        SVRenderMeshPtr m_pMesh;
+        
+        SVMtlGeo3dPtr m_lineMtl;
+        
+        SVColor m_color;
+    };
     
 }//!namespace sv
 

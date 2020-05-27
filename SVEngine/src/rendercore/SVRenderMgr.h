@@ -60,8 +60,8 @@ namespace sv {
         //
         SVLockPtr m_renderLock;
         SVLockPtr m_logicLock;
-        
-    };//!namespace logic
+    };
+
 
 }//!namespace sv
 

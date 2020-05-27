@@ -9,6 +9,8 @@
 #include "SVFilterBase.h"
 #include "../../node/SVMultPassNode.h"
 
+using namespace sv;
+
 SVFilterBase::SVFilterBase(SVInst *_app)
 : SVGBase(_app){
     m_pPassNode=nullptr;

@@ -14,39 +14,39 @@
 
 namespace sv {
 
-        class SVTransGPU : public SVTrans {
-        public:
-            SVTransGPU(SVInst *_app,
-                       SVTexturePtr _t0,
-                       SVTexturePtr _t1,
-                       SVTexturePtr _t2,
-                       SVTexturePtr _tOut);
-            
-            virtual ~SVTransGPU();
-            
-            void init(s32 _w, s32 _h,f32 _angle,PICFORMATE _formate,SVTEXTYPE _tt);
-            
-            void destroy();
-            
-            void update(f32 dt);
-            
-            void render();
-            
-            void setAngle(f32 _angle);
-            
-        protected:
-            SVTexturePtr m_tex0;
-            SVTexturePtr m_tex1;
-            SVTexturePtr m_tex2;
-            SVTexturePtr m_texOut;
-            f32 m_angle;
-            SVMultPassNodePtr m_passNode;
-            SVRenderObjectPtr m_pRenderObj;
-            SVRenderMeshPtr m_pMesh;
-            SVMtlCorePtr m_pMtl;
+    class SVTransGPU : public SVTrans {
+    public:
+        SVTransGPU(SVInst *_app,
+                   SVTexturePtr _t0,
+                   SVTexturePtr _t1,
+                   SVTexturePtr _t2,
+                   SVTexturePtr _tOut);
+        
+        virtual ~SVTransGPU();
+        
+        void init(s32 _w, s32 _h,f32 _angle,PICFORMATE _formate,SVTEXTYPE _tt);
+        
+        void destroy();
+        
+        void update(f32 dt);
+        
+        void render();
+        
+        void setAngle(f32 _angle);
+        
+    protected:
+        SVTexturePtr m_tex0;
+        SVTexturePtr m_tex1;
+        SVTexturePtr m_tex2;
+        SVTexturePtr m_texOut;
+        f32 m_angle;
+        SVMultPassNodePtr m_passNode;
+        SVRenderObjectPtr m_pRenderObj;
+        SVRenderMeshPtr m_pMesh;
+        SVMtlCorePtr m_pMtl;
 
-            void createPass(s32 _w, s32 _h, f32 _angle, SVTEXTYPE _tt);
-        };
+        void createPass(s32 _w, s32 _h, f32 _angle, SVTEXTYPE _tt);
+    };
         
 }//!namespace sv
 

@@ -6,6 +6,9 @@
 //
 
 #include "SVCallbackBase.h"
+
+using namespace sv;
+
 SVCallbackBase::SVCallbackBase(SVInst *_app)
 :SVGBase(_app) {
 }

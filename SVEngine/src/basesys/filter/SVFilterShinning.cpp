@@ -14,6 +14,9 @@
 #include "../../rendercore/SVRenderer.h"
 #include "../../mtl/SVMtlShinning.h"
 #include "../../rendercore/SVRenderMgr.h"
+
+using namespace sv;
+
 SVFilterShinning::SVFilterShinning(SVInst *_app)
 :SVFilterBase(_app){
     m_type=SV_FUNC_ADBASE;

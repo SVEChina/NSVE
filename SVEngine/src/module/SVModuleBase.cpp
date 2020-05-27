@@ -7,6 +7,8 @@
 
 #include "SVModuleBase.h"
 
+using namespace sv;
+
 SVModuleBase::SVModuleBase(SVInst *_app)
 :SVEventProc(_app)
 ,m_isOpen(false){

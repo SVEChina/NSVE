@@ -8,6 +8,9 @@
 #include "SVActMtl.h"
 #include "../mtl/SVMtlCore.h"
 #include "../node/SVNode.h"
+
+using namespace sv;
+
 SVActMtl::SVActMtl(SVInst *_app):SVActTime(_app) {
     m_pNewMtl = nullptr;
     m_pOldMtl = nullptr;

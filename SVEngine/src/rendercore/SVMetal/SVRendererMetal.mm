@@ -10,6 +10,8 @@
 #include "../../app/SVInst.h"
 #include "../../base/SVDataSwap.h"
 
+using namespace sv;
+
 SVRendererMetal::SVRendererMetal(SVInstPtr _app)
 :SVRenderer(_app){
     m_pDevice = nullptr;

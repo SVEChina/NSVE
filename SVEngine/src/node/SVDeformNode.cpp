@@ -9,7 +9,7 @@
 #include "SVDeformNode.h"
 #include "../core/SVDeformImageMove.h"
 
-
+using namespace sv;
 
 SVDeformNode::SVDeformNode(SVInst *_app)
 :SVNode(_app){

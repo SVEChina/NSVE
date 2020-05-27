@@ -21,6 +21,8 @@
 #include "freetype.h"
 #endif
 
+using namespace sv;
+
 SVFontProcess::SVFontProcess(SVInst *_app)
 :SVProcess(_app) {
     m_lock = MakeSharedPtr<SVLock>();

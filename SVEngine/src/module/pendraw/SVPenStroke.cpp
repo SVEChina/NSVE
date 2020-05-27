@@ -36,6 +36,9 @@
 #include "../../node/SVSpriteNode.h"
 #include "../../node/SVScene.h"
 #include "SVPenPackData.h"
+
+using namespace sv;
+
 SVPenStroke::SVPenStroke(SVInst* _app, SVPENMODE _mode, f32 _strokeWidth, FVec4 &_strokeColor, f32 _glowWidth, FVec4 &_glowColor)
 :SVGameBase(_app) {
     m_penStrokeCurve = MakeSharedPtr<SVPenCurve>(_app);

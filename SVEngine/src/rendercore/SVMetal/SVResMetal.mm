@@ -8,6 +8,8 @@
 #include "SVResMetal.h"
 
 
+using namespace sv;
+
 //Metal RenderMesh
 //// 每次渲染都要单独创建一个CommandBuffer
 //id<MTLCommandBuffer> commandBuffer = [self.commandQueue commandBuffer];

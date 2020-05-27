@@ -14,8 +14,7 @@
 
 namespace sv {
     
-    namespace node {
-        
+
         /*
          .三维空间绘制
          .屏幕空间绘制
@@ -88,7 +87,6 @@ namespace sv {
             void fromJSON(RAPIDJSON_NAMESPACE::Value &item);
         };
         
-    
     
 }//!namespace sv
 

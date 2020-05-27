@@ -9,6 +9,8 @@
 #include "SVEventMgr.h"
 #include "../app/SVInst.h"
 
+using namespace sv;
+
 SVEventProc::SVEventProc(SVInst* _app)
 :SVGBase(_app) {
 }

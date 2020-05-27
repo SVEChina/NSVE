@@ -8,6 +8,8 @@
 #include "SVMtlLib.h"
 #include "SVMtlGLTF.h"
 
+using namespace sv;
+
 SVMtlCorePtr SVMtlLib::m_pSkinMtl = nullptr;
 
 void SVMtlLib::clear() {

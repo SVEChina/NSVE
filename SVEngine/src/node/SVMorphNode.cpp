@@ -9,6 +9,8 @@
 #include "SVCameraNode.h"
 #include "SVScene.h"
 
+using namespace sv;
+
 SVMorphNode::SVMorphNode(SVInst *_app)
 :SVNode(_app){
     ntype = "SVMorphNode";

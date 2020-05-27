@@ -9,6 +9,8 @@
 #include "SVDeformScale.h"
 #include "../work/SVTdCore.h"
 
+using namespace sv;
+
 SVDeformScale::SVDeformScale(){
     m_lock=MakeSharedPtr<SVLock>();
     m_smooth=0.0;

@@ -8,6 +8,9 @@
 #include "SVModuleSys.h"
 #include "SVModuleBase.h"
 #include "../work/SVTdCore.h"
+
+using namespace sv;
+
 SVModuleSys::SVModuleSys(SVInst *_app)
 :SVSysBase(_app) {
     m_subsysType = 8;

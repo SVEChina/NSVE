@@ -14,6 +14,8 @@
 #include "SVPictureProcess.h"
 #include "SVSensorProcess.h"
 
+using namespace sv;
+
 SVBasicSys::SVBasicSys(SVInst *_app)
 :SVSysBase(_app) {
     m_subsysType = 2;

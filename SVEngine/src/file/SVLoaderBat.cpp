@@ -10,6 +10,8 @@
 #include "../base/SVDataChunk.h"
 #include "SVFileMgr.h"
 
+using namespace sv;
+
 SVLoaderBat::SVLoaderBat(SVInst *_app)
 :SVFileLoader(_app) {
     m_dataCxt.clear();

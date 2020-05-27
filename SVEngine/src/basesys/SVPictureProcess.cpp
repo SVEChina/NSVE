@@ -25,6 +25,8 @@
 #include "../core/SVPass.h"
 #include "filter/SVFilterBase.h"
 
+using namespace sv;
+
 SVPictureProcess::SVPictureProcess(SVInst *_app)
 :SVProcess(_app){
     

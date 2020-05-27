@@ -10,6 +10,9 @@
 #include "../app/SVGlobalMgr.h"
 #include "../act/SVActBase.h"
 #include "SVActionMgr.h"
+
+using namespace sv;
+
 SVActionUnit::SVActionUnit(SVInst *_app)
 :SVAniBase(_app) {
     m_actPtr = nullptr;

@@ -15,6 +15,8 @@
 #include "../rendercore/SVRenderScene.h"
 #include "../rendercore/SVRenderCmd.h"
 
+using namespace sv;
+
 SVCameraMgr::SVCameraMgr(SVInst *_app)
 :SVSysBase(_app) {
     m_subsysType = 3;

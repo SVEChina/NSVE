@@ -1,6 +1,8 @@
 #include "SVListenBase.h"
 #include "SVTdCore.h"
 
+using namespace sv;
+
 SVListenBase::SVListenBase(SVInst* _app)
 :SVGBase(_app){
     m_listenDirty = true;

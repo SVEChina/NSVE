@@ -8,8 +8,6 @@
 
 namespace sv {
     
-   
-        
         SVBoundSphere::SVBoundSphere() {
             clear();
         }

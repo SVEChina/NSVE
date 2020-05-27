@@ -11,6 +11,8 @@
 #include "../core/SVSpine.h"
 #include "../base/SVBounds.h"
 
+using namespace sv;
+
 bool SVVisitorBase::visit(SVNodePtr _node) {
     return false;
 }

@@ -11,39 +11,37 @@
 #include "SVNode.h"
 
 namespace sv {
+
+    // face shape douyin
     
-    namespace node {
+    class SVShapeVariedNode : public SVNode {
+    public:
+        SVShapeVariedNode(SVInst *_app);
         
-        // face shape douyin
+        virtual ~SVShapeVariedNode();
         
-        class SVShapeVariedNode : public SVNode {
-        public:
-            SVShapeVariedNode(SVInst *_app);
-            
-            virtual ~SVShapeVariedNode();
-            
-            void init();
-            
-            void destroy();
-            
-            void update(f32 dt);
-            
-            void render();
-            
-            void addPass(SVPassPtr _pass);
-            
-            void clearPass();
-            
-        protected:
-            SVRenderObjectPtr m_pRenderObj;
-            SVRenderMeshPtr m_pMesh;
-            SVMtlFaceShapeVariedPtr m_pMtl;
-        protected:
-            typedef SVArray<SVPassPtr> PASSPOOL;
-            PASSPOOL m_passPool;
-            SVRenderTexturePtr m_fbo;
-            
-        };
+        void init();
+        
+        void destroy();
+        
+        void update(f32 dt);
+        
+        void render();
+        
+        void addPass(SVPassPtr _pass);
+        
+        void clearPass();
+        
+    protected:
+        SVRenderObjectPtr m_pRenderObj;
+        SVRenderMeshPtr m_pMesh;
+        SVMtlFaceShapeVariedPtr m_pMtl;
+    protected:
+        typedef SVArray<SVPassPtr> PASSPOOL;
+        PASSPOOL m_passPool;
+        SVRenderTexturePtr m_fbo;
+        
+    };
         
     
     

@@ -8,6 +8,8 @@
 #include "SVImageUsingMove.h"
 #include "../work/SVTdCore.h"
 
+using namespace sv;
+
 SVImageUsingMove::SVImageUsingMove(){
     m_lock=MakeSharedPtr<SVLock>();
 }

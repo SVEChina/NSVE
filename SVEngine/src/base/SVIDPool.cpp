@@ -1,5 +1,7 @@
 #include "SVIDPool.h"
 
+using namespace sv;
+
 SVIDPool::SVIDPool(){
     m_initialized = 0;
     m_seed = 0;

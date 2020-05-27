@@ -12,18 +12,13 @@
 
 namespace sv {
     
-
-        
-        DECLARE_SHAREPTR(SVTrans);
-        DECLARE_SHAREPTR(SVTransCPU);
-        DECLARE_SHAREPTR(SVTransGPU);
-        //
-        DECLARE_SHAREPTR(StreamInCore);
-        //
-        
-
-    
+    DECLARE_SHAREPTR(SVTrans);
+    DECLARE_SHAREPTR(SVTransCPU);
+    DECLARE_SHAREPTR(SVTransGPU);
     //
+    DECLARE_SHAREPTR(StreamInCore);
+    //
+
     DECLARE_SHAREPTR(SVOutMission);
     DECLARE_SHAREPTR(SVOutMissionNor);
 

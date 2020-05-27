@@ -8,6 +8,9 @@
 #include "SVParseMusic.h"
 #include "../module/SVEffectMusic.h"
 #include "../app/SVInst.h"
+
+using namespace sv;
+
 SVEffectMusicPtr SVParseMusic::parseMusic(SVInst *app, RAPIDJSON_NAMESPACE::Value &item, s32 _resid, cptr8 _path){
     SVEffectMusicPtr effectMusic = MakeSharedPtr<SVEffectMusic>(app);
     effectMusic->setRootPath(_path);

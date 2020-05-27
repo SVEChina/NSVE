@@ -17,6 +17,8 @@
 #include "../../base/SVCompileConfig.h"
 #include "../../mtl/SVTexture.h"
 
+using namespace sv;
+
 SVRendererGL::SVRendererGL(SVInstPtr _app)
 :SVRenderer(_app){
     //m_pRState = MakeSharedPtr<SVRenderStateGL>(_app);

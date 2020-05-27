@@ -2,20 +2,10 @@
 
 namespace sv {
     
-   
-        /******************************************************************************\
-         *
-         * Generic simd processor
-         *
-         \******************************************************************************/
-        
-        //
         class SVSimdGeneric {
-            
         public:
-            
-            virtual ~SVSimdGeneric() { }
-            
+            virtual ~SVSimdGeneric() {
+            }
             // codepath
             virtual const char *name() const { return "Generic"; }
             
@@ -316,8 +306,7 @@ namespace sv {
             
             const u8 *s = (const u8*)src;
             for(size_t i = num; i > 0; i--) {
-                
-                ::mul(res,m,*(const FVec3*)s);
+                sv::mul(res,m,*(const FVec3*)s);
                 if(min.x > res.x) min.x = res.x;
                 if(max.x < res.x) max.x = res.x;
                 if(min.y > res.y) min.y = res.y;
@@ -339,7 +328,7 @@ namespace sv {
             const u8 *s = (const u8*)src;
             for(size_t i = num; i > 0; i--) {
                 
-                ::mul(res,m,*(const FVec4*)s);
+                sv::mul(res,m,*(const FVec4*)s);
                 if(min.x > res.x) min.x = res.x;
                 if(max.x < res.x) max.x = res.x;
                 if(min.y > res.y) min.y = res.y;
@@ -360,7 +349,7 @@ namespace sv {
             const u8 *s = (const u8*)src;
             for(size_t i = num; i > 0; i--) {
                 
-                *(f32*)d = ::dot(v,*(const FVec3*)s);
+                *(f32*)d = sv::dot(v,*(const FVec3*)s);
                 
                 s += src_stride;
                 d += ret_stride;
@@ -373,7 +362,7 @@ namespace sv {
             const u8 *s = (const u8*)src;
             for(size_t i = num; i > 0; i--) {
                 
-                *(f32*)d = ::dot(v,*(const FVec4*)s);
+                *(f32*)d = sv::dot(v,*(const FVec4*)s);
                 
                 s += src_stride;
                 d += ret_stride;
@@ -428,7 +417,7 @@ namespace sv {
             const u8 *s = (const u8*)src;
             for(size_t i = num; i > 0; i--) {
                 
-                ::mul(res,m,*(const FVec3*)s);
+                sv::mul(res,m,*(const FVec3*)s);
                 *(FVec3*)d = res;
                 
                 s += src_stride;
@@ -444,7 +433,7 @@ namespace sv {
             const u8 *s = (const u8*)src;
             for(size_t i = num; i > 0; i--) {
                 
-                ::mul(res,m,*(const FVec4*)s);
+                sv::mul(res,m,*(const FVec4*)s);
                 *(FVec4*)d = res;
                 
                 s += src_stride;
@@ -476,7 +465,7 @@ namespace sv {
             const u8 *s = (const u8*)src;
             for(size_t i = num; i > 0; i--) {
                 
-                ::mul(res,m,*(const DVec3*)s);
+                sv::mul(res,m,*(const DVec3*)s);
                 *(DVec3*)d = res;
                 
                 s += src_stride;
@@ -492,7 +481,7 @@ namespace sv {
             const u8 *s = (const u8*)src;
             for(size_t i = num; i > 0; i--) {
                 
-                ::mul(res,m,*(const DVec4*)s);
+                sv::mul(res,m,*(const DVec4*)s);
                 *(DVec4*)d = res;
                 
                 s += src_stride;
@@ -509,7 +498,7 @@ namespace sv {
             const u8 *s = (const u8*)src;
             for(size_t i = num; i > 0; i--) {
                 
-                ::proj(res,m,*(const FVec3*)s);
+                proj(res,m,*(const FVec3*)s);
                 *(FVec3*)d = res;
                 
                 s += src_stride;
@@ -525,7 +514,7 @@ namespace sv {
             const u8 *s = (const u8*)src;
             for(size_t i = num; i > 0; i--) {
                 
-                ::proj(res,m,*(const FVec4*)s);
+                proj(res,m,*(const FVec4*)s);
                 *(FVec4*)d = res;
                 
                 s += src_stride;
@@ -639,9 +628,9 @@ namespace sv {
                 row_2.z += matrix->m22 * weight;
             }
             
-            ret.x = ::dot(src,row_0);
-            ret.y = ::dot(src,row_1);
-            ret.z = ::dot(src,row_2);
+            ret.x = sv::dot(src,row_0);
+            ret.y = sv::dot(src,row_1);
+            ret.z = sv::dot(src,row_2);
         }
         
         void SVSimdGeneric::skinningMat4(FVec3 &ret,const FMat4 **matrices,const f32 *weights,s32 num,const FVec3 &src) const {
@@ -680,9 +669,9 @@ namespace sv {
                 row_2.w += matrix->m23 * weight;
             }
             
-            ret.x = ::dot(src,row_0);
-            ret.y = ::dot(src,row_1);
-            ret.z = ::dot(src,row_2);
+            ret.x = sv::dot(src,row_0);
+            ret.y = sv::dot(src,row_1);
+            ret.z = sv::dot(src,row_2);
         }
         
         //
@@ -3648,7 +3637,6 @@ namespace sv {
             simd->eliminate(ret,column,factor,rows,num);
         }
 
-    
-    
+
 }//namespace sv
 

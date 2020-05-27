@@ -13,25 +13,21 @@
 
 namespace sv {
     
-    
+    class SVFacePointNode : public SVNode {
+        public :
+        SVFacePointNode(SVInst *_app);
         
-        class SVFacePointNode : public SVNode {
-            public :
-            SVFacePointNode(SVInst *_app);
-            
-            ~SVFacePointNode();
-            
-            void update(f32 _dt);
-            
-            void render();
-        protected:
-            SVRenderObjectPtr m_pRenderObj;
-            SVRenderMeshPtr m_pMesh;
-            SVMtlCorePtr m_pMtl;
-        };
-   
-    
-    }
+        ~SVFacePointNode();
+        
+        void update(f32 _dt);
+        
+        void render();
+    protected:
+        SVRenderObjectPtr m_pRenderObj;
+        SVRenderMeshPtr m_pMesh;
+        SVMtlCorePtr m_pMtl;
+    };
+
 }
 
 #endif /* SV_FACEPOINTNODE_H */

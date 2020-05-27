@@ -7,6 +7,9 @@
 
 #include "SVParseAniTrigger.h"
 #include "../act/SVAniTrigger.h"
+
+using namespace sv;
+
 SVAniTriggerPtr SVParseAniTrigger::parseAniTrigger(SVInst *_app, RAPIDJSON_NAMESPACE::Value &item, s32 _resid, cptr8 _path) {
     SVAniTriggerPtr trigger = MakeSharedPtr<SVAniTrigger>(_app);
     trigger->init();

@@ -6,7 +6,10 @@
 //
 
 #include "SVMtlNocolor.h"
+
 #include "../rendercore/SVRenderer.h"
+
+using namespace sv;
 
 //
 SVMtlNocolor::SVMtlNocolor(SVInst *_app)

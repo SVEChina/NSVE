@@ -22,6 +22,8 @@
 #include "../mtl/SVTextureIOS.h"
 #endif
 
+using namespace sv;
+
 //读数据
 SVRenderCmdStreamOutNor::SVRenderCmdStreamOutNor(SVInst *_app)
 : mApp(_app) {

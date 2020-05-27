@@ -35,6 +35,7 @@
 #include "../core/SVMathHelper.h"
 #include "SVDeformScale.h"
 
+using namespace sv;
 
 SVParamDeform::SVParamDeform(){
 }

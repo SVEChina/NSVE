@@ -23,6 +23,9 @@
 #include "../rendercore/SVRenderMgr.h"
 #include "../rendercore/SVRenderObject.h"
 #include "../rendercore/SVRenderMesh.h"
+
+using namespace sv;
+
 #define SV_BMFONT_MAX_NUM  20
 #define DEFSPACE 40
 //

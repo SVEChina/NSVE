@@ -12,6 +12,8 @@
 #include "../rendercore/SVRenderMesh.h"
 #include "../rendercore/SVRenderObject.h"
 
+using namespace sv;
+
 #define OBJECT_PARTICLES_EPSILON	1e-3f
 
 //********************************* SVParticlesNode ********************************************

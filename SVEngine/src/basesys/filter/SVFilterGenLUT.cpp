@@ -17,6 +17,7 @@
 #include "../../mtl/SVMtlGradientMap.h"
 #include "../../rendercore/SVRenderMgr.h"
 
+using namespace sv;
 
 SVFilterGenLUT::SVFilterGenLUT(SVInst *_app)
 :SVFilterBase(_app){

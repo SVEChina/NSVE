@@ -8,6 +8,8 @@
 #include "SVLoaderObj.h"
 #include "../core/SVModel.h"
 
+using namespace sv;
+
 SVLoaderObj::SVLoaderObj(SVInst *_app)
 :SVFileLoader(_app) {
 }

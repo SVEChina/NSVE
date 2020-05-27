@@ -6,6 +6,9 @@
 //
 
 #include "SVFont.h"
+
+using namespace sv;
+
 SVFont::SVFont(SVInst *_app)
 :SVGBase(_app) {
 

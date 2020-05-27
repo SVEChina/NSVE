@@ -10,6 +10,8 @@
 #include "../mtl/SVTexture.h"
 #include "../rendercore/SVRenderer.h"
 
+using namespace sv;
+
 SVMtlGlitch::SVMtlGlitch(SVInst *_app)
 :SVMtlADFilterBase(_app,"filterglitch") {
     m_drift = nullptr;

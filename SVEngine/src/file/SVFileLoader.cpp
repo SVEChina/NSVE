@@ -7,6 +7,8 @@
 
 #include "SVFileLoader.h"
 
+using namespace sv;
+
 SVFileLoader::SVFileLoader(SVInst *_app)
 :SVGBase(_app) {
 

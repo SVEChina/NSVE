@@ -19,89 +19,85 @@
 typedef void (*pick_callback)(void* _obj,void* _node,int _flag);
 
 namespace sv {
-    
-    namespace node {
+
+    class SVVisitRayPick : public SVVisitorBase {
+    public:
+        SVVisitRayPick(FVec3& _rayStart,FVec3& _rayEnd);
         
-        class SVVisitRayPick : public SVVisitorBase {
-        public:
-            SVVisitRayPick(FVec3& _rayStart,FVec3& _rayEnd);
-            
-            ~SVVisitRayPick();
-            
-            virtual bool visit(SVNodePtr _node);
-            
-            SVNodePtr getCrossNode(FVec3& _campos);
-            
-        protected:
-            FVec3 m_rayStart;
-            FVec3 m_rayEnd;
-            typedef SVArray<SVNodePtr> NodeArray;
-            NodeArray m_nodearray;
-        };
-    
-        class SVVisitRayPickUI : public SVVisitRayPick {
-        public:
-            SVVisitRayPickUI(FVec3& _rayStart,FVec3& _rayEnd);
-            
-            ~SVVisitRayPickUI();
-            
-            virtual bool visit(SVNodePtr _node);
-            
-            SVNodePtr getPickNode();
-            
-        protected:
-            SVNodePtr m_pNode;
-        };
-    }
-    
-    
+        ~SVVisitRayPick();
         
-        class SVPickProcess : public SVProcess {
-        public:
-            SVPickProcess(SVInst* _app);
-            
-            ~SVPickProcess();
-            //
-            void enablePick();
-            //
-            void disablePick();
-            //
-            void clear();
-            //场景拾取
-            bool pickScene(SVCameraNodePtr _cam,s32 _sx,s32 _sy);
-            //UI拾取
-            bool pickUI(s32 _sx,s32 _sy);
-            //移动节点
-            void moveNode(SVCameraNodePtr _cam,s32 _sx,s32 _sy);
-            //获取交叉点
-            bool getCrossPoint(SVCameraNodePtr _cam,s32 _sx,s32 _sy,FVec3& _crosspt);
-            //
-            bool getCrossPointUI(SVCameraNodePtr _cam,s32 _sx,s32 _sy,FVec3& _crosspt);
-            //
-            bool getCrossPointWithPlane(SVCameraNodePtr _cam,s32 _sx,s32 _sy,FVec3& _crosspt, FVec4& _plane);
-            //
-            SVNodePtr getPickNode();
-            //
-            SVNodePtr getPickUI();
-            //
-            virtual bool procEvent(SVEventPtr _event);
-            
-            void transScreenPtToWorld(FVec2 &_screenPt, FVec3 &_worldPt);
-            
-        protected:
-            //
-            void _pick(SVNodePtr _node);
-            //
-            void _pickUI(SVNodePtr _node);
-            //获取射线
-            bool _getRay(SVCameraNodePtr _cam,s32 _sx,s32 _sy,FVec3& _rayStart,FVec3& _rayEnd);
-            bool _getRayMat(SVCameraNodePtr _cam,FMat4 _vpMat,s32 _sx,s32 _sy,FVec3& _rayStart,FVec3& _rayEnd);
-            //
-            bool m_enablePick;
-            SVNodePtr m_curPickNode;
-            SVNodePtr m_curPickUI;
-        };
+        virtual bool visit(SVNodePtr _node);
         
+        SVNodePtr getCrossNode(FVec3& _campos);
+        
+    protected:
+        FVec3 m_rayStart;
+        FVec3 m_rayEnd;
+        typedef SVArray<SVNodePtr> NodeArray;
+        NodeArray m_nodearray;
+    };
+
+    class SVVisitRayPickUI : public SVVisitRayPick {
+    public:
+        SVVisitRayPickUI(FVec3& _rayStart,FVec3& _rayEnd);
+        
+        ~SVVisitRayPickUI();
+        
+        virtual bool visit(SVNodePtr _node);
+        
+        SVNodePtr getPickNode();
+        
+    protected:
+        SVNodePtr m_pNode;
+    };
+
+
+    class SVPickProcess : public SVProcess {
+    public:
+        SVPickProcess(SVInst* _app);
+        
+        ~SVPickProcess();
+        //
+        void enablePick();
+        //
+        void disablePick();
+        //
+        void clear();
+        //场景拾取
+        bool pickScene(SVCameraNodePtr _cam,s32 _sx,s32 _sy);
+        //UI拾取
+        bool pickUI(s32 _sx,s32 _sy);
+        //移动节点
+        void moveNode(SVCameraNodePtr _cam,s32 _sx,s32 _sy);
+        //获取交叉点
+        bool getCrossPoint(SVCameraNodePtr _cam,s32 _sx,s32 _sy,FVec3& _crosspt);
+        //
+        bool getCrossPointUI(SVCameraNodePtr _cam,s32 _sx,s32 _sy,FVec3& _crosspt);
+        //
+        bool getCrossPointWithPlane(SVCameraNodePtr _cam,s32 _sx,s32 _sy,FVec3& _crosspt, FVec4& _plane);
+        //
+        SVNodePtr getPickNode();
+        //
+        SVNodePtr getPickUI();
+        //
+        virtual bool procEvent(SVEventPtr _event);
+        
+        void transScreenPtToWorld(FVec2 &_screenPt, FVec3 &_worldPt);
+        
+    protected:
+        //
+        void _pick(SVNodePtr _node);
+        //
+        void _pickUI(SVNodePtr _node);
+        //获取射线
+        bool _getRay(SVCameraNodePtr _cam,s32 _sx,s32 _sy,FVec3& _rayStart,FVec3& _rayEnd);
+        bool _getRayMat(SVCameraNodePtr _cam,FMat4 _vpMat,s32 _sx,s32 _sy,FVec3& _rayStart,FVec3& _rayEnd);
+        //
+        bool m_enablePick;
+        SVNodePtr m_curPickNode;
+        SVNodePtr m_curPickUI;
+    };
+    
     
 
 }//!namespace sv

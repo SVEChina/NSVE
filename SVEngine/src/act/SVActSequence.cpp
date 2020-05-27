@@ -6,6 +6,9 @@
 //
 
 #include "SVActSequence.h"
+
+using namespace sv;
+
 SVActSequence::SVActSequence(SVInst *_app):SVActBase(_app) {
     m_acttype = "SVActSequence";
     m_end = false;

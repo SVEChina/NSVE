@@ -7,6 +7,8 @@
 
 #include "SVFileWriter.h"
 
+using namespace sv;
+
 SVFileWriter::SVFileWriter(SVInst *_app)
 :SVGBase(_app)
 ,m_fp(nullptr){

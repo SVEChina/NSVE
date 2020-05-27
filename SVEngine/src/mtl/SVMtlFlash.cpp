@@ -10,6 +10,8 @@
 #include "../mtl/SVTexture.h"
 #include "../rendercore/SVRenderer.h"
 
+using namespace sv;
+
 SVMtlFlash::SVMtlFlash(SVInst *_app)
 :SVMtlADFilterBase(_app,"filterflash") {
     _resetTime();

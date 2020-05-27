@@ -29,6 +29,8 @@
 #include "../module/SVEffectPackage.h"
 #include "../basesys/filter/SVParseLUTFilter.h"
 
+using namespace sv;
+
 SVParseMain::SVParseMain(SVInst *_app)
 :SVGBase(_app) {
     m_app = _app;

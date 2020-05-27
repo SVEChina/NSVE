@@ -36,7 +36,6 @@ namespace sv {
             f32 m_intensity;
         };
         
-    };//!namespace logic
 }//!namespace sv
 
 

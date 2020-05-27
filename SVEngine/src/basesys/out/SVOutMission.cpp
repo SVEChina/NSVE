@@ -7,6 +7,8 @@
 
 #include "SVOutMission.h"
 
+using namespace sv;
+
 SVOutMission::SVOutMission(SVInst* _app,cptr8 _name)
 :SVEventProc(_app)
 ,m_name(_name)

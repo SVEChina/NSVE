@@ -18,6 +18,8 @@
 #include "../event/SVEventMgr.h"
 #include "../event/SVEvent.h"
 
+using namespace sv;
+
 #define SV_BITFONT_MAX_NUM  10
 //
 SVBitFontNode::SVBitFontNode(SVInst *_app)

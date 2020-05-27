@@ -165,7 +165,7 @@ namespace sv {
             f32 m_smooth;
             
         };
-    }
+    
 }
 
 #endif /* SV_FACEBEAUTYFILTER_H */

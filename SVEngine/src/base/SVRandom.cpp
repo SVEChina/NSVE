@@ -18,6 +18,7 @@
 
 #include "SVRandom.h"
 
+using namespace sv;
 
 SVRandom::SVRandom() {
 	setSeed((u32)time(nullptr));

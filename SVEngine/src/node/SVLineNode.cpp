@@ -14,6 +14,8 @@
 #include "../rendercore/SVRenderMesh.h"
 #include "../rendercore/SVRenderMgr.h"
 
+using namespace sv;
+
 SVLineNode::SVLineNode(SVInst *_app)
 : SVNode(_app) {
     ntype = "SVLineNode";

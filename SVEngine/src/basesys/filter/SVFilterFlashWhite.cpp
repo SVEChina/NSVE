@@ -14,6 +14,9 @@
 #include "../../rendercore/SVRenderer.h"
 #include "../../mtl/SVMtlFlashWhite.h"
 #include "../../rendercore/SVRenderMgr.h"
+
+using namespace sv;
+
 SVFilterFlashWhite::SVFilterFlashWhite(SVInst *_app)
 :SVFilterBase(_app){
     m_type = SV_FUNC_FLASHWHITE;
