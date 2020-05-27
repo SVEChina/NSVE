@@ -48,7 +48,7 @@ bool SVFilterShake::create(){
     SVPassPtr t_pass1 = MakeSharedPtr<SVPass>();
     m_mtlShake = MakeSharedPtr<SVMtlShake>(mApp);
     m_mtlShake->setTexcoordFlip(1.0f, 1.0f);
-    t_pass1->setMtl(m_mtlShake);
+    //t_pass1->setMtl(m_mtlShake);
     t_pass1->setInTex(0,E_TEX_MAIN);
     t_pass1->setOutTex(E_TEX_FILTER_SHAKE);
     m_pPassNode->addPass(t_pass1);
@@ -56,7 +56,7 @@ bool SVFilterShake::create(){
     SVPassPtr t_pass2 = MakeSharedPtr<SVPass>();
     SVMtlCorePtr t_mtl_back= MakeSharedPtr<SVMtlCore>(mApp,"screennor");
     t_mtl_back->setTexcoordFlip(1.0f, 1.0f);
-    t_pass2->setMtl(t_mtl_back);
+    //t_pass2->setMtl(t_mtl_back);
     t_pass2->setInTex(0, E_TEX_FILTER_SHAKE);
     t_pass2->setOutTex(E_TEX_MAIN);
     m_pPassNode->addPass(t_pass2);

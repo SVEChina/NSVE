@@ -41,7 +41,6 @@ SVGlobalMgr::SVGlobalMgr(SVInst *_app)
     m_pBasicSys = nullptr;
     m_pSceneMgr = nullptr;
     m_pCameraMgr = nullptr;
-    m_pUIMgr = nullptr;
     m_pShaderMgr = nullptr;
     m_pTexMgr = nullptr;
     m_pRenderMgr = nullptr;
@@ -60,7 +59,6 @@ SVGlobalMgr::~SVGlobalMgr() {
     m_pBasicSys = nullptr;
     m_pSceneMgr = nullptr;
     m_pCameraMgr = nullptr;
-    m_pUIMgr = nullptr;
     m_pShaderMgr = nullptr;
     m_pTexMgr = nullptr;
     m_pRenderMgr = nullptr;
@@ -138,11 +136,6 @@ void SVGlobalMgr::destroy() {
         //识别模块
         m_pDetectMgr->destroy();
         SV_LOG_ERROR("SVDetectMgr:destroy sucess");
-    }
-    //UI析构
-    if( m_pUIMgr ) {
-        m_pUIMgr->destroy();
-        SV_LOG_ERROR("m_pUIMgr:destroy sucess");
     }
     //相机析构
     if (m_pCameraMgr) {
@@ -239,8 +232,6 @@ void SVGlobalMgr::update(f32 dt) {
     timeTag(false,"scene cost");
     m_pDeformSys->update(dt);           //变形更新
     timeTag(false,"deform cost");
-    m_pUIMgr->update(dt);               //UI更新
-    timeTag(false,"ui cost");
     m_pTexMgr->update(dt);              //删除不用的纹理
     timeTag(false,"texmgr cost");
 }

@@ -204,74 +204,74 @@ void SVParticlesNode::update(f32 ifps) {
 void SVParticlesNode::render() {
     if (!m_visible)
         return;
-    SVCameraNodePtr t_camera = mApp->getCameraMgr()->getMainCamera();
-    if(!t_camera)
-        return ;
-    const FVec3 &camera_position = t_camera->getPosition();
-    const FMat4 &modelview = t_camera->getViewMatObj();// m_absolutMat*t_camera->getViewMatObj(); 粒子发射出来就是world 所以就不需要乘节点的矩阵了
-    // level of detail
-    f32 distance = (camera_position - m_postion).length();
-    f32 t_max_dis = 1000.0f;
-    f32 t_min_dis = 10.0f;
-    f32 fade = 0.5f; //根据视点到目标的距离来计算 fade值
-    if(fade < EPSILON) {
-        return ;
-    }
-    // SVParticles transformation
-    m_mtl_particle->m_p_transform = modelview * translate(world_offset);
-    // SVParticles radius
-    m_mtl_particle->m_p_radius = m_pParticles->getRadiusMean();
-    // SVParticles fade
-    m_mtl_particle->m_p_fade = m_pParticles->getFade();//fade * fade;
-    //设置纹理
-    m_mtl_particle->setTexture(0,m_diffuse);
-    m_mtl_particle->setTexture(1,m_atten);
-    //设置环境光
-    m_mtl_particle->m_ambient_color = FVec4(1.0f,1.0f,1.0f,1.0f);
-    //设置漫反色
-    m_mtl_particle->m_diffuse_color = FVec4(1.0f,1.0f,1.0f,1.0f);
-    //设置融合
-    m_mtl_particle->setBlendEnable(true);
-    m_mtl_particle->setBlendState(MTL_BLEND_ONE,MTL_BLEND_ONE_MINUS_SRC_ALPHA);
-    //生产粒子数据
-    if( m_pParticles && m_pMesh) {
-        m_pParticles->render(modelview, camera_position);
-        //计算-更新索引数据
-        s32 t_p_num = m_pParticles->getParticleNum();
-        if(t_p_num == 0)
-            return ;
-        s32 t_index_num = t_p_num*6;
-        s32 t_index_size = t_index_num*sizeof(u16);
-        s32 t_ex_size = t_index_size * 2;
-        m_pIndexData->extendSize(t_ex_size);
-        m_pIndexData->lockData();
-        u16 *t_indices  = (u16 *)(m_pIndexData->getData());
-        for(s32 i=0;i<t_p_num;i++) {
-            t_indices[0] = i*4 + 0;
-            t_indices[1] = i*4 + 1;
-            t_indices[2] = i*4 + 2;
-            t_indices[3] = i*4 + 2;
-            t_indices[4] = i*4 + 3;
-            t_indices[5] = i*4 + 0;
-            t_indices += 6;
-        }
-        m_pIndexData->unlockData(t_index_size);
-        m_pMesh->setIndexData(m_pIndexData,t_index_num);
-        //更新顶点数据
-        m_pVertData->writeData(m_pParticles->pVertex,
-                               m_pParticles->m_vertexBufNum*sizeof(V3_PARTICLE));
-        m_pMesh->setVertexDataNum(m_pParticles->m_vertexBufNum);
-        m_pMesh->setVertexData(m_pVertData);
-    }
-    //
-    SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
-    if (m_pRenderObj) {
-        m_pRenderObj->setMesh(m_pMesh);
-        m_pRenderObj->setMtl(m_mtl_particle);
-        m_pRenderObj->pushCmd(t_rs, m_rsType, "SVParticlesNode");
-    }
-    //渲染虚拟的东西
-    renderVisualizer();
+//    SVCameraNodePtr t_camera = mApp->getCameraMgr()->getMainCamera();
+//    if(!t_camera)
+//        return ;
+//    const FVec3 &camera_position = t_camera->getPosition();
+//    const FMat4 &modelview = t_camera->getViewMatObj();// m_absolutMat*t_camera->getViewMatObj(); 粒子发射出来就是world 所以就不需要乘节点的矩阵了
+//    // level of detail
+//    f32 distance = (camera_position - m_postion).length();
+//    f32 t_max_dis = 1000.0f;
+//    f32 t_min_dis = 10.0f;
+//    f32 fade = 0.5f; //根据视点到目标的距离来计算 fade值
+//    if(fade < EPSILON) {
+//        return ;
+//    }
+//    // SVParticles transformation
+//    m_mtl_particle->m_p_transform = modelview * translate(world_offset);
+//    // SVParticles radius
+//    m_mtl_particle->m_p_radius = m_pParticles->getRadiusMean();
+//    // SVParticles fade
+//    m_mtl_particle->m_p_fade = m_pParticles->getFade();//fade * fade;
+//    //设置纹理
+//    m_mtl_particle->setTexture(0,m_diffuse);
+//    m_mtl_particle->setTexture(1,m_atten);
+//    //设置环境光
+//    m_mtl_particle->m_ambient_color = FVec4(1.0f,1.0f,1.0f,1.0f);
+//    //设置漫反色
+//    m_mtl_particle->m_diffuse_color = FVec4(1.0f,1.0f,1.0f,1.0f);
+//    //设置融合
+//    m_mtl_particle->setBlendEnable(true);
+//    m_mtl_particle->setBlendState(MTL_BLEND_ONE,MTL_BLEND_ONE_MINUS_SRC_ALPHA);
+//    //生产粒子数据
+//    if( m_pParticles && m_pMesh) {
+//        m_pParticles->render(modelview, camera_position);
+//        //计算-更新索引数据
+//        s32 t_p_num = m_pParticles->getParticleNum();
+//        if(t_p_num == 0)
+//            return ;
+//        s32 t_index_num = t_p_num*6;
+//        s32 t_index_size = t_index_num*sizeof(u16);
+//        s32 t_ex_size = t_index_size * 2;
+//        m_pIndexData->extendSize(t_ex_size);
+//        m_pIndexData->lockData();
+//        u16 *t_indices  = (u16 *)(m_pIndexData->getData());
+//        for(s32 i=0;i<t_p_num;i++) {
+//            t_indices[0] = i*4 + 0;
+//            t_indices[1] = i*4 + 1;
+//            t_indices[2] = i*4 + 2;
+//            t_indices[3] = i*4 + 2;
+//            t_indices[4] = i*4 + 3;
+//            t_indices[5] = i*4 + 0;
+//            t_indices += 6;
+//        }
+//        m_pIndexData->unlockData(t_index_size);
+//        m_pMesh->setIndexData(m_pIndexData,t_index_num);
+//        //更新顶点数据
+//        m_pVertData->writeData(m_pParticles->pVertex,
+//                               m_pParticles->m_vertexBufNum*sizeof(V3_PARTICLE));
+//        m_pMesh->setVertexDataNum(m_pParticles->m_vertexBufNum);
+//        m_pMesh->setVertexData(m_pVertData);
+//    }
+//    //
+//    SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
+//    if (m_pRenderObj) {
+//        m_pRenderObj->setMesh(m_pMesh);
+//        m_pRenderObj->setMtl(m_mtl_particle);
+//        m_pRenderObj->pushCmd(t_rs, m_rsType, "SVParticlesNode");
+//    }
+//    //渲染虚拟的东西
+//    renderVisualizer();
     //
     SVNode::render();
 }

@@ -63,10 +63,6 @@ void SVMesh::setRenderMesh(SVRenderMeshPtr _rmesh) {
     m_pRenderMesh = _rmesh;
 }
 
-void SVMesh::setMtl(SVMtlCorePtr _mtl) {
-    m_pMtl = _mtl;
-}
-
 SVMtlCorePtr SVMesh::getMtl() {
     return m_pMtl;
 }

@@ -142,9 +142,7 @@ namespace sv {
             inline void setPeronID(s32 _personID){ m_personID = _personID;}
             inline s32  getPersonID(){ return m_personID; }
             inline bool getIsMipMap(){ return m_enableMipMap; }
-            //设置材质
-            void setMtl(SVMtlCorePtr _mtl);
-            
+
             //获取材质
             SVMtlCorePtr getMtl();
             

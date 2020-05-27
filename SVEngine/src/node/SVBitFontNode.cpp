@@ -51,24 +51,24 @@ SVBitFontNode::~SVBitFontNode() {
 
 void SVBitFontNode::update(f32 dt) {
     SVNode::update(dt);
-    if(m_fontDirty){
-        m_fontDirty = false;
-        _refresh();
-    }
-    if (m_pRenderObj && m_pMesh ) {
-        //材质独立性
-        SVMtlCorePtr t_mtl = MakeSharedPtr<SVMtlCore>(mApp, "normal2d_c");
-        t_mtl->setBlendEnable(true);
-        t_mtl->setBlendState(MTL_BLEND_ONE, MTL_BLEND_ONE_MINUS_SRC_ALPHA);
-        if (m_texture) {
-            t_mtl->setTexture(0,m_texture);
-        }
-        t_mtl->setModelMatrix(m_absolutMat.get());
-        t_mtl->setTexcoordFlip(1.0, -1.0f);
-        t_mtl->update(dt);
-        m_pRenderObj->setMesh(m_pMesh);
-        m_pRenderObj->setMtl(t_mtl);
-    }
+//    if(m_fontDirty){
+//        m_fontDirty = false;
+//        _refresh();
+//    }
+//    if (m_pRenderObj && m_pMesh ) {
+//        //材质独立性
+//        SVMtlCorePtr t_mtl = MakeSharedPtr<SVMtlCore>(mApp, "normal2d_c");
+//        t_mtl->setBlendEnable(true);
+//        t_mtl->setBlendState(MTL_BLEND_ONE, MTL_BLEND_ONE_MINUS_SRC_ALPHA);
+//        if (m_texture) {
+//            t_mtl->setTexture(0,m_texture);
+//        }
+//        t_mtl->setModelMatrix(m_absolutMat.get());
+//        t_mtl->setTexcoordFlip(1.0, -1.0f);
+//        t_mtl->update(dt);
+//        m_pRenderObj->setMesh(m_pMesh);
+//        m_pRenderObj->setMtl(t_mtl);
+//    }
 }
 
 

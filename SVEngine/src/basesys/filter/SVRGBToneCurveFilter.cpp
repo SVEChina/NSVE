@@ -50,7 +50,7 @@ bool SVRGBToneCurveFilter::create() {
     m_mtl_rgba->setTexcoordFlip(1.0f, 1.0f);
     m_mtl_rgba->setTexSizeIndex(1,0.5/t_w,0.5/ t_h);
     SVPassPtr t_pass = MakeSharedPtr<SVPass>();
-    t_pass->setMtl(m_mtl_rgba);
+    //t_pass->setMtl(m_mtl_rgba);
     t_pass->setInTex(0, E_TEX_MAIN);
     t_pass->setInTex(1, texrgb);
     t_pass->setOutTex(E_TEX_HELP0);
@@ -59,7 +59,7 @@ bool SVRGBToneCurveFilter::create() {
     m_mtl_back = MakeSharedPtr<SVMtlCore>(mApp,"screennor");
     m_mtl_back->setTexcoordFlip(1.0f, 1.0f);
     t_pass = MakeSharedPtr<SVPass>();
-    t_pass->setMtl(m_mtl_back);
+    //t_pass->setMtl(m_mtl_back);
     t_pass->setInTex(0, E_TEX_HELP0);
     t_pass->setOutTex( E_TEX_MAIN );
     m_pPassNode->addPass(t_pass);

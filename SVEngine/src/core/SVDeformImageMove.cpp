@@ -89,56 +89,56 @@ SVDeformImageMove::~SVDeformImageMove(){
 }
 
 void SVDeformImageMove::init(SVTexturePtr _intex,SVTexturePtr _texout){
-    SVRendererPtr t_renderer =  mApp->getRenderer();
-    if(t_renderer && _intex && _texout){
-        m_tt_w = _intex->getwidth();
-        m_tt_h = _intex->getheight();
-       
-        _initPoint();
-        t_renderer->createSVTex(E_TEX_FILTER_DEFORM02, m_tt_w, m_tt_h, GL_RGBA);
-        SVTexturePtr t_tex = mApp->getRenderer()->getSVTex(E_TEX_FILTER_DEFORM02);
-        m_fbo = MakeSharedPtr<SVRenderTexture>(mApp,
-                                               t_tex,
-                                               false,
-                                               false);
-        mApp->getRenderMgr()->pushRCmdCreate(m_fbo);
-       
-        //设置该fbo的矩阵关系
-        SVCameraNode t_camera(mApp);
-        t_camera.resetCamera(m_tt_w, m_tt_h);//120.0f error by fyz
-        
-        m_fbo->setLink(true);
-        m_fbo->setProjMat(t_camera.getProjectMatObj());
-        m_fbo->setViewMat(t_camera.getViewMatObj());
-       
-        //
-        m_passDeform = MakeSharedPtr<SVPass>();
-        m_passDeform->setMtl(m_pMtlBg);
-        m_passDeform->setMesh(m_pMeshBg);
-        m_passDeform->setInTex(0,_intex);
-        m_passDeform->setOutTex(E_TEX_FILTER_DEFORM02);
-        
-        SVMtlCorePtr t_mtl = MakeSharedPtr<SVMtlCore>(mApp, "normal2dcolor");
-        t_mtl->setBlendEnable(false);
-        t_mtl->setBlendState(MTL_BLEND_ONE, MTL_BLEND_ONE_MINUS_SRC_ALPHA);
-        t_mtl->setTexcoordFlip(1.0, -1.0);
-        t_mtl->setBlendEnable(true);
-        t_mtl->setBlendState(MTL_BLEND_SRC_ALPHA,MTL_BLEND_ONE_MINUS_SRC_ALPHA);
- 
-        m_passPoint = MakeSharedPtr<SVPass>();
-        m_passPoint->setMtl(t_mtl);
-        m_passPoint->setMesh(m_pMeshPoint);
-        m_passPoint->setInTex(0,m_pPointTex);
-        m_passPoint->setOutTex(E_TEX_FILTER_DEFORM02);
-        
-        t_mtl = MakeSharedPtr<SVMtlCore>(mApp,"screennor");
-        t_mtl->setTexcoordFlip(1.0, -1.0);
-        m_passBack = MakeSharedPtr<SVPass>();
-        m_passBack->setMtl(t_mtl);
-        m_passBack->setMesh(mApp->getDataMgr()->m_screenMesh);
-        m_passBack->setInTex(0,E_TEX_FILTER_DEFORM02);
-        m_passBack->setOutTex(_texout);
-    }
+//    SVRendererPtr t_renderer =  mApp->getRenderer();
+//    if(t_renderer && _intex && _texout){
+//        m_tt_w = _intex->getwidth();
+//        m_tt_h = _intex->getheight();
+//       
+//        _initPoint();
+//        t_renderer->createSVTex(E_TEX_FILTER_DEFORM02, m_tt_w, m_tt_h, GL_RGBA);
+//        SVTexturePtr t_tex = mApp->getRenderer()->getSVTex(E_TEX_FILTER_DEFORM02);
+//        m_fbo = MakeSharedPtr<SVRenderTexture>(mApp,
+//                                               t_tex,
+//                                               false,
+//                                               false);
+//        mApp->getRenderMgr()->pushRCmdCreate(m_fbo);
+//       
+//        //设置该fbo的矩阵关系
+//        SVCameraNode t_camera(mApp);
+//        t_camera.resetCamera(m_tt_w, m_tt_h);//120.0f error by fyz
+//        
+//        m_fbo->setLink(true);
+//        m_fbo->setProjMat(t_camera.getProjectMatObj());
+//        m_fbo->setViewMat(t_camera.getViewMatObj());
+//       
+//        //
+//        m_passDeform = MakeSharedPtr<SVPass>();
+//        m_passDeform->setMtl(m_pMtlBg);
+//        m_passDeform->setMesh(m_pMeshBg);
+//        m_passDeform->setInTex(0,_intex);
+//        m_passDeform->setOutTex(E_TEX_FILTER_DEFORM02);
+//        
+//        SVMtlCorePtr t_mtl = MakeSharedPtr<SVMtlCore>(mApp, "normal2dcolor");
+//        t_mtl->setBlendEnable(false);
+//        t_mtl->setBlendState(MTL_BLEND_ONE, MTL_BLEND_ONE_MINUS_SRC_ALPHA);
+//        t_mtl->setTexcoordFlip(1.0, -1.0);
+//        t_mtl->setBlendEnable(true);
+//        t_mtl->setBlendState(MTL_BLEND_SRC_ALPHA,MTL_BLEND_ONE_MINUS_SRC_ALPHA);
+// 
+//        m_passPoint = MakeSharedPtr<SVPass>();
+//        m_passPoint->setMtl(t_mtl);
+//        m_passPoint->setMesh(m_pMeshPoint);
+//        m_passPoint->setInTex(0,m_pPointTex);
+//        m_passPoint->setOutTex(E_TEX_FILTER_DEFORM02);
+//        
+//        t_mtl = MakeSharedPtr<SVMtlCore>(mApp,"screennor");
+//        t_mtl->setTexcoordFlip(1.0, -1.0);
+//        m_passBack = MakeSharedPtr<SVPass>();
+//        m_passBack->setMtl(t_mtl);
+//        m_passBack->setMesh(mApp->getDataMgr()->m_screenMesh);
+//        m_passBack->setInTex(0,E_TEX_FILTER_DEFORM02);
+//        m_passBack->setOutTex(_texout);
+//    }
 }
 
 void SVDeformImageMove::setScaleSmooth(f32 _smooth){

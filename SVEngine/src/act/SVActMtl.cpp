@@ -24,12 +24,12 @@ SVActMtl::~SVActMtl() {
 void SVActMtl::enter(SVNodePtr _nodePtr) {
     if (m_pNewMtl && _nodePtr) {
         m_pOldMtl = _nodePtr->getMtl();
-        _nodePtr->setMtl(m_pNewMtl);
+       // _nodePtr->setMtl(m_pNewMtl);
     }
 }
 
 void SVActMtl::exit(SVNodePtr _nodePtr) {
     if (m_pNewMtl && _nodePtr) {
-        _nodePtr->setMtl(m_pOldMtl);
+        //_nodePtr->setMtl(m_pOldMtl);
     }
 }

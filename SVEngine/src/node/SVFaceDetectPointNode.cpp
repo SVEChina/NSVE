@@ -103,20 +103,20 @@ void SVFaceDetectPointNode::createMesh( V2* _facepoint){
 
 void SVFaceDetectPointNode::update(f32 _dt){
     SVNode::update(_dt);
-    //创建新的材质
-    if (m_pRenderObj && m_pMesh) {
-        SVMtlCorePtr t_mtl = MakeSharedPtr<SVMtlCore>(mApp, "normal2d");
-        t_mtl->setBlendEnable(false);
-        t_mtl->setBlendState(MTL_BLEND_ONE, MTL_BLEND_ONE_MINUS_SRC_ALPHA);
-        t_mtl->setModelMatrix(m_absolutMat.get());
-        t_mtl->setTexcoordFlip(1.0, -1.0);
-        t_mtl->setTexture(0,m_pTex);
-        t_mtl->setBlendEnable(true);
-        t_mtl->setBlendState(MTL_BLEND_SRC_ALPHA,MTL_BLEND_ONE_MINUS_SRC_ALPHA);
-        t_mtl->update(_dt);
-        m_pRenderObj->setMesh(m_pMesh);
-        m_pRenderObj->setMtl(t_mtl);
-    }
+//    //创建新的材质
+//    if (m_pRenderObj && m_pMesh) {
+//        SVMtlCorePtr t_mtl = MakeSharedPtr<SVMtlCore>(mApp, "normal2d");
+//        t_mtl->setBlendEnable(false);
+//        t_mtl->setBlendState(MTL_BLEND_ONE, MTL_BLEND_ONE_MINUS_SRC_ALPHA);
+//        t_mtl->setModelMatrix(m_absolutMat.get());
+//        t_mtl->setTexcoordFlip(1.0, -1.0);
+//        t_mtl->setTexture(0,m_pTex);
+//        t_mtl->setBlendEnable(true);
+//        t_mtl->setBlendState(MTL_BLEND_SRC_ALPHA,MTL_BLEND_ONE_MINUS_SRC_ALPHA);
+//        t_mtl->update(_dt);
+//        m_pRenderObj->setMesh(m_pMesh);
+//        m_pRenderObj->setMtl(t_mtl);
+//    }
 }
 
 void SVFaceDetectPointNode::render(){

@@ -52,17 +52,17 @@ void SVPatchNode::setPatchIndexData(SVDataSwapPtr _indicesData, s32 _indicesCoun
 
 void SVPatchNode::update(f32 _dt) {
     SVNode::update(_dt);
-    if (m_pRenderObj && m_pMesh) {
-        m_patchMtl->update(_dt);
-        m_patchMtl->setModelMatrix(m_absolutMat.get());
-        m_patchMtl->setColor(1.0f, 0.0f, 0.0f, 1.0f);
-        m_patchMtl->setBlendEnable(false);
-        m_patchMtl->setTexcoordFlip(1.0, 1.0);
-        m_patchMtl->setLineSize(2.0f);
-        m_patchMtl->setBlendState(MTL_BLEND_SRC_ALPHA,MTL_BLEND_ONE_MINUS_SRC_ALPHA);
-        m_pRenderObj->setMesh(m_pMesh);
-        m_pRenderObj->setMtl(m_patchMtl);
-    }
+//    if (m_pRenderObj && m_pMesh) {
+//        m_patchMtl->update(_dt);
+//        m_patchMtl->setModelMatrix(m_absolutMat.get());
+//        m_patchMtl->setColor(1.0f, 0.0f, 0.0f, 1.0f);
+//        m_patchMtl->setBlendEnable(false);
+//        m_patchMtl->setTexcoordFlip(1.0, 1.0);
+//        m_patchMtl->setLineSize(2.0f);
+//        m_patchMtl->setBlendState(MTL_BLEND_SRC_ALPHA,MTL_BLEND_ONE_MINUS_SRC_ALPHA);
+//        m_pRenderObj->setMesh(m_pMesh);
+//        m_pRenderObj->setMtl(m_patchMtl);
+//    }
 }
 
 void SVPatchNode::render() {

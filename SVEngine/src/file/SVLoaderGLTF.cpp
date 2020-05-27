@@ -827,10 +827,10 @@ SVMeshPtr SVLoaderGLTF::_buildMeshPri(Primitive* _prim) {
     t_rMesh->createMesh();
     t_mesh->setRenderMesh(t_rMesh);
     //材质
-    SVMtlCorePtr t_mtl = _buildMtl(_prim,t_vtf);
-    if(t_mtl) {
-        t_mesh->setMtl(t_mtl);
-    }
+//    SVMtlCorePtr t_mtl = _buildMtl(_prim,t_vtf);
+//    if(t_mtl) {
+//        t_mesh->setMtl(t_mtl);
+//    }
     //返回目标mesh
     return t_mesh;
 }

@@ -48,7 +48,7 @@ bool SVADFilterBase::create(){
     //创建pass
     SVPassPtr t_pass1 = MakeSharedPtr<SVPass>();
     m_mtl->setTexcoordFlip(1.0f, 1.0f);
-    t_pass1->setMtl(m_mtl);
+    //t_pass1->setMtl(m_mtl);
     t_pass1->setInTex(0,E_TEX_MAIN);
     t_pass1->setOutTex(E_TEX_FILTER_1);
     m_pPassNode->addPass(t_pass1);
@@ -56,7 +56,7 @@ bool SVADFilterBase::create(){
     SVPassPtr t_pass2 = MakeSharedPtr<SVPass>();
     SVMtlCorePtr t_mtl_back= MakeSharedPtr<SVMtlCore>(mApp,"screennor");
     t_mtl_back->setTexcoordFlip(1.0f, 1.0f);
-    t_pass2->setMtl(t_mtl_back);
+    //t_pass2->setMtl(t_mtl_back);
     t_pass2->setInTex(0, E_TEX_FILTER_1);
     t_pass2->setOutTex(E_TEX_MAIN);
     m_pPassNode->addPass(t_pass2);
@@ -86,7 +86,7 @@ void SVADFilterBase::setFilterMtl(SVMtlADFilterBasePtr _mtl){
         SVPassPtr t_pass1 = m_pPassNode->getPass(0);
         if (t_pass1) {
             m_mtl->setTexcoordFlip(1.0f, 1.0f);
-            t_pass1->setMtl(m_mtl);
+            //t_pass1->setMtl(m_mtl);
             t_pass1->setInTex(0,E_TEX_MAIN);
             t_pass1->setOutTex(E_TEX_FILTER_1);
         }

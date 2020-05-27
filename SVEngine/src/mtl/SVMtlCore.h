@@ -25,7 +25,7 @@ namespace sv {
             
             virtual SVMtlCorePtr genMtl(SVInst *_app);
             
-            SVString m_shader;
+            s32 m_shader;
         };
         
         //

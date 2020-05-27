@@ -33,9 +33,9 @@ void SVRenderCmdGeo::render(){
 void SVRenderCmdGeo::_render(){
 }
 
-void SVRenderCmdGeo::setMtl(SVMtlCorePtr _mtl){
-    m_pMtl = _mtl;
-}
+//void SVRenderCmdGeo::setMtl(SVMtlCorePtr _mtl){
+//    m_pMtl = _mtl;
+//}
 
 //
 void SVRenderCmdLine::setLine(FVec3& _start, FVec3& _end){

@@ -64,49 +64,49 @@ f32 SVFrameAniNode::getHeight(){
 
 void SVFrameAniNode::update(f32 dt) {
     SVNode::update(dt);
-    if (!m_visible) {
-        return;
-    }
-    if (m_state == tANI_STATE_STOP) {
-        return;
-    }
-    //时间更新
-    if (m_state == tANI_STATE_PLAY) {
-        m_accTime += dt;
-    }
-    if(m_accTime>m_totalTime) {
-        _complete();
-        if(m_loop) {
-            m_accTime = 0.0f;
-        }else{
-            m_accTime = m_totalTime;
-            stop();
-        }
-    }
-    //预先加载
-    _preload();
-    //根据时间计算激活纹理
-    m_pActTex = _selectTex(m_accTime);
-    if(!m_pActTex) {
-        m_pActTex = mApp->getTexMgr()->getSVETexture();
-    }
-    //卸载
-    _unload();
-    //更新材质
-    if (m_pRenderObj && m_pMesh ) {
-        //创建新的材质
-        SVMtl2DPtr t_mtl = MakeSharedPtr<SVMtl2D>(mApp, "normal2d_c");
-        t_mtl->setModelMatrix(m_absolutMat.get());
-        t_mtl->setTexcoordFlip(1.0f, -1.0f);
-        t_mtl->setBlendEnable(true);
-        t_mtl->setBlendState(MTL_BLEND_ONE, MTL_BLEND_ONE_MINUS_SRC_ALPHA);
-        t_mtl->setAlpha(1.0f);
-        t_mtl->setTexture(0,m_pActTex);
-        t_mtl->update(dt);
-        m_pRenderObj->setMesh(m_pMesh);
-        m_pRenderObj->setMtl(t_mtl);
-        m_pMtl = t_mtl;
-    }
+//    if (!m_visible) {
+//        return;
+//    }
+//    if (m_state == tANI_STATE_STOP) {
+//        return;
+//    }
+//    //时间更新
+//    if (m_state == tANI_STATE_PLAY) {
+//        m_accTime += dt;
+//    }
+//    if(m_accTime>m_totalTime) {
+//        _complete();
+//        if(m_loop) {
+//            m_accTime = 0.0f;
+//        }else{
+//            m_accTime = m_totalTime;
+//            stop();
+//        }
+//    }
+//    //预先加载
+//    _preload();
+//    //根据时间计算激活纹理
+//    m_pActTex = _selectTex(m_accTime);
+//    if(!m_pActTex) {
+//        m_pActTex = mApp->getTexMgr()->getSVETexture();
+//    }
+//    //卸载
+//    _unload();
+//    //更新材质
+//    if (m_pRenderObj && m_pMesh ) {
+//        //创建新的材质
+//        SVMtl2DPtr t_mtl = MakeSharedPtr<SVMtl2D>(mApp, "normal2d_c");
+//        t_mtl->setModelMatrix(m_absolutMat.get());
+//        t_mtl->setTexcoordFlip(1.0f, -1.0f);
+//        t_mtl->setBlendEnable(true);
+//        t_mtl->setBlendState(MTL_BLEND_ONE, MTL_BLEND_ONE_MINUS_SRC_ALPHA);
+//        t_mtl->setAlpha(1.0f);
+//        t_mtl->setTexture(0,m_pActTex);
+//        t_mtl->update(dt);
+//        m_pRenderObj->setMesh(m_pMesh);
+//        m_pRenderObj->setMtl(t_mtl);
+//        m_pMtl = t_mtl;
+//    }
 }
 
 void SVFrameAniNode::render() {

@@ -48,21 +48,21 @@ void SVSkyDomeNode::generateSkyDome(SVTexturePtr _tex ,
 
 void SVSkyDomeNode::update(f32 _dt){
     SVNode::update(_dt);
-    //mMatSkydome->enableCullFace(false);
-    static f32 t_rot1 = 0.0f;
-    //setRotation(t_rot1 , 0.0f, 0.0f);
-    t_rot1 += 0.5f;
-    if (t_rot1 > 360.0f)
-        t_rot1 = 0.0f;
-    SVMtlCorePtr t_mtl_sky = MakeSharedPtr<SVMtlCore>(mApp , "SkyDome");
-    t_mtl_sky->m_LogicParamDepth.clear = true;
-    t_mtl_sky->m_LogicParamDepth.enable = true;
-    t_mtl_sky->m_LogicParamBlend.enable = true;
-    t_mtl_sky->m_LogicParamBlend.srcParam = MTL_BLEND_ONE;
-    t_mtl_sky->m_LogicParamBlend.dstParam = MTL_BLEND_ONE_MINUS_SRC_ALPHA;
-    t_mtl_sky->setModelMatrix(m_absolutMat.get());
-    t_mtl_sky->setTexture(0,mDomeTex);
-    m_renderObject->setMtl(t_mtl_sky);
+//    //mMatSkydome->enableCullFace(false);
+//    static f32 t_rot1 = 0.0f;
+//    //setRotation(t_rot1 , 0.0f, 0.0f);
+//    t_rot1 += 0.5f;
+//    if (t_rot1 > 360.0f)
+//        t_rot1 = 0.0f;
+//    SVMtlCorePtr t_mtl_sky = MakeSharedPtr<SVMtlCore>(mApp , "SkyDome");
+//    t_mtl_sky->m_LogicParamDepth.clear = true;
+//    t_mtl_sky->m_LogicParamDepth.enable = true;
+//    t_mtl_sky->m_LogicParamBlend.enable = true;
+//    t_mtl_sky->m_LogicParamBlend.srcParam = MTL_BLEND_ONE;
+//    t_mtl_sky->m_LogicParamBlend.dstParam = MTL_BLEND_ONE_MINUS_SRC_ALPHA;
+//    t_mtl_sky->setModelMatrix(m_absolutMat.get());
+//    t_mtl_sky->setTexture(0,mDomeTex);
+//    m_renderObject->setMtl(t_mtl_sky);
 }
 
 void SVSkyDomeNode::render(){

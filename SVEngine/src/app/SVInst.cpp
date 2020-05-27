@@ -179,10 +179,6 @@ SVStaticDataPtr SVInst::getDataMgr(){
     return m_pGlobalMgr->m_pStaticData;
 }
 
-SVActionMgrPtr SVInst::getActionMgr(){
-    return nullptr;
-}
-
 SVModelMgrPtr SVInst::getModelMgr(){
     if(!m_pGlobalMgr)
         return nullptr;
@@ -201,14 +197,4 @@ SVRendererPtr SVInst::getRenderer() {
     if(!m_pGlobalMgr->m_pRenderMgr)
         return nullptr;
     return m_pGlobalMgr->m_pRenderMgr->getRenderer();
-}
-
-SVRenderStatePtr SVInst::getRenderState() {
-    if(!m_pGlobalMgr)
-        return nullptr;
-    if(!m_pGlobalMgr->m_pRenderMgr)
-        return nullptr;
-    if(!m_pGlobalMgr->m_pRenderMgr->getRenderer())
-        return nullptr;
-    return m_pGlobalMgr->m_pRenderMgr->getRenderer()->getState();
 }

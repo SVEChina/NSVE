@@ -163,42 +163,42 @@ bool SVBackGroundNode::isDeform() {
 
 void SVBackGroundNode::update(f32 _dt){
     
-    if(m_pDeform){
-        mApp->getDeformMgr()->pushDeform(m_pDeform);
-    }
-    
-    if(m_inScreen) {
-        //屏幕空间下更新
-            m_pRenderObj->setMesh(mApp->getDataMgr()->m_screenMesh);
-            if(m_pMtl){
-                m_pMtl->setTexcoordFlip(m_texcoordX, m_texcoordY);
-                if(m_useTexType!=E_TEX_END){
-                    m_pMtl->setTexture(0,m_useTexType);
-                }else{
-                    m_pMtl->setTexture(0,m_pTex);
-                }
-                m_pRenderObj->setMtl(m_pMtl->clone());
-            }else{
-                m_pRenderObj->setMtl(nullptr);
-            }
-    }else{
-        //三维空间下更新
-        SVNode::update(_dt);
-        m_pRenderObj->setMesh(m_pMesh);
-        if(m_pMtl){
-            m_pMtl->setModelMatrix(m_absolutMat.get());
-            m_pMtl->setTexcoordFlip(m_texcoordX, m_texcoordY);
-            if(m_useTexType!=E_TEX_END){
-                m_pMtl->setTexture(0,m_useTexType);
-            }else{
-                m_pMtl->setTexture(0,m_pTex);
-            }
-            m_pMtl->update(_dt);
-            m_pRenderObj->setMtl(m_pMtl->clone());
-        }else{
-            m_pRenderObj->setMtl(nullptr);
-        }
-    }
+//    if(m_pDeform){
+//        mApp->getDeformMgr()->pushDeform(m_pDeform);
+//    }
+//    
+//    if(m_inScreen) {
+//        //屏幕空间下更新
+//            m_pRenderObj->setMesh(mApp->getDataMgr()->m_screenMesh);
+//            if(m_pMtl){
+//                m_pMtl->setTexcoordFlip(m_texcoordX, m_texcoordY);
+//                if(m_useTexType!=E_TEX_END){
+//                    m_pMtl->setTexture(0,m_useTexType);
+//                }else{
+//                    m_pMtl->setTexture(0,m_pTex);
+//                }
+//                m_pRenderObj->setMtl(m_pMtl->clone());
+//            }else{
+//                m_pRenderObj->setMtl(nullptr);
+//            }
+//    }else{
+//        //三维空间下更新
+//        SVNode::update(_dt);
+//        m_pRenderObj->setMesh(m_pMesh);
+//        if(m_pMtl){
+//            m_pMtl->setModelMatrix(m_absolutMat.get());
+//            m_pMtl->setTexcoordFlip(m_texcoordX, m_texcoordY);
+//            if(m_useTexType!=E_TEX_END){
+//                m_pMtl->setTexture(0,m_useTexType);
+//            }else{
+//                m_pMtl->setTexture(0,m_pTex);
+//            }
+//            m_pMtl->update(_dt);
+//            m_pRenderObj->setMtl(m_pMtl->clone());
+//        }else{
+//            m_pRenderObj->setMtl(nullptr);
+//        }
+//    }
 }
 
 void SVBackGroundNode::render(){

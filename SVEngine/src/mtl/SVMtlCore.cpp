@@ -19,18 +19,18 @@
 using namespace sv;
 
 SVMtlCoreParam::SVMtlCoreParam(){
-    m_shader = "normal2d";
+    //m_shader = "normal2d";
 }
 
 SVMtlCorePtr SVMtlCoreParam::genMtl(SVInst *_app){
-    SVMtlCorePtr t_mtl = MakeSharedPtr<SVMtlCore>(_app,m_shader.c_str());
-    return t_mtl;
+    //SVMtlCorePtr t_mtl = MakeSharedPtr<SVMtlCore>(_app,m_shader.c_str());
+    //return t_mtl;
+    return nullptr;
 }
 
 //
 SVMtlCore::SVMtlCore(SVInst *_app, cptr8 _shader)
 :SVGBase(_app)
-,m_pShader(nullptr)
 ,m_mtlname(_shader){
     reset();
 }
@@ -60,7 +60,6 @@ SVMtlCorePtr SVMtlCore::clone() {
 }
 
 void SVMtlCore::reset() {
-    m_pShader = nullptr;
     m_LogicMtlFlag0 = 0;
     m_LogicParamTex.reset();
     m_LogicParamBlend.reset();
@@ -127,7 +126,6 @@ void SVMtlCore::update(f32 dt) {
 
 void SVMtlCore::reloadShader(cptr8 _shader){
     m_mtlname = _shader;
-    m_pShader = nullptr;
 }
 
 //渲染更新(跑渲染参数)
@@ -147,9 +145,9 @@ bool SVMtlCore::submitMtl() {
     _refreshMatrix();
     _refreshModify();
     //提交shader
-    if(m_pShader) {
-        m_pShader->active(t_renderer);
-    }
+//    if(m_pShader) {
+//        m_pShader->active(t_renderer);
+//    }
     _submitUniform(t_renderer);
     _submitState(t_renderer);
     _submitMtl(t_renderer);
@@ -198,10 +196,10 @@ void SVMtlCore::swap() {
 }
 
 void SVMtlCore::_loadShader() {
-    SVRendererPtr t_renderer = mApp->getRenderer();
-    if(t_renderer){
-        m_pShader = mApp->getShaderMgr()->getShader(m_mtlname.c_str());
-    }
+//    SVRendererPtr t_renderer = mApp->getRenderer();
+//    if(t_renderer){
+//        m_pShader = mApp->getShaderMgr()->getShader(m_mtlname.c_str());
+//    }
 }
 
 void SVMtlCore::_refreshMatrix(){

@@ -31,8 +31,6 @@ namespace sv {
             bool setOutTex(SVTexturePtr _tex);
             
             bool setOutTex(SVTEXTYPE _tt);
-
-            void setMtl(SVMtlCorePtr _mtl);
             
             void setMesh( SVRenderMeshPtr _pMesh);
 

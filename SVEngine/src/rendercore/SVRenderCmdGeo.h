@@ -27,7 +27,7 @@ namespace sv {
             
             virtual void render();
             
-            void setMtl(SVMtlCorePtr _material);
+//            void setMtl(SVMtlCorePtr _material);
             
         protected:
             virtual void _render();

@@ -46,17 +46,17 @@ void SVLineNode::setLineData(f32 *_data, s32 _size, s32 _count){
 
 void SVLineNode::update(f32 _dt) {
     SVNode::update(_dt);
-    if (m_pRenderObj && m_pMesh) {
-        m_lineMtl->update(_dt);
-        m_lineMtl->setModelMatrix(m_absolutMat.get());
-        m_lineMtl->setLineSize(4.0f);
-        m_lineMtl->setColor(1.0f, 0.0f, 0.0f, 1.0f);
-        m_lineMtl->setBlendEnable(false);
-        m_lineMtl->setTexcoordFlip(1.0, 1.0);
-        m_lineMtl->setBlendState(MTL_BLEND_SRC_ALPHA,MTL_BLEND_ONE_MINUS_SRC_ALPHA);
-        m_pRenderObj->setMesh(m_pMesh);
-        m_pRenderObj->setMtl(m_lineMtl);
-    }
+//    if (m_pRenderObj && m_pMesh) {
+//        m_lineMtl->update(_dt);
+//        m_lineMtl->setModelMatrix(m_absolutMat.get());
+//        m_lineMtl->setLineSize(4.0f);
+//        m_lineMtl->setColor(1.0f, 0.0f, 0.0f, 1.0f);
+//        m_lineMtl->setBlendEnable(false);
+//        m_lineMtl->setTexcoordFlip(1.0, 1.0);
+//        m_lineMtl->setBlendState(MTL_BLEND_SRC_ALPHA,MTL_BLEND_ONE_MINUS_SRC_ALPHA);
+//        m_pRenderObj->setMesh(m_pMesh);
+//        m_pRenderObj->setMtl(m_lineMtl);
+//    }
 }
 
 void SVLineNode::render() {

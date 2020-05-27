@@ -97,42 +97,42 @@ bool SVARAnchor::isOpen(){
 }
 
 void SVARAnchor::update(f32 _dt) {
-    SVModuleBase::update(_dt);
-    SVRendererPtr t_renderer = mApp->getRenderer();
-    SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
-    if (t_rs && t_renderer && m_fbo) {
-        SVRenderCmdFboBindPtr t_fbo_bind = MakeSharedPtr<SVRenderCmdFboBind>(m_fbo);
-        t_fbo_bind->mTag = "draw_aranchor_bind";
-        t_rs->pushRenderCmd(RST_AR, t_fbo_bind);
-
-        SVRenderCmdClearPtr t_clear = MakeSharedPtr<SVRenderCmdClear>();
-        t_clear->mTag = "draw_aranchor_clear";
-        t_clear->setRenderer(t_renderer);
-        t_clear->setClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-        t_rs->pushRenderCmd(RST_AR, t_clear);
-        
-        if (t_testNode) {
-            t_testNode->update(_dt);
-            t_testNode->render();
-        }
-        
-        SVRenderCmdFboUnbindPtr t_fbo_unbind = MakeSharedPtr<SVRenderCmdFboUnbind>(m_fbo);
-        t_fbo_unbind->mTag = "draw_aranchor_unbind";
-        t_rs->pushRenderCmd(RST_AR, t_fbo_unbind);
-        
-//      再画回主纹理
-        SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
-        if (m_mtl && m_pMesh && m_pRenderObj) {
-            m_pRenderObj->setMtl(m_mtl);
-            m_pRenderObj->setMesh(m_pMesh);
-            m_pRenderObj->pushCmd(t_rs, RST_AR_END, "ARAnchorDrawReback");
-        }
-    }
-    f32 t_distance = _getAnchorDis();
-    if (m_cb) {
-        SVString t_distanceStr = SVString::format("%f",t_distance);
-        (*m_cb)(t_distanceStr.c_str(), m_obj);
-    }
+//    SVModuleBase::update(_dt);
+//    SVRendererPtr t_renderer = mApp->getRenderer();
+//    SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
+//    if (t_rs && t_renderer && m_fbo) {
+//        SVRenderCmdFboBindPtr t_fbo_bind = MakeSharedPtr<SVRenderCmdFboBind>(m_fbo);
+//        t_fbo_bind->mTag = "draw_aranchor_bind";
+//        t_rs->pushRenderCmd(RST_AR, t_fbo_bind);
+//
+//        SVRenderCmdClearPtr t_clear = MakeSharedPtr<SVRenderCmdClear>();
+//        t_clear->mTag = "draw_aranchor_clear";
+//        t_clear->setRenderer(t_renderer);
+//        t_clear->setClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+//        t_rs->pushRenderCmd(RST_AR, t_clear);
+//        
+//        if (t_testNode) {
+//            t_testNode->update(_dt);
+//            t_testNode->render();
+//        }
+//        
+//        SVRenderCmdFboUnbindPtr t_fbo_unbind = MakeSharedPtr<SVRenderCmdFboUnbind>(m_fbo);
+//        t_fbo_unbind->mTag = "draw_aranchor_unbind";
+//        t_rs->pushRenderCmd(RST_AR, t_fbo_unbind);
+//        
+////      再画回主纹理
+//        SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
+//        if (m_mtl && m_pMesh && m_pRenderObj) {
+//            m_pRenderObj->setMtl(m_mtl);
+//            m_pRenderObj->setMesh(m_pMesh);
+//            m_pRenderObj->pushCmd(t_rs, RST_AR_END, "ARAnchorDrawReback");
+//        }
+//    }
+//    f32 t_distance = _getAnchorDis();
+//    if (m_cb) {
+//        SVString t_distanceStr = SVString::format("%f",t_distance);
+//        (*m_cb)(t_distanceStr.c_str(), m_obj);
+//    }
 }
 
 void SVARAnchor::_addAnchor(f32 _x, f32 _y){

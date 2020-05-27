@@ -42,34 +42,34 @@ SVFaceShapeNode::~SVFaceShapeNode(){
 }
 
 void SVFaceShapeNode::init(){
-    startListen();
-    SVRendererPtr t_renderer = mApp->getRenderer();
-    if(!t_renderer)
-        return ;
-    SVTexturePtr t_tex = mApp->getTexMgr()->createUnctrlTexture(mApp->m_pGlobalParam->m_inner_width, mApp->m_pGlobalParam->m_inner_height,GL_RGBA, GL_RGBA);
-    m_fbo = MakeSharedPtr<SVRenderTexture>(mApp,
-                                           t_tex,
-                                           false,
-                                           false);
-    SVTexturePtr t_texmain = t_renderer->getSVTex(E_TEX_MAIN);
-    mApp->getRenderMgr()->pushRCmdCreate(m_fbo);
-    SVMtlCorePtr t_mtl = MakeSharedPtr<SVMtlCore>(mApp,"screennor");
-    t_mtl->setTexcoordFlip(1.0f, 1.0f);
-    
-    SVPassPtr t_pass1 = MakeSharedPtr<SVPass>();
-    t_pass1->setMtl(m_pMtl);
-    m_pMtl->setTexcoordFlip(1.0f, -1.0f);
-    t_pass1->setMesh(m_pMesh);
-    t_pass1->setInTex(0, t_texmain);
-    t_pass1->setOutTex(t_tex);
-    addPass(t_pass1);
-    
-    SVPassPtr t_pass2 = MakeSharedPtr<SVPass>();
-    t_pass2->setMtl(t_mtl);
-    t_pass2->setInTex(0, t_tex);
-    t_pass2->setMesh(mApp->getDataMgr()->m_screenMesh);
-    t_pass2->setOutTex(t_texmain);
-    addPass(t_pass2);
+//    startListen();
+//    SVRendererPtr t_renderer = mApp->getRenderer();
+//    if(!t_renderer)
+//        return ;
+//    SVTexturePtr t_tex = mApp->getTexMgr()->createUnctrlTexture(mApp->m_pGlobalParam->m_inner_width, mApp->m_pGlobalParam->m_inner_height,GL_RGBA, GL_RGBA);
+//    m_fbo = MakeSharedPtr<SVRenderTexture>(mApp,
+//                                           t_tex,
+//                                           false,
+//                                           false);
+//    SVTexturePtr t_texmain = t_renderer->getSVTex(E_TEX_MAIN);
+//    mApp->getRenderMgr()->pushRCmdCreate(m_fbo);
+//    SVMtlCorePtr t_mtl = MakeSharedPtr<SVMtlCore>(mApp,"screennor");
+//    t_mtl->setTexcoordFlip(1.0f, 1.0f);
+//    
+//    SVPassPtr t_pass1 = MakeSharedPtr<SVPass>();
+//    t_pass1->setMtl(m_pMtl);
+//    m_pMtl->setTexcoordFlip(1.0f, -1.0f);
+//    t_pass1->setMesh(m_pMesh);
+//    t_pass1->setInTex(0, t_texmain);
+//    t_pass1->setOutTex(t_tex);
+//    addPass(t_pass1);
+//    
+//    SVPassPtr t_pass2 = MakeSharedPtr<SVPass>();
+//    t_pass2->setMtl(t_mtl);
+//    t_pass2->setInTex(0, t_tex);
+//    t_pass2->setMesh(mApp->getDataMgr()->m_screenMesh);
+//    t_pass2->setOutTex(t_texmain);
+//    addPass(t_pass2);
 }
 
 void SVFaceShapeNode::addPass(SVPassPtr _pass) {

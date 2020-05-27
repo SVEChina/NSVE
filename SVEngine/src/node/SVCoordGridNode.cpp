@@ -40,24 +40,24 @@ SVCoordGridNode::~SVCoordGridNode(){
 
 void SVCoordGridNode::update(f32 dt){
     SVNode::update(dt);
-    _refreshUnit();
-    //
-    if(!m_gridTex){
-       m_gridTex = mApp->getTexMgr()->getTextureSync("svres/grid2.png",true,true);
-    }
-    SVMtlCoordPtr t_mtl_coord = MakeSharedPtr<SVMtlCoord>(mApp);
-    t_mtl_coord->update(dt * 0.001f);
-    t_mtl_coord->setTexture(0, m_gridTex);
-    t_mtl_coord->setTextureParam(0, E_T_PARAM_WRAP_S, E_T_WRAP_REPEAT);
-    t_mtl_coord->setTextureParam(0, E_T_PARAM_WRAP_T, E_T_WRAP_REPEAT);
-    t_mtl_coord->setModelMatrix(m_absolutMat.get());
-    t_mtl_coord->setTexcoordFlip(1.0, -1.0f);
-    t_mtl_coord->setDepthEnable(true);
-    t_mtl_coord->setZOffEnable(true);
-    t_mtl_coord->setZOffParam(-1.0f, -1.0f);
-    t_mtl_coord->setBlendEnable(true);
-    t_mtl_coord->setBlendState(MTL_BLEND_SRC_ALPHA,MTL_BLEND_ONE_MINUS_SRC_ALPHA);
-    m_pRenderObj->setMtl(t_mtl_coord);
+//    _refreshUnit();
+//    //
+//    if(!m_gridTex){
+//       m_gridTex = mApp->getTexMgr()->getTextureSync("svres/grid2.png",true,true);
+//    }
+//    SVMtlCoordPtr t_mtl_coord = MakeSharedPtr<SVMtlCoord>(mApp);
+//    t_mtl_coord->update(dt * 0.001f);
+//    t_mtl_coord->setTexture(0, m_gridTex);
+//    t_mtl_coord->setTextureParam(0, E_T_PARAM_WRAP_S, E_T_WRAP_REPEAT);
+//    t_mtl_coord->setTextureParam(0, E_T_PARAM_WRAP_T, E_T_WRAP_REPEAT);
+//    t_mtl_coord->setModelMatrix(m_absolutMat.get());
+//    t_mtl_coord->setTexcoordFlip(1.0, -1.0f);
+//    t_mtl_coord->setDepthEnable(true);
+//    t_mtl_coord->setZOffEnable(true);
+//    t_mtl_coord->setZOffParam(-1.0f, -1.0f);
+//    t_mtl_coord->setBlendEnable(true);
+//    t_mtl_coord->setBlendState(MTL_BLEND_SRC_ALPHA,MTL_BLEND_ONE_MINUS_SRC_ALPHA);
+//    m_pRenderObj->setMtl(t_mtl_coord);
 }
 
 void SVCoordGridNode::render(){

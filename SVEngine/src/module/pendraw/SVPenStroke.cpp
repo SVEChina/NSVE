@@ -847,29 +847,29 @@ void SVPenStroke::_updateARFaceStroke(float _dt){
 
 
 void SVPenStroke::renderStroke(){
-    SVRendererPtr t_renderer = mApp->getRenderer();
-    SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
-    SVSensorProcessPtr t_sensor = mApp->getBasicSys()->getSensorModule();
-    SVCameraNodePtr t_arCam = t_sensor->getARCamera();
-    if (t_renderer && t_rs && m_pRenderObj && m_pStrokeMesh && m_instanceCount > 0) {
-        if (!m_pMtl) {
-            m_pMtl = MakeSharedPtr<SVMtlStrokeBase>(mApp, "penstroke_base");
-            m_pMtl->setTextureParam(0, E_T_PARAM_WRAP_S, E_T_WRAP_REPEAT);
-            m_pMtl->setTextureParam(0, E_T_PARAM_WRAP_T, E_T_WRAP_REPEAT);
-            m_pMtl->setTexcoordFlip(1.0, -1.0);
-            m_pMtl->setLineSize(5.0f);
-        }
-        m_pMtl->setDepthEnable(true);
-        m_pMtl->setBlendEnable(true);
-        m_pMtl->setBlendState(MTL_BLEND_ONE, MTL_BLEND_ONE_MINUS_SRC_ALPHA);
-        m_pMtl->setCullEnable(false);
-        m_pMtl->setModelMatrix(m_localMat);
-        //更新顶点数据
-        m_pStrokeMesh->setInstanceOffsetData(m_pInstanceOffsetData, m_instanceCount);
-        m_pRenderObj->setMesh(m_pStrokeMesh);
-        m_pRenderObj->setMtl(m_pMtl);
-        m_pRenderObj->pushCmd(t_rs, RST_AR, "SVPenStrokeRender");
-    }
+//    SVRendererPtr t_renderer = mApp->getRenderer();
+//    SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
+//    SVSensorProcessPtr t_sensor = mApp->getBasicSys()->getSensorModule();
+//    SVCameraNodePtr t_arCam = t_sensor->getARCamera();
+//    if (t_renderer && t_rs && m_pRenderObj && m_pStrokeMesh && m_instanceCount > 0) {
+//        if (!m_pMtl) {
+//            m_pMtl = MakeSharedPtr<SVMtlStrokeBase>(mApp, "penstroke_base");
+//            m_pMtl->setTextureParam(0, E_T_PARAM_WRAP_S, E_T_WRAP_REPEAT);
+//            m_pMtl->setTextureParam(0, E_T_PARAM_WRAP_T, E_T_WRAP_REPEAT);
+//            m_pMtl->setTexcoordFlip(1.0, -1.0);
+//            m_pMtl->setLineSize(5.0f);
+//        }
+//        m_pMtl->setDepthEnable(true);
+//        m_pMtl->setBlendEnable(true);
+//        m_pMtl->setBlendState(MTL_BLEND_ONE, MTL_BLEND_ONE_MINUS_SRC_ALPHA);
+//        m_pMtl->setCullEnable(false);
+//        m_pMtl->setModelMatrix(m_localMat);
+//        //更新顶点数据
+//        m_pStrokeMesh->setInstanceOffsetData(m_pInstanceOffsetData, m_instanceCount);
+//        m_pRenderObj->setMesh(m_pStrokeMesh);
+//        m_pRenderObj->setMtl(m_pMtl);
+//        m_pRenderObj->pushCmd(t_rs, RST_AR, "SVPenStrokeRender");
+//    }
 }
 
 void SVPenStroke::updateGlow(float _dt){

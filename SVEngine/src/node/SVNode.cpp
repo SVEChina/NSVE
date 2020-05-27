@@ -167,10 +167,6 @@ void SVNode::render() {
     }
 }
 
-void SVNode::setMtl(SVMtlCorePtr _mtl) {
-    m_pMtl = _mtl;
-}
-
 SVMtlCorePtr SVNode::getMtl(){
     return m_pMtl;
 }

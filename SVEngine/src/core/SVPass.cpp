@@ -53,10 +53,6 @@ bool SVPass::setOutTex(SVTEXTYPE _tt) {
     return true;
 }
 
-void SVPass::setMtl(SVMtlCorePtr _mtl){
-    m_pMtl = _mtl;
-}
-
 void SVPass::setMesh(SVRenderMeshPtr _pMesh){
     m_pMesh=_pMesh;
 }

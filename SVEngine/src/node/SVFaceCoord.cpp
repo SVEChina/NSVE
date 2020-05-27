@@ -202,54 +202,44 @@ void SVFaceCoord::refresh() {
 
 void SVFaceCoord::update(f32 dt) {
     SVNode::update(dt);
-    //渲染普通点(绿色)
-    if (m_pRObjNor && m_pMesh) {
-        SVMtlGeo3dPtr t_mtl_box = MakeSharedPtr<SVMtlGeo3d>(mApp);
-        t_mtl_box->setColor(0.1f, 0.80f, 0.05f, 1.0f);
-        t_mtl_box->update(dt);
-        t_mtl_box->setModelMatrix(m_absolutMat.get());
-        t_mtl_box->setTexcoordFlip(1.0, -1.0f);
-        t_mtl_box->setDepthEnable(false);
-        t_mtl_box->setBlendEnable(true);
-        t_mtl_box->setBlendState(MTL_BLEND_SRC_ALPHA,MTL_BLEND_ONE_MINUS_SRC_ALPHA);
-        m_pRObjNor->setMesh(m_pMesh);
-        m_pRObjNor->setMtl(t_mtl_box);
-    }
-    //渲染激活点(红色)
-    if (m_pRObjAct && m_pMesh && m_activePt>=0 ) {
-        SVMtlGeo3dPtr t_mtl_box = MakeSharedPtr<SVMtlGeo3d>(mApp);
-        t_mtl_box->setColor( 0.80f, 0.02f, 0.05f, 1.0f);
-        t_mtl_box->update(dt);
-        t_mtl_box->setModelMatrix(m_absolutMat.get());
-        t_mtl_box->setTexcoordFlip(1.0, -1.0f);
-        t_mtl_box->setDepthEnable(false);
-        t_mtl_box->setBlendEnable(true);
-        t_mtl_box->setBlendState(MTL_BLEND_SRC_ALPHA,MTL_BLEND_ONE_MINUS_SRC_ALPHA);
-        m_pRObjAct->setMesh(m_pMeshAct);
-        m_pRObjAct->setMtl(t_mtl_box);
-    }
+//    //渲染普通点(绿色)
+//    if (m_pRObjNor && m_pMesh) {
+//        SVMtlGeo3dPtr t_mtl_box = MakeSharedPtr<SVMtlGeo3d>(mApp);
+//        t_mtl_box->setColor(0.1f, 0.80f, 0.05f, 1.0f);
+//        t_mtl_box->update(dt);
+//        t_mtl_box->setModelMatrix(m_absolutMat.get());
+//        t_mtl_box->setTexcoordFlip(1.0, -1.0f);
+//        t_mtl_box->setDepthEnable(false);
+//        t_mtl_box->setBlendEnable(true);
+//        t_mtl_box->setBlendState(MTL_BLEND_SRC_ALPHA,MTL_BLEND_ONE_MINUS_SRC_ALPHA);
+//        m_pRObjNor->setMesh(m_pMesh);
+//        m_pRObjNor->setMtl(t_mtl_box);
+//    }
+//    //渲染激活点(红色)
+//    if (m_pRObjAct && m_pMesh && m_activePt>=0 ) {
+//        SVMtlGeo3dPtr t_mtl_box = MakeSharedPtr<SVMtlGeo3d>(mApp);
+//        t_mtl_box->setColor( 0.80f, 0.02f, 0.05f, 1.0f);
+//        t_mtl_box->update(dt);
+//        t_mtl_box->setModelMatrix(m_absolutMat.get());
+//        t_mtl_box->setTexcoordFlip(1.0, -1.0f);
+//        t_mtl_box->setDepthEnable(false);
+//        t_mtl_box->setBlendEnable(true);
+//        t_mtl_box->setBlendState(MTL_BLEND_SRC_ALPHA,MTL_BLEND_ONE_MINUS_SRC_ALPHA);
+//        m_pRObjAct->setMesh(m_pMeshAct);
+//        m_pRObjAct->setMtl(t_mtl_box);
+//    }
 }
 
 void SVFaceCoord::render() {
-    if (mApp->m_pGlobalParam->m_curScene && m_visible ){
-        SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
-        if (m_pRObjNor) {
-            m_pRObjNor->pushCmd(t_rs, m_rsType, "SVFaceCoord-nor");
-        }
-        //
-        if (m_pRObjAct && m_activePt>=0 ) {
-            m_pRObjAct->pushCmd(t_rs, m_rsType, "SVFaceCoord-act");
-        }
-    }
+//    if (mApp->m_pGlobalParam->m_curScene && m_visible ){
+//        SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
+//        if (m_pRObjNor) {
+//            m_pRObjNor->pushCmd(t_rs, m_rsType, "SVFaceCoord-nor");
+//        }
+//        //
+//        if (m_pRObjAct && m_activePt>=0 ) {
+//            m_pRObjAct->pushCmd(t_rs, m_rsType, "SVFaceCoord-act");
+//        }
+//    }
     SVNode::render();
 }
-
-
-
-
-
-
-
-
-
-

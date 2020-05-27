@@ -73,7 +73,7 @@ bool SVBasedonFilter::create() {
     m_pPassNode->setRSType(RST_IMGFILTER);
     //创建pass
     SVPassPtr t_pass1 = MakeSharedPtr<SVPass>();
-    t_pass1->setMtl(m_baseOnmtl);
+    //t_pass1->setMtl(m_baseOnmtl);
     t_pass1->setInTex(0,E_TEX_MAIN);
     SVTexturePtr teximg = mApp->getTexMgr()->getTextureSync("svres/filterimg/facewhitefilter.png", true);
     t_pass1->setInTex(1,teximg);
@@ -82,7 +82,7 @@ bool SVBasedonFilter::create() {
     m_pPassNode->addPass(t_pass1);
     //
     SVPassPtr t_pass2 = MakeSharedPtr<SVPass>();
-    t_pass2->setMtl(m_acutancemtl);
+    //t_pass2->setMtl(m_acutancemtl);
     t_pass2->setInTex(0, E_TEX_HELP0);
     t_pass2->setOutTex(E_TEX_MAIN);
     t_pass2->mTag = "write-back";

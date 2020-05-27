@@ -45,14 +45,14 @@ void SVIOSInstreamNode::destroy(){
 
 void SVIOSInstreamNode::update(f32 dt) {
     SVNode::update(dt);
-    if(m_pRenderObj && m_pMtl){
-        m_pMtl->setTexcoordFlip(1.0f, -1.0f);
-        m_pMtl->setTexture(0, m_tt);    //那第一张纹理
-        m_pMtl->setModelMatrix(m_absolutMat.get());
-        m_pMtl->update(dt);
-        m_pRenderObj->setMtl(m_pMtl);
-        m_pRenderObj->setMesh(mApp->getDataMgr()->m_screenMesh);
-    }
+//    if(m_pRenderObj && m_pMtl){
+//        m_pMtl->setTexcoordFlip(1.0f, -1.0f);
+//        m_pMtl->setTexture(0, m_tt);    //那第一张纹理
+//        m_pMtl->setModelMatrix(m_absolutMat.get());
+//        m_pMtl->update(dt);
+//        m_pRenderObj->setMtl(m_pMtl);
+//        m_pRenderObj->setMesh(mApp->getDataMgr()->m_screenMesh);
+//    }
 }
 
 void SVIOSInstreamNode::render() {

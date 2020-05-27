@@ -11,6 +11,7 @@
 #include "SVVertDef.h"
 #include "../base/SVArray.h"
 #define EPS 1e-8
+
 class SVMathHelper{
 public:
     static f32 vec2Length(f32 _x1, f32 _x2, f32 _y1, f32 _y2);
@@ -23,9 +24,9 @@ public:
 
     static V2 translateToRight(s32 x, s32 y, f32 roll, f32 len);
     
-    static void createNormalCurve(V2 *originpoint, int origincount, int step, SVArray<V2> &outcurve);
+    static void createNormalCurve(V2 *originpoint, int origincount, int step, sv::SVArray<V2> &outcurve);
 
-    static void createCurve(V2 *originpoint, s32 origincount, s32 step, SVArray<V2>& outcurve);
+    static void createCurve(V2 *originpoint, s32 origincount, s32 step, sv::SVArray<V2>& outcurve);
 
     static f32 getEllipseY(f32 ellipse_a, f32 ellipse_b, f32 ellipse_x);
 

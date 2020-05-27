@@ -58,20 +58,20 @@ cptr8 SVFreeTypeNode::getText() {
 
 void SVFreeTypeNode::update(f32 dt) {
     SVNode::update(dt);
-    if (m_textChange) {
-        _updateTextTexture();
-        m_textChange = false;
-    }
-    if (m_renderObject && m_pMesh && m_pMtl) {
-        m_pMtl->update(dt);
-        m_pMtl->setModelMatrix(m_absolutMat.get());
-        m_pMtl->setTexcoordFlip(1.0, -1.0f);
-        m_pMtl->setTexture(0,m_texture);
-        m_pMtl->setBlendEnable(true);
-        m_pMtl->setBlendState(MTL_BLEND_ONE, MTL_BLEND_ONE_MINUS_SRC_ALPHA);
-        m_renderObject->setMesh(m_pMesh);
-        m_renderObject->setMtl(m_pMtl);
-    }
+//    if (m_textChange) {
+//        _updateTextTexture();
+//        m_textChange = false;
+//    }
+//    if (m_renderObject && m_pMesh && m_pMtl) {
+//        m_pMtl->update(dt);
+//        m_pMtl->setModelMatrix(m_absolutMat.get());
+//        m_pMtl->setTexcoordFlip(1.0, -1.0f);
+//        m_pMtl->setTexture(0,m_texture);
+//        m_pMtl->setBlendEnable(true);
+//        m_pMtl->setBlendState(MTL_BLEND_ONE, MTL_BLEND_ONE_MINUS_SRC_ALPHA);
+//        m_renderObject->setMesh(m_pMesh);
+//        m_renderObject->setMtl(m_pMtl);
+//    }
 }
 
 void SVFreeTypeNode::render() {

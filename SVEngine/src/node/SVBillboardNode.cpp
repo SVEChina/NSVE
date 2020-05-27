@@ -130,51 +130,45 @@ void SVBillboardNode::setMesh(SVRenderMeshPtr _mesh){
     }
 }
 
-void SVBillboardNode::setMtl(SVMtlCorePtr _mtl){
-    if (_mtl) {
-        m_pMtl = _mtl;
-    }
-}
-
 void SVBillboardNode::update(f32 dt) {
     SVNode::update(dt);
-    if (m_pRenderObj && m_pMesh) {
-        if(m_pMtl){
-            SVMtlBillboardPtr t_billboard = DYN_TO_SHAREPTR(SVMtlBillboard, m_pMtl);
-            if (t_billboard) {
-                t_billboard->setObjectPos(getPosition());
-                t_billboard->setViewPos(m_viewPos);
-                t_billboard->setUp(m_up);
-            }
-            m_pMtl->setModelMatrix(m_absolutMat.get());
-            m_pMtl->setTexcoordFlip(m_texcoordX, m_texcoordY);
-            if(m_inTexType == E_TEX_END) {
-                m_pMtl->setTexture(0,m_pTex);
-            }else{
-                SVTexturePtr t_tex = mApp->getRenderer()->getSVTex(m_inTexType);
-                m_pMtl->setTexture(0,t_tex);
-            }
-            m_pMtl->update(dt);
-            m_pRenderObj->setMesh(m_pMesh);
-            m_pRenderObj->setMtl(m_pMtl);
-        }else{
-            //创建新的材质
-            SVMtlCorePtr t_mtl = MakeSharedPtr<SVMtlCore>(mApp, "normal2d");
-            t_mtl->setModelMatrix(m_absolutMat.get());
-            t_mtl->setTexcoordFlip(m_texcoordX, m_texcoordY);
-            t_mtl->setBlendEnable(true);
-            t_mtl->setBlendState(MTL_BLEND_ONE, MTL_BLEND_ONE_MINUS_SRC_ALPHA);
-            if(m_inTexType == E_TEX_END) {
-                t_mtl->setTexture(0,m_pTex);
-            }else{
-                SVTexturePtr t_tex = mApp->getRenderer()->getSVTex(m_inTexType);
-                t_mtl->setTexture(0,t_tex);
-            }
-            t_mtl->update(dt);
-            m_pRenderObj->setMesh(m_pMesh);
-            m_pRenderObj->setMtl(t_mtl);
-        }
-    }
+//    if (m_pRenderObj && m_pMesh) {
+//        if(m_pMtl){
+//            SVMtlBillboardPtr t_billboard = DYN_TO_SHAREPTR(SVMtlBillboard, m_pMtl);
+//            if (t_billboard) {
+//                t_billboard->setObjectPos(getPosition());
+//                t_billboard->setViewPos(m_viewPos);
+//                t_billboard->setUp(m_up);
+//            }
+//            m_pMtl->setModelMatrix(m_absolutMat.get());
+//            m_pMtl->setTexcoordFlip(m_texcoordX, m_texcoordY);
+//            if(m_inTexType == E_TEX_END) {
+//                m_pMtl->setTexture(0,m_pTex);
+//            }else{
+//                SVTexturePtr t_tex = mApp->getRenderer()->getSVTex(m_inTexType);
+//                m_pMtl->setTexture(0,t_tex);
+//            }
+//            m_pMtl->update(dt);
+//            m_pRenderObj->setMesh(m_pMesh);
+//            m_pRenderObj->setMtl(m_pMtl);
+//        }else{
+//            //创建新的材质
+//            SVMtlCorePtr t_mtl = MakeSharedPtr<SVMtlCore>(mApp, "normal2d");
+//            t_mtl->setModelMatrix(m_absolutMat.get());
+//            t_mtl->setTexcoordFlip(m_texcoordX, m_texcoordY);
+//            t_mtl->setBlendEnable(true);
+//            t_mtl->setBlendState(MTL_BLEND_ONE, MTL_BLEND_ONE_MINUS_SRC_ALPHA);
+//            if(m_inTexType == E_TEX_END) {
+//                t_mtl->setTexture(0,m_pTex);
+//            }else{
+//                SVTexturePtr t_tex = mApp->getRenderer()->getSVTex(m_inTexType);
+//                t_mtl->setTexture(0,t_tex);
+//            }
+//            t_mtl->update(dt);
+//            m_pRenderObj->setMesh(m_pMesh);
+//            m_pRenderObj->setMtl(t_mtl);
+//        }
+//    }
 }
 
 void SVBillboardNode::render() {

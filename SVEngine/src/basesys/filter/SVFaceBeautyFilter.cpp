@@ -170,7 +170,7 @@ bool SVFairDataBlur::create() {
 
     SVPassPtr t_pass = MakeSharedPtr<SVPass>();
     t_pass->mTag = "SVFairDataBlur";
-    t_pass->setMtl(m_mtl_a);
+    //t_pass->setMtl(m_mtl_a);
     t_pass->setInTex(0, E_TEX_MAIN);
     t_pass->setOutTex(E_TEX_HELP0);
     t_pass->mTag = "blur_fair_01";
@@ -178,7 +178,7 @@ bool SVFairDataBlur::create() {
 
     t_pass = MakeSharedPtr<SVPass>();
     t_pass->mTag = "SVFairDataBlur";
-    t_pass->setMtl(m_mtl_b);
+    //t_pass->setMtl(m_mtl_b);
     t_pass->setInTex(0, E_TEX_HELP0);
     t_pass->setOutTex(E_TEX_HELP1);
     t_pass->mTag = "blur_fair_01";
@@ -186,7 +186,7 @@ bool SVFairDataBlur::create() {
     //
     t_pass = MakeSharedPtr<SVPass>();
     t_pass->mTag = "SVFairDataBlur";
-    t_pass->setMtl(m_mtl_c);
+    //t_pass->setMtl(m_mtl_c);
     t_pass->setInTex(0, E_TEX_MAIN);
     t_pass->setInTex(1, E_TEX_HELP1);
     t_pass->setOutTex(E_TEX_HELP2);
@@ -195,14 +195,14 @@ bool SVFairDataBlur::create() {
     //
     t_pass = MakeSharedPtr<SVPass>();
     t_pass->mTag = "SVFairDataBlur";
-    t_pass->setMtl(m_mtl_e);
+    //t_pass->setMtl(m_mtl_e);
     t_pass->setInTex(0, E_TEX_HELP2);
     t_pass->setOutTex(E_TEX_HELP0);
     m_pPassNode->addPass(t_pass);
     //
     t_pass = MakeSharedPtr<SVPass>();
     t_pass->mTag = "SVFairDataBlur";
-    t_pass->setMtl(m_mtl_f);
+    //t_pass->setMtl(m_mtl_f);
     t_pass->setInTex(0, E_TEX_HELP0);
     t_pass->setOutTex(E_TEX_HELP2);
     t_pass->mTag = "blur_fair_01";
@@ -210,7 +210,7 @@ bool SVFairDataBlur::create() {
     //
     t_pass = MakeSharedPtr<SVPass>();
     t_pass->mTag = "SVFairDataBlur";
-    t_pass->setMtl(m_mtl_d);
+    //t_pass->setMtl(m_mtl_d);
     t_pass->setInTex(0, E_TEX_MAIN);
     t_pass->setInTex(1, E_TEX_HELP1);
     t_pass->setInTex(2, E_TEX_HELP2);
@@ -220,7 +220,7 @@ bool SVFairDataBlur::create() {
     //写回
     t_pass = MakeSharedPtr<SVPass>();
     t_pass->mTag = "SVFairDataBlur";
-    t_pass->setMtl(m_mtl_back);
+    //t_pass->setMtl(m_mtl_back);
     t_pass->setInTex(0, E_TEX_HELP0);
     t_pass->setOutTex(E_TEX_MAIN);
     t_pass->mTag = "writeback";
@@ -355,37 +355,37 @@ SVFairLtraLow::~SVFairLtraLow() {
 }
 
 bool SVFairLtraLow::create() {
-    SVRendererPtr t_renderer = mApp->getRenderMgr()->getRenderer();
-    if (!t_renderer)
-        return false;
-    s32 t_w = mApp->m_pGlobalParam->m_inner_width;
-    s32 t_h = mApp->m_pGlobalParam->m_inner_height;
-    m_mtl_a = MakeSharedPtr<SVMtlFairLtraLow>(mApp);
-    m_mtl_a->setTexcoordFlip(1.0f, 1.0f);
-    m_mtl_back = MakeSharedPtr<SVMtlCore>(mApp, "screennor");
-    m_mtl_back->setTexcoordFlip(1.0f, 1.0f);
-
-    if (!t_renderer->getSVTex(E_TEX_HELP0)) {
-        t_renderer->createSVTex(E_TEX_HELP0, t_w, t_h, GL_RGBA);
-    }
-
-    m_pPassNode = MakeSharedPtr<SVMultPassNode>(mApp);
-    m_pPassNode->create(t_w, t_h);
-    //  m_pPassNode->setRSType(RST_BEAUTY);
-
-    SVPassPtr t_pass = MakeSharedPtr<SVPass>();
-    t_pass->mTag = "filter-beauty-lows";
-    t_pass->setMtl(m_mtl_a);
-    t_pass->setInTex(0, E_TEX_MAIN);
-    t_pass->setOutTex(E_TEX_HELP0);
-    m_pPassNode->addPass(t_pass);
-    //写回
-    t_pass = MakeSharedPtr<SVPass>();
-    t_pass->mTag = "filter-beauty-lows-back";
-    t_pass->setMtl(m_mtl_back);
-    t_pass->setInTex(0, E_TEX_HELP0);
-    t_pass->setOutTex(E_TEX_MAIN);
-    m_pPassNode->addPass(t_pass);
+//    SVRendererPtr t_renderer = mApp->getRenderMgr()->getRenderer();
+//    if (!t_renderer)
+//        return false;
+//    s32 t_w = mApp->m_pGlobalParam->m_inner_width;
+//    s32 t_h = mApp->m_pGlobalParam->m_inner_height;
+//    m_mtl_a = MakeSharedPtr<SVMtlFairLtraLow>(mApp);
+//    m_mtl_a->setTexcoordFlip(1.0f, 1.0f);
+//    m_mtl_back = MakeSharedPtr<SVMtlCore>(mApp, "screennor");
+//    m_mtl_back->setTexcoordFlip(1.0f, 1.0f);
+//
+//    if (!t_renderer->getSVTex(E_TEX_HELP0)) {
+//        t_renderer->createSVTex(E_TEX_HELP0, t_w, t_h, GL_RGBA);
+//    }
+//
+//    m_pPassNode = MakeSharedPtr<SVMultPassNode>(mApp);
+//    m_pPassNode->create(t_w, t_h);
+//    //  m_pPassNode->setRSType(RST_BEAUTY);
+//
+//    SVPassPtr t_pass = MakeSharedPtr<SVPass>();
+//    t_pass->mTag = "filter-beauty-lows";
+//    t_pass->setMtl(m_mtl_a);
+//    t_pass->setInTex(0, E_TEX_MAIN);
+//    t_pass->setOutTex(E_TEX_HELP0);
+//    m_pPassNode->addPass(t_pass);
+//    //写回
+//    t_pass = MakeSharedPtr<SVPass>();
+//    t_pass->mTag = "filter-beauty-lows-back";
+//    t_pass->setMtl(m_mtl_back);
+//    t_pass->setInTex(0, E_TEX_HELP0);
+//    t_pass->setOutTex(E_TEX_MAIN);
+//    m_pPassNode->addPass(t_pass);
     return true;
 }
 
