@@ -9,6 +9,8 @@
 #include "../app/SVInst.h"
 #include "../callback/SVOpCallback.h"
 
+using namespace sv;
+
 SVOpBase::SVOpBase(SVInst *_app)
 :SVGBase(_app)
 ,m_pCB(nullptr){

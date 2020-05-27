@@ -43,6 +43,8 @@
 
 #endif
 
+using namespace sv;
+
 
 //重置渲染器内部大小
 SVOpResizeRenderder::SVOpResizeRenderder(SVInst *_app,s32 _w,s32 _h)

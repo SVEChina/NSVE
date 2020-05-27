@@ -20,6 +20,9 @@
 #include "../basesys/SVBasicSys.h"
 #include "../basesys/SVPictureProcess.h"
 #include "../basesys/filter/SVFilterLUT.h"
+
+using namespace sv;
+
 //设置美颜滤镜
 SVOpSetBeautyFilter::SVOpSetBeautyFilter(SVInst* _app,cptr8 _scenename,cptr8 _filter,s32 _lows)
 :SVOpBase(_app) {

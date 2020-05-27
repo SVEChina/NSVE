@@ -13,6 +13,8 @@
 #include "../node/SVNode.h"
 #include "../node/SVCameraNode.h"
 
+using namespace sv;
+
 SVOpLoadBase::SVOpLoadBase(SVInst *_app)
 : SVOpBase(_app) {
 }

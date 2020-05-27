@@ -15,7 +15,7 @@
 #include "../rendercore/SVRenderDef.h"
 
 using namespace sv;
-ss
+
 //设置ios相机
 SVOpCreateIOSInstream::SVOpCreateIOSInstream(SVInst *_app, cptr8 _name, PICFORMATE _format, s32 _w, s32 _h,f32 _angle, bool _show)
         : SVOpBase(_app) {

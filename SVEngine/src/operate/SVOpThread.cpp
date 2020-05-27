@@ -10,6 +10,8 @@
 #include "../work/SVThread.h"
 #include "../work/SVThreadPool.h"
 
+using namespace sv;
+
 //
 SVOpAppMode::SVOpAppMode(SVInst* _app,SV_STATE _mode)
 : SVOpBase(_app) {

@@ -12,6 +12,7 @@
 #include "../base/SVPreDeclare.h"
 #include "../base/SVDatatDef.h"
 #include "SVPersonModule.h"
+
 namespace sv {
     
     class SVDetectMgr : public SVSysBase {
@@ -29,6 +30,7 @@ namespace sv {
         SVDetectBasePtr getDetect();
         
         SVPersonModulePtr getPersonModule();
+        
     protected:
         
         DETECTTYPE m_detectType;
@@ -38,6 +40,9 @@ namespace sv {
         SVPersonModulePtr m_pPersonModule;
     
     };
+
+
+}//!namespace sv
 
 
 

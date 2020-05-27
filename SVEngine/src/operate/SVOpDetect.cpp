@@ -9,6 +9,8 @@
 #include "../app/SVInst.h"
 #include "../detect/SVDetectMgr.h"
 
+using namespace sv;
+
 //
 SVOpOpenDetect::SVOpOpenDetect(SVInst *_app, s32 detecttype)
 :SVOpBase(_app) {

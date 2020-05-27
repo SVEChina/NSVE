@@ -152,14 +152,14 @@ void SVCameraNode::update(f32 _dt) {
 }
 
 void SVCameraNode::_updateForce() {
-    if(m_pProjMethod) {
-        m_pProjMethod->refresh();
-    }
-    //
-    m_pos = m_pCtrl->getPos();
-    m_mat_v = m_pCtrl->getMat();
-    m_mat_p = m_pProjMethod->getMat();
-    m_dirty = false;
+//    if(m_pProjMethod) {
+//        m_pProjMethod->refresh();
+//    }
+//    //
+//    m_pos = m_pCtrl->getPos();
+//    m_mat_v = m_pCtrl->getMat();
+//    m_mat_p = m_pProjMethod->getMat();
+//    m_dirty = false;
 }
 
 void SVCameraNode::resetDefaultCamera() {
@@ -227,10 +227,10 @@ FMat4& SVCameraNode::getVPMatObj(){
     return m_mat_vp;
 }
 
-//获取控制器
-SVCameraCtrlPtr SVCameraNode::getCtrl(){
-    return m_pCtrl;
-}
+////获取控制器
+//SVCameraCtrlPtr SVCameraNode::getCtrl(){
+//    return nullptr;
+//}
 
 void SVCameraNode::updateViewProj() {
     m_mat_vp =m_mat_p*m_mat_v;

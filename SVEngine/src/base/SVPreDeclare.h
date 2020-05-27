@@ -81,8 +81,8 @@ namespace sv {
     DECLARE_SHAREPTR(SVOpMarkPosition);
     DECLARE_SHAREPTR(SVOpMarkEnableRandom);
     //
-    DECLARE_SHAREPTR(SVOpCreateGameZCMgr);
-    DECLARE_SHAREPTR(SVOpDestroyGameZCMgr);
+//    DECLARE_SHAREPTR(SVOpCreateGameZCMgr);
+//    DECLARE_SHAREPTR(SVOpDestroyGameZCMgr);
     
     //Test
     DECLARE_SHAREPTR(SVOpCreateTest);

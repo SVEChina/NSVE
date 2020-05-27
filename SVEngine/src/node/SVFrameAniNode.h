@@ -11,11 +11,10 @@
 #include "SVNode.h"
 #include "../base/SVMap.h"
 //回调
-typedef void (*sv_frameani_callback)(SVFrameAniNodePtr _node,void* _obj,s32 _status);
+typedef void (*sv_frameani_callback)(sv::SVFrameAniNodePtr _node,void* _obj,s32 _status);
+
 namespace sv {
     
-    
-        
         /*
          帧动画节点
          */

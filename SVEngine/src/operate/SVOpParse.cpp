@@ -22,6 +22,8 @@
 #include "../rendercore/SVRenderMgr.h"
 #include "../module/SVModuleBase.h"
 
+using namespace sv;
+
 SVOpParse::SVOpParse(SVInst *_app, s32 _resid, cptr8 _path )
 : SVOpBase(_app) {
     resid = _resid;

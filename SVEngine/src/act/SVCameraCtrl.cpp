@@ -350,18 +350,18 @@ void SVCtrlCamera2D::move(f32 _win_px0,f32 _win_py0,f32 _win_px1,f32 _win_py1) {
 //推拉 (30尺度)
 void SVCtrlCamera2D::zoom(f32 _dis) {
     SV_LOG_INFO("_dis (%f) \n",_dis);
-    f32 t_near = m_linkCam->getProjMethod()->getNear();
-    f32 t_far = m_linkCam->getProjMethod()->getFar();
-    f32 t_h = m_linkCam->getProjMethod()->getHeight();
-    m_pixelUnit = PIXEL_UNIT_H1*fabs(m_dis)/t_h;
-    m_dis += _dis*m_pixelUnit*m_zoom_x;
-    if(m_dis<t_near + 1.0f) {
-        m_dis = t_near + 1.0f;
-    }
-    if(m_dis>t_far - 1.0f) {
-        m_dis = t_far - 1.0f;
-    }
-    m_dirty = true;
+//    f32 t_near = m_linkCam->getProjMethod()->getNear();
+//    f32 t_far = m_linkCam->getProjMethod()->getFar();
+//    f32 t_h = m_linkCam->getProjMethod()->getHeight();
+//    m_pixelUnit = PIXEL_UNIT_H1*fabs(m_dis)/t_h;
+//    m_dis += _dis*m_pixelUnit*m_zoom_x;
+//    if(m_dis<t_near + 1.0f) {
+//        m_dis = t_near + 1.0f;
+//    }
+//    if(m_dis>t_far - 1.0f) {
+//        m_dis = t_far - 1.0f;
+//    }
+//    m_dirty = true;
 }
 
 //相机控制

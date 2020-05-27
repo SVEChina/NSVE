@@ -14,6 +14,8 @@
 #include "../basesys/SVBasicSys.h"
 #include "../basesys/SVPickProcess.h"
 
+using namespace sv;
+
 SVOpDestroyEffect::SVOpDestroyEffect(SVInst *_app, cptr8 _name)
 :SVOpBase(_app) {
     m_name = _name;
@@ -88,12 +90,11 @@ SVOpDestroyGameZCMgr::SVOpDestroyGameZCMgr(SVInst *_app)
 }
 
 void SVOpDestroyGameZCMgr::_process(float dt) {
-    SVString t_name = "sv_gamezc_module";
-    SVModuleBasePtr t_module = mApp->getModuleSys()->getModule(t_name.c_str());
-    if (t_module) {
-        mApp->getModuleSys()->unregist(t_name.c_str());
-        t_module->close();
-        t_module->destroy();
-    }
-    
+//    SVString t_name = "sv_gamezc_module";
+//    SVModuleBasePtr t_module = mApp->getModuleSys()->getModule(t_name.c_str());
+//    if (t_module) {
+//        mApp->getModuleSys()->unregist(t_name.c_str());
+//        t_module->close();
+//        t_module->destroy();
+//    }
 }

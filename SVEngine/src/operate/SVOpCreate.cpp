@@ -44,9 +44,6 @@
 #include "../file/SVParseMain.h"
 #include "../file/SVBMFontLoader.h"
 #include "../file/SVLoaderGLTF.h"
-#include "../file/SVParsePen.h"
-#include "../game/zc/ZCMgr.h"
-#include "../game/zc/ZCDef.h"
 #include "../module/SVModuleSys.h"
 #include "../module/SVModuleBase.h"
 #include "../module/SVDivisonFilter.h"
@@ -68,6 +65,9 @@
 #include "../act/SVActionUnit.h"
 #include "../act/SVActFollow.h"
 #include "../act/SVActPhysics.h"
+
+using namespace sv;
+
 //创建场景OP
 SVOpCreateScene::SVOpCreateScene(SVInst *_app,cptr8 name)
 : SVOpBase(_app) {
@@ -687,12 +687,12 @@ SVOpSetPenEffcet::~SVOpSetPenEffcet() {
 }
 
 void SVOpSetPenEffcet::_process(f32 dt) {
-    SVString t_name = "sv_pen_module";
-    SVModuleBasePtr t_modulePtr = mApp->getModuleSys()->getModule(t_name.c_str());
-    if (t_modulePtr) {
-        SVParsePen t_parssPen(mApp);
-        t_parssPen.parse(m_strPath.c_str(),123);
-    }
+//    SVString t_name = "sv_pen_module";
+//    SVModuleBasePtr t_modulePtr = mApp->getModuleSys()->getModule(t_name.c_str());
+//    if (t_modulePtr) {
+//        SVParsePen t_parssPen(mApp);
+//        t_parssPen.parse(m_strPath.c_str(),123);
+//    }
 }
 
 
@@ -857,17 +857,17 @@ SVOpCreateGameZCMgr::~SVOpCreateGameZCMgr(){
 }
 
 void SVOpCreateGameZCMgr::_process(f32 dt) {
-    SVString t_name = "sv_gamezc_module";
-    SVModuleBasePtr t_modulePtr = mApp->getModuleSys()->getModule(t_name.c_str());
-    if (t_modulePtr == nullptr) {
-        t_modulePtr = MakeSharedPtr<zc::ZCMgr>(mApp);
-        t_modulePtr->init();
-        t_modulePtr->open();
-        mApp->getModuleSys()->regist(t_modulePtr, t_name.c_str());
-        if (m_pCB) {
-            (*m_pCB)("", m_obj);
-        }
-    }
+//    SVString t_name = "sv_gamezc_module";
+//    SVModuleBasePtr t_modulePtr = mApp->getModuleSys()->getModule(t_name.c_str());
+//    if (t_modulePtr == nullptr) {
+//        t_modulePtr = MakeSharedPtr<zc::ZCMgr>(mApp);
+//        t_modulePtr->init();
+//        t_modulePtr->open();
+//        mApp->getModuleSys()->regist(t_modulePtr, t_name.c_str());
+//        if (m_pCB) {
+//            (*m_pCB)("", m_obj);
+//        }
+//    }
 }
 
 SVOpEnableTouchAnchor::SVOpEnableTouchAnchor(SVInst *_app)

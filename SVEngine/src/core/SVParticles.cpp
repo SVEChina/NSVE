@@ -1,6 +1,6 @@
 #include "SVParticles.h"
 #include "../base/SVSimdLib.h"
-#include "../base/SVUtils.h"
+//#include "../base/SVUtils.h"
 #include "../base/SVNoise.h"
 #include "../core/SVImage.h"
 
@@ -1211,17 +1211,17 @@ struct ParticlesDistanceCompare {
 };
 
 void SVParticles::sort_particles(const FVec3 &camera) {
-    distances.resize(m_particles.size());
-    FVec3 t_direction;
-    s32 num_particles = m_particles.size();
-    for(s32 i = 0; i < num_particles; i++) {
-        Distance &t_d = distances[i];
-        sub(t_direction,m_particles[i].position,camera);
-        t_d.distance = t_direction.length2();
-        t_d.index = i;
-    }
-    ParticlesDistanceCompare compare;
-    sv::quickSort(distances.begin(),distances.end(),compare);
+//    distances.resize(m_particles.size());
+//    FVec3 t_direction;
+//    s32 num_particles = m_particles.size();
+//    for(s32 i = 0; i < num_particles; i++) {
+//        Distance &t_d = distances[i];
+//        sub(t_direction,m_particles[i].position,camera);
+//        t_d.distance = t_direction.length2();
+//        t_d.index = i;
+//    }
+//    ParticlesDistanceCompare compare;
+//    sv::quickSort(distances.begin(),distances.end(),compare);
 }
 
 //
