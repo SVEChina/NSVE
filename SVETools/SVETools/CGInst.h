@@ -21,6 +21,6 @@
 
 -(void)cgDestroy;
 //
-//-(void)getSVE;
+-(void*)getSVE;
 
 @end

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5F64D59A2480F0D40005CF47 /* CMetalView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5F64D5992480F0D40005CF47 /* CMetalView.mm */; };
 		5FD7F1F0247D064F00A53A1D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FD7F1EF247D064F00A53A1D /* AppDelegate.m */; };
 		5FD7F1F2247D065000A53A1D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5FD7F1F1247D065000A53A1D /* Assets.xcassets */; };
 		5FD7F1F5247D065000A53A1D /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FD7F1F3247D065000A53A1D /* MainMenu.xib */; };
@@ -51,6 +52,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5F64D5982480F0D40005CF47 /* CMetalView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CMetalView.h; sourceTree = "<group>"; };
+		5F64D5992480F0D40005CF47 /* CMetalView.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = CMetalView.mm; sourceTree = "<group>"; };
 		5FD7F1EB247D064F00A53A1D /* SVETools.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SVETools.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5FD7F1EE247D064F00A53A1D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		5FD7F1EF247D064F00A53A1D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -105,18 +108,20 @@
 		5FD7F1ED247D064F00A53A1D /* SVETools */ = {
 			isa = PBXGroup;
 			children = (
+				5FD7F1EE247D064F00A53A1D /* AppDelegate.h */,
+				5FD7F1EF247D064F00A53A1D /* AppDelegate.m */,
+				5FD7F1F1247D065000A53A1D /* Assets.xcassets */,
 				5FD7F217247D294F00A53A1D /* CGInst.h */,
 				5FD7F219247D294F00A53A1D /* CGInst.mm */,
 				5FD7F216247D294F00A53A1D /* CGState.h */,
 				5FD7F21A247D294F00A53A1D /* CGState.mm */,
 				5FD7F21B247D294F00A53A1D /* CGUI.h */,
 				5FD7F218247D294F00A53A1D /* CGUI.mm */,
-				5FD7F1EE247D064F00A53A1D /* AppDelegate.h */,
-				5FD7F1EF247D064F00A53A1D /* AppDelegate.m */,
-				5FD7F1F1247D065000A53A1D /* Assets.xcassets */,
-				5FD7F1F3247D065000A53A1D /* MainMenu.xib */,
+				5F64D5982480F0D40005CF47 /* CMetalView.h */,
+				5F64D5992480F0D40005CF47 /* CMetalView.mm */,
 				5FD7F1F6247D065000A53A1D /* Info.plist */,
 				5FD7F1F7247D065000A53A1D /* main.m */,
+				5FD7F1F3247D065000A53A1D /* MainMenu.xib */,
 				5FD7F1F9247D065000A53A1D /* SVETools.entitlements */,
 			);
 			path = SVETools;
@@ -248,6 +253,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F64D59A2480F0D40005CF47 /* CMetalView.mm in Sources */,
 				5FD7F21C247D294F00A53A1D /* CGUI.mm in Sources */,
 				5FD7F21D247D294F00A53A1D /* CGInst.mm in Sources */,
 				5FD7F1F8247D065000A53A1D /* main.m in Sources */,
