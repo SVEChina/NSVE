@@ -81,7 +81,7 @@ static CVReturn renderCallback(CVDisplayLinkRef displayLink,
 }
 
 -(void)renderMetal {
-    NSLog(@"sve renderMetal!");
+    //NSLog(@"sve renderMetal!");
     id<CAMetalDrawable> drawable = [metalLayer nextDrawable];
     id<MTLTexture> texture = drawable.texture;
     //
@@ -100,7 +100,7 @@ static CVReturn renderCallback(CVDisplayLinkRef displayLink,
 }
 
 - (void)drawRect:(NSRect)dirtyRect {
-    NSLog(@"sve drawRect!");
+    //NSLog(@"sve drawRect!");
     //
     [super drawRect:dirtyRect];
     //[self render];

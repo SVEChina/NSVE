@@ -28,9 +28,12 @@
     metalview = [[CMetalView alloc] initWithFrame:self.window.contentView.bounds];
     [self.window.contentView addSubview:metalview];
     //
-//    self.window.contentView.wantsLayer=YES;
-//    self.window.contentView.layer = metallayer;
-    //[[CGInst getInst] cgInit];
+    [[NSNotificationCenter defaultCenter] addObserver:self.window
+                                             selector:@selector(windowDidResize:)
+                                                 name:NSWindowDidResizeNotification
+                                               object:self];
+    //
+    [[CGInst getInst] cgInit];
 }
 
 
@@ -38,9 +41,8 @@
     // Insert code here to tear down your application
 }
 
-- (NSSize)windowWillResize:(NSWindow*)sender toSize:(NSSize)frameSize {
+- (void)windowDidResize:(NSNotification*)aNotification {
     NSLog(@"window resize!");
-    return frameSize;
 }
 
 
