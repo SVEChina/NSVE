@@ -6,8 +6,9 @@
 //
 
 #include "SVRendererMetal.h"
-#include "SVResMetalFbo.h"
+#include "SVRTargetMetal.h"
 #include "../../app/SVInst.h"
+#include "../../rendercore/SVRenderMgr.h"
 #include "../../base/SVDataSwap.h"
 
 using namespace sv;
@@ -15,9 +16,6 @@ using namespace sv;
 SVRendererMetal::SVRendererMetal(SVInstPtr _app)
 :SVRenderer(_app){
     m_pDevice = nullptr;
-    m_pTarget = nullptr;
-    m_pTargeTex = nullptr;
-    //
     m_pCmdQueue = nullptr;
     m_pLibrary = nullptr;
     m_pCurEncoder = nullptr;
@@ -33,8 +31,11 @@ void SVRendererMetal::initParam(id<MTLDevice> _device,id<MTLDrawable> _target,id
     }
     m_pCmdQueue = m_pDevice.newCommandQueue;
     m_pLibrary = [m_pDevice newDefaultLibrary];
-    m_pTarget = _target;
-    m_pTargeTex = _targetTex;
+    //创建了对应的主RT
+    SVRTargetMetalPtr t_rt = createRT(_target,_targetTex);
+    if(t_rt){
+        mApp->getRenderMgr()->setMainRT(t_rt);
+    }
 }
 
 //初始化
@@ -60,20 +61,27 @@ void SVRendererMetal::destroy(){
 void SVRendererMetal::resize(s32 _w,s32 _h) {
 }
 
+//创建RT
+SVRTargetMetalPtr SVRendererMetal::createRT(id<MTLDrawable> _target,id<MTLTexture> _targetTex) {
+    SVRTargetMetalPtr t_rm = MakeSharedPtr<SVRTargetMetal>(mApp);
+    t_rm->init(_target,_targetTex);
+    return t_rm;
+}
+
 //渲染器渲染
 void SVRendererMetal::render() {
-    //target
-    MTLRenderPassDescriptor  *passDescriptor = [MTLRenderPassDescriptor renderPassDescriptor];
-    passDescriptor.colorAttachments[0].texture = m_pTargeTex;
-    passDescriptor.colorAttachments[0].loadAction = MTLLoadActionClear;
-    passDescriptor.colorAttachments[0].storeAction = MTLStoreActionStore;
-    passDescriptor.colorAttachments[0].clearColor = MTLClearColorMake(1, 0, 0, 1);
-    //
-    id<MTLCommandBuffer> commandBuffer = [m_pCmdQueue commandBuffer];
-    id<MTLRenderCommandEncoder> commandEncoder = [commandBuffer renderCommandEncoderWithDescriptor:passDescriptor];
-    [commandEncoder endEncoding];
-    [commandBuffer presentDrawable:m_pTarget];
-    [commandBuffer commit];
+//    //target
+//    MTLRenderPassDescriptor  *passDescriptor = [MTLRenderPassDescriptor renderPassDescriptor];
+//    passDescriptor.colorAttachments[0].texture = m_pTargeTex;
+//    passDescriptor.colorAttachments[0].loadAction = MTLLoadActionClear;
+//    passDescriptor.colorAttachments[0].storeAction = MTLStoreActionStore;
+//    passDescriptor.colorAttachments[0].clearColor = MTLClearColorMake(1, 0, 0, 1);
+//    //
+//    id<MTLCommandBuffer> commandBuffer = [m_pCmdQueue commandBuffer];
+//    id<MTLRenderCommandEncoder> commandEncoder = [commandBuffer renderCommandEncoderWithDescriptor:passDescriptor];
+//    [commandEncoder endEncoding];
+//    [commandBuffer presentDrawable:m_pTarget];
+//    [commandBuffer commit];
 }
 
 //提交纹理

@@ -52,7 +52,6 @@ namespace sv {
         void _adapt();
         s32 m_adaptMode;
         //渲染流(缓存流)
-        SVRenderStreamPtr m_RStreamCache;
         SVLockPtr m_renderLock;
         SVLockPtr m_logicLock;
         

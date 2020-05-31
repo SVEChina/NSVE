@@ -40,6 +40,8 @@ namespace sv {
             
         public:
             //渲染器当中 创建资源的接口
+            // 创建RT接口
+            SVRTargetMetalPtr createRT(id<MTLDrawable> _target,id<MTLTexture> _targetTex);
             
         public:
             //renderder interface
@@ -114,8 +116,6 @@ namespace sv {
             
         public:
             id<MTLDevice> m_pDevice;
-            id<MTLDrawable> m_pTarget;
-            id<MTLTexture> m_pTargeTex;
             id<MTLCommandQueue> m_pCmdQueue;
             id<MTLLibrary> m_pLibrary;
             id<MTLRenderCommandEncoder> m_pCurEncoder;

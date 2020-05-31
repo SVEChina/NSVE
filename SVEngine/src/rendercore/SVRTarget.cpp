@@ -58,24 +58,24 @@ SVRTarget::~SVRTarget() {
 ////    SVRObjBase::destroy(_renderer);
 //}
 
-void SVRTarget::render() {
+void SVRTarget::render(SVRendererPtr _renderer) {
     //设置目标
-    _preRender();
+    _preRender(_renderer);
     //渲染
-    _render();
+    _render(_renderer);
     //解锁目标
-    _afterRender();
+    _afterRender(_renderer);
 }
 
-void SVRTarget::_preRender() {
+void SVRTarget::_preRender(SVRendererPtr _renderer) {
     
 }
 
-void SVRTarget::_render() {
+void SVRTarget::_render(SVRendererPtr _renderer) {
     
 }
 
-void SVRTarget::_afterRender() {
+void SVRTarget::_afterRender(SVRendererPtr _renderer) {
     
 }
 

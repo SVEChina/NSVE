@@ -42,6 +42,7 @@ SVInstPtr SVInst::makeCreate() {
 void SVInst::init() {
     m_pRM = nullptr;
     m_pGlobalMgr = MakeSharedPtr<SVGlobalMgr>( std::dynamic_pointer_cast<SVInst>(shareObject()) );
+    m_pGlobalMgr->init();
     m_pGlobalMgr->m_pConfig = MakeSharedPtr<SVConfig>(this);
     m_pGlobalMgr->m_pConfig->init();
     //

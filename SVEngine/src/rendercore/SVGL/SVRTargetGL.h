@@ -24,11 +24,11 @@ namespace sv {
         ~SVRTargetGL();
         
     protected:
-        void _preRender();
+        void _preRender(SVRendererPtr _renderer);
         
-        void _render();
+        void _render(SVRendererPtr _renderer);
         
-        void _afterRender();
+        void _afterRender(SVRendererPtr _renderer);
     };
 
     

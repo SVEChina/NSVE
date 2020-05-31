@@ -18,15 +18,15 @@ SVRTargetGL::SVRTargetGL(SVInstPtr _app)
 SVRTargetGL::~SVRTargetGL() {
 }
 
-void SVRTargetGL::_preRender() {
+void SVRTargetGL::_preRender(SVRendererPtr _renderer) {
     
 }
 
-void SVRTargetGL::_render() {
+void SVRTargetGL::_render(SVRendererPtr _renderer) {
     
 }
 
-void SVRTargetGL::_afterRender() {
+void SVRTargetGL::_afterRender(SVRendererPtr _renderer) {
     
 }
 

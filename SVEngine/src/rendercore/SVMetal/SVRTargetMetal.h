@@ -9,6 +9,10 @@
 #define SV_RENDERTARGETMETAL_H
 
 #include "../SVRTarget.h"
+#import <Metal/Metal.h>
+//#import <Metal/MTLDrawable.h>
+//#import <Metal/MTLRenderCommandEncoder.h>
+//#import <MetalKit/MetalKit.h>
 
 namespace sv {
     
@@ -16,18 +20,25 @@ namespace sv {
      渲染目标（主目标，其他目标，都包含在内）
      */
 
-    class SVRTargetMetal : public SVGBaseEx {
+    class SVRTargetMetal : public SVRTarget {
     public:
         SVRTargetMetal(SVInstPtr _app);
         
         ~SVRTargetMetal();
+        
+        void init(id<MTLDrawable> _target,id<MTLTexture> _targetTex);
 
     protected:
-        void _preRender();
+        void _preRender(SVRendererPtr _renderer);
         
-        void _render();
+        void _render(SVRendererPtr _renderer);
         
-        void _afterRender();
+        void _afterRender(SVRendererPtr _renderer);
+        
+    public:
+        id<MTLDrawable> m_pTarget;
+        id<MTLTexture> m_pTargetTex;
+        MTLRenderPassDescriptor* m_passDsp;
     };
 
     

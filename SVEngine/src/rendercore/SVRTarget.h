@@ -22,14 +22,14 @@ namespace sv {
         
         ~SVRTarget();
         
-        void render();
+        void render(SVRendererPtr _renderer);
         
     protected:
-        void _preRender();
+        virtual void _preRender(SVRendererPtr _renderer);
         
-        void _render();
+        virtual void _render(SVRendererPtr _renderer);
         
-        void _afterRender();
+        virtual void _afterRender(SVRendererPtr _renderer);
         
     public:
         s32 m_order;

@@ -63,15 +63,15 @@ SVRTargetPtr SVRenderMgr::getRTarget(cptr8 _name) {
 void SVRenderMgr::render(){
     //前向RT
     for(s32 i=0;i<m_preRT.size();i++) {
-        m_preRT[i]->render();
+        m_preRT[i]->render( mApp->getRenderer() );
     }
     //中间RT
     if( m_mainRT ) {
-        m_mainRT->render();
+        m_mainRT->render(  mApp->getRenderer() );
     }
     //后向RT
     for(s32 i=0;i<m_afterRT.size();i++) {
-        m_afterRT[i]->render();
+        m_afterRT[i]->render(  mApp->getRenderer() );
     }
 }
 
@@ -117,38 +117,34 @@ void SVRenderMgr::_adapt() {
 
 void SVRenderMgr::clear() {
     m_renderLock->lock();
-    if (m_RStreamCache) {
-        m_RStreamCache->clearSVRenderCmd();
-        m_RStreamCache = nullptr;
-    }
     m_renderLock->unlock();
 }
 
 
 //这里相当于准备数据
 void SVRenderMgr::swapData(){
-    m_logicLock->lock();
-    m_renderLock->lock();
-//    //交换全局(逻辑流,渲染流)
-//    if(m_pRenderScene && m_pRenderer){
-//        //准备的cache推送到流中
-//        for(s32 i=0;i<m_RStreamCache->m_cmdArray.size();i++){
-//            m_RStreamCache->m_cmdArray[i]->setRenderer(m_pRenderer);
-//            m_pRenderScene->pushCacheCmd(RST_BEGIN,m_RStreamCache->m_cmdArray[i]);
-//        }
-//        m_RStreamCache->clearSVRenderCmd();
-//        //交换管线
-//        m_pRenderScene->swapPipline();
-//    }
-    m_renderLock->unlock();
-    m_logicLock->unlock();
+//    m_logicLock->lock();
+//    m_renderLock->lock();
+////    //交换全局(逻辑流,渲染流)
+////    if(m_pRenderScene && m_pRenderer){
+////        //准备的cache推送到流中
+////        for(s32 i=0;i<m_RStreamCache->m_cmdArray.size();i++){
+////            m_RStreamCache->m_cmdArray[i]->setRenderer(m_pRenderer);
+////            m_pRenderScene->pushCacheCmd(RST_BEGIN,m_RStreamCache->m_cmdArray[i]);
+////        }
+////        m_RStreamCache->clearSVRenderCmd();
+////        //交换管线
+////        m_pRenderScene->swapPipline();
+////    }
+//    m_renderLock->unlock();
+//    m_logicLock->unlock();
 }
 
 void SVRenderMgr::pushRCmdCreate(SVRObjBasePtr _robj){
     m_logicLock->lock();
     if(_robj){
-        SVRCmdCreatePtr t_cmd= MakeSharedPtr<SVRCmdCreate>(_robj);
-        m_RStreamCache->addSVRenderCmd(t_cmd);
+//        SVRCmdCreatePtr t_cmd= MakeSharedPtr<SVRCmdCreate>(_robj);
+//        m_RStreamCache->addSVRenderCmd(t_cmd);
     }
     m_logicLock->unlock();
 }

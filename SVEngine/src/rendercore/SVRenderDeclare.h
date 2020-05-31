@@ -28,6 +28,7 @@ namespace sv {
     
     //gl
     DECLARE_SHAREPTR(SVRendererGL);
+    DECLARE_SHAREPTR(SVRTargetGL);
     DECLARE_SHAREPTR(SVRenderStateGL);
     DECLARE_SHAREPTR(SVRResGLTex);
     DECLARE_SHAREPTR(SVRResGLTexWithTexID);
@@ -45,13 +46,18 @@ namespace sv {
     DECLARE_SHAREPTR(SVResGLRenderMeshDvid);
     DECLARE_SHAREPTR(SVResGLRenderMeshData);
     
+    
     //metal
     #if defined(SV_IOS) || defined(SV_OSX)
+
     DECLARE_SHAREPTR(SVRendererMetal);
+    DECLARE_SHAREPTR(SVRTargetMetal);
     DECLARE_SHAREPTR(SVRResMetalTex);
     DECLARE_SHAREPTR(SVRResMetalShader);
     DECLARE_SHAREPTR(SVResMetalRenderMesh);
+    
     #endif
+
     //vulkan
     DECLARE_SHAREPTR(SVRendererVK);
     
