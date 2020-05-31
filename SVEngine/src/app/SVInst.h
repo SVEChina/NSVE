@@ -27,17 +27,20 @@ namespace sv {
         SVInst();
         //
         virtual ~SVInst();
-        //
         //初始化SV
         virtual void init();
         //销毁SVå
         virtual void destroy();
+        //创建渲染器
+        SVRendererPtr createRM(SV_RM_TYPE _type);
+        //销毁渲染器
+        void destroyRM();
+        //开始SV
+        virtual void start();
+        //停止SV
+        virtual void stop();
         //增加资源路径
         void addRespath(cptr8 _path);
-        //开始SV
-        virtual void startSVE();
-        //停止SV
-        virtual void stopSVE();
         //更新引擎
         void updateSVE(f32 _dt);
         //渲染引擎
@@ -64,6 +67,8 @@ namespace sv {
         SVGlobalMgrPtr m_pGlobalMgr;
         //全局参数
         SVGlobalParamPtr m_pGlobalParam;
+        //渲染器
+        SVRendererPtr m_pRM;
         //
         SV_STATE m_svst;
         //

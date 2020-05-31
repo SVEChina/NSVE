@@ -9,6 +9,7 @@
 #import "CMetalView.h"
 #import <QuartzCore/CAMetalLayer.h>
 #import <QuartzCore/CVDisplayLink.h>
+#include "src/app/SVInst.h"
 
 @interface CMetalView () {
     CAMetalLayer* metalLayer;

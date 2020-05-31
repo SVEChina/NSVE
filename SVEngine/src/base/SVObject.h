@@ -32,7 +32,7 @@ namespace sv {
         
         virtual ~SVObject();
         
-        auto shareObject() {
+        std::shared_ptr<SVObject> shareObject() {
             return shared_from_this();
         }
         

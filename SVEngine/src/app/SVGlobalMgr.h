@@ -13,9 +13,9 @@
 #include "../act/SVActDeclare.h"
 namespace sv {
     
-    class SVGlobalMgr : public SVGBase {
+    class SVGlobalMgr : public SVGBaseEx {
     public:
-        SVGlobalMgr(SVInst *_app);
+        SVGlobalMgr(SVInstPtr _app);
         
         ~SVGlobalMgr();
         

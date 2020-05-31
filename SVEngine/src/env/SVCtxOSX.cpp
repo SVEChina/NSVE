@@ -55,10 +55,10 @@ SVCtxOSXMetal::SVCtxOSXMetal()
 SVCtxOSXMetal::~SVCtxOSXMetal() {
 }
 
-SVRendererPtr SVCtxOSXMetal::createRenderer(SVInstPtr _handle) {
-    SVRendererMetalPtr t_renderer = MakeSharedPtr<SVRendererMetal>(nullptr);
-    return t_renderer;
-}
+//SVRendererPtr SVCtxOSXMetal::createRenderer(SVInstPtr _handle) {
+//    SVRendererMetalPtr t_renderer = MakeSharedPtr<SVRendererMetal>(nullptr);
+//    return t_renderer;
+//}
 
 bool SVCtxOSXMetal::activeContext(){
     return true;

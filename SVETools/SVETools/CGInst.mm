@@ -63,7 +63,6 @@ static CGInst *mInst;
 
 -(void)destroySVE{
     if(m_pSVE) {
-        m_pSVE->stopSVE();
         m_pSVE->destroy();
         m_pSVE = nullptr;
     }

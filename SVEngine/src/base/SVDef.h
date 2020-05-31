@@ -60,10 +60,10 @@ enum SV_THREAD_STATE {
 };
 
 //sv渲染器类型
-enum SV_RENDERER_TYPE {
-    E_RENDERER_GLES,
-    E_RENDERER_VUNKAN,
-    E_RENDERER_METAL
+enum SV_RM_TYPE {
+    E_M_GLES,
+    E_M_VUNKAN,
+    E_M_METAL
 };
 
 //设计适配模式
