@@ -54,6 +54,11 @@ void SVRenderer::destroy(){
     m_resLock = nullptr;
 }
 
+//渲染器渲染
+void SVRenderer::render() {
+    
+}
+
 //
 void SVRenderer::renderBegin() {
 }

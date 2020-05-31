@@ -18,8 +18,6 @@
 
 namespace sv {
     
-    
-    
         /*
         Metal渲染器
         */
@@ -30,12 +28,16 @@ namespace sv {
             
             ~SVRendererMetal();
             
+            void initParam(id<MTLDevice> _device,id<MTLDrawable> _target,id<MTLTexture> _targetTex);
+            
             //初始化
             virtual void init(s32 _w,s32 _h);
             //销毁
             virtual void destroy();
             //重置大小
             virtual void resize(s32 _w,s32 _h);
+            //渲染
+            virtual void render();
             
         public:
             //renderder interface
@@ -110,6 +112,8 @@ namespace sv {
             
         public:
             id<MTLDevice> m_pDevice;
+            id<MTLDrawable> m_pTarget;
+            id<MTLTexture> m_pTargeTex;
             id<MTLCommandQueue> m_pCmdQueue;
             id<MTLLibrary> m_pLibrary;
             id<MTLRenderCommandEncoder> m_pCurEncoder;

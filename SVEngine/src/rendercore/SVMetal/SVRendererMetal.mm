@@ -15,6 +15,9 @@ using namespace sv;
 SVRendererMetal::SVRendererMetal(SVInstPtr _app)
 :SVRenderer(_app){
     m_pDevice = nullptr;
+    m_pTarget = nullptr;
+    m_pTargeTex = nullptr;
+    //
     m_pCmdQueue = nullptr;
     m_pLibrary = nullptr;
     m_pCurEncoder = nullptr;
@@ -23,9 +26,21 @@ SVRendererMetal::SVRendererMetal(SVInstPtr _app)
 SVRendererMetal::~SVRendererMetal(){
 }
 
+void SVRendererMetal::initParam(id<MTLDevice> _device,id<MTLDrawable> _target,id<MTLTexture> _targetTex) {
+    m_pDevice = _device;
+    if (m_pDevice == nil) {
+        SV_LOG_INFO("don't support metal !");
+    }
+    //
+    m_pTarget = _target;
+    m_pTargeTex = _targetTex;
+    //
+    m_pCmdQueue = m_pDevice.newCommandQueue;
+    m_pLibrary = [m_pDevice newDefaultLibrary];
+}
+
 //初始化
 void SVRendererMetal::init(s32 _w,s32 _h){
-    //m_pDevice = (__bridge id)_device;//MTLCreateSystemDefaultDevice();
     if (m_pDevice == nil) {
         SV_LOG_INFO("don't support metal !");
     }
@@ -45,6 +60,23 @@ void SVRendererMetal::destroy(){
 
 //重置大小
 void SVRendererMetal::resize(s32 _w,s32 _h) {
+}
+
+//渲染器渲染
+void SVRendererMetal::render() {
+    //
+    MTLRenderPassDescriptor  *passDescriptor = [MTLRenderPassDescriptor renderPassDescriptor];
+    passDescriptor.colorAttachments[0].texture = m_pTargeTex;
+    passDescriptor.colorAttachments[0].loadAction = MTLLoadActionClear;
+    passDescriptor.colorAttachments[0].storeAction = MTLStoreActionStore;
+    passDescriptor.colorAttachments[0].clearColor = MTLClearColorMake(1, 0, 0, 1);
+    //
+    id<MTLCommandBuffer> commandBuffer = [m_pCmdQueue commandBuffer];
+    id<MTLRenderCommandEncoder> commandEncoder = [commandBuffer renderCommandEncoderWithDescriptor:passDescriptor];
+    //
+    [commandEncoder endEncoding];
+    [commandBuffer presentDrawable:m_pTarget];
+    [commandBuffer commit];
 }
 
 //提交纹理

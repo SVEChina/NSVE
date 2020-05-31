@@ -24,6 +24,8 @@
 @implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+    //
+    [[CGInst getInst] cgInit];
     // Insert code here to initialize your application
     metalview = [[CMetalView alloc] initWithFrame:self.window.contentView.bounds];
     [self.window.contentView addSubview:metalview];
@@ -32,8 +34,7 @@
                                              selector:@selector(windowDidResize:)
                                                  name:NSWindowDidResizeNotification
                                                object:self];
-    //
-    [[CGInst getInst] cgInit];
+
 }
 
 

@@ -91,7 +91,9 @@ void SVInst::updateSVE(f32 _dt) {
 }
 
 void SVInst::renderSVE() {
-    m_pGlobalMgr->m_pRenderMgr->render();
+    if(m_pRM) {
+        m_pRM->render();
+    }
 }
 
 void SVInst::svSuspend(){

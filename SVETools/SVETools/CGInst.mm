@@ -9,6 +9,7 @@
 #import "CGInst.h"
 #import "CGUI.h"
 #include "src/app/SVInst.h"
+#include "src/rendercore/SVMetal/SVRendererMetal.h"
 
 static CGInst *mInst;
 
@@ -68,9 +69,29 @@ static CGInst *mInst;
     }
 }
 
--(void*) getSVE {
+-(void*)getSVE {
     return m_pSVE.get();
     //return nullptr;
+}
+
+//
+-(void)createRM:(id<MTLDevice>)_device drawable:(id<CAMetalDrawable>)_drawable {
+    if( m_pSVE ) {
+        sv::SVRendererPtr t_rm =m_pSVE->createRM(E_M_METAL);
+        
+        sv::SVRendererMetalPtr t_rm_metal = std::dynamic_pointer_cast<sv::SVRendererMetal>(t_rm);
+        t_rm_metal->initParam(_device,_drawable,_drawable.texture);
+    }
+}
+
+//
+-(void)destroyRM {
+    
+}
+
+-(void)render {
+    //
+    m_pSVE->renderSVE();
 }
 
 ////数据重置

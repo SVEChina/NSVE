@@ -9,6 +9,7 @@
 #import "CMetalView.h"
 #import <QuartzCore/CAMetalLayer.h>
 #import <QuartzCore/CVDisplayLink.h>
+#import "CGInst.h"
 #include "src/app/SVInst.h"
 
 @interface CMetalView () {
@@ -26,7 +27,6 @@
 - (instancetype)initWithFrame:(NSRect)frameRect {
     self = [super initWithFrame:frameRect];
     if( self ) {
-        //
         self.mDevice = MTLCreateSystemDefaultDevice();
         self.mCommandQueue = [self.mDevice newCommandQueue];
         //创建metal环境
@@ -41,6 +41,12 @@
 }
 
 -(void)buildMetal {
+    //NSLog(@"sve renderMetal!");
+    id<CAMetalDrawable> drawable = [metalLayer nextDrawable];
+    id<MTLTexture> texture = drawable.texture;
+    //创建渲染器
+    [[CGInst getInst] createRM:self.mDevice drawable:drawable];
+    //
     [self setWantsLayer:true];
     [self setLayer:metalLayer];
     [self creatTimer];
@@ -82,22 +88,27 @@ static CVReturn renderCallback(CVDisplayLinkRef displayLink,
 }
 
 -(void)renderMetal {
-    //NSLog(@"sve renderMetal!");
-    id<CAMetalDrawable> drawable = [metalLayer nextDrawable];
-    id<MTLTexture> texture = drawable.texture;
-    //
-    MTLRenderPassDescriptor  *passDescriptor = [MTLRenderPassDescriptor renderPassDescriptor];
-    passDescriptor.colorAttachments[0].texture = texture;
-    passDescriptor.colorAttachments[0].loadAction = MTLLoadActionClear;
-    passDescriptor.colorAttachments[0].storeAction = MTLStoreActionStore;
-    passDescriptor.colorAttachments[0].clearColor = MTLClearColorMake(1, 0, 0, 1);
-    //
-    id<MTLCommandBuffer> commandBuffer = [self.mCommandQueue commandBuffer];
-    id<MTLRenderCommandEncoder> commandEncoder = [commandBuffer renderCommandEncoderWithDescriptor:passDescriptor];
-    //
-    [commandEncoder endEncoding];
-    [commandBuffer presentDrawable:drawable];
-    [commandBuffer commit];
+    if(false) {
+        //NSLog(@"sve renderMetal!");
+        id<CAMetalDrawable> drawable = [metalLayer nextDrawable];
+        id<MTLTexture> texture = drawable.texture;
+        //
+        MTLRenderPassDescriptor  *passDescriptor = [MTLRenderPassDescriptor renderPassDescriptor];
+        passDescriptor.colorAttachments[0].texture = texture;
+        passDescriptor.colorAttachments[0].loadAction = MTLLoadActionClear;
+        passDescriptor.colorAttachments[0].storeAction = MTLStoreActionStore;
+        passDescriptor.colorAttachments[0].clearColor = MTLClearColorMake(1, 0, 0, 1);
+        //
+        id<MTLCommandBuffer> commandBuffer = [self.mCommandQueue commandBuffer];
+        id<MTLRenderCommandEncoder> commandEncoder = [commandBuffer renderCommandEncoderWithDescriptor:passDescriptor];
+        //
+        [commandEncoder endEncoding];
+        [commandBuffer presentDrawable:drawable];
+        [commandBuffer commit];
+    }else{
+        [[CGInst getInst] render];
+    }
+    
 }
 
 - (void)drawRect:(NSRect)dirtyRect {
