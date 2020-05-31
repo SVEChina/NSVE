@@ -5,8 +5,8 @@
 // yizhou Fu,long Yin,longfei Lin,ziyu Xu,xiaofan Li,daming Li
 //
 
-#ifndef SV_RENDERTECH_METAL_H
-#define SV_RENDERTECH_METAL_H
+#ifndef SV_RENDERTECH_GL_H
+#define SV_RENDERTECH_GL_H
 
 #include "../SVRTech.h"
 #include "SVRenderDeclare.h"
@@ -14,14 +14,14 @@
 namespace sv {
 
     /*
-     render tech metal
+     render tech gl
      */
 
-    class SVRTechMetal : public SVRTech {
+    class SVRTechGL : public SVRTech {
     public:
-        SVRTechMetal(SVInstPtr _app);
+        SVRTechGL(SVInstPtr _app);
         
-        ~SVRTechMetal();
+        ~SVRTechGL();
         
         virtual void render(SVRendererPtr _renderer);
         
@@ -33,4 +33,4 @@ namespace sv {
 }//!namespace sv
 
 
-#endif //SV_RENDERTECH_METAL_H
+#endif //SV_RENDERTECH_GL_H
