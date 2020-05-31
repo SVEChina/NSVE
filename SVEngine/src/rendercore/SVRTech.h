@@ -1,5 +1,5 @@
 //
-// SVRenderTech.h
+// SVRTech.h
 // SVEngine
 // Copyright 2017-2020
 // yizhou Fu,long Yin,longfei Lin,ziyu Xu,xiaofan Li,daming Li
@@ -9,6 +9,7 @@
 #define SV_RENDERTECH_H
 
 #include "../base/SVGBase.h"
+#include "SVRenderDeclare.h"
 
 namespace sv {
 
@@ -16,13 +17,13 @@ namespace sv {
      render tech
      */
 
-    class SVRenderTech : public SVGBaseEx {
+    class SVRTech : public SVGBaseEx {
     public:
-        SVRenderTech(SVInstPtr _app);
+        SVRTech(SVInstPtr _app);
         
-        ~SVRenderTech();
+        ~SVRTech();
         
-        virtual void render();
+        virtual void render(SVRendererPtr _renderer);
     };
 
 

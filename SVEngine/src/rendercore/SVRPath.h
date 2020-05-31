@@ -23,16 +23,31 @@ namespace sv {
      等等
      */
 
+    //不同RPath 需要设定不同的流
     class SVRPath : public SVGBaseEx {
     public:
-        SVRPath(SVInstPtr _app);
+        SVRPath(SVInstPtr _app):SVGBaseEx(_app){}
         
-        ~SVRPath();
+        ~SVRPath(){}
+        
+        virtual void init(){};
+        
+        void render(SVRendererPtr _renderer){};
+    };
+
+    //普通Path
+    class SVRPathNor : public SVRPath {
+    public:
+        SVRPathNor(SVInstPtr _app);
+        
+        ~SVRPathNor();
+        
+        virtual void init();
         
         void render(SVRendererPtr _renderer);
-        
-        
     };
+
+    
 
     
 }//!namespace sv

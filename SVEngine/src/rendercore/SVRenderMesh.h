@@ -81,52 +81,19 @@ namespace sv {
         RENDERMESHCONF m_renderMeshConf;
         
         RENDERMESHDATA m_renderMeshData;
+        
+        //
+        struct dataTag {
+            void* m_pdata;  //数据指针s
+            s32 m_size;     //数据大小
+            s32 m_vertdsp;  //顶点描述
+        };
+        SVArray<dataTag> dataPool;
+        
+        //
+        void* m_pindex;
     };
     
-    //
-    class SVRenderMeshDvid : public SVRenderMesh {
-    public:
-        SVRenderMeshDvid(SVInst* _app);
-        
-        ~SVRenderMeshDvid();
-        
-        virtual void create(SVRendererPtr _renderer);
-        
-        virtual void destroy(SVRendererPtr _renderer);
-        
-        virtual void setVertexDataNum(s32 _vertexNum);
-        
-        virtual void setIndexData(SVDataSwapPtr _data,s32 _num);
-        
-        void setVertex2Data(SVDataSwapPtr _pdata);
-        
-        void setVertex3Data(SVDataSwapPtr _pdata);
-        
-        void setColor0Data(SVDataSwapPtr _pdata);
-        
-        void setColor1Data(SVDataSwapPtr _pdata);
-        
-        void setTexcoord0Data(SVDataSwapPtr _pdata);
-        
-        void setTexcoord1Data(SVDataSwapPtr _pdata);
-        
-        void setTexcoord2Data(SVDataSwapPtr _pdata);
-        
-        void setNormalData(SVDataSwapPtr _pdata);
-        
-        void setTagentData(SVDataSwapPtr _pdata);
-        
-        void setBTagentData(SVDataSwapPtr _pdata);
-        
-        virtual void getIndexData(SVDataSwapPtr _data,s32 &_num);
-          
-        virtual void getVertexData(SVDataSwapPtr _data);
-          
-        virtual void getVertexNum(s32 &_vertexNum);
-    protected:
-        virtual void _resetMeshData();
-    };
-        
 
 }//!namespace sv
 

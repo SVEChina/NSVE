@@ -14,14 +14,21 @@
 
 using namespace sv;
 
-//
-SVRPath::SVRPath(SVInstPtr _app)
-:SVGBaseEx(_app){
+//普通的path
+SVRPathNor::SVRPathNor(SVInstPtr _app)
+:SVRPath(_app){
+    
 }
 
-SVRPath::~SVRPath() {
+SVRPathNor::~SVRPathNor() {
+    
 }
 
-void SVRPath::render(SVRendererPtr _renderer) {
+void SVRPathNor::init() {
+    //设定两个流，固体和透明
+    
+}
+
+void SVRPathNor::render(SVRendererPtr _renderer) {
 }
 

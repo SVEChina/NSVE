@@ -7,7 +7,7 @@
 
 #include "SVRenderStream.h"
 #include "SVRenderCmd.h"
-#include "SVRenderTech.h"
+#include "SVRTech.h"
 #include "../work/SVTdCore.h"
 
 using namespace sv;
@@ -36,16 +36,16 @@ void SVRenderStream::clearSVRenderCmd() {
 //    m_lock->unlock();
 }
 
-void SVRenderStream::render() {
+void SVRenderStream::render(SVRendererPtr _renderer) {
     //渲染前先做cmd排序
     
     //做状态切换
-    m_pTech->render();
+    m_pTech->render(_renderer);
 //    m_lock->lock();
     //做指令渲染
-    for (s32 i = 0; i < m_cmdArray.size(); i++) {
-        m_cmdArray[i]->render();
-    }
+//    for (s32 i = 0; i < m_cmdArray.size(); i++) {
+//        m_cmdArray[i]->render(_renderer);
+//    }
     m_cmdArray.destroy();
 //    m_lock->unlock();
 }

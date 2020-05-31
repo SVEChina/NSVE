@@ -27,12 +27,12 @@ namespace sv {
         
         void clearSVRenderCmd();
         
-        void render();
+        void render(SVRendererPtr _renderer);
         
     protected:
         SVLockPtr m_lock;
         //渲染技术
-        SVRenderTechPtr m_pTech;
+        SVRTechPtr m_pTech;
         //数据流
         typedef SVArray<SVRenderCmdPtr> CMDPOOL;
         CMDPOOL m_cmdArray;

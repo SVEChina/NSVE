@@ -27,7 +27,6 @@ using namespace sv;
 ////    m_pVerts = MakeSharedPtr<SVDataSwap>();
 ////    m_pT0 = MakeSharedPtr<SVDataSwap>();
 ////    m_renderObject = MakeSharedPtr<SVRenderObject>();
-////    m_pFaceMesh = MakeSharedPtr<SVRenderMeshDvid>(mApp);
 //}
 //
 //SV2DFaceMaskNode::~SV2DFaceMaskNode() {

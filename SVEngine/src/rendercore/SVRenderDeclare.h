@@ -24,7 +24,7 @@ namespace sv {
     DECLARE_SHAREPTR(SVRenderer);
     DECLARE_SHAREPTR(SVRenderState);
     DECLARE_SHAREPTR(SVRenderTexture);
-    DECLARE_SHAREPTR(SVRenderTech);
+    DECLARE_SHAREPTR(SVRTech);
     DECLARE_SHAREPTR(SVRPath);
 
     //gl
@@ -69,7 +69,6 @@ namespace sv {
     DECLARE_SHAREPTR(SVRenderPipline);
     DECLARE_SHAREPTR(SVRenderStream);
     DECLARE_SHAREPTR(SVRenderMesh);
-    DECLARE_SHAREPTR(SVRenderMeshDvid);
     
     //rendercmd
     DECLARE_SHAREPTR(SVRenderCmd);
