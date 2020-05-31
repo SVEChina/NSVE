@@ -83,6 +83,9 @@ void SVGlobalMgr::init() {
     }
     //加载配置
     m_pConfig->loadConfig();
+    //渲染管理
+    m_pRenderMgr = MakeSharedPtr<SVRenderMgr>(mApp);
+    m_pRenderMgr->init();
 //    //消息系统建立起来
 //    m_pEventMgr = MakeSharedPtr<SVEventMgr>(mApp.get());
 //    m_pEventMgr->init();
@@ -92,9 +95,6 @@ void SVGlobalMgr::init() {
 //    //
 //    m_pPythonSys = MakeSharedPtr<SVPythonSys>(mApp.get());
 //    m_pPythonSys->init();
-//    //渲染器初始化
-//    m_pRenderMgr = MakeSharedPtr<SVRenderMgr>(mApp.get());
-//    m_pRenderMgr->init();
 //    //相机系统
 //    m_pCameraMgr = MakeSharedPtr<SVCameraMgr>(mApp.get());
 //    m_pCameraMgr->init();
@@ -171,11 +171,11 @@ void SVGlobalMgr::destroy() {
 //        m_pModuleSys->destroy();
 //        SV_LOG_ERROR("m_pModuleSys:destroy sucess");
 //    }
-//    if (m_pRenderMgr) {
-//        //渲染析够
-//        m_pRenderMgr->destroy();
-//        SV_LOG_ERROR("SVRenderMgr:destroy sucess");
-//    }
+    if (m_pRenderMgr) {
+        //渲染析够
+        m_pRenderMgr->destroy();
+        SV_LOG_ERROR("SVRenderMgr:destroy sucess");
+    }
 //    if(m_pBasicSys){
 //        //基础系统
 //        m_pBasicSys->destroy();

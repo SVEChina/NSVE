@@ -20,7 +20,8 @@ using namespace sv;
 
 //
 SVRTarget::SVRTarget(SVInstPtr _app)
-: SVGBaseEx(_app) {
+:SVGBaseEx(_app)
+,m_order(0){
 }
 
 SVRTarget::~SVRTarget() {

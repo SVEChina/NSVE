@@ -30,6 +30,9 @@ namespace sv {
         void _render();
         
         void _afterRender();
+        
+    public:
+        s32 m_order;
     };
 
     

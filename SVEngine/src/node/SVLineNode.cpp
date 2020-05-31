@@ -19,14 +19,14 @@ using namespace sv;
 SVLineNode::SVLineNode(SVInst *_app)
 : SVNode(_app) {
     ntype = "SVLineNode";
-    m_pRenderObj = MakeSharedPtr<SVRenderObject>();
-    m_lineMtl = MakeSharedPtr<SVMtlGeo3d>(mApp);
-    m_pMesh = mApp->getRenderMgr()->createMeshRObj();
-    m_pMesh->setVertexType(E_VF_V3);
-    m_pMesh->setDrawMethod(E_DM_LINES);
-    m_pMesh->createMesh();
-    m_drawBox = true;
-    m_visible = true;
+//    m_pRenderObj = MakeSharedPtr<SVRenderObject>();
+//    m_lineMtl = MakeSharedPtr<SVMtlGeo3d>(mApp);
+//    m_pMesh = mApp->getRenderMgr()->createMeshRObj();
+//    m_pMesh->setVertexType(E_VF_V3);
+//    m_pMesh->setDrawMethod(E_DM_LINES);
+//    m_pMesh->createMesh();
+//    m_drawBox = true;
+//    m_visible = true;
 }
 
 SVLineNode::~SVLineNode() {

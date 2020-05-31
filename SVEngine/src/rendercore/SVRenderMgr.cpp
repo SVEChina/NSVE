@@ -21,13 +21,13 @@
 
 using namespace sv;
 
-SVRenderMgr::SVRenderMgr(SVInst *_app)
-:SVGBase(_app) {
-    m_RStreamCache =  MakeSharedPtr<SVRenderStream>();      //逻辑全局流
+SVRenderMgr::SVRenderMgr(SVInstPtr _app)
+:SVGBaseEx(_app) {
+    m_mainRT = nullptr;
+    m_preRT.clear();
+    m_afterRT.clear();
     m_renderLock = MakeSharedPtr<SVLock>();
     m_logicLock = MakeSharedPtr<SVLock>();
-    //m_pRenderScene = nullptr;
-    m_pRenderer = nullptr;
     m_adaptMode = 0;
 }
 
@@ -41,16 +41,89 @@ void SVRenderMgr::init() {
 
 void SVRenderMgr::destroy() {
     clear();
-    if (m_pRenderer) {
-        m_pRenderer->destroy();
-        m_pRenderer = nullptr;
+}
+
+void SVRenderMgr::setMainRT(SVRTargetPtr _rt) {
+    m_mainRT = _rt;
+}
+
+void SVRenderMgr::addRTarget(SVRTargetPtr _rt,bool _pre) {
+    if(_pre) {
+        m_preRT.append(_rt);    //push 前向
+    }else{
+        m_afterRT.append(_rt);
     }
 }
 
-SVRenderMeshPtr SVRenderMgr::createMeshRObj(){
-    SVRenderMeshPtr t_rmesh = MakeSharedPtr<SVRenderMesh>(mApp);
-    return t_rmesh;
+SVRTargetPtr SVRenderMgr::getRTarget(cptr8 _name) {
+    return nullptr;
 }
+
+//只关心渲染，不应该关心环境的切换 环境放到外面去调用
+void SVRenderMgr::render(){
+    //前向RT
+    for(s32 i=0;i<m_preRT.size();i++) {
+        m_preRT[i]->render();
+    }
+    //中间RT
+    if( m_mainRT ) {
+        m_mainRT->render();
+    }
+    //后向RT
+    for(s32 i=0;i<m_afterRT.size();i++) {
+        m_afterRT[i]->render();
+    }
+}
+
+void SVRenderMgr::_sort() {
+    //前向与后向都需要排序
+    
+}
+
+void SVRenderMgr::_adapt() {
+//    return;
+//    if(m_pRenderer) {
+//        if(m_adaptMode == 0) {
+//            //形变 填充
+//            SVMtlCorePtr t_pMtl = MakeSharedPtr<SVMtlCore>(mApp, "screennor");
+//            t_pMtl->setTexture(0,E_TEX_MAIN);    //那第一张纹理
+//            t_pMtl->setBlendEnable(false);
+//            t_pMtl->setBlendState(MTL_BLEND_ONE,MTL_BLEND_ZERO);
+//            bool t_mirror = mApp->getConfig()->mirror;
+//            if( !t_mirror ) {
+//                t_pMtl->setTexcoordFlip(-1.0f, 1.0f);
+//            }else {
+//                t_pMtl->setTexcoordFlip(1.0f, 1.0f);
+//            }
+//            SVRenderCmdAdaptPtr t_cmd = MakeSharedPtr<SVRenderCmdAdapt>();
+//            t_cmd->mTag = "adaptscene";
+//            t_cmd->setRenderer(m_pRenderer);
+//            t_cmd->setClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+//            t_cmd->setWinSize(mApp->m_pGlobalParam->m_inner_width,mApp->m_pGlobalParam->m_inner_height);
+//            t_cmd->setMesh(mApp->getDataMgr()->m_screenMesh);
+//            t_cmd->setMaterial(t_pMtl->clone());
+//
+//        }else if(m_adaptMode == 1) {
+//            //非形变 固定
+//
+//        }else if(m_adaptMode == 2) {
+//            //非形变 固定 内接
+//
+//        }else if(m_adaptMode == 3) {
+//            //非形变 固定 外接
+//        }
+//    }
+}
+
+void SVRenderMgr::clear() {
+    m_renderLock->lock();
+    if (m_RStreamCache) {
+        m_RStreamCache->clearSVRenderCmd();
+        m_RStreamCache = nullptr;
+    }
+    m_renderLock->unlock();
+}
+
 
 //这里相当于准备数据
 void SVRenderMgr::swapData(){
@@ -82,101 +155,4 @@ void SVRenderMgr::pushRCmdCreate(SVRObjBasePtr _robj){
 
 SVRenderScenePtr SVRenderMgr::getRenderScene() {
     return nullptr;
-}
-
-void SVRenderMgr::setRenderTarget(cptr8 _name,SVRTargetPtr _rt) {
-    m_renderLock->lock();
-    m_renderLock->unlock();
-}
-
-SVRTargetPtr SVRenderMgr::getRenderTarget(cptr8 _name) {
-    return nullptr;
-}
-
-//只关心渲染，不应该关心环境的切换 环境放到外面去调用
-void SVRenderMgr::render(){
-    //
-    m_renderLock->lock();
-//    if(m_pRenderScene ){
-//        if( m_pRenderer ) {
-//            m_pRenderer->renderBegin();     //渲染器开始
-//            _adapt();                       //适配
-//            m_pRenderer->resetState();      //重置状态
-//            m_pRenderer->removeUnuseRes();  //资源释放
-//            m_pRenderer->renderEnd();       //渲染器结束
-//        }else {
-//            m_pRenderScene->clearRenderCmd();
-//        }
-//    }
-    m_renderLock->unlock();
-}
-
-void SVRenderMgr::clearScreen(){
-    m_renderLock->lock();
-//    if(m_pRenderer && m_pRenderScene ){
-////        SVCtxBasePtr t_context = m_pRenderer->getRenderContext();
-////        if( t_context && t_context->activeContext() ){
-////            m_pRenderer->renderBegin();
-////            SVRTargetPtr t_rt = getRenderTarget( m_pRenderScene->getName() );
-////            if( t_context->activeRenderTarget( t_rt ) ){
-////                m_pRenderer->resetState();
-////                t_context->swapRenderTarget( t_rt );   //交换场景
-////            }
-////            m_pRenderScene->clearRenderCmd();
-////            m_pRenderer->removeUnuseRes();  //资源释放
-////            m_pRenderer->renderEnd();
-////        }
-//    }
-    m_renderLock->unlock();
-}
-
-void SVRenderMgr::_adapt() {
-    return;
-    if(m_pRenderer) {
-        if(m_adaptMode == 0) {
-            //形变 填充
-            SVMtlCorePtr t_pMtl = MakeSharedPtr<SVMtlCore>(mApp, "screennor");
-            t_pMtl->setTexture(0,E_TEX_MAIN);    //那第一张纹理
-            t_pMtl->setBlendEnable(false);
-            t_pMtl->setBlendState(MTL_BLEND_ONE,MTL_BLEND_ZERO);
-            bool t_mirror = mApp->getConfig()->mirror;
-            if( !t_mirror ) {
-                t_pMtl->setTexcoordFlip(-1.0f, 1.0f);
-            }else {
-                t_pMtl->setTexcoordFlip(1.0f, 1.0f);
-            }
-            SVRenderCmdAdaptPtr t_cmd = MakeSharedPtr<SVRenderCmdAdapt>();
-            t_cmd->mTag = "adaptscene";
-            t_cmd->setRenderer(m_pRenderer);
-            t_cmd->setClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-            t_cmd->setWinSize(mApp->m_pGlobalParam->m_inner_width,mApp->m_pGlobalParam->m_inner_height);
-            t_cmd->setMesh(mApp->getDataMgr()->m_screenMesh);
-            t_cmd->setMaterial(t_pMtl->clone());
-
-        }else if(m_adaptMode == 1) {
-            //非形变 固定
-            
-        }else if(m_adaptMode == 2) {
-            //非形变 固定 内接
-            
-        }else if(m_adaptMode == 3) {
-            //非形变 固定 外接
-        }
-    }
-}
-
-void SVRenderMgr::clear() {
-    m_renderLock->lock();
-    if (m_RStreamCache) {
-        m_RStreamCache->clearSVRenderCmd();
-        m_RStreamCache = nullptr;
-    }
-    m_renderLock->unlock();
-}
-
-//回收GL资源
-void SVRenderMgr::recycleRes() {
-    if( m_pRenderer ) {
-        m_pRenderer->clearRes();
-    }
 }

@@ -45,32 +45,32 @@ SVParamDeform::~SVParamDeform(){
 
 SVDeformImageMove::SVDeformImageMove(SVInst *_app)
 :SVGBase(_app){
-    m_pMtlBg  = MakeSharedPtr<SVMtlCore>(mApp,"screennor");
-    m_pIUMP    = MakeSharedPtr<SVImageUsingMove>();
-    m_deformScale = MakeSharedPtr<SVDeformScale>();
-    m_pPointTex = mApp->getTexMgr()->getTextureSync("svres/point.png",true);
-    m_param = MakeSharedPtr<SVParamDeform>();
-    m_param->reset();
-    m_passDeform = nullptr;
-    m_passPoint = nullptr;
-    m_passBack = nullptr;
-    m_pMeshBg = nullptr;
-    m_pMeshPoint = mApp->getRenderMgr()->createMeshRObj();
-    m_pMeshPoint->createMesh();
-    m_rule=1;
-    m_tt_w = 0;
-    m_tt_h = 0;
-    m_dataPoint = nullptr;
-    m_fbo = nullptr;
-    m_wPointCount = 21;
-    m_hPointCont = 41;
-    m_inw = 10;
-    m_inh = 10;
-    m_smooth=1.0f;
-    m_flip = false;
-    is_swith = true;
-    m_is_point = false;
-    is_detect = false;
+//    m_pMtlBg  = MakeSharedPtr<SVMtlCore>(mApp,"screennor");
+//    m_pIUMP    = MakeSharedPtr<SVImageUsingMove>();
+//    m_deformScale = MakeSharedPtr<SVDeformScale>();
+//    m_pPointTex = mApp->getTexMgr()->getTextureSync("svres/point.png",true);
+//    m_param = MakeSharedPtr<SVParamDeform>();
+//    m_param->reset();
+//    m_passDeform = nullptr;
+//    m_passPoint = nullptr;
+//    m_passBack = nullptr;
+//    m_pMeshBg = nullptr;
+//    m_pMeshPoint = mApp->getRenderMgr()->createMeshRObj();
+//    m_pMeshPoint->createMesh();
+//    m_rule=1;
+//    m_tt_w = 0;
+//    m_tt_h = 0;
+//    m_dataPoint = nullptr;
+//    m_fbo = nullptr;
+//    m_wPointCount = 21;
+//    m_hPointCont = 41;
+//    m_inw = 10;
+//    m_inh = 10;
+//    m_smooth=1.0f;
+//    m_flip = false;
+//    is_swith = true;
+//    m_is_point = false;
+//    is_detect = false;
     
 }
 
@@ -168,9 +168,9 @@ void SVDeformImageMove::updatePointMSL(){
 }
 
 void SVDeformImageMove::_initPoint(){
-    if(!m_pMeshBg) {
-        m_pMeshBg = mApp->getRenderMgr()->createMeshRObj();
-    }
+//    if(!m_pMeshBg) {
+//        m_pMeshBg = mApp->getRenderMgr()->createMeshRObj();
+//    }
     //索引数据
     u16 m_dataIndex[46*65*2*3];//41*81*2*3
     //

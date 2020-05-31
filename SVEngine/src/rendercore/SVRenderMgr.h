@@ -22,9 +22,9 @@ namespace sv {
      2.渲染指令的推入
      */
 
-    class SVRenderMgr : public SVGBase {
+    class SVRenderMgr : public SVGBaseEx {
     public:
-        SVRenderMgr(SVInst *_app);
+        SVRenderMgr(SVInstPtr _app);
         
         ~SVRenderMgr();
         
@@ -32,36 +32,36 @@ namespace sv {
         
         void destroy();
         
+        void setMainRT(SVRTargetPtr _rt);
+        
         void clear();
         
         void render();
-        
-        void clearScreen();
-        
+
         void swapData();
-        
-        void recycleRes();  //回收GL资源
-        
-        SVRenderMeshPtr createMeshRObj();
-        
-        SVRenderScenePtr getRenderScene();
-        
+
         void pushRCmdCreate(SVRObjBasePtr _robj);
         
-        void setRenderTarget(cptr8 _name,SVRTargetPtr _rt);
+        void addRTarget(SVRTargetPtr _rt,bool _pre);
         
-        SVRTargetPtr getRenderTarget(cptr8 _name);
+        SVRTargetPtr getRTarget(cptr8 _name);
+
     
     protected:
+        void _sort();
         void _adapt();
         s32 m_adaptMode;
-        //渲染器
-        SVRendererPtr m_pRenderer;
         //渲染流(缓存流)
         SVRenderStreamPtr m_RStreamCache;
-        //
         SVLockPtr m_renderLock;
         SVLockPtr m_logicLock;
+        
+        SVArray<SVRTargetPtr> m_preRT; //前向RT
+        SVArray<SVRTargetPtr> m_afterRT; //后向RT
+        SVRTargetPtr m_mainRT; //主RT
+        
+    public:
+        SVRenderScenePtr getRenderScene();
     };
 
 

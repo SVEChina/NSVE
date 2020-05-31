@@ -31,12 +31,10 @@ void SVRendererMetal::initParam(id<MTLDevice> _device,id<MTLDrawable> _target,id
     if (m_pDevice == nil) {
         SV_LOG_INFO("don't support metal !");
     }
-    //
-    m_pTarget = _target;
-    m_pTargeTex = _targetTex;
-    //
     m_pCmdQueue = m_pDevice.newCommandQueue;
     m_pLibrary = [m_pDevice newDefaultLibrary];
+    m_pTarget = _target;
+    m_pTargeTex = _targetTex;
 }
 
 //初始化

@@ -40,9 +40,7 @@ SVInstPtr SVInst::makeCreate() {
 
 //构建各个模块的逻辑部分，引擎可以运行的最简模式
 void SVInst::init() {
-    //
     m_pRM = nullptr;
-    //
     m_pGlobalMgr = MakeSharedPtr<SVGlobalMgr>( std::dynamic_pointer_cast<SVInst>(shareObject()) );
     m_pGlobalMgr->m_pConfig = MakeSharedPtr<SVConfig>(this);
     m_pGlobalMgr->m_pConfig->init();
@@ -59,7 +57,6 @@ void SVInst::destroy() {
 
 //创建渲染器
 SVRendererPtr SVInst::createRM(SV_RM_TYPE _type) {
-    //
     if(_type == E_M_METAL) {
         m_pRM = MakeSharedPtr<SVRendererMetal>( std::dynamic_pointer_cast<SVInst>(shareObject())  );    //SVRendererPtr;
     }else if(_type == E_M_GLES) {
@@ -91,9 +88,12 @@ void SVInst::updateSVE(f32 _dt) {
 }
 
 void SVInst::renderSVE() {
-    if(m_pRM) {
-        m_pRM->render();
+    if( m_pGlobalMgr->m_pRenderMgr ) {
+        m_pGlobalMgr->m_pRenderMgr->render();
     }
+//    if(m_pRM) {
+//        m_pRM->render();
+//    }
 }
 
 void SVInst::svSuspend(){
