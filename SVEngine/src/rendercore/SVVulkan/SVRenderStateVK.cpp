@@ -7,7 +7,7 @@
 
 #include "SVRenderStateVK.h"
 #include "../../app/SVInst.h"
-#include "../SVRenderTarget.h"
+#include "../SVRTarget.h"
 #include "../../basesys/SVSceneMgr.h"
 
 using namespace sv;

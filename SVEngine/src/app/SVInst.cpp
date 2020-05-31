@@ -216,9 +216,5 @@ SVPhysicsWorldMgrPtr SVInst::getPhysicsWorldMgr(){
 }
 
 SVRendererPtr SVInst::getRenderer() {
-    if(!m_pGlobalMgr)
-        return nullptr;
-    if(!m_pGlobalMgr->m_pRenderMgr)
-        return nullptr;
-    return m_pGlobalMgr->m_pRenderMgr->getRenderer();
+    return m_pRM;
 }

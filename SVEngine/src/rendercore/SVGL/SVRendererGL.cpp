@@ -9,7 +9,7 @@
 #include "SVRenderStateGL.h"
 #include "SVRResGL.h"
 #include "../SVRenderMgr.h"
-#include "../SVRenderTarget.h"
+#include "../SVRTarget.h"
 #include "../SVRenderTexture.h"
 #include "../SVRenderMesh.h"
 #include "../../app/SVInst.h"

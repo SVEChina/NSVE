@@ -14,7 +14,7 @@
 #include "../node/SVScene.h"
 #include "../node/SVCameraNode.h"
 #include "../rendercore/SVRenderMgr.h"
-#include "../rendercore/SVRenderTarget.h"
+#include "../rendercore/SVRTarget.h"
 #include "../rendercore/SVGL/SVRendererGL.h"
 #include "../rendercore/SVVulkan/SVRendererVK.h"
 
@@ -83,16 +83,6 @@ void SVOpSetRenderTarget::setTargetParam(s32 _w, s32 _h, u32 _frameID, u32 _colo
 }
 
 void SVOpSetRenderTarget::_process(f32 dt) {
-    SVRenderTargetOutPtr t_renderTargetEnv = MakeSharedPtr<SVRenderTargetOut>(mApp,
-                                                                              m_width,
-                                                                              m_height,
-                                                                              m_frameID,
-                                                                              m_colorID);
-    mApp->getRenderMgr()->pushRCmdCreate(t_renderTargetEnv);
-    mApp->getRenderMgr()->setRenderTarget("sve", t_renderTargetEnv);
-    mApp->m_pGlobalParam->m_inner_width = m_width;
-    mApp->m_pGlobalParam->m_inner_height = m_height;
-    mApp->getConfig()->mirror = m_mirror;
 }
 
 //
@@ -108,14 +98,7 @@ void SVOpSetRenderTextureTarget::setTargetParam(s32 _w, s32 _h, u32 _textureId, 
 }
 
 void SVOpSetRenderTextureTarget::_process(f32 dt) {
-    SVRenderTargetOutTexturePtr t_renderTargetEnv = MakeSharedPtr<SVRenderTargetOutTexture>(mApp, m_width,
-                                                                              m_height, m_texId);
-    mApp->getRenderMgr()->pushRCmdCreate(t_renderTargetEnv);
-    mApp->getRenderMgr()->setRenderTarget("sve", t_renderTargetEnv);
-    mApp->getConfig()->mirror = m_mirror;
 }
-
-
 
 SVOpSetRenderMirror::SVOpSetRenderMirror(SVInst *_app)
 : SVOpBase(_app){

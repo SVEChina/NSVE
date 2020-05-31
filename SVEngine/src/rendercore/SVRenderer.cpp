@@ -12,7 +12,7 @@
 #include "../mtl/SVTexture.h"
 #include "../mtl/SVTextureIOS.h"
 #include "SVRenderMgr.h"
-#include "SVRenderTarget.h"
+#include "SVRTarget.h"
 #include "SVRenderTexture.h"
 #include "SVRObjBase.h"
 #include "SVRenderState.h"
@@ -56,7 +56,10 @@ void SVRenderer::destroy(){
 
 //渲染器渲染
 void SVRenderer::render() {
-    
+    renderBegin();
+    //
+    //
+    renderEnd();
 }
 
 //

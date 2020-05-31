@@ -9,7 +9,7 @@
 #include "SVRenderScene.h"
 #include "SVRenderCmd.h"
 #include "SVRenderStream.h"
-#include "SVRenderTarget.h"
+#include "SVRTarget.h"
 #include "SVRenderPipline.h"
 #include "SVRenderer.h"
 #include "../mtl/SVTexture.h"
@@ -80,24 +80,16 @@ void SVRenderMgr::pushRCmdCreate(SVRObjBasePtr _robj){
     m_logicLock->unlock();
 }
 
-void SVRenderMgr::setRenderer(SVRendererPtr _renderer){
-    m_pRenderer = _renderer;
-}
-
-SVRendererPtr SVRenderMgr::getRenderer(){
-    return m_pRenderer;
-}
-
 SVRenderScenePtr SVRenderMgr::getRenderScene() {
     return nullptr;
 }
 
-void SVRenderMgr::setRenderTarget(cptr8 _name,SVRenderTargetPtr _rt) {
+void SVRenderMgr::setRenderTarget(cptr8 _name,SVRTargetPtr _rt) {
     m_renderLock->lock();
     m_renderLock->unlock();
 }
 
-SVRenderTargetPtr SVRenderMgr::getRenderTarget(cptr8 _name) {
+SVRTargetPtr SVRenderMgr::getRenderTarget(cptr8 _name) {
     return nullptr;
 }
 
@@ -125,7 +117,7 @@ void SVRenderMgr::clearScreen(){
 ////        SVCtxBasePtr t_context = m_pRenderer->getRenderContext();
 ////        if( t_context && t_context->activeContext() ){
 ////            m_pRenderer->renderBegin();
-////            SVRenderTargetPtr t_rt = getRenderTarget( m_pRenderScene->getName() );
+////            SVRTargetPtr t_rt = getRenderTarget( m_pRenderScene->getName() );
 ////            if( t_context->activeRenderTarget( t_rt ) ){
 ////                m_pRenderer->resetState();
 ////                t_context->swapRenderTarget( t_rt );   //交换场景

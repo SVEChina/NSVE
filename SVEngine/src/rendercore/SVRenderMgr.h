@@ -16,6 +16,12 @@
 #include "../base/SVStack.h"
 namespace sv {
     
+    /*
+     负责构建渲染器数据用的
+     1.包含材质排序
+     2.渲染指令的推入
+     */
+
     class SVRenderMgr : public SVGBase {
     public:
         SVRenderMgr(SVInst *_app);
@@ -38,17 +44,13 @@ namespace sv {
         
         SVRenderMeshPtr createMeshRObj();
         
-        void setRenderer(SVRendererPtr _renderer);  //设置渲染器
-        
-        SVRendererPtr getRenderer();    //获取渲染器
-        
         SVRenderScenePtr getRenderScene();
         
         void pushRCmdCreate(SVRObjBasePtr _robj);
         
-        void setRenderTarget(cptr8 _name,SVRenderTargetPtr _rt);
+        void setRenderTarget(cptr8 _name,SVRTargetPtr _rt);
         
-        SVRenderTargetPtr getRenderTarget(cptr8 _name);
+        SVRTargetPtr getRenderTarget(cptr8 _name);
     
     protected:
         void _adapt();

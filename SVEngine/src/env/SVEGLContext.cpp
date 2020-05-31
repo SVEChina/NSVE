@@ -235,29 +235,18 @@ EGLint SVEGLContext::resume(ANativeWindow* window) {
     return err;
 }
 
-// void SVEGLContext::swapRenderTarget(SVRenderTargetPtr _target){
-//     SV_LOG_ERROR("SVEContext::active!");
-//     SVCtxBase::swapRenderTarget(_target);
-//     if(!swap()){
-//         SV_LOG_ERROR("SVEContext::SWAP! ERROR");
-//         return;
-//     };
-//     SV_LOG_ERROR("SVEContext::SWAP! SUCESS");
-// }
-
- bool SVEGLContext::activeContext(){
-
+bool SVEGLContext::activeContext(){
      if(!active()){
          SV_LOG_ERROR("SVEContext::active! ERROR");
          return false;
      };
      SV_LOG_ERROR("SVEContext::active! SUCESS");
      return true;
- }
+}
 
- void* SVEGLContext::getContext(){
-        return m_pGLContext;
- }
+void* SVEGLContext::getContext(){
+    return m_pGLContext;
+}
 
 
 

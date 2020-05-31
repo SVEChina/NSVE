@@ -57,10 +57,7 @@ namespace sv {
     
     //渲染框架
     DECLARE_SHAREPTR(SVFboObject);
-    DECLARE_SHAREPTR(SVRenderTarget);
-    DECLARE_SHAREPTR(SVRenderTargetDefault);
-    DECLARE_SHAREPTR(SVRenderTargetOut);
-    DECLARE_SHAREPTR(SVRenderTargetOutTexture);
+    DECLARE_SHAREPTR(SVRTarget);
     DECLARE_SHAREPTR(SVRenderScene);
     DECLARE_SHAREPTR(SVRenderPipline);
     DECLARE_SHAREPTR(SVRenderStream);
