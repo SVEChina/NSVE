@@ -11,13 +11,12 @@
 #include "../SVRenderer.h"
 #import <Foundation/Foundation.h>
 #import <AudioToolbox/AudioToolbox.h>
-//#import <QuartzCore/CAMetalLayer.h>
 #import <Metal/Metal.h>
 #import <Metal/MTLRenderCommandEncoder.h>
 #import <MetalKit/MetalKit.h>
 
 namespace sv {
-    
+
         /*
         Metal渲染器
         */
@@ -38,6 +37,9 @@ namespace sv {
             virtual void resize(s32 _w,s32 _h);
             //渲染
             virtual void render();
+            
+        public:
+            //渲染器当中 创建资源的接口
             
         public:
             //renderder interface

@@ -13,27 +13,30 @@
 
 namespace sv {
     
-    
+    /*
+     渲染流 按照材质去分的留
+     */
         
-        class SVRenderStream : public SVObject {
-            friend class sv::SVRenderMgr;
-        public:
-            SVRenderStream();
-            
-            ~SVRenderStream();
-            
-            void render();
-            
-            void addSVRenderCmd(SVRenderCmdPtr cmd);
-            
-            void clearSVRenderCmd();
-            
-        protected:
-            SVLockPtr m_lock;
-            typedef SVArray<SVRenderCmdPtr> CMDPOOL;
-            CMDPOOL m_cmdArray;
-        };
+    class SVRenderStream : public SVObject {
+    public:
+        SVRenderStream();
         
+        ~SVRenderStream();
+        
+        void addSVRenderCmd(SVRenderCmdPtr cmd);
+        
+        void clearSVRenderCmd();
+        
+        void render();
+        
+    protected:
+        SVLockPtr m_lock;
+        typedef SVArray<SVRenderCmdPtr> CMDPOOL;
+        CMDPOOL m_cmdArray;
+        
+        SVRenderTechPtr m_pTech;
+    };
+
     
     
 }//!namespace sv

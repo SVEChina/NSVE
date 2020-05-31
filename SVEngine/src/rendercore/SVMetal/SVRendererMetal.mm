@@ -64,7 +64,7 @@ void SVRendererMetal::resize(s32 _w,s32 _h) {
 
 //渲染器渲染
 void SVRendererMetal::render() {
-    //
+    //target
     MTLRenderPassDescriptor  *passDescriptor = [MTLRenderPassDescriptor renderPassDescriptor];
     passDescriptor.colorAttachments[0].texture = m_pTargeTex;
     passDescriptor.colorAttachments[0].loadAction = MTLLoadActionClear;
@@ -73,7 +73,6 @@ void SVRendererMetal::render() {
     //
     id<MTLCommandBuffer> commandBuffer = [m_pCmdQueue commandBuffer];
     id<MTLRenderCommandEncoder> commandEncoder = [commandBuffer renderCommandEncoderWithDescriptor:passDescriptor];
-    //
     [commandEncoder endEncoding];
     [commandBuffer presentDrawable:m_pTarget];
     [commandBuffer commit];

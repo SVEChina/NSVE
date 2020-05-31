@@ -41,7 +41,9 @@ void SVRenderPipline::render() {
 //                mApp->getRenderer()->pushVPMat(mApp->getCameraMgr()->getMainCamera()->getVPMatObjUI());
 //            }
 //        }
-        m_rstream_vec[i]->render();
+        
+        //m_rstream_vec[i]->render();
+        
 //        if(mApp->getRenderer()) {
 //            if(i == RST_UI){
 //                mApp->getRenderer()->popProjMat();

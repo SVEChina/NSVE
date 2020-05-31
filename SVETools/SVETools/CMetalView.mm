@@ -92,7 +92,7 @@ static CVReturn renderCallback(CVDisplayLinkRef displayLink,
         //NSLog(@"sve renderMetal!");
         id<CAMetalDrawable> drawable = [metalLayer nextDrawable];
         id<MTLTexture> texture = drawable.texture;
-        //
+        //相当于rt
         MTLRenderPassDescriptor  *passDescriptor = [MTLRenderPassDescriptor renderPassDescriptor];
         passDescriptor.colorAttachments[0].texture = texture;
         passDescriptor.colorAttachments[0].loadAction = MTLLoadActionClear;

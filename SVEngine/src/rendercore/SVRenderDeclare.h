@@ -24,6 +24,7 @@ namespace sv {
     DECLARE_SHAREPTR(SVRenderer);
     DECLARE_SHAREPTR(SVRenderState);
     DECLARE_SHAREPTR(SVRenderTexture);
+    DECLARE_SHAREPTR(SVRenderTech);
     
     //gl
     DECLARE_SHAREPTR(SVRendererGL);
