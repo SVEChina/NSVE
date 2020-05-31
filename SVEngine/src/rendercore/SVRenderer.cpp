@@ -54,23 +54,6 @@ void SVRenderer::destroy(){
     m_resLock = nullptr;
 }
 
-//渲染器渲染
-void SVRenderer::render() {
-    renderBegin();
-    //
-    //
-    renderEnd();
-}
-
-//
-void SVRenderer::renderBegin() {
-}
-
-//
-void SVRenderer::renderEnd() {
-    clearMatStack();
-}
-
 //获取状态
 SVRenderStatePtr SVRenderer::getState(){
     return m_pRState;

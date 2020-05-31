@@ -35,13 +35,14 @@ namespace sv {
             virtual void destroy();
             //重置大小
             virtual void resize(s32 _w,s32 _h);
-            //渲染
-            virtual void render();
             
         public:
-            //渲染器当中 创建资源的接口
-            // 创建RT接口
+            /*渲染器当中 创建资源的接口*/
+            //创建RT接口
             SVRTargetMetalPtr createRT(id<MTLDrawable> _target,id<MTLTexture> _targetTex);
+            
+            //创建buf接口
+            
             
         public:
             //renderder interface

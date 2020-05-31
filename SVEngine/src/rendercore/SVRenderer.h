@@ -50,12 +50,6 @@ namespace sv {
             virtual void destroy();
             //重置大小
             virtual void resize(s32 _w,s32 _h);
-            //
-            virtual void render();
-            //
-            virtual void renderBegin();
-            //
-            virtual void renderEnd();
             //增加渲染内核资源
             void addRes(SVRObjBasePtr _res);
             //移除渲染内核资源

@@ -68,22 +68,6 @@ SVRTargetMetalPtr SVRendererMetal::createRT(id<MTLDrawable> _target,id<MTLTextur
     return t_rm;
 }
 
-//渲染器渲染
-void SVRendererMetal::render() {
-//    //target
-//    MTLRenderPassDescriptor  *passDescriptor = [MTLRenderPassDescriptor renderPassDescriptor];
-//    passDescriptor.colorAttachments[0].texture = m_pTargeTex;
-//    passDescriptor.colorAttachments[0].loadAction = MTLLoadActionClear;
-//    passDescriptor.colorAttachments[0].storeAction = MTLStoreActionStore;
-//    passDescriptor.colorAttachments[0].clearColor = MTLClearColorMake(1, 0, 0, 1);
-//    //
-//    id<MTLCommandBuffer> commandBuffer = [m_pCmdQueue commandBuffer];
-//    id<MTLRenderCommandEncoder> commandEncoder = [commandBuffer renderCommandEncoderWithDescriptor:passDescriptor];
-//    [commandEncoder endEncoding];
-//    [commandBuffer presentDrawable:m_pTarget];
-//    [commandBuffer commit];
-}
-
 //提交纹理
  void SVRendererMetal::submitTex(u32 _channel,TexUnit& _unit){
      
