@@ -26,20 +26,14 @@ using namespace sv;
 //
 SVRenderCmd::SVRenderCmd() {
     mTag = "SVRenderCmd";
-    m_pRenderer = nullptr;
 }
 
 SVRenderCmd::~SVRenderCmd() {
-    m_pRenderer = nullptr;
-}
-
-void SVRenderCmd::setRenderer(SVRendererPtr _renderer) {
-    m_pRenderer = _renderer;
 }
 
 void SVRenderCmd::render() {
-    
 }
+
 //
 SVRenderCmdTransGPU::SVRenderCmdTransGPU(SVTransPtr _trans):SVRenderCmd() {
     mTag = "SVRenderCmdTransGPU";
@@ -63,14 +57,14 @@ SVRCmdCreate::SVRCmdCreate(SVRObjBasePtr _robj) {
 
 SVRCmdCreate::~SVRCmdCreate() {
     m_pRObj = nullptr;
-    m_pRenderer = nullptr;
+    //m_pRenderer = nullptr;
 }
 
 void SVRCmdCreate::render(){
-    if(m_pRObj && m_pRenderer){
-        m_pRObj->create(m_pRenderer);
-        m_pRenderer->addRes(m_pRObj);
-    }
+//    if(m_pRObj && m_pRenderer){
+//        m_pRObj->create(m_pRenderer);
+//        //m_pRenderer->addRes(m_pRObj);
+//    }
 }
 
 //普通渲染指令
@@ -93,15 +87,15 @@ void SVRenderCmdNor::setMaterial(SVMtlCorePtr _mtl){
 }
 
 void SVRenderCmdNor::render() {
-    if (m_pMtl && m_pMesh) {
-        if(mTag == "SVUIPanel") {
-            int a = 0;
-        }
-        if (m_pMtl->submitMtl()) {
-            m_pMesh->render(m_pRenderer);
-            m_pMtl->recoverMtl();
-        }
-    }
+//    if (m_pMtl && m_pMesh) {
+//        if(mTag == "SVUIPanel") {
+//            int a = 0;
+//        }
+//        if (m_pMtl->submitMtl()) {
+//            m_pMesh->render(m_pRenderer);
+//            m_pMtl->recoverMtl();
+//        }
+//    }
 }
 
 
@@ -124,10 +118,10 @@ void SVRenderCmdClear::setClearColor(f32 _r,f32 _g,f32 _b,f32 _a) {
 }
 
 void SVRenderCmdClear::render(){
-    if(m_pRenderer){
-        m_pRenderer->svClearColor(m_color_r,m_color_g,m_color_b,m_color_a);
-        m_pRenderer->svClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-    }
+//    if(m_pRenderer){
+//        m_pRenderer->svClearColor(m_color_r,m_color_g,m_color_b,m_color_a);
+//        m_pRenderer->svClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+//    }
 }
 
 //
@@ -146,10 +140,10 @@ void SVRenderCmdAdapt::setWinSize(s32 _w,s32 _h){
 
 void SVRenderCmdAdapt::render(){
     glViewport( 0, 0,m_winWidth,m_winHeight);
-    m_pRenderer->svClearColor(m_color_r,m_color_g,m_color_b,m_color_a);
-    m_pRenderer->svClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-//    glClearColor(m_color_r,m_color_g,m_color_b,m_color_a);
-//    glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+//    m_pRenderer->svClearColor(m_color_r,m_color_g,m_color_b,m_color_a);
+//    m_pRenderer->svClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+////    glClearColor(m_color_r,m_color_g,m_color_b,m_color_a);
+////    glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
     SVRenderCmdNor::render();
 }
 
@@ -179,12 +173,12 @@ void SVRenderCmdPass::render() {
         m_fbo->setTexture(m_tex);
         m_fbo->bind();
         m_fbo->clear();
-        if(m_pMtl && m_pMesh) {
-            if (m_pMtl->submitMtl()) {
-                m_pMesh->render(m_pRenderer);
-                m_pMtl->recoverMtl();
-            }
-        }
+//        if(m_pMtl && m_pMesh) {
+//            if (m_pMtl->submitMtl()) {
+//                m_pMesh->render(m_pRenderer);
+//                m_pMtl->recoverMtl();
+//            }
+//        }
         m_fbo->unbind();
     }
 }
@@ -208,16 +202,16 @@ void SVRenderCmdPassCollection::render(){
         m_fbo->setTexture(m_tex);
         m_fbo->bind();
         m_fbo->clear();
-        for(int i=0;i<m_MtlArray.size();i++){
-            SVMtlCorePtr t_mtl = m_MtlArray.get(i);
-            SVRenderMeshPtr t_mesh = m_MeshArray.get(i);
-            if(t_mtl && t_mesh) {
-                if (t_mtl->submitMtl()) {
-                    t_mesh->render(m_pRenderer);
-                    t_mtl->recoverMtl();
-                }
-            }
-        }
+//        for(int i=0;i<m_MtlArray.size();i++){
+//            SVMtlCorePtr t_mtl = m_MtlArray.get(i);
+//            SVRenderMeshPtr t_mesh = m_MeshArray.get(i);
+//            if(t_mtl && t_mesh) {
+//                if (t_mtl->submitMtl()) {
+//                    t_mesh->render(m_pRenderer);
+//                    t_mtl->recoverMtl();
+//                }
+//            }
+//        }
         m_fbo->unbind();
     }
 }
@@ -274,11 +268,11 @@ SVRenderCmdPushVPMat::~SVRenderCmdPushVPMat() {
 }
 
 void SVRenderCmdPushVPMat::render() {
-    if(m_pRenderer) {
-        m_pRenderer->pushViewMat(m_vm);
-        m_pRenderer->pushProjMat(m_pm);
-        m_pRenderer->pushVPMat(m_pm*m_vm);
-    }
+//    if(m_pRenderer) {
+//        m_pRenderer->pushViewMat(m_vm);
+//        m_pRenderer->pushProjMat(m_pm);
+//        m_pRenderer->pushVPMat(m_pm*m_vm);
+//    }
 }
 
 //
@@ -289,11 +283,11 @@ SVRenderCmdPopVPMat::~SVRenderCmdPopVPMat() {
 }
 
 void SVRenderCmdPopVPMat::render() {
-    if(m_pRenderer) {
-        m_pRenderer->popViewMat();
-        m_pRenderer->popProjMat();
-        m_pRenderer->popVPMat();
-    }
+//    if(m_pRenderer) {
+//        m_pRenderer->popViewMat();
+//        m_pRenderer->popProjMat();
+//        m_pRenderer->popVPMat();
+//    }
 }
 
 //推入矩阵
@@ -306,13 +300,13 @@ SVRenderCmdPushMat::~SVRenderCmdPushMat(){
 }
 
 void SVRenderCmdPushMat::render() {
-    if(m_pRenderer) {
-        if(m_type==0 ) {
-            m_pRenderer->pushViewMat(m_mat);
-        }else if(m_type==1) {
-            m_pRenderer->pushProjMat(m_mat);
-        }
-    }
+//    if(m_pRenderer) {
+//        if(m_type==0 ) {
+//            m_pRenderer->pushViewMat(m_mat);
+//        }else if(m_type==1) {
+//            m_pRenderer->pushProjMat(m_mat);
+//        }
+//    }
 }
 
 //
@@ -325,13 +319,13 @@ SVRenderCmdPopMat::~SVRenderCmdPopMat(){
 }
 
 void SVRenderCmdPopMat::render() {
-    if(m_pRenderer) {
-        if(m_type==0 ) {
-            m_pRenderer->popViewMat();
-        }else if(m_type==1) {
-            m_pRenderer->popProjMat();
-        }
-    }
+//    if(m_pRenderer) {
+//        if(m_type==0 ) {
+//            m_pRenderer->popViewMat();
+//        }else if(m_type==1) {
+//            m_pRenderer->popProjMat();
+//        }
+//    }
 }
 
 

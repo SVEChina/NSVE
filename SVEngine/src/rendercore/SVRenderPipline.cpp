@@ -56,9 +56,9 @@ void SVRenderPipline::render() {
 }
 
 void SVRenderPipline::pushRenderCmd(RENDERSTREAMTYPE _rst, SVRenderCmdPtr _rcmd) {
-    if (_rst >= RST_BEGIN && _rst <= RST_END) {
-        m_rstream_vec[_rst]->addSVRenderCmd(_rcmd);
-    }
+//    if (_rst >= RST_BEGIN && _rst <= RST_END) {
+//        m_rstream_vec[_rst]->addSVRenderCmd(_rcmd);
+//    }
 }
 
 void SVRenderPipline::clearRenderCmd(){

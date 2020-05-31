@@ -50,16 +50,16 @@ void SVRenderCmdStreamOutNor::setParam(SVRenderTexturePtr _fbo,
 }
 
 void SVRenderCmdStreamOutNor::render() {
-    if(m_fbo && m_tex && m_pMtl && m_pMesh && m_dataswap) {
-        m_fbo->setTexture(m_tex);
-        m_fbo->bind();
-        if (m_pMtl->submitMtl()) {
-            m_pMesh->render(m_pRenderer);
-            m_pMtl->recoverMtl();
-        }
-        _fectchdata();
-        m_fbo->unbind();
-    }
+//    if(m_fbo && m_tex && m_pMtl && m_pMesh && m_dataswap) {
+//        m_fbo->setTexture(m_tex);
+//        m_fbo->bind();
+//        if (m_pMtl->submitMtl()) {
+//            m_pMesh->render(m_pRenderer);
+//            m_pMtl->recoverMtl();
+//        }
+//        _fectchdata();
+//        m_fbo->unbind();
+//    }
 }
 
 void SVRenderCmdStreamOutNor::_fectchdata() {

@@ -58,37 +58,35 @@ void SVCameraMgr::update(f32 dt) {
         //
         SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
         SVRendererPtr t_renderer = mApp->getRenderer();
-        if(t_renderer && t_renderer->getRenderTexture() ) {
-        }
         if(t_rs && t_renderer) {
-            //这不知道要写到哪，先写这了. 晓帆
-            FMat4 t_vm = m_mainCamera->getViewMatObj();
-            FMat4 t_pm = m_mainCamera->getProjectMatObj();
-            SVRenderCmdPushVPMatPtr t_cmd = MakeSharedPtr<SVRenderCmdPushVPMat>(t_vm,t_pm);
-            t_cmd->setRenderer(t_renderer);
-            t_cmd->mTag = "main_camera_begin";
-            t_rs->pushRenderCmd(RST_SCENE_BEGIN, t_cmd);
+//            //这不知道要写到哪，先写这了. 晓帆
+//            FMat4 t_vm = m_mainCamera->getViewMatObj();
+//            FMat4 t_pm = m_mainCamera->getProjectMatObj();
+//            SVRenderCmdPushVPMatPtr t_cmd = MakeSharedPtr<SVRenderCmdPushVPMat>(t_vm,t_pm);
+//            t_cmd->setRenderer(t_renderer);
+//            t_cmd->mTag = "main_camera_begin";
+//            t_rs->pushRenderCmd(RST_SCENE_BEGIN, t_cmd);
         }
     }
     //更新ui相机
     if(m_uiCamera) {
         m_uiCamera->update(dt);
-        //
-        SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
-        SVRendererPtr t_renderer = mApp->getRenderer();
-        if(t_rs && t_renderer) {
-            FMat4 t_vm = m_uiCamera->getViewMatObj();
-            FMat4 t_pm = m_uiCamera->getProjectMatObj();
-            SVRenderCmdPushVPMatPtr t_cmd_push_ui = MakeSharedPtr<SVRenderCmdPushVPMat>(t_vm,t_pm);
-            t_cmd_push_ui->setRenderer(t_renderer);
-            t_cmd_push_ui->mTag = "ui_camera_begin";
-            t_rs->pushRenderCmd(RST_UI_BEGIN, t_cmd_push_ui);
-            //
-            SVRenderCmdPopVPMatPtr t_cmd_pop_ui = MakeSharedPtr<SVRenderCmdPopVPMat>();
-            t_cmd_pop_ui->setRenderer(t_renderer);
-            t_cmd_pop_ui->mTag = "ui_camera_end";
-            t_rs->pushRenderCmd(RST_UI_END, t_cmd_pop_ui);
-        }
+//        //
+//        SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
+//        SVRendererPtr t_renderer = mApp->getRenderer();
+//        if(t_rs && t_renderer) {
+//            FMat4 t_vm = m_uiCamera->getViewMatObj();
+//            FMat4 t_pm = m_uiCamera->getProjectMatObj();
+//            SVRenderCmdPushVPMatPtr t_cmd_push_ui = MakeSharedPtr<SVRenderCmdPushVPMat>(t_vm,t_pm);
+//            t_cmd_push_ui->setRenderer(t_renderer);
+//            t_cmd_push_ui->mTag = "ui_camera_begin";
+//            t_rs->pushRenderCmd(RST_UI_BEGIN, t_cmd_push_ui);
+//            //
+//            SVRenderCmdPopVPMatPtr t_cmd_pop_ui = MakeSharedPtr<SVRenderCmdPopVPMat>();
+//            t_cmd_pop_ui->setRenderer(t_renderer);
+//            t_cmd_pop_ui->mTag = "ui_camera_end";
+//            t_rs->pushRenderCmd(RST_UI_END, t_cmd_pop_ui);
+//        }
     }
 }
 

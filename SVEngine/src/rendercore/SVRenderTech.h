@@ -23,7 +23,6 @@ namespace sv {
         ~SVRenderTech();
         
         virtual void render();
-        
     };
 
 

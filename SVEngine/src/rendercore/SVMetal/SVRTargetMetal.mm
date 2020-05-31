@@ -29,11 +29,6 @@ void SVRTargetMetal::init(id<MTLDrawable> _target,id<MTLTexture> _targetTex) {
     m_passDsp.colorAttachments[0].loadAction = MTLLoadActionClear;
     m_passDsp.colorAttachments[0].storeAction = MTLStoreActionStore;
     m_passDsp.colorAttachments[0].clearColor = MTLClearColorMake(1, 0, 0, 1);
-//    id<MTLCommandBuffer> commandBuffer = [m_pCmdQueue commandBuffer];
-//    id<MTLRenderCommandEncoder> commandEncoder = [commandBuffer renderCommandEncoderWithDescriptor:passDescriptor];
-//    [commandEncoder endEncoding];
-//    [commandBuffer presentDrawable:m_pTarget];
-//    [commandBuffer commit];
 }
 
 void SVRTargetMetal::_preRender(SVRendererPtr _renderer) {

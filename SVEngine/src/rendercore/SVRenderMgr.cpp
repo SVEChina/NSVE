@@ -60,6 +60,9 @@ SVRTargetPtr SVRenderMgr::getRTarget(cptr8 _name) {
 }
 
 //只关心渲染，不应该关心环境的切换 环境放到外面去调用
+
+//这边应该又个渲染路径（RPath）的概念
+
 void SVRenderMgr::render(){
     //前向RT
     for(s32 i=0;i<m_preRT.size();i++) {
@@ -81,7 +84,6 @@ void SVRenderMgr::_sort() {
 }
 
 void SVRenderMgr::_adapt() {
-//    return;
 //    if(m_pRenderer) {
 //        if(m_adaptMode == 0) {
 //            //形变 填充

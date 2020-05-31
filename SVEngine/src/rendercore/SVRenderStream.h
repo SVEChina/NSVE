@@ -16,7 +16,7 @@ namespace sv {
     /*
      渲染流 按照材质去分的留
      */
-        
+
     class SVRenderStream : public SVObject {
     public:
         SVRenderStream();
@@ -31,10 +31,11 @@ namespace sv {
         
     protected:
         SVLockPtr m_lock;
+        //渲染技术
+        SVRenderTechPtr m_pTech;
+        //数据流
         typedef SVArray<SVRenderCmdPtr> CMDPOOL;
         CMDPOOL m_cmdArray;
-        
-        SVRenderTechPtr m_pTech;
     };
 
     

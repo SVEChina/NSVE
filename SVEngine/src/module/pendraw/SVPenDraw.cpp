@@ -152,87 +152,85 @@ void SVPenDraw::update(f32 _dt) {
 }
 
 void SVPenDraw::_drawStroke(){
-    SVRendererPtr t_renderer = mApp->getRenderer();
-    SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
-    if (t_rs && t_renderer && m_pRenderObj && m_fbo2) {
-        SVRenderCmdFboBindPtr t_fbo_bind = MakeSharedPtr<SVRenderCmdFboBind>(m_fbo2);
-        t_fbo_bind->mTag = "pen_draw_fbo2_bind";
-        t_rs->pushRenderCmd(RST_AR, t_fbo_bind);
-        
-        SVRenderCmdClearPtr t_clear = MakeSharedPtr<SVRenderCmdClear>();
-        t_clear->mTag = "pen_draw_fbo2_clear";
-        t_clear->setRenderer(t_renderer);
-        t_clear->setClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-        t_rs->pushRenderCmd(RST_AR, t_clear);
-        {
-            ////画笔触
-            for (s32 i =0; i<m_strokes.size(); i++) {
-                SVPenStrokePtr stroke = m_strokes[i];
-                stroke->updateStroke(0.0f);
-                stroke->renderStroke();
-            }
-            //做模糊处理
-            if (m_blurFilter) {
-                SVNodePtr t_node = m_blurFilter->getNode();
-                SVMultPassNodePtr t_passNode = DYN_TO_SHAREPTR(SVMultPassNode, t_node)
-                if (t_passNode) {
-                    t_passNode->update(0.0f);
-                    t_passNode->render();
-                }
-            }
-        }
-        SVRenderCmdFboUnbindPtr t_fbo_unbind = MakeSharedPtr<SVRenderCmdFboUnbind>(m_fbo2);
-        t_fbo_unbind->mTag = "pen_draw_fbo2_unbind";
-        t_rs->pushRenderCmd(RST_AR, t_fbo_unbind);
-    }
+//    SVRendererPtr t_renderer = mApp->getRenderer();
+//    SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
+//    if (t_rs && t_renderer && m_pRenderObj && m_fbo2) {
+//        SVRenderCmdFboBindPtr t_fbo_bind = MakeSharedPtr<SVRenderCmdFboBind>(m_fbo2);
+//        t_fbo_bind->mTag = "pen_draw_fbo2_bind";
+//        t_rs->pushRenderCmd(RST_AR, t_fbo_bind);
+//
+//        SVRenderCmdClearPtr t_clear = MakeSharedPtr<SVRenderCmdClear>();
+//        t_clear->mTag = "pen_draw_fbo2_clear";
+//        t_clear->setRenderer(t_renderer);
+//        t_clear->setClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+//        t_rs->pushRenderCmd(RST_AR, t_clear);
+//        {
+//            ////画笔触
+//            for (s32 i =0; i<m_strokes.size(); i++) {
+//                SVPenStrokePtr stroke = m_strokes[i];
+//                stroke->updateStroke(0.0f);
+//                stroke->renderStroke();
+//            }
+//            //做模糊处理
+//            if (m_blurFilter) {
+//                SVNodePtr t_node = m_blurFilter->getNode();
+//                SVMultPassNodePtr t_passNode = DYN_TO_SHAREPTR(SVMultPassNode, t_node)
+//                if (t_passNode) {
+//                    t_passNode->update(0.0f);
+//                    t_passNode->render();
+//                }
+//            }
+//        }
+//        SVRenderCmdFboUnbindPtr t_fbo_unbind = MakeSharedPtr<SVRenderCmdFboUnbind>(m_fbo2);
+//        t_fbo_unbind->mTag = "pen_draw_fbo2_unbind";
+//        t_rs->pushRenderCmd(RST_AR, t_fbo_unbind);
+//    }
 }
 void SVPenDraw::_drawGlow(){
-    SVRendererPtr t_renderer = mApp->getRenderer();
-    SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
-    if (t_rs && t_renderer && m_pRenderObj && m_fbo1) {
-        SVRenderCmdFboBindPtr t_fbo_bind = MakeSharedPtr<SVRenderCmdFboBind>(m_fbo1);
-        t_fbo_bind->mTag = "pen_draw_fbo1_bind";
-        t_rs->pushRenderCmd(RST_AR, t_fbo_bind);
-        
-        SVRenderCmdClearPtr t_clear = MakeSharedPtr<SVRenderCmdClear>();
-        t_clear->mTag = "pen_draw_fbo1_clear";
-        t_clear->setRenderer(t_renderer);
-        t_clear->setClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-        t_rs->pushRenderCmd(RST_AR, t_clear);
-        
-        {
-            ////画荧光背景
-            for (s32 i =0; i<m_strokes.size(); i++) {
-                SVPenStrokePtr stroke = m_strokes[i];
-                stroke->updateGlow(0.0f);
-                stroke->renderGlow();
-            }
-            //做荧光模糊处理
-            if (m_glowFilter) {
-                SVNodePtr t_node = m_glowFilter->getNode();
-                SVMultPassNodePtr t_passNode = DYN_TO_SHAREPTR(SVMultPassNode, t_node)
-                if (t_passNode) {
-                    t_passNode->update(0.0f);
-                    t_passNode->render();
-                }
-            }
-        }
-        SVRenderCmdFboUnbindPtr t_fbo_unbind = MakeSharedPtr<SVRenderCmdFboUnbind>(m_fbo1);
-        t_fbo_unbind->mTag = "pen_draw_fbo1_unbind";
-        t_rs->pushRenderCmd(RST_AR, t_fbo_unbind);
-        
-        
-    }
+//    SVRendererPtr t_renderer = mApp->getRenderer();
+//    SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
+//    if (t_rs && t_renderer && m_pRenderObj && m_fbo1) {
+//        SVRenderCmdFboBindPtr t_fbo_bind = MakeSharedPtr<SVRenderCmdFboBind>(m_fbo1);
+//        t_fbo_bind->mTag = "pen_draw_fbo1_bind";
+//        t_rs->pushRenderCmd(RST_AR, t_fbo_bind);
+//        
+//        SVRenderCmdClearPtr t_clear = MakeSharedPtr<SVRenderCmdClear>();
+//        t_clear->mTag = "pen_draw_fbo1_clear";
+//        t_clear->setRenderer(t_renderer);
+//        t_clear->setClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+//        t_rs->pushRenderCmd(RST_AR, t_clear);
+//        
+//        {
+//            ////画荧光背景
+//            for (s32 i =0; i<m_strokes.size(); i++) {
+//                SVPenStrokePtr stroke = m_strokes[i];
+//                stroke->updateGlow(0.0f);
+//                stroke->renderGlow();
+//            }
+//            //做荧光模糊处理
+//            if (m_glowFilter) {
+//                SVNodePtr t_node = m_glowFilter->getNode();
+//                SVMultPassNodePtr t_passNode = DYN_TO_SHAREPTR(SVMultPassNode, t_node)
+//                if (t_passNode) {
+//                    t_passNode->update(0.0f);
+//                    t_passNode->render();
+//                }
+//            }
+//        }
+//        SVRenderCmdFboUnbindPtr t_fbo_unbind = MakeSharedPtr<SVRenderCmdFboUnbind>(m_fbo1);
+//        t_fbo_unbind->mTag = "pen_draw_fbo1_unbind";
+//        t_rs->pushRenderCmd(RST_AR, t_fbo_unbind);
+//    }
 }
 void SVPenDraw::_drawReback(){
-    //再画回主纹理
-    SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
-    if (m_mtl1 && m_mesh1 && m_mtl2 && m_mesh2 && m_pRenderObj) {
-        m_pRenderObj->clearMesh();
-        m_pRenderObj->addRenderObj(m_mesh1, m_mtl1);
-        m_pRenderObj->addRenderObj(m_mesh2, m_mtl2);
-        m_pRenderObj->pushCmd(t_rs, RST_AR_END, "SVPenStrokeRenderReback");
-    }
+//    //再画回主纹理
+//    SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
+//    if (m_mtl1 && m_mesh1 && m_mtl2 && m_mesh2 && m_pRenderObj) {
+//        m_pRenderObj->clearMesh();
+//        m_pRenderObj->addRenderObj(m_mesh1, m_mtl1);
+//        m_pRenderObj->addRenderObj(m_mesh2, m_mtl2);
+//        m_pRenderObj->pushCmd(t_rs, RST_AR_END, "SVPenStrokeRenderReback");
+//    }
 }
 
 void SVPenDraw::open() {

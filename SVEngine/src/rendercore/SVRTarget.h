@@ -8,7 +8,8 @@
 #ifndef SV_RENDERTARGET_H
 #define SV_RENDERTARGET_H
 
-#include "SVFboObject.h"
+#include "../base/SVGbase.h"
+#include "SVRenderDeclare.h"
 
 namespace sv {
     
@@ -24,6 +25,8 @@ namespace sv {
         
         void render(SVRendererPtr _renderer);
         
+        void setRPath(SVRPathPtr _rpath);
+        
     protected:
         virtual void _preRender(SVRendererPtr _renderer);
         
@@ -33,6 +36,8 @@ namespace sv {
         
     public:
         s32 m_order;
+        
+        SVRPathPtr m_rpath; //渲染路径
     };
 
     
