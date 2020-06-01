@@ -26,7 +26,12 @@ namespace sv {
         virtual void render(SVRendererPtr _renderer);
         
     protected:
-        
+        s32 m_vsf;
+        s32 m_gsf;
+        s32 m_tscf;
+        s32 m_tsdf;
+        s32 m_fsf;
+        s32 m_csf;
     };
 
 

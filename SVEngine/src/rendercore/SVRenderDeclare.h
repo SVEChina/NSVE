@@ -29,6 +29,7 @@ namespace sv {
 
     //gl
     DECLARE_SHAREPTR(SVRendererGL);
+    DECLARE_SHAREPTR(SVRTechGL);
     DECLARE_SHAREPTR(SVRTargetGL);
     DECLARE_SHAREPTR(SVRenderStateGL);
     DECLARE_SHAREPTR(SVRResGLTex);

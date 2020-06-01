@@ -10,6 +10,7 @@
 
 #include "../SVRTech.h"
 #include "SVRenderDeclare.h"
+#import <Metal/Metal.h>
 
 namespace sv {
 
@@ -23,10 +24,18 @@ namespace sv {
         
         ~SVRTechMetal();
         
+        virtual void build(SVRendererPtr _renderer);
+        
         virtual void render(SVRendererPtr _renderer);
         
     protected:
-        
+        id<MTLFunction> m_vsf;
+        id<MTLFunction> m_gsf;
+        id<MTLFunction> m_tscf;
+        id<MTLFunction> m_tsdf;
+        id<MTLFunction> m_fsf;
+        id<MTLFunction> m_csf;
+        MTLRenderPipelineDescriptor* m_rp_dsp;
     };
 
 

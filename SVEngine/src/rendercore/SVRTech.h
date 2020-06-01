@@ -23,7 +23,23 @@ namespace sv {
         
         ~SVRTech();
         
+        void setShader(cptr8 _name,SV_TECH_TYPE _type);
+        
+        virtual void build(SVRendererPtr _renderer);
+        
         virtual void render(SVRendererPtr _renderer);
+        
+    protected:
+        
+        s32 m_techDsp;  //技术描述 SV_TECH_TYPE
+        
+        SVString m_vs_name;
+        SVString m_fs_name;
+        SVString m_gs_name;
+        SVString m_tsc_name;
+        SVString m_tsd_name;
+        SVString m_cs_name;
+        
     };
 
 
