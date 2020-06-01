@@ -10,7 +10,7 @@
 using namespace sv;
 
 SVRMeshGL::SVRMeshGL(SVInstPtr _app)
-:SVRenderMesh(_app.get()){
+:SVRMesh(_app){
 }
 
 SVRMeshGL::~SVRMeshGL() {

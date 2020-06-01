@@ -26,86 +26,63 @@ using namespace sv;
 
 SVRenderMesh::SVRenderMesh(SVInst* _app)
 :SVRObjBase(_app){
-    _resetMeshConf();
-    _resetMeshData();
     m_created = false;
 }
 
 SVRenderMesh::~SVRenderMesh() {
-    _resetMeshConf();
-    _resetMeshData();
     m_created = false;
 }
 
-void SVRenderMesh::_resetMeshData(){
-    m_renderMeshData.indexNum = 0;
-    m_renderMeshData.pointNum = 0;
-    m_renderMeshData.instanceCount = 0;
-    m_renderMeshData.pDataIndex = nullptr;
-    m_renderMeshData.pDataVertex = nullptr;
-    m_renderMeshData.pDataInsOffset = nullptr;
-    m_renderMeshData.dirty = false;
-}
-
-void SVRenderMesh::_resetMeshConf(){
-    m_renderMeshConf.vftype = E_VF_V2;
-    m_renderMeshConf.seqMode = 1;
-    m_renderMeshConf.drawmethod = E_DM_TRIANGLES;
-    m_renderMeshConf.vertPoolType = GL_STATIC_DRAW;
-    m_renderMeshConf.indexPoolType = GL_STATIC_DRAW;
-    m_renderMeshConf.bVisible = true;
-    m_renderMeshConf.dirty = false;
-}
+//void SVRenderMesh::_resetMeshData(){
+//    m_renderMeshData.indexNum = 0;
+//    m_renderMeshData.pointNum = 0;
+//    m_renderMeshData.instanceCount = 0;
+//    m_renderMeshData.pDataIndex = nullptr;
+//    m_renderMeshData.pDataVertex = nullptr;
+//    m_renderMeshData.pDataInsOffset = nullptr;
+//    m_renderMeshData.dirty = false;
+//}
+//
+//void SVRenderMesh::_resetMeshConf(){
+//    m_renderMeshConf.vftype = E_VF_V2;
+//    m_renderMeshConf.seqMode = 1;
+//    m_renderMeshConf.drawmethod = E_DM_TRIANGLES;
+//    m_renderMeshConf.vertPoolType = GL_STATIC_DRAW;
+//    m_renderMeshConf.indexPoolType = GL_STATIC_DRAW;
+//    m_renderMeshConf.bVisible = true;
+//    m_renderMeshConf.dirty = false;
+//}
 
 void SVRenderMesh::create(SVRendererPtr _renderer){
     SVRObjBase::create(_renderer);
-    SVRendererPtr t_renderBasePtr = mApp->getRenderer();
-    SVRendererGLPtr t_renderGLPtr = std::dynamic_pointer_cast<SVRendererGL>(t_renderBasePtr);
-    if (t_renderGLPtr) {
-        //渲染器类型E_RENDERER_GLES,
-        m_objVBOPtr = MakeSharedPtr<SVResGLRenderMesh>(mApp);
-    }
-    SVRendererVKPtr t_rendeVKPtr = std::dynamic_pointer_cast<SVRendererVK>(t_renderBasePtr);
-    if (t_rendeVKPtr) {
-        //渲染器类型E_RENDERER_VUNKAN,
-    }
-    #if defined(SV_IOS) || defined(SV_OSX)
-    SVRendererMetalPtr t_rendeMetalPtr = std::dynamic_pointer_cast<SVRendererMetal>(t_renderBasePtr);
-    if (t_rendeMetalPtr) {
-        //渲染器类型E_RENDERER_METAL
-        m_objVBOPtr = MakeSharedPtr<SVResMetalRenderMesh>(mApp);
-    }
-    #endif
-    if (m_objVBOPtr) {
-        _updateConf();
-        _updateData();
-        m_objVBOPtr->create(_renderer);
-    }
+//    SVRendererPtr t_renderBasePtr = mApp->getRenderer();
+//    SVRendererGLPtr t_renderGLPtr = std::dynamic_pointer_cast<SVRendererGL>(t_renderBasePtr);
+//    if (t_renderGLPtr) {
+//        //渲染器类型E_RENDERER_GLES,
+//        m_objVBOPtr = MakeSharedPtr<SVResGLRenderMesh>(mApp);
+//    }
+//    SVRendererVKPtr t_rendeVKPtr = std::dynamic_pointer_cast<SVRendererVK>(t_renderBasePtr);
+//    if (t_rendeVKPtr) {
+//        //渲染器类型E_RENDERER_VUNKAN,
+//    }
+//    #if defined(SV_IOS) || defined(SV_OSX)
+//    SVRendererMetalPtr t_rendeMetalPtr = std::dynamic_pointer_cast<SVRendererMetal>(t_renderBasePtr);
+//    if (t_rendeMetalPtr) {
+//        //渲染器类型E_RENDERER_METAL
+//        m_objVBOPtr = MakeSharedPtr<SVResMetalRenderMesh>(mApp);
+//    }
+//    #endif
+//    if (m_objVBOPtr) {
+//        _updateData();
+//        m_objVBOPtr->create(_renderer);
+//    }
 }
 
 void SVRenderMesh::destroy(SVRendererPtr _renderer) {
-    if (m_objVBOPtr) {
-        m_objVBOPtr->destroy(_renderer);
-    }
     SVRObjBase::destroy(_renderer);
 }
 
-void SVRenderMesh::_updateConf(){
-    if (m_objVBOPtr) {
-        if (m_renderMeshConf.dirty) {
-            m_renderMeshConf.dirty = false;
-            m_objVBOPtr->updateConf(m_renderMeshConf);
-        }
-    }
-}
-
 void SVRenderMesh::_updateData(){
-    if (m_objVBOPtr) {
-        if (m_renderMeshData.dirty) {
-            m_renderMeshData.dirty = false;
-            m_objVBOPtr->updateData(m_renderMeshData);
-        }
-    }
 }
 
 void SVRenderMesh::setIndexPoolType(u32 itype) {
@@ -203,9 +180,4 @@ void SVRenderMesh::createMesh(){
 }
 
 void SVRenderMesh::render(SVRendererPtr _renderer) {
-    if (m_objVBOPtr) {
-        _updateConf();
-        _updateData();
-        m_objVBOPtr->render(_renderer);
-    }
 }

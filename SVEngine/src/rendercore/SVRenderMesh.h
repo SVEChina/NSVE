@@ -16,7 +16,7 @@
 namespace sv {
 
     /*
-     render mesh
+     逻辑和渲染之间的桥梁，其实就是数据和数据描述
      */
 
     class SVRenderMesh : public SVRObjBase {
@@ -66,15 +66,7 @@ namespace sv {
         void createMesh();
         
     protected:
-        virtual void _resetMeshConf();
-    
-        virtual void _resetMeshData();
-        
-        virtual void _updateConf();
-        
         virtual void _updateData();
-        
-        SVResVBOPtr m_objVBOPtr;
         
         bool  m_created;
         
@@ -92,6 +84,8 @@ namespace sv {
         
         //
         void* m_pindex;
+        
+        SVRMeshPtr m_pRMesh;
     };
     
 

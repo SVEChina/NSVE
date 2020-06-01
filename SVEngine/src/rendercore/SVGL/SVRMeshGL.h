@@ -8,6 +8,7 @@
 #ifndef SV_RMESH_GL_H
 #define SV_RMESH_GL_H
 
+#include "../SVRMesh.h"
 #include "../SVRenderMesh.h"
 #include "SVRenderDef.h"
 #include "../mtl/SVShaderMgr.h"
@@ -19,7 +20,7 @@ namespace sv {
      render mesh gl
      */
 
-    class SVRMeshGL : public SVRenderMesh {
+    class SVRMeshGL : public SVRMesh {
     public:
         SVRMeshGL(SVInstPtr _app);
         
