@@ -39,7 +39,7 @@ void SVLineNode::setLineData(f32 *_data, s32 _size, s32 _count){
     if (m_lineMtl && _data) {
         SVDataSwapPtr t_data = MakeSharedPtr<SVDataSwap>();
         t_data->writeData(_data, _size);
-        m_pMesh->setVertexDataNum(_count);
+        m_pMesh->setVertNum(_count);
         m_pMesh->setVertexData(t_data);
     }
 }

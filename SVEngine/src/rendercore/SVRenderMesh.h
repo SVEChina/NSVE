@@ -41,50 +41,40 @@ namespace sv {
         
         void setVertexPoolType(u32 vtype);
         
-        void setVertexType(VFTYPE type);
+        void setVertexType(VFTYPE type,s32 _channel = 0);
         
         void setSeqMode(s32 _mode);    //数据排列模式
         
         void setDrawMethod(DRAWMETHOD drawtype);
         
-        void setvisible(bool bVis);
-        
         virtual void setIndexData(SVDataSwapPtr _data,s32 _num);
         
-        virtual void setVertexDataNum(s32 _vertexNum);
+        virtual void setVertexData(SVDataSwapPtr _data,s32 _channel = 0,VFTYPE type = E_VF_BASE);
         
-        virtual void setVertexData(SVDataSwapPtr _data);
+        virtual void setVertNum(s32 _vertexNum);
         
         void setInstanceOffsetData(SVDataSwapPtr _pdata, u32 _instanceCount);
-        
-        virtual void getIndexData(SVDataSwapPtr _data,s32 &_num);
-        
-        virtual void getVertexData(SVDataSwapPtr _data);
-        
-        virtual void getVertexNum(s32 &_vertexNum);
         
         void createMesh();
         
     protected:
-        virtual void _updateData();
         
         bool  m_created;
         
-        RENDERMESHCONF m_renderMeshConf;
-        
-        RENDERMESHDATA m_renderMeshData;
-        
-        //
+        //定点说一句
         struct dataTag {
-            void* m_pdata;  //数据指针s
-            s32 m_size;     //数据大小
-            s32 m_vertdsp;  //顶点描述
+            void* m_pdata;      //数据指针
+            s32 m_size;         //数据大小
+            s32 m_vertdsp;      //顶点描述
+            void* m_pdatad_up;  //更新的数据
+            s32 m_size_up;      //更新数据大小
         };
         SVArray<dataTag> dataPool;
         
-        //
-        void* m_pindex;
+        //索引数据
+        dataTag m_index;
         
+        //
         SVRMeshPtr m_pRMesh;
     };
     

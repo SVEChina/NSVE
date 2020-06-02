@@ -39,7 +39,7 @@ SVPatchNode::~SVPatchNode() {
 
 void SVPatchNode::setPatchVertexData(SVDataSwapPtr _vertexData, s32 _vertexCount){
     if (m_patchMtl && m_pMesh && _vertexData) {
-        m_pMesh->setVertexDataNum(_vertexCount);
+        m_pMesh->setVertNum(_vertexCount);
         m_pMesh->setVertexData(_vertexData);
     }
 }

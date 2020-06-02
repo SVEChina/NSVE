@@ -216,28 +216,28 @@ void SVStaticData::init() {
     VerData[3].t0y = 1.0f;
     t_pMeshData270->writeData(&VerData[0],sizeof(V2_C_T0)*4);
     //
-    m_screenLTMesh->setVertexDataNum(4);
+    m_screenLTMesh->setVertNum(4);
     m_screenLTMesh->setVertexData(t_pLTMeshData);
     
-    m_screenLBMesh->setVertexDataNum(4);
+    m_screenLBMesh->setVertNum(4);
     m_screenLBMesh->setVertexData(t_pLBMeshData);
     
-    m_screenRTMesh->setVertexDataNum(4);
+    m_screenRTMesh->setVertNum(4);
     m_screenRTMesh->setVertexData(t_pRTMeshData);
     
-    m_screenRBMesh->setVertexDataNum(4);
+    m_screenRBMesh->setVertNum(4);
     m_screenRBMesh->setVertexData(t_pRBMeshData);
     
-    m_screenMesh->setVertexDataNum(4);
+    m_screenMesh->setVertNum(4);
     m_screenMesh->setVertexData(t_pMeshData);
     
-    m_screenMeshRot90->setVertexDataNum(4);
+    m_screenMeshRot90->setVertNum(4);
     m_screenMeshRot90->setVertexData(t_pMeshData90);
     
-    m_screenMeshRot180->setVertexDataNum(4);
+    m_screenMeshRot180->setVertNum(4);
     m_screenMeshRot180->setVertexData(t_pMeshData180);
     
-    m_screenMeshRot270->setVertexDataNum(4);
+    m_screenMeshRot270->setVertNum(4);
     m_screenMeshRot270->setVertexData(t_pMeshData270);
     //封装命令出去
     m_screenMesh->createMesh();
@@ -320,7 +320,7 @@ SVRenderMeshPtr SVStaticData::generateAdaptScreenMesh(f32 _fromW, f32 _fromH, f3
     VerData[3].x = 1.0f;
     VerData[3].y = 1.0f;
     t_pMeshDataAdapt->writeData(&VerData[0],sizeof(V2_C_T0)*4);
-    m_screenAdaptMesh->setVertexDataNum(4);
+    m_screenAdaptMesh->setVertNum(4);
     m_screenAdaptMesh->setVertexData(t_pMeshDataAdapt);
     m_screenAdaptMesh->createMesh();
     return m_screenAdaptMesh;
@@ -392,7 +392,7 @@ SVRenderMeshPtr SVStaticData::generatePatchMesh(FVec3 &_corner00, FVec3 &_corner
     
     SVRenderMeshPtr patchMesh = MakeSharedPtr<SVRenderMesh>(mApp);
     patchMesh->setVertexType(E_VF_V3);
-    patchMesh->setVertexDataNum(t_vertexCount);
+    patchMesh->setVertNum(t_vertexCount);
     patchMesh->setVertexData(t_pVertexData);
     patchMesh->setDrawMethod(E_DM_LINES);
     patchMesh->createMesh();
@@ -543,7 +543,7 @@ void SVStaticData::_initTwoDivisionMesh(){
     VerData[11].x = 1.0f;
     VerData[11].y = 1.0f;
     t_pMeshData_TwoVidion->writeData(&VerData[0],sizeof(V2_C_T0)*12);
-    m_screenTwoDivisionMesh->setVertexDataNum(12);
+    m_screenTwoDivisionMesh->setVertNum(12);
     m_screenTwoDivisionMesh->setVertexData(t_pMeshData_TwoVidion);
     m_screenTwoDivisionMesh->createMesh();
 }
@@ -638,7 +638,7 @@ void SVStaticData::_initFourDivisionMesh(){
     
     t_pMeshData_FourVidion->writeData(&VerData[0],sizeof(V2_C_T0)*24);
     
-    m_screenFourDivisionMesh->setVertexDataNum(24);
+    m_screenFourDivisionMesh->setVertNum(24);
     m_screenFourDivisionMesh->setVertexData(t_pMeshData_FourVidion);
     m_screenFourDivisionMesh->createMesh();
 }
@@ -733,7 +733,7 @@ void SVStaticData::_initFourDivisionMesh_X(){
     VerData[11].y = 0.0f;
     t_pMeshData_FourVidion->writeData(&VerData[0],sizeof(V2_C_T0)*12);
     
-    m_screenFourXDivisionMesh->setVertexDataNum(12);
+    m_screenFourXDivisionMesh->setVertNum(12);
     m_screenFourXDivisionMesh->setVertexData(t_pMeshData_FourVidion);
     m_screenFourXDivisionMesh->createMesh();
 }

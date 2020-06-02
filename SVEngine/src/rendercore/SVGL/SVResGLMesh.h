@@ -57,7 +57,7 @@ namespace sv {
 
             void setDrawMethod(DRAWMETHOD drawtype);
 
-            void setVertexDataNum(s32 _vertexNum);
+            void setVertNum(s32 _vertexNum);
             
             virtual void setIndexData(SVDataSwapPtr _data,s32 _num);
             

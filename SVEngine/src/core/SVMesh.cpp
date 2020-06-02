@@ -53,7 +53,7 @@ void SVMesh::setData(SVDataSwapPtr _data,VFTYPE _vtf,s32 _count,s32 _seqMode) {
     m_pRenderMesh = MakeSharedPtr<SVRenderMesh>(mApp);
     m_pRenderMesh->setVertexType(_vtf);
     m_pRenderMesh->setSeqMode(_seqMode);
-    m_pRenderMesh->setVertexDataNum(_count);
+    m_pRenderMesh->setVertNum(_count);
     m_pRenderMesh->setVertexData(_data);
     m_pRenderMesh->setDrawMethod(E_DM_LINE_LOOP);
     m_pRenderMesh->createMesh();

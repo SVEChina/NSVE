@@ -557,7 +557,7 @@ void SVPenStroke::_createStrokeMesh(f32 _strokeWidth, FVec4 &_strokeColor){
 //    t_pVertexData->resize(vn_stroke*sizeof(V3));
 //    t_pVertexData->writeData(t_ver, vn_stroke*sizeof(V3));
 //    m_pStrokeMesh->setVertex3Data(t_pVertexData);
-//    m_pStrokeMesh->setVertexDataNum(vn_stroke);
+//    m_pStrokeMesh->setVertNum(vn_stroke);
 //    SVDataSwapPtr t_pColorData = MakeSharedPtr<SVDataSwap>();
 //    t_pColorData->resize(vn_stroke*sizeof(C));
 //    t_pColorData->writeData(t_color, vn_stroke*sizeof(C));
@@ -778,7 +778,7 @@ void SVPenStroke::_createGlowMesh(f32 _glowWidth, FVec4 &_glowColor){
 //    t_pVertexData->resize(vn_glow*sizeof(V3));
 //    t_pVertexData->writeData(t_ver, vn_glow*sizeof(V3));
 //    m_pGlowMesh->setVertex3Data(t_pVertexData);
-//    m_pGlowMesh->setVertexDataNum(vn_glow);
+//    m_pGlowMesh->setVertNum(vn_glow);
 //    SVDataSwapPtr t_pColorData = MakeSharedPtr<SVDataSwap>();
 //    t_pColorData->resize(vn_glow*sizeof(C));
 //    t_pColorData->writeData(t_color, vn_glow*sizeof(C));

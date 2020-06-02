@@ -103,7 +103,7 @@ void SVResGLRenderMesh::updateData(RENDERMESHDATA& _data) {
         setIndexData(_data.pDataIndex, _data.indexNum);
     }
     if (_data.pDataVertex) {
-        setVertexDataNum(_data.pointNum);
+        setVertNum(_data.pointNum);
         setVertexData(_data.pDataVertex);
     }
     if (_data.pDataInsOffset) {
@@ -157,7 +157,7 @@ void SVResGLRenderMesh::setIndexData(SVDataSwapPtr _data,s32 _num){
     }
 }
 
-void SVResGLRenderMesh::setVertexDataNum(s32 _vertexNum){
+void SVResGLRenderMesh::setVertNum(s32 _vertexNum){
     if( m_pointNum > 0 && m_pointNum < _vertexNum ){
         if (m_vboID > 0) {
             glDeleteBuffers(1, &m_vboID);
@@ -571,7 +571,7 @@ void SVResGLRenderMeshDvid::updateConf(RENDERMESHCONF& _conf){
 }
 
 void SVResGLRenderMeshDvid::updateData(RENDERMESHDATA& _data) {
-    setVertexDataNum(_data.pointNum);
+    setVertNum(_data.pointNum);
     setVertex2Data(_data.pDataV2);
     setVertex3Data(_data.pDataV3);
     setColor0Data(_data.pDataC0);

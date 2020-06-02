@@ -260,7 +260,7 @@ void SVParticlesNode::render() {
 //        //更新顶点数据
 //        m_pVertData->writeData(m_pParticles->pVertex,
 //                               m_pParticles->m_vertexBufNum*sizeof(V3_PARTICLE));
-//        m_pMesh->setVertexDataNum(m_pParticles->m_vertexBufNum);
+//        m_pMesh->setVertNum(m_pParticles->m_vertexBufNum);
 //        m_pMesh->setVertexData(m_pVertData);
 //    }
 //    //

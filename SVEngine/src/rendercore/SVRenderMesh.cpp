@@ -82,101 +82,43 @@ void SVRenderMesh::destroy(SVRendererPtr _renderer) {
     SVRObjBase::destroy(_renderer);
 }
 
-void SVRenderMesh::_updateData(){
-}
-
 void SVRenderMesh::setIndexPoolType(u32 itype) {
-    if (m_renderMeshConf.indexPoolType != itype) {
-        m_renderMeshConf.indexPoolType = itype;
-        m_renderMeshConf.dirty = true;
-    }
 }
 
 void SVRenderMesh::setVertexPoolType(u32 vtype) {
-    if (m_renderMeshConf.vertPoolType != vtype) {
-        m_renderMeshConf.vertPoolType = vtype;
-        m_renderMeshConf.dirty = true;
-    }
 }
 
 void SVRenderMesh::setDrawMethod(DRAWMETHOD drawtype) {
-    if (m_renderMeshConf.drawmethod != drawtype) {
-        m_renderMeshConf.drawmethod = drawtype;
-        m_renderMeshConf.dirty = true;
-    }
-}
-
-void SVRenderMesh::setVertexType(VFTYPE type) {
-    if (m_renderMeshConf.vftype != type) {
-        m_renderMeshConf.vftype = type;
-        m_renderMeshConf.dirty = true;
-    }
-}
-
-void SVRenderMesh::setvisible(bool bVis) {
-    if (m_renderMeshConf.bVisible != bVis) {
-        m_renderMeshConf.bVisible = bVis;
-        m_renderMeshConf.dirty = true;
-    }
-}
-
-void SVRenderMesh::setIndexData(SVDataSwapPtr _data,s32 _num){
-    if (_data) {
-        m_renderMeshData.pDataIndex = _data;
-        m_renderMeshData.indexNum = _num;
-        m_renderMeshData.dirty = true;
-    }
-}
-
-void SVRenderMesh::setVertexDataNum(s32 _vertexNum){
-    m_renderMeshData.pointNum = _vertexNum;
-    m_renderMeshData.dirty = true;
-}
-
-void SVRenderMesh::setVertexData(SVDataSwapPtr _data){
-    if (_data) {  
-        m_renderMeshData.pDataVertex = _data;
-        m_renderMeshData.dirty = true;
-    }
-}
-
-void SVRenderMesh::getIndexData(SVDataSwapPtr _data,s32 &_num){
-    if (m_renderMeshData.pDataIndex && _data) {
-        _data->writeData(m_renderMeshData.pDataIndex->getData(), m_renderMeshData.pDataIndex->getSize());
-        _num = m_renderMeshData.indexNum;
-    }
-}
-
-void SVRenderMesh::getVertexData(SVDataSwapPtr _data){
-    if (m_renderMeshData.pDataVertex && _data) {
-        _data->writeData(m_renderMeshData.pDataVertex->getData(), m_renderMeshData.pDataVertex->getSize());
-    }
-}
-
-void SVRenderMesh::getVertexNum(s32 &_vertexNum){
-    _vertexNum = m_renderMeshData.pointNum;
 }
 
 void SVRenderMesh::setSeqMode(s32 _mode) {
-    if( m_renderMeshConf.seqMode!=_mode) {
-        m_renderMeshConf.seqMode = _mode;
-        m_renderMeshConf.dirty = true;
-    }
+}
+
+void SVRenderMesh::setVertexType(VFTYPE type,s32 _channel) {
+}
+
+void SVRenderMesh::setVertNum(s32 _vertexNum){
+}
+
+void SVRenderMesh::setIndexData(SVDataSwapPtr _data,s32 _num){
+}
+
+void SVRenderMesh::setVertexData(SVDataSwapPtr _data,s32 _channel,VFTYPE type){
 }
 
 void SVRenderMesh::setInstanceOffsetData(SVDataSwapPtr _pdata, u32 _instanceCount){
-    if (_pdata) {
-        m_renderMeshData.pDataInsOffset = _pdata;
-        m_renderMeshData.instanceCount = _instanceCount;
-        m_renderMeshData.dirty = true;
-    }
+//    if (_pdata) {
+//        m_renderMeshData.pDataInsOffset = _pdata;
+//        m_renderMeshData.instanceCount = _instanceCount;
+//        m_renderMeshData.dirty = true;
+//    }
 }
 
 void SVRenderMesh::createMesh(){
-    if (!m_created) {
-        m_created = true;
-        mApp->getRenderMgr()->pushRCmdCreate(THIS_TO_SHAREPTR(SVRenderMesh));
-    }
+//    if (!m_created) {
+//        m_created = true;
+//        mApp->getRenderMgr()->pushRCmdCreate(THIS_TO_SHAREPTR(SVRenderMesh));
+//    }
 }
 
 void SVRenderMesh::render(SVRendererPtr _renderer) {
