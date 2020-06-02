@@ -33,7 +33,6 @@ SVNode::SVNode(SVInst *_app)
     m_adaptDesign = false;
     m_visible = true;
     m_dirty = false;
-    m_parent = nullptr;             //父节点
     m_iZOrder = 0;
     m_bindIndex = -1;
     m_personID = 1;
@@ -57,7 +56,6 @@ SVNode::SVNode(SVInst *_app)
 }
 
 SVNode::~SVNode() {
-    m_parent = nullptr;
     m_pMtl = nullptr;
     mApp->m_IDPool.returnUID(uid);
 }
@@ -80,35 +78,16 @@ void SVNode::deep_update(f32 dt) {
         if( !_clip() ) {
             //节点渲染
             render();
-            //子节点遍历
-            //m_childNodePool.stable_sort_object();
-            for (s32 i = 0; i < m_childNodePool.size(); i++) {
-                m_childNodePool[i]->deep_update(dt);
-            }
         }
     }
 }
 
 //深度访问
 void SVNode::deep_visit(SVVisitorBasePtr _visit) {
-    if( _visit && _visit->visit( THIS_TO_SHAREPTR(SVNode) ) ){
-        for (s32 i = 0; i < m_childNodePool.size(); i++) {
-            m_childNodePool[i]->deep_visit(_visit);
-        }
-    }
+
 }
 
 void SVNode::select_visit(SVVisitorBasePtr _visit) {
-    if(!_visit)
-        return ;
-    for (s32 i = 0; i < m_childNodePool.size(); i++) {
-        bool t_flag = _visit->visit(  m_childNodePool[i] ); //如果子被访问成功
-        if(t_flag) {
-            m_childNodePool[i]->select_visit(_visit);
-            break;
-        }
-    }
-    return ;
 }
 
 void SVNode::update(f32 dt) {
@@ -140,11 +119,11 @@ void SVNode::update(f32 dt) {
         m_dirty = false;
     }
     //计算绝对矩阵(world_matrix)
-    if (m_parent) {
-        m_absolutMat = m_parent->m_absolutMat*m_localMat;
-    } else {
-        m_absolutMat = m_localMat;
-    }
+//    if (m_parent) {
+//        m_absolutMat = m_parent->m_absolutMat*m_localMat;
+//    } else {
+//        m_absolutMat = m_localMat;
+//    }
     //更新包围盒
     m_aabbBox_sw = m_aabbBox;
     m_aabbBox_sw.setTransform(m_absolutMat);
@@ -169,117 +148,6 @@ void SVNode::render() {
 
 SVMtlCorePtr SVNode::getMtl(){
     return m_pMtl;
-}
-
-void SVNode::addChild(SVNodePtr _node) {
-    if (!_node)
-        return;
-    if (hasChild(_node))
-        return;
-    m_childNodePool.append(_node);
-    _node->m_parent = THIS_TO_SHAREPTR(SVNode);
-    m_needsort = true;
-}
-
-void SVNode::addChild(SVNodePtr _node, s32 iZOrder){
-    if (_node){
-        _node->setZOrder(iZOrder);
-    }
-    addChild(_node);
-}
-
-bool SVNode::removeChild(SVNodePtr _node) {
-    for (s32 i = 0; i < m_childNodePool.size(); i++) {
-        if( m_childNodePool[i]->removeChild(_node) ){
-            return true;
-        }else{
-            if (m_childNodePool[i] == _node) {
-                m_childNodePool.removeForce(i);
-                _node->m_parent = nullptr;
-                _node = nullptr;
-                return true;
-            }
-        }
-    }
-    return false;
-}
-
-bool SVNode::removeFromParent(){
-    if(m_parent){
-        for (s32 i = 0; i < m_parent->m_childNodePool.size(); i++) {
-            if(m_parent->m_childNodePool[i].get() == this ) {
-                m_parent->m_childNodePool.removeForce(i);
-                m_parent = nullptr;
-                return true;
-            }
-        }
-    }
-    return false;
-}
-
-//递归清理子节点
-void SVNode::clearChild() {
-    for (s32 i = 0; i < m_childNodePool.size(); i++) {
-        m_childNodePool[i]->clearChild();
-    }
-    m_childNodePool.destroy();
-    m_parent = nullptr;
-}
-
-bool SVNode::hasChild(SVNodePtr _node) {
-    for (s32 i = 0; i < m_childNodePool.size(); i++) {
-        if( m_childNodePool[i]->hasChild(_node) ){
-            return true;
-        }else{
-            if (m_childNodePool[i] == _node) {
-                return true;
-            }
-        }
-    }
-    return false;
-}
-
-u32 SVNode::getChildNum() {
-    return m_childNodePool.size();
-}
-
-SVNodePtr SVNode::getNode(cptr8 _name){
-    if(m_name == _name){
-        return THIS_TO_SHAREPTR(SVNode);
-    }
-    for (int i = 0; i < m_childNodePool.size(); i++) {
-        SVNodePtr t_node = m_childNodePool[i]->getNode(_name);
-        if(t_node){
-            return t_node;
-        }
-    }
-    return nullptr;
-}
-
-SVNodePtr SVNode::getChild(u32 _index) {
-    if(_index>=m_childNodePool.size())
-        return nullptr;
-    return m_childNodePool[_index];
-}
-
-void SVNode::_sort_child() {
-    if(!m_needsort)
-        return ;
-    m_needsort = false;
-    s32 t_num = getChildNum();
-    s32 t_times = t_num - 1;
-    for(s32 i = 0;i<t_times;i++) {
-        for(s32 j=0;j<t_times;j++) {
-            SVNodePtr t1 = m_childNodePool[j];
-            SVNodePtr t2 = m_childNodePool[j+1];
-            if(t1->getZOrder()<t2->getZOrder()) {
-                SVNodePtr tmp = m_childNodePool[j];
-                m_childNodePool[j] = m_childNodePool[j+1];
-                m_childNodePool[j+1] = tmp;
-            }
-        }
-        t_times--;
-    }
 }
 
 //获取本地空间矩阵
@@ -385,10 +253,6 @@ FVec3& SVNode::getScale() {
     return m_scale;
 }
 
-SVNodePtr SVNode::getParent() {
-    return m_parent;
-}
-
 void SVNode::setAutoAdaptDesign(bool _adapt){
     m_adaptDesign = _adapt;
     m_dirty = true;
@@ -440,9 +304,6 @@ SVBoundBox& SVNode::getAABBSW(){
 
 void SVNode::setZOrder(s32 _zorder){
     m_iZOrder = _zorder;
-    if(m_parent){
-        m_parent->m_needsort = true;
-    }
 }
 
 void SVNode::setAlpha(f32 _alpha){

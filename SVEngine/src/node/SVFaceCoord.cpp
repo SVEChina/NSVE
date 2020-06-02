@@ -90,8 +90,7 @@ bool SVFaceCoord::loadCoord(cptr8 _fname) {
     if( item_param.HasMember("design_img_height") ) {
         m_height = item_param["design_img_height"].GetInt();
     }
-    //清空子节点
-    clearChild();
+
     //
     m_aabbBox.clear();
     RAPIDJSON_NAMESPACE::Value &item_data = doc["data"];
@@ -110,7 +109,6 @@ bool SVFaceCoord::loadCoord(cptr8 _fname) {
         bmNode->setFontSize(0.25f);
         bmNode->setPosition(t_x,t_y-m_size*0.5f,0.0);
         bmNode->setRSType(m_rsType);
-        addChild(bmNode);
     }
     return true;
 }

@@ -93,7 +93,6 @@ bool SVFilterGlow::create(SVTEXTYPE _inType,SVTEXTYPE _outType){
 
 void SVFilterGlow::destroy(){
     if(m_pPassNode){
-        m_pPassNode->removeFromParent();
         m_pPassNode = nullptr;
     }
     m_pPassNode = nullptr;

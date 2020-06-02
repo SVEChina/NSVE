@@ -80,7 +80,6 @@ bool SVFilterBlur::create(SVTEXTYPE _inType,SVTEXTYPE _outType){
 
 void SVFilterBlur::destroy(){
     if(m_pPassNode){
-        m_pPassNode->removeFromParent();
         m_pPassNode = nullptr;
     }
     m_pPassNode = nullptr;

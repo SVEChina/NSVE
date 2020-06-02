@@ -84,7 +84,6 @@ void SVPhysicsBodyRigid::destroy(){
     }
     
     if(m_pNode){
-        m_pNode->removeFromParent();
         m_pNode = nullptr;
     }
 }

@@ -71,7 +71,6 @@ void SVRGBToneCurveFilter::destroy() {
     m_mtl_back = nullptr;
     texrgb = nullptr;
     if(m_pPassNode) {
-        m_pPassNode->removeFromParent();
         m_pPassNode = nullptr;
     }
 }

@@ -190,7 +190,6 @@ f32 SVBasedonFilter::getFilterParam(SVFILTERITEMTYPE _type){
 //销毁
 void SVBasedonFilter::destroy() {
     if(m_pPassNode) {
-        m_pPassNode->removeFromParent();
         m_pPassNode=nullptr;
     }
     m_acutancemtl = nullptr;

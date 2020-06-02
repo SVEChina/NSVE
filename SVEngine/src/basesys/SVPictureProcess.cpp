@@ -101,8 +101,7 @@ void SVPictureProcess::clearFilter(SVFilterBasePtr _filter){
         if(_filter==m_filterArray.get(i)){
             SVScenePtr t_sc = mApp->getSceneMgr()->getScene();
             if(t_sc){
-                SVNodePtr t_node=_filter->getNode();
-                t_node->removeFromParent();
+                
             }
             m_filterArray.get(i)->destroy();
             m_filterArray.removeForce(i);
@@ -117,8 +116,6 @@ void SVPictureProcess::clearFilter(SVString t_name){
             SVFilterBasePtr t_filter=m_filterArray.get(i);
             SVScenePtr t_sc = mApp->getSceneMgr()->getScene();
             if(t_sc){
-                SVNodePtr t_node=t_filter->getNode();
-                t_node->removeFromParent();
             }
             m_filterArray.get(i)->destroy();
             m_filterArray.removeForce(i);

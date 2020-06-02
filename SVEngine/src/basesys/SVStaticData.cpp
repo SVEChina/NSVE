@@ -43,7 +43,6 @@ SVStaticData::~SVStaticData() {
 void SVStaticData::init() {
     //
     _initBaseRect();
-    //
 //    m_screenMesh        = MakeSharedPtr<SVRenderMesh>(mApp);
 //    m_screenLTMesh      = MakeSharedPtr<SVRenderMesh>(mApp);
 //    m_screenLBMesh      = MakeSharedPtr<SVRenderMesh>(mApp);

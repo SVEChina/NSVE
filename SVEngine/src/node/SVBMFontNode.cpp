@@ -135,14 +135,14 @@ f32 SVBMFontNode::getWidth(){
     }
     f32 t_scaleX = 1.0f;
     SVNodePtr t_curNode = THIS_TO_SHAREPTR(SVBMFontNode);
-    while (t_curNode) {
-        t_scaleX = t_scaleX * t_curNode->getScale().x;
-        if (t_curNode->getParent()) {
-            t_curNode = t_curNode->getParent();
-        } else {
-            break;
-        }
-    }
+//    while (t_curNode) {
+//        t_scaleX = t_scaleX * t_curNode->getScale().x;
+//        if (t_curNode->getParent()) {
+//            t_curNode = t_curNode->getParent();
+//        } else {
+//            break;
+//        }
+//    }
     f32 t_total_w = m_font->getTextWidth(m_text.c_str(), m_fontSize);
     t_total_w = t_total_w + (m_text.size() - 1)*m_spacing;
     return t_total_w*t_scaleX;

@@ -13,7 +13,11 @@
 
 namespace sv {
     
-    //四叉数进行场景管理
+    /*
+     四叉数进行场景管理
+     scenetree BVH
+     */
+
     class SVTree4 :public SVGBase{
     public:
         SVTree4(SVInst *_app);
@@ -55,7 +59,8 @@ namespace sv {
         SVBoundBox m_treeBox;
     };
             
-    //场景
+    /*场景*/
+
     class SVScene : public SVGBase {
     public:
         SVScene(SVInst *_app,cptr8 name);
