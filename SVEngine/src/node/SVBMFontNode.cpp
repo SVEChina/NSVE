@@ -41,7 +41,7 @@ SVBMFontNode::SVBMFontNode(SVInst *_app)
     m_fontSize = 1.0f;
     m_pRenderVertex = MakeSharedPtr<SVDataSwap>();
     m_pRenderObj = MakeSharedPtr<SVRenderObject>();
-    m_pMesh = MakeSharedPtr<SVRenderMesh>(mApp);
+    //m_pMesh = MakeSharedPtr<SVRenderMesh>(mApp);
     m_pMesh->setVertexPoolType(GL_DYNAMIC_DRAW);
     m_spacing = 0.0f;
     _genMesh();

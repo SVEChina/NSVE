@@ -31,8 +31,8 @@ SVFaceCoord::SVFaceCoord(SVInst *_app)
     m_activePt = 0;
     m_size = 5.0f;
     m_aabbBox.clear();
-    m_pMesh = MakeSharedPtr<SVRenderMesh>(mApp);
-    m_pMeshAct = MakeSharedPtr<SVRenderMesh>(mApp);
+    //m_pMesh = MakeSharedPtr<SVRenderMesh>(mApp);
+    //m_pMeshAct = MakeSharedPtr<SVRenderMesh>(mApp);
     m_pRObjNor = MakeSharedPtr<SVRenderObject>();
     m_pRObjAct = MakeSharedPtr<SVRenderObject>();
 }

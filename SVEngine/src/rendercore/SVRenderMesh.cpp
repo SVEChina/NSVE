@@ -24,8 +24,8 @@
 
 using namespace sv;
 
-SVRenderMesh::SVRenderMesh(SVInst* _app)
-:SVRObjBase(_app){
+SVRenderMesh::SVRenderMesh(SVInstPtr _app)
+:SVGBaseEx(_app){
     m_created = false;
 }
 
@@ -54,7 +54,6 @@ SVRenderMesh::~SVRenderMesh() {
 //}
 
 void SVRenderMesh::create(SVRendererPtr _renderer){
-    SVRObjBase::create(_renderer);
 //    SVRendererPtr t_renderBasePtr = mApp->getRenderer();
 //    SVRendererGLPtr t_renderGLPtr = std::dynamic_pointer_cast<SVRendererGL>(t_renderBasePtr);
 //    if (t_renderGLPtr) {
@@ -79,7 +78,6 @@ void SVRenderMesh::create(SVRendererPtr _renderer){
 }
 
 void SVRenderMesh::destroy(SVRendererPtr _renderer) {
-    SVRObjBase::destroy(_renderer);
 }
 
 void SVRenderMesh::setIndexPoolType(u32 itype) {

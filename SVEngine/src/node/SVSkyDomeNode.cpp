@@ -20,7 +20,7 @@ SVSkyDomeNode::SVSkyDomeNode(SVInst* _app)
 :SVNode(_app)
 ,mDomeTex(nullptr){
     ntype = "SVSkyDomeNode";
-    mMesh = MakeSharedPtr<SVRenderMesh>(mApp);
+    //mMesh = MakeSharedPtr<SVRenderMesh>(mApp);
     mMesh->createMesh();
     m_renderObject = MakeSharedPtr<SVRenderObject>();
 }

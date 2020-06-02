@@ -35,7 +35,7 @@ SVBitFontNode::SVBitFontNode(SVInst *_app)
     m_atchType = ATCH_MC;
     m_pRenderVertex = MakeSharedPtr<SVDataSwap>();
     m_pRenderObj = MakeSharedPtr<SVRenderObject>();
-    m_pMesh = MakeSharedPtr<SVRenderMesh>(mApp);
+    //m_pMesh = MakeSharedPtr<SVRenderMesh>(mApp);
     m_pMesh->setVertexPoolType(GL_DYNAMIC_DRAW);
     //构建基础mesh和纹理坐标
     _genTexcoords();

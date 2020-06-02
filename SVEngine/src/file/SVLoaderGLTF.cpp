@@ -798,7 +798,7 @@ SVMeshPtr SVLoaderGLTF::_buildMeshPri(Primitive* _prim) {
         }
     }
     //
-    SVRenderMeshPtr t_rMesh = MakeSharedPtr<SVRenderMesh>(mApp);
+    SVRenderMeshPtr t_rMesh;// = MakeSharedPtr<SVRenderMesh>(mApp);
     t_rMesh->setVertexType(VFTYPE(t_vtf));
     t_rMesh->setSeqMode(1);
     t_rMesh->setVertNum(t_count);

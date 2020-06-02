@@ -44,15 +44,15 @@ void SVStaticData::init() {
     //
     _initBaseRect();
     //
-    m_screenMesh        = MakeSharedPtr<SVRenderMesh>(mApp);
-    m_screenLTMesh      = MakeSharedPtr<SVRenderMesh>(mApp);
-    m_screenLBMesh      = MakeSharedPtr<SVRenderMesh>(mApp);
-    m_screenRTMesh      = MakeSharedPtr<SVRenderMesh>(mApp);
-    m_screenRBMesh      = MakeSharedPtr<SVRenderMesh>(mApp);
-    m_screenMeshRot90   = MakeSharedPtr<SVRenderMesh>(mApp);
-    m_screenMeshRot180  = MakeSharedPtr<SVRenderMesh>(mApp);
-    m_screenMeshRot270  = MakeSharedPtr<SVRenderMesh>(mApp);
-    m_screenAdaptMesh = MakeSharedPtr<SVRenderMesh>(mApp);
+//    m_screenMesh        = MakeSharedPtr<SVRenderMesh>(mApp);
+//    m_screenLTMesh      = MakeSharedPtr<SVRenderMesh>(mApp);
+//    m_screenLBMesh      = MakeSharedPtr<SVRenderMesh>(mApp);
+//    m_screenRTMesh      = MakeSharedPtr<SVRenderMesh>(mApp);
+//    m_screenRBMesh      = MakeSharedPtr<SVRenderMesh>(mApp);
+//    m_screenMeshRot90   = MakeSharedPtr<SVRenderMesh>(mApp);
+//    m_screenMeshRot180  = MakeSharedPtr<SVRenderMesh>(mApp);
+//    m_screenMeshRot270  = MakeSharedPtr<SVRenderMesh>(mApp);
+//    m_screenAdaptMesh = MakeSharedPtr<SVRenderMesh>(mApp);
     //构建屏幕渲染Mesh
     m_screenMesh->setVertexType(E_VF_V2_C_T0);
     m_screenLTMesh->setVertexType(E_VF_V2_C_T0);
@@ -390,7 +390,7 @@ SVRenderMeshPtr SVStaticData::generatePatchMesh(FVec3 &_corner00, FVec3 &_corner
     SVDataSwapPtr t_pVertexData = MakeSharedPtr<SVDataSwap>();
     t_pVertexData->writeData(&vertexData[0], sizeof(V3)*t_vertexCount);
     
-    SVRenderMeshPtr patchMesh = MakeSharedPtr<SVRenderMesh>(mApp);
+    SVRenderMeshPtr patchMesh =nullptr;// MakeSharedPtr<SVRenderMesh>(mApp);
     patchMesh->setVertexType(E_VF_V3);
     patchMesh->setVertNum(t_vertexCount);
     patchMesh->setVertexData(t_pVertexData);
@@ -484,7 +484,7 @@ SVFaceDataMeshPtr SVStaticData::getFaceDataMesh(){
 
 void SVStaticData::_initTwoDivisionMesh(){
     //二分屏
-    m_screenTwoDivisionMesh  = MakeSharedPtr<SVRenderMesh>(mApp);
+    //m_screenTwoDivisionMesh  = MakeSharedPtr<SVRenderMesh>(mApp);
     m_screenTwoDivisionMesh->setVertexType(E_VF_V2_C_T0);
     m_screenTwoDivisionMesh->setDrawMethod(E_DM_TRIANGLES);
     
@@ -550,7 +550,7 @@ void SVStaticData::_initTwoDivisionMesh(){
 
 void SVStaticData::_initFourDivisionMesh(){
     //四分屏
-    m_screenFourDivisionMesh  = MakeSharedPtr<SVRenderMesh>(mApp);
+    //m_screenFourDivisionMesh  = MakeSharedPtr<SVRenderMesh>(mApp);
     m_screenFourDivisionMesh->setVertexType(E_VF_V2_C_T0);
     m_screenFourDivisionMesh->setDrawMethod(E_DM_TRIANGLES);
     SVDataSwapPtr t_pMeshData_FourVidion = MakeSharedPtr<SVDataSwap>();
@@ -645,7 +645,7 @@ void SVStaticData::_initFourDivisionMesh(){
 
 void SVStaticData::_initFourDivisionMesh_X(){
     //四分屏
-    m_screenFourXDivisionMesh  = MakeSharedPtr<SVRenderMesh>(mApp);
+    //m_screenFourXDivisionMesh  = MakeSharedPtr<SVRenderMesh>(mApp);
     m_screenFourXDivisionMesh->setVertexType(E_VF_V2_C_T0);
     m_screenFourXDivisionMesh->setDrawMethod(E_DM_TRIANGLES);
     SVDataSwapPtr t_pMeshData_FourVidion = MakeSharedPtr<SVDataSwap>();

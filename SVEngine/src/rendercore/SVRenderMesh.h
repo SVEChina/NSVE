@@ -19,15 +19,9 @@ namespace sv {
      逻辑和渲染之间的桥梁，其实就是数据和数据描述
      */
 
-    class SVRenderMesh : public SVRObjBase {
+    class SVRenderMesh : public SVGBaseEx {
     public:
-        enum MESHSTATE{
-            MESHDATA_WAIT = 0,
-            MESHDATA_READY,
-            MESHDATA_CREATE
-        };
-        
-        SVRenderMesh(SVInst* _app);
+        SVRenderMesh(SVInstPtr _app);
         
         ~SVRenderMesh();
         

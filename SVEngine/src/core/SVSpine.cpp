@@ -150,7 +150,7 @@ void SVSpine::init(spSkeletonData *skedata, spAtlas *atlas, bool ownsSkeletonDat
         spSlot *t_slot = m_pSkeleton->drawOrder[i];
         SpineMeshDataPtr pMeshData = MakeSharedPtr<SpineMeshData>();
         pMeshData->m_blendMode = t_slot->data->blendMode;
-        pMeshData->m_pRenderMesh = MakeSharedPtr<SVRenderMesh>(mApp);
+        //pMeshData->m_pRenderMesh = MakeSharedPtr<SVRenderMesh>(mApp);
         pMeshData->m_pRenderMesh->setVertexPoolType(GL_DYNAMIC_DRAW);
         pMeshData->m_pRenderMesh->setIndexPoolType(GL_DYNAMIC_DRAW);
         pMeshData->m_pRenderMesh->createMesh();
