@@ -36,7 +36,7 @@ namespace sv {
         
         virtual void init(){};
         
-        void render(SVRendererPtr _renderer){};
+        void render(){};
     };
 
     //普通Path
@@ -48,7 +48,19 @@ namespace sv {
         
         virtual void init();
         
-        void render(SVRendererPtr _renderer);
+        void render();
+    };
+
+    //延时渲染路径
+    class SVRPathDef : public SVRPath {
+    public:
+        SVRPathDef(SVInstPtr _app);
+        
+        ~SVRPathDef();
+        
+        virtual void init();
+        
+        void render();
     };
 
     

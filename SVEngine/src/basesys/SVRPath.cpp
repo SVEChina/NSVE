@@ -25,6 +25,39 @@ void SVRPathNor::init() {
     
 }
 
-void SVRPathNor::render(SVRendererPtr _renderer) {
+//前向渲染
+void SVRPathNor::render() {
+    //1 gpu例子
+    
+    //2 pre-z
+    
+    //3 逐实体渲染
+    
+    //4 后处理
 }
 
+
+
+//
+SVRPathDef::SVRPathDef(SVInstPtr _app)
+:SVRPath(_app){
+    
+}
+
+SVRPathDef::~SVRPathDef() {
+    
+}
+
+void SVRPathDef::init() {
+    
+}
+
+void SVRPathDef::render() {
+    //1 gpu例子
+    
+    //2 pre-z
+    
+    //3 逐实体渲染
+    
+    //4 后处理
+}
