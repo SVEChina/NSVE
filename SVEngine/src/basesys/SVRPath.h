@@ -36,7 +36,7 @@ namespace sv {
         
         virtual void init(){};
         
-        void render(){};
+        void render(f32 _dt){};
     };
 
     //普通Path
@@ -48,7 +48,7 @@ namespace sv {
         
         virtual void init();
         
-        void render();
+        void render(f32 _dt);
     };
 
     //延时渲染路径
@@ -60,7 +60,7 @@ namespace sv {
         
         virtual void init();
         
-        void render();
+        void render(f32 _dt);
     };
 
     

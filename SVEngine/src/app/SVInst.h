@@ -61,14 +61,14 @@ namespace sv {
     public:
         //唯一ID池
         SVIDPool m_IDPool;
-        //环境
-        //SVCtxBasePtr m_context;
         //全局对象
         SVGlobalMgrPtr m_pGlobalMgr;
         //全局参数
         SVGlobalParamPtr m_pGlobalParam;
         //渲染器
         SVRendererPtr m_pRM;
+        //
+        SVRPathPtr m_pRPath;
         //
         SV_STATE m_svst;
         //

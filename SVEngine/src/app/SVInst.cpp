@@ -8,6 +8,7 @@
 #include "SVInst.h"
 #include "SVGlobalMgr.h"
 #include "SVGlobalParam.h"
+#include "../basesys/SVRPath.h"
 #include "../work/SVTdCore.h"
 #include "../work/SVThreadPool.h"
 #include "../file/SVFileMgr.h"
@@ -28,6 +29,7 @@ using namespace sv;
 SVInst::SVInst() {
     m_svst = SV_ST_NULL;
     m_engTimeState = ENG_TS_NOR;
+    m_pRPath = nullptr;
 }
 
 SVInst::~SVInst() {
@@ -41,16 +43,22 @@ SVInstPtr SVInst::makeCreate() {
 //构建各个模块的逻辑部分，引擎可以运行的最简模式
 void SVInst::init() {
     m_pRM = nullptr;
+    //
     m_pGlobalMgr = MakeSharedPtr<SVGlobalMgr>( std::dynamic_pointer_cast<SVInst>(shareObject()) );
     m_pGlobalMgr->init();
+    //
     m_pGlobalMgr->m_pConfig = MakeSharedPtr<SVConfig>(this);
     m_pGlobalMgr->m_pConfig->init();
+    //默认渲染路径是普通
+    m_pRPath = MakeSharedPtr<SVRPathNor>(std::dynamic_pointer_cast<SVInst>(shareObject()) );
+    m_pRPath->init();
     //
     m_pGlobalParam = MakeSharedPtr<SVGlobalParam>(this);
     m_svst = SV_ST_WAIT;
 }
 
 void SVInst::destroy() {
+    m_pRPath = nullptr;
     m_pGlobalMgr = nullptr;
     m_pGlobalParam = nullptr;
     m_svst = SV_ST_NULL;
@@ -85,16 +93,16 @@ void SVInst::stop() {
 }
 
 void SVInst::updateSVE(f32 _dt) {
+    //处理一般逻辑，例如运动，消息处理等等
     m_pGlobalMgr->update(_dt);
+    //开始做渲染指令的生成（只有这里才会产生真正的渲染指令）
+    m_pRPath->render(_dt);
 }
 
 void SVInst::renderSVE() {
     if( m_pGlobalMgr->m_pRenderMgr ) {
         m_pGlobalMgr->m_pRenderMgr->render();
     }
-//    if(m_pRM) {
-//        m_pRM->render();
-//    }
 }
 
 void SVInst::svSuspend(){

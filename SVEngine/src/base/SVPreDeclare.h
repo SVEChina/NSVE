@@ -31,6 +31,12 @@ namespace sv {
     DECLARE_SHAREPTR(SVStaticData);
     DECLARE_SHAREPTR(SVFaceDataMesh);
     
+    //渲染路径
+    DECLARE_SHAREPTR(SVRPath);
+    DECLARE_SHAREPTR(SVRPathNor);
+    DECLARE_SHAREPTR(SVRPathDef);
+
+    
     //基础
     DECLARE_SHAREPTR(SVRandom);
     DECLARE_SHAREPTR(SVDataSwap);
