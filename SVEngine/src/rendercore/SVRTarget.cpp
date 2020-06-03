@@ -6,7 +6,6 @@
 //
 
 #include "SVRTarget.h"
-#include "SVRPath.h"
 #include "../app/SVInst.h"
 #include "SVRenderMgr.h"
 #include "SVGL/SVRResGL.h"
@@ -19,16 +18,10 @@ using namespace sv;
 //
 SVRTarget::SVRTarget(SVInstPtr _app)
 :SVGBaseEx(_app)
-,m_order(0)
-,m_rpath(nullptr){
+,m_order(0){
 }
 
 SVRTarget::~SVRTarget() {
-    m_rpath = nullptr;
-}
-
-void SVRTarget::setRPath(SVRPathPtr _rpath) {
-    m_rpath = _rpath;
 }
 
 //void SVRTarget::create(SVRendererPtr _renderer) {
@@ -76,9 +69,6 @@ void SVRTarget::_preRender(SVRendererPtr _renderer) {
 }
 
 void SVRTarget::_render(SVRendererPtr _renderer) {
-    if(m_rpath) {
-        m_rpath->render(_renderer);
-    }
 }
 
 void SVRTarget::_afterRender(SVRendererPtr _renderer) {

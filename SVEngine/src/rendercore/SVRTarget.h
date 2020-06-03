@@ -25,7 +25,6 @@ namespace sv {
         
         void render(SVRendererPtr _renderer);
         
-        void setRPath(SVRPathPtr _rpath);
         
     protected:
         virtual void _preRender(SVRendererPtr _renderer);
@@ -37,7 +36,6 @@ namespace sv {
     public:
         s32 m_order;
         
-        SVRPathPtr m_rpath; //渲染路径
     };
 
     

@@ -156,16 +156,5 @@ enum {
     NUM_FILL_MODES,
 };
 
-/* Shader types
- */
-enum {
-    SHADER_VERTEX = 0,
-    SHADER_CONTROL,
-    SHADER_EVALUATE,
-    SHADER_GEOMETRY,
-    SHADER_FRAGMENT,
-    SHADER_COMPUTE,
-    NUM_SHADERS,
-};
 
 #endif //SV_RENDERDEF_H

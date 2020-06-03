@@ -23,6 +23,10 @@ namespace sv {
      等等
      */
 
+    /*
+     由渲染路径产出指令，所以这是个路基概念
+     */
+
     //不同RPath 需要设定不同的流
     class SVRPath : public SVGBaseEx {
     public:

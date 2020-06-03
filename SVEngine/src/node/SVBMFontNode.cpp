@@ -154,14 +154,6 @@ f32 SVBMFontNode::getHeight(){
     }
     f32 t_scaleY = 1.0f;
     SVNodePtr t_curNode = THIS_TO_SHAREPTR(SVBMFontNode);
-    while (t_curNode) {
-        t_scaleY = t_scaleY * t_curNode->getScale().y;
-        if (t_curNode->getParent()) {
-            t_curNode = t_curNode->getParent();
-        } else {
-            break;
-        }
-    }
     return m_font->getTextHeight(m_text.c_str(), m_fontSize)*t_scaleY;
 }
 

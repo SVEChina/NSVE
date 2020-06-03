@@ -7,10 +7,6 @@
 
 #include "SVRPath.h"
 #include "../app/SVInst.h"
-#include "SVRenderMgr.h"
-#include "SVGL/SVRendererGL.h"
-#include "SVMetal/SVRendererMetal.h"
-#include "SVVulkan/SVRendererVK.h"
 
 using namespace sv;
 
