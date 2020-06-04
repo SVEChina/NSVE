@@ -45,11 +45,12 @@ void SVRTargetMetal::_preRender(SVRendererPtr _renderer) {
 void SVRTargetMetal::_render(SVRendererPtr _renderer) {
     SVRendererMetalPtr t_rm = std::dynamic_pointer_cast<SVRendererMetal>(_renderer);
     //数据，数据，数据
-    //[m_cmdEncoder endEncoding];
+    
 }
 
 void SVRTargetMetal::_afterRender(SVRendererPtr _renderer) {
-    SVRendererMetalPtr t_rm = std::dynamic_pointer_cast<SVRendererMetal>(_renderer);
+    //SVRendererMetalPtr t_rm = std::dynamic_pointer_cast<SVRendererMetal>(_renderer);
+    [m_cmdEncoder endEncoding];
     [m_cmdBuffer presentDrawable:m_pTarget];
     [m_cmdBuffer commit];
 }
