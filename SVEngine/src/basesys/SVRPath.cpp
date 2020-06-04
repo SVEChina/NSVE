@@ -27,6 +27,7 @@ void SVRPathNor::init() {
 
 //前向渲染
 void SVRPathNor::render(f32 _dt) {
+    SV_LOG_INFO("render path");
     //1 gpu例子
     
     //2 pre-z

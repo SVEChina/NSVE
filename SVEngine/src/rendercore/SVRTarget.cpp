@@ -24,37 +24,6 @@ SVRTarget::SVRTarget(SVInstPtr _app)
 SVRTarget::~SVRTarget() {
 }
 
-//void SVRTarget::create(SVRendererPtr _renderer) {
-////    SVRObjBase::create(_renderer);
-////    SVRendererPtr t_renderBasePtr = mApp->getRenderer();
-////    SVRendererGLPtr t_renderGLPtr = std::dynamic_pointer_cast<SVRendererGL>(t_renderBasePtr);
-////    if (t_renderGLPtr) {
-////        //渲染器类型E_RENDERER_GLES,
-////        m_objFBOPtr = MakeSharedPtr<SVResGLRenderTarget>(mApp, m_w, m_h, m_depth, m_stencil);
-////
-////    }
-////    SVRendererVKPtr t_rendeVKPtr = std::dynamic_pointer_cast<SVRendererVK>(t_renderBasePtr);
-////    if (t_rendeVKPtr) {
-////        //渲染器类型E_RENDERER_VUNKAN,
-////
-////    }
-//////    SVRendererMetalPtr t_rendeMetalPtr = std::dynamic_pointer_cast<SVRendererMetal>(
-//////            t_renderBasePtr);
-//////    if (t_rendeMetalPtr) {
-//////        //渲染器类型E_RENDERER_METAL,
-//////    }
-////    if (m_objFBOPtr) {
-////        m_objFBOPtr->create(_renderer);
-////    }
-//}
-//
-//void SVRTarget::destroy(SVRendererPtr _renderer) {
-//////    if (m_objFBOPtr) {
-//////        m_objFBOPtr->destroy(_renderer);
-//////    }
-////    SVRObjBase::destroy(_renderer);
-//}
-
 void SVRTarget::render(SVRendererPtr _renderer) {
     //设置目标
     _preRender(_renderer);
@@ -65,7 +34,6 @@ void SVRTarget::render(SVRendererPtr _renderer) {
 }
 
 void SVRTarget::_preRender(SVRendererPtr _renderer) {
-    
 }
 
 void SVRTarget::_render(SVRendererPtr _renderer) {

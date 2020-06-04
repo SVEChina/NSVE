@@ -70,6 +70,13 @@ namespace sv {
         
         //
         SVRMeshPtr m_pRMesh;
+    public:
+        void* vertices;
+        void* vertices_up;
+        s32 off;
+        s32 index;
+        s32 start;
+        s32 numVertices;
     };
     
 

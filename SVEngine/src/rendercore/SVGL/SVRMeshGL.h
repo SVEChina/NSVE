@@ -26,7 +26,11 @@ namespace sv {
         
         ~SVRMeshGL();
         
-        void render(SVRendererPtr _renderer);
+        void create(SVRendererPtr _renderer,SVRTargetPtr _target,SVRenderMeshPtr _rmesh);
+        
+        void render(SVRendererPtr _renderer,SVRTargetPtr _target,SVRenderMeshPtr _rmesh);
+        
+        void destroy(SVRendererPtr _renderer,SVRTargetPtr _target);
         
     };
     

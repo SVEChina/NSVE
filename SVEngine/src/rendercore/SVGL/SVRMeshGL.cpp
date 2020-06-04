@@ -6,6 +6,7 @@
 //
 
 #include "SVRMeshGL.h"
+#include "SVRTargetGL.h"
 
 using namespace sv;
 
@@ -17,6 +18,15 @@ SVRMeshGL::~SVRMeshGL() {
 }
 
 
-void SVRMeshGL::render(SVRendererPtr _renderer){
+void SVRMeshGL::create(SVRendererPtr _renderer,SVRTargetPtr _target,SVRenderMeshPtr _rmesh){
     
 }
+
+void SVRMeshGL::render(SVRendererPtr _renderer,SVRTargetPtr _target,SVRenderMeshPtr _rmesh){
+    
+}
+
+void SVRMeshGL::destroy(SVRendererPtr _renderer,SVRTargetPtr _target) {
+    
+}
+

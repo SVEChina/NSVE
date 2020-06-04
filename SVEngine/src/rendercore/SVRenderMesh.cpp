@@ -58,7 +58,6 @@ void SVRenderMesh::create(SVRendererPtr _renderer){
 //    SVRendererGLPtr t_renderGLPtr = std::dynamic_pointer_cast<SVRendererGL>(t_renderBasePtr);
 //    if (t_renderGLPtr) {
 //        //渲染器类型E_RENDERER_GLES,
-//        m_objVBOPtr = MakeSharedPtr<SVResGLRenderMesh>(mApp);
 //    }
 //    SVRendererVKPtr t_rendeVKPtr = std::dynamic_pointer_cast<SVRendererVK>(t_renderBasePtr);
 //    if (t_rendeVKPtr) {

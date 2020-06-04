@@ -39,6 +39,8 @@ namespace sv {
         id<MTLDrawable> m_pTarget;
         id<MTLTexture> m_pTargetTex;
         MTLRenderPassDescriptor* m_passDsp;
+        id<MTLCommandBuffer> m_cmdBuffer;
+        id<MTLRenderCommandEncoder> m_cmdEncoder;
     };
 
     

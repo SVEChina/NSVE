@@ -11,6 +11,8 @@ using namespace sv;
 
 SVRMesh::SVRMesh(SVInstPtr _app)
 :SVGBaseEx(_app){
+    m_create = false;
+    m_destroy = false;
 }
 
 SVRMesh::~SVRMesh() {

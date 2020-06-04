@@ -26,10 +26,15 @@ namespace sv {
         
         ~SVRMesh();
         
-        virtual void create(SVRendererPtr _renderer){}
+        virtual void create(SVRendererPtr _renderer,SVRTargetPtr _target,SVRenderMeshPtr _rmesh){}
         
-        virtual void render(SVRendererPtr _renderer){}
-
+        virtual void render(SVRendererPtr _renderer,SVRTargetPtr _target,SVRenderMeshPtr _rmesh){}
+        
+        virtual void destroy(SVRendererPtr _renderer,SVRTargetPtr _target){}
+        
+        bool m_create;
+        
+        bool m_destroy;
         
     };
     

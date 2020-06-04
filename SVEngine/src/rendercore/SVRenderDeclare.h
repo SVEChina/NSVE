@@ -45,9 +45,7 @@ namespace sv {
     DECLARE_SHAREPTR(SVResGLRenderTarget);
     DECLARE_SHAREPTR(SVResGLRenderTargetOut);
     DECLARE_SHAREPTR(SVResGLRenderTexture);
-    DECLARE_SHAREPTR(SVResGLVBO);
     DECLARE_SHAREPTR(SVResGLRenderMesh);
-    DECLARE_SHAREPTR(SVResGLRenderMeshDvid);
     DECLARE_SHAREPTR(SVResGLRenderMeshData);
     
     

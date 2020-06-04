@@ -25,7 +25,6 @@ namespace sv {
         
         void render(SVRendererPtr _renderer);
         
-        
     protected:
         virtual void _preRender(SVRendererPtr _renderer);
         
@@ -35,7 +34,6 @@ namespace sv {
         
     public:
         s32 m_order;
-        
     };
 
     
