@@ -15,6 +15,16 @@
 
 namespace sv {
 
+    //定点说一句
+    struct dataTag {
+        void* m_pdata;      //数据指针
+        s32 m_size;         //数据大小
+        s32 m_vertdsp;      //顶点描述
+        void* m_pdatad_up;  //更新的数据
+        s32 m_size_up;      //更新数据大小
+        s32 m_order;    
+    };
+
     /*
      逻辑和渲染之间的桥梁，其实就是数据和数据描述
      */
@@ -51,32 +61,20 @@ namespace sv {
         
         void createMesh();
         
-    protected:
-        
-        bool  m_created;
-        
-        //定点说一句
-        struct dataTag {
-            void* m_pdata;      //数据指针
-            s32 m_size;         //数据大小
-            s32 m_vertdsp;      //顶点描述
-            void* m_pdatad_up;  //更新的数据
-            s32 m_size_up;      //更新数据大小
-        };
-        SVArray<dataTag> dataPool;
-        
-        //索引数据
-        dataTag m_index;
-        
-        //
-        SVRMeshPtr m_pRMesh;
     public:
-        void* vertices;
-        void* vertices_up;
-        s32 off;
-        s32 index;
-        s32 start;
-        s32 numVertices;
+        dataTag m_index;
+        SVArray<dataTag> m_vertPool;
+        //
+        dataTag m_vert_up;
+        //不同内核的mesh
+        SVRMeshPtr m_pRMesh;
+//    public:
+//        void* vertices;
+//        void* vertices_up;
+//        s32 off;
+//        s32 index;
+//        s32 start;
+//        s32 numVertices;
     };
     
 

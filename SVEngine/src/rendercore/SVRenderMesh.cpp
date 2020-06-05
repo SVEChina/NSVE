@@ -26,11 +26,9 @@ using namespace sv;
 
 SVRenderMesh::SVRenderMesh(SVInstPtr _app)
 :SVGBaseEx(_app){
-    m_created = false;
 }
 
 SVRenderMesh::~SVRenderMesh() {
-    m_created = false;
 }
 
 //void SVRenderMesh::_resetMeshData(){

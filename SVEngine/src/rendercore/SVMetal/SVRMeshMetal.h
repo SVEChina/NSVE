@@ -32,9 +32,13 @@ namespace sv {
         
         void destroy(SVRendererPtr _renderer,SVRTargetPtr _target);
         
-        id<MTLBuffer> m_buf;
-        
-        s32 m_indexID;
+        id<MTLBuffer> m_ibuf;
+        SVArray<id<MTLBuffer>> m_dbufs;
+        s32 m_vertStart;
+        s32 m_vertCnt;
+        s32 m_iCnt;
+        s32 m_ibufOff;
+        s32 m_instCnt;
     };
     
 
