@@ -11,8 +11,9 @@ namespace sv {
         class SVBoundSphere;
         class SVBoundBox;
         class SVBoundFrustum;
-        //***************************************SVBoundSphere***************************************
-        //
+        /**
+         *SVBoundSphere
+         */
         class SVBoundSphere {
         public:
             SVBoundSphere();

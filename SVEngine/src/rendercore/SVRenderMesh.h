@@ -22,7 +22,7 @@ namespace sv {
         s32 m_vertdsp;      //顶点描述
         void* m_pdatad_up;  //更新的数据
         s32 m_size_up;      //更新数据大小
-        s32 m_order;    
+        s32 m_order;
     };
 
     /*
@@ -62,19 +62,14 @@ namespace sv {
         void createMesh();
         
     public:
+        //索引数据
         dataTag m_index;
+        //顶点数据
         SVArray<dataTag> m_vertPool;
-        //
+        //更新数据
         dataTag m_vert_up;
         //不同内核的mesh
         SVRMeshPtr m_pRMesh;
-//    public:
-//        void* vertices;
-//        void* vertices_up;
-//        s32 off;
-//        s32 index;
-//        s32 start;
-//        s32 numVertices;
     };
     
 

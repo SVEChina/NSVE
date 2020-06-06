@@ -137,17 +137,15 @@
 
 //
 class Base {
-		
-	public:
-		
-		#ifdef USE_MEMORY
-			static sv_inline void *operator new(size_t size) { return ::operator new(size); }
-			static sv_inline void *operator new[](size_t size) { return ::operator new[](size); }
-			static sv_inline void operator delete(void *ptr) { ::operator delete(ptr); }
-			static sv_inline void operator delete[](void *ptr) { ::operator delete[](ptr); }
-			static sv_inline void operator delete(void *ptr,size_t size) { ::operator delete(ptr,size); }
-			static sv_inline void operator delete[](void *ptr,size_t size) { ::operator delete[](ptr,size); }
-		#endif
+    public:
+#ifdef USE_MEMORY
+        static sv_inline void *operator new(size_t size) { return ::operator new(size); }
+        static sv_inline void *operator new[](size_t size) { return ::operator new[](size); }
+        static sv_inline void operator delete(void *ptr) { ::operator delete(ptr); }
+        static sv_inline void operator delete[](void *ptr) { ::operator delete[](ptr); }
+        static sv_inline void operator delete(void *ptr,size_t size) { ::operator delete(ptr,size); }
+        static sv_inline void operator delete[](void *ptr,size_t size) { ::operator delete[](ptr,size); }
+#endif
 };
 
 #endif /* __BASE_H__ */

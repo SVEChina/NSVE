@@ -86,6 +86,9 @@ void SVGlobalMgr::init() {
     //渲染管理
     m_pRenderMgr = MakeSharedPtr<SVRenderMgr>(mApp);
     m_pRenderMgr->init();
+    //构建静态数据
+    m_pStaticData = MakeSharedPtr<SVStaticData>(mApp);
+    m_pStaticData->init();
 //    //消息系统建立起来
 //    m_pEventMgr = MakeSharedPtr<SVEventMgr>(mApp.get());
 //    m_pEventMgr->init();
@@ -119,8 +122,6 @@ void SVGlobalMgr::init() {
 //    //创建识别对象成功
 //    m_pDetectMgr = MakeSharedPtr<SVDetectMgr>(mApp.get());
 //    m_pDetectMgr->init(DETECT_T_ST);
-//    //最后构建数据
-//    m_pStaticData = MakeSharedPtr<SVStaticData>(mApp.get());
 //    //变形系统
 //    m_pDeformSys = MakeSharedPtr<SVDeformMgr>(mApp.get());
 //    m_pDeformSys->init();

@@ -28,13 +28,14 @@ void SVRPathNor::init() {
 //前向渲染
 void SVRPathNor::render(f32 _dt) {
     SV_LOG_INFO("render path");
-    //1 gpu例子
+    //1 gpu粒子
     
     //2 pre-z
     
     //3 逐实体渲染
     
     //4 后处理
+    
 }
 
 
