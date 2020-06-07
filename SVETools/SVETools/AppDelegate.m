@@ -7,23 +7,43 @@
 //
 
 #import "AppDelegate.h"
+#import "CMetalView.h"
 #import "CGInst.h"
+#import <QuartzCore/CAMetalLayer.h>
+#import <Metal/MTLDevice.h>
 
-@interface AppDelegate ()
+@interface AppDelegate () {
+    CMetalView* metalview;
+    //CAMetalLayer* metallayer;
+}
 
 @property (weak) IBOutlet NSWindow *window;
+
 @end
 
 @implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-    // Insert code here to initialize your application
+    //
     [[CGInst getInst] cgInit];
+    // Insert code here to initialize your application
+    metalview = [[CMetalView alloc] initWithFrame:self.window.contentView.bounds];
+    [self.window.contentView addSubview:metalview];
+    //
+    [[NSNotificationCenter defaultCenter] addObserver:self.window
+                                             selector:@selector(windowDidResize:)
+                                                 name:NSWindowDidResizeNotification
+                                               object:self];
+
 }
 
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
     // Insert code here to tear down your application
+}
+
+- (void)windowDidResize:(NSNotification*)aNotification {
+    NSLog(@"window resize!");
 }
 
 

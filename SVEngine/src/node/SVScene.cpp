@@ -135,14 +135,10 @@ void SVTree4::addNode(SVNodePtr _node, s32 iZOrder){
 
 //增加节点
 void SVTree4::addNode(SVNodePtr _node) {
-    if(m_node) {
-        m_node->addChild(_node);
-    }else{
-        for(s32 i=0;i<4;i++){
-            if( m_pTreeNode[i]->_isIn(_node) ){
-                m_pTreeNode[i]->addNode(_node);
-                break;
-            }
+    for(s32 i=0;i<4;i++){
+        if( m_pTreeNode[i]->_isIn(_node) ){
+            m_pTreeNode[i]->addNode(_node);
+            break;
         }
     }
 }
@@ -150,13 +146,9 @@ void SVTree4::addNode(SVNodePtr _node) {
 //移除节点
 bool SVTree4::removeNode(SVNodePtr _node) {
     bool t_ret = false;
-    if(m_node) {
-        t_ret = m_node->removeChild(_node);
-    }else{
-        for(s32 i=0;i<4;i++){
-            if( m_pTreeNode[i]->removeNode(_node) ) {
-                return true;
-            }
+    for(s32 i=0;i<4;i++){
+        if( m_pTreeNode[i]->removeNode(_node) ) {
+            return true;
         }
     }
     return t_ret;
@@ -164,23 +156,15 @@ bool SVTree4::removeNode(SVNodePtr _node) {
 
 //清理节点
 void SVTree4::clearNode() {
-    if(m_node) {
-        m_node->clearChild();
-    }else{
-        for(s32 i=0;i<4;i++){
-            m_pTreeNode[i]->clearNode();
-        }
+    for(s32 i=0;i<4;i++){
+        m_pTreeNode[i]->clearNode();
     }
 }
 
 bool SVTree4::hasNode(SVNodePtr _node) {
-    if(m_node) {
-        return m_node->hasChild(_node);
-    }else{
-        for(s32 i=0;i<4;i++){
-            if( m_pTreeNode[i]->hasNode(_node) ){
-                return true;
-            }
+    for(s32 i=0;i<4;i++){
+        if( m_pTreeNode[i]->hasNode(_node) ){
+            return true;
         }
     }
     return false;

@@ -236,7 +236,6 @@ void SVFairDataBlur::destroy() {
     m_mtl_e = nullptr;
     m_mtl_back = nullptr;
     if (m_pPassNode) {
-        m_pPassNode->removeFromParent();
         m_pPassNode = nullptr;
     }
     SVRendererPtr t_renderer = mApp->getRenderer();
@@ -393,7 +392,6 @@ void SVFairLtraLow::destroy() {
     m_mtl_a = nullptr;
     m_mtl_back = nullptr;
     if (m_pPassNode) {
-        m_pPassNode->removeFromParent();
         m_pPassNode = nullptr;
     }
 }

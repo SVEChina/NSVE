@@ -50,7 +50,6 @@ void SVDivisonFilter::open() {
 void SVDivisonFilter::close() {
     if (m_isOpen) {
         m_isOpen = false;
-        m_backgroundNode->removeFromParent();
     }
 }
 

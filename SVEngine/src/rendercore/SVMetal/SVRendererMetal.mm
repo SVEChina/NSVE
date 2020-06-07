@@ -6,8 +6,9 @@
 //
 
 #include "SVRendererMetal.h"
-#include "SVResMetalFbo.h"
+#include "SVRTargetMetal.h"
 #include "../../app/SVInst.h"
+#include "../../rendercore/SVRenderMgr.h"
 #include "../../base/SVDataSwap.h"
 
 using namespace sv;
@@ -23,9 +24,22 @@ SVRendererMetal::SVRendererMetal(SVInstPtr _app)
 SVRendererMetal::~SVRendererMetal(){
 }
 
+void SVRendererMetal::initParam(id<MTLDevice> _device,id<MTLDrawable> _target,id<MTLTexture> _targetTex) {
+    m_pDevice = _device;
+    if (m_pDevice == nil) {
+        SV_LOG_INFO("don't support metal !");
+    }
+    m_pCmdQueue = m_pDevice.newCommandQueue;
+    m_pLibrary = [m_pDevice newDefaultLibrary];
+    //创建了对应的主RT
+    SVRTargetMetalPtr t_rt = createRT(_target,_targetTex);
+    if(t_rt){
+        mApp->getRenderMgr()->setMainRT(t_rt);
+    }
+}
+
 //初始化
 void SVRendererMetal::init(s32 _w,s32 _h){
-    //m_pDevice = (__bridge id)_device;//MTLCreateSystemDefaultDevice();
     if (m_pDevice == nil) {
         SV_LOG_INFO("don't support metal !");
     }
@@ -45,6 +59,13 @@ void SVRendererMetal::destroy(){
 
 //重置大小
 void SVRendererMetal::resize(s32 _w,s32 _h) {
+}
+
+//创建RT
+SVRTargetMetalPtr SVRendererMetal::createRT(id<MTLDrawable> _target,id<MTLTexture> _targetTex) {
+    SVRTargetMetalPtr t_rm = MakeSharedPtr<SVRTargetMetal>(mApp);
+    t_rm->init(_target,_targetTex);
+    return t_rm;
 }
 
 //提交纹理

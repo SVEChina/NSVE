@@ -68,7 +68,6 @@ bool SVSharpFilter::create(){
 
 void SVSharpFilter::destroy(){
     if(m_pPassNode){
-        m_pPassNode->removeFromParent();
         m_pPassNode = nullptr;
     }
     m_pPassNode = nullptr;

@@ -41,7 +41,9 @@ void SVRenderPipline::render() {
 //                mApp->getRenderer()->pushVPMat(mApp->getCameraMgr()->getMainCamera()->getVPMatObjUI());
 //            }
 //        }
-        m_rstream_vec[i]->render();
+        
+        //m_rstream_vec[i]->render();
+        
 //        if(mApp->getRenderer()) {
 //            if(i == RST_UI){
 //                mApp->getRenderer()->popProjMat();
@@ -54,9 +56,9 @@ void SVRenderPipline::render() {
 }
 
 void SVRenderPipline::pushRenderCmd(RENDERSTREAMTYPE _rst, SVRenderCmdPtr _rcmd) {
-    if (_rst >= RST_BEGIN && _rst <= RST_END) {
-        m_rstream_vec[_rst]->addSVRenderCmd(_rcmd);
-    }
+//    if (_rst >= RST_BEGIN && _rst <= RST_END) {
+//        m_rstream_vec[_rst]->addSVRenderCmd(_rcmd);
+//    }
 }
 
 void SVRenderPipline::clearRenderCmd(){

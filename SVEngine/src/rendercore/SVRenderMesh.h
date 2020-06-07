@@ -14,119 +14,65 @@
 #include "../base/SVPreDeclare.h"
 
 namespace sv {
-    
-    
-                
-        class SVRenderMesh : public SVRObjBase {
-        public:
-            enum MESHSTATE{
-                MESHDATA_WAIT = 0,
-                MESHDATA_READY,
-                MESHDATA_CREATE
-            };
-            
-            SVRenderMesh(SVInst* _app);
-            
-            ~SVRenderMesh();
-            
-            virtual void create(SVRendererPtr _renderer);
-            
-            virtual void destroy(SVRendererPtr _renderer);
+
+    //定点说一句
+    struct dataTag {
+        void* m_pdata;      //数据指针
+        s32 m_size;         //数据大小
+        s32 m_vertdsp;      //顶点描述
+        void* m_pdatad_up;  //更新的数据
+        s32 m_size_up;      //更新数据大小
+        s32 m_order;
+    };
+
+    /*
+     逻辑和渲染之间的桥梁，其实就是数据和数据描述
+     */
+
+    class SVRenderMesh : public SVGBaseEx {
+    public:
+        SVRenderMesh(SVInstPtr _app);
         
-            virtual void render(SVRendererPtr _renderer);
-            
-            void setIndexPoolType(u32 itype);
-            
-            void setVertexPoolType(u32 vtype);
-            
-            void setVertexType(VFTYPE type);
-            
-            void setSeqMode(s32 _mode);    //数据排列模式
-            
-            void setDrawMethod(DRAWMETHOD drawtype);
-            
-            void setvisible(bool bVis);
-            
-            virtual void setIndexData(SVDataSwapPtr _data,s32 _num);
-            
-            virtual void setVertexDataNum(s32 _vertexNum);
-            
-            virtual void setVertexData(SVDataSwapPtr _data);
-            
-            void setInstanceOffsetData(SVDataSwapPtr _pdata, u32 _instanceCount);
-            
-            virtual void getIndexData(SVDataSwapPtr _data,s32 &_num);
-            
-            virtual void getVertexData(SVDataSwapPtr _data);
-            
-            virtual void getVertexNum(s32 &_vertexNum);
-            
-            void createMesh();
-            
-        protected:
-            virtual void _resetMeshConf();
+        ~SVRenderMesh();
         
-            virtual void _resetMeshData();
-            
-            virtual void _updateConf();
-            
-            virtual void _updateData();
-            
-            SVResVBOPtr m_objVBOPtr;
-            
-            bool  m_created;
-            
-            RENDERMESHCONF m_renderMeshConf;
-            
-            RENDERMESHDATA m_renderMeshData;
-        };
+        virtual void create(SVRendererPtr _renderer);
         
-        //
-        class SVRenderMeshDvid : public SVRenderMesh {
-        public:
-            SVRenderMeshDvid(SVInst* _app);
-            
-            ~SVRenderMeshDvid();
-            
-            virtual void create(SVRendererPtr _renderer);
-            
-            virtual void destroy(SVRendererPtr _renderer);
-            
-            virtual void setVertexDataNum(s32 _vertexNum);
-            
-            virtual void setIndexData(SVDataSwapPtr _data,s32 _num);
-            
-            void setVertex2Data(SVDataSwapPtr _pdata);
-            
-            void setVertex3Data(SVDataSwapPtr _pdata);
-            
-            void setColor0Data(SVDataSwapPtr _pdata);
-            
-            void setColor1Data(SVDataSwapPtr _pdata);
-            
-            void setTexcoord0Data(SVDataSwapPtr _pdata);
-            
-            void setTexcoord1Data(SVDataSwapPtr _pdata);
-            
-            void setTexcoord2Data(SVDataSwapPtr _pdata);
-            
-            void setNormalData(SVDataSwapPtr _pdata);
-            
-            void setTagentData(SVDataSwapPtr _pdata);
-            
-            void setBTagentData(SVDataSwapPtr _pdata);
-            
-            virtual void getIndexData(SVDataSwapPtr _data,s32 &_num);
-              
-            virtual void getVertexData(SVDataSwapPtr _data);
-              
-            virtual void getVertexNum(s32 &_vertexNum);
-        protected:
-            virtual void _resetMeshData();
-        };
-        
+        virtual void destroy(SVRendererPtr _renderer);
     
+        virtual void render(SVRendererPtr _renderer);
+        
+        void setIndexPoolType(u32 itype);
+        
+        void setVertexPoolType(u32 vtype);
+        
+        void setVertexType(VFTYPE type,s32 _channel = 0);
+        
+        void setSeqMode(s32 _mode);    //数据排列模式
+        
+        void setDrawMethod(DRAWMETHOD drawtype);
+        
+        virtual void setIndexData(SVDataSwapPtr _data,s32 _num);
+        
+        virtual void setVertexData(SVDataSwapPtr _data,s32 _channel = 0,VFTYPE type = E_VF_BASE);
+        
+        virtual void setVertNum(s32 _vertexNum);
+        
+        void setInstanceOffsetData(SVDataSwapPtr _pdata, u32 _instanceCount);
+        
+        void createMesh();
+        
+    public:
+        //索引数据
+        dataTag m_index;
+        //顶点数据
+        SVArray<dataTag> m_vertPool;
+        //更新数据
+        dataTag m_vert_up;
+        //不同内核的mesh
+        SVRMeshPtr m_pRMesh;
+    };
     
+
 }//!namespace sv
 
 

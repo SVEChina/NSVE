@@ -22,10 +22,8 @@ SVResFBO:: ~SVResFBO(){
 }
 
 void SVResFBO::create(SVRendererPtr _renderer){
-    
 }
 
 void SVResFBO::destroy(SVRendererPtr _renderer){
-    
 }
 

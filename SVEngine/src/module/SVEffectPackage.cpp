@@ -109,7 +109,6 @@ void SVEffectUnit::destroy(){
         if (t_spineNode) {
             t_spineNode->stop();
         }
-        m_node->removeFromParent();
     }
     if (m_personAct) {
         m_personAct->stop();

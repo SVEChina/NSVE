@@ -91,10 +91,6 @@ bool SVStreamOut::openOutStream() {
 
 //关闭输出输出流
 void SVStreamOut::closeOutStream() {
-    if(m_pFrameOut) {
-        m_pFrameOut->removeFromParent();
-        m_pFrameOut = nullptr;
-    }
 }
 
 bool SVStreamOut::isOpen() {
@@ -193,7 +189,6 @@ void SVStreamOut::createOutStream(cptr8 _name, s32 _type, s32 _format, s32 _widt
 
 void SVStreamOut::destroyOutStream() {
     if(m_pFrameOut) {
-        m_pFrameOut->removeFromParent();
         m_pFrameOut = nullptr; 
     }
 }
@@ -206,9 +201,6 @@ void SVStreamOut::active() {
 }
 
 void SVStreamOut::unactive() {
-    if(m_pFrameOut){
-        m_pFrameOut->removeFromParent();
-    }
 }
 
 /*************************输出任务***************************/

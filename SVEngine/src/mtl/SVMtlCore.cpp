@@ -130,27 +130,27 @@ void SVMtlCore::reloadShader(cptr8 _shader){
 
 //渲染更新(跑渲染参数)
 bool SVMtlCore::submitMtl() {
-//    //单线程(交换改变池)
-//    swap();
-    SVRendererPtr t_renderer = mApp->getRenderer();
-    if(!t_renderer)
-        return false;
-    if (!m_pShader){
-        _loadShader();//加载shader
-        if(!m_pShader){
-            SV_LOG_INFO("SHADER ERROR %s \n",m_mtlname.c_str());
-            return false;
-        }
-    }
-    _refreshMatrix();
-    _refreshModify();
-    //提交shader
-//    if(m_pShader) {
-//        m_pShader->active(t_renderer);
+////    //单线程(交换改变池)
+////    swap();
+//    SVRendererPtr t_renderer = mApp->getRenderer();
+//    if(!t_renderer)
+//        return false;
+//    if (!m_pShader){
+//        _loadShader();//加载shader
+//        if(!m_pShader){
+//            SV_LOG_INFO("SHADER ERROR %s \n",m_mtlname.c_str());
+//            return false;
+//        }
 //    }
-    _submitUniform(t_renderer);
-    _submitState(t_renderer);
-    _submitMtl(t_renderer);
+//    _refreshMatrix();
+//    _refreshModify();
+//    //提交shader
+////    if(m_pShader) {
+////        m_pShader->active(t_renderer);
+////    }
+//    _submitUniform(t_renderer);
+//    _submitState(t_renderer);
+//    _submitMtl(t_renderer);
     return true;
 }
 

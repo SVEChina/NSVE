@@ -85,9 +85,6 @@ void SVMark::open(){
 
 void SVMark::close() {
     SVModuleBase::close();
-    if (m_bmFontNode) {
-        m_bmFontNode->removeFromParent();
-    }
     if (m_actAlphaUnit) {
         m_actAlphaUnit->stop();
         m_actAlphaUnit->removeFromActionMgr();

@@ -11,7 +11,7 @@
 #include "../basesys/SVSceneMgr.h"
 #include "../mtl/SVMtlRGB2YUV.h"
 #include "../basesys/SVConfig.h"
-#include "../rendercore/SVRenderTarget.h"
+#include "../rendercore/SVRTarget.h"
 #include "../rendercore/SVRenderTexture.h"
 #include "../rendercore/SVRenderObject.h"
 #include "../rendercore/SVRenderMgr.h"

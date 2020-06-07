@@ -41,7 +41,7 @@ SVBMFontNode::SVBMFontNode(SVInst *_app)
     m_fontSize = 1.0f;
     m_pRenderVertex = MakeSharedPtr<SVDataSwap>();
     m_pRenderObj = MakeSharedPtr<SVRenderObject>();
-    m_pMesh = MakeSharedPtr<SVRenderMesh>(mApp);
+    //m_pMesh = MakeSharedPtr<SVRenderMesh>(mApp);
     m_pMesh->setVertexPoolType(GL_DYNAMIC_DRAW);
     m_spacing = 0.0f;
     _genMesh();
@@ -135,14 +135,14 @@ f32 SVBMFontNode::getWidth(){
     }
     f32 t_scaleX = 1.0f;
     SVNodePtr t_curNode = THIS_TO_SHAREPTR(SVBMFontNode);
-    while (t_curNode) {
-        t_scaleX = t_scaleX * t_curNode->getScale().x;
-        if (t_curNode->getParent()) {
-            t_curNode = t_curNode->getParent();
-        } else {
-            break;
-        }
-    }
+//    while (t_curNode) {
+//        t_scaleX = t_scaleX * t_curNode->getScale().x;
+//        if (t_curNode->getParent()) {
+//            t_curNode = t_curNode->getParent();
+//        } else {
+//            break;
+//        }
+//    }
     f32 t_total_w = m_font->getTextWidth(m_text.c_str(), m_fontSize);
     t_total_w = t_total_w + (m_text.size() - 1)*m_spacing;
     return t_total_w*t_scaleX;
@@ -154,14 +154,6 @@ f32 SVBMFontNode::getHeight(){
     }
     f32 t_scaleY = 1.0f;
     SVNodePtr t_curNode = THIS_TO_SHAREPTR(SVBMFontNode);
-    while (t_curNode) {
-        t_scaleY = t_scaleY * t_curNode->getScale().y;
-        if (t_curNode->getParent()) {
-            t_curNode = t_curNode->getParent();
-        } else {
-            break;
-        }
-    }
     return m_font->getTextHeight(m_text.c_str(), m_fontSize)*t_scaleY;
 }
 
@@ -305,7 +297,7 @@ void SVBMFontNode::_refresh(){
     }
     s32 t_len = i;
     m_pRenderVertex->writeData(&tVerts[0], sizeof(V2_C_T0) * t_len * 6);
-    m_pMesh->setVertexDataNum(t_len * 6);
+    m_pMesh->setVertNum(t_len * 6);
     m_pMesh->setVertexData(m_pRenderVertex);
 }
 
@@ -368,7 +360,7 @@ void SVBMFontNode::_genMesh(){
     }
     //
     m_pRenderVertex->writeData(&t_Verts[0], sizeof(V2_C_T0) * SV_BMFONT_MAX_NUM * 6);
-    m_pMesh->setVertexDataNum(SV_BMFONT_MAX_NUM * 6);
+    m_pMesh->setVertNum(SV_BMFONT_MAX_NUM * 6);
     m_pMesh->setVertexData(m_pRenderVertex);
     m_pMesh->setVertexType(E_VF_V2_C_T0);
     m_pMesh->setDrawMethod(E_DM_TRIANGLES);

@@ -60,16 +60,26 @@ enum SV_THREAD_STATE {
 };
 
 //sv渲染器类型
-enum SV_RENDERER_TYPE {
-    E_RENDERER_GLES,
-    E_RENDERER_VUNKAN,
-    E_RENDERER_METAL
+enum SV_RM_TYPE {
+    E_M_GLES,
+    E_M_VUNKAN,
+    E_M_METAL
 };
 
 //设计适配模式
 enum SV_DESIGN_ADAPT_MODE {
     E_APT_M_BODER = 1,   //留空白模式
     E_APT_M_FULL         //全屏铺满模式
+};
+
+//技术类型
+enum SV_TECH_TYPE {
+    SV_E_TECH_VS = 0x00000001,
+    SV_E_TECH_FS = 0x00000010,
+    SV_E_TECH_GS = 0x00000100,
+    SV_E_TECH_TSC = 0x00001000,
+    SV_E_TECH_TSD = 0x00010000,
+    SV_E_TECH_CS = 0x00100000,
 };
 
 enum SV_OUTSTEAMFORMATE {

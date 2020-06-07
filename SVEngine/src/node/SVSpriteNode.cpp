@@ -95,28 +95,20 @@ f32 SVSpriteNode::getRelativeHeight(){
 f32 SVSpriteNode::getWidth(){
     f32 t_scaleX = 1.0f;
     SVNodePtr t_curNode = THIS_TO_SHAREPTR(SVSpriteNode);
-    while (t_curNode) {
-        t_scaleX = t_scaleX * t_curNode->getScale().x;
-        if (t_curNode->getParent()) {
-            t_curNode = t_curNode->getParent();
-        } else {
-            break;
-        }
-    }
     return m_width*t_scaleX;
 }
 
 f32 SVSpriteNode::getHeight(){
     f32 t_scaleY = 1.0f;
-    SVNodePtr t_curNode = THIS_TO_SHAREPTR(SVSpriteNode);
-    while (t_curNode) {
-        t_scaleY = t_scaleY * t_curNode->getScale().y;
-        if (t_curNode->getParent()) {
-            t_curNode = t_curNode->getParent();
-        } else {
-            break;
-        }
-    }
+//    SVNodePtr t_curNode = THIS_TO_SHAREPTR(SVSpriteNode);
+//    while (t_curNode) {
+//        t_scaleY = t_scaleY * t_curNode->getScale().y;
+//        if (t_curNode->getParent()) {
+//            t_curNode = t_curNode->getParent();
+//        } else {
+//            break;
+//        }
+//    }
     return m_height*t_scaleY;
 }
 

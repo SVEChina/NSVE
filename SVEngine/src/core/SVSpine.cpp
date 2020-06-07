@@ -150,7 +150,7 @@ void SVSpine::init(spSkeletonData *skedata, spAtlas *atlas, bool ownsSkeletonDat
         spSlot *t_slot = m_pSkeleton->drawOrder[i];
         SpineMeshDataPtr pMeshData = MakeSharedPtr<SpineMeshData>();
         pMeshData->m_blendMode = t_slot->data->blendMode;
-        pMeshData->m_pRenderMesh = MakeSharedPtr<SVRenderMesh>(mApp);
+        //pMeshData->m_pRenderMesh = MakeSharedPtr<SVRenderMesh>(mApp);
         pMeshData->m_pRenderMesh->setVertexPoolType(GL_DYNAMIC_DRAW);
         pMeshData->m_pRenderMesh->setIndexPoolType(GL_DYNAMIC_DRAW);
         pMeshData->m_pRenderMesh->createMesh();
@@ -249,7 +249,7 @@ void SVSpine::update(f32 deltaTime) {
             }
             default:;
         }
-        r_meshdata->m_pRenderMesh->setvisible(true);
+//        r_meshdata->m_pRenderMesh->setvisible(true);
         //更新mesh
         r_meshdata->m_pRenderMesh->setVertexType(E_VF_V2_C_T0);
         m_preMultAlpha = true;
@@ -298,14 +298,14 @@ void SVSpine::update(f32 deltaTime) {
         }
         s32 t_len = (s32) (sizeof(V2_C_T0) * pMeshData->m_aRenderVecData.size());
         if (t_len == 0) {
-            pMeshData->m_pRenderMesh->setvisible(false);
+            //pMeshData->m_pRenderMesh->setvisible(false);
         } else {
-            pMeshData->m_pRenderMesh->setvisible(true);
+            //pMeshData->m_pRenderMesh->setvisible(true);
             pMeshData->m_pRenderVertex->writeData(pMeshData->m_aRenderVecData.get(),
                                                   t_len);
             pMeshData->m_pRenderIndex->writeData(pMeshData->m_aRenderIndexData.get(),
                                                  pMeshData->m_indexCount *sizeof(u16));
-            pMeshData->m_pRenderMesh->setVertexDataNum(pMeshData->m_vertexCount);
+            pMeshData->m_pRenderMesh->setVertNum(pMeshData->m_vertexCount);
             pMeshData->m_pRenderMesh->setVertexData(pMeshData->m_pRenderVertex);
             pMeshData->m_pRenderMesh->setIndexData(pMeshData->m_pRenderIndex,
                                                    pMeshData->m_indexCount);

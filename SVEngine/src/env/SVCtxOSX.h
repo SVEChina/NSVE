@@ -40,9 +40,7 @@ namespace sv {
         SVCtxOSXMetal();
         
         ~SVCtxOSXMetal();
-        
-        virtual SVRendererPtr createRenderer(SVInstPtr _handle);
-        
+
         virtual bool activeContext();
         
         virtual bool swap();

@@ -31,8 +31,8 @@ SVFaceCoord::SVFaceCoord(SVInst *_app)
     m_activePt = 0;
     m_size = 5.0f;
     m_aabbBox.clear();
-    m_pMesh = MakeSharedPtr<SVRenderMesh>(mApp);
-    m_pMeshAct = MakeSharedPtr<SVRenderMesh>(mApp);
+    //m_pMesh = MakeSharedPtr<SVRenderMesh>(mApp);
+    //m_pMeshAct = MakeSharedPtr<SVRenderMesh>(mApp);
     m_pRObjNor = MakeSharedPtr<SVRenderObject>();
     m_pRObjAct = MakeSharedPtr<SVRenderObject>();
 }
@@ -90,8 +90,7 @@ bool SVFaceCoord::loadCoord(cptr8 _fname) {
     if( item_param.HasMember("design_img_height") ) {
         m_height = item_param["design_img_height"].GetInt();
     }
-    //清空子节点
-    clearChild();
+
     //
     m_aabbBox.clear();
     RAPIDJSON_NAMESPACE::Value &item_data = doc["data"];
@@ -110,7 +109,6 @@ bool SVFaceCoord::loadCoord(cptr8 _fname) {
         bmNode->setFontSize(0.25f);
         bmNode->setPosition(t_x,t_y-m_size*0.5f,0.0);
         bmNode->setRSType(m_rsType);
-        addChild(bmNode);
     }
     return true;
 }
@@ -188,13 +186,13 @@ void SVFaceCoord::refresh() {
     }
     //普通
     m_pMesh->setVertexType(E_VF_V3_T0);
-    m_pMesh->setVertexDataNum(t_count*6);
+    m_pMesh->setVertNum(t_count*6);
     m_pMesh->setVertexData(t_dataswap);
     m_pMesh->setDrawMethod(E_DM_TRIANGLES);
     m_pMesh->createMesh();
     //act
     m_pMeshAct->setVertexType(E_VF_V3_T0);
-    m_pMeshAct->setVertexDataNum(t_count_act*6);
+    m_pMeshAct->setVertNum(t_count_act*6);
     m_pMeshAct->setVertexData(t_dataswap_act);
     m_pMeshAct->setDrawMethod(E_DM_TRIANGLES);
     m_pMeshAct->createMesh();

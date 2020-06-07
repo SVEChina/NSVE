@@ -64,9 +64,6 @@ bool SVADFilterBase::create(){
 }
 
 void SVADFilterBase::destroy(){
-    if(m_pPassNode){
-        m_pPassNode->removeFromParent();
-    }
     SVRendererPtr t_renderer = mApp->getRenderer();
     if(t_renderer){
         t_renderer->destroySVTex(E_TEX_FILTER_1);

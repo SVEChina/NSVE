@@ -16,9 +16,15 @@
 #include "../base/SVStack.h"
 namespace sv {
     
-    class SVRenderMgr : public SVGBase {
+    /*
+     负责构建渲染器数据用的
+     1.包含材质排序
+     2.渲染指令的推入
+     */
+
+    class SVRenderMgr : public SVGBaseEx {
     public:
-        SVRenderMgr(SVInst *_app);
+        SVRenderMgr(SVInstPtr _app);
         
         ~SVRenderMgr();
         
@@ -26,40 +32,35 @@ namespace sv {
         
         void destroy();
         
+        void setMainRT(SVRTargetPtr _rt);
+        
         void clear();
         
         void render();
-        
-        void clearScreen();
-        
+
         void swapData();
-        
-        void recycleRes();  //回收GL资源
-        
-        SVRenderMeshPtr createMeshRObj();
-        
-        void setRenderer(SVRendererPtr _renderer);  //设置渲染器
-        
-        SVRendererPtr getRenderer();    //获取渲染器
-        
-        SVRenderScenePtr getRenderScene();
-        
+
         void pushRCmdCreate(SVRObjBasePtr _robj);
         
-        void setRenderTarget(cptr8 _name,SVRenderTargetPtr _rt);
+        void addRTarget(SVRTargetPtr _rt,bool _pre);
         
-        SVRenderTargetPtr getRenderTarget(cptr8 _name);
+        SVRTargetPtr getRTarget(cptr8 _name);
+
     
     protected:
+        void _sort();
         void _adapt();
         s32 m_adaptMode;
-        //渲染器
-        SVRendererPtr m_pRenderer;
         //渲染流(缓存流)
-        SVRenderStreamPtr m_RStreamCache;
-        //
         SVLockPtr m_renderLock;
         SVLockPtr m_logicLock;
+        
+        SVArray<SVRTargetPtr> m_preRT; //前向RT
+        SVArray<SVRTargetPtr> m_afterRT; //后向RT
+        SVRTargetPtr m_mainRT; //主RT
+        
+    public:
+        SVRenderScenePtr getRenderScene();
     };
 
 

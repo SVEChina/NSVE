@@ -12,7 +12,7 @@
 #include "../mtl/SVTexture.h"
 #include "../mtl/SVTextureIOS.h"
 #include "SVRenderMgr.h"
-#include "SVRenderTarget.h"
+#include "SVRTarget.h"
 #include "SVRenderTexture.h"
 #include "SVRObjBase.h"
 #include "SVRenderState.h"
@@ -52,15 +52,6 @@ void SVRenderer::destroy(){
     m_stack_view.destroy();
     m_stack_vp.destroy();
     m_resLock = nullptr;
-}
-
-//
-void SVRenderer::renderBegin() {
-}
-
-//
-void SVRenderer::renderEnd() {
-    clearMatStack();
 }
 
 //获取状态

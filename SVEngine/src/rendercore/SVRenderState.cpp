@@ -7,7 +7,7 @@
 
 
 #include "SVRenderState.h"
-#include "SVRenderTarget.h"
+#include "SVRTarget.h"
 #include "../app/SVInst.h"
 #include "../basesys/SVSceneMgr.h"
 

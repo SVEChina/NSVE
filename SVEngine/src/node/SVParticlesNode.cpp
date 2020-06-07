@@ -20,31 +20,31 @@ using namespace sv;
 SVParticlesNode::SVParticlesNode(SVInst *_app)
 :SVNode(_app) {
     ntype = "SVParticlesNode";
-    m_drawBox = false;
-    m_canSelect = true;
-    m_rsType = RST_SOLID_3D;
-    m_pParticles = MakeSharedPtr<SVParticles>(mApp);
-    m_pParticlesWorld = MakeSharedPtr<SVParticlesWorld>(mApp);
-    m_pParticles->setSeed(mApp->m_pGlobalParam->getRandom());
-    m_pParticles->setWorld(m_pParticlesWorld);
-    physical_mask = 1;
-    emitter_sync = 1;
-    emitter_velocity = Vec3_zero;
-    world_offset = Vec3_zero;
-    num_triangles = 0;
-    bound_box = m_pParticles->getSVBoundBox();
-    //
-    m_mtl_particle = MakeSharedPtr<SVMtlParticleAni>(mApp);
-    m_pMesh = _app->getRenderMgr()->createMeshRObj();
-    m_pMesh->createMesh();
-    m_pMesh->setVertexType(E_VF_V3_PARTICLE);
-    m_pMesh->setDrawMethod(E_DM_TRIANGLES);
-    //
-    m_pVertData = MakeSharedPtr<SVDataSwap>( );
-    m_pIndexData = MakeSharedPtr<SVDataSwap>();
-    m_pRenderObj = MakeSharedPtr<SVRenderObject>();
-    m_atten = mApp->getTexMgr()->getTexture("svres/textures/billboards_base_specular.png",true);
-    m_diffuse = mApp->getTexMgr()->getTexture("svres/textures/a_xuehua_00.png",true);
+//    m_drawBox = false;
+//    m_canSelect = true;
+//    m_rsType = RST_SOLID_3D;
+//    m_pParticles = MakeSharedPtr<SVParticles>(mApp);
+//    m_pParticlesWorld = MakeSharedPtr<SVParticlesWorld>(mApp);
+//    m_pParticles->setSeed(mApp->m_pGlobalParam->getRandom());
+//    m_pParticles->setWorld(m_pParticlesWorld);
+//    physical_mask = 1;
+//    emitter_sync = 1;
+//    emitter_velocity = Vec3_zero;
+//    world_offset = Vec3_zero;
+//    num_triangles = 0;
+//    bound_box = m_pParticles->getSVBoundBox();
+//    //
+//    m_mtl_particle = MakeSharedPtr<SVMtlParticleAni>(mApp);
+//    m_pMesh = _app->getRenderMgr()->createMeshRObj();
+//    m_pMesh->createMesh();
+//    m_pMesh->setVertexType(E_VF_V3_PARTICLE);
+//    m_pMesh->setDrawMethod(E_DM_TRIANGLES);
+//    //
+//    m_pVertData = MakeSharedPtr<SVDataSwap>( );
+//    m_pIndexData = MakeSharedPtr<SVDataSwap>();
+//    m_pRenderObj = MakeSharedPtr<SVRenderObject>();
+//    m_atten = mApp->getTexMgr()->getTexture("svres/textures/billboards_base_specular.png",true);
+//    m_diffuse = mApp->getTexMgr()->getTexture("svres/textures/a_xuehua_00.png",true);
 }
 
 SVParticlesNode::~SVParticlesNode() {
@@ -260,7 +260,7 @@ void SVParticlesNode::render() {
 //        //更新顶点数据
 //        m_pVertData->writeData(m_pParticles->pVertex,
 //                               m_pParticles->m_vertexBufNum*sizeof(V3_PARTICLE));
-//        m_pMesh->setVertexDataNum(m_pParticles->m_vertexBufNum);
+//        m_pMesh->setVertNum(m_pParticles->m_vertexBufNum);
 //        m_pMesh->setVertexData(m_pVertData);
 //    }
 //    //

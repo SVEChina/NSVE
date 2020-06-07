@@ -25,16 +25,13 @@ namespace sv {
             
             ~SVRenderCmd();
             
-            void setRenderer(SVRendererPtr _renderer);
-            
             virtual void render();
             
             SVString mTag;
             
-        protected:
-            SVRendererPtr m_pRenderer;
         };
         
+        //
         class SVRenderCmdTransGPU : public SVRenderCmd {
         public:
             SVRenderCmdTransGPU(SVTransPtr _trans);

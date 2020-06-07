@@ -11,15 +11,12 @@
 #include "../SVRenderer.h"
 #import <Foundation/Foundation.h>
 #import <AudioToolbox/AudioToolbox.h>
-//#import <QuartzCore/CAMetalLayer.h>
 #import <Metal/Metal.h>
 #import <Metal/MTLRenderCommandEncoder.h>
 #import <MetalKit/MetalKit.h>
 
 namespace sv {
-    
-    
-    
+
         /*
         Metal渲染器
         */
@@ -30,12 +27,22 @@ namespace sv {
             
             ~SVRendererMetal();
             
+            void initParam(id<MTLDevice> _device,id<MTLDrawable> _target,id<MTLTexture> _targetTex);
+            
             //初始化
             virtual void init(s32 _w,s32 _h);
             //销毁
             virtual void destroy();
             //重置大小
             virtual void resize(s32 _w,s32 _h);
+            
+        public:
+            /*渲染器当中 创建资源的接口*/
+            //创建RT接口
+            SVRTargetMetalPtr createRT(id<MTLDrawable> _target,id<MTLTexture> _targetTex);
+            
+            //创建buf接口
+            
             
         public:
             //renderder interface

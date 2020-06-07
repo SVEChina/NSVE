@@ -13,9 +13,9 @@
 #include "../act/SVActDeclare.h"
 namespace sv {
     
-    class SVGlobalMgr : public SVGBase {
+    class SVGlobalMgr : public SVGBaseEx {
     public:
-        SVGlobalMgr(SVInst *_app);
+        SVGlobalMgr(SVInstPtr _app);
         
         ~SVGlobalMgr();
         
@@ -28,15 +28,12 @@ namespace sv {
         void timeTag(bool _clear,cptr8 _tag);
         
     public:
-        //渲染器
-        //SVRendererPtr m_pRenderer;
-        //渲染技术
-        SVRenderMgrPtr m_pRenderMgr;
+        /*基础模块*/
+        SVRenderMgrPtr m_pRenderMgr; //渲染部分
+        SVFileMgrPtr m_pFileMgr; //文件部分
+        SVConfigPtr m_pConfig; //配置部分
         
-        //文件部分
-        SVFileMgrPtr m_pFileMgr;
-        //配置部分
-        SVConfigPtr m_pConfig;
+        /*可删减模块*/
         //事件部分
         SVEventMgrPtr m_pEventMgr;
         //基础系统

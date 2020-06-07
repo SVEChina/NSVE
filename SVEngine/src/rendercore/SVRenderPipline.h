@@ -11,28 +11,27 @@
 #include "../base/SVGBase.h"
 #include "SVRenderDef.h"
 
-//渲染管线
-
 namespace sv {
-    
-    
+    /*
+     渲染管线
+     */
 
-        class SVRenderPipline : public SVGBase {
-        public:
-            SVRenderPipline(SVInst *_app);
-            
-            ~SVRenderPipline();
-            
-            void render();
-            
-            void pushRenderCmd(RENDERSTREAMTYPE _rst, SVRenderCmdPtr _rcmd);
-            
-            void clearRenderCmd();
-            
-        protected:
-            typedef SVArray<SVRenderStreamPtr> RSTREAMVEC;
-            RSTREAMVEC m_rstream_vec;
-        };
+    class SVRenderPipline : public SVGBase {
+    public:
+        SVRenderPipline(SVInst *_app);
+        
+        ~SVRenderPipline();
+        
+        void render();
+        
+        void pushRenderCmd(RENDERSTREAMTYPE _rst, SVRenderCmdPtr _rcmd);
+        
+        void clearRenderCmd();
+        
+    protected:
+        typedef SVArray<SVRenderStreamPtr> RSTREAMVEC;
+        RSTREAMVEC m_rstream_vec;
+    };
         
     
     

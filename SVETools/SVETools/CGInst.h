@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <AppKit/NSMenu.h>
+#import <QuartzCore/CAMetalLayer.h>
 #import "CGState.h"
 
 @class CGLogic;
@@ -21,6 +22,12 @@
 
 -(void)cgDestroy;
 //
-//-(void)getSVE;
+-(void*)getSVE;
+//
+-(void)createRM:(id<MTLDevice>)_device drawable:(id<CAMetalDrawable>)_drawable;
+//
+-(void)destroyRM;
+//
+-(void)render;
 
 @end
