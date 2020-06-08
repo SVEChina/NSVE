@@ -11,6 +11,21 @@
 #include "../base/SVDef.h"
 #include "SVRenderDeclare.h"
 
+
+//纹理描述
+struct SVTexDsp {
+    s32 m_width;
+    s32 m_height;
+    s32 m_dfmt;     //data-formate
+    bool m_mipmap;
+    bool m_cube;
+};
+
+//数据描述
+struct SVDataDsp {
+    
+};
+
 /*
  .背景（sky）
  .美颜（磨皮，美白，红润等）
