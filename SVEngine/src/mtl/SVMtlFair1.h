@@ -12,8 +12,6 @@
 
 namespace sv {
     
-    
-        
         //
         class SVMtlFilterBrilaterl : public SVMtlCore {
         public:

@@ -40,9 +40,12 @@ namespace sv {
             /*渲染器当中 创建资源的接口*/
             //创建RT接口
             SVRTargetMetalPtr createRT(id<MTLDrawable> _target,id<MTLTexture> _targetTex);
-            
-            //创建buf接口
-            
+            //创建纹理接口
+            s32 createTexIn(s32 _texid,SVTexDsp _tdsp);
+            s32 createTexOut(SVTexDsp _tdsp,void* _pdata);
+            //s32 createTexCubeOut(s32 _w,s32 _h,s32 _ifmt,s32 _dfmt,s32 _mipmap,s32 _size,void* _pdata);
+            s32 createBuf(s32 _len);                //return buf index
+            s32 createBuf(s32 _len,void* _data);    //return buf index
             
         public:
             //renderder interface
@@ -120,7 +123,10 @@ namespace sv {
             id<MTLCommandQueue> m_pCmdQueue;
             id<MTLLibrary> m_pLibrary;
             id<MTLRenderCommandEncoder> m_pCurEncoder;
-            //MTLRenderPipelineDescriptor *m_pRPDes;
+            //
+            SVArray< id<MTLTexture> > m_texPoolIn;      //内部纹理池 内部使用的纹理
+            SVArray< id<MTLTexture> > m_texPoolOut;     //外部纹理池
+            SVArray< id<MTLBuffer> > m_bufPool;         //buf池
         };
         
     
