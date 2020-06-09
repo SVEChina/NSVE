@@ -16,6 +16,8 @@
 		028B5C61248F62A4002E6A9D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 028B5C60248F62A4002E6A9D /* main.m */; };
 		028B5C97248F818A002E6A9D /* CGInst.mm in Sources */ = {isa = PBXBuildFile; fileRef = 028B5C96248F818A002E6A9D /* CGInst.mm */; };
 		028B5C99248F855B002E6A9D /* libSVEngine_Static.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 028B5C90248F8083002E6A9D /* libSVEngine_Static.a */; };
+		028B5C9C248F8C2F002E6A9D /* CMetalView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 028B5C9B248F8C2F002E6A9D /* CMetalView.mm */; };
+		028B5C9E248F8C6A002E6A9D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 028B5C9D248F8C6A002E6A9D /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +67,9 @@
 		028B5C85248F8082002E6A9D /* SVEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SVEngine.xcodeproj; path = ../../SVEngine/platIOS/SVEngine.xcodeproj; sourceTree = "<group>"; };
 		028B5C95248F818A002E6A9D /* CGInst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CGInst.h; sourceTree = "<group>"; };
 		028B5C96248F818A002E6A9D /* CGInst.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = CGInst.mm; sourceTree = "<group>"; };
+		028B5C9A248F8C2F002E6A9D /* CMetalView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CMetalView.h; sourceTree = "<group>"; };
+		028B5C9B248F8C2F002E6A9D /* CMetalView.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = CMetalView.mm; sourceTree = "<group>"; };
+		028B5C9D248F8C6A002E6A9D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				028B5C9E248F8C6A002E6A9D /* QuartzCore.framework in Frameworks */,
 				028B5C99248F855B002E6A9D /* libSVEngine_Static.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -108,6 +114,8 @@
 				028B5C55248F62A1002E6A9D /* ViewController.m */,
 				028B5C95248F818A002E6A9D /* CGInst.h */,
 				028B5C96248F818A002E6A9D /* CGInst.mm */,
+				028B5C9A248F8C2F002E6A9D /* CMetalView.h */,
+				028B5C9B248F8C2F002E6A9D /* CMetalView.mm */,
 				028B5C57248F62A1002E6A9D /* Main.storyboard */,
 				028B5C5A248F62A4002E6A9D /* Assets.xcassets */,
 				028B5C5C248F62A4002E6A9D /* LaunchScreen.storyboard */,
@@ -131,6 +139,7 @@
 		028B5C98248F855B002E6A9D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				028B5C9D248F8C6A002E6A9D /* QuartzCore.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -242,6 +251,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				028B5C9C248F8C2F002E6A9D /* CMetalView.mm in Sources */,
 				028B5C56248F62A1002E6A9D /* ViewController.m in Sources */,
 				028B5C50248F62A1002E6A9D /* AppDelegate.m in Sources */,
 				028B5C61248F62A4002E6A9D /* main.m in Sources */,
