@@ -43,7 +43,7 @@ namespace sv {
             
             virtual void update(f32 dt);
             
-            virtual bool submitMtl();
+            virtual s32 submitMtl();
             
             virtual void recoverMtl();
             
@@ -99,9 +99,28 @@ namespace sv {
             void setStencilZfail(s32 _method);
             
             void setStencilSfail(s32 _method);
-            
             //
             void reloadShader(cptr8 _shader);
+            
+            
+        public:
+            //uniform 参数
+            struct InParam {
+                SVString m_name;
+                SVString m_type;
+                void* _pdata;
+            };
+            //参数表
+            SVArray<InParam> m_paramTbl;
+            
+            //设置参数
+            void setParam(cptr8 _param,cptr8 _type,void* _data);
+            //获取参数
+            void getParam(cptr8 _param);
+            //获取参数类型
+            cptr8 getParamType(cptr8 _param);
+            
+            //状态部分 tex,blend,stencil,alpha
             
         public:
             SVString m_mtlname;
@@ -116,6 +135,7 @@ namespace sv {
             SVAlphaParam m_LogicParamAlpha;              //alpha参数
             SVSizeParam m_LogicParamSize;                //尺寸参数
             SVZOffParam m_LogicParamZOff;                //Z偏移参数
+
             
         protected:
             void _loadShader();

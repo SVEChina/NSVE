@@ -5402,14 +5402,6 @@
 		5FD9B001225B497800522317 /* SVPenStroke.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FD9AFFE225B286200522317 /* SVPenStroke.h */; };
 		5FD9B002225B497900522317 /* SVPenStroke.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FD9AFFE225B286200522317 /* SVPenStroke.h */; };
 		5FD9B003225B497900522317 /* SVPenStroke.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FD9AFFE225B286200522317 /* SVPenStroke.h */; };
-		5FD9B00F225F589600522317 /* SVResMetal.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5FD9B00D225F589500522317 /* SVResMetal.mm */; };
-		5FD9B010225F589600522317 /* SVResMetal.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FD9B00E225F589600522317 /* SVResMetal.h */; };
-		5FD9B0112261E67E00522317 /* SVResMetal.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5FD9B00D225F589500522317 /* SVResMetal.mm */; };
-		5FD9B0122261E67F00522317 /* SVResMetal.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5FD9B00D225F589500522317 /* SVResMetal.mm */; };
-		5FD9B0132261E68000522317 /* SVResMetal.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5FD9B00D225F589500522317 /* SVResMetal.mm */; };
-		5FD9B0142261E68400522317 /* SVResMetal.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FD9B00E225F589600522317 /* SVResMetal.h */; };
-		5FD9B0152261E68400522317 /* SVResMetal.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FD9B00E225F589600522317 /* SVResMetal.h */; };
-		5FD9B0162261E68500522317 /* SVResMetal.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FD9B00E225F589600522317 /* SVResMetal.h */; };
 		5FD9B019226202A400522317 /* SVResShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FD9B017226202A300522317 /* SVResShader.cpp */; };
 		5FD9B01A226202A400522317 /* SVResShader.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FD9B018226202A400522317 /* SVResShader.h */; };
 		5FD9B01B2262048B00522317 /* SVResShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FD9B017226202A300522317 /* SVResShader.cpp */; };
@@ -5434,14 +5426,6 @@
 		5FD9B03222644E9400522317 /* SVResMetalTex.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FD9B02C22644E9300522317 /* SVResMetalTex.h */; };
 		5FD9B03322644E9400522317 /* SVResMetalTex.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FD9B02C22644E9300522317 /* SVResMetalTex.h */; };
 		5FD9B03422644E9400522317 /* SVResMetalTex.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FD9B02C22644E9300522317 /* SVResMetalTex.h */; };
-		5FD9B0372264660900522317 /* SVResMetalFbo.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5FD9B0352264660800522317 /* SVResMetalFbo.mm */; };
-		5FD9B0382264660900522317 /* SVResMetalFbo.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5FD9B0352264660800522317 /* SVResMetalFbo.mm */; };
-		5FD9B0392264660900522317 /* SVResMetalFbo.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5FD9B0352264660800522317 /* SVResMetalFbo.mm */; };
-		5FD9B03A2264660900522317 /* SVResMetalFbo.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5FD9B0352264660800522317 /* SVResMetalFbo.mm */; };
-		5FD9B03B2264660900522317 /* SVResMetalFbo.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FD9B0362264660900522317 /* SVResMetalFbo.h */; };
-		5FD9B03C2264660900522317 /* SVResMetalFbo.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FD9B0362264660900522317 /* SVResMetalFbo.h */; };
-		5FD9B03D2264660900522317 /* SVResMetalFbo.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FD9B0362264660900522317 /* SVResMetalFbo.h */; };
-		5FD9B03E2264660900522317 /* SVResMetalFbo.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FD9B0362264660900522317 /* SVResMetalFbo.h */; };
 		5FD9B04122647D2A00522317 /* SVResVBO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FD9B03F22647D2900522317 /* SVResVBO.cpp */; };
 		5FD9B04222647D2A00522317 /* SVResVBO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FD9B03F22647D2900522317 /* SVResVBO.cpp */; };
 		5FD9B04322647D2A00522317 /* SVResVBO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FD9B03F22647D2900522317 /* SVResVBO.cpp */; };
@@ -6827,16 +6811,12 @@
 		5FD9AFF22256096400522317 /* SVPenDraw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPenDraw.h; sourceTree = "<group>"; };
 		5FD9AFFD225B286200522317 /* SVPenStroke.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVPenStroke.cpp; sourceTree = "<group>"; };
 		5FD9AFFE225B286200522317 /* SVPenStroke.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPenStroke.h; sourceTree = "<group>"; };
-		5FD9B00D225F589500522317 /* SVResMetal.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVResMetal.mm; sourceTree = "<group>"; };
-		5FD9B00E225F589600522317 /* SVResMetal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVResMetal.h; sourceTree = "<group>"; };
 		5FD9B017226202A300522317 /* SVResShader.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVResShader.cpp; sourceTree = "<group>"; };
 		5FD9B018226202A400522317 /* SVResShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVResShader.h; sourceTree = "<group>"; };
 		5FD9B02122644DCC00522317 /* SVResMetalMesh.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVResMetalMesh.mm; sourceTree = "<group>"; };
 		5FD9B02222644DCC00522317 /* SVResMetalMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVResMetalMesh.h; sourceTree = "<group>"; };
 		5FD9B02B22644E9300522317 /* SVResMetalTex.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVResMetalTex.mm; sourceTree = "<group>"; };
 		5FD9B02C22644E9300522317 /* SVResMetalTex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVResMetalTex.h; sourceTree = "<group>"; };
-		5FD9B0352264660800522317 /* SVResMetalFbo.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SVResMetalFbo.mm; sourceTree = "<group>"; };
-		5FD9B0362264660900522317 /* SVResMetalFbo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVResMetalFbo.h; sourceTree = "<group>"; };
 		5FD9B03F22647D2900522317 /* SVResVBO.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVResVBO.cpp; sourceTree = "<group>"; };
 		5FD9B04022647D2900522317 /* SVResVBO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVResVBO.h; sourceTree = "<group>"; };
 		5FD9B04922647DCB00522317 /* SVResGLMesh.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVResGLMesh.cpp; sourceTree = "<group>"; };
@@ -8504,10 +8484,6 @@
 			children = (
 				5F7D5EEA215F407700803BCF /* SVRendererMetal.h */,
 				5F7D5EE9215F407700803BCF /* SVRendererMetal.mm */,
-				5FD9B00E225F589600522317 /* SVResMetal.h */,
-				5FD9B00D225F589500522317 /* SVResMetal.mm */,
-				5FD9B0362264660900522317 /* SVResMetalFbo.h */,
-				5FD9B0352264660800522317 /* SVResMetalFbo.mm */,
 				5FD9B02222644DCC00522317 /* SVResMetalMesh.h */,
 				5FD9B02122644DCC00522317 /* SVResMetalMesh.mm */,
 				5FD9B02C22644E9300522317 /* SVResMetalTex.h */,
@@ -9011,7 +8987,6 @@
 				5F7D6763215F407900803BCF /* SV3DBox.h in Headers */,
 				5F7D6897215F407900803BCF /* SVHash.h in Headers */,
 				5F7D622D215F407800803BCF /* pnglibconf.h in Headers */,
-				5FD9B0162261E68500522317 /* SVResMetal.h in Headers */,
 				020C468522DC5DCD00201753 /* btGImpactQuantizedBvh.h in Headers */,
 				020C4D1322DC5DD200201753 /* b3ConvexUtility.h in Headers */,
 				5F7D6091215F407700803BCF /* SVFilterDef.h in Headers */,
@@ -9362,7 +9337,6 @@
 				5F1475E422E86549000D140E /* SVMtlLib.h in Headers */,
 				5F7D6409215F407800803BCF /* allocators.h in Headers */,
 				020C4C4122DC5DD200201753 /* btTransform.h in Headers */,
-				5FD9B03E2264660900522317 /* SVResMetalFbo.h in Headers */,
 				020C491B22DC5DCF00201753 /* btGeneric6DofConstraint.h in Headers */,
 				5F7D6025215F407700803BCF /* SVBasicSys.h in Headers */,
 				5F7D6817215F407900803BCF /* SVEvent.h in Headers */,
@@ -9808,7 +9782,6 @@
 				5F7D6761215F407900803BCF /* SV3DBox.h in Headers */,
 				5F7D6895215F407900803BCF /* SVHash.h in Headers */,
 				5F7D622B215F407800803BCF /* pnglibconf.h in Headers */,
-				5FD9B0142261E68400522317 /* SVResMetal.h in Headers */,
 				020C468322DC5DCD00201753 /* btGImpactQuantizedBvh.h in Headers */,
 				020C4D1122DC5DD200201753 /* b3ConvexUtility.h in Headers */,
 				5F7D608F215F407700803BCF /* SVFilterDef.h in Headers */,
@@ -10156,7 +10129,6 @@
 				020C4BAF22DC5DD100201753 /* b3Transform.h in Headers */,
 				5F7D6407215F407800803BCF /* allocators.h in Headers */,
 				020C4C3F22DC5DD200201753 /* btTransform.h in Headers */,
-				5FD9B03C2264660900522317 /* SVResMetalFbo.h in Headers */,
 				020C491922DC5DCF00201753 /* btGeneric6DofConstraint.h in Headers */,
 				5F7D6023215F407700803BCF /* SVBasicSys.h in Headers */,
 				5F7D6815215F407900803BCF /* SVEvent.h in Headers */,
@@ -10973,7 +10945,6 @@
 				5F7D6402215F407800803BCF /* document.h in Headers */,
 				5F7D613A215F407700803BCF /* SVParticles.h in Headers */,
 				020C451622DC5DCC00201753 /* btManifoldResult.h in Headers */,
-				5FD9B010225F589600522317 /* SVResMetal.h in Headers */,
 				5F7D663C215F407800803BCF /* SVThreadPool.h in Headers */,
 				020C4C0822DC5DD100201753 /* clew.h in Headers */,
 				5C56B69C224A2B47007D7DC8 /* SVFilterHaze.h in Headers */,
@@ -11247,7 +11218,6 @@
 				5F7D63EE215F407800803BCF /* encodings.h in Headers */,
 				02F27E53218EF216007E85C3 /* SVModelNode.h in Headers */,
 				020C4C6622DC5DD200201753 /* btConvexHullComputer.h in Headers */,
-				5FD9B03B2264660900522317 /* SVResMetalFbo.h in Headers */,
 				5F7D68B8215F407900803BCF /* SVMat2.h in Headers */,
 				5F7D6530215F407800803BCF /* SVOpDetect.h in Headers */,
 				5C0C6034219BFF790052A826 /* SoundTouch.h in Headers */,
@@ -11399,7 +11369,6 @@
 				5F7D6762215F407900803BCF /* SV3DBox.h in Headers */,
 				5F7D6896215F407900803BCF /* SVHash.h in Headers */,
 				5F7D622C215F407800803BCF /* pnglibconf.h in Headers */,
-				5FD9B0152261E68400522317 /* SVResMetal.h in Headers */,
 				020C468422DC5DCD00201753 /* btGImpactQuantizedBvh.h in Headers */,
 				020C4D1222DC5DD200201753 /* b3ConvexUtility.h in Headers */,
 				5F7D6090215F407700803BCF /* SVFilterDef.h in Headers */,
@@ -11747,7 +11716,6 @@
 				020C4BB022DC5DD100201753 /* b3Transform.h in Headers */,
 				5F7D6408215F407800803BCF /* allocators.h in Headers */,
 				020C4C4022DC5DD200201753 /* btTransform.h in Headers */,
-				5FD9B03D2264660900522317 /* SVResMetalFbo.h in Headers */,
 				020C491A22DC5DCF00201753 /* btGeneric6DofConstraint.h in Headers */,
 				5F7D6024215F407700803BCF /* SVBasicSys.h in Headers */,
 				5F7D6816215F407900803BCF /* SVEvent.h in Headers */,
@@ -12409,7 +12377,6 @@
 				5F1475E022E86549000D140E /* SVMtlLib.cpp in Sources */,
 				5F7D60B1215F407700803BCF /* SVRGBToneCurveFilter.cpp in Sources */,
 				5F7D66B7215F407900803BCF /* SVTextureIOS.cpp in Sources */,
-				5FD9B03A2264660900522317 /* SVResMetalFbo.mm in Sources */,
 				5F7D6937215F407900803BCF /* SVSimdLib.cpp in Sources */,
 				02EA54BD22E83EE800F5701D /* SVPhysicsShapeBox.cpp in Sources */,
 				0279A4142261E68A00308871 /* SVPenCurve.cpp in Sources */,
@@ -12530,7 +12497,6 @@
 				5F7D6385215F407800803BCF /* IkConstraintData.c in Sources */,
 				5FD9B04422647D2A00522317 /* SVResVBO.cpp in Sources */,
 				5F7D61C9215F407700803BCF /* SVParseData.cpp in Sources */,
-				5FD9B0132261E68000522317 /* SVResMetal.mm in Sources */,
 				5F7D650F215F407800803BCF /* SVOpDetect.cpp in Sources */,
 				020C478B22DC5DCE00201753 /* btScaledBvhTriangleMeshShape.cpp in Sources */,
 				5F7D66EB215F407900803BCF /* SVMtlFair1.cpp in Sources */,
@@ -13088,7 +13054,6 @@
 				020C441622DC5DCC00201753 /* MultiBodyTreeInitCache.cpp in Sources */,
 				5F7D692C215F407900803BCF /* SVDataSwap.cpp in Sources */,
 				020C4C7A22DC5DD200201753 /* btSerializer.cpp in Sources */,
-				5FD9B0372264660900522317 /* SVResMetalFbo.mm in Sources */,
 				5F7D6684215F407800803BCF /* SVMtlFilterEx.cpp in Sources */,
 				0219DD6B232FB74A00F02C9A /* SVLineNode.cpp in Sources */,
 				5F7D6382215F407800803BCF /* IkConstraintData.c in Sources */,
@@ -13364,7 +13329,6 @@
 				5F7D64FC215F407800803BCF /* SVOpCreate.cpp in Sources */,
 				5F7D624E215F407800803BCF /* pngrutil.c in Sources */,
 				020C487E22DC5DCF00201753 /* btMultiBodyDynamicsWorld.cpp in Sources */,
-				5FD9B00F225F589600522317 /* SVResMetal.mm in Sources */,
 				5F7D65B8215F407800803BCF /* SVRendererMetal.mm in Sources */,
 				020C475022DC5DCE00201753 /* btStridingMeshInterface.cpp in Sources */,
 				5F7D667C215F407800803BCF /* SVMtlFace2D.cpp in Sources */,
@@ -13567,7 +13531,6 @@
 				020C4D0A22DC5DD200201753 /* b3ConvexUtility.cpp in Sources */,
 				5F7D60B0215F407700803BCF /* SVRGBToneCurveFilter.cpp in Sources */,
 				5F7D66B6215F407900803BCF /* SVTextureIOS.cpp in Sources */,
-				5FD9B0392264660900522317 /* SVResMetalFbo.mm in Sources */,
 				5F7D6936215F407900803BCF /* SVSimdLib.cpp in Sources */,
 				0207919822FA9FFA0029B759 /* SVModelMgr.cpp in Sources */,
 				0279A4132261E68A00308871 /* SVPenCurve.cpp in Sources */,
@@ -13685,7 +13648,6 @@
 				5F7D6384215F407800803BCF /* IkConstraintData.c in Sources */,
 				5FD9B04322647D2A00522317 /* SVResVBO.cpp in Sources */,
 				5F7D61C8215F407700803BCF /* SVParseData.cpp in Sources */,
-				5FD9B0122261E67F00522317 /* SVResMetal.mm in Sources */,
 				5F7D650E215F407800803BCF /* SVOpDetect.cpp in Sources */,
 				020C478A22DC5DCE00201753 /* btScaledBvhTriangleMeshShape.cpp in Sources */,
 				02A5075F237D2D6200C721CE /* SVParseFrameAni.cpp in Sources */,
@@ -14147,7 +14109,6 @@
 				020C4D0922DC5DD200201753 /* b3ConvexUtility.cpp in Sources */,
 				5F7D60AF215F407700803BCF /* SVRGBToneCurveFilter.cpp in Sources */,
 				5F7D66B5215F407900803BCF /* SVTextureIOS.cpp in Sources */,
-				5FD9B0382264660900522317 /* SVResMetalFbo.mm in Sources */,
 				5F7D6935215F407900803BCF /* SVSimdLib.cpp in Sources */,
 				0207919722FA9FFA0029B759 /* SVModelMgr.cpp in Sources */,
 				0279A4122261E68A00308871 /* SVPenCurve.cpp in Sources */,
@@ -14265,7 +14226,6 @@
 				5F7D6383215F407800803BCF /* IkConstraintData.c in Sources */,
 				5FD9B04222647D2A00522317 /* SVResVBO.cpp in Sources */,
 				5F7D61C7215F407700803BCF /* SVParseData.cpp in Sources */,
-				5FD9B0112261E67E00522317 /* SVResMetal.mm in Sources */,
 				5F7D650D215F407800803BCF /* SVOpDetect.cpp in Sources */,
 				020C478922DC5DCE00201753 /* btScaledBvhTriangleMeshShape.cpp in Sources */,
 				02A5075E237D2D6200C721CE /* SVParseFrameAni.cpp in Sources */,

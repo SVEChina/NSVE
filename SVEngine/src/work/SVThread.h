@@ -16,6 +16,10 @@
 #include <thread>
 
 namespace sv {
+
+    typedef bool (*thread_cb_init)();
+    typedef bool (*thread_cb_do)();
+    typedef bool (*thread_cb_destroy)();
     
     /*
      单纯线程
@@ -52,6 +56,10 @@ namespace sv {
         bool m_once;
         bool m_run;
         bool m_misclean;
+        //
+        thread_cb_init m_callback_init;
+        thread_cb_do m_callback_do;
+        thread_cb_destroy m_callback_destroy;
     };
     
 

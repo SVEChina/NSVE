@@ -16,11 +16,6 @@
 #include "../rendercore/SVGL/SVRResGL.h"
 #include "../rendercore/SVGL/SVRendererGL.h"
 //
-#if defined(SV_IOS) || defined(SV_OSX)
-#include "../rendercore/SVMetal/SVRendererMetal.h"
-#include "../rendercore/SVMetal/SVResMetal.h"
-#endif
-//
 #include "../rendercore/SVVulkan/SVRendererVK.h"
 
 using namespace sv;
@@ -65,11 +60,11 @@ void SVTexture::create(SVRendererPtr _renderer){
             //m_objTexPtr = MakeSharedPtr<SVRResGLTex>(mApp);
         }
 #if defined(SV_IOS) || defined(SV_OSX)
-        SVRendererMetalPtr t_rendeMetalPtr = std::dynamic_pointer_cast<SVRendererMetal>(t_renderBasePtr);
-        if (t_rendeMetalPtr) {
-            //渲染器类型E_RENDERER_METAL,
-            m_objTexPtr = MakeSharedPtr<SVRResMetalTex>(mApp);
-        }
+//        SVRendererMetalPtr t_rendeMetalPtr = std::dynamic_pointer_cast<SVRendererMetal>(t_renderBasePtr);
+//        if (t_rendeMetalPtr) {
+//            //渲染器类型E_RENDERER_METAL,
+//            m_objTexPtr = MakeSharedPtr<SVRResMetalTex>(mApp);
+//        }
 #endif
         if (m_objTexPtr) {
             m_objTexPtr->setname(m_name);

@@ -16,9 +16,6 @@
 #include "../rendercore/SVRenderMgr.h"
 #include "../rendercore/SVGL/SVRResGL.h"
 #include "../rendercore/SVGL/SVRResGLShader.h"
-#if defined(SV_IOS) || defined(SV_OSX)
-#include "../rendercore/SVMetal/SVResMetal.h"
-#endif
 
 
 using namespace sv;
@@ -88,9 +85,9 @@ void SVShaderMgr::loadAllShader() {
             if( mApp->m_pGlobalParam->getEngCore() == SV_E_CORE_GL ) {
                 t_resShader = MakeSharedPtr<SVRResGLShader>(mApp);
             }else if(mApp->m_pGlobalParam->getEngCore() == SV_E_CORE_METAL){
-                #if defined(SV_IOS) || defined(SV_OSX)
-                t_resShader = MakeSharedPtr<SVRResMetalShader>(mApp);
-                #endif
+//                #if defined(SV_IOS) || defined(SV_OSX)
+//                t_resShader = MakeSharedPtr<SVRResMetalShader>(mApp);
+//                #endif
             }else if(mApp->m_pGlobalParam->getEngCore() == SV_E_CORE_VULKAN){
                 //t_resShader = MakeSharedPtr<SVRResGLShader>(mApp);
             }
