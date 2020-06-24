@@ -295,40 +295,42 @@ u32 SVRResGLShader::_loadFS(cptr8 _filename){
 }
 
 u32 SVRResGLShader::_loadGS(cptr8 _filename){
-    SVDataChunk tDataStream;
-    u32 t_id=0;
-    bool t_flag=false;
-    if(!t_id){
-        t_flag = mApp->getFileMgr()->loadFileContentStr(&tDataStream, _filename);
-    }else{
-        return t_id;
-        
-    }
-    if (!t_flag)
-        return 0;
-    cptr8 gs_shader = tDataStream.m_data;
-    u32 t_gs_id = glCreateShader(GL_GEOMETRY_SHADER);
-    glShaderSource(t_gs_id, 1, &gs_shader, 0);
-    glCompileShader(t_gs_id);
-
-    GLint compileErr = 0;
-    glGetShaderiv(t_gs_id, GL_COMPILE_STATUS, &compileErr);
-    if (GL_FALSE == compileErr) {
-        GLint logLen;
-        glGetShaderiv(t_gs_id, GL_INFO_LOG_LENGTH, &logLen);
-        if (logLen > 0) {
-            char *log = (char *) malloc(logLen);
-            GLsizei written;
-            glGetShaderInfoLog(t_gs_id, logLen, &written, log);
-            SV_LOG_DEBUG("gs shader compile error log : \n %s fname:%s \n", log,
-                         _filename/*[filename UTF8String]*/);
-            free(log);
-        }
-        t_gs_id = 0;
-    }else{
-        SV_LOG_DEBUG("load gs: %s (%d) sucess\n", _filename, t_gs_id);
-    }
-    return t_gs_id;
+    //应该是 es 不支持gs，先关掉了。
+//    SVDataChunk tDataStream;
+//    u32 t_id=0;
+//    bool t_flag=false;
+//    if(!t_id){
+//        t_flag = mApp->getFileMgr()->loadFileContentStr(&tDataStream, _filename);
+//    }else{
+//        return t_id;
+//
+//    }
+//    if (!t_flag)
+//        return 0;
+//    cptr8 gs_shader = tDataStream.m_data;
+//    u32 t_gs_id = glCreateShader(GL_GEOMETRY_SHADER);
+//    glShaderSource(t_gs_id, 1, &gs_shader, 0);
+//    glCompileShader(t_gs_id);
+//
+//    GLint compileErr = 0;
+//    glGetShaderiv(t_gs_id, GL_COMPILE_STATUS, &compileErr);
+//    if (GL_FALSE == compileErr) {
+//        GLint logLen;
+//        glGetShaderiv(t_gs_id, GL_INFO_LOG_LENGTH, &logLen);
+//        if (logLen > 0) {
+//            char *log = (char *) malloc(logLen);
+//            GLsizei written;
+//            glGetShaderInfoLog(t_gs_id, logLen, &written, log);
+//            SV_LOG_DEBUG("gs shader compile error log : \n %s fname:%s \n", log,
+//                         _filename/*[filename UTF8String]*/);
+//            free(log);
+//        }
+//        t_gs_id = 0;
+//    }else{
+//        SV_LOG_DEBUG("load gs: %s (%d) sucess\n", _filename, t_gs_id);
+//    }
+//    return t_gs_id;
+    return 0;
 }
 
 u32 SVRResGLShader::_loadCS(cptr8 _filename){
