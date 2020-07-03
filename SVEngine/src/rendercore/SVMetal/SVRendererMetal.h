@@ -43,7 +43,7 @@ namespace sv {
             //创建纹理接口
             s32 createTexIn(s32 _texid,SVTexDsp _tdsp);
             s32 createTexOut(SVTexDsp _tdsp,void* _pdata);
-            //s32 createTexCubeOut(s32 _w,s32 _h,s32 _ifmt,s32 _dfmt,s32 _mipmap,s32 _size,void* _pdata);
+            //
             s32 createBuf(s32 _len);                //return buf index
             s32 createBuf(s32 _len,void* _data);    //return buf index
             

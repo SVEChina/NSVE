@@ -58,6 +58,21 @@ SVMtlCorePtr SVMtlCore::clone() {
     return PointerSharedPtr<SVMtlCore>(new SVMtlCore(this));
 }
 
+//设置参数
+void SVMtlCore::setParam(cptr8 _param,cptr8 _type,void* _data) {
+    //SVArray<InParam> m_paramTbl;
+}
+
+//获取参数
+void SVMtlCore::getParam(cptr8 _param) {
+    
+}
+
+//获取参数类型
+cptr8 SVMtlCore::getParamType(cptr8 _param) {
+    return nullptr;
+}
+
 void SVMtlCore::reset() {
     m_LogicMtlFlag0 = 0;
     m_LogicParamTex.reset();
@@ -176,7 +191,7 @@ void SVMtlCore::reloadShader(cptr8 _shader){
 }
 
 //渲染更新(跑渲染参数)
-bool SVMtlCore::submitMtl() {
+s32 SVMtlCore::submitMtl() {
 ////    //单线程(交换改变池)
 ////    swap();
 //    SVRendererPtr t_renderer = mApp->getRenderer();
@@ -198,7 +213,7 @@ bool SVMtlCore::submitMtl() {
 //    _submitUniform(t_renderer);
 //    _submitState(t_renderer);
 //    _submitMtl(t_renderer);
-    return true;
+    return m_pShader;
 }
 
 void SVMtlCore::recoverMtl() {

@@ -26,16 +26,6 @@ SVRTechMetal::~SVRTechMetal() {
 
 void SVRTechMetal::build(SVRendererPtr _renderer) {
     SVRendererMetalPtr t_rm = std::dynamic_pointer_cast<SVRendererMetal>(_renderer);
-    //m_rp_dsp = [[MTLRenderPipelineDescriptor alloc] init];
-    
-    //    pipelineStateDescriptor.label = @"Simple Pipeline";
-    //    pipelineStateDescriptor.vertexFunction = vertexFunction;
-    //    pipelineStateDescriptor.fragmentFunction = fragmentFunction;
-    //    pipelineStateDescriptor.colorAttachments[0].pixelFormat = mtkView.colorPixelFormat;
-    //
-    //    _pipelineState = [_device newRenderPipelineStateWithDescriptor:pipelineStateDescriptor
-    //                                                             error:&error];
-    
     if( m_techDsp&SV_E_TECH_VS ) {
         NSString* t_str = [NSString stringWithFormat:@"%s",m_vs_name.c_str()];
         m_vsf = [t_rm->m_pLibrary newFunctionWithName:t_str];
@@ -61,6 +51,14 @@ void SVRTechMetal::build(SVRendererPtr _renderer) {
         m_tsdf = [t_rm->m_pLibrary newFunctionWithName:t_str];
     }
     
+    //m_rp_dsp = [[MTLRenderPipelineDescriptor alloc] init];
+    //    pipelineStateDescriptor.label = @"Simple Pipeline";
+    //    pipelineStateDescriptor.vertexFunction = vertexFunction;
+    //    pipelineStateDescriptor.fragmentFunction = fragmentFunction;
+    //    pipelineStateDescriptor.colorAttachments[0].pixelFormat = mtkView.colorPixelFormat;
+    //
+    //    _pipelineState = [_device newRenderPipelineStateWithDescriptor:pipelineStateDescriptor
+    //                                                             error:&error];
 }
 
 void SVRTechMetal::render(SVRendererPtr _renderer) {

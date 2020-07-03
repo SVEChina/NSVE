@@ -5,6 +5,9 @@
 using namespace sv;
 
 SVThread::SVThread(){
+    m_callback_init = nullptr;
+    m_callback_do = nullptr;
+    m_callback_destroy = nullptr;
     m_mis = nullptr;
     m_misclean = true;
     m_cond = MakeSharedPtr<SVCond>();
@@ -21,6 +24,9 @@ SVThread::SVThread(){
 }
 
 SVThread::SVThread(SVCondPtr _cond) {
+    m_callback_init = nullptr;
+    m_callback_do = nullptr;
+    m_callback_destroy = nullptr;
     m_mis = nullptr;
     m_misclean = true;
     m_cond = _cond;
@@ -67,6 +73,8 @@ void SVThread::setMis(SVMisPtr _mis,bool _clean) {
 }
 
 void SVThread::_update(){
+    //
+    
     //进入逻辑主循环
     while( 1 ) {
         try {

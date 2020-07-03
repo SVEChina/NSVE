@@ -57,7 +57,6 @@ namespace sv {
     DECLARE_SHAREPTR(SVRMeshMetal);
     DECLARE_SHAREPTR(SVRResMetalTex);
     DECLARE_SHAREPTR(SVRResMetalShader);
-    DECLARE_SHAREPTR(SVResMetalRenderMesh);
     
     #endif
 

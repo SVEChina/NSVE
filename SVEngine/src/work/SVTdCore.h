@@ -34,7 +34,7 @@ namespace sv {
         void unlock();
         
     private:
-        std::atomic_flag mflag;     //原子操作
+        std::atomic_flag mflag = ATOMIC_FLAG_INIT;     //原子操作
     };
 
     /*
