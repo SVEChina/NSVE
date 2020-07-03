@@ -14,11 +14,12 @@
 #include "../rendercore/SVRenderDeclare.h"
 #include "SVShaderMgr.h"
 #include "SVMtlParamBase.h"
+//
+#include <vector>
+#include <string>
 
 namespace sv {
     
-    
-        
         class SVMtlCoreParam : public SVObject {
         public:
             SVMtlCoreParam();
@@ -46,6 +47,36 @@ namespace sv {
             virtual bool submitMtl();
             
             virtual void recoverMtl();
+            
+            //设置参数值 主要是针对uniform
+            void setParam(cptr8 _name,int _value);
+            
+            void setParam(cptr8 _name,float _value);
+            
+            void setParam(cptr8 _name,FVec2 _value);
+            
+            void setParam(cptr8 _name,FVec3 _value);
+            
+            void setParam(cptr8 _name,FVec4 _value);
+            
+            void setParam(cptr8 _name,FMat4 _value);
+            
+            void* getParam(cptr8 _name);
+            
+            //
+        protected:
+            //参数表
+            struct InParam {
+                std::string m_name; //参数名称
+                int m_size;         //参数数据大小
+                u64 m_off;          //参数数据偏移
+            };
+            //
+            std::vector<InParam> m_aramTbl;
+            //参数值
+            SVDataChunkPtr m_ParamValues;
+            
+        public:
             
             void swap();
                         
@@ -100,7 +131,6 @@ namespace sv {
             
             void setStencilSfail(s32 _method);
             
-            //
             void reloadShader(cptr8 _shader);
             
         public:

@@ -45,14 +45,14 @@ void SVParseDeform::parse(SVInst *app,cptr8 path, s32 resid,SVDeformImageMovePtr
     if (!tflag)
         return ;
     SV_LOG_ERROR("SVParseMain::load effect sucess\n");
-    SV_LOG_ERROR("filedata %s\n", tDataStream.m_data);
-    if (!tDataStream.m_data) {
+    SV_LOG_ERROR("filedata %s\n", tDataStream.getPointerChar());
+    if (!tDataStream.getPointerChar()) {
         SV_LOG_ERROR("data stream is null");
         return ;
     }
     
     RAPIDJSON_NAMESPACE::Document doc;
-    doc.Parse(tDataStream.m_data);
+    doc.Parse(tDataStream.getPointerChar());
     if (doc.HasParseError()) {
         RAPIDJSON_NAMESPACE::ParseErrorCode code = doc.GetParseError();
         SV_LOG_ERROR("rapidjson error code:%d \n", code);

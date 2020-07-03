@@ -77,7 +77,7 @@ bool SVRResGLShader::_parseTech() {
     if (!tflag)
         return false;
     RAPIDJSON_NAMESPACE::Document t_doc;
-    t_doc.Parse(tDataStream.m_data);
+    t_doc.Parse(tDataStream.getPointerChar());
     if (t_doc.HasParseError()) {
         RAPIDJSON_NAMESPACE::ParseErrorCode code = t_doc.GetParseError();
         SV_LOG_ERROR("rapidjson error code:%d \n", code);
@@ -228,7 +228,7 @@ u32 SVRResGLShader::_loadVS(cptr8 _filename) {
     }
     if (!t_flag)
         return 0;
-    cptr8 vs_shader = tDataStream.m_data;
+    cptr8 vs_shader = tDataStream.getPointerChar();
     u32 m_vs_id = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(m_vs_id, 1, &vs_shader, 0);
     glCompileShader(m_vs_id);
@@ -266,7 +266,7 @@ u32 SVRResGLShader::_loadFS(cptr8 _filename){
         return 0;
     s32 t_error = 0;
 
-    cptr8 fs_shader = tDataStream.m_data;
+    cptr8 fs_shader = tDataStream.getPointerChar();
     u32 m_fs_id = glCreateShader(GL_FRAGMENT_SHADER);
     t_error = glGetError();
 

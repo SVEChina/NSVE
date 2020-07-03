@@ -14,11 +14,9 @@ using namespace sv;
 
 SVPenPackData::SVPenPackData(SVInst *_app)
 :SVGBase(_app) {
-    
 }
 
 SVPenPackData::~SVPenPackData() {
-    
 }
 
 bool SVPenPackData::loadPenData(SVInst* _app, SVDataSwapPtr _data, cptr8 _path, s32 _offset, s32 _length){
@@ -29,7 +27,7 @@ bool SVPenPackData::loadPenData(SVInst* _app, SVDataSwapPtr _data, cptr8 _path, 
             SV_LOG_ERROR("SVPenPackData::Load Stroke Data Error %s\n", _path);
             return false;
         }else {
-            _data->writeData(dataChunk.m_data, dataChunk.m_size);
+            _data->writeData(dataChunk.getPointerChar(), dataChunk.getRealSize());
         }
     }
     return true;
@@ -38,10 +36,8 @@ bool SVPenPackData::loadPenData(SVInst* _app, SVDataSwapPtr _data, cptr8 _path, 
 bool SVPenPackData::writePenData(SVInst* _app, SVDataSwapPtr _data, cptr8 _path, bool _clearData){
     if (_data && _data->getSize()) {
         SVDataChunk dataChunk;
-        u32 dataSize = _data->getSize();
-        dataChunk.apply(dataSize);
-        memcpy(dataChunk.m_data, _data->getData(), _data->getSize());
-        bool t_flag = _app->getFileMgr()->writeFileData(&dataChunk, _path, dataSize, _clearData);
+        dataChunk.push(_data->getData(), _data->getSize());
+        bool t_flag = _app->getFileMgr()->writeFileData(&dataChunk, _path, dataChunk.getRealSize(), _clearData);
         if (!t_flag) {
             SV_LOG_ERROR("SVPenPackData::Save Stroke Data Error %s\n", _path);
             return false;

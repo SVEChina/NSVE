@@ -8,6 +8,7 @@
 
 #include "SVMtlCore.h"
 #include "SVGLModify.h"
+#include "../base/SVDataChunk.h"
 #include "../operate/SVOpCreate.h"
 #include "../mtl/SVTexture.h"
 #include "../rendercore/SVRenderScene.h"
@@ -19,19 +20,17 @@
 using namespace sv;
 
 SVMtlCoreParam::SVMtlCoreParam(){
-    //m_shader = "normal2d";
 }
 
 SVMtlCorePtr SVMtlCoreParam::genMtl(SVInst *_app){
-    //SVMtlCorePtr t_mtl = MakeSharedPtr<SVMtlCore>(_app,m_shader.c_str());
-    //return t_mtl;
-    return nullptr;
+    return nullptr;    
 }
 
 //
 SVMtlCore::SVMtlCore(SVInst *_app, cptr8 _shader)
 :SVGBase(_app)
 ,m_mtlname(_shader){
+    m_ParamValues = MakeSharedPtr<SVDataChunk>();
     reset();
 }
 
@@ -70,6 +69,54 @@ void SVMtlCore::reset() {
     m_LogicParamSize.reset();
     m_LogicParamMatrix.reset();
     m_LogicParamZOff.reset();
+}
+
+void SVMtlCore::setParam(cptr8 _name,int _value) {
+    for(int i=0;i<m_aramTbl.size();i++) {
+        if( strcmp( m_aramTbl[i].m_name.c_str() ,_name) == 0 ) {
+            //找到目标参数 ，拷贝即可
+            m_ParamValues->set(m_aramTbl[i].m_off,_value);
+            return ;
+        }
+    }
+    //推送目标参数
+    InParam t_param;
+    t_param.m_name = _name;
+    t_param.m_size = sizeof(int);
+    t_param.m_off = m_ParamValues->push(_value);
+    m_aramTbl.push_back(t_param);
+}
+
+void SVMtlCore::setParam(cptr8 _name,float _value) {
+    
+}
+
+void SVMtlCore::setParam(cptr8 _name,FVec2 _value) {
+    
+}
+
+void SVMtlCore::setParam(cptr8 _name,FVec3 _value) {
+    
+}
+
+void SVMtlCore::setParam(cptr8 _name,FVec4 _value) {
+    
+}
+
+void SVMtlCore::setParam(cptr8 _name,FMat4 _value) {
+    
+}
+
+void* SVMtlCore::getParam(cptr8 _name) {
+    u64 t_off = 0;
+    for(int i=0;i<m_aramTbl.size();i++) {
+        if( strcmp( m_aramTbl[i].m_name.c_str() ,_name) == 0 ) {
+            //找到目标参数 ，拷贝即可
+            t_off = m_aramTbl[i].m_off;
+            break;
+        }
+    }
+    return m_ParamValues->getPointer(t_off);
 }
 
 void SVMtlCore::setModelMatrix(f32 *_mat) {

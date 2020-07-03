@@ -88,8 +88,12 @@ bool SVFileMgr::loadFileData(SVDataChunk *_datachunk, cptr8 _fpath, s32 _offset,
                 t_length = (s32)t_file_len;
             }
             fseek(fp, _offset, SEEK_SET);
-            _datachunk->apply(t_length);
-            fread(_datachunk->m_data, t_length, 1, fp);
+            //
+            void* t_buf = malloc(t_length);
+            fread(t_buf, t_length, 1, fp);
+            _datachunk->push(t_buf, t_length);
+            free(t_buf);
+            //
             fclose(fp);
             return true;
         }
@@ -111,7 +115,7 @@ bool SVFileMgr::writeFileData(SVDataChunk *_datachunk, cptr8 _fpath, u32 _size, 
             fseek(fp, 0, SEEK_END);
         }
         if (fp) {
-            fwrite((_datachunk->m_data), sizeof(c8), _size, fp);
+            fwrite((_datachunk->getPointer() ), sizeof(c8), _size, fp);
             fclose(fp);
             return true;
         }
@@ -130,8 +134,12 @@ bool SVFileMgr::loadFileContent(SVDataChunk *_datachunk,cptr8 _fname) {
             fseek(fp, 0, SEEK_END);
             s64 t_file_len = ftell(fp);
             fseek(fp, 0, SEEK_SET);
-            _datachunk->apply((s32)t_file_len);
-            fread(_datachunk->m_data, t_file_len, 1, fp);
+            
+            void* t_buf = malloc((s32)t_file_len);
+            fread(t_buf, (s32)t_file_len, 1, fp);
+            _datachunk->push(t_buf, (s32)t_file_len);
+            free(t_buf);
+            
             fclose(fp);
             return true;
         }
@@ -149,9 +157,13 @@ bool SVFileMgr::loadFileContentStr(SVDataChunk *_datachunk,cptr8 _fname) {
         fseek(fp, 0, SEEK_END);
         s32 t_file_len = ftell(fp);
         fseek(fp, 0, SEEK_SET);
-        _datachunk->apply(t_file_len + 1);
-        fread(_datachunk->m_data, t_file_len, 1, fp);
-        _datachunk->toString();
+        //
+        char* t_buf = (char*)(malloc(t_file_len+1));
+        fread(t_buf, (s32)t_file_len, 1, fp);
+        t_buf[t_file_len] = '\0';
+        _datachunk->push(t_buf, t_file_len+1);
+        free(t_buf);
+        //
         fclose(fp);
         return true;
     }

@@ -10,7 +10,7 @@ using namespace sv;
 
 
 #ifdef SV_ANDROID
-SVEGLContext::SVEGLContextvoid* _window,void* _context,s32 _glversion)
+SVEGLContext::SVEGLContext(void* _window,void* _context,s32 _glversion)
 : SVCtxBase(_app) {
     m_Display = nullptr;
     m_pConfigsList = nullptr;
@@ -95,7 +95,6 @@ void SVEGLContext::createSurface(){
 
     EGLint num_configs;
     eglChooseConfig(m_Display, attribs, &m_GLConfigOff, 1, &num_configs);
-
     if (!num_configs) {
         // Fall back to 16bit depth buffer
         const EGLint attribs[] = {EGL_RENDERABLE_TYPE,

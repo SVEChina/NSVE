@@ -55,11 +55,11 @@ bool SVFaceCoord::loadCoord(cptr8 _fname) {
         return false;
     }
     SV_LOG_INFO("loadCoord sucess\n");
-    if (!tDataStream.m_data) {
+    if (!tDataStream.getPointer()) {
         return false;
     }
     RAPIDJSON_NAMESPACE::Document doc;
-    doc.Parse(tDataStream.m_data);
+    doc.Parse(tDataStream.getPointerChar());
     if (doc.HasParseError()) {
         RAPIDJSON_NAMESPACE::ParseErrorCode code = doc.GetParseError();
         SV_LOG_ERROR("SVLoaderGLTF :rapidjson error code:%d \n", code);

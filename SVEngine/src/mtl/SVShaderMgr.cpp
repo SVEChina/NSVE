@@ -46,9 +46,9 @@ void SVShaderMgr::loadAllShader() {
         SV_LOG_INFO("not find shadercfg.json!please check shader file path!\n");
         return;
     }
-    SV_LOG_ERROR("file context %s \n", tDataStream.m_data);
+    SV_LOG_ERROR("file context %s \n", tDataStream.getPointerChar());
     RAPIDJSON_NAMESPACE::Document doc;
-    doc.Parse<0>(tDataStream.m_data);
+    doc.Parse<0>(tDataStream.getPointerChar());
     if (doc.HasParseError()) {
         RAPIDJSON_NAMESPACE::ParseErrorCode code = doc.GetParseError();
         SV_LOG_ERROR("rapidjson error code:%d \n", code);

@@ -13,19 +13,41 @@
 //文件路径管理器 增加搜索路径相关
 namespace sv {
     
-    class SVDataChunk {
+    class SVDataChunk :public SVObject {
     public:
         SVDataChunk();
         
         virtual ~SVDataChunk();
         
-        void apply(s32 size);
+        bool set(u64 _off,int _value);
         
-        void reback();
+        bool set(u64 _off,float _value);
         
-        void toString();
+        bool set(u64 _off,void* _value,int _size);
         
+        u64 push(int _value);
+        
+        u64 push(float _value);
+        
+        u64 push(void* _value,s32 _size);
+        
+        void* getPointer() { return m_data; }
+        
+        void* getPointer(u64 _off) { return (void*)(m_data + _off); }
+        
+        char* getPointerChar(){ return (char*)m_data; }
+        
+        char* getPointerChar(u64 _off){ return m_data + _off; }
+        
+        u64 getSize() { return m_size; }
+        
+        u64 getRealSize() { return m_realsize; }
+        
+    protected:
+
         u64 m_size;
+        
+        u64 m_realsize;
         
         c8 *m_data;
     };

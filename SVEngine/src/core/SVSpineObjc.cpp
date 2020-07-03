@@ -28,9 +28,9 @@ char *_spUtil_readFile(void *_app, const char *path, int *length) {
     //返回文件内容
     SVDataChunk tChunk;
     bool t_resule = t_App->getFileMgr()->loadFileContent(&tChunk, path);
-    (*length) = tChunk.m_size;
-    char *t_data = (char *) malloc(tChunk.m_size);
-    memcpy(t_data, tChunk.m_data, tChunk.m_size);
+    (*length) = tChunk.getRealSize();
+    char *t_data = (char *) malloc(tChunk.getRealSize() );
+    memcpy(t_data, tChunk.getPointer(), tChunk.getRealSize() );
     return t_data;
 }
 

@@ -25,13 +25,13 @@ SVFilterBasePtr SVParseLUTFilter::parseLUT(SVInst *_app,cptr8 _path, s32 resid){
     return nullptr;
     SV_LOG_ERROR("SVParseMain::load effect sucess\n");
  //   SV_LOG_ERROR("filedata %s\n", tDataStream.m_data);
-    if (!tDataStream.m_data) {
+    if (!tDataStream.getPointer() ) {
         SV_LOG_ERROR("data stream is null");
         return nullptr;
     }
     
     RAPIDJSON_NAMESPACE::Document doc;
-    doc.Parse(tDataStream.m_data);
+    doc.Parse( (char*)(tDataStream.getPointer()) );
     if (doc.HasParseError()) {
         RAPIDJSON_NAMESPACE::ParseErrorCode code = doc.GetParseError();
         SV_LOG_ERROR("rapidjson error code:%d \n", code);

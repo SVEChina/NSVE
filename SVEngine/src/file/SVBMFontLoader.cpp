@@ -36,20 +36,20 @@ bool SVBMFontLoader::loadData(cptr8 _fontFilePath, SVBMFontPtr _font) {
     if (!t_flag) {
         return false;
     }
-    if (tSVDataChunk.m_size == 0){
+    if (tSVDataChunk.getRealSize() == 0){
         return false;
     }
     c8 str[4] = {0};
-    char* t_p = (char*)tSVDataChunk.m_data;
+    char* t_p = tSVDataChunk.getPointerChar();
     str[0] = *t_p;t_p++;
     str[1] = *t_p;t_p++;
     str[2] = *t_p;
     if( strcmp(str, "BMF") == 0 ){
         SVBMFontParseBinaryFormat parseBinaryFormat;
-        parseBinaryFormat.parseConfigFile(_font, tSVDataChunk.m_data, tSVDataChunk.m_size);
+        parseBinaryFormat.parseConfigFile(_font, tSVDataChunk.getPointerChar(), tSVDataChunk.getRealSize());
     }else{
         SVBMFontParseTextFormat parseTextFormat;
-        parseTextFormat.parseConfigFile(_font, tSVDataChunk.m_data, tSVDataChunk.m_size);
+        parseTextFormat.parseConfigFile(_font, tSVDataChunk.getPointerChar(), tSVDataChunk.getRealSize());
     }
     return true;
 }
