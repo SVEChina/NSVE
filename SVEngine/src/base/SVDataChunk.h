@@ -29,6 +29,10 @@ namespace sv {
         
         u64 push(float _value);
         
+//        u64 push(float _value);
+//        
+//        u64 push(float _value);
+        
         u64 push(void* _value,s32 _size);
         
         void* getPointer() { return m_data; }

@@ -134,7 +134,7 @@ s32 SVRTechGL::_complie_shader(s32 _shadertype,cptr8 _fname) {
         return t_id;
     }
     //
-    cptr8 vs_shader = tDataStream.m_data;
+    cptr8 vs_shader = tDataStream.getPointerChar();
     u32 t_shader_id = glCreateShader(_shadertype);
     glShaderSource(t_shader_id, 1, &vs_shader, 0);
     glCompileShader(t_shader_id);

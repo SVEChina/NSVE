@@ -58,21 +58,6 @@ SVMtlCorePtr SVMtlCore::clone() {
     return PointerSharedPtr<SVMtlCore>(new SVMtlCore(this));
 }
 
-//设置参数
-void SVMtlCore::setParam(cptr8 _param,cptr8 _type,void* _data) {
-    //SVArray<InParam> m_paramTbl;
-}
-
-//获取参数
-void SVMtlCore::getParam(cptr8 _param) {
-    
-}
-
-//获取参数类型
-cptr8 SVMtlCore::getParamType(cptr8 _param) {
-    return nullptr;
-}
-
 void SVMtlCore::reset() {
     m_LogicMtlFlag0 = 0;
     m_LogicParamTex.reset();

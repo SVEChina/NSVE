@@ -44,7 +44,7 @@ namespace sv {
             
             virtual void update(f32 dt);
             
-            virtual bool submitMtl();
+            virtual s32 submitMtl();
             
             virtual void recoverMtl();
             
