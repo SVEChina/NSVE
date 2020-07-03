@@ -23,9 +23,12 @@ namespace sv {
         
         static SVMtlCorePtr get3DNorMtl(SVInst* _app);
         
+        static SVMtlCorePtr genMtl(SVInst* _app,cptr8 _name);
         
     protected:
         static SVMtlCorePtr m_pSkinMtl;
+        
+        static SVString mapName(cptr8 _name);
     };
     
 }//!namespace sv

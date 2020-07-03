@@ -34,6 +34,30 @@ bool SVDataChunk::set(u64 _off,float _value) {
     return set(_off,&_value,sizeof(float));
 }
 
+bool SVDataChunk::set(u64 _off,FVec2& _value){
+    return set(_off,&_value,sizeof(FVec2));
+}
+
+bool SVDataChunk::set(u64 _off,FVec3& _value){
+    return set(_off,&_value,sizeof(FVec3));
+}
+
+bool SVDataChunk::set(u64 _off,FVec4& _value){
+    return set(_off,&_value,sizeof(FVec4));
+}
+
+bool SVDataChunk::set(u64 _off,FMat2& _value){
+    return set(_off,_value.mat,sizeof(FMat2));
+}
+
+bool SVDataChunk::set(u64 _off,FMat3& _value){
+    return set(_off,_value.mat,sizeof(FMat3));
+}
+
+bool SVDataChunk::set(u64 _off,FMat4& _value){
+    return set(_off,_value.mat,sizeof(FMat4));
+}
+
 bool SVDataChunk::set(u64 _off,void* _value,int _size) {
     if(_off+_size > m_realsize) {
         return false;
@@ -49,6 +73,30 @@ u64 SVDataChunk::push(int _value) {
 
 u64 SVDataChunk::push(float _value) {
     return push(&_value,sizeof(float));
+}
+
+u64 SVDataChunk::push(FVec2& _value) {
+    return push(&_value,sizeof(FVec2));
+}
+
+u64 SVDataChunk::push(FVec3& _value) {
+    return push(&_value,sizeof(FVec3));
+}
+
+u64 SVDataChunk::push(FVec4& _value) {
+    return push(&_value,sizeof(FVec4));
+}
+
+u64 SVDataChunk::push(FMat2& _value) {
+    return push(_value.mat,sizeof(FMat2));
+}
+
+u64 SVDataChunk::push(FMat3& _value) {
+    return push(_value.mat,sizeof(FMat3));
+}
+
+u64 SVDataChunk::push(FMat4& _value) {
+    return push(_value.mat,sizeof(FMat4));
 }
 
 u64 SVDataChunk::push(void* _value,s32 _size) {

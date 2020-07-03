@@ -49,9 +49,9 @@ namespace sv {
             virtual void recoverMtl();
             
             //设置参数值 主要是针对uniform
-            void setParam(cptr8 _name,int _value);
+            void setParam(cptr8 _name,s32 _value);
             
-            void setParam(cptr8 _name,float _value);
+            void setParam(cptr8 _name,f32 _value);
             
             void setParam(cptr8 _name,FVec2 _value);
             

@@ -71,7 +71,7 @@ void SVMtlCore::reset() {
     m_LogicParamZOff.reset();
 }
 
-void SVMtlCore::setParam(cptr8 _name,int _value) {
+void SVMtlCore::setParam(cptr8 _name,s32 _value) {
     for(int i=0;i<m_aramTbl.size();i++) {
         if( strcmp( m_aramTbl[i].m_name.c_str() ,_name) == 0 ) {
             //找到目标参数 ，拷贝即可
@@ -82,13 +82,25 @@ void SVMtlCore::setParam(cptr8 _name,int _value) {
     //推送目标参数
     InParam t_param;
     t_param.m_name = _name;
-    t_param.m_size = sizeof(int);
+    t_param.m_size = sizeof(s32);
     t_param.m_off = m_ParamValues->push(_value);
     m_aramTbl.push_back(t_param);
 }
 
-void SVMtlCore::setParam(cptr8 _name,float _value) {
-    
+void SVMtlCore::setParam(cptr8 _name,f32 _value) {
+    for(int i=0;i<m_aramTbl.size();i++) {
+        if( strcmp( m_aramTbl[i].m_name.c_str() ,_name) == 0 ) {
+            //找到目标参数 ，拷贝即可
+            m_ParamValues->set(m_aramTbl[i].m_off,_value);
+            return ;
+        }
+    }
+    //推送目标参数
+    InParam t_param;
+    t_param.m_name = _name;
+    t_param.m_size = sizeof(f32);
+    t_param.m_off = m_ParamValues->push(_value);
+    m_aramTbl.push_back(t_param);
 }
 
 void SVMtlCore::setParam(cptr8 _name,FVec2 _value) {
@@ -177,6 +189,8 @@ void SVMtlCore::reloadShader(cptr8 _shader){
 
 //渲染更新(跑渲染参数)
 s32 SVMtlCore::submitMtl() {
+    //更新参数
+    
 ////    //单线程(交换改变池)
 ////    swap();
 //    SVRendererPtr t_renderer = mApp->getRenderer();

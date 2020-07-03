@@ -43,6 +43,7 @@ namespace sv {
             SVTexturePtr m_pNormalTex;
             SVTexturePtr m_pOcclusionTex;
             SVTexturePtr m_pEmissiveTex;
+            
             FVec4 m_baseColorFactor;
             f32 m_metallicFactor;
             f32 m_roughtnessFactor;
