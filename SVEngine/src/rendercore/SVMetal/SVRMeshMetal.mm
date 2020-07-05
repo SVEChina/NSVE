@@ -35,7 +35,6 @@ void SVRMeshMetal::create(SVRendererPtr _renderer,SVRTargetPtr _target,SVRenderM
                                                  length: _rmesh->m_index.m_size
                                                  options: MTLResourceStorageModeShared ];
         //更新索引参数
-        
     }
 
     for(s32 i=0;i<_rmesh->m_vertPool.size();i++) {
@@ -51,7 +50,6 @@ void SVRMeshMetal::create(SVRendererPtr _renderer,SVRTargetPtr _target,SVRenderM
 }
 
 void SVRMeshMetal::render(SVRendererPtr _renderer,SVRTargetPtr _target,SVRenderMeshPtr _rmesh) {
-    //
     SVRTargetMetalPtr t_tar = std::dynamic_pointer_cast<SVRTargetMetal>(_target);
     //创建
     if(m_create) {

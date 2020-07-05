@@ -152,6 +152,7 @@ namespace sv {
             virtual void _refreshMatrix();
             virtual void _refreshModify();
             virtual void _submitUniform(SVRendererPtr _render);
+            virtual void _submitTexture(SVRendererPtr _render);
             virtual void _submitState(SVRendererPtr _render);
             virtual void _submitMtl(SVRendererPtr _render);
             
