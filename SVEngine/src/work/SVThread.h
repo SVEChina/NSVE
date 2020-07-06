@@ -39,6 +39,8 @@ namespace sv {
         //(销毁)
         void stop();
         
+        bool notice();
+        
         //设置任务
         void setMis(SVMisPtr _mis,bool _clean = false);
         

@@ -16,11 +16,6 @@ SVThread::SVThread(){
     m_once = true;
     m_run = true;
     m_pThread = nullptr;
-    if( m_cond->trylock() == 0 ) {
-        m_pThread = new std::thread(&SVThread::_update, this);  //创建线程
-        m_pThread->detach();     //线程自动启动，不会等待
-        m_cond->unlock();
-    }
 }
 
 SVThread::SVThread(SVCondPtr _cond) {
@@ -35,11 +30,6 @@ SVThread::SVThread(SVCondPtr _cond) {
     m_once = true;
     m_run = true;
     m_pThread = nullptr;
-    if( m_cond->trylock() == 0 ) {
-       m_pThread = new std::thread(&SVThread::_update, this);  //创建线程
-       m_pThread->detach();     //线程自动启动，不会等待
-       m_cond->unlock();
-    }
 }
 
 SVThread::~SVThread(){
@@ -53,16 +43,44 @@ SVThread::~SVThread(){
 
 //如果被多次调用很显然是不行的
 bool SVThread::start(bool _once){
-    if(m_svTState == TS_FREE) {
-        m_cond->notice();
+    if( m_cond->trylock() == 0 ) {
+        m_pThread = new std::thread(&SVThread::_update, this);  //创建线程
+        m_cond->unlock();
+        return true;
+    }
+    return false;
+//    if(m_svTState == TS_FREE) {
+//        m_cond->notice();
+//        return true;
+//    }
+//    return false;
+}
+
+bool SVThread::notice(){
+    if( m_svTState == TS_FREE ) {
+        if(m_cond) {
+            m_cond->notice();
+        }
         return true;
     }
     return false;
 }
 
+void SVThread::_wait() {
+    if(m_run) {
+        m_cond->lock();
+        m_svTState = TS_FREE;
+        m_cond->wait();
+        m_cond->unlock();
+    }
+}
+
 //同步接口
 void SVThread::stop(){
+    m_cond->lock();
     m_run = false;
+    m_cond->unlock();
+    notice();
 }
 
 void SVThread::setMis(SVMisPtr _mis,bool _clean) {
@@ -73,14 +91,13 @@ void SVThread::setMis(SVMisPtr _mis,bool _clean) {
 }
 
 void SVThread::_update(){
-    //
+    //初始化
     
     //进入逻辑主循环
     while( 1 ) {
         try {
             //挂起来
             _wait();
-//            SV_LOG_ERROR(m_pThread->id);
             //检测
             if(!m_run) {
                 break;
@@ -99,14 +116,8 @@ void SVThread::_update(){
             throw;
         }
     }
+    //结束
+    
     //表示线程已死
     m_svTState = TS_DESTROY;
 }
-
-void SVThread::_wait() {
-    m_cond->lock();
-    m_svTState = TS_FREE;
-    m_cond->wait();
-    m_cond->unlock();
-}
-
