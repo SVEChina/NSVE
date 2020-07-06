@@ -31,6 +31,11 @@ namespace sv {
         
         //
         class SVMtlCore : public SVGBase {
+            friend class SVRenderer;
+            friend class SVRendererGL;
+            friend class SVRendererMetal;
+            friend class SVRendererVulkan;
+            
         public:
             SVMtlCore(SVInst *_app, cptr8 _shader);
             
@@ -75,6 +80,16 @@ namespace sv {
             std::vector<InParam> m_aramTbl;
             //参数值
             SVDataChunkPtr m_ParamValues;
+            
+        public:
+            SVRTechPtr _tech;
+            //技术（shader）
+            
+            //uniform
+            
+            //采样器
+            
+            //状态
             
         public:
             

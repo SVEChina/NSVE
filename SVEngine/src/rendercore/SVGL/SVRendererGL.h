@@ -12,8 +12,6 @@
 #include "../../core/SVVertDef.h"
 
 namespace sv {
-    
-    
         
         /*
          GL渲染器
@@ -29,6 +27,22 @@ namespace sv {
             
             virtual void resize(s32 _w,s32 _);
             
+        public:
+            //创建部分
+            
+        public:
+            //处理部分
+            
+            //处理技术
+            virtual void processTech(SVRTechPtr _tech);
+           
+            //处理材质
+            virtual void processMtl(SVMtlCorePtr _mtl);
+           
+            //处理mesh
+            virtual void processMesh(SVRenderMeshPtr _mesh);
+            
+        public:
             //提交纹理
             virtual void submitTex(u32 _channel,TexUnit& _unit);
             //提交unifrom matrix

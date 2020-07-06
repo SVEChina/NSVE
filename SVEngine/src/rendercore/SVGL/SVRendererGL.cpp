@@ -75,6 +75,22 @@ void SVRendererGL::resize(s32 _w,s32 _h) {
 //    m_pRenderTex->setTexture(t_tex);
 }
 
+//处理技术
+void SVRendererGL::processTech(SVRTechPtr _tech) {
+    
+}
+
+//处理材质
+void SVRendererGL::processMtl(SVMtlCorePtr _mtl) {
+    
+}
+
+//处理mesh
+void SVRendererGL::processMesh(SVRenderMeshPtr _mesh) {
+    
+}
+
+
 //
 void SVRendererGL::submitTex(u32 _channel,TexUnit& _unit){
     SVRenderStateGLPtr pState = std::static_pointer_cast<SVRenderStateGL>(m_pRState);

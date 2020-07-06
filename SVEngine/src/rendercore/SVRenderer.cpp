@@ -115,7 +115,7 @@ void SVRenderer::removeUnuseRes() {
 }
 
 //处理技术
-void SVRenderer::processTech() {
+void SVRenderer::processTech(SVRTechPtr _tech) {
     
 }
            

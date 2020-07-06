@@ -58,7 +58,7 @@ namespace sv {
             void clearRes();
             
             //处理技术
-            virtual void processTech();
+            virtual void processTech(SVRTechPtr _tech);
             
             //处理材质
             virtual void processMtl(SVMtlCorePtr _mtl);
