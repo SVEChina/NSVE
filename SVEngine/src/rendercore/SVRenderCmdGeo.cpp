@@ -21,7 +21,7 @@ SVRenderCmdGeo::~SVRenderCmdGeo() {
     m_pMtl = nullptr;
 }
 
-void SVRenderCmdGeo::render(){
+void SVRenderCmdGeo::render(SVRendererPtr _renderer){
     if (m_pMtl ) {
         if (m_pMtl->submitMtl()) {
            _render();
@@ -43,7 +43,7 @@ void SVRenderCmdLine::setLine(FVec3& _start, FVec3& _end){
     m_end = _end;
 }
 
-void SVRenderCmdLine::_render(){
+void SVRenderCmdLine::_render(SVRendererPtr _renderer){
     V3 t_verts[2];
     t_verts[0].x = m_start.x;
     t_verts[0].y = m_start.y;
@@ -65,7 +65,7 @@ void SVRenderCmdRect::setRect(SVRect& _rect){
     m_rect = _rect;
 }
 
-void SVRenderCmdRect::_render(){
+void SVRenderCmdRect::_render(SVRendererPtr _renderer){
     V3 t_verts[4];
     t_verts[0].x = m_rect.m_lb_pt.x;
     t_verts[0].y = m_rect.m_lb_pt.y;
@@ -88,7 +88,7 @@ void SVRenderCmdRect::_render(){
 }
 
 
-void SVRenderCmdCurve::_render(){
+void SVRenderCmdCurve::_render(SVRendererPtr _renderer){
 //    V3 t_verts[4];
 //    t_verts[0].x = m_rect.m_lb_pt.X;
 //    t_verts[0].y = m_rect.m_lb_pt.Y;
@@ -132,7 +132,7 @@ void SVRenderCmdCircle::_render(){
     //    glDrawArrays(GL_LINE_LOOP,0,4);
 }
 
-void SVRenderCmdCircleSolid::_render(){
+void SVRenderCmdCircleSolid::_render(SVRendererPtr _renderer){
     //    V3 t_verts[4];
     //    t_verts[0].x = m_rect.m_lb_pt.X;
     //    t_verts[0].y = m_rect.m_lb_pt.Y;
@@ -172,7 +172,7 @@ void SVRenderCmdAABB::setAABB(SVBoundBox& _aabb){
  0---------4/
  */
 
-void SVRenderCmdAABB::_render(){
+void SVRenderCmdAABB::_render(SVRendererPtr _renderer){
     V3 t_verts[24];
     // 0-4
     t_verts[0].x = m_aabb.getMin().x;

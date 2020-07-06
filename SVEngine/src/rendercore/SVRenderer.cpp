@@ -114,6 +114,21 @@ void SVRenderer::removeUnuseRes() {
     m_resLock->unlock();
 }
 
+//处理技术
+void SVRenderer::processTech() {
+    
+}
+           
+//处理材质
+void SVRenderer::processMtl(SVMtlCorePtr _mtl) {
+    
+}
+           
+//处理mesh
+void SVRenderer::processMesh(SVRenderMeshPtr _mesh) {
+    
+}
+
 SVRenderTexturePtr SVRenderer::getRenderTexture() {
     return m_pRenderTex;
 }

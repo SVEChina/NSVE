@@ -56,10 +56,22 @@ namespace sv {
             void removeRes(SVRObjBasePtr _res);
             //清理渲染内核资源
             void clearRes();
+            
+            //处理技术
+            virtual void processTech();
+            
+            //处理材质
+            virtual void processMtl(SVMtlCorePtr _mtl);
+            
+            //处理mesh
+            virtual void processMesh(SVRenderMeshPtr _mesh);
+            
             //自动回收
             virtual void removeUnuseRes();
+            
             //获取渲染到纹理
             SVRenderTexturePtr getRenderTexture();
+            
             //创建内置纹理
             virtual SVTexturePtr createSVTex(SVTEXTYPE _type,s32 _w,s32 _h,s32 _formate, bool _enableMipMap = false);
             //创建内置纹理

@@ -31,7 +31,7 @@ SVRenderCmd::SVRenderCmd() {
 SVRenderCmd::~SVRenderCmd() {
 }
 
-void SVRenderCmd::render() {
+void SVRenderCmd::render(SVRendererPtr _renderer) {
 }
 
 //
@@ -60,7 +60,7 @@ SVRCmdCreate::~SVRCmdCreate() {
     //m_pRenderer = nullptr;
 }
 
-void SVRCmdCreate::render(){
+void SVRCmdCreate::render(SVRendererPtr _renderer){
 //    if(m_pRObj && m_pRenderer){
 //        m_pRObj->create(m_pRenderer);
 //        //m_pRenderer->addRes(m_pRObj);
@@ -86,7 +86,7 @@ void SVRenderCmdNor::setMaterial(SVMtlCorePtr _mtl){
     m_pMtl = _mtl;
 }
 
-void SVRenderCmdNor::render() {
+void SVRenderCmdNor::render(SVRendererPtr _renderer) {
     if (m_pMtl && m_pMesh) {
         int t_prop = m_pMtl->submitMtl();
 //        if () {
@@ -115,7 +115,7 @@ void SVRenderCmdClear::setClearColor(f32 _r,f32 _g,f32 _b,f32 _a) {
     m_color_a = _a;
 }
 
-void SVRenderCmdClear::render(){
+void SVRenderCmdClear::render(SVRendererPtr _renderer){
 //    if(m_pRenderer){
 //        m_pRenderer->svClearColor(m_color_r,m_color_g,m_color_b,m_color_a);
 //        m_pRenderer->svClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
@@ -136,13 +136,13 @@ void SVRenderCmdAdapt::setWinSize(s32 _w,s32 _h){
     m_winHeight = _h;
 }
 
-void SVRenderCmdAdapt::render(){
+void SVRenderCmdAdapt::render(SVRendererPtr _renderer){
     glViewport( 0, 0,m_winWidth,m_winHeight);
 //    m_pRenderer->svClearColor(m_color_r,m_color_g,m_color_b,m_color_a);
 //    m_pRenderer->svClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 ////    glClearColor(m_color_r,m_color_g,m_color_b,m_color_a);
 ////    glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-    SVRenderCmdNor::render();
+    SVRenderCmdNor::render(_renderer);
 }
 
 //渲染命令批次
@@ -166,7 +166,7 @@ void SVRenderCmdPass::setTexture(SVTexturePtr _tex) {
     m_tex = _tex;
 }
 
-void SVRenderCmdPass::render() {
+void SVRenderCmdPass::render(SVRendererPtr _renderer) {
     if(m_fbo && m_tex ) {
         m_fbo->setTexture(m_tex);
         m_fbo->bind();
@@ -195,7 +195,7 @@ SVRenderCmdPassCollection::~SVRenderCmdPassCollection(){
     m_MeshArray.clear();
 }
 
-void SVRenderCmdPassCollection::render(){
+void SVRenderCmdPassCollection::render(SVRendererPtr _renderer){
     if(m_fbo && m_tex ) {
         m_fbo->setTexture(m_tex);
         m_fbo->bind();
@@ -236,7 +236,7 @@ SVRenderCmdFboBind::~SVRenderCmdFboBind(){
     m_fbo = nullptr;
 }
 
-void SVRenderCmdFboBind::render() {
+void SVRenderCmdFboBind::render(SVRendererPtr _renderer) {
     if (m_fbo) {
         m_fbo->bind();
     }
@@ -251,7 +251,7 @@ SVRenderCmdFboUnbind::~SVRenderCmdFboUnbind(){
     m_fbo = nullptr;
 }
 
-void SVRenderCmdFboUnbind::render() {
+void SVRenderCmdFboUnbind::render(SVRendererPtr _renderer) {
     if (m_fbo) {
         m_fbo->unbind();
     }
@@ -265,7 +265,7 @@ SVRenderCmdPushVPMat::SVRenderCmdPushVPMat(FMat4& _vm,FMat4& _pm) {
 SVRenderCmdPushVPMat::~SVRenderCmdPushVPMat() {
 }
 
-void SVRenderCmdPushVPMat::render() {
+void SVRenderCmdPushVPMat::render(SVRendererPtr _renderer) {
 //    if(m_pRenderer) {
 //        m_pRenderer->pushViewMat(m_vm);
 //        m_pRenderer->pushProjMat(m_pm);
@@ -280,7 +280,7 @@ SVRenderCmdPopVPMat::SVRenderCmdPopVPMat() {
 SVRenderCmdPopVPMat::~SVRenderCmdPopVPMat() {
 }
 
-void SVRenderCmdPopVPMat::render() {
+void SVRenderCmdPopVPMat::render(SVRendererPtr _renderer) {
 //    if(m_pRenderer) {
 //        m_pRenderer->popViewMat();
 //        m_pRenderer->popProjMat();
@@ -297,7 +297,7 @@ SVRenderCmdPushMat::SVRenderCmdPushMat(FMat4& _mat,s32 _type) {
 SVRenderCmdPushMat::~SVRenderCmdPushMat(){
 }
 
-void SVRenderCmdPushMat::render() {
+void SVRenderCmdPushMat::render(SVRendererPtr _renderer) {
 //    if(m_pRenderer) {
 //        if(m_type==0 ) {
 //            m_pRenderer->pushViewMat(m_mat);
@@ -316,7 +316,7 @@ SVRenderCmdPopMat::SVRenderCmdPopMat(s32 _type) {
 SVRenderCmdPopMat::~SVRenderCmdPopMat(){
 }
 
-void SVRenderCmdPopMat::render() {
+void SVRenderCmdPopMat::render(SVRendererPtr _renderer) {
 //    if(m_pRenderer) {
 //        if(m_type==0 ) {
 //            m_pRenderer->popViewMat();

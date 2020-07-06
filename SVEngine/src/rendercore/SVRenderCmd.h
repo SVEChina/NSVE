@@ -25,7 +25,7 @@ namespace sv {
             
             ~SVRenderCmd();
             
-            virtual void render();
+            virtual void render(SVRendererPtr _renderer = nullptr);
             
             SVString mTag;
             
@@ -51,7 +51,7 @@ namespace sv {
             
             ~SVRCmdCreate();
             
-            virtual void render();
+            virtual void render(SVRendererPtr _renderer);
             
         protected:
             SVRObjBasePtr m_pRObj;
@@ -64,7 +64,7 @@ namespace sv {
             
             ~SVRenderCmdNor();
             
-            virtual void render();
+            virtual void render(SVRendererPtr _renderer);
             
             void setMesh(SVRenderMeshPtr _mesh);
             
@@ -84,7 +84,7 @@ namespace sv {
             
             void setClearColor(f32 _r,f32 _g,f32 _b,f32 _a);
             
-            virtual void render();
+            virtual void render(SVRendererPtr _renderer);
             
         protected:
             f32 m_color_r;
@@ -102,7 +102,7 @@ namespace sv {
             
             void setWinSize(s32 _w,s32 _h);
             
-            virtual void render();
+            virtual void render(SVRendererPtr _renderer);
             
         protected:
             s32 m_winWidth;
@@ -117,7 +117,7 @@ namespace sv {
             
             ~SVRenderCmdPass();
 
-            virtual void render();
+            virtual void render(SVRendererPtr _renderer);
             
             void setFbo(SVRenderTexturePtr _fbo);
             
@@ -136,7 +136,7 @@ namespace sv {
             
             ~SVRenderCmdPassCollection();
             
-            virtual void render();
+            virtual void render(SVRendererPtr _renderer);
             
             void setFbo(SVRenderTexturePtr _fbo);
             
@@ -160,7 +160,7 @@ namespace sv {
             
             ~SVRenderCmdFboBind();
             
-            virtual void render();
+            virtual void render(SVRendererPtr _renderer);
             
         protected:
             SVFboObjectPtr m_fbo;
@@ -173,7 +173,7 @@ namespace sv {
             
             ~SVRenderCmdFboUnbind();
             
-            virtual void render();
+            virtual void render(SVRendererPtr _renderer);
         protected:
             SVFboObjectPtr m_fbo;
         };
@@ -185,7 +185,7 @@ namespace sv {
             
             ~SVRenderCmdPushVPMat();
             
-            virtual void render();
+            virtual void render(SVRendererPtr _renderer);
             
         protected:
             FMat4 m_vm;
@@ -199,7 +199,7 @@ namespace sv {
             
             ~SVRenderCmdPopVPMat();
             
-            virtual void render();
+            virtual void render(SVRendererPtr _renderer);
         };
         
         //
@@ -210,7 +210,7 @@ namespace sv {
             
             ~SVRenderCmdPushMat();
             
-            virtual void render();
+            virtual void render(SVRendererPtr _renderer);
             
         protected:
             FMat4 m_mat;
@@ -225,7 +225,7 @@ namespace sv {
             
             ~SVRenderCmdPopMat();
             
-            virtual void render();
+            virtual void render(SVRendererPtr _renderer);
             
         protected:
             s32 m_type;

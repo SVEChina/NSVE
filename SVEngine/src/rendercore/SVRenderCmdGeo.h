@@ -16,8 +16,6 @@
 
 namespace sv {
     
-    
-        
         //线绘制
         class SVRenderCmdGeo : public SVRenderCmd {
         public:
@@ -25,7 +23,7 @@ namespace sv {
             
             ~SVRenderCmdGeo();
             
-            virtual void render();
+            virtual void render(SVRendererPtr _renderer);
             
 //            void setMtl(SVMtlCorePtr _material);
             
@@ -41,7 +39,7 @@ namespace sv {
             void setLine(FVec3& _start,FVec3& _end);
             
         protected:
-            virtual void _render();
+            virtual void _render(SVRendererPtr _renderer);
             
             FVec3 m_start;
             FVec3 m_end;
@@ -53,7 +51,7 @@ namespace sv {
             void setRect(SVRect& _rect);
             
         protected:
-            virtual void _render();
+            virtual void _render(SVRendererPtr _renderer);
             
             SVRect m_rect;
         };
@@ -63,7 +61,7 @@ namespace sv {
         public:
             
         protected:
-            virtual void _render();
+            virtual void _render(SVRendererPtr _renderer);
         
         public:
             SVArray<FVec3> m_ptList;
@@ -85,7 +83,7 @@ namespace sv {
         public:
             
         protected:
-            virtual void _render();
+            virtual void _render(SVRendererPtr _renderer);
             FVec3 m_center;
             f32 m_radius;
             f32 m_angle;
@@ -97,7 +95,7 @@ namespace sv {
             void setAABB(SVBoundBox& _aabb);
             
         protected:
-            virtual void _render();
+            virtual void _render(SVRendererPtr _renderer);
             
             SVBoundBox m_aabb;
         };

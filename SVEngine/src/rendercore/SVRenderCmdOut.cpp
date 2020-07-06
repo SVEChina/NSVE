@@ -49,7 +49,7 @@ void SVRenderCmdStreamOutNor::setParam(SVRenderTexturePtr _fbo,
     m_pCB = _cb;
 }
 
-void SVRenderCmdStreamOutNor::render() {
+void SVRenderCmdStreamOutNor::render(SVRendererPtr _renderer) {
 //    if(m_fbo && m_tex && m_pMtl && m_pMesh && m_dataswap) {
 //        m_fbo->setTexture(m_tex);
 //        m_fbo->bind();
