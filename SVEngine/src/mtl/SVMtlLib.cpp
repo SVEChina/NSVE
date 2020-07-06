@@ -43,6 +43,21 @@ SVMtlCorePtr SVMtlLib::getSkinMtl(SVInst* _app) {
 }
 
 SVMtlCorePtr SVMtlLib::get3DNorMtl(SVInst* _app) {
-SVMtlCorePtr t_mtl = MakeSharedPtr<SVMtlGLTF>(_app);
-return t_mtl;
+    SVMtlCorePtr t_mtl = MakeSharedPtr<SVMtlGLTF>(_app);
+    return t_mtl;
+}
+
+//材质名称和shader名称有个映射关系
+SVString SVMtlLib::mapName(cptr8 _name) {
+    return "";
+}
+
+SVMtlCorePtr SVMtlLib::genMtl(SVInst* _app,cptr8 _name) {
+    SVString t_mtlname = _name;
+    SVString t_shadername = mapName(_name);
+    SVMtlCorePtr t_mtl = MakeSharedPtr<SVMtlCore>(_app,t_shadername.c_str());
+    if(t_mtlname == "SVMtl2D") {
+        t_mtl->setParam("u_alpha",0.0f);
+    }
+    return t_mtl;
 }

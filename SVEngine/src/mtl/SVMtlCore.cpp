@@ -8,6 +8,7 @@
 
 #include "SVMtlCore.h"
 #include "SVGLModify.h"
+#include "../base/SVDataChunk.h"
 #include "../operate/SVOpCreate.h"
 #include "../mtl/SVTexture.h"
 #include "../rendercore/SVRenderScene.h"
@@ -19,19 +20,17 @@
 using namespace sv;
 
 SVMtlCoreParam::SVMtlCoreParam(){
-    //m_shader = "normal2d";
 }
 
 SVMtlCorePtr SVMtlCoreParam::genMtl(SVInst *_app){
-    //SVMtlCorePtr t_mtl = MakeSharedPtr<SVMtlCore>(_app,m_shader.c_str());
-    //return t_mtl;
-    return nullptr;
+    return nullptr;    
 }
 
 //
 SVMtlCore::SVMtlCore(SVInst *_app, cptr8 _shader)
 :SVGBase(_app)
 ,m_mtlname(_shader){
+    m_ParamValues = MakeSharedPtr<SVDataChunk>();
     reset();
 }
 
@@ -59,21 +58,6 @@ SVMtlCorePtr SVMtlCore::clone() {
     return PointerSharedPtr<SVMtlCore>(new SVMtlCore(this));
 }
 
-//设置参数
-void SVMtlCore::setParam(cptr8 _param,cptr8 _type,void* _data) {
-    //SVArray<InParam> m_paramTbl;
-}
-
-//获取参数
-void SVMtlCore::getParam(cptr8 _param) {
-    
-}
-
-//获取参数类型
-cptr8 SVMtlCore::getParamType(cptr8 _param) {
-    return nullptr;
-}
-
 void SVMtlCore::reset() {
     m_LogicMtlFlag0 = 0;
     m_LogicParamTex.reset();
@@ -85,6 +69,66 @@ void SVMtlCore::reset() {
     m_LogicParamSize.reset();
     m_LogicParamMatrix.reset();
     m_LogicParamZOff.reset();
+}
+
+void SVMtlCore::setParam(cptr8 _name,s32 _value) {
+    for(int i=0;i<m_aramTbl.size();i++) {
+        if( strcmp( m_aramTbl[i].m_name.c_str() ,_name) == 0 ) {
+            //找到目标参数 ，拷贝即可
+            m_ParamValues->set(m_aramTbl[i].m_off,_value);
+            return ;
+        }
+    }
+    //推送目标参数
+    InParam t_param;
+    t_param.m_name = _name;
+    t_param.m_size = sizeof(s32);
+    t_param.m_off = m_ParamValues->push(_value);
+    m_aramTbl.push_back(t_param);
+}
+
+void SVMtlCore::setParam(cptr8 _name,f32 _value) {
+    for(int i=0;i<m_aramTbl.size();i++) {
+        if( strcmp( m_aramTbl[i].m_name.c_str() ,_name) == 0 ) {
+            //找到目标参数 ，拷贝即可
+            m_ParamValues->set(m_aramTbl[i].m_off,_value);
+            return ;
+        }
+    }
+    //推送目标参数
+    InParam t_param;
+    t_param.m_name = _name;
+    t_param.m_size = sizeof(f32);
+    t_param.m_off = m_ParamValues->push(_value);
+    m_aramTbl.push_back(t_param);
+}
+
+void SVMtlCore::setParam(cptr8 _name,FVec2 _value) {
+    
+}
+
+void SVMtlCore::setParam(cptr8 _name,FVec3 _value) {
+    
+}
+
+void SVMtlCore::setParam(cptr8 _name,FVec4 _value) {
+    
+}
+
+void SVMtlCore::setParam(cptr8 _name,FMat4 _value) {
+    
+}
+
+void* SVMtlCore::getParam(cptr8 _name) {
+    u64 t_off = 0;
+    for(int i=0;i<m_aramTbl.size();i++) {
+        if( strcmp( m_aramTbl[i].m_name.c_str() ,_name) == 0 ) {
+            //找到目标参数 ，拷贝即可
+            t_off = m_aramTbl[i].m_off;
+            break;
+        }
+    }
+    return m_ParamValues->getPointer(t_off);
 }
 
 void SVMtlCore::setModelMatrix(f32 *_mat) {
@@ -143,29 +187,20 @@ void SVMtlCore::reloadShader(cptr8 _shader){
     m_mtlname = _shader;
 }
 
-//渲染更新(跑渲染参数)
+//提交参数到GPU
 s32 SVMtlCore::submitMtl() {
-////    //单线程(交换改变池)
-////    swap();
-//    SVRendererPtr t_renderer = mApp->getRenderer();
-//    if(!t_renderer)
-//        return false;
-//    if (!m_pShader){
-//        _loadShader();//加载shader
-//        if(!m_pShader){
-//            SV_LOG_INFO("SHADER ERROR %s \n",m_mtlname.c_str());
-//            return false;
-//        }
-//    }
-//    _refreshMatrix();
-//    _refreshModify();
-//    //提交shader
-////    if(m_pShader) {
-////        m_pShader->active(t_renderer);
-////    }
-//    _submitUniform(t_renderer);
-//    _submitState(t_renderer);
-//    _submitMtl(t_renderer);
+    //根据渲染器来，提交不同的数据和状态
+    SVRendererPtr t_renderer = mApp->getRenderer();
+    if(!t_renderer)
+        return 0;
+    //激活shader
+    
+    //提交UNIFORM
+    _submitUniform(t_renderer);
+    //提交纹理
+    _submitTexture(t_renderer);
+    //提交状态
+    _submitState(t_renderer);
     return m_pShader;
 }
 
@@ -248,42 +283,11 @@ void SVMtlCore::_refreshModify(){
 }
 
 void SVMtlCore::_submitUniform(SVRendererPtr _render) {
-    //get uniform
-    if((m_LogicMtlFlag0&MTL_F0_MAT_M)>0){
-        _render->submitUniformMatrix(NAME_M_MATRIX, m_LogicParamMatrix.m_mat_model);
-    }
-    //
-    if((m_LogicMtlFlag0&MTL_F0_MAT_V)>0){
-        _render->submitUniformMatrix(NAME_V_MATRIX, m_LogicParamMatrix.m_mat_view);
-    }
-    //
-    if((m_LogicMtlFlag0&MTL_F0_MAT_P)>0){
-        _render->submitUniformMatrix(NAME_P_MATRIX, m_LogicParamMatrix.m_mat_project);
-    }
-    //
-    if((m_LogicMtlFlag0&MTL_F0_MAT_VP)>0){
-        _render->submitUniformMatrix(NAME_VP_MATRIX, m_LogicParamMatrix.m_mat_vp);
-    }
-    //
-    if((m_LogicMtlFlag0&MTL_F0_TEX_SIZE)>0){
-        _render->submitUniformf2v(NAME_TEXSIZE_0, m_LogicParamSize.m_tex0size);
-    }
-    //
-    if((m_LogicMtlFlag0&MTL_F1_TEX_SIZE)>0){
-        _render->submitUniformf2v(NAME_TEXSIZE_1, m_LogicParamSize.m_tex1size);
-    }
-    //
-    if((m_LogicMtlFlag0&MTL_F2_TEX_SIZE)>0){
-        _render->submitUniformf2v(NAME_TEXSIZE_2, m_LogicParamSize.m_tex2size);
-    }
-    //
-    if((m_LogicMtlFlag0&MTL_F3_TEX_SIZE)>0){
-        _render->submitUniformf2v(NAME_TEXSIZE_3, m_LogicParamSize.m_tex3size);
-    }
-    //
-    if((m_LogicMtlFlag0&MTL_F0_POINT_SIZE)>0){
-        _render->submitUniformf(NAME_POINTSIZE, m_LogicParamSize.m_ptsize);
-    }
+    
+}
+
+void SVMtlCore::_submitTexture(SVRendererPtr _render){
+    
 }
 
 void SVMtlCore::_submitState(SVRendererPtr _render) {

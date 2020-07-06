@@ -50,13 +50,13 @@ bool SVLoaderGLTF::loadFromFile(cptr8 _filename){
     if (!tflag)
         return false;
     SV_LOG_INFO("SVLoaderGLTF :load glTF JSON sucess\n");
-    SV_LOG_INFO("SVLoaderGLTF :filedata %s\n", tDataStream.m_data);
-    if (!tDataStream.m_data) {
+    SV_LOG_INFO("SVLoaderGLTF :filedata %s\n", tDataStream.getPointerChar() );
+    if (!tDataStream.getPointerChar() ) {
         SV_LOG_ERROR("SVLoaderGLTF :data stream is null");
         return false;
     }
     RAPIDJSON_NAMESPACE::Document doc;
-    doc.Parse(tDataStream.m_data);
+    doc.Parse(tDataStream.getPointerChar());
     if (doc.HasParseError()) {
         RAPIDJSON_NAMESPACE::ParseErrorCode code = doc.GetParseError();
         SV_LOG_ERROR("SVLoaderGLTF :rapidjson error code:%d \n", code);
@@ -1596,18 +1596,18 @@ bool SVLoaderGLTF::_loadExternalFile(SVDataSwapPtr _dataOut, cptr8 _filename, s6
         SV_LOG_ERROR("SVLoaderGLTF Error:load ExternalFile failed\n");
         return false;
     }
-    SV_LOG_INFO("SVLoaderGLTF :ExternalFile filedata %s\n", tDataStream.m_data);
-    if (!tDataStream.m_data) {
+    SV_LOG_INFO("SVLoaderGLTF :ExternalFile filedata %s\n", tDataStream.getPointerChar());
+    if (!tDataStream.getPointerChar()) {
         SV_LOG_ERROR("SVLoaderGLTF Error:ExternalFile data stream is null");
         return false;
     }
     
     //SVDataChunk 空间多申请了一个字节
-    if ((tDataStream.m_size - 1) != _reqBytes) {
+    if ((tDataStream.getRealSize() - 1) != _reqBytes) {
         SV_LOG_ERROR("SVLoaderGLTF Error:ExternalFile File size mismatch requestedBytes");
         return false;
     }
-    _dataOut->writeData(tDataStream.m_data, tDataStream.m_size);
+    _dataOut->writeData(tDataStream.getPointerChar(), tDataStream.getRealSize());
     return true;
 }
 

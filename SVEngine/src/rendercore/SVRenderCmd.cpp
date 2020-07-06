@@ -88,10 +88,11 @@ void SVRenderCmdNor::setMaterial(SVMtlCorePtr _mtl){
 
 void SVRenderCmdNor::render() {
     if (m_pMtl && m_pMesh) {
-        if (m_pMtl->submitMtl()) {
-            //m_pMesh->render(m_pRenderer);
-            m_pMtl->recoverMtl();
-        }
+        int t_prop = m_pMtl->submitMtl();
+//        if () {
+//            m_pMesh->render(m_pRenderer);
+//            m_pMtl->recoverMtl();
+//        }
     }
 }
 

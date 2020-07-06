@@ -110,12 +110,12 @@ void SVConfig::loadConfig() {
     bool tflag = mApp->getFileMgr()->loadFileContentStr(&tDataStream, "svres/fmcfg.json");
     if (!tflag)
         return ;
-    if (!tDataStream.m_data) {
+    if (!tDataStream.getPointer()) {
         SV_LOG_ERROR("data stream is null");
         return ;
     }
     RAPIDJSON_NAMESPACE::Document doc;
-    doc.Parse(tDataStream.m_data);
+    doc.Parse(tDataStream.getPointerChar() );
     if (doc.HasParseError()) {
         RAPIDJSON_NAMESPACE::ParseErrorCode code = doc.GetParseError();
         SV_LOG_ERROR("rapidjson error code:%d \n", code);

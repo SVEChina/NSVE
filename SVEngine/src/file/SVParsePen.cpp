@@ -37,14 +37,14 @@ SVModuleBasePtr SVParsePen::parse(cptr8 _path, s32 _resid){
     if (!tflag)
         return nullptr;
     SV_LOG_ERROR("SVParsePen::load effect sucess\n");
-    SV_LOG_ERROR("filedata %s\n", tDataStream.m_data);
-    if (!tDataStream.m_data) {
+    SV_LOG_ERROR("filedata %s\n", tDataStream.getPointerChar() );
+    if (!tDataStream.getPointer() ) {
         SV_LOG_ERROR("data stream is null");
         return nullptr;
     }
     
     RAPIDJSON_NAMESPACE::Document doc;
-    doc.Parse(tDataStream.m_data);
+    doc.Parse(tDataStream.getPointerChar() );
     if (doc.HasParseError()) {
         RAPIDJSON_NAMESPACE::ParseErrorCode code = doc.GetParseError();
         SV_LOG_ERROR("rapidjson error code:%d \n", code);

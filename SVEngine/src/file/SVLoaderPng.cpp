@@ -49,7 +49,7 @@ void SVLoaderPng::loadData(cptr8 name, u8 **data) {
     SVDataChunk tSVDataChunk;
     bool t_flag = mApp->getFileMgr()->loadFileContent(&tSVDataChunk, name);
     if (t_flag) {
-        _readPngFromStream((void *) tSVDataChunk.m_data, tSVDataChunk.m_size, name, data);
+        _readPngFromStream((void *) tSVDataChunk.getPointer(), tSVDataChunk.getRealSize(), name, data);
     }
 }
 

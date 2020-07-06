@@ -60,9 +60,9 @@ void SVFaceDataMesh::_loadFaceMeshData(cptr8 _name){
        // MA_LOG_INFO(info.c_str());
         return;
     }
-    SV_LOG_DEBUG("file facemeshdata %s \n", tDataStream.m_data);
+    SV_LOG_DEBUG("file facemeshdata %s \n", tDataStream.getPointerChar());
     RAPIDJSON_NAMESPACE::Document doc;
-    doc.Parse<0>(tDataStream.m_data);
+    doc.Parse<0>(tDataStream.getPointerChar());
     if (doc.HasParseError()) {
         RAPIDJSON_NAMESPACE::ParseErrorCode code = doc.GetParseError();
         SV_LOG_DEBUG("rapidjson error code:%d \n", code);
@@ -107,9 +107,9 @@ void SVFaceDataMesh::_loadStanderFaceData(cptr8 _name){
         //MA_LOG_INFO(info.c_str());
         return;
     }
-    SV_LOG_DEBUG("file standerfacedata %s \n", tDataStream.m_data);
+    SV_LOG_DEBUG("file standerfacedata %s \n", tDataStream.getPointerChar());
     RAPIDJSON_NAMESPACE::Document doc;
-    doc.Parse<0>(tDataStream.m_data);
+    doc.Parse<0>(tDataStream.getPointerChar());
     if (doc.HasParseError()) {
         RAPIDJSON_NAMESPACE::ParseErrorCode code = doc.GetParseError();
         SV_LOG_DEBUG("rapidjson error code:%d \n", code);

@@ -14,11 +14,12 @@
 #include "../rendercore/SVRenderDeclare.h"
 #include "SVShaderMgr.h"
 #include "SVMtlParamBase.h"
+//
+#include <vector>
+#include <string>
 
 namespace sv {
     
-    
-        
         class SVMtlCoreParam : public SVObject {
         public:
             SVMtlCoreParam();
@@ -46,6 +47,36 @@ namespace sv {
             virtual s32 submitMtl();
             
             virtual void recoverMtl();
+            
+            //设置参数值 主要是针对uniform
+            void setParam(cptr8 _name,s32 _value);
+            
+            void setParam(cptr8 _name,f32 _value);
+            
+            void setParam(cptr8 _name,FVec2 _value);
+            
+            void setParam(cptr8 _name,FVec3 _value);
+            
+            void setParam(cptr8 _name,FVec4 _value);
+            
+            void setParam(cptr8 _name,FMat4 _value);
+            
+            void* getParam(cptr8 _name);
+            
+            //
+        protected:
+            //参数表
+            struct InParam {
+                std::string m_name; //参数名称
+                int m_size;         //参数数据大小
+                u64 m_off;          //参数数据偏移
+            };
+            //
+            std::vector<InParam> m_aramTbl;
+            //参数值
+            SVDataChunkPtr m_ParamValues;
+            
+        public:
             
             void swap();
                         
@@ -99,28 +130,8 @@ namespace sv {
             void setStencilZfail(s32 _method);
             
             void setStencilSfail(s32 _method);
-            //
+            
             void reloadShader(cptr8 _shader);
-            
-            
-        public:
-            //uniform 参数
-            struct InParam {
-                SVString m_name;
-                SVString m_type;
-                void* _pdata;
-            };
-            //参数表
-            SVArray<InParam> m_paramTbl;
-            
-            //设置参数
-            void setParam(cptr8 _param,cptr8 _type,void* _data);
-            //获取参数
-            void getParam(cptr8 _param);
-            //获取参数类型
-            cptr8 getParamType(cptr8 _param);
-            
-            //状态部分 tex,blend,stencil,alpha
             
         public:
             SVString m_mtlname;
@@ -135,13 +146,13 @@ namespace sv {
             SVAlphaParam m_LogicParamAlpha;              //alpha参数
             SVSizeParam m_LogicParamSize;                //尺寸参数
             SVZOffParam m_LogicParamZOff;                //Z偏移参数
-
             
         protected:
             void _loadShader();
             virtual void _refreshMatrix();
             virtual void _refreshModify();
             virtual void _submitUniform(SVRendererPtr _render);
+            virtual void _submitTexture(SVRendererPtr _render);
             virtual void _submitState(SVRendererPtr _render);
             virtual void _submitMtl(SVRendererPtr _render);
             

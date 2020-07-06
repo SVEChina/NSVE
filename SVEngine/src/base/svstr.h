@@ -16,7 +16,6 @@ namespace sv {
         public:
             SVString();
             
-            //explicit SVString(cptr8 s);
             SVString(cptr8 s);
             
             SVString(const SVString &s);
