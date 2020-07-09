@@ -12,7 +12,7 @@
 
 using namespace sv;
 
-SVResTex::SVResTex(SVInst* _app)
+SVResTex::SVResTex(SVInstPtr _app)
 :SVRObjBase(_app){
     m_uid = mApp->m_IDPool.applyUID();
     m_texLock = MakeSharedPtr<SVLock>();

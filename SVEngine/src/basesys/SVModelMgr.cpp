@@ -12,7 +12,7 @@
 
 using namespace sv;
 
-SVModelMgr::SVModelMgr(SVInst* _app)
+SVModelMgr::SVModelMgr(SVInstPtr _app)
 :SVSysBase(_app){
     m_lock = MakeSharedPtr<SVLock>();
 }

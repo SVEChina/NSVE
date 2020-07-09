@@ -17,7 +17,7 @@ namespace sv {
         
         class SVMtlBrightnessContrast : public SVMtlCore  {
         public:
-            SVMtlBrightnessContrast(SVInst *_app);
+            SVMtlBrightnessContrast(SVInstPtr _app);
             
             SVMtlBrightnessContrast(SVMtlBrightnessContrast* _mtl);
             
@@ -38,7 +38,7 @@ namespace sv {
         
         class SVMtlSaturation : public SVMtlCore  {
         public:
-            SVMtlSaturation(SVInst *_app);
+            SVMtlSaturation(SVInstPtr _app);
             
             SVMtlSaturation(SVMtlSaturation* _mtl);
             
@@ -56,7 +56,7 @@ namespace sv {
         
         class SVMtlVibrance : public SVMtlCore  {
         public:
-            SVMtlVibrance(SVInst *_app);
+            SVMtlVibrance(SVInstPtr _app);
             
             SVMtlVibrance(SVMtlVibrance* _mtl);
             
@@ -74,7 +74,7 @@ namespace sv {
         
         class SVMtlShadowHighlight : public SVMtlCore  {
         public:
-            SVMtlShadowHighlight(SVInst *_app);
+            SVMtlShadowHighlight(SVInstPtr _app);
             
             SVMtlShadowHighlight(SVMtlShadowHighlight* _mtl);
             
@@ -100,7 +100,7 @@ namespace sv {
         
         class SVMtlWhiteBlackLevel : public SVMtlCore  {
         public:
-            SVMtlWhiteBlackLevel(SVInst *_app);
+            SVMtlWhiteBlackLevel(SVInstPtr _app);
             
             SVMtlWhiteBlackLevel(SVMtlWhiteBlackLevel* _mtl);
             
@@ -126,7 +126,7 @@ namespace sv {
         
         class SVMtlColorBalance: public SVMtlCore  {
         public:
-            SVMtlColorBalance(SVInst *_app);
+            SVMtlColorBalance(SVInstPtr _app);
             
             SVMtlColorBalance(SVMtlColorBalance* _mtl);
             
@@ -178,7 +178,7 @@ namespace sv {
         
         class SVMtlHSL : public SVMtlCore  {
         public:
-            SVMtlHSL(SVInst *_app);
+            SVMtlHSL(SVInstPtr _app);
             
             SVMtlHSL(SVMtlHSL* _mtl);
             
@@ -290,7 +290,7 @@ namespace sv {
         class SVMtlWhiteBalance : public SVMtlCore  {
         public:
             
-            SVMtlWhiteBalance(SVInst *_app);
+            SVMtlWhiteBalance(SVInstPtr _app);
             
             SVMtlWhiteBalance(SVMtlWhiteBalance* _mtl);
             
@@ -312,7 +312,7 @@ namespace sv {
         class SVMtlGamma : public SVMtlCore  {
         public:
             
-            SVMtlGamma(SVInst *_app);
+            SVMtlGamma(SVInstPtr _app);
             
             SVMtlGamma(SVMtlGamma* _mtl);
             
@@ -331,7 +331,7 @@ namespace sv {
         class SVMtlExposure : public SVMtlCore  {
         public:
             
-            SVMtlExposure(SVInst *_app);
+            SVMtlExposure(SVInstPtr _app);
             
             SVMtlExposure(SVMtlExposure* _mtl);
             

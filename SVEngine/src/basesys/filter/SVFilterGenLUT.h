@@ -209,7 +209,7 @@ namespace sv {
         
         class SVFilterGenLUT : public SVFilterBase {
         public:
-            SVFilterGenLUT(SVInst *_app);
+            SVFilterGenLUT(SVInstPtr _app);
             
             ~SVFilterGenLUT();
             

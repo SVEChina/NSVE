@@ -10,7 +10,7 @@
 
 using namespace sv;
 
-SVPythonSys::SVPythonSys(SVInst *_app)
+SVPythonSys::SVPythonSys(SVInstPtr _app)
 :SVSysBase(_app) {
     m_subsysType = 1;
 }

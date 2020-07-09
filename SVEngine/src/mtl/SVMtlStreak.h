@@ -16,7 +16,7 @@ namespace sv {
         
         class SVMtlStreak : public SVMtlADFilterBase {
         public:
-            SVMtlStreak(SVInst *_app);
+            SVMtlStreak(SVInstPtr _app);
             
             SVMtlStreak(SVMtlStreak *_mtl);
             

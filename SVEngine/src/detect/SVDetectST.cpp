@@ -11,7 +11,7 @@
 
 using namespace sv;
 
-SVDetectST::SVDetectST(SVInst *_app)
+SVDetectST::SVDetectST(SVInstPtr _app)
 :SVDetectBase(_app) {
      memset(stData, 0, SUPPORT_MAX_PERSON_NUM * sizeof(PERSON_STDATA));
      memset(stDataOriginal, 0, SUPPORT_MAX_PERSON_NUM * sizeof(PERSON_STDATA));

@@ -17,12 +17,12 @@ namespace sv {
         
         class SVParseAnimate : public SVParseData {
         public:
-            static SVNodePtr parseAnim(SVInst *app, RAPIDJSON_NAMESPACE::Value &item, s32 _resid, cptr8 _path);
+            static SVNodePtr parseAnim(SVInstPtr app, RAPIDJSON_NAMESPACE::Value &item, s32 _resid, cptr8 _path);
         };
         //
         class SVParseGLTF : public SVParseData {
         public:
-            static SVNodePtr parseGLTF(SVInst *app, RAPIDJSON_NAMESPACE::Value &item, s32 _resid, cptr8 _path);
+            static SVNodePtr parseGLTF(SVInstPtr app, RAPIDJSON_NAMESPACE::Value &item, s32 _resid, cptr8 _path);
         };
         
     

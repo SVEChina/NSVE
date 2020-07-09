@@ -16,7 +16,7 @@ namespace sv {
         
         class SVParseMusic : public SVParseData {
         public:
-            static SVEffectMusicPtr parseMusic(SVInst *app, RAPIDJSON_NAMESPACE::Value &item, s32 _resid, cptr8 _path);
+            static SVEffectMusicPtr parseMusic(SVInstPtr app, RAPIDJSON_NAMESPACE::Value &item, s32 _resid, cptr8 _path);
         };
         
     

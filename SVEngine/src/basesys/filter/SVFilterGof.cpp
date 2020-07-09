@@ -17,7 +17,7 @@
 
 using namespace sv;
 
-SVFilterGof::SVFilterGof(SVInst *_app)
+SVFilterGof::SVFilterGof(SVInstPtr _app)
 :SVFilterBase(_app){
     m_type=SV_FUNC_GOF;
     m_name="SVFilterGof";

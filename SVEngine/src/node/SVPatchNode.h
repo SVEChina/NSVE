@@ -15,7 +15,7 @@ namespace sv {
         
         class SVPatchNode : public SVNode {
         public:
-            SVPatchNode(SVInst *_app);
+            SVPatchNode(SVInstPtr _app);
             
             virtual ~SVPatchNode();
             

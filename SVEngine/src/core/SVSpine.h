@@ -43,12 +43,12 @@ namespace sv {
         };
         
         //spine对象
-        class SVSpine : public SVGBase {
+        class SVSpine : public SVGBaseEx {
         public:
             static SVSpinePtr
-            createSpine(SVInst *_app, cptr8 skefname,cptr8 atlasfname, f32 scale = 1.0f, bool enableMipMap = false);
+            createSpine(SVInstPtr _app, cptr8 skefname,cptr8 atlasfname, f32 scale = 1.0f, bool enableMipMap = false);
             
-            SVSpine(SVInst *_app);
+            SVSpine(SVInstPtr _app);
             
             ~SVSpine();
             

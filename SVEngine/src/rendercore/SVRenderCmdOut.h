@@ -20,7 +20,7 @@ namespace sv {
         //普通的流输出
         class SVRenderCmdStreamOutNor : public SVRenderCmdNor {
         public:
-            SVRenderCmdStreamOutNor(SVInst *_app);
+            SVRenderCmdStreamOutNor(SVInstPtr _app);
             
             ~SVRenderCmdStreamOutNor();
             
@@ -40,13 +40,13 @@ namespace sv {
             
             cb_out_stream m_pCB;
 
-            SVInst *mApp;
+            SVInstPtr mApp;
         };
         
         //读取显存数据到NodeDataSwap
         class SVRenderCmdStreamOutIOS : public SVRenderCmdStreamOutNor {
         public:
-            SVRenderCmdStreamOutIOS(SVInst *_app);
+            SVRenderCmdStreamOutIOS(SVInstPtr _app);
             
             ~SVRenderCmdStreamOutIOS();
             

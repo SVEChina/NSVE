@@ -15,7 +15,7 @@ namespace sv {
     //设置美颜滤镜
     class SVOpSetBeautyFilter : public SVOpBase {
     public:
-        SVOpSetBeautyFilter(SVInst* _app,cptr8 _scenename,cptr8 _filter, int _lows);
+        SVOpSetBeautyFilter(SVInstPtr _app,cptr8 _scenename,cptr8 _filter, int _lows);
     protected:
         void _process(f32 _dt);
         SVString m_scenename;
@@ -27,7 +27,7 @@ namespace sv {
     public:
         f32 m_smooth;
         u32 m_type;
-        SVOpUpdateFilterSmooth(SVInst* _app,f32 _smooth,u32 _type);
+        SVOpUpdateFilterSmooth(SVInstPtr _app,f32 _smooth,u32 _type);
     protected:
         void _process(f32 _dt);
       
@@ -36,7 +36,7 @@ namespace sv {
     class SVOpUpdateBSplineFilter : public SVOpBase {
     public:
         SVDataSwapPtr m_pDataSwap;
-        SVOpUpdateBSplineFilter(SVInst* _app,SVDataSwapPtr _pDataSwap);
+        SVOpUpdateBSplineFilter(SVInstPtr _app,SVDataSwapPtr _pDataSwap);
     protected:
         void _process(f32 _dt);
         
@@ -45,7 +45,7 @@ namespace sv {
     //关闭美颜滤镜
     class SVOpCloseBeautyFilter : public SVOpBase {
     public:
-        SVOpCloseBeautyFilter(SVInst* _app);
+        SVOpCloseBeautyFilter(SVInstPtr _app);
     protected:
         void _process(f32 _dt);
     };
@@ -53,7 +53,7 @@ namespace sv {
     //
     class SVOpShapeFaceSmoothFilter : public SVOpBase {
     public:
-        SVOpShapeFaceSmoothFilter(SVInst* _app,f32 _face,f32 _eye);
+        SVOpShapeFaceSmoothFilter(SVInstPtr _app,f32 _face,f32 _eye);
     protected:
         void _process(f32 _dt);
         f32 m_face;
@@ -63,7 +63,7 @@ namespace sv {
     //设置查找表
     class SVOpLUTFilterCreate : public SVOpBase{
     public:
-        SVOpLUTFilterCreate(SVInst* _app,cptr8 _scenename,cptr8 _path,s32 resid);
+        SVOpLUTFilterCreate(SVInstPtr _app,cptr8 _scenename,cptr8 _path,s32 resid);
     protected:
         void _process(f32 _dt);
         SVString m_path;
@@ -72,7 +72,7 @@ namespace sv {
     
     class SVOpLUTFilterDestory : public SVOpBase{
     public:
-        SVOpLUTFilterDestory(SVInst* _app,cptr8 _scenename,s32 resid);
+        SVOpLUTFilterDestory(SVInstPtr _app,cptr8 _scenename,s32 resid);
     protected:
         void _process(f32 _dt);
     };

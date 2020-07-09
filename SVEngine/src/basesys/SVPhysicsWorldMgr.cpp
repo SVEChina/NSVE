@@ -12,7 +12,7 @@
 
 using namespace sv;
 
-SVPhysicsWorldMgr::SVPhysicsWorldMgr(SVInst *_app)
+SVPhysicsWorldMgr::SVPhysicsWorldMgr(SVInstPtr _app)
 :SVSysBase(_app) {
     m_subsysType = 4;
     m_rigidWorld = nullptr;

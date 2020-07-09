@@ -9,7 +9,7 @@
 
 using namespace sv;
 
-SVGameRun::SVGameRun(SVInst *_app)
+SVGameRun::SVGameRun(SVInstPtr _app)
 :SVGamePart(_app) {
 }
 

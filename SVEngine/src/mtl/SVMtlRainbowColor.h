@@ -16,7 +16,7 @@ namespace sv {
         
         class SVMtlRainbowColor : public SVMtlADFilterBase {
         public:
-            SVMtlRainbowColor(SVInst *_app);
+            SVMtlRainbowColor(SVInstPtr _app);
             
             SVMtlRainbowColor(SVMtlRainbowColor *_mtl);
             

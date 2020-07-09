@@ -13,7 +13,7 @@ using namespace sv;
 
 //解析面具
 SVNodePtr
-SVParseMask::parseMask(SVInst *_app, RAPIDJSON_NAMESPACE::Value &item, s32 _resid, cptr8 _path) {
+SVParseMask::parseMask(SVInstPtr _app, RAPIDJSON_NAMESPACE::Value &item, s32 _resid, cptr8 _path) {
 //    SV2DFaceMaskSTNodePtr t_maskNode = MakeSharedPtr<SV2DFaceMaskSTNode>(_app);
 //    t_maskNode->m_rootPath = _path;
 //    t_maskNode->fromJSON(item);

@@ -16,7 +16,7 @@ namespace sv {
         
         class SVMtlDistorted : public SVMtlADFilterBase {
         public:
-            SVMtlDistorted(SVInst *_app);
+            SVMtlDistorted(SVInstPtr _app);
             
             SVMtlDistorted(SVMtlDistorted *_mtl);
             

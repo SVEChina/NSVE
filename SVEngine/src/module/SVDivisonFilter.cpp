@@ -13,7 +13,7 @@
 
 using namespace sv;
 
-SVDivisonFilter::SVDivisonFilter(SVInst *_app)
+SVDivisonFilter::SVDivisonFilter(SVInstPtr _app)
 :SVModuleBase(_app){
     m_module_name = "";
     m_isOpen = false;

@@ -12,7 +12,7 @@
 
 using namespace sv;
 
-SVPerson::SVPerson(SVInst* _app)
+SVPerson::SVPerson(SVInstPtr _app)
 :SVListenBase(_app){
     m_facePtNum = 0;
     m_personID = 0;

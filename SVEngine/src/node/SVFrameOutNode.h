@@ -21,7 +21,7 @@ namespace sv {
         
         class SVFrameOutNode : public SVNode {
         public:
-            SVFrameOutNode(SVInst *_app);
+            SVFrameOutNode(SVInstPtr _app);
             
             virtual ~SVFrameOutNode();
             

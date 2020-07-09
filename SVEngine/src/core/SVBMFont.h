@@ -40,9 +40,9 @@ namespace sv {
                 s32 bottom;
             } SVBMFONTPADDING;
             
-            static SVBMFontPtr creatFnt(cptr8 _filePath, SVInst *_app);
+            static SVBMFontPtr creatFnt(cptr8 _filePath, SVInstPtr _app);
             
-            SVBMFont(SVInst *_app);
+            SVBMFont(SVInstPtr _app);
             
             ~SVBMFont();
             

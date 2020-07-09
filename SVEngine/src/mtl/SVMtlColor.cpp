@@ -12,7 +12,7 @@
 
 using namespace sv;
 
-SVMtlColor::SVMtlColor(SVInst *_app)
+SVMtlColor::SVMtlColor(SVInstPtr _app)
 :SVMtlCore(_app,"color") {
     
 }

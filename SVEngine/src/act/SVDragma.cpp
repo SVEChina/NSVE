@@ -14,8 +14,8 @@
 
 using namespace sv;
 
-SVDragma::SVDragma(SVInst* _app)
-:SVGBase(_app){
+SVDragma::SVDragma(SVInstPtr _app)
+:SVGBaseEx(_app){
     m_lock = MakeSharedPtr<SVLock>();
     m_uid = mApp->m_IDPool.applyUID();
     m_timeLinePool.resize(E_TL_T_MAX);

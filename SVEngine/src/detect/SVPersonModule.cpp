@@ -11,7 +11,7 @@
 
 using namespace sv;
 
-SVPersonModule::SVPersonModule(SVInst* _app)
+SVPersonModule::SVPersonModule(SVInstPtr _app)
 :SVEventProc(_app){
     
 }

@@ -17,7 +17,7 @@
 using namespace sv;
 
 //设置ios相机
-SVOpCreateIOSInstream::SVOpCreateIOSInstream(SVInst *_app, cptr8 _name, PICFORMATE _format, s32 _w, s32 _h,f32 _angle, bool _show)
+SVOpCreateIOSInstream::SVOpCreateIOSInstream(SVInstPtr _app, cptr8 _name, PICFORMATE _format, s32 _w, s32 _h,f32 _angle, bool _show)
         : SVOpBase(_app) {
     m_name = _name;
     m_formate = _format;
@@ -39,7 +39,7 @@ void SVOpCreateIOSInstream::_process(f32 _dt) {
 }
 
 //设置ios相机
-SVOpCreateIOSTexIDInstream::SVOpCreateIOSTexIDInstream(SVInst *_app, cptr8 _name, u32 _tex0ID, u32 _tex1ID, u32 _tex2ID, PICFORMATE _format, s32 _w, s32 _h,f32 _angle, bool _show)
+SVOpCreateIOSTexIDInstream::SVOpCreateIOSTexIDInstream(SVInstPtr _app, cptr8 _name, u32 _tex0ID, u32 _tex1ID, u32 _tex2ID, PICFORMATE _format, s32 _w, s32 _h,f32 _angle, bool _show)
 : SVOpBase(_app) {
     m_name = _name;
     m_formate = _format;
@@ -64,7 +64,7 @@ void SVOpCreateIOSTexIDInstream::_process(f32 _dt) {
 }
 
 //删除ios相机
-SVOpDestroyIOSInstream::SVOpDestroyIOSInstream(SVInst *_app, cptr8 _name)
+SVOpDestroyIOSInstream::SVOpDestroyIOSInstream(SVInstPtr _app, cptr8 _name)
         : SVOpBase(_app) {
     m_name = _name;
 }
@@ -80,7 +80,7 @@ void SVOpDestroyIOSInstream::_process(f32 _dt) {
 }
 
 
-SVOpCreateIOSOutstream::SVOpCreateIOSOutstream(SVInst *_app, cptr8 _name, s32 _format,  s32 _width, s32 _height, s32 _steamType)
+SVOpCreateIOSOutstream::SVOpCreateIOSOutstream(SVInstPtr _app, cptr8 _name, s32 _format,  s32 _width, s32 _height, s32 _steamType)
 : SVOpBase(_app) {
     m_name = _name;
     m_formate = _format;
@@ -99,7 +99,7 @@ void SVOpCreateIOSOutstream::_process(f32 _dt) {
 }
 
 
-SVOpDestroyIOSOutstream::SVOpDestroyIOSOutstream(SVInst *_app, cptr8 _name)
+SVOpDestroyIOSOutstream::SVOpDestroyIOSOutstream(SVInstPtr _app, cptr8 _name)
         : SVOpBase(_app) {
     m_name = _name;
 }
@@ -115,7 +115,7 @@ void SVOpDestroyIOSOutstream::_process(f32 _dt) {
 }
 
 
-SVOpOpenIOSOutstream::SVOpOpenIOSOutstream(SVInst *_app, cb_out_stream _cb)
+SVOpOpenIOSOutstream::SVOpOpenIOSOutstream(SVInstPtr _app, cb_out_stream _cb)
         : SVOpBase(_app) {
     m_cb = _cb;
 }
@@ -130,7 +130,7 @@ void SVOpOpenIOSOutstream::_process(f32 _dt) {
 #endif
 }
 
-SVOpCloseIOSOutstream::SVOpCloseIOSOutstream(SVInst *_app)
+SVOpCloseIOSOutstream::SVOpCloseIOSOutstream(SVInstPtr _app)
         : SVOpBase(_app) {
 }
 
@@ -144,7 +144,7 @@ void SVOpCloseIOSOutstream::_process(f32 _dt) {
 }
 
 //创建安卓相机
-SVOpCreateAndriodCamera::SVOpCreateAndriodCamera(SVInst *_app, s32 _format, s32 _w, s32 _h,
+SVOpCreateAndriodCamera::SVOpCreateAndriodCamera(SVInstPtr _app, s32 _format, s32 _w, s32 _h,
                                                  f32 _angle)
         : SVOpBase(_app) {
     m_formate = _format;
@@ -159,7 +159,7 @@ void SVOpCreateAndriodCamera::_process(f32 _dt) {
 
 }
 
-SVOpDestroyAndoidCamera::SVOpDestroyAndoidCamera(SVInst *_app, cptr8 _name)
+SVOpDestroyAndoidCamera::SVOpDestroyAndoidCamera(SVInstPtr _app, cptr8 _name)
         : SVOpBase(_app) {
     m_name = _name;
 }
@@ -169,7 +169,7 @@ void SVOpDestroyAndoidCamera::_process(f32 _dt) {
 }
 
 //创建纹理相机
-SVOpCreateTextureCamera::SVOpCreateTextureCamera(SVInst *_app, s32 _format, s32 _w, s32 _h,
+SVOpCreateTextureCamera::SVOpCreateTextureCamera(SVInstPtr _app, s32 _format, s32 _w, s32 _h,
                                                  f32 _angle)
         : SVOpBase(_app) {
     m_formate = _format;
@@ -187,7 +187,7 @@ void SVOpCreateTextureCamera::_process(f32 _dt) {
 }
 
 
-SVOpDestroyTextureOutstream::SVOpDestroyTextureOutstream(SVInst *_app, cptr8 _name): SVOpBase(_app) {
+SVOpDestroyTextureOutstream::SVOpDestroyTextureOutstream(SVInstPtr _app, cptr8 _name): SVOpBase(_app) {
     m_name = _name;
 }
 
@@ -201,7 +201,7 @@ void SVOpDestroyTextureOutstream::_process(f32 _dt) {
 
 
 //创建流相机
-SVOpCreateStreamCamera::SVOpCreateStreamCamera(SVInst *_app, cptr8 _name,s32 _format, s32 _w, s32 _h,
+SVOpCreateStreamCamera::SVOpCreateStreamCamera(SVInstPtr _app, cptr8 _name,s32 _format, s32 _w, s32 _h,
                                                f32 _angle)
         : SVOpBase(_app) {
     m_formate = _format;
@@ -219,7 +219,7 @@ void SVOpCreateStreamCamera::_process(f32 _dt) {
     }
 }
 
-SVOpDestroyStreamCamera::SVOpDestroyStreamCamera(SVInst *_app, cptr8 _name)
+SVOpDestroyStreamCamera::SVOpDestroyStreamCamera(SVInstPtr _app, cptr8 _name)
         : SVOpBase(_app) {
     m_name = _name;
 }

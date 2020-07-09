@@ -16,7 +16,7 @@ namespace sv {
     
     class SVShapeVariedNode : public SVNode {
     public:
-        SVShapeVariedNode(SVInst *_app);
+        SVShapeVariedNode(SVInstPtr _app);
         
         virtual ~SVShapeVariedNode();
         

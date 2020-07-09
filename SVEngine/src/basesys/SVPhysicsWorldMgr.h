@@ -14,7 +14,7 @@ namespace sv{
 
         class SVPhysicsWorldMgr : public SVSysBase {
         public:
-            SVPhysicsWorldMgr(SVInst* _app);
+            SVPhysicsWorldMgr(SVInstPtr _app);
             
             ~SVPhysicsWorldMgr();
             

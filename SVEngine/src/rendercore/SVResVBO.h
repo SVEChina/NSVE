@@ -54,7 +54,7 @@ namespace sv {
         public:
             static int getVertexFormateSize(VFTYPE _type);
             
-            SVResVBO(SVInst* _app);
+            SVResVBO(SVInstPtr _app);
             
             virtual ~SVResVBO();
             

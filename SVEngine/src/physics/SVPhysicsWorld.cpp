@@ -9,7 +9,7 @@
 
 using namespace sv;
 
-SVPhysicsWorld::SVPhysicsWorld(SVInst* _app):SVPhysicsWorldBase(_app) {
+SVPhysicsWorld::SVPhysicsWorld(SVInstPtr _app):SVPhysicsWorldBase(_app) {
     m_type = E_PHYSICS_WORLD_RIGID;
     m_pCollisionConfiguration = nullptr;
     m_pDispatcher = nullptr;

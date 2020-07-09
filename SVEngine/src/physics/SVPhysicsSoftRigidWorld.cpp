@@ -10,7 +10,7 @@
 
 using namespace sv;
 
-SVPhysicsSoftRigidWorld::SVPhysicsSoftRigidWorld(SVInst* _app):SVPhysicsWorldBase(_app) {
+SVPhysicsSoftRigidWorld::SVPhysicsSoftRigidWorld(SVInstPtr _app):SVPhysicsWorldBase(_app) {
     m_type = E_PHYSICS_WORLD_SOFT_RIGID;
     m_broadPhase = nullptr;
     m_collisionConfiguration = nullptr;

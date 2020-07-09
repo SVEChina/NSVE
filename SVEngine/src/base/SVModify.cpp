@@ -9,8 +9,8 @@
 
 using namespace sv;
 
-SVModify::SVModify(SVInst *_app)
-:SVGBase(_app){
+SVModify::SVModify(SVInstPtr _app)
+:SVGBaseEx(_app){
 }
 
 SVModify::~SVModify() {

@@ -97,9 +97,9 @@ namespace sv {
         };
         
         //基础相机控制
-        class SVCameraCtrl: public SVGBase {
+        class SVCameraCtrl: public SVGBaseEx {
         public:
-            SVCameraCtrl(SVInst* _app);
+            SVCameraCtrl(SVInstPtr _app);
             
             ~SVCameraCtrl();
             
@@ -130,7 +130,7 @@ namespace sv {
         //基础投影控制
         class SVCamCtrlProj : public SVCameraCtrl {
         public:
-            SVCamCtrlProj(SVInst* _app);
+            SVCamCtrlProj(SVInstPtr _app);
             
             ~SVCamCtrlProj();
             
@@ -162,7 +162,7 @@ namespace sv {
         //基础正交控制
         class SVCamCtrlOrtho : public SVCameraCtrl {
         public:
-            SVCamCtrlOrtho(SVInst* _app);
+            SVCamCtrlOrtho(SVInstPtr _app);
             
             ~SVCamCtrlOrtho();
             
@@ -182,7 +182,7 @@ namespace sv {
         //姿态相机控制
         class SVCamCtrlAttr : public SVCameraCtrl {
         public:
-            SVCamCtrlAttr(SVInst* _app);
+            SVCamCtrlAttr(SVInstPtr _app);
             
             ~SVCamCtrlAttr();
             
@@ -198,7 +198,7 @@ namespace sv {
         //3D相机节点控制
         class SVNodeCtrlCamera : public SVCameraCtrl {
         public:
-            SVNodeCtrlCamera(SVInst* _app);
+            SVNodeCtrlCamera(SVInstPtr _app);
             
             ~SVNodeCtrlCamera();
             
@@ -225,7 +225,7 @@ namespace sv {
         //纯平面控制
         class SVCtrlCamera2D : public SVNodeCtrlCamera {
         public:
-            SVCtrlCamera2D(SVInst* _app);
+            SVCtrlCamera2D(SVInstPtr _app);
             
             ~SVCtrlCamera2D();
             
@@ -252,7 +252,7 @@ namespace sv {
         //AR控制
         class SVCtrlCamereAR : public SVNodeCtrlCamera {
         public:
-            SVCtrlCamereAR(SVInst* _app);
+            SVCtrlCamereAR(SVInstPtr _app);
             
             ~SVCtrlCamereAR();
             
@@ -271,7 +271,7 @@ namespace sv {
         //Follow2d
         class SVCtrlCamereFollow2DTop : public SVNodeCtrlCamera {
         public:
-            SVCtrlCamereFollow2DTop(SVInst* _app);
+            SVCtrlCamereFollow2DTop(SVInstPtr _app);
             
             ~SVCtrlCamereFollow2DTop();
             

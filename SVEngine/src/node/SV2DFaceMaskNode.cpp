@@ -20,7 +20,7 @@
 
 using namespace sv;
 
-//SV2DFaceMaskNode::SV2DFaceMaskNode(SVInst *_app)
+//SV2DFaceMaskNode::SV2DFaceMaskNode(SVInstPtr _app)
 //:SVNode(_app) {
 //    ntype = "SV2DFaceMaskNode";
 ////    m_pIndexs = MakeSharedPtr<SVDataSwap>();

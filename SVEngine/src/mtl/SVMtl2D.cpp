@@ -11,7 +11,7 @@
 
 using namespace sv;
 
-SVMtl2D::SVMtl2D(SVInst *_app , cptr8 _shader)
+SVMtl2D::SVMtl2D(SVInstPtr _app , cptr8 _shader)
 :SVMtlCore(_app, _shader) {
     m_alpha = 1.0f;
     m_LogicParamDepth.enable = false;

@@ -323,8 +323,9 @@ spAtlas* spAtlas_createFromFile(void *_app, const char* path, void* rendererObje
 	dir[dirLength] = '\0';
 
 	data = _spUtil_readFile(_app, path, &length);
-	if (data) atlas = spAtlas_create(_app, data, length, dir, rendererObject, enableMipMap);
-
+    if (data) {
+        atlas = spAtlas_create(_app, data, length, dir, rendererObject, enableMipMap);
+    }
 	FREE(data);
 	FREE(dir);
 	return atlas;

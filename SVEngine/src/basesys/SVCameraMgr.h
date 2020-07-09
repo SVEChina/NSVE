@@ -14,7 +14,7 @@ namespace sv {
 
     class SVCameraMgr : public SVSysBase {
     public:
-        SVCameraMgr(SVInst *_app);
+        SVCameraMgr(SVInstPtr _app);
         
         ~SVCameraMgr();
         

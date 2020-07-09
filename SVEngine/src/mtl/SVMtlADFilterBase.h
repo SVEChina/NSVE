@@ -21,7 +21,7 @@ namespace sv {
                 MTL_ADFILTER_RUNNING,
                 MTL_ADFILTER_END,
             };
-            SVMtlADFilterBase(SVInst *_app, cptr8 _shader);
+            SVMtlADFilterBase(SVInstPtr _app, cptr8 _shader);
             
             SVMtlADFilterBase(SVMtlADFilterBase *_mtl);
             

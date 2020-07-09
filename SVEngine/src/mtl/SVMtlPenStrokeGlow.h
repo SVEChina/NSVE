@@ -16,7 +16,7 @@ namespace sv {
         
         class SVMtlPenStrokeGlow : public SVMtlBillboard {
         public:
-            SVMtlPenStrokeGlow(SVInst *_app);
+            SVMtlPenStrokeGlow(SVInstPtr _app);
             
             SVMtlPenStrokeGlow(SVMtlPenStrokeGlow *_mtl);
             

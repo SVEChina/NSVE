@@ -18,7 +18,7 @@ namespace sv {
         class SVMtlSmooth : public SVMtlCore {
         public:
             
-            SVMtlSmooth(SVInst *_app , SVString _name);
+            SVMtlSmooth(SVInstPtr _app , SVString _name);
             
             SVMtlSmooth(SVMtlSmooth *_mtl);
             

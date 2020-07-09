@@ -473,9 +473,9 @@ namespace sv {
     };
     
     //
-    class SVLoaderGLTF : public SVGBase{
+    class SVLoaderGLTF : public SVGBaseEx{
     public:
-        SVLoaderGLTF(SVInst *_app);
+        SVLoaderGLTF(SVInstPtr _app);
         
         ~SVLoaderGLTF();
         

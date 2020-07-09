@@ -10,7 +10,7 @@
 
 using namespace sv;
 
-SVDummyNode::SVDummyNode(SVInst *_app)
+SVDummyNode::SVDummyNode(SVInstPtr _app)
 :SVNode(_app) {
 
 }

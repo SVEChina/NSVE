@@ -16,7 +16,7 @@ namespace sv {
         
         class SVParseSprite : public SVParseData {
         public:
-            static SVNodePtr parseSprite(SVInst *_app, RAPIDJSON_NAMESPACE::Value &item, s32 _resid,cptr8 _path);
+            static SVNodePtr parseSprite(SVInstPtr _app, RAPIDJSON_NAMESPACE::Value &item, s32 _resid,cptr8 _path);
         };
 
         

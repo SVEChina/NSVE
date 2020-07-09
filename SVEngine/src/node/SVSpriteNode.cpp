@@ -25,7 +25,7 @@
 using namespace sv;
 
 //
-SVSpriteNode::SVSpriteNode(SVInst *_app)
+SVSpriteNode::SVSpriteNode(SVInstPtr _app)
 :SVNode(_app) {
     ntype = "SVSpriteNode";
     m_inTexType = E_TEX_END;
@@ -39,7 +39,7 @@ SVSpriteNode::SVSpriteNode(SVInst *_app)
     setSize(100,100);
 }
 
-SVSpriteNode::SVSpriteNode(SVInst *_app,f32 _w,f32 _h)
+SVSpriteNode::SVSpriteNode(SVInstPtr _app,f32 _w,f32 _h)
 :SVNode(_app) {
     ntype = "SVSpriteNode";
     m_inTexType = E_TEX_END;

@@ -8,8 +8,8 @@
 
 using namespace sv;
 
-SVPhysicsCollider::SVPhysicsCollider(SVInst* _app)
-:SVGBase(_app) {
+SVPhysicsCollider::SVPhysicsCollider(SVInstPtr _app)
+:SVGBaseEx(_app) {
     
 }
 

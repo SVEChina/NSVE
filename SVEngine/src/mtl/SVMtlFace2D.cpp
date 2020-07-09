@@ -10,7 +10,7 @@
 
 using namespace sv;
 
-SVMtlFace2D::SVMtlFace2D(SVInst *_app)
+SVMtlFace2D::SVMtlFace2D(SVInstPtr _app)
 :SVMtlCore(_app,"mask2d")
 ,m_pMaskTexture(nullptr) {
     m_LogicParamDepth.enable = false;

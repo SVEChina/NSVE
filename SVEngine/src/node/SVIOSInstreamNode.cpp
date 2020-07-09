@@ -22,7 +22,7 @@
 
 using namespace sv;
 
-SVIOSInstreamNode::SVIOSInstreamNode(SVInst *_app)
+SVIOSInstreamNode::SVIOSInstreamNode(SVInstPtr _app)
 :SVNode(_app){
     ntype = "SVIOSInstreamNode";
     m_tt = E_TEX_INSTREAM;

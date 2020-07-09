@@ -31,7 +31,7 @@
 
 using namespace sv;
 
-SVShapeVariedNode::SVShapeVariedNode(SVInst *_app)
+SVShapeVariedNode::SVShapeVariedNode(SVInstPtr _app)
 :SVNode(_app){
     ntype = "SVFaceShapeVariedNode";
 //    m_pRenderObj = MakeSharedPtr<SVRenderObject>();

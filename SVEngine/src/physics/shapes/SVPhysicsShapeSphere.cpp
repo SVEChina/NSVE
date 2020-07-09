@@ -9,14 +9,14 @@
 
 using namespace sv;
 
-SVPhysicsShapeSphere::SVPhysicsShapeSphere(SVInst* _app)
+SVPhysicsShapeSphere::SVPhysicsShapeSphere(SVInstPtr _app)
 :SVPhysicsShape(_app) {
     m_type = E_PHYSICS_SHAPE_SPHERE;
     setRadius(0.0f);
     m_pColShape = nullptr;
 }
 
-SVPhysicsShapeSphere::SVPhysicsShapeSphere(SVInst* _app, f32 _radius):SVPhysicsShape(_app) {
+SVPhysicsShapeSphere::SVPhysicsShapeSphere(SVInstPtr _app, f32 _radius):SVPhysicsShape(_app) {
     m_type = E_PHYSICS_SHAPE_SPHERE;
     setRadius(_radius);
     m_pColShape = nullptr;

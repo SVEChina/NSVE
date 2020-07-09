@@ -15,7 +15,7 @@ namespace sv {
         
         class SVMtlRGB2YUV : public SVMtlCore {
         public:
-            SVMtlRGB2YUV(SVInst *_app, SV_OUTSTEAMFORMATE formate);
+            SVMtlRGB2YUV(SVInstPtr _app, SV_OUTSTEAMFORMATE formate);
             
             SVMtlRGB2YUV(SVMtlRGB2YUV* _mtl);
             

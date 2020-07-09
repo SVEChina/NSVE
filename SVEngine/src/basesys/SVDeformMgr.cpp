@@ -15,7 +15,7 @@
 
 using namespace sv;
 
-SVDeformMgr::SVDeformMgr(SVInst *_app)
+SVDeformMgr::SVDeformMgr(SVInstPtr _app)
 :SVSysBase(_app){
     m_deformArray.clear();
     m_defromLock = MakeSharedPtr<SVLock>();

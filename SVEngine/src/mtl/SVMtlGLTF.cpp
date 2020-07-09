@@ -12,7 +12,7 @@
 
 using namespace sv;
 
-SVMtlGLTF::SVMtlGLTF(SVInst *_app)
+SVMtlGLTF::SVMtlGLTF(SVInstPtr _app)
 :SVMtlCore(_app,"gltf3d") {
     m_pBaseColorTex = nullptr;
     m_pMetallicRoughnessTex = nullptr;
@@ -43,7 +43,7 @@ SVMtlGLTF::SVMtlGLTF(SVMtlGLTF *_mtl)
 }
 
 //保护构造函数
-SVMtlGLTF::SVMtlGLTF(SVInst *_app,cptr8 _name)
+SVMtlGLTF::SVMtlGLTF(SVInstPtr _app,cptr8 _name)
 :SVMtlCore(_app,_name) {
     m_pBaseColorTex = nullptr;
     m_pMetallicRoughnessTex = nullptr;
@@ -93,7 +93,7 @@ void SVMtlGLTF::refresh() {
 }
 
 //
-SVMtlGLTFSkin::SVMtlGLTFSkin(SVInst *_app)
+SVMtlGLTFSkin::SVMtlGLTFSkin(SVInstPtr _app)
 :SVMtlGLTF(_app,"gltfskin") {
     memset(m_vecBoneMatrix,0.0f,MAX_BONES_DATA_SIZE);
     m_pBaseColorTex = nullptr;

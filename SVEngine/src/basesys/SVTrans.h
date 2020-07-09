@@ -12,9 +12,9 @@
 
 namespace sv {
 
-        class SVTrans : public SVGBase {
+        class SVTrans : public SVGBaseEx {
         public:
-            SVTrans(SVInst *_app);
+            SVTrans(SVInstPtr _app);
             
             virtual ~SVTrans();
             

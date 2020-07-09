@@ -44,13 +44,13 @@ static const s32 pixel_and_block_sizes[] = {
 /*
  */
 
-SVImage::SVImage(SVInst* _app)
-:SVGBase(_app){
+SVImage::SVImage(SVInstPtr _app)
+:SVGBaseEx(_app){
     m_pData = MakeSharedPtr<SVDataSwap>();
     clear();
 }
 
-SVImage::SVImage(SVInst* _app, cptr8 _filename):SVGBase(_app){
+SVImage::SVImage(SVInstPtr _app, cptr8 _filename):SVGBaseEx(_app){
     m_pData = MakeSharedPtr<SVDataSwap>();
     clear();
     load(_filename);

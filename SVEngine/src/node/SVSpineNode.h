@@ -24,7 +24,7 @@ namespace sv {
          */
         class SVSpineNode : public SVNode {
         public:
-            SVSpineNode(SVInst *_app);
+            SVSpineNode(SVInstPtr _app);
             
             ~SVSpineNode();
             

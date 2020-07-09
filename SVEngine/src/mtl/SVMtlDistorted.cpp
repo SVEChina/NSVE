@@ -12,7 +12,7 @@
 
 using namespace sv;
 
-SVMtlDistorted::SVMtlDistorted(SVInst *_app)
+SVMtlDistorted::SVMtlDistorted(SVInstPtr _app)
 :SVMtlADFilterBase(_app,"filterdistorted") {
     _resetTime();
 }

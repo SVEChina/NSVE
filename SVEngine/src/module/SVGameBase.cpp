@@ -12,7 +12,7 @@
 
 using namespace sv;
 
-SVGameBase::SVGameBase(SVInst *_app)
+SVGameBase::SVGameBase(SVInstPtr _app)
 :SVModuleBase(_app) {
     m_pGameReady = nullptr;
     m_pGameRun = nullptr;

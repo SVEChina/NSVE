@@ -11,7 +11,7 @@
 
 using namespace sv;
 
-SVMorphNode::SVMorphNode(SVInst *_app)
+SVMorphNode::SVMorphNode(SVInstPtr _app)
 :SVNode(_app){
     ntype = "SVMorphNode";
 }

@@ -15,7 +15,7 @@ namespace sv {
     
     class SVFacePointNode : public SVNode {
         public :
-        SVFacePointNode(SVInst *_app);
+        SVFacePointNode(SVInstPtr _app);
         
         ~SVFacePointNode();
         

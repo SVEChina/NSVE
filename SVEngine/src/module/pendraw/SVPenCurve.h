@@ -26,9 +26,9 @@ namespace sv{
         SV_ADD_DRAWEND
     };
     
-    class SVPenCurve : public SVGBase {
+    class SVPenCurve : public SVGBaseEx {
     public:
-        SVPenCurve(SVInst *_app);
+        SVPenCurve(SVInstPtr _app);
         
         ~SVPenCurve();
         

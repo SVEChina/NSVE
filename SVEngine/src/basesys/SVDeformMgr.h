@@ -18,7 +18,7 @@ namespace sv {
         //图片处理
         class SVDeformMgr : public SVSysBase {
         public:
-            SVDeformMgr(SVInst *_app);
+            SVDeformMgr(SVInstPtr _app);
             
             ~SVDeformMgr();
             //

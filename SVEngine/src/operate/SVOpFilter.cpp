@@ -24,7 +24,7 @@
 using namespace sv;
 
 //设置美颜滤镜
-SVOpSetBeautyFilter::SVOpSetBeautyFilter(SVInst* _app,cptr8 _scenename,cptr8 _filter,s32 _lows)
+SVOpSetBeautyFilter::SVOpSetBeautyFilter(SVInstPtr _app,cptr8 _scenename,cptr8 _filter,s32 _lows)
 :SVOpBase(_app) {
     m_scenename = _scenename;
     m_filter = _filter;
@@ -58,7 +58,7 @@ void SVOpSetBeautyFilter::_process(f32 _dt) {
 }
 
 //设置美颜滤镜
-SVOpUpdateFilterSmooth::SVOpUpdateFilterSmooth(SVInst* _app,f32 _smooth,u32 _type)
+SVOpUpdateFilterSmooth::SVOpUpdateFilterSmooth(SVInstPtr _app,f32 _smooth,u32 _type)
 :SVOpBase(_app) {
     m_smooth=_smooth;
     m_type=_type;
@@ -72,7 +72,7 @@ void SVOpUpdateFilterSmooth::_process(f32 _dt) {
 }
 
 //设置美颜滤镜
-SVOpUpdateBSplineFilter::SVOpUpdateBSplineFilter(SVInst* _app,SVDataSwapPtr _pDataSwap)
+SVOpUpdateBSplineFilter::SVOpUpdateBSplineFilter(SVInstPtr _app,SVDataSwapPtr _pDataSwap)
 :SVOpBase(_app) {
     m_pDataSwap=_pDataSwap;
 }
@@ -86,7 +86,7 @@ void SVOpUpdateBSplineFilter::_process(f32 _dt) {
 }
 
 //关闭美颜滤镜
-SVOpCloseBeautyFilter::SVOpCloseBeautyFilter(SVInst *_app)
+SVOpCloseBeautyFilter::SVOpCloseBeautyFilter(SVInstPtr _app)
 :SVOpBase(_app) {
 }
 
@@ -98,7 +98,7 @@ void SVOpCloseBeautyFilter::_process(f32 _dt) {
 }
 
 //
-SVOpShapeFaceSmoothFilter::SVOpShapeFaceSmoothFilter(SVInst* _app,f32 _face,f32 _eye)
+SVOpShapeFaceSmoothFilter::SVOpShapeFaceSmoothFilter(SVInstPtr _app,f32 _face,f32 _eye)
 :SVOpBase(_app) {
     m_face = _face;
     m_eye=_eye;
@@ -111,7 +111,7 @@ void SVOpShapeFaceSmoothFilter::_process(f32 _dt) {
     mApp->getEventMgr()->pushEvent(t_event);
 }
 
-SVOpLUTFilterCreate::SVOpLUTFilterCreate(SVInst* _app,cptr8 _scenename,cptr8 _path,s32 resid)
+SVOpLUTFilterCreate::SVOpLUTFilterCreate(SVInstPtr _app,cptr8 _scenename,cptr8 _path,s32 resid)
 :SVOpBase(_app){
      m_path = _path;
      m_resid = resid;
@@ -127,7 +127,7 @@ void SVOpLUTFilterCreate::_process(f32 _dt){
     }
 }
 
-SVOpLUTFilterDestory::SVOpLUTFilterDestory(SVInst* _app,cptr8 _scenename,s32 resid)
+SVOpLUTFilterDestory::SVOpLUTFilterDestory(SVInstPtr _app,cptr8 _scenename,s32 resid)
 :SVOpBase(_app){
     
 }

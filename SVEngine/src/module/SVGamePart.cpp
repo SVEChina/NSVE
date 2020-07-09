@@ -9,8 +9,8 @@
 
 using namespace sv;
 
-SVGamePart::SVGamePart(SVInst *_app)
-:SVGBase(_app) {
+SVGamePart::SVGamePart(SVInstPtr _app)
+:SVGBaseEx(_app) {
 }
 
 SVGamePart::~SVGamePart() {

@@ -25,7 +25,7 @@ using namespace sv;
 
 #ifdef SV_IOS
 
-SVFrameOutIOS::SVFrameOutIOS(SVInst *_app)
+SVFrameOutIOS::SVFrameOutIOS(SVInstPtr _app)
 :SVFrameOutNode(_app){
     ntype = "SVFrameOutIOS";
     m_dataswap = nullptr;

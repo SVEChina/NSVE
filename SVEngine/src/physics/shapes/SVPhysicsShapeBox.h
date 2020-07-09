@@ -15,9 +15,9 @@ namespace sv {
         
         class SVPhysicsShapeBox : public SVPhysicsShape {
         public:
-            SVPhysicsShapeBox(SVInst* _app);
+            SVPhysicsShapeBox(SVInstPtr _app);
             
-            SVPhysicsShapeBox(SVInst* _app, FVec3 _size);
+            SVPhysicsShapeBox(SVInstPtr _app, FVec3 _size);
             
             ~SVPhysicsShapeBox();
             

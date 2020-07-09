@@ -21,9 +21,9 @@ namespace sv{
         };
         class SVActionUnit : public SVAniBase {
         public:
-            SVActionUnit(SVInst* _app);
+            SVActionUnit(SVInstPtr _app);
             
-            SVActionUnit(SVInst* _app, SVActBasePtr _action, SVNodePtr _node);
+            SVActionUnit(SVInstPtr _app, SVActBasePtr _action, SVNodePtr _node);
             
             ~SVActionUnit();
             

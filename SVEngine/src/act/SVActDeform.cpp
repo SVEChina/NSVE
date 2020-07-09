@@ -11,7 +11,7 @@
 
 using namespace sv;
 
-SVActDeform::SVActDeform(SVInst *_app):SVActTime(_app) {
+SVActDeform::SVActDeform(SVInstPtr _app):SVActTime(_app) {
     m_acttype = "SVActDeform";
 }
 
@@ -24,7 +24,7 @@ void SVActDeform::run(SVNodePtr _nodePtr, f32 _dt) {
 }
 
 //
-SVActMove::SVActMove(SVInst *_app):SVActDeform(_app) {
+SVActMove::SVActMove(SVInstPtr _app):SVActDeform(_app) {
     m_acttype = "SVActMove";
 }
 
@@ -49,7 +49,7 @@ void SVActMove::exit(SVNodePtr _nodePtr){
 }
 
 //
-SVActMoveTo::SVActMoveTo(SVInst *_app):SVActDeform(_app) {
+SVActMoveTo::SVActMoveTo(SVInstPtr _app):SVActDeform(_app) {
     m_acttype = "SVActMoveTo";
 }
 
@@ -89,7 +89,7 @@ void SVActMoveTo::exit(SVNodePtr _nodePtr){
 
 //
 
-SVActMoveBetween::SVActMoveBetween(SVInst *_app):SVActDeform(_app) {
+SVActMoveBetween::SVActMoveBetween(SVInstPtr _app):SVActDeform(_app) {
     m_acttype = "SVActMoveBetween";
     m_begin.set(1.0f,1.0f,1.0f);
     m_end.set(1.0f,1.0f,1.0f);
@@ -140,7 +140,7 @@ void SVActMoveBetween::setEndPos(FVec3& _pos){
 }
 
 //
-SVActMoveBy::SVActMoveBy(SVInst *_app):SVActDeform(_app) {
+SVActMoveBy::SVActMoveBy(SVInstPtr _app):SVActDeform(_app) {
     m_acttype = "SVActMoveBy";
     m_dir.set(1.0f,1.0f,1.0f);
     m_sp = 100.0f;
@@ -175,7 +175,7 @@ void SVActMoveBy::setSpeed(f32 _sp){
 }
 
 //
-SVActRot::SVActRot(SVInst *_app):SVActDeform(_app) {
+SVActRot::SVActRot(SVInstPtr _app):SVActDeform(_app) {
     m_acttype = "SVActRot";
 }
 
@@ -202,7 +202,7 @@ void SVActRot::run(SVNodePtr _nodePtr, f32 _dt) {
 }
 
 //
-SVActRotTo::SVActRotTo(SVInst *_app):SVActDeform(_app) {
+SVActRotTo::SVActRotTo(SVInstPtr _app):SVActDeform(_app) {
     m_acttype = "SVActRotTo";
 }
 
@@ -233,7 +233,7 @@ void SVActRotTo::run(SVNodePtr _nodePtr, f32 _dt) {
 }
 
 //
-SVActRotBetween::SVActRotBetween(SVInst *_app):SVActDeform(_app) {
+SVActRotBetween::SVActRotBetween(SVInstPtr _app):SVActDeform(_app) {
     m_acttype = "SVActRotBetween";
 }
 
@@ -245,7 +245,7 @@ void SVActRotBetween::run(SVNodePtr _nodePtr, f32 _dt) {
     SVActDeform::run(_nodePtr, _dt);
 }
 //
-SVActAlpha::SVActAlpha(SVInst *_app):SVActDeform(_app) {
+SVActAlpha::SVActAlpha(SVInstPtr _app):SVActDeform(_app) {
     m_acttype = "SVActAlpha";
     m_srcAlpha = 1.0f;
     m_tarAlpha = 1.0f;
@@ -287,7 +287,7 @@ void SVActAlpha::setSrcAlpha(f32 _alpha){
 
 
 //
-SVActScale::SVActScale(SVInst *_app):SVActDeform(_app) {
+SVActScale::SVActScale(SVInstPtr _app):SVActDeform(_app) {
     m_acttype = "SVActScale";
 }
 
@@ -300,7 +300,7 @@ void SVActScale::run(SVNodePtr _nodePtr, f32 _dt) {
 }
 
 //
-SVActScaleTo::SVActScaleTo(SVInst *_app):SVActDeform(_app) {
+SVActScaleTo::SVActScaleTo(SVInstPtr _app):SVActDeform(_app) {
     m_acttype = "SVActScaleTo";
     m_time = 1.0;
     m_srcscale = FVec3(1.0f, 1.0f, 1.0f);
@@ -336,7 +336,7 @@ void SVActScaleTo::run(SVNodePtr _nodePtr, f32 _dt) {
 }
 
 //
-SVActScaleBetween::SVActScaleBetween(SVInst *_app):SVActDeform(_app) {
+SVActScaleBetween::SVActScaleBetween(SVInstPtr _app):SVActDeform(_app) {
     m_acttype = "SVActScaleBetween";
     m_begin.set(1.0f,1.0f,1.0f);
     m_end.set(1.0f,1.0f,1.0f);
@@ -386,7 +386,7 @@ void SVActScaleBetween::setEndScale(FVec3& _scale){
     m_end = _scale;
 }
 //
-SVActPosition::SVActPosition(SVInst *_app):SVActDeform(_app) {
+SVActPosition::SVActPosition(SVInstPtr _app):SVActDeform(_app) {
     m_acttype = "SVActRandomPosition";
     m_enableRandom = true;
     m_minPos.set(0.0f, 0.0f, 0.0f);

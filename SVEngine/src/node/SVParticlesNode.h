@@ -12,7 +12,7 @@ namespace sv {
         //
         class SVParticlesNode : public SVNode {
         public:
-            SVParticlesNode(SVInst *_app);
+            SVParticlesNode(SVInstPtr _app);
             
             ~SVParticlesNode();
             

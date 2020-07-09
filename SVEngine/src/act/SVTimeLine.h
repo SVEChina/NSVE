@@ -16,12 +16,12 @@
 
 namespace sv {
     
-        class SVTimeLine : public SVGBase {
+        class SVTimeLine : public SVGBaseEx {
         public:
             static u32 maxFrame(f32 _time,s32 _rate);
             
         public:
-            SVTimeLine(SVInst* _app,f32 _time,s32 _rate);
+            SVTimeLine(SVInstPtr _app,f32 _time,s32 _rate);
             
             ~SVTimeLine();
             

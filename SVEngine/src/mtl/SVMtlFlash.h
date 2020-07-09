@@ -16,7 +16,7 @@ namespace sv {
         
         class SVMtlFlash : public SVMtlADFilterBase {
         public:
-            SVMtlFlash(SVInst *_app);
+            SVMtlFlash(SVInstPtr _app);
             
             SVMtlFlash(SVMtlFlash *_mtl);
             

@@ -36,9 +36,9 @@ namespace sv {
     typedef SVMap<cptr8, StanderFace*> STANDERFACEPOOL;
     typedef SVMap<cptr8, FaceMesh*> FACEMESHPOOL;
     
-    class SVFaceDataMesh : public SVGBase{
+    class SVFaceDataMesh : public SVGBaseEx{
     public:
-        SVFaceDataMesh(SVInst *_app);
+        SVFaceDataMesh(SVInstPtr _app);
         
         ~SVFaceDataMesh();
         //

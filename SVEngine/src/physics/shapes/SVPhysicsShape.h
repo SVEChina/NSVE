@@ -19,9 +19,9 @@ namespace sv {
             E_PHYSICS_SHAPE_BOX,
             E_PHYSICS_SHAPE_SPHERE
         };
-        class SVPhysicsShape : public SVGBase {
+        class SVPhysicsShape : public SVGBaseEx {
         public:
-            SVPhysicsShape(SVInst* _app);
+            SVPhysicsShape(SVInstPtr _app);
             
             ~SVPhysicsShape();
             

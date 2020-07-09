@@ -11,7 +11,7 @@
 
 using namespace sv;
 
-SVTimeLineDeform::SVTimeLineDeform(SVInst* _app,f32 _time,s32 _rate)
+SVTimeLineDeform::SVTimeLineDeform(SVInstPtr _app,f32 _time,s32 _rate)
 :SVTimeLine(_app,_time,_rate){
     m_type = E_TL_T_DEFORM;
 }

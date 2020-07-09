@@ -14,9 +14,9 @@
 
 namespace sv {
     
-    class SVTexMgr : public SVGBase {
+    class SVTexMgr : public SVGBaseEx {
     public:
-        SVTexMgr(SVInst *_app);
+        SVTexMgr(SVInstPtr _app);
         
         ~SVTexMgr();
         

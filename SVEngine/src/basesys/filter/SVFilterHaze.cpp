@@ -17,7 +17,7 @@
 
 using namespace sv;
 
-SVFilterHaze::SVFilterHaze(SVInst *_app)
+SVFilterHaze::SVFilterHaze(SVInstPtr _app)
 :SVFilterBase(_app){
     m_type=SV_FUNC_HAZE;
     m_name="SVFilterHaze";

@@ -16,7 +16,7 @@ namespace sv {
         
         class SVParseMask : public SVParseData {
         public:
-            static SVNodePtr parseMask(SVInst *_app, RAPIDJSON_NAMESPACE::Value &item, s32 _resid, cptr8 _path);
+            static SVNodePtr parseMask(SVInstPtr _app, RAPIDJSON_NAMESPACE::Value &item, s32 _resid, cptr8 _path);
         };
 
         

@@ -12,7 +12,7 @@
 
 using namespace sv;
 
-SVRenderStateGL::SVRenderStateGL(SVInst *_app)
+SVRenderStateGL::SVRenderStateGL(SVInstPtr _app)
 :SVRenderState(_app){
     //
     m_fbo = 0;

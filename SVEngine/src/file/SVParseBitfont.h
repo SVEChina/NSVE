@@ -16,7 +16,7 @@ namespace sv {
         
         class SVParseBitfont : public SVParseData {
         public:
-            static SVNodePtr parseBitfont(SVInst *_app, RAPIDJSON_NAMESPACE::Value &item, s32 _resid,cptr8 _path);
+            static SVNodePtr parseBitfont(SVInstPtr _app, RAPIDJSON_NAMESPACE::Value &item, s32 _resid,cptr8 _path);
         };
 
         

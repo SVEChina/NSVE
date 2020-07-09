@@ -17,7 +17,7 @@ namespace sv {
         
         class SVDetectBase : public SVListenBase {
         public:
-            SVDetectBase(SVInst *_app);
+            SVDetectBase(SVInstPtr _app);
             
             ~SVDetectBase();
             

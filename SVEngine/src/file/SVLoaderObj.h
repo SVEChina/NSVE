@@ -14,7 +14,7 @@ namespace sv {
     
     class SVLoaderObj : public SVFileLoader {
     public:
-        SVLoaderObj(SVInst *_app);
+        SVLoaderObj(SVInstPtr _app);
         
         SVModelPtr loadModel(cptr8 _fname);
     };

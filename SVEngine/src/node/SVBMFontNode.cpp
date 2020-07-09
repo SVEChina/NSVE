@@ -29,7 +29,7 @@ using namespace sv;
 #define SV_BMFONT_MAX_NUM  20
 #define DEFSPACE 40
 //
-SVBMFontNode::SVBMFontNode(SVInst *_app)
+SVBMFontNode::SVBMFontNode(SVInstPtr _app)
 :SVNode(_app) {
     ntype = "SVBMFontNode";
     m_font = nullptr;

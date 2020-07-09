@@ -18,7 +18,7 @@ namespace sv {
         
         class SVMtl2D : public SVMtlCore {
         public:
-            SVMtl2D(SVInst *_app, cptr8 _shader);
+            SVMtl2D(SVInstPtr _app, cptr8 _shader);
             
             SVMtl2D(SVMtl2D *_mtl);
             

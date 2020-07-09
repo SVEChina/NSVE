@@ -11,7 +11,7 @@
 
 using namespace sv;
 
-SVActTime::SVActTime(SVInst *_app):SVActBase(_app) {
+SVActTime::SVActTime(SVInstPtr _app):SVActBase(_app) {
     m_acttype = "SVActTime";
     m_time = 0.0f;
     m_acctime = 0.0f;
@@ -41,7 +41,7 @@ bool SVActTime::isEnd(){
 }
 
 //
-SVActWait::SVActWait(SVInst *_app):SVActTime(_app){
+SVActWait::SVActWait(SVInstPtr _app):SVActTime(_app){
     m_acttype = "SVActWait";
 }
 
@@ -50,7 +50,7 @@ SVActWait::~SVActWait(){
 }
 
 //
-SVActHide::SVActHide(SVInst *_app):SVActWait(_app){
+SVActHide::SVActHide(SVInstPtr _app):SVActWait(_app){
     m_acttype = "SVActHide";
 }
 

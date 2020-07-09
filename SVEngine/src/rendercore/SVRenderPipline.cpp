@@ -19,8 +19,8 @@
 using namespace sv;
 
 //
-SVRenderPipline::SVRenderPipline(SVInst *_app)
-:SVGBase(_app) {
+SVRenderPipline::SVRenderPipline(SVInstPtr _app)
+:SVGBaseEx(_app) {
     for (s32 i = RST_BEGIN; i <= RST_END; i++) {
         SVRenderStreamPtr t_stream = MakeSharedPtr<SVRenderStream>();
         m_rstream_vec.append(t_stream);

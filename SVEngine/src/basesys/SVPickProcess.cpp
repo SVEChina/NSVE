@@ -83,7 +83,7 @@ SVNodePtr SVVisitRayPickUI::getPickNode() {
 }
 
 //
-SVPickProcess::SVPickProcess(SVInst *_app)
+SVPickProcess::SVPickProcess(SVInstPtr _app)
 :SVProcess(_app) {
     m_enablePick = false;
     m_curPickNode = nullptr;

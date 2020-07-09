@@ -14,7 +14,7 @@
 namespace sv{
     class SVGameRun : public SVGamePart {
     public:
-        SVGameRun(SVInst* _app);
+        SVGameRun(SVInstPtr _app);
         
         ~SVGameRun();
         

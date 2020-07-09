@@ -9,7 +9,7 @@
 
 using namespace sv;
 
-SVGameEnd::SVGameEnd(SVInst *_app)
+SVGameEnd::SVGameEnd(SVInstPtr _app)
 :SVGamePart(_app) {
 }
 

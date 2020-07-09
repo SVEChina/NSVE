@@ -21,9 +21,9 @@ namespace sv {
             E_PHYSICS_WORLD_RIGID,
             E_PHYSICS_WORLD_SOFT_RIGID
         };
-        class SVPhysicsWorldBase : public SVGBase {
+        class SVPhysicsWorldBase : public SVGBaseEx {
         public:
-            SVPhysicsWorldBase(SVInst* _app);
+            SVPhysicsWorldBase(SVInstPtr _app);
             
             ~SVPhysicsWorldBase();
             

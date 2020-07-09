@@ -14,7 +14,7 @@ namespace sv {
     
     class SVOpCallback : public SVCallbackBase {
     public:
-        SVOpCallback(SVInst* _app);
+        SVOpCallback(SVInstPtr _app);
         
         ~SVOpCallback();
         

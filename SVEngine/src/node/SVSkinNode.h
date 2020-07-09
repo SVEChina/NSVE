@@ -21,7 +21,7 @@ namespace sv {
         
         class SVSkinNode : public SVNode {
         public:
-            SVSkinNode(SVInst *_app);
+            SVSkinNode(SVInstPtr _app);
             
             ~SVSkinNode();
             

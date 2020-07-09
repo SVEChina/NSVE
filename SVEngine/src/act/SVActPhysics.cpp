@@ -19,7 +19,7 @@
 
 using namespace sv;
 
-SVActPhysics::SVActPhysics(SVInst *_app, SVPhysicsBodyPtr _physicsBody):SVActBase(_app){
+SVActPhysics::SVActPhysics(SVInstPtr _app, SVPhysicsBodyPtr _physicsBody):SVActBase(_app){
     m_physicsBody = _physicsBody;
 }
 
@@ -37,7 +37,7 @@ bool SVActPhysics::isEnd() {
 }
 
 
-SVActBodyRope::SVActBodyRope(SVInst *_app, SVPhysicsBodyPtr _physicsBody):SVActPhysics(_app, _physicsBody){
+SVActBodyRope::SVActBodyRope(SVInstPtr _app, SVPhysicsBodyPtr _physicsBody):SVActPhysics(_app, _physicsBody){
   
 }
 
@@ -67,7 +67,7 @@ bool SVActBodyRope::isEnd() {
 }
 
 
-SVActBodyCloth::SVActBodyCloth(SVInst *_app, SVPhysicsBodyPtr _physicsBody):SVActPhysics(_app, _physicsBody){
+SVActBodyCloth::SVActBodyCloth(SVInstPtr _app, SVPhysicsBodyPtr _physicsBody):SVActPhysics(_app, _physicsBody){
   
 }
 

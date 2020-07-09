@@ -19,8 +19,8 @@
 
 using namespace sv;
 
-SVMesh::SVMesh(SVInst* _app)
-:SVGBase(_app){
+SVMesh::SVMesh(SVInstPtr _app)
+:SVGBaseEx(_app){
     m_pRenderMesh = nullptr;
     m_pMtl = nullptr;
     m_lock = MakeSharedPtr<SVLock>();
@@ -124,7 +124,7 @@ void SVMesh::createShadow() {
 }
 
 //Morph动画的mesh
-SVMorphMesh::SVMorphMesh(SVInst* _app)
+SVMorphMesh::SVMorphMesh(SVInstPtr _app)
 :SVMesh(_app){
     
 }

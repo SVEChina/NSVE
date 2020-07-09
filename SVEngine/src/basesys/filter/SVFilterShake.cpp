@@ -17,7 +17,7 @@
 
 using namespace sv;
 
-SVFilterShake::SVFilterShake(SVInst *_app)
+SVFilterShake::SVFilterShake(SVInstPtr _app)
 :SVFilterBase(_app){
     m_type = SV_FUNC_SHAKE;
     m_name = "SVFilterShake";

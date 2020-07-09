@@ -27,7 +27,7 @@
 
 using namespace sv;
 
-SVPictureProcess::SVPictureProcess(SVInst *_app)
+SVPictureProcess::SVPictureProcess(SVInstPtr _app)
 :SVProcess(_app){
     
 }

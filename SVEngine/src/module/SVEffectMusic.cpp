@@ -13,7 +13,7 @@
 
 using namespace sv;
 
-SVEffectMusic::SVEffectMusic(SVInst* _app)
+SVEffectMusic::SVEffectMusic(SVInstPtr _app)
 :SVModuleBase(_app){
     m_lock = MakeSharedPtr<SVLock>();
 }

@@ -19,9 +19,9 @@ namespace sv {
     
     class SVOpParse : public SVOpBase {
     public:
-        SVOpParse(SVInst *_app, s32 _resid,cptr8 _path);
+        SVOpParse(SVInstPtr _app, s32 _resid,cptr8 _path);
         
-        SVOpParse(SVInst *_app, s32 _resid,cptr8 _path, s32 _restype);
+        SVOpParse(SVInstPtr _app, s32 _resid,cptr8 _path, s32 _restype);
         
         
     protected:
@@ -34,7 +34,7 @@ namespace sv {
     
     class SVOperateDelEft : public SVOpBase {
     public:
-        SVOperateDelEft(SVInst *_app, s32 _resid);
+        SVOperateDelEft(SVInstPtr _app, s32 _resid);
         
     protected:
         void _process(f32 dt);
@@ -46,7 +46,7 @@ namespace sv {
     //
     class SVOpSaveEft : public SVOpBase {
     public:
-        SVOpSaveEft(SVInst *_app, s32 _resid, cptr8 _path);
+        SVOpSaveEft(SVInstPtr _app, s32 _resid, cptr8 _path);
         
     protected:
         void _process(f32 dt);
@@ -59,7 +59,7 @@ namespace sv {
     //
     class SVOpFilterEft : public SVOpBase {
     public:
-        SVOpFilterEft(SVInst *_app, s32 _resType, s32 _resId);
+        SVOpFilterEft(SVInstPtr _app, s32 _resType, s32 _resId);
         
     protected:
         void _process(f32 dt);
@@ -71,7 +71,7 @@ namespace sv {
     //生成节点
     class SVOpGenerate : public SVOpBase {
     public:
-        SVOpGenerate(SVInst *_app, SVParseDataPtr _parsedataPtr, s32 _resid,cptr8 _path);
+        SVOpGenerate(SVInstPtr _app, SVParseDataPtr _parsedataPtr, s32 _resid,cptr8 _path);
         
     protected:
         void _process(f32 dt);
@@ -84,7 +84,7 @@ namespace sv {
     //纹理加载
     class SVOpTexLoad : public SVOpBase {
     public:
-        SVOpTexLoad(SVInst *_app, SVTexturePtr _tex,cptr8 _fname, bool _enableMipMap = false);
+        SVOpTexLoad(SVInstPtr _app, SVTexturePtr _tex,cptr8 _fname, bool _enableMipMap = false);
         
         ~SVOpTexLoad();
         

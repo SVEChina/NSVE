@@ -28,7 +28,7 @@ namespace sv {
             };
             
         public:
-            SVBitFontNode(SVInst *_app);
+            SVBitFontNode(SVInstPtr _app);
             
             ~SVBitFontNode();
             

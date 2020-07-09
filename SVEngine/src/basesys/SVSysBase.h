@@ -15,7 +15,7 @@ namespace sv {
     
     class SVSysBase : public SVEventProc {
     public:
-        SVSysBase(SVInst *_app);
+        SVSysBase(SVInstPtr _app);
         
         ~SVSysBase();
         

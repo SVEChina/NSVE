@@ -266,8 +266,8 @@ s32 SVChannel::findPreKey(f32 _acct,s32 _rate) {
 }
 
 //
-SVAnimateSkin::SVAnimateSkin(SVInst* _app,cptr8 _name)
-:SVGBase(_app)
+SVAnimateSkin::SVAnimateSkin(SVInstPtr _app,cptr8 _name)
+:SVGBaseEx(_app)
 ,m_name(_name){
     m_accTime = 0;
     m_totalTime = 0.0f;
@@ -338,8 +338,8 @@ void SVAnimateSkin::clearChannel() {
 }
 
 //
-SVSkinMgr::SVSkinMgr(SVInst* _app)
-:SVGBase(_app){
+SVSkinMgr::SVSkinMgr(SVInstPtr _app)
+:SVGBaseEx(_app){
 }
 
 SVSkinMgr::~SVSkinMgr() {

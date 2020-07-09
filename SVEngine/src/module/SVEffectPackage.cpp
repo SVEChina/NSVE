@@ -53,7 +53,7 @@ void frameani_callback(SVFrameAniNodePtr _node,void* _obj,s32 _status){
     }
 }
 
-SVEffectUnit::SVEffectUnit(SVInst* _app):SVGBase(_app){
+SVEffectUnit::SVEffectUnit(SVInstPtr _app):SVGBaseEx(_app){
     m_end = true;
     m_personAct = nullptr;
 }
@@ -128,7 +128,7 @@ bool SVEffectUnit::isEnd(){
     return m_end;
 }
 
-SVEffectPackage::SVEffectPackage(SVInst* _app)
+SVEffectPackage::SVEffectPackage(SVInstPtr _app)
 :SVModuleBase(_app){
     m_lock = MakeSharedPtr<SVLock>();
     m_aniState = EFFECT_ANI_WAIT;

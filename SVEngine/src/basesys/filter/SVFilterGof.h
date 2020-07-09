@@ -17,7 +17,7 @@ namespace sv {
         
         class SVFilterGof : public SVFilterBase {
         public:
-            SVFilterGof(SVInst *_app);
+            SVFilterGof(SVInstPtr _app);
             
             ~SVFilterGof();
             

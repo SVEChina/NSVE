@@ -14,7 +14,7 @@ namespace sv {
 
         class SVTransCPU : public SVTrans {
         public:
-            SVTransCPU(SVInst *_app);
+            SVTransCPU(SVInstPtr _app);
             
             virtual ~SVTransCPU();
             

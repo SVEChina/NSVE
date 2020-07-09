@@ -15,7 +15,7 @@ namespace sv {
     //
     class SVOpOpenDetect : public SVOpBase {
     public:
-        SVOpOpenDetect(SVInst *_app, s32 detecttype);
+        SVOpOpenDetect(SVInstPtr _app, s32 detecttype);
         
     protected:
         void _process(f32 dt);
@@ -25,7 +25,7 @@ namespace sv {
     
     class SVOpCloseDetect : public SVOpBase {
     public:
-        SVOpCloseDetect(SVInst *_app);
+        SVOpCloseDetect(SVInstPtr _app);
         
     protected:
         void _process(f32 dt);

@@ -19,13 +19,13 @@ namespace sv {
         public:
             SVActParam();
             
-            virtual SVActBasePtr genAct(SVInst *_app){ return nullptr; };
+            virtual SVActBasePtr genAct(SVInstPtr _app){ return nullptr; };
         };
         
         //参数表
-        class SVActBase : public SVGBase {
+        class SVActBase : public SVGBaseEx {
         public:
-            SVActBase(SVInst* _app);
+            SVActBase(SVInstPtr _app);
             
             ~SVActBase();
             

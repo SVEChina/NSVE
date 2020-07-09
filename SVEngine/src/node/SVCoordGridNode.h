@@ -17,7 +17,7 @@ namespace sv {
         
         class SVCoordGridNode : public SVNode {
         public :
-            SVCoordGridNode(SVInst *_app);
+            SVCoordGridNode(SVInstPtr _app);
             
             ~SVCoordGridNode();
             

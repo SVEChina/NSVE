@@ -16,8 +16,8 @@ using namespace sv;
 #define STANDARD_EYE_STD 311
 #define STANDARD_NOISE_STD 225
 
-SVPersonTracker::SVPersonTracker(SVInst* _app)
-:SVGBase(_app) {
+SVPersonTracker::SVPersonTracker(SVInstPtr _app)
+:SVGBaseEx(_app) {
     m_img_w = 720;
     m_img_h = 1280;
     m_personID = 0;

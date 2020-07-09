@@ -15,7 +15,7 @@ namespace sv {
     
         class SVParseTexAttachment : public SVParseData {
         public:
-            static SVAniTexAttachmentPtr parseTexAttachmet(SVInst *_app, RAPIDJSON_NAMESPACE::Value &item, s32 _resid,cptr8 _path);
+            static SVAniTexAttachmentPtr parseTexAttachmet(SVInstPtr _app, RAPIDJSON_NAMESPACE::Value &item, s32 _resid,cptr8 _path);
         };
 
         

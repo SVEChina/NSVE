@@ -24,14 +24,14 @@
 
 using namespace sv;
 
-SVOpParse::SVOpParse(SVInst *_app, s32 _resid, cptr8 _path )
+SVOpParse::SVOpParse(SVInstPtr _app, s32 _resid, cptr8 _path )
 : SVOpBase(_app) {
     resid = _resid;
     path = _path;
     restype = 0;
 }
 
-SVOpParse::SVOpParse(SVInst *_app, s32 _resid,  cptr8 _path,s32 _restype)
+SVOpParse::SVOpParse(SVInstPtr _app, s32 _resid,  cptr8 _path,s32 _restype)
 : SVOpBase(_app) {
     resid = _resid;
     path = _path;
@@ -61,7 +61,7 @@ void SVOpParse::_process(f32 dt) {
 }
 
 //
-SVOperateDelEft::SVOperateDelEft(SVInst *_app, s32 _resid)
+SVOperateDelEft::SVOperateDelEft(SVInstPtr _app, s32 _resid)
 : SVOpBase(_app) {
     resid = _resid;
 }
@@ -73,7 +73,7 @@ void SVOperateDelEft::_process(f32 dt) {
 }
 
 //
-SVOpSaveEft::SVOpSaveEft(SVInst *_app, s32 _resid, cptr8 _path)
+SVOpSaveEft::SVOpSaveEft(SVInstPtr _app, s32 _resid, cptr8 _path)
 : SVOpBase(_app) {
     resid = _resid;
     path = _path;
@@ -84,7 +84,7 @@ void SVOpSaveEft::_process(f32 dt) {
     SVScenePtr t_scene = mApp->getSceneMgr()->getScene();
 }
 
-SVOpFilterEft::SVOpFilterEft(SVInst *_app, s32 _resType, s32 _resId)
+SVOpFilterEft::SVOpFilterEft(SVInstPtr _app, s32 _resType, s32 _resId)
 : SVOpBase(_app) {
     resType = _resType;
     resId = _resId;
@@ -105,7 +105,7 @@ void SVOpFilterEft::_process(f32 dt) {
 }
 
 //生成节点
-SVOpGenerate::SVOpGenerate(SVInst *_app, SVParseDataPtr _parsedataPtr, s32 _resid,cptr8 _path)
+SVOpGenerate::SVOpGenerate(SVInstPtr _app, SVParseDataPtr _parsedataPtr, s32 _resid,cptr8 _path)
 : SVOpBase(_app) {
     mParseDataPtr = _parsedataPtr;
     mResid = _resid;
@@ -121,7 +121,7 @@ void SVOpGenerate::_process(f32 dt) {
 }
 
 //加载纹理
-SVOpTexLoad::SVOpTexLoad(SVInst *_app, SVTexturePtr _tex, cptr8 _fname, bool _enableMipMap)
+SVOpTexLoad::SVOpTexLoad(SVInstPtr _app, SVTexturePtr _tex, cptr8 _fname, bool _enableMipMap)
  : SVOpBase(_app) {
     mTex = _tex;
     mFilename = _fname;

@@ -13,7 +13,7 @@ namespace sv {
         
         class SVMtlBasedOn : public SVMtlCore {
         public:
-            SVMtlBasedOn(SVInst *_app);
+            SVMtlBasedOn(SVInstPtr _app);
             
             SVMtlBasedOn(SVMtlBasedOn* _mtl);
             
@@ -84,7 +84,7 @@ namespace sv {
         
         class SVMtlAcutance : public SVMtlCore {
         public:
-            SVMtlAcutance(SVInst *_app);
+            SVMtlAcutance(SVInstPtr _app);
             
             SVMtlAcutance(SVMtlAcutance *_mtl);
             

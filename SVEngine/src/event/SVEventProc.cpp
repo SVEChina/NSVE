@@ -11,8 +11,8 @@
 
 using namespace sv;
 
-SVEventProc::SVEventProc(SVInst* _app)
-:SVGBase(_app) {
+SVEventProc::SVEventProc(SVInstPtr _app)
+:SVGBaseEx(_app) {
 }
 
 SVEventProc::~SVEventProc() {
@@ -20,7 +20,6 @@ SVEventProc::~SVEventProc() {
 
 void SVEventProc::startListen(){
     mApp->getEventMgr()->registProcer(THIS_TO_SHAREPTR(SVEventProc));
-    int && a = 0;
 }
 
 void SVEventProc::stopListen(){

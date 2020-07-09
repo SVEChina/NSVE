@@ -17,7 +17,7 @@ namespace sv {
         
         class SVFilterGlow : public SVFilterBase {
         public:
-            SVFilterGlow(SVInst *_app);
+            SVFilterGlow(SVInstPtr _app);
             
             ~SVFilterGlow();
             

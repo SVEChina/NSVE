@@ -19,7 +19,7 @@ namespace sv {
         
         class SVModelNode : public SVNode {
         public:
-            SVModelNode(SVInst *_app);
+            SVModelNode(SVInstPtr _app);
             
             ~SVModelNode();
 

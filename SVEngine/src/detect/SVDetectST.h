@@ -32,7 +32,7 @@ namespace sv {
     
     class SVDetectST : public SVDetectBase {
     public:
-        SVDetectST(SVInst *_app);
+        SVDetectST(SVInstPtr _app);
         
         ~SVDetectST();
         

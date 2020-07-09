@@ -14,14 +14,14 @@ namespace sv{
     
     
         
-        class SVAniTrigger : public SVGBase {
+        class SVAniTrigger : public SVGBaseEx {
         public:
             struct ANITRIGGERPARAM{
                 SVString           tarName;
                 SVString           condition;
                 SVString           action;
             };
-            SVAniTrigger(SVInst* _app);
+            SVAniTrigger(SVInstPtr _app);
             
             ~SVAniTrigger();
             

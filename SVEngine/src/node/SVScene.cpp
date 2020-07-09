@@ -28,8 +28,8 @@
 
 using namespace sv;
 
-SVTree4::SVTree4(SVInst *_app)
-:SVGBase(_app){
+SVTree4::SVTree4(SVInstPtr _app)
+:SVGBaseEx(_app){
     m_treeLock = MakeSharedPtr<SVLock>();
     for(s32 i=0;i<4;i++){
         m_pTreeNode[i] = nullptr;
@@ -171,8 +171,8 @@ bool SVTree4::hasNode(SVNodePtr _node) {
 }
 
 //逻辑场景
-SVScene::SVScene(SVInst *_app,cptr8 _name)
-:SVGBase(_app) {
+SVScene::SVScene(SVInstPtr _app,cptr8 _name)
+:SVGBaseEx(_app) {
     m_name = _name;
     m_color.setColorARGB(0x00000000);
     m_worldW = 0;

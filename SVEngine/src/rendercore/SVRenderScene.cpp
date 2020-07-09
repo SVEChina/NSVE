@@ -16,8 +16,8 @@
 
 using namespace sv;
 //
-SVRenderScene::SVRenderScene(SVInst *_app)
-:SVGBase(_app){
+SVRenderScene::SVRenderScene(SVInstPtr _app)
+:SVGBaseEx(_app){
     m_name = "sve";
     m_suspend = false;
     m_writePipline = MakeSharedPtr<SVRenderPipline>(_app); //写管线

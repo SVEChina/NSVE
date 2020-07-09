@@ -18,9 +18,9 @@ namespace sv {
      scenetree BVH
      */
 
-    class SVTree4 :public SVGBase{
+    class SVTree4 :public SVGBaseEx{
     public:
-        SVTree4(SVInst *_app);
+        SVTree4(SVInstPtr _app);
         
         ~SVTree4();
         
@@ -61,9 +61,9 @@ namespace sv {
             
     /*场景*/
 
-    class SVScene : public SVGBase {
+    class SVScene : public SVGBaseEx {
     public:
-        SVScene(SVInst *_app,cptr8 name);
+        SVScene(SVInstPtr _app,cptr8 name);
         
         ~SVScene();
         

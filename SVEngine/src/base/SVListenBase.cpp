@@ -3,8 +3,8 @@
 
 using namespace sv;
 
-SVListenBase::SVListenBase(SVInst* _app)
-:SVGBase(_app){
+SVListenBase::SVListenBase(SVInstPtr _app)
+:SVGBaseEx(_app){
     m_listenDirty = true;
     m_listenlock = MakeSharedPtr<SVLock>();
 }

@@ -24,20 +24,22 @@ namespace sv {
         public:
             SVMtlCoreParam();
             
-            virtual SVMtlCorePtr genMtl(SVInst *_app);
+            virtual SVMtlCorePtr genMtl(SVInstPtr _app);
             
             s32 m_shader;
         };
         
         //
-        class SVMtlCore : public SVGBase {
+        class SVMtlCore : public SVGBaseEx {
             friend class SVRenderer;
             friend class SVRendererGL;
             friend class SVRendererMetal;
             friend class SVRendererVulkan;
             
         public:
-            SVMtlCore(SVInst *_app, cptr8 _shader);
+            SVMtlCore(SVInstPtr _app, cptr8 _shader);
+            
+            SVMtlCore(SVInstPtr _app, SVRShaderPtr _shader);
             
             SVMtlCore(SVMtlCore* _mtl);
             
@@ -82,9 +84,7 @@ namespace sv {
             SVDataChunkPtr m_ParamValues;
             
         public:
-            SVRTechPtr _tech;
-            //技术（shader）
-            
+            SVRShaderPtr m_shader;
             //uniform
             
             //采样器

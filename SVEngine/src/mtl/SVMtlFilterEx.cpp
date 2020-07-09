@@ -12,7 +12,7 @@
 
 using namespace sv;
 
-SVMtlBrightnessContrast::SVMtlBrightnessContrast(SVInst *_app)
+SVMtlBrightnessContrast::SVMtlBrightnessContrast(SVInstPtr _app)
 :SVMtlCore(_app,"BrightnessContrast") {
     m_brightness=0.0f;
     m_contrast=0.0f;
@@ -48,7 +48,7 @@ void SVMtlBrightnessContrast::_submitMtl(SVRendererPtr _render) {
 
 
 
-SVMtlSaturation::SVMtlSaturation(SVInst *_app)
+SVMtlSaturation::SVMtlSaturation(SVInstPtr _app)
 :SVMtlCore(_app,"saturation") {
     m_saturation=0.0f;
 }
@@ -76,7 +76,7 @@ void SVMtlSaturation::_submitMtl(SVRendererPtr _render) {
        _render->submitUniformf("saturation", m_saturation);
 }
 
-SVMtlVibrance::SVMtlVibrance(SVInst *_app)
+SVMtlVibrance::SVMtlVibrance(SVInstPtr _app)
 :SVMtlCore(_app,"vibrance") {
     m_vibrance=0.0f;
 }
@@ -104,7 +104,7 @@ void SVMtlVibrance::_submitMtl(SVRendererPtr _render) {
     _render->submitUniformf("vibrance", m_vibrance);
 }
 
-SVMtlShadowHighlight::SVMtlShadowHighlight(SVInst *_app)
+SVMtlShadowHighlight::SVMtlShadowHighlight(SVInstPtr _app)
 :SVMtlCore(_app,"shadowhighlight") {
     m_shadow=0.0;
     m_HighLight=0.0;
@@ -129,7 +129,7 @@ void SVMtlShadowHighlight::_submitMtl(SVRendererPtr _render){
     _render->submitUniformf("highlights", m_HighLight);
 }
 
-SVMtlWhiteBlackLevel::SVMtlWhiteBlackLevel(SVInst *_app)
+SVMtlWhiteBlackLevel::SVMtlWhiteBlackLevel(SVInstPtr _app)
 :SVMtlCore(_app,"whiteblackLevel") {
     m_shadow=0.0;
     m_HighLight=0.0;
@@ -154,7 +154,7 @@ void SVMtlWhiteBlackLevel::_submitMtl(SVRendererPtr _render){
     _render->submitUniformf("highlights", m_HighLight);
 }
 
-SVMtlColorBalance::SVMtlColorBalance(SVInst *_app)
+SVMtlColorBalance::SVMtlColorBalance(SVInstPtr _app)
 :SVMtlCore(_app,"colorBalance"){
     m_redShift      = 0.0f;
     m_greenShift    = 0.0f;
@@ -202,7 +202,7 @@ void SVMtlColorBalance::_submitMtl(SVRendererPtr _render){
 }
 
 
-SVMtlHSL::SVMtlHSL(SVInst *_app)
+SVMtlHSL::SVMtlHSL(SVInstPtr _app)
 :SVMtlCore(_app,"HSL2"){
      m_saturationRed=1.0;
      m_HueRed=0.0;
@@ -269,7 +269,7 @@ void SVMtlHSL::_submitMtl(SVRendererPtr _render){
 
 }
 
-SVMtlWhiteBalance::SVMtlWhiteBalance(SVInst *_app)
+SVMtlWhiteBalance::SVMtlWhiteBalance(SVInstPtr _app)
 :SVMtlCore(_app,"WhiteBalance"){
     m_Temperature = 5000.0f;
     m_Tint = 0.0f;
@@ -303,7 +303,7 @@ void SVMtlWhiteBalance::_submitMtl(SVRendererPtr _render){
     _render->submitUniformf("m_tint", m_Tint);
 }
 
-SVMtlGamma::SVMtlGamma(SVInst *_app)
+SVMtlGamma::SVMtlGamma(SVInstPtr _app)
 :SVMtlCore(_app,"gamma"){
     m_Gamma = 1.0f;
 }
@@ -330,7 +330,7 @@ void SVMtlGamma::_submitMtl(SVRendererPtr _render){
     _render->submitUniformf("m_gamma", m_Gamma);
 }
 
-SVMtlExposure::SVMtlExposure(SVInst *_app)
+SVMtlExposure::SVMtlExposure(SVInstPtr _app)
 :SVMtlCore(_app,"Exposure"){
     m_Exposure=0.0f;
 }

@@ -1,11 +1,11 @@
 //
-// SVRResGLShader.cpp
+// SVRGLShader.cpp
 // SVEngine
 // Copyright 2017-2020
 // yizhou Fu,long Yin,longfei Lin,ziyu Xu,xiaofan Li,daming Li
 //
 
-#include "SVRResGLShader.h"
+#include "SVRGLShader.h"
 #include "../../third/rapidjson/document.h"
 #include "../../base/SVPreDeclare.h"
 #include "../../app/SVInst.h"
@@ -27,8 +27,8 @@ using namespace sv;
 GL Shader
 */
 
-SVRResGLShader::SVRResGLShader(SVInst* _app)
-:SVResShader(_app){
+SVRGLShader::SVRGLShader(SVInstPtr _app)
+:SVRShader(_app){
     m_programm = 0;
     m_vs = 0;
     m_fs = 0;
@@ -39,7 +39,7 @@ SVRResGLShader::SVRResGLShader(SVInst* _app)
     m_use_tech = false;
 }
 
-SVRResGLShader::~SVRResGLShader(){
+SVRGLShader::~SVRGLShader(){
     m_programm = 0;
     m_vs = 0;
     m_fs = 0;
@@ -49,29 +49,78 @@ SVRResGLShader::~SVRResGLShader(){
     m_cs = 0;
 }
 
-void SVRResGLShader::create(SVRendererPtr _renderer) {
-    SVRObjBase::create(_renderer);
+void SVRGLShader::create(SVRendererPtr _renderer) {
     if( m_use_tech ) {
         _parseTech();
     } else {
-        m_vs = _loadVS(m_vs_fname.c_str());
-        m_fs = _loadFS(m_fs_fname.c_str());
-        m_gs = _loadGS(m_gs_fname.c_str());
-        m_tsc = _loadTSC(m_tsc_fname.c_str());
-        m_tse = _loadTSE(m_tse_fname.c_str());
-        m_cs = _loadCS(m_cs_fname.c_str());
+        m_vs = _loadShader(mApp,m_vs_fname.c_str(),1);
+        m_fs = _loadShader(mApp,m_fs_fname.c_str(),2);
+        m_gs = _loadShader(mApp,m_gs_fname.c_str(),3);
+        m_tsc = _loadShader(mApp,m_tsc_fname.c_str(),4);
+        m_tse = _loadShader(mApp,m_tse_fname.c_str(),5);
+        m_cs = _loadShader(mApp,m_cs_fname.c_str(),6);
         m_programm = _createProgram();
         _clearShaderRes();//生产program后就删除shader资源
     }
 }
 
-void SVRResGLShader::setTechFName(cptr8 _filename) {
+void SVRGLShader::setTechFName(cptr8 _filename) {
     m_tech_fname = _filename;
     m_use_tech = true;
 }
 
+u32 SVRGLShader::_loadShader(SVInstPtr _app,cptr8 _filename,s32 _shaderType){
+    SVDataChunk tDataStream;
+    u32 t_id = 0;
+    bool t_flag=false;
+    if(!t_id){
+        t_flag = _app->getFileMgr()->loadFileContentStr(&tDataStream, _filename);
+    }else{
+        return t_id;
+    }
+    if (!t_flag){
+        return 0;
+    }
+    //
+    cptr8 t_shader_res = tDataStream.getPointerChar();
+    s32 t_shader_type = 0;
+    if(_shaderType == 1) {
+        t_shader_type = GL_VERTEX_SHADER;
+    }else if(_shaderType == 2) {
+        t_shader_type = GL_FRAGMENT_SHADER;
+    }else if(_shaderType == 3) {
+        t_shader_type = GL_GEOMETRY_SHADER;
+    }else if(_shaderType == 4) {
+        t_shader_type = GL_TESS_EVALUATION_SHADER;
+    }else if(_shaderType == 5) {
+        t_shader_type = GL_TESS_CONTROL_SHADER;
+    }else if(_shaderType == 6) {
+    }
+    u32 t_shader_id = glCreateShader(t_shader_type);
+    glShaderSource(t_shader_id, 1, &t_shader_res, 0);
+    glCompileShader(t_shader_id);
+    GLint compileErr = 0;
+    glGetShaderiv(t_shader_id, GL_COMPILE_STATUS, &compileErr);
+    if (GL_FALSE == compileErr) {
+        GLint logLen;
+        glGetShaderiv(t_shader_id, GL_INFO_LOG_LENGTH, &logLen);
+        if (logLen > 0) {
+            c8 *log = (c8 *) malloc(logLen);
+            GLsizei written;
+            glGetShaderInfoLog(t_shader_id, logLen, &written, log);
+            SV_LOG_DEBUG("vs shader compile error log : \n %s fname:%s \n", log,
+                         _filename/*[filename UTF8String]*/);
+            free(log);
+        }
+        t_shader_id = 0;
+    }else{
+        SV_LOG_DEBUG("load shader file %s type %d sucess\n", _filename, _shaderType);
+    }
+    return t_shader_id;
+}
+
 //解析tech
-bool SVRResGLShader::_parseTech() {
+bool SVRGLShader::_parseTech() {
     SVDataChunk tDataStream;
     bool tflag = mApp->getFileMgr()->loadFileContentStr(&tDataStream, m_tech_fname.c_str());
     if (!tflag)
@@ -145,7 +194,7 @@ bool SVRResGLShader::_parseTech() {
     return true;
 }
 
-u32 SVRResGLShader::_loadTechVS(cptr8 _precision,cptr8 _src) {
+u32 SVRGLShader::_loadTechVS(cptr8 _precision,cptr8 _src) {
     SVString t_source = _src;
 #ifdef SV_ANDROID
     if(strcmp(_src,"lowp") == 0 ) {
@@ -170,7 +219,7 @@ u32 SVRResGLShader::_loadTechVS(cptr8 _precision,cptr8 _src) {
     return 0;
 }
 
-u32 SVRResGLShader::_loadTechFS(cptr8 _precision,cptr8 _src) {
+u32 SVRGLShader::_loadTechFS(cptr8 _precision,cptr8 _src) {
     SVString t_source = _src;
 #ifdef SV_ANDROID
     if(strcmp(_src,"lowp") == 0 ) {
@@ -194,7 +243,7 @@ u32 SVRResGLShader::_loadTechFS(cptr8 _precision,cptr8 _src) {
     return 0;
 }
 
-u32 SVRResGLShader::_loadTechGS(cptr8 _precision,cptr8 _src) {
+u32 SVRGLShader::_loadTechGS(cptr8 _precision,cptr8 _src) {
 #ifdef SV_ANDROID
     if(strcmp(_src,"lowp") == 0 ) {
 
@@ -216,144 +265,32 @@ u32 SVRResGLShader::_loadTechGS(cptr8 _precision,cptr8 _src) {
     return 0;
 }
 
-u32 SVRResGLShader::_loadVS(cptr8 _filename) {
-    SVDataChunk tDataStream;
-    u32 t_id=0;
-    bool t_flag=false;
-    if(!t_id){
-        t_flag = mApp->getFileMgr()->loadFileContentStr(&tDataStream, _filename);
-    }else{
-        return t_id;
-        
-    }
-    if (!t_flag)
-        return 0;
-    cptr8 vs_shader = tDataStream.getPointerChar();
-    u32 m_vs_id = glCreateShader(GL_VERTEX_SHADER);
-    glShaderSource(m_vs_id, 1, &vs_shader, 0);
-    glCompileShader(m_vs_id);
-
-    GLint compileErr = 0;
-    glGetShaderiv(m_vs_id, GL_COMPILE_STATUS, &compileErr);
-    if (GL_FALSE == compileErr) {
-        GLint logLen;
-        glGetShaderiv(m_vs_id, GL_INFO_LOG_LENGTH, &logLen);
-        if (logLen > 0) {
-            char *log = (char *) malloc(logLen);
-            GLsizei written;
-            glGetShaderInfoLog(m_vs_id, logLen, &written, log);
-            SV_LOG_DEBUG("vs shader compile error log : \n %s fname:%s \n", log,
-                         _filename/*[filename UTF8String]*/);
-            free(log);
-        }
-        m_vs_id = 0;
-    }else{
-        SV_LOG_DEBUG("load vs: %s (%d) sucess\n", _filename, m_vs_id);
-    }
-    return m_vs_id;
-}
-
-u32 SVRResGLShader::_loadFS(cptr8 _filename){
-    SVDataChunk tDataStream;
-    u32 t_id=0;
-    bool t_flag=false;
-    if(!t_id){
-        t_flag = mApp->getFileMgr()->loadFileContentStr(&tDataStream, _filename);
-    }else{
-        return t_id;
-    }
-    if (!t_flag)
-        return 0;
-    s32 t_error = 0;
-
-    cptr8 fs_shader = tDataStream.getPointerChar();
-    u32 m_fs_id = glCreateShader(GL_FRAGMENT_SHADER);
-    t_error = glGetError();
-
-    glShaderSource(m_fs_id, 1, &fs_shader, 0);
-    t_error = glGetError();
-
-    glCompileShader(m_fs_id);
-    t_error = glGetError();
-
-    GLint compileErr = 0;
-    glGetShaderiv(m_fs_id, GL_COMPILE_STATUS, &compileErr);
-    if (GL_FALSE == compileErr) {
-        GLint logLen;
-        glGetShaderiv(m_fs_id, GL_INFO_LOG_LENGTH, &logLen);
-        if (logLen > 0) {
-            char *log = (char *) malloc(logLen);
-            GLsizei written;
-            glGetShaderInfoLog(m_fs_id, logLen, &written, log);
-            SV_LOG_DEBUG("fs shader compile error log : \n %s fname:%s \n", log, _filename);            free(log);
-        }
-        m_fs_id = 0;
-    }else{
-        SV_LOG_DEBUG("load fs: %s (%d) sucess\n", _filename, m_fs_id);
-    }
-    return m_fs_id;
-}
-
-u32 SVRResGLShader::_loadGS(cptr8 _filename){
-    //应该是 es 不支持gs，先关掉了。
-//    SVDataChunk tDataStream;
-//    u32 t_id=0;
-//    bool t_flag=false;
-//    if(!t_id){
-//        t_flag = mApp->getFileMgr()->loadFileContentStr(&tDataStream, _filename);
-//    }else{
-//        return t_id;
-//
-//    }
-//    if (!t_flag)
-//        return 0;
-//    cptr8 gs_shader = tDataStream.m_data;
-//    u32 t_gs_id = glCreateShader(GL_GEOMETRY_SHADER);
-//    glShaderSource(t_gs_id, 1, &gs_shader, 0);
-//    glCompileShader(t_gs_id);
-//
-//    GLint compileErr = 0;
-//    glGetShaderiv(t_gs_id, GL_COMPILE_STATUS, &compileErr);
-//    if (GL_FALSE == compileErr) {
-//        GLint logLen;
-//        glGetShaderiv(t_gs_id, GL_INFO_LOG_LENGTH, &logLen);
-//        if (logLen > 0) {
-//            char *log = (char *) malloc(logLen);
-//            GLsizei written;
-//            glGetShaderInfoLog(t_gs_id, logLen, &written, log);
-//            SV_LOG_DEBUG("gs shader compile error log : \n %s fname:%s \n", log,
-//                         _filename/*[filename UTF8String]*/);
-//            free(log);
-//        }
-//        t_gs_id = 0;
-//    }else{
-//        SV_LOG_DEBUG("load gs: %s (%d) sucess\n", _filename, t_gs_id);
-//    }
-//    return t_gs_id;
-    return 0;
-}
-
-u32 SVRResGLShader::_loadCS(cptr8 _filename){
-    return 0;
-}
-
-u32 SVRResGLShader::_loadTSC(cptr8 _filename){
-    return 0;
-}
-
-u32 SVRResGLShader::_loadTSE(cptr8 _filename){
-    return 0;
-}
-
-u32 SVRResGLShader::_createProgram(){
+u32 SVRGLShader::_createProgram(){
     if (m_vs == 0 || m_fs == 0) {
         SV_LOG_DEBUG("error : create program fail, please check out shader:%s\n", m_programme_fname.c_str());
         return 0;
     }
     s32 t_error = 0;
     u32 t_program_id = glCreateProgram();
-    glAttachShader(t_program_id, m_vs);
-    glAttachShader(t_program_id, m_fs);
+    if(m_vs>0) {
+        glAttachShader(t_program_id, m_vs);
+    }
+    if(m_fs>0) {
+        glAttachShader(t_program_id, m_fs);
+    }
+    if(m_gs>0) {
+        glAttachShader(t_program_id, m_gs);
+    }
+    if(m_tsc>0) {
+        glAttachShader(t_program_id, m_tsc);
+    }
+    if(m_tse>0) {
+        glAttachShader(t_program_id, m_tse);
+    }
+    if(m_cs>0) {
+        glAttachShader(t_program_id, m_cs);
+    }
+    //
     if( m_attri_formate == "all" ) {
         //bind prop
         glBindAttribLocation(t_program_id, CHANNEL_POSITION, NAME_POSITION);
@@ -407,7 +344,6 @@ u32 SVRResGLShader::_createProgram(){
         }
     }
     glLinkProgram(t_program_id);
-
     GLint linkstatus;
     glGetProgramiv(t_program_id, GL_LINK_STATUS, &linkstatus);
     if (linkstatus == GL_FALSE) {
@@ -426,7 +362,7 @@ u32 SVRResGLShader::_createProgram(){
     return t_program_id;
 }
 
-void SVRResGLShader::_clearShaderRes(){
+void SVRGLShader::_clearShaderRes(){
     if(m_vs != 0) {
         glDeleteShader(m_vs);
         m_vs = 0;
@@ -453,14 +389,13 @@ void SVRResGLShader::_clearShaderRes(){
     }
 }
 
-void SVRResGLShader::destroy(SVRendererPtr _renderer) {
+void SVRGLShader::destroy(SVRendererPtr _renderer) {
     if(m_programm != 0){
         glDeleteProgram(m_programm);
     }
-    SVRObjBase::destroy(_renderer);
 }
 
-bool SVRResGLShader::active(SVRendererPtr _render) {
+bool SVRGLShader::active(SVRendererPtr _render) {
     SVRenderStatePtr t_state = _render->getState();
     if(m_programm>0) {
         glUseProgram(m_programm);

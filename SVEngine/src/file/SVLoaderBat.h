@@ -17,7 +17,7 @@ namespace sv {
     //加载普通的明文文件
     class SVLoaderBat : public SVFileLoader {
     public:
-        SVLoaderBat(SVInst *_app);
+        SVLoaderBat(SVInstPtr _app);
         
         bool loadFromFile(cptr8 _filename,SVTable& _tbl);
         

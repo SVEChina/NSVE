@@ -12,7 +12,7 @@
 
 using namespace sv;
 
-SVMtlFlashWhite::SVMtlFlashWhite(SVInst *_app)
+SVMtlFlashWhite::SVMtlFlashWhite(SVInstPtr _app)
 :SVMtlCore(_app,"filterflashwhite") {
     m_time = 0.0;
     m_cycle = 1.0f;

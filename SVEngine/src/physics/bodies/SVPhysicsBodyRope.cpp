@@ -9,7 +9,7 @@
 
 using namespace sv;
 
-SVPhysicsBodyRope::SVPhysicsBodyRope(SVInst* _app, btSoftBodyWorldInfo& _worldInfo, FVec3 &_from, FVec3 &_to, s32 _resCount, s32 _fixeds ):SVPhysicsBodySoft(_app) {
+SVPhysicsBodyRope::SVPhysicsBodyRope(SVInstPtr _app, btSoftBodyWorldInfo& _worldInfo, FVec3 &_from, FVec3 &_to, s32 _resCount, s32 _fixeds ):SVPhysicsBodySoft(_app) {
     m_type = E_PHYSICS_BODY_ROPE;
     m_vertexCount = 0;
     m_pVertexData = MakeSharedPtr<SVDataSwap>();

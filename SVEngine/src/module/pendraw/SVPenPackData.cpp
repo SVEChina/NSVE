@@ -12,14 +12,14 @@
 
 using namespace sv;
 
-SVPenPackData::SVPenPackData(SVInst *_app)
-:SVGBase(_app) {
+SVPenPackData::SVPenPackData(SVInstPtr _app)
+:SVGBaseEx(_app) {
 }
 
 SVPenPackData::~SVPenPackData() {
 }
 
-bool SVPenPackData::loadPenData(SVInst* _app, SVDataSwapPtr _data, cptr8 _path, s32 _offset, s32 _length){
+bool SVPenPackData::loadPenData(SVInstPtr _app, SVDataSwapPtr _data, cptr8 _path, s32 _offset, s32 _length){
     if (_data && _length) {
         SVDataChunk dataChunk;
         bool t_flag = _app->getFileMgr()->loadFileData(&dataChunk, _path, _offset, _length);
@@ -33,7 +33,7 @@ bool SVPenPackData::loadPenData(SVInst* _app, SVDataSwapPtr _data, cptr8 _path, 
     return true;
 }
 
-bool SVPenPackData::writePenData(SVInst* _app, SVDataSwapPtr _data, cptr8 _path, bool _clearData){
+bool SVPenPackData::writePenData(SVInstPtr _app, SVDataSwapPtr _data, cptr8 _path, bool _clearData){
     if (_data && _data->getSize()) {
         SVDataChunk dataChunk;
         dataChunk.push(_data->getData(), _data->getSize());
@@ -46,7 +46,7 @@ bool SVPenPackData::writePenData(SVInst* _app, SVDataSwapPtr _data, cptr8 _path,
     return true;
 }
 
-u64 SVPenPackData::checkPenStrokeDataLength(SVInst* _app, cptr8 _path){
+u64 SVPenPackData::checkPenStrokeDataLength(SVInstPtr _app, cptr8 _path){
     return _app->getFileMgr()->checkFileDataLength(_path);
     
 }

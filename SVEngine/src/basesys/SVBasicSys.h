@@ -14,7 +14,7 @@ namespace sv{
     
     class SVBasicSys : public SVSysBase {
     public:
-        SVBasicSys(SVInst* _app);
+        SVBasicSys(SVInstPtr _app);
         
         ~SVBasicSys();
         

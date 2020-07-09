@@ -16,9 +16,9 @@
 
 namespace sv {
         
-    class SVRObjBase: public SVGBase {
+    class SVRObjBase: public SVGBaseEx {
     public:
-        SVRObjBase(SVInst* _app);
+        SVRObjBase(SVInstPtr _app);
         
         virtual ~SVRObjBase();
         

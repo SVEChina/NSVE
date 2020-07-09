@@ -17,7 +17,7 @@
 
 using namespace sv;
 
-SVFilterGlow::SVFilterGlow(SVInst *_app)
+SVFilterGlow::SVFilterGlow(SVInstPtr _app)
 :SVFilterBase(_app){
     m_type=SV_FUNC_GLOW;
     m_name="SVFilterGlow";

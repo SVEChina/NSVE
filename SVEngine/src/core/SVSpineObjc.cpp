@@ -23,8 +23,9 @@ SVSpineObjc::~SVSpineObjc(){
 }
 
 //获取数据内容接口
-char *_spUtil_readFile(void *_app, const char *path, int *length) {
-    SVInst *t_App = (SVInst *) _app;
+char *_spUtil_readFile(void* _app, const char *path, int *length) {
+    //fix fuyizhou
+    SVInst* t_App = (SVInst*)_app;
     //返回文件内容
     SVDataChunk tChunk;
     bool t_resule = t_App->getFileMgr()->loadFileContent(&tChunk, path);
@@ -35,8 +36,9 @@ char *_spUtil_readFile(void *_app, const char *path, int *length) {
 }
 
 //创建纹理接口
-void _spAtlasPage_createTexture(void *_app, spAtlasPage *self, const char *path, char enableMipMap) {
-    SVInst *_tApp = (SVInst *) _app;
+void _spAtlasPage_createTexture(void* _app, spAtlasPage *self, const char *path, char enableMipMap) {
+    //fix fuyizhou
+    SVInst* _tApp = (SVInst*)_app;
     SVSpineObjc* pSpineObj = new SVSpineObjc();
     pSpineObj->m_texture = _tApp->getTexMgr()->getTextureSync(path, true, enableMipMap);
     if (pSpineObj && pSpineObj->m_texture) {

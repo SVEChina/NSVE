@@ -12,7 +12,7 @@
 
 using namespace sv;
 
-SVMtlADFilterBase::SVMtlADFilterBase(SVInst *_app, cptr8 _shader)
+SVMtlADFilterBase::SVMtlADFilterBase(SVInstPtr _app, cptr8 _shader)
 :SVMtlCore(_app,_shader) {
     _resetTime();
 }

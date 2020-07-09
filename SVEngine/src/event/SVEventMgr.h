@@ -17,7 +17,7 @@ namespace sv {
     
     class SVEventMgr : public SVSysBase {
     public:
-        SVEventMgr(SVInst* _app);
+        SVEventMgr(SVInstPtr _app);
         
         ~SVEventMgr();
         

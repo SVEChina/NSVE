@@ -13,7 +13,7 @@
 using namespace sv;
 
 //
-SVMtlFilterBrilaterl::SVMtlFilterBrilaterl(SVInst *_app)
+SVMtlFilterBrilaterl::SVMtlFilterBrilaterl(SVInstPtr _app)
 :SVMtlCore(_app,"brilateralfilter") {
     m_texelWidthOffset = 0.0f;
     m_texelHeightOffset = 0.0f;
@@ -65,7 +65,7 @@ void SVMtlFilterBrilaterl::_submitMtl(SVRendererPtr _render) {
 }
 
 //
-SVMtlFilterBrilaterl2::SVMtlFilterBrilaterl2(SVInst *_app)
+SVMtlFilterBrilaterl2::SVMtlFilterBrilaterl2(SVInstPtr _app)
 :SVMtlCore(_app,"brilateralfilter02") {
     m_texelWidthOffset = 0;
     m_texelHeightOffset = 0;
@@ -118,7 +118,7 @@ void SVMtlFilterBrilaterl2::_submitMtl(SVRendererPtr _render) {
 }
 
 //
-SVMtlGaussian::SVMtlGaussian(SVInst *_app)
+SVMtlGaussian::SVMtlGaussian(SVInstPtr _app)
 :SVMtlCore(_app,"gaussian") {
     m_radius = 1.0f;
     m_paramDirty = true;
@@ -155,7 +155,7 @@ void SVMtlGaussian::_submitMtl(SVRendererPtr _render) {
     }
 }
 
-SVMtlBlurFairGus::SVMtlBlurFairGus(SVInst *_app)
+SVMtlBlurFairGus::SVMtlBlurFairGus(SVInstPtr _app)
 :SVMtlCore(_app,"blur_fair_gus") {
     
 }
@@ -181,7 +181,7 @@ SVMtlCorePtr SVMtlBlurFairGus::clone(){
      return PointerSharedPtr<SVMtlBlurFairGus>(new SVMtlBlurFairGus(this));
 }
 
-SVMtlBlur::SVMtlBlur(SVInst *_app)
+SVMtlBlur::SVMtlBlur(SVInstPtr _app)
 :SVMtlCore(_app,"blur") {
     m_radius = 1.0f;
     m_paramDirty = true;
@@ -218,7 +218,7 @@ void SVMtlBlur::_submitMtl(SVRendererPtr _render) {
     }
 }
 
-SVMtlBlurFair::SVMtlBlurFair(SVInst *_app)
+SVMtlBlurFair::SVMtlBlurFair(SVInstPtr _app)
 :SVMtlCore(_app,"blur_fair_hipass"){
 
 }
@@ -243,7 +243,7 @@ SVMtlCorePtr SVMtlBlurFair::clone(){
     return PointerSharedPtr<SVMtlBlurFair>(new SVMtlBlurFair(this));
 }
 
-SVMtlFairLtraLow::SVMtlFairLtraLow(SVInst *_app)
+SVMtlFairLtraLow::SVMtlFairLtraLow(SVInstPtr _app)
 :SVMtlCore(_app,"beauty"){
      m_smooth=0.0;
 }

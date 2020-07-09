@@ -13,7 +13,7 @@
 using namespace sv;
 
 //
-SVOpAppMode::SVOpAppMode(SVInst* _app,SV_STATE _mode)
+SVOpAppMode::SVOpAppMode(SVInstPtr _app,SV_STATE _mode)
 : SVOpBase(_app) {
     m_EngMode = _mode;
 }

@@ -16,7 +16,7 @@ namespace sv {
     
         class SVTexture : public SVRObjBase {
         public:
-            SVTexture(SVInst *_app);
+            SVTexture(SVInstPtr _app);
             
             ~SVTexture();
             
@@ -73,7 +73,7 @@ namespace sv {
         
         class SVTextureInputTexID : public SVTexture{
         public:
-            SVTextureInputTexID(SVInst *_app, s32 _texID);
+            SVTextureInputTexID(SVInstPtr _app, s32 _texID);
             
             ~SVTextureInputTexID();
             

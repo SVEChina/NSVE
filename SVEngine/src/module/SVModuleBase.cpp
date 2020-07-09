@@ -9,7 +9,7 @@
 
 using namespace sv;
 
-SVModuleBase::SVModuleBase(SVInst *_app)
+SVModuleBase::SVModuleBase(SVInstPtr _app)
 :SVEventProc(_app)
 ,m_isOpen(false){
     m_module_name = "";

@@ -22,7 +22,7 @@ namespace sv{
     
     class SVOutMission : public SVEventProc {
     public:
-        SVOutMission(SVInst* _app,cptr8 _name);
+        SVOutMission(SVInstPtr _app,cptr8 _name);
         
         ~SVOutMission();
         

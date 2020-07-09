@@ -24,9 +24,9 @@ namespace sv {
         
         //普通mesh
         
-        class SVMesh :public SVGBase{
+        class SVMesh :public SVGBaseEx{
         public:
-            SVMesh(SVInst* _app);
+            SVMesh(SVInstPtr _app);
             
             virtual ~SVMesh();
             
@@ -63,7 +63,7 @@ namespace sv {
         //morph动画的mesh
         class SVMorphMesh :public SVMesh{
         public:
-            SVMorphMesh(SVInst* _app);
+            SVMorphMesh(SVInstPtr _app);
             
             virtual ~SVMorphMesh();
         };

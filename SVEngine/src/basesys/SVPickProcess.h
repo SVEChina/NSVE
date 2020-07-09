@@ -54,7 +54,7 @@ namespace sv {
 
     class SVPickProcess : public SVProcess {
     public:
-        SVPickProcess(SVInst* _app);
+        SVPickProcess(SVInstPtr _app);
         
         ~SVPickProcess();
         //

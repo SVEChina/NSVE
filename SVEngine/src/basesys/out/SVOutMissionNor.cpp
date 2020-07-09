@@ -9,7 +9,7 @@
 
 using namespace sv;
 
-SVOutMissionNor::SVOutMissionNor(SVInst* _app,cptr8 _name)
+SVOutMissionNor::SVOutMissionNor(SVInstPtr _app,cptr8 _name)
 :SVOutMission(_app,_name)
 ,m_end(false){
 }

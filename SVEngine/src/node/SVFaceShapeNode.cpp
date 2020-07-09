@@ -29,7 +29,7 @@
 
 using namespace sv;
 
-SVFaceShapeNode::SVFaceShapeNode(SVInst *_app)
+SVFaceShapeNode::SVFaceShapeNode(SVInstPtr _app)
 :SVNode(_app){
     ntype = "SVFaceShapeNode";
     m_pRenderObj = MakeSharedPtr<SVRenderObject>();

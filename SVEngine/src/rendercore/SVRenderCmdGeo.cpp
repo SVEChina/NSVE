@@ -22,12 +22,12 @@ SVRenderCmdGeo::~SVRenderCmdGeo() {
 }
 
 void SVRenderCmdGeo::render(SVRendererPtr _renderer){
-    if (m_pMtl ) {
-        if (m_pMtl->submitMtl()) {
-           _render();
-            m_pMtl->recoverMtl();
-        }
-    }
+//    if (m_pMtl ) {
+//        if (m_pMtl->submitMtl()) {
+//           _render();
+//            m_pMtl->recoverMtl();
+//        }
+//    }
 }
 
 void SVRenderCmdGeo::_render(){
@@ -44,20 +44,20 @@ void SVRenderCmdLine::setLine(FVec3& _start, FVec3& _end){
 }
 
 void SVRenderCmdLine::_render(SVRendererPtr _renderer){
-    V3 t_verts[2];
-    t_verts[0].x = m_start.x;
-    t_verts[0].y = m_start.y;
-    t_verts[0].z = m_start.z;
-    t_verts[1].x = m_end.x;
-    t_verts[1].y = m_end.y;
-    t_verts[1].z = m_end.z;
-    //
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glEnableVertexAttribArray(CHANNEL_POSITION);
-    glVertexAttribPointer(CHANNEL_POSITION, 3, GL_FLOAT, false, 0, t_verts);
-    glDrawArrays(GL_LINES,0,2);
-    glDisableVertexAttribArray(CHANNEL_POSITION);
+//    V3 t_verts[2];
+//    t_verts[0].x = m_start.x;
+//    t_verts[0].y = m_start.y;
+//    t_verts[0].z = m_start.z;
+//    t_verts[1].x = m_end.x;
+//    t_verts[1].y = m_end.y;
+//    t_verts[1].z = m_end.z;
+//    //
+//    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+//    glBindBuffer(GL_ARRAY_BUFFER, 0);
+//    glEnableVertexAttribArray(CHANNEL_POSITION);
+//    glVertexAttribPointer(CHANNEL_POSITION, 3, GL_FLOAT, false, 0, t_verts);
+//    glDrawArrays(GL_LINES,0,2);
+//    glDisableVertexAttribArray(CHANNEL_POSITION);
 }
 
 //
@@ -66,25 +66,25 @@ void SVRenderCmdRect::setRect(SVRect& _rect){
 }
 
 void SVRenderCmdRect::_render(SVRendererPtr _renderer){
-    V3 t_verts[4];
-    t_verts[0].x = m_rect.m_lb_pt.x;
-    t_verts[0].y = m_rect.m_lb_pt.y;
-    t_verts[0].z = 0.0f;
-    t_verts[1].x = m_rect.m_rt_pt.x;
-    t_verts[1].y = m_rect.m_lb_pt.y;
-    t_verts[1].z = 0.0f;
-    t_verts[2].x = m_rect.m_rt_pt.x;
-    t_verts[2].y = m_rect.m_rt_pt.y;
-    t_verts[2].z = 0.0f;
-    t_verts[3].x = m_rect.m_lb_pt.x;
-    t_verts[3].y = m_rect.m_rt_pt.y;
-    t_verts[3].z = 0.0f;
-    //
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glEnableVertexAttribArray(CHANNEL_POSITION);
-    glVertexAttribPointer(CHANNEL_POSITION, 3, GL_FLOAT, false, 0, t_verts);
-    glDrawArrays(GL_LINE_LOOP,0,4);
+//    V3 t_verts[4];
+//    t_verts[0].x = m_rect.m_lb_pt.x;
+//    t_verts[0].y = m_rect.m_lb_pt.y;
+//    t_verts[0].z = 0.0f;
+//    t_verts[1].x = m_rect.m_rt_pt.x;
+//    t_verts[1].y = m_rect.m_lb_pt.y;
+//    t_verts[1].z = 0.0f;
+//    t_verts[2].x = m_rect.m_rt_pt.x;
+//    t_verts[2].y = m_rect.m_rt_pt.y;
+//    t_verts[2].z = 0.0f;
+//    t_verts[3].x = m_rect.m_lb_pt.x;
+//    t_verts[3].y = m_rect.m_rt_pt.y;
+//    t_verts[3].z = 0.0f;
+//    //
+//    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+//    glBindBuffer(GL_ARRAY_BUFFER, 0);
+//    glEnableVertexAttribArray(CHANNEL_POSITION);
+//    glVertexAttribPointer(CHANNEL_POSITION, 3, GL_FLOAT, false, 0, t_verts);
+//    glDrawArrays(GL_LINE_LOOP,0,4);
 }
 
 
@@ -258,15 +258,15 @@ void SVRenderCmdAABB::_render(SVRendererPtr _renderer){
     t_verts[23].x = m_aabb.getMin().x;
     t_verts[23].y = m_aabb.getMin().y;
     t_verts[23].z = m_aabb.getMax().z;
-    //
-    glDisableVertexAttribArray(CHANNEL_COLOR0);
-    glDisableVertexAttribArray(CHANNEL_TEXCOORD0);
-    //
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glEnableVertexAttribArray(CHANNEL_POSITION);
-    glVertexAttribPointer(CHANNEL_POSITION, 3, GL_FLOAT, false, 0, &t_verts[0]);
-    glDrawArrays(GL_LINES,0,24);
-    glDisableVertexAttribArray(CHANNEL_POSITION);
+//    //
+//    glDisableVertexAttribArray(CHANNEL_COLOR0);
+//    glDisableVertexAttribArray(CHANNEL_TEXCOORD0);
+//    //
+//    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+//    glBindBuffer(GL_ARRAY_BUFFER, 0);
+//    glEnableVertexAttribArray(CHANNEL_POSITION);
+//    glVertexAttribPointer(CHANNEL_POSITION, 3, GL_FLOAT, false, 0, &t_verts[0]);
+//    glDrawArrays(GL_LINES,0,24);
+//    glDisableVertexAttribArray(CHANNEL_POSITION);
 }
 

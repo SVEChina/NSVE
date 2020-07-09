@@ -17,7 +17,7 @@ namespace sv {
         
         class SVFilterLUT : public SVFilterBase {
         public:
-            SVFilterLUT(SVInst *_app);
+            SVFilterLUT(SVInstPtr _app);
             
             ~SVFilterLUT();
             

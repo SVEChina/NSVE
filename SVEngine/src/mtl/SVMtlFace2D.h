@@ -18,7 +18,7 @@ namespace sv {
         
         class SVMtlFace2D : public SVMtlCore {
         public:
-            SVMtlFace2D(SVInst *_app);
+            SVMtlFace2D(SVInstPtr _app);
             
             SVMtlFace2D(SVMtlFace2D *_mtl);
             

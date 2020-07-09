@@ -13,14 +13,14 @@
 #include "../base/SVPreDeclare.h"
 namespace sv {
     
-        class SVFont : public SVGBase {
+        class SVFont : public SVGBaseEx {
         public:
             enum SVFONTTEXTENCODING{
                 NONE = 0,
                 UTF8,
                 UTF16
             };
-            SVFont(SVInst *_app);
+            SVFont(SVInstPtr _app);
             
             ~SVFont();
             

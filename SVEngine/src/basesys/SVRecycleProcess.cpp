@@ -12,7 +12,7 @@
 
 using namespace sv;
 
-SVRecycleProcess::SVRecycleProcess(SVInst *_app)
+SVRecycleProcess::SVRecycleProcess(SVInstPtr _app)
 :SVProcess(_app) {
 }
 

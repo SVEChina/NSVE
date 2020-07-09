@@ -15,7 +15,7 @@ namespace sv {
     
         class SV3DBox : public SVNode {
         public:
-            SV3DBox(SVInst *_app);
+            SV3DBox(SVInstPtr _app);
             
             virtual ~SV3DBox();
             

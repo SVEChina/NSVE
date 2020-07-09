@@ -15,9 +15,9 @@
 
 namespace sv {
     
-    class SVEventProc : public SVGBase {
+    class SVEventProc : public SVGBaseEx {
     public:
-        SVEventProc(SVInst* _app);
+        SVEventProc(SVInstPtr _app);
         
         ~SVEventProc();
         

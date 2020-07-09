@@ -15,7 +15,7 @@ namespace sv {
         
         class SVPhysicsBodyRope : public SVPhysicsBodySoft {
         public:
-            SVPhysicsBodyRope(SVInst* _app, btSoftBodyWorldInfo& _worldInfo, FVec3 &_from, FVec3 &_to, s32 _resCount, s32 _fixeds = 1+2);
+            SVPhysicsBodyRope(SVInstPtr _app, btSoftBodyWorldInfo& _worldInfo, FVec3 &_from, FVec3 &_to, s32 _resCount, s32 _fixeds = 1+2);
             
             ~SVPhysicsBodyRope();
             

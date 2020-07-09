@@ -12,7 +12,7 @@
 #include "../base/SVObject.h"
 #include "../base/SVMap.h"
 #include "../basesys/SVSysBase.h"
-#include "../rendercore/SVResShader.h"
+#include "../rendercore/SVRShader.h"
 
 namespace sv {
     /*
@@ -20,7 +20,7 @@ namespace sv {
      */
     class SVShaderMgr : public SVSysBase {
     public:
-        SVShaderMgr(SVInst *_app);
+        SVShaderMgr(SVInstPtr _app);
         
         ~SVShaderMgr();
         
@@ -28,15 +28,15 @@ namespace sv {
         
         void destroy();
 
-        SVResShaderPtr getShader(cptr8 _name);
+        SVRShaderPtr getShader(cptr8 _name);
         
     private:
-        void loadAllShader();
+        void _loadAllShader();
         
-        void clearAllShader();
+        void _clearAllShader();
         
     protected:
-        typedef SVMap<SVString,SVResShaderPtr> SHADERPOOL;
+        typedef SVMap<SVString,SVRShaderPtr> SHADERPOOL;
         SHADERPOOL ShaderMap;
     };
     

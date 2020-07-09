@@ -31,8 +31,8 @@
 
 using namespace sv;
 
-SVParseMain::SVParseMain(SVInst *_app)
-:SVGBase(_app) {
+SVParseMain::SVParseMain(SVInstPtr _app)
+:SVGBaseEx(_app) {
     m_app = _app;
     _registDictionary("SVSpineNode", SVParseAnimate::parseAnim);
     _registDictionary("SVFrameAniNode", SVParseFrameAni::parseFrameAni);

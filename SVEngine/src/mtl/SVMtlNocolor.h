@@ -17,7 +17,7 @@ namespace sv {
         
         class SVMtlNocolor : public SVMtlCore {
         public:
-            SVMtlNocolor(SVInst *_app);
+            SVMtlNocolor(SVInstPtr _app);
             
             SVMtlNocolor(SVMtlNocolor *_mtl);
             
@@ -37,7 +37,7 @@ namespace sv {
         //3D图元
         class SVMtlGeo3d : public SVMtlCore {
         public:
-            SVMtlGeo3d(SVInst *_app);
+            SVMtlGeo3d(SVInstPtr _app);
             
             SVMtlGeo3d(SVMtlGeo3d *_mtl);
             
@@ -55,7 +55,7 @@ namespace sv {
         //坐标
         class SVMtlCoord : public SVMtlCore {
         public:
-            SVMtlCoord(SVInst *_app);
+            SVMtlCoord(SVInstPtr _app);
             
             SVMtlCoord(SVMtlCoord *_mtl);
             
@@ -70,7 +70,7 @@ namespace sv {
         //网格
         class SVMtlNetGrid : public SVMtlCore {
         public:
-            SVMtlNetGrid(SVInst *_app);
+            SVMtlNetGrid(SVInstPtr _app);
             
             SVMtlNetGrid(SVMtlNetGrid *_mtl);
             
@@ -103,7 +103,7 @@ namespace sv {
         //粒子带动画的
         class SVMtlParticleAni : public SVMtlCore {
         public:
-            SVMtlParticleAni(SVInst *_app);
+            SVMtlParticleAni(SVInstPtr _app);
             
             SVMtlParticleAni(SVMtlParticleAni *_mtl);
             

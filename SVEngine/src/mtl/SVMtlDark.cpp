@@ -12,7 +12,7 @@
 
 using namespace sv;
 
-SVMtlDark::SVMtlDark(SVInst *_app)
+SVMtlDark::SVMtlDark(SVInstPtr _app)
 :SVMtlCore(_app,"filterdark") {
     m_intensity = 1.0;
 }

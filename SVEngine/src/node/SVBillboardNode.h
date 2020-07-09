@@ -16,9 +16,9 @@ namespace sv {
         
         class SVBillboardNode : public SVSpriteNode {
         public:
-            SVBillboardNode(SVInst *_app);
+            SVBillboardNode(SVInstPtr _app);
             
-            SVBillboardNode(SVInst *_app,f32 _w,f32 _h);
+            SVBillboardNode(SVInstPtr _app,f32 _w,f32 _h);
             
             ~SVBillboardNode();
             

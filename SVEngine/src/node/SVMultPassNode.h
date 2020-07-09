@@ -13,7 +13,7 @@ namespace sv {
     
     class SVMultPassNode : public SVNode {
     public:
-        SVMultPassNode(SVInst *_app);
+        SVMultPassNode(SVInstPtr _app);
         
         ~SVMultPassNode();
         

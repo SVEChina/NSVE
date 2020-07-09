@@ -15,7 +15,7 @@
 
 using namespace sv;
 
-SVSkinNode::SVSkinNode(SVInst *_app)
+SVSkinNode::SVSkinNode(SVInstPtr _app)
 :SVNode(_app){
     ntype = "SVSkinNode";
     m_pModel = nullptr;

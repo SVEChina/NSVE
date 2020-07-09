@@ -16,7 +16,7 @@ namespace sv{
         
         class SVActionMgr : public SVSysBase {
         public:
-            SVActionMgr(SVInst* _app);
+            SVActionMgr(SVInstPtr _app);
             
             ~SVActionMgr();
             

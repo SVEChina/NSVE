@@ -12,7 +12,7 @@
 
 using namespace sv;
 
-SVLoaderBat::SVLoaderBat(SVInst *_app)
+SVLoaderBat::SVLoaderBat(SVInstPtr _app)
 :SVFileLoader(_app) {
     m_dataCxt.clear();
 }

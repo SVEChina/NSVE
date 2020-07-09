@@ -15,7 +15,7 @@ namespace sv {
 
     class SVFrameOutRead : public SVFrameOutNode {
     public:
-        SVFrameOutRead(SVInst *_app);
+        SVFrameOutRead(SVInstPtr _app);
 
         virtual ~SVFrameOutRead();
         

@@ -11,7 +11,7 @@
 
 using namespace sv;
 
-SVMtlGradientMap::SVMtlGradientMap(SVInst *_app)
+SVMtlGradientMap::SVMtlGradientMap(SVInstPtr _app)
 :SVMtlCore(_app,"GradientMap") {
     
 }

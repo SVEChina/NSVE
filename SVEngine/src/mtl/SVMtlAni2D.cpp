@@ -12,7 +12,7 @@
 
 using namespace sv;
 
-SVMtlAni2D::SVMtlAni2D(SVInst *_app)
+SVMtlAni2D::SVMtlAni2D(SVInstPtr _app)
 :SVMtlCore(_app,"normal2dani_c") {
     m_LogicParamDepth.enable = false;
     m_LogicParamBlend.enable = true;

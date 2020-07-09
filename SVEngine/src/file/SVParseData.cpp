@@ -14,8 +14,8 @@
 using namespace sv;
 
 //解析基本数据
-SVParseData::SVParseData(SVInst *_app)
-: SVGBase(_app) {
+SVParseData::SVParseData(SVInstPtr _app)
+: SVGBaseEx(_app) {
     personid = 0;
 }
 
@@ -28,7 +28,6 @@ void SVParseData::generate(s32 resid) {
 
 void SVParseData::generate(s32 resid, cptr8 path) {
 }
-
 
 void SVParseData::suspend() {
     SVScenePtr t_scene = mApp->getSceneMgr()->getScene();

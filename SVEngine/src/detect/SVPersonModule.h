@@ -15,7 +15,7 @@ namespace sv {
         
         class SVPersonModule : public SVEventProc {
         public:
-            SVPersonModule(SVInst* _app);
+            SVPersonModule(SVInstPtr _app);
             
             ~SVPersonModule();
             

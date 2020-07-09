@@ -14,7 +14,7 @@
 namespace sv{
     class SVGameEnd : public SVGamePart {
     public:
-        SVGameEnd(SVInst* _app);
+        SVGameEnd(SVInstPtr _app);
         
         ~SVGameEnd();
         

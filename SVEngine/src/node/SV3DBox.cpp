@@ -17,7 +17,7 @@
 
 using namespace sv;
 
-SV3DBox::SV3DBox(SVInst *_app)
+SV3DBox::SV3DBox(SVInstPtr _app)
 : SVNode(_app) {
     ntype = "SV3DBox";
     m_aabbBox.clear();

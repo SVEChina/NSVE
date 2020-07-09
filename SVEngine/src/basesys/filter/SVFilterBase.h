@@ -20,9 +20,9 @@ namespace sv {
     
     
        
-        class SVFilterBase : public SVGBase {
+        class SVFilterBase : public SVGBaseEx {
         public:
-            SVFilterBase(SVInst *_app);
+            SVFilterBase(SVInstPtr _app);
             
             ~SVFilterBase();
             

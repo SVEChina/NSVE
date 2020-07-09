@@ -9,7 +9,7 @@
 
 using namespace sv;
 
-SVOutMission::SVOutMission(SVInst* _app,cptr8 _name)
+SVOutMission::SVOutMission(SVInstPtr _app,cptr8 _name)
 :SVEventProc(_app)
 ,m_name(_name)
 ,m_pOutStreamStateCB(nullptr){

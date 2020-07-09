@@ -9,8 +9,8 @@
 
 using namespace sv;
 
-SVCallbackBase::SVCallbackBase(SVInst *_app)
-:SVGBase(_app) {
+SVCallbackBase::SVCallbackBase(SVInstPtr _app)
+:SVGBaseEx(_app) {
 }
 
 SVCallbackBase::~SVCallbackBase() {

@@ -12,9 +12,8 @@
 
 using namespace sv;
 
-SVTextureIOS::SVTextureIOS(SVInst *_app)
+SVTextureIOS::SVTextureIOS(SVInstPtr _app)
 :SVTexture(_app) {
-    
 }
 
 SVTextureIOS::~SVTextureIOS() {
@@ -42,7 +41,7 @@ void SVTextureIOS::create(SVRendererPtr _renderer){
         SVRendererGLPtr t_renderGLPtr = std::dynamic_pointer_cast<SVRendererGL>(t_renderBasePtr);
         if (t_renderGLPtr) {
             //渲染器类型E_RENDERER_GLES,
-            m_objTexPtr = MakeSharedPtr<SVRResGLTexiOS>(mApp)  ;
+            m_objTexPtr = MakeSharedPtr<SVRGLTexiOS>(mApp)  ;
         }
         
         if (m_objTexPtr) {
@@ -67,7 +66,7 @@ void SVTextureIOS::destroy(SVRendererPtr _renderer){
 
 void SVTextureIOS::pushData(u8* _srcPtr,s32 _w,s32 _h,s32 _pixelformate){
 #ifdef SV_IOS
-    SVRResGLTexiOSPtr t_tmp = std::dynamic_pointer_cast<SVRResGLTexiOS>(m_objTexPtr);
+    SVRGLTexiOSPtr t_tmp = std::dynamic_pointer_cast<SVRGLTexiOS>(m_objTexPtr);
     if (t_tmp) {
         t_tmp->pushData(_srcPtr, _w, _h, _pixelformate);
     }
@@ -76,7 +75,7 @@ void SVTextureIOS::pushData(u8* _srcPtr,s32 _w,s32 _h,s32 _pixelformate){
 
 void SVTextureIOS::fetchData(u8* _dstPtr,s32 _w,s32 _h) {
 #ifdef SV_IOS
-    SVRResGLTexiOSPtr t_tmp = std::dynamic_pointer_cast<SVRResGLTexiOS>(m_objTexPtr);
+    SVRGLTexiOSPtr t_tmp = std::dynamic_pointer_cast<SVRGLTexiOS>(m_objTexPtr);
     if (t_tmp) {
         t_tmp->fetchData(_dstPtr, _w, _h);
     }

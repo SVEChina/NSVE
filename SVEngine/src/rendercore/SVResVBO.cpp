@@ -61,7 +61,7 @@ s32 SVResVBO::getVertexFormateSize(VFTYPE _type) {
     return 0;
 }
 
-SVResVBO::SVResVBO(SVInst* _app)
+SVResVBO::SVResVBO(SVInstPtr _app)
 :SVRObjBase(_app){
     m_uid = mApp->m_IDPool.applyUID();
 }

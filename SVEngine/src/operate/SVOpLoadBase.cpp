@@ -15,7 +15,7 @@
 
 using namespace sv;
 
-SVOpLoadBase::SVOpLoadBase(SVInst *_app)
+SVOpLoadBase::SVOpLoadBase(SVInstPtr _app)
 : SVOpBase(_app) {
 }
 
@@ -23,7 +23,7 @@ SVOpLoadBase::~SVOpLoadBase() {
 }
 
 //回收节点有问题
-SVOpRecycleNode::SVOpRecycleNode(SVInst *_app, SVNodePtr _node)
+SVOpRecycleNode::SVOpRecycleNode(SVInstPtr _app, SVNodePtr _node)
 :SVOpBase(_app) {
     m_node = _node;
 }
@@ -33,7 +33,7 @@ void SVOpRecycleNode::_process(f32 dt){
 }
 
 //拾取包
-SVOpPick::SVOpPick(SVInst *_app, s32 _x,s32 _y)
+SVOpPick::SVOpPick(SVInstPtr _app, s32 _x,s32 _y)
 :SVOpBase(_app){
     m_ui_x = _x;
     m_ui_y = _y;

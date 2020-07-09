@@ -22,7 +22,7 @@
 
 using namespace sv;
 
-SVFaceCoord::SVFaceCoord(SVInst *_app)
+SVFaceCoord::SVFaceCoord(SVInstPtr _app)
 : SVNode(_app) {
     ntype = "SVFaceCoord";
     m_rsType = RST_SKY;

@@ -21,7 +21,7 @@ namespace sv{
             E_G_STAGE_RUN,
             E_G_STAGE_END
         };
-        SVGameBase(SVInst* _app);
+        SVGameBase(SVInstPtr _app);
         
         ~SVGameBase();
         

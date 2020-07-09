@@ -9,8 +9,8 @@
 
 using namespace sv;
 
-SVTrans::SVTrans(SVInst *_app)
-:SVGBase(_app){
+SVTrans::SVTrans(SVInstPtr _app)
+:SVGBaseEx(_app){
     m_width = 0;
     m_height = 0;
     m_picformate = SV_PF_RGBA;

@@ -13,7 +13,7 @@
 
 using namespace sv;
 
-SVPhysicsBodyRigid::SVPhysicsBodyRigid(SVInst* _app):SVPhysicsBody(_app) {
+SVPhysicsBodyRigid::SVPhysicsBodyRigid(SVInstPtr _app):SVPhysicsBody(_app) {
     m_type = E_PHYSICS_BODY_RIGID;
     m_pShape = nullptr;
     m_pBody=nullptr;
@@ -24,7 +24,7 @@ SVPhysicsBodyRigid::SVPhysicsBodyRigid(SVInst* _app):SVPhysicsBody(_app) {
     m_savedState = 0;
 }
 
-SVPhysicsBodyRigid::SVPhysicsBodyRigid(SVInst* _app , SVPhysicsShapePtr _shape):SVPhysicsBody(_app) {
+SVPhysicsBodyRigid::SVPhysicsBodyRigid(SVInstPtr _app , SVPhysicsShapePtr _shape):SVPhysicsBody(_app) {
     m_type = E_PHYSICS_BODY_RIGID;
     m_pShape = _shape;
     m_pBody = nullptr;

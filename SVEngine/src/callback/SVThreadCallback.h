@@ -14,7 +14,7 @@ namespace sv {
     
 //    class SVThreadCallback : public SVCallbackBase {
 //    public:
-//        SVThreadCallback(SVInst* _app);
+//        SVThreadCallback(SVInstPtr _app);
 //
 //        ~SVThreadCallback();
 //    };

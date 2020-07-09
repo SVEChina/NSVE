@@ -14,9 +14,9 @@
 
 namespace sv{
     
-    class SVGamePart : public SVGBase {
+    class SVGamePart : public SVGBaseEx {
     public:
-        SVGamePart(SVInst* _app);
+        SVGamePart(SVInstPtr _app);
         
         virtual ~SVGamePart();
         

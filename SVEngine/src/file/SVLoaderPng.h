@@ -23,7 +23,7 @@ namespace sv {
     public:
         friend class SVOpTexLoad;
         
-        SVLoaderPng(SVInst *_app);
+        SVLoaderPng(SVInstPtr _app);
         
         ~SVLoaderPng();
         

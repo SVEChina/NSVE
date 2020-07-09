@@ -1,5 +1,5 @@
 //
-// SVRResGLShader.h
+// SVRGLShader.h
 // SVEngine
 // Copyright 2017-2020
 // yizhou Fu,long Yin,longfei Lin,ziyu Xu,xiaofan Li,daming Li
@@ -11,26 +11,22 @@
 #include "../SVRObjBase.h"
 #include "../SVResTex.h"
 #include "../SVResFBO.h"
-#include "../SVResShader.h"
+#include "../SVRShader.h"
 #include "../../base/SVPreDeclare.h"
 #include "../../base/SVRect.h"
 #include "../../core/SVVertDef.h"
 #include "../../base/SVDataChunk.h"
 
 namespace sv {
-
-    
-
-        
         /*
          GL Shader
          */
         
-        class SVRResGLShader: public SVResShader {
+        class SVRGLShader: public SVRShader {
         public:
-            SVRResGLShader(SVInst* _app);
+            SVRGLShader(SVInstPtr _app);
 
-            virtual ~SVRResGLShader();
+            virtual ~SVRGLShader();
 
             virtual void create(SVRendererPtr _renderer);
 
@@ -41,6 +37,8 @@ namespace sv {
             void setTechFName(cptr8 _filename);
 
         private:
+            static u32 _loadShader(SVInstPtr _app,cptr8 _filename,s32 _shaderType);
+            
             bool _parseTech();
 
             u32 _loadTechVS(cptr8 _precision,cptr8 _src);
@@ -48,18 +46,6 @@ namespace sv {
             u32 _loadTechFS(cptr8 _precision,cptr8 _src);
 
             u32 _loadTechGS(cptr8 _precision,cptr8 _src);
-
-            u32 _loadVS(cptr8 _filename);
-
-            u32 _loadFS(cptr8 _filename);
-
-            u32 _loadGS(cptr8 _filename);
-
-            u32 _loadCS(cptr8 _filename);
-
-            u32 _loadTSC(cptr8 _filename);
-
-            u32 _loadTSE(cptr8 _filename);
 
             u32 _createProgram();
 

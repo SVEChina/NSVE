@@ -17,7 +17,7 @@
 
 using namespace sv;
 
-SVFilterFlashWhite::SVFilterFlashWhite(SVInst *_app)
+SVFilterFlashWhite::SVFilterFlashWhite(SVInstPtr _app)
 :SVFilterBase(_app){
     m_type = SV_FUNC_FLASHWHITE;
     m_name = "SVFilterFlashWhite";

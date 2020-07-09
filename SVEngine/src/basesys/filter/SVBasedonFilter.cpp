@@ -16,7 +16,7 @@
 
 using namespace sv;
 
-SVBasedonFilter::SVBasedonFilter(SVInst *_app)
+SVBasedonFilter::SVBasedonFilter(SVInstPtr _app)
 :SVFilterBase(_app){
     m_baseOnmtl = nullptr;
     m_acutancemtl = nullptr;

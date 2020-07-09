@@ -16,7 +16,7 @@ namespace sv {
         
         class SVMtlBeauty : public SVMtlCore  {
         public:
-            SVMtlBeauty(SVInst *_app);
+            SVMtlBeauty(SVInstPtr _app);
             
             SVMtlBeauty(SVMtlBeauty* _mtl);
             

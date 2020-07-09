@@ -16,9 +16,9 @@ namespace sv {
     
     
         
-        class SVRenderState: public SVGBase {
+        class SVRenderState: public SVGBaseEx {
         public:
-            SVRenderState(SVInst* _app);
+            SVRenderState(SVInstPtr _app);
             
             ~SVRenderState();
             

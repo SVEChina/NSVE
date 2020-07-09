@@ -10,8 +10,8 @@
 
 using namespace sv;
 
-SVKeyFrame::SVKeyFrame(SVInst* _app,u32 _index)
-:SVGBase(_app){
+SVKeyFrame::SVKeyFrame(SVInstPtr _app,u32 _index)
+:SVGBaseEx(_app){
     m_uid = mApp->m_IDPool.applyUID();
     m_index = _index;
 }
@@ -50,7 +50,7 @@ void SVKeyFrame::_fromJSON(RAPIDJSON_NAMESPACE::Value &item) {
 }
 
 //形变帧
-SVKeyDeform::SVKeyDeform(SVInst* _app,u32 _index)
+SVKeyDeform::SVKeyDeform(SVInstPtr _app,u32 _index)
 :SVKeyFrame(_app,_index){
 }
 
@@ -69,7 +69,7 @@ void SVKeyDeform::fromJSON(RAPIDJSON_NAMESPACE::Value &item){
 }
 
 //材质帧
-SVKeyMtl::SVKeyMtl(SVInst* _app,u32 _index)
+SVKeyMtl::SVKeyMtl(SVInstPtr _app,u32 _index)
 :SVKeyFrame(_app,_index){
     m_mtl = nullptr;
 }
@@ -89,7 +89,7 @@ void SVKeyMtl::fromJSON(RAPIDJSON_NAMESPACE::Value &item){
 }
 
 //事件Key
-SVKeyEvent::SVKeyEvent(SVInst* _app,u32 _index)
+SVKeyEvent::SVKeyEvent(SVInstPtr _app,u32 _index)
 :SVKeyFrame(_app,_index){
 }
 

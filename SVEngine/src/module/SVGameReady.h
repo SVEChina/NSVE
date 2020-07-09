@@ -14,7 +14,7 @@
 namespace sv{
     class SVGameReady : public SVGamePart{
     public:
-        SVGameReady(SVInst* _app);
+        SVGameReady(SVInstPtr _app);
         
         ~SVGameReady();
         

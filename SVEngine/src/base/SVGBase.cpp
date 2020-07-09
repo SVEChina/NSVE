@@ -3,14 +3,6 @@
 
 using namespace sv;
 
-SVGBase::SVGBase(SVInst* _app)
-:mApp(_app){
-}
-
-SVGBase::~SVGBase(){
-    mApp = nullptr;
-}
-
 SVGBaseEx::SVGBaseEx(SVInstPtr _app)
 :mApp(_app){
 }

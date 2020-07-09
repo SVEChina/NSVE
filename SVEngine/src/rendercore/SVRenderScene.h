@@ -17,9 +17,9 @@ namespace sv {
         渲染场景
      */
 
-    class SVRenderScene : public SVGBase {
+    class SVRenderScene : public SVGBaseEx {
     public:
-        SVRenderScene(SVInst *_app);
+        SVRenderScene(SVInstPtr _app);
         
         ~SVRenderScene();
         

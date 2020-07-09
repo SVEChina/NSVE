@@ -16,14 +16,14 @@
 using namespace sv;
 
 //三角形
-SVRenderMeshPtr SVGeoGen::genTri(SVInst* _app,
+SVRenderMeshPtr SVGeoGen::genTri(SVInstPtr _app,
                                      f32 _len,
                                      SVBoundBox& _aabb) {
     return _getPolygonDiy(_app,3, 0.0f, _len,_aabb);
 }
 
 //方形
-SVRenderMeshPtr SVGeoGen::genRect(SVInst* _app,
+SVRenderMeshPtr SVGeoGen::genRect(SVInstPtr _app,
                                       f32 _w,
                                       f32 _h,
                                       f32 _inx,
@@ -81,7 +81,7 @@ SVRenderMeshPtr SVGeoGen::genRect(SVInst* _app,
     return nullptr;
 }
 
-SVRenderMeshPtr SVGeoGen::genRectARCHO(SVInst* _app,f32 _w,f32 _h,EUIARCHO _archo,SVBoundBox& _aabb) {
+SVRenderMeshPtr SVGeoGen::genRectARCHO(SVInstPtr _app,f32 _w,f32 _h,EUIARCHO _archo,SVBoundBox& _aabb) {
 //    //
 //    f32 t_off_x = 0.0f;
 //    f32 t_off_y = 0.0f;
@@ -159,34 +159,34 @@ SVRenderMeshPtr SVGeoGen::genRectARCHO(SVInst* _app,f32 _w,f32 _h,EUIARCHO _arch
 }
 
 //菱形
-SVRenderMeshPtr SVGeoGen::genLing(SVInst* _app,
+SVRenderMeshPtr SVGeoGen::genLing(SVInstPtr _app,
                                       f32 _len,
                                       SVBoundBox& _aabb) {
     return _getPolygonDiy(_app,4, 0.0f, _len,_aabb);
 }
 
 //五边
-SVRenderMeshPtr SVGeoGen::genFiveEdage(SVInst* _app,
+SVRenderMeshPtr SVGeoGen::genFiveEdage(SVInstPtr _app,
                                            f32 _len,
                                            SVBoundBox& _aabb) {
     return _getPolygonDiy(_app,5, 0.0f, _len,_aabb);
 }
 
 //六边
-SVRenderMeshPtr SVGeoGen::genSixEdage(SVInst* _app,
+SVRenderMeshPtr SVGeoGen::genSixEdage(SVInstPtr _app,
                                           f32 _len,
                                           SVBoundBox& _aabb) {
     return _getPolygonDiy(_app,6, 15.0f, _len,_aabb);
 }
 
 //圆形
-SVRenderMeshPtr SVGeoGen::genCircle(SVInst* _app,
+SVRenderMeshPtr SVGeoGen::genCircle(SVInstPtr _app,
                                         f32 _len,
                                         SVBoundBox& _aabb) {
     return _getPolygonDiy(_app,36, 0.0f, _len,_aabb);
 }
 
-SVRenderMeshPtr SVGeoGen::_getPolygonDiy(SVInst* _app,
+SVRenderMeshPtr SVGeoGen::_getPolygonDiy(SVInstPtr _app,
                                              s32 _edagenum,
                                              f32 _startangle,
                                              f32 _len,
@@ -236,7 +236,7 @@ SVRenderMeshPtr SVGeoGen::_getPolygonDiy(SVInst* _app,
 }
 
 //AABB盒
-SVRenderMeshPtr SVGeoGen::genAABB(SVInst* _app,SVBoundBox& _aabb){
+SVRenderMeshPtr SVGeoGen::genAABB(SVInstPtr _app,SVBoundBox& _aabb){
 //    //
 //    V3_T0 m_verts[36];
 //    //8个面 一个面6个点
@@ -446,7 +446,7 @@ SVRenderMeshPtr SVGeoGen::genAABB(SVInst* _app,SVBoundBox& _aabb){
     return nullptr;
 }
 
-SVRenderMeshPtr SVGeoGen::createRectMesh(SVInst* _app,f32 _w ,f32 _h , s32 _wPointCount , s32 _hPointCont){
+SVRenderMeshPtr SVGeoGen::createRectMesh(SVInstPtr _app,f32 _w ,f32 _h , s32 _wPointCount , s32 _hPointCont){
 //    s32 iWidthPoint = _wPointCount , iHeightPoint = _hPointCont;
 //    s32 iDataCount = iWidthPoint * iHeightPoint;
 //
@@ -511,7 +511,7 @@ SVRenderMeshPtr SVGeoGen::createRectMesh(SVInst* _app,f32 _w ,f32 _h , s32 _wPoi
 //_axis = 1 代表y轴
 //_axis = 2 代表z轴
 
-SVRenderMeshPtr SVGeoGen::createNetGrid(SVInst* _app,s32 _size,s32 _axis) {
+SVRenderMeshPtr SVGeoGen::createNetGrid(SVInstPtr _app,s32 _size,s32 _axis) {
 //    SVRenderMeshPtr pRenderMesh =  _app->getRenderMgr()->createMeshRObj();
 //    //渲染数据
 //    V3_T0 pVer[4];

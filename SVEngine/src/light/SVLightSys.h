@@ -15,7 +15,7 @@ namespace sv {
     
     class SVLightSys : public SVSysBase {
     public:
-        SVLightSys(SVInst *_app);
+        SVLightSys(SVInstPtr _app);
         
         ~SVLightSys();
         

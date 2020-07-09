@@ -5,7 +5,7 @@ using namespace sv;
 
 #define OBJECT_PARTICLES_EPSILON	1e-3f
 
-SVParticlesWorld::SVParticlesWorld(SVInst *_app) :SVParticlesWorldBase(_app) {
+SVParticlesWorld::SVParticlesWorld(SVInstPtr _app) :SVParticlesWorldBase(_app) {
     m_particleNode = nullptr;
 }
 

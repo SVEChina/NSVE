@@ -20,7 +20,7 @@
 
 using namespace sv;
 
-SVAniTexAttachment::SVAniTexAttachment(SVInst *_app)
+SVAniTexAttachment::SVAniTexAttachment(SVInstPtr _app)
 :SVAniBase(_app) {
     m_srcNode = nullptr;
     m_tarNode = nullptr;

@@ -20,7 +20,7 @@ namespace sv {
         
         class SVFboObject : public SVRObjBase {
         public:
-            SVFboObject(SVInst *_app);
+            SVFboObject(SVInstPtr _app);
             
             virtual ~SVFboObject();
             
@@ -63,7 +63,7 @@ namespace sv {
         //外部传递的一个fbo
         class SVOutFboObject : public SVFboObject {
         public:
-            SVOutFboObject(SVInst *_app,u32 _fboid);
+            SVOutFboObject(SVInstPtr _app,u32 _fboid);
             
             ~SVOutFboObject();
             

@@ -16,7 +16,7 @@
 
 using namespace sv;
 
-SVRGBToneCurveFilter::SVRGBToneCurveFilter(SVInst *_app)
+SVRGBToneCurveFilter::SVRGBToneCurveFilter(SVInstPtr _app)
 :SVFilterBase(_app){
     m_name="SVRGBToneCurveFilter";
     m_type=SV_FUNC_BSPLINE;

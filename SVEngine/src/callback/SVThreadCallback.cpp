@@ -9,7 +9,7 @@
 
 using namespace sv;
 
-//SVThreadCallback::SVThreadCallback(SVInst *_app)
+//SVThreadCallback::SVThreadCallback(SVInstPtr _app)
 //:SVCallbackBase(_app) {
 //}
 //

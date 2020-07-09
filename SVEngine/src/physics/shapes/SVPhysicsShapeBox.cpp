@@ -9,13 +9,13 @@
 
 using namespace sv;
 
-SVPhysicsShapeBox::SVPhysicsShapeBox(SVInst* _app)
+SVPhysicsShapeBox::SVPhysicsShapeBox(SVInstPtr _app)
 :SVPhysicsShape(_app) {
     m_type = E_PHYSICS_SHAPE_BOX;
     setSize(FVec3_zero);
 }
 
-SVPhysicsShapeBox::SVPhysicsShapeBox(SVInst* _app, FVec3 _size):SVPhysicsShape(_app) {
+SVPhysicsShapeBox::SVPhysicsShapeBox(SVInstPtr _app, FVec3 _size):SVPhysicsShape(_app) {
     m_type = E_PHYSICS_SHAPE_BOX;
     setSize(_size);
 }

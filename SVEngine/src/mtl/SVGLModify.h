@@ -16,13 +16,13 @@ namespace sv {
         
     class SVGLModify: public SVModify {
     public:
-        SVGLModify(SVInst *_app);
+        SVGLModify(SVInstPtr _app);
     };
     
     //修正纹理参数
     class SVGLModifyTex: public SVGLModify {
     public:
-        SVGLModifyTex(SVInst *_app);
+        SVGLModifyTex(SVInstPtr _app);
         void exec(SVObjectPtr _obj);
         u32 m_texChanel;
         u32 m_texID;
@@ -31,7 +31,7 @@ namespace sv {
     //修正纹理参数
     class SVGLModifyTexParam: public SVGLModify {
     public:
-        SVGLModifyTexParam(SVInst *_app);
+        SVGLModifyTexParam(SVInstPtr _app);
         void exec(SVObjectPtr _obj);
         u32 m_texChanel;
         u32 m_texID;
@@ -42,7 +42,7 @@ namespace sv {
     //线宽
     class SVGLModifyLineWidth: public SVGLModify {
     public:
-        SVGLModifyLineWidth(SVInst *_app);
+        SVGLModifyLineWidth(SVInstPtr _app);
         void exec(SVObjectPtr _obj);
         u32 m_size;
     };
@@ -50,7 +50,7 @@ namespace sv {
     //点大小
     class SVGLModifyPointSize: public SVGLModify {
     public:
-        SVGLModifyPointSize(SVInst *_app);
+        SVGLModifyPointSize(SVInstPtr _app);
         void exec(SVObjectPtr _obj);
         u32 m_size;
     };
@@ -58,7 +58,7 @@ namespace sv {
     //修正融合
     class SVGLModifyBlend: public SVGLModify {
     public:
-        SVGLModifyBlend(SVInst *_app);
+        SVGLModifyBlend(SVInstPtr _app);
         void exec(SVObjectPtr _obj);
         bool m_enable;
         u32 m_srcparam;
@@ -68,7 +68,7 @@ namespace sv {
     //修正CullFace
     class SVGLModifyCullFace: public SVGLModify {
     public:
-        SVGLModifyCullFace(SVInst *_app);
+        SVGLModifyCullFace(SVInstPtr _app);
         void exec(SVObjectPtr _obj);
         bool m_enable;
         u32 m_front;
@@ -78,7 +78,7 @@ namespace sv {
     //修正深度
     class SVGLModifyDepth: public SVGLModify {
     public:
-        SVGLModifyDepth(SVInst *_app);
+        SVGLModifyDepth(SVInstPtr _app);
         void exec(SVObjectPtr _obj);
         bool m_clear;
         bool m_enable;
@@ -87,7 +87,7 @@ namespace sv {
     //修正Stencil
     class SVGLModifyStencil: public SVGLModify {
     public:
-        SVGLModifyStencil(SVInst *_app);
+        SVGLModifyStencil(SVInstPtr _app);
         void exec(SVObjectPtr _obj);
         //
         bool m_clear;
@@ -105,7 +105,7 @@ namespace sv {
     //修正shader
     class SVGLModifyShader: public SVGLModify {
     public:
-        SVGLModifyShader(SVInst *_app);
+        SVGLModifyShader(SVInstPtr _app);
         void exec(SVObjectPtr _obj);
         u32 m_shaderID;
     };
@@ -113,7 +113,7 @@ namespace sv {
     //传递uniform
     class SVGLModifyUnif32: public SVGLModify {
     public:
-        SVGLModifyUnif32(SVInst *_app);
+        SVGLModifyUnif32(SVInstPtr _app);
         void exec(SVObjectPtr _obj);
         u32 m_shaderID;
         SVString m_name;
@@ -123,7 +123,7 @@ namespace sv {
     //传递uniform
     class SVGLModifyUnif32v2: public SVGLModify {
     public:
-        SVGLModifyUnif32v2(SVInst *_app);
+        SVGLModifyUnif32v2(SVInstPtr _app);
         void exec(SVObjectPtr _obj);
         SVString m_name;
         f32 m_data[2];
@@ -132,7 +132,7 @@ namespace sv {
     //传递uniform
     class SVGLModifyUniMatrix: public SVGLModify {
     public:
-        SVGLModifyUniMatrix(SVInst *_app);
+        SVGLModifyUniMatrix(SVInstPtr _app);
         void exec(SVObjectPtr _obj);
         u32 m_shaderID;
         SVString m_name;

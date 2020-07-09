@@ -13,7 +13,7 @@
 
 using namespace sv;
 
-SVMtlStrokeBase::SVMtlStrokeBase(SVInst *_app, cptr8 _shader)
+SVMtlStrokeBase::SVMtlStrokeBase(SVInstPtr _app, cptr8 _shader)
 :SVMtlCore(_app,_shader) {
   
 }

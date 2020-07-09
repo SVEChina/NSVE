@@ -17,7 +17,7 @@
 
 using namespace sv;
 
-SVFilterClarity::SVFilterClarity(SVInst *_app)
+SVFilterClarity::SVFilterClarity(SVInstPtr _app)
 :SVFilterBase(_app){
     m_type=SV_FUNC_CLARITY;
     m_name="SVFilterClarity";

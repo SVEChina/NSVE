@@ -12,7 +12,7 @@
 
 using namespace sv;
 
-SVMtlGlitch::SVMtlGlitch(SVInst *_app)
+SVMtlGlitch::SVMtlGlitch(SVInstPtr _app)
 :SVMtlADFilterBase(_app,"filterglitch") {
     m_drift = nullptr;
     m_jitter = nullptr;

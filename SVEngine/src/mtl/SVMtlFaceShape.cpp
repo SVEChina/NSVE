@@ -13,7 +13,7 @@
 
 using namespace sv;
 
-SVMtlFaceShape::SVMtlFaceShape(SVInst *_app)
+SVMtlFaceShape::SVMtlFaceShape(SVInstPtr _app)
 :SVMtlCore(_app,"faceShape"){
     memset(m_location0,0,2*sizeof(f32));
     memset(m_location1,0,2*sizeof(f32));

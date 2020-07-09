@@ -30,7 +30,7 @@ static void pngReadCallback(png_structp png_ptr, png_bytep data, png_size_t leng
     ((unsigned)((unsigned char)(vb) * ((unsigned char)(va) + 1) >> 8) << 16) | \
     ((unsigned)(unsigned char)(va) << 24))
 
-SVLoaderPng::SVLoaderPng(SVInst *_app)
+SVLoaderPng::SVLoaderPng(SVInstPtr _app)
 :SVFileLoader(_app) {
     m_iHeight = 0;
     m_iWidth = 0;

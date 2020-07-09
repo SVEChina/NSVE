@@ -15,8 +15,8 @@
 
 using namespace sv;
 
-SVFaceDataMesh::SVFaceDataMesh(SVInst *_app)
-:SVGBase(_app){
+SVFaceDataMesh::SVFaceDataMesh(SVInstPtr _app)
+:SVGBaseEx(_app){
     
 }
 //

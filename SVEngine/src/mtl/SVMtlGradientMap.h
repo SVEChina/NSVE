@@ -17,7 +17,7 @@ namespace sv {
         
         class SVMtlGradientMap : public SVMtlCore  {
         public:
-            SVMtlGradientMap(SVInst *_app);
+            SVMtlGradientMap(SVInstPtr _app);
             
             SVMtlGradientMap(SVMtlGradientMap* _mtl);
             

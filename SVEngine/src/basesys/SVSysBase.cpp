@@ -9,7 +9,7 @@
 
 using namespace sv;
 
-SVSysBase::SVSysBase(SVInst *_app)
+SVSysBase::SVSysBase(SVInstPtr _app)
 :SVEventProc(_app) {
     m_subsysType = 0;
 }

@@ -39,7 +39,7 @@
 
 using namespace sv;
 
-SVPenStroke::SVPenStroke(SVInst* _app, SVPENMODE _mode, f32 _strokeWidth, FVec4 &_strokeColor, f32 _glowWidth, FVec4 &_glowColor)
+SVPenStroke::SVPenStroke(SVInstPtr _app, SVPENMODE _mode, f32 _strokeWidth, FVec4 &_strokeColor, f32 _glowWidth, FVec4 &_glowColor)
 :SVGameBase(_app) {
     m_penStrokeCurve = MakeSharedPtr<SVPenCurve>(_app);
     m_penGlowCurve = MakeSharedPtr<SVPenCurve>(_app);

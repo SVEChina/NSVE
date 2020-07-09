@@ -16,9 +16,9 @@ namespace sv {
         
         class SVPhysicsBodyRigid : public SVPhysicsBody {
         public:
-            SVPhysicsBodyRigid(SVInst* _app);
+            SVPhysicsBodyRigid(SVInstPtr _app);
             
-            SVPhysicsBodyRigid(SVInst* _app , SVPhysicsShapePtr _shape);
+            SVPhysicsBodyRigid(SVInstPtr _app , SVPhysicsShapePtr _shape);
             
             ~SVPhysicsBodyRigid();
             

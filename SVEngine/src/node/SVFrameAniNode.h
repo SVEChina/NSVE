@@ -28,7 +28,7 @@ namespace sv {
             };
             
         public:
-            SVFrameAniNode(SVInst *_app);
+            SVFrameAniNode(SVInstPtr _app);
             
             ~SVFrameAniNode();
             

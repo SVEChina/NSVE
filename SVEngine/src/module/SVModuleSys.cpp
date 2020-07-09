@@ -11,7 +11,7 @@
 
 using namespace sv;
 
-SVModuleSys::SVModuleSys(SVInst *_app)
+SVModuleSys::SVModuleSys(SVInstPtr _app)
 :SVSysBase(_app) {
     m_subsysType = 8;
     m_moduleLock = MakeSharedPtr<SVLock>();

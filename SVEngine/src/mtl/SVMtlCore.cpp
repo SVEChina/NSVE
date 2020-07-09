@@ -15,27 +15,34 @@
 #include "../rendercore/SVGL/SVRResGL.h"
 #include "../rendercore/SVRenderMgr.h"
 #include "../rendercore/SVRenderer.h"
-#include "../rendercore/SVResShader.h"
+#include "../rendercore/SVRShader.h"
 
 using namespace sv;
 
 SVMtlCoreParam::SVMtlCoreParam(){
 }
 
-SVMtlCorePtr SVMtlCoreParam::genMtl(SVInst *_app){
+SVMtlCorePtr SVMtlCoreParam::genMtl(SVInstPtr _app){
     return nullptr;    
 }
 
 //
-SVMtlCore::SVMtlCore(SVInst *_app, cptr8 _shader)
-:SVGBase(_app)
+SVMtlCore::SVMtlCore(SVInstPtr _app, cptr8 _shader)
+:SVGBaseEx(_app)
 ,m_mtlname(_shader){
+    m_shader = nullptr;
     m_ParamValues = MakeSharedPtr<SVDataChunk>();
     reset();
 }
 
+SVMtlCore::SVMtlCore(SVInstPtr _app, SVRShaderPtr _shader)
+:SVGBaseEx(_app)
+,m_shader(_shader){
+    
+}
+
 SVMtlCore::SVMtlCore(SVMtlCore* _mtl)
-:SVGBase(_mtl->mApp){
+:SVGBaseEx(_mtl->mApp){
     m_mtlname = _mtl->m_mtlname;
     m_pShader = _mtl->m_pShader;
     m_LogicMtlFlag0 = _mtl->m_LogicMtlFlag0;

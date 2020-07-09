@@ -19,7 +19,7 @@ namespace sv {
         
         class SVRenderStateGL : public SVRenderState {
         public:
-            SVRenderStateGL(SVInst* _app);
+            SVRenderStateGL(SVInstPtr _app);
             
             ~SVRenderStateGL();
             

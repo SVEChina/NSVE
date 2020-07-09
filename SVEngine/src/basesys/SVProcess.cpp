@@ -9,7 +9,7 @@
 
 using namespace sv;
 
-SVProcess::SVProcess(SVInst *_app)
+SVProcess::SVProcess(SVInstPtr _app)
 :SVEventProc(_app) {
     m_subProcType = "SVProcess";
 

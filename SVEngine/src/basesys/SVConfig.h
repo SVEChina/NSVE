@@ -55,9 +55,9 @@ namespace sv {
         s32 m_audio;
     };
     
-    class SVConfig : public SVGBase {
+    class SVConfig : public SVGBaseEx {
     public:
-        SVConfig(SVInst *_app);
+        SVConfig(SVInstPtr _app);
         
         ~SVConfig();
         

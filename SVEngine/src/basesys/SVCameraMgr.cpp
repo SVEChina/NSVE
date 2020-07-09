@@ -17,7 +17,7 @@
 
 using namespace sv;
 
-SVCameraMgr::SVCameraMgr(SVInst *_app)
+SVCameraMgr::SVCameraMgr(SVInstPtr _app)
 :SVSysBase(_app) {
     m_subsysType = 3;
     m_cameraLock = MakeSharedPtr<SVLock>();

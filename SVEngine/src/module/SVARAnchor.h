@@ -25,7 +25,7 @@ namespace sv{
 
     class SVARAnchor : public SVModuleBase {
     public:
-        SVARAnchor(SVInst* _app);
+        SVARAnchor(SVInstPtr _app);
         
         ~SVARAnchor();
         

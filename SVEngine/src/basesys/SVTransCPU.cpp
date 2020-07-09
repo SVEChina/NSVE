@@ -9,7 +9,7 @@
 
 using namespace sv;
 
-SVTransCPU::SVTransCPU(SVInst *_app)
+SVTransCPU::SVTransCPU(SVInstPtr _app)
 :SVTrans(_app){
 }
 

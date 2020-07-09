@@ -30,7 +30,7 @@ namespace sv {
         
         class SVPhysicsBodySoft : public SVPhysicsBody {
         public:
-            SVPhysicsBodySoft(SVInst *_app);
+            SVPhysicsBodySoft(SVInstPtr _app);
 
             ~SVPhysicsBodySoft();
 

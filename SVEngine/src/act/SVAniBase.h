@@ -15,9 +15,9 @@ namespace sv{
     
     
         
-        class SVAniBase : public SVGBase {
+        class SVAniBase : public SVGBaseEx {
         public:
-            SVAniBase(SVInst* _app);
+            SVAniBase(SVInstPtr _app);
             
             ~SVAniBase();
             

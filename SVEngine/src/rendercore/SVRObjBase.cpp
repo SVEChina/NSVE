@@ -11,8 +11,8 @@
 
 using namespace sv;
 
-SVRObjBase::SVRObjBase(SVInst* _app)
-:SVGBase(_app)
+SVRObjBase::SVRObjBase(SVInstPtr _app)
+:SVGBaseEx(_app)
 ,m_pData(nullptr){
 }
 

@@ -13,9 +13,9 @@ namespace sv {
     
     
         
-        class SVPhysicsCollider : public SVGBase {
+        class SVPhysicsCollider : public SVGBaseEx {
         public:
-            SVPhysicsCollider(SVInst* _app);
+            SVPhysicsCollider(SVInstPtr _app);
             
             ~SVPhysicsCollider();
             

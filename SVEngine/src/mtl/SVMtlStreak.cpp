@@ -12,7 +12,7 @@
 
 using namespace sv;
 
-SVMtlStreak::SVMtlStreak(SVInst *_app)
+SVMtlStreak::SVMtlStreak(SVInstPtr _app)
 :SVMtlADFilterBase(_app,"filterstreak2") {
     m_lerp = 0.0f;
     _resetTime();

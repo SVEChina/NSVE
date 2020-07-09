@@ -16,9 +16,9 @@ namespace sv {
         //
         class SVBGRAInstreamNode : public SVNode {
         public:
-            SVBGRAInstreamNode(SVInst *_app);
+            SVBGRAInstreamNode(SVInstPtr _app);
             
-            SVBGRAInstreamNode(SVInst *_app,f32 _w,f32 _h);
+            SVBGRAInstreamNode(SVInstPtr _app,f32 _w,f32 _h);
             
             ~SVBGRAInstreamNode();
             

@@ -22,9 +22,9 @@ namespace sv {
             E_PHYSICS_BODY_CLOTH
         };
        
-        class SVPhysicsBody : public SVGBase {
+        class SVPhysicsBody : public SVGBaseEx {
         public:
-            SVPhysicsBody(SVInst *_app);
+            SVPhysicsBody(SVInstPtr _app);
 
             ~SVPhysicsBody();
 

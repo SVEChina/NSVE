@@ -184,7 +184,7 @@ namespace sv {
     class SVThread;
 }
 //回调函数
-typedef void (*ThreadCallback)(sv::SVInst* _app,sv::SVThread* _thread,SV_THREAD_STAGE _stage);
+typedef void (*ThreadCallback)(sv::SVInstPtr _app,sv::SVThread* _thread,SV_THREAD_STAGE _stage);
 //百分比回调
 typedef void (*cb_func_percent)(f32 percent);
 //百分比回调

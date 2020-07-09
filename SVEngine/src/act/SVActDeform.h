@@ -20,7 +20,7 @@ namespace sv {
 
         class SVActDeform : public SVActTime {
         public:
-            SVActDeform(SVInst *_app);
+            SVActDeform(SVInstPtr _app);
             
             ~SVActDeform();
             
@@ -33,7 +33,7 @@ namespace sv {
         //设定一个值
         class SVActMove : public SVActDeform {
         public:
-            SVActMove(SVInst *_app);
+            SVActMove(SVInstPtr _app);
             
             ~SVActMove();
             
@@ -49,7 +49,7 @@ namespace sv {
 
         class SVActMoveTo : public SVActDeform {
         public:
-            SVActMoveTo(SVInst *_app);
+            SVActMoveTo(SVInstPtr _app);
             
             ~SVActMoveTo();
             
@@ -69,7 +69,7 @@ namespace sv {
 
         class SVActMoveBetween : public SVActDeform {
         public:
-            SVActMoveBetween(SVInst *_app);
+            SVActMoveBetween(SVInstPtr _app);
             
             ~SVActMoveBetween();
             
@@ -91,7 +91,7 @@ namespace sv {
         //
         class SVActMoveBy : public SVActDeform {
         public:
-            SVActMoveBy(SVInst *_app);
+            SVActMoveBy(SVInstPtr _app);
             
             ~SVActMoveBy();
             
@@ -112,7 +112,7 @@ namespace sv {
 
         class SVActRot : public SVActDeform {
         public:
-            SVActRot(SVInst *_app);
+            SVActRot(SVInstPtr _app);
             
             ~SVActRot();
             
@@ -122,7 +122,7 @@ namespace sv {
 
         class SVActRotTo : public SVActDeform {
         public:
-            SVActRotTo(SVInst *_app);
+            SVActRotTo(SVInstPtr _app);
             
             ~SVActRotTo();
             
@@ -138,7 +138,7 @@ namespace sv {
 
         class SVActRotBetween : public SVActDeform {
         public:
-            SVActRotBetween(SVInst *_app);
+            SVActRotBetween(SVInstPtr _app);
             
             ~SVActRotBetween();
             
@@ -149,7 +149,7 @@ namespace sv {
         //
         class SVActAlpha : public SVActDeform {
         public:
-            SVActAlpha(SVInst *_app);
+            SVActAlpha(SVInstPtr _app);
             
             ~SVActAlpha();
             
@@ -170,7 +170,7 @@ namespace sv {
         //
         class SVActScale : public SVActDeform {
         public:
-            SVActScale(SVInst *_app);
+            SVActScale(SVInstPtr _app);
             
             ~SVActScale();
             
@@ -183,7 +183,7 @@ namespace sv {
         //以一定的速率 缩放到目标
         class SVActScaleTo : public SVActDeform {
         public:
-            SVActScaleTo(SVInst *_app);
+            SVActScaleTo(SVInstPtr _app);
             
             ~SVActScaleTo();
             
@@ -199,7 +199,7 @@ namespace sv {
 
         class SVActScaleBetween : public SVActDeform {
         public:
-            SVActScaleBetween(SVInst *_app);
+            SVActScaleBetween(SVInstPtr _app);
             
             ~SVActScaleBetween();
             
@@ -221,7 +221,7 @@ namespace sv {
         
         class SVActPosition : public SVActDeform {
         public:
-            SVActPosition(SVInst *_app);
+            SVActPosition(SVInstPtr _app);
             
             ~SVActPosition();
             

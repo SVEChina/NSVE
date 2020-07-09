@@ -10,17 +10,18 @@
 #include "../base/SVDataChunk.h"
 #include "../app/SVInst.h"
 #include "../app/SVGlobalParam.h"
+#include "../app/SVDispatch.h"
 #include "../third/rapidjson/document.h"
 #include "../third/rapidjson/stringbuffer.h"
 #include "../third/rapidjson/writer.h"
 #include "../rendercore/SVRenderMgr.h"
 #include "../rendercore/SVGL/SVRResGL.h"
-#include "../rendercore/SVGL/SVRResGLShader.h"
+#include "../rendercore/SVGL/SVRGLShader.h"
 
 
 using namespace sv;
 
-SVShaderMgr::SVShaderMgr(SVInst *_app)
+SVShaderMgr::SVShaderMgr(SVInstPtr _app)
 :SVSysBase(_app) {
 }
 
@@ -28,14 +29,14 @@ SVShaderMgr::~SVShaderMgr() {
 }
 
 void SVShaderMgr::init() {
-    loadAllShader();    //加载表
+    _loadAllShader();    //加载表
 }
 
 void SVShaderMgr::destroy() {
-    clearAllShader();
+    _clearAllShader();
 }
 
-void SVShaderMgr::loadAllShader() {
+void SVShaderMgr::_loadAllShader() {
     SVDataChunk tDataStream;
     SV_LOG_ERROR("load shadercfg.json begin\n");
     bool tflag = mApp->getFileMgr()->loadFileContentStr(&tDataStream, "shader/shadercfg.json");
@@ -81,15 +82,15 @@ void SVShaderMgr::loadAllShader() {
                 t_attri_formate = shaderitem["af"].GetString();
             }
             //
-            SVResShaderPtr t_resShader = nullptr;
+            SVRShaderPtr t_resShader = nullptr;
             if( mApp->m_pGlobalParam->getEngCore() == SV_E_CORE_GL ) {
-                t_resShader = MakeSharedPtr<SVRResGLShader>(mApp);
+                //t_resShader = MakeSharedPtr<SVRGLShader>(mApp);
             }else if(mApp->m_pGlobalParam->getEngCore() == SV_E_CORE_METAL){
 //                #if defined(SV_IOS) || defined(SV_OSX)
-//                t_resShader = MakeSharedPtr<SVRResMetalShader>(mApp);
+//                t_resShader = MakeSharedPtr<SVRMetalShader>(mApp);
 //                #endif
             }else if(mApp->m_pGlobalParam->getEngCore() == SV_E_CORE_VULKAN){
-                //t_resShader = MakeSharedPtr<SVRResGLShader>(mApp);
+                //t_resShader = MakeSharedPtr<SVRGLShader>(mApp);
             }
             //
             if(t_resShader) {
@@ -98,7 +99,8 @@ void SVShaderMgr::loadAllShader() {
                 t_resShader->setVSFName(t_vs_fname.c_str());
                 t_resShader->setFSFName(t_fs_fname.c_str());
                 t_resShader->setProgrammeName(t_programme_name.c_str());
-                mApp->getRenderMgr()->pushRCmdCreate(t_resShader);
+                //创建shader
+                SVDispatch::dispatchShaderCreate(mApp,t_resShader);
                 SV_LOG_ERROR("shader : vs(%s) fs(%s)\n", t_vs_fname.c_str(),t_fs_fname.c_str());
             }
         }
@@ -106,11 +108,11 @@ void SVShaderMgr::loadAllShader() {
     SV_LOG_DEBUG("load shader end\n");
 }
 
-void SVShaderMgr::clearAllShader() {
+void SVShaderMgr::_clearAllShader() {
     ShaderMap.clear();
 }
 
-SVResShaderPtr SVShaderMgr::getShader(cptr8 _name) {
+SVRShaderPtr SVShaderMgr::getShader(cptr8 _name) {
     SHADERPOOL::Iterator it = ShaderMap.find(_name);
     if(it!=ShaderMap.end()) {
         return it->data;

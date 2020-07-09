@@ -17,7 +17,7 @@ namespace sv{
     
     class SVModuleSys : public SVSysBase {
     public:
-        SVModuleSys(SVInst* _app);
+        SVModuleSys(SVInstPtr _app);
         
         ~SVModuleSys();
         

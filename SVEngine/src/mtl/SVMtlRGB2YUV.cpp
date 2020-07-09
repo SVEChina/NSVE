@@ -11,7 +11,7 @@
 
 using namespace sv;
 
-SVMtlRGB2YUV::SVMtlRGB2YUV(SVInst *_app, SV_OUTSTEAMFORMATE formate)
+SVMtlRGB2YUV::SVMtlRGB2YUV(SVInstPtr _app, SV_OUTSTEAMFORMATE formate)
 :SVMtlCore(_app,"rgb2yuvnv21") {
     if (formate == SV_OUT_STEAM_RGB2YUVNV21) {
         reloadShader("rgb2yuvnv21");

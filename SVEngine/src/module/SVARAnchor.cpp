@@ -30,7 +30,7 @@
 
 using namespace sv;
 
-SVARAnchor::SVARAnchor(SVInst* _app)
+SVARAnchor::SVARAnchor(SVInstPtr _app)
 :SVModuleBase(_app){
     m_plane_dis = 0.3f;
     m_fbo = nullptr;

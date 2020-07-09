@@ -12,7 +12,7 @@
 using namespace sv;
 
 //
-SVOpOpenDetect::SVOpOpenDetect(SVInst *_app, s32 detecttype)
+SVOpOpenDetect::SVOpOpenDetect(SVInstPtr _app, s32 detecttype)
 :SVOpBase(_app) {
     m_detectType = (DETECTTYPE)detecttype;
 }
@@ -22,7 +22,7 @@ void SVOpOpenDetect::_process(float dt) {
 }
 
 //
-SVOpCloseDetect::SVOpCloseDetect(SVInst *_app)
+SVOpCloseDetect::SVOpCloseDetect(SVInstPtr _app)
 :SVOpBase(_app) {
 }
 

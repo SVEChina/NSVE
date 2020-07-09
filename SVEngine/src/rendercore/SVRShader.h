@@ -1,5 +1,5 @@
 //
-// SVResShader.h
+// SVRShader.h
 // SVEngine
 // Copyright 2017-2020
 // yizhou Fu,long Yin,longfei Lin,ziyu Xu,xiaofan Li,daming Li
@@ -82,11 +82,11 @@ namespace sv {
     
     
         
-        class SVResShader: public SVRObjBase{
+        class SVRShader: public SVGBaseEx{
         public:
-            SVResShader(SVInst* _app);
+            SVRShader(SVInstPtr _app);
             
-            virtual ~SVResShader();
+            virtual ~SVRShader();
             
             virtual void create(SVRendererPtr _renderer){}
             

@@ -16,7 +16,7 @@ namespace sv {
     
         class SVBasedonFilter : public SVFilterBase {
         public:
-            SVBasedonFilter(SVInst *_app);
+            SVBasedonFilter(SVInstPtr _app);
             
             ~SVBasedonFilter();
             

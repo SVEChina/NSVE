@@ -28,7 +28,7 @@ namespace sv {
         
         class SVStreamOut : public SVProcess {
         public:
-            SVStreamOut(SVInst *_app);
+            SVStreamOut(SVInstPtr _app);
             
             ~SVStreamOut();
             

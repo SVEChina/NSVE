@@ -29,7 +29,7 @@
 
 using namespace sv;
 
-SVSpineNode::SVSpineNode(SVInst *_app)
+SVSpineNode::SVSpineNode(SVInstPtr _app)
 :SVNode(_app) {
     ntype = "SVSpineNode";
 //    m_spine = nullptr;

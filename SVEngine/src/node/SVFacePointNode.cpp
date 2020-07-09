@@ -18,7 +18,7 @@
 
 using namespace sv;
 
-SVFacePointNode::SVFacePointNode(SVInst *_app)
+SVFacePointNode::SVFacePointNode(SVInstPtr _app)
 :SVNode(_app){
     ntype = "SVFacePointNode";
 //    m_pRenderObj = MakeSharedPtr<SVRenderObject>();

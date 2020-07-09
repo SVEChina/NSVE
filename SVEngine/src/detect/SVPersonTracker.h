@@ -19,9 +19,9 @@
 
 namespace sv {
     
-    class SVPersonTracker : public SVGBase {
+    class SVPersonTracker : public SVGBaseEx {
     public:
-        SVPersonTracker(SVInst* _app);
+        SVPersonTracker(SVInstPtr _app);
         
         virtual ~SVPersonTracker();
         

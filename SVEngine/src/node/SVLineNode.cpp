@@ -16,7 +16,7 @@
 
 using namespace sv;
 
-SVLineNode::SVLineNode(SVInst *_app)
+SVLineNode::SVLineNode(SVInstPtr _app)
 : SVNode(_app) {
     ntype = "SVLineNode";
 //    m_pRenderObj = MakeSharedPtr<SVRenderObject>();

@@ -14,7 +14,7 @@
 
 using namespace sv;
 
-SVBMFontLoader::SVBMFontLoader(SVInst *_app)
+SVBMFontLoader::SVBMFontLoader(SVInstPtr _app)
 :SVFileLoader(_app) {
 
 }

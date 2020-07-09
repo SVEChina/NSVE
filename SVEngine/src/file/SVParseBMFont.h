@@ -16,7 +16,7 @@ namespace sv {
         
         class SVParseBMFont : public SVParseData {
         public:
-            static SVNodePtr parseBMFont(SVInst *_app, RAPIDJSON_NAMESPACE::Value &item, s32 _resid,cptr8 _path);
+            static SVNodePtr parseBMFont(SVInstPtr _app, RAPIDJSON_NAMESPACE::Value &item, s32 _resid,cptr8 _path);
         };
 
         

@@ -11,7 +11,7 @@
 #include "../SVRObjBase.h"
 #include "../SVResTex.h"
 #include "../SVResFBO.h"
-#include "../SVResShader.h"
+#include "../SVRShader.h"
 #include "../../base/SVPreDeclare.h"
 #include "../../base/SVRect.h"
 #include "../../core/SVVertDef.h"
@@ -22,11 +22,11 @@ namespace sv {
     
 
         //纹理资源
-        class SVRResGLTex: public SVResTex {
+        class SVRGLTex: public SVResTex {
         public:
-            SVRResGLTex(SVInst* _app);
+            SVRGLTex(SVInstPtr _app);
 
-            virtual ~SVRResGLTex();
+            virtual ~SVRGLTex();
 
             virtual void create(SVRendererPtr _renderer);
 
@@ -37,11 +37,11 @@ namespace sv {
             virtual void commit();  //数据提交到显卡
         };
         
-        class SVRResGLTexWithTexID: public SVRResGLTex {
+        class SVRGLTexWithTexID: public SVRGLTex {
         public:
-            SVRResGLTexWithTexID(SVInst* _app, s32 _id);
+            SVRGLTexWithTexID(SVInstPtr _app, s32 _id);
             
-            virtual ~SVRResGLTexWithTexID();
+            virtual ~SVRGLTexWithTexID();
             
             virtual void create(SVRendererPtr _renderer);
             
@@ -51,11 +51,11 @@ namespace sv {
         };
         
         //PList假纹理
-        class SVRResGLTexPlist : public SVRResGLTex{
+        class SVRGLTexPlist : public SVRGLTex{
         public:
-            SVRResGLTexPlist(SVInst *mApp);
+            SVRGLTexPlist(SVInstPtr mApp);
 
-            ~SVRResGLTexPlist();
+            ~SVRGLTexPlist();
 
             virtual void refreshParam();
 
@@ -69,7 +69,7 @@ namespace sv {
 
             SVRect *getDstRect();
 
-            void bindTexset(SVRResGLTexSetPtr _texset);
+            void bindTexset(SVRGLTexSetPtr _texset);
 
             void unbindTexset();
 
@@ -84,24 +84,24 @@ namespace sv {
         private:
             SVRect m_srcRect; //在原图的尺寸
             SVRect m_dstRect; //在大纹理中的位置
-            SVRResGLTexSetPtr m_pTexset;
+            SVRGLTexSetPtr m_pTexset;
         };
         //
         //PList真纹理
-        class SVRResGLTexSet : public SVRResGLTex {
+        class SVRGLTexSet : public SVRGLTex {
         public:
-            SVRResGLTexSet(SVInst *mApp);
+            SVRGLTexSet(SVInstPtr mApp);
 
-            ~SVRResGLTexSet();
+            ~SVRGLTexSet();
         };
 
         //
         //iOS纹理
-        class SVRResGLTexiOS : public SVRResGLTex {
+        class SVRGLTexiOS : public SVRGLTex {
         public:
-            SVRResGLTexiOS(SVInst *mApp);
+            SVRGLTexiOS(SVInstPtr mApp);
 
-            ~SVRResGLTexiOS();
+            ~SVRGLTexiOS();
 
             virtual void create(SVRendererPtr _renderer);
 
@@ -123,7 +123,7 @@ namespace sv {
         //////////////////////////////////////////////////////////FBO资源
         class SVRResGLFBO: public SVResFBO {
         public:
-            SVRResGLFBO(SVInst* _app);
+            SVRResGLFBO(SVInstPtr _app);
 
             virtual ~SVRResGLFBO();
 
@@ -176,7 +176,7 @@ namespace sv {
         //外部传入的FBO
         class SVRResGLOutFBO : public SVRResGLFBO {
         public:
-            SVRResGLOutFBO(SVInst *_app,u32 _fboid);
+            SVRResGLOutFBO(SVInstPtr _app,u32 _fboid);
 
             ~SVRResGLOutFBO();
 
@@ -188,7 +188,7 @@ namespace sv {
         //RenderTarget
         class SVResGLRenderTarget : public SVRResGLFBO {
         public:
-            SVResGLRenderTarget(SVInst *_app,s32 _w, s32 _h,bool _depth,bool _stencil);
+            SVResGLRenderTarget(SVInstPtr _app,s32 _w, s32 _h,bool _depth,bool _stencil);
 
             ~SVResGLRenderTarget();
 
@@ -205,7 +205,7 @@ namespace sv {
         //
         class SVResGLRenderTargetOut : public SVResGLRenderTarget {
         public:
-            SVResGLRenderTargetOut(SVInst *_app,s32 _w, s32 _h,u32 _fboid,u32 _colorID);
+            SVResGLRenderTargetOut(SVInstPtr _app,s32 _w, s32 _h,u32 _fboid,u32 _colorID);
 
             ~SVResGLRenderTargetOut();
 
@@ -217,7 +217,7 @@ namespace sv {
         //
         class SVResGLRenderTexture : public SVRResGLFBO {
         public:
-            SVResGLRenderTexture(SVInst *_app,SVRResGLTexPtr _tex, bool _depth,bool _stencil);
+            SVResGLRenderTexture(SVInstPtr _app,SVRGLTexPtr _tex, bool _depth,bool _stencil);
 
             ~SVResGLRenderTexture();
 
@@ -225,14 +225,14 @@ namespace sv {
 
             void destroy(SVRendererPtr _renderer);
 
-            void setTexture(SVRResGLTexPtr _tex);
+            void setTexture(SVRGLTexPtr _tex);
 
             void refresh();
 
         protected:
             void _bindColor();
 
-            SVRResGLTexPtr m_tex;
+            SVRGLTexPtr m_tex;
         };
 
     

@@ -18,9 +18,9 @@ namespace sv {
    
 
         /* 模型 由多个mesh构成 */
-        class SVModel : public SVGBase {
+        class SVModel : public SVGBaseEx {
         public:
-            SVModel(SVInst* _app);
+            SVModel(SVInstPtr _app);
             
             ~SVModel();
             

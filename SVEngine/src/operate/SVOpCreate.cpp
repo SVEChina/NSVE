@@ -69,7 +69,7 @@
 using namespace sv;
 
 //创建场景OP
-SVOpCreateScene::SVOpCreateScene(SVInst *_app,cptr8 name)
+SVOpCreateScene::SVOpCreateScene(SVInstPtr _app,cptr8 name)
 : SVOpBase(_app) {
     m_scenename = name;
 }
@@ -85,7 +85,7 @@ void SVOpCreateScene::_process(f32 dt) {
 
 
 //删除逻辑场景OP
-SVOpDestroyScene::SVOpDestroyScene(SVInst *_app,cptr8 name)
+SVOpDestroyScene::SVOpDestroyScene(SVInstPtr _app,cptr8 name)
 : SVOpBase(_app) {
     m_scenename = name;
 }
@@ -94,7 +94,7 @@ void SVOpDestroyScene::_process(f32 dt) {
 }
 
 //
-SVOpCameraControl::SVOpCameraControl(SVInst *_app, bool bOpen, s32 iResId)
+SVOpCameraControl::SVOpCameraControl(SVInstPtr _app, bool bOpen, s32 iResId)
 : SVOpBase(_app)
 , m_bOpen(bOpen)
 , m_iResId(iResId) {
@@ -116,7 +116,7 @@ void SVOpCameraControl::_process(f32 dt) {
 }
 
 //创建天空
-SVOpCreateSkyDome::SVOpCreateSkyDome(SVInst *_app,cptr8 pStrPath,s32 resId)
+SVOpCreateSkyDome::SVOpCreateSkyDome(SVInstPtr _app,cptr8 pStrPath,s32 resId)
 : SVOpBase(_app)
 , m_strPath(pStrPath)
 ,m_iResId(resId) {
@@ -129,7 +129,7 @@ void SVOpCreateSkyDome::_process(f32 dt) {
 }
 
 //创建粒子节点
-SVOpCreateParticle::SVOpCreateParticle(SVInst *_app,cptr8 pStrPath)
+SVOpCreateParticle::SVOpCreateParticle(SVInstPtr _app,cptr8 pStrPath)
 : SVOpBase(_app)
 , m_strPath(pStrPath) {
 }
@@ -141,7 +141,7 @@ void SVOpCreateParticle::_process(f32 dt) {
 }
 
 //创建特效
-SVOpCreateEffcet::SVOpCreateEffcet(SVInst *_app,cptr8 pStrPath)
+SVOpCreateEffcet::SVOpCreateEffcet(SVInstPtr _app,cptr8 pStrPath)
 : SVOpBase(_app)
 , m_strPath(pStrPath) {
 }
@@ -195,7 +195,7 @@ void SVOpCreateEffcet::_process(f32 dt) {
 }
 
 
-SVOpTexAttachment::SVOpTexAttachment(SVInst *_app, cptr8 _strPath, s32 _channel, void *_data, s32 _width, s32 _height):SVOpBase(_app){
+SVOpTexAttachment::SVOpTexAttachment(SVInstPtr _app, cptr8 _strPath, s32 _channel, void *_data, s32 _width, s32 _height):SVOpBase(_app){
     m_strPath = _strPath;
     m_data = _data;
     m_width = _width;
@@ -224,7 +224,7 @@ void SVOpTexAttachment::_process(f32 dt) {
 }
 
 
-SVOpEngineResume::SVOpEngineResume(SVInst *_app) : SVOpBase(_app){
+SVOpEngineResume::SVOpEngineResume(SVInstPtr _app) : SVOpBase(_app){
     
 }
 
@@ -236,7 +236,7 @@ void SVOpEngineResume::_process(f32 dt){
     mApp->svResume();
 }
 
-SVOpEngineSuspend::SVOpEngineSuspend(SVInst *_app) : SVOpBase(_app){
+SVOpEngineSuspend::SVOpEngineSuspend(SVInstPtr _app) : SVOpBase(_app){
     
 }
 
@@ -248,7 +248,7 @@ void SVOpEngineSuspend::_process(f32 dt){
     mApp->svSuspend();
 }
 
-SVOpPushFaceData::SVOpPushFaceData(SVInst *_app, void *_data)
+SVOpPushFaceData::SVOpPushFaceData(SVInstPtr _app, void *_data)
 : SVOpBase(_app){
     m_data = _data;
 }
@@ -267,7 +267,7 @@ void SVOpPushFaceData::_process(f32 dt){
 }
 
 //测试操作
-SVOpCreateTest::SVOpCreateTest(SVInst *_app)
+SVOpCreateTest::SVOpCreateTest(SVInstPtr _app)
 : SVOpBase(_app){
     
 }
@@ -292,7 +292,7 @@ void SVOpCreateTest::_process(f32 dt) {
 
 
 //测试操作
-SVOpCreateDebugFacePt::SVOpCreateDebugFacePt(SVInst *_app)
+SVOpCreateDebugFacePt::SVOpCreateDebugFacePt(SVInstPtr _app)
 : SVOpBase(_app){
 
 }
@@ -313,7 +313,7 @@ void SVOpCreateDebugFacePt::_process(f32 dt) {
 
 
 //测试操作
-SVOpCreateTestLine::SVOpCreateTestLine(SVInst *_app)
+SVOpCreateTestLine::SVOpCreateTestLine(SVInstPtr _app)
 : SVOpBase(_app){
     
 }
@@ -343,7 +343,7 @@ void SVOpCreateTestLine::_process(f32 dt) {
 }
 
 //测试操作
-SVOpCreateTestPatch::SVOpCreateTestPatch(SVInst *_app)
+SVOpCreateTestPatch::SVOpCreateTestPatch(SVInstPtr _app)
 : SVOpBase(_app){
     
 }
@@ -381,7 +381,7 @@ void SVOpCreateTestPatch::_process(f32 dt) {
 }
 
 //测试操作
-SVOpCreateTestMianSha::SVOpCreateTestMianSha(SVInst *_app)
+SVOpCreateTestMianSha::SVOpCreateTestMianSha(SVInstPtr _app)
 : SVOpBase(_app){
     
 }
@@ -454,7 +454,7 @@ void SVOpCreateTestMianSha::_process(f32 dt) {
 //    }
 }
 
-SVOpCreateDivision::SVOpCreateDivision(SVInst *_app) :  SVOpBase(_app){
+SVOpCreateDivision::SVOpCreateDivision(SVInstPtr _app) :  SVOpBase(_app){
     
 }
 
@@ -473,7 +473,7 @@ void SVOpCreateDivision::_process(f32 dt) {
     }
 }
 //about mark
-SVOpCreateMark::SVOpCreateMark(SVInst *_app) :  SVOpBase(_app){
+SVOpCreateMark::SVOpCreateMark(SVInstPtr _app) :  SVOpBase(_app){
     
 }
 
@@ -492,7 +492,7 @@ void SVOpCreateMark::_process(f32 dt) {
     }
 }
 
-SVOpMarkContent::SVOpMarkContent(SVInst *_app, SVString _content) :  SVOpBase(_app){
+SVOpMarkContent::SVOpMarkContent(SVInstPtr _app, SVString _content) :  SVOpBase(_app){
     m_content = _content;
 }
 
@@ -509,7 +509,7 @@ void SVOpMarkContent::_process(f32 dt) {
     }
 }
 
-SVOpMarkAlpha::SVOpMarkAlpha(SVInst *_app, f32 _alpha) :  SVOpBase(_app){
+SVOpMarkAlpha::SVOpMarkAlpha(SVInstPtr _app, f32 _alpha) :  SVOpBase(_app){
     m_alpha = _alpha;
 }
 
@@ -526,7 +526,7 @@ void SVOpMarkAlpha::_process(f32 dt) {
     }
 }
 
-SVOpMarkScale::SVOpMarkScale(SVInst *_app, f32 _scale) :  SVOpBase(_app){
+SVOpMarkScale::SVOpMarkScale(SVInstPtr _app, f32 _scale) :  SVOpBase(_app){
     m_scale = _scale;
 }
 
@@ -543,7 +543,7 @@ void SVOpMarkScale::_process(f32 dt) {
     }
 }
 
-SVOpMarkRotation::SVOpMarkRotation(SVInst *_app, f32 _roation) :  SVOpBase(_app){
+SVOpMarkRotation::SVOpMarkRotation(SVInstPtr _app, f32 _roation) :  SVOpBase(_app){
     m_rotation = _roation;
 }
 
@@ -560,7 +560,7 @@ void SVOpMarkRotation::_process(f32 dt) {
     }
 }
 
-SVOpMarkAlphaTime::SVOpMarkAlphaTime(SVInst *_app, f32 _alphaTime) :  SVOpBase(_app){
+SVOpMarkAlphaTime::SVOpMarkAlphaTime(SVInstPtr _app, f32 _alphaTime) :  SVOpBase(_app){
     m_alphaTime = _alphaTime;
 }
 
@@ -577,7 +577,7 @@ void SVOpMarkAlphaTime::_process(f32 dt) {
     }
 }
 
-SVOpMarkAlphaRange::SVOpMarkAlphaRange(SVInst *_app, f32 _srcAlpha, f32 _tarAlpha) :  SVOpBase(_app){
+SVOpMarkAlphaRange::SVOpMarkAlphaRange(SVInstPtr _app, f32 _srcAlpha, f32 _tarAlpha) :  SVOpBase(_app){
     m_srcAlpha = _srcAlpha;
     m_tarAlpha = _tarAlpha;
 }
@@ -595,7 +595,7 @@ void SVOpMarkAlphaRange::_process(f32 dt) {
     }
 }
 
-SVOpMarkAppearTime::SVOpMarkAppearTime(SVInst *_app, f32 _appearTime) :  SVOpBase(_app){
+SVOpMarkAppearTime::SVOpMarkAppearTime(SVInstPtr _app, f32 _appearTime) :  SVOpBase(_app){
     m_appearTime = _appearTime;
 }
 
@@ -612,7 +612,7 @@ void SVOpMarkAppearTime::_process(f32 dt) {
     }
 }
 
-SVOpMarkPosition::SVOpMarkPosition(SVInst *_app, FVec3 _pos) :  SVOpBase(_app){
+SVOpMarkPosition::SVOpMarkPosition(SVInstPtr _app, FVec3 _pos) :  SVOpBase(_app){
     m_pos = _pos;
 }
 
@@ -637,7 +637,7 @@ void SVOpMarkPosition::_process(f32 dt) {
     }
 }
 
-SVOpMarkEnableRandom::SVOpMarkEnableRandom(SVInst *_app, bool _enable) :  SVOpBase(_app){
+SVOpMarkEnableRandom::SVOpMarkEnableRandom(SVInstPtr _app, bool _enable) :  SVOpBase(_app){
     m_enable = _enable;
 }
 
@@ -655,7 +655,7 @@ void SVOpMarkEnableRandom::_process(f32 dt) {
 }
 
 //about pen
-SVOpOpenPen::SVOpOpenPen(SVInst *_app) :  SVOpBase(_app){
+SVOpOpenPen::SVOpOpenPen(SVInstPtr _app) :  SVOpBase(_app){
     
 }
 
@@ -678,7 +678,7 @@ void SVOpOpenPen::_process(f32 dt) {
     }
 }
 
-SVOpSetPenEffcet::SVOpSetPenEffcet(SVInst *_app,cptr8 pStrPath)
+SVOpSetPenEffcet::SVOpSetPenEffcet(SVInstPtr _app,cptr8 pStrPath)
 : SVOpBase(_app)
 , m_strPath(pStrPath) {
 }
@@ -696,7 +696,7 @@ void SVOpSetPenEffcet::_process(f32 dt) {
 }
 
 
-SVOpSavePenEffcet::SVOpSavePenEffcet(SVInst *_app,cptr8 pStrPath)
+SVOpSavePenEffcet::SVOpSavePenEffcet(SVInstPtr _app,cptr8 pStrPath)
 : SVOpBase(_app)
 , m_strPath(pStrPath) {
 }
@@ -717,11 +717,11 @@ void SVOpSavePenEffcet::_process(f32 dt) {
         }
     }
     if (m_pCB) {
-        (*m_pCB)(result, mApp);
+        (*m_pCB)(result, mApp.get());
     }
 }
 
-SVOpClearPen::SVOpClearPen(SVInst *_app) :  SVOpBase(_app){
+SVOpClearPen::SVOpClearPen(SVInstPtr _app) :  SVOpBase(_app){
     
 }
 
@@ -740,7 +740,7 @@ void SVOpClearPen::_process(f32 dt) {
     }
 }
 
-SVOpPenUndo::SVOpPenUndo(SVInst *_app) :  SVOpBase(_app){
+SVOpPenUndo::SVOpPenUndo(SVInstPtr _app) :  SVOpBase(_app){
     
 }
 
@@ -759,7 +759,7 @@ void SVOpPenUndo::_process(f32 dt) {
     }
 }
 
-SVOpPenRedo::SVOpPenRedo(SVInst *_app) :  SVOpBase(_app){
+SVOpPenRedo::SVOpPenRedo(SVInstPtr _app) :  SVOpBase(_app){
     
 }
 
@@ -778,7 +778,7 @@ void SVOpPenRedo::_process(f32 dt) {
     }
 }
 
-SVOpPenUndoIsEnable::SVOpPenUndoIsEnable(SVInst *_app) :  SVOpBase(_app){
+SVOpPenUndoIsEnable::SVOpPenUndoIsEnable(SVInstPtr _app) :  SVOpBase(_app){
     
 }
 
@@ -803,7 +803,7 @@ void SVOpPenUndoIsEnable::_process(f32 dt) {
     }
 }
 
-SVOpPenRedoIsEnable::SVOpPenRedoIsEnable(SVInst *_app) :  SVOpBase(_app){
+SVOpPenRedoIsEnable::SVOpPenRedoIsEnable(SVInstPtr _app) :  SVOpBase(_app){
     
 }
 
@@ -828,7 +828,7 @@ void SVOpPenRedoIsEnable::_process(f32 dt) {
     }
 }
 
-SVOpPenMode::SVOpPenMode(SVInst *_app, s32 _mode) :  SVOpBase(_app){
+SVOpPenMode::SVOpPenMode(SVInstPtr _app, s32 _mode) :  SVOpBase(_app){
     m_mode = _mode;
 }
 
@@ -848,7 +848,7 @@ void SVOpPenMode::_process(f32 dt) {
     }
 }
 
-SVOpCreateGameZCMgr::SVOpCreateGameZCMgr(SVInst *_app) :  SVOpBase(_app){
+SVOpCreateGameZCMgr::SVOpCreateGameZCMgr(SVInstPtr _app) :  SVOpBase(_app){
     
 }
 
@@ -870,7 +870,7 @@ void SVOpCreateGameZCMgr::_process(f32 dt) {
 //    }
 }
 
-SVOpEnableTouchAnchor::SVOpEnableTouchAnchor(SVInst *_app)
+SVOpEnableTouchAnchor::SVOpEnableTouchAnchor(SVInstPtr _app)
 : SVOpBase(_app){
     
 }
@@ -891,7 +891,7 @@ void SVOpEnableTouchAnchor::_process(f32 dt) {
     }
 }
 
-SVOpDisableTouchAnchor::SVOpDisableTouchAnchor(SVInst *_app)
+SVOpDisableTouchAnchor::SVOpDisableTouchAnchor(SVInstPtr _app)
 : SVOpBase(_app){
     
 }

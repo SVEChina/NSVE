@@ -11,7 +11,7 @@
 
 using namespace sv;
 
-SVActionMgr::SVActionMgr(SVInst *_app)
+SVActionMgr::SVActionMgr(SVInstPtr _app)
 :SVSysBase(_app) {
     m_subsysType = 0;
     m_lock = MakeSharedPtr<SVLock>();

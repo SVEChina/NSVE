@@ -13,9 +13,9 @@ namespace sv {
     
     
         
-        class SVPhysicsJoint : public SVGBase {
+        class SVPhysicsJoint : public SVGBaseEx {
         public:
-            SVPhysicsJoint(SVInst* _app);
+            SVPhysicsJoint(SVInstPtr _app);
             
             ~SVPhysicsJoint();
             

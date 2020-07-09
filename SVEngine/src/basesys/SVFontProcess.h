@@ -26,7 +26,7 @@ namespace sv {
         
         class SVFontProcess : public SVProcess {
         public:
-            SVFontProcess(SVInst* _app);
+            SVFontProcess(SVInstPtr _app);
             
             ~SVFontProcess();
             

@@ -16,7 +16,7 @@ namespace sv {
         
         class SVMtlBlackWhite : public SVMtlCore {
         public:
-            SVMtlBlackWhite(SVInst *_app);
+            SVMtlBlackWhite(SVInstPtr _app);
             
             SVMtlBlackWhite(SVMtlBlackWhite *_mtl);
             

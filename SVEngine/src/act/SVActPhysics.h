@@ -15,7 +15,7 @@ namespace sv {
         
         class SVActPhysics : public SVActBase {
         public:
-            SVActPhysics(SVInst *_app, SVPhysicsBodyPtr _physicsBody);
+            SVActPhysics(SVInstPtr _app, SVPhysicsBodyPtr _physicsBody);
         
             ~SVActPhysics();
         
@@ -30,7 +30,7 @@ namespace sv {
         
         class SVActBodyRope : public SVActPhysics {
         public:
-            SVActBodyRope(SVInst *_app, SVPhysicsBodyPtr _physicsBody);
+            SVActBodyRope(SVInstPtr _app, SVPhysicsBodyPtr _physicsBody);
         
             ~SVActBodyRope();
         
@@ -45,7 +45,7 @@ namespace sv {
     
         class SVActBodyCloth : public SVActPhysics {
         public:
-            SVActBodyCloth(SVInst *_app, SVPhysicsBodyPtr _physicsBody);
+            SVActBodyCloth(SVInstPtr _app, SVPhysicsBodyPtr _physicsBody);
         
             ~SVActBodyCloth();
         

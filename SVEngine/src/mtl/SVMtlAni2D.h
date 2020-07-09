@@ -24,7 +24,7 @@ namespace sv {
                 SV_MTL_BLENDMODE_MULTIPLY,
                 SV_MTL_BLENDMODE_SCREEN
             };
-            SVMtlAni2D(SVInst *_app);
+            SVMtlAni2D(SVInstPtr _app);
             
             SVMtlAni2D(SVMtlAni2D *_mtl);
             

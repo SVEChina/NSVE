@@ -11,7 +11,7 @@
 
 using namespace sv;
 
-SVMtlBasedOn::SVMtlBasedOn(SVInst *_app)
+SVMtlBasedOn::SVMtlBasedOn(SVInstPtr _app)
 :SVMtlCore(_app,"baseFilterAdjustment") {
     //
     m_BaseOnFlag = MTL_F_BASEON_NONE;
@@ -266,7 +266,7 @@ void SVMtlBasedOn::_submitMtl(SVRendererPtr _render) {
     m_BaseOnFlag = MTL_F_BASEON_NONE;
 }
 
-SVMtlAcutance::SVMtlAcutance(SVInst *_app)
+SVMtlAcutance::SVMtlAcutance(SVInstPtr _app)
 :SVMtlCore(_app,"acutance") {
     m_BaseOnFlag = MTL_F_BASEON_NONE;
     m_acutance=0.0;

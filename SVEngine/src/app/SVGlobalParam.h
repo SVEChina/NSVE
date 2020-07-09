@@ -17,9 +17,9 @@
 
 namespace sv {
 
-    class SVGlobalParam: public SVGBase {
+    class SVGlobalParam: public SVGBaseEx {
     public:
-        SVGlobalParam(SVInst* _app);
+        SVGlobalParam(SVInstPtr _app);
         
         ~SVGlobalParam();
         

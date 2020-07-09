@@ -116,12 +116,10 @@ void SVRenderer::removeUnuseRes() {
 
 //处理技术
 void SVRenderer::processTech(SVRTechPtr _tech) {
-    
 }
            
 //处理材质
 void SVRenderer::processMtl(SVMtlCorePtr _mtl) {
-    
 }
            
 //处理mesh

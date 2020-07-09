@@ -16,7 +16,7 @@ namespace sv {
     
         class SVActTime : public SVActBase {
         public:
-            SVActTime(SVInst *_app);
+            SVActTime(SVInstPtr _app);
             
             ~SVActTime();
             
@@ -36,7 +36,7 @@ namespace sv {
         //可见不变
         class SVActWait : public SVActTime {
         public:
-            SVActWait(SVInst *_app);
+            SVActWait(SVInstPtr _app);
             
             ~SVActWait();
             
@@ -44,7 +44,7 @@ namespace sv {
         
         class SVActHide : public SVActWait {
         public:
-            SVActHide(SVInst *_app);
+            SVActHide(SVInstPtr _app);
             
             ~SVActHide();
             

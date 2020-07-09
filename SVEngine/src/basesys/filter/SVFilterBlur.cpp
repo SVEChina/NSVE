@@ -18,7 +18,7 @@
 
 using namespace sv;
 
-SVFilterBlur::SVFilterBlur(SVInst *_app)
+SVFilterBlur::SVFilterBlur(SVInstPtr _app)
 :SVFilterBase(_app){
     m_type=SV_FUNC_BLUR;
     m_name="SVFilterBlur";

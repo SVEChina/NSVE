@@ -21,7 +21,7 @@
 
 using namespace sv;
 
-SVFaceDetectPointNode::SVFaceDetectPointNode(SVInst *_app):SVNode(_app) {
+SVFaceDetectPointNode::SVFaceDetectPointNode(SVInstPtr _app):SVNode(_app) {
     ntype = "SVFaceDetectPointNode";
     m_rsType = RST_DEBUG;
     m_pRenderObj = MakeSharedPtr<SVRenderObject>();

@@ -12,11 +12,9 @@
 
 namespace sv {
     
-    
-        
         class SVResTex: public SVRObjBase{
         public:
-            SVResTex(SVInst* _app);
+            SVResTex(SVInstPtr _app);
             
             virtual ~SVResTex();
             

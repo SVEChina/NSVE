@@ -17,7 +17,7 @@ namespace sv {
         
         class SVFilterBlur : public SVFilterBase {
         public:
-            SVFilterBlur(SVInst *_app);
+            SVFilterBlur(SVInstPtr _app);
             
             ~SVFilterBlur();
             

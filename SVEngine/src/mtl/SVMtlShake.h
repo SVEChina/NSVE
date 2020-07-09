@@ -16,7 +16,7 @@ namespace sv {
         
         class SVMtlShake : public SVMtlCore {
         public:
-            SVMtlShake(SVInst *_app);
+            SVMtlShake(SVInstPtr _app);
             
             SVMtlShake(SVMtlShake *_mtl);
             

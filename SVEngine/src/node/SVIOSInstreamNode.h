@@ -15,7 +15,7 @@ namespace sv {
     
     class SVIOSInstreamNode : public SVNode {
     public:
-        SVIOSInstreamNode(SVInst *_app);
+        SVIOSInstreamNode(SVInstPtr _app);
         
         virtual ~SVIOSInstreamNode();
         

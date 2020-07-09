@@ -17,7 +17,7 @@ using namespace sv;
 #define OBJECT_PARTICLES_EPSILON	1e-3f
 
 //********************************* SVParticlesNode ********************************************
-SVParticlesNode::SVParticlesNode(SVInst *_app)
+SVParticlesNode::SVParticlesNode(SVInstPtr _app)
 :SVNode(_app) {
     ntype = "SVParticlesNode";
 //    m_drawBox = false;

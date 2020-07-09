@@ -10,7 +10,7 @@
 
 using namespace sv;
 
-SVLoaderObj::SVLoaderObj(SVInst *_app)
+SVLoaderObj::SVLoaderObj(SVInstPtr _app)
 :SVFileLoader(_app) {
 }
 

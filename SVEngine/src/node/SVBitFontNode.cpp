@@ -22,7 +22,7 @@ using namespace sv;
 
 #define SV_BITFONT_MAX_NUM  10
 //
-SVBitFontNode::SVBitFontNode(SVInst *_app)
+SVBitFontNode::SVBitFontNode(SVInstPtr _app)
 :SVNode(_app) {
     ntype = "SVBitFontNode";
     m_texture = nullptr;

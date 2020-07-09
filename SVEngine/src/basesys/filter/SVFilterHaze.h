@@ -17,7 +17,7 @@ namespace sv {
         
         class SVFilterHaze : public SVFilterBase {
         public:
-            SVFilterHaze(SVInst *_app);
+            SVFilterHaze(SVInstPtr _app);
             
             ~SVFilterHaze();
             

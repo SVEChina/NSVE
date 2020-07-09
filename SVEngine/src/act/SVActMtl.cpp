@@ -11,7 +11,7 @@
 
 using namespace sv;
 
-SVActMtl::SVActMtl(SVInst *_app):SVActTime(_app) {
+SVActMtl::SVActMtl(SVInstPtr _app):SVActTime(_app) {
     m_pNewMtl = nullptr;
     m_pOldMtl = nullptr;
 }

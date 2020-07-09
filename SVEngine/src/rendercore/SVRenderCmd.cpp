@@ -87,12 +87,9 @@ void SVRenderCmdNor::setMaterial(SVMtlCorePtr _mtl){
 }
 
 void SVRenderCmdNor::render(SVRendererPtr _renderer) {
-    if (m_pMtl && m_pMesh) {
-        int t_prop = m_pMtl->submitMtl();
-//        if () {
-//            m_pMesh->render(m_pRenderer);
-//            m_pMtl->recoverMtl();
-//        }
+    if (m_pMtl && m_pMesh && _renderer) {
+        _renderer->processMtl(m_pMtl);
+        _renderer->processMesh(m_pMesh);
     }
 }
 
@@ -116,10 +113,9 @@ void SVRenderCmdClear::setClearColor(f32 _r,f32 _g,f32 _b,f32 _a) {
 }
 
 void SVRenderCmdClear::render(SVRendererPtr _renderer){
-//    if(m_pRenderer){
-//        m_pRenderer->svClearColor(m_color_r,m_color_g,m_color_b,m_color_a);
-//        m_pRenderer->svClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-//    }
+    if(_renderer){
+        //_renderer->clear();
+    }
 }
 
 //
@@ -137,7 +133,7 @@ void SVRenderCmdAdapt::setWinSize(s32 _w,s32 _h){
 }
 
 void SVRenderCmdAdapt::render(SVRendererPtr _renderer){
-    glViewport( 0, 0,m_winWidth,m_winHeight);
+ //   glViewport( 0, 0,m_winWidth,m_winHeight);
 //    m_pRenderer->svClearColor(m_color_r,m_color_g,m_color_b,m_color_a);
 //    m_pRenderer->svClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 ////    glClearColor(m_color_r,m_color_g,m_color_b,m_color_a);
@@ -167,18 +163,18 @@ void SVRenderCmdPass::setTexture(SVTexturePtr _tex) {
 }
 
 void SVRenderCmdPass::render(SVRendererPtr _renderer) {
-    if(m_fbo && m_tex ) {
-        m_fbo->setTexture(m_tex);
-        m_fbo->bind();
-        m_fbo->clear();
-//        if(m_pMtl && m_pMesh) {
-//            if (m_pMtl->submitMtl()) {
-//                m_pMesh->render(m_pRenderer);
-//                m_pMtl->recoverMtl();
-//            }
-//        }
-        m_fbo->unbind();
-    }
+//    if(m_fbo && m_tex ) {
+//        m_fbo->setTexture(m_tex);
+//        m_fbo->bind();
+//        m_fbo->clear();
+////        if(m_pMtl && m_pMesh) {
+////            if (m_pMtl->submitMtl()) {
+////                m_pMesh->render(m_pRenderer);
+////                m_pMtl->recoverMtl();
+////            }
+////        }
+//        m_fbo->unbind();
+//    }
 }
 
 SVRenderCmdPassCollection::SVRenderCmdPassCollection(){
@@ -196,22 +192,22 @@ SVRenderCmdPassCollection::~SVRenderCmdPassCollection(){
 }
 
 void SVRenderCmdPassCollection::render(SVRendererPtr _renderer){
-    if(m_fbo && m_tex ) {
-        m_fbo->setTexture(m_tex);
-        m_fbo->bind();
-        m_fbo->clear();
-//        for(int i=0;i<m_MtlArray.size();i++){
-//            SVMtlCorePtr t_mtl = m_MtlArray.get(i);
-//            SVRenderMeshPtr t_mesh = m_MeshArray.get(i);
-//            if(t_mtl && t_mesh) {
-//                if (t_mtl->submitMtl()) {
-//                    t_mesh->render(m_pRenderer);
-//                    t_mtl->recoverMtl();
-//                }
-//            }
-//        }
-        m_fbo->unbind();
-    }
+//    if(m_fbo && m_tex ) {
+//        m_fbo->setTexture(m_tex);
+//        m_fbo->bind();
+//        m_fbo->clear();
+////        for(int i=0;i<m_MtlArray.size();i++){
+////            SVMtlCorePtr t_mtl = m_MtlArray.get(i);
+////            SVRenderMeshPtr t_mesh = m_MeshArray.get(i);
+////            if(t_mtl && t_mesh) {
+////                if (t_mtl->submitMtl()) {
+////                    t_mesh->render(m_pRenderer);
+////                    t_mtl->recoverMtl();
+////                }
+////            }
+////        }
+//        m_fbo->unbind();
+//    }
 }
 
 void SVRenderCmdPassCollection::setFbo(SVRenderTexturePtr _fbo){
@@ -237,9 +233,9 @@ SVRenderCmdFboBind::~SVRenderCmdFboBind(){
 }
 
 void SVRenderCmdFboBind::render(SVRendererPtr _renderer) {
-    if (m_fbo) {
-        m_fbo->bind();
-    }
+//    if (m_fbo) {
+//        m_fbo->bind();
+//    }
 }
 
 //不激活FBO(fbo static)

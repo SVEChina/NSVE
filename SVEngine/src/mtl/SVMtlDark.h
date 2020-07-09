@@ -16,7 +16,7 @@ namespace sv {
         
         class SVMtlDark : public SVMtlCore {
         public:
-            SVMtlDark(SVInst *_app);
+            SVMtlDark(SVInstPtr _app);
             
             SVMtlDark(SVMtlDark *_mtl);
             

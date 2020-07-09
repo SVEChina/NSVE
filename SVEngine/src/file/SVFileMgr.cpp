@@ -11,7 +11,7 @@
 
 using namespace sv;
 
-SVFileMgr::SVFileMgr(SVInst *_app)
+SVFileMgr::SVFileMgr(SVInstPtr _app)
 :SVSysBase(_app) {
     m_fileLock = MakeSharedPtr<SVLock>();
 }
@@ -133,13 +133,11 @@ bool SVFileMgr::loadFileContent(SVDataChunk *_datachunk,cptr8 _fname) {
         if (fp) {
             fseek(fp, 0, SEEK_END);
             s64 t_file_len = ftell(fp);
-            fseek(fp, 0, SEEK_SET);
-            
+            rewind(fp);
             void* t_buf = malloc((s32)t_file_len);
             fread(t_buf, (s32)t_file_len, 1, fp);
             _datachunk->push(t_buf, (s32)t_file_len);
             free(t_buf);
-            
             fclose(fp);
             return true;
         }
@@ -155,15 +153,13 @@ bool SVFileMgr::loadFileContentStr(SVDataChunk *_datachunk,cptr8 _fname) {
         SV_LOG_ERROR("SVFileMgr::getFileFullName %s\n", t_fullname.c_str());
         FILE *fp = fopen(t_fullname.c_str(), "r");
         fseek(fp, 0, SEEK_END);
-        s32 t_file_len = ftell(fp);
-        fseek(fp, 0, SEEK_SET);
-        //
-        char* t_buf = (char*)(malloc(t_file_len+1));
-        fread(t_buf, (s32)t_file_len, 1, fp);
+        s64 t_file_len = ftell(fp);
+        rewind(fp);
+        c8* t_buf = (c8*)(malloc(t_file_len+1));
+        fread(t_buf, t_file_len, 1, fp);
         t_buf[t_file_len] = '\0';
-        _datachunk->push(t_buf, t_file_len+1);
+        _datachunk->push(t_buf, s32(t_file_len+1));
         free(t_buf);
-        //
         fclose(fp);
         return true;
     }
@@ -188,7 +184,3 @@ SVString SVFileMgr::getFileFullName(cptr8 _fname) {
     SV_LOG_ERROR("find file %s\n", tFileName.c_str());
     return tFileName;
 }
-
-
-
-

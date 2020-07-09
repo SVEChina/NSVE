@@ -19,7 +19,7 @@
 
 using namespace sv;
 
-SVFaceBeautyBase::SVFaceBeautyBase(SVInst *_app)
+SVFaceBeautyBase::SVFaceBeautyBase(SVInstPtr _app)
         : SVFilterBase(_app) {
     m_pParam = MakeSharedPtr<SVGenFBParam>();
     m_pParam->reset();
@@ -93,7 +93,7 @@ void SVFaceBeautyBase::fromJSON(RAPIDJSON_NAMESPACE::Value &item) {
 
 }
 
-SVFairDataBlur::SVFairDataBlur(SVInst *_app)
+SVFairDataBlur::SVFairDataBlur(SVInstPtr _app)
         : SVFaceBeautyBase(_app) {
     m_type = SV_FUNC_BEAUTY;
     m_name = "SVFairDataBlur";
@@ -341,7 +341,7 @@ void SVFairDataBlur::fromJSON(RAPIDJSON_NAMESPACE::Value &item) {
 
 }
 
-SVFairLtraLow::SVFairLtraLow(SVInst *_app)
+SVFairLtraLow::SVFairLtraLow(SVInstPtr _app)
         : SVFilterBase(_app) {
     m_type = SV_FUNC_BEAUTY;
     m_name = "SVFairLtraLow";

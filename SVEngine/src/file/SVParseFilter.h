@@ -15,7 +15,7 @@ namespace sv {
         
         class SVParseFilter : public SVParseData {
         public:
-            static SVFilterBasePtr parseFilter(SVInst *app, RAPIDJSON_NAMESPACE::Value &item, s32 _resid, cptr8 _path);
+            static SVFilterBasePtr parseFilter(SVInstPtr app, RAPIDJSON_NAMESPACE::Value &item, s32 _resid, cptr8 _path);
         };
         
     

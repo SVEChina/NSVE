@@ -12,9 +12,9 @@
 
 namespace sv {
     
-        class SVModify : public SVGBase {
+        class SVModify : public SVGBaseEx {
         public:
-            SVModify(SVInst *_app);
+            SVModify(SVInstPtr _app);
             
             ~SVModify();
             

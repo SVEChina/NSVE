@@ -14,7 +14,7 @@ namespace sv {
 
     class SVFrameOutTex : public SVFrameOutNode {
     public:
-        SVFrameOutTex(SVInst *_app);
+        SVFrameOutTex(SVInstPtr _app);
 
         virtual ~SVFrameOutTex();
 

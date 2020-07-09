@@ -23,7 +23,7 @@
 
 using namespace sv;
 
-SVMark::SVMark(SVInst* _app)
+SVMark::SVMark(SVInstPtr _app)
 :SVModuleBase(_app){
     m_bmFontNode = nullptr;
     m_actAlphaUnit= nullptr;

@@ -11,8 +11,8 @@
 
 using namespace sv;
 
-SVOpBase::SVOpBase(SVInst *_app)
-:SVGBase(_app)
+SVOpBase::SVOpBase(SVInstPtr _app)
+:SVGBaseEx(_app)
 ,m_pCB(nullptr){
 }
 

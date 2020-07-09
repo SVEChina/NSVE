@@ -17,7 +17,7 @@ namespace sv {
     
     class SVDetectMgr : public SVSysBase {
     public:
-        SVDetectMgr(SVInst *_app);
+        SVDetectMgr(SVInstPtr _app);
         
         ~SVDetectMgr();
         

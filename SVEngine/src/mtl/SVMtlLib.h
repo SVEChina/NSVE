@@ -19,11 +19,11 @@ namespace sv {
     public:
         static void clear();
         
-        static SVMtlCorePtr getSkinMtl(SVInst* _app);
+        static SVMtlCorePtr getSkinMtl(SVInstPtr _app);
         
-        static SVMtlCorePtr get3DNorMtl(SVInst* _app);
+        static SVMtlCorePtr get3DNorMtl(SVInstPtr _app);
         
-        static SVMtlCorePtr genMtl(SVInst* _app,cptr8 _name);
+        static SVMtlCorePtr genMtl(SVInstPtr _app,cptr8 _name);
         
     protected:
         static SVMtlCorePtr m_pSkinMtl;

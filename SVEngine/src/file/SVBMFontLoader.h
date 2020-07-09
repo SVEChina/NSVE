@@ -12,7 +12,7 @@
 namespace sv {
     class SVBMFontLoader : public SVFileLoader {
     public:
-        SVBMFontLoader(SVInst *_app);
+        SVBMFontLoader(SVInstPtr _app);
         
         ~SVBMFontLoader();
         

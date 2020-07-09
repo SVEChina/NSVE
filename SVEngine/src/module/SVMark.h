@@ -14,7 +14,7 @@
 namespace sv{
     class SVMark : public SVModuleBase {
     public:
-        SVMark(SVInst* _app);
+        SVMark(SVInstPtr _app);
         
         ~SVMark();
         

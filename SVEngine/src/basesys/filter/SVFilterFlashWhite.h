@@ -15,7 +15,7 @@ namespace sv {
         
         class SVFilterFlashWhite : public SVFilterBase {
         public:
-            SVFilterFlashWhite(SVInst *_app);
+            SVFilterFlashWhite(SVInstPtr _app);
             
             ~SVFilterFlashWhite();
             

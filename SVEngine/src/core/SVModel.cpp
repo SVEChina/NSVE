@@ -11,8 +11,8 @@
 
 using namespace sv;
 
-SVModel::SVModel(SVInst* _app)
-:SVGBase(_app){
+SVModel::SVModel(SVInstPtr _app)
+:SVGBaseEx(_app){
     m_meshPool.clear();
 }
 

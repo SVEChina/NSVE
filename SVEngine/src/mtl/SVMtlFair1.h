@@ -15,7 +15,7 @@ namespace sv {
         //
         class SVMtlFilterBrilaterl : public SVMtlCore {
         public:
-            SVMtlFilterBrilaterl(SVInst *_app);
+            SVMtlFilterBrilaterl(SVInstPtr _app);
             
             SVMtlFilterBrilaterl(SVMtlFilterBrilaterl *_mtl);
             
@@ -40,7 +40,7 @@ namespace sv {
         //
         class SVMtlFilterBrilaterl2 : public SVMtlCore {
         public:
-            SVMtlFilterBrilaterl2(SVInst *_app);
+            SVMtlFilterBrilaterl2(SVInstPtr _app);
             
             SVMtlFilterBrilaterl2(SVMtlFilterBrilaterl2 *_mtl);
             
@@ -65,7 +65,7 @@ namespace sv {
         //
         class SVMtlGaussian : public SVMtlCore {
         public:
-            SVMtlGaussian(SVInst *_app);
+            SVMtlGaussian(SVInstPtr _app);
             
             SVMtlGaussian(SVMtlGaussian *_mtl);
             
@@ -85,7 +85,7 @@ namespace sv {
 
         class SVMtlBlur : public SVMtlCore {
         public:
-            SVMtlBlur(SVInst *_app);
+            SVMtlBlur(SVInstPtr _app);
             
             SVMtlBlur(SVMtlBlur *_mtl);
 
@@ -105,7 +105,7 @@ namespace sv {
         
         class SVMtlBlurFair : public SVMtlCore {
         public:
-            SVMtlBlurFair(SVInst *_app);
+            SVMtlBlurFair(SVInstPtr _app);
             
             SVMtlBlurFair(SVMtlBlurFair *_mtl);
             
@@ -123,7 +123,7 @@ namespace sv {
         
         class SVMtlFairLtraLow : public SVMtlCore {
         public:
-            SVMtlFairLtraLow(SVInst *_app);
+            SVMtlFairLtraLow(SVInstPtr _app);
             
             SVMtlFairLtraLow(SVMtlFairLtraLow *_mtl);
             
@@ -141,7 +141,7 @@ namespace sv {
         
         class SVMtlBlurFairGus : public SVMtlCore {
         public:
-            SVMtlBlurFairGus(SVInst *_app);
+            SVMtlBlurFairGus(SVInstPtr _app);
             
             SVMtlBlurFairGus(SVMtlBlurFairGus *_mtl);
             

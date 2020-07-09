@@ -15,7 +15,7 @@ namespace sv {
     
         class SVParseLUTFilter : public SVParseData {
         public:
-            static SVFilterBasePtr parseLUT(SVInst *_app,cptr8 _path, s32 resid);
+            static SVFilterBasePtr parseLUT(SVInstPtr _app,cptr8 _path, s32 resid);
         };
 
 }//!namespace sv

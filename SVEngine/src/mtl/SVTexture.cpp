@@ -20,7 +20,7 @@
 
 using namespace sv;
 
-SVTexture::SVTexture(SVInst*_app)
+SVTexture::SVTexture(SVInstPtr _app)
 : SVRObjBase(_app) {
     m_uid = mApp->m_IDPool.applyUID();
     m_name = "";
@@ -52,18 +52,18 @@ void SVTexture::create(SVRendererPtr _renderer){
         SVRendererGLPtr t_renderGLPtr = std::dynamic_pointer_cast<SVRendererGL>(t_renderBasePtr);
         if (t_renderGLPtr) {
             //渲染器类型E_RENDERER_GLES,
-            m_objTexPtr = MakeSharedPtr<SVRResGLTex>(mApp);
+            m_objTexPtr = MakeSharedPtr<SVRGLTex>(mApp);
         }
         SVRendererVKPtr t_rendeVKPtr = std::dynamic_pointer_cast<SVRendererVK>(t_renderBasePtr);
         if (t_rendeVKPtr) {
             //渲染器类型E_RENDERER_VUNKAN,
-            //m_objTexPtr = MakeSharedPtr<SVRResGLTex>(mApp);
+            //m_objTexPtr = MakeSharedPtr<SVRGLTex>(mApp);
         }
 #if defined(SV_IOS) || defined(SV_OSX)
 //        SVRendererMetalPtr t_rendeMetalPtr = std::dynamic_pointer_cast<SVRendererMetal>(t_renderBasePtr);
 //        if (t_rendeMetalPtr) {
 //            //渲染器类型E_RENDERER_METAL,
-//            m_objTexPtr = MakeSharedPtr<SVRResMetalTex>(mApp);
+//            m_objTexPtr = MakeSharedPtr<SVRMetalTex>(mApp);
 //        }
 #endif
         if (m_objTexPtr) {
@@ -182,7 +182,7 @@ SVResTexPtr SVTexture::getResTex(){
     return m_objTexPtr;
 }
 //
-SVTextureInputTexID::SVTextureInputTexID(SVInst *_app, s32 _texID):SVTexture(_app){
+SVTextureInputTexID::SVTextureInputTexID(SVInstPtr _app, s32 _texID):SVTexture(_app){
     m_uid = mApp->m_IDPool.applyUID();
     m_name = "";
     m_bData = false;
@@ -215,7 +215,7 @@ void SVTextureInputTexID::create(SVRendererPtr _renderer){
     SVRendererGLPtr t_renderGLPtr = std::dynamic_pointer_cast<SVRendererGL>(t_renderBasePtr);
     if (t_renderGLPtr) {
         //渲染器类型E_RENDERER_GLES,
-        m_objTexPtr = MakeSharedPtr<SVRResGLTexWithTexID>(mApp, m_texID);
+        m_objTexPtr = MakeSharedPtr<SVRGLTexWithTexID>(mApp, m_texID);
         
     }
     SVRendererVKPtr t_rendeVKPtr = std::dynamic_pointer_cast<SVRendererVK>(t_renderBasePtr);
@@ -229,7 +229,7 @@ void SVTextureInputTexID::create(SVRendererPtr _renderer){
 //
 //    }
     if (m_objTexPtr) {
-        SVRResGLTexWithTexIDPtr t_tmp = std::dynamic_pointer_cast<SVRResGLTexWithTexID>(m_objTexPtr);
+        SVRGLTexWithTexIDPtr t_tmp = std::dynamic_pointer_cast<SVRGLTexWithTexID>(m_objTexPtr);
         t_tmp->setname(m_name);
         t_tmp->settype(m_type);
         t_tmp->setwidth(m_width);
@@ -242,7 +242,7 @@ void SVTextureInputTexID::create(SVRendererPtr _renderer){
 
 void SVTextureInputTexID::setTexID(u32 _texID){
     m_texID = _texID;
-    SVRResGLTexWithTexIDPtr resTexWithID = DYN_TO_SHAREPTR(SVRResGLTexWithTexID, m_objTexPtr);
+    SVRGLTexWithTexIDPtr resTexWithID = DYN_TO_SHAREPTR(SVRGLTexWithTexID, m_objTexPtr);
     if (resTexWithID) {
         resTexWithID->setTexID(m_texID);
     }

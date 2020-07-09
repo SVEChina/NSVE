@@ -16,7 +16,7 @@
 
 using namespace sv;
 
-SVSkyDomeNode::SVSkyDomeNode(SVInst* _app)
+SVSkyDomeNode::SVSkyDomeNode(SVInstPtr _app)
 :SVNode(_app)
 ,mDomeTex(nullptr){
     ntype = "SVSkyDomeNode";

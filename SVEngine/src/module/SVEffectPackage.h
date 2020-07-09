@@ -13,9 +13,9 @@
 #include "../act/SVActDeclare.h"
 namespace sv{
     
-    class SVEffectUnit : public SVGBase{
+    class SVEffectUnit : public SVGBaseEx{
     public:
-        SVEffectUnit(SVInst* _app);
+        SVEffectUnit(SVInstPtr _app);
         
         ~SVEffectUnit();
         
@@ -43,7 +43,7 @@ namespace sv{
             EFFECT_ANI_RUN,
             EFFECT_ANI_END
         };
-        SVEffectPackage(SVInst* _app);
+        SVEffectPackage(SVInstPtr _app);
         
         ~SVEffectPackage();
         

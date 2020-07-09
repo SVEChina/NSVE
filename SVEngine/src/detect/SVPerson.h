@@ -23,7 +23,7 @@ namespace sv {
     
     class SVPerson : public SVListenBase {
     public:
-        SVPerson(SVInst* _app);
+        SVPerson(SVInstPtr _app);
         
         ~SVPerson();
         

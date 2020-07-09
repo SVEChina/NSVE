@@ -17,7 +17,7 @@
 
 using namespace sv;
 
-SVFilterDark::SVFilterDark(SVInst *_app)
+SVFilterDark::SVFilterDark(SVInstPtr _app)
 :SVFilterBase(_app){
     m_type = SV_FUNC_DARK;
     m_name = "SVFilterDark";

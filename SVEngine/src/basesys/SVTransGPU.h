@@ -16,7 +16,7 @@ namespace sv {
 
     class SVTransGPU : public SVTrans {
     public:
-        SVTransGPU(SVInst *_app,
+        SVTransGPU(SVInstPtr _app,
                    SVTexturePtr _t0,
                    SVTexturePtr _t1,
                    SVTexturePtr _t2,

@@ -21,7 +21,7 @@
 
 using namespace sv;
 
-SVDeformImageMovePtr SVParseDeform::parseDeform(SVInst *app, RAPIDJSON_NAMESPACE::Value &item, s32 _resid, cptr8 _path){
+SVDeformImageMovePtr SVParseDeform::parseDeform(SVInstPtr app, RAPIDJSON_NAMESPACE::Value &item, s32 _resid, cptr8 _path){
     SVDeformImageMovePtr m_deform=MakeSharedPtr<SVDeformImageMove>(app);
     SVTexturePtr t_innerTex = app->getRenderer()->getSVTex(E_TEX_MAIN);
     m_deform->init(t_innerTex,t_innerTex);
@@ -33,7 +33,7 @@ SVDeformImageMovePtr SVParseDeform::parseDeform(SVInst *app, RAPIDJSON_NAMESPACE
     return m_deform;
 }
 
-void SVParseDeform::parse(SVInst *app,cptr8 path, s32 resid,SVDeformImageMovePtr _deform) {
+void SVParseDeform::parse(SVInstPtr app,cptr8 path, s32 resid,SVDeformImageMovePtr _deform) {
     RAPIDJSON_NAMESPACE::Document t_doc;
     //解析效果包
     SVString t_path = SVString(path) + SVString("/");

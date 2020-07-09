@@ -8,8 +8,8 @@
 
 using namespace sv;
 
-SVPhysicsShape::SVPhysicsShape(SVInst* _app)
-:SVGBase(_app) {
+SVPhysicsShape::SVPhysicsShape(SVInstPtr _app)
+:SVGBaseEx(_app) {
     m_type = E_PHYSICS_SHAPE_BASE;
     m_size=FVec3(0.0,0.0,0.0);
     m_mass=0.0;

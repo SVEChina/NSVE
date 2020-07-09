@@ -15,7 +15,7 @@
 
 using namespace sv;
 
-SVMovie::SVMovie(SVInst* _app)
+SVMovie::SVMovie(SVInstPtr _app)
 :SVAniBase(_app)
 ,m_loop(false)
 ,m_accTime(0)

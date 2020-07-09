@@ -9,8 +9,8 @@
 
 using namespace sv;
 
-SVFont::SVFont(SVInst *_app)
-:SVGBase(_app) {
+SVFont::SVFont(SVInstPtr _app)
+:SVGBaseEx(_app) {
 
 }
 

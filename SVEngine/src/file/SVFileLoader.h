@@ -14,9 +14,9 @@
 
 namespace sv {
     
-    class SVFileLoader : public SVGBase {
+    class SVFileLoader : public SVGBaseEx {
     public:
-        SVFileLoader(SVInst *_app);
+        SVFileLoader(SVInstPtr _app);
         
         ~SVFileLoader();
         

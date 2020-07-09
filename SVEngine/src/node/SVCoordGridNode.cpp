@@ -18,7 +18,7 @@ using namespace sv;
 
 #define COORD_SIZE 64*100
 
-SVCoordGridNode::SVCoordGridNode(SVInst *_app)
+SVCoordGridNode::SVCoordGridNode(SVInstPtr _app)
 :SVNode(_app)
 ,m_unit(50.0f){
     m_rsType = RST_LASTFILTER;

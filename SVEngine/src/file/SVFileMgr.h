@@ -15,7 +15,7 @@ namespace sv {
     
     class SVFileMgr : public SVSysBase {
     public:
-        SVFileMgr(SVInst *_app);
+        SVFileMgr(SVInstPtr _app);
         
         ~SVFileMgr();
         

@@ -12,7 +12,7 @@
 using namespace sv;
 
 //
-SVMtlNocolor::SVMtlNocolor(SVInst *_app)
+SVMtlNocolor::SVMtlNocolor(SVInstPtr _app)
 :SVMtlCore(_app,"mvnocolor") {
     m_lerp = 0.0f;
     m_accTime = 0.0f;
@@ -46,7 +46,7 @@ void SVMtlNocolor::_submitMtl(SVRendererPtr _render) {
 }
 
 //
-SVMtlGeo3d::SVMtlGeo3d(SVInst *_app)
+SVMtlGeo3d::SVMtlGeo3d(SVInstPtr _app)
 :SVMtlCore(_app,"geo3d") {//geo3d
     m_color.setColorARGB(0xff00ffff);
 }
@@ -69,7 +69,7 @@ void SVMtlGeo3d::_submitMtl(SVRendererPtr _render) {
 }
 
 //坐标
-SVMtlCoord::SVMtlCoord(SVInst *_app)
+SVMtlCoord::SVMtlCoord(SVInstPtr _app)
 :SVMtlCore(_app,"normal3d1") {
 }
 
@@ -85,7 +85,7 @@ void SVMtlCoord::_submitMtl(SVRendererPtr _render) {
 }
 
 //网格
-SVMtlNetGrid::SVMtlNetGrid(SVInst *_app)
+SVMtlNetGrid::SVMtlNetGrid(SVInstPtr _app)
 :SVMtlCore(_app,"netgrid") {
     m_boder = 2.0f;
     m_gridsize = 10.0f;
@@ -158,7 +158,7 @@ void SVMtlNetGrid::setGridBoderColor(f32 _r,f32 _g,f32 _b,f32 _a) {
 }
 
 //
-SVMtlParticleAni::SVMtlParticleAni(SVInst *_app)
+SVMtlParticleAni::SVMtlParticleAni(SVInstPtr _app)
 :SVMtlCore(_app,"particle_ani_ambient") {
     m_ani_trans.set(1.0f,1.0f,1.0f,0.5f);
     m_diffuse_color = FVec4(1.0f,8.0f,1.0f,1.0f);

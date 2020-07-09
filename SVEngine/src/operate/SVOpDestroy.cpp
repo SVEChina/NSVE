@@ -16,7 +16,7 @@
 
 using namespace sv;
 
-SVOpDestroyEffect::SVOpDestroyEffect(SVInst *_app, cptr8 _name)
+SVOpDestroyEffect::SVOpDestroyEffect(SVInstPtr _app, cptr8 _name)
 :SVOpBase(_app) {
     m_name = _name;
 }
@@ -34,7 +34,7 @@ void SVOpDestroyEffect::_process(float dt) {
 }
 
 
-SVOpDestroyDivision::SVOpDestroyDivision(SVInst *_app)
+SVOpDestroyDivision::SVOpDestroyDivision(SVInstPtr _app)
 :SVOpBase(_app) {
     
 }
@@ -50,7 +50,7 @@ void SVOpDestroyDivision::_process(float dt) {
     
 }
 
-SVOpDestroyMark::SVOpDestroyMark(SVInst *_app)
+SVOpDestroyMark::SVOpDestroyMark(SVInstPtr _app)
 :SVOpBase(_app) {
     
 }
@@ -68,7 +68,7 @@ void SVOpDestroyMark::_process(float dt) {
 
 
 
-SVOpClosePen::SVOpClosePen(SVInst *_app)
+SVOpClosePen::SVOpClosePen(SVInstPtr _app)
 :SVOpBase(_app) {
     
 }
@@ -84,7 +84,7 @@ void SVOpClosePen::_process(float dt) {
     
 }
 
-SVOpDestroyGameZCMgr::SVOpDestroyGameZCMgr(SVInst *_app)
+SVOpDestroyGameZCMgr::SVOpDestroyGameZCMgr(SVInstPtr _app)
 :SVOpBase(_app) {
     
 }

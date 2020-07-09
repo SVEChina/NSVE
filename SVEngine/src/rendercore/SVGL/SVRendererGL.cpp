@@ -8,6 +8,7 @@
 #include "SVRendererGL.h"
 #include "SVRenderStateGL.h"
 #include "SVRResGL.h"
+#include "SVRTechGL.h"
 #include "../SVRenderMgr.h"
 #include "../SVRTarget.h"
 #include "../SVRenderTexture.h"
@@ -16,6 +17,7 @@
 #include "../../app/SVGlobalParam.h"
 #include "../../base/SVCompileConfig.h"
 #include "../../mtl/SVTexture.h"
+#include "../../mtl/SVMtlCore.h"
 
 using namespace sv;
 
@@ -77,12 +79,14 @@ void SVRendererGL::resize(s32 _w,s32 _h) {
 
 //处理技术
 void SVRendererGL::processTech(SVRTechPtr _tech) {
-    
+    if(!_tech)
+        return ;
 }
 
 //处理材质
 void SVRendererGL::processMtl(SVMtlCorePtr _mtl) {
-    
+    if(!_mtl)
+        return ;
 }
 
 //处理mesh

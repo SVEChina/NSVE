@@ -21,7 +21,7 @@
 using namespace sv;
 
 //
-SVNode::SVNode(SVInst *_app)
+SVNode::SVNode(SVInstPtr _app)
 :SVEventProc(_app) {
     ntype = "SVNode";
     uid = mApp->m_IDPool.applyUID();

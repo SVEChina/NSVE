@@ -16,14 +16,14 @@ namespace sv {
     //
     class SVOpLoadBase : public SVOpBase {
     public:
-        SVOpLoadBase(SVInst *_app);
+        SVOpLoadBase(SVInstPtr _app);
         ~SVOpLoadBase();
     };
     
     //回收节点
     class SVOpRecycleNode : public SVOpBase {
     public:
-        SVOpRecycleNode(SVInst *_app, SVNodePtr _node);
+        SVOpRecycleNode(SVInstPtr _app, SVNodePtr _node);
         
     protected:
         void _process(f32 dt);
@@ -34,7 +34,7 @@ namespace sv {
     //拾取包
     class SVOpPick : public SVOpBase {
     public:
-        SVOpPick(SVInst *_app, s32 _x,s32 _y);
+        SVOpPick(SVInstPtr _app, s32 _x,s32 _y);
         
         ~SVOpPick();
         

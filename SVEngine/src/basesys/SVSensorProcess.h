@@ -16,7 +16,7 @@ namespace sv {
     
     class SVSensorProcess : public SVProcess {
     public:
-        SVSensorProcess(SVInst* _app);
+        SVSensorProcess(SVInstPtr _app);
         
         ~SVSensorProcess();
         //

@@ -16,7 +16,7 @@ void SVMtlLib::clear() {
     m_pSkinMtl = nullptr;
 }
 
-SVMtlCorePtr SVMtlLib::getSkinMtl(SVInst* _app) {
+SVMtlCorePtr SVMtlLib::getSkinMtl(SVInstPtr _app) {
     if(!m_pSkinMtl) {
          m_pSkinMtl = MakeSharedPtr<SVMtlGLTF>(_app);
     }
@@ -42,7 +42,7 @@ SVMtlCorePtr SVMtlLib::getSkinMtl(SVInst* _app) {
     return m_pSkinMtl;
 }
 
-SVMtlCorePtr SVMtlLib::get3DNorMtl(SVInst* _app) {
+SVMtlCorePtr SVMtlLib::get3DNorMtl(SVInstPtr _app) {
     SVMtlCorePtr t_mtl = MakeSharedPtr<SVMtlGLTF>(_app);
     return t_mtl;
 }
@@ -52,12 +52,16 @@ SVString SVMtlLib::mapName(cptr8 _name) {
     return "";
 }
 
-SVMtlCorePtr SVMtlLib::genMtl(SVInst* _app,cptr8 _name) {
+SVMtlCorePtr SVMtlLib::genMtl(SVInstPtr _app,cptr8 _name) {
     SVString t_mtlname = _name;
     SVString t_shadername = mapName(_name);
     SVMtlCorePtr t_mtl = MakeSharedPtr<SVMtlCore>(_app,t_shadername.c_str());
     if(t_mtlname == "SVMtl2D") {
         t_mtl->setParam("u_alpha",0.0f);
     }
+    //根据shader不同，生成不同的tech;
+    
+    
+    //
     return t_mtl;
 }

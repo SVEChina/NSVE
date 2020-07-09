@@ -157,9 +157,10 @@ namespace sv {
         };
         
         //
-        class SVParticlesWorldBase : public SVGBase {
+        class SVParticlesWorldBase : public SVGBaseEx {
         public:
-            SVParticlesWorldBase(SVInst *_app) : SVGBase(_app) {
+            SVParticlesWorldBase(SVInstPtr _app)
+            :SVGBaseEx(_app) {
             }
 
             ~SVParticlesWorldBase() {
@@ -188,11 +189,11 @@ namespace sv {
         };
         
         //一堆粒子算法
-        class SVParticles :public SVGBase {
+        class SVParticles :public SVGBaseEx {
             friend struct ParticlesDistanceCompare;
             friend class SVParticlesNode;
         public:
-            SVParticles(SVInst *_app);
+            SVParticles(SVInstPtr _app);
             
             virtual ~SVParticles();
 

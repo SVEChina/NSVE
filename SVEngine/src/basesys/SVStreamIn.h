@@ -16,9 +16,9 @@
 namespace sv {
 
         //
-        class StreamInCore :public SVGBase {
+        class StreamInCore :public SVGBaseEx {
         public:
-            StreamInCore(SVInst* _app);
+            StreamInCore(SVInstPtr _app);
             
             virtual ~StreamInCore();
             
@@ -59,7 +59,7 @@ namespace sv {
         //
         class SVStreamIn : public SVProcess {
         public:
-            SVStreamIn(SVInst *_app);
+            SVStreamIn(SVInstPtr _app);
             
             ~SVStreamIn();
             

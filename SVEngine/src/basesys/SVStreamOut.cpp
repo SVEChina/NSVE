@@ -20,7 +20,7 @@
 
 using namespace sv;
 
-SVStreamOut::SVStreamOut(SVInst *_app)
+SVStreamOut::SVStreamOut(SVInstPtr _app)
 :SVProcess(_app){
     m_lock = MakeSharedPtr<SVLock>();
     m_missionlock = MakeSharedPtr<SVLock>();

@@ -13,7 +13,7 @@
 
 using namespace sv;
 
-SVMtlBillboard::SVMtlBillboard(SVInst *_app)
+SVMtlBillboard::SVMtlBillboard(SVInstPtr _app)
 :SVMtlCore(_app,"normal3d_billboard") {
     m_objPos.set(0, 0, 0);
     m_viewPos.set(0, 0, 0);

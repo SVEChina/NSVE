@@ -9,8 +9,8 @@
 
 using namespace sv;
 
-SVFileWriter::SVFileWriter(SVInst *_app)
-:SVGBase(_app)
+SVFileWriter::SVFileWriter(SVInstPtr _app)
+:SVGBaseEx(_app)
 ,m_fp(nullptr){
 }
 

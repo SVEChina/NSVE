@@ -13,7 +13,7 @@
 
 using namespace sv;
 
-SVMtlPenStrokeGlow::SVMtlPenStrokeGlow(SVInst *_app)
+SVMtlPenStrokeGlow::SVMtlPenStrokeGlow(SVInstPtr _app)
 :SVMtlBillboard(_app) {
     m_mtlname = "penstrokeglow";
     m_strokeColor.set(38, 165, 38, 100);

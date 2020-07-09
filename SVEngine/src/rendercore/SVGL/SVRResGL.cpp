@@ -22,7 +22,7 @@
 
 using namespace sv;
 
-SVRResGLTex::SVRResGLTex(SVInst* _app)
+SVRGLTex::SVRGLTex(SVInstPtr _app)
         :SVResTex(_app){
     m_bLoad = false;
     m_enableMipMap = false;
@@ -35,13 +35,13 @@ SVRResGLTex::SVRResGLTex(SVInst* _app)
     m_dataformate = GL_RGBA;
 }
 
-SVRResGLTex::~SVRResGLTex(){
-    SV_LOG_INFO("SVRResGLTex destroy %d ",m_uid);
+SVRGLTex::~SVRGLTex(){
+    SV_LOG_INFO("SVRGLTex destroy %d ",m_uid);
 }
 
-void SVRResGLTex:: create(SVRendererPtr _renderer) {
+void SVRGLTex:: create(SVRendererPtr _renderer) {
     SVRObjBase::create(_renderer);
-    SV_LOG_INFO("SVRResGLTex create %d ",m_uid);
+    SV_LOG_INFO("SVRGLTex create %d ",m_uid);
     if( m_id == 0 ){
         m_bLoad = true;
         glGenTextures(1, &m_id);
@@ -82,7 +82,7 @@ void SVRResGLTex:: create(SVRendererPtr _renderer) {
     }
 }
 
-void SVRResGLTex::destroy(SVRendererPtr _renderer) {
+void SVRGLTex::destroy(SVRendererPtr _renderer) {
     SVRObjBase::destroy(_renderer);
     if(m_id>0){
         glDeleteTextures(1, &m_id);
@@ -90,7 +90,7 @@ void SVRResGLTex::destroy(SVRendererPtr _renderer) {
     }
 }
 
-void SVRResGLTex::commit() {
+void SVRGLTex::commit() {
     m_texLock->lock();
     if (m_pData && m_bLoad) {
         //更新数据
@@ -109,14 +109,14 @@ void SVRResGLTex::commit() {
             glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, m_width, m_height, m_informate,GL_UNSIGNED_BYTE,m_pData->getData());
             m_pData->unlockData();
         }else{
-            SV_LOG_ERROR("SVRResGLTex: commit pixel data error");
+            SV_LOG_ERROR("SVRGLTex: commit pixel data error");
         }
         m_pData = nullptr;
     }
     m_texLock->unlock();
 }
 
-void SVRResGLTex::setTexData(void *_data, s32 _len){
+void SVRGLTex::setTexData(void *_data, s32 _len){
     m_texLock->lock();
     if( _data && _len>0 ) {
         SVDataSwapPtr t_pDataSwap = MakeSharedPtr<SVDataSwap>();
@@ -127,15 +127,15 @@ void SVRResGLTex::setTexData(void *_data, s32 _len){
 }
 
 //////
-SVRResGLTexWithTexID::SVRResGLTexWithTexID(SVInst* _app, s32 _id):SVRResGLTex(_app){
+SVRGLTexWithTexID::SVRGLTexWithTexID(SVInstPtr _app, s32 _id):SVRGLTex(_app){
     m_id = _id;
 }
 
-SVRResGLTexWithTexID::~SVRResGLTexWithTexID(){
+SVRGLTexWithTexID::~SVRGLTexWithTexID(){
     
 }
 
-void SVRResGLTexWithTexID:: create(SVRendererPtr _renderer) {
+void SVRGLTexWithTexID:: create(SVRendererPtr _renderer) {
     SVRObjBase::create(_renderer);
     m_bLoad = true;
     glBindTexture(GL_TEXTURE_2D, m_id);
@@ -145,14 +145,14 @@ void SVRResGLTexWithTexID:: create(SVRendererPtr _renderer) {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 }
 
-void SVRResGLTexWithTexID::destroy(SVRendererPtr _renderer) {
+void SVRGLTexWithTexID::destroy(SVRendererPtr _renderer) {
     SVRObjBase::destroy(_renderer);
     if(m_id>0){
         m_id = 0;
     }
 }
 
-void SVRResGLTexWithTexID::setTexID(u32 _texID){
+void SVRGLTexWithTexID::setTexID(u32 _texID){
     m_id = _texID;
     glBindTexture(GL_TEXTURE_2D, m_id);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -162,8 +162,8 @@ void SVRResGLTexWithTexID::setTexID(u32 _texID){
 }
 
 //////
-SVRResGLTexPlist::SVRResGLTexPlist(SVInst *mApp)
-        : SVRResGLTex(mApp) {
+SVRGLTexPlist::SVRGLTexPlist(SVInstPtr mApp)
+        : SVRGLTex(mApp) {
     m_type = 3;
     rot = false;    //是否旋转
     trim = false;   //是否旋转
@@ -172,11 +172,11 @@ SVRResGLTexPlist::SVRResGLTexPlist(SVInst *mApp)
     m_pTexset = nullptr;
 }
 
-SVRResGLTexPlist::~SVRResGLTexPlist() {
+SVRGLTexPlist::~SVRGLTexPlist() {
     unbindTexset();
 }
 
-void SVRResGLTexPlist::refreshParam(){
+void SVRGLTexPlist::refreshParam(){
     if(m_pTexset){
         m_id = m_pTexset->getTexID();  //同步纹理ID
         m_width = m_pTexset->getwidth();
@@ -184,64 +184,64 @@ void SVRResGLTexPlist::refreshParam(){
     }
 }
 
-void SVRResGLTexPlist::apply(){
+void SVRGLTexPlist::apply(){
     if(m_pTexset){
         //m_pTexset->apply();
         refreshParam();
     }
 }
 
-void SVRResGLTexPlist::apply(void *data){
+void SVRGLTexPlist::apply(void *data){
     if(m_pTexset){
         //m_pTexset->apply(data);
         refreshParam();
     }
 }
 
-void SVRResGLTexPlist::commit() {
+void SVRGLTexPlist::commit() {
     if(m_pTexset){
         m_pTexset->commit();
         refreshParam();
     }
 }
 
-bool SVRResGLTexPlist::getbLoad(){
+bool SVRGLTexPlist::getbLoad(){
     if(m_pTexset){
         return m_pTexset->getbLoad();
     }
-    return SVRResGLTex::getbLoad();
+    return SVRGLTex::getbLoad();
 }
 
-void SVRResGLTexPlist::bindTexset(SVRResGLTexSetPtr _texset){
+void SVRGLTexPlist::bindTexset(SVRGLTexSetPtr _texset){
     if(m_pTexset!=_texset){
         m_pTexset = _texset;
     }
 }
 
-void SVRResGLTexPlist::unbindTexset(){
+void SVRGLTexPlist::unbindTexset(){
     if(m_pTexset){
         m_pTexset = nullptr;
     }
 }
 
-SVRect *SVRResGLTexPlist::getSrcRect() {
+SVRect *SVRGLTexPlist::getSrcRect() {
     return &m_srcRect;
 }
 
-SVRect *SVRResGLTexPlist::getDstRect() {
+SVRect *SVRGLTexPlist::getDstRect() {
     return &m_dstRect;
 }
 
 //
-SVRResGLTexSet::SVRResGLTexSet(SVInst *mApp)
-        : SVRResGLTex(mApp) {
+SVRGLTexSet::SVRGLTexSet(SVInstPtr mApp)
+        : SVRGLTex(mApp) {
     m_type = 2;
 }
 
-SVRResGLTexSet::~SVRResGLTexSet() {
+SVRGLTexSet::~SVRGLTexSet() {
 }
 
-SVRResGLTexiOS::SVRResGLTexiOS(SVInst *_app): SVRResGLTex(_app)
+SVRGLTexiOS::SVRGLTexiOS(SVInstPtr _app): SVRGLTex(_app)
 {
 #ifdef SV_IOS
     m_pTexCacheRef = nullptr;
@@ -250,10 +250,10 @@ SVRResGLTexiOS::SVRResGLTexiOS(SVInst *_app): SVRResGLTex(_app)
 #endif
 }
 
-SVRResGLTexiOS::~SVRResGLTexiOS() {
+SVRGLTexiOS::~SVRGLTexiOS() {
 }
 
-void SVRResGLTexiOS::create(SVRendererPtr _renderer){
+void SVRGLTexiOS::create(SVRendererPtr _renderer){
     if(!_renderer)
         return ;
     SVRObjBase::create(_renderer);
@@ -317,7 +317,7 @@ void SVRResGLTexiOS::create(SVRendererPtr _renderer){
 #endif
 }
 
-void SVRResGLTexiOS::destroy(SVRendererPtr _renderer){
+void SVRGLTexiOS::destroy(SVRendererPtr _renderer){
 #ifdef SV_IOS
     if(m_pPixelBuf){
         CFRelease(m_pPixelBuf);
@@ -336,7 +336,7 @@ void SVRResGLTexiOS::destroy(SVRendererPtr _renderer){
     SVRObjBase::destroy(_renderer);
 }
 
-void SVRResGLTexiOS::pushData(u8* _srcPtr,s32 _w,s32 _h,s32 _pixelformate){
+void SVRGLTexiOS::pushData(u8* _srcPtr,s32 _w,s32 _h,s32 _pixelformate){
 #ifdef SV_IOS
     if( (!m_pPixelBuf) || (!m_pTexRef) || (!m_pTexCacheRef) || (_srcPtr == nullptr) )
         return;
@@ -362,7 +362,7 @@ void SVRResGLTexiOS::pushData(u8* _srcPtr,s32 _w,s32 _h,s32 _pixelformate){
 #endif
 }
 
-void SVRResGLTexiOS::fetchData(u8* _dstPtr,s32 _w,s32 _h) {
+void SVRGLTexiOS::fetchData(u8* _dstPtr,s32 _w,s32 _h) {
 #ifdef SV_IOS
     if( (!m_pPixelBuf) || (!m_pTexRef) || (!m_pTexCacheRef) || (_dstPtr == nullptr))
         return;
@@ -389,7 +389,7 @@ void SVRResGLTexiOS::fetchData(u8* _dstPtr,s32 _w,s32 _h) {
 }
 
 //FBO资源
-SVRResGLFBO::SVRResGLFBO(SVInst* _app)
+SVRResGLFBO::SVRResGLFBO(SVInstPtr _app)
 :SVResFBO(_app)
 ,m_fboID(0)
 ,m_depthID(0)
@@ -516,7 +516,7 @@ void SVRResGLFBO::unbind() {
 }
 
 //
-SVRResGLOutFBO::SVRResGLOutFBO(SVInst *_app,u32 _fboid)
+SVRResGLOutFBO::SVRResGLOutFBO(SVInstPtr _app,u32 _fboid)
 :SVRResGLFBO(_app){
     m_fboID = _fboid;
 }
@@ -535,7 +535,7 @@ void SVRResGLOutFBO::destroy(SVRendererPtr _renderer){
 
 //RenderTarget
 //
-SVResGLRenderTarget::SVResGLRenderTarget(SVInst *_app,s32 _w, s32 _h,bool _depth,bool _stencil)
+SVResGLRenderTarget::SVResGLRenderTarget(SVInstPtr _app,s32 _w, s32 _h,bool _depth,bool _stencil)
         :SVRResGLFBO(_app){
     m_width = _w;
     m_height = _h;
@@ -569,7 +569,7 @@ void SVResGLRenderTarget::destroy(SVRendererPtr _renderer) {
     SVRResGLFBO::destroy(_renderer);
 }
 //
-SVResGLRenderTargetOut::SVResGLRenderTargetOut(SVInst *_app,s32 _w, s32 _h,u32 _fboid,u32 _colorID)
+SVResGLRenderTargetOut::SVResGLRenderTargetOut(SVInstPtr _app,s32 _w, s32 _h,u32 _fboid,u32 _colorID)
         :SVResGLRenderTarget(_app,_w,_h,false,false){
     m_fboID = _fboid;
     m_colorID = _colorID;
@@ -591,7 +591,7 @@ void SVResGLRenderTargetOut::destroy(SVRendererPtr _renderer) {
 }
 //
 //RenderTexture
-SVResGLRenderTexture::SVResGLRenderTexture(SVInst *_app,SVRResGLTexPtr _tex, bool _depth,bool _stencil)
+SVResGLRenderTexture::SVResGLRenderTexture(SVInstPtr _app,SVRGLTexPtr _tex, bool _depth,bool _stencil)
 :SVRResGLFBO(_app){
     if(_tex){
         m_tex = _tex;
@@ -635,7 +635,7 @@ void SVResGLRenderTexture::destroy(SVRendererPtr _renderer) {
     SVRResGLFBO::destroy(_renderer);
 }
 
-void SVResGLRenderTexture::setTexture(SVRResGLTexPtr _tex) {
+void SVResGLRenderTexture::setTexture(SVRGLTexPtr _tex) {
     if(m_tex != _tex){
         m_tex = _tex;
         if(m_tex) {

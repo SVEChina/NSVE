@@ -13,7 +13,7 @@
 namespace sv {
     
    
-        class SVImage : public SVGBase {
+        class SVImage : public SVGBaseEx {
         public:
             struct Pixeli{
                 s32 r,g,b,a;
@@ -79,9 +79,9 @@ namespace sv {
                 SV_FORMAT_ZLC2,
             };
             
-            SVImage(SVInst* _app);
+            SVImage(SVInstPtr _app);
             
-            SVImage(SVInst* _app, cptr8 _filename);
+            SVImage(SVInstPtr _app, cptr8 _filename);
             
             virtual ~SVImage();
             

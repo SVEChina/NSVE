@@ -13,7 +13,7 @@
 
 using namespace sv;
 
-SVActionUnit::SVActionUnit(SVInst *_app)
+SVActionUnit::SVActionUnit(SVInstPtr _app)
 :SVAniBase(_app) {
     m_actPtr = nullptr;
     m_nodePtr = nullptr;
@@ -21,7 +21,7 @@ SVActionUnit::SVActionUnit(SVInst *_app)
     m_state = SV_ACTION_STATE_WAIT;
 }
 
-SVActionUnit::SVActionUnit(SVInst* _app, SVActBasePtr _action, SVNodePtr _node):SVAniBase(_app){
+SVActionUnit::SVActionUnit(SVInstPtr _app, SVActBasePtr _action, SVNodePtr _node):SVAniBase(_app){
     m_actPtr = _action;
     m_nodePtr = _node;
     m_isEnd = false;

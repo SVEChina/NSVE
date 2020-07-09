@@ -11,8 +11,8 @@
 
 using namespace sv;
 
-SVFilterBase::SVFilterBase(SVInst *_app)
-: SVGBase(_app){
+SVFilterBase::SVFilterBase(SVInstPtr _app)
+:SVGBaseEx(_app){
     m_pPassNode=nullptr;
     m_mtl=nullptr;
     m_name="SVFilterBase";

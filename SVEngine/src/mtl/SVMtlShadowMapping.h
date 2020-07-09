@@ -17,7 +17,7 @@ namespace sv {
         
         class SVMtlShadowMapping : public SVMtlCore  {
         public:
-            SVMtlShadowMapping(SVInst *_app);
+            SVMtlShadowMapping(SVInstPtr _app);
             
             SVMtlShadowMapping(SVMtlShadowMapping* _mtl);
             

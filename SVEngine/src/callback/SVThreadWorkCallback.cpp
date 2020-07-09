@@ -13,33 +13,33 @@
 using namespace sv;
 
 //空跑模式
-void process_wt_null(SVInst* _app,SVThread* _thread,SV_THREAD_STAGE _stage){
+void process_wt_null(SVInstPtr _app,SVThread* _thread,SV_THREAD_STAGE _stage){
 }
 
 //停止模式
-void process_wt_stop(SVInst* _app,SVThread* _thread,SV_THREAD_STAGE _stage){
+void process_wt_stop(SVInstPtr _app,SVThread* _thread,SV_THREAD_STAGE _stage){
 }
 
 //预览模式
-void process_wt_preview(SVInst* _app,SVThread* _thread,SV_THREAD_STAGE _stage){
+void process_wt_preview(SVInstPtr _app,SVThread* _thread,SV_THREAD_STAGE _stage){
 }
 
 //合成模式
-void process_wt_mix(SVInst* _app,SVThread* _thread,SV_THREAD_STAGE _stage){
+void process_wt_mix(SVInstPtr _app,SVThread* _thread,SV_THREAD_STAGE _stage){
 }
 
 //相机模式
-void process_wt_camera(SVInst* _app,SVThread* _thread,SV_THREAD_STAGE _stage){
+void process_wt_camera(SVInstPtr _app,SVThread* _thread,SV_THREAD_STAGE _stage){
 }
 
 //录制模式
-void process_wt_record(SVInst* _app,SVThread* _thread,SV_THREAD_STAGE _stage){
+void process_wt_record(SVInstPtr _app,SVThread* _thread,SV_THREAD_STAGE _stage){
 }
 
 //工作线程回调
-void workThreadCallback(SVInst* _app,SVThread* _thread,SV_THREAD_STAGE _stage){
+void workThreadCallback(SVInstPtr _app,SVThread* _thread,SV_THREAD_STAGE _stage){
 }
 
 //线程销毁回调
-void workThreadDestroyCallback(SVInst* _app,SVThread* _thread,SV_THREAD_STAGE _stage){
+void workThreadDestroyCallback(SVInstPtr _app,SVThread* _thread,SV_THREAD_STAGE _stage){
 }

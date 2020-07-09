@@ -18,9 +18,9 @@ namespace sv {
         
         class SVSpriteNode : public SVNode {
         public:
-            SVSpriteNode(SVInst *_app);
+            SVSpriteNode(SVInstPtr _app);
             
-            SVSpriteNode(SVInst *_app,f32 _w,f32 _h);
+            SVSpriteNode(SVInstPtr _app,f32 _w,f32 _h);
             
             ~SVSpriteNode();
             

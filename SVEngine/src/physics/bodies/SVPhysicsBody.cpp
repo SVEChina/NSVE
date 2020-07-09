@@ -8,7 +8,7 @@
 
 using namespace sv;
 
-SVPhysicsBody::SVPhysicsBody(SVInst* _app):SVGBase(_app) {
+SVPhysicsBody::SVPhysicsBody(SVInstPtr _app):SVGBaseEx(_app) {
     m_type = E_PHYSICS_BODY_BASE;
     m_pNode = nullptr;
 }

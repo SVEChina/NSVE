@@ -19,7 +19,7 @@ namespace sv {
         
         class SVPhysicsSoftRigidWorld : public SVPhysicsWorldBase {
         public:
-            SVPhysicsSoftRigidWorld(SVInst* _app);
+            SVPhysicsSoftRigidWorld(SVInstPtr _app);
             
             ~SVPhysicsSoftRigidWorld();
             

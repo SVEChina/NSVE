@@ -10,7 +10,7 @@
 
 using namespace sv;
 
-SVPhysicsBodySoft::SVPhysicsBodySoft(SVInst* _app):SVPhysicsBody(_app) {
+SVPhysicsBodySoft::SVPhysicsBodySoft(SVInstPtr _app):SVPhysicsBody(_app) {
     m_type = E_PHYSICS_BODY_SOFT;
     m_softBody = nullptr;
 }

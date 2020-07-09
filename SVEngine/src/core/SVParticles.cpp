@@ -8,7 +8,8 @@ using namespace sv;
 
 #define PARTICLES_IFPS		(1.0f / 30.0f)
 
-SVParticles::SVParticles(SVInst *_app) : SVGBase(_app) {
+SVParticles::SVParticles(SVInstPtr _app)
+:SVGBaseEx(_app) {
 	m_pWorld = nullptr;
 	frame = 0;
 	type = TYPE_BILLBOARD;

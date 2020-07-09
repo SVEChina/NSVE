@@ -12,7 +12,7 @@
 
 using namespace sv;
 
-SVMtlShinning::SVMtlShinning(SVInst *_app)
+SVMtlShinning::SVMtlShinning(SVInstPtr _app)
 :SVMtlADFilterBase(_app,"filtershinning") {
     m_lerp = 0.0f;
     _resetTime();

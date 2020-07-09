@@ -18,9 +18,9 @@ namespace sv {
     
         
         //SVDragma 节点和时间轴的关系
-        class SVDragma : public SVGBase {
+        class SVDragma : public SVGBaseEx {
         public:
-            SVDragma(SVInst* _app);
+            SVDragma(SVInstPtr _app);
             
             ~SVDragma();
 

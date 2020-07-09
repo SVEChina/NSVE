@@ -15,7 +15,7 @@ namespace sv {
     
         class SVResFBO: public SVRObjBase{
         public:
-            SVResFBO(SVInst* _app);
+            SVResFBO(SVInstPtr _app);
             
             virtual ~SVResFBO();
             

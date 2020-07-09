@@ -14,9 +14,9 @@
 
 namespace sv {
     
-    class SVFileWriter: public SVGBase {
+    class SVFileWriter: public SVGBaseEx {
     public:
-        SVFileWriter(SVInst* _app);
+        SVFileWriter(SVInstPtr _app);
         
         ~SVFileWriter();
         

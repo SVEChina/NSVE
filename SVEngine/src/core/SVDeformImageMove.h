@@ -16,8 +16,6 @@
 
 namespace sv {
     
-    
-        
         class SVParamDeform{
         public:
             SVParamDeform();
@@ -41,9 +39,9 @@ namespace sv {
         };
         
         //deform imagemove 算法
-        class SVDeformImageMove : public SVGBase {
+        class SVDeformImageMove : public SVGBaseEx {
         public:
-            SVDeformImageMove(SVInst *_app);
+            SVDeformImageMove(SVInstPtr _app);
             
             ~SVDeformImageMove();
             

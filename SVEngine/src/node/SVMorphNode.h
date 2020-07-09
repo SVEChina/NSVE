@@ -18,7 +18,7 @@ namespace sv {
     
     class SVMorphNode : public SVNode {
     public:
-        SVMorphNode(SVInst *_app);
+        SVMorphNode(SVInstPtr _app);
         
         ~SVMorphNode();
     };

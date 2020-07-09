@@ -19,7 +19,7 @@ namespace sv {
         
         class SVActMtl : public SVActTime {
         public:
-            SVActMtl(SVInst *_app);
+            SVActMtl(SVInstPtr _app);
             
             ~SVActMtl();
             

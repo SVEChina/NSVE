@@ -17,7 +17,7 @@
 
 using namespace sv;
 
-SVPatchNode::SVPatchNode(SVInst *_app)
+SVPatchNode::SVPatchNode(SVInstPtr _app)
 : SVNode(_app) {
     ntype = "SVPatchNode";
     m_pRenderObj = MakeSharedPtr<SVRenderObject>();

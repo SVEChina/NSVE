@@ -17,7 +17,7 @@ namespace sv {
         
         class SVSharpFilter : public SVFilterBase {
         public:
-            SVSharpFilter(SVInst *_app);
+            SVSharpFilter(SVInstPtr _app);
             
             ~SVSharpFilter();
             

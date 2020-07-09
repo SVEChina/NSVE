@@ -18,7 +18,7 @@ namespace sv{
     
     class SVDivisonFilter : public SVModuleBase {
     public:
-        SVDivisonFilter(SVInst* _app);
+        SVDivisonFilter(SVInstPtr _app);
         
         virtual ~SVDivisonFilter();
         

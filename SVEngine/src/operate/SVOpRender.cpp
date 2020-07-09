@@ -47,7 +47,7 @@ using namespace sv;
 
 
 //重置渲染器内部大小
-SVOpResizeRenderder::SVOpResizeRenderder(SVInst *_app,s32 _w,s32 _h)
+SVOpResizeRenderder::SVOpResizeRenderder(SVInstPtr _app,s32 _w,s32 _h)
 : SVOpBase(_app)
 , m_width(_w)
 , m_height(_h){
@@ -70,7 +70,7 @@ void SVOpResizeRenderder::_process(float dt) {
 }
 
 //设置渲染目标
-SVOpSetRenderTarget::SVOpSetRenderTarget(SVInst *_app)
+SVOpSetRenderTarget::SVOpSetRenderTarget(SVInstPtr _app)
         : SVOpBase(_app) {
 }
 
@@ -86,7 +86,7 @@ void SVOpSetRenderTarget::_process(f32 dt) {
 }
 
 //
-SVOpSetRenderTextureTarget::SVOpSetRenderTextureTarget(SVInst *_app)
+SVOpSetRenderTextureTarget::SVOpSetRenderTextureTarget(SVInstPtr _app)
         : SVOpBase(_app) {
 }
 
@@ -100,7 +100,7 @@ void SVOpSetRenderTextureTarget::setTargetParam(s32 _w, s32 _h, u32 _textureId, 
 void SVOpSetRenderTextureTarget::_process(f32 dt) {
 }
 
-SVOpSetRenderMirror::SVOpSetRenderMirror(SVInst *_app)
+SVOpSetRenderMirror::SVOpSetRenderMirror(SVInstPtr _app)
 : SVOpBase(_app){
     
 }

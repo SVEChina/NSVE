@@ -9,7 +9,7 @@
 
 using namespace sv;
 
-SVOpCallback::SVOpCallback(SVInst *_app)
+SVOpCallback::SVOpCallback(SVInstPtr _app)
 :SVCallbackBase(_app) {
 }
 

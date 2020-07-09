@@ -43,8 +43,8 @@ SVParamDeform::SVParamDeform(){
 SVParamDeform::~SVParamDeform(){
 }
 
-SVDeformImageMove::SVDeformImageMove(SVInst *_app)
-:SVGBase(_app){
+SVDeformImageMove::SVDeformImageMove(SVInstPtr _app)
+:SVGBaseEx(_app){
 //    m_pMtlBg  = MakeSharedPtr<SVMtlCore>(mApp,"screennor");
 //    m_pIUMP    = MakeSharedPtr<SVImageUsingMove>();
 //    m_deformScale = MakeSharedPtr<SVDeformScale>();

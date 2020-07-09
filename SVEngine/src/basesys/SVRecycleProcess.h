@@ -16,7 +16,7 @@ namespace sv {
     
     class SVRecycleProcess : public SVProcess {
     public:
-        SVRecycleProcess(SVInst* _app);
+        SVRecycleProcess(SVInstPtr _app);
         
         ~SVRecycleProcess();
         

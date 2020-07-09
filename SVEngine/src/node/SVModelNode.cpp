@@ -26,7 +26,7 @@
 using namespace sv;
 
 //
-SVModelNode::SVModelNode(SVInst *_app)
+SVModelNode::SVModelNode(SVInstPtr _app)
 :SVNode(_app) {
     ntype = "SVModelNode";
     m_enableDebugNormal = false;

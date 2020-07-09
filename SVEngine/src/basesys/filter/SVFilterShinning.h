@@ -15,7 +15,7 @@ namespace sv {
         
         class SVFilterShinning : public SVFilterBase {
         public:
-            SVFilterShinning(SVInst *_app);
+            SVFilterShinning(SVInstPtr _app);
             
             ~SVFilterShinning();
             

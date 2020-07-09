@@ -16,13 +16,13 @@ namespace sv {
         
         class SVParsePen : public SVParseData {
         public:
-            SVParsePen(SVInst *_app);
+            SVParsePen(SVInstPtr _app);
             
             virtual ~SVParsePen();
             
             SVModuleBasePtr parse(cptr8 _path, s32 _resid);
         protected:
-            void _parsePen(SVInst *_app, RAPIDJSON_NAMESPACE::Value &_item, s32 _resid,cptr8 _path);
+            void _parsePen(SVInstPtr _app, RAPIDJSON_NAMESPACE::Value &_item, s32 _resid,cptr8 _path);
         };
     
 }//!namespace sv

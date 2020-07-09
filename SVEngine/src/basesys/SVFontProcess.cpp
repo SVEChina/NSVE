@@ -23,7 +23,7 @@
 
 using namespace sv;
 
-SVFontProcess::SVFontProcess(SVInst *_app)
+SVFontProcess::SVFontProcess(SVInstPtr _app)
 :SVProcess(_app) {
     m_lock = MakeSharedPtr<SVLock>();
 #ifdef CONFIG_IS_LOAD_FREETYPE

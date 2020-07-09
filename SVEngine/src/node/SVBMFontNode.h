@@ -33,7 +33,7 @@ namespace sv {
                 s32 charID;
             };
         public:
-            SVBMFontNode(SVInst *_app);
+            SVBMFontNode(SVInstPtr _app);
             
             ~SVBMFontNode();
             

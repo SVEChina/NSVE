@@ -15,7 +15,7 @@ namespace sv {
     
     class SVPngWriter: public SVFileWriter {
     public:
-        SVPngWriter(SVInst* _app);
+        SVPngWriter(SVInstPtr _app);
         bool write(cptr8 fname,s32 width,s32 height,void* data);
     };
 

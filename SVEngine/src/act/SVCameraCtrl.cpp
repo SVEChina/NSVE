@@ -111,8 +111,8 @@ void SVARProj::setProjMat(FMat4& _mat) {
 }
 
 
-SVCameraCtrl::SVCameraCtrl(SVInst* _app)
-:SVGBase(_app)
+SVCameraCtrl::SVCameraCtrl(SVInstPtr _app)
+:SVGBaseEx(_app)
 ,m_linkCam(nullptr){
     m_pos.set(0.0f,0.0f,0.0f);
 }
@@ -153,7 +153,7 @@ void SVCameraCtrl::unbind() {
 基础Proj控制
  */
 
-SVCamCtrlProj::SVCamCtrlProj(SVInst* _app)
+SVCamCtrlProj::SVCamCtrlProj(SVInstPtr _app)
 :SVCameraCtrl(_app) {
 }
 
@@ -222,7 +222,7 @@ bool SVCamCtrlProj::run(SVCameraNodePtr _nodePtr, f32 dt) {
  基础正交控制
  */
 
-SVCamCtrlOrtho::SVCamCtrlOrtho(SVInst* _app)
+SVCamCtrlOrtho::SVCamCtrlOrtho(SVInstPtr _app)
 :SVCameraCtrl(_app) {
     m_width = 720.0f;
     m_height = 1280.0f;
@@ -262,7 +262,7 @@ bool SVCamCtrlOrtho::run(SVCameraNodePtr _nodePtr, f32 dt) {
 /*
 姿态相机控制
  */
-SVCamCtrlAttr::SVCamCtrlAttr(SVInst* _app)
+SVCamCtrlAttr::SVCamCtrlAttr(SVInstPtr _app)
 :SVCameraCtrl(_app) {
 }
 
@@ -277,7 +277,7 @@ bool SVCamCtrlAttr::run(SVCameraNodePtr _nodePtr, f32 dt) {
 相机控制
 */
 
-SVNodeCtrlCamera::SVNodeCtrlCamera(SVInst* _app)
+SVNodeCtrlCamera::SVNodeCtrlCamera(SVInstPtr _app)
 :SVCameraCtrl(_app) {
 }
 
@@ -312,7 +312,7 @@ bool SVNodeCtrlCamera::run(SVCameraNodePtr _nodePtr, f32 dt) {
 #define PIXEL_UNIT_H1 1.1547
 
 //纯2d平面控制
-SVCtrlCamera2D::SVCtrlCamera2D(SVInst* _app)
+SVCtrlCamera2D::SVCtrlCamera2D(SVInstPtr _app)
 :SVNodeCtrlCamera(_app){
     m_zoom_x = 5.0f;
     m_pixelUnit = 0.0f;
@@ -378,7 +378,7 @@ bool SVCtrlCamera2D::run(SVCameraNodePtr _nodePtr, f32 dt) {
 }
 
 //AR控制器
-SVCtrlCamereAR::SVCtrlCamereAR(SVInst* _app)
+SVCtrlCamereAR::SVCtrlCamereAR(SVInstPtr _app)
 :SVNodeCtrlCamera(_app){
 }
 
@@ -403,7 +403,7 @@ void SVCtrlCamereAR::setViewMat(FMat4& _mat) {
 
 //
 //Top2D-follow
-SVCtrlCamereFollow2DTop::SVCtrlCamereFollow2DTop(SVInst* _app)
+SVCtrlCamereFollow2DTop::SVCtrlCamereFollow2DTop(SVInstPtr _app)
 :SVNodeCtrlCamera(_app){
     m_hDis = 400.0f;
     m_follow_dis = 50.0f;

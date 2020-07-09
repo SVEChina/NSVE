@@ -47,13 +47,13 @@ void SVInst::init() {
     m_pGlobalMgr = MakeSharedPtr<SVGlobalMgr>( std::dynamic_pointer_cast<SVInst>(shareObject()) );
     m_pGlobalMgr->init();
     //
-    m_pGlobalMgr->m_pConfig = MakeSharedPtr<SVConfig>(this);
+    m_pGlobalMgr->m_pConfig = MakeSharedPtr<SVConfig>( std::dynamic_pointer_cast<SVInst>(shareObject())  );
     m_pGlobalMgr->m_pConfig->init();
     //默认渲染路径是普通
     m_pRPath = MakeSharedPtr<SVRPathNor>(std::dynamic_pointer_cast<SVInst>(shareObject()) );
     m_pRPath->init();
     //
-    m_pGlobalParam = MakeSharedPtr<SVGlobalParam>(this);
+    m_pGlobalParam = MakeSharedPtr<SVGlobalParam>( std::dynamic_pointer_cast<SVInst>(shareObject()) );
     m_svst = SV_ST_WAIT;
 }
 

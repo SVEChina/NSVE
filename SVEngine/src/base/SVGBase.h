@@ -16,16 +16,6 @@
 
 namespace sv {
     
-    class SVGBase: public SVObject {
-    public:
-        SVGBase(SVInst* _app);
-        
-        ~SVGBase();
-        
-    protected:
-        SVInst* mApp;
-    };
-
     class SVGBaseEx: public SVObject {
     public:
         SVGBaseEx(SVInstPtr _app);

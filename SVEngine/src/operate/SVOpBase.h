@@ -14,9 +14,9 @@
 
 namespace sv {
     
-    class SVOpBase : public SVGBase {
+    class SVOpBase : public SVGBaseEx {
     public:
-        SVOpBase(SVInst *_app);
+        SVOpBase(SVInstPtr _app);
         
         ~SVOpBase();
         

@@ -20,14 +20,14 @@ namespace sv {
         
         class SVMtlGLTF : public SVMtlCore {
         public:
-            SVMtlGLTF(SVInst *_app);
+            SVMtlGLTF(SVInstPtr _app);
             
             SVMtlGLTF(SVMtlGLTF *_mtl);
             
             ~SVMtlGLTF();
             
         protected:
-            SVMtlGLTF(SVInst *_app,cptr8 _name);
+            SVMtlGLTF(SVInstPtr _app,cptr8 _name);
         
         public:
             
@@ -58,7 +58,7 @@ namespace sv {
         
         class SVMtlGLTFSkin : public SVMtlGLTF {
         public:
-            SVMtlGLTFSkin(SVInst *_app);
+            SVMtlGLTFSkin(SVInstPtr _app);
             
             SVMtlGLTFSkin(SVMtlGLTFSkin *_mtl);
             

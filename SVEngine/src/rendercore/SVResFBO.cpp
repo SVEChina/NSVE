@@ -12,7 +12,7 @@
 
 using namespace sv;
 
-SVResFBO::SVResFBO(SVInst* _app)
+SVResFBO::SVResFBO(SVInstPtr _app)
 :SVRObjBase(_app){
     m_uid = mApp->m_IDPool.applyUID();
 }

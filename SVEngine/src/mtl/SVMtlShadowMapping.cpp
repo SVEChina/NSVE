@@ -13,7 +13,7 @@
 using namespace sv;
 
 //
-SVMtlShadowMapping::SVMtlShadowMapping(SVInst *_app)
+SVMtlShadowMapping::SVMtlShadowMapping(SVInstPtr _app)
 :SVMtlCore(_app,"depthPlan") {
  
 }

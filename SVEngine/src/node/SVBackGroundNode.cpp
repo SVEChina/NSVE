@@ -36,7 +36,7 @@
 
 using namespace sv;
 
-SVBackGroundNode::SVBackGroundNode(SVInst *_app)
+SVBackGroundNode::SVBackGroundNode(SVInstPtr _app)
 :SVNode(_app){
     ntype = "SVBackGroundNode";
     m_pTexName = "";
@@ -54,7 +54,7 @@ SVBackGroundNode::SVBackGroundNode(SVInst *_app)
     setInScreen(m_inScreen);
 }
 
-SVBackGroundNode::SVBackGroundNode(SVInst *_app,f32 _w,f32 _h)
+SVBackGroundNode::SVBackGroundNode(SVInstPtr _app,f32 _w,f32 _h)
 :SVNode(_app){
     ntype = "SVBackGroundNode";
     m_pTexName = "";

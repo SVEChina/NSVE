@@ -13,7 +13,7 @@
 
 using namespace sv;
 
-SVActFollow::SVActFollow(SVInst *_app):SVActBase(_app){
+SVActFollow::SVActFollow(SVInstPtr _app):SVActBase(_app){
     m_validDis = 100.0f;
     m_speed = 300.0f;
     m_targetNodePtr = nullptr;
@@ -75,7 +75,7 @@ bool SVActFollow::isEnd() {
 
 
 //
-SVActCircle::SVActCircle(SVInst *_app):SVActBase(_app){
+SVActCircle::SVActCircle(SVInstPtr _app):SVActBase(_app){
     m_radius = 10.0f;
     m_center.set(0.0f, 0.0f,0.0f);
     m_angle = 0.0f;
@@ -123,7 +123,7 @@ bool SVActCircle::isEnd() {
 
 
 //
-SVActFollowPerson::SVActFollowPerson(SVInst *_app, s32 _personID)
+SVActFollowPerson::SVActFollowPerson(SVInstPtr _app, s32 _personID)
 :SVActBase(_app){
     m_personID = _personID;
     m_bindIndex = 0;
@@ -190,7 +190,7 @@ void SVActFollowPerson::setRotation(f32 _rotX, f32 _rotY, f32 _rotZ){
 
 //
 //
-SVActFollowPerson3d::SVActFollowPerson3d(SVInst *_app, s32 _personID)
+SVActFollowPerson3d::SVActFollowPerson3d(SVInstPtr _app, s32 _personID)
 :SVActFollowPerson(_app,_personID){
     m_src_eyedis = 1.0f;
 }

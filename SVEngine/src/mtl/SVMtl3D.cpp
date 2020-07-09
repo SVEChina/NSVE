@@ -13,7 +13,7 @@
 
 using namespace sv;
 
-SVMtl3D::SVMtl3D(SVInst *_app, cptr8 _shader)
+SVMtl3D::SVMtl3D(SVInstPtr _app, cptr8 _shader)
 :SVMtlCore(_app, _shader) {
     m_LogicParamBlend.srcParam = MTL_BLEND_ONE;
     m_LogicParamBlend.dstParam = MTL_BLEND_ONE_MINUS_SRC_ALPHA;

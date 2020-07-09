@@ -15,7 +15,7 @@
 
 using namespace sv;
 
-SVFilterBasePtr SVParseLUTFilter::parseLUT(SVInst *_app,cptr8 _path, s32 resid){
+SVFilterBasePtr SVParseLUTFilter::parseLUT(SVInstPtr _app,cptr8 _path, s32 resid){
     RAPIDJSON_NAMESPACE::Document t_doc;
     //解析滤镜包
 

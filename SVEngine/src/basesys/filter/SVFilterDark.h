@@ -15,7 +15,7 @@ namespace sv {
         
         class SVFilterDark : public SVFilterBase {
         public:
-            SVFilterDark(SVInst *_app);
+            SVFilterDark(SVInstPtr _app);
             
             ~SVFilterDark();
             

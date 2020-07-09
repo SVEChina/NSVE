@@ -25,7 +25,7 @@
 using namespace sv;
 
 //
-SVBillboardNode::SVBillboardNode(SVInst *_app)
+SVBillboardNode::SVBillboardNode(SVInstPtr _app)
 :SVSpriteNode(_app) {
     ntype = "SVBillboardNode";
     m_inTexType = E_TEX_END;
@@ -45,7 +45,7 @@ SVBillboardNode::SVBillboardNode(SVInst *_app)
     m_pMtl->setBlendState(MTL_BLEND_ONE, MTL_BLEND_ONE_MINUS_SRC_ALPHA);
 }
 
-SVBillboardNode::SVBillboardNode(SVInst *_app,f32 _w,f32 _h)
+SVBillboardNode::SVBillboardNode(SVInstPtr _app,f32 _w,f32 _h)
 :SVSpriteNode(_app) {
     ntype = "SVBillboardNode";
     m_inTexType = E_TEX_END;

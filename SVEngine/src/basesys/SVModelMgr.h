@@ -14,7 +14,7 @@ namespace sv {
 
     class SVModelMgr : public SVSysBase{
     public:
-        SVModelMgr(SVInst* _app);
+        SVModelMgr(SVInstPtr _app);
         
         ~SVModelMgr();
         

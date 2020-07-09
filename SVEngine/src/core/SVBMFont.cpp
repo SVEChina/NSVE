@@ -15,7 +15,7 @@
 
 using namespace sv;
 
-SVBMFontPtr SVBMFont::creatFnt(cptr8 _filePath, SVInst *_app){
+SVBMFontPtr SVBMFont::creatFnt(cptr8 _filePath, SVInstPtr _app){
     SVBMFontPtr font = MakeSharedPtr<SVBMFont>(_app);
     SVBMFontLoader t_loder(_app);
     bool t_res = t_loder.loadData(_filePath, font);
@@ -25,7 +25,7 @@ SVBMFontPtr SVBMFont::creatFnt(cptr8 _filePath, SVInst *_app){
     return nullptr;
 }
 
-SVBMFont::SVBMFont(SVInst *_app)
+SVBMFont::SVBMFont(SVInstPtr _app)
 :SVFont(_app) {
     m_defChar.charID = 10000000;
     m_defChar.x = 0;

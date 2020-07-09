@@ -30,7 +30,7 @@ namespace sv{
                 SVString        slotName;
                 SVString        matadata;
             };
-            SVAniTexAttachment(SVInst* _app);
+            SVAniTexAttachment(SVInstPtr _app);
             
             ~SVAniTexAttachment();
             

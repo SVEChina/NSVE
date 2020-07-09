@@ -10,7 +10,7 @@
 
 using namespace sv;
 
-SVPngWriter::SVPngWriter(SVInst *_app)
+SVPngWriter::SVPngWriter(SVInstPtr _app)
 : SVFileWriter(_app) {
 
 }

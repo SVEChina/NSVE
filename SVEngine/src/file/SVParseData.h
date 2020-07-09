@@ -15,9 +15,9 @@ namespace sv {
     
     
         
-        class SVParseData : public SVGBase {
+        class SVParseData : public SVGBaseEx {
         public:
-            SVParseData(SVInst *_app);
+            SVParseData(SVInstPtr _app);
             
             ~SVParseData();
             

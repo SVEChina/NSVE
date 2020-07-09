@@ -15,7 +15,7 @@ namespace sv {
     
     class SVDeformNode : public SVNode {
         public :
-        SVDeformNode(SVInst *_app);
+        SVDeformNode(SVInstPtr _app);
         
         ~SVDeformNode();
         

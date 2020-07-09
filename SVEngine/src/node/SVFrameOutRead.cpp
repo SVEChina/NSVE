@@ -25,7 +25,7 @@
 
 using namespace sv;
 
-SVFrameOutRead::SVFrameOutRead(SVInst *_app)
+SVFrameOutRead::SVFrameOutRead(SVInstPtr _app)
 :SVFrameOutNode(_app){
     ntype = "SVFrameOutRead";
     m_outFormat = SV_OUT_STEAM_RGBA;

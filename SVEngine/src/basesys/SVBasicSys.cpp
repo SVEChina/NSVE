@@ -16,7 +16,7 @@
 
 using namespace sv;
 
-SVBasicSys::SVBasicSys(SVInst *_app)
+SVBasicSys::SVBasicSys(SVInstPtr _app)
 :SVSysBase(_app) {
     m_subsysType = 2;
     m_pRecycleModule = nullptr;

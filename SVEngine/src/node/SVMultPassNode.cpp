@@ -23,7 +23,7 @@
 using namespace sv;
 
 //
-SVMultPassNode::SVMultPassNode(SVInst *_app)
+SVMultPassNode::SVMultPassNode(SVInstPtr _app)
 :SVNode(_app) {
     ntype = "SVMultPassNode";
     m_rsType = RST_IMGFILTER;

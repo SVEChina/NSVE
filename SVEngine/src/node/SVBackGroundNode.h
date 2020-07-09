@@ -25,9 +25,9 @@ namespace sv {
         
         class SVBackGroundNode : public SVNode {
         public:
-            SVBackGroundNode(SVInst *_app);
+            SVBackGroundNode(SVInstPtr _app);
             
-            SVBackGroundNode(SVInst *_app,f32 _w,f32 _h);
+            SVBackGroundNode(SVInstPtr _app,f32 _w,f32 _h);
             
             virtual ~SVBackGroundNode();
             

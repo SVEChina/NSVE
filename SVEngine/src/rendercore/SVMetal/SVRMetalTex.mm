@@ -1,11 +1,11 @@
 //
-// SVRResMetalTex.cpp
+// SVRMetalTex.cpp
 // SVEngine
 // Copyright 2017-2020
 // yizhou Fu,long Yin,longfei Lin,ziyu Xu,xiaofan Li,daming Li
 //
 
-#include "SVResMetalTex.h"
+#include "SVRMetalTex.h"
 #include "SVRendererMetal.h"
 #include "../../app/SVInst.h"
 #include "../../mtl/SVMtlDef.h"
@@ -21,16 +21,16 @@
 using namespace sv;
 
 //tex资源
-SVRResMetalTex::SVRResMetalTex(SVInst* _app)
+SVRMetalTex::SVRMetalTex(SVInstPtr _app)
 :SVResTex(_app)
 ,m_srcTex(nullptr){
     
 }
 
-SVRResMetalTex::~SVRResMetalTex(){
+SVRMetalTex::~SVRMetalTex(){
 }
 
-void SVRResMetalTex:: create(SVRendererPtr _renderer) {
+void SVRMetalTex:: create(SVRendererPtr _renderer) {
     SVResTex::create(_renderer);
     SVRendererMetalPtr t_rendeMetalPtr = std::dynamic_pointer_cast<SVRendererMetal>(_renderer);
     if (t_rendeMetalPtr) {
@@ -65,7 +65,7 @@ void SVRResMetalTex:: create(SVRendererPtr _renderer) {
     ////        }
 }
 
-void SVRResMetalTex::destroy(SVRendererPtr _renderer) {
+void SVRMetalTex::destroy(SVRendererPtr _renderer) {
     SVResTex::destroy(_renderer);
     if(m_id>0){
         //        glDeleteTextures(1, &m_id);
@@ -73,7 +73,7 @@ void SVRResMetalTex::destroy(SVRendererPtr _renderer) {
     }
 }
 
-void SVRResMetalTex::commit() {
+void SVRMetalTex::commit() {
     m_texLock->lock();
     //    if (m_pData) {
     //        if(m_bLoad){
@@ -88,7 +88,7 @@ void SVRResMetalTex::commit() {
     m_texLock->unlock();
 }
 
-void SVRResMetalTex::setTexData(void *_data, s32 _len){
+void SVRMetalTex::setTexData(void *_data, s32 _len){
     m_texLock->lock();
     //    if( _data && _len>0 ) {
     //        SVDataSwapPtr t_pDataSwap = MakeSharedPtr<SVDataSwap>();
@@ -103,15 +103,15 @@ void SVRResMetalTex::setTexData(void *_data, s32 _len){
  metal texture
  */
 
-u32 SVRResMetalTex::getTexID(){
+u32 SVRMetalTex::getTexID(){
     return m_id;
 }
 
-u32 SVRResMetalTex::getuid(){
+u32 SVRMetalTex::getuid(){
     return m_uid;
 }
 
-bool SVRResMetalTex::getbLoad() {
+bool SVRMetalTex::getbLoad() {
     return m_bLoad;
 }
 
@@ -120,14 +120,14 @@ bool SVRResMetalTex::getbLoad() {
  metal shader
  */
 
-SVRResMetalShader::SVRResMetalShader(SVInst* _app)
-:SVResShader(_app){
+SVRMetalShader::SVRMetalShader(SVInstPtr _app)
+:SVRShader(_app){
 }
 
-SVRResMetalShader::~SVRResMetalShader() {
+SVRMetalShader::~SVRMetalShader() {
 }
 
-void SVRResMetalShader::create(SVRendererPtr _renderer) {
+void SVRMetalShader::create(SVRendererPtr _renderer) {
     SVRendererMetalPtr t_rendeMetalPtr = std::dynamic_pointer_cast<SVRendererMetal>(_renderer);
     if (t_rendeMetalPtr && t_rendeMetalPtr->m_pLibrary) {
         NSString* t_vsname = [NSString stringWithFormat:@"%s",m_vs_fname.c_str()];
@@ -145,10 +145,10 @@ void SVRResMetalShader::create(SVRendererPtr _renderer) {
     //self.commandQueue = [self.mtkView.device newCommandQueue]; // CommandQueue是渲染指令队列，保证渲染指令有序地提交到GPU
 }
 
-void SVRResMetalShader::destroy(SVRendererPtr _renderer) {
+void SVRMetalShader::destroy(SVRendererPtr _renderer) {
     //
 }
 
-bool SVRResMetalShader::active(SVRendererPtr _render) {
+bool SVRMetalShader::active(SVRendererPtr _render) {
     return false;
 }

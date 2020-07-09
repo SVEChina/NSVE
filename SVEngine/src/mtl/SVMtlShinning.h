@@ -16,7 +16,7 @@ namespace sv {
         
         class SVMtlShinning : public SVMtlADFilterBase {
         public:
-            SVMtlShinning(SVInst *_app);
+            SVMtlShinning(SVInstPtr _app);
             
             SVMtlShinning(SVMtlShinning *_mtl);
             

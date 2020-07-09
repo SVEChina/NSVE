@@ -15,7 +15,7 @@ namespace sv {
     
     class SVOpAppMode : public SVOpBase {
     public:
-        SVOpAppMode(SVInst* _app,SV_STATE _mode);
+        SVOpAppMode(SVInstPtr _app,SV_STATE _mode);
         
         ~SVOpAppMode();
         

@@ -17,7 +17,7 @@ namespace sv {
         
         class SVMtlBillboard : public SVMtlCore {
         public:
-            SVMtlBillboard(SVInst *_app);
+            SVMtlBillboard(SVInstPtr _app);
             
             SVMtlBillboard(SVMtlBillboard *_mtl);
             

@@ -1,5 +1,5 @@
 //
-// SVRResMetalTex.h
+// SVRMetalTex.h
 // SVEngine
 // Copyright 2017-2020
 // yizhou Fu,long Yin,longfei Lin,ziyu Xu,xiaofan Li,daming Li
@@ -9,7 +9,7 @@
 #define SV_RESMETAL_TEX_H
 
 #include "../SVResTex.h"
-#include "../SVResShader.h"
+#include "../SVRShader.h"
 #import <Metal/MTLTexture.h>
 #import <Metal/MTLBuffer.h>
 #import <Metal/MTLLibrary.h>
@@ -17,17 +17,14 @@
 
 namespace sv {
 
-    
-
-
         /*
         纹理资源
          */
-        class SVRResMetalTex: public SVResTex {
+        class SVRMetalTex: public SVResTex {
         public:
-            SVRResMetalTex(SVInst* _app);
+            SVRMetalTex(SVInstPtr _app);
             
-            virtual ~SVRResMetalTex();
+            virtual ~SVRMetalTex();
             
             virtual void create(SVRendererPtr _renderer);
             
@@ -50,11 +47,11 @@ namespace sv {
         /*
          Shader资源
          */
-        class SVRResMetalShader: public SVResShader {
+        class SVRMetalShader: public SVRShader {
         public:
-            SVRResMetalShader(SVInst* _app);
+            SVRMetalShader(SVInstPtr _app);
             
-            virtual ~SVRResMetalShader();
+            virtual ~SVRMetalShader();
             
             virtual void create(SVRendererPtr _renderer);
             

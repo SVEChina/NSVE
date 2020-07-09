@@ -13,8 +13,8 @@
 
 using namespace sv;
 
-SVAniTrigger::SVAniTrigger(SVInst *_app)
-:SVGBase(_app) {
+SVAniTrigger::SVAniTrigger(SVInstPtr _app)
+:SVGBaseEx(_app) {
 
 }
 

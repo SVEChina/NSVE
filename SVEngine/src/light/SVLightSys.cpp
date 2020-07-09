@@ -12,7 +12,7 @@
 
 using namespace sv;
 
-SVLightSys::SVLightSys(SVInst *_app)
+SVLightSys::SVLightSys(SVInstPtr _app)
 :SVSysBase(_app) {
     m_subsysType = 7;
 }

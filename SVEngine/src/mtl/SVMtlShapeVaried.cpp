@@ -61,7 +61,7 @@ f32 percentages[14] ={
     0.5,  //--移动嘴巴 没有滑杆
 };
 
-SVMtlFaceShapeVaried::SVMtlFaceShapeVaried(SVInst *_app)
+SVMtlFaceShapeVaried::SVMtlFaceShapeVaried(SVInstPtr _app)
 :SVMtlCore(_app,"faceShapeVaried"){
     memcpy( m_g_intensity   ,   percentages , sizeof( f32 ) * 14);
     m_surfaceWidth      =   mApp->m_pGlobalParam->m_inner_width;

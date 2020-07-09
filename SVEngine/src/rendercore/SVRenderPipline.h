@@ -16,9 +16,9 @@ namespace sv {
      渲染管线
      */
 
-    class SVRenderPipline : public SVGBase {
+    class SVRenderPipline : public SVGBaseEx {
     public:
-        SVRenderPipline(SVInst *_app);
+        SVRenderPipline(SVInstPtr _app);
         
         ~SVRenderPipline();
         

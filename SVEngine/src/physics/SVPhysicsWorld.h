@@ -16,7 +16,7 @@ namespace sv {
         
         class SVPhysicsWorld : public SVPhysicsWorldBase {
         public:
-            SVPhysicsWorld(SVInst* _app);
+            SVPhysicsWorld(SVInstPtr _app);
             
             ~SVPhysicsWorld();
             

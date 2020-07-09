@@ -10,7 +10,7 @@
 
 using namespace sv;
 
-SVPhysicsBodyCloth::SVPhysicsBodyCloth(SVInst* _app, btSoftBodyWorldInfo& _worldInfo, const FVec3& _corner00,
+SVPhysicsBodyCloth::SVPhysicsBodyCloth(SVInstPtr _app, btSoftBodyWorldInfo& _worldInfo, const FVec3& _corner00,
                                        const FVec3& _corner10,
                                        const FVec3& _corner01,
                                        const FVec3& _corner11,
@@ -35,7 +35,7 @@ SVPhysicsBodyCloth::SVPhysicsBodyCloth(SVInst* _app, btSoftBodyWorldInfo& _world
     m_softBody->setTotalMass(150);
 }
 
-SVPhysicsBodyCloth::SVPhysicsBodyCloth(SVInst* _app, btSoftBodyWorldInfo& _worldInfo, const f32 *_vertices, const s32 *_indices, s32 _ntrangles,
+SVPhysicsBodyCloth::SVPhysicsBodyCloth(SVInstPtr _app, btSoftBodyWorldInfo& _worldInfo, const f32 *_vertices, const s32 *_indices, s32 _ntrangles,
                    bool randomizeConstraints ):SVPhysicsBodySoft(_app){
     m_type = E_PHYSICS_BODY_CLOTH;
     m_vertexCount = 0;

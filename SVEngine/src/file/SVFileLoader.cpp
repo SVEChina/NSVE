@@ -9,8 +9,8 @@
 
 using namespace sv;
 
-SVFileLoader::SVFileLoader(SVInst *_app)
-:SVGBase(_app) {
+SVFileLoader::SVFileLoader(SVInstPtr _app)
+:SVGBaseEx(_app) {
 
 }
 

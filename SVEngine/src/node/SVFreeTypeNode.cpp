@@ -27,7 +27,7 @@
 
 using namespace sv;
 
-SVFreeTypeNode::SVFreeTypeNode(SVInst *_app)
+SVFreeTypeNode::SVFreeTypeNode(SVInstPtr _app)
 :SVNode(_app) {
     ntype = "SVFreeTypeNode";
     m_fontPixelSize=0;    //字体标准像素尺寸

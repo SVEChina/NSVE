@@ -17,10 +17,10 @@ namespace sv {
     class SVInst;
     
     //线程回调
-    void workThreadCallback(SVInst* _app,SVThread* _thread,SV_THREAD_STAGE _stag);
+    void workThreadCallback(SVInstPtr _app,SVThread* _thread,SV_THREAD_STAGE _stag);
     
     //线程销毁回调
-    void workThreadDestroyCallback(SVInst* _app,SVThread* _thread,SV_THREAD_STAGE _stage);
+    void workThreadDestroyCallback(SVInstPtr _app,SVThread* _thread,SV_THREAD_STAGE _stage);
     
 }//!namespace sv
 

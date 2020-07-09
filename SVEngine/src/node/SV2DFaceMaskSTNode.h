@@ -25,7 +25,7 @@ namespace sv {
         
 //        class SV2DFaceMaskSTNode : public SV2DFaceMaskNode {
 //        public:
-//            SV2DFaceMaskSTNode(SVInst *_app);
+//            SV2DFaceMaskSTNode(SVInstPtr _app);
 //            
 //            ~SV2DFaceMaskSTNode();
 //            

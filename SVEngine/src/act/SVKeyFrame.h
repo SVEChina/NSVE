@@ -19,9 +19,9 @@
 
 namespace sv {
     
-        class SVKeyFrame : public SVGBase {
+        class SVKeyFrame : public SVGBaseEx {
         public:
-            SVKeyFrame(SVInst* _app,u32 _index);
+            SVKeyFrame(SVInstPtr _app,u32 _index);
             
             ~SVKeyFrame();
 
@@ -52,7 +52,7 @@ namespace sv {
         //
         class SVKeyDeform : public SVKeyFrame {
         public:
-            SVKeyDeform(SVInst* _app,u32 _index);
+            SVKeyDeform(SVInstPtr _app,u32 _index);
             
             ~SVKeyDeform();
             
@@ -70,7 +70,7 @@ namespace sv {
         //
         class SVKeyMtl : public SVKeyFrame {
         public:
-            SVKeyMtl(SVInst* _app,u32 _index);
+            SVKeyMtl(SVInstPtr _app,u32 _index);
             
             ~SVKeyMtl();
             
@@ -85,7 +85,7 @@ namespace sv {
         //
         class SVKeyEvent : public SVKeyFrame {
         public:
-            SVKeyEvent(SVInst* _app,u32 _index);
+            SVKeyEvent(SVInstPtr _app,u32 _index);
             
             ~SVKeyEvent();
             

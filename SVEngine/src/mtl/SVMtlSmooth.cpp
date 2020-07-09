@@ -11,7 +11,7 @@
 
 using namespace sv;
 
-SVMtlSmooth::SVMtlSmooth(SVInst *_app , SVString _name)
+SVMtlSmooth::SVMtlSmooth(SVInstPtr _app , SVString _name)
 :SVMtlCore(_app,_name.c_str()) {
     m_smooth = 0.0f;
     m_w = 0.0f;

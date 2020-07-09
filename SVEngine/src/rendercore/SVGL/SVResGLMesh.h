@@ -19,7 +19,7 @@ namespace sv {
 //        //mesh
 //        class SVResGLRenderMesh : public SVResGLVBO {
 //        public:
-//            SVResGLRenderMesh(SVInst* _app);
+//            SVResGLRenderMesh(SVInstPtr _app);
 //
 //            ~SVResGLRenderMesh();
 //
@@ -77,7 +77,7 @@ namespace sv {
 //
 //        class SVResGLRenderMeshDvid : public SVResGLRenderMesh {
 //        public:
-//            SVResGLRenderMeshDvid(SVInst* _app);
+//            SVResGLRenderMeshDvid(SVInstPtr _app);
 //
 //            ~SVResGLRenderMeshDvid();
 //

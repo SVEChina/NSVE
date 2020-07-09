@@ -17,7 +17,7 @@ namespace sv {
         //相机节点 不是节点
         class SVCameraNode : public SVEventProc {
         public:
-            SVCameraNode(SVInst *_app);
+            SVCameraNode(SVInstPtr _app);
             
             ~SVCameraNode();
             

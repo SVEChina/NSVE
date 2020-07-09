@@ -19,10 +19,9 @@
 
 namespace sv {
     
-    
         class SVTextureIOS : public SVTexture {
         public:
-            SVTextureIOS(SVInst *_app);
+            SVTextureIOS(SVInstPtr _app);
             
             ~SVTextureIOS();
             

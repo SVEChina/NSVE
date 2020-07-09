@@ -17,7 +17,7 @@
 namespace sv{
     class SVPenDraw : public SVGameBase {
     public:
-        SVPenDraw(SVInst* _app);
+        SVPenDraw(SVInstPtr _app);
         
         ~SVPenDraw();
         

@@ -12,8 +12,8 @@
 
 using namespace sv;
 
-SVAniBase::SVAniBase(SVInst *_app)
-:SVGBase(_app) {
+SVAniBase::SVAniBase(SVInstPtr _app)
+:SVGBaseEx(_app) {
 }
 
 SVAniBase::~SVAniBase() {

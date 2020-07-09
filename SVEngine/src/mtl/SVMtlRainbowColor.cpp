@@ -12,7 +12,7 @@
 
 using namespace sv;
 
-SVMtlRainbowColor::SVMtlRainbowColor(SVInst *_app)
+SVMtlRainbowColor::SVMtlRainbowColor(SVInstPtr _app)
 :SVMtlADFilterBase(_app,"filterrainbowcolor") {
     _resetTime();
 }

@@ -14,7 +14,7 @@
 #include "../base/SVObject.h"
 #include "../node/SVNodeDeclare.h"
 
-typedef sv::SVNodePtr (*prase_content_fun)(sv::SVInst *app,
+typedef sv::SVNodePtr (*prase_content_fun)(sv::SVInstPtr app,
                                   RAPIDJSON_NAMESPACE::Value &item,
                                   s32 _resid,
                                   cptr8 _path);

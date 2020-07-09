@@ -18,7 +18,7 @@ namespace sv {
         
         class SVActFollow : public SVActBase {
         public:
-            SVActFollow(SVInst *_app);
+            SVActFollow(SVInstPtr _app);
             
             ~SVActFollow();
             
@@ -41,7 +41,7 @@ namespace sv {
         //圈飞
         class SVActCircle : public SVActBase {
         public:
-            SVActCircle(SVInst *_app);
+            SVActCircle(SVInstPtr _app);
             
             ~SVActCircle();
             
@@ -62,7 +62,7 @@ namespace sv {
 
         class SVActFollowPerson : public SVActBase {
         public:
-            SVActFollowPerson(SVInst *_app, s32 _personID);
+            SVActFollowPerson(SVInstPtr _app, s32 _personID);
             
             ~SVActFollowPerson();
             
@@ -93,7 +93,7 @@ namespace sv {
         //
         class SVActFollowPerson3d : public SVActFollowPerson {
         public:
-            SVActFollowPerson3d(SVInst *_app, s32 _personID);
+            SVActFollowPerson3d(SVInstPtr _app, s32 _personID);
             
             ~SVActFollowPerson3d();
             

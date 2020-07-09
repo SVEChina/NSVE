@@ -17,7 +17,7 @@
 
 using namespace sv;
 
-SVFilterLUT::SVFilterLUT(SVInst *_app)
+SVFilterLUT::SVFilterLUT(SVInstPtr _app)
 :SVFilterBase(_app){
     m_type=SV_FUNC_LOOKUP;
     m_name="SVFilterLUT";

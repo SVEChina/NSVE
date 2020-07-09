@@ -57,15 +57,15 @@ SpineMeshData::~SpineMeshData(){
 
 //
 SVSpinePtr
-SVSpine::createSpine(SVInst *_app, cptr8 skefname, cptr8 atlasfname,f32 scale, bool enableMipMap) {
-    spAtlas *_atlas = spAtlas_createFromFile(_app, atlasfname, 0, enableMipMap);
+SVSpine::createSpine(SVInstPtr _app, cptr8 skefname, cptr8 atlasfname,f32 scale, bool enableMipMap) {
+    spAtlas *_atlas = spAtlas_createFromFile(_app.get(), atlasfname, 0, enableMipMap);
     if (!_atlas)
         return nullptr;
     //骨架json
     spSkeletonJson *json = spSkeletonJson_create(_atlas);
     json->scale = scale;
     //动画数据
-    spSkeletonData *skeletonData = spSkeletonJson_readSkeletonDataFile(_app, json, skefname);
+    spSkeletonData *skeletonData = spSkeletonJson_readSkeletonDataFile(_app.get(), json, skefname);
     spSkeletonJson_dispose(json);
     if (!skeletonData)
         return nullptr;
@@ -84,8 +84,8 @@ SVSpine::createSpine(SVInst *_app, cptr8 skefname, cptr8 atlasfname,f32 scale, b
     return t_spine;
 }
 
-SVSpine::SVSpine(SVInst *_app)
-:SVGBase(_app){
+SVSpine::SVSpine(SVInstPtr _app)
+:SVGBaseEx(_app){
     m_pSpineAniState = nullptr;
     m_pSkeleton = nullptr;
     m_pRootBone = nullptr;

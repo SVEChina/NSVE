@@ -17,7 +17,7 @@ namespace sv {
         class SVMtlGlitch : public SVMtlADFilterBase {
         public:
             
-            SVMtlGlitch(SVInst *_app);
+            SVMtlGlitch(SVInstPtr _app);
             
             SVMtlGlitch(SVMtlGlitch *_mtl);
             

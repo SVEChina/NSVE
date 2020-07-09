@@ -9,8 +9,8 @@
 
 using namespace sv;
 
-SVPenCurve::SVPenCurve(SVInst *_app)
-:SVGBase(_app) {
+SVPenCurve::SVPenCurve(SVInstPtr _app)
+:SVGBaseEx(_app) {
     m_bPushSamePoint = false;
 }
 

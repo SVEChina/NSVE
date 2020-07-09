@@ -12,7 +12,7 @@
 
 using namespace sv;
 
-SVMtlShake::SVMtlShake(SVInst *_app)
+SVMtlShake::SVMtlShake(SVInstPtr _app)
 :SVMtlCore(_app,"filtershake") {
     m_time = 0.0f;
     m_speed = 3.0f;

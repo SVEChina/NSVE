@@ -35,7 +35,7 @@ using namespace sv;
 SVGlobalMgr::SVGlobalMgr(SVInstPtr _app)
 :SVGBaseEx(_app) {
     //引擎系统和操作指令系统要先建立起来
-    m_pFileMgr = MakeSharedPtr<SVFileMgr>(mApp.get());
+    m_pFileMgr = MakeSharedPtr<SVFileMgr>(mApp);
     m_pConfig = nullptr;
     m_pEventMgr = nullptr;
     m_pBasicSys = nullptr;
@@ -73,12 +73,12 @@ SVGlobalMgr::~SVGlobalMgr() {
 void SVGlobalMgr::init() {
     //推送默认空路径
     if (!m_pFileMgr) {
-        m_pFileMgr = MakeSharedPtr<SVFileMgr>(mApp.get());
+        m_pFileMgr = MakeSharedPtr<SVFileMgr>(mApp);
     }
     m_pFileMgr->addRespath("");
     //配置系统
     if (!m_pConfig) {
-        m_pConfig = MakeSharedPtr<SVConfig>(mApp.get());
+        m_pConfig = MakeSharedPtr<SVConfig>(mApp);
         m_pConfig->init();
     }
     //加载配置
@@ -90,7 +90,7 @@ void SVGlobalMgr::init() {
     m_pStaticData = MakeSharedPtr<SVStaticData>(mApp);
     m_pStaticData->init();
 //    //消息系统建立起来
-//    m_pEventMgr = MakeSharedPtr<SVEventMgr>(mApp.get());
+//    m_pEventMgr = MakeSharedPtr<SVEventMgr>(mApp);
 //    m_pEventMgr->init();
 //    //基础系统
 //    m_pBasicSys = MakeSharedPtr<SVBasicSys>(mApp.get());

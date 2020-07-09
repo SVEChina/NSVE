@@ -18,7 +18,7 @@ namespace sv {
         
         class SVFreeTypeNode : public SVNode {
         public:
-            SVFreeTypeNode(SVInst *_app);
+            SVFreeTypeNode(SVInstPtr _app);
             
             virtual ~SVFreeTypeNode();
             

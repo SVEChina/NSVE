@@ -36,8 +36,8 @@
 
 using namespace sv;
 
-SVLoaderGLTF::SVLoaderGLTF(SVInst *_app)
-:SVGBase(_app) {
+SVLoaderGLTF::SVLoaderGLTF(SVInstPtr _app)
+:SVGBaseEx(_app) {
 }
 
 SVLoaderGLTF::~SVLoaderGLTF() {

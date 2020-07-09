@@ -17,7 +17,7 @@ namespace sv {
         
         class SVRenderTexture : public SVFboObject {
         public:
-            SVRenderTexture(SVInst *_app, SVTexturePtr _tex, bool _depth, bool _stencil);
+            SVRenderTexture(SVInstPtr _app, SVTexturePtr _tex, bool _depth, bool _stencil);
             
             ~SVRenderTexture();
             

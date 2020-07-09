@@ -18,7 +18,7 @@ namespace sv {
         //PList假纹理
         class SVTexturePList : public SVTexture {
         public:
-            SVTexturePList(SVInst *_app);
+            SVTexturePList(SVInstPtr _app);
 
             ~SVTexturePList();
 
@@ -67,7 +67,7 @@ namespace sv {
         //PList真纹理
         class SVTextureSet : public SVTexture {
         public:
-            SVTextureSet(SVInst *_app);
+            SVTextureSet(SVInstPtr _app);
             
             ~SVTextureSet();
             

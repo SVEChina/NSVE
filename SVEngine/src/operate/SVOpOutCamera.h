@@ -15,7 +15,7 @@ namespace sv {
     //创建ios相机
     class SVOpCreateIOSInstream : public SVOpBase {
     public:
-        SVOpCreateIOSInstream(SVInst* _app,cptr8 _name,PICFORMATE _format,s32 _w,s32 _h,f32 _angle, bool _show = false);
+        SVOpCreateIOSInstream(SVInstPtr _app,cptr8 _name,PICFORMATE _format,s32 _w,s32 _h,f32 _angle, bool _show = false);
         
         void _process(f32 _dt);
         
@@ -31,7 +31,7 @@ namespace sv {
     //创建ios相机
     class SVOpCreateIOSTexIDInstream : public SVOpBase {
     public:
-        SVOpCreateIOSTexIDInstream(SVInst* _app,cptr8 _name, u32 _tex0ID, u32 _tex1ID, u32 _tex2ID, PICFORMATE _format,s32 _w,s32 _h,f32 _angle, bool _show = false);
+        SVOpCreateIOSTexIDInstream(SVInstPtr _app,cptr8 _name, u32 _tex0ID, u32 _tex1ID, u32 _tex2ID, PICFORMATE _format,s32 _w,s32 _h,f32 _angle, bool _show = false);
         
         void _process(f32 _dt);
         
@@ -50,7 +50,7 @@ namespace sv {
     //销毁ios相机
     class SVOpDestroyIOSInstream : public SVOpBase {
     public:
-        SVOpDestroyIOSInstream(SVInst* _app,cptr8 _name);
+        SVOpDestroyIOSInstream(SVInstPtr _app,cptr8 _name);
         
         void _process(f32 _dt);
     protected:
@@ -60,7 +60,7 @@ namespace sv {
     //创建ios输出流
     class SVOpCreateIOSOutstream : public SVOpBase {
     public:
-        SVOpCreateIOSOutstream(SVInst* _app,cptr8 _name,s32 _format, s32 _width, s32 _height, s32 _steamType = 20);
+        SVOpCreateIOSOutstream(SVInstPtr _app,cptr8 _name,s32 _format, s32 _width, s32 _height, s32 _steamType = 20);
         
         void _process(f32 _dt);
         
@@ -75,7 +75,7 @@ namespace sv {
     //销毁ios输出流
     class SVOpDestroyIOSOutstream : public SVOpBase {
     public:
-        SVOpDestroyIOSOutstream(SVInst* _app,cptr8 _name);
+        SVOpDestroyIOSOutstream(SVInstPtr _app,cptr8 _name);
         
         void _process(f32 _dt);
     protected:
@@ -85,7 +85,7 @@ namespace sv {
     //打开ios输出流
     class SVOpOpenIOSOutstream : public SVOpBase {
     public:
-        SVOpOpenIOSOutstream(SVInst* _app, cb_out_stream _cb);
+        SVOpOpenIOSOutstream(SVInstPtr _app, cb_out_stream _cb);
         
         void _process(f32 _dt);
     protected:
@@ -95,7 +95,7 @@ namespace sv {
     //关闭ios输出流
     class SVOpCloseIOSOutstream : public SVOpBase {
     public:
-        SVOpCloseIOSOutstream(SVInst* _app);
+        SVOpCloseIOSOutstream(SVInstPtr _app);
         
         void _process(f32 _dt);
     };
@@ -103,7 +103,7 @@ namespace sv {
     //创建一个andriod相机
     class SVOpCreateAndriodCamera: public SVOpBase {
     public:
-        SVOpCreateAndriodCamera(SVInst* _app,s32 _format,s32 _w,s32 _h,f32 _angle);
+        SVOpCreateAndriodCamera(SVInstPtr _app,s32 _format,s32 _w,s32 _h,f32 _angle);
         
         void _process(f32 _dt);
         
@@ -117,7 +117,7 @@ namespace sv {
     //销毁android相机
     class SVOpDestroyAndoidCamera : public SVOpBase {
     public:
-        SVOpDestroyAndoidCamera(SVInst* _app,cptr8 _name);
+        SVOpDestroyAndoidCamera(SVInstPtr _app,cptr8 _name);
         
         void _process(f32 _dt);
     protected:
@@ -127,7 +127,7 @@ namespace sv {
     //创建一个纹理相机
     class SVOpCreateTextureCamera : public SVOpBase {
     public:
-        SVOpCreateTextureCamera(SVInst* _app,s32 _format,s32 _w,s32 _h,f32 _angle);
+        SVOpCreateTextureCamera(SVInstPtr _app,s32 _format,s32 _w,s32 _h,f32 _angle);
         
         void _process(f32 _dt);
         
@@ -141,7 +141,7 @@ namespace sv {
     //销毁ios输出流
     class SVOpDestroyTextureOutstream : public SVOpBase {
     public:
-        SVOpDestroyTextureOutstream(SVInst* _app,cptr8 _name);
+        SVOpDestroyTextureOutstream(SVInstPtr _app,cptr8 _name);
 
         void _process(f32 _dt);
     protected:
@@ -152,7 +152,7 @@ namespace sv {
     //创建一个流相机
     class SVOpCreateStreamCamera : public SVOpBase {
     public:
-        SVOpCreateStreamCamera(SVInst* _app,cptr8 _name,s32 _format,s32 _w,s32 _h,f32 _angle);
+        SVOpCreateStreamCamera(SVInstPtr _app,cptr8 _name,s32 _format,s32 _w,s32 _h,f32 _angle);
         
         void _process(f32 _dt);
         
@@ -169,7 +169,7 @@ namespace sv {
 
     class SVOpDestroyStreamCamera : public SVOpBase {
     public:
-        SVOpDestroyStreamCamera(SVInst* _app,cptr8 _name);
+        SVOpDestroyStreamCamera(SVInstPtr _app,cptr8 _name);
 
         void _process(f32 _dt);
     protected:

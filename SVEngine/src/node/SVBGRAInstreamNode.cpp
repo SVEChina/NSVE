@@ -24,12 +24,12 @@
 using namespace sv;
 
 //
-SVBGRAInstreamNode::SVBGRAInstreamNode(SVInst *_app)
+SVBGRAInstreamNode::SVBGRAInstreamNode(SVInstPtr _app)
 :SVNode(_app) {
     SVBGRAInstreamNode(_app,100,100);
 }
 
-SVBGRAInstreamNode::SVBGRAInstreamNode(SVInst *_app,f32 _w,f32 _h)
+SVBGRAInstreamNode::SVBGRAInstreamNode(SVInstPtr _app,f32 _w,f32 _h)
 :SVNode(_app) {
     ntype = "SVBGRAInstreamNode";
     m_rsType = RST_SOLID_3D;

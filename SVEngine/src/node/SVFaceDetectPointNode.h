@@ -15,7 +15,7 @@ namespace sv {
         
         class SVFaceDetectPointNode : public SVNode {
         public:
-            SVFaceDetectPointNode(SVInst *_app);
+            SVFaceDetectPointNode(SVInstPtr _app);
             
             ~SVFaceDetectPointNode();
             

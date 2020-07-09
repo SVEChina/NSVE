@@ -20,8 +20,8 @@
 
 using namespace sv;
 
-SVTexMgr::SVTexMgr(SVInst *_app)
-:SVGBase(_app) {
+SVTexMgr::SVTexMgr(SVInstPtr _app)
+:SVGBaseEx(_app) {
     mAsync = false;
     m_sveTexture = nullptr;
     m_texLock = MakeSharedPtr<SVLock>();

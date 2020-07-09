@@ -13,7 +13,7 @@
 namespace sv {
     class SVOpDestroyEffect : public SVOpBase {
     public:
-        SVOpDestroyEffect(SVInst *_app, cptr8 _name);
+        SVOpDestroyEffect(SVInstPtr _app, cptr8 _name);
         
     protected:
         void _process(f32 dt);
@@ -24,7 +24,7 @@ namespace sv {
     //
     class SVOpDestroyDivision : public SVOpBase {
     public:
-        SVOpDestroyDivision(SVInst *_app);
+        SVOpDestroyDivision(SVInstPtr _app);
         
     protected:
         void _process(f32 dt);
@@ -33,7 +33,7 @@ namespace sv {
     //
     class SVOpDestroyMark : public SVOpBase {
     public:
-        SVOpDestroyMark(SVInst *_app);
+        SVOpDestroyMark(SVInstPtr _app);
         
     protected:
         void _process(f32 dt);
@@ -41,7 +41,7 @@ namespace sv {
     //
     class SVOpClosePen : public SVOpBase {
     public:
-        SVOpClosePen(SVInst *_app);
+        SVOpClosePen(SVInstPtr _app);
         
     protected:
         void _process(f32 dt);
@@ -50,7 +50,7 @@ namespace sv {
     //
     class SVOpDestroyGameZCMgr : public SVOpBase {
     public:
-        SVOpDestroyGameZCMgr(SVInst *_app);
+        SVOpDestroyGameZCMgr(SVInstPtr _app);
         
     protected:
         void _process(f32 dt);

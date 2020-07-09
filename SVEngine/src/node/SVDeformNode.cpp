@@ -11,7 +11,7 @@
 
 using namespace sv;
 
-SVDeformNode::SVDeformNode(SVInst *_app)
+SVDeformNode::SVDeformNode(SVInstPtr _app)
 :SVNode(_app){
     ntype = "SVDeformNode";
     

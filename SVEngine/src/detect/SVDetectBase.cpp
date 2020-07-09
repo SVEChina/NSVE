@@ -10,7 +10,7 @@
 
 using namespace sv;
 
-SVDetectBase::SVDetectBase(SVInst *_app)
+SVDetectBase::SVDetectBase(SVInstPtr _app)
 :SVListenBase(_app) {
 }
 

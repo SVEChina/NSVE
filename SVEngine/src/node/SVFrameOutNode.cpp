@@ -19,7 +19,7 @@
 
 using namespace sv;
 
-SVFrameOutNode::SVFrameOutNode(SVInst *_app)
+SVFrameOutNode::SVFrameOutNode(SVInstPtr _app)
 :SVNode(_app) {
     ntype = "SVFrameOutNode";
     m_pData = nullptr;

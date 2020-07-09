@@ -19,7 +19,7 @@
 
 using namespace sv;
 
-SVFilterGenLUT::SVFilterGenLUT(SVInst *_app)
+SVFilterGenLUT::SVFilterGenLUT(SVInstPtr _app)
 :SVFilterBase(_app){
     m_type=SV_FUNC_BRIGHTNESSCONTRAST;
     m_name="SVFilterGenLUT";

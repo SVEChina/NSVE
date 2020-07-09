@@ -19,12 +19,12 @@
 #include "../../rendercore/SVRenderMgr.h"
 #include "../SVRenderer.h"
 #include "../SVGL/SVRendererGL.h"
-#include "../SVResShader.h"
+#include "../SVRShader.h"
 
 using namespace sv;
 
 ////
-//SVResGLRenderMesh::SVResGLRenderMesh(SVInst* _app)
+//SVResGLRenderMesh::SVResGLRenderMesh(SVInstPtr _app)
 //:SVResGLVBO(_app){
 //    _reset();
 //}
@@ -311,7 +311,7 @@ using namespace sv;
 //}
 //
 ////
-//SVResGLRenderMeshDvid::SVResGLRenderMeshDvid(SVInst* _app)
+//SVResGLRenderMeshDvid::SVResGLRenderMeshDvid(SVInstPtr _app)
 //        :SVResGLRenderMesh(_app){
 //            _reset();
 //}

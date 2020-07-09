@@ -11,7 +11,7 @@
 
 using namespace sv;
 
-SVEventMgr::SVEventMgr(SVInst *_app)
+SVEventMgr::SVEventMgr(SVInstPtr _app)
 : SVSysBase(_app) {
     mActiveEventPool = nullptr;
     mWaitEventPool = nullptr;

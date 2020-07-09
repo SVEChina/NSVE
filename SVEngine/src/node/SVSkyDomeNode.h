@@ -15,7 +15,7 @@ namespace sv {
         
         class SVSkyDomeNode : public SVNode {
         public:
-            SVSkyDomeNode(SVInst* _app);
+            SVSkyDomeNode(SVInstPtr _app);
             
             virtual ~SVSkyDomeNode();
             

@@ -12,7 +12,7 @@
 using namespace sv;
 
 //
-SVMtlBeauty::SVMtlBeauty(SVInst *_app)
+SVMtlBeauty::SVMtlBeauty(SVInstPtr _app)
 :SVMtlCore(_app,"beauty") {
     m_lImgW=720;
     m_lImgH=1280;

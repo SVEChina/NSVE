@@ -38,7 +38,7 @@
 
 using namespace sv;
 
-SVPenDraw::SVPenDraw(SVInst *_app)
+SVPenDraw::SVPenDraw(SVInstPtr _app)
 :SVGameBase(_app)
 ,m_curStroke(nullptr){
     m_lock = MakeSharedPtr<SVLock>();

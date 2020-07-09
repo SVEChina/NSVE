@@ -12,7 +12,7 @@
 
 using namespace sv;
 
-SVMtlFlash::SVMtlFlash(SVInst *_app)
+SVMtlFlash::SVMtlFlash(SVInstPtr _app)
 :SVMtlADFilterBase(_app,"filterflash") {
     _resetTime();
     m_state = MTL_ADFILTER_BEGIN;

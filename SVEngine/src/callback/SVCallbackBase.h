@@ -12,9 +12,9 @@
 
 namespace sv {
     
-    class SVCallbackBase : public SVGBase {
+    class SVCallbackBase : public SVGBaseEx {
     public:
-        SVCallbackBase(SVInst* _app);
+        SVCallbackBase(SVInstPtr _app);
         
         ~SVCallbackBase();
     };

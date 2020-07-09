@@ -18,7 +18,7 @@
 
 using namespace sv;
 
-SVFrameAniNode::SVFrameAniNode(SVInst *_app)
+SVFrameAniNode::SVFrameAniNode(SVInstPtr _app)
 :SVNode(_app){
     ntype = "SVFrameAniNode";
     m_rsType = RST_SOLID_3D;

@@ -22,7 +22,7 @@
 
 using namespace sv;
 
-SVSceneMgr::SVSceneMgr(SVInst *_app)
+SVSceneMgr::SVSceneMgr(SVInstPtr _app)
 :SVSysBase(_app) {
     m_subsysType = 6;
     m_pMainScene = nullptr;

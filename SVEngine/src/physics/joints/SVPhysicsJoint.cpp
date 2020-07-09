@@ -8,7 +8,7 @@
 
 using namespace sv;
 
-SVPhysicsJoint::SVPhysicsJoint(SVInst* _app):SVGBase(_app) {
+SVPhysicsJoint::SVPhysicsJoint(SVInstPtr _app):SVGBaseEx(_app) {
     
 }
 

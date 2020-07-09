@@ -14,7 +14,7 @@ namespace sv {
 
     class SVSceneMgr : public SVSysBase {
     public:
-        SVSceneMgr(SVInst *_app);
+        SVSceneMgr(SVInstPtr _app);
         
         ~SVSceneMgr();
         

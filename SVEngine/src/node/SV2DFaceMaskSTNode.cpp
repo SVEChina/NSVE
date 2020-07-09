@@ -23,7 +23,7 @@
 using namespace sv;
 
 ////ST masknode
-//SV2DFaceMaskSTNode::SV2DFaceMaskSTNode(SVInst *_app)
+//SV2DFaceMaskSTNode::SV2DFaceMaskSTNode(SVInstPtr _app)
 //: SV2DFaceMaskNode(_app) {
 //    ntype = "SV2DFaceMaskSTNode";
 ////    //

@@ -16,9 +16,9 @@ namespace sv {
         dataListenFunc func;
     };
     
-    class SVListenBase : public SVGBase {
+    class SVListenBase : public SVGBaseEx {
     public:
-        SVListenBase(SVInst* _app);
+        SVListenBase(SVInstPtr _app);
         
         ~SVListenBase();
         

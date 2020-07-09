@@ -38,7 +38,7 @@ namespace sv{
     
     class SVPenStroke : public SVGameBase {
     public:
-        SVPenStroke(SVInst* _app, SVPENMODE _mode, f32 _strokeWidth, FVec4 &_strokeColor, f32 _glowWidth, FVec4 &_glowColor);
+        SVPenStroke(SVInstPtr _app, SVPENMODE _mode, f32 _strokeWidth, FVec4 &_strokeColor, f32 _glowWidth, FVec4 &_glowColor);
         
         ~SVPenStroke();
         

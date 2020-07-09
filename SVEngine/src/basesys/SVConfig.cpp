@@ -15,7 +15,8 @@
 
 using namespace sv;
 
-SVConfig::SVConfig(SVInst *_app) : SVGBase(_app) {
+SVConfig::SVConfig(SVInstPtr _app)
+: SVGBaseEx(_app) {
     //m_subsysType = 5;
     width = 720;
     height = 1280;

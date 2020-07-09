@@ -143,9 +143,9 @@ namespace sv {
         /*
          蒙皮动画 单个动画名称
          */
-        class SVAnimateSkin : public SVGBase{
+        class SVAnimateSkin : public SVGBaseEx{
         public:
-            SVAnimateSkin(SVInst* _app,cptr8 _name);
+            SVAnimateSkin(SVInstPtr _app,cptr8 _name);
 
             ~SVAnimateSkin();
             
@@ -184,9 +184,9 @@ namespace sv {
         };
         
         //骨架池
-        class SVSkinMgr : public SVGBase{
+        class SVSkinMgr : public SVGBaseEx{
         public:
-            SVSkinMgr(SVInst* _app);
+            SVSkinMgr(SVInstPtr _app);
             
             ~SVSkinMgr();
             

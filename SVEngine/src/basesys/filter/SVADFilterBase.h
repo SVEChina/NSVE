@@ -15,7 +15,7 @@ namespace sv {
         
         class SVADFilterBase : public SVFilterBase {
         public:
-            SVADFilterBase(SVInst *_app, SVMtlCorePtr _mtl);
+            SVADFilterBase(SVInstPtr _app, SVMtlCorePtr _mtl);
             
             ~SVADFilterBase();
             

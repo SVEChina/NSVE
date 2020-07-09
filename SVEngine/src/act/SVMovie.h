@@ -22,7 +22,7 @@ namespace sv {
         
         class SVMovie : public SVAniBase {
         public:
-            SVMovie(SVInst* _app);
+            SVMovie(SVInstPtr _app);
             
             ~SVMovie();
             

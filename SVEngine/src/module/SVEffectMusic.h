@@ -12,7 +12,7 @@
 namespace sv{
     class SVEffectMusic : public SVModuleBase {
     public:
-        SVEffectMusic(SVInst* _app);
+        SVEffectMusic(SVInstPtr _app);
         
         ~SVEffectMusic();
         

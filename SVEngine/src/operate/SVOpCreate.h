@@ -20,7 +20,7 @@ namespace sv {
     //创建场景OP
     class SVOpCreateScene : public SVOpBase {
     public:
-        SVOpCreateScene(SVInst *_app, cptr8 name);
+        SVOpCreateScene(SVInstPtr _app, cptr8 name);
         
     protected:
         void _process(f32 dt);
@@ -31,7 +31,7 @@ namespace sv {
     //删除逻辑场景
     class SVOpDestroyScene : public SVOpBase {
     public:
-        SVOpDestroyScene(SVInst *_app,cptr8 name);
+        SVOpDestroyScene(SVInstPtr _app,cptr8 name);
         
     protected:
         void _process(f32 dt);
@@ -42,7 +42,7 @@ namespace sv {
     //
     class SVOpCameraControl : public SVOpBase {
     public:
-        SVOpCameraControl(SVInst *_app, bool bOpen, s32 iResId);
+        SVOpCameraControl(SVInstPtr _app, bool bOpen, s32 iResId);
         
         ~SVOpCameraControl();
         
@@ -56,7 +56,7 @@ namespace sv {
     //创建天空
     class SVOpCreateSkyDome : public SVOpBase {
     public:
-        SVOpCreateSkyDome(SVInst *_app, cptr8 pStrPath,s32 resId);
+        SVOpCreateSkyDome(SVInstPtr _app, cptr8 pStrPath,s32 resId);
         
         ~SVOpCreateSkyDome();
         
@@ -69,7 +69,7 @@ namespace sv {
     //创建粒子
     class SVOpCreateParticle : public SVOpBase {
     public:
-        SVOpCreateParticle(SVInst *_app, cptr8 pStrPath);
+        SVOpCreateParticle(SVInstPtr _app, cptr8 pStrPath);
         
         ~SVOpCreateParticle();
         
@@ -82,7 +82,7 @@ namespace sv {
     //创建特效
     class SVOpCreateEffcet : public SVOpBase {
     public:
-        SVOpCreateEffcet(SVInst *_app, cptr8 pStrPath);
+        SVOpCreateEffcet(SVInstPtr _app, cptr8 pStrPath);
         
         ~SVOpCreateEffcet();
         
@@ -94,7 +94,7 @@ namespace sv {
     
     class SVOpTexAttachment: public SVOpBase {
     public:
-        SVOpTexAttachment(SVInst *_app, cptr8 _strPath, s32 _channel, void * _data, s32 _width, s32 _height);
+        SVOpTexAttachment(SVInstPtr _app, cptr8 _strPath, s32 _channel, void * _data, s32 _width, s32 _height);
         
         ~SVOpTexAttachment();
         
@@ -111,7 +111,7 @@ namespace sv {
     //恢复
     class SVOpEngineResume : public SVOpBase {
     public:
-        SVOpEngineResume(SVInst *_app);
+        SVOpEngineResume(SVInstPtr _app);
         
         ~SVOpEngineResume();
         
@@ -122,7 +122,7 @@ namespace sv {
     //挂起
     class SVOpEngineSuspend : public SVOpBase {
     public:
-        SVOpEngineSuspend(SVInst *_app);
+        SVOpEngineSuspend(SVInstPtr _app);
         
         ~SVOpEngineSuspend();
         
@@ -133,7 +133,7 @@ namespace sv {
     //推送人脸识别点
     class SVOpPushFaceData : public SVOpBase {
     public:
-        SVOpPushFaceData(SVInst *_app, void *_data);
+        SVOpPushFaceData(SVInstPtr _app, void *_data);
         
         ~SVOpPushFaceData();
         
@@ -146,7 +146,7 @@ namespace sv {
     //测试操作
     class SVOpCreateTest : public SVOpBase {
     public:
-        SVOpCreateTest(SVInst *_app);
+        SVOpCreateTest(SVInstPtr _app);
         
         ~SVOpCreateTest();
         
@@ -157,7 +157,7 @@ namespace sv {
     //测试操作
     class SVOpCreateDebugFacePt : public SVOpBase {
     public:
-        SVOpCreateDebugFacePt(SVInst *_app);
+        SVOpCreateDebugFacePt(SVInstPtr _app);
         
         ~SVOpCreateDebugFacePt();
         
@@ -168,7 +168,7 @@ namespace sv {
     //测试画线
     class SVOpCreateTestLine : public SVOpBase {
     public:
-        SVOpCreateTestLine(SVInst *_app);
+        SVOpCreateTestLine(SVInstPtr _app);
         
         ~SVOpCreateTestLine();
         
@@ -179,7 +179,7 @@ namespace sv {
     //测试画补丁网格
     class SVOpCreateTestPatch : public SVOpBase {
     public:
-        SVOpCreateTestPatch(SVInst *_app);
+        SVOpCreateTestPatch(SVInstPtr _app);
         
         ~SVOpCreateTestPatch();
         
@@ -192,7 +192,7 @@ namespace sv {
     //测试面纱
     class SVOpCreateTestMianSha : public SVOpBase {
     public:
-        SVOpCreateTestMianSha(SVInst *_app);
+        SVOpCreateTestMianSha(SVInstPtr _app);
         
         ~SVOpCreateTestMianSha();
         
@@ -203,7 +203,7 @@ namespace sv {
     //分屏
     class SVOpCreateDivision : public SVOpBase {
     public:
-        SVOpCreateDivision(SVInst *_app);
+        SVOpCreateDivision(SVInstPtr _app);
         
         ~SVOpCreateDivision();
         
@@ -213,7 +213,7 @@ namespace sv {
     //mark
     class SVOpCreateMark : public SVOpBase {
     public:
-        SVOpCreateMark(SVInst *_app);
+        SVOpCreateMark(SVInstPtr _app);
         
         ~SVOpCreateMark();
         
@@ -223,7 +223,7 @@ namespace sv {
     
     class SVOpMarkContent : public SVOpBase {
     public:
-        SVOpMarkContent(SVInst *_app, SVString _content);
+        SVOpMarkContent(SVInstPtr _app, SVString _content);
         
         ~SVOpMarkContent();
         
@@ -234,7 +234,7 @@ namespace sv {
     
     class SVOpMarkAlpha : public SVOpBase {
     public:
-        SVOpMarkAlpha(SVInst *_app, f32 _alpha);
+        SVOpMarkAlpha(SVInstPtr _app, f32 _alpha);
         
         ~SVOpMarkAlpha();
         
@@ -245,7 +245,7 @@ namespace sv {
     
     class SVOpMarkScale : public SVOpBase {
     public:
-        SVOpMarkScale(SVInst *_app, f32 _scale);
+        SVOpMarkScale(SVInstPtr _app, f32 _scale);
         
         ~SVOpMarkScale();
         
@@ -256,7 +256,7 @@ namespace sv {
     
     class SVOpMarkRotation : public SVOpBase {
     public:
-        SVOpMarkRotation(SVInst *_app, f32 _rotation);
+        SVOpMarkRotation(SVInstPtr _app, f32 _rotation);
         
         ~SVOpMarkRotation();
         
@@ -267,7 +267,7 @@ namespace sv {
     
     class SVOpMarkAlphaTime : public SVOpBase {
     public:
-        SVOpMarkAlphaTime(SVInst *_app, f32 _alphaTime);
+        SVOpMarkAlphaTime(SVInstPtr _app, f32 _alphaTime);
         
         ~SVOpMarkAlphaTime();
         
@@ -278,7 +278,7 @@ namespace sv {
     
     class SVOpMarkAlphaRange : public SVOpBase {
     public:
-        SVOpMarkAlphaRange(SVInst *_app, f32 _srcAlpha, f32 _tarAlpha);
+        SVOpMarkAlphaRange(SVInstPtr _app, f32 _srcAlpha, f32 _tarAlpha);
         
         ~SVOpMarkAlphaRange();
         
@@ -291,7 +291,7 @@ namespace sv {
     
     class SVOpMarkAppearTime : public SVOpBase {
     public:
-        SVOpMarkAppearTime(SVInst *_app, f32 _appearTime);
+        SVOpMarkAppearTime(SVInstPtr _app, f32 _appearTime);
         
         ~SVOpMarkAppearTime();
         
@@ -302,7 +302,7 @@ namespace sv {
     
     class SVOpMarkPosition : public SVOpBase {
     public:
-        SVOpMarkPosition(SVInst *_app, FVec3 _pos);
+        SVOpMarkPosition(SVInstPtr _app, FVec3 _pos);
         
         ~SVOpMarkPosition();
         
@@ -313,7 +313,7 @@ namespace sv {
     
     class SVOpMarkEnableRandom : public SVOpBase {
     public:
-        SVOpMarkEnableRandom(SVInst *_app, bool _enable);
+        SVOpMarkEnableRandom(SVInstPtr _app, bool _enable);
         
         ~SVOpMarkEnableRandom();
         
@@ -325,7 +325,7 @@ namespace sv {
     //
     class SVOpOpenPen : public SVOpBase {
     public:
-        SVOpOpenPen(SVInst *_app);
+        SVOpOpenPen(SVInstPtr _app);
         
         ~SVOpOpenPen();
         
@@ -335,7 +335,7 @@ namespace sv {
     //
     class SVOpSetPenEffcet : public SVOpBase {
     public:
-        SVOpSetPenEffcet(SVInst *_app, cptr8 pStrPath);
+        SVOpSetPenEffcet(SVInstPtr _app, cptr8 pStrPath);
         
         ~SVOpSetPenEffcet();
         
@@ -347,7 +347,7 @@ namespace sv {
     //
     class SVOpSavePenEffcet : public SVOpBase {
     public:
-        SVOpSavePenEffcet(SVInst *_app, cptr8 pStrPath);
+        SVOpSavePenEffcet(SVInstPtr _app, cptr8 pStrPath);
         
         ~SVOpSavePenEffcet();
         
@@ -359,7 +359,7 @@ namespace sv {
     //
     class SVOpClearPen : public SVOpBase {
     public:
-        SVOpClearPen(SVInst *_app);
+        SVOpClearPen(SVInstPtr _app);
         
         ~SVOpClearPen();
         
@@ -369,7 +369,7 @@ namespace sv {
     //
     class SVOpPenUndo : public SVOpBase {
     public:
-        SVOpPenUndo(SVInst *_app);
+        SVOpPenUndo(SVInstPtr _app);
         
         ~SVOpPenUndo();
         
@@ -379,7 +379,7 @@ namespace sv {
     //
     class SVOpPenRedo : public SVOpBase {
     public:
-        SVOpPenRedo(SVInst *_app);
+        SVOpPenRedo(SVInstPtr _app);
         
         ~SVOpPenRedo();
         
@@ -389,7 +389,7 @@ namespace sv {
     //
     class SVOpPenUndoIsEnable : public SVOpBase {
     public:
-        SVOpPenUndoIsEnable(SVInst *_app);
+        SVOpPenUndoIsEnable(SVInstPtr _app);
         
         ~SVOpPenUndoIsEnable();
         
@@ -399,7 +399,7 @@ namespace sv {
     //
     class SVOpPenRedoIsEnable : public SVOpBase {
     public:
-        SVOpPenRedoIsEnable(SVInst *_app);
+        SVOpPenRedoIsEnable(SVInstPtr _app);
         
         ~SVOpPenRedoIsEnable();
         
@@ -409,7 +409,7 @@ namespace sv {
     //
     class SVOpPenMode : public SVOpBase {
     public:
-        SVOpPenMode(SVInst *_app, s32 _mode);
+        SVOpPenMode(SVInstPtr _app, s32 _mode);
         
         ~SVOpPenMode();
         
@@ -420,7 +420,7 @@ namespace sv {
 
     class SVOpCreateGameZCMgr : public SVOpBase {
     public:
-        SVOpCreateGameZCMgr(SVInst *_app);
+        SVOpCreateGameZCMgr(SVInstPtr _app);
         
         ~SVOpCreateGameZCMgr();
         
@@ -431,7 +431,7 @@ namespace sv {
     //
     class SVOpEnableTouchAnchor : public SVOpBase {
     public:
-        SVOpEnableTouchAnchor(SVInst *_app);
+        SVOpEnableTouchAnchor(SVInstPtr _app);
         
         ~SVOpEnableTouchAnchor();
         
@@ -441,7 +441,7 @@ namespace sv {
 
     class SVOpDisableTouchAnchor : public SVOpBase {
     public:
-        SVOpDisableTouchAnchor(SVInst *_app);
+        SVOpDisableTouchAnchor(SVInstPtr _app);
         
         ~SVOpDisableTouchAnchor();
         

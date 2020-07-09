@@ -29,8 +29,8 @@
 using namespace sv;
 
 //
-StreamInCore::StreamInCore(SVInst* _app)
-:SVGBase(_app){
+StreamInCore::StreamInCore(SVInstPtr _app)
+:SVGBaseEx(_app){
 //    m_trans = nullptr;
 //    m_showNode = nullptr;
 //    m_tt = E_TEX_END;
@@ -323,7 +323,7 @@ void StreamInCore::_updateTrans(){
 
 /*
  */
-SVStreamIn::SVStreamIn(SVInst *_app)
+SVStreamIn::SVStreamIn(SVInstPtr _app)
 :SVProcess(_app){
 //    m_streamLock = MakeSharedPtr<SVLock>();
 }

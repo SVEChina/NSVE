@@ -33,7 +33,7 @@ namespace sv {
     //改变渲染器尺寸
     class SVOpResizeRenderder : public SVOpBase {
     public:
-        SVOpResizeRenderder(SVInst *_app,s32 _w,s32 _h);
+        SVOpResizeRenderder(SVInstPtr _app,s32 _w,s32 _h);
         
     protected:
         void _process(f32 dt);
@@ -44,7 +44,7 @@ namespace sv {
     //设置GL渲染目标
     class SVOpSetRenderTarget : public SVOpBase {
     public:
-        SVOpSetRenderTarget(SVInst *_app);
+        SVOpSetRenderTarget(SVInstPtr _app);
         
         void setTargetParam(s32 _w,s32 _h,u32 _frameID,u32 _colorID, bool _mirror);
         
@@ -61,7 +61,7 @@ namespace sv {
     //设置渲染目标 -- 纹理
     class SVOpSetRenderTextureTarget : public SVOpBase {
     public:
-        SVOpSetRenderTextureTarget(SVInst *_app);
+        SVOpSetRenderTextureTarget(SVInstPtr _app);
 
         void setTargetParam(s32 _w,s32 _h,u32 _textureId, bool _mirror);
 
@@ -77,7 +77,7 @@ namespace sv {
     
     class SVOpSetRenderMirror: public SVOpBase{
     public:
-        SVOpSetRenderMirror(SVInst *_app);
+        SVOpSetRenderMirror(SVInstPtr _app);
         
         void setTargetParam(bool _mirror);
     protected:

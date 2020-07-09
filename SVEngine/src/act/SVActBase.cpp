@@ -15,7 +15,8 @@ SVActParam::SVActParam(){
     
 }
 
-SVActBase::SVActBase(SVInst* _app):SVGBase(_app) {
+SVActBase::SVActBase(SVInstPtr _app)
+:SVGBaseEx(_app) {
     
 }
 

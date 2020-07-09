@@ -17,7 +17,7 @@ namespace sv {
         
         class SVActSequence : public SVActBase {
         public:
-            SVActSequence(SVInst *_app);
+            SVActSequence(SVInstPtr _app);
             
             ~SVActSequence();
             

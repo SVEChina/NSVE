@@ -17,7 +17,7 @@ namespace sv {
         
         class SVFilterClarity : public SVFilterBase {
         public:
-            SVFilterClarity(SVInst *_app);
+            SVFilterClarity(SVInstPtr _app);
             
             ~SVFilterClarity();
             

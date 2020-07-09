@@ -17,7 +17,7 @@ namespace sv{
     
     class SVProcess : public SVEventProc {
     public:
-        SVProcess(SVInst* _app);
+        SVProcess(SVInstPtr _app);
         
         ~SVProcess();
         

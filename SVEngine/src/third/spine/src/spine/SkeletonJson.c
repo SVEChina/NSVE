@@ -565,6 +565,8 @@ static void _readVertices (spSkeletonJson* self, Json* attachmentMap, spVertexAt
 spSkeletonData* spSkeletonJson_readSkeletonDataFile (void *_app, spSkeletonJson* self, const char* path) {
 	int length;
 	spSkeletonData* skeletonData;
+    //fyz _app 转成shader ptr
+    
 	const char* json = _spUtil_readFile(_app, path, &length);
 	if (length == 0 || !json) {
 		_spSkeletonJson_setError(self, 0, "Unable to read skeleton file: ", path);

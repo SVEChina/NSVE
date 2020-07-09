@@ -16,7 +16,7 @@ namespace sv {
         
         class SVMtlFaceShapeVaried : public SVMtlCore {
         public:
-            SVMtlFaceShapeVaried(SVInst *_app);
+            SVMtlFaceShapeVaried(SVInstPtr _app);
             
             SVMtlFaceShapeVaried(SVMtlFaceShapeVaried *_mtl);
             

@@ -16,7 +16,7 @@ namespace sv{
     
     class SVOutMissionNor : public SVOutMission {
     public:
-        SVOutMissionNor(SVInst* _app,cptr8 _name);
+        SVOutMissionNor(SVInstPtr _app,cptr8 _name);
         
         virtual ~SVOutMissionNor();
         

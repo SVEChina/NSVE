@@ -11,7 +11,7 @@
 using namespace sv;
 
 SVNodePtr
-SVParseBMFont::parseBMFont(SVInst *_app, RAPIDJSON_NAMESPACE::Value &item, s32 _resid, cptr8 _path) {
+SVParseBMFont::parseBMFont(SVInstPtr _app, RAPIDJSON_NAMESPACE::Value &item, s32 _resid, cptr8 _path) {
     SVBMFontNodePtr t_bmFontNode = MakeSharedPtr<SVBMFontNode>(_app);
     t_bmFontNode->m_rootPath = _path;
     t_bmFontNode->fromJSON(item);

@@ -18,7 +18,7 @@ namespace sv {
     //图片处理
     class SVPictureProcess : public SVProcess {
     public:
-        SVPictureProcess(SVInst *_app);
+        SVPictureProcess(SVInstPtr _app);
         
         ~SVPictureProcess();
         //

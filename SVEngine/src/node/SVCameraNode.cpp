@@ -13,7 +13,7 @@
 using namespace sv;
 
 //
-SVCameraNode::SVCameraNode(SVInst *_app)
+SVCameraNode::SVCameraNode(SVInstPtr _app)
 : SVEventProc(_app) {
     m_dirty = true;
     m_resLock = MakeSharedPtr<SVLock>();
@@ -239,7 +239,7 @@ void SVCameraNode::updateViewProj() {
 
 ///*proj camera*/
 //
-//SVCameraProjNode::SVCameraProjNode(SVInst *_app)
+//SVCameraProjNode::SVCameraProjNode(SVInstPtr _app)
 //:SVCameraNode(_app) {
 //    m_fovy = 60.0f;
 //}
@@ -287,7 +287,7 @@ void SVCameraNode::updateViewProj() {
 //}
 //
 ///*ortho camera*/
-//SVCameraOrthoNode::SVCameraOrthoNode(SVInst *_app)
+//SVCameraOrthoNode::SVCameraOrthoNode(SVInstPtr _app)
 //:SVCameraNode(_app)  {
 //    m_p_zn = 100.0f;
 //    m_p_zf = 5000.0f;
@@ -320,7 +320,7 @@ void SVCameraNode::updateViewProj() {
 //}
 //
 ////
-//SVCameraARNode::SVCameraARNode(SVInst *_app)
+//SVCameraARNode::SVCameraARNode(SVInstPtr _app)
 //:SVCameraNode(_app)  {
 //}
 //

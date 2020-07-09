@@ -16,9 +16,9 @@ namespace sv {
     
     
         
-        class SVParseMain : public SVGBase {
+        class SVParseMain : public SVGBaseEx {
         public:
-            SVParseMain(SVInst *_app);
+            SVParseMain(SVInstPtr _app);
             
             virtual ~SVParseMain();
             
@@ -36,7 +36,7 @@ namespace sv {
         protected:
             typedef SVMap<SVString, prase_content_fun> PARSEPOOL;
             PARSEPOOL parse_dictionary;
-            SVInst *m_app;
+            SVInstPtr m_app;
         };
 
         

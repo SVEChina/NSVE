@@ -13,8 +13,8 @@
 
 using namespace sv;
 
-SVRenderState::SVRenderState(SVInst *_app)
-:SVGBase(_app){
+SVRenderState::SVRenderState(SVInstPtr _app)
+:SVGBaseEx(_app){
     m_shaderID = 0;
 }
 

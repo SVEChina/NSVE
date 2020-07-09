@@ -14,7 +14,7 @@ namespace sv {
 
     class SVLineNode : public SVNode {
     public:
-        SVLineNode(SVInst *_app);
+        SVLineNode(SVInstPtr _app);
         
         virtual ~SVLineNode();
         

@@ -59,7 +59,7 @@ namespace sv {
             
         public:
             
-            SVFaceBeautyBase(SVInst *_app);
+            SVFaceBeautyBase(SVInstPtr _app);
             
             ~SVFaceBeautyBase();
             
@@ -103,7 +103,7 @@ namespace sv {
         
         class SVFairDataBlur : public SVFaceBeautyBase {
         public:
-            SVFairDataBlur(SVInst *_app);
+            SVFairDataBlur(SVInstPtr _app);
             
             ~SVFairDataBlur();
             
@@ -135,7 +135,7 @@ namespace sv {
         
         class SVFairLtraLow : public SVFilterBase {
         public:
-            SVFairLtraLow(SVInst *_app);
+            SVFairLtraLow(SVInstPtr _app);
             
             ~SVFairLtraLow();
             

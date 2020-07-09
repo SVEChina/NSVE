@@ -16,7 +16,7 @@ namespace sv{
     
     class SVPythonSys : public SVSysBase {
     public:
-        SVPythonSys(SVInst* _app);
+        SVPythonSys(SVInstPtr _app);
         
         ~SVPythonSys();
         

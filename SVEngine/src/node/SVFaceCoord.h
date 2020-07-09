@@ -17,7 +17,7 @@ namespace sv {
         
         class SVFaceCoord : public SVNode {
         public:
-            SVFaceCoord(SVInst *_app);
+            SVFaceCoord(SVInstPtr _app);
             
             virtual ~SVFaceCoord();
             

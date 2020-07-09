@@ -12,7 +12,7 @@
 
 using namespace sv;
 
-SVMtlBlackWhite::SVMtlBlackWhite(SVInst *_app)
+SVMtlBlackWhite::SVMtlBlackWhite(SVInstPtr _app)
 :SVMtlCore(_app,"filterblackwhite") {
     m_mode = 5.0;
 }

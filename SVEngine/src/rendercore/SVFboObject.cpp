@@ -25,7 +25,7 @@
 
 using namespace sv;
 
-SVFboObject::SVFboObject(SVInst *_app)
+SVFboObject::SVFboObject(SVInstPtr _app)
 :SVRObjBase(_app)
 ,m_link(false){
 }
@@ -159,7 +159,7 @@ void SVFboObject::setViewMat(FMat4 _view) {
 }
 
 //
-SVOutFboObject::SVOutFboObject(SVInst *_app,u32 _fboid)
+SVOutFboObject::SVOutFboObject(SVInstPtr _app,u32 _fboid)
 :SVFboObject(_app){
     m_fboID = _fboid;
 }

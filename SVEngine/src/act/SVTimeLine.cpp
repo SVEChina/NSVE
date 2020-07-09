@@ -20,8 +20,8 @@ u32 SVTimeLine::maxFrame(f32 _time,s32 _rate) {
     return t_value;
 }
 
-SVTimeLine::SVTimeLine(SVInst* _app,f32 _time,s32 _rate)
-:SVGBase(_app){
+SVTimeLine::SVTimeLine(SVInstPtr _app,f32 _time,s32 _rate)
+:SVGBaseEx(_app){
     m_type = E_TL_T_BASE;
     m_accTime = 0.0f;
     m_totalTime = _time;

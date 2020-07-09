@@ -29,7 +29,7 @@ namespace sv {
 
     class SVNode : public SVEventProc {
     public:
-        SVNode(SVInst *_app);
+        SVNode(SVInstPtr _app);
         
         ~SVNode();
         

@@ -23,7 +23,7 @@
 
 using namespace sv;
 
-SVFrameOutTex::SVFrameOutTex(SVInst *_app)
+SVFrameOutTex::SVFrameOutTex(SVInstPtr _app)
 :SVFrameOutNode(_app){
     ntype = "SVFrameOutTex";
     m_pMtl = MakeSharedPtr<SVMtlCore>(mApp,"rgba");

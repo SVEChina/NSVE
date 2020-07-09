@@ -15,7 +15,7 @@ namespace sv {
         
         class SVFilterShake : public SVFilterBase {
         public:
-            SVFilterShake(SVInst *_app);
+            SVFilterShake(SVInstPtr _app);
             
             ~SVFilterShake();
             

@@ -16,7 +16,7 @@ namespace sv {
         
         class SVMtlFlashWhite : public SVMtlCore {
         public:
-            SVMtlFlashWhite(SVInst *_app);
+            SVMtlFlashWhite(SVInstPtr _app);
             
             SVMtlFlashWhite(SVMtlFlashWhite *_mtl);
             

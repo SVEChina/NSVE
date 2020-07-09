@@ -17,7 +17,7 @@ namespace sv {
         
         class SVRGBToneCurveFilter : public SVFilterBase {
         public:
-            SVRGBToneCurveFilter(SVInst *_app);
+            SVRGBToneCurveFilter(SVInstPtr _app);
 
             ~SVRGBToneCurveFilter();
 

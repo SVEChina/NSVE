@@ -15,7 +15,7 @@
 
 using namespace sv;
 
-SVParsePen::SVParsePen(SVInst *_app)
+SVParsePen::SVParsePen(SVInstPtr _app)
 :SVParseData(_app) {
     
 }
@@ -61,7 +61,7 @@ SVModuleBasePtr SVParsePen::parse(cptr8 _path, s32 _resid){
 }
 
 void
-SVParsePen::_parsePen(SVInst *_app, RAPIDJSON_NAMESPACE::Value &_item, s32 _resid, cptr8 _path) {
+SVParsePen::_parsePen(SVInstPtr _app, RAPIDJSON_NAMESPACE::Value &_item, s32 _resid, cptr8 _path) {
     SVString t_name = "sv_pen_module";
     SVModuleBasePtr t_module = mApp->getModuleSys()->getModule(t_name.c_str());
     if (t_module) {
