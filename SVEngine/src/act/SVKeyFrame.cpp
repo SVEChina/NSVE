@@ -12,12 +12,10 @@ using namespace sv;
 
 SVKeyFrame::SVKeyFrame(SVInstPtr _app,u32 _index)
 :SVGBaseEx(_app){
-    m_uid = mApp->m_IDPool.applyUID();
     m_index = _index;
 }
 
 SVKeyFrame::~SVKeyFrame(){
-    mApp->m_IDPool.returnUID(m_uid);
 }
 
 void SVKeyFrame::setIndex(u32 _index) {

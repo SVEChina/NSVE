@@ -8,8 +8,8 @@
 #ifndef SV_RRESGL_SHADER_H
 #define SV_RRESGL_SHADER_H
 
-#include "../SVRObjBase.h"
-#include "../SVResTex.h"
+#include "../SVRRes.h"
+#include "../SVRResTex.h"
 #include "../SVResFBO.h"
 #include "../SVRShader.h"
 #include "../../base/SVPreDeclare.h"

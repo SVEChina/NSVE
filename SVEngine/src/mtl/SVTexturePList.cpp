@@ -28,7 +28,6 @@ SVTexturePList::SVTexturePList(SVInstPtr _app)
 }
 
 SVTexturePList::~SVTexturePList() {
-    mApp->m_IDPool.returnUID(m_uid);
     m_pData = nullptr;
     m_objTexPtr = nullptr;
     m_bCreated = false;
@@ -46,7 +45,7 @@ void SVTexturePList::init(cptr8 _name, s32 _type, s32 _width, s32 _height, s32 _
 
 
 void SVTexturePList::create(SVRendererPtr _renderer){
-    SVRObjBase::create(_renderer);
+    SVRRes::create(_renderer);
     if (!m_bCreated) {
         m_bCreated = true;
         SVRendererPtr t_renderBasePtr = mApp->getRenderer();
@@ -70,7 +69,7 @@ void SVTexturePList::create(SVRendererPtr _renderer){
 }
 
 void SVTexturePList::destroy(SVRendererPtr _renderer){
-    SVRObjBase::destroy(_renderer);
+    SVRRes::destroy(_renderer);
 }
 
 void SVTexturePList::refreshParam(){
@@ -166,7 +165,7 @@ void SVTexturePList::_updateData(){
         }
         if (m_btexSet) {
             m_btexSet = false;
-            SVRObjBasePtr t_tmp_tex = m_texset->getResTex();
+            SVRResPtr t_tmp_tex = m_texset->getResTex();
             SVRGLTexSetPtr t_tmp_texset = std::dynamic_pointer_cast<SVRGLTexSet>(m_objTexPtr);
             if (t_tmp && t_tmp_texset) {
                 t_tmp->bindTexset(t_tmp_texset);
@@ -218,7 +217,7 @@ void SVTextureSet::create(SVRendererPtr _renderer){
 }
 
 void SVTextureSet::destroy(SVRendererPtr _renderer){
-    SVRObjBase::destroy(_renderer);
+    SVRRes::destroy(_renderer);
 }
 
 

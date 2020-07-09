@@ -54,10 +54,10 @@ namespace sv {
             virtual void resize(s32 _w,s32 _h);
             
             //增加渲染内核资源
-            void addRes(SVRObjBasePtr _res);
+            void addRes(SVRResPtr _res);
             
             //移除渲染内核资源
-            void removeRes(SVRObjBasePtr _res);
+            void removeRes(SVRResPtr _res);
             
             //清理渲染内核资源
             void clearRes();
@@ -120,7 +120,7 @@ namespace sv {
             //各种内置纹理
             SVTexturePtr m_svTex[E_TEX_END];
             //渲染内核资源
-            typedef SVArray<SVRObjBasePtr> ROBJLIST;
+            typedef SVArray<SVRResPtr> ROBJLIST;
             ROBJLIST m_robjList;
             //资源锁
             SVLockPtr m_resLock;

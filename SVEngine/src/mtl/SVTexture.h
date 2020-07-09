@@ -9,12 +9,12 @@
 #define SV_TEXTURE_H
 
 #include "SVMtlDef.h"
-#include "../rendercore/SVResTex.h"
+#include "../rendercore/SVRResTex.h"
 #include "../rendercore/SVRenderDef.h"
 
 namespace sv {
     
-        class SVTexture : public SVRObjBase {
+        class SVTexture : public SVRRes {
         public:
             SVTexture(SVInstPtr _app);
             
@@ -48,11 +48,11 @@ namespace sv {
             
             s32 getdataformate();
             
-            SVResTexPtr getResTex();
+            SVRResTexPtr getResTex();
             
         protected:
             void _updateData();
-            SVResTexPtr m_objTexPtr;
+            SVRResTexPtr m_objTexPtr;
             SVString m_name;
             s32   m_type;
             s32   m_width;
@@ -63,7 +63,6 @@ namespace sv {
             bool  m_bEnableMipMap;
             bool  m_bCreated;
             SVDataSwapPtr m_pData;
-            u32   m_uid;          //唯一ID对象
             
         public:
             virtual void pushData(u8* _srcPtr,s32 _w,s32 _h,s32 _pixelformate){}

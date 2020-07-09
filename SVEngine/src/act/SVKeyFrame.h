@@ -24,8 +24,6 @@ namespace sv {
             SVKeyFrame(SVInstPtr _app,u32 _index);
             
             ~SVKeyFrame();
-
-            inline u32 getUID(){ return m_uid; }
             
             void setIndex(u32 _index);
             
@@ -38,9 +36,6 @@ namespace sv {
             void fromJSON(RAPIDJSON_NAMESPACE::Value &item);
             
         protected:
-            
-            u32 m_uid;
-            
             u32 m_index; //key索引
             
             void _toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_alloc,

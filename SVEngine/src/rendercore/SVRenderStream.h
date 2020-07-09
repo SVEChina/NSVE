@@ -9,6 +9,7 @@
 #define SV_RENDER_STREAM_H
 
 #include "../base/SVObject.h"
+#include "../work/SVWorkDeclare.h"
 #include "SVRenderDeclare.h"
 
 namespace sv {
@@ -30,7 +31,7 @@ namespace sv {
         void render(SVRendererPtr _renderer);
         
     protected:
-        SVLockPtr m_lock;
+        SVLockSpinPtr m_lock;
         //数据流
         typedef SVArray<SVRenderCmdPtr> CMDPOOL;
         CMDPOOL m_cmdArray;

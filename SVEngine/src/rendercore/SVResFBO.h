@@ -8,12 +8,12 @@
 #ifndef SVResFBO_h
 #define SVResFBO_h
 
-#include "SVRObjBase.h"
+#include "SVRRes.h"
 #include "../base/SVPreDeclare.h"
 
 namespace sv {
     
-        class SVResFBO: public SVRObjBase{
+        class SVResFBO: public SVRRes{
         public:
             SVResFBO(SVInstPtr _app);
             
@@ -24,7 +24,6 @@ namespace sv {
             virtual void destroy(SVRendererPtr _renderer);
             
         protected:
-            u32     m_uid;          //唯一ID对象
             SVLockPtr m_texLock;
         };
         

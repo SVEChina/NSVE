@@ -1,22 +1,22 @@
 //
-// SVResTex.h
+// SVRResTex.h
 // SVEngine
 // Copyright 2017-2020
 // yizhou Fu,long Yin,longfei Lin,ziyu Xu,xiaofan Li,daming Li
 //
 
-#ifndef SVResTex_h
-#define SVResTex_h
+#ifndef SVRResTex_h
+#define SVRResTex_h
 
-#include "SVRObjBase.h"
+#include "SVRRes.h"
 
 namespace sv {
     
-        class SVResTex: public SVRObjBase{
+        class SVRResTex: public SVRRes{
         public:
-            SVResTex(SVInstPtr _app);
+            SVRResTex(SVInstPtr _app);
             
-            virtual ~SVResTex();
+            virtual ~SVRResTex();
             
             virtual void create(SVRendererPtr _renderer);
             
@@ -41,14 +41,12 @@ namespace sv {
             inline s32 getinformate(){ return m_informate; }
             inline s32 getdataformate(){ return m_dataformate; }
             inline u32  getTexID(){ return m_id; }
-            inline u32  getuid(){ return m_uid; }
             inline bool getbLoad(){ return m_bLoad; }
             inline bool getMipMap(){ return m_enableMipMap; }
             
         protected:
             SVString m_name;
             SVLockPtr m_texLock;
-            u32     m_uid;          //唯一ID对象
             u32     m_id;           //纹理ID
             s32     m_type;         //类型
             s32     m_width;        //宽
@@ -63,4 +61,4 @@ namespace sv {
 }//!namespace sv
 
 
-#endif /* SVResTex_h */
+#endif /* SVRResTex_h */

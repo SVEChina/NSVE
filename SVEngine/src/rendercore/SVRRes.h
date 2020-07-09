@@ -1,5 +1,5 @@
 //
-// SVRObjBase.h
+// SVRRes.h
 // SVEngine
 // Copyright 2017-2020
 // yizhou Fu,long Yin,longfei Lin,ziyu Xu,xiaofan Li,daming Li
@@ -12,26 +12,19 @@
 #include "../base/SVPreDeclare.h"
 #include "SVRenderDef.h"
 
-//渲染中间件基类
+//渲染资源对象
 
 namespace sv {
         
-    class SVRObjBase: public SVGBaseEx {
+    class SVRRes: public SVGBaseEx {
     public:
-        SVRObjBase(SVInstPtr _app);
+        SVRRes(SVInstPtr _app);
         
-        virtual ~SVRObjBase();
+        virtual ~SVRRes();
         
         virtual void create(SVRendererPtr _renderer);
         
         virtual void destroy(SVRendererPtr _renderer);
-        
-        virtual void setData(SVDataSwapPtr _pdata);
-        
-        virtual void process();     //处理
-        
-    protected:
-        SVDataSwapPtr m_pData;      //数据
     };
         
 }//!namespace sv

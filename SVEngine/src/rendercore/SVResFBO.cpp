@@ -13,12 +13,10 @@
 using namespace sv;
 
 SVResFBO::SVResFBO(SVInstPtr _app)
-:SVRObjBase(_app){
-    m_uid = mApp->m_IDPool.applyUID();
+:SVRRes(_app){
 }
 
 SVResFBO:: ~SVResFBO(){
-    mApp->m_IDPool.returnUID(m_uid);
 }
 
 void SVResFBO::create(SVRendererPtr _renderer){

@@ -13,11 +13,11 @@
 using namespace sv;
 
 SVRenderStream::SVRenderStream() {
-    //m_lock = MakeSharedPtr<SVLock>();
+    m_lock = MakeSharedPtr<SVLockSpin>();
 }
 
 SVRenderStream::~SVRenderStream() {
-    //m_lock = nullptr;
+    m_lock = nullptr;
 }
 
 void SVRenderStream::addRenderCmd(SVRenderCmdPtr cmd) {

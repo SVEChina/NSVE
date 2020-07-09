@@ -18,6 +18,7 @@
 #include "../basesys/SVConfig.h"
 #include "../basesys/SVStaticData.h"
 #include "../app/SVInst.h"
+#include "../env/SVCtxBase.h"
 
 using namespace sv;
 
@@ -73,6 +74,10 @@ void SVRenderMgr::render(){
     if(!t_renderer){
         return;
     }
+    if( mApp->m_ctx ) {
+       // mApp->m_ctx->
+    }
+    
     //激活
     //创建流
     if(m_stream_create) {
@@ -160,7 +165,7 @@ void SVRenderMgr::swapData(){
 //    m_logicLock->unlock();
 }
 
-void SVRenderMgr::pushRCmdCreate(SVRObjBasePtr _robj){
+void SVRenderMgr::pushRCmdCreate(SVRResPtr _robj){
     m_logicLock->lock();
     if(_robj){
 //        SVRCmdCreatePtr t_cmd= MakeSharedPtr<SVRCmdCreate>(_robj);

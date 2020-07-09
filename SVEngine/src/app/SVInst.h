@@ -10,6 +10,7 @@
 
 #include "../base/SVIDPool.h"
 #include "../rendercore/SVRenderDeclare.h"
+#include "../env/SVEnvDeclare.h"
 #include "SVGlobalMgr.h"
 #include "SVGlobalParam.h"
 
@@ -68,7 +69,9 @@ namespace sv {
         //渲染器
         SVRendererPtr m_pRM;
         //
-        SVRPathPtr m_pRPath;
+        //SVRPathPtr m_pRPath;
+        //渲染环境
+        SVCtxBasePtr m_ctx;
         //
         SV_STATE m_svst;
         //

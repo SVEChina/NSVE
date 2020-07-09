@@ -34,7 +34,7 @@ SVRenderTexture::~SVRenderTexture() {
 }
 
 void SVRenderTexture::create(SVRendererPtr _renderer) {
-    SVRObjBase::create(_renderer);
+    SVRRes::create(_renderer);
     SVRendererGLPtr t_renderGLPtr = std::dynamic_pointer_cast<SVRendererGL>(_renderer);
     if (t_renderGLPtr) {
         //渲染器类型E_RENDERER_GLES,
@@ -62,7 +62,7 @@ void SVRenderTexture::destroy(SVRendererPtr _renderer) {
     if (m_objFBOPtr) {
         m_objFBOPtr->destroy(_renderer);
     }
-    SVRObjBase::destroy(_renderer);
+    SVRRes::destroy(_renderer);
 }
 
 void SVRenderTexture::setTexture(SVTexturePtr _tex) {

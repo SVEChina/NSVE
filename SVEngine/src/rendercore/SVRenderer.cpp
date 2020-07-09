@@ -14,7 +14,7 @@
 #include "SVRenderMgr.h"
 #include "SVRTarget.h"
 #include "SVRenderTexture.h"
-#include "SVRObjBase.h"
+#include "SVRRes.h"
 #include "SVRenderState.h"
 
 using namespace sv;
@@ -72,23 +72,23 @@ void SVRenderer::resize(s32 _w,s32 _) {
 void SVRenderer::clearRes() {
     m_resLock->lock();
     for(s32 i=0;i<m_robjList.size();i++) {
-        SVRObjBasePtr t_robj = m_robjList[i];
+        SVRResPtr t_robj = m_robjList[i];
         t_robj->destroy(nullptr);
     }
     m_robjList.destroy();
     m_resLock->unlock();
 }
 
-void SVRenderer::addRes(SVRObjBasePtr _res) {
+void SVRenderer::addRes(SVRResPtr _res) {
     m_resLock->lock();
     m_robjList.append(_res);
     m_resLock->unlock();
 }
 
-void SVRenderer::removeRes(SVRObjBasePtr _res) {
+void SVRenderer::removeRes(SVRResPtr _res) {
     m_resLock->lock();
     for(s32 i=0;i<m_robjList.size();i++) {
-        SVRObjBasePtr t_robj = m_robjList[i];
+        SVRResPtr t_robj = m_robjList[i];
         if(t_robj == _res) {
             t_robj->destroy(nullptr);
             m_robjList.removeForce(i);

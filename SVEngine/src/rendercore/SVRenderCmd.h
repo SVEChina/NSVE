@@ -47,14 +47,14 @@ namespace sv {
         //创建指令
         class SVRCmdCreate : public SVRenderCmd {
         public:
-            SVRCmdCreate(SVRObjBasePtr _robj);
+            SVRCmdCreate(SVRResPtr _robj);
             
             ~SVRCmdCreate();
             
             virtual void render(SVRendererPtr _renderer);
             
         protected:
-            SVRObjBasePtr m_pRObj;
+            SVRResPtr m_pRObj;
         };
 
         //普通渲染命令

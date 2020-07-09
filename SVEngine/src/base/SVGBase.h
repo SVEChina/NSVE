@@ -21,9 +21,12 @@ namespace sv {
         SVGBaseEx(SVInstPtr _app);
     
         ~SVGBaseEx();
-    
+        
+        inline u32 getUID(){ return m_uid; }
+        
     protected:
         SVInstPtr mApp;
+        u32 m_uid;          //唯一对象id
     };
     
 }//!namespace sv

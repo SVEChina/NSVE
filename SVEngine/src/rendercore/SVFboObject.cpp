@@ -26,7 +26,7 @@
 using namespace sv;
 
 SVFboObject::SVFboObject(SVInstPtr _app)
-:SVRObjBase(_app)
+:SVRRes(_app)
 ,m_link(false){
 }
 
@@ -34,7 +34,7 @@ SVFboObject::~SVFboObject() {
 }
 
 void SVFboObject::create(SVRendererPtr _renderer){
-    SVRObjBase::create(_renderer);
+    SVRRes::create(_renderer);
     SVRendererPtr t_renderBasePtr = mApp->getRenderer();
     SVRendererGLPtr t_renderGLPtr = std::dynamic_pointer_cast<SVRendererGL>(t_renderBasePtr);
     if (t_renderGLPtr) {
@@ -61,7 +61,7 @@ void SVFboObject::destroy(SVRendererPtr _renderer) {
     if (m_objFBOPtr) {
         m_objFBOPtr->destroy(_renderer);
     }
-    SVRObjBase::destroy(_renderer);
+    SVRRes::destroy(_renderer);
 }
 
 void SVFboObject::refresh() {
@@ -170,7 +170,7 @@ SVOutFboObject::~SVOutFboObject() {
 
 void SVOutFboObject::create(SVRendererPtr _renderer){
     //外部设置的FBO 直接使用外部的就好
-    SVRObjBase::create(_renderer);
+    SVRRes::create(_renderer);
     SVRendererPtr t_renderBasePtr = mApp->getRenderer();
     SVRendererGLPtr t_renderGLPtr = std::dynamic_pointer_cast<SVRendererGL>(t_renderBasePtr);
     if (t_renderGLPtr) {
@@ -197,6 +197,6 @@ void SVOutFboObject::destroy(SVRendererPtr _renderer){
     if (m_objFBOPtr) {
         m_objFBOPtr->destroy(_renderer);
     }
-    SVRObjBase::destroy(_renderer);
+    SVRRes::destroy(_renderer);
 }
 

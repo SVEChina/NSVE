@@ -8,7 +8,7 @@
 #ifndef SV_RESMETAL_TEX_H
 #define SV_RESMETAL_TEX_H
 
-#include "../SVResTex.h"
+#include "../SVRResTex.h"
 #include "../SVRShader.h"
 #import <Metal/MTLTexture.h>
 #import <Metal/MTLBuffer.h>
@@ -20,7 +20,7 @@ namespace sv {
         /*
         纹理资源
          */
-        class SVRMetalTex: public SVResTex {
+        class SVRMetalTex: public SVRResTex {
         public:
             SVRMetalTex(SVInstPtr _app);
             

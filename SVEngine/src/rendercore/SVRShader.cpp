@@ -13,7 +13,7 @@
 using namespace sv;
 
 SVRShader::SVRShader(SVInstPtr _app)
-:SVGBaseEx(_app){
+:SVRRes(_app){
     m_attri_formate = "all";
 }
 

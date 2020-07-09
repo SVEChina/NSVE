@@ -8,17 +8,15 @@
 #ifndef SV_FBOOBJECT_H
 #define SV_FBOOBJECT_H
 
-#include "SVRObjBase.h"
+#include "SVRRes.h"
 #include "SVResFBO.h"
 #include "SVRenderDef.h"
 #include "../base/SVColor.h"
 #include "../base/SVMat4.h"
 
 namespace sv {
-    
-    
         
-        class SVFboObject : public SVRObjBase {
+        class SVFboObject : public SVRRes {
         public:
             SVFboObject(SVInstPtr _app);
             

@@ -17,7 +17,6 @@ SVTextureIOS::SVTextureIOS(SVInstPtr _app)
 }
 
 SVTextureIOS::~SVTextureIOS() {
-    mApp->m_IDPool.returnUID(m_uid);
     m_pData = nullptr;
     m_objTexPtr = nullptr;
     m_bCreated = false;
@@ -34,7 +33,7 @@ void SVTextureIOS::init(cptr8 _name, s32 _type, s32 _width, s32 _height, s32 _in
 
 
 void SVTextureIOS::create(SVRendererPtr _renderer){
-    SVRObjBase::create(_renderer);
+    SVRRes::create(_renderer);
     if (!m_bCreated) {
         m_bCreated = true;
         SVRendererPtr t_renderBasePtr = mApp->getRenderer();
@@ -61,7 +60,7 @@ void SVTextureIOS::destroy(SVRendererPtr _renderer){
     if (m_objTexPtr) {
         m_objTexPtr->destroy(_renderer);
     }
-    SVRObjBase::destroy(_renderer);
+    SVRRes::destroy(_renderer);
 }
 
 void SVTextureIOS::pushData(u8* _srcPtr,s32 _w,s32 _h,s32 _pixelformate){

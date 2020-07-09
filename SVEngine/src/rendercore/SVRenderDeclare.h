@@ -15,7 +15,7 @@ namespace sv {
     
     //渲染资源
     DECLARE_SHAREPTR(SVRRes);
-    DECLARE_SHAREPTR(SVResTex);
+    DECLARE_SHAREPTR(SVRResTex);
     DECLARE_SHAREPTR(SVResFBO);
     DECLARE_SHAREPTR(SVResVBO);
     DECLARE_SHAREPTR(SVRShader);
@@ -99,7 +99,7 @@ namespace sv {
     DECLARE_SHAREPTR(SVRenderCmdCircleSolid);
     
     //renderobject
-    DECLARE_SHAREPTR(SVRObjBase);
+    DECLARE_SHAREPTR(SVRRes);
     DECLARE_SHAREPTR(SVRenderObject);
     DECLARE_SHAREPTR(SVMultPassRenderObject);
     DECLARE_SHAREPTR(SVMultMeshRenderObject);

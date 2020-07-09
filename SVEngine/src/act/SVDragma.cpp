@@ -17,7 +17,6 @@ using namespace sv;
 SVDragma::SVDragma(SVInstPtr _app)
 :SVGBaseEx(_app){
     m_lock = MakeSharedPtr<SVLock>();
-    m_uid = mApp->m_IDPool.applyUID();
     m_timeLinePool.resize(E_TL_T_MAX);
     for(s32 i=0;i<E_TL_T_MAX;i++) {
         m_timeLinePool[i] = nullptr;
@@ -29,7 +28,7 @@ SVDragma::~SVDragma() {
     for(s32 i=0;i<E_TL_T_MAX;i++) {
         m_timeLinePool[i] = nullptr;
     }
-    mApp->m_IDPool.returnUID(m_uid);
+   
     m_node = nullptr;
     m_lock = nullptr;
 }

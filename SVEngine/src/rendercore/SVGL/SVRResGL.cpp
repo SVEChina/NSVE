@@ -23,8 +23,9 @@
 using namespace sv;
 
 SVRGLTex::SVRGLTex(SVInstPtr _app)
-        :SVResTex(_app){
+:SVRResTex(_app){
     m_bLoad = false;
+    m_pData = nullptr;
     m_enableMipMap = false;
     m_name = "";
     m_id = 0;
@@ -40,7 +41,7 @@ SVRGLTex::~SVRGLTex(){
 }
 
 void SVRGLTex:: create(SVRendererPtr _renderer) {
-    SVRObjBase::create(_renderer);
+    SVRRes::create(_renderer);
     SV_LOG_INFO("SVRGLTex create %d ",m_uid);
     if( m_id == 0 ){
         m_bLoad = true;
@@ -58,15 +59,15 @@ void SVRGLTex:: create(SVRendererPtr _renderer) {
                          m_pData->getData());
             
         }else{
-                glTexImage2D(GL_TEXTURE_2D,
-                             0,
-                             m_informate,
-                             m_width,
-                             m_height,
-                             0,
-                             m_dataformate,
-                             GL_UNSIGNED_BYTE,
-                             nullptr);
+            glTexImage2D(GL_TEXTURE_2D,
+                         0,
+                         m_informate,
+                         m_width,
+                         m_height,
+                         0,
+                         m_dataformate,
+                         GL_UNSIGNED_BYTE,
+                         nullptr);
         }
         m_pData = nullptr;
         if (m_enableMipMap) {
@@ -83,7 +84,7 @@ void SVRGLTex:: create(SVRendererPtr _renderer) {
 }
 
 void SVRGLTex::destroy(SVRendererPtr _renderer) {
-    SVRObjBase::destroy(_renderer);
+    SVRRes::destroy(_renderer);
     if(m_id>0){
         glDeleteTextures(1, &m_id);
         m_id = 0;
@@ -119,9 +120,9 @@ void SVRGLTex::commit() {
 void SVRGLTex::setTexData(void *_data, s32 _len){
     m_texLock->lock();
     if( _data && _len>0 ) {
-        SVDataSwapPtr t_pDataSwap = MakeSharedPtr<SVDataSwap>();
-        t_pDataSwap->writeData(_data, _len);
-        setData(t_pDataSwap);
+//        SVDataSwapPtr t_pDataSwap = MakeSharedPtr<SVDataSwap>();
+//        t_pDataSwap->writeData(_data, _len);
+//        setData(t_pDataSwap);
     }
     m_texLock->unlock();
 }
@@ -136,7 +137,7 @@ SVRGLTexWithTexID::~SVRGLTexWithTexID(){
 }
 
 void SVRGLTexWithTexID:: create(SVRendererPtr _renderer) {
-    SVRObjBase::create(_renderer);
+    SVRRes::create(_renderer);
     m_bLoad = true;
     glBindTexture(GL_TEXTURE_2D, m_id);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -146,7 +147,7 @@ void SVRGLTexWithTexID:: create(SVRendererPtr _renderer) {
 }
 
 void SVRGLTexWithTexID::destroy(SVRendererPtr _renderer) {
-    SVRObjBase::destroy(_renderer);
+    SVRRes::destroy(_renderer);
     if(m_id>0){
         m_id = 0;
     }
@@ -256,7 +257,7 @@ SVRGLTexiOS::~SVRGLTexiOS() {
 void SVRGLTexiOS::create(SVRendererPtr _renderer){
     if(!_renderer)
         return ;
-    SVRObjBase::create(_renderer);
+    SVRRes::create(_renderer);
 #ifdef SV_IOS
 //    SVCtxBasePtr t_contextbase = _renderer->getRenderContext();
 //    CVEAGLContext t_glcontext = CVEAGLContext((__bridge id)t_contextbase->getContext());
@@ -333,7 +334,7 @@ void SVRGLTexiOS::destroy(SVRendererPtr _renderer){
         m_pTexCacheRef = nullptr;
     }
 #endif
-    SVRObjBase::destroy(_renderer);
+    SVRRes::destroy(_renderer);
 }
 
 void SVRGLTexiOS::pushData(u8* _srcPtr,s32 _w,s32 _h,s32 _pixelformate){
@@ -404,7 +405,7 @@ SVRResGLFBO::~SVRResGLFBO(){
 }
 
 void SVRResGLFBO::create(SVRendererPtr _renderer){
-    SVRObjBase::create(_renderer);
+    SVRRes::create(_renderer);
     glGenFramebuffers(1,&m_fboID);
     _bindColor();
     _bindDepth();
@@ -453,7 +454,7 @@ void SVRResGLFBO::destroy(SVRendererPtr _renderer){
         m_depthID = 0;
         m_fboID = 0;
     }
-    SVRObjBase::destroy(_renderer);
+    SVRRes::destroy(_renderer);
 }
 
 void SVRResGLFBO::_bindColor() {

@@ -30,7 +30,7 @@ namespace sv {
             
             void destroy();
             
-            inline u32 getUID(){ return m_uid; }
+            
             
             void update(f32 dt);  //循环action
             
@@ -58,7 +58,6 @@ namespace sv {
         protected:
             typedef SVArray<SVTimeLinePtr> TLPOOL;
             TLPOOL m_timeLinePool;
-            u32 m_uid;
             //绑定的剧本
             SVLockPtr m_lock;
             SVNodePtr m_node;

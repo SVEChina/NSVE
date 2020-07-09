@@ -8,7 +8,7 @@
 #ifndef SV_RESSHADER_H
 #define SV_RESSHADER_H
 
-#include "SVRObjBase.h"
+#include "SVRRes.h"
 #include "../base/SVPreDeclare.h"
 
 /*
@@ -76,13 +76,14 @@
 
 #define NAME_BLENDMODE  "blendmode"
 #define NAME_POINTSIZE  "ptsize"
-//渲染资源
+
+/*
+ 渲染资源 shader
+*/
 
 namespace sv {
     
-    
-        
-        class SVRShader: public SVGBaseEx{
+        class SVRShader: public SVRRes{
         public:
             SVRShader(SVInstPtr _app);
             

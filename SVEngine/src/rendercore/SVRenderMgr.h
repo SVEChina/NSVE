@@ -40,7 +40,7 @@ namespace sv {
 
         void swapData();
 
-        void pushRCmdCreate(SVRObjBasePtr _robj);
+        void pushRCmdCreate(SVRResPtr _robj);
         
         void addRTarget(SVRTargetPtr _rt,bool _pre);
         

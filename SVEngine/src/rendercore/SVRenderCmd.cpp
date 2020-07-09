@@ -51,7 +51,7 @@ void SVRenderCmdTransGPU::render() {
     }
 }
 //创建指令
-SVRCmdCreate::SVRCmdCreate(SVRObjBasePtr _robj) {
+SVRCmdCreate::SVRCmdCreate(SVRResPtr _robj) {
     m_pRObj = _robj;
 }
 

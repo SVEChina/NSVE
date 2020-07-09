@@ -8,8 +8,8 @@
 #ifndef SV_RRESGL_H
 #define SV_RRESGL_H
 
-#include "../SVRObjBase.h"
-#include "../SVResTex.h"
+#include "../SVRRes.h"
+#include "../SVRResTex.h"
 #include "../SVResFBO.h"
 #include "../SVRShader.h"
 #include "../../base/SVPreDeclare.h"
@@ -19,10 +19,8 @@
 
 namespace sv {
 
-    
-
         //纹理资源
-        class SVRGLTex: public SVResTex {
+        class SVRGLTex: public SVRResTex {
         public:
             SVRGLTex(SVInstPtr _app);
 
@@ -35,6 +33,8 @@ namespace sv {
             virtual void setTexData(void *_data, s32 _len);
 
             virtual void commit();  //数据提交到显卡
+            
+            SVDataSwapPtr m_pData;
         };
         
         class SVRGLTexWithTexID: public SVRGLTex {

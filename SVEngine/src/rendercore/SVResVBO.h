@@ -8,7 +8,7 @@
 #ifndef SV_RESVBO_h
 #define SV_RESVBO_h
 
-#include "SVRObjBase.h"
+#include "SVRRes.h"
 #include "../base/SVPreDeclare.h"
 #include "../core/SVVertDef.h"
 
@@ -50,7 +50,7 @@ namespace sv {
         };
         
         //
-        class SVResVBO: public SVRObjBase{
+        class SVResVBO: public SVRRes{
         public:
             static int getVertexFormateSize(VFTYPE _type);
             
@@ -67,9 +67,6 @@ namespace sv {
             virtual void updateConf(RENDERMESHCONF& _conf);
             
             virtual void updateData(RENDERMESHDATA& _data);
-            
-        protected:
-            u32 m_uid;
         };
         
     

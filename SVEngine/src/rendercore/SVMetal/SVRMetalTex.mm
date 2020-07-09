@@ -22,7 +22,7 @@ using namespace sv;
 
 //tex资源
 SVRMetalTex::SVRMetalTex(SVInstPtr _app)
-:SVResTex(_app)
+:SVRResTex(_app)
 ,m_srcTex(nullptr){
     
 }
@@ -31,7 +31,7 @@ SVRMetalTex::~SVRMetalTex(){
 }
 
 void SVRMetalTex:: create(SVRendererPtr _renderer) {
-    SVResTex::create(_renderer);
+    SVRResTex::create(_renderer);
     SVRendererMetalPtr t_rendeMetalPtr = std::dynamic_pointer_cast<SVRendererMetal>(_renderer);
     if (t_rendeMetalPtr) {
         MTLTextureDescriptor *dsp = [MTLTextureDescriptor texture2DDescriptorWithPixelFormat:MTLPixelFormatRGBA8Unorm width:m_width height:m_height mipmapped:m_enableMipMap];
@@ -43,30 +43,19 @@ void SVRMetalTex:: create(SVRendererPtr _renderer) {
         region.size.width = m_width;
         region.size.height = m_height;
         region.size.depth = 1;
-        if(m_pData) {
-            m_bLoad = true;
-            m_pData->lockData();
-            [m_srcTex replaceRegion:region mipmapLevel:0 withBytes:m_pData->getData()
-                        bytesPerRow:4*m_width];
-            m_pData->unlockData();
-            m_pData = nullptr;
-        }
+//        if(m_pData) {
+//            m_bLoad = true;
+//            m_pData->lockData();
+//            [m_srcTex replaceRegion:region mipmapLevel:0 withBytes:m_pData->getData()
+//                        bytesPerRow:4*m_width];
+//            m_pData->unlockData();
+//            m_pData = nullptr;
+//        }
     }
-    ////        if( m_id == 0 ){
-    ////            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
-    ////            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    ////            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    ////            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    ////            if (m_enableMipMap) {
-    ////                glGenerateMipmap(GL_TEXTURE_2D);
-    ////                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-    ////                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-    ////            }
-    ////        }
 }
 
 void SVRMetalTex::destroy(SVRendererPtr _renderer) {
-    SVResTex::destroy(_renderer);
+    SVRResTex::destroy(_renderer);
     if(m_id>0){
         //        glDeleteTextures(1, &m_id);
         //        m_id = 0;
@@ -105,10 +94,6 @@ void SVRMetalTex::setTexData(void *_data, s32 _len){
 
 u32 SVRMetalTex::getTexID(){
     return m_id;
-}
-
-u32 SVRMetalTex::getuid(){
-    return m_uid;
 }
 
 bool SVRMetalTex::getbLoad() {

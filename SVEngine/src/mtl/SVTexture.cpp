@@ -21,8 +21,7 @@
 using namespace sv;
 
 SVTexture::SVTexture(SVInstPtr _app)
-: SVRObjBase(_app) {
-    m_uid = mApp->m_IDPool.applyUID();
+: SVRRes(_app) {
     m_name = "";
     m_bData = false;
     m_bEnableMipMap = false;
@@ -37,7 +36,6 @@ SVTexture::SVTexture(SVInstPtr _app)
 }
 
 SVTexture::~SVTexture() {
-    mApp->m_IDPool.returnUID(m_uid);
     m_pData = nullptr;
     m_objTexPtr = nullptr;
     m_bCreated = false;
@@ -45,7 +43,7 @@ SVTexture::~SVTexture() {
 
 void SVTexture::create(SVRendererPtr _renderer){
     SV_LOG_INFO("texture create id %d \n",m_uid);
-    SVRObjBase::create(_renderer);
+    SVRRes::create(_renderer);
     if (!m_bCreated) {
         m_bCreated = true;
         SVRendererPtr t_renderBasePtr = mApp->getRenderer();
@@ -94,7 +92,7 @@ void SVTexture::destroy(SVRendererPtr _renderer){
     if (m_objTexPtr) {
         m_objTexPtr->destroy(_renderer);
     }
-    SVRObjBase::destroy(_renderer);
+    SVRRes::destroy(_renderer);
 }
 
 void SVTexture::setTexData(void *_data, s32 _len){
@@ -124,11 +122,6 @@ bool SVTexture::getbLoad(){
         return m_objTexPtr->getbLoad();
     }
     return 0;
-}
-
-u32 SVTexture::getuid(){
-   
-    return m_uid;
 }
 
 cptr8 SVTexture::getname(){
@@ -178,12 +171,11 @@ void SVTexture::_updateData(){
     }
 }
 
-SVResTexPtr SVTexture::getResTex(){
+SVRResTexPtr SVTexture::getResTex(){
     return m_objTexPtr;
 }
 //
 SVTextureInputTexID::SVTextureInputTexID(SVInstPtr _app, s32 _texID):SVTexture(_app){
-    m_uid = mApp->m_IDPool.applyUID();
     m_name = "";
     m_bData = false;
     m_width = 1;
@@ -195,7 +187,6 @@ SVTextureInputTexID::SVTextureInputTexID(SVInstPtr _app, s32 _texID):SVTexture(_
 }
 
 SVTextureInputTexID::~SVTextureInputTexID(){
-    mApp->m_IDPool.returnUID(m_uid);
     m_pData = nullptr;
     m_texID = 0;
 }
@@ -210,7 +201,7 @@ void SVTextureInputTexID::init(cptr8 _name, s32 _type, s32 _width, s32 _height, 
 }
 
 void SVTextureInputTexID::create(SVRendererPtr _renderer){
-    SVRObjBase::create(_renderer);
+    SVRRes::create(_renderer);
     SVRendererPtr t_renderBasePtr = mApp->getRenderer();
     SVRendererGLPtr t_renderGLPtr = std::dynamic_pointer_cast<SVRendererGL>(t_renderBasePtr);
     if (t_renderGLPtr) {
@@ -252,5 +243,5 @@ void SVTextureInputTexID::destroy(SVRendererPtr _renderer){
     if (m_objTexPtr) {
         m_objTexPtr->destroy(_renderer);
     }
-    SVRObjBase::destroy(_renderer);
+    SVRRes::destroy(_renderer);
 }
