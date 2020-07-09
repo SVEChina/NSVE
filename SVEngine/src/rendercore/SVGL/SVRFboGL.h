@@ -5,10 +5,10 @@
 // yizhou Fu,long Yin,longfei Lin,ziyu Xu,xiaofan Li,daming Li
 //
 
-#ifndef SV_RENDERTARGET_GL_H
-#define SV_RENDERTARGET_GL_H
+#ifndef SV_RFBO_GL_H
+#define SV_RFBO_GL_H
 
-#include "../SVRTarget.h"
+#include "../SVRFbo.h"
 
 namespace sv {
     
@@ -17,11 +17,11 @@ namespace sv {
      渲染目标（主目标，其他目标，都包含在内）
      */
 
-    class SVRTargetGL  : public SVRTarget {
+    class SVRFboGL  : public SVRFbo {
     public:
-        SVRTargetGL(SVInstPtr _app);
+        SVRFboGL(SVInstPtr _app);
         
-        ~SVRTargetGL();
+        ~SVRFboGL();
         
     protected:
         void _preRender(SVRendererPtr _renderer);
@@ -36,4 +36,4 @@ namespace sv {
 
 
 
-#endif //SV_RENDERTARGET_GL_H
+#endif //SV_RFBO_GL_H

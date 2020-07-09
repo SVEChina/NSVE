@@ -10,7 +10,7 @@
 #include "../rendercore/SVRenderMgr.h"
 #include "../work/SVTdCore.h"
 #include "../rendercore/SVGL/SVRendererGL.h"
-#include "../rendercore/SVGL/SVRResGL.h"
+#include "../rendercore/SVGL/SVRTexGL.h"
 #include "../rendercore/SVVulkan/SVRendererVK.h"
 
 using namespace sv;

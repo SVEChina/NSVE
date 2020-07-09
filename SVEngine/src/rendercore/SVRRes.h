@@ -9,7 +9,7 @@
 #define SV_ROBJBASE_H
 
 #include "../base/SVGBase.h"
-#include "../base/SVPreDeclare.h"
+#include "SVRenderDeclare.h"
 #include "SVRenderDef.h"
 
 //渲染资源对象

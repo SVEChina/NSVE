@@ -73,7 +73,7 @@ void SVRenderer::clearRes() {
     m_resLock->lock();
     for(s32 i=0;i<m_robjList.size();i++) {
         SVRResPtr t_robj = m_robjList[i];
-        t_robj->destroy(nullptr);
+        t_robj->destroy( std::dynamic_pointer_cast<SVRenderer>(shareObject())  );
     }
     m_robjList.destroy();
     m_resLock->unlock();
@@ -90,7 +90,7 @@ void SVRenderer::removeRes(SVRResPtr _res) {
     for(s32 i=0;i<m_robjList.size();i++) {
         SVRResPtr t_robj = m_robjList[i];
         if(t_robj == _res) {
-            t_robj->destroy(nullptr);
+            t_robj->destroy( std::dynamic_pointer_cast<SVRenderer>(shareObject())  );
             m_robjList.removeForce(i);
             break;
         }
@@ -112,6 +112,17 @@ void SVRenderer::removeUnuseRes() {
     }
     m_robjList.reserveForce(m_robjList.size());
     m_resLock->unlock();
+}
+
+//需要控制当前的fbo
+void SVRenderer::pushFbo(SVRFboPtr _fbo) {
+    if(_fbo) {
+        _fbo->bind();
+    }
+}
+
+void SVRenderer::popFbo() {
+    
 }
 
 //处理技术

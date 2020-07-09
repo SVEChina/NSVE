@@ -8,7 +8,7 @@
 #include "SVMtlAni2D.h"
 #include "../mtl/SVTexture.h"
 #include "../rendercore/SVRenderer.h"
-#include "../rendercore/SVGL/SVRResGL.h"
+#include "../rendercore/SVGL/SVRTexGL.h"
 
 using namespace sv;
 

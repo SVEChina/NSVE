@@ -28,24 +28,23 @@ SVFrameOutTex::SVFrameOutTex(SVInstPtr _app)
     ntype = "SVFrameOutTex";
     m_pMtl = MakeSharedPtr<SVMtlCore>(mApp,"rgba");
     m_pMesh = mApp->getDataMgr()->m_screenMesh;
-    //
     SVRendererPtr t_renderer = mApp->getRenderer();
     if( t_renderer ) {
-#if defined (SV_IOS)
-        SVTexturePtr t_tex = t_renderer->createSVTexIOS(E_TEX_OUTSTREAM,
-                                                     mApp->m_pGlobalParam->m_inner_width,
-                                                     mApp->m_pGlobalParam->m_inner_height,
-                                                     GL_RGBA); //GL_RGBA
-        m_fbo = MakeSharedPtr<SVRenderTexture>(mApp,t_tex,false,false);
-        mApp->getRenderMgr()->pushRCmdCreate(m_fbo);
-#else
-        SVTexturePtr t_tex = t_renderer->createSVTex(E_TEX_OUTSTREAM,
-                                                     mApp->m_pGlobalParam->m_inner_width,
-                                                     mApp->m_pGlobalParam->m_inner_height,
-                                                     GL_RGBA); //GL_RGBA
-        m_fbo = MakeSharedPtr<SVRenderTexture>(mApp,t_tex,false,false);
-        mApp->getRenderMgr()->pushRCmdCreate(m_fbo);
-#endif
+//#if defined (SV_IOS)
+//        SVTexturePtr t_tex = t_renderer->createSVTexIOS(E_TEX_OUTSTREAM,
+//                                                     mApp->m_pGlobalParam->m_inner_width,
+//                                                     mApp->m_pGlobalParam->m_inner_height,
+//                                                     GL_RGBA); //GL_RGBA
+//        m_fbo = MakeSharedPtr<SVRenderTexture>(mApp,t_tex,false,false);
+//        mApp->getRenderMgr()->pushRCmdCreate(m_fbo);
+//#else
+//        SVTexturePtr t_tex = t_renderer->createSVTex(E_TEX_OUTSTREAM,
+//                                                     mApp->m_pGlobalParam->m_inner_width,
+//                                                     mApp->m_pGlobalParam->m_inner_height,
+//                                                     GL_RGBA); //GL_RGBA
+//        m_fbo = MakeSharedPtr<SVRenderTexture>(mApp,t_tex,false,false);
+//        mApp->getRenderMgr()->pushRCmdCreate(m_fbo);
+//#endif
     }
 }
 

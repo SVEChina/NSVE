@@ -100,7 +100,7 @@ SVTexturePtr SVTexMgr::getTextureSync(cptr8 _name, bool _create, bool _enableMip
 SVTexturePtr SVTexMgr::createUnctrlTextureWithTexID(s32 _texId, s32 _width, s32 _height, s32 _informat, s32 _dataformat, bool _enableMipMap){
     SVTexturePtr tTexture = MakeSharedPtr<SVTextureInputTexID>(mApp, _texId);
     tTexture->init("", GL_TEXTURE_2D, _width, _height, _informat, _dataformat, _enableMipMap);
-    mApp->getRenderMgr()->pushRCmdCreate(tTexture);
+    //mApp->getRenderMgr()->pushRCmdCreate(tTexture);
     return tTexture;
 }
 
@@ -120,7 +120,7 @@ SVTexturePtr SVTexMgr::createUnctrlTextureWithData(s32 _width, s32 _height, s32 
         t_len = _width*_height*2;
     }
     tTexture->setTexData(_data, t_len);
-    mApp->getRenderMgr()->pushRCmdCreate(tTexture);
+    //mApp->getRenderMgr()->pushRCmdCreate(tTexture);
     mTexpool.append(t_name, tTexture);
     return tTexture;
 }
@@ -130,7 +130,7 @@ SVTexturePtr SVTexMgr::createUnctrlTexture(s32 _w, s32 _h, s32 _informat,  s32 _
     SVString t_name = SVString::format("%d", tTexture->getuid());
     t_name = SVString("unctrltex") + SVString("_") + t_name;
     tTexture->init(t_name.c_str(), GL_TEXTURE_2D, _w, _h, _informat, _dataformat, _enableMipMap);
-    mApp->getRenderMgr()->pushRCmdCreate(tTexture);
+    //mApp->getRenderMgr()->pushRCmdCreate(tTexture);
     mTexpool.append(t_name, tTexture);
     return tTexture;
 }

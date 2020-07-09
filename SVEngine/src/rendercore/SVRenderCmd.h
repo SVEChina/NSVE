@@ -57,6 +57,18 @@ namespace sv {
             SVRResPtr m_pRObj;
         };
 
+        class SVRCmdDestroy : public SVRenderCmd {
+        public:
+            SVRCmdDestroy(SVRResPtr _robj);
+            
+            ~SVRCmdDestroy();
+            
+            virtual void render(SVRendererPtr _renderer);
+            
+        protected:
+            SVRResPtr m_pRObj;
+        };
+
         //普通渲染命令
         class SVRenderCmdNor : public SVRenderCmd {
         public:

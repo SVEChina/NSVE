@@ -9,7 +9,7 @@
 #define SV_TEXTURE_H
 
 #include "SVMtlDef.h"
-#include "../rendercore/SVRResTex.h"
+#include "../rendercore/SVRTex.h"
 #include "../rendercore/SVRenderDef.h"
 
 namespace sv {
@@ -48,11 +48,11 @@ namespace sv {
             
             s32 getdataformate();
             
-            SVRResTexPtr getResTex();
+            SVRTexPtr getResTex();
             
         protected:
             void _updateData();
-            SVRResTexPtr m_objTexPtr;
+            SVRTexPtr m_objTexPtr;
             SVString m_name;
             s32   m_type;
             s32   m_width;

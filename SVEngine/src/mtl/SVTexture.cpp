@@ -13,7 +13,7 @@
 #include "../work/SVTdCore.h"
 #include "../base/SVDataSwap.h"
 //
-#include "../rendercore/SVGL/SVRResGL.h"
+#include "../rendercore/SVGL/SVRTexGL.h"
 #include "../rendercore/SVGL/SVRendererGL.h"
 //
 #include "../rendercore/SVVulkan/SVRendererVK.h"
@@ -171,7 +171,7 @@ void SVTexture::_updateData(){
     }
 }
 
-SVRResTexPtr SVTexture::getResTex(){
+SVRTexPtr SVTexture::getResTex(){
     return m_objTexPtr;
 }
 //

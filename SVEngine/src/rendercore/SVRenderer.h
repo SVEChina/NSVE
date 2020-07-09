@@ -62,6 +62,10 @@ namespace sv {
             //清理渲染内核资源
             void clearRes();
             
+            virtual void pushFbo(SVRFboPtr _fbo);
+            
+            virtual void popFbo();
+            
             //处理技术
             virtual void processTech(SVRTechPtr _tech);
             
@@ -119,9 +123,11 @@ namespace sv {
             SVRenderTexturePtr m_pRenderTex;
             //各种内置纹理
             SVTexturePtr m_svTex[E_TEX_END];
-            //渲染内核资源
+            
+            //渲染内核资源,起到资源统计和管理的作用
             typedef SVArray<SVRResPtr> ROBJLIST;
             ROBJLIST m_robjList;
+            
             //资源锁
             SVLockPtr m_resLock;
             //渲染状态

@@ -8,7 +8,7 @@
 #include "SVFboObject.h"
 #include "SVRenderScene.h"
 #include "SVRenderMgr.h"
-#include "SVGL/SVRResGL.h"
+#include "SVGL/SVRTexGL.h"
 #if defined(SV_IOS) || defined(SV_OSX)
 #include "SVMetal/SVRendererMetal.h"
 #endif
@@ -35,23 +35,6 @@ SVFboObject::~SVFboObject() {
 
 void SVFboObject::create(SVRendererPtr _renderer){
     SVRRes::create(_renderer);
-    SVRendererPtr t_renderBasePtr = mApp->getRenderer();
-    SVRendererGLPtr t_renderGLPtr = std::dynamic_pointer_cast<SVRendererGL>(t_renderBasePtr);
-    if (t_renderGLPtr) {
-        //渲染器类型E_RENDERER_GLES,
-        m_objFBOPtr = MakeSharedPtr<SVRResGLFBO>(mApp);
-        
-    }
-    SVRendererVKPtr t_rendeVKPtr = std::dynamic_pointer_cast<SVRendererVK>(t_renderBasePtr);
-    if (t_rendeVKPtr) {
-        //渲染器类型E_RENDERER_VUNKAN,
-        
-    }
-//    SVRendererMetalPtr t_rendeMetalPtr = std::dynamic_pointer_cast<SVRendererMetal>(t_renderBasePtr);
-//    if (t_rendeMetalPtr) {
-//        //渲染器类型E_RENDERER_METAL,
-//
-//    }
     if (m_objFBOPtr) {
         m_objFBOPtr->create(_renderer);
     }
@@ -65,10 +48,10 @@ void SVFboObject::destroy(SVRendererPtr _renderer) {
 }
 
 void SVFboObject::refresh() {
-    SVRResGLFBOPtr t_tmp = std::dynamic_pointer_cast<SVRResGLFBO>(m_objFBOPtr);
-    if (t_tmp) {
-        t_tmp->refresh();
-    }
+//    SVRResGLFBOPtr t_tmp = std::dynamic_pointer_cast<SVRResGLFBO>(m_objFBOPtr);
+//    if (t_tmp) {
+//        t_tmp->refresh();
+//    }
 }
 
 void SVFboObject::setLink(bool _link) {
@@ -76,75 +59,75 @@ void SVFboObject::setLink(bool _link) {
 }
 
 void SVFboObject::bind() {
-    SVRResGLFBOPtr t_tmp = std::dynamic_pointer_cast<SVRResGLFBO>(m_objFBOPtr);
-    if (t_tmp) {
-        t_tmp->bind();
-        SVRendererPtr t_renderBasePtr = mApp->getRenderer();
-        if(m_link && t_renderBasePtr){
-            t_renderBasePtr->pushViewMat(m_mat_view);
-            t_renderBasePtr->pushProjMat(m_mat_proj);
-            t_renderBasePtr->pushVPMat(m_mat_vp);
-        }
-    }
+//    SVRResGLFBOPtr t_tmp = std::dynamic_pointer_cast<SVRResGLFBO>(m_objFBOPtr);
+//    if (t_tmp) {
+//        t_tmp->bind();
+//        SVRendererPtr t_renderBasePtr = mApp->getRenderer();
+//        if(m_link && t_renderBasePtr){
+//            t_renderBasePtr->pushViewMat(m_mat_view);
+//            t_renderBasePtr->pushProjMat(m_mat_proj);
+//            t_renderBasePtr->pushVPMat(m_mat_vp);
+//        }
+//    }
 }
 
 void SVFboObject::clear(){
-    SVRResGLFBOPtr t_tmp = std::dynamic_pointer_cast<SVRResGLFBO>(m_objFBOPtr);
-    if (t_tmp) {
-        t_tmp->clear();
-    }
+//    SVRResGLFBOPtr t_tmp = std::dynamic_pointer_cast<SVRResGLFBO>(m_objFBOPtr);
+//    if (t_tmp) {
+//        t_tmp->clear();
+//    }
 }
 
 void SVFboObject::unbind() {
-    SVRResGLFBOPtr t_tmp = std::dynamic_pointer_cast<SVRResGLFBO>(m_objFBOPtr);
-    if (t_tmp) {
-        t_tmp->unbind();
-        SVRendererPtr t_renderBasePtr = mApp->getRenderer();
-        if(m_link && t_renderBasePtr){
-            t_renderBasePtr->popViewMat();
-            t_renderBasePtr->popProjMat();
-            t_renderBasePtr->popVPMat();
-        }
-    }
+//    SVRResGLFBOPtr t_tmp = std::dynamic_pointer_cast<SVRResGLFBO>(m_objFBOPtr);
+//    if (t_tmp) {
+//        t_tmp->unbind();
+//        SVRendererPtr t_renderBasePtr = mApp->getRenderer();
+//        if(m_link && t_renderBasePtr){
+//            t_renderBasePtr->popViewMat();
+//            t_renderBasePtr->popProjMat();
+//            t_renderBasePtr->popVPMat();
+//        }
+//    }
 }
 
 u32 SVFboObject::getFboID(){
-    SVRResGLFBOPtr t_tmp = std::dynamic_pointer_cast<SVRResGLFBO>(m_objFBOPtr);
-    if (t_tmp) {
-        return t_tmp->getFboID();
-    }
+//    SVRResGLFBOPtr t_tmp = std::dynamic_pointer_cast<SVRResGLFBO>(m_objFBOPtr);
+//    if (t_tmp) {
+//        return t_tmp->getFboID();
+//    }
     return 0;
 }
 
 u32 SVFboObject::getWidth(){
-    SVRResGLFBOPtr t_tmp = std::dynamic_pointer_cast<SVRResGLFBO>(m_objFBOPtr);
-    if (t_tmp) {
-        return t_tmp->getWidth();
-    }
+//    SVRResGLFBOPtr t_tmp = std::dynamic_pointer_cast<SVRResGLFBO>(m_objFBOPtr);
+//    if (t_tmp) {
+//        return t_tmp->getWidth();
+//    }
     return 0;
 }
 
 u32 SVFboObject::getHeight(){
-    SVRResGLFBOPtr t_tmp = std::dynamic_pointer_cast<SVRResGLFBO>(m_objFBOPtr);
-    if (t_tmp) {
-        return t_tmp->getHeight();
-    }
+//    SVRResGLFBOPtr t_tmp = std::dynamic_pointer_cast<SVRResGLFBO>(m_objFBOPtr);
+//    if (t_tmp) {
+//        return t_tmp->getHeight();
+//    }
     return 0;
 }
 
 bool SVFboObject::hasDepth(){
-    SVRResGLFBOPtr t_tmp = std::dynamic_pointer_cast<SVRResGLFBO>(m_objFBOPtr);
-    if (t_tmp) {
-        return t_tmp->hasDepth();
-    }
+//    SVRResGLFBOPtr t_tmp = std::dynamic_pointer_cast<SVRResGLFBO>(m_objFBOPtr);
+//    if (t_tmp) {
+//        return t_tmp->hasDepth();
+//    }
     return 0;
 }
 
 bool SVFboObject::hasStencil(){
-    SVRResGLFBOPtr t_tmp = std::dynamic_pointer_cast<SVRResGLFBO>(m_objFBOPtr);
-    if (t_tmp) {
-        return t_tmp->hasStencil();
-    }
+//    SVRResGLFBOPtr t_tmp = std::dynamic_pointer_cast<SVRResGLFBO>(m_objFBOPtr);
+//    if (t_tmp) {
+//        return t_tmp->hasStencil();
+//    }
     return 0;
 }
 
@@ -157,46 +140,3 @@ void SVFboObject::setViewMat(FMat4 _view) {
     m_mat_view = _view;
     m_mat_vp = m_mat_proj*m_mat_view;
 }
-
-//
-SVOutFboObject::SVOutFboObject(SVInstPtr _app,u32 _fboid)
-:SVFboObject(_app){
-    m_fboID = _fboid;
-}
-
-SVOutFboObject::~SVOutFboObject() {
-    
-}
-
-void SVOutFboObject::create(SVRendererPtr _renderer){
-    //外部设置的FBO 直接使用外部的就好
-    SVRRes::create(_renderer);
-    SVRendererPtr t_renderBasePtr = mApp->getRenderer();
-    SVRendererGLPtr t_renderGLPtr = std::dynamic_pointer_cast<SVRendererGL>(t_renderBasePtr);
-    if (t_renderGLPtr) {
-        //渲染器类型E_RENDERER_GLES,
-        m_objFBOPtr = MakeSharedPtr<SVRResGLOutFBO>(mApp, m_fboID);
-        
-    }
-    SVRendererVKPtr t_rendeVKPtr = std::dynamic_pointer_cast<SVRendererVK>(t_renderBasePtr);
-    if (t_rendeVKPtr) {
-        //渲染器类型E_RENDERER_VUNKAN,
-        
-    }
-//    SVRendererMetalPtr t_rendeMetalPtr = std::dynamic_pointer_cast<SVRendererMetal>(t_renderBasePtr);
-//    if (t_rendeMetalPtr) {
-//        //渲染器类型E_RENDERER_METAL,
-//        
-//    }
-    if(m_objFBOPtr){
-        m_objFBOPtr->create(_renderer);
-    }
-}
-
-void SVOutFboObject::destroy(SVRendererPtr _renderer){
-    if (m_objFBOPtr) {
-        m_objFBOPtr->destroy(_renderer);
-    }
-    SVRRes::destroy(_renderer);
-}
-

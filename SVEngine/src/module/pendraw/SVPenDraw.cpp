@@ -93,9 +93,9 @@ void SVPenDraw::init(SVGameReadyPtr _ready,SVGameRunPtr _run,SVGameEndPtr _end) 
         }
     }
     m_fbo1 = MakeSharedPtr<SVRenderTexture>(mApp,m_pTex1,true,true);
-    mApp->getRenderMgr()->pushRCmdCreate(m_fbo1);
+    //mApp->getRenderMgr()->pushRCmdCreate(m_fbo1);
     m_fbo2 = MakeSharedPtr<SVRenderTexture>(mApp,m_pTex2,true,true);
-    mApp->getRenderMgr()->pushRCmdCreate(m_fbo2);
+    //mApp->getRenderMgr()->pushRCmdCreate(m_fbo2);
     m_pRenderObj = MakeSharedPtr<SVMultMeshMtlRenderObject>();
     m_mtl1 = MakeSharedPtr<SVMtlCore>(mApp,"screennor");
     m_mtl1->setTexcoordFlip(1.0f, 1.0f);

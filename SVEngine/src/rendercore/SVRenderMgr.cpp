@@ -68,38 +68,59 @@ SVRTargetPtr SVRenderMgr::getRTarget(cptr8 _name) {
 
 //只关心渲染，不应该关心环境的切换 环境放到外面去调用
 //这边应该又个渲染路径（RPath）的概念
-
 void SVRenderMgr::render(){
     SVRendererPtr t_renderer = mApp->getRenderer();
     if(!t_renderer){
         return;
     }
-    if( mApp->m_ctx ) {
-       // mApp->m_ctx->
+    if( mApp->m_ctx && mApp->m_ctx->activeContext() ) {
+        //激活
+        //创建流
+        if(m_stream_create) {
+            m_stream_create->render(t_renderer );
+        }
+        //前向RT
+        for(s32 i=0;i<m_preRT.size();i++) {
+            m_preRT[i]->render( t_renderer);
+        }
+        //中间RT
+        if( m_mainRT ) {
+            m_mainRT->render( t_renderer );
+        }
+        //后向RT
+        for(s32 i=0;i<m_afterRT.size();i++) {
+            m_afterRT[i]->render(  t_renderer );
+        }
+        //销毁流
+        if(m_stream_destroy) {
+            m_stream_destroy->render( t_renderer );
+        }
+        //
+        mApp->m_ctx->swap();
+    }else{
+       //创建流
+        if(m_stream_create) {
+            m_stream_create->render(t_renderer );
+        }
+        //前向RT
+        for(s32 i=0;i<m_preRT.size();i++) {
+            m_preRT[i]->render( t_renderer);
+        }
+        //中间RT
+        if( m_mainRT ) {
+            m_mainRT->render( t_renderer );
+        }
+        //后向RT
+        for(s32 i=0;i<m_afterRT.size();i++) {
+            m_afterRT[i]->render(  t_renderer );
+        }
+        //销毁流
+        if(m_stream_destroy) {
+            m_stream_destroy->render( t_renderer );
+        }
+        //
+        mApp->m_ctx->swap();
     }
-    
-    //激活
-    //创建流
-    if(m_stream_create) {
-        m_stream_create->render(t_renderer );
-    }
-    //前向RT
-    for(s32 i=0;i<m_preRT.size();i++) {
-        m_preRT[i]->render( t_renderer);
-    }
-    //中间RT
-    if( m_mainRT ) {
-        m_mainRT->render( t_renderer );
-    }
-    //后向RT
-    for(s32 i=0;i<m_afterRT.size();i++) {
-        m_afterRT[i]->render(  t_renderer );
-    }
-    //销毁流
-    if(m_stream_destroy) {
-        m_stream_destroy->render( t_renderer );
-    }
-    //swap
 }
 
 void SVRenderMgr::_sort() {
@@ -165,11 +186,18 @@ void SVRenderMgr::swapData(){
 //    m_logicLock->unlock();
 }
 
-void SVRenderMgr::pushRCmdCreate(SVRResPtr _robj){
+void SVRenderMgr::pushRCmdCreate(SVRenderCmdPtr _rcmd){
     m_logicLock->lock();
-    if(_robj){
-//        SVRCmdCreatePtr t_cmd= MakeSharedPtr<SVRCmdCreate>(_robj);
-//        m_RStreamCache->addRenderCmd(t_cmd);
+    if(_rcmd && m_stream_create){
+        m_stream_create->addRenderCmd(_rcmd);
+    }
+    m_logicLock->unlock();
+}
+
+void SVRenderMgr::pushRCmdDestory(SVRenderCmdPtr _rcmd){
+    m_logicLock->lock();
+    if(_rcmd && m_stream_destroy){
+        m_stream_destroy->addRenderCmd(_rcmd);
     }
     m_logicLock->unlock();
 }

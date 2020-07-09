@@ -7,7 +7,7 @@
 
 #include "SVRendererGL.h"
 #include "SVRenderStateGL.h"
-#include "SVRResGL.h"
+#include "SVRTexGL.h"
 #include "SVRTechGL.h"
 #include "../SVRenderMgr.h"
 #include "../SVRTarget.h"

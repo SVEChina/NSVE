@@ -53,14 +53,14 @@ void SVFrameOutRead::create(s32 _width,s32 _height) {
                                                         m_height,
                                                         GL_RGBA);
         m_fbo = MakeSharedPtr<SVRenderTexture>(mApp,t_tex,false,false);
-        mApp->getRenderMgr()->pushRCmdCreate(m_fbo);
+        //mApp->getRenderMgr()->pushRCmdCreate(m_fbo);
 #else
         SVTexturePtr t_tex = t_renderer->createSVTex(E_TEX_OUTSTREAM,
                                                      m_width,
                                                      m_height,
                                                      GL_RGBA);
         m_fbo = MakeSharedPtr<SVRenderTexture>(mApp,t_tex,false,false);
-        mApp->getRenderMgr()->pushRCmdCreate(m_fbo);
+        //mApp->getRenderMgr()->pushRCmdCreate(m_fbo);
 #endif
     }
     _resize();

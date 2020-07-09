@@ -6,7 +6,7 @@
 //
 
 #include "SVRMeshGL.h"
-#include "SVRTargetGL.h"
+#include "SVRFboGL.h"
 
 using namespace sv;
 

@@ -1,5 +1,5 @@
 //
-// SVRGLShader.h
+// SVRShaderGL.h
 // SVEngine
 // Copyright 2017-2020
 // yizhou Fu,long Yin,longfei Lin,ziyu Xu,xiaofan Li,daming Li
@@ -9,8 +9,8 @@
 #define SV_RRESGL_SHADER_H
 
 #include "../SVRRes.h"
-#include "../SVRResTex.h"
-#include "../SVResFBO.h"
+#include "../SVRTex.h"
+#include "../SVRFbo.h"
 #include "../SVRShader.h"
 #include "../../base/SVPreDeclare.h"
 #include "../../base/SVRect.h"
@@ -22,11 +22,11 @@ namespace sv {
          GL Shader
          */
         
-        class SVRGLShader: public SVRShader {
+        class SVRShaderGL: public SVRShader {
         public:
-            SVRGLShader(SVInstPtr _app);
+            SVRShaderGL(SVInstPtr _app);
 
-            virtual ~SVRGLShader();
+            virtual ~SVRShaderGL();
 
             virtual void create(SVRendererPtr _renderer);
 

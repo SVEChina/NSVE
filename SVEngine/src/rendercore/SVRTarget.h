@@ -5,10 +5,10 @@
 // yizhou Fu,long Yin,longfei Lin,ziyu Xu,xiaofan Li,daming Li
 //
 
-#ifndef SV_RENDERTARGET_H
-#define SV_RENDERTARGET_H
+#ifndef SV_RENDER_TARGET_H
+#define SV_RENDER_TARGET_H
 
-#include "../base/SVGbase.h"
+#include "../base/SVGBase.h"
 #include "SVRenderDeclare.h"
 
 namespace sv {
@@ -23,6 +23,10 @@ namespace sv {
         
         ~SVRTarget();
         
+        void setFbo(SVRFboPtr _fbo) {
+            m_fbo = _fbo;
+        }
+        
         void render(SVRendererPtr _renderer);
         
     protected:
@@ -32,8 +36,7 @@ namespace sv {
         
         virtual void _afterRender(SVRendererPtr _renderer);
         
-    public:
-        s32 m_order;
+        SVRFboPtr m_fbo;
     };
 
     
@@ -41,4 +44,4 @@ namespace sv {
 
 
 
-#endif //SV_RENDERTARGET_H
+#endif //SV_RENDER_TARGET_H

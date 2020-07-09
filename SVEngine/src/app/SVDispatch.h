@@ -26,7 +26,10 @@ namespace sv {
         
         //投递mesh create
         static void dispatchMeshCreate(SVInstPtr _app,SVRMeshPtr _mesh);
-        //
+ 
+        //投递texture create
+        static void dispatcTextureCreate(SVInstPtr _app,SVRTexPtr _tex);
+        
        
     };
     

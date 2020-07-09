@@ -1,14 +1,14 @@
 //
-// SVRTechMetal.h
+// SVRShaderMetal.h
 // SVEngine
 // Copyright 2017-2020
 // yizhou Fu,long Yin,longfei Lin,ziyu Xu,xiaofan Li,daming Li
 //
 
-#ifndef SV_RENDERTECH_METAL_H
-#define SV_RENDERTECH_METAL_H
+#ifndef SV_SHADER_METAL_H
+#define SV_SHADER_METAL_H
 
-#include "../SVRTech.h"
+#include "../SVRShader.h"
 #include "SVRenderDeclare.h"
 #import <Metal/Metal.h>
 
@@ -18,15 +18,19 @@ namespace sv {
      render tech metal
      */
 
-    class SVRTechMetal : public SVRTech {
+    class SVRShaderMetal : public SVRShader {
     public:
-        SVRTechMetal(SVInstPtr _app);
+        SVRShaderMetal(SVInstPtr _app);
         
-        ~SVRTechMetal();
+        ~SVRShaderMetal();
         
-        virtual void build(SVRendererPtr _renderer);
+        virtual void create(SVRendererPtr _renderer);
+                   
+        virtual void destroy(SVRendererPtr _renderer);
         
-        virtual void render(SVRendererPtr _renderer);
+//        virtual void build(SVRendererPtr _renderer);
+//
+//        virtual void render(SVRendererPtr _renderer);
         
     protected:
         id<MTLFunction> m_vsf;
@@ -42,4 +46,4 @@ namespace sv {
 }//!namespace sv
 
 
-#endif //SV_RENDERTECH_METAL_H
+#endif //SV_SHADER_METAL_H

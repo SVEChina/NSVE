@@ -15,7 +15,7 @@
 #include "SVRenderTexture.h"
 #include "SVRenderer.h"
 #include <sys/time.h>
-#include "SVGL/SVRResGL.h"
+#include "SVGL/SVRTexGL.h"
 #include "SVFboObject.h"
 
 #ifdef SV_IOS

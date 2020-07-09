@@ -12,7 +12,7 @@
 #include "SVRenderMgr.h"
 //
 #include "SVGL/SVRendererGL.h"
-#include "SVGL/SVRResGL.h"
+#include "SVGL/SVRTexGL.h"
 #include "SVGL/SVResGLMesh.h"
 //
 #if defined(SV_IOS) || defined(SV_OSX)

@@ -9,7 +9,7 @@
 #define SV_FBOOBJECT_H
 
 #include "SVRRes.h"
-#include "SVResFBO.h"
+#include "SVRFbo.h"
 #include "SVRenderDef.h"
 #include "../base/SVColor.h"
 #include "../base/SVMat4.h"
@@ -55,25 +55,9 @@ namespace sv {
             FMat4 m_mat_view;
             FMat4 m_mat_vp;
             bool m_link;
-            SVResFBOPtr m_objFBOPtr;
-        };
-        
-        //外部传递的一个fbo
-        class SVOutFboObject : public SVFboObject {
-        public:
-            SVOutFboObject(SVInstPtr _app,u32 _fboid);
-            
-            ~SVOutFboObject();
-            
-            virtual void create(SVRendererPtr _renderer);
-            
-            virtual void destroy(SVRendererPtr _renderer);
-        private:
-            u32 m_fboID;
+            SVRFboPtr m_objFBOPtr;
         };
 
-    
-    
 }//!namespace sv
 
 

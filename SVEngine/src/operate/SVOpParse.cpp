@@ -140,7 +140,7 @@ void SVOpTexLoad::_process(f32 dt) {
     if (pTexData) {
         mTex->init(mFilename.c_str(), GL_TEXTURE_2D, pngLoad.m_iWidth, pngLoad.m_iHeight, pngLoad.mRenderFormat, pngLoad.mRenderFormat, m_enableMipMap);
         mTex->setTexData(pTexData, pngLoad.m_iDataLength);  //数据
-        mApp->getRenderMgr()->pushRCmdCreate(mTex);
+        //mApp->getRenderMgr()->pushRCmdCreate(mTex);
         free(pTexData);
     }
 }

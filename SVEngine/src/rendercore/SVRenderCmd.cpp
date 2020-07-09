@@ -50,6 +50,7 @@ void SVRenderCmdTransGPU::render() {
         m_trans->render();
     }
 }
+
 //创建指令
 SVRCmdCreate::SVRCmdCreate(SVRResPtr _robj) {
     m_pRObj = _robj;
@@ -61,11 +62,31 @@ SVRCmdCreate::~SVRCmdCreate() {
 }
 
 void SVRCmdCreate::render(SVRendererPtr _renderer){
-//    if(m_pRObj && m_pRenderer){
-//        m_pRObj->create(m_pRenderer);
-//        //m_pRenderer->addRes(m_pRObj);
-//    }
+    if(m_pRObj && _renderer){
+        m_pRObj->create(_renderer);
+        _renderer->addRes(m_pRObj);
+    }
 }
+
+
+//创建指令
+SVRCmdDestroy::SVRCmdDestroy(SVRResPtr _robj) {
+    m_pRObj = _robj;
+}
+
+SVRCmdDestroy::~SVRCmdDestroy() {
+    m_pRObj = nullptr;
+}
+
+void SVRCmdDestroy::render(SVRendererPtr _renderer){
+    if(m_pRObj && _renderer){
+        _renderer->removeRes(m_pRObj);
+        m_pRObj->destroy(_renderer);
+    }
+}
+
+
+
 
 //普通渲染指令
 SVRenderCmdNor::SVRenderCmdNor() {

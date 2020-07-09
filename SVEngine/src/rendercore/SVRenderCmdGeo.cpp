@@ -6,7 +6,7 @@
 //
 
 #include "SVRenderCmdGeo.h"
-#include "SVGL/SVRResGL.h"
+#include "SVGL/SVRTexGL.h"
 #include "../base/SVDataSwap.h"
 #include "../core/SVVertDef.h"
 #include "../mtl/SVMtlCore.h"

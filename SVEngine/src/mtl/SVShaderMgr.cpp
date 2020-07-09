@@ -15,8 +15,8 @@
 #include "../third/rapidjson/stringbuffer.h"
 #include "../third/rapidjson/writer.h"
 #include "../rendercore/SVRenderMgr.h"
-#include "../rendercore/SVGL/SVRResGL.h"
-#include "../rendercore/SVGL/SVRGLShader.h"
+#include "../rendercore/SVGL/SVRTexGL.h"
+#include "../rendercore/SVGL/SVRShaderGL.h"
 
 
 using namespace sv;
@@ -84,13 +84,13 @@ void SVShaderMgr::_loadAllShader() {
             //
             SVRShaderPtr t_resShader = nullptr;
             if( mApp->m_pGlobalParam->getEngCore() == SV_E_CORE_GL ) {
-                //t_resShader = MakeSharedPtr<SVRGLShader>(mApp);
+                //t_resShader = MakeSharedPtr<SVRShaderGL>(mApp);
             }else if(mApp->m_pGlobalParam->getEngCore() == SV_E_CORE_METAL){
 //                #if defined(SV_IOS) || defined(SV_OSX)
 //                t_resShader = MakeSharedPtr<SVRMetalShader>(mApp);
 //                #endif
             }else if(mApp->m_pGlobalParam->getEngCore() == SV_E_CORE_VULKAN){
-                //t_resShader = MakeSharedPtr<SVRGLShader>(mApp);
+                //t_resShader = MakeSharedPtr<SVRShaderGL>(mApp);
             }
             //
             if(t_resShader) {

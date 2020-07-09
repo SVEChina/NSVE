@@ -28,10 +28,17 @@ using namespace sv;
 
 void SVDispatch::dispatchShaderCreate(SVInstPtr _app,SVRShaderPtr _shader) {
     //投体到renderMgr的创建队列中
-    _app->getRenderMgr()->pushRCmdCreate(nullptr);
+    SVRCmdCreatePtr t_cmd = MakeSharedPtr<SVRCmdCreate>(_shader);
+    _app->getRenderMgr()->pushRCmdCreate(t_cmd);
 }
 
 //投递mesh create
 void SVDispatch::dispatchMeshCreate(SVInstPtr _app,SVRMeshPtr _mesh) {
-    
+    SVRCmdCreatePtr t_cmd = MakeSharedPtr<SVRCmdCreate>(_shader);
+    _app->getRenderMgr()->pushRCmdCreate(t_cmd);
+}
+
+void SVDispatch::dispatcTextureCreate(SVInstPtr _app,SVRTexPtr _tex) {
+    SVRCmdCreatePtr t_cmd = MakeSharedPtr<SVRCmdCreate>(_shader);
+    _app->getRenderMgr()->pushRCmdCreate(t_cmd);
 }

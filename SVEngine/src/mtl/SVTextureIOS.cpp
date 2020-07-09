@@ -5,7 +5,7 @@
 // yizhou Fu,long Yin,longfei Lin,ziyu Xu,xiaofan Li,daming Li
 //
 #include "SVTextureIOS.h"
-#include "../rendercore/SVGL/SVRResGL.h"
+#include "../rendercore/SVGL/SVRTexGL.h"
 #include "../app/SVInst.h"
 #include "../rendercore/SVRenderMgr.h"
 #include "../rendercore/SVGL/SVRendererGL.h"

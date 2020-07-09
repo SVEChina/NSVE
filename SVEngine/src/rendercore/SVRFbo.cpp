@@ -1,27 +1,20 @@
 //
-// SVResFBO.cpp
+// SVRFbo.cpp
 // SVEngine
 // Copyright 2017-2020
 // yizhou Fu,long Yin,longfei Lin,ziyu Xu,xiaofan Li,daming Li
 //
 
-#include "SVResFBO.h"
+#include "SVRFbo.h"
 #include "../app/SVInst.h"
 #include "../work/SVTdCore.h"
 #include "SVRenderer.h"
 
 using namespace sv;
 
-SVResFBO::SVResFBO(SVInstPtr _app)
+SVRFbo::SVRFbo(SVInstPtr _app)
 :SVRRes(_app){
 }
 
-SVResFBO:: ~SVResFBO(){
+SVRFbo:: ~SVRFbo(){
 }
-
-void SVResFBO::create(SVRendererPtr _renderer){
-}
-
-void SVResFBO::destroy(SVRendererPtr _renderer){
-}
-

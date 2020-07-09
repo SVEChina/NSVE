@@ -12,7 +12,7 @@
 #include "../operate/SVOpCreate.h"
 #include "../mtl/SVTexture.h"
 #include "../rendercore/SVRenderScene.h"
-#include "../rendercore/SVGL/SVRResGL.h"
+#include "../rendercore/SVGL/SVRTexGL.h"
 #include "../rendercore/SVRenderMgr.h"
 #include "../rendercore/SVRenderer.h"
 #include "../rendercore/SVRShader.h"

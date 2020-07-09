@@ -5,7 +5,7 @@
 // yizhou Fu,long Yin,longfei Lin,ziyu Xu,xiaofan Li,daming Li
 //
 
-#include "SVRResGL.h"
+#include "SVRTexGL.h"
 #include "../../third/rapidjson/document.h"
 #include "../../app/SVInst.h"
 #include "../../base/SVPreDeclare.h"
@@ -23,7 +23,7 @@
 using namespace sv;
 
 SVRGLTex::SVRGLTex(SVInstPtr _app)
-:SVRResTex(_app){
+:SVRTex(_app){
     m_bLoad = false;
     m_pData = nullptr;
     m_enableMipMap = false;
@@ -389,265 +389,265 @@ void SVRGLTexiOS::fetchData(u8* _dstPtr,s32 _w,s32 _h) {
 #endif
 }
 
-//FBO资源
-SVRResGLFBO::SVRResGLFBO(SVInstPtr _app)
-:SVResFBO(_app)
-,m_fboID(0)
-,m_depthID(0)
-,m_width(0)
-,m_height(0)
-,m_depth(false)
-,m_stencil(false)
-,m_dirty(false){
-
-}
-SVRResGLFBO::~SVRResGLFBO(){
-}
-
-void SVRResGLFBO::create(SVRendererPtr _renderer){
-    SVRRes::create(_renderer);
-    glGenFramebuffers(1,&m_fboID);
-    _bindColor();
-    _bindDepth();
-    s32 t_error = glCheckFramebufferStatus(GL_FRAMEBUFFER);
-    switch(t_error){
-        case GL_FRAMEBUFFER_COMPLETE:
-            SV_LOG_INFO("GL_FRAMEBUFFER_COMPLETE");
-            break;
-        case GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT:
-            SV_LOG_INFO("GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT");
-            break;
-        case GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT    :
-            SV_LOG_INFO("GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT");
-            break;
-        case GL_FRAMEBUFFER_UNSUPPORTED:
-            SV_LOG_INFO("GL_FRAMEBUFFER_UNSUPPORTED");
-            break;
-        case GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE:
-            SV_LOG_INFO("GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE");
-            break;
-        case GL_FRAMEBUFFER_UNDEFINED :
-            SV_LOG_INFO("GL_FRAMEBUFFER_UNDEFINED");
-            break;
-#if defined SV_OSX
-        case GL_FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER:
-            SV_LOG_INFO("GL_FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER");
-            break;
-        case GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER:
-            SV_LOG_INFO("GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER");
-            break;
-#endif
-    }
-}
-
-void SVRResGLFBO::destroy(SVRendererPtr _renderer){
-    if(m_fboID>0) {
-        glBindFramebuffer(GL_FRAMEBUFFER,m_fboID);
-        if(m_stencil) {
-            glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_STENCIL_ATTACHMENT, GL_RENDERBUFFER,0);
-        }
-        if(m_depth) {
-            glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER,0);
-        }
-        glDeleteRenderbuffers(1, &m_depthID);
-        glDeleteFramebuffers(1,&m_fboID);
-        m_depthID = 0;
-        m_fboID = 0;
-    }
-    SVRRes::destroy(_renderer);
-}
-
-void SVRResGLFBO::_bindColor() {
-}
-
-void SVRResGLFBO::_bindDepth() {
-    if(m_depth && m_width>0 && m_height>0) {
-        if (m_depthID == 0) {
-            glGenRenderbuffers(1, &m_depthID);
-        }
-        glBindRenderbuffer(GL_RENDERBUFFER, m_depthID);
-        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, m_width, m_height);
-        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, m_depthID);
-        if( m_stencil ) {
-            glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_STENCIL_ATTACHMENT, GL_RENDERBUFFER, m_depthID);
-        }
-    }else{
-        if (m_depthID > 0) {
-            glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_STENCIL_ATTACHMENT, GL_RENDERBUFFER,0);
-            glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER,0);
-            glDeleteRenderbuffers(1, &m_depthID);
-            m_depthID = 0;
-        }
-    }
-}
-
-void SVRResGLFBO::refresh() {
-    _bindColor();
-    _bindDepth();
-}
-
-void SVRResGLFBO::bind() {
-    //保存下当前的fbo
-    glGetIntegerv(GL_FRAMEBUFFER_BINDING, &m_lastFboID);
-    if(m_dirty){
-        m_dirty = false;
-        refresh();
-    }
-    SVRendererPtr t_renderer = mApp->getRenderer();
-    if(t_renderer) {
-        t_renderer->svBindFrameBuffer(m_fboID);
-        t_renderer->svPushViewPort(0,0,m_width,m_height);
-    }
-}
-
-void  SVRResGLFBO::clear(){
-    SVRendererPtr t_renderer = mApp->getRenderer();
-    if(t_renderer) {
-        t_renderer->svBindClearColor(m_fboID);
-    }
-}
-
-void SVRResGLFBO::unbind() {
-    SVRendererPtr t_renderer = mApp->getRenderer();
-    if(t_renderer) {
-        t_renderer->svPopViewPort();
-        t_renderer->svBindFrameBuffer(m_lastFboID);
-    }
-    m_lastFboID = 0;
-}
-
+////FBO资源
+//SVRResGLFBO::SVRResGLFBO(SVInstPtr _app)
+//:SVRFbo(_app)
+//,m_fboID(0)
+//,m_depthID(0)
+//,m_width(0)
+//,m_height(0)
+//,m_depth(false)
+//,m_stencil(false)
+//,m_dirty(false){
 //
-SVRResGLOutFBO::SVRResGLOutFBO(SVInstPtr _app,u32 _fboid)
-:SVRResGLFBO(_app){
-    m_fboID = _fboid;
-}
-
-SVRResGLOutFBO::~SVRResGLOutFBO() {
-    m_fboID = 0;
-}
-
-void SVRResGLOutFBO::create(SVRendererPtr _renderer){
-    //外部设置的FBO 直接使用外部的就好
-}
-
-void SVRResGLOutFBO::destroy(SVRendererPtr _renderer){
-    m_fboID = 0;
-}
-
-//RenderTarget
+//}
+//SVRResGLFBO::~SVRResGLFBO(){
+//}
 //
-SVResGLRenderTarget::SVResGLRenderTarget(SVInstPtr _app,s32 _w, s32 _h,bool _depth,bool _stencil)
-        :SVRResGLFBO(_app){
-    m_width = _w;
-    m_height = _h;
-    m_depth = _depth;
-    m_stencil = _stencil;
-    m_colorID = 0;
-}
-
-SVResGLRenderTarget::~SVResGLRenderTarget() {
-
-}
-
-void SVResGLRenderTarget::create(SVRendererPtr _renderer) {
-    SVRResGLFBO::create(_renderer);
-    if( m_fboID >0 ) {
-        glBindFramebuffer(GL_FRAMEBUFFER, m_fboID);
-        glGenRenderbuffers(1, &m_colorID);
-        glBindRenderbuffer(GL_RENDERBUFFER, m_colorID);
-        glRenderbufferStorage(GL_RENDERBUFFER, GL_RGBA8, m_width, m_height);
-        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, m_colorID);
-    }
-}
-
-void SVResGLRenderTarget::destroy(SVRendererPtr _renderer) {
-    if( m_fboID >0 ) {
-        glBindFramebuffer(GL_FRAMEBUFFER, m_fboID);
-        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, 0);
-        glDeleteRenderbuffers(1,&m_colorID);
-        m_colorID = 0;
-    }
-    SVRResGLFBO::destroy(_renderer);
-}
+//void SVRResGLFBO::create(SVRendererPtr _renderer){
+//    SVRRes::create(_renderer);
+//    glGenFramebuffers(1,&m_fboID);
+//    _bindColor();
+//    _bindDepth();
+//    s32 t_error = glCheckFramebufferStatus(GL_FRAMEBUFFER);
+//    switch(t_error){
+//        case GL_FRAMEBUFFER_COMPLETE:
+//            SV_LOG_INFO("GL_FRAMEBUFFER_COMPLETE");
+//            break;
+//        case GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT:
+//            SV_LOG_INFO("GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT");
+//            break;
+//        case GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT    :
+//            SV_LOG_INFO("GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT");
+//            break;
+//        case GL_FRAMEBUFFER_UNSUPPORTED:
+//            SV_LOG_INFO("GL_FRAMEBUFFER_UNSUPPORTED");
+//            break;
+//        case GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE:
+//            SV_LOG_INFO("GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE");
+//            break;
+//        case GL_FRAMEBUFFER_UNDEFINED :
+//            SV_LOG_INFO("GL_FRAMEBUFFER_UNDEFINED");
+//            break;
+//#if defined SV_OSX
+//        case GL_FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER:
+//            SV_LOG_INFO("GL_FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER");
+//            break;
+//        case GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER:
+//            SV_LOG_INFO("GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER");
+//            break;
+//#endif
+//    }
+//}
 //
-SVResGLRenderTargetOut::SVResGLRenderTargetOut(SVInstPtr _app,s32 _w, s32 _h,u32 _fboid,u32 _colorID)
-        :SVResGLRenderTarget(_app,_w,_h,false,false){
-    m_fboID = _fboid;
-    m_colorID = _colorID;
-}
-
-SVResGLRenderTargetOut::~SVResGLRenderTargetOut(){
-    m_width = 0;
-    m_height = 0;
-    m_fboID = 0;
-    m_colorID = 0;
-}
-
-void SVResGLRenderTargetOut::create(SVRendererPtr _renderer) {
-}
-
-void SVResGLRenderTargetOut::destroy(SVRendererPtr _renderer) {
-    m_fboID = 0;
-    m_colorID = 0;
-}
+//void SVRResGLFBO::destroy(SVRendererPtr _renderer){
+//    if(m_fboID>0) {
+//        glBindFramebuffer(GL_FRAMEBUFFER,m_fboID);
+//        if(m_stencil) {
+//            glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_STENCIL_ATTACHMENT, GL_RENDERBUFFER,0);
+//        }
+//        if(m_depth) {
+//            glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER,0);
+//        }
+//        glDeleteRenderbuffers(1, &m_depthID);
+//        glDeleteFramebuffers(1,&m_fboID);
+//        m_depthID = 0;
+//        m_fboID = 0;
+//    }
+//    SVRRes::destroy(_renderer);
+//}
 //
-//RenderTexture
-SVResGLRenderTexture::SVResGLRenderTexture(SVInstPtr _app,SVRGLTexPtr _tex, bool _depth,bool _stencil)
-:SVRResGLFBO(_app){
-    if(_tex){
-        m_tex = _tex;
-        m_width = m_tex->getwidth();
-        m_height = m_tex->getheight();
-    }else{
-        m_tex = nullptr;
-        m_width = 0;
-        m_height = 0;
-    }
-    m_depth = _depth;
-    m_stencil = _stencil;
-}
-
-SVResGLRenderTexture::~SVResGLRenderTexture() {
-}
-
-void SVResGLRenderTexture::create(SVRendererPtr _renderer) {
-    SVRResGLFBO::create(_renderer);
-    m_dirty = true;
-}
-
-void SVResGLRenderTexture::_bindColor() {
-    if( m_fboID>0 && m_tex) {
-        glBindFramebuffer(GL_FRAMEBUFFER, m_fboID);
-        if(m_tex->getinformate()==GL_DEPTH_COMPONENT){
-            glDrawBuffers(0, GL_NONE);
-            glReadBuffer(GL_NONE); glFramebufferTexture2D(GL_FRAMEBUFFER,GL_DEPTH_ATTACHMENT,GL_TEXTURE_2D,m_tex->getTexID(),0);
-        }else{
-            glFramebufferTexture2D(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_TEXTURE_2D,m_tex->getTexID(),0);
-        }
-    }
-}
-
-void SVResGLRenderTexture::destroy(SVRendererPtr _renderer) {
-    if(m_fboID>0) {
-        glBindFramebuffer(GL_FRAMEBUFFER, m_fboID);
-        glFramebufferTexture2D(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_TEXTURE_2D,0,0);
-    }
-    m_tex = nullptr;
-    SVRResGLFBO::destroy(_renderer);
-}
-
-void SVResGLRenderTexture::setTexture(SVRGLTexPtr _tex) {
-    if(m_tex != _tex){
-        m_tex = _tex;
-        if(m_tex) {
-            //正常应该 reCreate才对
-            m_width = m_tex->getwidth();
-            m_height = m_tex->getheight();
-        }
-        m_dirty = true;
-    }
-}
-
-void SVResGLRenderTexture::refresh() {
-    SVRResGLFBO::refresh();
-}
+//void SVRResGLFBO::_bindColor() {
+//}
+//
+//void SVRResGLFBO::_bindDepth() {
+//    if(m_depth && m_width>0 && m_height>0) {
+//        if (m_depthID == 0) {
+//            glGenRenderbuffers(1, &m_depthID);
+//        }
+//        glBindRenderbuffer(GL_RENDERBUFFER, m_depthID);
+//        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, m_width, m_height);
+//        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, m_depthID);
+//        if( m_stencil ) {
+//            glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_STENCIL_ATTACHMENT, GL_RENDERBUFFER, m_depthID);
+//        }
+//    }else{
+//        if (m_depthID > 0) {
+//            glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_STENCIL_ATTACHMENT, GL_RENDERBUFFER,0);
+//            glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER,0);
+//            glDeleteRenderbuffers(1, &m_depthID);
+//            m_depthID = 0;
+//        }
+//    }
+//}
+//
+//void SVRResGLFBO::refresh() {
+//    _bindColor();
+//    _bindDepth();
+//}
+//
+//void SVRResGLFBO::bind() {
+//    //保存下当前的fbo
+//    glGetIntegerv(GL_FRAMEBUFFER_BINDING, &m_lastFboID);
+//    if(m_dirty){
+//        m_dirty = false;
+//        refresh();
+//    }
+//    SVRendererPtr t_renderer = mApp->getRenderer();
+//    if(t_renderer) {
+//        t_renderer->svBindFrameBuffer(m_fboID);
+//        t_renderer->svPushViewPort(0,0,m_width,m_height);
+//    }
+//}
+//
+//void  SVRResGLFBO::clear(){
+//    SVRendererPtr t_renderer = mApp->getRenderer();
+//    if(t_renderer) {
+//        t_renderer->svBindClearColor(m_fboID);
+//    }
+//}
+//
+//void SVRResGLFBO::unbind() {
+//    SVRendererPtr t_renderer = mApp->getRenderer();
+//    if(t_renderer) {
+//        t_renderer->svPopViewPort();
+//        t_renderer->svBindFrameBuffer(m_lastFboID);
+//    }
+//    m_lastFboID = 0;
+//}
+//
+////
+//SVRResGLOutFBO::SVRResGLOutFBO(SVInstPtr _app,u32 _fboid)
+//:SVRResGLFBO(_app){
+//    m_fboID = _fboid;
+//}
+//
+//SVRResGLOutFBO::~SVRResGLOutFBO() {
+//    m_fboID = 0;
+//}
+//
+//void SVRResGLOutFBO::create(SVRendererPtr _renderer){
+//    //外部设置的FBO 直接使用外部的就好
+//}
+//
+//void SVRResGLOutFBO::destroy(SVRendererPtr _renderer){
+//    m_fboID = 0;
+//}
+//
+////RenderTarget
+////
+//SVResGLRenderTarget::SVResGLRenderTarget(SVInstPtr _app,s32 _w, s32 _h,bool _depth,bool _stencil)
+//        :SVRResGLFBO(_app){
+//    m_width = _w;
+//    m_height = _h;
+//    m_depth = _depth;
+//    m_stencil = _stencil;
+//    m_colorID = 0;
+//}
+//
+//SVResGLRenderTarget::~SVResGLRenderTarget() {
+//
+//}
+//
+//void SVResGLRenderTarget::create(SVRendererPtr _renderer) {
+//    SVRResGLFBO::create(_renderer);
+//    if( m_fboID >0 ) {
+//        glBindFramebuffer(GL_FRAMEBUFFER, m_fboID);
+//        glGenRenderbuffers(1, &m_colorID);
+//        glBindRenderbuffer(GL_RENDERBUFFER, m_colorID);
+//        glRenderbufferStorage(GL_RENDERBUFFER, GL_RGBA8, m_width, m_height);
+//        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, m_colorID);
+//    }
+//}
+//
+//void SVResGLRenderTarget::destroy(SVRendererPtr _renderer) {
+//    if( m_fboID >0 ) {
+//        glBindFramebuffer(GL_FRAMEBUFFER, m_fboID);
+//        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, 0);
+//        glDeleteRenderbuffers(1,&m_colorID);
+//        m_colorID = 0;
+//    }
+//    SVRResGLFBO::destroy(_renderer);
+//}
+////
+//SVResGLRenderTargetOut::SVResGLRenderTargetOut(SVInstPtr _app,s32 _w, s32 _h,u32 _fboid,u32 _colorID)
+//        :SVResGLRenderTarget(_app,_w,_h,false,false){
+//    m_fboID = _fboid;
+//    m_colorID = _colorID;
+//}
+//
+//SVResGLRenderTargetOut::~SVResGLRenderTargetOut(){
+//    m_width = 0;
+//    m_height = 0;
+//    m_fboID = 0;
+//    m_colorID = 0;
+//}
+//
+//void SVResGLRenderTargetOut::create(SVRendererPtr _renderer) {
+//}
+//
+//void SVResGLRenderTargetOut::destroy(SVRendererPtr _renderer) {
+//    m_fboID = 0;
+//    m_colorID = 0;
+//}
+////
+////RenderTexture
+//SVResGLRenderTexture::SVResGLRenderTexture(SVInstPtr _app,SVRGLTexPtr _tex, bool _depth,bool _stencil)
+//:SVRResGLFBO(_app){
+//    if(_tex){
+//        m_tex = _tex;
+//        m_width = m_tex->getwidth();
+//        m_height = m_tex->getheight();
+//    }else{
+//        m_tex = nullptr;
+//        m_width = 0;
+//        m_height = 0;
+//    }
+//    m_depth = _depth;
+//    m_stencil = _stencil;
+//}
+//
+//SVResGLRenderTexture::~SVResGLRenderTexture() {
+//}
+//
+//void SVResGLRenderTexture::create(SVRendererPtr _renderer) {
+//    SVRResGLFBO::create(_renderer);
+//    m_dirty = true;
+//}
+//
+//void SVResGLRenderTexture::_bindColor() {
+//    if( m_fboID>0 && m_tex) {
+//        glBindFramebuffer(GL_FRAMEBUFFER, m_fboID);
+//        if(m_tex->getinformate()==GL_DEPTH_COMPONENT){
+//            glDrawBuffers(0, GL_NONE);
+//            glReadBuffer(GL_NONE); glFramebufferTexture2D(GL_FRAMEBUFFER,GL_DEPTH_ATTACHMENT,GL_TEXTURE_2D,m_tex->getTexID(),0);
+//        }else{
+//            glFramebufferTexture2D(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_TEXTURE_2D,m_tex->getTexID(),0);
+//        }
+//    }
+//}
+//
+//void SVResGLRenderTexture::destroy(SVRendererPtr _renderer) {
+//    if(m_fboID>0) {
+//        glBindFramebuffer(GL_FRAMEBUFFER, m_fboID);
+//        glFramebufferTexture2D(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_TEXTURE_2D,0,0);
+//    }
+//    m_tex = nullptr;
+//    SVRResGLFBO::destroy(_renderer);
+//}
+//
+//void SVResGLRenderTexture::setTexture(SVRGLTexPtr _tex) {
+//    if(m_tex != _tex){
+//        m_tex = _tex;
+//        if(m_tex) {
+//            //正常应该 reCreate才对
+//            m_width = m_tex->getwidth();
+//            m_height = m_tex->getheight();
+//        }
+//        m_dirty = true;
+//    }
+//}
+//
+//void SVResGLRenderTexture::refresh() {
+//    SVRResGLFBO::refresh();
+//}

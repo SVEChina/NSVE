@@ -1,11 +1,11 @@
 //
-// SVRGLShader.cpp
+// SVRShaderGL.cpp
 // SVEngine
 // Copyright 2017-2020
 // yizhou Fu,long Yin,longfei Lin,ziyu Xu,xiaofan Li,daming Li
 //
 
-#include "SVRGLShader.h"
+#include "SVRShaderGL.h"
 #include "../../third/rapidjson/document.h"
 #include "../../base/SVPreDeclare.h"
 #include "../../app/SVInst.h"
@@ -27,7 +27,7 @@ using namespace sv;
 GL Shader
 */
 
-SVRGLShader::SVRGLShader(SVInstPtr _app)
+SVRShaderGL::SVRShaderGL(SVInstPtr _app)
 :SVRShader(_app){
     m_programm = 0;
     m_vs = 0;
@@ -39,7 +39,7 @@ SVRGLShader::SVRGLShader(SVInstPtr _app)
     m_use_tech = false;
 }
 
-SVRGLShader::~SVRGLShader(){
+SVRShaderGL::~SVRShaderGL(){
     m_programm = 0;
     m_vs = 0;
     m_fs = 0;
@@ -49,7 +49,7 @@ SVRGLShader::~SVRGLShader(){
     m_cs = 0;
 }
 
-void SVRGLShader::create(SVRendererPtr _renderer) {
+void SVRShaderGL::create(SVRendererPtr _renderer) {
     if( m_use_tech ) {
         _parseTech();
     } else {
@@ -64,12 +64,12 @@ void SVRGLShader::create(SVRendererPtr _renderer) {
     }
 }
 
-void SVRGLShader::setTechFName(cptr8 _filename) {
+void SVRShaderGL::setTechFName(cptr8 _filename) {
     m_tech_fname = _filename;
     m_use_tech = true;
 }
 
-u32 SVRGLShader::_loadShader(SVInstPtr _app,cptr8 _filename,s32 _shaderType){
+u32 SVRShaderGL::_loadShader(SVInstPtr _app,cptr8 _filename,s32 _shaderType){
     SVDataChunk tDataStream;
     u32 t_id = 0;
     bool t_flag=false;
@@ -120,7 +120,7 @@ u32 SVRGLShader::_loadShader(SVInstPtr _app,cptr8 _filename,s32 _shaderType){
 }
 
 //解析tech
-bool SVRGLShader::_parseTech() {
+bool SVRShaderGL::_parseTech() {
     SVDataChunk tDataStream;
     bool tflag = mApp->getFileMgr()->loadFileContentStr(&tDataStream, m_tech_fname.c_str());
     if (!tflag)
@@ -194,7 +194,7 @@ bool SVRGLShader::_parseTech() {
     return true;
 }
 
-u32 SVRGLShader::_loadTechVS(cptr8 _precision,cptr8 _src) {
+u32 SVRShaderGL::_loadTechVS(cptr8 _precision,cptr8 _src) {
     SVString t_source = _src;
 #ifdef SV_ANDROID
     if(strcmp(_src,"lowp") == 0 ) {
@@ -219,7 +219,7 @@ u32 SVRGLShader::_loadTechVS(cptr8 _precision,cptr8 _src) {
     return 0;
 }
 
-u32 SVRGLShader::_loadTechFS(cptr8 _precision,cptr8 _src) {
+u32 SVRShaderGL::_loadTechFS(cptr8 _precision,cptr8 _src) {
     SVString t_source = _src;
 #ifdef SV_ANDROID
     if(strcmp(_src,"lowp") == 0 ) {
@@ -243,7 +243,7 @@ u32 SVRGLShader::_loadTechFS(cptr8 _precision,cptr8 _src) {
     return 0;
 }
 
-u32 SVRGLShader::_loadTechGS(cptr8 _precision,cptr8 _src) {
+u32 SVRShaderGL::_loadTechGS(cptr8 _precision,cptr8 _src) {
 #ifdef SV_ANDROID
     if(strcmp(_src,"lowp") == 0 ) {
 
@@ -265,7 +265,7 @@ u32 SVRGLShader::_loadTechGS(cptr8 _precision,cptr8 _src) {
     return 0;
 }
 
-u32 SVRGLShader::_createProgram(){
+u32 SVRShaderGL::_createProgram(){
     if (m_vs == 0 || m_fs == 0) {
         SV_LOG_DEBUG("error : create program fail, please check out shader:%s\n", m_programme_fname.c_str());
         return 0;
@@ -362,7 +362,7 @@ u32 SVRGLShader::_createProgram(){
     return t_program_id;
 }
 
-void SVRGLShader::_clearShaderRes(){
+void SVRShaderGL::_clearShaderRes(){
     if(m_vs != 0) {
         glDeleteShader(m_vs);
         m_vs = 0;
@@ -389,13 +389,13 @@ void SVRGLShader::_clearShaderRes(){
     }
 }
 
-void SVRGLShader::destroy(SVRendererPtr _renderer) {
+void SVRShaderGL::destroy(SVRendererPtr _renderer) {
     if(m_programm != 0){
         glDeleteProgram(m_programm);
     }
 }
 
-bool SVRGLShader::active(SVRendererPtr _render) {
+bool SVRShaderGL::active(SVRendererPtr _render) {
     SVRenderStatePtr t_state = _render->getState();
     if(m_programm>0) {
         glUseProgram(m_programm);

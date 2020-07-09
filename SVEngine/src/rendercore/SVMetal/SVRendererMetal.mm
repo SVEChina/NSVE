@@ -6,7 +6,8 @@
 //
 
 #include "SVRendererMetal.h"
-#include "SVRTargetMetal.h"
+#include "SVRFboMetal.h"
+#include "../SVRTarget.h"
 #include "../../app/SVInst.h"
 #include "../../rendercore/SVRenderMgr.h"
 #include "../../base/SVDataSwap.h"
@@ -31,8 +32,8 @@ void SVRendererMetal::initParam(id<MTLDevice> _device,id<MTLDrawable> _target,id
     }
     m_pCmdQueue = m_pDevice.newCommandQueue;
     m_pLibrary = [m_pDevice newDefaultLibrary];
-    //创建了对应的主RT
-    SVRTargetMetalPtr t_rt = createRT(_target,_targetTex);
+    //创建主RTarget
+    SVRTargetPtr t_rt = createRT(_target,_targetTex);
     if(t_rt){
         mApp->getRenderMgr()->setMainRT(t_rt);
     }
@@ -62,10 +63,13 @@ void SVRendererMetal::resize(s32 _w,s32 _h) {
 }
 
 //创建RT
-SVRTargetMetalPtr SVRendererMetal::createRT(id<MTLDrawable> _target,id<MTLTexture> _targetTex) {
-    SVRTargetMetalPtr t_rm = MakeSharedPtr<SVRTargetMetal>(mApp);
-    t_rm->init(_target,_targetTex);
-    return t_rm;
+SVRTargetPtr SVRendererMetal::createRT(id<MTLDrawable> _target,id<MTLTexture> _targetTex) {
+    SVRFboMetalPtr t_fbo = MakeSharedPtr<SVRFboMetal>(mApp);
+    t_fbo->init(_target,_targetTex);
+    //
+    SVRTargetPtr t_target = MakeSharedPtr<SVRTarget>(mApp);
+    t_target->setFbo(t_fbo);
+    return t_target;
 }
 
 //创建纹理接口

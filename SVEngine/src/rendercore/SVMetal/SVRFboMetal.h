@@ -1,14 +1,14 @@
 //
-// SVRTargetMetal.h
+// SVRFboMetal.h
 // SVEngine
 // Copyright 2017-2020
 // yizhou Fu,long Yin,longfei Lin,ziyu Xu,xiaofan Li,daming Li
 //
 
-#ifndef SV_RENDERTARGETMETAL_H
-#define SV_RENDERTARGETMETAL_H
+#ifndef SV_RFBO_METAL_H
+#define SV_RFBO_METAL_H
 
-#include "../SVRTarget.h"
+#include "../SVRFbo.h"
 #import <Metal/Metal.h>
 //#import <Metal/MTLDrawable.h>
 //#import <Metal/MTLRenderCommandEncoder.h>
@@ -20,11 +20,11 @@ namespace sv {
      渲染目标（主目标，其他目标，都包含在内）
      */
 
-    class SVRTargetMetal : public SVRTarget {
+    class SVRFboMetal : public SVRFbo {
     public:
-        SVRTargetMetal(SVInstPtr _app);
+        SVRFboMetal(SVInstPtr _app);
         
-        ~SVRTargetMetal();
+        ~SVRFboMetal();
         
         void init(id<MTLDrawable> _target,id<MTLTexture> _targetTex);
 
@@ -48,4 +48,4 @@ namespace sv {
 
 
 
-#endif //SV_RENDERTARGET_H
+#endif //SV_RFBO_METAL_H

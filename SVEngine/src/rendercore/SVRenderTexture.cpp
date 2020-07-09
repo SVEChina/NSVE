@@ -11,7 +11,7 @@
 #include "../mtl/SVTexMgr.h"
 #include "../app/SVInst.h"
 #include "SVRenderMgr.h"
-#include "SVGL/SVRResGL.h"
+#include "SVGL/SVRTexGL.h"
 #include "SVGL/SVRendererGL.h"
 #if defined(SV_IOS) || defined(SV_OSX)
 #include "SVMetal/SVRendererMetal.h"
@@ -37,13 +37,13 @@ void SVRenderTexture::create(SVRendererPtr _renderer) {
     SVRRes::create(_renderer);
     SVRendererGLPtr t_renderGLPtr = std::dynamic_pointer_cast<SVRendererGL>(_renderer);
     if (t_renderGLPtr) {
-        //渲染器类型E_RENDERER_GLES,
-        SVRGLTexPtr t_tex = nullptr;
-        if (m_tex) {
-            t_tex = std::dynamic_pointer_cast<SVRGLTex>(m_tex->getResTex());
-        }
-        m_objFBOPtr = MakeSharedPtr<SVResGLRenderTexture>(mApp, t_tex, m_depth, m_stencil);
-        m_objFBOPtr->create(_renderer);
+//        //渲染器类型E_RENDERER_GLES,
+//        SVRGLTexPtr t_tex = nullptr;
+//        if (m_tex) {
+//            t_tex = std::dynamic_pointer_cast<SVRGLTex>(m_tex->getResTex());
+//        }
+//        m_objFBOPtr = MakeSharedPtr<SVResGLRenderTexture>(mApp, t_tex, m_depth, m_stencil);
+//        m_objFBOPtr->create(_renderer);
         return ;
     }
 //    SVRendererVKPtr t_rendeVKPtr = std::dynamic_pointer_cast<SVRendererVK>(_renderer);
@@ -66,19 +66,19 @@ void SVRenderTexture::destroy(SVRendererPtr _renderer) {
 }
 
 void SVRenderTexture::setTexture(SVTexturePtr _tex) {
-    SVResGLRenderTexturePtr t_tmp = std::dynamic_pointer_cast<SVResGLRenderTexture>(m_objFBOPtr);
-    SVRGLTexPtr t_texGL = nullptr;
-    if (_tex) {
-        t_texGL = std::dynamic_pointer_cast<SVRGLTex>(_tex->getResTex());
-    }
-    if (t_tmp && t_texGL) {
-        t_tmp->setTexture(t_texGL);
-    }
+//    SVResGLRenderTexturePtr t_tmp = std::dynamic_pointer_cast<SVResGLRenderTexture>(m_objFBOPtr);
+//    SVRGLTexPtr t_texGL = nullptr;
+//    if (_tex) {
+//        t_texGL = std::dynamic_pointer_cast<SVRGLTex>(_tex->getResTex());
+//    }
+//    if (t_tmp && t_texGL) {
+//        t_tmp->setTexture(t_texGL);
+//    }
 }
 
 void SVRenderTexture::refresh() {
-    SVResGLRenderTexturePtr t_tmp = std::dynamic_pointer_cast<SVResGLRenderTexture>(m_objFBOPtr);
-    if (t_tmp) {
-        t_tmp->refresh();
-    }
+//    SVResGLRenderTexturePtr t_tmp = std::dynamic_pointer_cast<SVResGLRenderTexture>(m_objFBOPtr);
+//    if (t_tmp) {
+//        t_tmp->refresh();
+//    }
 }

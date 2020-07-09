@@ -1,22 +1,22 @@
 //
-// SVRResTex.h
+// SVRTex.h
 // SVEngine
 // Copyright 2017-2020
 // yizhou Fu,long Yin,longfei Lin,ziyu Xu,xiaofan Li,daming Li
 //
 
-#ifndef SVRResTex_h
-#define SVRResTex_h
+#ifndef SVRTex_h
+#define SVRTex_h
 
 #include "SVRRes.h"
 
 namespace sv {
     
-        class SVRResTex: public SVRRes{
+        class SVRTex: public SVRRes{
         public:
-            SVRResTex(SVInstPtr _app);
+            SVRTex(SVInstPtr _app);
             
-            virtual ~SVRResTex();
+            virtual ~SVRTex();
             
             virtual void create(SVRendererPtr _renderer);
             
@@ -61,4 +61,4 @@ namespace sv {
 }//!namespace sv
 
 
-#endif /* SVRResTex_h */
+#endif /* SVRTex_h */

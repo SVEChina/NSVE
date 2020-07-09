@@ -22,7 +22,7 @@ using namespace sv;
 
 //tex资源
 SVRMetalTex::SVRMetalTex(SVInstPtr _app)
-:SVRResTex(_app)
+:SVRTex(_app)
 ,m_srcTex(nullptr){
     
 }
@@ -31,7 +31,7 @@ SVRMetalTex::~SVRMetalTex(){
 }
 
 void SVRMetalTex:: create(SVRendererPtr _renderer) {
-    SVRResTex::create(_renderer);
+    SVRTex::create(_renderer);
     SVRendererMetalPtr t_rendeMetalPtr = std::dynamic_pointer_cast<SVRendererMetal>(_renderer);
     if (t_rendeMetalPtr) {
         MTLTextureDescriptor *dsp = [MTLTextureDescriptor texture2DDescriptorWithPixelFormat:MTLPixelFormatRGBA8Unorm width:m_width height:m_height mipmapped:m_enableMipMap];
@@ -55,7 +55,7 @@ void SVRMetalTex:: create(SVRendererPtr _renderer) {
 }
 
 void SVRMetalTex::destroy(SVRendererPtr _renderer) {
-    SVRResTex::destroy(_renderer);
+    SVRTex::destroy(_renderer);
     if(m_id>0){
         //        glDeleteTextures(1, &m_id);
         //        m_id = 0;
