@@ -51,10 +51,15 @@ namespace sv {
         void _sort();
         void _adapt();
         s32 m_adaptMode;
-        //渲染流(缓存流)
+        
+        //资源创建流
+        SVRenderStreamPtr m_stream_create;
+        //资源销毁流
+        SVRenderStreamPtr m_stream_destroy;
+        
         SVLockPtr m_renderLock;
         SVLockPtr m_logicLock;
-        
+        //
         SVArray<SVRTargetPtr> m_preRT; //前向RT
         SVArray<SVRTargetPtr> m_afterRT; //后向RT
         SVRTargetPtr m_mainRT; //主RT

@@ -13,8 +13,6 @@
 
 namespace sv {
     
-    
-        
         class SVRenderTexture : public SVFboObject {
         public:
             SVRenderTexture(SVInstPtr _app, SVTexturePtr _tex, bool _depth, bool _stencil);
@@ -34,8 +32,6 @@ namespace sv {
             bool m_stencil;
         };
         
-    
-    
 }//!namespace sv
 
 

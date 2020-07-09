@@ -46,14 +46,19 @@ namespace sv {
             ~SVRenderer();
             //初始化
             virtual void init(s32 _w,s32 _h);
+            
             //销毁
             virtual void destroy();
+            
             //重置大小
             virtual void resize(s32 _w,s32 _h);
+            
             //增加渲染内核资源
             void addRes(SVRObjBasePtr _res);
+            
             //移除渲染内核资源
             void removeRes(SVRObjBasePtr _res);
+            
             //清理渲染内核资源
             void clearRes();
             
@@ -110,7 +115,6 @@ namespace sv {
             SVRenderPiplinePtr m_resPipline; //写管线
             //渲染pipline
             SVRenderPiplinePtr m_readPipline;  //读管线
-            
             //主FBO
             SVRenderTexturePtr m_pRenderTex;
             //各种内置纹理

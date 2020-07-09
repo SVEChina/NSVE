@@ -14,7 +14,7 @@
 namespace sv {
     
     /*
-     渲染流 按照材质去分的留
+     只是一个命令流而已，就这么简单，批量处理命令的流
      */
 
     class SVRenderStream : public SVObject {
@@ -23,16 +23,14 @@ namespace sv {
         
         ~SVRenderStream();
         
-        void addSVRenderCmd(SVRenderCmdPtr cmd);
+        void addRenderCmd(SVRenderCmdPtr cmd);
         
-        void clearSVRenderCmd();
+        void clearRenderCmd();
         
         void render(SVRendererPtr _renderer);
         
     protected:
         SVLockPtr m_lock;
-        //渲染技术
-        SVRTechPtr m_pTech;
         //数据流
         typedef SVArray<SVRenderCmdPtr> CMDPOOL;
         CMDPOOL m_cmdArray;

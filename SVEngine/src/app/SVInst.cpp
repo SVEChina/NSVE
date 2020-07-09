@@ -67,9 +67,9 @@ void SVInst::destroy() {
 //创建渲染器
 SVRendererPtr SVInst::createRM(SV_RM_TYPE _type) {
     if(_type == E_M_METAL) {
-        m_pRM = MakeSharedPtr<SVRendererMetal>( std::dynamic_pointer_cast<SVInst>(shareObject())  );    //SVRendererPtr;
+        m_pRM = MakeSharedPtr<SVRendererMetal>( std::dynamic_pointer_cast<SVInst>(shareObject())  );
     }else if(_type == E_M_GLES) {
-        m_pRM = MakeSharedPtr<SVRendererGL>( std::dynamic_pointer_cast<SVInst>(shareObject())  );       //SVRendererPtr;
+        m_pRM = MakeSharedPtr<SVRendererGL>( std::dynamic_pointer_cast<SVInst>(shareObject())  );
     }else if(_type == E_M_VUNKAN) {
         //m_pRM = MakeSharedPtr<>();
     }

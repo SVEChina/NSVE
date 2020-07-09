@@ -27,7 +27,8 @@
 using namespace sv;
 
 void SVDispatch::dispatchShaderCreate(SVInstPtr _app,SVRShaderPtr _shader) {
-    
+    //投体到renderMgr的创建队列中
+    _app->getRenderMgr()->pushRCmdCreate(nullptr);
 }
 
 //投递mesh create

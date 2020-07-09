@@ -57,12 +57,12 @@ void SVRenderPipline::render() {
 
 void SVRenderPipline::pushRenderCmd(RENDERSTREAMTYPE _rst, SVRenderCmdPtr _rcmd) {
 //    if (_rst >= RST_BEGIN && _rst <= RST_END) {
-//        m_rstream_vec[_rst]->addSVRenderCmd(_rcmd);
+//        m_rstream_vec[_rst]->addRenderCmd(_rcmd);
 //    }
 }
 
 void SVRenderPipline::clearRenderCmd(){
     for (s32 i = RST_BEGIN; i <= RST_END; i++) {
-        m_rstream_vec[i]->clearSVRenderCmd();
+        m_rstream_vec[i]->clearRenderCmd();
     }
 }
