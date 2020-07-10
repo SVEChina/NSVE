@@ -29,7 +29,7 @@ void SVRShaderMetal::create(SVRendererPtr _renderer) {
     if(!m_logic_obj) {
         return ;
     }
-    SVShaderPtr t_shader;// = std::dynamic_pointer_cast<SVShader>(m_logic_obj);
+    SVShaderPtr t_shader = std::dynamic_pointer_cast<SVShader>(m_logic_obj);
     if(!t_shader){
         return ;
     }

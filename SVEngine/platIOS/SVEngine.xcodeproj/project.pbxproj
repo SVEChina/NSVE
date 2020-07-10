@@ -5438,6 +5438,9 @@
 		5FD9B0622265F5A700522317 /* SVRShaderGL.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FD9B05C2265F5A600522317 /* SVRShaderGL.h */; };
 		5FD9B0632265F5A700522317 /* SVRShaderGL.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FD9B05C2265F5A600522317 /* SVRShaderGL.h */; };
 		5FD9B0642265F5A700522317 /* SVRShaderGL.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FD9B05C2265F5A600522317 /* SVRShaderGL.h */; };
+		5FF2B7FD24B8750500FC0BC9 /* SVShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F574D4724B85AF10035AB08 /* SVShader.cpp */; };
+		5FF2B7FE24B8750500FC0BC9 /* SVShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F574D4724B85AF10035AB08 /* SVShader.cpp */; };
+		5FF2B7FF24B8750600FC0BC9 /* SVShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F574D4724B85AF10035AB08 /* SVShader.cpp */; };
 		5FFB8A4721C4F948002480D0 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FFB8A4621C4F948002480D0 /* Metal.framework */; };
 		5FFB8A4921C4F950002480D0 /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FFB8A4821C4F94F002480D0 /* MetalKit.framework */; };
 /* End PBXBuildFile section */
@@ -6177,7 +6180,7 @@
 		5F44287621848CBC00AF4A5B /* SVFrameOutRead.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVFrameOutRead.cpp; sourceTree = "<group>"; };
 		5F44287721848CBC00AF4A5B /* SVFrameOutRead.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVFrameOutRead.h; sourceTree = "<group>"; };
 		5F574D4624B85AF10035AB08 /* SVShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVShader.h; sourceTree = "<group>"; };
-		5F574D4724B85AF10035AB08 /* SVShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SVShader.cpp; sourceTree = "<group>"; };
+		5F574D4724B85AF10035AB08 /* SVShader.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVShader.cpp; sourceTree = "<group>"; };
 		5F5A50CA231FA6E300D8931F /* SVFaceCoord.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVFaceCoord.cpp; sourceTree = "<group>"; };
 		5F5A50CB231FA6E400D8931F /* SVFaceCoord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVFaceCoord.h; sourceTree = "<group>"; };
 		5F64D5A0248370450005CF47 /* SVRTech.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVRTech.h; sourceTree = "<group>"; };
@@ -12267,6 +12270,7 @@
 				020C4C8922DC5DD200201753 /* btPolarDecomposition.cpp in Sources */,
 				5F7D6973215F407900803BCF /* SVColor.cpp in Sources */,
 				020C476722DC5DCE00201753 /* btOptimizedBvh.cpp in Sources */,
+				5FF2B7FF24B8750600FC0BC9 /* SVShader.cpp in Sources */,
 				020C439522DC5DCC00201753 /* btSoftBodyHelpers.cpp in Sources */,
 				5F7D611D215F407700803BCF /* SVGeoGen.cpp in Sources */,
 				5F7D6987215F407900803BCF /* SVMat2.cpp in Sources */,
@@ -13431,6 +13435,7 @@
 				020C46FE22DC5DCE00201753 /* btCompoundShape.cpp in Sources */,
 				020C475E22DC5DCE00201753 /* btBvhTriangleMeshShape.cpp in Sources */,
 				022AF18821AD1F2300BF6F37 /* SVMtl2D.cpp in Sources */,
+				5FF2B7FE24B8750500FC0BC9 /* SVShader.cpp in Sources */,
 				020C492222DC5DCF00201753 /* btGearConstraint.cpp in Sources */,
 				5F7D67FA215F407900803BCF /* SVMultPassNode.cpp in Sources */,
 				020C4CB622DC5DD200201753 /* btConvexHull.cpp in Sources */,
@@ -14007,6 +14012,7 @@
 				020C46FD22DC5DCE00201753 /* btCompoundShape.cpp in Sources */,
 				020C475D22DC5DCE00201753 /* btBvhTriangleMeshShape.cpp in Sources */,
 				022AF18721AD1F2300BF6F37 /* SVMtl2D.cpp in Sources */,
+				5FF2B7FD24B8750500FC0BC9 /* SVShader.cpp in Sources */,
 				020C492122DC5DCF00201753 /* btGearConstraint.cpp in Sources */,
 				5F7D67F9215F407900803BCF /* SVMultPassNode.cpp in Sources */,
 				020C4CB522DC5DD200201753 /* btConvexHull.cpp in Sources */,

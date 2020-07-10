@@ -6,7 +6,8 @@
 //
 
 #include "SVRBufferGL.h"
-#include "SVRFboGL.h"
+#include "SVRendererGL.h"
+#include "../SVRenderMesh.h"
 
 using namespace sv;
 
@@ -15,6 +16,18 @@ SVRBufferGL::SVRBufferGL(SVInstPtr _app)
 }
 
 SVRBufferGL::~SVRBufferGL() {
+}
+
+void SVRBufferGL::create(SVRendererPtr _renderer) {
+    SVRendererGLPtr t_rm = std::dynamic_pointer_cast<SVRendererGL>(_renderer);
+    SVRenderMeshPtr t_rendermesh = std::dynamic_pointer_cast<SVRenderMesh>(m_logic_obj);
+    if(t_rm && t_rendermesh) {
+        m_exist = true;
+    }
+}
+
+void SVRBufferGL::destroy(SVRendererPtr _renderer) {
+
 }
 //
 //void SVRBufferGL::create(SVRendererPtr _renderer,SVRTargetPtr _target,SVRenderMeshPtr _rmesh){

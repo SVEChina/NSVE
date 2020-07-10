@@ -146,7 +146,7 @@ u32 SVRShaderGL::_createProgram(){
         glAttachShader(t_program_id, m_cs);
     }
     //
-    SVShaderPtr t_shader ;//= std::dynamic_pointer_cast<SVShader>(m_logic_obj);
+    SVShaderPtr t_shader = std::dynamic_pointer_cast<SVShader>(m_logic_obj);
     if( t_shader->m_param.m_attri_formate == "all" ) {
         //bind prop
         glBindAttribLocation(t_program_id, CHANNEL_POSITION, NAME_POSITION);

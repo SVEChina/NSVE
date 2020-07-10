@@ -26,6 +26,10 @@ namespace sv {
         
         ~SVRBufferMetal();
         
+        virtual void create(SVRendererPtr _renderer);
+        
+        virtual void destroy(SVRendererPtr _renderer);
+        
         void create(SVRendererPtr _renderer,SVRTargetPtr _target,SVRenderMeshPtr _rmesh);
         
         void render(SVRendererPtr _renderer,SVRTargetPtr _target,SVRenderMeshPtr _rmesh);

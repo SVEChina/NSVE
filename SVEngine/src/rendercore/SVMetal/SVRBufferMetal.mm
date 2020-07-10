@@ -6,7 +6,6 @@
 //
 
 #include "SVRBufferMetal.h"
-#include "SVRFboMetal.h"
 #include "SVRendererMetal.h"
 #include "../SVRenderMesh.h"
 
@@ -24,6 +23,15 @@ SVRBufferMetal::SVRBufferMetal(SVInstPtr _app)
 
 SVRBufferMetal::~SVRBufferMetal() {
     destroy(nullptr, nullptr);
+}
+
+void SVRBufferMetal::create(SVRendererPtr _renderer) {
+    SVRendererMetalPtr t_rm = std::dynamic_pointer_cast<SVRendererMetal>(_renderer);
+    SVRenderMeshPtr t_rendermesh = std::dynamic_pointer_cast<SVRenderMesh>(m_logic_obj);
+}
+
+void SVRBufferMetal::destroy(SVRendererPtr _renderer) {
+    
 }
 
 void SVRBufferMetal::create(SVRendererPtr _renderer,SVRTargetPtr _target,SVRenderMeshPtr _rmesh) {
