@@ -8,10 +8,8 @@
 #ifndef SV_SHADER_H
 #define SV_SHADER_H
 
-#include "SVMtlDef.h"
-#include "../rendercore/SVRTex.h"
-#include "../rendercore/SVRenderDef.h"
-#include "SVTexMgr.h"
+#include "../base/SVGBase.h"
+#include "../rendercore/SVRenderDeclare.h"
 
 namespace sv {
 
@@ -20,6 +18,7 @@ namespace sv {
     */
 
     struct ShaderParam {
+        s32 m_dsp;
         SVString m_programme_fname;
         SVString m_vs_fname;
         SVString m_fs_fname;
@@ -37,7 +36,7 @@ namespace sv {
         ~SVShader();
         
         //渲染内核
-        void bindRes(SVRTexPtr _res);
+        void bindRes(SVRShaderPtr _res);
         
         void unbindRes();
         
@@ -48,7 +47,6 @@ namespace sv {
         
     public:
         ShaderParam m_param;
-        
     };
         
 }//!namespace sv

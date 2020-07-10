@@ -7,12 +7,12 @@
 
 #include "SVRShaderMetal.h"
 #include "SVRendererMetal.h"
+#include "../../mtl/SVShader.h"
 
 using namespace sv;
 
 SVRShaderMetal::SVRShaderMetal(SVInstPtr _app)
 :SVRShader(_app){
-    m_shader_dsp = 0;
     m_rp_dsp = nullptr;
     m_vsf = nullptr;
     m_gsf = nullptr;
@@ -26,32 +26,38 @@ SVRShaderMetal::~SVRShaderMetal() {
 }
 
 void SVRShaderMetal::create(SVRendererPtr _renderer) {
+    if(!m_logic_obj) {
+        return ;
+    }
+    SVShaderPtr t_shader;// = std::dynamic_pointer_cast<SVShader>(m_logic_obj);
+    if(!t_shader){
+        return ;
+    }
     SVRendererMetalPtr t_rm = std::dynamic_pointer_cast<SVRendererMetal>(_renderer);
-    if( m_shader_dsp&SV_E_TECH_VS ) {
-        NSString* t_str = [NSString stringWithFormat:@"%s",m_vs_fname.c_str()];
+    if( t_shader->m_param.m_dsp &SV_E_TECH_VS ) {
+        NSString* t_str = [NSString stringWithFormat:@"%s",t_shader->m_param.m_vs_fname.c_str()];
         m_vsf = [t_rm->m_pLibrary newFunctionWithName:t_str];
     }
-    if( m_shader_dsp&SV_E_TECH_FS ) {
-        NSString* t_str = [NSString stringWithFormat:@"%s",m_fs_fname.c_str()];
+    if( t_shader->m_param.m_dsp&SV_E_TECH_FS ) {
+        NSString* t_str = [NSString stringWithFormat:@"%s",t_shader->m_param.m_fs_fname.c_str()];
         m_fsf = [t_rm->m_pLibrary newFunctionWithName:t_str];
     }
-    if( m_shader_dsp&SV_E_TECH_GS ) {
-        NSString* t_str = [NSString stringWithFormat:@"%s",m_gs_fname.c_str()];
+    if( t_shader->m_param.m_dsp&SV_E_TECH_GS ) {
+        NSString* t_str = [NSString stringWithFormat:@"%s",t_shader->m_param.m_gs_fname.c_str()];
         m_gsf = [t_rm->m_pLibrary newFunctionWithName:t_str];
     }
 //    if( m_shader_dsp&SV_E_TECH_CS ) {
-//        NSString* t_str = [NSString stringWithFormat:@"%s",m_cs_fname.c_str()];
+//        NSString* t_str = [NSString stringWithFormat:@"%s",t_shader->m_param.m_cs_fname.c_str()];
 //        m_csf = [t_rm->m_pLibrary newFunctionWithName:t_str];
 //    }
-    if( m_shader_dsp&SV_E_TECH_TSC ) {
-        NSString* t_str = [NSString stringWithFormat:@"%s",m_tsc_fname.c_str()];
+    if( t_shader->m_param.m_dsp&SV_E_TECH_TSC ) {
+        NSString* t_str = [NSString stringWithFormat:@"%s",t_shader->m_param.m_tsc_fname.c_str()];
         m_tscf = [t_rm->m_pLibrary newFunctionWithName:t_str];
     }
-    if( m_shader_dsp&SV_E_TECH_TSD ) {
-        NSString* t_str = [NSString stringWithFormat:@"%s",m_tse_fname.c_str()];
+    if( t_shader->m_param.m_dsp&SV_E_TECH_TSD ) {
+        NSString* t_str = [NSString stringWithFormat:@"%s",t_shader->m_param.m_tse_fname.c_str()];
         m_tsdf = [t_rm->m_pLibrary newFunctionWithName:t_str];
     }
-        
         //m_rp_dsp = [[MTLRenderPipelineDescriptor alloc] init];
         //    pipelineStateDescriptor.label = @"Simple Pipeline";
         //    pipelineStateDescriptor.vertexFunction = vertexFunction;
@@ -60,6 +66,7 @@ void SVRShaderMetal::create(SVRendererPtr _renderer) {
         //
         //    _pipelineState = [_device newRenderPipelineStateWithDescriptor:pipelineStateDescriptor
         //
+    m_exist = true;
 }
            
 void SVRShaderMetal::destroy(SVRendererPtr _renderer) {

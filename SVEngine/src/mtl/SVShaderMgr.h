@@ -9,10 +9,8 @@
 #define SV_SHADERMGR_H
 
 #include "../base/SVDef.h"
-#include "../base/SVObject.h"
-#include "../base/SVMap.h"
 #include "../basesys/SVSysBase.h"
-#include "SVShader.h"
+#include <map>
 
 namespace sv {
 
@@ -38,8 +36,8 @@ namespace sv {
         void _clearAllShader();
         
     protected:
-        typedef SVMap<SVString,SVShaderPtr> SHADERPOOL;
-        SHADERPOOL ShaderMap;
+        typedef std::map<SVString,SVShaderPtr> SHADERPOOL;
+        SHADERPOOL m_shaderMap;
     };
     
 }//!namespace sv

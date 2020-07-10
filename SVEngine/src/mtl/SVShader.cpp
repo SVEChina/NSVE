@@ -6,17 +6,13 @@
 //
 
 #include "SVShader.h"
-#include "../app/SVDispatch.h"
+#include "../rendercore/SVRShader.h"
 #include "../app/SVInst.h"
-#include "../basesys/SVConfig.h"
-#include "../rendercore/SVRenderMgr.h"
-#include "../work/SVTdCore.h"
-#include "../base/SVDataSwap.h"
 
 using namespace sv;
 
 SVShader::SVShader(SVInstPtr _app)
-: SVGBaseEx(_app)
+:SVGBaseEx(_app)
 ,m_res_shader(nullptr){
 }
 
@@ -25,7 +21,7 @@ SVShader::~SVShader() {
 }
 
 //渲染内核
-void SVShader::bindRes(SVRTexPtr _res) {
+void SVShader::bindRes(SVRShaderPtr _res) {
     m_res_shader = _res;
 }
 

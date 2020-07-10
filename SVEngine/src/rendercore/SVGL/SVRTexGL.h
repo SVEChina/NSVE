@@ -5,8 +5,8 @@
 // yizhou Fu,long Yin,longfei Lin,ziyu Xu,xiaofan Li,daming Li
 //
 
-#ifndef SV_RRESGL_H
-#define SV_RRESGL_H
+#ifndef SV_RTEX_GL_H
+#define SV_RTEX_GL_H
 
 #include "../SVRRes.h"
 #include "../SVRTex.h"
@@ -240,4 +240,4 @@ namespace sv {
 
 
 //
-#endif //SV_RRESGL_H
+#endif //SV_RTEX_GL_H

@@ -83,62 +83,19 @@
 
 namespace sv {
     
-        class SVRShader: public SVRRes{
-        public:
-            SVRShader(SVInstPtr _app);
-            
-            virtual ~SVRShader();
-            
-            virtual void create(SVRendererPtr _renderer){}
-            
-            virtual void destroy(SVRendererPtr _renderer){}
-            
-            virtual bool active(SVRendererPtr _render){ return false; }
-            
-            void setAF(cptr8 _af);
-            
-            cptr8 getAF();
-            
-            void setProgrammeName(cptr8 _filename);
-            
-            cptr8 getProgrammeName();
-            
-            void setTechFName(cptr8 _filename);
-            
-            void setVSFName(cptr8 _filename);
-            
-            void setFSFName(cptr8 _filename);
-            
-            void setGSFName(cptr8 _filename);
-            
-            void setCSFName(cptr8 _filename);
-            
-            void setTSCFName(cptr8 _filename);
-            
-            void setTSEFName(cptr8 _filename);
+    class SVRShader: public SVRRes{
+    public:
+        SVRShader(SVInstPtr _app);
 
-        protected:
-            SVString m_programme_fname;
-            
-            SVString m_vs_fname;
-            
-            SVString m_fs_fname;
-            
-            SVString m_gs_fname;
-            
-            SVString m_cs_fname;
-            
-            SVString m_tsc_fname;
-            
-            SVString m_tse_fname;
-            
-            SVString m_attri_formate;
-            
-            s32 m_shader_dsp;
-        };
+        virtual ~SVRShader();
+
+        virtual void create(SVRendererPtr _renderer){}
+
+        virtual void destroy(SVRendererPtr _renderer){}
+
+        virtual bool active(SVRendererPtr _render){ return false; }
+    };
         
-    
-    
 }//!namespace sv
 
 

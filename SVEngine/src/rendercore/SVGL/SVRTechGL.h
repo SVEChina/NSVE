@@ -9,7 +9,7 @@
 #define SV_RENDERTECH_GL_H
 
 #include "../SVRTech.h"
-#include "SVRenderDeclare.h"
+#include "../SVRenderDeclare.h"
 
 namespace sv {
 

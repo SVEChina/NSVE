@@ -44,27 +44,6 @@ namespace sv {
             id<MTLTexture> m_srcTex;
         };
         
-        /*
-         Shader资源
-         */
-        class SVRMetalShader: public SVRShader {
-        public:
-            SVRMetalShader(SVInstPtr _app);
-            
-            virtual ~SVRMetalShader();
-            
-            virtual void create(SVRendererPtr _renderer);
-            
-            virtual void destroy(SVRendererPtr _renderer);
-            
-            virtual bool active(SVRendererPtr _render);
-            
-        protected:
-            id<MTLFunction> m_pVS;
-            id<MTLFunction> m_pFS;
-            id<MTLRenderPipelineState> m_pProgram;
-        };
-        
     
 
 }//!namespace sv

@@ -6,6 +6,7 @@
 //
 
 #include "SVShaderMgr.h"
+#include "SVShader.h"
 #include "../file/SVFileMgr.h"
 #include "../base/SVDataChunk.h"
 #include "../app/SVInst.h"
@@ -81,7 +82,8 @@ void SVShaderMgr::_loadAllShader() {
             //
             SVShaderPtr t_shader = MakeSharedPtr<SVShader>(mApp);
             if(t_shader) {
-                ShaderMap.append(t_programme_name, t_shader);
+                m_shaderMap.insert( std::make_pair(t_programme_name, t_shader) );
+                //
                 t_shader->m_param.m_attri_formate = t_attri_formate;
                 t_shader->m_param.m_vs_fname = t_vs_fname;
                 t_shader->m_param.m_fs_fname = t_fs_fname;
@@ -100,13 +102,13 @@ void SVShaderMgr::_loadAllShader() {
 }
 
 void SVShaderMgr::_clearAllShader() {
-    ShaderMap.clear();
+    m_shaderMap.clear();
 }
 
 SVShaderPtr SVShaderMgr::getShader(cptr8 _name) {
-    SHADERPOOL::Iterator it = ShaderMap.find(_name);
-    if(it!=ShaderMap.end()) {
-        return it->data;
+    SHADERPOOL::iterator it = m_shaderMap.find(_name);
+    if(it!=m_shaderMap.end()) {
+        return it->second;
     }
     return nullptr;
 }

@@ -25,6 +25,10 @@ namespace sv {
         virtual void create(SVRendererPtr _renderer);
         
         virtual void destroy(SVRendererPtr _renderer);
+        
+        //
+        SVObjectPtr m_logic_obj;
+        bool m_exist;
     };
         
 }//!namespace sv

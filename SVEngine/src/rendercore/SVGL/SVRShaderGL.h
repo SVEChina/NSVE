@@ -5,67 +5,54 @@
 // yizhou Fu,long Yin,longfei Lin,ziyu Xu,xiaofan Li,daming Li
 //
 
-#ifndef SV_RRESGL_SHADER_H
-#define SV_RRESGL_SHADER_H
+#ifndef SV_RSHADER_GL_H
+#define SV_RSHADER_GL_H
 
-#include "../SVRRes.h"
-#include "../SVRTex.h"
-#include "../SVRFbo.h"
 #include "../SVRShader.h"
-#include "../../base/SVPreDeclare.h"
-#include "../../base/SVRect.h"
-#include "../../core/SVVertDef.h"
-#include "../../base/SVDataChunk.h"
 
 namespace sv {
-        /*
-         GL Shader
-         */
+
+    /*
+     GL Shader
+     */
+
+    class SVRShaderGL: public SVRShader {
+    public:
+        SVRShaderGL(SVInstPtr _app);
+
+        virtual ~SVRShaderGL();
+
+        virtual void create(SVRendererPtr _renderer);
+
+        virtual void destroy(SVRendererPtr _renderer);
         
-        class SVRShaderGL: public SVRShader {
-        public:
-            SVRShaderGL(SVInstPtr _app);
+        virtual bool active(SVRendererPtr _render);
 
-            virtual ~SVRShaderGL();
+    private:
+        static u32 _loadShader(SVInstPtr _app,cptr8 _filename,s32 _shaderType);
 
-            virtual void create(SVRendererPtr _renderer);
+        u32 _createProgram();
 
-            virtual void destroy(SVRendererPtr _renderer);
-            
-            virtual bool active(SVRendererPtr _render);
+        void _clearShaderRes();
 
-            void setTechFName(cptr8 _filename);
-
-        private:
-            static u32 _loadShader(SVInstPtr _app,cptr8 _filename,s32 _shaderType);
-
-            u32 _createProgram();
-
-            void _clearShaderRes();
-
-            SVString m_tech_fname;   //技术
-
-            u32 m_programm;
-            
-            u32 m_vs;
-
-            u32 m_fs;
-
-            u32 m_gs;
-
-            u32 m_tsc;
-
-            u32 m_tse;
-
-            u32 m_cs;
-        };
+        u32 m_programm;
         
+        u32 m_vs;
 
-    
+        u32 m_fs;
 
+        u32 m_gs;
+
+        u32 m_tsc;
+
+        u32 m_tse;
+
+        u32 m_cs;
+    };
+        
 }//!namespace sv
 
 
 
 //
-#endif //SV_RRESGL_SHADER_H
+#endif //SV_RSHADER_GL_H

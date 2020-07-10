@@ -6,20 +6,9 @@
 //
 
 #include "SVRShaderGL.h"
-#include "../../third/rapidjson/document.h"
-#include "../../base/SVPreDeclare.h"
+#include "../../mtl/SVShader.h"
 #include "../../app/SVInst.h"
-#include "../../mtl/SVMtlDef.h"
-#include "../../mtl/SVTexMgr.h"
-#include "../../mtl/SVTexture.h"
-#include "../../base/SVDataChunk.h"
 #include "../../file/SVFileMgr.h"
-#include "../../base/SVDataSwap.h"
-#include "../../work/SVTdCore.h"
-#include "../../rendercore/SVRenderMgr.h"
-#include "../SVRenderer.h"
-#include "../SVRenderState.h"
-#include "../SVGL/SVRendererGL.h"
 
 using namespace sv;
 
@@ -49,18 +38,37 @@ SVRShaderGL::~SVRShaderGL(){
 }
 
 void SVRShaderGL::create(SVRendererPtr _renderer) {
-    m_vs = _loadShader(mApp,m_vs_fname.c_str(),SV_E_TECH_VS);
-    m_fs = _loadShader(mApp,m_fs_fname.c_str(),SV_E_TECH_FS);
-    m_gs = _loadShader(mApp,m_gs_fname.c_str(),SV_E_TECH_GS);
-    m_tsc = _loadShader(mApp,m_tsc_fname.c_str(),SV_E_TECH_TSC);
-    m_tse = _loadShader(mApp,m_tse_fname.c_str(),SV_E_TECH_TSD);
-    m_cs = _loadShader(mApp,m_cs_fname.c_str(),SV_E_TECH_CS);
+    if(!m_logic_obj) {
+        return ;
+    }
+    SVShaderPtr t_shader = std::dynamic_pointer_cast<SVShader>(m_logic_obj);
+    if(!t_shader){
+        return ;
+    }
+    //
+    if( t_shader->m_param.m_dsp &SV_E_TECH_VS ) {
+         m_vs = _loadShader(mApp,t_shader->m_param.m_vs_fname.c_str(),SV_E_TECH_VS);
+    }
+    if( t_shader->m_param.m_dsp&SV_E_TECH_FS ) {
+        m_fs = _loadShader(mApp,t_shader->m_param.m_fs_fname.c_str(),SV_E_TECH_FS);
+    }
+    if( t_shader->m_param.m_dsp&SV_E_TECH_GS ) {
+       m_gs = _loadShader(mApp,t_shader->m_param.m_gs_fname.c_str(),SV_E_TECH_GS);
+    }
+//    if( m_shader_dsp&SV_E_TECH_CS ) {
+//     m_cs = _loadShader(mApp,t_shader->m_param.m_gs_fname.c_str(),SV_E_TECH_GS);
+//    }
+    if( t_shader->m_param.m_dsp&SV_E_TECH_TSC ) {
+        m_tsc = _loadShader(mApp,t_shader->m_param.m_tsc_fname.c_str(),SV_E_TECH_TSC);
+    }
+    if( t_shader->m_param.m_dsp&SV_E_TECH_TSD ) {
+        m_tse = _loadShader(mApp,t_shader->m_param.m_tse_fname.c_str(),SV_E_TECH_TSD);
+    }
     m_programm = _createProgram();
-    _clearShaderRes();//生产program后就删除shader资源
-}
-
-void SVRShaderGL::setTechFName(cptr8 _filename) {
-    m_tech_fname = _filename;
+    //生产program后就删除shader资源
+    _clearShaderRes();
+    //创建完毕，资源释放
+    m_logic_obj = nullptr;
 }
 
 u32 SVRShaderGL::_loadShader(SVInstPtr _app,cptr8 _filename,s32 _shaderType){
@@ -115,7 +123,6 @@ u32 SVRShaderGL::_loadShader(SVInstPtr _app,cptr8 _filename,s32 _shaderType){
 
 u32 SVRShaderGL::_createProgram(){
     if (m_vs == 0 || m_fs == 0) {
-        SV_LOG_DEBUG("error : create program fail, please check out shader:%s\n", m_programme_fname.c_str());
         return 0;
     }
     s32 t_error = 0;
@@ -139,7 +146,8 @@ u32 SVRShaderGL::_createProgram(){
         glAttachShader(t_program_id, m_cs);
     }
     //
-    if( m_attri_formate == "all" ) {
+    SVShaderPtr t_shader ;//= std::dynamic_pointer_cast<SVShader>(m_logic_obj);
+    if( t_shader->m_param.m_attri_formate == "all" ) {
         //bind prop
         glBindAttribLocation(t_program_id, CHANNEL_POSITION, NAME_POSITION);
         glBindAttribLocation(t_program_id, CHANNEL_NORMAL, NAME_NORMAL);
@@ -163,7 +171,7 @@ u32 SVRShaderGL::_createProgram(){
         glBindAttribLocation(t_program_id, CHANNEL_ATTRI_7, "s_attribute_7");
     } else {
         SVStringArray t_str_array;
-        t_str_array.setData(m_attri_formate.c_str(),'-');
+        t_str_array.setData( t_shader->m_param.m_attri_formate.c_str(),'-');
         for(s32 i=0;i<t_str_array.size();i++) {
             SVString t_str = t_str_array[i];
             if( t_str == "V2" ) {
@@ -244,12 +252,9 @@ void SVRShaderGL::destroy(SVRendererPtr _renderer) {
 }
 
 bool SVRShaderGL::active(SVRendererPtr _render) {
-    SVRenderStatePtr t_state = _render->getState();
     if(m_programm>0) {
         glUseProgram(m_programm);
-        t_state->m_shaderID = m_programm;
         return true;
     }
-    t_state->m_shaderID = 0;
     return false;
 }

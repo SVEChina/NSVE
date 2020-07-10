@@ -12,10 +12,13 @@
 using namespace sv;
 
 SVRRes::SVRRes(SVInstPtr _app)
-:SVGBaseEx(_app){
+:SVGBaseEx(_app)
+,m_logic_obj(nullptr)
+,m_exist(false){
 }
 
 SVRRes::~SVRRes(){
+    m_logic_obj = nullptr;
 }
 
 void SVRRes::create(SVRendererPtr _renderer){

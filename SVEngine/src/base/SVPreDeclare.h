@@ -19,6 +19,7 @@ typedef std::shared_ptr<classname> classname##Ptr;\
 namespace sv {
 
     DECLARE_SHAREPTR(SVObject);
+    DECLARE_SHAREPTR(SVGBaseEx);
     DECLARE_SHAREPTR(SVDataChunk);
     
     //MainApp
@@ -37,7 +38,6 @@ namespace sv {
     DECLARE_SHAREPTR(SVRPathNor);
     DECLARE_SHAREPTR(SVRPathDef);
 
-    
     //基础
     DECLARE_SHAREPTR(SVRandom);
     DECLARE_SHAREPTR(SVDataSwap);

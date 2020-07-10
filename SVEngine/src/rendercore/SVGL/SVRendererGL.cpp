@@ -27,7 +27,6 @@ using namespace sv;
 
 SVRendererGL::SVRendererGL(SVInstPtr _app)
 :SVRenderer(_app){
-    //m_pRState = MakeSharedPtr<SVRenderStateGL>(_app);
 }
 
 SVRendererGL::~SVRendererGL(){
@@ -114,9 +113,7 @@ void SVRendererGL::processMtl(SVMtlCorePtr _mtl) {
 
 //处理mesh
 void SVRendererGL::processMesh(SVRenderMeshPtr _mesh) {
-    
 }
-
 
 //
 void SVRendererGL::submitTex(u32 _channel,TexUnit& _unit){

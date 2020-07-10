@@ -5,8 +5,8 @@
 // yizhou Fu,long Yin,longfei Lin,ziyu Xu,xiaofan Li,daming Li
 //
 
-#ifndef SV_SHADER_METAL_H
-#define SV_SHADER_METAL_H
+#ifndef SV_RSHADER_METAL_H
+#define SV_RSHADER_METAL_H
 
 #include "../SVRShader.h"
 #include "SVRenderDeclare.h"
@@ -44,4 +44,4 @@ namespace sv {
 }//!namespace sv
 
 
-#endif //SV_SHADER_METAL_H
+#endif //SV_RSHADER_METAL_H

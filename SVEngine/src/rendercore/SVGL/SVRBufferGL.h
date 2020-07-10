@@ -5,8 +5,8 @@
 // yizhou Fu,long Yin,longfei Lin,ziyu Xu,xiaofan Li,daming Li
 //
 
-#ifndef SV_RMESH_GL_H
-#define SV_RMESH_GL_H
+#ifndef SV_RBUFFER_GL_H
+#define SV_RBUFFER_GL_H
 
 #include "../SVRBuffer.h"
 #include "../SVRenderMesh.h"
@@ -38,4 +38,4 @@ namespace sv {
 }//!namespace sv
 
 
-#endif //SV_RMESH_GL_H
+#endif //SV_RBUFFER_GL_H

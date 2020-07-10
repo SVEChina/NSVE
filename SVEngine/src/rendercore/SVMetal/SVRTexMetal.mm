@@ -43,14 +43,6 @@ void SVRTexMetal:: create(SVRendererPtr _renderer) {
         region.size.width = m_width;
         region.size.height = m_height;
         region.size.depth = 1;
-//        if(m_pData) {
-//            m_bLoad = true;
-//            m_pData->lockData();
-//            [m_srcTex replaceRegion:region mipmapLevel:0 withBytes:m_pData->getData()
-//                        bytesPerRow:4*m_width];
-//            m_pData->unlockData();
-//            m_pData = nullptr;
-//        }
     }
 }
 
@@ -98,42 +90,4 @@ u32 SVRTexMetal::getTexID(){
 
 bool SVRTexMetal::getbLoad() {
     return m_bLoad;
-}
-
-
-/*
- metal shader
- */
-
-SVRMetalShader::SVRMetalShader(SVInstPtr _app)
-:SVRShader(_app){
-}
-
-SVRMetalShader::~SVRMetalShader() {
-}
-
-void SVRMetalShader::create(SVRendererPtr _renderer) {
-    SVRendererMetalPtr t_rendeMetalPtr = std::dynamic_pointer_cast<SVRendererMetal>(_renderer);
-    if (t_rendeMetalPtr && t_rendeMetalPtr->m_pLibrary) {
-        NSString* t_vsname = [NSString stringWithFormat:@"%s",m_vs_fname.c_str()];
-        NSString* t_fsname = [NSString stringWithFormat:@"%s",m_fs_fname.c_str()];
-        m_pVS = [t_rendeMetalPtr->m_pLibrary newFunctionWithName:t_vsname];
-        m_pFS = [t_rendeMetalPtr->m_pLibrary newFunctionWithName:t_fsname];
-        MTLRenderPipelineDescriptor *t_dsp = [[MTLRenderPipelineDescriptor alloc] init];
-        t_dsp.vertexFunction = m_pVS;
-        t_dsp.fragmentFunction = m_pFS;
-        //t_dsp.colorAttachments[0].pixelFormat = ;
-        //t_dsp.colorAttachments[0].pixelFormat = self.mtkView.colorPixelFormat;
-        m_pProgram = [t_rendeMetalPtr->m_pDevice newRenderPipelineStateWithDescriptor:t_dsp error:nullptr];
-    }
-    //创建图形渲染管道，耗性能操作不宜频繁调用
-    //self.commandQueue = [self.mtkView.device newCommandQueue]; // CommandQueue是渲染指令队列，保证渲染指令有序地提交到GPU
-}
-
-void SVRMetalShader::destroy(SVRendererPtr _renderer) {
-    //
-}
-
-bool SVRMetalShader::active(SVRendererPtr _render) {
-    return false;
 }
