@@ -36,7 +36,6 @@ SVRShaderGL::SVRShaderGL(SVInstPtr _app)
     m_tsc = 0;
     m_tse = 0;
     m_cs = 0;
-    m_use_tech = false;
 }
 
 SVRShaderGL::~SVRShaderGL(){
@@ -50,23 +49,18 @@ SVRShaderGL::~SVRShaderGL(){
 }
 
 void SVRShaderGL::create(SVRendererPtr _renderer) {
-    if( m_use_tech ) {
-        _parseTech();
-    } else {
-        m_vs = _loadShader(mApp,m_vs_fname.c_str(),1);
-        m_fs = _loadShader(mApp,m_fs_fname.c_str(),2);
-        m_gs = _loadShader(mApp,m_gs_fname.c_str(),3);
-        m_tsc = _loadShader(mApp,m_tsc_fname.c_str(),4);
-        m_tse = _loadShader(mApp,m_tse_fname.c_str(),5);
-        m_cs = _loadShader(mApp,m_cs_fname.c_str(),6);
-        m_programm = _createProgram();
-        _clearShaderRes();//生产program后就删除shader资源
-    }
+    m_vs = _loadShader(mApp,m_vs_fname.c_str(),SV_E_TECH_VS);
+    m_fs = _loadShader(mApp,m_fs_fname.c_str(),SV_E_TECH_FS);
+    m_gs = _loadShader(mApp,m_gs_fname.c_str(),SV_E_TECH_GS);
+    m_tsc = _loadShader(mApp,m_tsc_fname.c_str(),SV_E_TECH_TSC);
+    m_tse = _loadShader(mApp,m_tse_fname.c_str(),SV_E_TECH_TSD);
+    m_cs = _loadShader(mApp,m_cs_fname.c_str(),SV_E_TECH_CS);
+    m_programm = _createProgram();
+    _clearShaderRes();//生产program后就删除shader资源
 }
 
 void SVRShaderGL::setTechFName(cptr8 _filename) {
     m_tech_fname = _filename;
-    m_use_tech = true;
 }
 
 u32 SVRShaderGL::_loadShader(SVInstPtr _app,cptr8 _filename,s32 _shaderType){
@@ -84,15 +78,15 @@ u32 SVRShaderGL::_loadShader(SVInstPtr _app,cptr8 _filename,s32 _shaderType){
     //
     cptr8 t_shader_res = tDataStream.getPointerChar();
     s32 t_shader_type = 0;
-    if(_shaderType == 1) {
+    if(_shaderType == SV_E_TECH_VS) {
         t_shader_type = GL_VERTEX_SHADER;
-    }else if(_shaderType == 2) {
+    }else if(_shaderType == SV_E_TECH_FS) {
         t_shader_type = GL_FRAGMENT_SHADER;
-    }else if(_shaderType == 3) {
+    }else if(_shaderType == SV_E_TECH_GS) {
         t_shader_type = GL_GEOMETRY_SHADER;
-    }else if(_shaderType == 4) {
+    }else if(_shaderType == SV_E_TECH_TSD) {
         t_shader_type = GL_TESS_EVALUATION_SHADER;
-    }else if(_shaderType == 5) {
+    }else if(_shaderType == SV_E_TECH_TSC) {
         t_shader_type = GL_TESS_CONTROL_SHADER;
     }else if(_shaderType == 6) {
     }
@@ -117,152 +111,6 @@ u32 SVRShaderGL::_loadShader(SVInstPtr _app,cptr8 _filename,s32 _shaderType){
         SV_LOG_DEBUG("load shader file %s type %d sucess\n", _filename, _shaderType);
     }
     return t_shader_id;
-}
-
-//解析tech
-bool SVRShaderGL::_parseTech() {
-    SVDataChunk tDataStream;
-    bool tflag = mApp->getFileMgr()->loadFileContentStr(&tDataStream, m_tech_fname.c_str());
-    if (!tflag)
-        return false;
-    RAPIDJSON_NAMESPACE::Document t_doc;
-    t_doc.Parse(tDataStream.getPointerChar());
-    if (t_doc.HasParseError()) {
-        RAPIDJSON_NAMESPACE::ParseErrorCode code = t_doc.GetParseError();
-        SV_LOG_ERROR("rapidjson error code:%d \n", code);
-        return false;
-    }
-    //
-    if (t_doc.HasMember("version")) {
-        RAPIDJSON_NAMESPACE::Value &version = t_doc["version"];
-    }
-    if (t_doc.HasMember("language")) {
-        RAPIDJSON_NAMESPACE::Value &language = t_doc["language"];
-    }
-    //
-    if (t_doc.HasMember("vs")) {
-        RAPIDJSON_NAMESPACE::Value &vs = t_doc["vs"];
-        if (vs.IsObject()) {
-            SVString t_precision = SVString::null;
-            SVString t_src = SVString::null;
-            if (vs.HasMember("precision")) {
-                RAPIDJSON_NAMESPACE::Value &t_value = vs["precision"];
-                t_precision = t_value.GetString();
-            }
-            if (vs.HasMember("source")) {
-                RAPIDJSON_NAMESPACE::Value &t_value = vs["source"];
-                t_src = t_value.GetString();
-            }
-            //拼接字符串 这里需要
-            m_vs = _loadTechVS(t_precision.c_str(),t_src.c_str());
-        }
-    }
-    //
-    if (t_doc.HasMember("fs")) {
-        RAPIDJSON_NAMESPACE::Value &fs = t_doc["fs"];
-        if (fs.IsObject()) {
-            SVString t_precision = SVString::null;
-            SVString t_src = SVString::null;
-            if (fs.HasMember("precision")) {
-                RAPIDJSON_NAMESPACE::Value &t_value = fs["precision"];
-                t_precision = t_value.GetString();
-            }
-            if (fs.HasMember("source")) {
-                RAPIDJSON_NAMESPACE::Value &t_value = fs["source"];
-                t_src = t_value.GetString();
-            }
-            m_fs = _loadTechFS(t_precision.c_str(),t_src.c_str());
-        }
-    }
-    //
-    if (t_doc.HasMember("gs")) {
-        RAPIDJSON_NAMESPACE::Value &gs = t_doc["gs"];
-        if (gs.IsObject()) {
-            SVString t_precision = SVString::null;
-            SVString t_src = SVString::null;
-            if (gs.HasMember("precision")) {
-                RAPIDJSON_NAMESPACE::Value &t_value = gs["precision"];
-                t_precision = t_value.GetString();
-            }
-            if (gs.HasMember("source")) {
-                RAPIDJSON_NAMESPACE::Value &t_value = gs["source"];
-                t_src = t_value.GetString();
-            }
-            m_gs = _loadTechGS(t_precision.c_str(),t_src.c_str());
-        }
-    }
-    return true;
-}
-
-u32 SVRShaderGL::_loadTechVS(cptr8 _precision,cptr8 _src) {
-    SVString t_source = _src;
-#ifdef SV_ANDROID
-    if(strcmp(_src,"lowp") == 0 ) {
-
-    } else if(strcmp(_src,"mediump") == 0 ) {
-
-    } else if(strcmp(_src,"highp") == 0 ) {
-
-    }
-#endif
-
-#ifdef  SV_IOS
-    if(strcmp(_src,"lowp") == 0 ) {
-
-    } else if(strcmp(_src,"mediump") == 0 ) {
-
-    } else if(strcmp(_src,"highp") == 0 ) {
-
-    }
-#endif
-
-    return 0;
-}
-
-u32 SVRShaderGL::_loadTechFS(cptr8 _precision,cptr8 _src) {
-    SVString t_source = _src;
-#ifdef SV_ANDROID
-    if(strcmp(_src,"lowp") == 0 ) {
-        //t_source =
-    } else if(strcmp(_src,"mediump") == 0 ) {
-
-    } else if(strcmp(_src,"highp") == 0 ) {
-
-    }
-#endif
-
-#ifdef SV_IOS
-    if(strcmp(_src,"lowp") == 0 ) {
-        //t_source =
-    } else if(strcmp(_src,"mediump") == 0 ) {
-
-    } else if(strcmp(_src,"highp") == 0 ) {
-
-    }
-#endif
-    return 0;
-}
-
-u32 SVRShaderGL::_loadTechGS(cptr8 _precision,cptr8 _src) {
-#ifdef SV_ANDROID
-    if(strcmp(_src,"lowp") == 0 ) {
-
-    } else if(strcmp(_src,"mediump") == 0 ) {
-
-    } else if(strcmp(_src,"highp") == 0 ) {
-
-    }
-#endif
-#ifdef SV_IOS
-    if(strcmp(_src,"lowp") == 0 ) {
-
-    } else if(strcmp(_src,"mediump") == 0 ) {
-
-    } else if(strcmp(_src,"highp") == 0 ) {
-
-    }
-#endif
-    return 0;
 }
 
 u32 SVRShaderGL::_createProgram(){

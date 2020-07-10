@@ -73,7 +73,7 @@ enum SV_DESIGN_ADAPT_MODE {
 };
 
 //技术类型
-enum SV_TECH_TYPE {
+enum SV_SHADER_TYPE {
     SV_E_TECH_VS = 0x00000001,
     SV_E_TECH_FS = 0x00000010,
     SV_E_TECH_GS = 0x00000100,

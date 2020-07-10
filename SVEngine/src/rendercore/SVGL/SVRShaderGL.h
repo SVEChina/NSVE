@@ -38,20 +38,10 @@ namespace sv {
 
         private:
             static u32 _loadShader(SVInstPtr _app,cptr8 _filename,s32 _shaderType);
-            
-            bool _parseTech();
-
-            u32 _loadTechVS(cptr8 _precision,cptr8 _src);
-
-            u32 _loadTechFS(cptr8 _precision,cptr8 _src);
-
-            u32 _loadTechGS(cptr8 _precision,cptr8 _src);
 
             u32 _createProgram();
 
             void _clearShaderRes();
-
-            bool m_use_tech;
 
             SVString m_tech_fname;   //技术
 

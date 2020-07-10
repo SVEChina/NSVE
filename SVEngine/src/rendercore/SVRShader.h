@@ -133,6 +133,8 @@ namespace sv {
             SVString m_tse_fname;
             
             SVString m_attri_formate;
+            
+            s32 m_shader_dsp;
         };
         
     

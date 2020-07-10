@@ -24,13 +24,11 @@ namespace sv {
         
         ~SVRShaderMetal();
         
-        virtual void create(SVRendererPtr _renderer);
-                   
-        virtual void destroy(SVRendererPtr _renderer);
-        
-//        virtual void build(SVRendererPtr _renderer);
-//
-//        virtual void render(SVRendererPtr _renderer);
+        void create(SVRendererPtr _renderer);
+               
+        void destroy(SVRendererPtr _renderer);
+
+        bool active(SVRendererPtr _render);
         
     protected:
         id<MTLFunction> m_vsf;
