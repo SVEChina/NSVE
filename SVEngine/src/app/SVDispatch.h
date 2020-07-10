@@ -10,6 +10,7 @@
 
 #include "../base/SVIDPool.h"
 #include "../rendercore/SVRenderDeclare.h"
+#include "../mtl/SVTexture.h"
 #include "SVGlobalMgr.h"
 #include "SVGlobalParam.h"
 
@@ -25,10 +26,22 @@ namespace sv {
         static void dispatchShaderCreate(SVInstPtr _app,SVRShaderPtr _shader);
         
         //投递mesh create
-        static void dispatchMeshCreate(SVInstPtr _app,SVRMeshPtr _mesh);
+        static void dispatchMeshCreate(SVInstPtr _app,SVRenderMeshPtr _mesh);
+        
+        //
+        static void dispatchBufferCreate(SVInstPtr _app,SVRBufferPtr _buffer);
  
         //投递texture create
         static void dispatchTextureCreate(SVInstPtr _app,SVRTexPtr _tex);
+        
+        //投递texture create
+        static void dispatchTextureCreate(SVInstPtr _app,SVTexturePtr _tex);
+        
+        //投递target
+        static void dispatchTargetCreate(SVInstPtr _app,SVRTargetPtr _target);
+        
+        
+        
         
        
     };

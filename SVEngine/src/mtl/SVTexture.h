@@ -37,11 +37,16 @@ namespace sv {
         
         virtual bool getbLoad();
         
+        //渲染内核
+        void bindRes(SVRTexPtr _res);
+        
+        void unbindRes();
+        
         SVRTexPtr getResTex();
         
     protected:
         void _updateData();
-        SVRTexPtr m_objTexPtr;
+        SVRTexPtr m_restex;
         
     public:
         SVString m_name;

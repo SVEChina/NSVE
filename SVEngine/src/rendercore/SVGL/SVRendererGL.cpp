@@ -9,6 +9,10 @@
 #include "SVRenderStateGL.h"
 #include "SVRTexGL.h"
 #include "SVRTechGL.h"
+#include "SVRFboGL.h"
+#include "SVRShaderGL.h"
+#include "SVRBufferGL.h"
+//
 #include "../SVRenderMgr.h"
 #include "../SVRTarget.h"
 #include "../SVRenderTexture.h"
@@ -75,6 +79,25 @@ void SVRendererGL::resize(s32 _w,s32 _h) {
 //                                                  true);
 //    mApp->getRenderMgr()->pushRCmdCreate(m_pRenderTex);
 //    m_pRenderTex->setTexture(t_tex);
+}
+
+SVRTexPtr SVRendererGL::createResTexture() {
+    return MakeSharedPtr<SVRTexGL>(mApp);
+}
+
+//shader
+SVRShaderPtr SVRendererGL::createResShader() {
+    return MakeSharedPtr<SVRShaderGL>(mApp);
+}
+
+//buf-vbo 等
+SVRBufferPtr SVRendererGL::createResBuf() {
+    return MakeSharedPtr<SVRBufferGL>(mApp);
+}
+
+//fbo
+SVRFboPtr SVRendererGL::createResFbo() {
+    return MakeSharedPtr<SVRFboGL>(mApp);
 }
 
 //处理技术
@@ -559,7 +582,7 @@ void SVRendererGL::svUpdateVertexFormate(VFTYPE _vf,s32 _count,s32 _mode) {
     SVRenderStateGLPtr m_pRStateGL = std::dynamic_pointer_cast<SVRenderStateGL>(m_pRState);
     m_pRStateGL->m_VFType = _vf;
     if( _mode == 1 ) {
-        s32 t_ver_len = SVResVBO::getVertexFormateSize(_vf);
+        s32 t_ver_len = SVRBuffer::getVertexFormateSize(_vf);
         s32 t_off = 0;
         if (_vf == E_VF_V3_PARTICLE) {
             //骨骼权重

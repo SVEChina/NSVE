@@ -36,6 +36,15 @@ namespace sv {
         
         virtual void _afterRender(SVRendererPtr _renderer);
         
+    public:
+        void bindRes(SVRFboPtr _res);
+        
+        void unbindRes();
+        
+        SVRFboPtr getResFbo();
+        
+    protected:
+        
         SVRFboPtr m_fbo;
     };
 

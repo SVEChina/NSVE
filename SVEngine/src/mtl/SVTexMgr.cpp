@@ -79,7 +79,7 @@ SVTexturePtr SVTexMgr::_createTexture(cptr8 _name, bool _sync, bool _enableMipMa
         _loadTextureAsync(tTexture, _name, _enableMipMap);
     }
     m_ftex_pool.insert(std::make_pair(_name, tTexture));
-    //SVDispatch::dis
+    SVDispatch::dispatchTextureCreate(mApp, tTexture);
     m_texLock->unlock();
     return tTexture;
 }

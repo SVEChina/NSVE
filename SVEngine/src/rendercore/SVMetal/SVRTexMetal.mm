@@ -1,11 +1,11 @@
 //
-// SVRMetalTex.cpp
+// SVRTexMetal.cpp
 // SVEngine
 // Copyright 2017-2020
 // yizhou Fu,long Yin,longfei Lin,ziyu Xu,xiaofan Li,daming Li
 //
 
-#include "SVRMetalTex.h"
+#include "SVRTexMetal.h"
 #include "SVRendererMetal.h"
 #include "../../app/SVInst.h"
 #include "../../mtl/SVMtlDef.h"
@@ -21,16 +21,16 @@
 using namespace sv;
 
 //tex资源
-SVRMetalTex::SVRMetalTex(SVInstPtr _app)
+SVRTexMetal::SVRTexMetal(SVInstPtr _app)
 :SVRTex(_app)
 ,m_srcTex(nullptr){
     
 }
 
-SVRMetalTex::~SVRMetalTex(){
+SVRTexMetal::~SVRTexMetal(){
 }
 
-void SVRMetalTex:: create(SVRendererPtr _renderer) {
+void SVRTexMetal:: create(SVRendererPtr _renderer) {
     SVRTex::create(_renderer);
     SVRendererMetalPtr t_rendeMetalPtr = std::dynamic_pointer_cast<SVRendererMetal>(_renderer);
     if (t_rendeMetalPtr) {
@@ -54,7 +54,7 @@ void SVRMetalTex:: create(SVRendererPtr _renderer) {
     }
 }
 
-void SVRMetalTex::destroy(SVRendererPtr _renderer) {
+void SVRTexMetal::destroy(SVRendererPtr _renderer) {
     SVRTex::destroy(_renderer);
     if(m_id>0){
         //        glDeleteTextures(1, &m_id);
@@ -62,7 +62,7 @@ void SVRMetalTex::destroy(SVRendererPtr _renderer) {
     }
 }
 
-void SVRMetalTex::commit() {
+void SVRTexMetal::commit() {
     m_texLock->lock();
     //    if (m_pData) {
     //        if(m_bLoad){
@@ -77,7 +77,7 @@ void SVRMetalTex::commit() {
     m_texLock->unlock();
 }
 
-void SVRMetalTex::setTexData(void *_data, s32 _len){
+void SVRTexMetal::setTexData(void *_data, s32 _len){
     m_texLock->lock();
     //    if( _data && _len>0 ) {
     //        SVDataSwapPtr t_pDataSwap = MakeSharedPtr<SVDataSwap>();
@@ -92,11 +92,11 @@ void SVRMetalTex::setTexData(void *_data, s32 _len){
  metal texture
  */
 
-u32 SVRMetalTex::getTexID(){
+u32 SVRTexMetal::getTexID(){
     return m_id;
 }
 
-bool SVRMetalTex::getbLoad() {
+bool SVRTexMetal::getbLoad() {
     return m_bLoad;
 }
 

@@ -18,7 +18,7 @@ SVTextureIOS::SVTextureIOS(SVInstPtr _app)
 
 SVTextureIOS::~SVTextureIOS() {
     m_pData = nullptr;
-    m_objTexPtr = nullptr;
+    m_restex = nullptr;
     m_bCreated = false;
 }
 
@@ -40,32 +40,32 @@ void SVTextureIOS::create(SVRendererPtr _renderer){
 //        SVRendererGLPtr t_renderGLPtr = std::dynamic_pointer_cast<SVRendererGL>(t_renderBasePtr);
 //        if (t_renderGLPtr) {
 //            //渲染器类型E_RENDERER_GLES,
-//            m_objTexPtr = MakeSharedPtr<SVRGLTexiOS>(mApp)  ;
+//            m_restex = MakeSharedPtr<SVRTexGLiOS>(mApp)  ;
 //        }
 //        
-//        if (m_objTexPtr) {
-//            m_objTexPtr->setname(m_name);
-//            m_objTexPtr->settype(m_type);
-//            m_objTexPtr->setwidth(m_width);
-//            m_objTexPtr->setheight(m_height);
-//            m_objTexPtr->setinformate(m_informate);
-//            m_objTexPtr->setdataformate(m_dataformate);
+//        if (m_restex) {
+//            m_restex->setname(m_name);
+//            m_restex->settype(m_type);
+//            m_restex->setwidth(m_width);
+//            m_restex->setheight(m_height);
+//            m_restex->setinformate(m_informate);
+//            m_restex->setdataformate(m_dataformate);
 //            _updateData();
-//            m_objTexPtr->create(_renderer);
+//            m_restex->create(_renderer);
 //        }
 //    }
 }
 
 void SVTextureIOS::destroy(SVRendererPtr _renderer){
-//    if (m_objTexPtr) {
-//        m_objTexPtr->destroy(_renderer);
+//    if (m_restex) {
+//        m_restex->destroy(_renderer);
 //    }
 //    SVRRes::destroy(_renderer);
 }
 
 void SVTextureIOS::pushData(u8* _srcPtr,s32 _w,s32 _h,s32 _pixelformate){
 #ifdef SV_IOS
-    SVRGLTexiOSPtr t_tmp = std::dynamic_pointer_cast<SVRGLTexiOS>(m_objTexPtr);
+    SVRTexGLiOSPtr t_tmp = std::dynamic_pointer_cast<SVRTexGLiOS>(m_restex);
     if (t_tmp) {
         t_tmp->pushData(_srcPtr, _w, _h, _pixelformate);
     }
@@ -74,7 +74,7 @@ void SVTextureIOS::pushData(u8* _srcPtr,s32 _w,s32 _h,s32 _pixelformate){
 
 void SVTextureIOS::fetchData(u8* _dstPtr,s32 _w,s32 _h) {
 #ifdef SV_IOS
-    SVRGLTexiOSPtr t_tmp = std::dynamic_pointer_cast<SVRGLTexiOS>(m_objTexPtr);
+    SVRTexGLiOSPtr t_tmp = std::dynamic_pointer_cast<SVRTexGLiOS>(m_restex);
     if (t_tmp) {
         t_tmp->fetchData(_dstPtr, _w, _h);
     }

@@ -31,13 +31,13 @@ SVTexture::SVTexture(SVInstPtr _app)
     m_type = GL_TEXTURE_2D;
     m_informate = GL_RGBA;
     m_dataformate = GL_RGBA;
-    m_objTexPtr = nullptr;
+    m_restex = nullptr;
     m_pData = nullptr;
 }
 
 SVTexture::~SVTexture() {
     m_pData = nullptr;
-    m_objTexPtr = nullptr;
+    m_restex = nullptr;
     m_bCreated = false;
 }
 
@@ -53,8 +53,8 @@ void SVTexture::init(SVTexParam& _param,SVDataSwapPtr _data) {
 
 //
 void SVTexture::destroy(){
-//    if (m_objTexPtr) {
-//        m_objTexPtr->destroy(_renderer);
+//    if (m_restex) {
+//        m_restex->destroy(_renderer);
 //    }
 }
 
@@ -69,26 +69,34 @@ void SVTexture::setTexData(SVDataSwapPtr _data){
 }
 
 void SVTexture::commit(){
-    if (m_objTexPtr) {
-        m_objTexPtr->commit();
+    if (m_restex) {
+        m_restex->commit();
     }
 }
 
 bool SVTexture::getbLoad(){
-    if (m_objTexPtr) {
-        return m_objTexPtr->getbLoad();
+    if (m_restex) {
+        return m_restex->getbLoad();
     }
     return 0;
 }
 
 void SVTexture::_updateData(){
-    if (m_objTexPtr && m_bData) {
-        m_objTexPtr->setTexData(m_pData->getData(), m_pData->getSize());
+    if (m_restex && m_bData) {
+        m_restex->setTexData(m_pData->getData(), m_pData->getSize());
         m_pData->reback();
         m_bData = false;
     }
 }
 
+void SVTexture::bindRes(SVRTexPtr _res) {
+    m_restex = _res;
+}
+
+void SVTexture::unbindRes() {
+    m_restex = nullptr;
+}
+
 SVRTexPtr SVTexture::getResTex(){
-    return m_objTexPtr;
+    return m_restex;
 }

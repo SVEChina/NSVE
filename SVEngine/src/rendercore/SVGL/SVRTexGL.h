@@ -20,11 +20,11 @@
 namespace sv {
 
         //纹理资源
-        class SVRGLTex: public SVRTex {
+        class SVRTexGL: public SVRTex {
         public:
-            SVRGLTex(SVInstPtr _app);
+            SVRTexGL(SVInstPtr _app);
 
-            virtual ~SVRGLTex();
+            virtual ~SVRTexGL();
 
             virtual void create(SVRendererPtr _renderer);
 
@@ -37,11 +37,11 @@ namespace sv {
             SVDataSwapPtr m_pData;
         };
         
-        class SVRGLTexWithTexID: public SVRGLTex {
+        class SVRTexGLWithTexID: public SVRTexGL {
         public:
-            SVRGLTexWithTexID(SVInstPtr _app, s32 _id);
+            SVRTexGLWithTexID(SVInstPtr _app, s32 _id);
             
-            virtual ~SVRGLTexWithTexID();
+            virtual ~SVRTexGLWithTexID();
             
             virtual void create(SVRendererPtr _renderer);
             
@@ -51,11 +51,11 @@ namespace sv {
         };
         
         //PList假纹理
-        class SVRGLTexPlist : public SVRGLTex{
+        class SVRTexGLPlist : public SVRTexGL{
         public:
-            SVRGLTexPlist(SVInstPtr mApp);
+            SVRTexGLPlist(SVInstPtr mApp);
 
-            ~SVRGLTexPlist();
+            ~SVRTexGLPlist();
 
             virtual void refreshParam();
 
@@ -69,7 +69,7 @@ namespace sv {
 
             SVRect *getDstRect();
 
-            void bindTexset(SVRGLTexSetPtr _texset);
+            void bindTexset(SVRTexGLSetPtr _texset);
 
             void unbindTexset();
 
@@ -84,24 +84,24 @@ namespace sv {
         private:
             SVRect m_srcRect; //在原图的尺寸
             SVRect m_dstRect; //在大纹理中的位置
-            SVRGLTexSetPtr m_pTexset;
+            SVRTexGLSetPtr m_pTexset;
         };
         //
         //PList真纹理
-        class SVRGLTexSet : public SVRGLTex {
+        class SVRTexGLSet : public SVRTexGL {
         public:
-            SVRGLTexSet(SVInstPtr mApp);
+            SVRTexGLSet(SVInstPtr mApp);
 
-            ~SVRGLTexSet();
+            ~SVRTexGLSet();
         };
 
         //
         //iOS纹理
-        class SVRGLTexiOS : public SVRGLTex {
+        class SVRTexGLiOS : public SVRTexGL {
         public:
-            SVRGLTexiOS(SVInstPtr mApp);
+            SVRTexGLiOS(SVInstPtr mApp);
 
-            ~SVRGLTexiOS();
+            ~SVRTexGLiOS();
 
             virtual void create(SVRendererPtr _renderer);
 
@@ -217,7 +217,7 @@ namespace sv {
 //        //
 //        class SVResGLRenderTexture : public SVRResGLFBO {
 //        public:
-//            SVResGLRenderTexture(SVInstPtr _app,SVRGLTexPtr _tex, bool _depth,bool _stencil);
+//            SVResGLRenderTexture(SVInstPtr _app,SVRTexGLPtr _tex, bool _depth,bool _stencil);
 //
 //            ~SVResGLRenderTexture();
 //
@@ -225,17 +225,15 @@ namespace sv {
 //
 //            void destroy(SVRendererPtr _renderer);
 //
-//            void setTexture(SVRGLTexPtr _tex);
+//            void setTexture(SVRTexGLPtr _tex);
 //
 //            void refresh();
 //
 //        protected:
 //            void _bindColor();
 //
-//            SVRGLTexPtr m_tex;
+//            SVRTexGLPtr m_tex;
 //        };
-
-    
 
 }//!namespace sv
 

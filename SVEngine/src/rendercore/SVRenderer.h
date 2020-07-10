@@ -53,6 +53,23 @@ namespace sv {
             //重置大小
             virtual void resize(s32 _w,s32 _h);
             
+        public:
+            //创建资源接口
+            //纹理
+            virtual SVRTexPtr createResTexture() { return nullptr; }
+            
+            //shader
+            virtual SVRShaderPtr createResShader() { return nullptr; }
+            
+            //buf-vbo 等
+            virtual SVRBufferPtr createResBuf() { return nullptr; }
+            
+            //fbo
+            virtual SVRFboPtr createResFbo() { return nullptr; }
+            
+            
+        public:
+            
             //增加渲染内核资源
             void addRes(SVRResPtr _res);
             

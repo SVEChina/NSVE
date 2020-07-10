@@ -38,9 +38,9 @@ void SVRenderTexture::create(SVRendererPtr _renderer) {
     SVRendererGLPtr t_renderGLPtr = std::dynamic_pointer_cast<SVRendererGL>(_renderer);
     if (t_renderGLPtr) {
 //        //渲染器类型E_RENDERER_GLES,
-//        SVRGLTexPtr t_tex = nullptr;
+//        SVRTexGLPtr t_tex = nullptr;
 //        if (m_tex) {
-//            t_tex = std::dynamic_pointer_cast<SVRGLTex>(m_tex->getResTex());
+//            t_tex = std::dynamic_pointer_cast<SVRTexGL>(m_tex->getResTex());
 //        }
 //        m_objFBOPtr = MakeSharedPtr<SVResGLRenderTexture>(mApp, t_tex, m_depth, m_stencil);
 //        m_objFBOPtr->create(_renderer);
@@ -67,9 +67,9 @@ void SVRenderTexture::destroy(SVRendererPtr _renderer) {
 
 void SVRenderTexture::setTexture(SVTexturePtr _tex) {
 //    SVResGLRenderTexturePtr t_tmp = std::dynamic_pointer_cast<SVResGLRenderTexture>(m_objFBOPtr);
-//    SVRGLTexPtr t_texGL = nullptr;
+//    SVRTexGLPtr t_texGL = nullptr;
 //    if (_tex) {
-//        t_texGL = std::dynamic_pointer_cast<SVRGLTex>(_tex->getResTex());
+//        t_texGL = std::dynamic_pointer_cast<SVRTexGL>(_tex->getResTex());
 //    }
 //    if (t_tmp && t_texGL) {
 //        t_tmp->setTexture(t_texGL);

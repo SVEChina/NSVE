@@ -29,6 +29,16 @@ namespace sv {
             
         public:
             //创建部分
+            SVRTexPtr createResTexture() ;
+
+            //shader
+            SVRShaderPtr createResShader() ;
+
+            //buf-vbo 等
+            SVRBufferPtr createResBuf() ;
+
+            //fbo
+            SVRFboPtr createResFbo() ;
             
         public:
             //处理部分

@@ -1,18 +1,18 @@
 //
-// SVResVBO.cpp
+// SVRBuffer.cpp
 // SVEngine
 // Copyright 2017-2020
 // yizhou Fu,long Yin,longfei Lin,ziyu Xu,xiaofan Li,daming Li
 //
 
-#include "SVResVBO.h"
+#include "SVRBuffer.h"
 #include "../app/SVInst.h"
 #include "../work/SVTdCore.h"
 #include "SVRenderer.h"
 
 using namespace sv;
 
-s32 SVResVBO::getVertexFormateSize(VFTYPE _type) {
+s32 SVRBuffer::getVertexFormateSize(VFTYPE _type) {
     if (_type == E_VF_V2) {
         return sizeof(V2);
     } else if (_type == E_VF_V2_T0) {
@@ -61,28 +61,28 @@ s32 SVResVBO::getVertexFormateSize(VFTYPE _type) {
     return 0;
 }
 
-SVResVBO::SVResVBO(SVInstPtr _app)
+SVRBuffer::SVRBuffer(SVInstPtr _app)
 :SVRRes(_app){
 }
 
-SVResVBO::~SVResVBO(){
+SVRBuffer::~SVRBuffer(){
 }
 
-void SVResVBO::create(SVRendererPtr _renderer) {
+void SVRBuffer::create(SVRendererPtr _renderer) {
 }
 
-void SVResVBO::destroy(SVRendererPtr _renderer) {
+void SVRBuffer::destroy(SVRendererPtr _renderer) {
 }
 
-void SVResVBO::render(SVRendererPtr _renderer) {
+void SVRBuffer::render(SVRendererPtr _renderer) {
     
 }
 
-void SVResVBO::updateConf(RENDERMESHCONF& _conf) {
+void SVRBuffer::updateConf(RENDERMESHCONF& _conf) {
     
 }
 
-void SVResVBO::updateData(RENDERMESHDATA& _data) {
+void SVRBuffer::updateData(RENDERMESHDATA& _data) {
     
 }
 

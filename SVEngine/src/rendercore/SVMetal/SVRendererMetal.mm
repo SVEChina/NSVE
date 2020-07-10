@@ -7,6 +7,10 @@
 
 #include "SVRendererMetal.h"
 #include "SVRFboMetal.h"
+#include "SVRTexMetal.h"
+#include "SVRShaderMetal.h"
+#include "SVRBufferMetal.h"
+
 #include "../SVRTarget.h"
 #include "../../app/SVInst.h"
 #include "../../rendercore/SVRenderMgr.h"
@@ -60,6 +64,25 @@ void SVRendererMetal::destroy(){
 
 //重置大小
 void SVRendererMetal::resize(s32 _w,s32 _h) {
+}
+
+SVRTexPtr SVRendererMetal::createResTexture()  {
+    return MakeSharedPtr<SVRTexMetal>(mApp);
+}
+
+//shader
+SVRShaderPtr SVRendererMetal::createResShader() {
+    return MakeSharedPtr<SVRShaderMetal>(mApp);
+}
+
+//buf-vbo 等
+SVRBufferPtr SVRendererMetal::createResBuf()  {
+    return MakeSharedPtr<SVRBufferMetal>(mApp);
+}
+
+//fbo
+SVRFboPtr SVRendererMetal::createResFbo()  {
+    return MakeSharedPtr<SVRFboMetal>(mApp);
 }
 
 //创建RT

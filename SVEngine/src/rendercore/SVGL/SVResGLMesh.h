@@ -8,7 +8,7 @@
 #ifndef SV_RESGLMESH_H
 #define SV_RESGLMESH_H
 
-#include "../SVResVBO.h"
+#include "../SVRBuffer.h"
 #include "../../base/SVPreDeclare.h"
 #include "../../base/SVRect.h"
 #include "../../core/SVVertDef.h"

@@ -8,7 +8,7 @@
 #ifndef SV_RENDERMESH_H
 #define SV_RENDERMESH_H
 
-#include "SVResVBO.h"
+#include "SVRBuffer.h"
 #include "SVRenderDef.h"
 #include "../mtl/SVShaderMgr.h"
 #include "../base/SVPreDeclare.h"
@@ -28,6 +28,8 @@ namespace sv {
     /*
      逻辑和渲染之间的桥梁，其实就是数据和数据描述
      */
+
+    //存描述信息和数据
 
     class SVRenderMesh : public SVGBaseEx {
     public:
@@ -68,8 +70,16 @@ namespace sv {
         SVArray<dataTag> m_vertPool;
         //更新数据
         dataTag m_vert_up;
-        //不同内核的mesh
-        SVRMeshPtr m_pRMesh;
+       
+    public:
+        void bindRes(SVRBufferPtr _res);
+        
+        void unbindRes();
+        
+        SVRBufferPtr getResBuffer();
+        
+    protected:
+        SVRBufferPtr m_res_buffer;      //最主要的是他
     };
     
 

@@ -29,7 +29,7 @@ SVTexturePList::SVTexturePList(SVInstPtr _app)
 
 SVTexturePList::~SVTexturePList() {
     m_pData = nullptr;
-    m_objTexPtr = nullptr;
+    m_restex = nullptr;
     m_bCreated = false;
     m_texset = nullptr;
 }
@@ -52,7 +52,7 @@ void SVTexturePList::create(SVRendererPtr _renderer){
 //        SVRendererGLPtr t_renderGLPtr = std::dynamic_pointer_cast<SVRendererGL>(t_renderBasePtr);
 //        if (t_renderGLPtr) {
 //            //渲染器类型E_RENDERER_GLES,
-//            m_objTexPtr = MakeSharedPtr<SVRGLTexPlist>(mApp);
+//            m_restex = MakeSharedPtr<SVRTexGLPlist>(mApp);
 //
 //        }
 //        SVRendererVKPtr t_rendeVKPtr = std::dynamic_pointer_cast<SVRendererVK>(t_renderBasePtr);
@@ -73,7 +73,7 @@ void SVTexturePList::destroy(SVRendererPtr _renderer){
 }
 
 void SVTexturePList::refreshParam(){
-    SVRGLTexPlistPtr t_tmp = std::dynamic_pointer_cast<SVRGLTexPlist>(m_objTexPtr);
+    SVRTexGLPlistPtr t_tmp = std::dynamic_pointer_cast<SVRTexGLPlist>(m_restex);
     if (t_tmp) {
         t_tmp->refreshParam();
     }
@@ -92,14 +92,14 @@ void SVTexturePList::apply(void *data){
 }
 
 void SVTexturePList::commit(){
-    SVRGLTexPlistPtr t_tmp = std::dynamic_pointer_cast<SVRGLTexPlist>(m_objTexPtr);
+    SVRTexGLPlistPtr t_tmp = std::dynamic_pointer_cast<SVRTexGLPlist>(m_restex);
     if (t_tmp) {
         t_tmp->commit();
     }
 }
 
 SVRect *SVTexturePList::getSrcRect() {
-    SVRGLTexPlistPtr t_tmp = std::dynamic_pointer_cast<SVRGLTexPlist>(m_objTexPtr);
+    SVRTexGLPlistPtr t_tmp = std::dynamic_pointer_cast<SVRTexGLPlist>(m_restex);
     if (t_tmp) {
         return t_tmp->getSrcRect();
     }
@@ -107,7 +107,7 @@ SVRect *SVTexturePList::getSrcRect() {
 }
 
 SVRect *SVTexturePList::getDstRect() {
-    SVRGLTexPlistPtr t_tmp = std::dynamic_pointer_cast<SVRGLTexPlist>(m_objTexPtr);
+    SVRTexGLPlistPtr t_tmp = std::dynamic_pointer_cast<SVRTexGLPlist>(m_restex);
     if (t_tmp) {
         return t_tmp->getDstRect();
     }
@@ -124,7 +124,7 @@ void SVTexturePList::bindTexset(SVTextureSetPtr _texset){
 }
 
 bool SVTexturePList::getbLoad(){
-    SVRGLTexPlistPtr t_tmp = std::dynamic_pointer_cast<SVRGLTexPlist>(m_objTexPtr);
+    SVRTexGLPlistPtr t_tmp = std::dynamic_pointer_cast<SVRTexGLPlist>(m_restex);
     if (t_tmp) {
         return t_tmp->getbLoad();
     }
@@ -149,7 +149,7 @@ void SVTexturePList::setSrch(bool _srch){
 
 void SVTexturePList::_updateData(){
     SVTexture::_updateData();
-    SVRGLTexPlistPtr t_tmp = std::dynamic_pointer_cast<SVRGLTexPlist>(m_objTexPtr);
+    SVRTexGLPlistPtr t_tmp = std::dynamic_pointer_cast<SVRTexGLPlist>(m_restex);
     if (t_tmp) {
         t_tmp->rot = m_rot;
         t_tmp->trim = m_trim;
@@ -166,7 +166,7 @@ void SVTexturePList::_updateData(){
         if (m_btexSet) {
             m_btexSet = false;
             SVRResPtr t_tmp_tex = m_texset->getResTex();
-            SVRGLTexSetPtr t_tmp_texset = std::dynamic_pointer_cast<SVRGLTexSet>(m_objTexPtr);
+            SVRTexGLSetPtr t_tmp_texset = std::dynamic_pointer_cast<SVRTexGLSet>(m_restex);
             if (t_tmp && t_tmp_texset) {
                 t_tmp->bindTexset(t_tmp_texset);
             }
@@ -201,7 +201,7 @@ void SVTextureSet::create(SVRendererPtr _renderer){
     SVRendererGLPtr t_renderGLPtr = std::dynamic_pointer_cast<SVRendererGL>(t_renderBasePtr);
     if (t_renderGLPtr) {
         //渲染器类型E_RENDERER_GLES,
-        m_objTexPtr = MakeSharedPtr<SVRGLTexSet>(mApp);
+        m_restex = MakeSharedPtr<SVRTexGLSet>(mApp);
         
     }
     SVRendererVKPtr t_rendeVKPtr = std::dynamic_pointer_cast<SVRendererVK>(t_renderBasePtr);

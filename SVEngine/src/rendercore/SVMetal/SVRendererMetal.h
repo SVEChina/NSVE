@@ -17,57 +17,69 @@
 
 namespace sv {
 
-        /*
-        Metal渲染器
-        */
-    
-        class SVRendererMetal : public SVRenderer {
-        public:
-            SVRendererMetal(SVInstPtr _app);
-            
-            ~SVRendererMetal();
-            
-            void initParam(id<MTLDevice> _device,id<MTLDrawable> _target,id<MTLTexture> _targetTex);
-            
-            //初始化
-            virtual void init(s32 _w,s32 _h);
-            //销毁
-            virtual void destroy();
-            //重置大小
-            virtual void resize(s32 _w,s32 _h);
-            
+    /*
+    Metal渲染器
+    */
+
+    class SVRendererMetal : public SVRenderer {
+    public:
+        SVRendererMetal(SVInstPtr _app);
+
+        ~SVRendererMetal();
+
+        void initParam(id<MTLDevice> _device,id<MTLDrawable> _target,id<MTLTexture> _targetTex);
+
+        //初始化
+        virtual void init(s32 _w,s32 _h);
+        //销毁
+        virtual void destroy();
+        //重置大小
+        virtual void resize(s32 _w,s32 _h);
+
+    public:
+        SVRTexPtr createResTexture();
+
+        //shader
+        SVRShaderPtr createResShader() ;
+
+        //buf-vbo 等
+        SVRBufferPtr createResBuf() ;
+
+        //fbo
+        SVRFboPtr createResFbo() ;
+
+
+    public:
+        /*渲染器当中 创建资源的接口*/
+        //创建RT接口
+        SVRTargetPtr createRT(id<MTLDrawable> _target,id<MTLTexture> _targetTex);
+        //创建纹理接口
+        s32 createTexIn(s32 _texid,SVTexDsp _tdsp);
+        s32 createTexOut(SVTexDsp _tdsp,void* _pdata);
+        //
+        s32 createBuf(s32 _len);                //return buf index
+        s32 createBuf(s32 _len,void* _data);    //return buf index
+
+    public:
+        //处理技术
+        virtual void processTech(SVRTechPtr _tech);
+
+        //处理材质
+        virtual void processMtl(SVMtlCorePtr _mtl);
+
+        //处理mesh
+        virtual void processMesh(SVRenderMeshPtr _mesh);
 
         public:
-            /*渲染器当中 创建资源的接口*/
-            //创建RT接口
-            SVRTargetPtr createRT(id<MTLDrawable> _target,id<MTLTexture> _targetTex);
-            //创建纹理接口
-            s32 createTexIn(s32 _texid,SVTexDsp _tdsp);
-            s32 createTexOut(SVTexDsp _tdsp,void* _pdata);
-            //
-            s32 createBuf(s32 _len);                //return buf index
-            s32 createBuf(s32 _len,void* _data);    //return buf index
-        
-        public:
-            //处理技术
-            virtual void processTech(SVRTechPtr _tech);
-            
-            //处理材质
-            virtual void processMtl(SVMtlCorePtr _mtl);
-            
-            //处理mesh
-            virtual void processMesh(SVRenderMeshPtr _mesh);
-
-        public:
-            id<MTLDevice> m_pDevice;
-            id<MTLCommandQueue> m_pCmdQueue;
-            id<MTLLibrary> m_pLibrary;
-            id<MTLRenderCommandEncoder> m_pCurEncoder;
-            //
-            SVArray< id<MTLTexture> > m_texPoolIn;      //内部纹理池 内部使用的纹理
-            SVArray< id<MTLTexture> > m_texPoolOut;     //外部纹理池
-            SVArray< id<MTLBuffer> > m_bufPool;         //buf池
-        };
+        id<MTLDevice> m_pDevice;
+        id<MTLCommandQueue> m_pCmdQueue;
+        id<MTLLibrary> m_pLibrary;
+        id<MTLRenderCommandEncoder> m_pCurEncoder;
+        //
+        SVArray< id<MTLTexture> > m_texPoolIn;      //内部纹理池 内部使用的纹理
+        SVArray< id<MTLTexture> > m_texPoolOut;     //外部纹理池
+        SVArray< id<MTLBuffer> > m_bufPool;         //buf池
+    };
         
     
     

@@ -1,5 +1,5 @@
 //
-// SVRMetalTex.h
+// SVRTexMetal.h
 // SVEngine
 // Copyright 2017-2020
 // yizhou Fu,long Yin,longfei Lin,ziyu Xu,xiaofan Li,daming Li
@@ -20,11 +20,11 @@ namespace sv {
         /*
         纹理资源
          */
-        class SVRMetalTex: public SVRTex {
+        class SVRTexMetal: public SVRTex {
         public:
-            SVRMetalTex(SVInstPtr _app);
+            SVRTexMetal(SVInstPtr _app);
             
-            virtual ~SVRMetalTex();
+            virtual ~SVRTexMetal();
             
             virtual void create(SVRendererPtr _renderer);
             

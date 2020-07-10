@@ -1,19 +1,19 @@
 //
-// SVRMeshMetal.cpp
+// SVRBufferMetal.cpp
 // SVEngine
 // Copyright 2017-2020
 // yizhou Fu,long Yin,longfei Lin,ziyu Xu,xiaofan Li,daming Li
 //
 
-#include "SVRMeshMetal.h"
+#include "SVRBufferMetal.h"
 #include "SVRFboMetal.h"
 #include "SVRendererMetal.h"
 #include "../SVRenderMesh.h"
 
 using namespace sv;
 
-SVRMeshMetal::SVRMeshMetal(SVInstPtr _app)
-:SVRMesh(_app){
+SVRBufferMetal::SVRBufferMetal(SVInstPtr _app)
+:SVRBuffer(_app){
     m_ibuf = nullptr;
     m_vertStart = 0;
     m_vertCnt = 0;
@@ -22,11 +22,11 @@ SVRMeshMetal::SVRMeshMetal(SVInstPtr _app)
     m_instCnt = 0;
 }
 
-SVRMeshMetal::~SVRMeshMetal() {
+SVRBufferMetal::~SVRBufferMetal() {
     destroy(nullptr, nullptr);
 }
 
-void SVRMeshMetal::create(SVRendererPtr _renderer,SVRTargetPtr _target,SVRenderMeshPtr _rmesh) {
+void SVRBufferMetal::create(SVRendererPtr _renderer,SVRTargetPtr _target,SVRenderMeshPtr _rmesh) {
 //    SVRendererMetalPtr t_rm = std::dynamic_pointer_cast<SVRendererMetal>(_renderer);
 //    SVRFboMetalPtr t_tar = std::dynamic_pointer_cast<SVRFboMetal>(_target);
 //    //创建buf
@@ -48,7 +48,7 @@ void SVRMeshMetal::create(SVRendererPtr _renderer,SVRTargetPtr _target,SVRenderM
 //    //更新vert参数
 }
 
-void SVRMeshMetal::render(SVRendererPtr _renderer,SVRTargetPtr _target,SVRenderMeshPtr _rmesh) {
+void SVRBufferMetal::render(SVRendererPtr _renderer,SVRTargetPtr _target,SVRenderMeshPtr _rmesh) {
 //    SVRFboMetalPtr t_tar = std::dynamic_pointer_cast<SVRFboMetal>();
 //    //创建
 //    if(m_create) {
@@ -81,7 +81,7 @@ void SVRMeshMetal::render(SVRendererPtr _renderer,SVRTargetPtr _target,SVRenderM
 //    [t_tar->m_cmdEncoder endEncoding]; // 结束
 }
 
-void SVRMeshMetal::destroy(SVRendererPtr _renderer,SVRTargetPtr _target){
+void SVRBufferMetal::destroy(SVRendererPtr _renderer,SVRTargetPtr _target){
     if(m_ibuf) {
         m_ibuf = nullptr;
     }

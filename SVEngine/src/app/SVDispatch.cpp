@@ -32,13 +32,50 @@ void SVDispatch::dispatchShaderCreate(SVInstPtr _app,SVRShaderPtr _shader) {
     _app->getRenderMgr()->pushRCmdCreate(t_cmd);
 }
 
+void SVDispatch::dispatchMeshCreate(SVInstPtr _app,SVRenderMeshPtr _mesh) {
+    SVRendererPtr t_renderer = _app->getRenderer();
+    if(t_renderer && _mesh) {
+        //
+        SVRBufferPtr t_rbuffer = t_renderer->createResBuf() ;
+        _mesh->bindRes(t_rbuffer);
+        //
+        SVRCmdCreatePtr t_cmd = MakeSharedPtr<SVRCmdCreate>(t_rbuffer);
+        _app->getRenderMgr()->pushRCmdCreate(t_cmd);
+    }
+}
+
 //投递mesh create
-void SVDispatch::dispatchMeshCreate(SVInstPtr _app,SVRMeshPtr _mesh) {
-    SVRCmdCreatePtr t_cmd = MakeSharedPtr<SVRCmdCreate>(_shader);
-    _app->getRenderMgr()->pushRCmdCreate(t_cmd);
+void SVDispatch::dispatchBufferCreate(SVRBufferPtr _buffer)) {
+//    SVRCmdCreatePtr t_cmd = MakeSharedPtr<SVRCmdCreate>(_shader);
+//    _app->getRenderMgr()->pushRCmdCreate(t_cmd);
 }
 
 void SVDispatch::dispatchTextureCreate(SVInstPtr _app,SVRTexPtr _tex) {
     SVRCmdCreatePtr t_cmd = MakeSharedPtr<SVRCmdCreate>(_shader);
     _app->getRenderMgr()->pushRCmdCreate(t_cmd);
+}
+
+void SVDispatch::dispatchTextureCreate(SVInstPtr _app,SVTexturePtr _tex) {
+    SVRendererPtr t_renderer = _app->getRenderer();
+    if(t_renderer) {
+        //
+        SVRTexPtr t_rtex = t_renderer->createResTexture() ;
+        _tex->bindRes(t_rtex);
+        //
+        SVRCmdCreatePtr t_cmd = MakeSharedPtr<SVRCmdCreate>(t_rtex);
+        _app->getRenderMgr()->pushRCmdCreate(t_cmd);
+    }
+}
+
+
+void SVDispatch::dispatchTargetCreate(SVInstPtr _app,SVRTargetPtr _target) {
+    SVRendererPtr t_renderer = _app->getRenderer();
+    if(t_renderer) {
+        //
+        SVRTexPtr t_rtex = t_renderer->createResTexture() ;
+        _tex->bindRes(t_rtex);
+        //
+        SVRCmdCreatePtr t_cmd = MakeSharedPtr<SVRCmdCreate>(t_rtex);
+        _app->getRenderMgr()->pushRCmdCreate(t_cmd);
+    }
 }

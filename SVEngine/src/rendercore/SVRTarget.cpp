@@ -48,3 +48,15 @@ void SVRTarget::_afterRender(SVRendererPtr _renderer) {
     //
 }
 
+void SVRTarget::bindRes(SVRFboPtr _res) {
+    m_fbo = _res;
+}
+
+void SVRTarget::unbindRes() {
+    m_fbo = nullptr;
+}
+
+SVRFboPtr SVRTarget::getResFbo() {
+    return m_fbo;
+}
+

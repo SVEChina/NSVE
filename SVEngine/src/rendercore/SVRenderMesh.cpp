@@ -10,27 +10,31 @@
 #include "../app/SVGlobalMgr.h"
 #include "../base/SVDataSwap.h"
 #include "SVRenderMgr.h"
-//
-#include "SVGL/SVRendererGL.h"
-#include "SVGL/SVRTexGL.h"
-#include "SVGL/SVResGLMesh.h"
-//
-#if defined(SV_IOS) || defined(SV_OSX)
-#include "SVMetal/SVRendererMetal.h"
-#include "SVMetal/SVResMetalMesh.h"
-#endif
-//
-#include "SVVulkan/SVRendererVK.h"
 
 using namespace sv;
 
 SVRenderMesh::SVRenderMesh(SVInstPtr _app)
 :SVGBaseEx(_app){
+    m_res_buffer = nullptr;
 }
 
 SVRenderMesh::~SVRenderMesh() {
+    m_res_buffer = nullptr;
 }
 
+void SVRenderMesh::bindRes(SVRBufferPtr _res) {
+    m_res_buffer = _res;
+}
+
+void SVRenderMesh::unbindRes() {
+    m_res_buffer = nullptr;
+}
+
+SVRBufferPtr SVRenderMesh::getResBuffer() {
+    return m_res_buffer;
+}
+
+//
 void SVRenderMesh::create(SVRendererPtr _renderer){
 }
 
