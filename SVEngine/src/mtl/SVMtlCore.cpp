@@ -30,12 +30,12 @@ SVMtlCorePtr SVMtlCoreParam::genMtl(SVInstPtr _app){
 SVMtlCore::SVMtlCore(SVInstPtr _app, cptr8 _shader)
 :SVGBaseEx(_app)
 ,m_mtlname(_shader){
-    m_shader = nullptr;
+    //m_shader = ;
     m_ParamValues = MakeSharedPtr<SVDataChunk>();
     reset();
 }
 
-SVMtlCore::SVMtlCore(SVInstPtr _app, SVRShaderPtr _shader)
+SVMtlCore::SVMtlCore(SVInstPtr _app, SVShaderPtr _shader)
 :SVGBaseEx(_app)
 ,m_shader(_shader){
     

@@ -56,6 +56,7 @@ namespace sv {
     DECLARE_SHAREPTR(SVDetectMgr);
     DECLARE_SHAREPTR(SVEventMgr);
     DECLARE_SHAREPTR(SVRenderMgr);
+    DECLARE_SHAREPTR(SVShader);
     DECLARE_SHAREPTR(SVShaderMgr);
     DECLARE_SHAREPTR(SVSceneMgr);
     DECLARE_SHAREPTR(SVDeformMgr);
@@ -98,8 +99,6 @@ namespace sv {
     DECLARE_SHAREPTR(SVOpCreateTestPatch);
     DECLARE_SHAREPTR(SVOpCreateTestMianSha);
     //
-
-    
     DECLARE_SHAREPTR(SVOpDestroyScene);
     DECLARE_SHAREPTR(SVOpCameraControl);
     DECLARE_SHAREPTR(SVOpCreateSkyDome);
@@ -188,86 +187,82 @@ namespace sv {
     DECLARE_SHAREPTR(SVBMFont);
     //image
     DECLARE_SHAREPTR(SVImage);
-    
     DECLARE_SHAREPTR(SVNoise);
 
-    
-    //
     // detect
-        DECLARE_SHAREPTR(SVDetectBase);
-        DECLARE_SHAREPTR(SVDetectST);
-        DECLARE_SHAREPTR(SVPerson);
-        DECLARE_SHAREPTR(SVPersonModule);
-        DECLARE_SHAREPTR(SVPersonTracker);
-        DECLARE_SHAREPTR(SVPersonExpressionExt);
+    DECLARE_SHAREPTR(SVDetectBase);
+    DECLARE_SHAREPTR(SVDetectST);
+    DECLARE_SHAREPTR(SVPerson);
+    DECLARE_SHAREPTR(SVPersonModule);
+    DECLARE_SHAREPTR(SVPersonTracker);
+    DECLARE_SHAREPTR(SVPersonExpressionExt);
     
     //logic
-        
-        //逻辑系统下的模块
-        DECLARE_SHAREPTR(SVRecycleProcess);
-        DECLARE_SHAREPTR(SVPickProcess);
-        DECLARE_SHAREPTR(SVFontProcess);
-        DECLARE_SHAREPTR(SVSensorProcess);
-        
-        //功能部分
-        DECLARE_SHAREPTR(SVAni2DBase);
-        DECLARE_SHAREPTR(SVAni2DStickersMgr);
-        DECLARE_SHAREPTR(SVStreamIn);
-        DECLARE_SHAREPTR(SVStreamOut);
-        DECLARE_SHAREPTR(SVPictureProcess);
-        //parse部分
-        DECLARE_SHAREPTR(SVParse);
-        DECLARE_SHAREPTR(SVParse2DAni);
-        DECLARE_SHAREPTR(SVParseAnimate);
-        DECLARE_SHAREPTR(SVParseMain);
-        DECLARE_SHAREPTR(SVParseParticle);
-        DECLARE_SHAREPTR(SVParseLUTFilter);
-        DECLARE_SHAREPTR(SVParseData);
-        DECLARE_SHAREPTR(SVParseMask);
-        DECLARE_SHAREPTR(SVParseStamp);
-        DECLARE_SHAREPTR(SVParseGame);
-        
-        //filter 部分
-        DECLARE_SHAREPTR(SVFilterBase);
-        DECLARE_SHAREPTR(SVFilterLUT);
-        DECLARE_SHAREPTR(SVFairDataBlur);
-        DECLARE_SHAREPTR(SVFaceBeautyBase);
-        DECLARE_SHAREPTR(SVGenFBParam);
-        DECLARE_SHAREPTR(SVFairLtraLow);
-        DECLARE_SHAREPTR(SVGenLUTParam);
-        DECLARE_SHAREPTR(SVDataFilter);
-        DECLARE_SHAREPTR(SVFilterGenLUT);
-        DECLARE_SHAREPTR(SVFilterClarity);
-        DECLARE_SHAREPTR(SVFilterHaze);
-        DECLARE_SHAREPTR(SVSharpFilter);
-        DECLARE_SHAREPTR(SVFilterGof);
-        DECLARE_SHAREPTR(SVFilterGlow);
-        DECLARE_SHAREPTR(SVFilterBlur);
-        DECLARE_SHAREPTR(SVRGBToneCurveFilter);
-        DECLARE_SHAREPTR(SVBasedonFilter);
-        DECLARE_SHAREPTR(SVAni2DStickersMgr);
-        DECLARE_SHAREPTR(SVAni2DBase);
-        DECLARE_SHAREPTR(SVAni2DScreen);
-        DECLARE_SHAREPTR(SVFilterShinning);
-        DECLARE_SHAREPTR(SVFilterDark);
-        DECLARE_SHAREPTR(SVFilterShake);
-        DECLARE_SHAREPTR(SVFilterFlashWhite);
-        DECLARE_SHAREPTR(SVADFilterBase);
-        
-        //物理部分
-        DECLARE_SHAREPTR(SVPhysicsWorldBase);
-        DECLARE_SHAREPTR(SVPhysicsWorld);
-        DECLARE_SHAREPTR(SVPhysicsSoftRigidWorld);
-        DECLARE_SHAREPTR(SVPhysicsBody);
-        DECLARE_SHAREPTR(SVPhysicsBodySoft);
-        DECLARE_SHAREPTR(SVPhysicsBodyRigid);
-        DECLARE_SHAREPTR(SVPhysicsBodyRope);
-        DECLARE_SHAREPTR(SVPhysicsBodyCloth);
-        DECLARE_SHAREPTR(SVPhysicsShape);
-        DECLARE_SHAREPTR(SVPhysicsShapeBox);
-        DECLARE_SHAREPTR(SVPhysicsShapeSphere);
-        DECLARE_SHAREPTR(SVPhysicsJoint);
-        DECLARE_SHAREPTR(SVPhysicsCollider);
+    //逻辑系统下的模块
+    DECLARE_SHAREPTR(SVRecycleProcess);
+    DECLARE_SHAREPTR(SVPickProcess);
+    DECLARE_SHAREPTR(SVFontProcess);
+    DECLARE_SHAREPTR(SVSensorProcess);
+
+    //功能部分
+    DECLARE_SHAREPTR(SVAni2DBase);
+    DECLARE_SHAREPTR(SVAni2DStickersMgr);
+    DECLARE_SHAREPTR(SVStreamIn);
+    DECLARE_SHAREPTR(SVStreamOut);
+    DECLARE_SHAREPTR(SVPictureProcess);
+    //parse部分
+    DECLARE_SHAREPTR(SVParse);
+    DECLARE_SHAREPTR(SVParse2DAni);
+    DECLARE_SHAREPTR(SVParseAnimate);
+    DECLARE_SHAREPTR(SVParseMain);
+    DECLARE_SHAREPTR(SVParseParticle);
+    DECLARE_SHAREPTR(SVParseLUTFilter);
+    DECLARE_SHAREPTR(SVParseData);
+    DECLARE_SHAREPTR(SVParseMask);
+    DECLARE_SHAREPTR(SVParseStamp);
+    DECLARE_SHAREPTR(SVParseGame);
+
+    //filter 部分
+    DECLARE_SHAREPTR(SVFilterBase);
+    DECLARE_SHAREPTR(SVFilterLUT);
+    DECLARE_SHAREPTR(SVFairDataBlur);
+    DECLARE_SHAREPTR(SVFaceBeautyBase);
+    DECLARE_SHAREPTR(SVGenFBParam);
+    DECLARE_SHAREPTR(SVFairLtraLow);
+    DECLARE_SHAREPTR(SVGenLUTParam);
+    DECLARE_SHAREPTR(SVDataFilter);
+    DECLARE_SHAREPTR(SVFilterGenLUT);
+    DECLARE_SHAREPTR(SVFilterClarity);
+    DECLARE_SHAREPTR(SVFilterHaze);
+    DECLARE_SHAREPTR(SVSharpFilter);
+    DECLARE_SHAREPTR(SVFilterGof);
+    DECLARE_SHAREPTR(SVFilterGlow);
+    DECLARE_SHAREPTR(SVFilterBlur);
+    DECLARE_SHAREPTR(SVRGBToneCurveFilter);
+    DECLARE_SHAREPTR(SVBasedonFilter);
+    DECLARE_SHAREPTR(SVAni2DStickersMgr);
+    DECLARE_SHAREPTR(SVAni2DBase);
+    DECLARE_SHAREPTR(SVAni2DScreen);
+    DECLARE_SHAREPTR(SVFilterShinning);
+    DECLARE_SHAREPTR(SVFilterDark);
+    DECLARE_SHAREPTR(SVFilterShake);
+    DECLARE_SHAREPTR(SVFilterFlashWhite);
+    DECLARE_SHAREPTR(SVADFilterBase);
+
+    //物理部分
+    DECLARE_SHAREPTR(SVPhysicsWorldBase);
+    DECLARE_SHAREPTR(SVPhysicsWorld);
+    DECLARE_SHAREPTR(SVPhysicsSoftRigidWorld);
+    DECLARE_SHAREPTR(SVPhysicsBody);
+    DECLARE_SHAREPTR(SVPhysicsBodySoft);
+    DECLARE_SHAREPTR(SVPhysicsBodyRigid);
+    DECLARE_SHAREPTR(SVPhysicsBodyRope);
+    DECLARE_SHAREPTR(SVPhysicsBodyCloth);
+    DECLARE_SHAREPTR(SVPhysicsShape);
+    DECLARE_SHAREPTR(SVPhysicsShapeBox);
+    DECLARE_SHAREPTR(SVPhysicsShapeSphere);
+    DECLARE_SHAREPTR(SVPhysicsJoint);
+    DECLARE_SHAREPTR(SVPhysicsCollider);
 
     
     DECLARE_SHAREPTR(SVLoaderGLTF);

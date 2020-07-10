@@ -14,9 +14,6 @@
 #include "../third/rapidjson/document.h"
 #include "../third/rapidjson/stringbuffer.h"
 #include "../third/rapidjson/writer.h"
-#include "../rendercore/SVRenderMgr.h"
-#include "../rendercore/SVGL/SVRTexGL.h"
-#include "../rendercore/SVGL/SVRShaderGL.h"
 
 
 using namespace sv;
@@ -58,13 +55,13 @@ void SVShaderMgr::_loadAllShader() {
         for (s32 i = 0; i < shader.Size(); ++i) {
             RAPIDJSON_NAMESPACE::Value &shaderitem = shader[i];
             assert(shaderitem.IsObject());
-            SVString t_vs_fname;
-            SVString t_fs_fname;
-            SVString t_gs_fname;
-            SVString t_cs_fname;
-            SVString t_tsc_fname;
-            SVString t_tse_fname;
-            SVString t_programme_name;
+            SVString t_vs_fname = "";
+            SVString t_fs_fname = "";
+            SVString t_gs_fname = "";
+            SVString t_cs_fname = "";
+            SVString t_tsc_fname = "";
+            SVString t_tse_fname = "";
+            SVString t_programme_name = "";
             if (shaderitem.HasMember("vs") && shaderitem["vs"].IsString()) {
                 t_vs_fname = shaderitem["vs"].GetString();
                 t_vs_fname = SVString("shader/") + t_vs_fname + ".vs";
@@ -82,25 +79,19 @@ void SVShaderMgr::_loadAllShader() {
                 t_attri_formate = shaderitem["af"].GetString();
             }
             //
-            SVRShaderPtr t_resShader = nullptr;
-            if( mApp->m_pGlobalParam->getEngCore() == SV_E_CORE_GL ) {
-                //t_resShader = MakeSharedPtr<SVRShaderGL>(mApp);
-            }else if(mApp->m_pGlobalParam->getEngCore() == SV_E_CORE_METAL){
-//                #if defined(SV_IOS) || defined(SV_OSX)
-//                t_resShader = MakeSharedPtr<SVRMetalShader>(mApp);
-//                #endif
-            }else if(mApp->m_pGlobalParam->getEngCore() == SV_E_CORE_VULKAN){
-                //t_resShader = MakeSharedPtr<SVRShaderGL>(mApp);
-            }
-            //
-            if(t_resShader) {
-                ShaderMap.append(t_programme_name, t_resShader);
-                t_resShader->setAF(t_attri_formate.c_str());
-                t_resShader->setVSFName(t_vs_fname.c_str());
-                t_resShader->setFSFName(t_fs_fname.c_str());
-                t_resShader->setProgrammeName(t_programme_name.c_str());
+            SVShaderPtr t_shader = MakeSharedPtr<SVShader>(mApp);
+            if(t_shader) {
+                ShaderMap.append(t_programme_name, t_shader);
+                t_shader->m_param.m_attri_formate = t_attri_formate;
+                t_shader->m_param.m_vs_fname = t_vs_fname;
+                t_shader->m_param.m_fs_fname = t_fs_fname;
+                t_shader->m_param.m_gs_fname = t_gs_fname;
+                t_shader->m_param.m_cs_fname = t_cs_fname;
+                t_shader->m_param.m_tsc_fname = t_tsc_fname;
+                t_shader->m_param.m_tse_fname = t_tse_fname;
+                t_shader->m_param.m_programme_fname = t_programme_name;
                 //创建shader
-                SVDispatch::dispatchShaderCreate(mApp,t_resShader);
+                SVDispatch::dispatchShaderCreate(mApp,t_shader);
                 SV_LOG_ERROR("shader : vs(%s) fs(%s)\n", t_vs_fname.c_str(),t_fs_fname.c_str());
             }
         }
@@ -112,7 +103,7 @@ void SVShaderMgr::_clearAllShader() {
     ShaderMap.clear();
 }
 
-SVRShaderPtr SVShaderMgr::getShader(cptr8 _name) {
+SVShaderPtr SVShaderMgr::getShader(cptr8 _name) {
     SHADERPOOL::Iterator it = ShaderMap.find(_name);
     if(it!=ShaderMap.end()) {
         return it->data;

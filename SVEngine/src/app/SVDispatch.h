@@ -23,16 +23,10 @@ namespace sv {
     class SVDispatch : public SVObject {
     public:
         //投递shader create
-        static void dispatchShaderCreate(SVInstPtr _app,SVRShaderPtr _shader);
+        static void dispatchShaderCreate(SVInstPtr _app,SVShaderPtr _shader);
         
         //投递mesh create
         static void dispatchMeshCreate(SVInstPtr _app,SVRenderMeshPtr _mesh);
-        
-        //
-        static void dispatchBufferCreate(SVInstPtr _app,SVRBufferPtr _buffer);
- 
-        //投递texture create
-        static void dispatchTextureCreate(SVInstPtr _app,SVRTexPtr _tex);
         
         //投递texture create
         static void dispatchTextureCreate(SVInstPtr _app,SVTexturePtr _tex);

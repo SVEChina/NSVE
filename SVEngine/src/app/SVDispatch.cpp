@@ -26,10 +26,16 @@
 
 using namespace sv;
 
-void SVDispatch::dispatchShaderCreate(SVInstPtr _app,SVRShaderPtr _shader) {
+void SVDispatch::dispatchShaderCreate(SVInstPtr _app,SVShaderPtr _shader) {
     //投体到renderMgr的创建队列中
-    SVRCmdCreatePtr t_cmd = MakeSharedPtr<SVRCmdCreate>(_shader);
-    _app->getRenderMgr()->pushRCmdCreate(t_cmd);
+    SVRendererPtr t_renderer = _app->getRenderer();
+    if(t_renderer && _shader) {
+        //
+        SVRShaderPtr t_rshader = t_renderer->createResShader() ;
+        _shader->bindRes(t_rshader);
+        SVRCmdCreatePtr t_cmd = MakeSharedPtr<SVRCmdCreate>(_shader);
+        _app->getRenderMgr()->pushRCmdCreate(t_cmd);
+    }
 }
 
 void SVDispatch::dispatchMeshCreate(SVInstPtr _app,SVRenderMeshPtr _mesh) {
@@ -44,17 +50,6 @@ void SVDispatch::dispatchMeshCreate(SVInstPtr _app,SVRenderMeshPtr _mesh) {
     }
 }
 
-//投递mesh create
-void SVDispatch::dispatchBufferCreate(SVRBufferPtr _buffer)) {
-//    SVRCmdCreatePtr t_cmd = MakeSharedPtr<SVRCmdCreate>(_shader);
-//    _app->getRenderMgr()->pushRCmdCreate(t_cmd);
-}
-
-void SVDispatch::dispatchTextureCreate(SVInstPtr _app,SVRTexPtr _tex) {
-    SVRCmdCreatePtr t_cmd = MakeSharedPtr<SVRCmdCreate>(_shader);
-    _app->getRenderMgr()->pushRCmdCreate(t_cmd);
-}
-
 void SVDispatch::dispatchTextureCreate(SVInstPtr _app,SVTexturePtr _tex) {
     SVRendererPtr t_renderer = _app->getRenderer();
     if(t_renderer) {
@@ -66,7 +61,6 @@ void SVDispatch::dispatchTextureCreate(SVInstPtr _app,SVTexturePtr _tex) {
         _app->getRenderMgr()->pushRCmdCreate(t_cmd);
     }
 }
-
 
 void SVDispatch::dispatchTargetCreate(SVInstPtr _app,SVRTargetPtr _target) {
     SVRendererPtr t_renderer = _app->getRenderer();

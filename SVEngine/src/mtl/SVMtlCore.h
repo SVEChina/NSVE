@@ -39,7 +39,7 @@ namespace sv {
         public:
             SVMtlCore(SVInstPtr _app, cptr8 _shader);
             
-            SVMtlCore(SVInstPtr _app, SVRShaderPtr _shader);
+            SVMtlCore(SVInstPtr _app, SVShaderPtr _shader);
             
             SVMtlCore(SVMtlCore* _mtl);
             
@@ -84,7 +84,7 @@ namespace sv {
             SVDataChunkPtr m_ParamValues;
             
         public:
-            SVRShaderPtr m_shader;
+            SVShaderPtr m_shader;
             //uniform
             
             //采样器
