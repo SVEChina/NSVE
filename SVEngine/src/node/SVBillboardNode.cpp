@@ -75,14 +75,14 @@ void SVBillboardNode::setSize(f32 _w,f32 _h) {
 
 void SVBillboardNode::syncTexSize() {
     if(m_inTexType == E_TEX_END) {
-        m_pTex = mApp->getTexMgr()->getTextureSync(m_pTexPath.c_str(),true);
+        m_pTex = mApp->getTexMgr()->getTexture(m_pTexPath.c_str(),true);
     }else {
         m_pTex = mApp->getRenderer()->getSVTex(m_inTexType);
     }
     if(m_pTex) {
-        s32 t_w = m_pTex->getwidth();
-        s32 t_h = m_pTex->getheight();
-        setSize(t_w,t_h);
+//        s32 t_w = m_pTex->getwidth();
+//        s32 t_h = m_pTex->getheight();
+//        setSize(t_w,t_h);
     }
 }
 
@@ -94,7 +94,7 @@ void SVBillboardNode::setTexcoord(f32 _x,f32 _y){
 void SVBillboardNode::setTexture(cptr8 _path, bool enableMipMap){
     if(m_pTexPath!=_path) {
         m_pTexPath = _path;
-        m_pTex = mApp->getTexMgr()->getTextureSync(m_pTexPath.c_str(),true, enableMipMap);
+        m_pTex = mApp->getTexMgr()->getTexture(m_pTexPath.c_str(),true);
     }
 }
 
@@ -107,9 +107,9 @@ void SVBillboardNode::setUp(FVec3 &_up){
 }
 
 cptr8 SVBillboardNode::getTexturePath(){
-    if (m_pTex) {
-        return m_pTex->getname();
-    }
+//    if (m_pTex) {
+//        return m_pTex->getname();
+//    }
     return m_pTexPath.c_str();
 }
 

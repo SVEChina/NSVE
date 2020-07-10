@@ -78,8 +78,8 @@ void SVPenDraw::init(SVGameReadyPtr _ready,SVGameRunPtr _run,SVGameEndPtr _end) 
     SVRendererPtr t_renderer = mApp->getRenderer();
     if (t_renderer) {
         SVTexturePtr t_tex = t_renderer->getSVTex(E_TEX_MAIN);
-        s32 t_w = t_tex->getwidth();
-        s32 t_h = t_tex->getheight();
+        s32 t_w = 0;//t_tex->m_width;
+        s32 t_h = 0;//t_tex->m_height;
         if (t_renderer->hasSVTex(E_TEX_HELP0)) {
             m_pTex1 = t_renderer->getSVTex(E_TEX_HELP0);
         }else{

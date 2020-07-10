@@ -40,7 +40,7 @@ void _spAtlasPage_createTexture(void* _app, spAtlasPage *self, const char *path,
     //fix fuyizhou
     SVInst* _tApp = (SVInst*)_app;
     SVSpineObjc* pSpineObj = new SVSpineObjc();
-    pSpineObj->m_texture = _tApp->getTexMgr()->getTextureSync(path, true, enableMipMap);
+    pSpineObj->m_texture = _tApp->getTexMgr()->getTexture(path, true);
     if (pSpineObj && pSpineObj->m_texture) {
         self->pRenderObj = (void*)pSpineObj;
     }

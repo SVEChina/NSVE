@@ -278,7 +278,7 @@ namespace sv {
                     cptr8 t_pointer = strchr(t_pData,delimiters);
                     if(t_pointer) {
                         //找到目标字符
-                        s32 t_size = t_pointer - t_pData;
+                        s64 t_size = t_pointer - t_pData;
                         SVString t_str;
                         t_str.append(t_pData,t_size);
                         t_pData = t_pointer;

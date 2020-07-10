@@ -33,8 +33,8 @@ bool SVFilterGlow::create(SVTEXTYPE _inType,SVTEXTYPE _outType){
 //    if(!t_renderer)
 //        return false;
 //    SVTexturePtr t_tex = t_renderer->getSVTex(_inType);
-//    s32 t_w = t_tex->getwidth();
-//    s32 t_h = t_tex->getheight();
+//    s32 t_w = t_tex->m_width;
+//    s32 t_h = t_tex->m_height;
 //
 //    if(! t_renderer->getSVTex(E_TEX_FILTER_GLOW_1) ){
 //        t_renderer->createSVTex(E_TEX_FILTER_GLOW_1,t_w, t_h, GL_RGBA);

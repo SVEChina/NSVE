@@ -23,26 +23,26 @@ using namespace sv;
 SVTexMgr::SVTexMgr(SVInstPtr _app)
 :SVGBaseEx(_app) {
     mAsync = false;
-    m_sveTexture = nullptr;
+    m_sve_tex = nullptr;
     m_texLock = MakeSharedPtr<SVLock>();
 }
 
 SVTexMgr::~SVTexMgr() {
     m_texLock = nullptr;
-    m_sveTexture = nullptr;
+    m_sve_tex = nullptr;
 }
 
 void SVTexMgr::init() {
-    m_sveTexture = getTextureSync("svres/sve.png",true);
+    m_sve_tex = getTexture("svres/sve.png",true);
 }
 
 void SVTexMgr::destroy() {
-    m_sveTexture = nullptr;
+    m_sve_tex = nullptr;
     clear();
 }
 
 SVTexturePtr SVTexMgr::getSVETexture(){
-    return m_sveTexture;
+    return m_sve_tex;
 }
 
 void SVTexMgr::update(f32 _dt){
@@ -69,44 +69,31 @@ void SVTexMgr::_removeUnuseTexture() {
 }
 
 //返回一个空壳纹理
-SVTexturePtr SVTexMgr::getTexture(cptr8 _name, bool _create, bool _enableMipMap) {
+SVTexturePtr SVTexMgr::getTexture(cptr8 _name,bool _sync) {
     TEXPOOL::Iterator it = mTexpool.find(_name);
     if( it!=mTexpool.end() ) {
         return it->data;
     }
-    if (_create) {
-        return _createTexture(_name, !mAsync, _enableMipMap);
-    }
+    return _createTexture(_name, _sync, true);
+}
+
+SVTexturePtr SVTexMgr::getTexture(SVTEXTYPE _texname) {
+    //获取内置纹理
+    
     return nullptr;
 }
 
-//同步创建纹理
-SVTexturePtr SVTexMgr::getTextureSync(cptr8 _name, bool _create, bool _enableMipMap) {
-    SVTexturePtr t_tex = nullptr;
-    m_texLock->lock();
-    TEXPOOL::Iterator it = mTexpool.find(_name);
-    if( it!=mTexpool.end() ) {
-        t_tex = it->data;
-    }
-    m_texLock->unlock();
-    if(!t_tex) {
-        if (_create) {
-            t_tex = _createTexture(_name, true, _enableMipMap);
-        }
-    }
-    return t_tex;
-}
-
 SVTexturePtr SVTexMgr::createUnctrlTextureWithTexID(s32 _texId, s32 _width, s32 _height, s32 _informat, s32 _dataformat, bool _enableMipMap){
-    SVTexturePtr tTexture = MakeSharedPtr<SVTextureInputTexID>(mApp, _texId);
-    tTexture->init("", GL_TEXTURE_2D, _width, _height, _informat, _dataformat, _enableMipMap);
-    //mApp->getRenderMgr()->pushRCmdCreate(tTexture);
-    return tTexture;
+//    SVTexturePtr tTexture = MakeSharedPtr<SVTextureInputTexID>(mApp, _texId);
+//    tTexture->init("", GL_TEXTURE_2D, _width, _height, _informat, _dataformat, _enableMipMap);
+//    //mApp->getRenderMgr()->pushRCmdCreate(tTexture);
+//    return tTexture;
+    return nullptr;
 }
 
 SVTexturePtr SVTexMgr::createUnctrlTextureWithData(s32 _width, s32 _height, s32 _informat, s32 _dataformat, void* _data, bool _enableMipMap){
     SVTexturePtr tTexture = MakeSharedPtr<SVTexture>(mApp);
-    SVString t_name = SVString::format("%d", tTexture->getuid());
+    SVString t_name = SVString::format("%d", tTexture->getUID());
     t_name = SVString("unctrltexdata") + SVString("_") + t_name;
     tTexture->init(t_name.c_str(), GL_TEXTURE_2D, _width, _height, _informat, _dataformat, _enableMipMap);
     s32 t_len = 0;//应该根据格式算的
@@ -127,7 +114,7 @@ SVTexturePtr SVTexMgr::createUnctrlTextureWithData(s32 _width, s32 _height, s32 
 
 SVTexturePtr SVTexMgr::createUnctrlTexture(s32 _w, s32 _h, s32 _informat,  s32 _dataformat, bool _enableMipMap){
     SVTexturePtr tTexture = MakeSharedPtr<SVTexture>(mApp);
-    SVString t_name = SVString::format("%d", tTexture->getuid());
+    SVString t_name = SVString::format("%d", tTexture->getUID());
     t_name = SVString("unctrltex") + SVString("_") + t_name;
     tTexture->init(t_name.c_str(), GL_TEXTURE_2D, _w, _h, _informat, _dataformat, _enableMipMap);
     //mApp->getRenderMgr()->pushRCmdCreate(tTexture);

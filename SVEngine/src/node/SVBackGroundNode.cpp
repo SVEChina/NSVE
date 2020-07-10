@@ -85,14 +85,14 @@ void SVBackGroundNode::setSize(f32 _w,f32 _h) {
 }
 
 void SVBackGroundNode::syncTexSize() {
-    if(m_pTex) {
-        setSize(m_pTex->getwidth(),m_pTex->getheight());
-    }else{
-        SVTexturePtr tmpTex = mApp->getRenderer()->getSVTex(m_useTexType);
-        if(tmpTex){
-            setSize(tmpTex->getwidth(),tmpTex->getheight());
-        }
-    }
+//    if(m_pTex) {
+//        setSize(m_pTex->getwidth(),m_pTex->getheight());
+//    }else{
+//        SVTexturePtr tmpTex = mApp->getRenderer()->getSVTex(m_useTexType);
+//        if(tmpTex){
+//            setSize(tmpTex->getwidth(),tmpTex->getheight());
+//        }
+//    }
     m_isSyncTex = true;
 }
 
@@ -113,7 +113,7 @@ void SVBackGroundNode::setInScreen(bool _inscreen) {
 void SVBackGroundNode::setTexture(cptr8 _path) {
     if(m_pTexName!=_path) {
         m_pTexName = _path;
-        m_pTex = mApp->getTexMgr()->getTextureSync(m_pTexName.c_str(),true);
+        m_pTex = mApp->getTexMgr()->getTexture(m_pTexName.c_str(),true);
         if(m_isSyncTex){
             syncTexSize();
         }

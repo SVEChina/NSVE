@@ -26,7 +26,7 @@ SVCoordGridNode::SVCoordGridNode(SVInstPtr _app)
     m_pMeshY = SVGeoGen::createNetGrid(mApp,COORD_SIZE,1);
     m_pMeshZ = SVGeoGen::createNetGrid(mApp,COORD_SIZE,2);
     m_pRenderObj = MakeSharedPtr<SVRenderObject>();
-    //m_gridTex = mApp->getTexMgr()->getTextureSync("svres/grid6.png",true);
+    //m_gridTex = mApp->getTexMgr()->getTexture("svres/grid6.png",true);
     m_gridTex = nullptr;
 }
 
@@ -43,7 +43,7 @@ void SVCoordGridNode::update(f32 dt){
 //    _refreshUnit();
 //    //
 //    if(!m_gridTex){
-//       m_gridTex = mApp->getTexMgr()->getTextureSync("svres/grid2.png",true,true);
+//       m_gridTex = mApp->getTexMgr()->getTexture("svres/grid2.png",true);
 //    }
 //    SVMtlCoordPtr t_mtl_coord = MakeSharedPtr<SVMtlCoord>(mApp);
 //    t_mtl_coord->update(dt * 0.001f);

@@ -58,8 +58,8 @@ void SVARAnchor::init(){
     SVRendererPtr t_renderer = mApp->getRenderer();
     if (t_renderer) {
         SVTexturePtr t_tex = t_renderer->getSVTex(E_TEX_MAIN);
-        s32 t_w = t_tex->getwidth();
-        s32 t_h = t_tex->getheight();
+        s32 t_w = t_tex->m_width;
+        s32 t_h = t_tex->m_height;
         if (t_renderer->hasSVTex(E_TEX_HELP7)) {
             m_pTex = t_renderer->getSVTex(E_TEX_HELP7);
         }else{

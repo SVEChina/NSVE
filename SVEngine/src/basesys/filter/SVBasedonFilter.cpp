@@ -75,7 +75,7 @@ bool SVBasedonFilter::create() {
     SVPassPtr t_pass1 = MakeSharedPtr<SVPass>();
     //t_pass1->setMtl(m_baseOnmtl);
     t_pass1->setInTex(0,E_TEX_MAIN);
-    SVTexturePtr teximg = mApp->getTexMgr()->getTextureSync("svres/filterimg/facewhitefilter.png", true);
+    SVTexturePtr teximg = mApp->getTexMgr()->getTexture("svres/filterimg/facewhitefilter.png", true);
     t_pass1->setInTex(1,teximg);
     t_pass1->setOutTex(E_TEX_HELP0);
     t_pass1->mTag = "filter-baseon";

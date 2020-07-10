@@ -151,7 +151,7 @@ using namespace sv;
 ////        SVString t_textureName = item["texture"].GetString();
 ////        SVString t_texturePath = m_rootPath + t_textureName;
 ////        SVMtlFace2DPtr t_material_face2d = MakeSharedPtr<SVMtlFace2D>(mApp);
-////        SVTexturePtr tex = mApp->getTexMgr()->getTextureSync(t_texturePath.c_str(), true);
+////        SVTexturePtr tex = mApp->getTexMgr()->getTexture(t_texturePath.c_str(), true);
 ////        t_material_face2d->setMaskTexture(tex);
 ////        setMaterial(t_material_face2d);
 ////    }

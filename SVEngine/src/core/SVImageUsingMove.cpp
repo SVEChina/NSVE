@@ -92,6 +92,7 @@ FVec2 SVImageUsingMove::MLS(const FVec2& t){
     iter_control=m_controlArray.begin();
     iter_w=m_weightArray.begin();
     iter_target=m_targetArray.begin();
+    
     //
     while(iter_control!=m_controlArray.end()){
         f64 P[2]={iter_control->x-pc.x,iter_control->y-pc.y};

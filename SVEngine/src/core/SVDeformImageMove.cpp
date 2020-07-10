@@ -48,7 +48,7 @@ SVDeformImageMove::SVDeformImageMove(SVInstPtr _app)
 //    m_pMtlBg  = MakeSharedPtr<SVMtlCore>(mApp,"screennor");
 //    m_pIUMP    = MakeSharedPtr<SVImageUsingMove>();
 //    m_deformScale = MakeSharedPtr<SVDeformScale>();
-//    m_pPointTex = mApp->getTexMgr()->getTextureSync("svres/point.png",true);
+//    m_pPointTex = mApp->getTexMgr()->getTexture("svres/point.png",true);
 //    m_param = MakeSharedPtr<SVParamDeform>();
 //    m_param->reset();
 //    m_passDeform = nullptr;

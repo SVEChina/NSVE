@@ -36,40 +36,40 @@ SVTexturePList::~SVTexturePList() {
 
 void SVTexturePList::init(cptr8 _name, s32 _type, s32 _width, s32 _height, s32 _informate, s32 _dateformate){
     m_name = _name;
-    m_width = _width;
-    m_height = _height;
-    m_type = _type;
-    m_informate = _informate;
-    m_dataformate = _dateformate;
+//    m_width = _width;
+//    m_height = _height;
+//    m_type = _type;
+//    m_informate = _informate;
+//    m_dataformate = _dateformate;
 }
 
 
 void SVTexturePList::create(SVRendererPtr _renderer){
-    SVRRes::create(_renderer);
-    if (!m_bCreated) {
-        m_bCreated = true;
-        SVRendererPtr t_renderBasePtr = mApp->getRenderer();
-        SVRendererGLPtr t_renderGLPtr = std::dynamic_pointer_cast<SVRendererGL>(t_renderBasePtr);
-        if (t_renderGLPtr) {
-            //渲染器类型E_RENDERER_GLES,
-            m_objTexPtr = MakeSharedPtr<SVRGLTexPlist>(mApp);
-            
-        }
-        SVRendererVKPtr t_rendeVKPtr = std::dynamic_pointer_cast<SVRendererVK>(t_renderBasePtr);
-        if (t_rendeVKPtr) {
-            //渲染器类型E_RENDERER_VUNKAN,
-            
-        }
-        //    SVRendererMetalPtr t_rendeMetalPtr = std::dynamic_pointer_cast<SVRendererMetal>(t_renderBasePtr);
-        //    if (t_rendeMetalPtr) {
-        //        //渲染器类型E_RENDERER_METAL,
-        //
-        //    }
-    }
+//    SVRRes::create(_renderer);
+//    if (!m_bCreated) {
+//        m_bCreated = true;
+//        SVRendererPtr t_renderBasePtr = mApp->getRenderer();
+//        SVRendererGLPtr t_renderGLPtr = std::dynamic_pointer_cast<SVRendererGL>(t_renderBasePtr);
+//        if (t_renderGLPtr) {
+//            //渲染器类型E_RENDERER_GLES,
+//            m_objTexPtr = MakeSharedPtr<SVRGLTexPlist>(mApp);
+//
+//        }
+//        SVRendererVKPtr t_rendeVKPtr = std::dynamic_pointer_cast<SVRendererVK>(t_renderBasePtr);
+//        if (t_rendeVKPtr) {
+//            //渲染器类型E_RENDERER_VUNKAN,
+//
+//        }
+//        //    SVRendererMetalPtr t_rendeMetalPtr = std::dynamic_pointer_cast<SVRendererMetal>(t_renderBasePtr);
+//        //    if (t_rendeMetalPtr) {
+//        //        //渲染器类型E_RENDERER_METAL,
+//        //
+//        //    }
+//    }
 }
 
 void SVTexturePList::destroy(SVRendererPtr _renderer){
-    SVRRes::destroy(_renderer);
+    //SVRRes::destroy(_renderer);
 }
 
 void SVTexturePList::refreshParam(){
@@ -189,11 +189,11 @@ SVTextureSet::~SVTextureSet() {
 
 void SVTextureSet::init(cptr8 _name, s32 _type, s32 _width, s32 _height, s32 _informate, s32 _dateformate){
     m_name = _name;
-    m_width = _width;
-    m_height = _height;
-    m_type = _type;
-    m_informate = _informate;
-    m_dataformate = _dateformate;
+//    m_width = _width;
+//    m_height = _height;
+//    m_type = _type;
+//    m_informate = _informate;
+//    m_dataformate = _dateformate;
 }
 
 void SVTextureSet::create(SVRendererPtr _renderer){
@@ -217,7 +217,7 @@ void SVTextureSet::create(SVRendererPtr _renderer){
 }
 
 void SVTextureSet::destroy(SVRendererPtr _renderer){
-    SVRRes::destroy(_renderer);
+   // SVRRes::destroy(_renderer);
 }
 
 

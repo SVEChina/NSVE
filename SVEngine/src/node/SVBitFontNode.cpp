@@ -79,20 +79,20 @@ void SVBitFontNode::setTexture(SVTexturePtr _tex){
 }
 
 void SVBitFontNode::setTexture(cptr8 _path){
-    if (m_texture) {
-        if (strcmp(m_texture->getname(), _path) != 0) {
-            m_texture = nullptr;
-        }
-    }
-    if (m_texture == nullptr) {
-        m_texture = mApp->getTexMgr()->getTextureSync(_path,true);
-    }
+//    if (m_texture) {
+//        if (strcmp(m_texture->getname(), _path) != 0) {
+//            m_texture = nullptr;
+//        }
+//    }
+//    if (m_texture == nullptr) {
+//        m_texture = mApp->getTexMgr()->getTexture(_path,true);
+//    }
 }
 
 cptr8 SVBitFontNode::getTexturePath(){
-    if (m_texture) {
-        return m_texture->getname();
-    }
+//    if (m_texture) {
+//        return m_texture->getname();
+//    }
     return "";
 }
 

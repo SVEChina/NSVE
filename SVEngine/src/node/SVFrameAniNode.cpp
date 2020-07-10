@@ -161,10 +161,10 @@ SVTexturePtr SVFrameAniNode::_selectTex(f32 _time) {
     m_curFrame = s32(_time*m_frameRate);
     if(m_curFrame>=t_ct)
         return nullptr;
-     m_framePool[m_curFrame].m_pTex = mApp->getTexMgr()->getTextureSync( m_framePool[m_curFrame].m_pTexName.c_str(),true,true);
+     m_framePool[m_curFrame].m_pTex = mApp->getTexMgr()->getTexture( m_framePool[m_curFrame].m_pTexName.c_str(),true);
 //    for(s32 i=0;i<2;i++) {
 //        s32 t_aim_index = (m_curFrame + i)%t_ct;
-//        m_framePool[t_aim_index].m_pTex = mApp->getTexMgr()->getTextureSync( m_framePool[t_aim_index].m_pTexName.c_str(),true,true);
+//        m_framePool[t_aim_index].m_pTex = mApp->getTexMgr()->getTexture( m_framePool[t_aim_index].m_pTexName.c_str(),true);
 //    }
     return m_framePool[m_curFrame].m_pTex;
 }

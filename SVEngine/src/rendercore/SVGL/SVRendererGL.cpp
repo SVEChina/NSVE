@@ -117,7 +117,7 @@ void SVRendererGL::submitTex(u32 _channel,TexUnit& _unit){
         return ;
     }
     t_aimTex->commit();
-    texid = t_aimTex->getTexID();
+    texid = 0;
     glBindTexture(GL_TEXTURE_2D, texid);
     SVString atexture = SVString::format("aTexture%d",_channel);
     s32 m_uni_tex = glGetUniformLocation(m_pRState->m_shaderID, atexture.c_str() );

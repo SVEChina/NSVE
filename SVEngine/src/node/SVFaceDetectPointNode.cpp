@@ -26,7 +26,7 @@ SVFaceDetectPointNode::SVFaceDetectPointNode(SVInstPtr _app):SVNode(_app) {
     m_rsType = RST_DEBUG;
     m_pRenderObj = MakeSharedPtr<SVRenderObject>();
     m_canSelect = false;
-    m_pTex = mApp->getTexMgr()->getTextureSync("svres/point.png",true);;
+    m_pTex = mApp->getTexMgr()->getTexture("svres/point.png",true);;
     m_pMesh = nullptr;
 }
 

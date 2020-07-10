@@ -58,7 +58,7 @@ void SVShapeVariedNode::init(){
 //    if(!t_renderer)
 //        return ;
 //    SVTexturePtr t_tex = mApp->getTexMgr()->createUnctrlTexture(mApp->m_pGlobalParam->m_inner_width, mApp->m_pGlobalParam->m_inner_height,GL_RGBA, GL_RGBA);
-//    SVTexturePtr teximg = mApp->getTexMgr()->getTextureSync("svres/filterimg/mask", true);
+//    SVTexturePtr teximg = mApp->getTexMgr()->getTexture("svres/filterimg/mask", true);
 //    m_fbo = MakeSharedPtr<SVRenderTexture>(mApp,
 //                                           t_tex,
 //                                           false,

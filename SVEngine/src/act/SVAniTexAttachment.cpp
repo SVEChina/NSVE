@@ -197,14 +197,14 @@ void SVAniTexAttachment::_findAttachmentNode(){
 }
 
 void SVAniTexAttachment::_refreshAttachmentNode(){
-    if (m_texture && m_srcNode) {
-        f32 t_relH = m_srcNode->getRelativeHeight();
-        f32 t_relW = m_srcNode->getRelativeWidth();
-        f32 t_texW = m_texture->getwidth();
-        f32 t_texH = m_texture->getheight();
-        m_srcNode->setSize(t_texW*(t_relH*1.0/t_texH), t_texH);
-        m_srcNode->setTexture(m_texture);
-    }
+//    if (m_texture && m_srcNode) {
+//        f32 t_relH = m_srcNode->getRelativeHeight();
+//        f32 t_relW = m_srcNode->getRelativeWidth();
+//        f32 t_texW = m_texture->getwidth();
+//        f32 t_texH = m_texture->getheight();
+//        m_srcNode->setSize(t_texW*(t_relH*1.0/t_texH), t_texH);
+//        m_srcNode->setTexture(m_texture);
+//    }
 }
 
 void SVAniTexAttachment::toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator, RAPIDJSON_NAMESPACE::Value &_objValue){

@@ -68,14 +68,14 @@ void SVSpriteNode::setSize(f32 _w,f32 _h) {
 
 void SVSpriteNode::syncTexSize() {
     if(m_inTexType == E_TEX_END) {
-        m_pTex = mApp->getTexMgr()->getTextureSync(m_pTexPath.c_str(),true);
+        m_pTex = mApp->getTexMgr()->getTexture(m_pTexPath.c_str(),true);
     }else {
         m_pTex = mApp->getRenderer()->getSVTex(m_inTexType);
     }
     if(m_pTex) {
-        s32 t_w = m_pTex->getwidth();
-        s32 t_h = m_pTex->getheight();
-        setSize(t_w,t_h);
+//        s32 t_w = m_pTex->getwidth();
+//        s32 t_h = m_pTex->getheight();
+//        setSize(t_w,t_h);
     }
 }
 
@@ -115,14 +115,14 @@ f32 SVSpriteNode::getHeight(){
 void SVSpriteNode::setTexture(cptr8 _path, bool enableMipMap){
     if(m_pTexPath!=_path) {
         m_pTexPath = _path;
-        m_pTex = mApp->getTexMgr()->getTextureSync(m_pTexPath.c_str(),true, enableMipMap);
+        m_pTex = mApp->getTexMgr()->getTexture(m_pTexPath.c_str(),true);
     }
 }
 
 cptr8 SVSpriteNode::getTexturePath(){
-    if (m_pTex) {
-        return m_pTex->getname();
-    }
+//    if (m_pTex) {
+//        return m_pTex->m_;
+//    }
     return m_pTexPath.c_str();
 }
 

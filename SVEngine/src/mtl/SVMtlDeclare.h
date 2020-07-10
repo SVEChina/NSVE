@@ -71,7 +71,6 @@ namespace sv {
         DECLARE_SHAREPTR(SVMtlADFilterBase);
         //texture
         DECLARE_SHAREPTR(SVTexture);
-        DECLARE_SHAREPTR(SVTextureInputTexID);
         DECLARE_SHAREPTR(SVTextureSet);
         DECLARE_SHAREPTR(SVTexturePList);
         DECLARE_SHAREPTR(SVTextureIOS);

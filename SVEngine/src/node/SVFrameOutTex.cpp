@@ -69,7 +69,7 @@ void SVFrameOutTex::update(f32 _dt){
 s32 SVFrameOutTex::getTexId(){
     SVRendererPtr t_renderer = mApp->getRenderer();
     SVTexturePtr t_out_tex = t_renderer->getSVTex(E_TEX_OUTSTREAM);
-    return t_out_tex->getTexID();
+    return 0;
 }
 
 void SVFrameOutTex::render(){

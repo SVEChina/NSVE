@@ -26,9 +26,11 @@ namespace sv {
         
         void update(f32 _dt);
         
-        SVTexturePtr getTexture(cptr8 _name, bool _create = false, bool _enableMipMap = false);
+        //根据文件名称获取纹理，自然是加载外部文件
+        SVTexturePtr getTexture(cptr8 _name,bool _sync = true);
         
-        SVTexturePtr getTextureSync(cptr8 _name, bool _create = false, bool _enableMipMap = false);
+        //根据内置纹理id获取纹理
+        SVTexturePtr getTexture(SVTEXTYPE _texname);
         
         SVTexturePtr createUnctrlTexture(s32 _w, s32 _h, s32 _informat, s32 _dataformat, bool _enableMipMap = false);
         
@@ -62,7 +64,7 @@ namespace sv {
         typedef SVMap<SVString, SVTexturePtr> TEXPOOL;
         TEXPOOL mTexpool;
         SVLockPtr m_texLock;
-        SVTexturePtr m_sveTexture;
+        SVTexturePtr m_sve_tex;
         bool mAsync;
     };
 

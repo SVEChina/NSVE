@@ -95,56 +95,56 @@ void SVTransGPU::destroy() {
 }
 
 void SVTransGPU::update(f32 dt) {
-    if (m_pMtl) {
-        m_pMtl->setTexcoordFlip(1.0f, -1.0f);
-        if (m_picformate == SV_PF_GRAY8) {
- 
-        } else if (m_picformate == SV_PF_YV12) {
-            m_pMtl->setTexcoordFlip(1.0,1.0);
-            m_pMtl->setTexture(0, m_tex0);
-            m_pMtl->setTexSizeIndex(0, 1.0f / m_tex0->getwidth(), 1.0f / m_tex0->getheight());
-            m_pMtl->setTexture(1, m_tex1);
-            m_pMtl->setTexSizeIndex(1, 1.0f / (m_tex1->getwidth() / 2),
-                                    1.0f / (m_tex1->getheight() / 2));
-        } else if (m_picformate == SV_PF_I420) {
-            m_pMtl->setTexcoordFlip(1.0,1.0);
-            m_pMtl->setTexture(0, m_tex0);
-            m_pMtl->setTexSizeIndex(0, 1.0f / m_tex0->getwidth(), 1.0f / m_tex0->getheight());
-            m_pMtl->setTexture(1, m_tex1);
-            m_pMtl->setTexSizeIndex(1, 1.0f / (m_tex1->getwidth() / 2),
-                                    1.0f / (m_tex1->getheight() / 2));
-            m_pMtl->setTexture(1, m_tex2);
-            m_pMtl->setTexSizeIndex(1, 1.0f / (m_tex2->getwidth() / 2),
-                                    1.0f / (m_tex2->getheight() / 2));
-        } else if (m_picformate == SV_PF_NV12) {
-            m_pMtl->setTexcoordFlip(1.0,1.0);
-            m_pMtl->setTexture(0, m_tex0);
-            m_pMtl->setTexSizeIndex(0, 1.0f / m_tex0->getwidth(), 1.0f / m_tex0->getheight());
-            m_pMtl->setTexture(1, m_tex1);
-            m_pMtl->setTexSizeIndex(1, 1.0f / (m_tex1->getwidth() / 2),
-                                    1.0f / (m_tex1->getheight() / 2));
-        } else if (m_picformate == SV_PF_NV21) {
-            m_pMtl->setTexcoordFlip(1.0,1.0);
-            m_pMtl->setTexture(0, m_tex0);
-            m_pMtl->setTexSizeIndex(0, 1.0f / m_tex0->getwidth(), 1.0f / m_tex0->getheight());
-            m_pMtl->setTexture(1, m_tex1);
-            m_pMtl->setTexSizeIndex(1, 1.0f / (m_tex1->getwidth() / 2),
-                                    1.0f / (m_tex1->getheight() / 2));
-        } else if (m_picformate == SV_PF_BGRA) {
-            m_pMtl->setTexcoordFlip(1.0,1.0);
-            m_pMtl->setTexture(0, m_tex0);
-            m_pMtl->setTexSizeIndex(0, 1.0f / m_tex0->getwidth(), 1.0f / m_tex0->getheight());
-        } else if (m_picformate == SV_PF_RGBA) {
-            m_pMtl->setTexcoordFlip(1.0,1.0);
-            m_pMtl->setTexture(0, m_tex0);
-            m_pMtl->setTexSizeIndex(0, 1.0f / m_tex0->getwidth(), 1.0f / m_tex0->getheight());
-        } else if (m_picformate == SV_PF_RGB) {
-        }
-        m_pMtl->update(dt);
-    }
-    if (m_passNode) {
-        m_passNode->update(0.0f);
-    }
+//    if (m_pMtl) {
+//        m_pMtl->setTexcoordFlip(1.0f, -1.0f);
+//        if (m_picformate == SV_PF_GRAY8) {
+// 
+//        } else if (m_picformate == SV_PF_YV12) {
+//            m_pMtl->setTexcoordFlip(1.0,1.0);
+//            m_pMtl->setTexture(0, m_tex0);
+//            m_pMtl->setTexSizeIndex(0, 1.0f / m_tex0->getwidth(), 1.0f / m_tex0->getheight());
+//            m_pMtl->setTexture(1, m_tex1);
+//            m_pMtl->setTexSizeIndex(1, 1.0f / (m_tex1->getwidth() / 2),
+//                                    1.0f / (m_tex1->getheight() / 2));
+//        } else if (m_picformate == SV_PF_I420) {
+//            m_pMtl->setTexcoordFlip(1.0,1.0);
+//            m_pMtl->setTexture(0, m_tex0);
+//            m_pMtl->setTexSizeIndex(0, 1.0f / m_tex0->getwidth(), 1.0f / m_tex0->getheight());
+//            m_pMtl->setTexture(1, m_tex1);
+//            m_pMtl->setTexSizeIndex(1, 1.0f / (m_tex1->getwidth() / 2),
+//                                    1.0f / (m_tex1->getheight() / 2));
+//            m_pMtl->setTexture(1, m_tex2);
+//            m_pMtl->setTexSizeIndex(1, 1.0f / (m_tex2->getwidth() / 2),
+//                                    1.0f / (m_tex2->getheight() / 2));
+//        } else if (m_picformate == SV_PF_NV12) {
+//            m_pMtl->setTexcoordFlip(1.0,1.0);
+//            m_pMtl->setTexture(0, m_tex0);
+//            m_pMtl->setTexSizeIndex(0, 1.0f / m_tex0->getwidth(), 1.0f / m_tex0->getheight());
+//            m_pMtl->setTexture(1, m_tex1);
+//            m_pMtl->setTexSizeIndex(1, 1.0f / (m_tex1->getwidth() / 2),
+//                                    1.0f / (m_tex1->getheight() / 2));
+//        } else if (m_picformate == SV_PF_NV21) {
+//            m_pMtl->setTexcoordFlip(1.0,1.0);
+//            m_pMtl->setTexture(0, m_tex0);
+//            m_pMtl->setTexSizeIndex(0, 1.0f / m_tex0->getwidth(), 1.0f / m_tex0->getheight());
+//            m_pMtl->setTexture(1, m_tex1);
+//            m_pMtl->setTexSizeIndex(1, 1.0f / (m_tex1->getwidth() / 2),
+//                                    1.0f / (m_tex1->getheight() / 2));
+//        } else if (m_picformate == SV_PF_BGRA) {
+//            m_pMtl->setTexcoordFlip(1.0,1.0);
+//            m_pMtl->setTexture(0, m_tex0);
+//            m_pMtl->setTexSizeIndex(0, 1.0f / m_tex0->getwidth(), 1.0f / m_tex0->getheight());
+//        } else if (m_picformate == SV_PF_RGBA) {
+//            m_pMtl->setTexcoordFlip(1.0,1.0);
+//            m_pMtl->setTexture(0, m_tex0);
+//            m_pMtl->setTexSizeIndex(0, 1.0f / m_tex0->getwidth(), 1.0f / m_tex0->getheight());
+//        } else if (m_picformate == SV_PF_RGB) {
+//        }
+//        m_pMtl->update(dt);
+//    }
+//    if (m_passNode) {
+//        m_passNode->update(0.0f);
+//    }
 }
 
 void SVTransGPU::render(){

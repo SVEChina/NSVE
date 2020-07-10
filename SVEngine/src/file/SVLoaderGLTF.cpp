@@ -1681,7 +1681,7 @@ bool SVLoaderGLTF::_parseImage(Image *_image, RAPIDJSON_NAMESPACE::Value &_item,
         SVString t_baseDir = _basedir;
         s32 t_pos = t_baseDir.rfind('/');
         SVString t_imageUri = SVString::substr(t_baseDir.c_str(), 0, t_pos + 1) + uri;
-        _image->texture = mApp->getTexMgr()->getTextureSync(t_imageUri, true);
+        _image->texture = mApp->getTexMgr()->getTexture(t_imageUri, true);
     }
     return true;
 }
