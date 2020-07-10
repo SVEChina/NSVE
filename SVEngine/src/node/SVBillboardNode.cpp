@@ -113,7 +113,7 @@ cptr8 SVBillboardNode::getTexturePath(){
     return m_pTexPath.c_str();
 }
 
-void SVBillboardNode::setTexture(SVTEXTYPE _textype){
+void SVBillboardNode::setTexture(SVTEXINID _textype){
     m_inTexType = _textype;
 }
 
@@ -209,7 +209,7 @@ void SVBillboardNode::fromJSON(RAPIDJSON_NAMESPACE::Value &item){
         setTexture(t_texturePath.c_str(), m_enableMipMap);
     }
     if (item.HasMember("textype") && item["textype"].IsInt()) {
-        m_inTexType = SVTEXTYPE(item["textype"].GetInt());
+        m_inTexType = SVTEXINID(item["textype"].GetInt());
     }
     m_dirty = true;
 }

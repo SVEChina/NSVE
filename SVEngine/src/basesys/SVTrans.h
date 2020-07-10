@@ -18,7 +18,7 @@ namespace sv {
             
             virtual ~SVTrans();
             
-            virtual void init(s32 _w, s32 _h,f32 _angle,PICFORMATE _picformate,SVTEXTYPE _tt);
+            virtual void init(s32 _w, s32 _h,f32 _angle,PICFORMATE _picformate,SVTEXINID _tt);
 
             virtual void destroy();
             
@@ -33,7 +33,7 @@ namespace sv {
             s32 m_height;
             PICFORMATE m_picformate;
             f32 m_angle;
-            SVTEXTYPE m_texTT;
+            SVTEXINID m_texTT;
         };
     
 }//!namespace sv

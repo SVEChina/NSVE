@@ -121,12 +121,12 @@ void SVFilterLUT::toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocato
 void SVFilterLUT::fromJSON(RAPIDJSON_NAMESPACE::Value &item) {
     if (item.HasMember("data") && item["data"].IsString()) {
         SVRendererPtr t_renderer = mApp->getRenderer();
-        if(t_renderer){
-            t_renderer->createSVTex(E_TEX_FILTER_LUT, 512, 512, GL_RGBA,GL_RGBA);
-            SVTexturePtr t_tex=t_renderer->getSVTex(E_TEX_FILTER_LUT);
-            t_tex->setTexData((void*)item["data"].GetString(), item["data"].GetStringLength());
-            setLUTTex(t_tex);
-        }
+//        if(t_renderer){
+//            t_renderer->createSVTex(E_TEX_FILTER_LUT, 512, 512, GL_RGBA,GL_RGBA);
+//            SVTexturePtr t_tex=t_renderer->getSVTex(E_TEX_FILTER_LUT);
+//            t_tex->setTexData((void*)item["data"].GetString(), item["data"].GetStringLength());
+//            setLUTTex(t_tex);
+//        }
     }
 }
 

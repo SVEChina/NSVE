@@ -97,7 +97,7 @@ namespace sv {
                         
             void setTexture(s32 _chanel,SVTexturePtr _texture);
             
-            void setTexture(s32 _chanel,SVTEXTYPE _from);
+            void setTexture(s32 _chanel,SVTEXINID _from);
             
             void setTexcoordFlip(f32 _x, f32 _y);
             

@@ -35,7 +35,7 @@ bool SVPass::setInTex(s32 _index,SVTexturePtr _tex){
     return false;
 }
 
-bool SVPass::setInTex(s32 _index,SVTEXTYPE _tt){
+bool SVPass::setInTex(s32 _index,SVTEXINID _tt){
     if( m_pMtl ){
         m_pMtl->setTexture(_index, _tt);
         return true;
@@ -48,7 +48,7 @@ bool SVPass::setOutTex(SVTexturePtr _tex){
     return true;
 }
 
-bool SVPass::setOutTex(SVTEXTYPE _tt) {
+bool SVPass::setOutTex(SVTEXINID _tt) {
     m_outTexType = _tt;
     return true;
 }

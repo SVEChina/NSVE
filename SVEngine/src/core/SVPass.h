@@ -26,11 +26,11 @@ namespace sv {
 
             bool setInTex(s32 _index,SVTexturePtr _tex);
             
-            bool setInTex(s32 _index,SVTEXTYPE _tt);
+            bool setInTex(s32 _index,SVTEXINID _tt);
 
             bool setOutTex(SVTexturePtr _tex);
             
-            bool setOutTex(SVTEXTYPE _tt);
+            bool setOutTex(SVTEXINID _tt);
             
             void setMesh( SVRenderMeshPtr _pMesh);
 
@@ -40,7 +40,7 @@ namespace sv {
             
             SVRenderMeshPtr m_pMesh;
             
-            SVTEXTYPE m_outTexType;
+            SVTEXINID m_outTexType;
             
             SVString mTag;
         };

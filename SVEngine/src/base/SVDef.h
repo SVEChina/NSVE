@@ -105,8 +105,22 @@ enum BITFONT_ATCH_PT {
     ATCH_RT
 };
 
+enum SVTEXKIND {
+    E_TEX_1D,
+    E_TEX_2D,
+    E_TEX_3D,
+    E_TEX_CUBE
+};
+
+enum SVTEXFORMATE {
+    E_TEX_RGBA8888,
+    E_TEX_RGB888,
+    E_TEX_ALPHA,
+    E_TEX_L_ALPHA
+};
+
 //SV 支持的纹理类型
-enum SVTEXTYPE {
+enum SVTEXINID {
     E_TEX_MAIN = 0,
     E_TEX_CAMERA = 1,
     E_TEX_SHADOW,

@@ -223,16 +223,16 @@ SVTexturePtr SVFilterGenLUT::getOutTex(){
 void SVFilterGenLUT::setCurveRgba(ptr8  data,u32 size){
     SVRendererPtr t_renderer = mApp->getRenderer();
     if(t_renderer) {
-        SVTexturePtr t_tex = t_renderer->getSVTex(E_TEX_FILTER_GENLUT_H3);
-        t_tex->setTexData(data, size);
+//        SVTexturePtr t_tex = t_renderer->getSVTex(E_TEX_FILTER_GENLUT_H3);
+//        t_tex->setTexData(data, size);
     }
 }
 
 void SVFilterGenLUT::setGradientMap(ptr8  data,u32 size){
     SVRendererPtr t_renderer = mApp->getRenderer();
     if(t_renderer) {
-        SVTexturePtr t_tex = t_renderer->getSVTex(E_TEX_FILTER_GENLUT_H4);
-        t_tex->setTexData(data, size);
+//        SVTexturePtr t_tex = t_renderer->getSVTex(E_TEX_FILTER_GENLUT_H4);
+//        t_tex->setTexData(data, size);
     }
 }
 

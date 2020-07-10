@@ -28,7 +28,7 @@ SVFilterGlow::SVFilterGlow(SVInstPtr _app)
 SVFilterGlow::~SVFilterGlow(){
 }
 
-bool SVFilterGlow::create(SVTEXTYPE _inType,SVTEXTYPE _outType){
+bool SVFilterGlow::create(SVTEXINID _inType,SVTEXINID _outType){
 //    SVRendererPtr t_renderer = mApp->getRenderer();
 //    if(!t_renderer)
 //        return false;

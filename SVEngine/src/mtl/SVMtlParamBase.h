@@ -63,7 +63,7 @@ namespace sv {
             
             f32 m_texcoordFlip[2];
             
-            SVTEXTYPE m_texForm;  //纹理来源
+            SVTEXINID m_texForm;  //纹理来源
             
             u32 m_min_filter;
             
@@ -87,7 +87,7 @@ namespace sv {
             
             void setTexture(u32 _index,SVTexturePtr _tex);
             
-            void setTexture(u32 _index,SVTEXTYPE _from);
+            void setTexture(u32 _index,SVTEXINID _from);
             
             void setTexClip(u32 _index,f32 _x,f32 _y);
             

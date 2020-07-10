@@ -38,7 +38,7 @@ void SVDispatch::dispatchMeshCreate(SVInstPtr _app,SVRMeshPtr _mesh) {
     _app->getRenderMgr()->pushRCmdCreate(t_cmd);
 }
 
-void SVDispatch::dispatcTextureCreate(SVInstPtr _app,SVRTexPtr _tex) {
+void SVDispatch::dispatchTextureCreate(SVInstPtr _app,SVRTexPtr _tex) {
     SVRCmdCreatePtr t_cmd = MakeSharedPtr<SVRCmdCreate>(_shader);
     _app->getRenderMgr()->pushRCmdCreate(t_cmd);
 }

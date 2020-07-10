@@ -137,10 +137,10 @@ void SVOpTexLoad::_process(f32 dt) {
     SVLoaderPng pngLoad(mApp);
     u8 *pTexData = nullptr;
     pngLoad.loadData(mFilename.c_str(), &pTexData);
-    if (pTexData) {
-        mTex->init(mFilename.c_str(), GL_TEXTURE_2D, pngLoad.m_iWidth, pngLoad.m_iHeight, pngLoad.mRenderFormat, pngLoad.mRenderFormat, m_enableMipMap);
-        mTex->setTexData(pTexData, pngLoad.m_iDataLength);  //数据
-        //mApp->getRenderMgr()->pushRCmdCreate(mTex);
-        free(pTexData);
-    }
+//    if (pTexData) {
+//        mTex->init(mFilename.c_str(), GL_TEXTURE_2D, pngLoad.m_iWidth, pngLoad.m_iHeight, pngLoad.mRenderFormat, pngLoad.mRenderFormat, m_enableMipMap);
+//        mTex->setTexData(pTexData, pngLoad.m_iDataLength);  //数据
+//        //mApp->getRenderMgr()->pushRCmdCreate(mTex);
+//        free(pTexData);
+//    }
 }

@@ -24,11 +24,11 @@ namespace sv {
             
             void init(s32 _w,s32 _h,PICFORMATE _informate,f32 _angle,bool _show);
             
-            void init(s32 _w,s32 _h,PICFORMATE _informate,f32 _angle,bool _show,SVTEXTYPE _tex);
+            void init(s32 _w,s32 _h,PICFORMATE _informate,f32 _angle,bool _show,SVTEXINID _tex);
             
             void init(u32 _tex0ID, u32 _tex1ID, u32 _tex2ID, s32 _w,s32 _h,PICFORMATE _informate,f32 _angle,bool _show);
             
-            void init(u32 _tex0ID, u32 _tex1ID, u32 _tex2ID, s32 _w,s32 _h,PICFORMATE _informate,f32 _angle,bool _show,SVTEXTYPE _tex);
+            void init(u32 _tex0ID, u32 _tex1ID, u32 _tex2ID, s32 _w,s32 _h,PICFORMATE _informate,f32 _angle,bool _show,SVTEXINID _tex);
             
             void destroy();
             
@@ -47,7 +47,7 @@ namespace sv {
             bool m_useGPU;
             SVTransPtr m_trans;
             SVNodePtr m_showNode;
-            SVTEXTYPE m_tt;
+            SVTEXINID m_tt;
             PICFORMATE m_formate;
             //
             SVTexturePtr m_texResult;
@@ -65,7 +65,7 @@ namespace sv {
             
             void createInStream(cptr8 _name,s32 _type,PICFORMATE _formate,s32 _w,s32 _h,f32 _angle, bool _show = false);
             
-            void createInStream(cptr8 _name,s32 _type,PICFORMATE _formate,s32 _w,s32 _h,f32 _angle, SVTEXTYPE _tex, bool _show = false);
+            void createInStream(cptr8 _name,s32 _type,PICFORMATE _formate,s32 _w,s32 _h,f32 _angle, SVTEXINID _tex, bool _show = false);
     
             void createInTextureStream(cptr8 _name, u32 _tex0ID, u32 _tex1ID, u32 _tex2ID, s32 _type,PICFORMATE _formate,s32 _w,s32 _h,f32 _angle, bool _show = false);
             
@@ -82,7 +82,7 @@ namespace sv {
             void update(f32 _dt);
             
         protected:
-            //SVTEXTYPE
+            //SVTEXINID
             typedef SVMap<SVString,StreamInCorePtr> TEXMAP;
             TEXMAP m_TexMap;
             //

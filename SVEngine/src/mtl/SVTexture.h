@@ -11,6 +11,7 @@
 #include "SVMtlDef.h"
 #include "../rendercore/SVRTex.h"
 #include "../rendercore/SVRenderDef.h"
+#include "SVTexMgr.h"
 
 namespace sv {
     
@@ -24,13 +25,13 @@ namespace sv {
         
         ~SVTexture();
         
-        void init(cptr8 _name, s32 _type, s32 _width, s32 _height, s32 _informate, s32 _dataformate, bool _enableMipMap);
+        void init(SVTexParam& _param);
         
-        void init(cptr8 _name, s32 _type, s32 _width, s32 _height, s32 _informate, s32 _dataformate, bool _enableMipMap,SVDataSwapPtr _data);
-        
+        void init(SVTexParam& _param,SVDataSwapPtr _data);
+
         void destroy();
         
-        virtual void setTexData(void *_data, s32 _len);
+        virtual void setTexData(SVDataSwapPtr _data);
         
         virtual void commit();  //数据提交到显卡
         
@@ -44,6 +45,8 @@ namespace sv {
         
     public:
         SVString m_name;
+        SVTexParam m_param;
+        //
         s32 m_type;
         s32 m_width;
         s32 m_height;

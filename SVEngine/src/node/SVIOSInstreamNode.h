@@ -19,7 +19,7 @@ namespace sv {
         
         virtual ~SVIOSInstreamNode();
         
-        void init(SVTEXTYPE _tt);
+        void init(SVTEXINID _tt);
         
         void destroy();
         
@@ -30,7 +30,7 @@ namespace sv {
     protected:
         SVRenderObjectPtr m_pRenderObj;
         SVMtlCorePtr m_pMtl;
-        SVTEXTYPE m_tt;
+        SVTEXINID m_tt;
     };
 
 }//!namespace sv

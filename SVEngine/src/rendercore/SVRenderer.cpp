@@ -142,21 +142,21 @@ SVRenderTexturePtr SVRenderer::getRenderTexture() {
     return m_pRenderTex;
 }
 
-SVTexturePtr SVRenderer::getSVTex(SVTEXTYPE _type){
+SVTexturePtr SVRenderer::getSVTex(SVTEXINID _type){
     if(E_TEX_END == _type) {
         return nullptr;
     }
     return m_svTex[_type];
 }
 
-bool SVRenderer::hasSVTex(SVTEXTYPE _type) {
+bool SVRenderer::hasSVTex(SVTEXINID _type) {
     if( m_svTex[_type] )
         return true;
     return false;
 }
 
 //创建内置纹理 有问题后期删掉
-SVTexturePtr SVRenderer::createSVTex(SVTEXTYPE _type,s32 _w,s32 _h,s32 _formate, bool _enableMipMap) {
+SVTexturePtr SVRenderer::createSVTex(SVTEXINID _type,s32 _w,s32 _h,s32 _formate, bool _enableMipMap) {
 //    SVTexturePtr t_tex = MakeSharedPtr<SVTexture>(mApp);;
 //    SVString t_str("");
 //    t_str.printf("intexture_%d",s32(_type));
@@ -172,7 +172,7 @@ SVTexturePtr SVRenderer::createSVTex(SVTEXTYPE _type,s32 _w,s32 _h,s32 _formate,
 }
 
 //创建内置纹理 有问题后期删掉
-SVTexturePtr SVRenderer::createSVTex(SVTEXTYPE _type,s32 _w,s32 _h,s32 _informate,s32 _daformate, bool _enableMipMap) {
+SVTexturePtr SVRenderer::createSVTex(SVTEXINID _type,s32 _w,s32 _h,s32 _informate,s32 _daformate, bool _enableMipMap) {
 //    SVTexturePtr t_tex = MakeSharedPtr<SVTexture>(mApp);;
 //    SVString t_str("");
 //    t_str.printf("intexture_%d",s32(_type));
@@ -184,7 +184,7 @@ SVTexturePtr SVRenderer::createSVTex(SVTEXTYPE _type,s32 _w,s32 _h,s32 _informat
 }
 
 //创建内置纹理 IOS
-SVTexturePtr SVRenderer::createSVTexIOS(SVTEXTYPE _type,s32 _w,s32 _h,s32 _formate, bool _enableMipMap) {
+SVTexturePtr SVRenderer::createSVTexIOS(SVTEXINID _type,s32 _w,s32 _h,s32 _formate, bool _enableMipMap) {
 #if defined( SV_IOS )
 //    SVTexturePtr t_tex = MakeSharedPtr<SVTextureIOS>(mApp);;
 //    SVString t_str("");
@@ -197,7 +197,7 @@ SVTexturePtr SVRenderer::createSVTexIOS(SVTEXTYPE _type,s32 _w,s32 _h,s32 _forma
     return nullptr;
 }
 
-SVTexturePtr SVRenderer::createSVTexIOS(SVTEXTYPE _type,s32 _w,s32 _h,s32 _informate,s32 _daformate, bool _enableMipMap) {
+SVTexturePtr SVRenderer::createSVTexIOS(SVTEXINID _type,s32 _w,s32 _h,s32 _informate,s32 _daformate, bool _enableMipMap) {
 #if defined( SV_IOS )
 //    SVTexturePtr t_tex = MakeSharedPtr<SVTextureIOS>(mApp);
 //    SVString t_str("");
@@ -211,7 +211,7 @@ SVTexturePtr SVRenderer::createSVTexIOS(SVTEXTYPE _type,s32 _w,s32 _h,s32 _infor
 }
 
 //
-void SVRenderer::destroySVTex(SVTEXTYPE _type) {
+void SVRenderer::destroySVTex(SVTEXINID _type) {
     m_svTex[_type] = nullptr;
 }
 

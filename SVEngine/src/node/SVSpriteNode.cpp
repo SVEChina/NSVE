@@ -126,7 +126,7 @@ cptr8 SVSpriteNode::getTexturePath(){
     return m_pTexPath.c_str();
 }
 
-void SVSpriteNode::setTexture(SVTEXTYPE _textype){
+void SVSpriteNode::setTexture(SVTEXINID _textype){
     m_inTexType = _textype;
 }
 
@@ -138,10 +138,10 @@ void SVSpriteNode::setTexture(SVTexturePtr _tex){
 }
 
 void SVSpriteNode::setTexture(void * _data, s32 _w, s32 _h, bool enableMipMap){
-    if (m_pTex) {
-        m_pTex = nullptr;
-    }
-    m_pTex = mApp->getTexMgr()->createUnctrlTextureWithData(_w, _h, GL_RGBA, GL_RGBA, (void *)_data);;
+//    if (m_pTex) {
+//        m_pTex = nullptr;
+//    }
+//    m_pTex = mApp->getTexMgr()->createUnctrlTextureWithData(_w, _h, GL_RGBA, GL_RGBA, (void *)_data);;
 }
 
 void SVSpriteNode::setMesh(SVRenderMeshPtr _mesh){
@@ -231,7 +231,7 @@ void SVSpriteNode::fromJSON(RAPIDJSON_NAMESPACE::Value &item){
         setTexture(t_texturePath.c_str(), m_enableMipMap);
     }
     if (item.HasMember("textype") && item["textype"].IsInt()) {
-        m_inTexType = SVTEXTYPE(item["textype"].GetInt());
+        m_inTexType = SVTEXINID(item["textype"].GetInt());
     }
     m_dirty = true;
 }

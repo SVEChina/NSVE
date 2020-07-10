@@ -6,7 +6,7 @@
 //
 
 #include "SVTexture.h"
-#include "../mtl/SVTexMgr.h"
+#include "../app/SVDispatch.h"
 #include "../app/SVInst.h"
 #include "../basesys/SVConfig.h"
 #include "../rendercore/SVRenderMgr.h"
@@ -32,7 +32,7 @@ SVTexture::SVTexture(SVInstPtr _app)
     m_informate = GL_RGBA;
     m_dataformate = GL_RGBA;
     m_objTexPtr = nullptr;
-    m_pData = MakeSharedPtr<SVDataSwap>();
+    m_pData = nullptr;
 }
 
 SVTexture::~SVTexture() {
@@ -41,51 +41,14 @@ SVTexture::~SVTexture() {
     m_bCreated = false;
 }
 
-//void SVTexture::create(SVRendererPtr _renderer){
-//    SV_LOG_INFO("texture create id %d \n",m_uid);
-////    SVRRes::create(_renderer);
-////    if (!m_bCreated) {
-////        m_bCreated = true;
-////        SVRendererPtr t_renderBasePtr = mApp->getRenderer();
-////        SVRendererGLPtr t_renderGLPtr = std::dynamic_pointer_cast<SVRendererGL>(t_renderBasePtr);
-////        if (t_renderGLPtr) {
-////            //渲染器类型E_RENDERER_GLES,
-////            m_objTexPtr = MakeSharedPtr<SVRGLTex>(mApp);
-////        }
-////        SVRendererVKPtr t_rendeVKPtr = std::dynamic_pointer_cast<SVRendererVK>(t_renderBasePtr);
-////        if (t_rendeVKPtr) {
-////            //渲染器类型E_RENDERER_VUNKAN,
-////            //m_objTexPtr = MakeSharedPtr<SVRGLTex>(mApp);
-////        }
-////#if defined(SV_IOS) || defined(SV_OSX)
-//////        SVRendererMetalPtr t_rendeMetalPtr = std::dynamic_pointer_cast<SVRendererMetal>(t_renderBasePtr);
-//////        if (t_rendeMetalPtr) {
-//////            //渲染器类型E_RENDERER_METAL,
-//////            m_objTexPtr = MakeSharedPtr<SVRMetalTex>(mApp);
-//////        }
-////#endif
-////        if (m_objTexPtr) {
-////            m_objTexPtr->setname(m_name);
-////            m_objTexPtr->settype(m_type);
-////            m_objTexPtr->setwidth(m_width);
-////            m_objTexPtr->setheight(m_height);
-////            m_objTexPtr->setinformate(m_informate);
-////            m_objTexPtr->setdataformate(m_dataformate);
-////            m_objTexPtr->setEnableMipMap(m_bEnableMipMap);
-////            _updateData();
-////            m_objTexPtr->create(t_renderBasePtr);
-////        }
-////    }
-//}
+void SVTexture::init(SVTexParam& _param) {
+    m_param = _param;
+    m_pData = nullptr;
+}
 
-void SVTexture::init(cptr8 _name, s32 _type, s32 _width, s32 _height, s32 _informate, s32 _dateformate, bool _enableMipMap){
-    m_name = _name;
-    m_width = _width;
-    m_height = _height;
-    m_type = _type;
-    m_informate = _informate;
-    m_dataformate = _dateformate;
-    m_bEnableMipMap = _enableMipMap;
+void SVTexture::init(SVTexParam& _param,SVDataSwapPtr _data) {
+    m_param = _param;
+    m_pData = _data;
 }
 
 //
@@ -95,12 +58,14 @@ void SVTexture::destroy(){
 //    }
 }
 
-void SVTexture::setTexData(void *_data, s32 _len){
-    if (_data && _len > 0) {
-        m_bData = true;
-        m_pData->writeData(_data, _len);
-        _updateData();
-    }
+void SVTexture::setTexData(SVDataSwapPtr _data){
+    //更新纹理数据
+    m_pData = _data;
+//    if (_data && _len > 0) {
+//        m_bData = true;
+//        m_pData->writeData(_data, _len);
+//        _updateData();
+//    }
 }
 
 void SVTexture::commit(){

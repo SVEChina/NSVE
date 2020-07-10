@@ -50,7 +50,7 @@ namespace sv {
             
             virtual void setTexture(cptr8 _path, bool enableMipMap = false);
             
-            virtual void setTexture(SVTEXTYPE _textype);
+            virtual void setTexture(SVTEXINID _textype);
             
             virtual void setTexture(SVTexturePtr _tex);
             
@@ -69,7 +69,7 @@ namespace sv {
             f32 m_texcoordX;
             f32 m_texcoordY;
             SVString m_pTexPath;
-            SVTEXTYPE m_inTexType;
+            SVTEXINID m_inTexType;
             //运行时属性
             SVTexturePtr m_pTex;
             SVRenderMeshPtr m_pMesh;

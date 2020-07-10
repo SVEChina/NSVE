@@ -11,9 +11,21 @@
 #include "../base/SVGBase.h"
 #include "../base/SVMap.h"
 #include "../mtl/SVMtlDeclare.h"
+#include <vector>
+#include <list>
+#include <map>
 
 namespace sv {
-    
+
+    struct SVTexParam {
+        SVTEXKIND m_kind;
+        SVTEXFORMATE m_formate;
+        s32 m_width;
+        s32 m_height;
+        bool m_minmap;
+    };
+
+    //
     class SVTexMgr : public SVGBaseEx {
     public:
         SVTexMgr(SVInstPtr _app);
@@ -26,17 +38,18 @@ namespace sv {
         
         void update(f32 _dt);
         
-        //根据文件名称获取纹理，自然是加载外部文件
+        //从文件加载纹理
         SVTexturePtr getTexture(cptr8 _name,bool _sync = true);
         
-        //根据内置纹理id获取纹理
-        SVTexturePtr getTexture(SVTEXTYPE _texname);
+        //创建内部纹理
+        SVTexturePtr getTexture(SVTEXINID _texname);
         
-        SVTexturePtr createUnctrlTexture(s32 _w, s32 _h, s32 _informat, s32 _dataformat, bool _enableMipMap = false);
+        SVTexturePtr createTexture(SVTEXINID _texname,SVTexParam _param);
         
-        SVTexturePtr createUnctrlTextureWithTexID(s32 _texId, s32 _width, s32 _height, s32 _informat, s32 _dataformat, bool _enableMipMap = false);
+        //创建外部纹理
+        SVTexturePtr createTexture(SVTexParam _param);
         
-        SVTexturePtr createUnctrlTextureWithData(s32 _width, s32 _height, s32 _informat, s32 _dataformat, void* _data, bool _enableMipMap = false);
+        SVTexturePtr createTexture(SVTexParam _param,SVDataSwapPtr _data);
         
         bool hasTexture(SVTexturePtr _tex);
         
@@ -61,8 +74,18 @@ namespace sv {
         
         void _removeUnuseTexture();
         
-        typedef SVMap<SVString, SVTexturePtr> TEXPOOL;
-        TEXPOOL mTexpool;
+        //文件纹理池
+        typedef std::map<SVString, SVTexturePtr> FTEXPOOL;
+        FTEXPOOL m_ftex_pool;
+        
+        //内部纹理池
+        typedef std::vector<SVTexturePtr> INTEXPOOL;
+        INTEXPOOL m_intex_pool;
+        
+        //外部纹理池
+        typedef std::list<SVTexturePtr> OUTTEXPOOL;
+        OUTTEXPOOL m_outtex_pool;
+        
         SVLockPtr m_texLock;
         SVTexturePtr m_sve_tex;
         bool mAsync;

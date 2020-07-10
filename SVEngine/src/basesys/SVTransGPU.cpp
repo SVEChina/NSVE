@@ -46,7 +46,7 @@ SVTransGPU::~SVTransGPU() {
     m_pMtl = nullptr;
 }
 
-void SVTransGPU::init(s32 _w, s32 _h, f32 _angle, PICFORMATE _picformate, SVTEXTYPE _tt) {
+void SVTransGPU::init(s32 _w, s32 _h, f32 _angle, PICFORMATE _picformate, SVTEXINID _tt) {
     SVTrans::init(_w, _h, _angle, _picformate, _tt);
     if (_picformate == SV_PF_GRAY8) {
         m_pMtl = MakeSharedPtr<SVMtlCore>(mApp, "yuv2y");
@@ -167,7 +167,7 @@ void SVTransGPU::setAngle(f32 _angle){
 //    }
 }
 
-void SVTransGPU::createPass(s32 _w, s32 _h, f32 _angle, SVTEXTYPE _tt) {
+void SVTransGPU::createPass(s32 _w, s32 _h, f32 _angle, SVTEXINID _tt) {
 //    m_passNode->create(_w, _h);
 //    SVPassPtr t_pass = MakeSharedPtr<SVPass>();
 //    m_pMtl->setTexcoordFlip(1.0,1.0);
