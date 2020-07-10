@@ -54,27 +54,27 @@ SVARAnchor::~SVARAnchor(){
 
 void SVARAnchor::init(){
     SVModuleBase::init();
-    startListen();
-    SVRendererPtr t_renderer = mApp->getRenderer();
-    if (t_renderer) {
-        SVTexturePtr t_tex = t_renderer->getSVTex(E_TEX_MAIN);
-        s32 t_w = t_tex->m_width;
-        s32 t_h = t_tex->m_height;
-        if (t_renderer->hasSVTex(E_TEX_HELP7)) {
-            m_pTex = t_renderer->getSVTex(E_TEX_HELP7);
-        }else{
-            m_pTex = t_renderer->createSVTex(E_TEX_HELP7, t_w, t_h, GL_RGBA);
-        }
-    }
-    m_fbo = MakeSharedPtr<SVRenderTexture>(mApp,m_pTex,true,true);
-    //mApp->getRenderMgr()->pushRCmdCreate(m_fbo);
-    m_pRenderObj = MakeSharedPtr<SVRenderObject>();
-    m_mtl = MakeSharedPtr<SVMtlCore>(mApp,"screennor");
-    m_mtl->setTexcoordFlip(1.0f, 1.0f);
-    m_mtl->setTexture(0, E_TEX_HELP7);
-    m_mtl->setBlendEnable(true);
-    m_mtl->setBlendState(MTL_BLEND_ONE, MTL_BLEND_ONE_MINUS_SRC_ALPHA);
-    m_pMesh = mApp->getDataMgr()->m_screenMesh;
+//    startListen();
+//    SVRendererPtr t_renderer = mApp->getRenderer();
+//    if (t_renderer) {
+//        SVTexturePtr t_tex = t_renderer->getSVTex(E_TEX_MAIN);
+//        s32 t_w = t_tex->m_width;
+//        s32 t_h = t_tex->m_height;
+//        if (t_renderer->hasSVTex(E_TEX_HELP7)) {
+//            m_pTex = t_renderer->getSVTex(E_TEX_HELP7);
+//        }else{
+//            m_pTex = t_renderer->createSVTex(E_TEX_HELP7, t_w, t_h, GL_RGBA);
+//        }
+//    }
+//    m_fbo = MakeSharedPtr<SVRenderTexture>(mApp,m_pTex,true,true);
+//    //mApp->getRenderMgr()->pushRCmdCreate(m_fbo);
+//    m_pRenderObj = MakeSharedPtr<SVRenderObject>();
+//    m_mtl = MakeSharedPtr<SVMtlCore>(mApp,"screennor");
+//    m_mtl->setTexcoordFlip(1.0f, 1.0f);
+//    m_mtl->setTexture(0, E_TEX_HELP7);
+//    m_mtl->setBlendEnable(true);
+//    m_mtl->setBlendState(MTL_BLEND_ONE, MTL_BLEND_ONE_MINUS_SRC_ALPHA);
+//    m_pMesh = mApp->getDataMgr()->m_screenMesh;
 }
 
 void SVARAnchor::destroy(){

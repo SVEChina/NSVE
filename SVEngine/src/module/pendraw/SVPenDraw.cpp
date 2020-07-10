@@ -75,51 +75,51 @@ SVPenDraw::~SVPenDraw() {
 
 void SVPenDraw::init(SVGameReadyPtr _ready,SVGameRunPtr _run,SVGameEndPtr _end) {
     SVGameBase::init(_ready,_run,_end);
-    SVRendererPtr t_renderer = mApp->getRenderer();
-    if (t_renderer) {
-        SVTexturePtr t_tex = t_renderer->getSVTex(E_TEX_MAIN);
-        s32 t_w = 0;//t_tex->m_width;
-        s32 t_h = 0;//t_tex->m_height;
-        if (t_renderer->hasSVTex(E_TEX_HELP0)) {
-            m_pTex1 = t_renderer->getSVTex(E_TEX_HELP0);
-        }else{
-            m_pTex1 = t_renderer->createSVTex(E_TEX_HELP0, t_w, t_h, GL_RGBA);
-        }
-        
-        if (t_renderer->hasSVTex(E_TEX_HELP1)) {
-            m_pTex2 = t_renderer->getSVTex(E_TEX_HELP1);
-        }else{
-            m_pTex2 = t_renderer->createSVTex(E_TEX_HELP1, t_w, t_h, GL_RGBA);
-        }
-    }
-    m_fbo1 = MakeSharedPtr<SVRenderTexture>(mApp,m_pTex1,true,true);
-    //mApp->getRenderMgr()->pushRCmdCreate(m_fbo1);
-    m_fbo2 = MakeSharedPtr<SVRenderTexture>(mApp,m_pTex2,true,true);
-    //mApp->getRenderMgr()->pushRCmdCreate(m_fbo2);
-    m_pRenderObj = MakeSharedPtr<SVMultMeshMtlRenderObject>();
-    m_mtl1 = MakeSharedPtr<SVMtlCore>(mApp,"screennor");
-    m_mtl1->setTexcoordFlip(1.0f, 1.0f);
-    m_mtl1->setTexture(0, E_TEX_HELP0);
-    m_mtl1->setDepthEnable(false);
-    m_mtl1->setBlendEnable(true);
-    m_mtl1->setBlendState(MTL_BLEND_SRC_ALPHA, MTL_BLEND_ONE);
-    m_mesh1 = mApp->getDataMgr()->m_screenMesh;
-    m_mtl2 = MakeSharedPtr<SVMtlCore>(mApp,"screennor");
-    m_mtl2->setTexcoordFlip(1.0f, 1.0f);
-    m_mtl2->setTexture(0, E_TEX_HELP1);
-    m_mtl2->setDepthEnable(false);
-    m_mtl2->setBlendEnable(true);
-    m_mtl2->setBlendState(MTL_BLEND_SRC_ALPHA, MTL_BLEND_ONE);
-    m_mesh2 = mApp->getDataMgr()->m_screenMesh;
-    //做辉光效果处理
-    m_glowFilter = MakeSharedPtr<SVFilterGlow>(mApp);
-    m_glowFilter->setRSType(RST_AR);
-    m_glowFilter->create(E_TEX_HELP0, E_TEX_HELP0);
-    //模糊效果处理
-    m_blurFilter = MakeSharedPtr<SVFilterBlur>(mApp);
-    m_blurFilter->setRSType(RST_AR);
-    m_blurFilter->setSmooth(1.5);
-    m_blurFilter->create(E_TEX_HELP1, E_TEX_HELP1);
+//    SVRendererPtr t_renderer = mApp->getRenderer();
+//    if (t_renderer) {
+//        SVTexturePtr t_tex = t_renderer->getSVTex(E_TEX_MAIN);
+//        s32 t_w = 0;//t_tex->m_width;
+//        s32 t_h = 0;//t_tex->m_height;
+//        if (t_renderer->hasSVTex(E_TEX_HELP0)) {
+//            m_pTex1 = t_renderer->getSVTex(E_TEX_HELP0);
+//        }else{
+//            m_pTex1 = t_renderer->createSVTex(E_TEX_HELP0, t_w, t_h, GL_RGBA);
+//        }
+//        
+//        if (t_renderer->hasSVTex(E_TEX_HELP1)) {
+//            m_pTex2 = t_renderer->getSVTex(E_TEX_HELP1);
+//        }else{
+//            m_pTex2 = t_renderer->createSVTex(E_TEX_HELP1, t_w, t_h, GL_RGBA);
+//        }
+//    }
+//    m_fbo1 = MakeSharedPtr<SVRenderTexture>(mApp,m_pTex1,true,true);
+//    //mApp->getRenderMgr()->pushRCmdCreate(m_fbo1);
+//    m_fbo2 = MakeSharedPtr<SVRenderTexture>(mApp,m_pTex2,true,true);
+//    //mApp->getRenderMgr()->pushRCmdCreate(m_fbo2);
+//    m_pRenderObj = MakeSharedPtr<SVMultMeshMtlRenderObject>();
+//    m_mtl1 = MakeSharedPtr<SVMtlCore>(mApp,"screennor");
+//    m_mtl1->setTexcoordFlip(1.0f, 1.0f);
+//    m_mtl1->setTexture(0, E_TEX_HELP0);
+//    m_mtl1->setDepthEnable(false);
+//    m_mtl1->setBlendEnable(true);
+//    m_mtl1->setBlendState(MTL_BLEND_SRC_ALPHA, MTL_BLEND_ONE);
+//    m_mesh1 = mApp->getDataMgr()->m_screenMesh;
+//    m_mtl2 = MakeSharedPtr<SVMtlCore>(mApp,"screennor");
+//    m_mtl2->setTexcoordFlip(1.0f, 1.0f);
+//    m_mtl2->setTexture(0, E_TEX_HELP1);
+//    m_mtl2->setDepthEnable(false);
+//    m_mtl2->setBlendEnable(true);
+//    m_mtl2->setBlendState(MTL_BLEND_SRC_ALPHA, MTL_BLEND_ONE);
+//    m_mesh2 = mApp->getDataMgr()->m_screenMesh;
+//    //做辉光效果处理
+//    m_glowFilter = MakeSharedPtr<SVFilterGlow>(mApp);
+//    m_glowFilter->setRSType(RST_AR);
+//    m_glowFilter->create(E_TEX_HELP0, E_TEX_HELP0);
+//    //模糊效果处理
+//    m_blurFilter = MakeSharedPtr<SVFilterBlur>(mApp);
+//    m_blurFilter->setRSType(RST_AR);
+//    m_blurFilter->setSmooth(1.5);
+//    m_blurFilter->create(E_TEX_HELP1, E_TEX_HELP1);
     
 }
 

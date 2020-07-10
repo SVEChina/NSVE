@@ -8,7 +8,6 @@
 #include "SVPass.h"
 #include "../app/SVInst.h"
 #include "../mtl/SVMtlCore.h"
-#include "../rendercore/SVRenderTexture.h"
 #include "../rendercore/SVRenderer.h"
 
 using namespace sv;

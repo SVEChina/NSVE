@@ -35,7 +35,7 @@ SVMultPassNode::~SVMultPassNode() {
 }
 
 void SVMultPassNode::create(s32 _w,s32 _h) {
-    m_fbo = MakeSharedPtr<SVRenderTexture>(mApp,nullptr,false,false);
+    //m_fbo = MakeSharedPtr<SVRenderTexture>(mApp,nullptr,false,false);
     //mApp->getRenderMgr()->pushRCmdCreate(m_fbo);
 }
 

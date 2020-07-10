@@ -28,6 +28,9 @@ namespace sv {
         SVInst();
         //
         virtual ~SVInst();
+        
+        SVInstPtr share();
+        
         //初始化SV
         virtual void init();
         //销毁SVå
@@ -68,8 +71,6 @@ namespace sv {
         SVGlobalParamPtr m_pGlobalParam;
         //渲染器
         SVRendererPtr m_pRM;
-        //
-        //SVRPathPtr m_pRPath;
         //渲染环境
         SVCtxBasePtr m_ctx;
         //

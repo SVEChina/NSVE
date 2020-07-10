@@ -19,7 +19,6 @@
 #include "../../rendercore/SVRenderMesh.h"
 #include "../../rendercore/SVRenderMgr.h"
 #include "../../rendercore/SVRenderer.h"
-#include "../../rendercore/SVRenderTexture.h"
 #include "../../mtl/SVMtlCore.h"
 #include "../../mtl/SVTexMgr.h"
 #include "../../mtl/SVTexture.h"

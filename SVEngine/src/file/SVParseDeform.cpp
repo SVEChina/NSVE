@@ -9,7 +9,6 @@
 #include "SVParseDeform.h"
 #include "../core/SVDeformImageMove.h"
 #include "../rendercore/SVRenderer.h"
-#include "../rendercore/SVRenderTexture.h"
 #include "../rendercore/SVRenderMgr.h"
 #include "../operate/SVOpParse.h"
 #include "../work/SVThreadPool.h"
