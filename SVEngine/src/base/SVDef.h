@@ -28,6 +28,7 @@ enum SV_STATE{
     SV_ST_SUSPEND       //挂起
 };
 
+//引擎内核
 enum SV_ENGCORE {
     SV_E_CORE_GL = 0,
     SV_E_CORE_METAL,
@@ -82,6 +83,7 @@ enum SV_SHADER_TYPE {
     SV_E_TECH_CS = 0x00100000,
 };
 
+//输出纹理格式
 enum SV_OUTSTEAMFORMATE {
     SV_OUT_STEAM_RGB2YUVNV12 = 0,
     SV_OUT_STEAM_RGBA,
@@ -105,6 +107,7 @@ enum BITFONT_ATCH_PT {
     ATCH_RT
 };
 
+//纹理类型
 enum SVTEXKIND {
     E_TEX_1D,
     E_TEX_2D,
@@ -112,6 +115,15 @@ enum SVTEXKIND {
     E_TEX_CUBE
 };
 
+//纹理环绕方式
+enum SVTEXWRAP {
+    E_TEX_CLAMP,
+    E_TEX_MIRROR,
+    E_TEX_REPEAT,
+    E_TEX_BORDER
+};
+
+//纹理数据格式
 enum SVTEXFORMATE {
     E_TEX_RGBA8888,
     E_TEX_RGB888,
@@ -119,7 +131,7 @@ enum SVTEXFORMATE {
     E_TEX_L_ALPHA
 };
 
-//SV 支持的纹理类型
+//SV 支持的内置纹理种类
 enum SVTEXINID {
     E_TEX_MAIN = 0,
     E_TEX_CAMERA = 1,

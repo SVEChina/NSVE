@@ -5422,14 +5422,6 @@
 		5FD9B04622647D2A00522317 /* SVRBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FD9B04022647D2900522317 /* SVRBuffer.h */; };
 		5FD9B04722647D2A00522317 /* SVRBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FD9B04022647D2900522317 /* SVRBuffer.h */; };
 		5FD9B04822647D2A00522317 /* SVRBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FD9B04022647D2900522317 /* SVRBuffer.h */; };
-		5FD9B04B22647DCC00522317 /* SVResGLMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FD9B04922647DCB00522317 /* SVResGLMesh.cpp */; };
-		5FD9B04C22647DCC00522317 /* SVResGLMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FD9B04922647DCB00522317 /* SVResGLMesh.cpp */; };
-		5FD9B04D22647DCC00522317 /* SVResGLMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FD9B04922647DCB00522317 /* SVResGLMesh.cpp */; };
-		5FD9B04E22647DCC00522317 /* SVResGLMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FD9B04922647DCB00522317 /* SVResGLMesh.cpp */; };
-		5FD9B04F22647DCC00522317 /* SVResGLMesh.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FD9B04A22647DCC00522317 /* SVResGLMesh.h */; };
-		5FD9B05022647DCC00522317 /* SVResGLMesh.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FD9B04A22647DCC00522317 /* SVResGLMesh.h */; };
-		5FD9B05122647DCC00522317 /* SVResGLMesh.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FD9B04A22647DCC00522317 /* SVResGLMesh.h */; };
-		5FD9B05222647DCC00522317 /* SVResGLMesh.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FD9B04A22647DCC00522317 /* SVResGLMesh.h */; };
 		5FD9B05D2265F5A700522317 /* SVRShaderGL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FD9B05B2265F5A600522317 /* SVRShaderGL.cpp */; };
 		5FD9B05E2265F5A700522317 /* SVRShaderGL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FD9B05B2265F5A600522317 /* SVRShaderGL.cpp */; };
 		5FD9B05F2265F5A700522317 /* SVRShaderGL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FD9B05B2265F5A600522317 /* SVRShaderGL.cpp */; };
@@ -6810,8 +6802,6 @@
 		5FD9B02C22644E9300522317 /* SVRTexMetal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVRTexMetal.h; sourceTree = "<group>"; };
 		5FD9B03F22647D2900522317 /* SVRBuffer.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVRBuffer.cpp; sourceTree = "<group>"; };
 		5FD9B04022647D2900522317 /* SVRBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVRBuffer.h; sourceTree = "<group>"; };
-		5FD9B04922647DCB00522317 /* SVResGLMesh.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVResGLMesh.cpp; sourceTree = "<group>"; };
-		5FD9B04A22647DCC00522317 /* SVResGLMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVResGLMesh.h; sourceTree = "<group>"; };
 		5FD9B05B2265F5A600522317 /* SVRShaderGL.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVRShaderGL.cpp; sourceTree = "<group>"; };
 		5FD9B05C2265F5A600522317 /* SVRShaderGL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVRShaderGL.h; sourceTree = "<group>"; };
 		5FFB8A4621C4F948002480D0 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
@@ -8454,8 +8444,6 @@
 				5F7D5ED0215F407700803BCF /* SVRendererGL.h */,
 				5F7D5ECE215F407700803BCF /* SVRenderStateGL.cpp */,
 				5F7D5ED1215F407700803BCF /* SVRenderStateGL.h */,
-				5FD9B04922647DCB00522317 /* SVResGLMesh.cpp */,
-				5FD9B04A22647DCC00522317 /* SVResGLMesh.h */,
 				5FD9B05B2265F5A600522317 /* SVRShaderGL.cpp */,
 				5FD9B05C2265F5A600522317 /* SVRShaderGL.h */,
 				5F64D5E7248502220005CF47 /* SVRBufferGL.cpp */,
@@ -9533,7 +9521,6 @@
 				5F7D63E9215F407800803BCF /* meta.h in Headers */,
 				5F06308F23223A4900A2BD73 /* SVLightSys.h in Headers */,
 				020C485D22DC5DCF00201753 /* btRaycastVehicle.h in Headers */,
-				5FD9B05222647DCC00522317 /* SVResGLMesh.h in Headers */,
 				020C466D22DC5DCD00201753 /* gim_contact.h in Headers */,
 				5F7D65CF215F407800803BCF /* SVRenderStream.h in Headers */,
 				020C452522DC5DCD00201753 /* btCollisionWorld.h in Headers */,
@@ -10320,7 +10307,6 @@
 				5F7D615F215F407700803BCF /* SVGlobalParam.h in Headers */,
 				5F7D63E7215F407800803BCF /* meta.h in Headers */,
 				020C485B22DC5DCF00201753 /* btRaycastVehicle.h in Headers */,
-				5FD9B05022647DCC00522317 /* SVResGLMesh.h in Headers */,
 				020C466B22DC5DCD00201753 /* gim_contact.h in Headers */,
 				5F7D65CD215F407800803BCF /* SVRenderStream.h in Headers */,
 				020C452322DC5DCD00201753 /* btCollisionWorld.h in Headers */,
@@ -10559,7 +10545,6 @@
 				020C445C22DC5DCC00201753 /* btDispatcher.h in Headers */,
 				5FAB9DDC2189AC6700B05ED5 /* SVAniBase.h in Headers */,
 				020C482822DC5DCE00201753 /* btDynamicsWorld.h in Headers */,
-				5FD9B04F22647DCC00522317 /* SVResGLMesh.h in Headers */,
 				5F7D65DC215F407800803BCF /* SVFboObject.h in Headers */,
 				0279A4152261E68A00308871 /* SVPenCurve.h in Headers */,
 				020C43E622DC5DCC00201753 /* b3JacobianEntry.h in Headers */,
@@ -11905,7 +11890,6 @@
 				5F7D6160215F407700803BCF /* SVGlobalParam.h in Headers */,
 				5F7D63E8215F407800803BCF /* meta.h in Headers */,
 				020C485C22DC5DCF00201753 /* btRaycastVehicle.h in Headers */,
-				5FD9B05122647DCC00522317 /* SVResGLMesh.h in Headers */,
 				020C466C22DC5DCD00201753 /* gim_contact.h in Headers */,
 				5F7D65CE215F407800803BCF /* SVRenderStream.h in Headers */,
 				020C452422DC5DCD00201753 /* btCollisionWorld.h in Headers */,
@@ -12402,7 +12386,6 @@
 				020C455D22DC5DCD00201753 /* btSphereBoxCollisionAlgorithm.cpp in Sources */,
 				5F7D6001215F407700803BCF /* SVDetectBase.cpp in Sources */,
 				5F7D66A7215F407900803BCF /* SVMtlFaceShape.cpp in Sources */,
-				5FD9B04E22647DCC00522317 /* SVResGLMesh.cpp in Sources */,
 				020C45C122DC5DCD00201753 /* btConvexConvexAlgorithm.cpp in Sources */,
 				020C458922DC5DCD00201753 /* btCollisionDispatcher.cpp in Sources */,
 				5F7D6371215F407800803BCF /* SkeletonClipping.c in Sources */,
@@ -12877,7 +12860,6 @@
 				020C47D022DC5DCE00201753 /* btPolyhedralConvexShape.cpp in Sources */,
 				5C0C606C219BFF790052A826 /* FIFOSampleBuffer.cpp in Sources */,
 				02EA54C022E842E700F5701D /* SVPhysicsShapeSphere.cpp in Sources */,
-				5FD9B04B22647DCC00522317 /* SVResGLMesh.cpp in Sources */,
 				5F7D6630215F407800803BCF /* SVRRes.cpp in Sources */,
 				02A16A5A2284427500FE2B99 /* SVParseMusic.cpp in Sources */,
 				020C456A22DC5DCD00201753 /* btManifoldResult.cpp in Sources */,
@@ -13556,7 +13538,6 @@
 				020C455C22DC5DCD00201753 /* btSphereBoxCollisionAlgorithm.cpp in Sources */,
 				5F7D6000215F407700803BCF /* SVDetectBase.cpp in Sources */,
 				5F7D66A6215F407900803BCF /* SVMtlFaceShape.cpp in Sources */,
-				5FD9B04D22647DCC00522317 /* SVResGLMesh.cpp in Sources */,
 				020C45C022DC5DCD00201753 /* btConvexConvexAlgorithm.cpp in Sources */,
 				020C458822DC5DCD00201753 /* btCollisionDispatcher.cpp in Sources */,
 				5F7D6370215F407800803BCF /* SkeletonClipping.c in Sources */,
@@ -14133,7 +14114,6 @@
 				020C455B22DC5DCD00201753 /* btSphereBoxCollisionAlgorithm.cpp in Sources */,
 				5F7D5FFF215F407700803BCF /* SVDetectBase.cpp in Sources */,
 				5F7D66A5215F407900803BCF /* SVMtlFaceShape.cpp in Sources */,
-				5FD9B04C22647DCC00522317 /* SVResGLMesh.cpp in Sources */,
 				020C45BF22DC5DCD00201753 /* btConvexConvexAlgorithm.cpp in Sources */,
 				020C458722DC5DCD00201753 /* btCollisionDispatcher.cpp in Sources */,
 				5F7D636F215F407800803BCF /* SkeletonClipping.c in Sources */,

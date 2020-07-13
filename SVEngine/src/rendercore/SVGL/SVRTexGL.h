@@ -30,13 +30,14 @@ namespace sv {
 
             virtual void destroy(SVRendererPtr _renderer);
 
-            virtual void setTexData(SVDataSwapPtr _data);
-
             virtual void commit();  //数据提交到显卡
             
-            SVDataSwapPtr m_pData;
-            
             u32 m_res_id;
+            SVTEXKIND m_tex_kind;
+            s32 m_width;
+            s32 m_height;
+            s32 m_depth;
+            s32 m_informate;
         };
 //        //PList假纹理
 //        class SVRTexGLPlist : public SVRTexGL{

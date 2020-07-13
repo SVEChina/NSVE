@@ -91,7 +91,7 @@ SVTexturePtr SVTexMgr::getTexture(SVTEXINID _texname) {
     return nullptr;
 }
 
-SVTexturePtr SVTexMgr::createTexture(SVTEXINID _texname,SVTexParam _param) {
+SVTexturePtr SVTexMgr::createTexture(SVTEXINID _texname,SVTextureDsp _param) {
     if(_texname>=E_TEX_MAIN && _texname<E_TEX_END){
         SVTexturePtr tTexture = MakeSharedPtr<SVTexture>(mApp);
         tTexture->init(_param);
@@ -101,11 +101,11 @@ SVTexturePtr SVTexMgr::createTexture(SVTEXINID _texname,SVTexParam _param) {
 }
 
 //创建外部纹理
-SVTexturePtr SVTexMgr::createTexture(SVTexParam _param) {
+SVTexturePtr SVTexMgr::createTexture(SVTextureDsp _param) {
     return nullptr;
 }
 
-SVTexturePtr SVTexMgr::createTexture(SVTexParam _param,SVDataSwapPtr _data) {
+SVTexturePtr SVTexMgr::createTexture(SVTextureDsp _param,SVDataSwapPtr _data) {
     return nullptr;
 }
 

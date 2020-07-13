@@ -38,12 +38,12 @@ namespace sv {
         //创建内部纹理
         SVTexturePtr getTexture(SVTEXINID _texname);
         
-        SVTexturePtr createTexture(SVTEXINID _texname,SVTexParam _param);
+        SVTexturePtr createTexture(SVTEXINID _texname,SVTextureDsp _param);
         
         //创建外部纹理
-        SVTexturePtr createTexture(SVTexParam _param);
+        SVTexturePtr createTexture(SVTextureDsp _param);
         
-        SVTexturePtr createTexture(SVTexParam _param,SVDataSwapPtr _data);
+        SVTexturePtr createTexture(SVTextureDsp _param,SVDataSwapPtr _data);
         
         bool hasTexture(SVTexturePtr _tex);
         

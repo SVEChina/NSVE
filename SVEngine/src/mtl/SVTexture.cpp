@@ -41,13 +41,13 @@ SVTexture::~SVTexture() {
     m_bCreated = false;
 }
 
-void SVTexture::init(SVTexParam& _param) {
-    m_param = _param;
+void SVTexture::init(SVTextureDsp& _param) {
+    m_texture_dsp = _param;
     m_pData = nullptr;
 }
 
-void SVTexture::init(SVTexParam& _param,SVDataSwapPtr _data) {
-    m_param = _param;
+void SVTexture::init(SVTextureDsp& _param,SVDataSwapPtr _data) {
+    m_texture_dsp = _param;
     m_pData = _data;
 }
 
@@ -56,6 +56,21 @@ void SVTexture::destroy(){
 //    if (m_restex) {
 //        m_restex->destroy(_renderer);
 //    }
+}
+
+SVTextureDsp* SVTexture::getTextureDsp() {
+    return &m_texture_dsp;
+}
+
+SVDataSwapPtr SVTexture::getTextureData() {
+    return m_pData;
+}
+
+SVDataSwapPtr SVTexture::getTextureCubeData(s32 _index) {
+    if(_index>=0 && _index<6) {
+        return m_cubData[_index];
+    }
+    return nullptr;
 }
 
 void SVTexture::setTexData(SVDataSwapPtr _data){

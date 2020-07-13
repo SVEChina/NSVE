@@ -24,10 +24,14 @@ namespace sv {
             
             virtual void setTexData(SVDataSwapPtr _data);
             
+            virtual void setTexCubeData(SVDataSwapPtr _data,s32 _index);
+            
             virtual void commit();  //数据提交到显卡
             
         protected:
             SVLockSpinPtr m_texLock;
+            SVDataSwapPtr m_data;
+            SVDataSwapPtr m_cube_data[6];
         };
         
     

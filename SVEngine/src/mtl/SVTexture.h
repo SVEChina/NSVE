@@ -17,12 +17,15 @@ namespace sv {
     /*
      逻辑层面的纹理
      */
-
-    struct SVTexParam {
+    struct SVTextureDsp {
         SVTEXKIND m_kind;
-        SVTEXFORMATE m_formate;
+        SVTEXFORMATE m_inFormate;   //内部格式
+        SVTEXFORMATE m_dataFormate; //数据格式
+        SVTEXWRAP m_warp_s;
+        SVTEXWRAP m_warp_t;
         s32 m_width;
         s32 m_height;
+        s32 m_depth;        //3d纹理使用
         bool m_minmap;
     };
 
@@ -32,13 +35,13 @@ namespace sv {
         
         ~SVTexture();
         
-        void init(SVTexParam& _param);
+        void init(SVTextureDsp& _param);
         
-        void init(SVTexParam& _param,SVDataSwapPtr _data);
+        void init(SVTextureDsp& _param,SVDataSwapPtr _data);
 
         void destroy();
         
-        virtual void setTexData(SVDataSwapPtr _data);
+        void setTexData(SVDataSwapPtr _data);
         
         virtual void commit();  //数据提交到显卡
         
@@ -51,13 +54,19 @@ namespace sv {
         
         SVRTexPtr getResTex();
         
+        SVTextureDsp* getTextureDsp();
+        
+        SVDataSwapPtr getTextureData();
+        
+        SVDataSwapPtr getTextureCubeData(s32 _index);
+        
     protected:
         void _updateData();
         SVRTexPtr m_restex;
         
     public:
         SVString m_name;
-        SVTexParam m_param;
+        SVTextureDsp m_texture_dsp;
         //
         s32 m_type;
         s32 m_width;
@@ -68,6 +77,7 @@ namespace sv {
         bool m_bData;
         bool m_bCreated;
         SVDataSwapPtr m_pData;
+        SVDataSwapPtr m_cubData[6];
         
     public:
         virtual void pushData(u8* _srcPtr,s32 _w,s32 _h,s32 _pixelformate){}
