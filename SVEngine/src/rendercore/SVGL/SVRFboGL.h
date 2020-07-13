@@ -23,12 +23,10 @@ namespace sv {
         
         ~SVRFboGL();
         
-    protected:
-        void _preRender(SVRendererPtr _renderer);
+        virtual void create(SVRendererPtr _renderer);
+
+        virtual void destroy(SVRendererPtr _renderer);
         
-        void _render(SVRendererPtr _renderer);
-        
-        void _afterRender(SVRendererPtr _renderer);
     };
 
     

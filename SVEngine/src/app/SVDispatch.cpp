@@ -7,22 +7,16 @@
 
 #include "SVDispatch.h"
 #include "SVInst.h"
-#include "SVGlobalMgr.h"
-#include "SVGlobalParam.h"
-#include "../basesys/SVRPath.h"
-#include "../work/SVTdCore.h"
-#include "../work/SVThreadPool.h"
-#include "../file/SVFileMgr.h"
-#include "../basesys/SVBasicSys.h"
-#include "../basesys/SVConfig.h"
-#include "../operate/SVOpBase.h"
-#include "../operate/SVOpCreate.h"
-#include "../operate/SVOpThread.h"
-#include "../rendercore/SVRenderMgr.h"
-#include "../rendercore/SVRenderState.h"
+#include "../mtl/SVTexture.h"
+#include "../mtl/SVShader.h"
+#include "../rendercore/SVRenderMesh.h"
 #include "../rendercore/SVRenderer.h"
-#include "../rendercore/SVMetal/SVRendererMetal.h"
-#include "../rendercore/SVGL/SVRendererGL.h"
+#include "../rendercore/SVRenderCmd.h"
+#include "../rendercore/SVRenderMgr.h"
+#include "../rendercore/SVRTarget.h"
+#include "../rendercore/SVRShader.h"
+#include "../rendercore/SVRFbo.h"
+#include "../rendercore/SVRTex.h"
 
 using namespace sv;
 
@@ -35,7 +29,7 @@ void SVDispatch::dispatchShaderCreate(SVInstPtr _app,SVShaderPtr _shader) {
         t_rshader->m_logic_obj = _shader;
         _shader->bindRes(t_rshader);
         //
-        SVRCmdCreatePtr t_cmd = MakeSharedPtr<SVRCmdCreate>(_shader);
+        SVRCmdCreatePtr t_cmd = MakeSharedPtr<SVRCmdCreate>(t_rshader);
         _app->getRenderMgr()->pushRCmdCreate(t_cmd);
     }
 }

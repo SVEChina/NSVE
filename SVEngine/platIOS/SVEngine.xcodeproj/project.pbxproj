@@ -5433,6 +5433,9 @@
 		5FF2B7FD24B8750500FC0BC9 /* SVShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F574D4724B85AF10035AB08 /* SVShader.cpp */; };
 		5FF2B7FE24B8750500FC0BC9 /* SVShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F574D4724B85AF10035AB08 /* SVShader.cpp */; };
 		5FF2B7FF24B8750600FC0BC9 /* SVShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F574D4724B85AF10035AB08 /* SVShader.cpp */; };
+		5FF2B80024BC61D800FC0BC9 /* SVDispatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F6E617324B717C6004B7B13 /* SVDispatch.cpp */; };
+		5FF2B80124BC61D900FC0BC9 /* SVDispatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F6E617324B717C6004B7B13 /* SVDispatch.cpp */; };
+		5FF2B80224BC61D900FC0BC9 /* SVDispatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F6E617324B717C6004B7B13 /* SVDispatch.cpp */; };
 		5FFB8A4721C4F948002480D0 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FFB8A4621C4F948002480D0 /* Metal.framework */; };
 		5FFB8A4921C4F950002480D0 /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FFB8A4821C4F94F002480D0 /* MetalKit.framework */; };
 /* End PBXBuildFile section */
@@ -6196,7 +6199,7 @@
 		5F6D899824751A9000D33318 /* SVThreadGroup.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVThreadGroup.cpp; sourceTree = "<group>"; };
 		5F6D899924751A9100D33318 /* SVThreadGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVThreadGroup.h; sourceTree = "<group>"; };
 		5F6E617224B717C6004B7B13 /* SVDispatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVDispatch.h; sourceTree = "<group>"; };
-		5F6E617324B717C6004B7B13 /* SVDispatch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SVDispatch.cpp; sourceTree = "<group>"; };
+		5F6E617324B717C6004B7B13 /* SVDispatch.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVDispatch.cpp; sourceTree = "<group>"; };
 		5F7D5D5C215F407700803BCF /* SVDetectMgr.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVDetectMgr.cpp; sourceTree = "<group>"; };
 		5F7D5D5D215F407700803BCF /* SVPerson.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVPerson.cpp; sourceTree = "<group>"; };
 		5F7D5D5E215F407700803BCF /* SVDetectMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVDetectMgr.h; sourceTree = "<group>"; };
@@ -12450,6 +12453,7 @@
 				5C56B6872248C66F007D7DC8 /* SVFilterClarity.cpp in Sources */,
 				5F7D5FED215F407700803BCF /* SVPerson.cpp in Sources */,
 				5F7D6747215F407900803BCF /* SVBitFontNode.cpp in Sources */,
+				5FF2B80224BC61D900FC0BC9 /* SVDispatch.cpp in Sources */,
 				020C465D22DC5DCD00201753 /* btGenericPoolAllocator.cpp in Sources */,
 				0288F9EE21788A310089E61C /* SVFont.cpp in Sources */,
 				020C474322DC5DCE00201753 /* btTriangleMeshShape.cpp in Sources */,
@@ -13780,6 +13784,7 @@
 				5F7D6902215F407900803BCF /* SVMathLib.cpp in Sources */,
 				5F7D6796215F407900803BCF /* SVSpriteNode.cpp in Sources */,
 				5F7D6250215F407800803BCF /* pngrutil.c in Sources */,
+				5FF2B80124BC61D900FC0BC9 /* SVDispatch.cpp in Sources */,
 				5F7D658E215F407800803BCF /* SVCtxOSX.cpp in Sources */,
 				020C4C3822DC5DD200201753 /* btTaskScheduler.cpp in Sources */,
 				020C455422DC5DCD00201753 /* btSimulationIslandManager.cpp in Sources */,
@@ -14356,6 +14361,7 @@
 				5F7D6901215F407900803BCF /* SVMathLib.cpp in Sources */,
 				5F7D6795215F407900803BCF /* SVSpriteNode.cpp in Sources */,
 				5F7D624F215F407800803BCF /* pngrutil.c in Sources */,
+				5FF2B80024BC61D800FC0BC9 /* SVDispatch.cpp in Sources */,
 				5F7D658D215F407800803BCF /* SVCtxOSX.cpp in Sources */,
 				020C4C3722DC5DD200201753 /* btTaskScheduler.cpp in Sources */,
 				020C455322DC5DCD00201753 /* btSimulationIslandManager.cpp in Sources */,

@@ -13,6 +13,7 @@
 
 #include "../SVRTarget.h"
 #include "../../app/SVInst.h"
+#include "../../app/SVDispatch.h"
 #include "../../rendercore/SVRenderMgr.h"
 #include "../../base/SVDataSwap.h"
 
@@ -29,18 +30,23 @@ SVRendererMetal::SVRendererMetal(SVInstPtr _app)
 SVRendererMetal::~SVRendererMetal(){
 }
 
-void SVRendererMetal::initParam(id<MTLDevice> _device,id<MTLDrawable> _target,id<MTLTexture> _targetTex) {
+void SVRendererMetal::init(id<MTLDevice> _device,id<MTLDrawable> _target,id<MTLTexture> _targetTex) {
     m_pDevice = _device;
     if (m_pDevice == nil) {
         SV_LOG_INFO("don't support metal !");
     }
     m_pCmdQueue = m_pDevice.newCommandQueue;
     m_pLibrary = [m_pDevice newDefaultLibrary];
-    //创建主RTarget
-    SVRTargetPtr t_rt = createRT(_target,_targetTex);
-    if(t_rt){
-        mApp->getRenderMgr()->setMainRT(t_rt);
-    }
+    //
+    SVRTargetPtr t_target = MakeSharedPtr<SVRTarget>(mApp);
+    SVDispatch::dispatchTargetCreate(mApp,t_target);
+    //设置主RTarget
+    mApp->getRenderMgr()->setMainRT(t_target);
+    //t_target->init();
+    //    if(t_fbo) {
+    //        t_fbo->init(_target,_targetTex);
+    //    }
+    //SVRFboMetalPtr t_fbo = std::dynamic_pointer_cast<SVRFboMetal>( createResFbo() );
 }
 
 //初始化
@@ -83,16 +89,6 @@ SVRBufferPtr SVRendererMetal::createResBuf()  {
 //fbo
 SVRFboPtr SVRendererMetal::createResFbo()  {
     return MakeSharedPtr<SVRFboMetal>(mApp);
-}
-
-//创建RT
-SVRTargetPtr SVRendererMetal::createRT(id<MTLDrawable> _target,id<MTLTexture> _targetTex) {
-    SVRFboMetalPtr t_fbo = MakeSharedPtr<SVRFboMetal>(mApp);
-    t_fbo->init(_target,_targetTex);
-    //
-    SVRTargetPtr t_target = MakeSharedPtr<SVRTarget>(mApp);
-    t_target->setFbo(t_fbo);
-    return t_target;
 }
 
 //创建纹理接口

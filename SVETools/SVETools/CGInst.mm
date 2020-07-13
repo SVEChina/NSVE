@@ -79,7 +79,10 @@ static CGInst *mInst;
     if( m_pSVE ) {
         sv::SVRendererPtr t_rm =m_pSVE->createRM(E_M_METAL);
         sv::SVRendererMetalPtr t_rm_metal = std::dynamic_pointer_cast<sv::SVRendererMetal>(t_rm);
-        t_rm_metal->initParam(_device,_drawable,_drawable.texture);
+        if(t_rm_metal) {
+            //渲染器初始化
+            t_rm_metal->init(_device,_drawable,_drawable.texture);
+        }
     }
 }
 

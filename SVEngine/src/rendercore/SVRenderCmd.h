@@ -9,7 +9,7 @@
 #define SV_RENDERCMD_H
 
 #include "SVRenderDef.h"
-#include "SVRenderMesh.h"
+#include "SVRenderDeclare.h"
 #include "../base/SVObject.h"
 #include "../base/SVMat4.h"
 #include "../base/SVPreDeclare.h"

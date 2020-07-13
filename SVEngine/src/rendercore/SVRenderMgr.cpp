@@ -118,8 +118,6 @@ void SVRenderMgr::render(){
         if(m_stream_destroy) {
             m_stream_destroy->render( t_renderer );
         }
-        //
-        mApp->m_ctx->swap();
     }
 }
 

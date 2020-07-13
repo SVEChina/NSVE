@@ -8,11 +8,12 @@
 #ifndef SV_DISPATCH_H
 #define SV_DISPATCH_H
 
-#include "../base/SVIDPool.h"
+#include "../base/SVObject.h"
+#include "../base/SVPreDeclare.h"
+#include "../mtl/SVMtlDeclare.h"
 #include "../rendercore/SVRenderDeclare.h"
-#include "../mtl/SVTexture.h"
-#include "SVGlobalMgr.h"
-#include "SVGlobalParam.h"
+//#include "SVGlobalMgr.h"
+//#include "SVGlobalParam.h"
 
 namespace sv {
     

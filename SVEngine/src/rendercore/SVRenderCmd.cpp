@@ -10,6 +10,7 @@
 #include "SVRenderScene.h"
 #include "SVRenderTexture.h"
 #include "SVRenderer.h"
+#include "SVRenderMesh.h"
 #include "../base/SVDataSwap.h"
 #include "../event/SVEvent.h"
 #include "../event/SVEventMgr.h"

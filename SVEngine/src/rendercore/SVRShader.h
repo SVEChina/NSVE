@@ -5,8 +5,8 @@
 // yizhou Fu,long Yin,longfei Lin,ziyu Xu,xiaofan Li,daming Li
 //
 
-#ifndef SV_RESSHADER_H
-#define SV_RESSHADER_H
+#ifndef SV_RSHADER_H
+#define SV_RSHADER_H
 
 #include "SVRRes.h"
 #include "../base/SVPreDeclare.h"
@@ -101,4 +101,4 @@ namespace sv {
 }//!namespace sv
 
 
-#endif /* SV_RESSHADER_H */
+#endif /* SV_RSHADER_H */

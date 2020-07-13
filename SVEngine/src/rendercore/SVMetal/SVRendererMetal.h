@@ -27,7 +27,7 @@ namespace sv {
 
         ~SVRendererMetal();
 
-        void initParam(id<MTLDevice> _device,id<MTLDrawable> _target,id<MTLTexture> _targetTex);
+        virtual void init(id<MTLDevice> _device,id<MTLDrawable> _target,id<MTLTexture> _targetTex);
 
         //初始化
         virtual void init(s32 _w,s32 _h);
@@ -50,9 +50,6 @@ namespace sv {
 
 
     public:
-        /*渲染器当中 创建资源的接口*/
-        //创建RT接口
-        SVRTargetPtr createRT(id<MTLDrawable> _target,id<MTLTexture> _targetTex);
         //创建纹理接口
         s32 createTexIn(s32 _texid,SVTexDsp _tdsp);
         s32 createTexOut(SVTexDsp _tdsp,void* _pdata);

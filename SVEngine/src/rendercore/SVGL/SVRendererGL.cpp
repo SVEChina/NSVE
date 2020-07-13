@@ -37,33 +37,28 @@ SVRendererGL::~SVRendererGL(){
     m_cur_program = 0;
 }
 
-#if defined SV_IOS
-
 void SVRendererGL::init(s32 _w,s32 _h){
+    SVRenderer::init(_w,_h);
     m_inWidth = _w;
     m_inHeight = _h;
     mApp->m_pGlobalParam->m_inner_width = _w;
     mApp->m_pGlobalParam->m_inner_height = _h;
+    //
+    SVRFboGLPtr t_fbo = std::dynamic_pointer_cast<SVRFboGL>( createResFbo() );
+    if(t_fbo) {
+        //t_fbo->init(_target,_targetTex);
+    }
+    //
+    SVRTargetPtr t_target = MakeSharedPtr<SVRTarget>(mApp);
+    //t_target->init();
+    t_target->setFbo(t_fbo);
+    //设置主RTarget
+    mApp->getRenderMgr()->setMainRT(t_target);
 }
 
-#elif defined SV_ANDROID
-
-void SVRendererGL::init(s32 _w,s32 _h) {
-    m_inWidth = _w;
-    m_inHeight = _h;
-    mApp->m_pGlobalParam->m_inner_width = _w;
-    mApp->m_pGlobalParam->m_inner_height = _h;
+void SVRendererGL::init(s32 _w,s32 _h,bool _offline) {
+    
 }
-
-#elif defined SV_OSX
-void SVRendererGL::init(s32 _w,s32 _h) {
-    m_inWidth = _w;
-    m_inHeight = _h;
-    mApp->m_pGlobalParam->m_inner_width = _w;
-    mApp->m_pGlobalParam->m_inner_height = _h;
-}
-
-#endif
 
 void SVRendererGL::resize(s32 _w,s32 _h) {
 //    //

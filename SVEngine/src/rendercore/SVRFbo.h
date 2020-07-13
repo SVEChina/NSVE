@@ -5,32 +5,32 @@
 // yizhou Fu,long Yin,longfei Lin,ziyu Xu,xiaofan Li,daming Li
 //
 
-#ifndef SVRFbo_h
-#define SVRFbo_h
+#ifndef SV_RFBO_H
+#define SV_RFBO_H
 
 #include "SVRRes.h"
 
 namespace sv {
     
-        class SVRFbo: public SVRRes{
-        public:
-            SVRFbo(SVInstPtr _app);
-            
-            virtual ~SVRFbo();
-            
-            virtual void create(SVRendererPtr _renderer) {}
-            
-            virtual void destroy(SVRendererPtr _renderer) {}
-            
-            virtual void bind() {}
-            
-            virtual void unbind() {}
-            
-        protected:
-            SVLockPtr m_texLock;
-        };
+    class SVRFbo: public SVRRes{
+    public:
+        SVRFbo(SVInstPtr _app);
+
+        virtual ~SVRFbo();
+
+        virtual void create(SVRendererPtr _renderer) {}
+
+        virtual void destroy(SVRendererPtr _renderer) {}
+
+        virtual void bind() {}
+
+        virtual void unbind() {}
+
+    protected:
+        SVLockPtr m_texLock;
+    };
         
 }//!namespace sv
 
 
-#endif /* SVRFbo_h */
+#endif /* SV_RFBO_H */

@@ -37,7 +37,6 @@ void SVRTarget::render(SVRendererPtr _renderer) {
 }
 
 void SVRTarget::_preRender(SVRendererPtr _renderer) {
-    //
 }
 
 void SVRTarget::_render(SVRendererPtr _renderer) {

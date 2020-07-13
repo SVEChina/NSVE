@@ -25,6 +25,8 @@ namespace sv {
             
             virtual void init(s32 _w,s32 _h);
             
+            virtual void init(s32 _w,s32 _h,bool _offline);
+            
             virtual void resize(s32 _w,s32 _);
             
         public:

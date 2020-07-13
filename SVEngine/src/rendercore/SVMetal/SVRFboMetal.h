@@ -26,14 +26,18 @@ namespace sv {
         
         ~SVRFboMetal();
         
-        void init(id<MTLDrawable> _target,id<MTLTexture> _targetTex);
+        virtual void create(SVRendererPtr _renderer);
 
-    protected:
-        void _preRender(SVRendererPtr _renderer);
+        virtual void destroy(SVRendererPtr _renderer);
         
-        void _render(SVRendererPtr _renderer);
-        
-        void _afterRender(SVRendererPtr _renderer);
+//        void init(id<MTLDrawable> _target,id<MTLTexture> _targetTex);
+
+//    protected:
+//        void _preRender(SVRendererPtr _renderer);
+//        
+//        void _render(SVRendererPtr _renderer);
+//        
+//        void _afterRender(SVRendererPtr _renderer);
         
     public:
         id<MTLDrawable> m_pTarget;
