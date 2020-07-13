@@ -19,10 +19,21 @@ namespace sv {
 
     //
     struct SVTargetDsp {
+        SVTargetDsp() {
+            m_width = 512;
+            m_height = 512;
+            m_use_depth = true;
+            m_use_stencil = true;
+            m_oc_target = nullptr;
+            m_oc_texture = nullptr;
+        }
         s32 m_width;
         s32 m_height;
         bool m_use_depth;
         bool m_use_stencil;
+        //metal专用参数
+        void* m_oc_target;
+        void* m_oc_texture;
     };
 
     //

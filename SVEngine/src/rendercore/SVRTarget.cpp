@@ -24,7 +24,7 @@ SVRTarget::~SVRTarget() {
 
 void SVRTarget::render(SVRendererPtr _renderer) {
     if(m_fbo) {
-        m_fbo->bind();
+        m_fbo->bind(_renderer);
         //设置目标
         _preRender(_renderer);
         //渲染
@@ -32,7 +32,7 @@ void SVRTarget::render(SVRendererPtr _renderer) {
         //解锁目标
         _afterRender(_renderer);
         //
-        m_fbo->unbind();
+        m_fbo->unbind(_renderer);
     }
 }
 

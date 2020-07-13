@@ -22,9 +22,9 @@ namespace sv {
 
         virtual void destroy(SVRendererPtr _renderer) {}
 
-        virtual void bind() {}
+        virtual void bind(SVRendererPtr _renderer) {}
 
-        virtual void unbind() {}
+        virtual void unbind(SVRendererPtr _renderer) {}
 
     protected:
         SVLockPtr m_texLock;

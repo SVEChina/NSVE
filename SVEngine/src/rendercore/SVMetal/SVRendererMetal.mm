@@ -37,16 +37,14 @@ void SVRendererMetal::init(id<MTLDevice> _device,id<MTLDrawable> _target,id<MTLT
     }
     m_pCmdQueue = m_pDevice.newCommandQueue;
     m_pLibrary = [m_pDevice newDefaultLibrary];
-    //
+    //创建主target
     SVRTargetPtr t_target = MakeSharedPtr<SVRTarget>(mApp);
+    SVTargetDsp* t_dsp = t_target->getTargetDsp();
+    t_dsp->m_oc_target = (__bridge_retained void*)_target;
+    t_dsp->m_oc_texture = (__bridge_retained void*)_targetTex;
     SVDispatch::dispatchTargetCreate(mApp,t_target);
     //设置主RTarget
     mApp->getRenderMgr()->setMainRT(t_target);
-    //t_target->init();
-    //    if(t_fbo) {
-    //        t_fbo->init(_target,_targetTex);
-    //    }
-    //SVRFboMetalPtr t_fbo = std::dynamic_pointer_cast<SVRFboMetal>( createResFbo() );
 }
 
 //初始化

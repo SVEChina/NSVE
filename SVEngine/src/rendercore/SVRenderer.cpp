@@ -116,9 +116,9 @@ void SVRenderer::removeUnuseRes() {
 
 //需要控制当前的fbo
 void SVRenderer::pushFbo(SVRFboPtr _fbo) {
-    if(_fbo) {
-        _fbo->bind();
-    }
+//    if(_fbo) {
+//        _fbo->bind(std::dynamic_pointer_cast<SVRenderer>(shareObject()) );
+//    }
 }
 
 void SVRenderer::popFbo() {

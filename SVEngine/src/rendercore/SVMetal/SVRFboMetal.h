@@ -30,6 +30,10 @@ namespace sv {
 
         virtual void destroy(SVRendererPtr _renderer);
         
+        virtual void bind(SVRendererPtr _renderer);
+
+        virtual void unbind(SVRendererPtr _renderer);
+        
 //        void init(id<MTLDrawable> _target,id<MTLTexture> _targetTex);
 
 //    protected:
