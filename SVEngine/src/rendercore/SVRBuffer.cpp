@@ -74,15 +74,6 @@ void SVRBuffer::create(SVRendererPtr _renderer) {
 void SVRBuffer::destroy(SVRendererPtr _renderer) {
 }
 
-void SVRBuffer::render(SVRendererPtr _renderer) {
-    
+s32 SVRBuffer::process(SVRendererPtr _renderer) {
+    return -1;
 }
-
-void SVRBuffer::updateConf(RENDERMESHCONF& _conf) {
-    
-}
-
-void SVRBuffer::updateData(RENDERMESHDATA& _data) {
-    
-}
-

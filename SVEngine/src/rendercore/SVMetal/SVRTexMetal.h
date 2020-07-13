@@ -30,15 +30,9 @@ namespace sv {
             
             virtual void destroy(SVRendererPtr _renderer);
             
-            virtual void setTexData(void *_data, s32 _len);
+            virtual void setTexData(SVDataSwapPtr _data);
             
             virtual void commit();  //数据提交到显卡
-            
-            virtual bool getbLoad();
-            
-            u32  getTexID();
-            
-            u32  getuid();
             
         protected:
             id<MTLTexture> m_srcTex;

@@ -86,8 +86,6 @@ void SVRCmdDestroy::render(SVRendererPtr _renderer){
 }
 
 
-
-
 //普通渲染指令
 SVRenderCmdNor::SVRenderCmdNor() {
     m_pMtl  = nullptr;

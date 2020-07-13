@@ -9,6 +9,7 @@
 #define SV_TEXMGR_H
 
 #include "../base/SVGBase.h"
+#include "SVTexture.h"
 #include "../base/SVMap.h"
 #include "../mtl/SVMtlDeclare.h"
 #include <vector>
@@ -17,13 +18,6 @@
 
 namespace sv {
 
-    struct SVTexParam {
-        SVTEXKIND m_kind;
-        SVTEXFORMATE m_formate;
-        s32 m_width;
-        s32 m_height;
-        bool m_minmap;
-    };
 
     //
     class SVTexMgr : public SVGBaseEx {

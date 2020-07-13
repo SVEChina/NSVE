@@ -26,7 +26,9 @@ namespace sv {
 
         virtual void destroy(SVRendererPtr _renderer);
         
-        virtual bool active(SVRendererPtr _render);
+        virtual bool active(SVRendererPtr _renderer);
+        
+        virtual s32 process(SVRendererPtr _renderer);
 
     private:
         static u32 _loadShader(SVInstPtr _app,cptr8 _filename,s32 _shaderType);

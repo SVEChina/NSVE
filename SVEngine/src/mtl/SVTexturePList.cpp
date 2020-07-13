@@ -73,10 +73,10 @@ void SVTexturePList::destroy(SVRendererPtr _renderer){
 }
 
 void SVTexturePList::refreshParam(){
-    SVRTexGLPlistPtr t_tmp = std::dynamic_pointer_cast<SVRTexGLPlist>(m_restex);
-    if (t_tmp) {
-        t_tmp->refreshParam();
-    }
+//    SVRTexGLPlistPtr t_tmp = std::dynamic_pointer_cast<SVRTexGLPlist>(m_restex);
+//    if (t_tmp) {
+//        t_tmp->refreshParam();
+//    }
 }
 
 void SVTexturePList::apply(){
@@ -92,25 +92,25 @@ void SVTexturePList::apply(void *data){
 }
 
 void SVTexturePList::commit(){
-    SVRTexGLPlistPtr t_tmp = std::dynamic_pointer_cast<SVRTexGLPlist>(m_restex);
-    if (t_tmp) {
-        t_tmp->commit();
-    }
+//    SVRTexGLPlistPtr t_tmp = std::dynamic_pointer_cast<SVRTexGLPlist>(m_restex);
+//    if (t_tmp) {
+//        t_tmp->commit();
+//    }
 }
 
 SVRect *SVTexturePList::getSrcRect() {
-    SVRTexGLPlistPtr t_tmp = std::dynamic_pointer_cast<SVRTexGLPlist>(m_restex);
-    if (t_tmp) {
-        return t_tmp->getSrcRect();
-    }
+//    SVRTexGLPlistPtr t_tmp = std::dynamic_pointer_cast<SVRTexGLPlist>(m_restex);
+//    if (t_tmp) {
+//        return t_tmp->getSrcRect();
+//    }
     return nullptr;
 }
 
 SVRect *SVTexturePList::getDstRect() {
-    SVRTexGLPlistPtr t_tmp = std::dynamic_pointer_cast<SVRTexGLPlist>(m_restex);
-    if (t_tmp) {
-        return t_tmp->getDstRect();
-    }
+//    SVRTexGLPlistPtr t_tmp = std::dynamic_pointer_cast<SVRTexGLPlist>(m_restex);
+//    if (t_tmp) {
+//        return t_tmp->getDstRect();
+//    }
     return nullptr;
 }
 
@@ -124,10 +124,10 @@ void SVTexturePList::bindTexset(SVTextureSetPtr _texset){
 }
 
 bool SVTexturePList::getbLoad(){
-    SVRTexGLPlistPtr t_tmp = std::dynamic_pointer_cast<SVRTexGLPlist>(m_restex);
-    if (t_tmp) {
-        return t_tmp->getbLoad();
-    }
+//    SVRTexGLPlistPtr t_tmp = std::dynamic_pointer_cast<SVRTexGLPlist>(m_restex);
+//    if (t_tmp) {
+//        return t_tmp->getbLoad();
+//    }
     return SVTexture::getbLoad();
 }
 
@@ -149,30 +149,30 @@ void SVTexturePList::setSrch(bool _srch){
 
 void SVTexturePList::_updateData(){
     SVTexture::_updateData();
-    SVRTexGLPlistPtr t_tmp = std::dynamic_pointer_cast<SVRTexGLPlist>(m_restex);
-    if (t_tmp) {
-        t_tmp->rot = m_rot;
-        t_tmp->trim = m_trim;
-        t_tmp->srcw = m_srcw;
-        t_tmp->srch = m_srch;
-        if (m_bApply) {
-//            t_tmp->apply(m_pApplyData->getData());
-            m_bApply = false;
-        }
-        if (m_bApplyData) {
-            m_bApplyData = false;
-            t_tmp->apply();
-        }
-        if (m_btexSet) {
-            m_btexSet = false;
-            SVRResPtr t_tmp_tex = m_texset->getResTex();
-            SVRTexGLSetPtr t_tmp_texset = std::dynamic_pointer_cast<SVRTexGLSet>(m_restex);
-            if (t_tmp && t_tmp_texset) {
-                t_tmp->bindTexset(t_tmp_texset);
-            }
-        }
-        
-    }
+//    SVRTexGLPlistPtr t_tmp = std::dynamic_pointer_cast<SVRTexGLPlist>(m_restex);
+//    if (t_tmp) {
+//        t_tmp->rot = m_rot;
+//        t_tmp->trim = m_trim;
+//        t_tmp->srcw = m_srcw;
+//        t_tmp->srch = m_srch;
+//        if (m_bApply) {
+////            t_tmp->apply(m_pApplyData->getData());
+//            m_bApply = false;
+//        }
+//        if (m_bApplyData) {
+//            m_bApplyData = false;
+//            t_tmp->apply();
+//        }
+//        if (m_btexSet) {
+//            m_btexSet = false;
+//            SVRResPtr t_tmp_tex = m_texset->getResTex();
+//            SVRTexGLSetPtr t_tmp_texset = std::dynamic_pointer_cast<SVRTexGLSet>(m_restex);
+//            if (t_tmp && t_tmp_texset) {
+//                t_tmp->bindTexset(t_tmp_texset);
+//            }
+//        }
+//
+//    }
 }
 
 
@@ -198,22 +198,6 @@ void SVTextureSet::init(cptr8 _name, s32 _type, s32 _width, s32 _height, s32 _in
 
 void SVTextureSet::create(SVRendererPtr _renderer){
     SVRendererPtr t_renderBasePtr = mApp->getRenderer();
-    SVRendererGLPtr t_renderGLPtr = std::dynamic_pointer_cast<SVRendererGL>(t_renderBasePtr);
-    if (t_renderGLPtr) {
-        //渲染器类型E_RENDERER_GLES,
-        m_restex = MakeSharedPtr<SVRTexGLSet>(mApp);
-        
-    }
-    SVRendererVKPtr t_rendeVKPtr = std::dynamic_pointer_cast<SVRendererVK>(t_renderBasePtr);
-    if (t_rendeVKPtr) {
-        //渲染器类型E_RENDERER_VUNKAN,
-        
-    }
-//    SVRendererMetalPtr t_rendeMetalPtr = std::dynamic_pointer_cast<SVRendererMetal>(t_renderBasePtr);
-//    if (t_rendeMetalPtr) {
-//        //渲染器类型E_RENDERER_METAL,
-//        
-//    }
 }
 
 void SVTextureSet::destroy(SVRendererPtr _renderer){

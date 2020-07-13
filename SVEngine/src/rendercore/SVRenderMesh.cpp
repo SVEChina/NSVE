@@ -16,10 +16,14 @@ using namespace sv;
 SVRenderMesh::SVRenderMesh(SVInstPtr _app)
 :SVGBaseEx(_app){
     m_res_buffer = nullptr;
+    m_use_index = false;
+    m_use_instance = false;
 }
 
 SVRenderMesh::~SVRenderMesh() {
     m_res_buffer = nullptr;
+    m_use_index = false;
+    m_use_instance = false;
 }
 
 void SVRenderMesh::bindRes(SVRBufferPtr _res) {
@@ -32,6 +36,32 @@ void SVRenderMesh::unbindRes() {
 
 SVRBufferPtr SVRenderMesh::getResBuffer() {
     return m_res_buffer;
+}
+
+bool SVRenderMesh::useIndex() {
+    return m_use_index;
+}
+
+BufferDsp* SVRenderMesh::getIndexDsp() {
+    return &m_index_dsp;
+}
+
+s32 SVRenderMesh::getStreamNum() {
+    return 0;
+}
+
+BufferDsp* SVRenderMesh::getStreamDsp(s32 _index) {
+    if(_index<m_vert_dsp.size())
+        return &m_vert_dsp[_index];
+    return nullptr;
+}
+
+bool SVRenderMesh::useInstance() {
+    return m_use_instance;
+}
+
+BufferDsp* SVRenderMesh::getInstanceDsp() {
+    return &m_instance_dsp;
 }
 
 //

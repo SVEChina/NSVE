@@ -14,7 +14,7 @@ using namespace sv;
 
 SVRTex::SVRTex(SVInstPtr _app)
 :SVRRes(_app){
-    m_texLock = MakeSharedPtr<SVLock>();
+    m_texLock = MakeSharedPtr<SVLockSpin>();
 }
 
 SVRTex:: ~SVRTex(){
@@ -27,7 +27,7 @@ void SVRTex::create(SVRendererPtr _renderer){
 void SVRTex::destroy(SVRendererPtr _renderer){
 }
 
-void SVRTex::setTexData(void *_data, s32 _len){
+void SVRTex::setTexData(SVDataSwapPtr _data){
 }
 
 void SVRTex::commit(){

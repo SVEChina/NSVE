@@ -60,11 +60,10 @@ namespace sv {
         
         virtual void destroy(SVRendererPtr _renderer);
         
-        virtual void render(SVRendererPtr _renderer);
+        virtual s32 process(SVRendererPtr _renderer);
         
-        virtual void updateConf(RENDERMESHCONF& _conf);
+    protected:
         
-        virtual void updateData(RENDERMESHDATA& _data);
     };
         
     

@@ -28,6 +28,17 @@ SVRBufferMetal::~SVRBufferMetal() {
 void SVRBufferMetal::create(SVRendererPtr _renderer) {
     SVRendererMetalPtr t_rm = std::dynamic_pointer_cast<SVRendererMetal>(_renderer);
     SVRenderMeshPtr t_rendermesh = std::dynamic_pointer_cast<SVRenderMesh>(m_logic_obj);
+    if(t_rm && t_rendermesh) {
+//        for(s32 i=0;i<_rmesh->m_vertPool.size();i++) {
+//            s32 t_off = 0;
+//            id<MTLBuffer> posBuf = [t_rm->m_pDevice newBufferWithBytes:_rmesh->m_vertPool[i].m_pdata
+//                                                     length: _rmesh->m_vertPool[i].m_size
+//                                                    options: MTLResourceStorageModeShared ];
+//            m_dbufs.append(posBuf);
+//            [t_tar->m_cmdEncoder setVertexBuffer:posBuf offset:t_off atIndex:i];
+//        }
+        m_exist = true;
+    }
 }
 
 void SVRBufferMetal::destroy(SVRendererPtr _renderer) {

@@ -7,10 +7,9 @@
 
 #include "SVRTexMetal.h"
 #include "SVRendererMetal.h"
+#include "../../mtl/SVTexture.h"
 #include "../../app/SVInst.h"
 #include "../../mtl/SVMtlDef.h"
-#include "../../mtl/SVTexMgr.h"
-#include "../../mtl/SVTexture.h"
 #include "../../base/SVDataChunk.h"
 #include "../../file/SVFileMgr.h"
 #include "../../base/SVDataSwap.h"
@@ -24,7 +23,6 @@ using namespace sv;
 SVRTexMetal::SVRTexMetal(SVInstPtr _app)
 :SVRTex(_app)
 ,m_srcTex(nullptr){
-    
 }
 
 SVRTexMetal::~SVRTexMetal(){
@@ -32,26 +30,28 @@ SVRTexMetal::~SVRTexMetal(){
 
 void SVRTexMetal:: create(SVRendererPtr _renderer) {
     SVRTex::create(_renderer);
-    SVRendererMetalPtr t_rendeMetalPtr = std::dynamic_pointer_cast<SVRendererMetal>(_renderer);
-    if (t_rendeMetalPtr) {
-        MTLTextureDescriptor *dsp = [MTLTextureDescriptor texture2DDescriptorWithPixelFormat:MTLPixelFormatRGBA8Unorm width:m_width height:m_height mipmapped:m_enableMipMap];
-        m_srcTex = [t_rendeMetalPtr->m_pDevice newTextureWithDescriptor:dsp]; // 创建纹理
-        MTLRegion region;
-        region.origin.x = 0;
-        region.origin.y = 0;
-        region.origin.z = 0;
-        region.size.width = m_width;
-        region.size.height = m_height;
-        region.size.depth = 1;
+    SVRendererMetalPtr t_rm = std::dynamic_pointer_cast<SVRendererMetal>(_renderer);
+    SVTexturePtr t_texture = std::dynamic_pointer_cast<SVTexture>(m_logic_obj);
+    if(t_rm && t_texture) {
+        
     }
+//    if (t_rendeMetalPtr) {
+//        MTLTextureDescriptor *dsp = [MTLTextureDescriptor texture2DDescriptorWithPixelFormat:MTLPixelFormatRGBA8Unorm width:m_width height:m_height mipmapped:m_enableMipMap];
+//        m_srcTex = [t_rendeMetalPtr->m_pDevice newTextureWithDescriptor:dsp]; // 创建纹理
+//        MTLRegion region;
+//        region.origin.x = 0;
+//        region.origin.y = 0;
+//        region.origin.z = 0;
+//        region.size.width = m_width;
+//        region.size.height = m_height;
+//        region.size.depth = 1;
+//    }
 }
 
 void SVRTexMetal::destroy(SVRendererPtr _renderer) {
     SVRTex::destroy(_renderer);
-    if(m_id>0){
-        //        glDeleteTextures(1, &m_id);
-        //        m_id = 0;
-    }
+//    if(m_id>0){
+//    }
 }
 
 void SVRTexMetal::commit() {
@@ -69,7 +69,7 @@ void SVRTexMetal::commit() {
     m_texLock->unlock();
 }
 
-void SVRTexMetal::setTexData(void *_data, s32 _len){
+void SVRTexMetal::setTexData(SVDataSwapPtr _data){
     m_texLock->lock();
     //    if( _data && _len>0 ) {
     //        SVDataSwapPtr t_pDataSwap = MakeSharedPtr<SVDataSwap>();
@@ -77,17 +77,4 @@ void SVRTexMetal::setTexData(void *_data, s32 _len){
     //        setData(t_pDataSwap);
     //    }
     m_texLock->unlock();
-}
-
-
-/*
- metal texture
- */
-
-u32 SVRTexMetal::getTexID(){
-    return m_id;
-}
-
-bool SVRTexMetal::getbLoad() {
-    return m_bLoad;
 }

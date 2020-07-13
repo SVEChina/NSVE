@@ -11,13 +11,20 @@
 #include "SVMtlDef.h"
 #include "../rendercore/SVRTex.h"
 #include "../rendercore/SVRenderDef.h"
-#include "SVTexMgr.h"
 
 namespace sv {
     
     /*
      逻辑层面的纹理
      */
+
+    struct SVTexParam {
+        SVTEXKIND m_kind;
+        SVTEXFORMATE m_formate;
+        s32 m_width;
+        s32 m_height;
+        bool m_minmap;
+    };
 
     class SVTexture : public SVGBaseEx {
     public:

@@ -52,6 +52,8 @@ namespace sv {
             //处理mesh
             virtual void processMesh(SVRenderMeshPtr _mesh);
             
+            u32 m_cur_program;  //当前的program
+            
         public:
             //提交纹理
             virtual void submitTex(u32 _channel,TexUnit& _unit);

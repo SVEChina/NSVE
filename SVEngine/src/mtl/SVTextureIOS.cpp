@@ -65,19 +65,19 @@ void SVTextureIOS::destroy(SVRendererPtr _renderer){
 
 void SVTextureIOS::pushData(u8* _srcPtr,s32 _w,s32 _h,s32 _pixelformate){
 #ifdef SV_IOS
-    SVRTexGLiOSPtr t_tmp = std::dynamic_pointer_cast<SVRTexGLiOS>(m_restex);
-    if (t_tmp) {
-        t_tmp->pushData(_srcPtr, _w, _h, _pixelformate);
-    }
+//    SVRTexGLiOSPtr t_tmp = std::dynamic_pointer_cast<SVRTexGLiOS>(m_restex);
+//    if (t_tmp) {
+//        t_tmp->pushData(_srcPtr, _w, _h, _pixelformate);
+//    }
 #endif
 }
 
 void SVTextureIOS::fetchData(u8* _dstPtr,s32 _w,s32 _h) {
 #ifdef SV_IOS
-    SVRTexGLiOSPtr t_tmp = std::dynamic_pointer_cast<SVRTexGLiOS>(m_restex);
-    if (t_tmp) {
-        t_tmp->fetchData(_dstPtr, _w, _h);
-    }
+//    SVRTexGLiOSPtr t_tmp = std::dynamic_pointer_cast<SVRTexGLiOS>(m_restex);
+//    if (t_tmp) {
+//        t_tmp->fetchData(_dstPtr, _w, _h);
+//    }
 #endif
 }
 

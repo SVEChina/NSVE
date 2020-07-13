@@ -10,26 +10,34 @@
 
 #include "SVRBuffer.h"
 #include "SVRenderDef.h"
+#include "../core/SVVertDef.h"
 #include "../mtl/SVShaderMgr.h"
 #include "../base/SVPreDeclare.h"
+#include <vector>
 
 namespace sv {
 
     //定点说一句
-    struct dataTag {
-        void* m_pdata;      //数据指针
-        s32 m_size;         //数据大小
-        s32 m_vertdsp;      //顶点描述
-        void* m_pdatad_up;  //更新的数据
-        s32 m_size_up;      //更新数据大小
-        s32 m_order;
+    struct BufferDsp {
+        BufferDsp() {
+            _bufData = nullptr;
+            _bufSize = 0;
+            _bufType = E_BFT_STATIC_DRAW;
+            _bufVertDsp = E_VF_BASE;
+        };
+        //数据
+        SVDataSwapPtr _bufData;
+        //数据尺寸
+        s32 _bufSize;
+        //数据类型
+        BUFFERTYPE _bufType;
+        //数据顶点描述
+        VFTYPE _bufVertDsp;
     };
 
     /*
      逻辑和渲染之间的桥梁，其实就是数据和数据描述
      */
-
-    //存描述信息和数据
 
     class SVRenderMesh : public SVGBaseEx {
     public:
@@ -43,6 +51,24 @@ namespace sv {
     
         virtual void render(SVRendererPtr _renderer);
         
+        //是否使用索引
+        bool useIndex();
+        
+        //获取索引数据描述
+        BufferDsp* getIndexDsp();
+        
+        //获取流数目
+        s32 getStreamNum();
+        
+        //获取流数据描述
+        BufferDsp* getStreamDsp(s32 _index);
+        
+        bool useInstance();
+        
+        //获取多实例描述
+        BufferDsp* getInstanceDsp();
+        
+        //
         void setIndexPoolType(u32 itype);
         
         void setVertexPoolType(u32 vtype);
@@ -64,12 +90,12 @@ namespace sv {
         void createMesh();
         
     public:
+        bool m_use_index;
+        bool m_use_instance;
         //索引数据
-        dataTag m_index;
-        //顶点数据
-        SVArray<dataTag> m_vertPool;
-        //更新数据
-        dataTag m_vert_up;
+        BufferDsp m_index_dsp;
+        std::vector<BufferDsp> m_vert_dsp;
+        BufferDsp m_instance_dsp;
        
     public:
         void bindRes(SVRBufferPtr _res);

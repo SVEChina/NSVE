@@ -20,9 +20,3 @@ SVRRes::SVRRes(SVInstPtr _app)
 SVRRes::~SVRRes(){
     m_logic_obj = nullptr;
 }
-
-void SVRRes::create(SVRendererPtr _renderer){
-}
-
-void SVRRes::destroy(SVRendererPtr _renderer){
-}

@@ -122,21 +122,16 @@ void SVRenderer::pushFbo(SVRFboPtr _fbo) {
 }
 
 void SVRenderer::popFbo() {
-    
 }
 
 //处理技术
-void SVRenderer::processTech(SVRTechPtr _tech) {
-}
+void SVRenderer::processTech(SVRTechPtr _tech) {}
            
 //处理材质
-void SVRenderer::processMtl(SVMtlCorePtr _mtl) {
-}
+void SVRenderer::processMtl(SVMtlCorePtr _mtl) {}
            
 //处理mesh
-void SVRenderer::processMesh(SVRenderMeshPtr _mesh) {
-    
-}
+void SVRenderer::processMesh(SVRenderMeshPtr _mesh) {}
 
 SVRenderTexturePtr SVRenderer::getRenderTexture() {
     return m_pRenderTex;

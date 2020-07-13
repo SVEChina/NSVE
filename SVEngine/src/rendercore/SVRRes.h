@@ -10,6 +10,7 @@
 
 #include "../base/SVGBase.h"
 #include "SVRenderDeclare.h"
+#include "../work/SVWorkDeclare.h"
 #include "SVRenderDef.h"
 
 //渲染资源对象
@@ -22,9 +23,11 @@ namespace sv {
         
         virtual ~SVRRes();
         
-        virtual void create(SVRendererPtr _renderer);
+        virtual void create(SVRendererPtr _renderer) {}
         
-        virtual void destroy(SVRendererPtr _renderer);
+        virtual void destroy(SVRendererPtr _renderer) {}
+        
+        virtual s32 process(SVRendererPtr _renderer) { return -1; }
         
         //
         SVObjectPtr m_logic_obj;

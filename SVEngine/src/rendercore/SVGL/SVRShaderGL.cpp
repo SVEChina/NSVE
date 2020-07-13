@@ -6,9 +6,11 @@
 //
 
 #include "SVRShaderGL.h"
+#include "SVRendererGL.h"
 #include "../../mtl/SVShader.h"
 #include "../../app/SVInst.h"
 #include "../../file/SVFileMgr.h"
+
 
 using namespace sv;
 
@@ -251,10 +253,19 @@ void SVRShaderGL::destroy(SVRendererPtr _renderer) {
     }
 }
 
-bool SVRShaderGL::active(SVRendererPtr _render) {
-    if(m_programm>0) {
+bool SVRShaderGL::active(SVRendererPtr _renderer) {
+    SVRendererGLPtr t_rm = std::dynamic_pointer_cast<SVRendererGL>(_renderer);
+    if(t_rm && m_programm>0) {
         glUseProgram(m_programm);
+        t_rm->m_cur_program = m_programm;
         return true;
     }
     return false;
+}
+
+s32 SVRShaderGL::process(SVRendererPtr _renderer) {
+    if( active(_renderer) ) {
+        return 0;
+    }
+    return -1;
 }

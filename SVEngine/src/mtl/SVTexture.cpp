@@ -75,18 +75,18 @@ void SVTexture::commit(){
 }
 
 bool SVTexture::getbLoad(){
-    if (m_restex) {
-        return m_restex->getbLoad();
-    }
+//    if (m_restex) {
+//        return m_restex->getbLoad();
+//    }
     return 0;
 }
 
 void SVTexture::_updateData(){
-    if (m_restex && m_bData) {
-        m_restex->setTexData(m_pData->getData(), m_pData->getSize());
-        m_pData->reback();
-        m_bData = false;
-    }
+//    if (m_restex && m_bData) {
+//        m_restex->setTexData(m_pData->getData(), m_pData->getSize());
+//        m_pData->reback();
+//        m_bData = false;
+//    }
 }
 
 void SVTexture::bindRes(SVRTexPtr _res) {

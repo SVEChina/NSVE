@@ -6,9 +6,9 @@
 //
 
 #include "SVRTexGL.h"
+#include "../../mtl/SVTexture.h"
 #include "../../third/rapidjson/document.h"
 #include "../../app/SVInst.h"
-#include "../../base/SVPreDeclare.h"
 #include "../../base/SVDataSwap.h"
 #include "../../work/SVTdCore.h"
 #include "../../base/SVDataChunk.h"
@@ -24,370 +24,286 @@ using namespace sv;
 
 SVRTexGL::SVRTexGL(SVInstPtr _app)
 :SVRTex(_app){
-    m_bLoad = false;
     m_pData = nullptr;
-    m_enableMipMap = false;
-    m_name = "";
-    m_id = 0;
-    m_width = 1;
-    m_height = 1;
-    m_type = GL_TEXTURE_2D;
-    m_informate = GL_RGBA;
-    m_dataformate = GL_RGBA;
 }
 
 SVRTexGL::~SVRTexGL(){
     SV_LOG_INFO("SVRTexGL destroy %d ",m_uid);
 }
 
-void SVRTexGL:: create(SVRendererPtr _renderer) {
+void SVRTexGL::create(SVRendererPtr _renderer) {
     SVRRes::create(_renderer);
-    SV_LOG_INFO("SVRTexGL create %d ",m_uid);
-    if( m_id == 0 ){
-        m_bLoad = true;
-        glGenTextures(1, &m_id);
-        glBindTexture(GL_TEXTURE_2D, m_id);
-        if(m_pData){
-            glTexImage2D(GL_TEXTURE_2D,
-                         0,
-                         m_informate,
-                         m_width,
-                         m_height,
-                         0,
-                         m_dataformate,
-                         GL_UNSIGNED_BYTE,
-                         m_pData->getData());
-            
-        }else{
-            glTexImage2D(GL_TEXTURE_2D,
-                         0,
-                         m_informate,
-                         m_width,
-                         m_height,
-                         0,
-                         m_dataformate,
-                         GL_UNSIGNED_BYTE,
-                         nullptr);
-        }
-        m_pData = nullptr;
-        if (m_enableMipMap) {
-            glGenerateMipmap(GL_TEXTURE_2D);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-            
-        }else{
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
-        }
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    SVRendererGLPtr t_rm = std::dynamic_pointer_cast<SVRendererGL>(_renderer);
+    SVTexturePtr t_texture = std::dynamic_pointer_cast<SVTexture>(m_logic_obj);
+    if(t_rm && t_texture) {
+        SV_LOG_INFO("SVRTexGL create %d ",m_uid);
+//        if( m_id == 0 ){
+//            m_bLoad = true;
+//            glGenTextures(1, &m_id);
+//            glBindTexture(GL_TEXTURE_2D, m_id);
+//            if(m_pData){
+//                glTexImage2D(GL_TEXTURE_2D,
+//                             0,
+//                             m_informate,
+//                             m_width,
+//                             m_height,
+//                             0,
+//                             m_dataformate,
+//                             GL_UNSIGNED_BYTE,
+//                             m_pData->getData());
+//
+//            }else{
+//                glTexImage2D(GL_TEXTURE_2D,
+//                             0,
+//                             m_informate,
+//                             m_width,
+//                             m_height,
+//                             0,
+//                             m_dataformate,
+//                             GL_UNSIGNED_BYTE,
+//                             nullptr);
+//            }
+//            m_pData = nullptr;
+//            if (m_enableMipMap) {
+//                glGenerateMipmap(GL_TEXTURE_2D);
+//                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+//
+//            }else{
+//                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
+//            }
+//            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+//            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+//            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+//        }
+        m_exist = true;
     }
 }
 
 void SVRTexGL::destroy(SVRendererPtr _renderer) {
     SVRRes::destroy(_renderer);
-    if(m_id>0){
-        glDeleteTextures(1, &m_id);
-        m_id = 0;
-    }
+//    if(m_res_id>0){
+//        glDeleteTextures(1, &m_res_id);
+//        m_res_id = 0;
+//    }
 }
 
 void SVRTexGL::commit() {
     m_texLock->lock();
-    if (m_pData && m_bLoad) {
-        //更新数据
-        s32 bpp = 1;
-        if ( m_informate == GL_RGBA ){
-            bpp = 4;
-        }else if ( m_informate == GL_RGB ){
-            bpp = 3;
-        }else if ( m_informate == GL_LUMINANCE_ALPHA ){
-            bpp = 2;
-        }
-        s32 t_dataLen = m_width*m_height*bpp;
-        if (m_pData->getSize() == t_dataLen) {
-            m_pData->lockData();
-            glBindTexture(GL_TEXTURE_2D, m_id);
-            glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, m_width, m_height, m_informate,GL_UNSIGNED_BYTE,m_pData->getData());
-            m_pData->unlockData();
-        }else{
-            SV_LOG_ERROR("SVRTexGL: commit pixel data error");
-        }
-        m_pData = nullptr;
-    }
+//    if (m_pData && m_bLoad) {
+//        //更新数据
+//        s32 bpp = 1;
+//        if ( m_informate == GL_RGBA ){
+//            bpp = 4;
+//        }else if ( m_informate == GL_RGB ){
+//            bpp = 3;
+//        }else if ( m_informate == GL_LUMINANCE_ALPHA ){
+//            bpp = 2;
+//        }
+//        s32 t_dataLen = m_width*m_height*bpp;
+//        if (m_pData->getSize() == t_dataLen) {
+//            m_pData->lockData();
+//            glBindTexture(GL_TEXTURE_2D, m_id);
+//            glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, m_width, m_height, m_informate,GL_UNSIGNED_BYTE,m_pData->getData());
+//            m_pData->unlockData();
+//        }else{
+//            SV_LOG_ERROR("SVRTexGL: commit pixel data error");
+//        }
+//        m_pData = nullptr;
+//    }
     m_texLock->unlock();
 }
 
-void SVRTexGL::setTexData(void *_data, s32 _len){
+void SVRTexGL::setTexData(SVDataSwapPtr _data){
     m_texLock->lock();
-    if( _data && _len>0 ) {
-//        SVDataSwapPtr t_pDataSwap = MakeSharedPtr<SVDataSwap>();
-//        t_pDataSwap->writeData(_data, _len);
-//        setData(t_pDataSwap);
-    }
+//    if( _data && _len>0 ) {
+////        SVDataSwapPtr t_pDataSwap = MakeSharedPtr<SVDataSwap>();
+////        t_pDataSwap->writeData(_data, _len);
+////        setData(t_pDataSwap);
+//    }
     m_texLock->unlock();
 }
 
-//////
-SVRTexGLWithTexID::SVRTexGLWithTexID(SVInstPtr _app, s32 _id):SVRTexGL(_app){
-    m_id = _id;
-}
-
-SVRTexGLWithTexID::~SVRTexGLWithTexID(){
-    
-}
-
-void SVRTexGLWithTexID:: create(SVRendererPtr _renderer) {
-    SVRRes::create(_renderer);
-    m_bLoad = true;
-    glBindTexture(GL_TEXTURE_2D, m_id);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-}
-
-void SVRTexGLWithTexID::destroy(SVRendererPtr _renderer) {
-    SVRRes::destroy(_renderer);
-    if(m_id>0){
-        m_id = 0;
-    }
-}
-
-void SVRTexGLWithTexID::setTexID(u32 _texID){
-    m_id = _texID;
-    glBindTexture(GL_TEXTURE_2D, m_id);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-}
-
-//////
-SVRTexGLPlist::SVRTexGLPlist(SVInstPtr mApp)
-        : SVRTexGL(mApp) {
-    m_type = 3;
-    rot = false;    //是否旋转
-    trim = false;   //是否旋转
-    srcw = 128;     //原有纹理的宽度
-    srch = 128;     //原有纹理的高度
-    m_pTexset = nullptr;
-}
-
-SVRTexGLPlist::~SVRTexGLPlist() {
-    unbindTexset();
-}
-
-void SVRTexGLPlist::refreshParam(){
-    if(m_pTexset){
-        m_id = m_pTexset->getTexID();  //同步纹理ID
-        m_width = m_pTexset->getwidth();
-        m_height = m_pTexset->getheight();
-    }
-}
-
-void SVRTexGLPlist::apply(){
-    if(m_pTexset){
-        //m_pTexset->apply();
-        refreshParam();
-    }
-}
-
-void SVRTexGLPlist::apply(void *data){
-    if(m_pTexset){
-        //m_pTexset->apply(data);
-        refreshParam();
-    }
-}
-
-void SVRTexGLPlist::commit() {
-    if(m_pTexset){
-        m_pTexset->commit();
-        refreshParam();
-    }
-}
-
-bool SVRTexGLPlist::getbLoad(){
-    if(m_pTexset){
-        return m_pTexset->getbLoad();
-    }
-    return SVRTexGL::getbLoad();
-}
-
-void SVRTexGLPlist::bindTexset(SVRTexGLSetPtr _texset){
-    if(m_pTexset!=_texset){
-        m_pTexset = _texset;
-    }
-}
-
-void SVRTexGLPlist::unbindTexset(){
-    if(m_pTexset){
-        m_pTexset = nullptr;
-    }
-}
-
-SVRect *SVRTexGLPlist::getSrcRect() {
-    return &m_srcRect;
-}
-
-SVRect *SVRTexGLPlist::getDstRect() {
-    return &m_dstRect;
-}
-
+////////
+//SVRTexGLWithTexID::SVRTexGLWithTexID(SVInstPtr _app, s32 _id):SVRTexGL(_app){
+//    m_id = _id;
+//}
 //
-SVRTexGLSet::SVRTexGLSet(SVInstPtr mApp)
-        : SVRTexGL(mApp) {
-    m_type = 2;
-}
-
-SVRTexGLSet::~SVRTexGLSet() {
-}
-
-SVRTexGLiOS::SVRTexGLiOS(SVInstPtr _app): SVRTexGL(_app)
-{
-#ifdef SV_IOS
-    m_pTexCacheRef = nullptr;
-    m_pTexRef = nullptr;
-    m_pPixelBuf = nullptr;
-#endif
-}
-
-SVRTexGLiOS::~SVRTexGLiOS() {
-}
-
-void SVRTexGLiOS::create(SVRendererPtr _renderer){
-    if(!_renderer)
-        return ;
-    SVRRes::create(_renderer);
-#ifdef SV_IOS
-//    SVCtxBasePtr t_contextbase = _renderer->getRenderContext();
-//    CVEAGLContext t_glcontext = CVEAGLContext((__bridge id)t_contextbase->getContext());
-//    CVReturn t_flag = CVOpenGLESTextureCacheCreate(nullptr,
-//                                                   nullptr,
-//                                                   t_glcontext,
-//                                                   nullptr,
-//                                                   &m_pTexCacheRef);
-//    if (t_flag) {
-//        SV_LOG_ERROR("SVTextureIOS create texture cache failed");
-//    }
-//    const void *keys[] = {
-//        kCVPixelBufferOpenGLESCompatibilityKey,
-//        kCVPixelBufferIOSurfacePropertiesKey,
-//        kCVPixelBufferBytesPerRowAlignmentKey,
-//    };
-//    const void *values[] = {
-//        (__bridge const void *)([NSNumber numberWithBool:YES]),
-//        (__bridge const void *)([NSDictionary dictionary]),
-//        (__bridge const void *)([NSNumber numberWithInteger:16])
-//    };
-//    CFDictionaryRef opDic = CFDictionaryCreate(NULL, keys,
-//                                               values, 2,
-//                                               NULL, NULL);
-//    t_flag = CVPixelBufferCreate(kCFAllocatorDefault,
-//                                 m_width,
-//                                 m_height,
-//                                 kCVPixelFormatType_32BGRA,
-//                                 opDic,
-//                                 &m_pPixelBuf);
-//    if( t_flag == 0) {
+//SVRTexGLWithTexID::~SVRTexGLWithTexID(){
 //
-//    }
-//    t_flag = CVOpenGLESTextureCacheCreateTextureFromImage(nullptr,
-//                                                          m_pTexCacheRef,
-//                                                          m_pPixelBuf,
-//                                                          nullptr,
-//                                                          GL_TEXTURE_2D,
-//                                                          m_informate,
-//                                                          m_width,
-//                                                          m_height,
-//                                                          m_dataformate,
-//                                                          GL_UNSIGNED_BYTE,
-//                                                          0,
-//                                                          &m_pTexRef);
-//    if(t_flag == 0){
-//        m_id = CVOpenGLESTextureGetName(m_pTexRef);
-//        glBindTexture(GL_TEXTURE_2D , m_id);
-//        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-//        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-//        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-//        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-//        glBindTexture(GL_TEXTURE_2D, 0);
-//    }
-//    CVOpenGLESTextureCacheFlush(m_pTexCacheRef,0);
-//    CFRelease(opDic);
+//}
+//
+//void SVRTexGLWithTexID:: create(SVRendererPtr _renderer) {
+//    SVRRes::create(_renderer);
 //    m_bLoad = true;
-#endif
-}
-
-void SVRTexGLiOS::destroy(SVRendererPtr _renderer){
-#ifdef SV_IOS
-    if(m_pPixelBuf){
-        CFRelease(m_pPixelBuf);
-        m_pPixelBuf = nullptr;
-    }
-    if(m_pTexRef){
-        CFRelease(m_pTexRef);
-        m_pTexRef = nullptr;
-    }
-    if(m_pTexCacheRef){
-        CVOpenGLESTextureCacheFlush(m_pTexCacheRef,0);
-        CFRelease(m_pTexCacheRef);
-        m_pTexCacheRef = nullptr;
-    }
-#endif
-    SVRRes::destroy(_renderer);
-}
-
-void SVRTexGLiOS::pushData(u8* _srcPtr,s32 _w,s32 _h,s32 _pixelformate){
-#ifdef SV_IOS
-    if( (!m_pPixelBuf) || (!m_pTexRef) || (!m_pTexCacheRef) || (_srcPtr == nullptr) )
-        return;
-    if(CVPixelBufferLockBaseAddress(m_pPixelBuf, 0) == kCVReturnSuccess){
-        s32 width = (s32)CVPixelBufferGetWidth(m_pPixelBuf);
-        s32 height = (s32)CVPixelBufferGetHeight(m_pPixelBuf);
-        s32 bytesPerRow = (s32)CVPixelBufferGetBytesPerRowOfPlane(m_pPixelBuf, 0);
-        u8* _dstPtr = (u8*)CVPixelBufferGetBaseAddress(m_pPixelBuf);
-        //判断从 CVImageBufferRef 里取出来的数据是否带panding
-        if (bytesPerRow/4 - width !=0) {
-            //带panding，要处理
-            s32 a = 0;
-            for (s32 i = 0; i < height; i++) {
-                memcpy(_dstPtr +  a, _srcPtr + i * width * 4, width*4);
-                a += bytesPerRow;
-            }
-        }else{
-            memcpy(_dstPtr,_srcPtr,_w*_h*4);
-        }
-        
-        CVPixelBufferUnlockBaseAddress(m_pPixelBuf, 0);
-    }
-#endif
-}
-
-void SVRTexGLiOS::fetchData(u8* _dstPtr,s32 _w,s32 _h) {
-#ifdef SV_IOS
-    if( (!m_pPixelBuf) || (!m_pTexRef) || (!m_pTexCacheRef) || (_dstPtr == nullptr))
-        return;
-    if(CVPixelBufferLockBaseAddress(m_pPixelBuf, 0) == kCVReturnSuccess){
-        s32 width = (s32)CVPixelBufferGetWidth(m_pPixelBuf);
-        s32 height = (s32)CVPixelBufferGetHeight(m_pPixelBuf);
-        s32 bytesPerRow = (s32)CVPixelBufferGetBytesPerRowOfPlane(m_pPixelBuf, 0);
-        u8* t_srtPtr = (u8*)CVPixelBufferGetBaseAddress(m_pPixelBuf);
-        //判断从 CVImageBufferRef 里取出来的数据是否带panding
-        if (bytesPerRow/4 - width !=0) {
-            //带panding，要处理
-            s32 a = 0;
-            for (s32 i = 0; i < height; i++) {
-                memcpy(_dstPtr + i * width * 4 , t_srtPtr + a, width*4);
-                a += bytesPerRow;
-            }
-        }else{
-            memcpy(_dstPtr,t_srtPtr,_w*_h*4);
-        }
-
-        CVPixelBufferUnlockBaseAddress(m_pPixelBuf, 0);
-    }
-#endif
-}
+//    glBindTexture(GL_TEXTURE_2D, m_id);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+//}
+//
+//void SVRTexGLWithTexID::destroy(SVRendererPtr _renderer) {
+//    SVRRes::destroy(_renderer);
+//    if(m_id>0){
+//        m_id = 0;
+//    }
+//}
+//
+//void SVRTexGLWithTexID::setTexID(u32 _texID){
+//    m_id = _texID;
+//    glBindTexture(GL_TEXTURE_2D, m_id);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+//}
+//
+//SVRTexGLiOS::SVRTexGLiOS(SVInstPtr _app): SVRTexGL(_app)
+//{
+//#ifdef SV_IOS
+//    m_pTexCacheRef = nullptr;
+//    m_pTexRef = nullptr;
+//    m_pPixelBuf = nullptr;
+//#endif
+//}
+//
+//SVRTexGLiOS::~SVRTexGLiOS() {
+//}
+//
+//void SVRTexGLiOS::create(SVRendererPtr _renderer){
+//    if(!_renderer)
+//        return ;
+//    SVRRes::create(_renderer);
+//#ifdef SV_IOS
+////    SVCtxBasePtr t_contextbase = _renderer->getRenderContext();
+////    CVEAGLContext t_glcontext = CVEAGLContext((__bridge id)t_contextbase->getContext());
+////    CVReturn t_flag = CVOpenGLESTextureCacheCreate(nullptr,
+////                                                   nullptr,
+////                                                   t_glcontext,
+////                                                   nullptr,
+////                                                   &m_pTexCacheRef);
+////    if (t_flag) {
+////        SV_LOG_ERROR("SVTextureIOS create texture cache failed");
+////    }
+////    const void *keys[] = {
+////        kCVPixelBufferOpenGLESCompatibilityKey,
+////        kCVPixelBufferIOSurfacePropertiesKey,
+////        kCVPixelBufferBytesPerRowAlignmentKey,
+////    };
+////    const void *values[] = {
+////        (__bridge const void *)([NSNumber numberWithBool:YES]),
+////        (__bridge const void *)([NSDictionary dictionary]),
+////        (__bridge const void *)([NSNumber numberWithInteger:16])
+////    };
+////    CFDictionaryRef opDic = CFDictionaryCreate(NULL, keys,
+////                                               values, 2,
+////                                               NULL, NULL);
+////    t_flag = CVPixelBufferCreate(kCFAllocatorDefault,
+////                                 m_width,
+////                                 m_height,
+////                                 kCVPixelFormatType_32BGRA,
+////                                 opDic,
+////                                 &m_pPixelBuf);
+////    if( t_flag == 0) {
+////
+////    }
+////    t_flag = CVOpenGLESTextureCacheCreateTextureFromImage(nullptr,
+////                                                          m_pTexCacheRef,
+////                                                          m_pPixelBuf,
+////                                                          nullptr,
+////                                                          GL_TEXTURE_2D,
+////                                                          m_informate,
+////                                                          m_width,
+////                                                          m_height,
+////                                                          m_dataformate,
+////                                                          GL_UNSIGNED_BYTE,
+////                                                          0,
+////                                                          &m_pTexRef);
+////    if(t_flag == 0){
+////        m_id = CVOpenGLESTextureGetName(m_pTexRef);
+////        glBindTexture(GL_TEXTURE_2D , m_id);
+////        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+////        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+////        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+////        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+////        glBindTexture(GL_TEXTURE_2D, 0);
+////    }
+////    CVOpenGLESTextureCacheFlush(m_pTexCacheRef,0);
+////    CFRelease(opDic);
+////    m_bLoad = true;
+//#endif
+//}
+//
+//void SVRTexGLiOS::destroy(SVRendererPtr _renderer){
+//#ifdef SV_IOS
+//    if(m_pPixelBuf){
+//        CFRelease(m_pPixelBuf);
+//        m_pPixelBuf = nullptr;
+//    }
+//    if(m_pTexRef){
+//        CFRelease(m_pTexRef);
+//        m_pTexRef = nullptr;
+//    }
+//    if(m_pTexCacheRef){
+//        CVOpenGLESTextureCacheFlush(m_pTexCacheRef,0);
+//        CFRelease(m_pTexCacheRef);
+//        m_pTexCacheRef = nullptr;
+//    }
+//#endif
+//    SVRRes::destroy(_renderer);
+//}
+//
+//void SVRTexGLiOS::pushData(u8* _srcPtr,s32 _w,s32 _h,s32 _pixelformate){
+//#ifdef SV_IOS
+//    if( (!m_pPixelBuf) || (!m_pTexRef) || (!m_pTexCacheRef) || (_srcPtr == nullptr) )
+//        return;
+//    if(CVPixelBufferLockBaseAddress(m_pPixelBuf, 0) == kCVReturnSuccess){
+//        s32 width = (s32)CVPixelBufferGetWidth(m_pPixelBuf);
+//        s32 height = (s32)CVPixelBufferGetHeight(m_pPixelBuf);
+//        s32 bytesPerRow = (s32)CVPixelBufferGetBytesPerRowOfPlane(m_pPixelBuf, 0);
+//        u8* _dstPtr = (u8*)CVPixelBufferGetBaseAddress(m_pPixelBuf);
+//        //判断从 CVImageBufferRef 里取出来的数据是否带panding
+//        if (bytesPerRow/4 - width !=0) {
+//            //带panding，要处理
+//            s32 a = 0;
+//            for (s32 i = 0; i < height; i++) {
+//                memcpy(_dstPtr +  a, _srcPtr + i * width * 4, width*4);
+//                a += bytesPerRow;
+//            }
+//        }else{
+//            memcpy(_dstPtr,_srcPtr,_w*_h*4);
+//        }
+//        
+//        CVPixelBufferUnlockBaseAddress(m_pPixelBuf, 0);
+//    }
+//#endif
+//}
+//
+//void SVRTexGLiOS::fetchData(u8* _dstPtr,s32 _w,s32 _h) {
+//#ifdef SV_IOS
+//    if( (!m_pPixelBuf) || (!m_pTexRef) || (!m_pTexCacheRef) || (_dstPtr == nullptr))
+//        return;
+//    if(CVPixelBufferLockBaseAddress(m_pPixelBuf, 0) == kCVReturnSuccess){
+//        s32 width = (s32)CVPixelBufferGetWidth(m_pPixelBuf);
+//        s32 height = (s32)CVPixelBufferGetHeight(m_pPixelBuf);
+//        s32 bytesPerRow = (s32)CVPixelBufferGetBytesPerRowOfPlane(m_pPixelBuf, 0);
+//        u8* t_srtPtr = (u8*)CVPixelBufferGetBaseAddress(m_pPixelBuf);
+//        //判断从 CVImageBufferRef 里取出来的数据是否带panding
+//        if (bytesPerRow/4 - width !=0) {
+//            //带panding，要处理
+//            s32 a = 0;
+//            for (s32 i = 0; i < height; i++) {
+//                memcpy(_dstPtr + i * width * 4 , t_srtPtr + a, width*4);
+//                a += bytesPerRow;
+//            }
+//        }else{
+//            memcpy(_dstPtr,t_srtPtr,_w*_h*4);
+//        }
+//
+//        CVPixelBufferUnlockBaseAddress(m_pPixelBuf, 0);
+//    }
+//#endif
+//}
 
 ////FBO资源
 //SVRResGLFBO::SVRResGLFBO(SVInstPtr _app)
