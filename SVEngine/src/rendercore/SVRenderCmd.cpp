@@ -243,103 +243,19 @@ void SVRenderCmdPassCollection::addMtlMesh(SVMtlCorePtr _mtl , SVRenderMeshPtr _
     m_MeshArray.append(_mesh);
 }
 
-//激活FBO(fbo static)
-SVRenderCmdFboBind::SVRenderCmdFboBind(SVFboObjectPtr _fbo) {
+//fbo 重置大小
+SVRenderCmdFboResize::SVRenderCmdFboResize(SVRFboPtr _fbo,s32 _w,s32 _h) {
     m_fbo = _fbo;
+    m_width = _w;
+    m_height = _h;
 }
 
-SVRenderCmdFboBind::~SVRenderCmdFboBind(){
+SVRenderCmdFboResize::~SVRenderCmdFboResize(){
     m_fbo = nullptr;
 }
 
-void SVRenderCmdFboBind::render(SVRendererPtr _renderer) {
-//    if (m_fbo) {
-//        m_fbo->bind();
-//    }
-}
-
-//不激活FBO(fbo static)
-SVRenderCmdFboUnbind::SVRenderCmdFboUnbind(SVFboObjectPtr _fbo) {
-    m_fbo = _fbo;
-}
-
-SVRenderCmdFboUnbind::~SVRenderCmdFboUnbind(){
-    m_fbo = nullptr;
-}
-
-void SVRenderCmdFboUnbind::render(SVRendererPtr _renderer) {
+void SVRenderCmdFboResize::render(SVRendererPtr _renderer) {
     if (m_fbo) {
-        m_fbo->unbind();
+        m_fbo->resize(m_width,m_height);
     }
 }
-
-SVRenderCmdPushVPMat::SVRenderCmdPushVPMat(FMat4& _vm,FMat4& _pm) {
-    m_vm = _vm;
-    m_pm = _pm;
-}
-
-SVRenderCmdPushVPMat::~SVRenderCmdPushVPMat() {
-}
-
-void SVRenderCmdPushVPMat::render(SVRendererPtr _renderer) {
-//    if(m_pRenderer) {
-//        m_pRenderer->pushViewMat(m_vm);
-//        m_pRenderer->pushProjMat(m_pm);
-//        m_pRenderer->pushVPMat(m_pm*m_vm);
-//    }
-}
-
-//
-SVRenderCmdPopVPMat::SVRenderCmdPopVPMat() {
-}
-
-SVRenderCmdPopVPMat::~SVRenderCmdPopVPMat() {
-}
-
-void SVRenderCmdPopVPMat::render(SVRendererPtr _renderer) {
-//    if(m_pRenderer) {
-//        m_pRenderer->popViewMat();
-//        m_pRenderer->popProjMat();
-//        m_pRenderer->popVPMat();
-//    }
-}
-
-//推入矩阵
-SVRenderCmdPushMat::SVRenderCmdPushMat(FMat4& _mat,s32 _type) {
-    m_mat = _mat;
-    m_type = _type;
-}
-
-SVRenderCmdPushMat::~SVRenderCmdPushMat(){
-}
-
-void SVRenderCmdPushMat::render(SVRendererPtr _renderer) {
-//    if(m_pRenderer) {
-//        if(m_type==0 ) {
-//            m_pRenderer->pushViewMat(m_mat);
-//        }else if(m_type==1) {
-//            m_pRenderer->pushProjMat(m_mat);
-//        }
-//    }
-}
-
-//
-//弹出矩阵
-SVRenderCmdPopMat::SVRenderCmdPopMat(s32 _type) {
-    m_type = _type;
-}
-
-SVRenderCmdPopMat::~SVRenderCmdPopMat(){
-}
-
-void SVRenderCmdPopMat::render(SVRendererPtr _renderer) {
-//    if(m_pRenderer) {
-//        if(m_type==0 ) {
-//            m_pRenderer->popViewMat();
-//        }else if(m_type==1) {
-//            m_pRenderer->popProjMat();
-//        }
-//    }
-}
-
-

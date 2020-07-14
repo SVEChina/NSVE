@@ -17,6 +17,9 @@
 #include "../../rendercore/SVRenderMgr.h"
 #include "../../base/SVDataSwap.h"
 
+#include <Cocoa/Cocoa.h>
+#import <Foundation/Foundation.h>
+
 using namespace sv;
 
 SVRendererMetal::SVRendererMetal(SVInstPtr _app)
@@ -25,6 +28,12 @@ SVRendererMetal::SVRendererMetal(SVInstPtr _app)
     m_pCmdQueue = nullptr;
     m_pLibrary = nullptr;
     m_pCurEncoder = nullptr;
+    //prop
+    m_iOS9Runtime = false;
+    m_macOS11Runtime = true;
+    //
+    m_hasPixelFormatDepth32Float_Stencil8 = true;
+    m_samplenum = 1;    //msaa采样数
 }
 
 SVRendererMetal::~SVRendererMetal(){
@@ -33,10 +42,26 @@ SVRendererMetal::~SVRendererMetal(){
 void SVRendererMetal::init(id<MTLDevice> _device,id<MTLDrawable> _target,id<MTLTexture> _targetTex) {
     m_pDevice = _device;
     if (m_pDevice == nil) {
-        SV_LOG_INFO("don't support metal !");
+        m_pDevice = MTLCreateSystemDefaultDevice();
     }
+    if (m_pDevice == nil) {
+        SV_LOG_INFO("don't support metal !");
+        return ;
+    }
+    //
     m_pCmdQueue = m_pDevice.newCommandQueue;
     m_pLibrary = [m_pDevice newDefaultLibrary];
+//    m_renderPipelineDescriptor   = newRenderPipelineDescriptor();
+//    m_depthStencilDescriptor     = newDepthStencilDescriptor();
+//    m_frontFaceStencilDescriptor = newStencilDescriptor();
+//    m_backFaceStencilDescriptor  = newStencilDescriptor();
+//    m_vertexDescriptor  = newVertexDescriptor();
+//    m_textureDescriptor = newTextureDescriptor();
+//    m_samplerDescriptor = newSamplerDescriptor();
+//    for (uint8_t ii = 0; ii < MTL_MAX_FRAMES_IN_FLIGHT; ++ii)
+//    {
+//        m_uniformBuffers[ii] = m_device.newBufferWithLength(UNIFORM_BUFFER_SIZE, 0);
+//    }
     //创建主target
     SVRTargetPtr t_target = MakeSharedPtr<SVRTarget>(mApp);
     SVTargetDsp* t_dsp = t_target->getTargetDsp();

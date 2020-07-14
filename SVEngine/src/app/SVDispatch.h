@@ -35,6 +35,9 @@ namespace sv {
         //投递target
         static void dispatchTargetCreate(SVInstPtr _app,SVRTargetPtr _target);
         
+        //target 大小重置
+        static void dispatchTargetResize(SVInstPtr _app,SVRTargetPtr _target);
+        
         
         
         

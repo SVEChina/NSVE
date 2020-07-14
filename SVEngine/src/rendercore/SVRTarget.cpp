@@ -8,6 +8,7 @@
 #include "SVRTarget.h"
 #include "SVRFbo.h"
 #include "../app/SVInst.h"
+#include "../app/SVDispatch.h"
 #include "SVRenderMgr.h"
 
 using namespace sv;
@@ -20,6 +21,17 @@ SVRTarget::SVRTarget(SVInstPtr _app)
 
 SVRTarget::~SVRTarget() {
     m_fbo = nullptr;
+}
+
+void SVRTarget::resize(s32 _width,s32 _height) {
+    if( m_target_dsp.m_width!=_width ||
+       m_target_dsp.m_height!=_height) {
+        //
+        m_target_dsp.m_width = _width;
+        m_target_dsp.m_height = _height;
+        //
+        SVDispatch::dispatchTargetResize(mApp,std::dynamic_pointer_cast<SVRTarget>( shareObject() ) );
+    }
 }
 
 void SVRTarget::render(SVRendererPtr _renderer) {
@@ -37,6 +49,7 @@ void SVRTarget::render(SVRendererPtr _renderer) {
 }
 
 void SVRTarget::_preRender(SVRendererPtr _renderer) {
+    //
 }
 
 void SVRTarget::_render(SVRendererPtr _renderer) {

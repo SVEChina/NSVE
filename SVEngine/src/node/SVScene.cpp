@@ -256,7 +256,7 @@ void SVScene::update(f32 dt) {
 //    SVRendererPtr t_renderer = mApp->getRenderer();
 //    if( t_renderer && t_renderer->hasSVTex(E_TEX_MAIN) ){
 //        if (m_pRenderScene && false == m_pRenderScene->isSuspend() ) {
-//            SVRenderCmdFboBindPtr t_fbo_bind = MakeSharedPtr<SVRenderCmdFboBind>(t_renderer->getRenderTexture());
+//            SVRenderCmdFboResizePtr t_fbo_bind = MakeSharedPtr<SVRenderCmdFboResize>(t_renderer->getRenderTexture());
 //            t_fbo_bind->mTag = "main_frame_bind";
 //            m_pRenderScene->pushRenderCmd(RST_SCENE_BEGIN, t_fbo_bind);
 //            //

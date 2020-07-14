@@ -166,81 +166,18 @@ namespace sv {
         };
         
         //FBO绑定(推送FBO)
-        class SVRenderCmdFboBind : public SVRenderCmd {
+        class SVRenderCmdFboResize : public SVRenderCmd {
         public:
-            SVRenderCmdFboBind(SVFboObjectPtr _fbo);
+            SVRenderCmdFboResize(SVRFboPtr _fbo,s32 _w,s32 _h);
             
-            ~SVRenderCmdFboBind();
+            ~SVRenderCmdFboResize();
             
             virtual void render(SVRendererPtr _renderer);
             
         protected:
-            SVFboObjectPtr m_fbo;
-        };
-        
-        //FBO解绑定(弹出FBO)
-        class SVRenderCmdFboUnbind : public SVRenderCmd {
-        public:
-            SVRenderCmdFboUnbind(SVFboObjectPtr _fbo);
-            
-            ~SVRenderCmdFboUnbind();
-            
-            virtual void render(SVRendererPtr _renderer);
-        protected:
-            SVFboObjectPtr m_fbo;
-        };
-        
-        //
-        class SVRenderCmdPushVPMat : public SVRenderCmd {
-        public:
-            SVRenderCmdPushVPMat(FMat4& _vm,FMat4& _pm);
-            
-            ~SVRenderCmdPushVPMat();
-            
-            virtual void render(SVRendererPtr _renderer);
-            
-        protected:
-            FMat4 m_vm;
-            FMat4 m_pm;
-        };
-        
-        //
-        class SVRenderCmdPopVPMat : public SVRenderCmd {
-        public:
-            SVRenderCmdPopVPMat();
-            
-            ~SVRenderCmdPopVPMat();
-            
-            virtual void render(SVRendererPtr _renderer);
-        };
-        
-        //
-        class SVRenderCmdPushMat : public SVRenderCmd {
-        public:
-            //0: vm 1:pm
-            SVRenderCmdPushMat(FMat4& _mat,s32 _type);
-            
-            ~SVRenderCmdPushMat();
-            
-            virtual void render(SVRendererPtr _renderer);
-            
-        protected:
-            FMat4 m_mat;
-            s32 m_type;
-        };
-        
-        //
-        class SVRenderCmdPopMat : public SVRenderCmd {
-        public:
-            //0: vm 1:pm
-            SVRenderCmdPopMat(s32 _type);
-            
-            ~SVRenderCmdPopMat();
-            
-            virtual void render(SVRendererPtr _renderer);
-            
-        protected:
-            s32 m_type;
+            SVRFboPtr m_fbo;
+            s32 m_width;
+            s32 m_height;
         };
         
 

@@ -22,13 +22,16 @@ namespace sv {
         SVTargetDsp() {
             m_width = 512;
             m_height = 512;
+            m_target_num = 1;
             m_use_depth = true;
             m_use_stencil = true;
             m_oc_target = nullptr;
             m_oc_texture = nullptr;
         }
+        //
         s32 m_width;
         s32 m_height;
+        s32 m_target_num;
         bool m_use_depth;
         bool m_use_stencil;
         //metal专用参数
@@ -42,11 +45,9 @@ namespace sv {
         SVRTarget(SVInstPtr _app);
 
         ~SVRTarget();
-
-        void setFbo(SVRFboPtr _fbo) {
-            m_fbo = _fbo;
-        }
-
+        
+        void resize(s32 _width,s32 _height);
+        
         void render(SVRendererPtr _renderer);
 
     protected:

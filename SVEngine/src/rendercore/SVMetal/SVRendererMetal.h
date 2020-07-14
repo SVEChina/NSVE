@@ -57,8 +57,6 @@ namespace sv {
         s32 createBuf(s32 _len);                //return buf index
         s32 createBuf(s32 _len,void* _data);    //return buf index
 
-    public:
-        //处理技术
         virtual void processTech(SVRTechPtr _tech);
 
         //处理材质
@@ -67,7 +65,7 @@ namespace sv {
         //处理mesh
         virtual void processMesh(SVRenderMeshPtr _mesh);
 
-        public:
+    public:
         id<MTLDevice> m_pDevice;
         id<MTLCommandQueue> m_pCmdQueue;
         id<MTLLibrary> m_pLibrary;
@@ -76,6 +74,13 @@ namespace sv {
         SVArray< id<MTLTexture> > m_texPoolIn;      //内部纹理池 内部使用的纹理
         SVArray< id<MTLTexture> > m_texPoolOut;     //外部纹理池
         SVArray< id<MTLBuffer> > m_bufPool;         //buf池
+        
+    public:
+        //prop
+        bool m_iOS9Runtime;
+        bool m_macOS11Runtime;
+        bool m_hasPixelFormatDepth32Float_Stencil8;
+        s32 m_samplenum;
     };
         
     

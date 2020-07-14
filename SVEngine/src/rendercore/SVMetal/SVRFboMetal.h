@@ -19,6 +19,7 @@ namespace sv {
     /*
      渲染目标（主目标，其他目标，都包含在内）
      */
+#define MAX_SUPPORT_TEXTAREGT 4
 
     class SVRFboMetal : public SVRFbo {
     public:
@@ -29,6 +30,8 @@ namespace sv {
         virtual void create(SVRendererPtr _renderer);
 
         virtual void destroy(SVRendererPtr _renderer);
+        
+        virtual void resize(s32 _width,s32 _height);
         
         virtual void bind(SVRendererPtr _renderer);
 
@@ -42,10 +45,22 @@ namespace sv {
 //        void _render(SVRendererPtr _renderer);
 //        
 //        void _afterRender(SVRendererPtr _renderer);
+    private:
+        void _createCommonBuf(SVRendererMetalPtr _renderer);
+        
+        void _createDepthBuf(SVRendererMetalPtr _renderer);
+
+        void _createStencilBuf(SVRendererMetalPtr _renderer) ;
         
     public:
         id<MTLDrawable> m_pTarget;
-        id<MTLTexture> m_pTargetTex;
+        id<MTLTexture> m_pTargetTex[MAX_SUPPORT_TEXTAREGT];
+        id<MTLTexture> m_pDepthTex;
+        id<MTLTexture> m_pStencilTex;
+        s32 m_width;
+        s32 m_height;
+        s32 m_target_num;
+        //
         MTLRenderPassDescriptor* m_passDsp;
         id<MTLCommandBuffer> m_cmdBuffer;
         id<MTLRenderCommandEncoder> m_cmdEncoder;
