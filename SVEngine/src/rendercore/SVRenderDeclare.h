@@ -85,6 +85,13 @@ namespace sv {
     DECLARE_SHAREPTR(SVRenderCmdCurve);
     DECLARE_SHAREPTR(SVRenderCmdCircle);
     DECLARE_SHAREPTR(SVRenderCmdCircleSolid);
+    //
+    DECLARE_SHAREPTR(SVRCmdCreateMesh);
+    DECLARE_SHAREPTR(SVRCmdCreateShader);
+    DECLARE_SHAREPTR(SVRCmdCreateTex);
+    DECLARE_SHAREPTR(SVRCmdCreateFbo);
+
+
     
     //renderobject
     DECLARE_SHAREPTR(SVRRes);

@@ -42,7 +42,7 @@ SVBMFontNode::SVBMFontNode(SVInstPtr _app)
     m_pRenderVertex = MakeSharedPtr<SVDataSwap>();
     m_pRenderObj = MakeSharedPtr<SVRenderObject>();
     //m_pMesh = MakeSharedPtr<SVRenderMesh>(mApp);
-    m_pMesh->setVertexPoolType(GL_DYNAMIC_DRAW);
+    //m_pMesh->setVertexPoolType(GL_DYNAMIC_DRAW);
     m_spacing = 0.0f;
     _genMesh();
 }
@@ -362,9 +362,8 @@ void SVBMFontNode::_genMesh(){
     m_pRenderVertex->writeData(&t_Verts[0], sizeof(V2_C_T0) * SV_BMFONT_MAX_NUM * 6);
     m_pMesh->setVertNum(SV_BMFONT_MAX_NUM * 6);
     m_pMesh->setVertexData(m_pRenderVertex);
-    m_pMesh->setVertexType(E_VF_V2_C_T0);
     m_pMesh->setDrawMethod(E_DM_TRIANGLES);
-    m_pMesh->createMesh();
+    //m_pMesh->createMesh();
 }
 
 //序列化接口

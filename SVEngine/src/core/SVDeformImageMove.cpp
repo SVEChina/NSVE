@@ -209,8 +209,6 @@ void SVDeformImageMove::_initPoint(){
     m_pMeshBg->setIndexData(t_index, m_iIndexCount);
     //第一次更新顶点数据
     _refreshScreenRectMesh(m_pointScreen,m_pointScreen);
-    //创建mesh
-    m_pMeshBg->createMesh();
 }
 
 void SVDeformImageMove::_refreshScreenRectMesh(V2 *_data,V2 *_targetData){
@@ -231,11 +229,11 @@ void SVDeformImageMove::_refreshScreenRectMesh(V2 *_data,V2 *_targetData){
             pVer[i].b = 255;
             pVer[i].a = 255;
         }
-        m_pMeshBg->setVertexType(E_VF_V2_C_T0);
-        SVDataSwapPtr t_datav = MakeSharedPtr<SVDataSwap>();
-        t_datav->writeData(pVer, sizeof(V2_C_T0) * m_wPointCount * m_hPointCont);
-        m_pMeshBg->setVertNum( m_wPointCount * m_hPointCont );
-        m_pMeshBg->setVertexData(t_datav);
+//        m_pMeshBg->setVertexType(E_VF_V2_C_T0);
+//        SVDataSwapPtr t_datav = MakeSharedPtr<SVDataSwap>();
+//        t_datav->writeData(pVer, sizeof(V2_C_T0) * m_wPointCount * m_hPointCont);
+//        m_pMeshBg->setVertNum( m_wPointCount * m_hPointCont );
+//        m_pMeshBg->setVertexData(t_datav);
     }
 }
 
@@ -606,8 +604,8 @@ void SVDeformImageMove::updatePointMesh( V2* _facepoint){
     }
     SVDataSwapPtr t_data = MakeSharedPtr<SVDataSwap>();
     t_data->writeData(&verts[0], sizeof(V2_C_T0) * 636);
-    m_pMeshPoint->setVertNum(636);
-    m_pMeshPoint->setVertexData(t_data);
-    m_pMeshPoint->setVertexType(E_VF_V2_C_T0);
-    m_pMeshPoint->setDrawMethod(E_DM_TRIANGLES);
+//    m_pMeshPoint->setVertNum(636);
+//    m_pMeshPoint->setVertexData(t_data);
+//    m_pMeshPoint->setVertexType(E_VF_V2_C_T0);
+//    m_pMeshPoint->setDrawMethod(E_DM_TRIANGLES);
 }

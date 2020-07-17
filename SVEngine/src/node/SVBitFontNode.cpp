@@ -36,7 +36,7 @@ SVBitFontNode::SVBitFontNode(SVInstPtr _app)
     m_pRenderVertex = MakeSharedPtr<SVDataSwap>();
     m_pRenderObj = MakeSharedPtr<SVRenderObject>();
     //m_pMesh = MakeSharedPtr<SVRenderMesh>(mApp);
-    m_pMesh->setVertexPoolType(GL_DYNAMIC_DRAW);
+    //m_pMesh->setVertexPoolType(GL_DYNAMIC_DRAW);
     //构建基础mesh和纹理坐标
     _genTexcoords();
     _genMesh();
@@ -387,13 +387,12 @@ void SVBitFontNode::_genMesh(){
         m_Verts[i * 6 + 5].b = 255;
         m_Verts[i * 6 + 5].a = 255;
     }
-    //
-    m_pRenderVertex->writeData(&m_Verts[0], sizeof(V2_C_T0) * SV_BITFONT_MAX_NUM * 6);
-    m_pMesh->setVertNum(SV_BITFONT_MAX_NUM * 6);
-    m_pMesh->setVertexData(m_pRenderVertex);
-    m_pMesh->setVertexType(E_VF_V2_C_T0);
-    m_pMesh->setDrawMethod(E_DM_TRIANGLES);
-    m_pMesh->createMesh();
+//    //
+//    m_pRenderVertex->writeData(&m_Verts[0], sizeof(V2_C_T0) * SV_BITFONT_MAX_NUM * 6);
+//    m_pMesh->setVertNum(SV_BITFONT_MAX_NUM * 6);
+//    m_pMesh->setVertexData(m_pRenderVertex);
+//    m_pMesh->setDrawMethod(E_DM_TRIANGLES);
+//    //m_pMesh->createMesh();
 }
 
 void SVBitFontNode::_genTexcoords(){

@@ -864,7 +864,7 @@ void SVPenStroke::renderStroke(){
 //        m_pMtl->setCullEnable(false);
 //        m_pMtl->setModelMatrix(m_localMat);
 //        //更新顶点数据
-//        m_pStrokeMesh->setInstanceOffsetData(m_pInstanceOffsetData, m_instanceCount);
+//        m_pStrokeMesh->setInstanceData(m_pInstanceOffsetData, m_instanceCount);
 //        m_pRenderObj->setMesh(m_pStrokeMesh);
 //        m_pRenderObj->setMtl(m_pMtl);
 //        m_pRenderObj->pushCmd(t_rs, RST_AR, "SVPenStrokeRender");
@@ -949,7 +949,7 @@ void SVPenStroke::renderGlow(){
 //        m_pGlowMtl->setCullEnable(false);
 //        m_pGlowMtl->setModelMatrix(m_localMat);
 //        //更新顶点数据
-//        m_pGlowMesh->setInstanceOffsetData(m_pGlowInstanceOffsetData, m_glowInstanceCount);
+//        m_pGlowMesh->setInstanceData(m_pGlowInstanceOffsetData, m_glowInstanceCount);
 //        m_pRenderObj->setMesh(m_pGlowMesh);
 //        m_pRenderObj->setMtl(m_pGlowMtl);
 //        m_pRenderObj->pushCmd(t_rs, RST_AR, "SVPenStrokeRenderGlow");

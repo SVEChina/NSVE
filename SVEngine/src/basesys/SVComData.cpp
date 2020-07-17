@@ -8,6 +8,7 @@
 #include "SVComData.h"
 #include "SVFaceDataMesh.h"
 #include "../app/SVInst.h"
+#include "../app/SVDispatch.h"
 #include "../base/SVDataSwap.h"
 #include "../rendercore/SVRenderMesh.h"
 #include "../rendercore/SVRenderCmd.h"
@@ -15,20 +16,13 @@
 
 using namespace sv;
 
-//V3_C_T0 SVComData::m_baseRect[6];
-
-static f32 m_data_rect_v3_c_t0[] = {
-    -1.0f,-1.0f,0.0f,0.0f,1.0f,1.0f,1.0f,1.0f,
-    -1.0f,-1.0f,0.0f,0.0f,1.0f,1.0f,1.0f,1.0f,
-    -1.0f,-1.0f,0.0f,0.0f,1.0f,1.0f,1.0f,1.0f,
-    -1.0f,-1.0f,0.0f,0.0f,1.0f,1.0f,1.0f,1.0f
-};
-
-static f32 m_data_rect_v3_t0[] = {
-    -1.0f,-1.0f,0.0f,0.0f,
-    -1.0f,-1.0f,0.0f,0.0f,
-    -1.0f,-1.0f,0.0f,0.0f,
-    -1.0f,-1.0f,0.0f,0.0f
+static u16 m_rect_index[6] = {0,1,2,2,1,3 };
+    
+static f32 m_screen_rect_v3_t0[] = {
+    -1.0f,-1.0f, 0.0f,0.0f,
+    1.0f,-1.0f, 0.0f,0.0f,
+    -1.0f,1.0f, 0.0f,0.0f,
+    1.0f,1.0f, 0.0f,0.0f
 };
 
 SVComData::SVComData
@@ -45,24 +39,71 @@ SVComData::~SVComData() {
 
 void SVComData::init() {
     m_screenMesh = MakeSharedPtr<SVRenderMesh>(mApp);
-    m_screenMesh->setVertexType(E_VF_V2_C_T0);
-    u16 t_index[6] = {0, 1, 2, 2, 1, 3};
-    SVDataSwapPtr t_pIndexData = MakeSharedPtr<SVDataSwap>();
-    t_pIndexData->writeData(t_index,sizeof(u16)*6);
-    m_screenMesh->setIndexData(t_pIndexData,6);
+    BufferDsp t_index_dsp;
+    SVRenderMesh::buildBufferDsp(E_VF_BASE,E_BFT_STATIC_DRAW,6*sizeof(u16),m_rect_index,&t_index_dsp);
+    m_screenMesh->setIndexDsp(t_index_dsp);
     //
-    SVDataSwapPtr t_pMeshData = MakeSharedPtr<SVDataSwap>();
-    //渲染数据
-//    V2_T0 VerData[4];
+    BufferDsp t_vert_dsp;
+    SVRenderMesh::buildBufferDsp(E_VF_V3_T0,E_BFT_STATIC_DRAW,6*sizeof(u16),m_screen_rect_v3_t0,&t_vert_dsp);
+    m_screenMesh->setVertDsp(t_vert_dsp);
+    
+    //这个必须有渲染器才可以执行
+    SVDispatch::dispatchMeshCreate(mApp, m_screenMesh);
+}
+
+SVRenderMeshPtr SVComData::generateAdaptScreenMesh(f32 _fromW, f32 _fromH, f32 _toW, f32 _toH){
+//    f32 _tarW = _toW;
+//    f32 _tarH = _toH;
+//    f32 _srcW = _fromW;
+//    f32 _srcH = _fromH;
+//    if ((_tarW > _srcW) || (_tarH > _srcH)) {
+//        return m_screenMesh;
+//    }
+//    f32 t_tar_scale = _tarW/_tarH;
+//    f32 t_src_scale = _srcW/_srcH;
+//    if (t_tar_scale == t_src_scale) {
+//        return m_screenMesh;
+//    }
+//    SVDataSwapPtr t_pMeshDataAdapt = MakeSharedPtr<SVDataSwap>();
+//    //渲染数据
+//    V2_C_T0 VerData[4];
+//    //颜色
+//    VerData[0].r = 255;
+//    VerData[0].g = 255;
+//    VerData[0].b = 255;
+//    VerData[0].a = 255;
+//    VerData[1].r = 255;
+//    VerData[1].g = 255;
+//    VerData[1].b = 255;
+//    VerData[1].a = 255;
+//    VerData[2].r = 255;
+//    VerData[2].g = 255;
+//    VerData[2].b = 255;
+//    VerData[2].a = 255;
+//    VerData[3].r = 255;
+//    VerData[3].g = 255;
+//    VerData[3].b = 255;
+//    VerData[3].a = 255;
 //    //
-//    VerData[0].t0x = c;
-//    VerData[0].t0y = 0.0f;
-//    VerData[1].t0x = 1.0f;
-//    VerData[1].t0y = 0.0f;
-//    VerData[2].t0x = 0.0f;
-//    VerData[2].t0y = 1.0f;
-//    VerData[3].t0x = 1.0f;
-//    VerData[3].t0y = 1.0f;
+//    if (t_tar_scale < t_src_scale) {
+//        VerData[0].t0x = ((_srcW - _tarW*(_srcH/_tarH))/_srcW)*0.5f;
+//        VerData[0].t0y = 0.0f;
+//        VerData[1].t0x = 1.0f - ((_srcW - _tarW*(_srcH/_tarH))/_srcW)*0.5f;
+//        VerData[1].t0y = 0.0f;
+//        VerData[2].t0x = ((_srcW - _tarW*(_srcH/_tarH))/_srcW)*0.5f;
+//        VerData[2].t0y = 1.0f;
+//        VerData[3].t0x = 1.0f - ((_srcW - _tarW*(_srcH/_tarH))/_srcW)*0.5f;
+//        VerData[3].t0y = 1.0f;
+//    }else{
+//        VerData[0].t0x = 0.0f;
+//        VerData[0].t0y = ((_srcH - _tarH*(_srcW/_tarW))/_srcH)*0.5f;
+//        VerData[1].t0x = 1.0f;
+//        VerData[1].t0y = ((_srcH -  _tarH*(_srcW/_tarW))/_srcH)*0.5f;;
+//        VerData[2].t0x = 0.0f;
+//        VerData[2].t0y = 1.0f - ((_srcH -  _tarH*(_srcW/_tarW))/_srcH)*0.5f;;
+//        VerData[3].t0x = 1.0f;
+//        VerData[3].t0y = 1.0f - ((_srcH -  _tarH*(_srcW/_tarW))/_srcH)*0.5f;;
+//    }
 //    //
 //    VerData[0].x = -1.0f;
 //    VerData[0].y = -1.0f;
@@ -72,90 +113,9 @@ void SVComData::init() {
 //    VerData[2].y = 1.0f;
 //    VerData[3].x = 1.0f;
 //    VerData[3].y = 1.0f;
-//    t_pMeshData->writeData(&VerData[0],sizeof(V2_T0)*4);
-//    //
-//    VerData[0].x = -1.0f;
-//    VerData[0].y = 0.0f;
-//    VerData[1].x = 0.0f;
-//    VerData[1].y = 0.0f;
-//    VerData[2].x = -1.0f;
-//    VerData[2].y = 1.0f;
-//    VerData[3].x = 0.0f;
-//    VerData[3].y = 1.0f;
-//    m_screenMesh->setVertNum(4);
-//    m_screenMesh->setVertexData(t_pMeshData);
-//    m_screenMesh->createMesh();
-//    //
-//    m_faceDataMesh = MakeSharedPtr<SVFaceDataMesh>(mApp);
-//    m_faceDataMesh->init();
-}
-
-SVRenderMeshPtr SVComData::generateAdaptScreenMesh(f32 _fromW, f32 _fromH, f32 _toW, f32 _toH){
-    f32 _tarW = _toW;
-    f32 _tarH = _toH;
-    f32 _srcW = _fromW;
-    f32 _srcH = _fromH;
-    if ((_tarW > _srcW) || (_tarH > _srcH)) {
-        return m_screenMesh;
-    }
-    f32 t_tar_scale = _tarW/_tarH;
-    f32 t_src_scale = _srcW/_srcH;
-    if (t_tar_scale == t_src_scale) {
-        return m_screenMesh;
-    }
-    SVDataSwapPtr t_pMeshDataAdapt = MakeSharedPtr<SVDataSwap>();
-    //渲染数据
-    V2_C_T0 VerData[4];
-    //颜色
-    VerData[0].r = 255;
-    VerData[0].g = 255;
-    VerData[0].b = 255;
-    VerData[0].a = 255;
-    VerData[1].r = 255;
-    VerData[1].g = 255;
-    VerData[1].b = 255;
-    VerData[1].a = 255;
-    VerData[2].r = 255;
-    VerData[2].g = 255;
-    VerData[2].b = 255;
-    VerData[2].a = 255;
-    VerData[3].r = 255;
-    VerData[3].g = 255;
-    VerData[3].b = 255;
-    VerData[3].a = 255;
-    //
-    if (t_tar_scale < t_src_scale) {
-        VerData[0].t0x = ((_srcW - _tarW*(_srcH/_tarH))/_srcW)*0.5f;
-        VerData[0].t0y = 0.0f;
-        VerData[1].t0x = 1.0f - ((_srcW - _tarW*(_srcH/_tarH))/_srcW)*0.5f;
-        VerData[1].t0y = 0.0f;
-        VerData[2].t0x = ((_srcW - _tarW*(_srcH/_tarH))/_srcW)*0.5f;
-        VerData[2].t0y = 1.0f;
-        VerData[3].t0x = 1.0f - ((_srcW - _tarW*(_srcH/_tarH))/_srcW)*0.5f;
-        VerData[3].t0y = 1.0f;
-    }else{
-        VerData[0].t0x = 0.0f;
-        VerData[0].t0y = ((_srcH - _tarH*(_srcW/_tarW))/_srcH)*0.5f;
-        VerData[1].t0x = 1.0f;
-        VerData[1].t0y = ((_srcH -  _tarH*(_srcW/_tarW))/_srcH)*0.5f;;
-        VerData[2].t0x = 0.0f;
-        VerData[2].t0y = 1.0f - ((_srcH -  _tarH*(_srcW/_tarW))/_srcH)*0.5f;;
-        VerData[3].t0x = 1.0f;
-        VerData[3].t0y = 1.0f - ((_srcH -  _tarH*(_srcW/_tarW))/_srcH)*0.5f;;
-    }
-    //
-    VerData[0].x = -1.0f;
-    VerData[0].y = -1.0f;
-    VerData[1].x = 1.0f;
-    VerData[1].y = -1.0f;
-    VerData[2].x = -1.0f;
-    VerData[2].y = 1.0f;
-    VerData[3].x = 1.0f;
-    VerData[3].y = 1.0f;
-    t_pMeshDataAdapt->writeData(&VerData[0],sizeof(V2_C_T0)*4);
-    m_screenAdaptMesh->setVertNum(4);
-    m_screenAdaptMesh->setVertexData(t_pMeshDataAdapt);
-    m_screenAdaptMesh->createMesh();
+//    t_pMeshDataAdapt->writeData(&VerData[0],sizeof(V2_C_T0)*4);
+//    m_screenAdaptMesh->setVertNum(4);
+//    m_screenAdaptMesh->setVertexData(t_pMeshDataAdapt);
     return m_screenAdaptMesh;
 }
 
@@ -225,11 +185,11 @@ SVRenderMeshPtr SVComData::generatePatchMesh(FVec3 &_corner00, FVec3 &_corner10,
     t_pVertexData->writeData(&vertexData[0], sizeof(V3)*t_vertexCount);
     
     SVRenderMeshPtr patchMesh =nullptr;// MakeSharedPtr<SVRenderMesh>(mApp);
-    patchMesh->setVertexType(E_VF_V3);
-    patchMesh->setVertNum(t_vertexCount);
-    patchMesh->setVertexData(t_pVertexData);
-    patchMesh->setDrawMethod(E_DM_LINES);
-    patchMesh->createMesh();
+//    patchMesh->setVertexType(E_VF_V3);
+//    patchMesh->setVertNum(t_vertexCount);
+//    patchMesh->setVertexData(t_pVertexData);
+//    patchMesh->setDrawMethod(E_DM_LINES);
+//    patchMesh->createMesh();
     return patchMesh;
 }
 

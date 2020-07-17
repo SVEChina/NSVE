@@ -17,9 +17,18 @@
 
 namespace sv {
 
-    //定点说一句
+//最大支持10个流
+#define SV_MAX_STREAM_NUM 10
+    //
     struct BufferDsp {
         BufferDsp() {
+            _bufData = nullptr;
+            _bufSize = 0;
+            _bufType = E_BFT_STATIC_DRAW;
+            _bufVertDsp = E_VF_BASE;
+        };
+        
+        ~BufferDsp() {
             _bufData = nullptr;
             _bufSize = 0;
             _bufType = E_BFT_STATIC_DRAW;
@@ -38,8 +47,10 @@ namespace sv {
     /*
      逻辑和渲染之间的桥梁，其实就是数据和数据描述
      */
-
     class SVRenderMesh : public SVGBaseEx {
+    public:
+        static void buildBufferDsp(VFTYPE _vertype,BUFFERTYPE _buftype,s32 _bufsize,void* _data,BufferDsp* _dsp);
+        
     public:
         SVRenderMesh(SVInstPtr _app);
         
@@ -50,6 +61,13 @@ namespace sv {
         virtual void destroy(SVRendererPtr _renderer);
     
         virtual void render(SVRendererPtr _renderer);
+        
+        //设置各种描述
+        void setIndexDsp(BufferDsp& _dsp);
+        
+        void setVertDsp(BufferDsp& _dsp,s32 _index = 0);
+        
+        void setInstanceDsp(BufferDsp& _dsp);
         
         //是否使用索引
         bool useIndex();
@@ -68,26 +86,17 @@ namespace sv {
         //获取多实例描述
         BufferDsp* getInstanceDsp();
         
-        //
-        void setIndexPoolType(u32 itype);
+        //设置数据
+        void setIndexData(SVDataSwapPtr _data,s32 _num);
         
-        void setVertexPoolType(u32 vtype);
+        void setVertexData(SVDataSwapPtr _data,s32 _index = 0,VFTYPE type = E_VF_BASE);
         
-        void setVertexType(VFTYPE type,s32 _channel = 0);
-        
-        void setSeqMode(s32 _mode);    //数据排列模式
-        
+        void setInstanceData(SVDataSwapPtr _pdata, u32 _instanceCount);
+
+        //设置其他属性
         void setDrawMethod(DRAWMETHOD drawtype);
         
-        virtual void setIndexData(SVDataSwapPtr _data,s32 _num);
-        
-        virtual void setVertexData(SVDataSwapPtr _data,s32 _channel = 0,VFTYPE type = E_VF_BASE);
-        
-        virtual void setVertNum(s32 _vertexNum);
-        
-        void setInstanceOffsetData(SVDataSwapPtr _pdata, u32 _instanceCount);
-        
-        void createMesh();
+        void setVertNum(s32 _vertexNum);
         
     public:
         bool m_use_index;

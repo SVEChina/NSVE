@@ -799,33 +799,33 @@ SVMeshPtr SVLoaderGLTF::_buildMeshPri(Primitive* _prim) {
     }
     //
     SVRenderMeshPtr t_rMesh;// = MakeSharedPtr<SVRenderMesh>(mApp);
-    t_rMesh->setVertexType(VFTYPE(t_vtf));
-    t_rMesh->setSeqMode(1);
-    t_rMesh->setVertNum(t_count);
-    t_rMesh->setVertexData(t_data);
-    //索引数据
-    if( _prim->indices >=0) {
-        Accessor* accIndex = &(m_gltf.accessors[_prim->indices]);
-        SVDataSwapPtr pIndex = MakeSharedPtr<SVDataSwap>();
-        _fetchDataFromAcc(pIndex,accIndex);
-        t_rMesh->setIndexData(pIndex,accIndex->count);
-    }
-    //绘制模式
-    if(_prim->mode == SVGLTF_MODE_POINTS) {
-        t_rMesh->setDrawMethod(E_DM_POINTS);
-    }else if(_prim->mode == SVGLTF_MODE_LINE) {
-        t_rMesh->setDrawMethod(E_DM_LINES);
-    }else if(_prim->mode == SVGLTF_MODE_LINE_LOOP) {
-        t_rMesh->setDrawMethod(E_DM_LINE_LOOP);
-    }else if(_prim->mode == SVGLTF_MODE_TRIANGLES) {
-        t_rMesh->setDrawMethod(E_DM_TRIANGLES);
-    }else if(_prim->mode == SVGLTF_MODE_TRIANGLE_STRIP) {
-        t_rMesh->setDrawMethod(E_DM_TRIANGLE_STRIP);
-    }else if(_prim->mode == SVGLTF_MODE_TRIANGLE_FAN) {
-        t_rMesh->setDrawMethod(E_DM_TRIANGLE_FAN);
-    }
-    t_rMesh->createMesh();
-    t_mesh->setRenderMesh(t_rMesh);
+//    t_rMesh->setVertexType(VFTYPE(t_vtf));
+//    //t_rMesh->setSeqMode(1);
+//    t_rMesh->setVertNum(t_count);
+//    t_rMesh->setVertexData(t_data);
+//    //索引数据
+//    if( _prim->indices >=0) {
+//        Accessor* accIndex = &(m_gltf.accessors[_prim->indices]);
+//        SVDataSwapPtr pIndex = MakeSharedPtr<SVDataSwap>();
+//        _fetchDataFromAcc(pIndex,accIndex);
+//        t_rMesh->setIndexData(pIndex,accIndex->count);
+//    }
+//    //绘制模式
+//    if(_prim->mode == SVGLTF_MODE_POINTS) {
+//        t_rMesh->setDrawMethod(E_DM_POINTS);
+//    }else if(_prim->mode == SVGLTF_MODE_LINE) {
+//        t_rMesh->setDrawMethod(E_DM_LINES);
+//    }else if(_prim->mode == SVGLTF_MODE_LINE_LOOP) {
+//        t_rMesh->setDrawMethod(E_DM_LINE_LOOP);
+//    }else if(_prim->mode == SVGLTF_MODE_TRIANGLES) {
+//        t_rMesh->setDrawMethod(E_DM_TRIANGLES);
+//    }else if(_prim->mode == SVGLTF_MODE_TRIANGLE_STRIP) {
+//        t_rMesh->setDrawMethod(E_DM_TRIANGLE_STRIP);
+//    }else if(_prim->mode == SVGLTF_MODE_TRIANGLE_FAN) {
+//        t_rMesh->setDrawMethod(E_DM_TRIANGLE_FAN);
+//    }
+//    t_rMesh->createMesh();
+//    t_mesh->setRenderMesh(t_rMesh);
     //材质
 //    SVMtlCorePtr t_mtl = _buildMtl(_prim,t_vtf);
 //    if(t_mtl) {

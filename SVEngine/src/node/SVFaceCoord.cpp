@@ -184,18 +184,18 @@ void SVFaceCoord::refresh() {
             t_count++;
         }
     }
-    //普通
-    m_pMesh->setVertexType(E_VF_V3_T0);
-    m_pMesh->setVertNum(t_count*6);
-    m_pMesh->setVertexData(t_dataswap);
-    m_pMesh->setDrawMethod(E_DM_TRIANGLES);
-    m_pMesh->createMesh();
-    //act
-    m_pMeshAct->setVertexType(E_VF_V3_T0);
-    m_pMeshAct->setVertNum(t_count_act*6);
-    m_pMeshAct->setVertexData(t_dataswap_act);
-    m_pMeshAct->setDrawMethod(E_DM_TRIANGLES);
-    m_pMeshAct->createMesh();
+//    //普通
+//    m_pMesh->setVertexType(E_VF_V3_T0);
+//    m_pMesh->setVertNum(t_count*6);
+//    m_pMesh->setVertexData(t_dataswap);
+//    m_pMesh->setDrawMethod(E_DM_TRIANGLES);
+//    //m_pMesh->createMesh();
+//    //act
+//    m_pMeshAct->setVertexType(E_VF_V3_T0);
+//    m_pMeshAct->setVertNum(t_count_act*6);
+//    m_pMeshAct->setVertexData(t_dataswap_act);
+//    m_pMeshAct->setDrawMethod(E_DM_TRIANGLES);
+//    //m_pMeshAct->createMesh();
 }
 
 void SVFaceCoord::update(f32 dt) {

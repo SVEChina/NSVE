@@ -13,6 +13,19 @@
 
 using namespace sv;
 
+void SVRenderMesh::buildBufferDsp(VFTYPE _vertype,BUFFERTYPE _buftype,s32 _bufsize,void* _data,BufferDsp* _dsp) {
+    if(_dsp) {
+        _dsp->_bufVertDsp = _vertype;
+        _dsp->_bufType = _buftype;
+        _dsp->_bufSize = _bufsize;
+        _dsp->_bufData = nullptr;
+        if(_data) {
+            _dsp->_bufData = MakeSharedPtr<SVDataSwap>();
+            _dsp->_bufData->appendData(_data, _bufsize);
+        }
+    }
+}
+
 SVRenderMesh::SVRenderMesh(SVInstPtr _app)
 :SVGBaseEx(_app){
     m_res_buffer = nullptr;
@@ -36,6 +49,28 @@ void SVRenderMesh::unbindRes() {
 
 SVRBufferPtr SVRenderMesh::getResBuffer() {
     return m_res_buffer;
+}
+
+//
+void SVRenderMesh::setIndexDsp(BufferDsp& _dsp) {
+    m_use_index = true;
+    m_index_dsp = _dsp;
+}
+
+//
+void SVRenderMesh::setVertDsp(BufferDsp& _dsp,s32 _index) {
+    if(m_vert_dsp.size() == 0) {
+        m_vert_dsp.resize(SV_MAX_STREAM_NUM);
+    }
+    if(_index<SV_MAX_STREAM_NUM) {
+        m_vert_dsp[_index] = _dsp;
+    }
+}
+
+//
+void SVRenderMesh::setInstanceDsp(BufferDsp& _dsp) {
+    m_use_instance = true;
+    m_instance_dsp = _dsp;
 }
 
 bool SVRenderMesh::useIndex() {
@@ -71,19 +106,8 @@ void SVRenderMesh::create(SVRendererPtr _renderer){
 void SVRenderMesh::destroy(SVRendererPtr _renderer) {
 }
 
-void SVRenderMesh::setIndexPoolType(u32 itype) {
-}
-
-void SVRenderMesh::setVertexPoolType(u32 vtype) {
-}
 
 void SVRenderMesh::setDrawMethod(DRAWMETHOD drawtype) {
-}
-
-void SVRenderMesh::setSeqMode(s32 _mode) {
-}
-
-void SVRenderMesh::setVertexType(VFTYPE type,s32 _channel) {
 }
 
 void SVRenderMesh::setVertNum(s32 _vertexNum){
@@ -95,10 +119,7 @@ void SVRenderMesh::setIndexData(SVDataSwapPtr _data,s32 _num){
 void SVRenderMesh::setVertexData(SVDataSwapPtr _data,s32 _channel,VFTYPE type){
 }
 
-void SVRenderMesh::setInstanceOffsetData(SVDataSwapPtr _pdata, u32 _instanceCount){
-}
-
-void SVRenderMesh::createMesh(){
+void SVRenderMesh::setInstanceData(SVDataSwapPtr _pdata, u32 _instanceCount){
 }
 
 void SVRenderMesh::render(SVRendererPtr _renderer) {

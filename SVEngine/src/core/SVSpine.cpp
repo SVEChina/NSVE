@@ -144,20 +144,20 @@ void SVSpine::init(spSkeletonData *skedata, spAtlas *atlas, bool ownsSkeletonDat
     
     spAnimationState_update(m_pSpineAniState, 0.0f);
     spAnimationState_apply(m_pSpineAniState, m_pSkeleton);
-    spSkeleton_updateWorldTransform(m_pSkeleton);
-    //构建mesh(这里需要统计顶点数目等相关操作)
-    for (s32 i = 0, n = m_pSkeleton->slotsCount; i < n; i++) {
-        spSlot *t_slot = m_pSkeleton->drawOrder[i];
-        SpineMeshDataPtr pMeshData = MakeSharedPtr<SpineMeshData>();
-        pMeshData->m_blendMode = t_slot->data->blendMode;
-        //pMeshData->m_pRenderMesh = MakeSharedPtr<SVRenderMesh>(mApp);
-        pMeshData->m_pRenderMesh->setVertexPoolType(GL_DYNAMIC_DRAW);
-        pMeshData->m_pRenderMesh->setIndexPoolType(GL_DYNAMIC_DRAW);
-        pMeshData->m_pRenderMesh->createMesh();
-        pMeshData->m_pRenderIndex  = MakeSharedPtr<SVDataSwap>();
-        pMeshData->m_pRenderVertex = MakeSharedPtr<SVDataSwap>();
-        m_spineDataPool.append(pMeshData);
-    }
+//    spSkeleton_updateWorldTransform(m_pSkeleton);
+//    //构建mesh(这里需要统计顶点数目等相关操作)
+//    for (s32 i = 0, n = m_pSkeleton->slotsCount; i < n; i++) {
+//        spSlot *t_slot = m_pSkeleton->drawOrder[i];
+//        SpineMeshDataPtr pMeshData = MakeSharedPtr<SpineMeshData>();
+//        pMeshData->m_blendMode = t_slot->data->blendMode;
+//        //pMeshData->m_pRenderMesh = MakeSharedPtr<SVRenderMesh>(mApp);
+//        pMeshData->m_pRenderMesh->setVertexPoolType(GL_DYNAMIC_DRAW);
+//        pMeshData->m_pRenderMesh->setIndexPoolType(GL_DYNAMIC_DRAW);
+//        pMeshData->m_pRenderMesh->createMesh();
+//        pMeshData->m_pRenderIndex  = MakeSharedPtr<SVDataSwap>();
+//        pMeshData->m_pRenderVertex = MakeSharedPtr<SVDataSwap>();
+//        m_spineDataPool.append(pMeshData);
+//    }
 }
 
 SVTexturePtr SVSpine::_getTexture(spAttachment *pAttach) {
@@ -251,7 +251,7 @@ void SVSpine::update(f32 deltaTime) {
         }
 //        r_meshdata->m_pRenderMesh->setvisible(true);
         //更新mesh
-        r_meshdata->m_pRenderMesh->setVertexType(E_VF_V2_C_T0);
+        //r_meshdata->m_pRenderMesh->setVertexType(E_VF_V2_C_T0);
         m_preMultAlpha = true;
         if (m_preMultAlpha) {
             a *= m_pSkeleton->color.a * t_slot->color.a;
