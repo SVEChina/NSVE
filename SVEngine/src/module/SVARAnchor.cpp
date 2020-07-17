@@ -12,7 +12,7 @@
 #include "../basesys/SVBasicSys.h"
 #include "../basesys/SVPickProcess.h"
 #include "../basesys/SVSensorProcess.h"
-#include "../basesys/SVStaticData.h"
+#include "../basesys/SVComData.h"
 #include "../mtl/SVTexMgr.h"
 #include "../mtl/SVMtlCore.h"
 #include "../mtl/SVTexture.h"

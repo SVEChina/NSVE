@@ -9,7 +9,7 @@
 #include "SVCameraNode.h"
 #include "SVScene.h"
 #include "../app/SVInst.h"
-#include "../basesys/SVStaticData.h"
+#include "../basesys/SVComData.h"
 #include "../mtl/SVMtlNocolor.h"
 #include "../rendercore/SVRenderObject.h"
 #include "../rendercore/SVRenderMesh.h"

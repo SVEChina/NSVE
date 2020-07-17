@@ -20,7 +20,7 @@
 #include "../rendercore/SVRenderObject.h"
 #include "../rendercore/SVRenderMgr.h"
 #include "../rendercore/SVRenderer.h"
-#include "../basesys/SVStaticData.h"
+#include "../basesys/SVComData.h"
 
 using namespace sv;
 

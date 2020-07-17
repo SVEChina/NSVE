@@ -9,7 +9,7 @@
 #include "SVScene.h"
 #include "../mtl/SVMtlCore.h"
 #include "../basesys/SVSceneMgr.h"
-#include "../basesys/SVStaticData.h"
+#include "../basesys/SVComData.h"
 #include "../rendercore/SVRenderMesh.h"
 #include "../rendercore/SVRenderMgr.h"
 #include "../rendercore/SVRenderObject.h"

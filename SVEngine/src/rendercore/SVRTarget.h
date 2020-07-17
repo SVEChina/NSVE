@@ -25,6 +25,7 @@ namespace sv {
             m_target_num = 1;
             m_use_depth = true;
             m_use_stencil = true;
+            m_gl_tex = 0;
             m_oc_target = nullptr;
             m_oc_texture = nullptr;
         }
@@ -34,6 +35,8 @@ namespace sv {
         s32 m_target_num;
         bool m_use_depth;
         bool m_use_stencil;
+        //gl
+        u32 m_gl_tex;
         //metal专用参数
         void* m_oc_target;
         void* m_oc_texture;

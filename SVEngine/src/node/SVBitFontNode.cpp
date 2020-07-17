@@ -13,7 +13,7 @@
 #include "../mtl/SVMtlCore.h"
 #include "../rendercore/SVRenderMgr.h"
 #include "../rendercore/SVRenderObject.h"
-#include "../basesys/SVStaticData.h"
+#include "../basesys/SVComData.h"
 #include "../rendercore/SVRenderMesh.h"
 #include "../event/SVEventMgr.h"
 #include "../event/SVEvent.h"

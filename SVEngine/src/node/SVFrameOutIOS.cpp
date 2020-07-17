@@ -8,7 +8,7 @@
 #include "SVFrameOutIOS.h"
 #include "../app/SVInst.h"
 #include "../app/SVGlobalMgr.h"
-#include "../basesys/SVStaticData.h"
+#include "../basesys/SVComData.h"
 #include "../mtl/SVTexMgr.h"
 #include "../mtl/SVTexture.h"
 #include "../mtl/SVTextureIOS.h"

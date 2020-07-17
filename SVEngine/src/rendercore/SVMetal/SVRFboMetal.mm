@@ -16,8 +16,6 @@ SVRFboMetal::SVRFboMetal(SVInstPtr _app)
 :SVRFbo(_app) {
     m_pTarget = nullptr;
     m_passDsp = nullptr;
-    m_width = 1;
-    m_height = 1;
     for(s32 i=0;i<MAX_SUPPORT_TEXTAREGT;i++) {
         m_pTargetTex[i] = nullptr;
     }

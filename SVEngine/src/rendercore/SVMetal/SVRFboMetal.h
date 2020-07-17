@@ -19,7 +19,6 @@ namespace sv {
     /*
      渲染目标（主目标，其他目标，都包含在内）
      */
-#define MAX_SUPPORT_TEXTAREGT 4
 
     class SVRFboMetal : public SVRFbo {
     public:
@@ -57,9 +56,6 @@ namespace sv {
         id<MTLTexture> m_pTargetTex[MAX_SUPPORT_TEXTAREGT];
         id<MTLTexture> m_pDepthTex;
         id<MTLTexture> m_pStencilTex;
-        s32 m_width;
-        s32 m_height;
-        s32 m_target_num;
         //
         MTLRenderPassDescriptor* m_passDsp;
         id<MTLCommandBuffer> m_cmdBuffer;

@@ -13,7 +13,7 @@
 #include "../event/SVEventProc.h"
 #include "../base/SVDef.h"
 #include "../node/SVNodeDeclare.h"
-#include "../basesys/SVStaticData.h"
+#include "../basesys/SVComData.h"
 namespace sv{
     
     class SVDivisonFilter : public SVModuleBase {

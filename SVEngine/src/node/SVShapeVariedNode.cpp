@@ -12,7 +12,7 @@
 //#include "../event/SVEvent.h"
 //#include "../event/SVOpEvent.h"
 //#include "../basesys/SVSceneMgr.h"
-//#include "../basesys/SVStaticData.h"
+//#include "../basesys/SVComData.h"
 //#include "../rendercore/SVRenderMgr.h"
 //#include "../rendercore/SVRenderObject.h"
 //#include "../rendercore/SVRenderMesh.h"

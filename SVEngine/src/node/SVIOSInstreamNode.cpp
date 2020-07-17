@@ -10,7 +10,7 @@
 #include "SVScene.h"
 #include "../app/SVInst.h"
 #include "../basesys/SVSceneMgr.h"
-#include "../basesys/SVStaticData.h"
+#include "../basesys/SVComData.h"
 #include "../mtl/SVTexMgr.h"
 #include "../mtl/SVTexture.h"
 #include "../mtl/SVTextureIOS.h"

@@ -12,7 +12,7 @@
 #include "../mtl/SVTexMgr.h"
 #include "../core/SVMathHelper.h"
 #include "../basesys/SVConfig.h"
-#include "../basesys/SVStaticData.h"
+#include "../basesys/SVComData.h"
 #include "../basesys/SVFaceDataMesh.h"
 #include "../rendercore/SVRenderMesh.h"
 #include "../rendercore/SVRenderMgr.h"

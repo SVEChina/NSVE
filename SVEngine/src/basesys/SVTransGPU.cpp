@@ -11,7 +11,7 @@
 #include "../node/SVMultPassNode.h"
 #include "../core/SVPass.h"
 #include "../basesys/SVSceneMgr.h"
-#include "../basesys/SVStaticData.h"
+#include "../basesys/SVComData.h"
 #include "../app/SVInst.h"
 #include "../rendercore/SVRenderMgr.h"
 #include "../rendercore/SVRenderObject.h"

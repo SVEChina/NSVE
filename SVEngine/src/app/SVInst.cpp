@@ -208,10 +208,11 @@ SVDeformMgrPtr SVInst::getDeformMgr(){
     return m_pGlobalMgr->m_pDeformSys;
 }
 
-SVStaticDataPtr SVInst::getDataMgr(){
+SVComDataPtr SVInst::getDataMgr(){
     if(!m_pGlobalMgr)
         return nullptr;
-    return m_pGlobalMgr->m_pStaticData;
+    return m_pGlobalMgr->m_pComData
+;
 }
 
 SVModelMgrPtr SVInst::getModelMgr(){

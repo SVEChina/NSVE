@@ -30,7 +30,8 @@ namespace sv {
     //模块module
     DECLARE_SHAREPTR(SVFileMgr);
     DECLARE_SHAREPTR(SVConfig);
-    DECLARE_SHAREPTR(SVStaticData);
+    DECLARE_SHAREPTR(SVComData
+);
     DECLARE_SHAREPTR(SVFaceDataMesh);
     
     //渲染路径

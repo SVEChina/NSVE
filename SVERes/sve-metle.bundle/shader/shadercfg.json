@@ -1,0 +1,20 @@
+{
+  "shader": [
+    {
+      "vs": "screen",
+      "fs": "screen",
+      "gs": ""
+      "tse": ""
+      "tsd": ""
+      "programme": "screen"
+    },
+    {
+      "vs": "mask",
+      "fs": "mask",
+      "gs": ""
+      "tse": ""
+      "tsd": ""
+      "programme": "mask2d"
+    }
+  ]
+}

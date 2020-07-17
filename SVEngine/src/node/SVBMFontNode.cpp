@@ -9,7 +9,7 @@
 #include "SVScene.h"
 #include "SVCameraNode.h"
 #include "../basesys/SVBasicSys.h"
-#include "../basesys/SVStaticData.h"
+#include "../basesys/SVComData.h"
 #include "../basesys/SVConfig.h"
 #include "../basesys/SVFontProcess.h"
 #include "../core/SVBMFont.h"

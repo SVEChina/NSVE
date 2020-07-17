@@ -12,6 +12,8 @@
 
 namespace sv {
     
+    #define MAX_SUPPORT_TEXTAREGT 4
+
     class SVRFbo: public SVRRes{
     public:
         SVRFbo(SVInstPtr _app);
@@ -30,6 +32,9 @@ namespace sv {
 
     protected:
         SVLockPtr m_texLock;
+        s32 m_width;
+        s32 m_height;
+        s32 m_target_num;
     };
         
 }//!namespace sv

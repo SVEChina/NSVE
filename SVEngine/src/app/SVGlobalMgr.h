@@ -56,7 +56,7 @@ namespace sv {
         //模型部分
         SVModelMgrPtr  m_pModelMgr;
         //静态数据
-        SVStaticDataPtr m_pStaticData;
+        SVComDataPtr m_pComData;
         //
         SVPythonSysPtr m_pPythonSys;
         //变形形同

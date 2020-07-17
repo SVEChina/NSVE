@@ -26,7 +26,7 @@
 #include "../../basesys/filter/SVFilterGlow.h"
 #include "../../basesys/filter/SVFilterBlur.h"
 #include "../../basesys/filter/SVFilterBase.h"
-#include "../../basesys/SVStaticData.h"
+#include "../../basesys/SVComData.h"
 #include "../../basesys/SVConfig.h"
 #include "../../basesys/SVSensorProcess.h"
 #include "../../node/SVMultPassNode.h"

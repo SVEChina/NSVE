@@ -16,7 +16,7 @@
 #include "../mtl/SVMtlCore.h"
 #include "../work/SVTdCore.h"
 #include "../basesys/SVConfig.h"
-#include "../basesys/SVStaticData.h"
+#include "../basesys/SVComData.h"
 #include "../app/SVInst.h"
 #include "../env/SVCtxBase.h"
 

@@ -11,7 +11,7 @@
 #include "SVNodeVisit.h"
 #include "../app/SVGlobalMgr.h"
 #include "../app/SVGlobalParam.h"
-#include "../basesys/SVStaticData.h"
+#include "../basesys/SVComData.h"
 #include "../rendercore/SVRenderMgr.h"
 #include "../rendercore/SVRenderScene.h"
 #include "../rendercore/SVRenderer.h"

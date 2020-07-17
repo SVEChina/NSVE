@@ -13,7 +13,10 @@
 using namespace sv;
 
 SVRFbo::SVRFbo(SVInstPtr _app)
-:SVRRes(_app){
+:SVRRes(_app)
+,m_width(1)
+,m_height(1)
+,m_target_num(1){
 }
 
 SVRFbo:: ~SVRFbo(){

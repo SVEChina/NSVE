@@ -13,7 +13,7 @@
 #include "../basesys/SVFontProcess.h"
 #include "../basesys/SVSceneMgr.h"
 #include "../basesys/SVCameraMgr.h"
-#include "../basesys/SVStaticData.h"
+#include "../basesys/SVComData.h"
 #include "../basesys/SVDeformMgr.h"
 #include "../basesys/SVModelMgr.h"
 #include "../basesys/SVPhysicsWorldMgr.h"
@@ -45,7 +45,7 @@ SVGlobalMgr::SVGlobalMgr(SVInstPtr _app)
     m_pTexMgr = nullptr;
     m_pRenderMgr = nullptr;
     m_pDetectMgr = nullptr;
-    m_pStaticData = nullptr;
+    m_pComData = nullptr;
     m_pModelMgr = nullptr;
     m_pDeformSys = nullptr;
     m_pPhysicSys =nullptr;
@@ -63,7 +63,7 @@ SVGlobalMgr::~SVGlobalMgr() {
     m_pTexMgr = nullptr;
     m_pRenderMgr = nullptr;
     m_pDetectMgr = nullptr;
-    m_pStaticData = nullptr;
+    m_pComData = nullptr;
     m_pModelMgr = nullptr;
     m_pDeformSys = nullptr;
     m_pPhysicSys =nullptr;
@@ -87,8 +87,9 @@ void SVGlobalMgr::init() {
     m_pRenderMgr = MakeSharedPtr<SVRenderMgr>(mApp);
     m_pRenderMgr->init();
     //构建静态数据
-    m_pStaticData = MakeSharedPtr<SVStaticData>(mApp);
-    m_pStaticData->init();
+    m_pComData = MakeSharedPtr<SVComData
+>(mApp);
+    m_pComData->init();
 //    //消息系统建立起来
 //    m_pEventMgr = MakeSharedPtr<SVEventMgr>(mApp);
 //    m_pEventMgr->init();

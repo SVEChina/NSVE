@@ -6,7 +6,7 @@
 //
 
 #include "SVSceneMgr.h"
-#include "SVStaticData.h"
+#include "SVComData.h"
 #include "../basesys/SVBasicSys.h"
 #include "../node/SVScene.h"
 #include "../node/SVCameraNode.h"

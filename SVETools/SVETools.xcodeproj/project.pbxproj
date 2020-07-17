@@ -18,6 +18,8 @@
 		5FD7F21C247D294F00A53A1D /* CGUI.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5FD7F218247D294F00A53A1D /* CGUI.mm */; };
 		5FD7F21D247D294F00A53A1D /* CGInst.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5FD7F219247D294F00A53A1D /* CGInst.mm */; };
 		5FD7F21E247D294F00A53A1D /* CGState.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5FD7F21A247D294F00A53A1D /* CGState.mm */; };
+		5FF2B80B24C1509300FC0BC9 /* sve-metle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5FF2B80424C1509200FC0BC9 /* sve-metle.bundle */; };
+		5FF2B80C24C1509300FC0BC9 /* sve.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5FF2B80524C1509200FC0BC9 /* sve.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +73,8 @@
 		5FD7F219247D294F00A53A1D /* CGInst.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = CGInst.mm; sourceTree = "<group>"; };
 		5FD7F21A247D294F00A53A1D /* CGState.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = CGState.mm; sourceTree = "<group>"; };
 		5FD7F21B247D294F00A53A1D /* CGUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGUI.h; sourceTree = "<group>"; };
+		5FF2B80424C1509200FC0BC9 /* sve-metle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "sve-metle.bundle"; sourceTree = "<group>"; };
+		5FF2B80524C1509200FC0BC9 /* sve.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = sve.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +94,7 @@
 		5FD7F1E2247D064F00A53A1D = {
 			isa = PBXGroup;
 			children = (
+				5FF2B80324C1509200FC0BC9 /* SVERes */,
 				5FD7F210247D0FE000A53A1D /* Frameworks */,
 				5FD7F1EC247D064F00A53A1D /* Products */,
 				5FD7F1FF247D06B700A53A1D /* SVEngine.xcodeproj */,
@@ -145,6 +150,16 @@
 				5FD7F212247D0FF600A53A1D /* QuartzCore.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5FF2B80324C1509200FC0BC9 /* SVERes */ = {
+			isa = PBXGroup;
+			children = (
+				5FF2B80424C1509200FC0BC9 /* sve-metle.bundle */,
+				5FF2B80524C1509200FC0BC9 /* sve.bundle */,
+			);
+			name = SVERes;
+			path = ../SVERes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -241,8 +256,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5FF2B80C24C1509300FC0BC9 /* sve.bundle in Resources */,
 				5FD7F1F2247D065000A53A1D /* Assets.xcassets in Resources */,
 				5FD7F1F5247D065000A53A1D /* MainMenu.xib in Resources */,
+				5FF2B80B24C1509300FC0BC9 /* sve-metle.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
