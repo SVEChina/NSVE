@@ -15,6 +15,7 @@
 #include "../file/SVFileMgr.h"
 #include "../basesys/SVBasicSys.h"
 #include "../basesys/SVConfig.h"
+#include "../file/SVFileMgr.h"
 #include "../operate/SVOpBase.h"
 #include "../operate/SVOpCreate.h"
 #include "../operate/SVOpThread.h"
@@ -31,10 +32,14 @@ SVInst::SVInst() {
     m_svst = SV_ST_NULL;
     m_engTimeState = ENG_TS_NOR;
     m_ctx = nullptr;
+    m_pFileMgr = nullptr;
+    m_pConfig = nullptr;
 }
 
 SVInst::~SVInst() {
     m_ctx = nullptr;
+    m_pFileMgr = nullptr;
+    m_pConfig = nullptr;
 }
 
 SVInstPtr SVInst::makeCreate() {
@@ -50,19 +55,27 @@ SVInstPtr SVInst::share() {
 void SVInst::init() {
     m_pRM = nullptr;
     //
-    m_pGlobalMgr = MakeSharedPtr<SVGlobalMgr>( share() );
-    m_pGlobalMgr->init();
-    //
-    m_pGlobalMgr->m_pConfig = MakeSharedPtr<SVConfig>( share()  );
-    m_pGlobalMgr->m_pConfig->init();
+    if(!m_pFileMgr) {
+        m_pFileMgr = MakeSharedPtr<SVFileMgr>(share());
+    }
+    //配置系统
+    if (!m_pConfig) {
+        m_pConfig = MakeSharedPtr<SVConfig>(share());
+        m_pConfig->init();
+    }
+    //加载配置
+    m_pConfig->loadConfig();
     //
     m_pGlobalParam = MakeSharedPtr<SVGlobalParam>( share() );
+    m_pGlobalMgr = MakeSharedPtr<SVGlobalMgr>( share() );
+    m_pGlobalMgr->init();
     m_svst = SV_ST_WAIT;
 }
 
 void SVInst::destroy() {
     m_pGlobalMgr = nullptr;
     m_pGlobalParam = nullptr;
+    m_pFileMgr = nullptr;
     m_svst = SV_ST_NULL;
 }
 
@@ -81,6 +94,7 @@ SVRendererPtr SVInst::createRM(SV_RM_TYPE _type) {
 //销毁渲染器
 void SVInst::destroyRM() {
     //
+    
 }
 
 //跑线程模型 就是引擎运行
@@ -118,7 +132,10 @@ void SVInst::clearCache(){
 
 //
 void SVInst::addRespath(cptr8 path) {
-    m_pGlobalMgr->m_pFileMgr->addRespath(path);
+    if(!m_pFileMgr) {
+         m_pFileMgr = MakeSharedPtr<SVFileMgr>(share());
+    }
+    m_pFileMgr->addRespath(path);
 }
 
 void SVInst::setTimeState(SV_ENG_TIMESTATE _mode){
@@ -131,15 +148,11 @@ SV_ENG_TIMESTATE SVInst::getTimeState(){
 
 //
 SVFileMgrPtr SVInst::getFileMgr(){
-    if(!m_pGlobalMgr)
-        return nullptr;
-    return m_pGlobalMgr->m_pFileMgr;
+    return m_pFileMgr;
 }
 
 SVConfigPtr SVInst::getConfig(){
-    if(!m_pGlobalMgr)
-        return nullptr;
-    return m_pGlobalMgr->m_pConfig;
+    return m_pConfig;
 }
 
 SVEventMgrPtr SVInst::getEventMgr(){

@@ -13,10 +13,11 @@
 
 using namespace sv;
 
-void SVRenderMesh::buildBufferDsp(VFTYPE _vertype,BUFFERTYPE _buftype,s32 _bufsize,void* _data,BufferDsp* _dsp) {
+void SVRenderMesh::buildBufferDsp(VFTYPE _vertype,BUFFERTYPE _buftype,s32 _vertCnt,s32 _bufsize,void* _data,BufferDsp* _dsp) {
     if(_dsp) {
         _dsp->_bufVertDsp = _vertype;
         _dsp->_bufType = _buftype;
+        _dsp->_vertCnt = _vertCnt;
         _dsp->_bufSize = _bufsize;
         _dsp->_bufData = nullptr;
         if(_data) {
@@ -58,13 +59,8 @@ void SVRenderMesh::setIndexDsp(BufferDsp& _dsp) {
 }
 
 //
-void SVRenderMesh::setVertDsp(BufferDsp& _dsp,s32 _index) {
-    if(m_vert_dsp.size() == 0) {
-        m_vert_dsp.resize(SV_MAX_STREAM_NUM);
-    }
-    if(_index<SV_MAX_STREAM_NUM) {
-        m_vert_dsp[_index] = _dsp;
-    }
+void SVRenderMesh::setVertDsp(BufferDsp& _dsp) {
+    m_vert_dsp = _dsp;
 }
 
 //
@@ -85,10 +81,8 @@ s32 SVRenderMesh::getStreamNum() {
     return 0;
 }
 
-BufferDsp* SVRenderMesh::getStreamDsp(s32 _index) {
-    if(_index<m_vert_dsp.size())
-        return &m_vert_dsp[_index];
-    return nullptr;
+BufferDsp* SVRenderMesh::getStreamDsp() {
+    return &m_vert_dsp;
 }
 
 bool SVRenderMesh::useInstance() {

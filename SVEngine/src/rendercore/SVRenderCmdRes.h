@@ -21,7 +21,7 @@ namespace sv {
         
         ~SVRCmdCreateMesh();
         
-        void render(SVRendererPtr _renderer);
+        void render(SVRendererPtr _renderer,SVRTargetPtr _target);
         
     protected:
         SVRenderMeshPtr m_rendermesh;
@@ -34,7 +34,7 @@ namespace sv {
         
         ~SVRCmdCreateShader();
         
-        void render(SVRendererPtr _renderer);
+        void render(SVRendererPtr _renderer,SVRTargetPtr _target);
         
     protected:
         SVShaderPtr m_shader;
@@ -47,7 +47,7 @@ namespace sv {
         
         ~SVRCmdCreateTex();
         
-        void render(SVRendererPtr _renderer);
+        void render(SVRendererPtr _renderer,SVRTargetPtr _target);
         
     protected:
         SVTexturePtr m_texture;
@@ -61,7 +61,7 @@ namespace sv {
         
         ~SVRCmdCreateFbo();
         
-        void render(SVRendererPtr _renderer);
+        void render(SVRendererPtr _renderer,SVRTargetPtr _target);
         
     protected:
         SVRTargetPtr m_rtarget;

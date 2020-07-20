@@ -42,10 +42,10 @@ SVPenDraw::SVPenDraw(SVInstPtr _app)
 :SVGameBase(_app)
 ,m_curStroke(nullptr){
     m_lock = MakeSharedPtr<SVLock>();
-    m_strokeWidth = mApp->m_pGlobalMgr->m_pConfig->m_strokeWidth;
-    m_strokeColor = mApp->m_pGlobalMgr->m_pConfig->m_strokeColor;
-    m_glowWidth = mApp->m_pGlobalMgr->m_pConfig->m_strokeGlowWidth;
-    m_glowColor = mApp->m_pGlobalMgr->m_pConfig->m_strokeGlowColor;
+    m_strokeWidth = mApp->m_pConfig->m_strokeWidth;
+    m_strokeColor = mApp->m_pConfig->m_strokeColor;
+    m_glowWidth = mApp->m_pConfig->m_strokeGlowWidth;
+    m_glowColor = mApp->m_pConfig->m_strokeGlowColor;
     m_faceRot.set(0.0f, 0.0f, 0.0f);
     m_noseCenter.set(0.0f, 0.0f, 0.0f);
     m_faceEyeDis = 1.0f;

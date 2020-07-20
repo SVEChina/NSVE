@@ -65,6 +65,10 @@ namespace sv {
     public:
         //唯一ID池
         SVIDPool m_IDPool;
+        //文件部分
+        SVFileMgrPtr m_pFileMgr;
+        //配置部分
+        SVConfigPtr m_pConfig;
         //全局对象
         SVGlobalMgrPtr m_pGlobalMgr;
         //全局参数

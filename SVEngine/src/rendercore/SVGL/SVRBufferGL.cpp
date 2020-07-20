@@ -58,35 +58,33 @@ void SVRBufferGL::create(SVRendererPtr _renderer) {
         if(t_stream_num>0 && t_stream_num<MAX_VERTEX_STEAM_NUM) {
             m_bufnum = t_stream_num;
             glGenBuffers(t_stream_num, m_bufID);
-            for(s32 i=0;i<t_stream_num;i++) {
-                BufferDsp* t_dsp = t_rendermesh->getStreamDsp(i);
-                if(t_dsp){
-                    glBindBuffer(GL_ARRAY_BUFFER, m_bufID[i]);
-                    m_ver_dsp.push_back(t_dsp->_bufVertDsp);
-                    //
-                    s32 t_pool_type = GL_STATIC_DRAW;
-                    if(t_dsp->_bufType == E_BFT_STATIC_DRAW) {
-                        t_pool_type = GL_STATIC_DRAW;
-                    }else if(t_dsp->_bufType == E_BFT_DYNAMIC_DRAW) {
-                        t_pool_type = GL_DYNAMIC_DRAW;
-                    }else if(t_dsp->_bufType == E_BFT_STREAM_DRAW) {
-                        t_pool_type = GL_STREAM_DRAW;
-                    }
-                    //
-                    if(t_dsp->_bufData) {
-                        glBufferData(GL_ARRAY_BUFFER,
-                                     t_dsp->_bufData->getSize(),
-                                     t_dsp->_bufData->getData(),
-                                     t_pool_type);
-                        
-                    }else{
-                        glBufferData(GL_ARRAY_BUFFER,
-                                     t_dsp->_bufSize,
-                                     0,
-                                     t_pool_type);
-                    }
-                }//!dsp
-            }//!for
+            BufferDsp* t_dsp = t_rendermesh->getStreamDsp();
+//            for(s32 i=0;i<t_stream_num;i++) {
+//                glBindBuffer(GL_ARRAY_BUFFER, m_bufID[i]);
+//                m_ver_dsp.push_back(t_dsp->_bufVertDsp);
+//                //
+//                s32 t_pool_type = GL_STATIC_DRAW;
+//                if(t_dsp->_bufType == E_BFT_STATIC_DRAW) {
+//                    t_pool_type = GL_STATIC_DRAW;
+//                }else if(t_dsp->_bufType == E_BFT_DYNAMIC_DRAW) {
+//                    t_pool_type = GL_DYNAMIC_DRAW;
+//                }else if(t_dsp->_bufType == E_BFT_STREAM_DRAW) {
+//                    t_pool_type = GL_STREAM_DRAW;
+//                }
+//                //
+//                if(t_dsp->_bufData) {
+//                    glBufferData(GL_ARRAY_BUFFER,
+//                                 t_dsp->_bufData->getSize(),
+//                                 t_dsp->_bufData->getData(),
+//                                 t_pool_type);
+//                    
+//                }else{
+//                    glBufferData(GL_ARRAY_BUFFER,
+//                                 t_dsp->_bufSize,
+//                                 0,
+//                                 t_pool_type);
+//                }
+//            }//!for
         }
         //多实例
         if( t_rendermesh->useInstance() ) {

@@ -54,11 +54,13 @@ static CGInst *mInst;
 
 -(void)initSVE{
     m_pSVE = sv::SVInst::makeCreate();
+    //
+    NSString* t_sve_path = [[NSBundle mainBundle] pathForResource:@"sve-metal" ofType:@"bundle"];
+    NSString* t_sve_path_ = [t_sve_path stringByAppendingString:@"/"];
+    m_pSVE->addRespath([t_sve_path_ UTF8String]);
+    //
     m_pSVE->init();
-//    NSString* t_sve_path = [[NSBundle mainBundle] pathForResource:@"sve_gl" ofType:@"bundle"];
-//    NSString* t_sve_path_ = [t_sve_path stringByAppendingString:@"/"];
-//    m_pSVE->addRespath([t_sve_path_ UTF8String]);
-//    m_pSVE->addRespath("");
+   
 //    m_pSVE->startSVE();
 }
 

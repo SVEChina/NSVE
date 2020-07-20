@@ -159,12 +159,12 @@ void SVRFboMetal::bind(SVRendererPtr _renderer) {
             if(m_pTargetTex[i]) {
                 m_passDsp.colorAttachments[i].texture = m_pTargetTex[i];
                 m_passDsp.colorAttachments[i].loadAction = MTLLoadActionClear;
-                m_passDsp.colorAttachments[i].storeAction = MTLStoreActionStore;
+                m_passDsp.colorAttachments[i].storeAction = MTLStoreActionDontCare;
                 m_passDsp.colorAttachments[i].clearColor = MTLClearColorMake(1, 0, 0, 1);
             }else{
                 m_passDsp.colorAttachments[i].texture = nullptr;
                 m_passDsp.colorAttachments[i].loadAction = MTLLoadActionClear;
-                m_passDsp.colorAttachments[i].storeAction = MTLStoreActionStore;
+                m_passDsp.colorAttachments[i].storeAction = MTLStoreActionDontCare;
                 m_passDsp.colorAttachments[i].clearColor = MTLClearColorMake(1, 0, 0, 1);
             }
         }
@@ -172,14 +172,14 @@ void SVRFboMetal::bind(SVRendererPtr _renderer) {
         if(m_pDepthTex) {
             m_passDsp.depthAttachment.texture = m_pDepthTex;
             m_passDsp.depthAttachment.loadAction = MTLLoadActionClear;
-            m_passDsp.depthAttachment.storeAction = MTLStoreActionStore;
+            m_passDsp.depthAttachment.storeAction = MTLStoreActionDontCare;
             m_passDsp.depthAttachment.clearDepth = 1.0;
         }
         //支持模版
         if(m_pStencilTex) {
             m_passDsp.stencilAttachment.texture = m_pStencilTex;
             m_passDsp.stencilAttachment.loadAction = MTLLoadActionClear;
-            m_passDsp.stencilAttachment.storeAction = MTLStoreActionStore;
+            m_passDsp.stencilAttachment.storeAction = MTLStoreActionDontCare;
             m_passDsp.stencilAttachment.clearStencil = 0;
         }
         //
@@ -194,28 +194,3 @@ void SVRFboMetal::unbind(SVRendererPtr _renderer) {
     [m_cmdBuffer presentDrawable:m_pTarget];
     [m_cmdBuffer commit];
 }
-
-//void SVRFboMetal::_preRender(SVRendererPtr _renderer) {
-//    m_passDsp.colorAttachments[0].texture = m_pTargetTex;
-//    m_passDsp.colorAttachments[0].loadAction = MTLLoadActionClear;
-//    m_passDsp.colorAttachments[0].storeAction = MTLStoreActionStore;
-//    m_passDsp.colorAttachments[0].clearColor = MTLClearColorMake(1, 0, 0, 1);
-//    SVRendererMetalPtr t_rm = std::dynamic_pointer_cast<SVRendererMetal>(_renderer);
-//    m_cmdBuffer = [t_rm->m_pCmdQueue commandBuffer];
-//    m_cmdEncoder = [m_cmdBuffer renderCommandEncoderWithDescriptor:m_passDsp];
-//}
-//
-//void SVRFboMetal::_render(SVRendererPtr _renderer) {
-//    SVRendererMetalPtr t_rm = std::dynamic_pointer_cast<SVRendererMetal>(_renderer);
-//    //数据，数据，数据
-//
-//}
-//
-//void SVRFboMetal::_afterRender(SVRendererPtr _renderer) {
-////SVRendererMetalPtr t_rm = std::dynamic_pointer_cast<SVRendererMetal>(_renderer);
-////    [m_cmdEncoder endEncoding];
-////    [m_cmdBuffer presentDrawable:m_pTarget];
-////    [m_cmdBuffer commit];
-//}
-
-

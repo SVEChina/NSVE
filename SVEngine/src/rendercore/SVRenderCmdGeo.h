@@ -23,7 +23,7 @@ namespace sv {
             
             ~SVRenderCmdGeo();
             
-            virtual void render(SVRendererPtr _renderer);
+            virtual void render(SVRendererPtr _renderer,SVRTargetPtr _target);
             
 //            void setMtl(SVMtlCorePtr _material);
             
@@ -39,7 +39,7 @@ namespace sv {
             void setLine(FVec3& _start,FVec3& _end);
             
         protected:
-            virtual void _render(SVRendererPtr _renderer);
+            virtual void _render(SVRendererPtr _renderer,SVRTargetPtr _target);
             
             FVec3 m_start;
             FVec3 m_end;
@@ -51,7 +51,7 @@ namespace sv {
             void setRect(SVRect& _rect);
             
         protected:
-            virtual void _render(SVRendererPtr _renderer);
+            virtual void _render(SVRendererPtr _renderer,SVRTargetPtr _target);
             
             SVRect m_rect;
         };
@@ -61,7 +61,7 @@ namespace sv {
         public:
             
         protected:
-            virtual void _render(SVRendererPtr _renderer);
+            virtual void _render(SVRendererPtr _renderer,SVRTargetPtr _target);
         
         public:
             SVArray<FVec3> m_ptList;
@@ -72,7 +72,7 @@ namespace sv {
         public:
             
         protected:
-            virtual void _render();
+            virtual void _render(SVRendererPtr _renderer,SVRTargetPtr _target);
             FVec3 m_center;
             f32 m_radius;
             f32 m_angle;
@@ -83,7 +83,7 @@ namespace sv {
         public:
             
         protected:
-            virtual void _render(SVRendererPtr _renderer);
+            virtual void _render(SVRendererPtr _renderer,SVRTargetPtr _target);
             FVec3 m_center;
             f32 m_radius;
             f32 m_angle;
@@ -95,7 +95,7 @@ namespace sv {
             void setAABB(SVBoundBox& _aabb);
             
         protected:
-            virtual void _render(SVRendererPtr _renderer);
+            virtual void _render(SVRendererPtr _renderer,SVRTargetPtr _target);
             
             SVBoundBox m_aabb;
         };

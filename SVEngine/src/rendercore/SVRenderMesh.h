@@ -17,31 +17,42 @@
 
 namespace sv {
 
-//最大支持10个流
-#define SV_MAX_STREAM_NUM 10
+    //最大支持10个流
+    #define SV_MAX_STREAM_NUM 10
+    //
+    //1.AOS模式  混合流
+    //2.SOA模式  拆分流
     //
     struct BufferDsp {
         BufferDsp() {
-            _bufData = nullptr;
-            _bufSize = 0;
-            _bufType = E_BFT_STATIC_DRAW;
+            _bufMode = E_BFM_AOS;
             _bufVertDsp = E_VF_BASE;
+            _bufType = E_BFT_STATIC_DRAW;
+            _vertCnt = 0;
+            _bufSize = 0;
+            _bufData = nullptr;
         };
         
         ~BufferDsp() {
-            _bufData = nullptr;
-            _bufSize = 0;
-            _bufType = E_BFT_STATIC_DRAW;
+            _bufMode = E_BFM_AOS;
             _bufVertDsp = E_VF_BASE;
+            _bufType = E_BFT_STATIC_DRAW;
+            _vertCnt = 0;
+            _bufSize = 0;
+            _bufData = nullptr;
         };
-        //数据
-        SVDataSwapPtr _bufData;
-        //数据尺寸
-        s32 _bufSize;
-        //数据类型
-        BUFFERTYPE _bufType;
+        //
+        BUFFERMODE _bufMode;
         //数据顶点描述
         VFTYPE _bufVertDsp;
+        //数据类型
+        BUFFERTYPE _bufType;
+        //数据个数
+        s32 _vertCnt;
+        //数据尺寸
+        s32 _bufSize;
+        //数据
+        SVDataSwapPtr _bufData;
     };
 
     /*
@@ -49,7 +60,7 @@ namespace sv {
      */
     class SVRenderMesh : public SVGBaseEx {
     public:
-        static void buildBufferDsp(VFTYPE _vertype,BUFFERTYPE _buftype,s32 _bufsize,void* _data,BufferDsp* _dsp);
+        static void buildBufferDsp(VFTYPE _vertype,BUFFERTYPE _buftype,s32 _vertCnt,s32 _bufsize,void* _data,BufferDsp* _dsp);
         
     public:
         SVRenderMesh(SVInstPtr _app);
@@ -65,7 +76,7 @@ namespace sv {
         //设置各种描述
         void setIndexDsp(BufferDsp& _dsp);
         
-        void setVertDsp(BufferDsp& _dsp,s32 _index = 0);
+        void setVertDsp(BufferDsp& _dsp);
         
         void setInstanceDsp(BufferDsp& _dsp);
         
@@ -79,7 +90,7 @@ namespace sv {
         s32 getStreamNum();
         
         //获取流数据描述
-        BufferDsp* getStreamDsp(s32 _index);
+        BufferDsp* getStreamDsp();
         
         bool useInstance();
         
@@ -103,7 +114,7 @@ namespace sv {
         bool m_use_instance;
         //索引数据
         BufferDsp m_index_dsp;
-        std::vector<BufferDsp> m_vert_dsp;
+        BufferDsp m_vert_dsp;
         BufferDsp m_instance_dsp;
        
     public:

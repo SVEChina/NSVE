@@ -36,14 +36,6 @@ namespace sv {
 
         virtual void unbind(SVRendererPtr _renderer);
         
-//        void init(id<MTLDrawable> _target,id<MTLTexture> _targetTex);
-
-//    protected:
-//        void _preRender(SVRendererPtr _renderer);
-//        
-//        void _render(SVRendererPtr _renderer);
-//        
-//        void _afterRender(SVRendererPtr _renderer);
     private:
         void _createCommonBuf(SVRendererMetalPtr _renderer);
         

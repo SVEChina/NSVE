@@ -75,7 +75,7 @@ SVModuleBasePtr SVParseMain::parse(cptr8 path, s32 resid) {
     SVString config_name = t_path + "config.json";
     SVDataChunk tDataStream;
     SV_LOG_ERROR("SVParseMain::parse begin config name %s\n", config_name.get());
-    bool tflag = mApp->m_pGlobalMgr->m_pFileMgr->loadFileContentStr(&tDataStream, config_name.get());
+    bool tflag = mApp->m_pFileMgr->loadFileContentStr(&tDataStream, config_name.get());
     if (!tflag)
         return nullptr;
     SV_LOG_ERROR("SVParseMain::load effect sucess\n");

@@ -288,9 +288,10 @@ struct V3_PARTICLE {
 
 //
 //顶点格式索引
-#define D_VF_NULL 0x0000
-#define D_VF_V2   0x0001
-#define D_VF_V3   0x0002
+#define D_VF_NULL  0x0000
+#define D_VF_INDEX 0x0001
+#define D_VF_V2    0x0002
+#define D_VF_V3    0x0004
 #define D_VF_NOR  0x0010
 #define D_VF_TAG  0x0020
 #define D_VF_BTAG 0x0040
@@ -308,7 +309,8 @@ struct V3_PARTICLE {
 #define D_VF_INSOFFSET 0x00200000
 
 enum VFTYPE {
-    E_VF_BASE = 0,
+    E_VF_BASE = D_VF_NULL,
+    E_VF_INDEX = D_VF_INDEX,
     E_VF_V2 = D_VF_V2,
     E_VF_V2_T0 = D_VF_V2 | D_VF_T0,
     E_VF_V2_T0_T1 = D_VF_V2 | D_VF_T0 | D_VF_T1,
@@ -335,13 +337,18 @@ enum VFTYPE {
     E_VF_V3_PARTICLE = D_VF_PARTICLE
 };
 
+//
+enum BUFFERMODE {
+    E_BFM_AOS,      //混合流
+    E_BFM_SOA       //单一流
+};
+
+//
 enum BUFFERTYPE {
     E_BFT_STATIC_DRAW,
     E_BFT_DYNAMIC_DRAW,
     E_BFT_STREAM_DRAW
 };
-
- //STATIC_DRAW, STREAM_DRAW, DYNAMIC_DRAW
 
 //
 enum DRAWMETHOD {

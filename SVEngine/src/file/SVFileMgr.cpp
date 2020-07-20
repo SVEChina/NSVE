@@ -14,6 +14,7 @@ using namespace sv;
 SVFileMgr::SVFileMgr(SVInstPtr _app)
 :SVSysBase(_app) {
     m_fileLock = MakeSharedPtr<SVLock>();
+    m_searchPathPool.push_back("");
 }
 
 SVFileMgr::~SVFileMgr() {
@@ -37,25 +38,29 @@ bool SVFileMgr::_hasRespath(cptr8 _path) {
 void SVFileMgr::addRespath(cptr8 _path) {
     m_fileLock->lock();
     if (!_hasRespath(_path)) {
-        m_searchPathPool.append(_path);
+        m_searchPathPool.push_back(_path);
     }
     m_fileLock->unlock();
 }
 
-void SVFileMgr::delRespath(cptr8 _path) {
+bool SVFileMgr::delRespath(cptr8 _path) {
+    bool t_ret = false;
     m_fileLock->lock();
-    for (s32 i = 0; i < m_searchPathPool.size(); i++) {
-        if (strcmp(m_searchPathPool[i].c_str(), _path) == 0) {
-            m_searchPathPool.removeForce(i);
-            m_fileLock->unlock();
-            return;
+    SEARCHPATHPOOL::iterator it = m_searchPathPool.begin();
+    while (it!=m_searchPathPool.end()) {
+        if( (*it) == _path ) {
+            m_searchPathPool.erase(it);
+            t_ret = true;
+            break;
         }
+        it++;
     }
     m_fileLock->unlock();
+    return t_ret;
 }
 
 void SVFileMgr::clearRespath(){
-    m_searchPathPool.destroy();
+    m_searchPathPool.clear();
 }
 
 u64  SVFileMgr::checkFileDataLength(cptr8 _fpath){

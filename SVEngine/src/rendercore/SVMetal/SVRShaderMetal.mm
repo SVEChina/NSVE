@@ -34,28 +34,28 @@ void SVRShaderMetal::create(SVRendererPtr _renderer) {
         return ;
     }
     SVRendererMetalPtr t_rm = std::dynamic_pointer_cast<SVRendererMetal>(_renderer);
-    if( t_shader->m_param.m_dsp &SV_E_TECH_VS ) {
-        NSString* t_str = [NSString stringWithFormat:@"%s",t_shader->m_param.m_vs_fname.c_str()];
+    if( t_shader->m_dsp.m_dsp &SV_E_TECH_VS ) {
+        NSString* t_str = [NSString stringWithFormat:@"%s",t_shader->m_dsp.m_vs_fname.c_str()];
         m_vsf = [t_rm->m_pLibrary newFunctionWithName:t_str];
     }
-    if( t_shader->m_param.m_dsp&SV_E_TECH_FS ) {
-        NSString* t_str = [NSString stringWithFormat:@"%s",t_shader->m_param.m_fs_fname.c_str()];
+    if( t_shader->m_dsp.m_dsp&SV_E_TECH_FS ) {
+        NSString* t_str = [NSString stringWithFormat:@"%s",t_shader->m_dsp.m_fs_fname.c_str()];
         m_fsf = [t_rm->m_pLibrary newFunctionWithName:t_str];
     }
-    if( t_shader->m_param.m_dsp&SV_E_TECH_GS ) {
-        NSString* t_str = [NSString stringWithFormat:@"%s",t_shader->m_param.m_gs_fname.c_str()];
+    if( t_shader->m_dsp.m_dsp&SV_E_TECH_GS ) {
+        NSString* t_str = [NSString stringWithFormat:@"%s",t_shader->m_dsp.m_gs_fname.c_str()];
         m_gsf = [t_rm->m_pLibrary newFunctionWithName:t_str];
     }
 //    if( m_shader_dsp&SV_E_TECH_CS ) {
 //        NSString* t_str = [NSString stringWithFormat:@"%s",t_shader->m_param.m_cs_fname.c_str()];
 //        m_csf = [t_rm->m_pLibrary newFunctionWithName:t_str];
 //    }
-    if( t_shader->m_param.m_dsp&SV_E_TECH_TSC ) {
-        NSString* t_str = [NSString stringWithFormat:@"%s",t_shader->m_param.m_tsc_fname.c_str()];
+    if( t_shader->m_dsp.m_dsp&SV_E_TECH_TSC ) {
+        NSString* t_str = [NSString stringWithFormat:@"%s",t_shader->m_dsp.m_tsc_fname.c_str()];
         m_tscf = [t_rm->m_pLibrary newFunctionWithName:t_str];
     }
-    if( t_shader->m_param.m_dsp&SV_E_TECH_TSD ) {
-        NSString* t_str = [NSString stringWithFormat:@"%s",t_shader->m_param.m_tse_fname.c_str()];
+    if( t_shader->m_dsp.m_dsp&SV_E_TECH_TSD ) {
+        NSString* t_str = [NSString stringWithFormat:@"%s",t_shader->m_dsp.m_tse_fname.c_str()];
         m_tsdf = [t_rm->m_pLibrary newFunctionWithName:t_str];
     }
         //m_rp_dsp = [[MTLRenderPipelineDescriptor alloc] init];

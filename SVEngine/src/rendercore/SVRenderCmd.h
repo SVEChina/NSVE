@@ -25,50 +25,12 @@ namespace sv {
             
             ~SVRenderCmd();
             
-            virtual void render(SVRendererPtr _renderer = nullptr);
+            virtual void render(SVRendererPtr _renderer,SVRTargetPtr _target);
             
             SVString mTag;
             
         };
         
-        //
-        class SVRenderCmdTransGPU : public SVRenderCmd {
-        public:
-            SVRenderCmdTransGPU(SVTransPtr _trans);
-            
-            ~SVRenderCmdTransGPU();
-            
-            virtual void render();
-            
-        protected:
-            SVTransPtr m_trans;
-        };
-        
-        //创建指令
-        class SVRCmdCreate : public SVRenderCmd {
-        public:
-            SVRCmdCreate(SVRResPtr _robj);
-            
-            ~SVRCmdCreate();
-            
-            virtual void render(SVRendererPtr _renderer);
-            
-        protected:
-            SVRResPtr m_pRObj;
-        };
-
-        class SVRCmdDestroy : public SVRenderCmd {
-        public:
-            SVRCmdDestroy(SVRResPtr _robj);
-            
-            ~SVRCmdDestroy();
-            
-            virtual void render(SVRendererPtr _renderer);
-            
-        protected:
-            SVRResPtr m_pRObj;
-        };
-
         //普通渲染命令
         class SVRenderCmdNor : public SVRenderCmd {
         public:
@@ -76,7 +38,7 @@ namespace sv {
             
             ~SVRenderCmdNor();
             
-            virtual void render(SVRendererPtr _renderer);
+            virtual void render(SVRendererPtr _renderer,SVRTargetPtr _target);
             
             void setMesh(SVRenderMeshPtr _mesh);
             
@@ -96,7 +58,7 @@ namespace sv {
             
             void setClearColor(f32 _r,f32 _g,f32 _b,f32 _a);
             
-            virtual void render(SVRendererPtr _renderer);
+            virtual void render(SVRendererPtr _renderer,SVRTargetPtr _target);
             
         protected:
             f32 m_color_r;
@@ -114,7 +76,7 @@ namespace sv {
             
             void setWinSize(s32 _w,s32 _h);
             
-            virtual void render(SVRendererPtr _renderer);
+            virtual void render(SVRendererPtr _renderer,SVRTargetPtr _target);
             
         protected:
             s32 m_winWidth;
@@ -129,7 +91,7 @@ namespace sv {
             
             ~SVRenderCmdPass();
 
-            virtual void render(SVRendererPtr _renderer);
+            virtual void render(SVRendererPtr _renderer,SVRTargetPtr _target);
             
             void setFbo(SVRenderTexturePtr _fbo);
             
@@ -148,7 +110,7 @@ namespace sv {
             
             ~SVRenderCmdPassCollection();
             
-            virtual void render(SVRendererPtr _renderer);
+            virtual void render(SVRendererPtr _renderer,SVRTargetPtr _target);
             
             void setFbo(SVRenderTexturePtr _fbo);
             
@@ -172,13 +134,27 @@ namespace sv {
             
             ~SVRenderCmdFboResize();
             
-            virtual void render(SVRendererPtr _renderer);
+            virtual void render(SVRendererPtr _renderer,SVRTargetPtr _target);
             
         protected:
             SVRFboPtr m_fbo;
             s32 m_width;
             s32 m_height;
         };
+
+        //
+        class SVRenderCmdTransGPU : public SVRenderCmd {
+        public:
+            SVRenderCmdTransGPU(SVTransPtr _trans);
+            
+            ~SVRenderCmdTransGPU();
+            
+            virtual void render(SVRendererPtr _renderer,SVRTargetPtr _target);
+            
+        protected:
+            SVTransPtr m_trans;
+        };
+
         
 
 }//!namespace sv

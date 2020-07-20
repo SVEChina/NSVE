@@ -84,14 +84,14 @@ void SVShaderMgr::_loadAllShader() {
             if(t_shader) {
                 m_shaderMap.insert( std::make_pair(t_programme_name, t_shader) );
                 //
-                t_shader->m_param.m_attri_formate = t_attri_formate;
-                t_shader->m_param.m_vs_fname = t_vs_fname;
-                t_shader->m_param.m_fs_fname = t_fs_fname;
-                t_shader->m_param.m_gs_fname = t_gs_fname;
-                t_shader->m_param.m_cs_fname = t_cs_fname;
-                t_shader->m_param.m_tsc_fname = t_tsc_fname;
-                t_shader->m_param.m_tse_fname = t_tse_fname;
-                t_shader->m_param.m_programme_fname = t_programme_name;
+                t_shader->m_dsp.m_attri_formate = t_attri_formate;
+                t_shader->m_dsp.m_vs_fname = t_vs_fname;
+                t_shader->m_dsp.m_fs_fname = t_fs_fname;
+                t_shader->m_dsp.m_gs_fname = t_gs_fname;
+                t_shader->m_dsp.m_cs_fname = t_cs_fname;
+                t_shader->m_dsp.m_tsc_fname = t_tsc_fname;
+                t_shader->m_dsp.m_tse_fname = t_tse_fname;
+                t_shader->m_dsp.m_programme_fname = t_programme_name;
                 //创建shader
                 SVDispatch::dispatchShaderCreate(mApp,t_shader);
                 SV_LOG_ERROR("shader : vs(%s) fs(%s)\n", t_vs_fname.c_str(),t_fs_fname.c_str());

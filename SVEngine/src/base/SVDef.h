@@ -67,13 +67,24 @@ enum SV_RM_TYPE {
     E_M_METAL
 };
 
+//sv渲染流类型
+enum SV_RSTREAM_TYPE {
+    E_RSM_NOR = 0,          //普通流
+    E_RSM_PRE,              //前向流
+    E_RSM_AFTER,            //后处理流
+    E_RSM_DEBUG,            //调试流
+    E_RSM_CREATE_SHADOW,    //产生阴影流
+    E_RSM_RECEIVE_SHADOW,   //接收阴影流
+    E_RSM_PARTICLE          //粒子流
+};
+
 //设计适配模式
 enum SV_DESIGN_ADAPT_MODE {
     E_APT_M_BODER = 1,   //留空白模式
     E_APT_M_FULL         //全屏铺满模式
 };
 
-//技术类型
+//shader类型
 enum SV_SHADER_TYPE {
     SV_E_TECH_VS = 0x00000001,
     SV_E_TECH_FS = 0x00000010,

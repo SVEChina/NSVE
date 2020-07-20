@@ -32,60 +32,8 @@ SVRenderCmd::SVRenderCmd() {
 SVRenderCmd::~SVRenderCmd() {
 }
 
-void SVRenderCmd::render(SVRendererPtr _renderer) {
+void SVRenderCmd::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
 }
-
-//
-SVRenderCmdTransGPU::SVRenderCmdTransGPU(SVTransPtr _trans):SVRenderCmd() {
-    mTag = "SVRenderCmdTransGPU";
-    m_trans = _trans;
-}
-
-SVRenderCmdTransGPU::~SVRenderCmdTransGPU() {
-    m_trans = nullptr;
-}
-
-void SVRenderCmdTransGPU::render() {
-    if (m_trans) {
-        m_trans->update(0.0f);
-        m_trans->render();
-    }
-}
-
-//创建指令
-SVRCmdCreate::SVRCmdCreate(SVRResPtr _robj) {
-    m_pRObj = _robj;
-}
-
-SVRCmdCreate::~SVRCmdCreate() {
-    m_pRObj = nullptr;
-    //m_pRenderer = nullptr;
-}
-
-void SVRCmdCreate::render(SVRendererPtr _renderer){
-    if(m_pRObj && _renderer){
-        m_pRObj->create(_renderer);
-        _renderer->addRes(m_pRObj);
-    }
-}
-
-
-//创建指令
-SVRCmdDestroy::SVRCmdDestroy(SVRResPtr _robj) {
-    m_pRObj = _robj;
-}
-
-SVRCmdDestroy::~SVRCmdDestroy() {
-    m_pRObj = nullptr;
-}
-
-void SVRCmdDestroy::render(SVRendererPtr _renderer){
-    if(m_pRObj && _renderer){
-        _renderer->removeRes(m_pRObj);
-        m_pRObj->destroy(_renderer);
-    }
-}
-
 
 //普通渲染指令
 SVRenderCmdNor::SVRenderCmdNor() {
@@ -106,7 +54,7 @@ void SVRenderCmdNor::setMaterial(SVMtlCorePtr _mtl){
     m_pMtl = _mtl;
 }
 
-void SVRenderCmdNor::render(SVRendererPtr _renderer) {
+void SVRenderCmdNor::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
     if (m_pMtl && m_pMesh && _renderer) {
         _renderer->processMtl(m_pMtl);
         _renderer->processMesh(m_pMesh);
@@ -132,7 +80,7 @@ void SVRenderCmdClear::setClearColor(f32 _r,f32 _g,f32 _b,f32 _a) {
     m_color_a = _a;
 }
 
-void SVRenderCmdClear::render(SVRendererPtr _renderer){
+void SVRenderCmdClear::render(SVRendererPtr _renderer,SVRTargetPtr _target){
     if(_renderer){
         //_renderer->clear();
     }
@@ -152,13 +100,13 @@ void SVRenderCmdAdapt::setWinSize(s32 _w,s32 _h){
     m_winHeight = _h;
 }
 
-void SVRenderCmdAdapt::render(SVRendererPtr _renderer){
+void SVRenderCmdAdapt::render(SVRendererPtr _renderer,SVRTargetPtr _target){
  //   glViewport( 0, 0,m_winWidth,m_winHeight);
 //    m_pRenderer->svClearColor(m_color_r,m_color_g,m_color_b,m_color_a);
 //    m_pRenderer->svClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 ////    glClearColor(m_color_r,m_color_g,m_color_b,m_color_a);
 ////    glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-    SVRenderCmdNor::render(_renderer);
+    SVRenderCmdNor::render(_renderer,_target);
 }
 
 //渲染命令批次
@@ -182,7 +130,7 @@ void SVRenderCmdPass::setTexture(SVTexturePtr _tex) {
     m_tex = _tex;
 }
 
-void SVRenderCmdPass::render(SVRendererPtr _renderer) {
+void SVRenderCmdPass::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
 //    if(m_fbo && m_tex ) {
 //        m_fbo->setTexture(m_tex);
 //        m_fbo->bind();
@@ -211,7 +159,7 @@ SVRenderCmdPassCollection::~SVRenderCmdPassCollection(){
     m_MeshArray.clear();
 }
 
-void SVRenderCmdPassCollection::render(SVRendererPtr _renderer){
+void SVRenderCmdPassCollection::render(SVRendererPtr _renderer,SVRTargetPtr _target){
 //    if(m_fbo && m_tex ) {
 //        m_fbo->setTexture(m_tex);
 //        m_fbo->bind();
@@ -254,8 +202,25 @@ SVRenderCmdFboResize::~SVRenderCmdFboResize(){
     m_fbo = nullptr;
 }
 
-void SVRenderCmdFboResize::render(SVRendererPtr _renderer) {
+void SVRenderCmdFboResize::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
     if (m_fbo) {
         m_fbo->resize(m_width,m_height);
     }
+}
+
+//
+SVRenderCmdTransGPU::SVRenderCmdTransGPU(SVTransPtr _trans):SVRenderCmd() {
+    mTag = "SVRenderCmdTransGPU";
+    m_trans = _trans;
+}
+
+SVRenderCmdTransGPU::~SVRenderCmdTransGPU() {
+    m_trans = nullptr;
+}
+
+void SVRenderCmdTransGPU::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
+//    if (m_trans) {
+//        m_trans->update(0.0f);
+//        m_trans->render();
+//    }
 }

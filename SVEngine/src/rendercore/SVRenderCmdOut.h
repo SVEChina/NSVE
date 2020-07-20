@@ -24,7 +24,7 @@ namespace sv {
             
             ~SVRenderCmdStreamOutNor();
             
-            virtual void render(SVRendererPtr _renderer);
+            virtual void render(SVRendererPtr _renderer,SVRTargetPtr _target);
             
             void setParam(SVRenderTexturePtr _fbo,SVTexturePtr _tex,SVDataSwapPtr _dataswap,cb_out_stream _cb);
 

@@ -26,7 +26,7 @@ SVRCmdCreateMesh::~SVRCmdCreateMesh() {
     m_rendermesh = nullptr;
 }
 
-void SVRCmdCreateMesh::render(SVRendererPtr _renderer) {
+void SVRCmdCreateMesh::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
     if(m_rendermesh && _renderer) {
         SVRBufferPtr t_rbuffer = _renderer->createResBuf() ;
         t_rbuffer->m_logic_obj = m_rendermesh;
@@ -47,7 +47,7 @@ SVRCmdCreateShader::~SVRCmdCreateShader() {
     m_shader = nullptr;
 }
 
-void SVRCmdCreateShader::render(SVRendererPtr _renderer) {
+void SVRCmdCreateShader::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
     if(m_shader && _renderer) {
         SVRShaderPtr t_rshader = _renderer->createResShader() ;
         t_rshader->m_logic_obj = m_shader;
@@ -68,7 +68,7 @@ SVRCmdCreateTex::~SVRCmdCreateTex(){
     m_texture = nullptr;
 }
 
-void SVRCmdCreateTex::render(SVRendererPtr _renderer) {
+void SVRCmdCreateTex::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
     if(m_texture && _renderer) {
         SVRTexPtr t_rtex = _renderer->createResTexture() ;
         t_rtex->m_logic_obj = m_texture;
@@ -89,7 +89,7 @@ SVRCmdCreateFbo::~SVRCmdCreateFbo(){
     m_rtarget = nullptr;
 }
 
-void SVRCmdCreateFbo::render(SVRendererPtr _renderer) {
+void SVRCmdCreateFbo::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
     if(m_rtarget && _renderer) {
         SVRFboPtr t_rfbo = _renderer->createResFbo() ;
         t_rfbo->m_logic_obj = m_rtarget;

@@ -34,10 +34,10 @@ void SVRenderStream::clearRenderCmd() {
     m_lock->unlock();
 }
 
-void SVRenderStream::render(SVRendererPtr _renderer) {
+void SVRenderStream::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
     m_lock->lock();
     for (s32 i = 0; i < m_cmdArray.size(); i++) {
-        m_cmdArray[i]->render(_renderer);
+        m_cmdArray[i]->render(_renderer,_target);
     }
     m_cmdArray.destroy();
     m_lock->unlock();

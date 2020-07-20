@@ -7,7 +7,6 @@
 
 #include "SVGlobalMgr.h"
 #include "SVInst.h"
-#include "../basesys/SVConfig.h"
 #include "../basesys/SVBasicSys.h"
 #include "../basesys/script/SVPythonSys.h"
 #include "../basesys/SVFontProcess.h"
@@ -19,7 +18,6 @@
 #include "../basesys/SVPhysicsWorldMgr.h"
 #include "../module/SVModuleSys.h"
 #include "../light/SVLightSys.h"
-#include "../file/SVFileMgr.h"
 #include "../event/SVEventMgr.h"
 #include "../mtl/SVTexMgr.h"
 #include "../detect/SVDetectMgr.h"
@@ -35,8 +33,6 @@ using namespace sv;
 SVGlobalMgr::SVGlobalMgr(SVInstPtr _app)
 :SVGBaseEx(_app) {
     //引擎系统和操作指令系统要先建立起来
-    m_pFileMgr = MakeSharedPtr<SVFileMgr>(mApp);
-    m_pConfig = nullptr;
     m_pEventMgr = nullptr;
     m_pBasicSys = nullptr;
     m_pSceneMgr = nullptr;
@@ -53,8 +49,6 @@ SVGlobalMgr::SVGlobalMgr(SVInstPtr _app)
 }
 
 SVGlobalMgr::~SVGlobalMgr() {
-    m_pFileMgr = nullptr;
-    m_pConfig = nullptr;
     m_pEventMgr = nullptr;
     m_pBasicSys = nullptr;
     m_pSceneMgr = nullptr;
@@ -71,24 +65,11 @@ SVGlobalMgr::~SVGlobalMgr() {
 }
 
 void SVGlobalMgr::init() {
-    //推送默认空路径
-    if (!m_pFileMgr) {
-        m_pFileMgr = MakeSharedPtr<SVFileMgr>(mApp);
-    }
-    m_pFileMgr->addRespath("");
-    //配置系统
-    if (!m_pConfig) {
-        m_pConfig = MakeSharedPtr<SVConfig>(mApp);
-        m_pConfig->init();
-    }
-    //加载配置
-    m_pConfig->loadConfig();
     //渲染管理
     m_pRenderMgr = MakeSharedPtr<SVRenderMgr>(mApp);
     m_pRenderMgr->init();
     //构建静态数据
-    m_pComData = MakeSharedPtr<SVComData
->(mApp);
+    m_pComData = MakeSharedPtr<SVComData>(mApp);
     m_pComData->init();
 //    //消息系统建立起来
 //    m_pEventMgr = MakeSharedPtr<SVEventMgr>(mApp);
@@ -111,15 +92,15 @@ void SVGlobalMgr::init() {
 //    //组件系统
 //    m_pModuleSys = MakeSharedPtr<SVModuleSys>(mApp.get());
 //    m_pModuleSys->init();
-//    //shader程序初始化
-//    m_pShaderMgr = MakeSharedPtr<SVShaderMgr>(mApp.get());
-//    m_pShaderMgr->init();
+    //shader程序初始化
+    m_pShaderMgr = MakeSharedPtr<SVShaderMgr>(mApp);
+    m_pShaderMgr->init();
 //    //模型管理部分
 //    m_pModelMgr = MakeSharedPtr<SVModelMgr>(mApp.get());
 //    m_pModelMgr->init();
-//    //纹理管理器初始化
-//    m_pTexMgr = MakeSharedPtr<SVTexMgr>(mApp.get());
-//    m_pTexMgr->init();
+    //纹理管理器初始化
+    m_pTexMgr = MakeSharedPtr<SVTexMgr>(mApp);
+    m_pTexMgr->init();
 //    //创建识别对象成功
 //    m_pDetectMgr = MakeSharedPtr<SVDetectMgr>(mApp.get());
 //    m_pDetectMgr->init(DETECT_T_ST);

@@ -10,6 +10,8 @@
 
 #include "../basesys/SVSysBase.h"
 #include "../base/SVDataChunk.h"
+#include <vector>
+
 //文件路径管理器 增加搜索路径相关
 namespace sv {
     
@@ -25,7 +27,7 @@ namespace sv {
         //设置c++搜索路径
         void addRespath(cptr8 _path);
         
-        void delRespath(cptr8 _path);
+        bool delRespath(cptr8 _path);
         
         void clearRespath();
         
@@ -36,7 +38,7 @@ namespace sv {
         
         bool loadFileContentStr(SVDataChunk *_datachunk, cptr8 _fname);
         
-        u64  checkFileDataLength(cptr8 _fpath);
+        u64 checkFileDataLength(cptr8 _fpath);
         
         //传绝对路径，默认会读取整个文件。
         bool loadFileData(SVDataChunk *_datachunk, cptr8 _fpath, s32 _offset = 0, s32 _length = -1);
@@ -44,7 +46,7 @@ namespace sv {
         bool writeFileData(SVDataChunk *_datachunk, cptr8 _fpath, u32 _size, bool _clearData = true);
         
     protected:
-        typedef SVArray<SVString> SEARCHPATHPOOL;
+        typedef std::vector<SVString> SEARCHPATHPOOL;
         SEARCHPATHPOOL m_searchPathPool;
         
         SVLockPtr m_fileLock;

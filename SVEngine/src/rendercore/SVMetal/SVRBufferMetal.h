@@ -30,19 +30,21 @@ namespace sv {
         
         virtual void destroy(SVRendererPtr _renderer);
         
-        void create(SVRendererPtr _renderer,SVRTargetPtr _target,SVRenderMeshPtr _rmesh);
-        
         void render(SVRendererPtr _renderer,SVRTargetPtr _target,SVRenderMeshPtr _rmesh);
         
         void destroy(SVRendererPtr _renderer,SVRTargetPtr _target);
         
         id<MTLBuffer> m_ibuf;
+        id<MTLBuffer> m_instance_buf;
         SVArray<id<MTLBuffer>> m_dbufs;
         s32 m_vertStart;
         s32 m_vertCnt;
         s32 m_iCnt;
         s32 m_ibufOff;
         s32 m_instCnt;
+        //
+        MTLVertexDescriptor* m_vert_dsp;
+        BUFFERMODE m_bufmode;
     };
     
 

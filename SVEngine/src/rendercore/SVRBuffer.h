@@ -13,41 +13,10 @@
 #include "../core/SVVertDef.h"
 
 namespace sv {
+        
+    //1.AOS模式  混合流
+    //2.SOA模式  拆分流
 
-    //
-    struct RENDERMESHDATA{
-        u32 indexNum;    //索引数量
-        u32 pointNum;    //顶点数量
-        u32 instanceCount; //多实例数量
-        SVDataSwapPtr pDataIndex;
-        SVDataSwapPtr pDataVertex;
-        //did数据
-        SVDataSwapPtr pDataV2;
-        SVDataSwapPtr pDataV3;
-        SVDataSwapPtr pDataC0;
-        SVDataSwapPtr pDataC1;
-        SVDataSwapPtr pDataT0;
-        SVDataSwapPtr pDataT1;
-        SVDataSwapPtr pDataT2;
-        SVDataSwapPtr pDataNor;
-        SVDataSwapPtr pDataTag;
-        SVDataSwapPtr pDataBTor;
-        SVDataSwapPtr pDataInsOffset;
-        bool dirty;
-    };
-        
-    //
-    struct RENDERMESHCONF{
-        VFTYPE vftype;
-        u32 vertPoolType;
-        u32 indexPoolType;
-        s32 seqMode;
-        DRAWMETHOD drawmethod;
-        bool bVisible;
-        bool dirty;
-    };
-        
-    //
     class SVRBuffer: public SVRRes{
     public:
         static int getVertexFormateSize(VFTYPE _type);

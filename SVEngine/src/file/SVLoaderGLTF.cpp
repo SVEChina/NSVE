@@ -46,7 +46,7 @@ SVLoaderGLTF::~SVLoaderGLTF() {
 
 bool SVLoaderGLTF::loadFromFile(cptr8 _filename){
     SVDataChunk tDataStream;
-    bool tflag = mApp->m_pGlobalMgr->m_pFileMgr->loadFileContentStr(&tDataStream, _filename);
+    bool tflag = mApp->m_pFileMgr->loadFileContentStr(&tDataStream, _filename);
     if (!tflag)
         return false;
     SV_LOG_INFO("SVLoaderGLTF :load glTF JSON sucess\n");
@@ -1591,7 +1591,7 @@ bool SVLoaderGLTF::_parseSampler(Sampler *_sampler, RAPIDJSON_NAMESPACE::Value &
 
 bool SVLoaderGLTF::_loadExternalFile(SVDataSwapPtr _dataOut, cptr8 _filename, s64 _reqBytes){
     SVDataChunk tDataStream;
-    bool tflag = mApp->m_pGlobalMgr->m_pFileMgr->loadFileContentStr(&tDataStream, _filename);
+    bool tflag = mApp->m_pFileMgr->loadFileContentStr(&tDataStream, _filename);
     if (!tflag){
         SV_LOG_ERROR("SVLoaderGLTF Error:load ExternalFile failed\n");
         return false;

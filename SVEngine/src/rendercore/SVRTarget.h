@@ -10,6 +10,7 @@
 
 #include "../base/SVGBase.h"
 #include "SVRenderDeclare.h"
+#include <vector>
 
 namespace sv {
     
@@ -52,14 +53,14 @@ namespace sv {
         void resize(s32 _width,s32 _height);
         
         void render(SVRendererPtr _renderer);
+        
+        void pushRenderCommand(SVRenderCmdPtr _rcmd,SV_RSTREAM_TYPE _rstype);
+        
+        void clearRenderCommand();
 
     protected:
-        virtual void _preRender(SVRendererPtr _renderer);
-
-        virtual void _render(SVRendererPtr _renderer);
-
-        virtual void _afterRender(SVRendererPtr _renderer);
-
+        std::vector<SVRenderStreamPtr> m_stream_pool;
+        
     public:
         void bindRes(SVRFboPtr _res);
 

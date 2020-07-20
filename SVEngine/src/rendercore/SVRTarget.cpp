@@ -10,6 +10,7 @@
 #include "../app/SVInst.h"
 #include "../app/SVDispatch.h"
 #include "SVRenderMgr.h"
+#include "SVRenderStream.h"
 
 using namespace sv;
 
@@ -37,27 +38,21 @@ void SVRTarget::resize(s32 _width,s32 _height) {
 void SVRTarget::render(SVRendererPtr _renderer) {
     if(m_fbo) {
         m_fbo->bind(_renderer);
-        //设置目标
-        _preRender(_renderer);
-        //渲染
-        _render(_renderer);
-        //解锁目标
-        _afterRender(_renderer);
-        //
+        for(s32 i=0;i<m_stream_pool.size();i++) {
+            m_stream_pool[i]->render(_renderer,std::dynamic_pointer_cast<SVRTarget>(shareObject()));
+        }
         m_fbo->unbind(_renderer);
     }
 }
 
-void SVRTarget::_preRender(SVRendererPtr _renderer) {
-    //
+void SVRTarget::pushRenderCommand(SVRenderCmdPtr _rcmd,SV_RSTREAM_TYPE _rstype) {
+    //命令身上肯定带属性，才能丢到不同的路径当中啊,
+    //到底要推入到哪个流中？
+    
 }
 
-void SVRTarget::_render(SVRendererPtr _renderer) {
-    //
-}
-
-void SVRTarget::_afterRender(SVRendererPtr _renderer) {
-    //
+void SVRTarget::clearRenderCommand() {
+    
 }
 
 void SVRTarget::bindRes(SVRFboPtr _res) {

@@ -30,9 +30,6 @@ namespace sv {
     public:
         /*基础模块*/
         SVRenderMgrPtr m_pRenderMgr; //渲染部分
-        SVFileMgrPtr m_pFileMgr; //文件部分
-        SVConfigPtr m_pConfig; //配置部分
-        
         /*可删减模块*/
         //事件部分
         SVEventMgrPtr m_pEventMgr;
@@ -50,7 +47,6 @@ namespace sv {
         SVShaderMgrPtr m_pShaderMgr;
         //纹理部分
         SVTexMgrPtr m_pTexMgr;
-
         //识别部分
         SVDetectMgrPtr m_pDetectMgr;
         //模型部分

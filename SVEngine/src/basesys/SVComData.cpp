@@ -40,11 +40,11 @@ SVComData::~SVComData() {
 void SVComData::init() {
     m_screenMesh = MakeSharedPtr<SVRenderMesh>(mApp);
     BufferDsp t_index_dsp;
-    SVRenderMesh::buildBufferDsp(E_VF_BASE,E_BFT_STATIC_DRAW,6*sizeof(u16),m_rect_index,&t_index_dsp);
+    SVRenderMesh::buildBufferDsp(E_VF_INDEX,E_BFT_STATIC_DRAW,6,6*sizeof(u16),m_rect_index,&t_index_dsp);
     m_screenMesh->setIndexDsp(t_index_dsp);
     //
     BufferDsp t_vert_dsp;
-    SVRenderMesh::buildBufferDsp(E_VF_V3_T0,E_BFT_STATIC_DRAW,6*sizeof(u16),m_screen_rect_v3_t0,&t_vert_dsp);
+    SVRenderMesh::buildBufferDsp(E_VF_V3_T0,E_BFT_STATIC_DRAW,4,6*sizeof(u16),m_screen_rect_v3_t0,&t_vert_dsp);
     m_screenMesh->setVertDsp(t_vert_dsp);
     
     //这个必须有渲染器才可以执行

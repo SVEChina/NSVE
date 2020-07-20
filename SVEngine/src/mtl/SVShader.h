@@ -10,6 +10,8 @@
 
 #include "../base/SVGBase.h"
 #include "../rendercore/SVRenderDeclare.h"
+#include <string>
+#include <vector>
 
 namespace sv {
 
@@ -17,7 +19,7 @@ namespace sv {
     逻辑概念的shader
     */
 
-    struct ShaderParam {
+    struct ShaderDsp {
         s32 m_dsp;
         SVString m_programme_fname;
         SVString m_vs_fname;
@@ -45,8 +47,19 @@ namespace sv {
     protected:
         SVRShaderPtr m_res_shader;
         
+        //参数表
+        struct InParam {
+            std::string m_name; //参数名称
+            int m_size;         //参数数据大小
+            u64 m_off;          //参数数据偏移
+        };
+        //
+        std::vector<InParam> m_aramTbl;
+        //参数值
+        SVDataChunkPtr m_ParamValues;
+        
     public:
-        ShaderParam m_param;
+        ShaderDsp m_dsp;
     };
         
 }//!namespace sv

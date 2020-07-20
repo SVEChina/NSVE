@@ -28,7 +28,7 @@ namespace sv {
         
         void clearRenderCmd();
         
-        void render(SVRendererPtr _renderer);
+        void render(SVRendererPtr _renderer,SVRTargetPtr _target);
         
     protected:
         SVLockSpinPtr m_lock;
