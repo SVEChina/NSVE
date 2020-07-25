@@ -9,9 +9,10 @@
 #define SV_RENDERPIPLE_H
 
 #include "../base/SVGBase.h"
-#include "SVRenderDef.h"
+#include "SVRenderDeclare.h"
 
 namespace sv {
+    
     /*
      渲染管线
      */

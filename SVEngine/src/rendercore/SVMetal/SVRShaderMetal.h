@@ -28,7 +28,7 @@ namespace sv {
                
         void destroy(SVRendererPtr _renderer);
 
-        bool active(SVRendererPtr _render);
+        bool active(SVRendererPtr _renderer);
         
     protected:
         id<MTLFunction> m_vsf;

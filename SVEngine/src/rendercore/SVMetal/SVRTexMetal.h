@@ -17,6 +17,15 @@
 
 namespace sv {
 
+    //纹理描述
+    struct SVTexDsp {
+        s32 m_width;
+        s32 m_height;
+        s32 m_dfmt;     //data-formate
+        bool m_mipmap;
+        bool m_cube;
+    };
+
     /*
     纹理资源
      */
@@ -48,6 +57,8 @@ namespace sv {
         s32 m_width;
         s32 m_height;
         s32 m_depth;
+        //
+        
     };
         
     

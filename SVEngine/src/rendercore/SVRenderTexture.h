@@ -26,6 +26,7 @@ namespace sv {
             void setTexture(SVTexturePtr _tex);
             
             void refresh();
+            
         private:
             SVTexturePtr m_tex;
             bool m_depth;

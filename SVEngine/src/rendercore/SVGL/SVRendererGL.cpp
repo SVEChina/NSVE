@@ -33,7 +33,6 @@ SVRendererGL::SVRendererGL(SVInstPtr _app)
 
 SVRendererGL::~SVRendererGL(){
     m_pRState = nullptr;
-    m_pRenderTex = nullptr;
     m_cur_program = 0;
 }
 
@@ -50,7 +49,6 @@ void SVRendererGL::init(s32 _w,s32 _h){
     }
     //
     SVRTargetPtr t_target = MakeSharedPtr<SVRTarget>(mApp);
-    //t_target->init();
     t_target->bindRes(t_fbo);
     //设置主RTarget
     mApp->getRenderMgr()->setMainRT(t_target);
@@ -69,13 +67,6 @@ void SVRendererGL::resize(s32 _w,s32 _h) {
 //    mApp->m_pGlobalParam->m_inner_height = _h;
 //    //重新创建主纹理
 //    SVTexturePtr t_tex = createSVTex(E_TEX_MAIN,_w,_h,GL_RGBA);
-//    //重新创建主FBO
-//    m_pRenderTex = MakeSharedPtr<SVRenderTexture>(mApp,
-//                                                  t_tex,
-//                                                  true,
-//                                                  true);
-//    mApp->getRenderMgr()->pushRCmdCreate(m_pRenderTex);
-//    m_pRenderTex->setTexture(t_tex);
 }
 
 SVRTexPtr SVRendererGL::createResTexture() {

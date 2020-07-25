@@ -122,7 +122,6 @@ namespace sv {
             SVMtlCorePtr m_pMtlBg;
             SVRenderMeshPtr m_pMeshBg;
             SVRenderMeshPtr m_pMeshPoint;
-            SVRenderTexturePtr m_fbo;
             SVImageUsingMovePtr m_pIUMP;
             SVArray<u32> m_scaleCtlArray;
             SVPassPtr m_passDeform;

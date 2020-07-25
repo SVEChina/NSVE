@@ -31,14 +31,14 @@ namespace sv {
             void addPass(SVPassPtr _pass);
             
             void clearPass();
+            
         protected:
             SVRenderObjectPtr m_pRenderObj;
             SVRenderMeshPtr m_pMesh;
             SVMtlFaceShapePtr m_pMtl;
-        protected:
+
             typedef SVArray<SVPassPtr> PASSPOOL;
             PASSPOOL m_passPool;
-            SVRenderTexturePtr m_fbo;
         };
 
 }

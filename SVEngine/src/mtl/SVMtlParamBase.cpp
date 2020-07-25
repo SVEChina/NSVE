@@ -11,15 +11,6 @@
 
 using namespace sv;
 
-SVMtlParam::SVMtlParam(){
-}
-
-SVMtlParam::~SVMtlParam(){
-}
-
-void SVMtlParam::reset(){
-}
-
 //
 SVMatrixParam::SVMatrixParam(){
     reset();
@@ -88,10 +79,6 @@ void TexUnit::copy(TexUnit& _texunit){
 
 //纹理参数
 SVTextureParam::SVTextureParam(){
-    reset();
-}
-
-SVTextureParam::~SVTextureParam(){
     reset();
 }
 
@@ -261,36 +248,6 @@ void SVAlphaParam::copy(SVAlphaParam& _param){
 }
 
 //
-SVSizeParam::SVSizeParam(){
-    reset();
-}
-
-SVSizeParam::~SVSizeParam(){
-}
-
-void SVSizeParam::reset(){
-    memset(m_tex0size, 0, sizeof(f32) * 2);
-    memset(m_tex1size, 0, sizeof(f32) * 2);
-    memset(m_tex2size, 0, sizeof(f32) * 2);
-    memset(m_tex3size, 0, sizeof(f32) * 2);
-    m_ptsize = 5.0f;
-    m_linewidth = 5.0f;
-}
-
-void SVSizeParam::copy(SVSizeParam& _param){
-    m_tex0size[0] = _param.m_tex0size[0];
-    m_tex0size[1] = _param.m_tex0size[1];
-    m_tex1size[0] = _param.m_tex1size[0];
-    m_tex1size[1] = _param.m_tex1size[1];
-    m_tex2size[0] = _param.m_tex2size[0];
-    m_tex2size[1] = _param.m_tex2size[1];
-    m_tex3size[0] = _param.m_tex3size[0];
-    m_tex3size[1] = _param.m_tex3size[1];
-    m_ptsize = _param.m_ptsize;
-    m_linewidth = _param.m_linewidth;
-}
-
-//
 //
 SVZOffParam::SVZOffParam(){
     reset();
@@ -310,25 +267,6 @@ void SVZOffParam::copy(SVZOffParam& _param){
     m_factor = _param.m_factor;
     m_unit = _param.m_unit;
 }
-
-
-//融合参数
-SVBlendModeParam::SVBlendModeParam(){
-    reset();
-}
-
-SVBlendModeParam::~SVBlendModeParam(){
-    
-}
-
-void SVBlendModeParam::reset(){
-    m_blendmode = 0;
-}
-
-void SVBlendModeParam::copy(SVBlendModeParam& _param){
-    m_blendmode = _param.m_blendmode;
-}
-
 
 
 

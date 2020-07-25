@@ -11,6 +11,7 @@
 #include "../app/SVDispatch.h"
 #include "SVRenderMgr.h"
 #include "SVRenderStream.h"
+#include "SVRenderer.h"
 
 using namespace sv;
 
@@ -37,11 +38,13 @@ void SVRTarget::resize(s32 _width,s32 _height) {
 
 void SVRTarget::render(SVRendererPtr _renderer) {
     if(m_fbo) {
+        _renderer->setCurTarget( std::dynamic_pointer_cast<SVRTarget>(shareObject()) );
         m_fbo->bind(_renderer);
         for(s32 i=0;i<m_stream_pool.size();i++) {
             m_stream_pool[i]->render(_renderer,std::dynamic_pointer_cast<SVRTarget>(shareObject()));
         }
         m_fbo->unbind(_renderer);
+        _renderer->setCurTarget(nullptr);
     }
 }
 

@@ -1,20 +1,45 @@
 {
-  "shader": [
-    {
-      "vs": "screen",
-      "fs": "screen",
-      "gs": ""
-      "tse": ""
-      "tsd": ""
-      "programme": "screen"
-    },
-    {
-      "vs": "mask",
-      "fs": "mask",
-      "gs": ""
-      "tse": ""
-      "tsd": ""
-      "programme": "mask2d"
-    }
+    "shadertype" :"metal",
+    "shader": [
+        {
+            "file": "screen",
+            "vs": "vertexShader",
+            "fs": "fragmentShader",
+            "gs": "null",
+            "tse": "null",
+            "tsd": "null"
+        },
+        {
+            "file": "screen",
+            "vs": "vertexShader",
+            "fs": "fragmentShader",
+            "gs": "null",
+            "tse": "null",
+            "tsd": "null"
+        },
+        {
+            "file": "screen",
+            "vs": "vertexShader",
+            "fs": "fragmentShader",
+            "gs": "null",
+            "tse": "null",
+            "tsd": "null"
+        },
+        {
+            "file": "screen",
+            "vs": "vertexShader",
+            "fs": "fragmentShader",
+            "gs": "null",
+            "tse": "null",
+            "tsd": "null"
+        },
+        {
+            "file": "screen",
+            "vs": "vertexShader",
+            "fs": "fragmentShader",
+            "gs": "null",
+            "tse": "null",
+            "tsd": "null"
+        }
   ]
 }

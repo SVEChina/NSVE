@@ -11,7 +11,7 @@
 
 //基础渲染数据接口 包含很多 基本的数据
 
-#include "../rendercore/SVRenderDef.h"
+#include "../rendercore/SVRenderDeclare.h"
 #include "../base/SVGBase.h"
 #include "../base/SVPreDeclare.h"
 #include "../base/SVMap.h"

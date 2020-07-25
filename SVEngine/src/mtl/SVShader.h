@@ -54,9 +54,9 @@ namespace sv {
             u64 m_off;          //参数数据偏移
         };
         //
-        std::vector<InParam> m_aramTbl;
+        std::vector<InParam> m_paramTbl;
         //参数值
-        SVDataChunkPtr m_ParamValues;
+        SVDataChunkPtr m_paramValues;
         
     public:
         ShaderDsp m_dsp;

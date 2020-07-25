@@ -9,10 +9,8 @@
 #define SV_RFBO_METAL_H
 
 #include "../SVRFbo.h"
+
 #import <Metal/Metal.h>
-//#import <Metal/MTLDrawable.h>
-//#import <Metal/MTLRenderCommandEncoder.h>
-//#import <MetalKit/MetalKit.h>
 
 namespace sv {
     

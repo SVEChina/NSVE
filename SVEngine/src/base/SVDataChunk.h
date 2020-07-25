@@ -26,9 +26,9 @@ namespace sv {
         virtual ~SVDataChunk();
         
         //
-        bool set(u64 _off,int _value);
+        bool set(u64 _off,s32 _value);
         
-        bool set(u64 _off,float _value);
+        bool set(u64 _off,f32 _value);
         
         bool set(u64 _off,FVec2& _value);
         
@@ -42,11 +42,11 @@ namespace sv {
         
         bool set(u64 _off,FMat4& _value);
         
-        bool set(u64 _off,void* _value,int _size);
+        bool set(u64 _off,void* _value,s32 _size);
         
-        u64 push(int _value);
+        u64 push(s32 _value);
         
-        u64 push(float _value);
+        u64 push(f32 _value);
         
         u64 push(FVec2& _value);
         
@@ -68,9 +68,9 @@ namespace sv {
         
         void* getPointer(u64 _off) { return (void*)(m_data + _off); }
         
-        char* getPointerChar(){ return (char*)m_data; }
+        c8* getPointerChar(){ return (char*)m_data; }
         
-        char* getPointerChar(u64 _off){ return m_data + _off; }
+        c8* getPointerChar(u64 _off){ return m_data + _off; }
         
         u64 getSize() { return m_size; }
         

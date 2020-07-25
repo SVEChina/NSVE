@@ -71,7 +71,6 @@ namespace sv{
         SVPenStrokePtr m_curStroke;
         SVRenderTexturePtr m_fbo1;
         SVRenderTexturePtr m_fbo2;
-        SVMultMeshMtlRenderObjectPtr m_pRenderObj;
         SVMtlCorePtr m_mtl1;
         SVRenderMeshPtr m_mesh1;
         SVMtlCorePtr m_mtl2;

@@ -31,7 +31,7 @@ SVMtlCore::SVMtlCore(SVInstPtr _app, cptr8 _shader)
 :SVGBaseEx(_app)
 ,m_mtlname(_shader){
     //m_shader = ;
-    m_ParamValues = MakeSharedPtr<SVDataChunk>();
+    m_paramValues = MakeSharedPtr<SVDataChunk>();
     reset();
 }
 
@@ -46,13 +46,12 @@ SVMtlCore::SVMtlCore(SVMtlCore* _mtl)
     m_mtlname = _mtl->m_mtlname;
     m_pShader = _mtl->m_pShader;
     m_LogicMtlFlag0 = _mtl->m_LogicMtlFlag0;
-    m_LogicParamTex.copy(_mtl->m_LogicParamTex);
+    m_paramTex.copy(_mtl->m_paramTex);
     m_LogicParamBlend.copy(_mtl->m_LogicParamBlend);
     m_LogicParamCull.copy(_mtl->m_LogicParamCull);
     m_LogicParamDepth.copy(_mtl->m_LogicParamDepth);
     m_LogicParamStencil.copy(_mtl->m_LogicParamStencil);
     m_LogicParamAlpha.copy(_mtl->m_LogicParamAlpha);
-    m_LogicParamSize.copy(_mtl->m_LogicParamSize);
     m_LogicParamMatrix.copy(_mtl->m_LogicParamMatrix);
     m_LogicParamZOff.copy(_mtl->m_LogicParamZOff);
 }
@@ -67,59 +66,118 @@ SVMtlCorePtr SVMtlCore::clone() {
 
 void SVMtlCore::reset() {
     m_LogicMtlFlag0 = 0;
-    m_LogicParamTex.reset();
+    m_paramTex.reset();
     m_LogicParamBlend.reset();
     m_LogicParamCull.reset();
     m_LogicParamDepth.reset();
     m_LogicParamStencil.reset();
     m_LogicParamAlpha.reset();
-    m_LogicParamSize.reset();
     m_LogicParamMatrix.reset();
     m_LogicParamZOff.reset();
 }
 
+void SVMtlCore::addParam(cptr8 _name,cptr8 _type,cptr8 _value)  {
+    if( strcmp(_type,"s32") == 0) {
+        s32 tmp = atoi(_value);
+        setParam(_name,tmp);
+    }else if( strcmp(_type,"f32") == 0 ) {
+        f32 tmp = atof(_value);
+        setParam(_name,tmp);
+    }else if( strcmp(_type,"fvec2") == 0 ) {
+        FVec2 tmp(_value);
+        setParam(_name,tmp);
+    }else if( strcmp(_type,"fvec3") == 0 ) {
+        FVec3 tmp(_value);
+        setParam(_name,tmp);
+    }else if( strcmp(_type,"fvec4") == 0 ) {
+        FVec4 tmp(_value);
+        setParam(_name,tmp);
+    }
+}
+
 void SVMtlCore::setParam(cptr8 _name,s32 _value) {
-    for(int i=0;i<m_aramTbl.size();i++) {
-        if( strcmp( m_aramTbl[i].m_name.c_str() ,_name) == 0 ) {
+    for(int i=0;i<m_paramTbl.size();i++) {
+        if( strcmp( m_paramTbl[i].m_name.c_str() ,_name) == 0 ) {
             //找到目标参数 ，拷贝即可
-            m_ParamValues->set(m_aramTbl[i].m_off,_value);
+            m_paramValues->set(m_paramTbl[i].m_off,_value);
             return ;
         }
     }
     //推送目标参数
-    InParam t_param;
+    MtlParamDsp t_param;
     t_param.m_name = _name;
+    t_param.m_type = "s32";
     t_param.m_size = sizeof(s32);
-    t_param.m_off = m_ParamValues->push(_value);
-    m_aramTbl.push_back(t_param);
+    t_param.m_off = m_paramValues->push(_value);
+    m_paramTbl.push_back(t_param);
 }
 
 void SVMtlCore::setParam(cptr8 _name,f32 _value) {
-    for(int i=0;i<m_aramTbl.size();i++) {
-        if( strcmp( m_aramTbl[i].m_name.c_str() ,_name) == 0 ) {
+    for(int i=0;i<m_paramTbl.size();i++) {
+        if( strcmp( m_paramTbl[i].m_name.c_str() ,_name) == 0 ) {
             //找到目标参数 ，拷贝即可
-            m_ParamValues->set(m_aramTbl[i].m_off,_value);
+            m_paramValues->set(m_paramTbl[i].m_off,_value);
             return ;
         }
     }
     //推送目标参数
-    InParam t_param;
+    MtlParamDsp t_param;
     t_param.m_name = _name;
+    t_param.m_type = "f32";
     t_param.m_size = sizeof(f32);
-    t_param.m_off = m_ParamValues->push(_value);
-    m_aramTbl.push_back(t_param);
+    t_param.m_off = m_paramValues->push(_value);
+    m_paramTbl.push_back(t_param);
 }
 
 void SVMtlCore::setParam(cptr8 _name,FVec2 _value) {
-    
+    for(int i=0;i<m_paramTbl.size();i++) {
+        if( strcmp( m_paramTbl[i].m_name.c_str() ,_name) == 0 ) {
+            //找到目标参数 ，拷贝即可
+            m_paramValues->set(m_paramTbl[i].m_off,_value);
+            return ;
+        }
+    }
+    //推送目标参数
+    MtlParamDsp t_param;
+    t_param.m_name = _name;
+    t_param.m_type = "fvec2";
+    t_param.m_size = sizeof(FVec2);
+    t_param.m_off = m_paramValues->push(_value);
+    m_paramTbl.push_back(t_param);
 }
 
 void SVMtlCore::setParam(cptr8 _name,FVec3 _value) {
-    
+    for(int i=0;i<m_paramTbl.size();i++) {
+        if( strcmp( m_paramTbl[i].m_name.c_str() ,_name) == 0 ) {
+            //找到目标参数 ，拷贝即可
+            m_paramValues->set(m_paramTbl[i].m_off,_value);
+            return ;
+        }
+    }
+    //推送目标参数
+    MtlParamDsp t_param;
+    t_param.m_name = _name;
+    t_param.m_type = "fvec3";
+    t_param.m_size = sizeof(FVec3);
+    t_param.m_off = m_paramValues->push(_value);
+    m_paramTbl.push_back(t_param);
 }
 
 void SVMtlCore::setParam(cptr8 _name,FVec4 _value) {
-    
+    for(int i=0;i<m_paramTbl.size();i++) {
+        if( strcmp( m_paramTbl[i].m_name.c_str() ,_name) == 0 ) {
+            //找到目标参数 ，拷贝即可
+            m_paramValues->set(m_paramTbl[i].m_off,_value);
+            return ;
+        }
+    }
+    //推送目标参数
+    MtlParamDsp t_param;
+    t_param.m_name = _name;
+    t_param.m_type = "fvec4";
+    t_param.m_size = sizeof(FVec4);
+    t_param.m_off = m_paramValues->push(_value);
+    m_paramTbl.push_back(t_param);
 }
 
 void SVMtlCore::setParam(cptr8 _name,FMat4 _value) {
@@ -128,14 +186,14 @@ void SVMtlCore::setParam(cptr8 _name,FMat4 _value) {
 
 void* SVMtlCore::getParam(cptr8 _name) {
     u64 t_off = 0;
-    for(int i=0;i<m_aramTbl.size();i++) {
-        if( strcmp( m_aramTbl[i].m_name.c_str() ,_name) == 0 ) {
+    for(int i=0;i<m_paramTbl.size();i++) {
+        if( strcmp( m_paramTbl[i].m_name.c_str() ,_name) == 0 ) {
             //找到目标参数 ，拷贝即可
-            t_off = m_aramTbl[i].m_off;
+            t_off = m_paramTbl[i].m_off;
             break;
         }
     }
-    return m_ParamValues->getPointer(t_off);
+    return m_paramValues->getPointer(t_off);
 }
 
 void SVMtlCore::setModelMatrix(f32 *_mat) {
@@ -163,7 +221,7 @@ void SVMtlCore::setVPMatrix(f32 *_mat) {
 
 void SVMtlCore::setTexcoordFlip(f32 _x, f32 _y) {
     for(s32 i=0;i<MAX_TEXUNIT;i++){
-        m_LogicParamTex.setTexClip(i,_x,_y);
+        m_paramTex.setTexClip(i,_x,_y);
     }
     m_LogicMtlFlag0 |= MTL_F0_TEX_FLIP;
 }
@@ -172,16 +230,16 @@ void SVMtlCore::setTextureParam(s32 _chanel,TEXTUREPARAM _type,s32 _value) {
     if(_chanel>=0 && _chanel<MAX_TEXUNIT) {
         if(_type == E_T_PARAM_FILTER_MAG) {
             //filter_max
-            m_LogicParamTex.m_texUnit[_chanel].m_mag_filter = _value;
+            m_paramTex.m_texUnit[_chanel].m_mag_filter = _value;
         }else if(_type == E_T_PARAM_FILTER_MIN) {
             //filter_min
-            m_LogicParamTex.m_texUnit[_chanel].m_min_filter = _value;
+            m_paramTex.m_texUnit[_chanel].m_min_filter = _value;
         }else if(_type == E_T_PARAM_WRAP_S) {
             //wrap_s
-            m_LogicParamTex.m_texUnit[_chanel].m_s_wrap = _value;
+            m_paramTex.m_texUnit[_chanel].m_s_wrap = _value;
         }else if(_type == E_T_PARAM_WRAP_T) {
             //wrap_t
-            m_LogicParamTex.m_texUnit[_chanel].m_t_wrap = _value;
+            m_paramTex.m_texUnit[_chanel].m_t_wrap = _value;
         }
     }
 }
@@ -300,32 +358,32 @@ void SVMtlCore::_submitTexture(SVRendererPtr _render){
 void SVMtlCore::_submitState(SVRendererPtr _render) {
     //更新纹理
     if((m_LogicMtlFlag0&MTL_F0_TEX0)>0){
-        _render->submitTex(0, m_LogicParamTex.m_texUnit[0]);
+        _render->submitTex(0, m_paramTex.m_texUnit[0]);
     }
     if((m_LogicMtlFlag0&MTL_F0_TEX1)>0){
-        _render->submitTex(1, m_LogicParamTex.m_texUnit[1]);
+        _render->submitTex(1, m_paramTex.m_texUnit[1]);
     }
     if((m_LogicMtlFlag0&MTL_F0_TEX2)>0){
-        _render->submitTex(2, m_LogicParamTex.m_texUnit[2]);
+        _render->submitTex(2, m_paramTex.m_texUnit[2]);
     }
     if((m_LogicMtlFlag0&MTL_F0_TEX3)>0){
-        _render->submitTex(3, m_LogicParamTex.m_texUnit[3]);
+        _render->submitTex(3, m_paramTex.m_texUnit[3]);
     }
     if((m_LogicMtlFlag0&MTL_F0_TEX4)>0){
-        _render->submitTex(4, m_LogicParamTex.m_texUnit[4]);
+        _render->submitTex(4, m_paramTex.m_texUnit[4]);
     }
     if((m_LogicMtlFlag0&MTL_F0_TEX5)>0){
-        _render->submitTex(5, m_LogicParamTex.m_texUnit[5]);
+        _render->submitTex(5, m_paramTex.m_texUnit[5]);
     }
     if((m_LogicMtlFlag0&MTL_F0_TEX6)>0){
-        _render->submitTex(6, m_LogicParamTex.m_texUnit[6]);
+        _render->submitTex(6, m_paramTex.m_texUnit[6]);
     }
     if((m_LogicMtlFlag0&MTL_F0_TEX7)>0){
-        _render->submitTex(7, m_LogicParamTex.m_texUnit[7]);
+        _render->submitTex(7, m_paramTex.m_texUnit[7]);
     }
     //
     if((m_LogicMtlFlag0&MTL_F0_LINE_SIZE)>0){
-        _render->submitLineWidth(m_LogicParamSize.m_linewidth);
+        //_render->submitLineWidth(m_LogicParamSize.m_linewidth);
     }
     //融合
     if((m_LogicMtlFlag0&MTL_F0_BLEND)>0){
@@ -360,7 +418,7 @@ void SVMtlCore::_submitMtl(SVRendererPtr _render) {
 void SVMtlCore::setTexture(s32 _chanel,SVTexturePtr _texture) {
     if(_chanel<0 || _chanel>=MAX_TEXUNIT)
         return;
-    m_LogicParamTex.setTexture(_chanel, _texture);
+    m_paramTex.setTexture(_chanel, _texture);
     s32 t_flag = MTL_F0_TEX0;
     t_flag = t_flag<<_chanel;
     m_LogicMtlFlag0 |= t_flag;
@@ -369,38 +427,17 @@ void SVMtlCore::setTexture(s32 _chanel,SVTexturePtr _texture) {
 void SVMtlCore::setTexture(s32 _chanel,SVTEXINID _from) {
     if(_chanel<0 || _chanel>=MAX_TEXUNIT)
         return;
-    m_LogicParamTex.setTexture(_chanel, _from);
+    m_paramTex.setTexture(_chanel, _from);
     s32 t_flag = MTL_F0_TEX0;
     t_flag = t_flag<<_chanel;
     m_LogicMtlFlag0 |= t_flag;
 }
 
 void SVMtlCore::setTexSizeIndex(s32 index, f32 _w, f32 _h) {
-    if (index == 0) {
-        m_LogicParamSize.m_tex0size[0] = _w;
-        m_LogicParamSize.m_tex0size[1] = _h;
-        m_LogicMtlFlag0 |= MTL_F0_TEX_SIZE;
-    } else if (index == 1) {
-        m_LogicParamSize.m_tex1size[0] = _w;
-        m_LogicParamSize.m_tex1size[1] = _h;
-        m_LogicMtlFlag0 |= MTL_F1_TEX_SIZE;
-    } else if (index == 2) {
-        m_LogicParamSize.m_tex2size[0] = _w;
-        m_LogicParamSize.m_tex2size[1] = _h;
-        m_LogicMtlFlag0 |= MTL_F2_TEX_SIZE;
-    } else if (index == 3) {
-        m_LogicParamSize.m_tex3size[0] = _w;
-        m_LogicParamSize.m_tex3size[1] = _h;
-        m_LogicMtlFlag0 |= MTL_F3_TEX_SIZE;
-    }
 }
 
 void SVMtlCore::setLineSize(f32 _linewidth){
-    if(m_LogicParamSize.m_linewidth!=_linewidth) {
-        m_LogicParamSize.m_linewidth = _linewidth;
-        m_LogicParamSize.m_linewidth = _linewidth;
-        m_LogicMtlFlag0 |= MTL_F0_LINE_SIZE;
-    }
+    m_LogicMtlFlag0 |= MTL_F0_LINE_SIZE;
 }
 
 void SVMtlCore::setBlendState(MTLBLENDFUNC _src , MTLBLENDFUNC _dst){

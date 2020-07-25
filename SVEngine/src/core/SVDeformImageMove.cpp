@@ -81,7 +81,7 @@ SVDeformImageMove::~SVDeformImageMove(){
     m_pMtlBg = nullptr;
     m_pIUMP = nullptr;
     m_dataPoint = nullptr;
-    m_fbo = nullptr;
+    //m_fbo = nullptr;
     SVRendererPtr t_renderer = mApp->getRenderer();
     if(t_renderer) {
         t_renderer->destroySVTex(E_TEX_FILTER_DEFORM02);
@@ -270,7 +270,7 @@ void SVDeformImageMove::render(){
         if(m_passDeform && m_passDeform->m_pMtl){
             SVRenderCmdPassCollectionPtr t_cmd = MakeSharedPtr<SVRenderCmdPassCollection>();
             t_cmd->mTag = "SVBackGroundNode";
-            t_cmd->setFbo(m_fbo);
+            //t_cmd->setFbo(m_fbo);
             //图片翻转这块需要校正一下 by fyz
             if(m_pMtlBg){
                 if(m_flip){
@@ -300,7 +300,7 @@ void SVDeformImageMove::render(){
         if(m_passBack){
             SVRenderCmdPassPtr t_cmd = MakeSharedPtr<SVRenderCmdPass>();
             t_cmd->mTag = "SVFaceDeform";
-            t_cmd->setFbo(m_fbo);
+            //t_cmd->setFbo(m_fbo);
             t_cmd->setTexture(m_passBack->m_outTex);
             t_cmd->setMesh(m_passBack->m_pMesh);
             if(m_flip){

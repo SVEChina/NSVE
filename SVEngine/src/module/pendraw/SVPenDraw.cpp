@@ -55,10 +55,6 @@ SVPenDraw::SVPenDraw(SVInstPtr _app)
 SVPenDraw::~SVPenDraw() {
     m_curStroke = nullptr;
     m_lock = nullptr;
-    if(m_pRenderObj){
-        m_pRenderObj->clearMesh();
-        m_pRenderObj = nullptr;
-    }
     m_fbo1 = nullptr;
     m_fbo2 = nullptr;
     m_pTex1 = nullptr;

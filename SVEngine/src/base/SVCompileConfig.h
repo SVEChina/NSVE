@@ -29,17 +29,19 @@
 #include <EGl/eglplatform.h>
 
 #ifdef LOG_ENABLE
+
 #define  LOG_TAG  "SVEngine"
 #define  SV_LOG_DEBUG(...) __android_log_print(ANDROID_LOG_DEBUG, LOG_TAG, __VA_ARGS__)
 #define  SV_LOG_INFO(...) __android_log_print(ANDROID_LOG_INFO, LOG_TAG, __VA_ARGS__)
 #define  SV_LOG_ERROR(...) __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, __VA_ARGS__)
 #define  SV_LOG_ERROR_TE(...)  __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, __VA_ARGS__)
+
 #else
+
 #define  SV_LOG_DEBUG(...)
 #define  SV_LOG_INFO(...)
 #define  SV_LOG_ERROR(...)
 #endif
-
 
 #endif
 

@@ -22,7 +22,6 @@ SVMtlAni2D::SVMtlAni2D(SVInstPtr _app)
 
 SVMtlAni2D::SVMtlAni2D(SVMtlAni2D *_mtl)
 :SVMtlCore(_mtl){
-    m_LogicParamBlendMode.copy(_mtl->m_LogicParamBlendMode);
 }
 
 SVMtlAni2D::~SVMtlAni2D() {
@@ -35,17 +34,11 @@ SVMtlCorePtr SVMtlAni2D::clone() {
 
 void SVMtlAni2D::reset() {
     SVMtlCore::reset();
-    m_LogicParamBlendMode.reset();
 }
 
 void SVMtlAni2D::_submitUniform(SVRendererPtr _render) {
     SVMtlCore::_submitUniform(_render);
-    if((m_LogicMtlFlag0&MTL_F0_BLENDMODE)>0){
-        _render->submitUniformi(NAME_BLENDMODE, m_LogicParamBlendMode.m_blendmode);
-    }
 }
 
 void SVMtlAni2D::setBlendMode(SVMTLBLENDMODE _blendMode){
-    m_LogicParamBlendMode.m_blendmode = _blendMode;
-    m_LogicMtlFlag0 |= MTL_F0_BLENDMODE;
 }

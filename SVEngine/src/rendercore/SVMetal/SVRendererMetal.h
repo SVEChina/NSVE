@@ -9,6 +9,9 @@
 #define SV_RENDERER_METAL_H
 
 #include "../SVRenderer.h"
+#include "../SVRenderDeclare.h"
+#include "SVRTexMetal.h"
+
 #import <Foundation/Foundation.h>
 #import <AudioToolbox/AudioToolbox.h>
 #import <Metal/Metal.h>

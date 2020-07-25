@@ -61,6 +61,16 @@ namespace sv {
                 
             }
             
+            sv_inline FVec3(cptr8 _value) {
+                SVStringArray t_str_array;
+                t_str_array.setData(_value,',');
+                if(t_str_array.size() >= 3) {
+                    x = atof(t_str_array[0]);
+                    y = atof(t_str_array[1]);
+                    z = atof(t_str_array[2]);
+                }
+            }
+            
             explicit sv_inline FVec3(const DVec3 &v);
             
             explicit sv_inline FVec3(const HVec3 &v);

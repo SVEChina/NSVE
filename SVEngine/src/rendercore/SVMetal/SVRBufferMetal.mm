@@ -318,12 +318,6 @@ void SVRBufferMetal::render(SVRendererPtr _renderer,SVRTargetPtr _target,SVRende
         }
         [t_fbo->m_cmdEncoder endEncoding]; // 结束
     }
-//    //数据更新 有肯能更新一堆数据呢
-//    if(_rmesh->m_vert_up.m_pdata){
-//        //[t_tar->m_cmdEncoder setVertexBuffer:m_dbufs[_rmesh->m_vert_up.m_order] offset:0 atIndex:0];
-//        //[//t_tar->m_cmdEncoder setVertexBufferOffset:0 atIndex:0];
-////        - (void)setVertexBuffers:(const id <MTLBuffer> __nullable [__nonnull])buffers offsets:(const NSUInteger [__nonnull])offsets withRange:(NSRange)range;
-//    }
 }
 
 void SVRBufferMetal::destroy(SVRendererPtr _renderer,SVRTargetPtr _target){
@@ -335,25 +329,3 @@ void SVRBufferMetal::destroy(SVRendererPtr _renderer,SVRTargetPtr _target){
     }
     m_dbufs.clear();
 }
-
-//MTLVertexDescriptor _unityVertexDescriptor = [[MTLVertexDescriptor alloc] init];
-//    
-//    // Positions.
-//    _unityVertexDescriptor.attributes[0].format = MTLVertexFormatFloat2;
-//    _unityVertexDescriptor.attributes[0].offset = 0;
-//    _unityVertexDescriptor.attributes[0].bufferIndex = 0;
-//    
-//    // Texture coordinates.
-//    _unityVertexDescriptor.attributes[1].format = MTLVertexFormatFloat2;
-//    _unityVertexDescriptor.attributes[1].offset = 0;
-//    _unityVertexDescriptor.attributes[1].bufferIndex = 0;
-//
-//    // Position Buffer Layout
-//    _unityVertexDescriptor.layouts[0].stride = 8;
-//    _unityVertexDescriptor.layouts[0].stepRate = 1;
-//    _unityVertexDescriptor.layouts[0].stepFunction = MTLVertexStepFunctionPerVertex;
-//    
-//    _unityVertexDescriptor.layouts[1].stride = 8;
-//    _unityVertexDescriptor.layouts[1].stepRate = 1;
-//    _unityVertexDescriptor.layouts[1].stepFunction = MTLVertexStepFunctionPerVe
-

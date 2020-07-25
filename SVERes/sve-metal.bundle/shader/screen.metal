@@ -7,11 +7,15 @@
 //
 
 #include <metal_stdlib>
+
 using namespace metal;
 
 struct Vertex {
     float2 position [[attribute(0)]];
-    //float2 position [[attribute(1)]];
+};
+
+struct VertexOut {
+    float4 position [[position]];
 };
 
 struct FSOutput
@@ -20,14 +24,10 @@ struct FSOutput
     half4 frag_data1 [[color(1)]];
 };
 
-struct VertexOut {
-    float4 position [[position]];
-};
-
 //
 vertex VertexOut vertexShader( Vertex input [[stage_in]] ) {
     VertexOut vert;
-    vert.position = position[vid];
+    //vert.position = position[vid];
     return vert;
 }
 

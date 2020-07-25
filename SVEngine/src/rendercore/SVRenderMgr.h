@@ -8,12 +8,13 @@
 #ifndef SV_RENDERMGR_H
 #define SV_RENDERMGR_H
 
-#include "SVRenderDef.h"
+#include "SVRenderDeclare.h"
 #include "../base/SVGBase.h"
 #include "../base/SVMap.h"
 #include "../base/SVPreDeclare.h"
 #include "../base/SVMat4d.h"
 #include "../base/SVStack.h"
+
 namespace sv {
     
     /*

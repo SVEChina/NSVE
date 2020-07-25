@@ -13,7 +13,6 @@
 #include "../mtl/SVTextureIOS.h"
 #include "SVRenderMgr.h"
 #include "SVRTarget.h"
-#include "SVRenderTexture.h"
 #include "SVRRes.h"
 #include "SVRenderState.h"
 
@@ -21,8 +20,8 @@ using namespace sv;
 
 SVRenderer::SVRenderer(SVInstPtr _app)
 :SVGBaseEx(_app)
-,m_pRenderTex(nullptr)
 ,m_pRState(nullptr)
+,m_cur_target(nullptr)
 ,m_inWidth(256)
 ,m_inHeight(256)
 ,m_outWidth(256)
@@ -35,6 +34,7 @@ SVRenderer::SVRenderer(SVInstPtr _app)
 
 SVRenderer::~SVRenderer(){
     m_resLock = nullptr;
+    m_cur_target = nullptr;
 }
 
 void SVRenderer::init(s32 _w,s32 _h){
@@ -43,7 +43,6 @@ void SVRenderer::init(s32 _w,s32 _h){
 }
 
 void SVRenderer::destroy(){
-    m_pRenderTex = nullptr;
     for(s32 i=E_TEX_MAIN ;i<E_TEX_END;i++) {
         m_svTex[i] = nullptr;
     }
@@ -115,13 +114,8 @@ void SVRenderer::removeUnuseRes() {
 }
 
 //需要控制当前的fbo
-void SVRenderer::pushFbo(SVRFboPtr _fbo) {
-//    if(_fbo) {
-//        _fbo->bind(std::dynamic_pointer_cast<SVRenderer>(shareObject()) );
-//    }
-}
-
-void SVRenderer::popFbo() {
+void SVRenderer::setCurTarget(SVRTargetPtr _target) {
+    m_cur_target = _target;
 }
 
 //处理技术
@@ -132,10 +126,6 @@ void SVRenderer::processMtl(SVMtlCorePtr _mtl) {}
            
 //处理mesh
 void SVRenderer::processMesh(SVRenderMeshPtr _mesh) {}
-
-SVRenderTexturePtr SVRenderer::getRenderTexture() {
-    return m_pRenderTex;
-}
 
 SVTexturePtr SVRenderer::getSVTex(SVTEXINID _type){
     if(E_TEX_END == _type) {

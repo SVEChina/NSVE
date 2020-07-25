@@ -26,12 +26,12 @@ SVDataChunk::~SVDataChunk() {
 }
 
 //
-bool SVDataChunk::set(u64 _off,int _value) {
-    return set(_off,&_value,sizeof(int));
+bool SVDataChunk::set(u64 _off,s32 _value) {
+    return set(_off,&_value,sizeof(s32));
 }
 
-bool SVDataChunk::set(u64 _off,float _value) {
-    return set(_off,&_value,sizeof(float));
+bool SVDataChunk::set(u64 _off,f32 _value) {
+    return set(_off,&_value,sizeof(f32));
 }
 
 bool SVDataChunk::set(u64 _off,FVec2& _value){
@@ -58,7 +58,7 @@ bool SVDataChunk::set(u64 _off,FMat4& _value){
     return set(_off,_value.mat,sizeof(FMat4));
 }
 
-bool SVDataChunk::set(u64 _off,void* _value,int _size) {
+bool SVDataChunk::set(u64 _off,void* _value,s32 _size) {
     if(_off+_size > m_realsize) {
         return false;
     }
@@ -67,12 +67,12 @@ bool SVDataChunk::set(u64 _off,void* _value,int _size) {
 }
 
 //
-u64 SVDataChunk::push(int _value) {
-    return push(&_value,sizeof(int));
+u64 SVDataChunk::push(s32 _value) {
+    return push(&_value,sizeof(s32));
 }
 
-u64 SVDataChunk::push(float _value) {
-    return push(&_value,sizeof(float));
+u64 SVDataChunk::push(f32 _value) {
+    return push(&_value,sizeof(f32));
 }
 
 u64 SVDataChunk::push(FVec2& _value) {
@@ -117,14 +117,16 @@ u64 SVDataChunk::push(void* _value,s32 _size) {
         m_size = t_newsize;
         //新地址,并拷贝数据
         c8* t_newdata = (c8*)(malloc(t_newsize));
-        memcpy(t_newdata, m_data, m_realsize);
-        free(m_data);
+        if(!m_data && m_realsize>0) {
+            memcpy(t_newdata, m_data, m_realsize);
+            free(m_data);
+        }
         m_data = t_newdata;
     }
     //
     u64 t_off = m_realsize;
     void* t_pos = m_data + m_realsize;
-    memcpy(t_pos, &_value, _size);
+    memcpy(t_pos, _value, _size);
     m_realsize += _size;
     return t_off;
 }

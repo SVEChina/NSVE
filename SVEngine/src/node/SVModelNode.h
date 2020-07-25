@@ -42,8 +42,6 @@ namespace sv {
         protected:
             void _showDebugNormalLines();
             
-            SVMultMeshMtlRenderObjectPtr m_pRObj;
-            
             bool m_enableDebugNormal;
             
             SVModelPtr m_pModel;

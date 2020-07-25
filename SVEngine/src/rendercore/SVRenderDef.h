@@ -8,37 +8,36 @@
 #ifndef SV_RENDERDEF_H
 #define SV_RENDERDEF_H
 
-#include "../base/SVDef.h"
-#include "SVRenderDeclare.h"
+#include "../base/SVCompileConfig.h"
 
+//定义了Metal
+#define SV_METAL
 
-//纹理描述
-struct SVTexDsp {
-    s32 m_width;
-    s32 m_height;
-    s32 m_dfmt;     //data-formate
-    bool m_mipmap;
-    bool m_cube;
-};
+//一堆宏定义
+#ifdef SV_METAL
 
-//数据描述
-struct SVDataDsp {
-    
-};
+#include "SVMetal/SVMetalDef.h"
 
-/*
- .背景（sky）
- .美颜（磨皮，美白，红润等）
- .美妆（纹眉，腮红，嘴唇等面具技术）
- .面部微整（大眼，瘦脸，尖下巴，隆鼻等）
- .风格化（老照片，青色，阳光等）
- .面具（饰品类）
- .动画（头饰类，跟人）
- .AR特效
- .平面特效（动画，全屏幕动画）
- .ui类
- .debug类
- */
+#elif defined SV_VULKAN
+
+#include "SVMetal/SVVulkanDef.h"
+
+#elif defined SV_GLES
+
+#include "SVMetal/SVGLDef.h"
+
+#elif defined SV_WEBGL
+
+#include "SVMetal/SVWebGLDef.h"
+
+#endif
+
+//#if defined(SV_ANDROID)
+//#endif
+//
+////MAC平台 或 IPHONE平台
+//#if defined(SV_IOS)
+//#endif  //__MACOSX__ || __APPLE__
 
 enum RENDERSTREAMTYPE {
     RST_BEGIN = 0,

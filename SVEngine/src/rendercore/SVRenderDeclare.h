@@ -10,6 +10,7 @@
 
 #include "../base/SVDef.h"
 #include "../base/SVPreDeclare.h"
+#include "SVRenderDef.h"
 
 namespace sv {
     
@@ -19,7 +20,7 @@ namespace sv {
     DECLARE_SHAREPTR(SVRFbo);
     DECLARE_SHAREPTR(SVRBuffer);
     DECLARE_SHAREPTR(SVRShader);
-
+    DECLARE_SHAREPTR(SVRDPState);
 
     //渲染器
     DECLARE_SHAREPTR(SVRenderer);
@@ -91,14 +92,9 @@ namespace sv {
     DECLARE_SHAREPTR(SVRCmdCreateTex);
     DECLARE_SHAREPTR(SVRCmdCreateFbo);
 
-
-    
     //renderobject
     DECLARE_SHAREPTR(SVRRes);
     DECLARE_SHAREPTR(SVRenderObject);
-    DECLARE_SHAREPTR(SVMultPassRenderObject);
-    DECLARE_SHAREPTR(SVMultMeshRenderObject);
-    DECLARE_SHAREPTR(SVMultMeshMtlRenderObject);
 
 
 }//!namespace sv

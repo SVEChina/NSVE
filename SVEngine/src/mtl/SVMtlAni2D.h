@@ -38,8 +38,6 @@ namespace sv {
             
         protected:
             virtual void _submitUniform(SVRendererPtr _render);
-
-            SVBlendModeParam m_LogicParamBlendMode;      //融合模式参数
         };
 
     

@@ -14,21 +14,17 @@
 
 namespace sv {
     
-    
+    class SVRenderState: public SVGBaseEx {
+    public:
+        SVRenderState(SVInstPtr _app);
+
+        ~SVRenderState();
+
+        virtual void resetState(){};
+
+        u32 m_shaderID;
+    };
         
-        class SVRenderState: public SVGBaseEx {
-        public:
-            SVRenderState(SVInstPtr _app);
-            
-            ~SVRenderState();
-            
-            virtual void resetState(){};
-            
-            u32 m_shaderID;
-        };
-        
-    
-    
 }//!namespace sv
 
 

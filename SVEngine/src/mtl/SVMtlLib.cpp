@@ -7,6 +7,9 @@
 
 #include "SVMtlLib.h"
 #include "SVMtlGLTF.h"
+#include "../app/SVInst.h"
+#include "../file/SVFileMgr.h"
+#include "../base/SVDataChunk.h"
 
 using namespace sv;
 
@@ -57,11 +60,84 @@ SVMtlCorePtr SVMtlLib::genMtl(SVInstPtr _app,cptr8 _name) {
     SVString t_shadername = mapName(_name);
     SVMtlCorePtr t_mtl = MakeSharedPtr<SVMtlCore>(_app,t_shadername.c_str());
     if(t_mtlname == "SVMtl2D") {
-        t_mtl->setParam("u_alpha",0.0f);
+        //t_mtl->setParam("u_alpha",0.0f);
+    }else if(t_mtlname == "SVMtl2D") {
+        //
     }
-    //根据shader不同，生成不同的tech;
-    
-    
-    //
     return t_mtl;
+}
+
+SVMtlCorePtr SVMtlLib::createMtl(SVInstPtr _app,cptr8 _mtlname) {
+    //SVDataChunk *_datachunk
+    SVDataChunk t_data;
+    bool t_ret = _app->m_pFileMgr->loadFileContent(&t_data, _mtlname);
+    if(!t_ret) {
+        return nullptr;
+    }
+    //解析json文件
+    RAPIDJSON_NAMESPACE::Document doc;
+    doc.Parse(t_data.getPointerChar());
+    if (doc.HasParseError()) {
+        RAPIDJSON_NAMESPACE::ParseErrorCode code = doc.GetParseError();
+        SV_LOG_ERROR("rapidjson error code:%d \n", code);
+        return nullptr;
+    }
+    SVString t_version = "1.0";
+    if (doc.HasMember("version")) {
+        t_version = doc["version"].GetString();
+    }
+    if(t_version == "1.0") {
+        SVMtlCorePtr t_mtl = MakeSharedPtr<SVMtlGLTF>(_app);
+        parseMtl1(t_mtl,doc);
+        return t_mtl;
+    }
+    return nullptr;
+}
+
+bool SVMtlLib::parseMtl1(SVMtlCorePtr _mtl,RAPIDJSON_NAMESPACE::Document& _doc) {
+    if(!_mtl)
+        return false;
+    SVString t_shader_file = "shader";
+    if (_doc.HasMember("shader") && _doc["shader"].IsString()) {
+        RAPIDJSON_NAMESPACE::Value &t_value = _doc["shader"];
+        t_shader_file = t_value.GetString();
+    }
+    //param param 参数解析
+    if (_doc.HasMember("param-tbl") && _doc["param-tbl"].IsArray()) {
+        RAPIDJSON_NAMESPACE::Document::Array t_value_array = _doc["param-tbl"].GetArray();
+        for(s32 i=0;i<t_value_array.Size();i++) {
+            RAPIDJSON_NAMESPACE::Document::Object element = t_value_array[i].GetObject();
+            SVString t_param_name = element["name"].GetString();
+            SVString t_param_type = element["type"].GetString();
+            SVString t_param_value = element["value"].GetString();
+            _mtl->addParam(t_param_name.c_str(),t_param_type.c_str(),t_param_value.c_str());
+        }
+    }
+    //texture param 纹理解析
+    if (_doc.HasMember("texture-tbl") && _doc["texture-tbl"].IsArray()) {
+        RAPIDJSON_NAMESPACE::Document::Array t_value_array = _doc["texture-tbl"].GetArray();
+        for(s32 i=0;i<t_value_array.Size();i++) {
+            RAPIDJSON_NAMESPACE::Document::Object element = t_value_array[i].GetObject();
+            s32 t_param_chan = element["channel"].GetInt();
+            SVString t_param_type = element["type"].GetString();
+            SVString t_param_path = element["path"].GetString();
+        }
+        //t_shader_file = t_value.GetString();
+    }
+    //blend param 融合
+    if (_doc.HasMember("blend-param") && _doc["blend-param"].IsObject()) {
+        RAPIDJSON_NAMESPACE::Document::Object t_value_obj = _doc["blend-param"].GetObject();
+        s32 t_enable = t_value_obj["enable"].GetInt();
+    }
+    //stencil param 融合
+    if (_doc.HasMember("stencil-param") && _doc["stencil-param"].IsObject()) {
+        RAPIDJSON_NAMESPACE::Document::Object t_value_obj = _doc["stencil-param"].GetObject();
+        s32 t_enable = t_value_obj["enable"].GetInt();
+    }
+    //alpha param 融合
+    if (_doc.HasMember("alpha-param") && _doc["alpha-param"].IsObject()) {
+        RAPIDJSON_NAMESPACE::Document::Object t_value_obj = _doc["alpha-param"].GetObject();
+        s32 t_enable = t_value_obj["enable"].GetInt();
+    }
+    return true;
 }

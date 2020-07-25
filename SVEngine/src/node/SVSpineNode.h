@@ -87,8 +87,6 @@ namespace sv {
             
             SVSpinePtr m_spine;
             
-            SVMultMeshMtlRenderObjectPtr m_pRObj;
-            
             f32 m_aabbBox_scale;
             
             void* m_p_cb_obj;

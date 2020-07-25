@@ -33,6 +33,17 @@ namespace sv {
             , w(w) {
             }
             
+            sv_inline FVec4(cptr8 _value) {
+                SVStringArray t_str_array;
+                t_str_array.setData(_value,',');
+                if(t_str_array.size() >= 4) {
+                    x = atof(t_str_array[0]);
+                    y = atof(t_str_array[1]);
+                    z = atof(t_str_array[2]);
+                    w = atof(t_str_array[3]);
+                }
+            }
+            
             explicit sv_inline FVec4(f32 v)
             : x(v)
             , y(v)
