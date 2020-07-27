@@ -30,7 +30,6 @@ SVTexturePList::SVTexturePList(SVInstPtr _app)
 SVTexturePList::~SVTexturePList() {
     m_pData = nullptr;
     m_restex = nullptr;
-    m_bCreated = false;
     m_texset = nullptr;
 }
 

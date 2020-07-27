@@ -33,26 +33,22 @@ bool SVFilterGof::create(){
     if(!t_renderer)
         return false;
     SVTexturePtr t_tex = t_renderer->getSVTex(E_TEX_MAIN);
-    s32 t_w = t_tex->m_width;
-    s32 t_h = t_tex->m_height;
-    
-    if(! t_renderer->getSVTex(E_TEX_HELP0) ){
-        t_renderer->createSVTex(E_TEX_HELP0,t_w, t_h, GL_RGBA);
-    }
-    
-    if(! t_renderer->getSVTex(E_TEX_FILTER_GOF_1) ){
-        t_renderer->createSVTex(E_TEX_FILTER_GOF_1,t_w, t_h, GL_RGBA);
-    }
-    
-    if(! t_renderer->getSVTex(E_TEX_FILTER_GOF_2) ){
-         t_renderer->createSVTex(E_TEX_FILTER_GOF_2,t_w/2, t_h/2, GL_RGBA);
-    }
-    
-    
+//    s32 t_w = t_tex->m_width;
+//    s32 t_h = t_tex->m_height;
+//    if(! t_renderer->getSVTex(E_TEX_HELP0) ){
+//        t_renderer->createSVTex(E_TEX_HELP0,t_w, t_h, GL_RGBA);
+//    }
+//    if(! t_renderer->getSVTex(E_TEX_FILTER_GOF_1) ){
+//        t_renderer->createSVTex(E_TEX_FILTER_GOF_1,t_w, t_h, GL_RGBA);
+//    }
+//    if(! t_renderer->getSVTex(E_TEX_FILTER_GOF_2) ){
+//         t_renderer->createSVTex(E_TEX_FILTER_GOF_2,t_w/2, t_h/2, GL_RGBA);
+//    }
+//
     //创建多passnode
     m_pPassNode = MakeSharedPtr<SVMultPassNode>(mApp);
     m_pPassNode->setname("SVFilterGOFNode");
-    m_pPassNode->create(t_w, t_h);
+    //m_pPassNode->create(t_w, t_h);
     m_pPassNode->setRSType(RST_IMGFILTER);
     //创建pass
     SVPassPtr t_pass1 = MakeSharedPtr<SVPass>();
@@ -66,7 +62,7 @@ bool SVFilterGof::create(){
     t_pass1 = MakeSharedPtr<SVPass>();
     SVMtlSmoothPtr t_lkMtl02=MakeSharedPtr<SVMtlSmooth>(mApp,"blurtex");
     t_lkMtl02->setTexcoordFlip(1.0f, 1.0f);
-    t_lkMtl02->setImgWH(t_w/2,t_h/2);
+    //t_lkMtl02->setImgWH(t_w/2,t_h/2);
     //t_pass1->setMtl(t_lkMtl02);
     t_pass1->setInTex(0,E_TEX_MAIN);
     t_pass1->setOutTex(E_TEX_FILTER_GOF_1);
@@ -74,7 +70,7 @@ bool SVFilterGof::create(){
     
     SVMtlSmoothPtr t_lkMtl01=MakeSharedPtr<SVMtlSmooth>(mApp,"blurtex");
     t_lkMtl01->setTexcoordFlip(1.0f, 1.0f);
-    t_lkMtl01->setImgWH(t_w/2,t_h/2);
+    ///t_lkMtl01->setImgWH(t_w/2,t_h/2);
     t_pass1 = MakeSharedPtr<SVPass>();
     //t_pass1->setMtl(t_lkMtl01);
     t_pass1->setInTex(0,E_TEX_FILTER_GOF_1);
@@ -84,7 +80,7 @@ bool SVFilterGof::create(){
     SVPassPtr t_pass2 = MakeSharedPtr<SVPass>();
     m_mtl_smooth =MakeSharedPtr<SVMtlSmooth>(mApp,"gof");
     m_mtl_smooth->setTexcoordFlip(1.0, 1.0);
-    m_mtl_smooth->setImgWH(t_w,t_h);
+    //m_mtl_smooth->setImgWH(t_w,t_h);
     //t_pass2->setMtl(m_mtl_smooth);
     t_pass2->setInTex(0, E_TEX_HELP0);
     t_pass2->setInTex(1, E_TEX_FILTER_GOF_2);

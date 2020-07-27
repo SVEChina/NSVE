@@ -33,17 +33,15 @@ bool SVFilterClarity::create(){
     if(!t_renderer)
         return false;
     SVTexturePtr t_tex = t_renderer->getSVTex(E_TEX_MAIN);
-    s32 t_w = t_tex->m_width;
-    s32 t_h = t_tex->m_height;
-    
-    if(! t_renderer->getSVTex(E_TEX_FILTER_MIP_1) ){
-        t_renderer->createSVTex(E_TEX_FILTER_MIP_1,t_w, t_h, GL_RGBA,true);
-    }
-    
+//    s32 t_w = t_tex->m_width;
+//    s32 t_h = t_tex->m_height;
+//    if(! t_renderer->getSVTex(E_TEX_FILTER_MIP_1) ){
+//        t_renderer->createSVTex(E_TEX_FILTER_MIP_1,t_w, t_h, GL_RGBA,true);
+//    }
     //创建多passnode
     m_pPassNode = MakeSharedPtr<SVMultPassNode>(mApp);
     m_pPassNode->setname("SVFilterClarityNode");
-    m_pPassNode->create(t_w, t_h);
+    //m_pPassNode->create(t_w, t_h);
     m_pPassNode->setRSType(RST_IMGFILTER);
     //创建pass
     SVPassPtr t_pass1 = MakeSharedPtr<SVPass>();
@@ -57,7 +55,7 @@ bool SVFilterClarity::create(){
     SVPassPtr t_pass2 = MakeSharedPtr<SVPass>();
     m_mtl_smooth =MakeSharedPtr<SVMtlSmooth>(mApp,"Clarity");
     m_mtl_smooth->setTexcoordFlip(1.0, 1.0);
-    m_mtl_smooth->setImgWH(t_w,t_h);
+    //m_mtl_smooth->setImgWH(t_w,t_h);
     //t_pass2->setMtl(m_mtl_smooth);
     t_pass2->setInTex(0, E_TEX_FILTER_MIP_1);
     t_pass2->setOutTex(E_TEX_MAIN);
@@ -70,13 +68,11 @@ void SVFilterClarity::destroy(){
         m_pPassNode = nullptr;
     }
     m_pPassNode = nullptr;
-
     SVRendererPtr t_renderer = mApp->getRenderer();
     if(t_renderer){
         t_renderer->destroySVTex(E_TEX_FILTER_MIP_1);
     }
 }
-
 
 void SVFilterClarity::update(f32 dt){
     m_mtl_smooth->setSmooth(m_smooth);

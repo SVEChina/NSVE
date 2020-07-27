@@ -92,15 +92,16 @@ void SVGlobalMgr::init() {
 //    //组件系统
 //    m_pModuleSys = MakeSharedPtr<SVModuleSys>(mApp.get());
 //    m_pModuleSys->init();
+    //纹理管理器初始化
+    m_pTexMgr = MakeSharedPtr<SVTexMgr>(mApp);
+    m_pTexMgr->init();
     //shader程序初始化
     m_pShaderMgr = MakeSharedPtr<SVShaderMgr>(mApp);
     m_pShaderMgr->init();
 //    //模型管理部分
 //    m_pModelMgr = MakeSharedPtr<SVModelMgr>(mApp.get());
 //    m_pModelMgr->init();
-    //纹理管理器初始化
-    m_pTexMgr = MakeSharedPtr<SVTexMgr>(mApp);
-    m_pTexMgr->init();
+
 //    //创建识别对象成功
 //    m_pDetectMgr = MakeSharedPtr<SVDetectMgr>(mApp.get());
 //    m_pDetectMgr->init(DETECT_T_ST);

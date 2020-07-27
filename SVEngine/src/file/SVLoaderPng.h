@@ -21,44 +21,22 @@ namespace sv {
     
     class SVLoaderPng : public SVFileLoader {
     public:
-        friend class SVOpTexLoad;
-        
         SVLoaderPng(SVInstPtr _app);
         
         ~SVLoaderPng();
         
-        void loadData(cptr8 name, u8 **data);
-        
-        inline u32 getWidth(){
-            return m_iWidth;
-        }
-        
-        inline u32 getHeight(){
-            return m_iHeight;
-        }
-        
-        inline u32 getDataLen(){
-            return m_iDataLength;
-        }
-        
-        inline s32 getDataType(){
-            return m_iDataType;
-        }
-        
-        inline s32 getRenderFormat(){
-            return mRenderFormat;
-        }
-    private:
-        void _readPngFromStream(void *stream, s32 dataLen, cptr8 fname, u8 **data);
-        
-        void _premultipliedAlpha(u8* _data, s32 _width, s32 _height);
+        bool loadData(cptr8 name, u8 **data);
         
         u32 m_iWidth;
         u32 m_iHeight;
         u32 m_iDataLength;
         s32 m_iDataType;
-        s32 mRenderFormat;
+        s32 m_tex_format;
+            
+    private:
+        bool _readPngFromStream(void *stream, u64 dataLen, cptr8 fname, u8 **data);
         
+        void _premultipliedAlpha(u8* _data, s32 _width, s32 _height);
     };
     
 }//!namespace sv

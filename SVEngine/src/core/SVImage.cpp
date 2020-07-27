@@ -8,11 +8,10 @@
 #include "SVImage.h"
 #include "../base/SVDataSwap.h"
 #include "../file/SVLoaderPng.h"
+#include "../mtl/SVTexture.h"
 
 using namespace sv;
 
-/*
- */
 static cptr8 type_names[] = {
     "2D", "3D", "Cube", "2D_Array",
 };
@@ -50,14 +49,14 @@ SVImage::SVImage(SVInstPtr _app)
     clear();
 }
 
-SVImage::SVImage(SVInstPtr _app, cptr8 _filename):SVGBaseEx(_app){
+SVImage::SVImage(SVInstPtr _app, cptr8 _filename)
+:SVGBaseEx(_app){
     m_pData = MakeSharedPtr<SVDataSwap>();
     clear();
     load(_filename);
 }
 
 SVImage::~SVImage() {
-    clear();
     m_pData = nullptr;
 }
 
@@ -67,12 +66,28 @@ s32 SVImage::load(cptr8 _filename){
     u8 *pTexData = nullptr;
     pngLoad.loadData(_filename, &pTexData);
     if (pTexData) {
-        create2D(pngLoad.getWidth(), pngLoad.getHeight(), SV_FORMAT_RGBA8);
-        setPixels(pTexData, pngLoad.getDataLen());
+        create2D(pngLoad.m_iWidth, pngLoad.m_iHeight, pngLoad.m_tex_format);
+        setPixels(pTexData, pngLoad.m_iDataLength);
         free(pTexData);
         return 1;
     }
     return 0;
+}
+
+SVTexturePtr SVImage::toTexture() {
+    SVTexturePtr t_tex = MakeSharedPtr<SVTexture>(mApp);
+    SVTextureDsp t_dsp;
+    t_dsp.m_kind = m_type;
+    t_dsp.m_width = m_width;
+    t_dsp.m_height = m_height;
+    t_dsp.m_depth = m_depth;
+    t_dsp.m_minmap = true;
+    t_dsp.m_computeWrite = false;
+    t_dsp.m_renderTarget = false;
+    t_dsp.m_srgb = false;
+    t_dsp.m_dataFormate = m_format;
+    t_tex->init(t_dsp,m_pData);
+    return t_tex;
 }
 
 void SVImage::clear(){
@@ -87,29 +102,25 @@ void SVImage::clear(){
 s32 SVImage::create2D(s32 _width, s32 _height, s32 _format , bool _allocate ){
     assert(_width > 0 && _height > 0 && "SVImage::create2D(): bad image size");
     clear();
-
     m_type = SV_IMAGE_2D;
     m_format = _format;
     m_width = _width;
     m_height = _height;
-    
     if(_allocate) {
         s32 t_size = getSize();
         m_pData->resize(t_size);
     }
     return 1;
 }
+
 s32 SVImage::create3D(s32 _width, s32 _height, s32 _depth, s32 _format, bool _allocate){
     assert(_width > 0 && _height > 0 && _depth > 0 && "SVImage::create3D(): bad image size");
-    
     clear();
-    
     m_type = SV_IMAGE_3D;
     m_format = _format;
     m_width = _width;
     m_height = _height;
     m_depth = _depth;
-    
     if(_allocate) {
         s32 t_size = getSize();
         m_pData->resize(t_size);
@@ -142,38 +153,54 @@ s32 SVImage::getDepth() const {
 }
 
 s32 SVImage::isRawFormat() const {
-    if(m_format >= SV_FORMAT_R8 && m_format <= SV_FORMAT_RGB10A2) return 1;
+    if(m_format >= SV_FORMAT_R8 && m_format <= SV_FORMAT_RGB10A2) {
+        return 1;
+    }
     return 0;
 }
 
 s32 SVImage::isUCharFormat() const {
-    if(m_format >= SV_FORMAT_R8 && m_format <= SV_FORMAT_RGBA8) return 1;
-    if(m_format >= SV_FORMAT_DXT1 && m_format <= SV_FORMAT_PVR4) return 1;
+    if(m_format >= SV_FORMAT_R8 && m_format <= SV_FORMAT_RGBA8) {
+        return 1;
+    }
+    if(m_format >= SV_FORMAT_DXT1 && m_format <= SV_FORMAT_PVR4) {
+        return 1;
+    }
     return 0;
 }
 
 s32 SVImage::isHalfFormat() const {
-    if(m_format >= SV_FORMAT_R16F && m_format <= SV_FORMAT_RGBA16F) return 1;
+    if(m_format >= SV_FORMAT_R16F && m_format <= SV_FORMAT_RGBA16F) {
+        return 1;
+    }
     return 0;
 }
 
 s32 SVImage::isFloatFormat() const {
-    if(m_format >= SV_FORMAT_R32F && m_format <= SV_FORMAT_RGBA32F) return 1;
+    if(m_format >= SV_FORMAT_R32F && m_format <= SV_FORMAT_RGBA32F) {
+        return 1;
+    }
     return 0;
 }
 
 s32 SVImage::isCombinedFormat() const {
-    if(m_format >= SV_FORMAT_R5G6B5 && m_format <= SV_FORMAT_RGB10A2) return 1;
+    if(m_format >= SV_FORMAT_R5G6B5 && m_format <= SV_FORMAT_RGB10A2) {
+        return 1;
+    }
     return 0;
 }
 
 s32 SVImage::isCompressedFormat() const {
-    if(m_format >= SV_FORMAT_DXT1 && m_format <= SV_FORMAT_ZLC2) return 1;
+    if(m_format >= SV_FORMAT_DXT1 && m_format <= SV_FORMAT_ZLC2) {
+        return 1;
+    }
     return 0;
 }
 
 s32 SVImage::isZCompressedFormat() const {
-    if(m_format >= SV_FORMAT_ZLC1 && m_format <= SV_FORMAT_ZLC2) return 1;
+    if(m_format >= SV_FORMAT_ZLC1 && m_format <= SV_FORMAT_ZLC2) {
+        return 1;
+    }
     return 0;
 }
 
@@ -186,6 +213,7 @@ s32 SVImage::isLoaded() const{
 s32 SVImage::getType() const{
     return m_type;
 }
+
 cptr8 SVImage::getTypeName() const{
     return type_names[(s32)m_type];
 }
@@ -194,6 +222,7 @@ cptr8 SVImage::getTypeName() const{
 s32 SVImage::getFormat() const{
     return m_format;
 }
+
 cptr8 SVImage::getFormatName() const{
     return format_names[(s32)m_format];
 }
@@ -344,7 +373,9 @@ SVImage::Pixel SVImage::get3D(f32 _x, f32 _y, f32 _z) const{
 }
 
 void SVImage::setPixels(u8 *pixels, s32 _size){
-    m_pData->writeData(pixels, _size);
+    if(m_pData) {
+        m_pData->writeData(pixels, _size);
+    }
 }
 
 u8 * SVImage::getPixels(){
@@ -623,6 +654,7 @@ void SVImage::_get(u32 _x, u32 _y, u32 _offset, Pixel &_p) const{
         }
     }
 }
+
 void SVImage::_get(u32 _x, u32 _y, u32 _offset, Pixel &_p00, Pixel &_p10, Pixel &_p01, Pixel &_p11) const{
     s32 x0 = _x % m_width;
     s32 y0 = _y % m_height;
@@ -771,6 +803,7 @@ void SVImage::_get(u32 _x, u32 _y, u32 _offset, Pixel &_p00, Pixel &_p10, Pixel 
         }
     }
 }
+
 void SVImage::_geti(u32 _x, u32 _y, u32 _offset, s32 _index, s32 &_p00, s32 &_p10, s32 &_p01, s32 &_p11) const{
     s32 x0 = _x % m_width;
     s32 y0 = _y % m_height;
@@ -830,6 +863,7 @@ void SVImage::_get(u32 _x, u32 _y, u32 _z, u32 _offset, Pixel &_p00, Pixel &_p10
     _offset += m_width * m_height * _z;
     _get(_x,_y,_offset,_p00,_p10,_p01,_p11);
 }
+
 void SVImage::_interpolate(f32 _x, f32 _y, const Pixel &_p00, const Pixel &_p10, const Pixel &_p01, const Pixel &_p11, Pixel &_p) const{
     f32 x1 = 1.0f - _x;
     f32 y1 = 1.0f - _y;

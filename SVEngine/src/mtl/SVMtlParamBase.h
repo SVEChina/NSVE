@@ -89,7 +89,7 @@ namespace sv {
         
         void setTexture(u32 _index,SVTexturePtr _tex);
         
-        void setTexture(u32 _index,SVTEXINID _from);
+        void setTexture(u32 _index,sv::SVTEXINID _from);
         
         void setTexClip(u32 _index,f32 _x,f32 _y);
         

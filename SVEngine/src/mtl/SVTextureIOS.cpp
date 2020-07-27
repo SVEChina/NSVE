@@ -19,7 +19,6 @@ SVTextureIOS::SVTextureIOS(SVInstPtr _app)
 SVTextureIOS::~SVTextureIOS() {
     m_pData = nullptr;
     m_restex = nullptr;
-    m_bCreated = false;
 }
 
 void SVTextureIOS::init(cptr8 _name, s32 _type, s32 _width, s32 _height, s32 _informate, s32 _dateformate, bool _enableMipMap){

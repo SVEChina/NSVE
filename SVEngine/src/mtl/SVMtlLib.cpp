@@ -124,7 +124,9 @@ bool SVMtlLib::parseMtl1(SVMtlCorePtr _mtl,RAPIDJSON_NAMESPACE::Document& _doc) 
             if(t_param_type == "file") {
                 _mtl->setTexture(t_param_chan, t_param_path.c_str());
             }else if(t_param_type == "inner") {
-                //_mtl->setTexture(t_param_chan, "");
+                if(t_param_path == "SV_MAIN") {
+                    _mtl->setTexture(t_param_chan,E_TEX_MAIN);
+                }
             }
         }
         //t_shader_file = t_value.GetString();

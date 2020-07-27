@@ -29,8 +29,6 @@ SVShaderMgr::~SVShaderMgr() {
 
 void SVShaderMgr::init() {
     _loadAllShader();    //加载表
-    //test
-    SVMtlCorePtr t_mtl = SVMtlLib::createMtl(mApp, "scene.mtl");
 }
 
 void SVShaderMgr::destroy() {

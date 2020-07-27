@@ -45,12 +45,13 @@ SVLoaderPng::~SVLoaderPng() {
     m_iDataType = -1;
 }
 
-void SVLoaderPng::loadData(cptr8 name, u8 **data) {
+bool SVLoaderPng::loadData(cptr8 name, u8 **data) {
     SVDataChunk tSVDataChunk;
-    bool t_flag = mApp->getFileMgr()->loadFileContent(&tSVDataChunk, name);
+    bool t_flag = mApp->m_pFileMgr->loadFileContent(&tSVDataChunk, name);
     if (t_flag) {
-        _readPngFromStream((void *) tSVDataChunk.getPointer(), tSVDataChunk.getRealSize(), name, data);
+        return _readPngFromStream(tSVDataChunk.getPointer(), tSVDataChunk.getRealSize(), name, data);
     }
+    return false;
 }
 
 void SVLoaderPng::_premultipliedAlpha(u8 *_data, s32 _width, s32 _height) {
@@ -61,11 +62,11 @@ void SVLoaderPng::_premultipliedAlpha(u8 *_data, s32 _width, s32 _height) {
     }
 }
 
-void SVLoaderPng::_readPngFromStream(void *instream, s32 dataLen, cptr8 fname,u8 **data) {
+bool SVLoaderPng::_readPngFromStream(void *instream, u64 dataLen, cptr8 fname,u8 **data) {
     // length of bytes to check if it is a valid png file
 #define PNGSIGSIZE  8
     if (dataLen < PNGSIGSIZE)
-        return;
+        return false;
     png_byte header[PNGSIGSIZE] = {0};
     png_structp png_ptr = 0;
     png_infop info_ptr = 0;
@@ -73,24 +74,24 @@ void SVLoaderPng::_readPngFromStream(void *instream, s32 dataLen, cptr8 fname,u8
     memcpy(header, instream, PNGSIGSIZE);
     if (png_sig_cmp(header, 0, PNGSIGSIZE)) {
         //error not png formate
-        return;
+        return false;
     }
     // init png_struct
     png_ptr = png_create_read_struct(PNG_LIBPNG_VER_STRING, 0, 0, 0);
     if (!png_ptr) {
         png_destroy_read_struct(&png_ptr, &info_ptr, 0);
-        return;
+        return false;
     }
     // init png_info
     info_ptr = png_create_info_struct(png_ptr);
     if (!info_ptr) {
         png_destroy_read_struct(&png_ptr, &info_ptr, 0);
-        return;
+        return false;
     }
     //设置内部跳转错误，如果在解析png的过程中出现错误 直接跳转到这里
     if (setjmp(png_jmpbuf(png_ptr))) {
         png_destroy_read_struct(&png_ptr, &info_ptr, 0);
-        return;
+        return false;
     }
     // set the read call back function
     tImageSource imageSource;
@@ -142,37 +143,38 @@ void SVLoaderPng::_readPngFromStream(void *instream, s32 dataLen, cptr8 fname,u8
     
     s32 t_chan_num = s32(rowbytes) / m_iWidth;
     //根据颜色类型 设置渲染格式
-    mRenderFormat = GL_RGBA;
+    m_tex_format = GL_RGBA;
     switch (color_type) {
         case PNG_COLOR_TYPE_PALETTE:
             if(t_chan_num == 3){
-                mRenderFormat = GL_RGB;
+                m_tex_format = SV_FORMAT_RGB8;
             }else{
-                mRenderFormat = GL_RGBA;;
+                m_tex_format = SV_FORMAT_RGBA8;
             }
             break;
         case PNG_COLOR_TYPE_GRAY:
-            mRenderFormat = GL_RGBA;//GL_LUMINANCE;//Texture2D::PixelFormat::I8;
+            m_tex_format = SV_FORMAT_R8; //GL_LUMINANCE;//Texture2D::PixelFormat::I8;
             break;
         case PNG_COLOR_TYPE_GRAY_ALPHA:
-            mRenderFormat = GL_RGBA;//GL_LUMINANCE_ALPHA;//(int)SVTexture::PixelFormat::AI88;
+            m_tex_format = SV_FORMAT_RG8;//GL_LUMINANCE_ALPHA;//(int)SVTexture::PixelFormat::AI88;
             break;
         case PNG_COLOR_TYPE_RGB:
-            mRenderFormat = GL_RGB;//(int)SVTexture::PixelFormat::RGB888;
+            m_tex_format = SV_FORMAT_RGB8;//(int)SVTexture::PixelFormat::RGB888;
             break;
         case PNG_COLOR_TYPE_RGB_ALPHA:
-            mRenderFormat = GL_RGBA;//(int)SVTexture::PixelFormat::RGBA8888;
+            m_tex_format = SV_FORMAT_RGBA8;//(int)SVTexture::PixelFormat::RGBA8888;
             break;
         default:
             break;
     }
     //
-    m_iDataLength = rowbytes * m_iHeight;
+    m_iDataLength = u32(rowbytes * m_iHeight);
     *data = (u8 *) (malloc(m_iDataLength * sizeof(u8)));
     u8 *pdata = *data;
     if (!pdata) {
+        free(data);// fix by fyz
         png_destroy_read_struct(&png_ptr, &info_ptr, 0);
-        return;
+        return false;
     }
     //分配数据流指针
     png_bytep *row_pointers = (png_bytep *) png_malloc(png_ptr, sizeof(png_bytep) * m_iHeight);
@@ -183,7 +185,6 @@ void SVLoaderPng::_readPngFromStream(void *instream, s32 dataLen, cptr8 fname,u8
     png_read_image(png_ptr, row_pointers);
     //不继续读下面的内容(辅助模块)
     png_read_end(png_ptr, nullptr);
-
     // premultiplied alpha for RGBA8888
     if (rowbytes / m_iWidth == 4) {
         //4通道 预乘alpha
@@ -195,13 +196,10 @@ void SVLoaderPng::_readPngFromStream(void *instream, s32 dataLen, cptr8 fname,u8
     if (row_pointers) {
         free(row_pointers);
     }
-
     m_iDataType = color_type;
-
     png_destroy_read_struct(&png_ptr, &info_ptr, 0);
-
     if (png_ptr) {
         png_destroy_read_struct(&png_ptr, (info_ptr) ? &info_ptr : 0, 0);
     }
-    return;
+    return true;
 }

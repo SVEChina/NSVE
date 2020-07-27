@@ -33,13 +33,11 @@ bool SVFilterShinning::create(){
     if(!t_renderer)
         return false;
     SVTexturePtr t_tex = t_renderer->getSVTex(E_TEX_MAIN);
-    s32 t_w = t_tex->m_width;
-    s32 t_h = t_tex->m_height;
-    t_renderer->createSVTex(E_TEX_FILTER_1, t_w, t_h, GL_RGBA);
+    //t_renderer->createSVTex(E_TEX_FILTER_1, t_w, t_h, GL_RGBA);
     //创建多passnode
     m_pPassNode = MakeSharedPtr<SVMultPassNode>(mApp);
     m_pPassNode->setname("SVAdvanceFilterNode");
-    m_pPassNode->create(t_w, t_h);
+    //m_pPassNode->create(t_w, t_h);
     m_pPassNode->setRSType(RST_IMGFILTER);
     //创建pass
     SVPassPtr t_pass1 = MakeSharedPtr<SVPass>();

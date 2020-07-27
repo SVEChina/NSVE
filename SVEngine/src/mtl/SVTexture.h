@@ -19,9 +19,9 @@ namespace sv {
      */
     struct SVTextureDsp {
         SVTextureDsp() {
-            m_kind = E_TEX_2D;
-            m_inFormate = E_TEX_RGBA8888;   //内部格式
-            m_dataFormate = E_TEX_RGBA8888; //数据格式
+            m_kind = SV_IMAGE_2D;
+            m_inFormate = SV_FORMAT_RGBA8;   //内部格式
+            m_dataFormate = SV_FORMAT_RGBA8; //数据格式
             m_warp_s = E_TEX_CLAMP;     //S方向环绕
             m_warp_t = E_TEX_CLAMP;     //T方向环绕
             m_width = 1;                //宽
@@ -33,9 +33,9 @@ namespace sv {
             m_srgb = false;             //metal
         };
         
-        SVTEXKIND m_kind;
-        SVTEXFORMATE m_inFormate;   //内部格式
-        SVTEXFORMATE m_dataFormate; //数据格式
+        s32 m_kind;
+        s32 m_inFormate;   //内部格式
+        s32 m_dataFormate; //数据格式
         SVTEXWRAP m_warp_s;
         SVTEXWRAP m_warp_t;
         s32 m_width;    //宽
@@ -85,15 +85,7 @@ namespace sv {
     public:
         SVString m_name;
         SVTextureDsp m_texture_dsp;
-        //
-        s32 m_type;
-        s32 m_width;
-        s32 m_height;
-        s32 m_informate;
-        s32 m_dataformate;
         bool m_bEnableMipMap;
-        bool m_bData;
-        bool m_bCreated;
         SVDataSwapPtr m_pData;
         SVDataSwapPtr m_cubData[6];
         

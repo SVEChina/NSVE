@@ -50,8 +50,8 @@ bool SVFilterGenLUT::create(){
         return false;
     SVTexturePtr inTex= mApp->getTexMgr()->getTexture("svres/lookup.png", true);
     //
-    s32 t_w = inTex->m_width;
-    s32 t_h = inTex->m_height;
+    s32 t_w = 0;// inTex->m_width;
+    s32 t_h = 0;//inTex->m_height;
     t_renderer->createSVTex(E_TEX_FILTER_GENLUT_OUT, t_w, t_h, GL_RGBA);
     t_renderer->createSVTex(E_TEX_FILTER_GENLUT_H1, t_w, t_h, GL_RGBA);
     t_renderer->createSVTex(E_TEX_FILTER_GENLUT_H2, t_w, t_h, GL_RGBA);

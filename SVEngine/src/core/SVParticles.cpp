@@ -2579,7 +2579,7 @@ SVImagePtr SVParticles::getNoiseImage(s32 num) {
         SVNoise y_noise(num + 113);
         SVNoise z_noise(num + 49344);
         n.image = MakeSharedPtr<SVImage>(mApp);
-        n.image->create3D(n.size,n.size,n.size,SVImage::SV_FORMAT_RGBA8);
+        n.image->create3D(n.size,n.size,n.size,SV_FORMAT_RGBA8);
         f32 size = Math::itof(n.size);
         for(s32 z = 0; z < n.size; z++) {
             f32 sz = Math::itof(z) * n.scale;

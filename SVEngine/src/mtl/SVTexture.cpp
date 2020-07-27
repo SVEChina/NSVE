@@ -23,14 +23,7 @@ using namespace sv;
 SVTexture::SVTexture(SVInstPtr _app)
 : SVGBaseEx(_app) {
     m_name = "";
-    m_bData = false;
     m_bEnableMipMap = false;
-    m_bCreated = false;
-    m_width = 0;
-    m_height = 0;
-    m_type = GL_TEXTURE_2D;
-    m_informate = GL_RGBA;
-    m_dataformate = GL_RGBA;
     m_restex = nullptr;
     m_pData = nullptr;
 }
@@ -38,7 +31,6 @@ SVTexture::SVTexture(SVInstPtr _app)
 SVTexture::~SVTexture() {
     m_pData = nullptr;
     m_restex = nullptr;
-    m_bCreated = false;
 }
 
 void SVTexture::init(SVTextureDsp& _param) {
@@ -76,11 +68,6 @@ SVDataSwapPtr SVTexture::getTextureCubeData(s32 _index) {
 void SVTexture::setTexData(SVDataSwapPtr _data){
     //更新纹理数据
     m_pData = _data;
-//    if (_data && _len > 0) {
-//        m_bData = true;
-//        m_pData->writeData(_data, _len);
-//        _updateData();
-//    }
 }
 
 void SVTexture::commit(){

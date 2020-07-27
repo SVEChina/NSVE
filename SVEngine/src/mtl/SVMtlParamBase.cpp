@@ -88,7 +88,7 @@ void SVTextureParam::setTexture(u32 _index,SVTexturePtr _tex){
     m_texUnit[_index].m_pTex = _tex;
 }
 
-void SVTextureParam::setTexture(u32 _index,SVTEXINID _from){
+void SVTextureParam::setTexture(u32 _index,sv::SVTEXINID _from){
     if(_index<0 ||_index>=MAX_TEXUNIT)
         return;
     m_texUnit[_index].m_texForm = _from;

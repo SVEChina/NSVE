@@ -17,13 +17,12 @@ namespace sv {
     class SVFileLoader : public SVGBaseEx {
     public:
         SVFileLoader(SVInstPtr _app);
-        
+
         ~SVFileLoader();
-        
+
         virtual SVTexture *load(cptr8 _filename);
     };
 
-    
 }//!namespace sv
 
 

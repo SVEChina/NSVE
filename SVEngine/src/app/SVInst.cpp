@@ -51,6 +51,9 @@ SVInstPtr SVInst::share() {
     return std::dynamic_pointer_cast<SVInst>(shareObject()) ;
 }
 
+#include "../mtl/SVMtlLib.h"
+#include "../mtl/SVMtlCore.h"
+
 //构建各个模块的逻辑部分，引擎可以运行的最简模式
 void SVInst::init() {
     m_pRM = nullptr;
@@ -69,6 +72,10 @@ void SVInst::init() {
     m_pGlobalParam = MakeSharedPtr<SVGlobalParam>( share() );
     m_pGlobalMgr = MakeSharedPtr<SVGlobalMgr>( share() );
     m_pGlobalMgr->init();
+    //
+    //test
+    SVMtlCorePtr t_mtl = SVMtlLib::createMtl(share(), "scene.mtl");
+    //
     m_svst = SV_ST_WAIT;
 }
 

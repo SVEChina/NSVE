@@ -13,6 +13,7 @@
 #include "../file/SVFileMgr.h"
 #include "../base/SVDataChunk.h"
 #include "../app/SVInst.h"
+#include "../core/SVImage.h"
 #include "../operate/SVOpCreate.h"
 #include "../operate/SVOpParse.h"
 #include "../rendercore/SVRenderMgr.h"
@@ -70,15 +71,24 @@ SVTexturePtr SVTexMgr::getTexture(cptr8 _name,bool _sync) {
 
 SVTexturePtr SVTexMgr::_createTexture(cptr8 _name, bool _sync, bool _enableMipMap) {
     //返回空壳纹理
+    SVTexturePtr tTexture = nullptr;
     m_texLock->lock();
-    SVTexturePtr tTexture = MakeSharedPtr<SVTexture>(mApp);
+    SVImagePtr t_img = MakeSharedPtr<SVImage>(mApp);
     if (_sync) {
-        _loadTextureSync(tTexture, _name, _enableMipMap);
+        if( t_img->load(_name) ) {
+            tTexture = t_img->toTexture();
+            SVDispatch::dispatchTextureCreate(mApp, tTexture);
+        }
     } else {
-        _loadTextureAsync(tTexture, _name, _enableMipMap);
+        //异步创建需要等
+        if( t_img->load(_name) ) {
+            tTexture = t_img->toTexture();
+        }
     }
-    m_ftex_pool.insert(std::make_pair(_name, tTexture));
-    SVDispatch::dispatchTextureCreate(mApp, tTexture);
+    if(tTexture) {
+        m_ftex_pool.insert(std::make_pair(_name, tTexture));
+    }
+    t_img = nullptr;
     m_texLock->unlock();
     return tTexture;
 }
@@ -166,28 +176,24 @@ void SVTexMgr::_removeUnuseTexture() {
 
 SVTexturePtr SVTexMgr::_createTextureSet(cptr8 _name, bool _sync, bool _enableMipMap) {
     //返回空壳纹理
+    SVTexturePtr tTexture = nullptr;
     m_texLock->lock();
-    SVTexturePtr tTexture = MakeSharedPtr<SVTextureSet>(mApp);
+    SVImagePtr t_img = MakeSharedPtr<SVImage>(mApp);
     if (_sync) {
-        _loadTextureSync(tTexture, _name, _enableMipMap);
+        if( t_img->load(_name) ) {
+            tTexture = t_img->toTexture();
+        }
     } else {
-        _loadTextureAsync(tTexture, _name, _enableMipMap);
+        if( t_img->load(_name) ) {
+            tTexture = t_img->toTexture();
+        }
     }
-    //m_ftex_pool.append(_name, tTexture);
+    if(tTexture) {
+        m_ftex_pool.insert(std::make_pair(_name, tTexture));
+    }
+    t_img = nullptr;
     m_texLock->unlock();
     return tTexture;
-}
-
-void SVTexMgr::_loadTextureSync(SVTexturePtr _tex,cptr8 _name, bool _enableMipMap) {
-//    SVOpTexLoad tTexLoad(mApp, _tex, _name, _enableMipMap);
-//    tTexLoad.process(0.0f);
-}
-
-void SVTexMgr::_loadTextureAsync(SVTexturePtr _tex, cptr8 _name, bool _enableMipMap) {
-//    SVOpTexLoadPtr tTexLoad = MakeSharedPtr<SVOpTexLoad>(mApp, _tex, _name, _enableMipMap);
-//    if(mApp->m_pTPool->getHelpThread()){
-//        mApp->m_pTPool->getHelpThread()->pushThreadOp(tTexLoad);
-//    }
 }
 
 bool SVTexMgr::hasTexture(SVTexturePtr _tex){

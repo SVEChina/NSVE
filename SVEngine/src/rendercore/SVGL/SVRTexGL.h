@@ -33,7 +33,7 @@ namespace sv {
             virtual void commit();  //数据提交到显卡
             
             u32 m_res_id;
-            SVTEXKIND m_tex_kind;
+            u32 m_tex_kind;
             s32 m_width;
             s32 m_height;
             s32 m_depth;

@@ -237,7 +237,7 @@ void SVMtlCore::setTexture(s32 _chanel,SVTexturePtr _texture) {
     m_LogicMtlFlag0 |= t_flag;
 }
 
-void SVMtlCore::setTexture(s32 _chanel,SVTEXINID _from) {
+void SVMtlCore::setTexture(s32 _chanel,sv::SVTEXINID _from) {
     if(_chanel<0 || _chanel>=MAX_TEXUNIT)
         return;
     m_paramTex.setTexture(_chanel, _from);

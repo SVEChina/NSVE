@@ -60,10 +60,6 @@ namespace sv {
         
         SVTexturePtr _createTextureSet(cptr8 _name, bool _sync = true, bool _enableMipMap = false);
         
-        void _loadTextureSync(SVTexturePtr _tex, cptr8 _name, bool _enableMipMap = false);
-        
-        void _loadTextureAsync(SVTexturePtr _tex, cptr8 _name, bool _enableMipMap = false);
-        
         void _createTexturList();
         
         void _removeUnuseTexture();

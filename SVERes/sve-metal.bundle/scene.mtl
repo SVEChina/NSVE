@@ -38,14 +38,14 @@
         {
             "channel" : 1,
             "type" : "inner",
-            "path" : "SVE_MAIN"
+            "path" : "SV_MAIN"
         }
     ],
 
     "blend-param" : {
         "enable" : 0,
         "src" : "SVE_ONE",
-        "dst" : "SVE_ZERO",
+        "dst" : "SVE_ZERO"
     },
 
     "stencil-param" : {

@@ -73,7 +73,7 @@ namespace sv {
         
         void setTexture(s32 _chanel,SVTexturePtr _texture);
                
-        void setTexture(s32 _chanel,SVTEXINID _from);
+        void setTexture(s32 _chanel,sv::SVTEXINID _from);
         
     protected:
         //param

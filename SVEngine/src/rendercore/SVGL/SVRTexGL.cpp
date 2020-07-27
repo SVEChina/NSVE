@@ -38,27 +38,21 @@ void SVRTexGL::create(SVRendererPtr _renderer) {
     if(t_rm && t_texture) {
         SV_LOG_INFO("SVRTexGL create %d ",m_uid);
         SVTextureDsp* t_dsp = t_texture->getTextureDsp();
-        //内部格式
-        m_informate = GL_RGBA;
-        if(t_dsp->m_inFormate == E_TEX_RGBA8888) {
-            m_informate = GL_RGBA;
-        }else if(t_dsp->m_inFormate == E_TEX_RGB888) {
-            m_informate = GL_RGBA;
-        }else if(t_dsp->m_inFormate == E_TEX_ALPHA) {
-            m_informate = GL_RGBA;
-        }else if(t_dsp->m_inFormate == E_TEX_L_ALPHA) {
-            m_informate = GL_RGBA;
-        }
         //数据格式
         s32 t_datafmt = GL_RGBA;
-        if(t_dsp->m_dataFormate == E_TEX_RGBA8888) {
+        m_informate = GL_RGBA;
+        if(t_dsp->m_dataFormate == SV_FORMAT_RGBA8) {
             t_datafmt = GL_RGBA;
-        }else if(t_dsp->m_dataFormate == E_TEX_RGB888) {
+            m_informate = GL_RGBA;
+        }else if(t_dsp->m_dataFormate == SV_FORMAT_RGBA8) {
             t_datafmt = GL_RGBA;
-        }else if(t_dsp->m_dataFormate == E_TEX_ALPHA) {
+            m_informate = GL_RGBA;
+        }else if(t_dsp->m_dataFormate == SV_FORMAT_R8) {
             t_datafmt = GL_RGBA;
-        }else if(t_dsp->m_dataFormate == E_TEX_L_ALPHA) {
+            m_informate = GL_RGBA;
+        }else if(t_dsp->m_dataFormate == SV_FORMAT_RG8) {
             t_datafmt = GL_RGBA;
+            m_informate = GL_RGBA;
         }
         SVDataSwapPtr t_data = t_texture->getTextureData();
         //生成纹理
@@ -68,7 +62,7 @@ void SVRTexGL::create(SVRendererPtr _renderer) {
         m_depth = t_dsp->m_depth;
         s32 t_tex_kind = GL_TEXTURE_2D;
         glGenTextures(1, &m_res_id);
-        if(m_tex_kind == E_TEX_1D) {
+        if(m_tex_kind == SV_IMAGE_1D) {
             t_tex_kind = GL_TEXTURE_1D;
             glBindTexture(GL_TEXTURE_1D, m_res_id);
             if(t_data) {
@@ -90,7 +84,7 @@ void SVRTexGL::create(SVRendererPtr _renderer) {
                              GL_UNSIGNED_BYTE,
                              0);
             }
-        }else if(m_tex_kind == E_TEX_2D) {
+        }else if(m_tex_kind == SV_IMAGE_2D) {
             t_tex_kind = GL_TEXTURE_2D;
             glBindTexture(GL_TEXTURE_2D, m_res_id);
             if(t_data) {
@@ -114,7 +108,7 @@ void SVRTexGL::create(SVRendererPtr _renderer) {
                     GL_UNSIGNED_BYTE,
                     t_data->getData() );
             }
-        }else if(m_tex_kind == E_TEX_3D) {
+        }else if(m_tex_kind == SV_IMAGE_3D) {
             t_tex_kind = GL_TEXTURE_3D;
             glBindTexture(GL_TEXTURE_3D, m_res_id);
             if(t_data) {
@@ -140,7 +134,7 @@ void SVRTexGL::create(SVRendererPtr _renderer) {
                 GL_UNSIGNED_BYTE,
                 0);
             }
-        }else if(m_tex_kind == E_TEX_CUBE) {
+        }else if(m_tex_kind == SV_IMAGE_CUBE) {
             t_tex_kind = GL_TEXTURE_CUBE_MAP;
             glBindTexture(GL_TEXTURE_CUBE_MAP, m_res_id);
             for(s32 i = 0;i<6;i++) {
@@ -181,7 +175,7 @@ void SVRTexGL::destroy(SVRendererPtr _renderer) {
 
 void SVRTexGL::commit() {
     m_texLock->lock();
-    if(m_tex_kind == E_TEX_1D) {
+    if(m_tex_kind == SV_IMAGE_1D) {
         if(m_data) {
             glBindTexture(GL_TEXTURE_1D, m_res_id);
             glTexSubImage1D(GL_TEXTURE_1D,
@@ -192,7 +186,7 @@ void SVRTexGL::commit() {
                             m_data->getData());
             m_data = nullptr;
         }
-    }else if(m_tex_kind == E_TEX_2D) {
+    }else if(m_tex_kind == SV_IMAGE_2D) {
         if(m_data) {
             glBindTexture(GL_TEXTURE_2D, m_res_id);
             glTexSubImage2D(GL_TEXTURE_2D,
@@ -204,7 +198,7 @@ void SVRTexGL::commit() {
                             m_data->getData());
             m_data = nullptr;
         }
-    }else if(m_tex_kind == E_TEX_3D) {
+    }else if(m_tex_kind == SV_IMAGE_3D) {
         if(m_data) {
             glBindTexture(GL_TEXTURE_3D, m_res_id);
             glTexSubImage3D(GL_TEXTURE_3D,
@@ -216,7 +210,7 @@ void SVRTexGL::commit() {
                             m_data->getData());
             m_data = nullptr;
         }
-    }else if(m_tex_kind == E_TEX_CUBE) {
+    }else if(m_tex_kind == SV_IMAGE_CUBE) {
         glBindTexture(GL_TEXTURE_CUBE_MAP, m_res_id);
         for(s32 i = 0;i<6;i++) {
             SVDataSwapPtr t_data = m_cube_data[i];

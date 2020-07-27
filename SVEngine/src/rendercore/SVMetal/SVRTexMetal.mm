@@ -52,6 +52,17 @@ void SVRTexMetal:: create(SVRendererPtr _renderer) {
         //
         MTLTextureDescriptor* t_descriptor = [[MTLTextureDescriptor alloc] init];
         t_descriptor.pixelFormat = MTLPixelFormatInvalid;//MTLPixelFormatRGBA8Unorm;
+        s32 t_bytesPerRow = 0;
+        if( t_dsp->m_dataFormate == SV_FORMAT_RGBA8 ) {
+            t_bytesPerRow = m_width*4;
+            t_descriptor.pixelFormat = MTLPixelFormatRGBA8Uint;
+        }else if( t_dsp->m_dataFormate == SV_FORMAT_R8 ) {
+            t_bytesPerRow = m_width;
+            t_descriptor.pixelFormat = MTLPixelFormatA8Unorm;
+        }else if( t_dsp->m_dataFormate == SV_FORMAT_RG8 ) {
+            t_bytesPerRow = m_width*2;
+            t_descriptor.pixelFormat = MTLPixelFormatRG8Unorm;
+        }
         t_descriptor.width = t_dsp->m_width;
         t_descriptor.height = t_dsp->m_height;
         t_descriptor.depth = t_dsp->m_depth;
@@ -70,19 +81,19 @@ void SVRTexMetal:: create(SVRendererPtr _renderer) {
             }
         }
         //设置类型，创建纹理
-        if(t_dsp->m_kind == E_TEX_1D) {
+        if(t_dsp->m_kind == SV_IMAGE_1D) {
             t_descriptor.pixelFormat = MTLPixelFormatRGBA8Unorm;
             t_descriptor.textureType = MTLTextureType1D;
             m_src_tex =  [t_rm->m_pDevice newTextureWithDescriptor:t_descriptor];
-        }else if(t_dsp->m_kind == E_TEX_2D) {
+        }else if(t_dsp->m_kind == SV_IMAGE_2D) {
             t_descriptor.pixelFormat = MTLPixelFormatRGBA8Unorm;
             t_descriptor.textureType = MTLTextureType2D;
             m_src_tex =  [t_rm->m_pDevice newTextureWithDescriptor:t_descriptor];
-        }else if(t_dsp->m_kind == E_TEX_3D) {
+        }else if(t_dsp->m_kind == SV_IMAGE_2D) {
             t_descriptor.pixelFormat = MTLPixelFormatRGBA8Unorm;
             t_descriptor.textureType = MTLTextureType3D;
             m_src_tex =  [t_rm->m_pDevice newTextureWithDescriptor:t_descriptor];
-        }else if(t_dsp->m_kind == E_TEX_CUBE) {
+        }else if(t_dsp->m_kind == SV_IMAGE_CUBE) {
             t_descriptor.pixelFormat = MTLPixelFormatRGBA8Unorm;
             t_descriptor.textureType = MTLTextureTypeCube;
             m_src_tex =  [t_rm->m_pDevice newTextureWithDescriptor:t_descriptor];
@@ -94,20 +105,19 @@ void SVRTexMetal:: create(SVRendererPtr _renderer) {
             if (t_rm->m_iOS9Runtime ||  t_rm->m_macOS11Runtime){
                 t_descriptor.storageMode = (MTLStorageMode)(2 /* MTLStorageModePrivate */);
             }
-            m_src_tex =  [t_rm->m_pDevice newTextureWithDescriptor:t_descriptor];
+            //m_src_tex =  [t_rm->m_pDevice newTextureWithDescriptor:t_descriptor];
             m_src_tex_msaa = [t_rm->m_pDevice newTextureWithDescriptor:t_descriptor];
         }
         //更新数据
         if(m_src_tex && t_texture->getTextureData() ) {
             SVDataSwapPtr t_data = t_texture->getTextureData();
-            MTLRegion t_region =  MTLRegionMake3D(0, 0, 0,t_dsp->m_width, t_dsp->m_height, t_dsp->m_depth);
-            s32 t_bytesPerRow = 0;
+            MTLRegion t_region =  MTLRegionMake3D(0, 0, 0,m_width, m_height, m_depth);
             [m_src_tex replaceRegion:t_region mipmapLevel:0 withBytes:t_data->getData() bytesPerRow:t_bytesPerRow];
         }
         //更新mass纹理
         if(m_src_tex_msaa && t_texture->getTextureData() ) {
             SVDataSwapPtr t_data = t_texture->getTextureData();
-            MTLRegion t_region =  MTLRegionMake3D(0, 0, 0,t_dsp->m_width, t_dsp->m_height, t_dsp->m_depth);
+            MTLRegion t_region =  MTLRegionMake3D(0, 0, 0,m_width, m_height, m_depth);
             s32 t_bytesPerRow = 0;
             [m_src_tex_msaa replaceRegion:t_region mipmapLevel:0 withBytes:t_data->getData() bytesPerRow:t_bytesPerRow];
         }
