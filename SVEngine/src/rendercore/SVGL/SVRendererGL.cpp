@@ -131,7 +131,14 @@ void SVRendererGL::submitTex(u32 _channel,TexUnit& _unit){
     if (!t_load){
         return ;
     }
-    t_aimTex->commit();
+    //渲染器主动提交纹理
+    t_aimTex->lockData();
+    if( t_aimTex->getTextureData() ) {
+        //主动提交纹理
+        t_aimTex->setTexData(nullptr);
+    }
+    t_aimTex->unlockData();
+    //
     texid = 0;
     glBindTexture(GL_TEXTURE_2D, texid);
     SVString atexture = SVString::format("aTexture%d",_channel);

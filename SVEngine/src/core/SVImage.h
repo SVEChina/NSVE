@@ -11,6 +11,7 @@
 #include "../base/SVGBase.h"
 #include "../base/SVPreDeclare.h"
 #include "../mtl/SVMtlDeclare.h"
+#include <string>
 
 namespace sv {
     
@@ -115,13 +116,15 @@ namespace sv {
         void _get(u32 _x, u32 _y, u32 _z, u32 _offset, Pixel &_p) const;
         void _get(u32 _x, u32 _y, u32 _z, u32 _offset, Pixel &_p00, Pixel &_p10, Pixel &_p01, Pixel &_p11) const;
         void _interpolate(f32 _x, f32 _y, const Pixel &_p00, const Pixel &_p10, const Pixel &_p01, const Pixel &_p11, Pixel &_p) const;
+        
+        std::string m_img_name;
+        
         c8 m_type;                  // image type
         c8 m_format;                // image format
         
         s32 m_width;                // image size
         s32 m_height;
         s32 m_depth;
-        
         SVDataSwapPtr m_pData;
     };
     

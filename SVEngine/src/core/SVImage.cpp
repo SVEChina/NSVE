@@ -62,6 +62,7 @@ SVImage::~SVImage() {
 
 s32 SVImage::load(cptr8 _filename){
     SV_LOG_INFO("load image: %s \n",_filename );
+    m_img_name = _filename;
     SVLoaderPng pngLoad(mApp);
     u8 *pTexData = nullptr;
     pngLoad.loadData(_filename, &pTexData);
@@ -87,6 +88,7 @@ SVTexturePtr SVImage::toTexture() {
     t_dsp.m_srgb = false;
     t_dsp.m_dataFormate = m_format;
     t_tex->init(t_dsp,m_pData);
+    t_tex->m_name = m_img_name.c_str();
     return t_tex;
 }
 

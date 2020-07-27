@@ -59,9 +59,12 @@ namespace sv {
 
         void destroy();
         
-        void setTexData(SVDataSwapPtr _data);
+        //数据操作的锁
+        void lockData();
         
-        virtual void commit();  //数据提交到显卡
+        void unlockData();
+        
+        void setTexData(SVDataSwapPtr _data);
         
         virtual bool getbLoad();
         
@@ -80,7 +83,10 @@ namespace sv {
         
     protected:
         void _updateData();
+        
         SVRTexPtr m_restex;
+        
+        SVLockSpinPtr m_lock;
         
     public:
         SVString m_name;
@@ -89,7 +95,6 @@ namespace sv {
         SVDataSwapPtr m_pData;
         SVDataSwapPtr m_cubData[6];
         
-    public:
         virtual void pushData(u8* _srcPtr,s32 _w,s32 _h,s32 _pixelformate){}
         
         virtual void fetchData(u8* _dstPtr,s32 _w,s32 _h){}

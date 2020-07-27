@@ -6,22 +6,22 @@
 //
 
 #include "SVTexture.h"
+#include "../work/SVTdCore.h"
 #include "../app/SVDispatch.h"
 #include "../app/SVInst.h"
 #include "../basesys/SVConfig.h"
 #include "../rendercore/SVRenderMgr.h"
 #include "../work/SVTdCore.h"
 #include "../base/SVDataSwap.h"
-//
-#include "../rendercore/SVGL/SVRTexGL.h"
-#include "../rendercore/SVGL/SVRendererGL.h"
-//
-#include "../rendercore/SVVulkan/SVRendererVK.h"
+//#include "../rendercore/SVGL/SVRTexGL.h"
+//#include "../rendercore/SVGL/SVRendererGL.h"
+//#include "../rendercore/SVVulkan/SVRendererVK.h"
 
 using namespace sv;
 
 SVTexture::SVTexture(SVInstPtr _app)
 : SVGBaseEx(_app) {
+    m_lock = MakeSharedPtr<SVLockSpin>();
     m_name = "";
     m_bEnableMipMap = false;
     m_restex = nullptr;
@@ -29,18 +29,19 @@ SVTexture::SVTexture(SVInstPtr _app)
 }
 
 SVTexture::~SVTexture() {
+    m_lock = nullptr;
     m_pData = nullptr;
     m_restex = nullptr;
 }
 
 void SVTexture::init(SVTextureDsp& _param) {
     m_texture_dsp = _param;
-    m_pData = nullptr;
+    setTexData(nullptr);
 }
 
 void SVTexture::init(SVTextureDsp& _param,SVDataSwapPtr _data) {
     m_texture_dsp = _param;
-    m_pData = _data;
+    setTexData(_data);
 }
 
 //
@@ -65,15 +66,23 @@ SVDataSwapPtr SVTexture::getTextureCubeData(s32 _index) {
     return nullptr;
 }
 
-void SVTexture::setTexData(SVDataSwapPtr _data){
-    //更新纹理数据
-    m_pData = _data;
+void SVTexture::lockData() {
+    if(m_lock) {
+        m_lock->lock();
+    }
 }
 
-void SVTexture::commit(){
-    if (m_restex) {
-        m_restex->commit();
+void SVTexture::unlockData() {
+    if(m_lock) {
+        m_lock->unlock();
     }
+}
+
+void SVTexture::setTexData(SVDataSwapPtr _data){
+    //更新纹理数据
+    lockData();
+    m_pData = _data;
+    unlockData();
 }
 
 bool SVTexture::getbLoad(){
