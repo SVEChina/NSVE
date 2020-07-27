@@ -1,5 +1,5 @@
-#ifndef SV_AHALF_H
-#define SV_AHALF_H
+#ifndef SV_HALF_H
+#define SV_HALF_H
 
 #include "SVBase.h"
 
@@ -86,4 +86,4 @@ namespace sv {
 }//!namespace sv
 
 
-#endif /* SV_AHALF_H */
+#endif /* SV_HALF_H */

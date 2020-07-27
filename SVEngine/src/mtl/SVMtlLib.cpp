@@ -121,6 +121,11 @@ bool SVMtlLib::parseMtl1(SVMtlCorePtr _mtl,RAPIDJSON_NAMESPACE::Document& _doc) 
             s32 t_param_chan = element["channel"].GetInt();
             SVString t_param_type = element["type"].GetString();
             SVString t_param_path = element["path"].GetString();
+            if(t_param_type == "file") {
+                _mtl->setTexture(t_param_chan, t_param_path.c_str());
+            }else if(t_param_type == "inner") {
+                //_mtl->setTexture(t_param_chan, "");
+            }
         }
         //t_shader_file = t_value.GetString();
     }
@@ -128,6 +133,8 @@ bool SVMtlLib::parseMtl1(SVMtlCorePtr _mtl,RAPIDJSON_NAMESPACE::Document& _doc) 
     if (_doc.HasMember("blend-param") && _doc["blend-param"].IsObject()) {
         RAPIDJSON_NAMESPACE::Document::Object t_value_obj = _doc["blend-param"].GetObject();
         s32 t_enable = t_value_obj["enable"].GetInt();
+        _mtl->setBlendEnable(true);
+        //_mtl->setBlendState(<#MTLBLENDFUNC _src#>, <#MTLBLENDFUNC _dst#>)
     }
     //stencil param 融合
     if (_doc.HasMember("stencil-param") && _doc["stencil-param"].IsObject()) {

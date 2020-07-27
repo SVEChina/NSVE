@@ -73,7 +73,7 @@ SVRenderMeshPtr SVMesh::getRenderMesh(){
 
 void SVMesh::update(f32 _dt,FMat4& _mat) {
     if(m_pMtl) {
-        m_pMtl->setModelMatrix(_mat.get());
+        //m_pMtl->setModelMatrix(_mat.get());
         m_pMtl->setBlendEnable(true);
         m_pMtl->setDepthEnable(true);
         m_pMtl->update(_dt);
@@ -107,6 +107,7 @@ void SVMesh::createShadow() {
 //        SVRenderCmdNorPtr t_cmd = MakeSharedPtr<SVRenderCmdNor>();
 //        if(m_pMtl) {
 //            SVMtlCorePtr t_mtl= MakeSharedPtr<SVMtlCore>(mApp,"depth3d");
+                //t_mtl->setParam("mmat", m_mat_unit);
 //            t_mtl->setModelMatrix(m_pMtl->m_LogicParamMatrix.m_mat_model);
 //            t_mtl->setBlendEnable(true);
 //            t_mtl->setDepthEnable(true);

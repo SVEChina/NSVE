@@ -962,7 +962,8 @@ void SVPenStroke::_renderBoundingBox(){
         SVMtlGeo3dPtr t_mtl_geo3d = MakeSharedPtr<SVMtlGeo3d>(mApp);
         t_mtl_geo3d->setColor(1.0f, 0.0f, 0.0f, 1.0f);
         FMat4 m_mat_unit = FMat4_identity;
-        t_mtl_geo3d->setModelMatrix( m_mat_unit.get() ); SVRenderObjInst::pushAABBCmd(t_rs,RST_AR_END,m_aabbBox,t_mtl_geo3d,"SV3DBOX_aabb");
+        t_mtl_geo3d->setParam("mmat", m_mat_unit);
+        SVRenderObjInst::pushAABBCmd(t_rs,RST_AR_END,m_aabbBox,t_mtl_geo3d,"SV3DBOX_aabb");
     }
 }
 

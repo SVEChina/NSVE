@@ -27,12 +27,12 @@ namespace sv {
         
         void unregistListenFunc(SVObject *listener, dataListenFunc func);
         
-        void noticeListener(float dt);
+        void noticeListener(f32 dt);
         
     protected:
-        virtual void _updateSelf(float dt);
+        virtual void _updateSelf(f32 dt);
         
-        virtual void _notice(float dt);
+        virtual void _notice(f32 dt);
         
         typedef SVArray<LISTENFUNC> LISTENFUNCPOOL;
         LISTENFUNCPOOL m_listenfunc_pool;

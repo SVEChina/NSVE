@@ -10,6 +10,7 @@
 #include "SVGLModify.h"
 #include "../base/SVDataChunk.h"
 #include "../operate/SVOpCreate.h"
+#include "../mtl/SVTexMgr.h"
 #include "../mtl/SVTexture.h"
 #include "../rendercore/SVRenderScene.h"
 #include "../rendercore/SVGL/SVRTexGL.h"
@@ -181,7 +182,20 @@ void SVMtlCore::setParam(cptr8 _name,FVec4 _value) {
 }
 
 void SVMtlCore::setParam(cptr8 _name,FMat4 _value) {
-    
+    for(int i=0;i<m_paramTbl.size();i++) {
+        if( strcmp( m_paramTbl[i].m_name.c_str() ,_name) == 0 ) {
+            //找到目标参数 ，拷贝即可
+            m_paramValues->set(m_paramTbl[i].m_off,_value);
+            return ;
+        }
+    }
+    //推送目标参数
+    MtlParamDsp t_param;
+    t_param.m_name = _name;
+    t_param.m_type = "fmat4";
+    t_param.m_size = sizeof(FMat4);
+    t_param.m_off = m_paramValues->push(_value);
+    m_paramTbl.push_back(t_param);
 }
 
 void* SVMtlCore::getParam(cptr8 _name) {
@@ -196,6 +210,43 @@ void* SVMtlCore::getParam(cptr8 _name) {
     return m_paramValues->getPointer(t_off);
 }
 
+//
+void SVMtlCore::setTexture(s32 _chanel,cptr8 _fname) {
+    //从文件加载纹理
+    if(_chanel<0 || _chanel>=MAX_TEXUNIT) {
+         //error 报错
+        return ;
+    }
+    SVTexturePtr t_tex = mApp->getTexMgr()->getTexture(_fname);
+    if(!t_tex) {
+        //error 报错 用默认纹理代替
+        t_tex = mApp->getTexMgr()->getSVETexture();
+    }
+    m_paramTex.setTexture(_chanel, t_tex);
+    s32 t_flag = MTL_F0_TEX0;
+    t_flag = t_flag<<_chanel;
+    m_LogicMtlFlag0 |= t_flag;
+}
+
+void SVMtlCore::setTexture(s32 _chanel,SVTexturePtr _texture) {
+    if(_chanel<0 || _chanel>=MAX_TEXUNIT)
+        return;
+    m_paramTex.setTexture(_chanel, _texture);
+    s32 t_flag = MTL_F0_TEX0;
+    t_flag = t_flag<<_chanel;
+    m_LogicMtlFlag0 |= t_flag;
+}
+
+void SVMtlCore::setTexture(s32 _chanel,SVTEXINID _from) {
+    if(_chanel<0 || _chanel>=MAX_TEXUNIT)
+        return;
+    m_paramTex.setTexture(_chanel, _from);
+    s32 t_flag = MTL_F0_TEX0;
+    t_flag = t_flag<<_chanel;
+    m_LogicMtlFlag0 |= t_flag;
+}
+
+//
 void SVMtlCore::setModelMatrix(f32 *_mat) {
     memcpy(m_LogicParamMatrix.m_mat_model, _mat, sizeof(f32) * 16);
     m_LogicMtlFlag0 |= MTL_F0_MAT_M;
@@ -413,24 +464,6 @@ void SVMtlCore::_submitState(SVRendererPtr _render) {
 }
 
 void SVMtlCore::_submitMtl(SVRendererPtr _render) {
-}
-
-void SVMtlCore::setTexture(s32 _chanel,SVTexturePtr _texture) {
-    if(_chanel<0 || _chanel>=MAX_TEXUNIT)
-        return;
-    m_paramTex.setTexture(_chanel, _texture);
-    s32 t_flag = MTL_F0_TEX0;
-    t_flag = t_flag<<_chanel;
-    m_LogicMtlFlag0 |= t_flag;
-}
-
-void SVMtlCore::setTexture(s32 _chanel,SVTEXINID _from) {
-    if(_chanel<0 || _chanel>=MAX_TEXUNIT)
-        return;
-    m_paramTex.setTexture(_chanel, _from);
-    s32 t_flag = MTL_F0_TEX0;
-    t_flag = t_flag<<_chanel;
-    m_LogicMtlFlag0 |= t_flag;
 }
 
 void SVMtlCore::setTexSizeIndex(s32 index, f32 _w, f32 _h) {

@@ -12,14 +12,14 @@
 
 namespace sv {
     
-        class SVModify : public SVGBaseEx {
-        public:
-            SVModify(SVInstPtr _app);
-            
-            ~SVModify();
-            
-            void exec(SVObjectPtr _obj);
-        };
+    class SVModify : public SVGBaseEx {
+    public:
+        SVModify(SVInstPtr _app);
+        
+        ~SVModify();
+        
+        void exec(SVObjectPtr _obj);
+    };
     
 }//!namespace sv
 

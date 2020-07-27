@@ -5,33 +5,31 @@
 
 namespace sv {
     
-   
+    //
+    class SetData {
+    public:
+        SetData() {
+        }
         
-        //
-        class SetData {
-        public:
-            SetData() {
-            }
-            
-            ~SetData() {
-            }
-        };
+        ~SetData() {
+        }
+    };
+    
+    //
+    template <class Key,u16 Capacity = 128> class SVSet : public SVCoreTree<Key,SetData,Capacity> {
+    public:
+        SVSet() {
+        }
         
-        //
-        template <class Key,u16 Capacity = 128> class SVSet : public SVCoreTree<Key,SetData,Capacity> {
-        public:
-            SVSet() {
-            }
-            
-            ~SVSet() {
-            }
-            
-            sv_inline void append(const Key &key) {
-                s16 change = 0;
-                typename SVSet<Key,Capacity>::Node *parent = 0;
-                append_proc(key,SVCoreTree<Key,SetData,Capacity>::root,parent,change);
-            }
-        };
+        ~SVSet() {
+        }
+        
+        sv_inline void append(const Key &key) {
+            s16 change = 0;
+            typename SVSet<Key,Capacity>::Node *parent = 0;
+            append_proc(key,SVCoreTree<Key,SetData,Capacity>::root,parent,change);
+        }
+    };
         
     
     

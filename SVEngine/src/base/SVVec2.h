@@ -1,5 +1,5 @@
-#ifndef __aVEC2_H__
-#define __aVEC2_H__
+#ifndef __SV_VEC2_H__
+#define __SV_VEC2_H__
 
 #include "SVVecbase.h"
 #include "SVCoreMath.h"
@@ -806,4 +806,4 @@ namespace sv {
 }//!namespace sv
 
 
-#endif /* __aVEC2_H__ */
+#endif /* __SV_VEC2_H__ */

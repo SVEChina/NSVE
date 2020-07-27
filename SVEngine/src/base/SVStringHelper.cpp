@@ -9,9 +9,7 @@
 
 using namespace sv;
 
-SVStringHelper::SVStringHelper()
-: SVObject(){
- 
+SVStringHelper::SVStringHelper() {
 }
 
 SVStringHelper::~SVStringHelper(){
@@ -37,22 +35,22 @@ void SVStringHelper::decrypt(c8 *_str, s32 *_keys, u32 _keyCount){
 SVString SVStringHelper::jsonFormat(const SVString inString){
     SVString outString;
     outString.allocate(inString.size());
-    int index = 0;
-    int count = 0;
+    s32 index = 0;
+    s32 count = 0;
     while(index < inString.size()){
         char ch = inString.get(index);
         if(ch == '{' || ch == '['){
             outString.append(ch);
             outString.append('\n');
             count++;
-            for (int i = 0; i < count; i++) {
+            for (s32 i = 0; i < count; i++) {
                 outString.append('\t');
             }
         }
         else if(ch == '}' || ch == ']'){
             outString.append('\n');
             count--;
-            for (int i = 0; i < count; i++) {
+            for (s32 i = 0; i < count; i++) {
                 outString.append('\t');
             }
             outString.append(ch);
@@ -60,7 +58,7 @@ SVString SVStringHelper::jsonFormat(const SVString inString){
         else if(ch == ','){
             outString.append(ch);
             outString.append('\n');
-            for (int i = 0; i < count; i++) {
+            for (s32 i = 0; i < count; i++) {
                 outString.append('\t');
             }
         }

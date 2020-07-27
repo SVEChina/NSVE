@@ -9,10 +9,8 @@
 
 using namespace sv;
 
-/*
- */
 SVNoise::SVNoise(){
-	setSeed((u32)time(NULL));
+	setSeed((u32)time(nullptr));
 }
 
 SVNoise::SVNoise(u32 _seed){
@@ -20,7 +18,6 @@ SVNoise::SVNoise(u32 _seed){
 }
 
 SVNoise::~SVNoise() {
-	
 }
 
 /*
@@ -267,7 +264,7 @@ f32 SVNoise::getTileableTurbulence2(f32 _x, f32 _y, f32 _width, f32 _height, s32
 	return res;
 }
 
-f32 SVNoise::getTileableTurbulence3(f32 _x, f32 _y, f32 _z, f32 _width, f32 _height, f32 _depth, s32 _frequency) const {
+f32 SVNoise::getTileableTurbulence3(f32 _x, f32 _y, f32 _z, f32 _width, f32 _height, f32 _depth, s32 _frequency) const{
 	f32 res = 0.0f;
 	for(s32 f = _frequency; f >= 1; f >>= 1) {
 		res += getTileable3(_x * f,_y * f,_z * f,_width * f,_height * f,_depth * f) / f;

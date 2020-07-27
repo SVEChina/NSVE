@@ -1,5 +1,5 @@
-#ifndef __HASH_H__
-#define __HASH_H__
+#ifndef __SV_HASH_H__
+#define __SV_HASH_H__
 
 #include "SVBase.h"
 
@@ -12,7 +12,6 @@ namespace sv {
     public:
         class Iterator {
         private:
-            
             friend class SVHash;
             Iterator(Data *ptr,Data *end)
             : ptr(ptr)
@@ -347,4 +346,4 @@ namespace sv {
 
 
 
-#endif /* __HASH_H__ */
+#endif /* __SV_HASH_H__ */

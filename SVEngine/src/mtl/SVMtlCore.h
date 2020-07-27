@@ -68,6 +68,13 @@ namespace sv {
         
         void* getParam(cptr8 _name);
         
+        //
+        void setTexture(s32 _chanel,cptr8 _fname);
+        
+        void setTexture(s32 _chanel,SVTexturePtr _texture);
+               
+        void setTexture(s32 _chanel,SVTEXINID _from);
+        
     protected:
         //param
         std::vector<MtlParamDsp> m_paramTbl;  //参数表
@@ -87,10 +94,6 @@ namespace sv {
         
         void swap();
                     
-        void setTexture(s32 _chanel,SVTexturePtr _texture);
-        
-        void setTexture(s32 _chanel,SVTEXINID _from);
-        
         void setTexcoordFlip(f32 _x, f32 _y);
         
         void setTextureParam(s32 _chanel,TEXTUREPARAM _type,s32 _value);
