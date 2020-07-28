@@ -69,8 +69,6 @@ namespace sv {
         static void eliminate(f32 *ret,const f32 *column,const f32 *factor,s32 rows,s32 num);
     };
     
-    
-    
 }//!namespace sv
 
 

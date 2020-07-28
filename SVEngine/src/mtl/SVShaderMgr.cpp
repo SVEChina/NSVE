@@ -60,7 +60,6 @@ void SVShaderMgr::_loadAllShader() {
         }
     }
     //"shadertype" :"metal",
-    //
     RAPIDJSON_NAMESPACE::Value &shader = doc["shader"];
     if (shader.IsArray()) {
         for (s32 i = 0; i < shader.Size(); ++i) {
@@ -121,7 +120,6 @@ void SVShaderMgr::_loadAllShader() {
                     if(t_tse_func!="null") {
                         t_shader->m_dsp.m_dsp |= SV_E_TECH_TSD;
                     }
-                    
                     //创建shader
                     //
                     SVDispatch::dispatchShaderCreate(mApp,t_shader);

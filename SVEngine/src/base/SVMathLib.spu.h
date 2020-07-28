@@ -66,8 +66,6 @@
 
 namespace sv {
     
-   
-        
     //
     struct FVec3;
     struct FVec4;
@@ -104,102 +102,99 @@ namespace sv {
 
     //
     class Math {
-        
-            Math() { }
-        
-        public:
-        
-            // functions
-            static s32 signMask(s32 v);
-            static f32 sign(f32 v);
-            static vec_float4 sign4(vec_float4 v);
-        
-            static s32 abs(s32 v);
-            static f32 abs(f32 v);
-            static vec_float4 abs4(vec_float4 v);
-        
-            static f32 ceil(f32 v);
-            static vec_float4 ceil4(vec_float4 v);
-        
-            static f32 floor(f32 v);
-            static vec_float4 floor4(vec_float4 v);
-        
-            static f32 frac(f32 v);
-            static vec_float4 frac4(vec_float4 v);
-        
-            static f32 sqrt(f32 v);
-            static vec_float4 sqrt4(vec_float4 v);
-        
-            static f32 rcp(f32 v);
-            static vec_float4 rcp4(vec_float4 v);
-        
-            static f32 rsqrt(f32 v);
-            static f32 rsqrtFast(f32 v);
-            static vec_float4 rsqrt4(vec_float4 v);
-            static vec_float4 rsqrtFast4(vec_float4 v);
-        
-            static f32 mod(f32 x,f32 y);
-            static vec_float4 mod(vec_float4 x,vec_float4 y);
-        
-            static f32 pow(f32 x,f32 y);
-            static f32 powFast(f32 x,f32 y);
-            static vec_float4 pow4(vec_float4 x,vec_float4 y);
-        
-            static f32 exp(f32 v);
-            static f32 expFast(f32 v);
-            static vec_float4 exp4(vec_float4 v);
-        
-            static f32 exp2(f32 v);
-            static f32 exp2Fast(f32 v);
-            static vec_float4 exp24(vec_float4 v);
-        
-            static f32 log(f32 v);
-            static f32 logFast(f32 v);
-            static vec_float4 log4(vec_float4 v);
-        
-            static f32 log2(f32 v);
-            static f32 log2Fast(f32 v);
-            static vec_float4 log24(vec_float4 v);
-        
-            static f32 log10(f32 v);
-            static vec_float4 log104(vec_float4 v);
-        
-            // trigonometry
-            static f32 sin(f32 a);
-            static vec_float4 sin4(vec_float4 a);
-        
-            static f32 cos(f32 a);
-            static vec_float4 cos4(vec_float4 a);
-        
-            static f32 tan(f32 a);
-            static vec_float4 tan4(vec_float4 a);
-        
-            static f32 asin(f32 v);
-            static vec_float4 asin4(vec_float4 v);
-        
-            static f32 acos(f32 v);
-            static vec_float4 acos4(vec_float4 v);
-        
-            static f32 atan(f32 v);
-            static vec_float4 atan4(vec_float4 v);
-        
-            static f32 atan2(f32 y,f32 x);
-            static vec_float4 atan24(vec_float4 y,vec_float4 x);
-        
-            static void sincos(f32 a,f32 &s,f32 &c);
-            static void sincosFast(f32 a,f32 &s,f32 &c);
-            static void sincos4(vec_float4 a,vec_float4 &s,vec_float4 &c);
-            static void sincosFast4(vec_float4 a,vec_float4 &s,vec_float4 &c);
-        
-            // branching
-            static s32 select(s32 c,s32 v0,s32 v1);
-            static f32 select(s32 c,f32 v0,f32 v1);
-            static f32 select(f32 c,f32 v0,f32 v1);
-        
-            // conversion
-            static f32 itof(s32 v);
-            static s32 ftoi(f32 v);
-            static s32 round(f32 v);
+        Math() {}
+    public:
+        // functions
+        static s32 signMask(s32 v);
+        static f32 sign(f32 v);
+        static vec_float4 sign4(vec_float4 v);
+    
+        static s32 abs(s32 v);
+        static f32 abs(f32 v);
+        static vec_float4 abs4(vec_float4 v);
+    
+        static f32 ceil(f32 v);
+        static vec_float4 ceil4(vec_float4 v);
+    
+        static f32 floor(f32 v);
+        static vec_float4 floor4(vec_float4 v);
+    
+        static f32 frac(f32 v);
+        static vec_float4 frac4(vec_float4 v);
+    
+        static f32 sqrt(f32 v);
+        static vec_float4 sqrt4(vec_float4 v);
+    
+        static f32 rcp(f32 v);
+        static vec_float4 rcp4(vec_float4 v);
+    
+        static f32 rsqrt(f32 v);
+        static f32 rsqrtFast(f32 v);
+        static vec_float4 rsqrt4(vec_float4 v);
+        static vec_float4 rsqrtFast4(vec_float4 v);
+    
+        static f32 mod(f32 x,f32 y);
+        static vec_float4 mod(vec_float4 x,vec_float4 y);
+    
+        static f32 pow(f32 x,f32 y);
+        static f32 powFast(f32 x,f32 y);
+        static vec_float4 pow4(vec_float4 x,vec_float4 y);
+    
+        static f32 exp(f32 v);
+        static f32 expFast(f32 v);
+        static vec_float4 exp4(vec_float4 v);
+    
+        static f32 exp2(f32 v);
+        static f32 exp2Fast(f32 v);
+        static vec_float4 exp24(vec_float4 v);
+    
+        static f32 log(f32 v);
+        static f32 logFast(f32 v);
+        static vec_float4 log4(vec_float4 v);
+    
+        static f32 log2(f32 v);
+        static f32 log2Fast(f32 v);
+        static vec_float4 log24(vec_float4 v);
+    
+        static f32 log10(f32 v);
+        static vec_float4 log104(vec_float4 v);
+    
+        // trigonometry
+        static f32 sin(f32 a);
+        static vec_float4 sin4(vec_float4 a);
+    
+        static f32 cos(f32 a);
+        static vec_float4 cos4(vec_float4 a);
+    
+        static f32 tan(f32 a);
+        static vec_float4 tan4(vec_float4 a);
+    
+        static f32 asin(f32 v);
+        static vec_float4 asin4(vec_float4 v);
+    
+        static f32 acos(f32 v);
+        static vec_float4 acos4(vec_float4 v);
+    
+        static f32 atan(f32 v);
+        static vec_float4 atan4(vec_float4 v);
+    
+        static f32 atan2(f32 y,f32 x);
+        static vec_float4 atan24(vec_float4 y,vec_float4 x);
+    
+        static void sincos(f32 a,f32 &s,f32 &c);
+        static void sincosFast(f32 a,f32 &s,f32 &c);
+        static void sincos4(vec_float4 a,vec_float4 &s,vec_float4 &c);
+        static void sincosFast4(vec_float4 a,vec_float4 &s,vec_float4 &c);
+    
+        // branching
+        static s32 select(s32 c,s32 v0,s32 v1);
+        static f32 select(s32 c,f32 v0,f32 v1);
+        static f32 select(f32 c,f32 v0,f32 v1);
+    
+        // conversion
+        static f32 itof(s32 v);
+        static s32 ftoi(f32 v);
+        static s32 round(f32 v);
     };
 
     //

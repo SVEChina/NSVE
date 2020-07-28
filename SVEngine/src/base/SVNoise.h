@@ -14,9 +14,10 @@ namespace sv {
     
     class SVNoise{
     public:
-        
         SVNoise();
+        
         SVNoise(u32 _seed);
+        
         ~SVNoise();
         
         void setSeed(u32 _seed);
@@ -58,9 +59,6 @@ namespace sv {
         f32 gradient3[SAMPLES * 2 + 2][3];
     };
         
-        
-    
-    
 }//!namespace sv
 
 #endif /* __SV_NOISE_H__ */

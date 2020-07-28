@@ -16,187 +16,85 @@ using namespace sv;
 SVCameraNode::SVCameraNode(SVInstPtr _app)
 : SVEventProc(_app) {
     m_dirty = true;
+    m_is_ortho = false;
     m_resLock = MakeSharedPtr<SVLock>();
-//    //视矩阵
-//    SVCamCtrlProjPtr t_pCtrl =  MakeSharedPtr<SVCamCtrlProj>(_app);
-//    f32 t_pos_z = (1280.0f*0.5f) / tan(30.0f * DEGTORAD);
-//    t_pCtrl->setPosition(0.0f, 0.0,t_pos_z);
-//    t_pCtrl->setTarget(0.0f, 0.0f, 0.0f);
-//    t_pCtrl->setUp(0.0f,1.0f,0.0f);
-//    m_pCtrl = t_pCtrl;
-//    //投影矩阵
-//    m_pProjMethod = MakeSharedPtr<SVProject>();
-//    m_pProjMethod->reset();
-//    //更新矩阵
-//    m_pos = m_pCtrl->getPos();
-//    m_mat_v = m_pCtrl->getMat();
-//    m_mat_p = m_pProjMethod->getMat();
-//    //
-//    updateViewProj();
+    m_znear = 1.0f;
+    m_zfar = 100.0f;
+    m_width = 720.0f;
+    m_height = 1280.0f;
+    m_fovy = 60.0f;
 }
 
 SVCameraNode::~SVCameraNode() {
+    
 }
 
 void SVCameraNode::init() {
-//    if(m_pCtrl) {
-//        m_pCtrl->bind(THIS_TO_SHAREPTR(SVCameraNode));
-//    }
+    if(m_is_ortho) {
+        setOrtho();
+    }else{
+        setProject();
+    }
 }
 
 void SVCameraNode::destroy() {
-//    if(m_pCtrl) {
-//        m_pCtrl->unbind();
-//    }
+    
 }
 
-void SVCameraNode::project() {
-//    if(m_pProjMethod) {
-//        SVProjectPtr tt = MakeSharedPtr<SVProject>();
-//        tt->setWidth(m_pProjMethod->getWidth());
-//        tt->setHeight(m_pProjMethod->getHeight());
-//        tt->setNear(m_pProjMethod->getNear());
-//        tt->setFar(m_pProjMethod->getFar());
-//        tt->setFovy(60.0f);
-//        tt->refresh();
-//        m_pProjMethod = tt;
-//    }else {
-//        m_pProjMethod = MakeSharedPtr<SVProject>();
-//        m_pProjMethod->reset();
-//    }
-//    //
-//    m_mat_p = m_pProjMethod->getMat();
-//    //设置透视ctrl
+void SVCameraNode::setProject() {
+    f32 t_aspect = m_width/m_height;
+    m_mat_p = perspective(m_fovy,t_aspect,m_znear,m_zfar);
 }
 
-void SVCameraNode::ortho() {
-//    if(m_pProjMethod) {
-//        SVOrthoPtr tt = MakeSharedPtr<SVOrtho>();
-//        tt->setWidth(tt->getWidth());
-//        tt->setHeight(tt->getHeight());
-//        tt->setNear(tt->getNear());
-//        tt->setFar(tt->getFar());
-//        tt->refresh();
-//        m_pProjMethod = tt;
-//    }else {
-//        m_pProjMethod = MakeSharedPtr<SVOrtho>();
-//        m_pProjMethod = MakeSharedPtr<SVProject>();
-//        m_pProjMethod->reset();
-//    }
-//    //
-//    m_mat_p = m_pProjMethod->getMat();
-//    //设置正交ctrl
-//    m_pCtrl =  MakeSharedPtr<SVCamCtrlOrtho>(mApp);
+void SVCameraNode::setOrtho() {
+    m_mat_p = ortho(-m_width*0.5f,m_width*0.5f,-m_height*0.5f,m_height*0.5f,m_znear,m_zfar);
 }
-
-////LINK FBO
-//void SVCameraNode::addLinkFboObject(SVFboObjectPtr _fbo){
-//    if (_fbo) {
-//        for(s32 i=0;i<m_fbobjectPool.size();i++) {
-//            if(m_fbobjectPool[i] == _fbo) {
-//                return ;
-//            }
-//        }
-//        m_fbobjectPool.append(_fbo);
-//    }
-//}
-
-void SVCameraNode::_removeUnuseLinkFboObject(){
-//    m_resLock->lock();
-//    //小心复值引用计数会加 1！！！！！！！！！！！！！！ 晓帆。。
-//    for(s32 i=0;i<m_fbobjectPool.size();) {
-//        if(m_fbobjectPool[i].use_count() == 2) {
-//            m_fbobjectPool.remove(i);
-//        }else{
-//            i++;
-//        }
-//    }
-//    m_fbobjectPool.reserveForce(m_fbobjectPool.size());
-//    m_resLock->unlock();
-}
-
-//bool SVCameraNode::removeLinkFboObject(SVFboObjectPtr _fbo){
-//    if (_fbo) {
-//        for (s32 i = 0; i < m_fbobjectPool.size(); i++) {
-//            if (m_fbobjectPool[i] == _fbo) {
-//                m_fbobjectPool.removeForce(i);
-//                return true;
-//            }
-//        }
-//    }
-//    return false;
-//}
 
 //
 void SVCameraNode::update(f32 _dt) {
-//    //移除关联fbo
-//    _removeUnuseLinkFboObject();
-//    //数据更新
-//    if(m_pCtrl && m_pProjMethod) {
-//        //控制器接管
-//        bool t_flag = m_pCtrl->run(THIS_TO_SHAREPTR(SVCameraNode),_dt);
-//        if (m_dirty || t_flag) {
-//            m_pos = m_pCtrl->getPos();
-//            m_mat_v = m_pCtrl->getMat();
-//            m_mat_p = m_pProjMethod->getMat();
-//            updateViewProj();  // 更新vp矩阵
-//        }
-//        //关联fbo
-//        for (s32 i = 0; i < m_fbobjectPool.size(); i++) {
-//            SVFboObjectPtr t_fbo = m_fbobjectPool[i];
-//            t_fbo->setLink(true);
-//            t_fbo->setViewMat(m_mat_v);
-//            t_fbo->setProjMat(m_mat_p);
-//        }
-//    }
+    //移除关联fbo
+    if (m_dirty) {
+        m_dirty = true;
+        //
+        if(m_is_ortho) {
+            setOrtho();
+        }else{
+            setProject();
+        }
+        //
+        m_mat_vp =m_mat_p*m_mat_v;
+        updateViewProj();  // 更新vp矩阵
+    }
 }
 
 void SVCameraNode::_updateForce() {
-//    if(m_pProjMethod) {
-//        m_pProjMethod->refresh();
-//    }
-//    //
-//    m_pos = m_pCtrl->getPos();
-//    m_mat_v = m_pCtrl->getMat();
-//    m_mat_p = m_pProjMethod->getMat();
-//    m_dirty = false;
+    m_dirty = false;
+    if(m_is_ortho) {
+        setOrtho();
+    }else{
+        setProject();
+    }
+    m_mat_vp =m_mat_p*m_mat_v;
+    updateViewProj();
 }
 
-void SVCameraNode::resetDefaultCamera() {
-//    //控制重制
-//    if(m_pCtrl){
-//        m_pCtrl->reset();
-//    }
-//    //投影充值
-//    if(m_pProjMethod) {
-//        m_pProjMethod->reset();
-//    }
-//    //
-//    m_pos = m_pCtrl->getPos();
-//    m_mat_v = m_pCtrl->getMat();
-//    m_mat_p = m_pProjMethod->getMat();
+void SVCameraNode::resetDefault() {
+    m_width = 720.0f;
+    m_height = 1280.0f;
+    m_dirty = true;
 }
 
-void SVCameraNode::resetCamera(f32 w, f32 h) {
-//    //主要是改变投影
-//    if(m_pProjMethod) {
-//        m_pProjMethod->setWidth(w);
-//        m_pProjMethod->setHeight(h);
-//    }
-//    if(m_pCtrl) {
-//        m_pCtrl->reset(w,h);
-//    }
-//    _updateForce();
+void SVCameraNode::resetSize(f32 _w, f32 _h) {
+    m_width = _w;
+    m_height = _h;
+    m_dirty = true;
 }
 
 //设置远进裁
 void SVCameraNode::setZ(f32 _near, f32 _far) {
-//    if(m_pProjMethod) {
-//        m_pProjMethod->setNear(_near);
-//        m_pProjMethod->setFar(_far);
-//        m_pProjMethod->refresh();
-//        m_mat_p = m_pProjMethod->getMat();
-//    }
+    m_znear = _near;
+    m_zfar = _far;
+    m_dirty = true;
 }
 
 FVec3& SVCameraNode::getPosition() {
@@ -271,8 +169,6 @@ void SVCameraNode::updateViewProj() {
 //    m_direction.normalize();
 //    m_upEx.set(0.0f,1.0f,0.0f);
 //    m_upEx.normalize();
-//    //
-//    _updateForce();
 ////    //计算角度
 ////    m_angle_yaw = acos(m_direction.x)*RAD2DEG;
 ////    if(m_direction.z<0) {
@@ -309,8 +205,6 @@ void SVCameraNode::updateViewProj() {
 //    m_direction.normalize();
 //    m_upEx.set(0.0f,1.0f,0.0f);
 //    m_upEx.normalize();
-//    //
-//    _updateForce();
 //}
 //
 ////
@@ -367,3 +261,14 @@ void SVCameraNode::updateViewProj() {
 ////    m_mat_vp =m_mat_proj*m_mat_view;
 ////    //反算裁剪面
 ////}
+
+
+//    FMat4 reflect(const FVec4 &plane);
+//    FMat4 ortho(f32 left,f32 right,f32 bottom,f32 top,f32 znear,f32 zfar);
+//    FMat4 frustum(f32 left,f32 right,f32 bottom,f32 top,f32 znear,f32 zfar);
+//    FMat4 perspective(f32 fov,f32 aspect,f32 znear,f32 zfar);
+//    FMat4 setTo(const FVec3 &position,const FVec3 &direction,const FVec3 &up);
+//    FMat4 lookAt(const FVec3 &position,const FVec3 &direction,const FVec3 &up);
+//    FMat4 obliqueProjection(const FMat4 &projection,const FVec4 &plane);
+//    FMat4 symmetryProjection(const FMat4 &projection);
+//    FMat4 cubeTransform(s32 face);

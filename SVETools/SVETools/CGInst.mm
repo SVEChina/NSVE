@@ -95,6 +95,7 @@ static CGInst *mInst;
 
 -(void)render {
     //
+    m_pSVE->updateSVE(0.33f);
     m_pSVE->renderSVE();
 }
 

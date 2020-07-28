@@ -6,6 +6,7 @@
 //
 
 #include "SVSceneMgr.h"
+#include "../work/SVTdCore.h"
 #include "SVComData.h"
 #include "../basesys/SVBasicSys.h"
 #include "../node/SVScene.h"
@@ -26,27 +27,32 @@ SVSceneMgr::SVSceneMgr(SVInstPtr _app)
 :SVSysBase(_app) {
     m_subsysType = 6;
     m_pMainScene = nullptr;
-    m_sceneLock = MakeSharedPtr<SVLock>();
+    m_sceneLock = MakeSharedPtr<SVLockSpin>();
 }
 
 SVSceneMgr::~SVSceneMgr() {
+    m_pMainScene = nullptr;
     m_sceneLock = nullptr;
 }
 
 void SVSceneMgr::init() {
-    m_pMainScene = nullptr;
 }
 
 void SVSceneMgr::destroy() {
-    m_pMainScene = nullptr;
+}
+
+//加载场景
+void SVSceneMgr::loadScene(cptr8 _fname) {
+}
+
+//切换场景
+void SVSceneMgr::changeScene(cptr8 _name) {
 }
 
 void SVSceneMgr::setScene(SVScenePtr _scene){
     m_sceneLock->lock();
     m_pMainScene = _scene;
     m_sceneLock->unlock();
-    if(m_pMainScene){
-    }
 }
 
 SVScenePtr SVSceneMgr::getScene(){
