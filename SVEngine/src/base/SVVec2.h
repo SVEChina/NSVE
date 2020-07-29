@@ -22,7 +22,7 @@ namespace sv {
     struct BVec4;
 
     //******************************** FVec2***********************************
-    //
+
     SVE_ALIGNED8(struct) FVec2 {
         
         sv_inline FVec2() { }
@@ -317,117 +317,144 @@ namespace sv {
     \******************************************************************************/
     //
     SVE_ALIGNED16(struct) DVec2 {
+        sv_inline DVec2() { }
+        sv_inline DVec2(f64 x,f64 y) : x(x), y(y) { }
+        explicit sv_inline DVec2(f64 v) : x(v), y(v) { }
+        explicit sv_inline DVec2(const DVec3 &v);
+        explicit sv_inline DVec2(const DVec4 &v);
+        explicit sv_inline DVec2(const f64 *v) : x(v[0]), y(v[1]) { }
+        explicit sv_inline DVec2(const FVec2 &v) : x(v.x), y(v.y) { }
+        explicit sv_inline DVec2(const HVec2 &v);
+        explicit sv_inline DVec2(const IVec2 &v);
+        
+#ifdef USE_SSE2
+        sv_inline DVec2(const DVec2 &v) : vec(v.vec) { }
+        explicit sv_inline DVec2(__m128d v) : vec(v) { }
+#else
+        sv_inline DVec2(const DVec2 &v) : x(v.x), y(v.y) { }
+#endif
 
-    sv_inline DVec2() { }
-    sv_inline DVec2(f64 x,f64 y) : x(x), y(y) { }
-    explicit sv_inline DVec2(f64 v) : x(v), y(v) { }
-    explicit sv_inline DVec2(const DVec3 &v);
-    explicit sv_inline DVec2(const DVec4 &v);
-    explicit sv_inline DVec2(const f64 *v) : x(v[0]), y(v[1]) { }
-    explicit sv_inline DVec2(const FVec2 &v) : x(v.x), y(v.y) { }
-    explicit sv_inline DVec2(const HVec2 &v);
-    explicit sv_inline DVec2(const IVec2 &v);
-    #ifdef USE_SSE2
-    sv_inline DVec2(const DVec2 &v) : vec(v.vec) { }
-    explicit sv_inline DVec2(__m128d v) : vec(v) { }
-    #else
-    sv_inline DVec2(const DVec2 &v) : x(v.x), y(v.y) { }
-    #endif
+        sv_inline DVec2 &operator=(const DVec2 &v) {
+#ifdef USE_SSE2
+            vec = v.vec;
+#else
+            x = v.x;
+            y = v.y;
+#endif
+            return *this;
+        }
+        
+        sv_inline DVec2 operator-() const {
+            return DVec2(-x,-y);
+        }
+        
+        sv_inline DVec2 &operator*=(f64 v) {
+            x *= v;
+            y *= v;
+            return *this;
+        }
+        
+        sv_inline DVec2 &operator*=(const DVec2 &v) {
+            x *= v.x;
+            y *= v.y;
+            return *this;
+        }
+        
+        sv_inline DVec2 &operator/=(f64 v) {
+            f64 iv = Math::rcp(v);
+            x *= iv;
+            y *= iv;
+            return *this;
+        }
+            
+        sv_inline DVec2 &operator/=(const DVec2 &v) {
+            x /= v.x;
+            y /= v.y;
+            return *this;
+        }
+            
+        sv_inline DVec2 &operator+=(const DVec2 &v) {
+            x += v.x;
+            y += v.y;
+            return *this;
+        }
+            
+        sv_inline DVec2 &operator-=(const DVec2 &v) {
+            x -= v.x;
+            y -= v.y;
+            return *this;
+        }
 
-    sv_inline DVec2 &operator=(const DVec2 &v) {
-    #ifdef USE_SSE2
-    vec = v.vec;
-    #else
-    x = v.x; y = v.y;
-    #endif
-    return *this;
-    }
-    sv_inline DVec2 operator-() const {
-    return DVec2(-x,-y);
-    }
-    sv_inline DVec2 &operator*=(f64 v) {
-    x *= v; y *= v;
-    return *this;
-    }
-    sv_inline DVec2 &operator*=(const DVec2 &v) {
-    x *= v.x; y *= v.y;
-    return *this;
-    }
-    sv_inline DVec2 &operator/=(f64 v) {
-    f64 iv = Math::rcp(v);
-    x *= iv; y *= iv;
-    return *this;
-    }
-    sv_inline DVec2 &operator/=(const DVec2 &v) {
-    x /= v.x; y /= v.y;
-    return *this;
-    }
-    sv_inline DVec2 &operator+=(const DVec2 &v) {
-    x += v.x; y += v.y;
-    return *this;
-    }
-    sv_inline DVec2 &operator-=(const DVec2 &v) {
-    x -= v.x; y -= v.y;
-    return *this;
-    }
+        sv_inline operator f64*() { return v; }
+        sv_inline operator const f64*() const { return v; }
+        sv_inline operator void*() { return v; }
+        sv_inline operator const void*() const { return v; }
 
-    sv_inline operator f64*() { return v; }
-    sv_inline operator const f64*() const { return v; }
-    sv_inline operator void*() { return v; }
-    sv_inline operator const void*() const { return v; }
+        sv_inline f64 &operator[](s32 i) {
+            assert((u32)i < 2 && "DVec2::operator[](): bad index");
+            return v[i];
+        }
+            
+        sv_inline f64 operator[](s32 i) const {
+            assert((u32)i < 2 && "DVec2::operator[](): bad index");
+            return v[i];
+        }
 
-    sv_inline f64 &operator[](s32 i) {
-    assert((u32)i < 2 && "DVec2::operator[](): bad index");
-    return v[i];
-    }
-    sv_inline f64 operator[](s32 i) const {
-    assert((u32)i < 2 && "DVec2::operator[](): bad index");
-    return v[i];
-    }
+        sv_inline void set(f64 v) {
+            x = v;
+            y = v;
+        }
+            
+        sv_inline void set(f64 x_,f64 y_) {
+            x = x_;
+            y = y_;
+        }
+        
+        sv_inline void set(const DVec2 &v) {
+#ifdef USE_SSE2
+            vec = v.vec;
+#else
+            x = v.x;
+            y = v.y;
+#endif
+        }
+        
+        sv_inline void set(const f64 *v) {
+            x = v[0];
+            y = v[1];
+        }
+            
+        sv_inline void get(f64 *v) const {
+            v[0] = x;
+            v[1] = y;
+        }
+            
+        sv_inline f64 *get() { return v; }
+            
+        sv_inline const f64 *get() const { return v; }
 
-    sv_inline void set(f64 v) {
-    x = v; y = v;
-    }
-    sv_inline void set(f64 x_,f64 y_) {
-    x = x_; y = y_;
-    }
-    sv_inline void set(const DVec2 &v) {
-    #ifdef USE_SSE2
-    vec = v.vec;
-    #else
-    x = v.x; y = v.y;
-    #endif
-    }
-    sv_inline void set(const f64 *v) {
-    x = v[0]; y = v[1];
-    }
-    sv_inline void get(f64 *v) const {
-    v[0] = x; v[1] = y;
-    }
-    sv_inline f64 *get() { return v; }
-    sv_inline const f64 *get() const { return v; }
+        sv_inline f64 length() const {
+            return Math::sqrt(x * x + y * y);
+        }
+            
+        sv_inline f64 length2() const {
+            return x * x + y * y;
+        }
+            
+        sv_inline DVec2 &normalize() {
+            f64 ilength = Math::rsqrt(x * x + y * y);
+            x *= ilength;
+            y *= ilength;
+            return *this;
+        }
 
-    sv_inline f64 length() const {
-    return Math::sqrt(x * x + y * y);
-    }
-    sv_inline f64 length2() const {
-    return x * x + y * y;
-    }
-    sv_inline DVec2 &normalize() {
-    f64 ilength = Math::rsqrt(x * x + y * y);
-    x *= ilength; y *= ilength;
-    return *this;
-    }
-
-    union {
-    struct {
-    f64 x,y;
-    };
-    f64 v[2];
-    #ifdef USE_SSE2
-    __m128d vec;
-    #endif
-    };
+        union{
+            struct { f64 x,y; };
+            f64 v[2];
+#ifdef USE_SSE2
+            __m128d vec;
+#endif
+        };
     };
 
     //
@@ -437,71 +464,75 @@ namespace sv {
     extern const DVec2 DVec2_infinity;
 
     //
-    sv_inline FVec2::FVec2(const DVec2 &v) : x((f32)v.x), y((f32)v.y) { }
+    FVec2::FVec2(const DVec2 &v)
+    : x((f32)v.x)
+    , y((f32)v.y) {
+        
+    }
 
     //
     sv_inline s32 operator==(const DVec2 &v0,const DVec2 &v1) {
-    return (compare(v0.x,v1.x) && compare(v0.y,v1.y));
+        return (compare(v0.x,v1.x) && compare(v0.y,v1.y));
     }
 
     sv_inline s32 operator!=(const DVec2 &v0,const DVec2 &v1) {
-    return !(compare(v0.x,v1.x) && compare(v0.y,v1.y));
+        return !(compare(v0.x,v1.x) && compare(v0.y,v1.y));
     }
 
     sv_inline DVec2 operator*(const DVec2 &v0,f64 v1) {
-    return DVec2(v0.x * v1,v0.y * v1);
+        return DVec2(v0.x * v1,v0.y * v1);
     }
 
     sv_inline DVec2 operator*(const DVec2 &v0,const DVec2 &v1) {
-    return DVec2(v0.x * v1.x,v0.y * v1.y);
+        return DVec2(v0.x * v1.x,v0.y * v1.y);
     }
 
     sv_inline DVec2 operator/(const DVec2 &v0,f64 v1) {
     f64 iv1 = Math::rcp(v1);
-    return DVec2(v0.x * iv1,v0.y * iv1);
+        return DVec2(v0.x * iv1,v0.y * iv1);
     }
 
     sv_inline DVec2 operator/(const DVec2 &v0,const DVec2 &v1) {
-    return DVec2(v0.x / v1.x,v0.y / v1.y);
+        return DVec2(v0.x / v1.x,v0.y / v1.y);
     }
 
     sv_inline DVec2 operator+(const DVec2 &v0,const DVec2 &v1) {
-    return DVec2(v0.x + v1.x,v0.y + v1.y);
+        return DVec2(v0.x + v1.x,v0.y + v1.y);
     }
 
     sv_inline DVec2 operator-(const DVec2 &v0,const DVec2 &v1) {
-    return DVec2(v0.x - v1.x,v0.y - v1.y);
+        return DVec2(v0.x - v1.x,v0.y - v1.y);
     }
 
     //
     sv_inline s32 compare(const DVec2 &v0,const DVec2 &v1) {
-    return (compare(v0.x,v1.x) && compare(v0.y,v1.y));
+        return (compare(v0.x,v1.x) && compare(v0.y,v1.y));
     }
 
-    sv_inline s32 compare(const DVec2 &v0,const DVec2 &v1,f64 epsilon) {
-    return (compare(v0.x,v1.x,epsilon) && compare(v0.y,v1.y,epsilon));
+        sv_inline s32 compare(const DVec2 &v0,const DVec2 &v1,f64 epsilon) {
+        return (compare(v0.x,v1.x,epsilon) && compare(v0.y,v1.y,epsilon));
     }
 
     sv_inline f64 dot(const DVec2 &v0,const DVec2 &v1) {
-    return v0.x * v1.x + v0.y * v1.y;
+        return v0.x * v1.x + v0.y * v1.y;
     }
 
     sv_inline DVec2 &mul(DVec2 &ret,const DVec2 &v0,f64 v1) {
-    ret.x = v0.x * v1;
-    ret.y = v0.y * v1;
-    return ret;
+        ret.x = v0.x * v1;
+        ret.y = v0.y * v1;
+        return ret;
     }
 
     sv_inline DVec2 &mul(DVec2 &ret,const DVec2 &v0,const DVec2 &v1) {
-    ret.x = v0.x * v1.x;
-    ret.y = v0.y * v1.y;
-    return ret;
+        ret.x = v0.x * v1.x;
+        ret.y = v0.y * v1.y;
+        return ret;
     }
 
     sv_inline DVec2 &mad(DVec2 &ret,const DVec2 &v0,f64 v1,const DVec2 &v2) {
-    ret.x = v0.x * v1 + v2.x;
-    ret.y = v0.y * v1 + v2.y;
-    return ret;
+        ret.x = v0.x * v1 + v2.x;
+        ret.y = v0.y * v1 + v2.y;
+        return ret;
     }
 
     sv_inline DVec2 &mad(DVec2 &ret,const DVec2 &v0,const DVec2 &v1,const DVec2 &v2) {
@@ -511,35 +542,35 @@ namespace sv {
     }
 
     sv_inline DVec2 &add(DVec2 &ret,const DVec2 &v0,const DVec2 &v1) {
-    ret.x = v0.x + v1.x;
-    ret.y = v0.y + v1.y;
-    return ret;
+        ret.x = v0.x + v1.x;
+        ret.y = v0.y + v1.y;
+        return ret;
     }
 
     sv_inline DVec2 &sub(DVec2 &ret,const DVec2 &v0,const DVec2 &v1) {
-    ret.x = v0.x - v1.x;
-    ret.y = v0.y - v1.y;
-    return ret;
+        ret.x = v0.x - v1.x;
+        ret.y = v0.y - v1.y;
+        return ret;
     }
 
     sv_inline DVec2 &lerp(DVec2 &ret,const DVec2 &v0,const DVec2 &v1,f64 k) {
-    ret.x = lerp(v0.x,v1.x,k);
-    ret.y = lerp(v0.y,v1.y,k);
-    return ret;
+        ret.x = lerp(v0.x,v1.x,k);
+        ret.y = lerp(v0.y,v1.y,k);
+        return ret;
     }
 
     //
     sv_inline f64 length(const DVec2 &v) {
-    return v.length();
+        return v.length();
     }
 
     sv_inline f64 length2(const DVec2 &v) {
-    return v.length2();
+        return v.length2();
     }
 
     sv_inline DVec2 normalize(const DVec2 &v) {
-    DVec2 ret = v;
-    return ret.normalize();
+        DVec2 ret = v;
+        return ret.normalize();
     }
 
     //
@@ -800,8 +831,6 @@ namespace sv {
     IVec2 max(const IVec2 &v0,const IVec2 &v1);
     IVec2 clamp(const IVec2 &v,const IVec2 &v0,const IVec2 &v1);
     IVec2 lerp(const IVec2 &v0,const IVec2 &v1,s32 k);
-
-
 
 }//!namespace sv
 

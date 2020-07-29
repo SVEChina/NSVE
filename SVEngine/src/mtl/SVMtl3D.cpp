@@ -9,7 +9,7 @@
 #include "../basesys/SVCameraMgr.h"
 #include "../mtl/SVTexture.h"
 #include "../rendercore/SVRenderer.h"
-#include "../node/SVCameraNode.h"
+#include "../basesys/SVCameraNode.h"
 
 using namespace sv;
 

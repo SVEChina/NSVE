@@ -12,8 +12,8 @@
 #include "../event/SVOpEvent.h"
 #include "../basesys/SVSceneMgr.h"
 #include "../basesys/SVCameraMgr.h"
-#include "../node/SVScene.h"
-#include "../node/SVCameraNode.h"
+#include "../basesys/SVScene.h"
+#include "../basesys/SVCameraNode.h"
 
 using namespace sv;
 

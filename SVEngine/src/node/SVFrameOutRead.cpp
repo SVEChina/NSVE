@@ -6,8 +6,8 @@
 //
 
 #include "SVFrameOutRead.h"
-#include "SVCameraNode.h"
-#include "SVScene.h"
+#include "../basesys/SVCameraNode.h"
+#include "../basesys/SVScene.h"
 #include "../base/SVDataSwap.h"
 #include "../basesys/SVSceneMgr.h"
 #include "../basesys/SVComData.h"

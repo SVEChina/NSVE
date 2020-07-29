@@ -15,7 +15,7 @@
 #include "../event/SVEvent.h"
 #include "../event/SVEventMgr.h"
 #include "../event/SVOpEvent.h"
-#include "../node/SVScene.h"
+#include "../basesys/SVScene.h"
 #include "../mtl/SVMtlCore.h"
 #include "../mtl/SVTexMgr.h"
 #include "../mtl/SVTexture.h"

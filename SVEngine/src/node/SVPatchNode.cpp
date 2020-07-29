@@ -6,8 +6,8 @@
 //
 
 #include "SVPatchNode.h"
-#include "SVCameraNode.h"
-#include "SVScene.h"
+#include "../basesys/SVCameraNode.h"
+#include "../basesys/SVScene.h"
 #include "../app/SVInst.h"
 #include "../basesys/SVComData.h"
 #include "../mtl/SVMtlNocolor.h"

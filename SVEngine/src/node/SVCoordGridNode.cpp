@@ -9,7 +9,7 @@
 #include "../core/SVGeoGen.h"
 #include "../mtl/SVMtlNocolor.h"
 #include "../mtl/SVTexMgr.h"
-#include "../node/SVScene.h"
+#include "../basesys/SVScene.h"
 #include "../rendercore/SVRenderObject.h"
 #include "../rendercore/SVRenderScene.h"
 #include "../rendercore/SVRenderMgr.h"

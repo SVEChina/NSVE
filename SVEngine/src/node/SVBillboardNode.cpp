@@ -7,8 +7,8 @@
 
 
 #include "SVBillboardNode.h"
-#include "SVScene.h"
-#include "SVCameraNode.h"
+#include "../basesys/SVScene.h"
+#include "../basesys/SVCameraNode.h"
 #include "../mtl/SVMtlCore.h"
 #include "../mtl/SVMtlBillboard.h"
 #include "../rendercore/SVRenderMesh.h"

@@ -11,7 +11,7 @@
 #include "../node/SVSpineNode.h"
 #include "../node/SVSpriteNode.h"
 #include "../basesys/SVSceneMgr.h"
-#include "../node/SVScene.h"
+#include "../basesys/SVScene.h"
 #include "../node/SVNodeVisit.h"
 #include "../mtl/SVTexMgr.h"
 #include "../mtl/SVTexture.h"

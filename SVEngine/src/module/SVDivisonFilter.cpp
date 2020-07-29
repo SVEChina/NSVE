@@ -7,7 +7,7 @@
 
 #include "SVDivisonFilter.h"
 #include "../node/SVSpriteNode.h"
-#include "../node/SVScene.h"
+#include "../basesys/SVScene.h"
 #include "../basesys/SVSceneMgr.h"
 #include "../mtl/SVMtlCore.h"
 
@@ -41,7 +41,7 @@ void SVDivisonFilter::open() {
         SVScenePtr t_sc = mApp->getSceneMgr()->getScene();
         if(t_sc && m_backgroundNode){
             t_sc->addNode(m_backgroundNode);
-            m_backgroundNode->setMesh(mApp->getDataMgr()->m_screenMesh);
+            //m_backgroundNode->setMesh(mApp->getDataMgr()->m_screenMesh);
             m_backgroundNode->setTexture(E_TEX_INSTREAM);
         }
     }

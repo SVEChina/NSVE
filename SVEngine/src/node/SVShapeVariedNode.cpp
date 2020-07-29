@@ -6,7 +6,7 @@
 //
 
 #include "SVShapeVariedNode.h"
-#include "SVScene.h"
+#include "../basesys/SVScene.h"
 //#include "../app/SVInst.h"
 //#include "../event/SVEventMgr.h"
 //#include "../event/SVEvent.h"

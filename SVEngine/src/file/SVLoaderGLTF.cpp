@@ -21,7 +21,7 @@
 #include "../node/SVSkinNode.h"
 #include "../node/SVModelNode.h"
 #include "../node/SVMorphNode.h"
-#include "../node/SVScene.h"
+#include "../basesys/SVScene.h"
 #include "../basesys/SVSceneMgr.h"
 #include "../core/SVModel.h"
 #include "../core/SVMesh.h"

@@ -6,8 +6,8 @@
 //
 
 #include "SVFrameAniNode.h"
-#include "SVCameraNode.h"
-#include "SVScene.h"
+#include "../basesys/SVCameraNode.h"
+#include "../basesys/SVScene.h"
 #include "../mtl/SVMtlCore.h"
 #include "../mtl/SVMtl2D.h"
 #include "../mtl/SVTexMgr.h"

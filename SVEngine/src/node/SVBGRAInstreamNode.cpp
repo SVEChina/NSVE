@@ -7,8 +7,8 @@
 
 
 #include "SVBGRAInstreamNode.h"
-#include "SVScene.h"
-#include "SVCameraNode.h"
+#include "../basesys/SVScene.h"
+#include "../basesys/SVCameraNode.h"
 #include "../mtl/SVMtlCore.h"
 #include "../rendercore/SVRenderMesh.h"
 #include "../core/SVGeoGen.h"

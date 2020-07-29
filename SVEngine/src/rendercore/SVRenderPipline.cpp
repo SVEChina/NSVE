@@ -13,7 +13,7 @@
 #include "../app/SVInst.h"
 #include "../work/SVTdCore.h"
 #include "../basesys/SVCameraMgr.h"
-#include "../node/SVCameraNode.h"
+#include "../basesys/SVCameraNode.h"
 #include <sys/time.h>
 
 using namespace sv;

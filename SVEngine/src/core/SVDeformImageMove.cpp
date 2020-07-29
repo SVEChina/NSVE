@@ -7,7 +7,7 @@
 
 
 #include "SVDeformImageMove.h"
-#include "../node/SVScene.h"
+#include "../basesys/SVScene.h"
 #include "../app/SVInst.h"
 #include "../event/SVEventMgr.h"
 #include "../event/SVEvent.h"
@@ -28,7 +28,7 @@
 #include "../mtl/SVMtlShapeVaried.h"
 #include "../mtl/SVTexMgr.h"
 #include "../base/SVVec2.h"
-#include "../node/SVCameraNode.h"
+#include "../basesys/SVCameraNode.h"
 #include "../node/SVNode.h"
 #include "../detect/SVDetectMgr.h"
 #include "../detect/SVDetectST.h"

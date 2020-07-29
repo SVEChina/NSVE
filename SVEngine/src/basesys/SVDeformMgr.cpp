@@ -10,7 +10,7 @@
 #include "../basesys/SVSceneMgr.h"
 #include "../basesys/SVCameraMgr.h"
 #include "../core/SVDeformImageMove.h"
-#include "../node/SVScene.h"
+#include "../basesys/SVScene.h"
 #include "../work/SVTdCore.h"
 
 using namespace sv;

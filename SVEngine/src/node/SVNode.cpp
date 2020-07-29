@@ -7,8 +7,8 @@
 
 #include "SVNode.h"
 #include "SVNodeVisit.h"
-#include "SVScene.h"
-#include "SVCameraNode.h"
+#include "../basesys/SVScene.h"
+#include "../basesys/SVCameraNode.h"
 #include "../mtl/SVMtlCore.h"
 #include "../mtl/SVMtlNocolor.h"
 #include "../act/SVActBase.h"
@@ -24,7 +24,6 @@ using namespace sv;
 SVNode::SVNode(SVInstPtr _app)
 :SVEventProc(_app) {
     ntype = "SVNode";
-    uid = mApp->m_IDPool.applyUID();
     m_name = "";
     m_rsType = RST_DEBUG;
     m_canSelect = false;
@@ -57,7 +56,6 @@ SVNode::SVNode(SVInstPtr _app)
 
 SVNode::~SVNode() {
     m_pMtl = nullptr;
-    mApp->m_IDPool.returnUID(uid);
 }
 
 void SVNode::enter(){
@@ -69,7 +67,7 @@ void SVNode::exit(){
 //做子节点的深度遍历(先子节点 在兄弟节点)
 void SVNode::deep_update(f32 dt) {
     //排序
-    _sort_child();
+    //_sort_child();
     //可见性(属性)判断,优先级最高
     if(m_visible){
         //节点更新
@@ -84,7 +82,6 @@ void SVNode::deep_update(f32 dt) {
 
 //深度访问
 void SVNode::deep_visit(SVVisitorBasePtr _visit) {
-
 }
 
 void SVNode::select_visit(SVVisitorBasePtr _visit) {

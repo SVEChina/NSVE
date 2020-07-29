@@ -1,6 +1,6 @@
 #include "SVParticlesNode.h"
 #include "SVParticlesWorld.h"
-#include "SVCameraNode.h"
+#include "../basesys/SVCameraNode.h"
 #include "../base/SVDataSwap.h"
 #include "../core/SVParticles.h"
 #include "../basesys/SVCameraMgr.h"

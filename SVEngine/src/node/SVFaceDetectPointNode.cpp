@@ -5,8 +5,8 @@
 // yizhou Fu,long Yin,longfei Lin,ziyu Xu,xiaofan Li,daming Li
 //
 #include "SVFaceDetectPointNode.h"
-#include "SVScene.h"
-#include "SVCameraNode.h"
+#include "../basesys/SVScene.h"
+#include "../basesys/SVCameraNode.h"
 #include "../mtl/SVMtlCore.h"
 #include "../rendercore/SVRenderMesh.h"
 #include "../core/SVGeoGen.h"

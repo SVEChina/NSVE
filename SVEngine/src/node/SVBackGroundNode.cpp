@@ -6,7 +6,7 @@
 //
 
 #include "SVBackGroundNode.h"
-#include "SVScene.h"
+#include "../basesys/SVScene.h"
 #include "../app/SVInst.h"
 #include "../app/SVGlobalMgr.h"
 #include "../base/SVVec2.h"

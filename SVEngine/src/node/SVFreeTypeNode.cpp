@@ -11,8 +11,8 @@
 
 #include "ft2build.h"
 #include "freetype.h"
-#include "SVCameraNode.h"
-#include "SVScene.h"
+#include "../basesys/SVCameraNode.h"
+#include "../basesys/SVScene.h"
 #include "../core/SVGeoGen.h"
 #include "../basesys/SVBasicSys.h"
 #include "../basesys/SVFontProcess.h"

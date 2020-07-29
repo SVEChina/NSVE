@@ -18,7 +18,7 @@
 #include "../rendercore/SVRenderMgr.h"
 #include "../rendercore/SVRenderObject.h"
 #include "../detect/SVDetectMgr.h"
-#include "SVScene.h"
+#include "../basesys/SVScene.h"
 
 using namespace sv;
 

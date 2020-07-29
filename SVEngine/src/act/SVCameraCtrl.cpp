@@ -7,7 +7,7 @@
 
 
 #include "SVCameraCtrl.h"
-#include "../node/SVCameraNode.h"
+#include "../basesys/SVCameraNode.h"
 #include "../basesys/SVBasicSys.h"
 #include "../basesys/SVPickProcess.h"
 

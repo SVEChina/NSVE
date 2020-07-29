@@ -10,7 +10,7 @@
 #include "../basesys/SVSceneMgr.h"
 #include "../file/SVParseMain.h"
 #include "../node/SVNodeVisit.h"
-#include "../node/SVScene.h"
+#include "../basesys/SVScene.h"
 #include "../event/SVEvent.h"
 #include "../event/SVEventMgr.h"
 #include "../app/SVInst.h"

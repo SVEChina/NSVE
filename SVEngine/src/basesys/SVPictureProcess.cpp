@@ -9,7 +9,7 @@
 #include "../app/SVInst.h"
 #include "../app/SVGlobalMgr.h"
 #include "../basesys/SVSceneMgr.h"
-#include "../node/SVScene.h"
+#include "../basesys/SVScene.h"
 #include "../node/SVMultPassNode.h"
 #include "../mtl/SVMtlCore.h"
 #include "../mtl/SVMtlFair1.h"

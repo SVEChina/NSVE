@@ -127,7 +127,6 @@ namespace sv {
         void setLocalMatrix(FMat4 &_mat);
         
         inline cptr8 getType(){ return ntype.c_str(); }
-        inline s32 getuid(){ return uid; }
         inline cptr8 getname(){return m_name.c_str();}
         inline s32 getZOrder(){ return m_iZOrder;}
         inline bool getcanSelect(){ return m_canSelect; }
@@ -154,13 +153,13 @@ namespace sv {
         //
         SVString ntype;         //节点类型
         SVString m_name;        //唯一名称
-        s32 uid;                //唯一ID
         s32 m_personID;         //角色ID
         s32 m_iZOrder;          //Z值
         bool m_canSelect;       //是否可以选择
         bool m_canProcEvent;    //是否能处理事件
         bool m_visible;         //是否可见
         bool m_drawBox;         //是否渲染包围盒
+        //
         RENDERSTREAMTYPE m_rsType;      //渲染流类型
         FVec3 m_postion;        //位置
         FVec3 m_rotation;       //旋转
@@ -182,7 +181,7 @@ namespace sv {
         SVMtlCorePtr m_pMtl;    //材质
 
     protected:
-        void _sort_child();
+        //void _sort_child(){ }
         bool m_needsort;
         
         //序列化接口

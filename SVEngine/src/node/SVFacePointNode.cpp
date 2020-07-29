@@ -5,7 +5,7 @@
 // yizhou Fu,long Yin,longfei Lin,ziyu Xu,xiaofan Li,daming Li
 //
 #include "SVFacePointNode.h"
-#include "SVScene.h"
+#include "../basesys/SVScene.h"
 #include "../app/SVInst.h"
 #include "../basesys/SVSceneMgr.h"
 #include "../rendercore/SVRenderMgr.h"

@@ -6,20 +6,10 @@
 //
 
 #include "SVSceneMgr.h"
-#include "../work/SVTdCore.h"
+#include "SVScene.h"
 #include "SVComData.h"
+#include "../work/SVTdCore.h"
 #include "../basesys/SVBasicSys.h"
-#include "../node/SVScene.h"
-#include "../node/SVCameraNode.h"
-#include "../mtl/SVMtlCore.h"
-#include "../mtl/SVMtlBeauty.h"
-#include "../work/SVThreadPool.h"
-#include "../rendercore/SVRenderMgr.h"
-#include "../rendercore/SVRenderObject.h"
-#include "../rendercore/SVRenderCmd.h"
-#include "../rendercore/SVRenderScene.h"
-#include "../rendercore/SVRenderer.h"
-#include "../basesys/SVConfig.h"
 
 using namespace sv;
 
@@ -36,6 +26,9 @@ SVSceneMgr::~SVSceneMgr() {
 }
 
 void SVSceneMgr::init() {
+    m_pMainScene = MakeSharedPtr<SVScene>(mApp,"testScene");
+    m_pMainScene->create();
+    m_pMainScene->test();
 }
 
 void SVSceneMgr::destroy() {
@@ -62,7 +55,7 @@ SVScenePtr SVSceneMgr::getScene(){
 //反适配
 void SVSceneMgr::uiToScene(f32& _x,f32& _y) {
     //invert Y
-    _y = mApp->m_pGlobalParam->m_inner_height - _y;
+    //_y = mApp->m_pGlobalParam->m_inner_height - _y;
 }
 
 //更新

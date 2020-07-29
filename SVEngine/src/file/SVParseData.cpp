@@ -8,7 +8,7 @@
 #include "SVParseData.h"
 #include "../app/SVInst.h"
 #include "../node/SVNode.h"
-#include "../node/SVScene.h"
+#include "../basesys/SVScene.h"
 #include "../basesys/SVSceneMgr.h"
 
 using namespace sv;

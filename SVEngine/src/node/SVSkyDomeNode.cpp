@@ -6,8 +6,8 @@
 //
 
 #include "SVSkyDomeNode.h"
-#include "SVScene.h"
-#include "SVCameraNode.h"
+#include "../basesys/SVScene.h"
+#include "../basesys/SVCameraNode.h"
 #include "../mtl/SVTexture.h"
 #include "../mtl/SVMtlCore.h"
 #include "../rendercore/SVRenderObject.h"
