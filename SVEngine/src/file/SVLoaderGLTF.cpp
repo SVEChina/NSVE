@@ -32,7 +32,7 @@
 #include "../base/SVArray.h"
 #include "../base/svstr.h"
 #include "../basesys/SVModelMgr.h"
-#include "../rendercore/SVRBuffer.h"
+#include "../rendercore/SVRMeshRes.h"
 
 using namespace sv;
 
@@ -743,7 +743,7 @@ SVMeshPtr SVLoaderGLTF::_buildMeshPri(Primitive* _prim) {
         //没有pos直接返回算了
         return nullptr;
     }
-    s32 t_verSize = SVRBuffer::getVertexFormateSize(VFTYPE(t_vtf));
+    s32 t_verSize = SVRMeshRes::getVertexFormateSize(VFTYPE(t_vtf));
     SVMeshPtr t_mesh = MakeSharedPtr<SVMesh>(mApp);
     //设置box
     s64 t_count = accV3->count;

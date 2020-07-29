@@ -29,6 +29,8 @@ namespace sv {
         SVRendererMetal(SVInstPtr _app);
 
         ~SVRendererMetal();
+        
+        SVRendererMetalPtr share();
 
         virtual void init(id<MTLDevice> _device,id<MTLDrawable> _target,id<MTLTexture> _targetTex);
 
@@ -46,20 +48,18 @@ namespace sv {
         SVRShaderPtr createResShader() ;
 
         //buf-vbo 等
-        SVRBufferPtr createResBuf() ;
+        SVRMeshResPtr createResBuf() ;
 
         //fbo
         SVRFboPtr createResFbo() ;
 
     public:
-        //
-        virtual void processTech(SVRTechPtr _tech);
 
         //处理材质
         virtual void processMtl(SVMtlCorePtr _mtl);
 
         //处理mesh
-        virtual void processMesh(SVRenderMeshPtr _mesh);
+        virtual void processMesh(SVRenderMeshPtr _mesh,SVRTargetPtr _target);
 
     public:
         id<MTLDevice> m_pDevice;

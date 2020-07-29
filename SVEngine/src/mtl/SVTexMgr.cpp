@@ -58,7 +58,6 @@ SVTexturePtr SVTexMgr::getSVETexture(){
 }
 
 void SVTexMgr::update(f32 _dt){
-    //
     _removeUnuseTexture();
 }
 
@@ -113,15 +112,6 @@ SVTexturePtr SVTexMgr::createTexture(SVTEXINID _texname,SVTextureDsp _param) {
         tTexture->init(_param);
         //m_intex_pool[_texname] = tTexture;
     }
-    return nullptr;
-}
-
-//创建外部纹理
-SVTexturePtr SVTexMgr::createTexture(SVTextureDsp _param) {
-    return nullptr;
-}
-
-SVTexturePtr SVTexMgr::createTexture(SVTextureDsp _param,SVDataSwapPtr _data) {
     return nullptr;
 }
 

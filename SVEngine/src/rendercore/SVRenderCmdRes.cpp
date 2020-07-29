@@ -8,7 +8,7 @@
 #include "SVRenderCmdRes.h"
 #include "SVRenderMesh.h"
 #include "SVRenderer.h"
-#include "SVRBuffer.h"
+#include "SVRMeshRes.h"
 #include "SVRShader.h"
 #include "SVRTex.h"
 #include "SVRTarget.h"
@@ -28,7 +28,7 @@ SVRCmdCreateMesh::~SVRCmdCreateMesh() {
 
 void SVRCmdCreateMesh::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
     if(m_rendermesh && _renderer) {
-        SVRBufferPtr t_rbuffer = _renderer->createResBuf() ;
+        SVRMeshResPtr t_rbuffer = _renderer->createResBuf() ;
         t_rbuffer->m_logic_obj = m_rendermesh;
         m_rendermesh->bindRes(t_rbuffer);
         //

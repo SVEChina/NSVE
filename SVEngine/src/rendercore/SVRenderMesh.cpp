@@ -40,7 +40,7 @@ SVRenderMesh::~SVRenderMesh() {
     m_use_instance = false;
 }
 
-void SVRenderMesh::bindRes(SVRBufferPtr _res) {
+void SVRenderMesh::bindRes(SVRMeshResPtr _res) {
     m_res_buffer = _res;
 }
 
@@ -48,7 +48,7 @@ void SVRenderMesh::unbindRes() {
     m_res_buffer = nullptr;
 }
 
-SVRBufferPtr SVRenderMesh::getResBuffer() {
+SVRMeshResPtr SVRenderMesh::getResBuffer() {
     return m_res_buffer;
 }
 
@@ -91,12 +91,6 @@ bool SVRenderMesh::useInstance() {
 
 BufferDsp* SVRenderMesh::getInstanceDsp() {
     return &m_instance_dsp;
-}
-
-void SVRenderMesh::render(SVRendererPtr _renderer) {
-    if(m_res_buffer) {
-        m_res_buffer->process(_renderer);
-    }
 }
 
 void SVRenderMesh::setDrawMethod(DRAWMETHOD drawtype) {

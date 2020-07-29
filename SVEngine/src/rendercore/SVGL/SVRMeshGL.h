@@ -1,14 +1,14 @@
 //
-// SVRBufferGL.h
+// SVRMeshGL.h
 // SVEngine
 // Copyright 2017-2020
 // yizhou Fu,long Yin,longfei Lin,ziyu Xu,xiaofan Li,daming Li
 //
 
-#ifndef SV_RBUFFER_GL_H
-#define SV_RBUFFER_GL_H
+#ifndef SV_RMESH_GL_H
+#define SV_RMESH_GL_H
 
-#include "../SVRBuffer.h"
+#include "../SVRMeshRes.h"
 #include "SVRenderDef.h"
 #include "../base/SVPreDeclare.h"
 #include "../../core/SVVertDef.h"
@@ -21,17 +21,19 @@ namespace sv {
      */
     #define MAX_VERTEX_STEAM_NUM 8
 
-    class SVRBufferGL : public SVRBuffer {
+    class SVRMeshGL : public SVRMeshRes {
     public:
-        SVRBufferGL(SVInstPtr _app);
+        SVRMeshGL(SVInstPtr _app);
         
-        ~SVRBufferGL();
+        ~SVRMeshGL();
         
-        virtual void create(SVRendererPtr _renderer);
-        
-        virtual void destroy(SVRendererPtr _renderer);
-        
-        virtual s32 process(SVRendererPtr _renderer);
+        void create(SVRendererPtr _renderer);
+
+        void destroy(SVRendererPtr _renderer);
+
+        s32 process(SVRendererPtr _renderer,SVRTargetPtr _target);
+
+        void draw(SVRendererPtr _renderer,SVRTargetPtr _target);
         
     protected:
         //渲染属性
@@ -53,4 +55,4 @@ namespace sv {
 }//!namespace sv
 
 
-#endif //SV_RBUFFER_GL_H
+#endif //SV_RMESH_GL_H

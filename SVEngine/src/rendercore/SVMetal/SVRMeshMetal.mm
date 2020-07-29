@@ -1,11 +1,11 @@
 //
-// SVRBufferMetal.cpp
+// SVRMeshMetal.cpp
 // SVEngine
 // Copyright 2017-2020
 // yizhou Fu,long Yin,longfei Lin,ziyu Xu,xiaofan Li,daming Li
 //
 
-#include "SVRBufferMetal.h"
+#include "SVRMeshMetal.h"
 #include "SVRendererMetal.h"
 #include "SVRFboMetal.h"
 #include "../SVRenderMesh.h"
@@ -14,8 +14,8 @@
 
 using namespace sv;
 
-SVRBufferMetal::SVRBufferMetal(SVInstPtr _app)
-:SVRBuffer(_app){
+SVRMeshMetal::SVRMeshMetal(SVInstPtr _app)
+:SVRMeshRes(_app){
     //
     m_dbufs.resize(SV_MAX_STREAM_NUM);
     for(s32 i=0;i<SV_MAX_STREAM_NUM;i++) {
@@ -31,11 +31,11 @@ SVRBufferMetal::SVRBufferMetal(SVInstPtr _app)
     m_bufmode = E_BFM_AOS;
 }
 
-SVRBufferMetal::~SVRBufferMetal() {
-    destroy(nullptr, nullptr);
+SVRMeshMetal::~SVRMeshMetal() {
+    //destroy(nullptr);
 }
 
-void SVRBufferMetal::create(SVRendererPtr _renderer) {
+void SVRMeshMetal::create(SVRendererPtr _renderer) {
     SVRendererMetalPtr t_rm = std::dynamic_pointer_cast<SVRendererMetal>(_renderer);
     SVRenderMeshPtr t_rendermesh = std::dynamic_pointer_cast<SVRenderMesh>(m_logic_obj);
     if(t_rm && t_rendermesh) {
@@ -320,20 +320,33 @@ void SVRBufferMetal::create(SVRendererPtr _renderer) {
     }
 }
 
-void SVRBufferMetal::destroy(SVRendererPtr _renderer) {
+void SVRMeshMetal::destroy(SVRendererPtr _renderer) {
+    if(m_ibuf) {
+        m_ibuf = nullptr;
+    }
+    for(s32 i=0;i<m_dbufs.size();i++) {
+        m_dbufs[i] = nullptr;
+    }
+    m_dbufs.clear();
 }
 
-void SVRBufferMetal::render(SVRendererPtr _renderer,SVRTargetPtr _target,SVRenderMeshPtr _rmesh) {
+s32 SVRMeshMetal::process(SVRendererPtr _renderer,SVRTargetPtr _target) {
     SVRendererMetalPtr t_rm = std::dynamic_pointer_cast<SVRendererMetal>(_renderer);
     SVRFboMetalPtr t_fbo = std::dynamic_pointer_cast<SVRFboMetal>( _target->getResFbo() );
     if(t_rm && t_fbo) {
-        //绑定
         for(s32 i=0;i<SV_MAX_STREAM_NUM;i++) {
             if(m_dbufs[i]) {
                 [t_fbo->m_cmdEncoder setVertexBuffer:m_dbufs[i] offset:0 atIndex:i];    //i表示的buf和索引的对应
             }
         }
-        //绘制
+    }
+    return 0;
+}
+
+void SVRMeshMetal::draw(SVRendererPtr _renderer,SVRTargetPtr _target) {
+    SVRendererMetalPtr t_rm = std::dynamic_pointer_cast<SVRendererMetal>(_renderer);
+    SVRFboMetalPtr t_fbo = std::dynamic_pointer_cast<SVRFboMetal>( _target->getResFbo() );
+    if(t_rm && t_fbo) {
         if( m_ibuf ) {
             if(m_instance_buf) {
                 //多实体
@@ -363,16 +376,13 @@ void SVRBufferMetal::render(SVRendererPtr _renderer,SVRTargetPtr _target,SVRende
         }
         [t_fbo->m_cmdEncoder endEncoding]; // 结束
     }
-    
-//    -(void)setTessellationFactorBuffer:(nullable id <MTLBuffer>)buffer offset:(NSUInteger)offset instanceStride:(NSUInteger)instanceStride API_AVAILABLE(macos(10.12), ios(10.0));
 }
 
-void SVRBufferMetal::destroy(SVRendererPtr _renderer,SVRTargetPtr _target){
-    if(m_ibuf) {
-        m_ibuf = nullptr;
-    }
-    for(s32 i=0;i<m_dbufs.size();i++) {
-        m_dbufs[i] = nullptr;
-    }
-    m_dbufs.clear();
-}
+//void SVRMeshMetal::render(SVRendererPtr _renderer,SVRTargetPtr _target,SVRenderMeshPtr _rmesh) {
+//
+//        
+////        - (void)setVertexBuffers:(const id <MTLBuffer> __nullable [__nonnull])buffers offsets:(const NSUInteger [__nonnull])offsets withRange:(NSRange)range;
+//        //绘
+//    
+////    -(void)setTessellationFactorBuffer:(nullable id <MTLBuffer>)buffer offset:(NSUInteger)offset instanceStride:(NSUInteger)instanceStride API_AVAILABLE(macos(10.12), ios(10.0));
+//}

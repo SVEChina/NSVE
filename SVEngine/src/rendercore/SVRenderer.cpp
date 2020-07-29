@@ -117,15 +117,12 @@ void SVRenderer::removeUnuseRes() {
 void SVRenderer::setCurTarget(SVRTargetPtr _target) {
     m_cur_target = _target;
 }
-
-//处理技术
-void SVRenderer::processTech(SVRTechPtr _tech) {}
            
 //处理材质
 void SVRenderer::processMtl(SVMtlCorePtr _mtl) {}
            
 //处理mesh
-void SVRenderer::processMesh(SVRenderMeshPtr _mesh) {}
+void SVRenderer::processMesh(SVRenderMeshPtr _mesh,SVRTargetPtr _target) {}
 
 bool SVRenderer::hasSVTex(SVTEXINID _type) {
     if( m_svTex[_type] )

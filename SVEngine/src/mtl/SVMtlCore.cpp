@@ -43,7 +43,6 @@ SVMtlCore::SVMtlCore(SVInstPtr _app, SVShaderPtr _shader)
 SVMtlCore::SVMtlCore(SVMtlCore* _mtl)
 :SVGBaseEx(_mtl->mApp){
     m_mtlname = _mtl->m_mtlname;
-    m_pShader = _mtl->m_pShader;
     m_LogicMtlFlag0 = _mtl->m_LogicMtlFlag0;
     m_paramTex.copy(_mtl->m_paramTex);
     m_LogicParamBlend.copy(_mtl->m_LogicParamBlend);
@@ -318,7 +317,7 @@ s32 SVMtlCore::submitMtl() {
     _submitTexture(t_renderer);
     //提交状态
     _submitState(t_renderer);
-    return m_pShader;
+    return 0;
 }
 
 void SVMtlCore::recoverMtl() {
@@ -360,13 +359,6 @@ void SVMtlCore::recoverMtl() {
 
 //交换
 void SVMtlCore::swap() {
-}
-
-void SVMtlCore::_loadShader() {
-//    SVRendererPtr t_renderer = mApp->getRenderer();
-//    if(t_renderer){
-//        m_pShader = mApp->getShaderMgr()->getShader(m_mtlname.c_str());
-//    }
 }
 
 //

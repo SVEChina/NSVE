@@ -62,14 +62,12 @@ namespace sv {
         virtual SVRShaderPtr createResShader() { return nullptr; }
         
         //buf-vbo 等
-        virtual SVRBufferPtr createResBuf() { return nullptr; }
+        virtual SVRMeshResPtr createResBuf() { return nullptr; }
         
         //fbo
         virtual SVRFboPtr createResFbo() { return nullptr; }
         
-        
     public:
-        
         //增加渲染内核资源
         void addRes(SVRResPtr _res);
         
@@ -83,14 +81,11 @@ namespace sv {
         
         SVRTargetPtr curTarget(){ return m_cur_target; }
         
-        //处理技术
-        virtual void processTech(SVRTechPtr _tech);
-        
         //处理材质
         virtual void processMtl(SVMtlCorePtr _mtl);
         
         //处理mesh
-        virtual void processMesh(SVRenderMeshPtr _mesh);
+        virtual void processMesh(SVRenderMeshPtr _mesh,SVRTargetPtr _target);
         
         //自动回收
         virtual void removeUnuseRes();

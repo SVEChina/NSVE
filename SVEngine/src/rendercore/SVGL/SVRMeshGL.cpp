@@ -1,11 +1,11 @@
 //
-// SVRBufferGL.cpp
+// SVRMeshGL.cpp
 // SVEngine
 // Copyright 2017-2020
 // yizhou Fu,long Yin,longfei Lin,ziyu Xu,xiaofan Li,daming Li
 //
 
-#include "SVRBufferGL.h"
+#include "SVRMeshGL.h"
 #include "SVRendererGL.h"
 #include "SVRShaderGL.h"
 #include "../SVRenderMesh.h"
@@ -13,17 +13,17 @@
 
 using namespace sv;
 
-SVRBufferGL::SVRBufferGL(SVInstPtr _app)
-:SVRBuffer(_app)
+SVRMeshGL::SVRMeshGL(SVInstPtr _app)
+:SVRMeshRes(_app)
 ,m_indexID(0)
 ,m_bufnum(0)
 ,m_instanceID(0){
 }
 
-SVRBufferGL::~SVRBufferGL() {
+SVRMeshGL::~SVRMeshGL() {
 }
 
-void SVRBufferGL::create(SVRendererPtr _renderer) {
+void SVRMeshGL::create(SVRendererPtr _renderer) {
     SVRendererGLPtr t_rm = std::dynamic_pointer_cast<SVRendererGL>(_renderer);
     SVRenderMeshPtr t_rendermesh = std::dynamic_pointer_cast<SVRenderMesh>(m_logic_obj);
     if(t_rm && t_rendermesh) {
@@ -118,7 +118,7 @@ void SVRBufferGL::create(SVRendererPtr _renderer) {
     }
 }
 
-void SVRBufferGL::destroy(SVRendererPtr _renderer) {
+void SVRMeshGL::destroy(SVRendererPtr _renderer) {
     if(m_exist) {
         m_exist = false;
         if(m_indexID>0) {
@@ -131,7 +131,7 @@ void SVRBufferGL::destroy(SVRendererPtr _renderer) {
     }
 }
 
-s32 SVRBufferGL::process(SVRendererPtr _renderer){
+s32 SVRMeshGL::process(SVRendererPtr _renderer,SVRTargetPtr _target){
     SVRRes::process(_renderer);
     SVRendererGLPtr t_rm = std::dynamic_pointer_cast<SVRendererGL>(_renderer);
     if(m_ver_dsp.size()>0) {
@@ -243,3 +243,8 @@ s32 SVRBufferGL::process(SVRendererPtr _renderer){
     }
     return 1;
 }
+
+void SVRMeshGL::draw(SVRendererPtr _renderer,SVRTargetPtr _target) {
+    
+}
+

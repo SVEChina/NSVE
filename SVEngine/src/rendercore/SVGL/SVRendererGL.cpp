@@ -11,7 +11,7 @@
 #include "SVRTechGL.h"
 #include "SVRFboGL.h"
 #include "SVRShaderGL.h"
-#include "SVRBufferGL.h"
+#include "SVRMeshGL.h"
 //
 #include "../SVRenderMgr.h"
 #include "../SVRTarget.h"
@@ -77,19 +77,13 @@ SVRShaderPtr SVRendererGL::createResShader() {
 }
 
 //buf-vbo 等
-SVRBufferPtr SVRendererGL::createResBuf() {
-    return MakeSharedPtr<SVRBufferGL>(mApp);
+SVRMeshResPtr SVRendererGL::createResBuf() {
+    return MakeSharedPtr<SVRMeshGL>(mApp);
 }
 
 //fbo
 SVRFboPtr SVRendererGL::createResFbo() {
     return MakeSharedPtr<SVRFboGL>(mApp);
-}
-
-//处理技术
-void SVRendererGL::processTech(SVRTechPtr _tech) {
-    if(!_tech)
-        return ;
 }
 
 //处理材质
@@ -102,9 +96,9 @@ void SVRendererGL::processMtl(SVMtlCorePtr _mtl) {
 }
 
 //处理mesh
-void SVRendererGL::processMesh(SVRenderMeshPtr _mesh) {
+void SVRendererGL::processMesh(SVRenderMeshPtr _mesh,SVRTargetPtr _target) {
     if(_mesh && _mesh->getResBuffer() ) {
-        _mesh->getResBuffer()->process( std::dynamic_pointer_cast<SVRendererGL>(shareObject()) );
+        _mesh->getResBuffer()->process( std::dynamic_pointer_cast<SVRendererGL>(shareObject()) ,_target);
     }
 }
 

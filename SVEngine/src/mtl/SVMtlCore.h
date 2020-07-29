@@ -128,13 +128,13 @@ namespace sv {
         
     public:
         SVString m_mtlname;
-        s32 m_pShader;        //shaderid
+        
         s32 m_LogicMtlFlag0;  //MTLFLAG0;
         
         SVMatrixParam m_LogicParamMatrix;            //矩阵信息
         
     protected:
-        void _loadShader();
+    
         virtual void _refreshMatrix();
         virtual void _refreshModify();
         virtual void _submitUniform(SVRendererPtr _render);

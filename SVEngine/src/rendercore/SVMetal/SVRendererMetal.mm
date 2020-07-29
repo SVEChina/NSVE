@@ -9,7 +9,7 @@
 #include "SVRFboMetal.h"
 #include "SVRTexMetal.h"
 #include "SVRShaderMetal.h"
-#include "SVRBufferMetal.h"
+#include "SVRMeshMetal.h"
 
 #include "../SVRTarget.h"
 #include "../../app/SVInst.h"
@@ -40,6 +40,10 @@ SVRendererMetal::SVRendererMetal(SVInstPtr _app)
 }
 
 SVRendererMetal::~SVRendererMetal(){
+}
+
+SVRendererMetalPtr SVRendererMetal::share() {
+    return std::dynamic_pointer_cast<SVRendererMetal>(shareObject());
 }
 
 void SVRendererMetal::init(id<MTLDevice> _device,id<MTLDrawable> _target,id<MTLTexture> _targetTex) {
@@ -98,8 +102,8 @@ SVRShaderPtr SVRendererMetal::createResShader() {
 }
 
 //buf-vbo 等
-SVRBufferPtr SVRendererMetal::createResBuf()  {
-    return MakeSharedPtr<SVRBufferMetal>(mApp);
+SVRMeshResPtr SVRendererMetal::createResBuf()  {
+    return MakeSharedPtr<SVRMeshMetal>(mApp);
 }
 
 //fbo
@@ -119,10 +123,6 @@ SVRFboPtr SVRendererMetal::createResFbo()  {
 //    return m_texPoolIn.size()-1;
 //}
 
-//处理技术
-void SVRendererMetal::processTech(SVRTechPtr _tech) {
-}
-
 //处理材质
 void SVRendererMetal::processMtl(SVMtlCorePtr _mtl) {
     if(!m_pCurEncoder)
@@ -134,11 +134,11 @@ void SVRendererMetal::processMtl(SVMtlCorePtr _mtl) {
 }
 
 //处理mesh
-void SVRendererMetal::processMesh(SVRenderMeshPtr _mesh) {
+void SVRendererMetal::processMesh(SVRenderMeshPtr _mesh,SVRTargetPtr _target) {
     if(!m_pCurEncoder)
         return ;
-    if(_mesh) {
-        _mesh->render( std::dynamic_pointer_cast<SVRendererMetal>(shareObject()) );
+    if(_mesh->getResBuffer()) {
+        _mesh->getResBuffer()->process( share(), _target);
     }
 }
 
