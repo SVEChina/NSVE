@@ -87,6 +87,8 @@ namespace sv {
         //处理mesh
         virtual void processMesh(SVRenderMeshPtr _mesh,SVRTargetPtr _target);
         
+        virtual void drawMesh(SVRenderMeshPtr _mesh,SVRTargetPtr _target){}
+        
         //自动回收
         virtual void removeUnuseRes();
         

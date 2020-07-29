@@ -142,6 +142,14 @@ void SVRendererMetal::processMesh(SVRenderMeshPtr _mesh,SVRTargetPtr _target) {
     }
 }
 
+void SVRendererMetal::drawMesh(SVRenderMeshPtr _mesh,SVRTargetPtr _target) {
+    if(!m_pCurEncoder)
+        return ;
+    if(_mesh->getResBuffer()) {
+        _mesh->getResBuffer()->draw( share(), _target);
+    }
+}
+
 void SVRendererMetal::drawBox() {
 //    - (void)setVertexBytes:(const void *)bytes length:(NSUInteger)length atIndex:(NSUInteger)index API_AVAILABLE(macos(10.11), ios(8.3));
 }

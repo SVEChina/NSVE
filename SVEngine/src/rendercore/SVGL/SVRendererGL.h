@@ -51,6 +51,8 @@ namespace sv {
             //处理mesh
             virtual void processMesh(SVRenderMeshPtr _mesh,SVRTargetPtr _target);
             
+            void drawMesh(SVRenderMeshPtr _mesh,SVRTargetPtr _target);
+            
             u32 m_cur_program;  //当前的program
             
         public:

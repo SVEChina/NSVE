@@ -102,6 +102,13 @@ void SVRendererGL::processMesh(SVRenderMeshPtr _mesh,SVRTargetPtr _target) {
     }
 }
 
+//处理mesh
+void SVRendererGL::drawMesh(SVRenderMeshPtr _mesh,SVRTargetPtr _target) {
+//    if(_mesh && _mesh->getResBuffer() ) {
+//        _mesh->getResBuffer()->process( std::dynamic_pointer_cast<SVRendererGL>(shareObject()) ,_target);
+//    }
+}
+
 //
 void SVRendererGL::submitTex(u32 _channel,TexUnit& _unit){
     SVRenderStateGLPtr pState = std::static_pointer_cast<SVRenderStateGL>(m_pRState);

@@ -56,10 +56,13 @@ namespace sv {
     public:
 
         //处理材质
-        virtual void processMtl(SVMtlCorePtr _mtl);
+        void processMtl(SVMtlCorePtr _mtl);
 
         //处理mesh
-        virtual void processMesh(SVRenderMeshPtr _mesh,SVRTargetPtr _target);
+        void processMesh(SVRenderMeshPtr _mesh,SVRTargetPtr _target);
+
+        //
+        void drawMesh(SVRenderMeshPtr _mesh,SVRTargetPtr _target);
 
     public:
         id<MTLDevice> m_pDevice;
