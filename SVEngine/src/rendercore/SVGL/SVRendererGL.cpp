@@ -146,13 +146,6 @@ void SVRendererGL::submitTex(u32 _channel,TexUnit& _unit){
     if (m_uni_tex>=0) {
         glUniform1i(m_uni_tex, _channel);
     }
-    //
-    if(_channel == 0) {
-        s32 m_uni_clip = glGetUniformLocation(m_pRState->m_shaderID, "texcoordClip" );
-        if (m_uni_clip>=0) {
-            glUniform2fv(m_uni_clip, 1 , _unit.m_texcoordFlip);
-        }
-    }
     //最小过滤器
     u32 t_filter = GL_TEXTURE_MIN_FILTER;
     switch (_unit.m_min_filter) {

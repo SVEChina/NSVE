@@ -42,6 +42,7 @@ namespace sv {
         s32 m_iCnt;
         s32 m_ibufOff;
         s32 m_instCnt;
+        s32 m_streanNum;
         //
         MTLVertexDescriptor* m_vert_dsp;
         BUFFERMODE m_bufmode;

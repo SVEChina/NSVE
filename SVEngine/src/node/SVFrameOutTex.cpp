@@ -58,10 +58,10 @@ void SVFrameOutTex::update(f32 _dt){
     SVNode::update(_dt);
     SVRendererPtr t_renderer = mApp->getRenderer();
     if(m_pMtl){
-        m_pMtl->setModelMatrix(m_absolutMat.get());
+        m_pMtl->setModelMatrix(m_absolutMat);
         m_pMtl->setTexture(0,t_renderer->getSVTex(E_TEX_MAIN));    //那第一张纹理
         m_pMtl->setBlendEnable(false);
-        m_pMtl->setTexcoordFlip(1.0f, 1.0f);
+        m_pMtl->setParam("texclip",FVec2(1.0f, 1.0f));
         m_pMtl->update(_dt);
     }
 }

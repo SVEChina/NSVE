@@ -156,7 +156,7 @@ void SVSpriteNode::update(f32 dt) {
 //        if(m_pMtl){
 //            m_pMtl->setBlendEnable(true);
 //            m_pMtl->setBlendState(MTL_BLEND_ONE, MTL_BLEND_ONE_MINUS_SRC_ALPHA);
-//            m_pMtl->setModelMatrix(m_absolutMat.get());
+//            m_pMtl->setModelMatrix(m_absolutMat);
 //            m_pMtl->setTexcoordFlip(m_texcoordX, m_texcoordY);
 //            if(m_inTexType == E_TEX_END) {
 //                m_pMtl->setTexture(0,m_pTex);
@@ -174,7 +174,7 @@ void SVSpriteNode::update(f32 dt) {
 //        }else{
 //            //创建新的材质
 //            SVMtl2DPtr t_mtl = MakeSharedPtr<SVMtl2D>(mApp, "normal2d_c");
-//            t_mtl->setModelMatrix(m_absolutMat.get());
+//            t_mtl->setModelMatrix(m_absolutMat);
 //            t_mtl->setTexcoordFlip(m_texcoordX, m_texcoordY);
 //            t_mtl->setBlendEnable(true);
 //            t_mtl->setBlendState(MTL_BLEND_ONE, MTL_BLEND_ONE_MINUS_SRC_ALPHA);

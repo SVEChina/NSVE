@@ -140,7 +140,7 @@ void SVBillboardNode::update(f32 dt) {
 //                t_billboard->setViewPos(m_viewPos);
 //                t_billboard->setUp(m_up);
 //            }
-//            m_pMtl->setModelMatrix(m_absolutMat.get());
+//            m_pMtl->setModelMatrix(m_absolutMat);
 //            m_pMtl->setTexcoordFlip(m_texcoordX, m_texcoordY);
 //            if(m_inTexType == E_TEX_END) {
 //                m_pMtl->setTexture(0,m_pTex);
@@ -154,7 +154,7 @@ void SVBillboardNode::update(f32 dt) {
 //        }else{
 //            //创建新的材质
 //            SVMtlCorePtr t_mtl = MakeSharedPtr<SVMtlCore>(mApp, "normal2d");
-//            t_mtl->setModelMatrix(m_absolutMat.get());
+//            t_mtl->setModelMatrix(m_absolutMat);
 //            t_mtl->setTexcoordFlip(m_texcoordX, m_texcoordY);
 //            t_mtl->setBlendEnable(true);
 //            t_mtl->setBlendState(MTL_BLEND_ONE, MTL_BLEND_ONE_MINUS_SRC_ALPHA);

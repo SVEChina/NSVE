@@ -96,7 +96,7 @@ void SVFrameAniNode::update(f32 dt) {
 //    if (m_pRenderObj && m_pMesh ) {
 //        //创建新的材质
 //        SVMtl2DPtr t_mtl = MakeSharedPtr<SVMtl2D>(mApp, "normal2d_c");
-//        t_mtl->setModelMatrix(m_absolutMat.get());
+//        t_mtl->setModelMatrix(m_absolutMat);
 //        t_mtl->setTexcoordFlip(1.0f, -1.0f);
 //        t_mtl->setBlendEnable(true);
 //        t_mtl->setBlendState(MTL_BLEND_ONE, MTL_BLEND_ONE_MINUS_SRC_ALPHA);

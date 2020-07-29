@@ -66,40 +66,40 @@ bool SVFilterGenLUT::create(){
     
     //创建材质
     m_BCMtl=MakeSharedPtr<SVMtlBrightnessContrast>(mApp);
-    m_BCMtl->setTexcoordFlip(1.0f, 1.0f);
+    //m_BCMtl->setTexcoordFlip(1.0f, 1.0f);
     
     SVMtlCorePtr t_mtl_back=MakeSharedPtr<SVMtlCore>(mApp,"screennor");
-    t_mtl_back->setTexcoordFlip(1.0f, 1.0f);
+    //t_mtl_back->setTexcoordFlip(1.0f, 1.0f);
     
     m_SaturationMtl=MakeSharedPtr<SVMtlSaturation>(mApp);
-    m_SaturationMtl->setTexcoordFlip(1.0f, 1.0f);
+    //m_SaturationMtl->setTexcoordFlip(1.0f, 1.0f);
     
     m_VibranceMtl=MakeSharedPtr<SVMtlVibrance>(mApp);
-    m_VibranceMtl->setTexcoordFlip(1.0f, 1.0f);
+    //m_VibranceMtl->setTexcoordFlip(1.0f, 1.0f);
     
     m_colorBalanceMtl=MakeSharedPtr<SVMtlColorBalance>(mApp);
-    m_colorBalanceMtl->setTexcoordFlip(1.0f, 1.0f);
+    //m_colorBalanceMtl->setTexcoordFlip(1.0f, 1.0f);
     
     m_hslMtl=MakeSharedPtr<SVMtlHSL>(mApp);
-    m_hslMtl->setTexcoordFlip(1.0, 1.0);
+    //m_hslMtl->setTexcoordFlip(1.0, 1.0);
     
     m_shadowHighlightMtl=MakeSharedPtr<SVMtlShadowHighlight>(mApp);
-    m_shadowHighlightMtl->setTexcoordFlip(1.0, 1.0);
+    //m_shadowHighlightMtl->setTexcoordFlip(1.0, 1.0);
     
     m_whiteBalckLeveMtl=MakeSharedPtr<SVMtlWhiteBlackLevel>(mApp);
-    m_whiteBalckLeveMtl->setTexcoordFlip(1.0, 1.0);
+    //m_whiteBalckLeveMtl->setTexcoordFlip(1.0, 1.0);
     
     m_whiteBalanceMtl = MakeSharedPtr<SVMtlWhiteBalance>(mApp);
-    m_whiteBalanceMtl->setTexcoordFlip(1.0, 1.0);
+    //m_whiteBalanceMtl->setTexcoordFlip(1.0, 1.0);
     
     m_gammaMtl = MakeSharedPtr<SVMtlGamma>(mApp);
-    m_gammaMtl->setTexcoordFlip(1.0, 1.0);
+    //m_gammaMtl->setTexcoordFlip(1.0, 1.0);
     
     m_exposureMtl = MakeSharedPtr<SVMtlExposure>(mApp);
-    m_exposureMtl->setTexcoordFlip(1.0, 1.0);
+    //m_exposureMtl->setTexcoordFlip(1.0, 1.0);
     
     SVMtlCorePtr t_curveMtl = MakeSharedPtr<SVMtlCore>(mApp,"curveRgba");
-    t_curveMtl->setTexcoordFlip(1.0, 1.0);
+    //t_curveMtl->setTexcoordFlip(1.0, 1.0);
    
     SVPassPtr m_pass = MakeSharedPtr<SVPass>();
     //m_pass->setMtl(m_BCMtl);
@@ -169,7 +169,6 @@ bool SVFilterGenLUT::create(){
     m_pPassNode->addPass(m_pass);
     
     SVMtlCorePtr t_mtl_rgba=MakeSharedPtr<SVMtlCore>(mApp,"screennor");
-    t_mtl_rgba->setTexcoordFlip(1.0f, 1.0f);
     m_GradientMapPass=MakeSharedPtr<SVPass>();
     //m_GradientMapPass->setMtl(t_mtl_rgba);
     m_GradientMapPass->setInTex(0,E_TEX_FILTER_GENLUT_H1);

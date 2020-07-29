@@ -18,7 +18,6 @@
 
 namespace sv {
 
-
     //
     class SVTexMgr : public SVGBaseEx {
     public:

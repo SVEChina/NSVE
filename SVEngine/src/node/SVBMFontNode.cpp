@@ -73,7 +73,7 @@ void SVBMFontNode::update(f32 dt) {
 //            t_mtl->setTexture(0,m_texture);
 //            t_mtl->setTexSizeIndex(0, 1.0/m_texture->getwidth(), 1.0/m_texture->getheight());
 //        }
-//        t_mtl->setModelMatrix(m_absolutMat.get());
+//        t_mtl->setModelMatrix(m_absolutMat);
 //        t_mtl->setTexcoordFlip(1.0, 1.0f);
 //        t_mtl->setAlpha(m_alpha);
 //        t_mtl->update(dt);

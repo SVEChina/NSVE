@@ -152,130 +152,169 @@ void SVRBufferMetal::create(SVRendererPtr _renderer) {
             id<MTLBuffer> posBuf = [t_rm->m_pDevice newBufferWithBytes:t_buf_dsp->_bufData->getData()
                                                      length: t_buf_dsp->_bufSize
                                                     options: MTLResourceStorageModeShared ];
+            //单一流
             m_dbufs[0] = posBuf;
-            //[t_tar->m_cmdEncoder setVertexBuffer:posBuf offset:t_off atIndex:i];
+            m_streanNum = 1;
         }else {
+            //混合流模式
             m_vert_dsp = [[MTLVertexDescriptor alloc] init];
             VFTYPE _vf = t_buf_dsp->_bufVertDsp;
             s32 t_attri_index = 0;
             s32 t_vert_size = 0;
+            s8* t_pointer = (s8*)(t_buf_dsp->_bufData->getData());
+            s32 t_pointer_off = 0;
             if (_vf & D_VF_V2) {
                 m_vert_dsp.attributes[t_attri_index].format = MTLVertexFormatFloat2;
                 m_vert_dsp.attributes[t_attri_index].offset = 0;
                 m_vert_dsp.attributes[t_attri_index].bufferIndex = 0;
-                t_attri_index++;
-                t_vert_size += 2*sizeof(f32);
-                //
                 m_vert_dsp.layouts[t_attri_index].stride = 2*sizeof(f32);
                 m_vert_dsp.layouts[t_attri_index].stepRate = 1;
                 m_vert_dsp.layouts[t_attri_index].stepFunction = MTLVertexStepFunctionPerVertex;
-//                //
-//                id<MTLBuffer> mtlBuf = [t_rm->m_pDevice newBufferWithBytes:t_buf_dsp->_bufData->getData()
-//                                                         length: t_buf_dsp->_bufSize
-//                                                        options: MTLResourceStorageModeShared ];
-//                m_dbufs[t_attri_index] = mtlBuf;
+                //
+                t_vert_size += 2*sizeof(f32)*t_buf_dsp->_vertCnt;
+                m_dbufs[t_attri_index] = [t_rm->m_pDevice newBufferWithBytes:t_pointer + t_pointer_off
+                                                         length: t_vert_size
+                                                        options: MTLResourceStorageModeShared ];
+                t_pointer_off = t_vert_size;
+                t_attri_index++;
             }
             if (_vf & D_VF_V3) {
                 m_vert_dsp.attributes[t_attri_index].format = MTLVertexFormatFloat3;
                 m_vert_dsp.attributes[t_attri_index].offset = 0;
                 m_vert_dsp.attributes[t_attri_index].bufferIndex = 0;
-                t_attri_index++;
-                t_vert_size += 3*sizeof(f32);
-                //
                 m_vert_dsp.layouts[t_attri_index].stride = 3*sizeof(f32);
                 m_vert_dsp.layouts[t_attri_index].stepRate = 1;
                 m_vert_dsp.layouts[t_attri_index].stepFunction = MTLVertexStepFunctionPerVertex;
+                //
+                t_vert_size += 3*sizeof(f32)*t_buf_dsp->_vertCnt;
+                m_dbufs[t_attri_index] = [t_rm->m_pDevice newBufferWithBytes:t_pointer + t_pointer_off
+                                                         length: t_vert_size
+                                                        options: MTLResourceStorageModeShared ];
+                t_pointer_off = t_vert_size;
+                t_attri_index++;
             }
             if (_vf & D_VF_NOR) {
                 m_vert_dsp.attributes[t_attri_index].format = MTLVertexFormatFloat3;
                 m_vert_dsp.attributes[t_attri_index].offset = 0;
                 m_vert_dsp.attributes[t_attri_index].bufferIndex = 0;
-                t_attri_index++;
-                t_vert_size += 3*sizeof(f32);
-                //
                 m_vert_dsp.layouts[t_attri_index].stride = 3*sizeof(f32);
                 m_vert_dsp.layouts[t_attri_index].stepRate = 1;
                 m_vert_dsp.layouts[t_attri_index].stepFunction = MTLVertexStepFunctionPerVertex;
+                
+                t_vert_size += 3*sizeof(f32)*t_buf_dsp->_vertCnt;
+                m_dbufs[t_attri_index] = [t_rm->m_pDevice newBufferWithBytes:t_pointer + t_pointer_off
+                                                         length: t_vert_size
+                                                        options: MTLResourceStorageModeShared ];
+                t_pointer_off = t_vert_size;
+                t_attri_index++;
             }
             if (_vf & D_VF_TAG) {
                 m_vert_dsp.attributes[t_attri_index].format = MTLVertexFormatFloat3;
                 m_vert_dsp.attributes[t_attri_index].offset = 0;
                 m_vert_dsp.attributes[t_attri_index].bufferIndex = 0;
-                t_attri_index++;
-                t_vert_size += 3*sizeof(f32);
-                //
                 m_vert_dsp.layouts[t_attri_index].stride = 3*sizeof(f32);
                 m_vert_dsp.layouts[t_attri_index].stepRate = 1;
                 m_vert_dsp.layouts[t_attri_index].stepFunction = MTLVertexStepFunctionPerVertex;
+                //
+                t_vert_size += 3*sizeof(f32)*t_buf_dsp->_vertCnt;
+                m_dbufs[t_attri_index] = [t_rm->m_pDevice newBufferWithBytes:t_pointer + t_pointer_off
+                                                         length: t_vert_size
+                                                        options: MTLResourceStorageModeShared ];
+                t_pointer_off = t_vert_size;
+                t_attri_index++;
             }
             if (_vf & D_VF_BTAG) {
                 m_vert_dsp.attributes[t_attri_index].format = MTLVertexFormatFloat3;
                 m_vert_dsp.attributes[t_attri_index].offset = 0;
                 m_vert_dsp.attributes[t_attri_index].bufferIndex = 0;
-                t_attri_index++;
-                t_vert_size += 3*sizeof(f32);
                 //
                 m_vert_dsp.layouts[t_attri_index].stride = 3*sizeof(f32);
                 m_vert_dsp.layouts[t_attri_index].stepRate = 1;
                 m_vert_dsp.layouts[t_attri_index].stepFunction = MTLVertexStepFunctionPerVertex;
+                //
+                t_vert_size += 3*sizeof(f32)*t_buf_dsp->_vertCnt;
+                m_dbufs[t_attri_index] = [t_rm->m_pDevice newBufferWithBytes:t_pointer + t_pointer_off
+                                                         length: t_vert_size
+                                                        options: MTLResourceStorageModeShared ];
+                t_pointer_off = t_vert_size;
+                t_attri_index++;
             }
             if (_vf & D_VF_C0) {
                 m_vert_dsp.attributes[t_attri_index].format = MTLVertexFormatUChar4;
                 m_vert_dsp.attributes[t_attri_index].offset = 0;
                 m_vert_dsp.attributes[t_attri_index].bufferIndex = 0;
-                t_attri_index++;
-                t_vert_size += 4*sizeof(u8);
-                //
                 m_vert_dsp.layouts[t_attri_index].stride = 4*sizeof(u8);
                 m_vert_dsp.layouts[t_attri_index].stepRate = 1;
                 m_vert_dsp.layouts[t_attri_index].stepFunction = MTLVertexStepFunctionPerVertex;
+                //
+                t_vert_size += 4*sizeof(u8)*t_buf_dsp->_vertCnt;
+                m_dbufs[t_attri_index] = [t_rm->m_pDevice newBufferWithBytes:t_pointer + t_pointer_off
+                                                         length: t_vert_size
+                                                        options: MTLResourceStorageModeShared ];
+                t_pointer_off = t_vert_size;
+                t_attri_index++;
             }
             if (_vf & D_VF_T0) {
                 m_vert_dsp.attributes[t_attri_index].format = MTLVertexFormatFloat2;
                 m_vert_dsp.attributes[t_attri_index].offset = 0;
                 m_vert_dsp.attributes[t_attri_index].bufferIndex = 0;
-                t_attri_index++;
-                t_vert_size += 2*sizeof(f32);
-                //
                 m_vert_dsp.layouts[t_attri_index].stride = 2*sizeof(f32);
                 m_vert_dsp.layouts[t_attri_index].stepRate = 1;
                 m_vert_dsp.layouts[t_attri_index].stepFunction = MTLVertexStepFunctionPerVertex;
+                //
+                t_vert_size += 2*sizeof(f32)*t_buf_dsp->_vertCnt;
+                m_dbufs[t_attri_index] = [t_rm->m_pDevice newBufferWithBytes:t_pointer + t_pointer_off
+                                                         length: t_vert_size
+                                                        options: MTLResourceStorageModeShared ];
+                t_pointer_off = t_vert_size;
+                t_attri_index++;
             }
             if (_vf & D_VF_T1) {
                 m_vert_dsp.attributes[t_attri_index].format = MTLVertexFormatFloat2;
                 m_vert_dsp.attributes[t_attri_index].offset = 0;
                 m_vert_dsp.attributes[t_attri_index].bufferIndex = 0;
-                t_attri_index++;
-                t_vert_size += 2*sizeof(f32);
-                //
                 m_vert_dsp.layouts[t_attri_index].stride = 2*sizeof(f32);
                 m_vert_dsp.layouts[t_attri_index].stepRate = 1;
                 m_vert_dsp.layouts[t_attri_index].stepFunction = MTLVertexStepFunctionPerVertex;
+                //
+                t_vert_size += 2*sizeof(f32)*t_buf_dsp->_vertCnt;
+                m_dbufs[t_attri_index] = [t_rm->m_pDevice newBufferWithBytes:t_pointer + t_pointer_off
+                                                         length: t_vert_size
+                                                        options: MTLResourceStorageModeShared ];
+                t_pointer_off = t_vert_size;
+                t_attri_index++;
             }
             if (_vf & D_VF_BONE) {
                 m_vert_dsp.attributes[t_attri_index].format = MTLVertexFormatUShort4;
                 m_vert_dsp.attributes[t_attri_index].offset = 0;
                 m_vert_dsp.attributes[t_attri_index].bufferIndex = 0;
-                t_attri_index++;
-                t_vert_size += 4*sizeof(u16);
-                //
                 m_vert_dsp.layouts[t_attri_index].stride = 4*sizeof(u16);
                 m_vert_dsp.layouts[t_attri_index].stepRate = 1;
                 m_vert_dsp.layouts[t_attri_index].stepFunction = MTLVertexStepFunctionPerVertex;
+                //
+                t_vert_size += 4*sizeof(u16)*t_buf_dsp->_vertCnt;
+                m_dbufs[t_attri_index] = [t_rm->m_pDevice newBufferWithBytes:t_pointer + t_pointer_off
+                                                         length: t_vert_size
+                                                        options: MTLResourceStorageModeShared ];
+                t_pointer_off = t_vert_size;
+                t_attri_index++;
             }
             if (_vf & D_VF_BONE_W) {
                 m_vert_dsp.attributes[t_attri_index].format = MTLVertexFormatFloat4;
                 m_vert_dsp.attributes[t_attri_index].offset = 0;
                 m_vert_dsp.attributes[t_attri_index].bufferIndex = 0;
-                t_attri_index++;
-                t_vert_size += 4*sizeof(f32);
-                //
                 m_vert_dsp.layouts[t_attri_index].stride = 4*sizeof(f32);
                 m_vert_dsp.layouts[t_attri_index].stepRate = 1;
                 m_vert_dsp.layouts[t_attri_index].stepFunction = MTLVertexStepFunctionPerVertex;
+                //
+                t_vert_size += 4*sizeof(f32)*t_buf_dsp->_vertCnt;
+                m_dbufs[t_attri_index] = [t_rm->m_pDevice newBufferWithBytes:t_pointer + t_pointer_off
+                                                         length: t_vert_size
+                                                        options: MTLResourceStorageModeShared ];
+                t_pointer_off = t_vert_size;
+                t_attri_index++;
             }
-            //创建多个buf
-            
+            m_streanNum = t_attri_index;
         }
         m_exist = true;
     }
@@ -288,6 +327,7 @@ void SVRBufferMetal::render(SVRendererPtr _renderer,SVRTargetPtr _target,SVRende
     SVRendererMetalPtr t_rm = std::dynamic_pointer_cast<SVRendererMetal>(_renderer);
     SVRFboMetalPtr t_fbo = std::dynamic_pointer_cast<SVRFboMetal>( _target->getResFbo() );
     if(t_rm && t_fbo) {
+        //绑定
         for(s32 i=0;i<SV_MAX_STREAM_NUM;i++) {
             if(m_dbufs[i]) {
                 [t_fbo->m_cmdEncoder setVertexBuffer:m_dbufs[i] offset:0 atIndex:i];    //i表示的buf和索引的对应

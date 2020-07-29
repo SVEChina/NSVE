@@ -80,14 +80,14 @@ void SV3DBox::update(f32 dt) {
 //        if(m_pMtl){
 //            m_pMtl->update(dt);
 //            m_pMtl->setDepthEnable(true);
-//            m_pMtl->setModelMatrix(m_absolutMat.get());
+//            m_pMtl->setModelMatrix(m_absolutMat);
 //            m_pMtl->setTexcoordFlip(1.0, 1.0);
 //            m_pRenderObj->setMesh(m_pMesh);
 //            m_pRenderObj->setMtl(m_pMtl);
 //        }else{
 //            m_mtl_box->setColor(m_color.r, m_color.g, m_color.b, m_color.a);
 //            m_mtl_box->update(dt * 0.001f);
-//            m_mtl_box->setModelMatrix(m_absolutMat.get());
+//            m_mtl_box->setModelMatrix(m_absolutMat);
 //            m_mtl_box->setTexcoordFlip(1.0, -1.0f);
 //            m_mtl_box->setDepthEnable(true);
 //            m_mtl_box->setBlendEnable(true);

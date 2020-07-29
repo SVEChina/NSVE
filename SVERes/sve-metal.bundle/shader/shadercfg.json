@@ -3,43 +3,27 @@
     "shader": [
         {
             "file": "screen",
-            "vs": "vertexShader",
-            "fs": "fragmentShader",
-            "gs": "null",
-            "tse": "null",
-            "tsd": "null"
-        },
-        {
-            "file": "screen",
-            "vs": "vertexShader",
-            "fs": "fragmentShader",
-            "gs": "null",
-            "tse": "null",
-            "tsd": "null"
-        },
-        {
-            "file": "screen",
-            "vs": "vertexShader",
-            "fs": "fragmentShader",
-            "gs": "null",
-            "tse": "null",
-            "tsd": "null"
-        },
-        {
-            "file": "screen",
-            "vs": "vertexShader",
-            "fs": "fragmentShader",
-            "gs": "null",
-            "tse": "null",
-            "tsd": "null"
-        },
-        {
-            "file": "screen",
-            "vs": "vertexShader",
-            "fs": "fragmentShader",
-            "gs": "null",
-            "tse": "null",
-            "tsd": "null"
+            "vs": {
+                "entry": "vertexShader",
+                "sampler": [
+                    { "chn" : 0 , "warps" : "default" ,  "warpt" : "default" , "min" : "default", "mag" : "default" }
+                ]
+            },
+            "fs":{
+                "entry": "fragmentShader",
+                "sampler": [
+                    { "chn" : 0 , "warps" : "default" ,  "warpt" : "default" , "min" : "default", "mag" : "default" }
+                ]
+            },
+            "gs": {
+                "entry": "null"
+            },
+            "tse": {
+                "entry": "null"
+            },
+            "tsd": {
+                "entry": "null"
+            }
         }
   ]
 }

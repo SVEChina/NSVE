@@ -63,7 +63,7 @@ void SVBitFontNode::update(f32 dt) {
 //        if (m_texture) {
 //            t_mtl->setTexture(0,m_texture);
 //        }
-//        t_mtl->setModelMatrix(m_absolutMat.get());
+//        t_mtl->setModelMatrix(m_absolutMat);
 //        t_mtl->setTexcoordFlip(1.0, -1.0f);
 //        t_mtl->update(dt);
 //        m_pRenderObj->setMesh(m_pMesh);

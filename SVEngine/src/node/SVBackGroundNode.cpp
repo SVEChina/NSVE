@@ -186,7 +186,7 @@ void SVBackGroundNode::update(f32 _dt){
 //        SVNode::update(_dt);
 //        m_pRenderObj->setMesh(m_pMesh);
 //        if(m_pMtl){
-//            m_pMtl->setModelMatrix(m_absolutMat.get());
+//            m_pMtl->setModelMatrix(m_absolutMat);
 //            m_pMtl->setTexcoordFlip(m_texcoordX, m_texcoordY);
 //            if(m_useTexType!=E_TEX_END){
 //                m_pMtl->setTexture(0,m_useTexType);

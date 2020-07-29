@@ -16,71 +16,69 @@
 //GLTF材质
 namespace sv {
     
+    class SVMtlGLTF : public SVMtlCore {
+    public:
+        SVMtlGLTF(SVInstPtr _app);
+        
+        SVMtlGLTF(SVMtlGLTF *_mtl);
+        
+        ~SVMtlGLTF();
+        
+    protected:
+        SVMtlGLTF(SVInstPtr _app,cptr8 _name);
     
+    public:
         
-        class SVMtlGLTF : public SVMtlCore {
-        public:
-            SVMtlGLTF(SVInstPtr _app);
-            
-            SVMtlGLTF(SVMtlGLTF *_mtl);
-            
-            ~SVMtlGLTF();
-            
-        protected:
-            SVMtlGLTF(SVInstPtr _app,cptr8 _name);
+        virtual SVMtlCorePtr clone();
         
-        public:
-            
-            virtual SVMtlCorePtr clone();
-            
-            void update(f32 dt);
-            
-            void refresh();
-            
-        public:
-            SVTexturePtr m_pBaseColorTex;
-            SVTexturePtr m_pMetallicRoughnessTex;
-            SVTexturePtr m_pNormalTex;
-            SVTexturePtr m_pOcclusionTex;
-            SVTexturePtr m_pEmissiveTex;
-            
-            FVec4 m_baseColorFactor;
-            f32 m_metallicFactor;
-            f32 m_roughtnessFactor;
-            f32 m_normalScale;
-            f32 m_occlusionStrength;
-            FVec3 m_emissiveFactor;
-        };
+        void update(f32 dt);
         
+        void refresh();
+        
+    public:
+        SVTexturePtr m_pBaseColorTex;
+        SVTexturePtr m_pMetallicRoughnessTex;
+        SVTexturePtr m_pNormalTex;
+        SVTexturePtr m_pOcclusionTex;
+        SVTexturePtr m_pEmissiveTex;
+        
+        FVec4 m_baseColorFactor;
+        f32 m_metallicFactor;
+        f32 m_roughtnessFactor;
+        f32 m_normalScale;
+        f32 m_occlusionStrength;
+        FVec3 m_emissiveFactor;
+    };
+    
 #define MAX_BONES 30
 #define MAX_BONES_DATA 30*16
 #define MAX_BONES_DATA_SIZE 30*16*4
+    
+    class SVMtlGLTFSkin : public SVMtlGLTF {
+    public:
+        SVMtlGLTFSkin(SVInstPtr _app);
         
-        class SVMtlGLTFSkin : public SVMtlGLTF {
-        public:
-            SVMtlGLTFSkin(SVInstPtr _app);
-            
-            SVMtlGLTFSkin(SVMtlGLTFSkin *_mtl);
-            
-            ~SVMtlGLTFSkin();
-            
-            virtual SVMtlCorePtr clone();
-            
-            void update(f32 dt);
-            
-            void refresh();
-            
-            void bindSke(SVSkeletonPtr _ske);
-            
-            void unbindSke();
-            
-        protected:
-            virtual void _submitUniform(SVRendererPtr _render);
-            //
-            f32 m_vecBoneMatrix[MAX_BONES_DATA];
-            //关联骨架
-            SVSkeletonPtr m_pSke;
-        };
+        SVMtlGLTFSkin(SVMtlGLTFSkin *_mtl);
+        
+        ~SVMtlGLTFSkin();
+        
+        virtual SVMtlCorePtr clone();
+        
+        void update(f32 dt);
+        
+        void refresh();
+        
+        void bindSke(SVSkeletonPtr _ske);
+        
+        void unbindSke();
+        
+    protected:
+        virtual void _submitUniform(SVRendererPtr _render);
+        //
+        f32 m_vecBoneMatrix[MAX_BONES_DATA];
+        //关联骨架
+        SVSkeletonPtr m_pSke;
+    };
 
 
     

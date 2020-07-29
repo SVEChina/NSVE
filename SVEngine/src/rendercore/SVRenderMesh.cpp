@@ -100,6 +100,11 @@ void SVRenderMesh::create(SVRendererPtr _renderer){
 void SVRenderMesh::destroy(SVRendererPtr _renderer) {
 }
 
+void SVRenderMesh::render(SVRendererPtr _renderer) {
+    if(m_res_buffer) {
+        m_res_buffer->process(_renderer);
+    }
+}
 
 void SVRenderMesh::setDrawMethod(DRAWMETHOD drawtype) {
 }
@@ -116,5 +121,4 @@ void SVRenderMesh::setVertexData(SVDataSwapPtr _data,s32 _channel,VFTYPE type){
 void SVRenderMesh::setInstanceData(SVDataSwapPtr _pdata, u32 _instanceCount){
 }
 
-void SVRenderMesh::render(SVRendererPtr _renderer) {
-}
+

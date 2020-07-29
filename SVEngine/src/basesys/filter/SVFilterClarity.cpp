@@ -46,7 +46,7 @@ bool SVFilterClarity::create(){
     //创建pass
     SVPassPtr t_pass1 = MakeSharedPtr<SVPass>();
     SVMtlCorePtr t_lkMtl=MakeSharedPtr<SVMtlCore>(mApp,"screennor");
-    t_lkMtl->setTexcoordFlip(1.0f, 1.0f);
+    t_lkMtl->setParam("texclip",FVec2(1.0f, 1.0f));
     //t_pass1->setMtl(t_lkMtl);
     t_pass1->setInTex(0,E_TEX_MAIN);
     t_pass1->setOutTex(E_TEX_FILTER_MIP_1);
@@ -54,7 +54,7 @@ bool SVFilterClarity::create(){
 
     SVPassPtr t_pass2 = MakeSharedPtr<SVPass>();
     m_mtl_smooth =MakeSharedPtr<SVMtlSmooth>(mApp,"Clarity");
-    m_mtl_smooth->setTexcoordFlip(1.0, 1.0);
+    m_mtl_smooth->setParam("texclip",FVec2(1.0f, 1.0f));
     //m_mtl_smooth->setImgWH(t_w,t_h);
     //t_pass2->setMtl(m_mtl_smooth);
     t_pass2->setInTex(0, E_TEX_FILTER_MIP_1);

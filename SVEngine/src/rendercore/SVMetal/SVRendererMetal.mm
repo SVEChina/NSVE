@@ -15,7 +15,10 @@
 #include "../../app/SVInst.h"
 #include "../../app/SVDispatch.h"
 #include "../../rendercore/SVRenderMgr.h"
+#include "../../rendercore/SVRenderMesh.h"
 #include "../../base/SVDataSwap.h"
+#include "../../mtl/SVMtlCore.h"
+#include "../../mtl/SVShader.h"
 
 #include <Cocoa/Cocoa.h>
 #import <Foundation/Foundation.h>
@@ -175,15 +178,23 @@ s32 SVRendererMetal::createBuf(s32 _len,void* _data) {
 
 //处理技术
 void SVRendererMetal::processTech(SVRTechPtr _tech) {
-    
 }
 
 //处理材质
 void SVRendererMetal::processMtl(SVMtlCorePtr _mtl) {
-    
+    if(!m_pCurEncoder)
+        return ;
+    if(_mtl->m_shader && _mtl->m_shader->active() ) {
+        //传递uniform
+        //m_pCurEncoder
+    }
 }
 
 //处理mesh
 void SVRendererMetal::processMesh(SVRenderMeshPtr _mesh) {
-    
+    if(!m_pCurEncoder)
+        return ;
+    if(_mesh) {
+        _mesh->render( std::dynamic_pointer_cast<SVRendererMetal>(shareObject()) );
+    }
 }

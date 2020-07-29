@@ -58,12 +58,12 @@ bool SVBasedonFilter::create() {
     }
     //创建材质
     m_acutancemtl=MakeSharedPtr<SVMtlAcutance>(mApp);
-    m_acutancemtl->setTexcoordFlip(1.0f, 1.0f);
+    //m_acutancemtl->setTexcoordFlip(1.0f, 1.0f);
     m_acutancemtl->setTexSizeIndex(0,0.5/t_w,0.5/ t_h);
     m_acutancemtl->setTexSizeIndex(1,0.5/255.0,0.0);
     
     m_baseOnmtl=MakeSharedPtr<SVMtlBasedOn>(mApp);
-    m_baseOnmtl->setTexcoordFlip(1.0f, 1.0f);
+    //m_baseOnmtl->setTexcoordFlip(1.0f, 1.0f);
     m_baseOnmtl->setTexSizeIndex(0,0.5/t_w,0.5/ t_h);
     m_baseOnmtl->setTexSizeIndex(1,0.5/255.0,0.0);
     //创建多passnode
@@ -198,7 +198,7 @@ void SVBasedonFilter::destroy() {
 
 void SVBasedonFilter::update(f32 dt){
     if( m_baseOnmtl ){
-        m_baseOnmtl->setTexcoordFlip(1.0, 1.0);
+        //m_baseOnmtl->setTexcoordFlip(1.0, 1.0);
         m_baseOnmtl->setShadows(m_shadows);
         m_baseOnmtl->setHighlights(m_highlights);
         m_baseOnmtl->setContrast(m_contrast);

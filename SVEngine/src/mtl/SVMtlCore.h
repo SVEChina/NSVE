@@ -19,19 +19,12 @@
 #include <string>
 
 namespace sv {
-    
-    class SVMtlCoreParam : public SVObject {
-    public:
-        SVMtlCoreParam();
-        
-        virtual SVMtlCorePtr genMtl(SVInstPtr _app);
-        
-        s32 m_shader;
-    };
-            
+
     //
     class SVMtlCore : public SVGBaseEx {
     public:
+        SVMtlCore(SVInstPtr _app);
+        
         SVMtlCore(SVInstPtr _app, cptr8 _shader);
         
         SVMtlCore(SVInstPtr _app, SVShaderPtr _shader);
@@ -93,18 +86,8 @@ namespace sv {
         SVShaderPtr m_shader;
         
         void swap();
-                    
-        void setTexcoordFlip(f32 _x, f32 _y);
         
         void setTextureParam(s32 _chanel,TEXTUREPARAM _type,s32 _value);
-        
-        void setModelMatrix(f32 *_mat);
-        
-        void setViewMatrix(f32 *_mat);
-        
-        void setProjMatrix(f32 *_mat);
-        
-        void setVPMatrix(f32 *_mat);
         
         void setTexSizeIndex(s32 index, f32 _w, f32 _h);
         
@@ -145,11 +128,10 @@ namespace sv {
         
     public:
         SVString m_mtlname;
-        s32 m_pShader;                  //shaderid
-        s32 m_LogicMtlFlag0;                         //MTLFLAG0;
+        s32 m_pShader;        //shaderid
+        s32 m_LogicMtlFlag0;  //MTLFLAG0;
         
         SVMatrixParam m_LogicParamMatrix;            //矩阵信息
-       
         
     protected:
         void _loadShader();
@@ -162,6 +144,15 @@ namespace sv {
         
         
     public:
+        //快捷接口而已
+        void setModelMatrix(FMat4& _mat);
+
+        void setViewMatrix(FMat4& _mat);
+
+        void setProjMatrix(FMat4& _mat);
+
+        void setVPMatrix(FMat4& _mat);
+        
         virtual void toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator,
                             RAPIDJSON_NAMESPACE::Value &_objValue);
         

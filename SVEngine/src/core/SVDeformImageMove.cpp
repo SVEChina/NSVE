@@ -274,9 +274,9 @@ void SVDeformImageMove::render(){
             //图片翻转这块需要校正一下 by fyz
             if(m_pMtlBg){
                 if(m_flip){
-                    m_pMtlBg->setTexcoordFlip(1.0f, -1.0f);
+                    m_pMtlBg->setParam("texclip",FVec2(1.0f, 1.0f));
                 }else{
-                    m_pMtlBg->setTexcoordFlip(1.0f, 1.0f);
+                    m_pMtlBg->setParam("texclip",FVec2(1.0f, 1.0f));
                 }
             }
             //
@@ -304,9 +304,9 @@ void SVDeformImageMove::render(){
             t_cmd->setTexture(m_passBack->m_outTex);
             t_cmd->setMesh(m_passBack->m_pMesh);
             if(m_flip){
-                m_passBack->m_pMtl->setTexcoordFlip(1.0f, -1.0f);
+                //m_passBack->m_pMtl->setTexcoordFlip(1.0f, -1.0f);
             }else{
-                m_passBack->m_pMtl->setTexcoordFlip(1.0f, 1.0f);
+                //m_passBack->m_pMtl->setTexcoordFlip(1.0f, 1.0f);
             }
 //            t_cmd->setMaterial(m_passBack->m_pMtl);
             t_rs->pushRenderCmd(RST_FACEMORPH, t_cmd);

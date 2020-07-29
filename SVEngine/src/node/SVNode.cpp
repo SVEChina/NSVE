@@ -135,14 +135,14 @@ bool SVNode::_clip() {
 
 void SVNode::render() {
     if( m_drawBox){
-        SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
-        if( t_rs ){
-            SVMtlGeo3dPtr t_mtl = MakeSharedPtr<SVMtlGeo3d>(mApp);
-            t_mtl->setColor(0.0f, 1.0f, 0.0f, 1.0f);
-            FMat4 m_mat_unit = FMat4_identity;
-            t_mtl->setModelMatrix( m_mat_unit.get() );
-            SVRenderObjInst::pushAABBCmd(t_rs,RST_DEBUG_INNER,m_aabbBox_sw,t_mtl,"SV3DBOX_aabb");
-        }
+//        SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
+//        if( t_rs ){
+//            SVMtlGeo3dPtr t_mtl = MakeSharedPtr<SVMtlGeo3d>(mApp);
+//            t_mtl->setColor(0.0f, 1.0f, 0.0f, 1.0f);
+//            FMat4 m_mat_unit = FMat4_identity;
+//            t_mtl->setModelMatrix( m_mat_unit );
+//            SVRenderObjInst::pushAABBCmd(t_rs,RST_DEBUG_INNER,m_aabbBox_sw,t_mtl,"SV3DBOX_aabb");
+//        }
     }
 }
 

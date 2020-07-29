@@ -20,18 +20,17 @@
 
 using namespace sv;
 
-SVMtlCoreParam::SVMtlCoreParam(){
-}
-
-SVMtlCorePtr SVMtlCoreParam::genMtl(SVInstPtr _app){
-    return nullptr;    
+//
+SVMtlCore::SVMtlCore(SVInstPtr _app)
+:SVGBaseEx(_app){
+    m_paramValues = MakeSharedPtr<SVDataChunk>();
+    reset();
 }
 
 //
 SVMtlCore::SVMtlCore(SVInstPtr _app, cptr8 _shader)
 :SVGBaseEx(_app)
 ,m_mtlname(_shader){
-    //m_shader = ;
     m_paramValues = MakeSharedPtr<SVDataChunk>();
     reset();
 }
@@ -39,7 +38,6 @@ SVMtlCore::SVMtlCore(SVInstPtr _app, cptr8 _shader)
 SVMtlCore::SVMtlCore(SVInstPtr _app, SVShaderPtr _shader)
 :SVGBaseEx(_app)
 ,m_shader(_shader){
-    
 }
 
 SVMtlCore::SVMtlCore(SVMtlCore* _mtl)
@@ -80,19 +78,53 @@ void SVMtlCore::reset() {
 void SVMtlCore::addParam(cptr8 _name,cptr8 _type,cptr8 _value)  {
     if( strcmp(_type,"s32") == 0) {
         s32 tmp = atoi(_value);
-        setParam(_name,tmp);
+        if(strcmp(_value,"identify") == 0) {
+            setParam(_name,1);
+        }else{
+            setParam(_name,tmp);
+        }
     }else if( strcmp(_type,"f32") == 0 ) {
-        f32 tmp = atof(_value);
-        setParam(_name,tmp);
+        if(strcmp(_value,"identify") == 0) {
+            setParam(_name,1.0f);
+        }else{
+            f32 tmp = atof(_value);
+            setParam(_name,tmp);
+        }
     }else if( strcmp(_type,"fvec2") == 0 ) {
-        FVec2 tmp(_value);
-        setParam(_name,tmp);
+        if(strcmp(_value,"identify") == 0) {
+            FVec2 tmp = FVec2_one;;
+            setParam(_name,tmp);
+        }else{
+            FVec2 tmp(_value);
+            setParam(_name,tmp);
+        }
+        
     }else if( strcmp(_type,"fvec3") == 0 ) {
-        FVec3 tmp(_value);
-        setParam(_name,tmp);
+        if(strcmp(_value,"identify") == 0) {
+            FVec3 tmp = FVec3_one;
+            setParam(_name,tmp);
+        }else{
+            FVec3 tmp(_value);
+            setParam(_name,tmp);
+        }
+        
     }else if( strcmp(_type,"fvec4") == 0 ) {
-        FVec4 tmp(_value);
-        setParam(_name,tmp);
+        if(strcmp(_value,"identify") == 0) {
+            FVec4 tmp = FVec4_one;
+            setParam(_name,tmp);
+        }else{
+            FVec4 tmp(_value);
+            setParam(_name,tmp);
+        }
+    }else if( strcmp(_type,"fmat4") == 0 ) {
+        if(strcmp(_value,"identify") == 0) {
+            FMat4 tmp;
+            tmp.setIdentity();
+            setParam(_name,tmp);
+        }else{
+            FMat4 tmp(_value);
+            setParam(_name,tmp);
+        }
     }
 }
 
@@ -246,37 +278,6 @@ void SVMtlCore::setTexture(s32 _chanel,sv::SVTEXINID _from) {
     m_LogicMtlFlag0 |= t_flag;
 }
 
-//
-void SVMtlCore::setModelMatrix(f32 *_mat) {
-    memcpy(m_LogicParamMatrix.m_mat_model, _mat, sizeof(f32) * 16);
-    m_LogicMtlFlag0 |= MTL_F0_MAT_M;
-}
-
-void SVMtlCore::setViewMatrix(f32 *_mat) {
-    memcpy(m_LogicParamMatrix.m_mat_view, _mat, sizeof(f32) * 16);
-    m_LogicParamMatrix.m_self_view = 1;
-    m_LogicMtlFlag0 |= MTL_F0_MAT_V;
-}
-
-void SVMtlCore::setProjMatrix(f32 *_mat) {
-    memcpy(m_LogicParamMatrix.m_mat_project, _mat, sizeof(f32) * 16);
-    m_LogicParamMatrix.m_self_proj = 1;
-    m_LogicMtlFlag0 |= MTL_F0_MAT_P;
-}
-
-void SVMtlCore::setVPMatrix(f32 *_mat) {
-    memcpy(m_LogicParamMatrix.m_mat_vp, _mat, sizeof(f32) * 16);
-    m_LogicParamMatrix.m_self_vp = 1;
-    m_LogicMtlFlag0 |= MTL_F0_MAT_VP;
-}
-
-void SVMtlCore::setTexcoordFlip(f32 _x, f32 _y) {
-    for(s32 i=0;i<MAX_TEXUNIT;i++){
-        m_paramTex.setTexClip(i,_x,_y);
-    }
-    m_LogicMtlFlag0 |= MTL_F0_TEX_FLIP;
-}
-
 void SVMtlCore::setTextureParam(s32 _chanel,TEXTUREPARAM _type,s32 _value) {
     if(_chanel>=0 && _chanel<MAX_TEXUNIT) {
         if(_type == E_T_PARAM_FILTER_MAG) {
@@ -368,6 +369,23 @@ void SVMtlCore::_loadShader() {
 //    }
 }
 
+//
+void SVMtlCore::setModelMatrix(FMat4& _mat) {
+    setParam("mmat",_mat);
+}
+
+void SVMtlCore::setViewMatrix(FMat4& _mat) {
+    setParam("vmat",_mat);
+}
+
+void SVMtlCore::setProjMatrix(FMat4& _mat) {
+    setParam("pmat",_mat);
+}
+
+void SVMtlCore::setVPMatrix(FMat4& _mat) {
+    setParam("vpmat",_mat);
+}
+
 void SVMtlCore::_refreshMatrix(){
     SVRendererPtr t_renderer = mApp->getRenderer();
     if(t_renderer){
@@ -399,11 +417,9 @@ void SVMtlCore::_refreshModify(){
 }
 
 void SVMtlCore::_submitUniform(SVRendererPtr _render) {
-    
 }
 
 void SVMtlCore::_submitTexture(SVRendererPtr _render){
-    
 }
 
 void SVMtlCore::_submitState(SVRendererPtr _render) {
