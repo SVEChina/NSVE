@@ -63,10 +63,6 @@ bool SVFilterFlashWhite::create(){
 }
 
 void SVFilterFlashWhite::destroy(){
-    SVRendererPtr t_renderer = mApp->getRenderer();
-    if(t_renderer){
-        t_renderer->destroySVTex(E_TEX_FILTER_FLASHWHITE);
-    }
 }
 
 void SVFilterFlashWhite::update(f32 dt){

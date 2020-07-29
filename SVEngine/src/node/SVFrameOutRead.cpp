@@ -42,36 +42,31 @@ SVFrameOutRead::~SVFrameOutRead(){
 }
 
 void SVFrameOutRead::create(s32 _width,s32 _height) {
-    m_width = _width;
-    m_height = _height;
-    //创建fbo
-    SVRendererPtr t_renderer = mApp->getRenderer();
-    if( t_renderer ) {
-#if defined(SV_IOS)
-        SVTexturePtr t_tex = t_renderer->createSVTexIOS(E_TEX_OUTSTREAM,
-                                                        m_width,
-                                                        m_height,
-                                                        GL_RGBA);
-        m_fbo = MakeSharedPtr<SVRenderTexture>(mApp,t_tex,false,false);
-        //mApp->getRenderMgr()->pushRCmdCreate(m_fbo);
-#else
-        SVTexturePtr t_tex = t_renderer->createSVTex(E_TEX_OUTSTREAM,
-                                                     m_width,
-                                                     m_height,
-                                                     GL_RGBA);
-        m_fbo = MakeSharedPtr<SVRenderTexture>(mApp,t_tex,false,false);
-        //mApp->getRenderMgr()->pushRCmdCreate(m_fbo);
-#endif
-    }
+//    m_width = _width;
+//    m_height = _height;
+//    //创建fbo
+//    SVRendererPtr t_renderer = mApp->getRenderer();
+//    if( t_renderer ) {
+//#if defined(SV_IOS)
+//        SVTexturePtr t_tex = t_renderer->createSVTexIOS(E_TEX_OUTSTREAM,
+//                                                        m_width,
+//                                                        m_height,
+//                                                        GL_RGBA);
+//        m_fbo = MakeSharedPtr<SVRenderTexture>(mApp,t_tex,false,false);
+//        //mApp->getRenderMgr()->pushRCmdCreate(m_fbo);
+//#else
+//        SVTexturePtr t_tex = t_renderer->createSVTex(E_TEX_OUTSTREAM,
+//                                                     m_width,
+//                                                     m_height,
+//                                                     GL_RGBA);
+//        m_fbo = MakeSharedPtr<SVRenderTexture>(mApp,t_tex,false,false);
+//        //mApp->getRenderMgr()->pushRCmdCreate(m_fbo);
+//#endif
+//    }
     _resize();
 }
 
 void SVFrameOutRead::destroy(){
-    SVRendererPtr t_renderer = mApp->getRenderer();
-    if( t_renderer ) {
-        m_fbo = nullptr;
-        t_renderer->destroySVTex(E_TEX_OUTSTREAM);
-    }
 }
 
 void SVFrameOutRead::setFormat(SV_OUTSTEAMFORMATE _fromate) {

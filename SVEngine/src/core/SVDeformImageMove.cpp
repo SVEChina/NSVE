@@ -81,11 +81,6 @@ SVDeformImageMove::~SVDeformImageMove(){
     m_pMtlBg = nullptr;
     m_pIUMP = nullptr;
     m_dataPoint = nullptr;
-    //m_fbo = nullptr;
-    SVRendererPtr t_renderer = mApp->getRenderer();
-    if(t_renderer) {
-        t_renderer->destroySVTex(E_TEX_FILTER_DEFORM02);
-    }
 }
 
 void SVDeformImageMove::init(SVTexturePtr _intex,SVTexturePtr _texout){
@@ -283,8 +278,8 @@ void SVDeformImageMove::render(){
             if( m_passDeform->m_outTexType == E_TEX_END ) {
                 t_cmd->setTexture(m_passDeform->m_outTex);
             }else{
-                SVTexturePtr t_tex = mApp->getRenderer()->getSVTex(m_passDeform->m_outTexType);
-                t_cmd->setTexture(t_tex);
+//                SVTexturePtr t_tex = mApp->getRenderer()->getSVTex(m_passDeform->m_outTexType);
+//                t_cmd->setTexture(t_tex);
             }
             if(m_passDeform->m_pMesh){
                 t_cmd->addMtlMesh(m_passDeform->m_pMtl,m_passDeform->m_pMesh);

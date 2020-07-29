@@ -32,7 +32,7 @@ bool SVFilterClarity::create(){
     SVRendererPtr t_renderer = mApp->getRenderer();
     if(!t_renderer)
         return false;
-    SVTexturePtr t_tex = t_renderer->getSVTex(E_TEX_MAIN);
+    //SVTexturePtr t_tex = t_renderer->getSVTex(E_TEX_MAIN);
 //    s32 t_w = t_tex->m_width;
 //    s32 t_h = t_tex->m_height;
 //    if(! t_renderer->getSVTex(E_TEX_FILTER_MIP_1) ){
@@ -68,10 +68,6 @@ void SVFilterClarity::destroy(){
         m_pPassNode = nullptr;
     }
     m_pPassNode = nullptr;
-    SVRendererPtr t_renderer = mApp->getRenderer();
-    if(t_renderer){
-        t_renderer->destroySVTex(E_TEX_FILTER_MIP_1);
-    }
 }
 
 void SVFilterClarity::update(f32 dt){

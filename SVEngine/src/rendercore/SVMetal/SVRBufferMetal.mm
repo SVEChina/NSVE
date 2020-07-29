@@ -344,20 +344,27 @@ void SVRBufferMetal::render(SVRendererPtr _renderer,SVRTargetPtr _target,SVRende
                                          indexBufferOffset:m_ibufOff
                                          instanceCount:m_instCnt];
             }else{
+                //非多实例，索引绘制
                 [t_fbo->m_cmdEncoder drawIndexedPrimitives:MTLPrimitiveTypeTriangle
                                                 indexCount:m_iCnt
                                                  indexType:MTLIndexTypeUInt16
                                                indexBuffer:m_ibuf
                                          indexBufferOffset:m_ibufOff];
             }
-
         }else{
-            [t_fbo->m_cmdEncoder drawPrimitives:MTLPrimitiveTypeTriangle
-            vertexStart:m_vertStart
-            vertexCount:m_vertCnt];
+            //正常顶点绘制
+            if(m_instance_buf) {
+                //多实体
+                [t_fbo->m_cmdEncoder drawPrimitives:MTLPrimitiveTypeTriangle vertexStart:m_vertStart vertexCount:m_vertCnt instanceCount:m_instCnt baseInstance:0];
+            }else{
+                //非多实例，顶点绘制
+                [t_fbo->m_cmdEncoder drawPrimitives:MTLPrimitiveTypeTriangle vertexStart:m_vertStart vertexCount:m_vertCnt];
+            }
         }
         [t_fbo->m_cmdEncoder endEncoding]; // 结束
     }
+    
+//    -(void)setTessellationFactorBuffer:(nullable id <MTLBuffer>)buffer offset:(NSUInteger)offset instanceStride:(NSUInteger)instanceStride API_AVAILABLE(macos(10.12), ios(10.0));
 }
 
 void SVRBufferMetal::destroy(SVRendererPtr _renderer,SVRTargetPtr _target){

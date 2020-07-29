@@ -55,11 +55,9 @@ void SVRendererGL::init(s32 _w,s32 _h){
 }
 
 void SVRendererGL::init(s32 _w,s32 _h,bool _offline) {
-    
 }
 
 void SVRendererGL::resize(s32 _w,s32 _h) {
-//    //
 //    m_inWidth = _w;
 //    m_inHeight = _h;
 //    //重置size

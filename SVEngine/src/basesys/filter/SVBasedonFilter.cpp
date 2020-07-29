@@ -52,10 +52,6 @@ bool SVBasedonFilter::create() {
         return false;
     s32 t_w =  mApp->m_pGlobalParam->m_inner_width;
     s32 t_h =  mApp->m_pGlobalParam->m_inner_height;
-    SVTexturePtr tex = t_renderer->getSVTex(E_TEX_HELP0);
-    if(!tex){
-        tex = t_renderer->createSVTex(E_TEX_HELP0,t_w, t_h, GL_RGBA);
-    }
     //创建材质
     m_acutancemtl=MakeSharedPtr<SVMtlAcutance>(mApp);
     //m_acutancemtl->setTexcoordFlip(1.0f, 1.0f);

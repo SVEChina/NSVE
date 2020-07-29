@@ -51,15 +51,8 @@ namespace sv {
         //fbo
         SVRFboPtr createResFbo() ;
 
-
     public:
-        //创建纹理接口
-        s32 createTexIn(s32 _texid,SVTexDsp _tdsp);
-        s32 createTexOut(SVTexDsp _tdsp,void* _pdata);
         //
-        s32 createBuf(s32 _len);                //return buf index
-        s32 createBuf(s32 _len,void* _data);    //return buf index
-
         virtual void processTech(SVRTechPtr _tech);
 
         //处理材质
@@ -73,10 +66,6 @@ namespace sv {
         id<MTLCommandQueue> m_pCmdQueue;
         id<MTLLibrary> m_pLibrary;
         id<MTLRenderCommandEncoder> m_pCurEncoder;
-        //
-        SVArray< id<MTLTexture> > m_texPoolIn;      //内部纹理池 内部使用的纹理
-        SVArray< id<MTLTexture> > m_texPoolOut;     //外部纹理池
-        SVArray< id<MTLBuffer> > m_bufPool;         //buf池
         
     public:
         //prop
@@ -84,6 +73,9 @@ namespace sv {
         bool m_macOS11Runtime;
         bool m_hasPixelFormatDepth32Float_Stencil8;
         s32 m_samplenum;
+        
+    public:
+        void drawBox();
     };
         
     

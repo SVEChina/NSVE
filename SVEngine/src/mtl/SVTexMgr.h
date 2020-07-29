@@ -46,9 +46,6 @@ namespace sv {
         //
         SVTexturePtr createTexture(SVTextureDsp _param,SVDataSwapPtr _data);
         
-        //
-        bool hasTexture(SVTexturePtr _tex);
-        
         bool hasTexture(cptr8 _name);
         
         void clear();
@@ -58,11 +55,8 @@ namespace sv {
         SVTexturePtr loadImgPList(cptr8 _plistname, cptr8 _path);
         
     protected:
+        
         SVTexturePtr _createTexture(cptr8 _name, bool _sync = true, bool _enableMipMap = false);
-        
-        SVTexturePtr _createTextureSet(cptr8 _name, bool _sync = true, bool _enableMipMap = false);
-        
-        void _createTexturList();
         
         void _removeUnuseTexture();
         
@@ -73,10 +67,6 @@ namespace sv {
         //内部纹理池
         typedef std::vector<SVTexturePtr> INTEXPOOL;
         INTEXPOOL m_intex_pool;
-        
-        //外部纹理池
-        typedef std::list<SVTexturePtr> OUTTEXPOOL;
-        OUTTEXPOOL m_outtex_pool;
         
         SVLockPtr m_texLock;
         SVTexturePtr m_sve_tex;

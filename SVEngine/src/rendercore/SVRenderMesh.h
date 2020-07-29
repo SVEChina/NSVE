@@ -66,10 +66,6 @@ namespace sv {
         SVRenderMesh(SVInstPtr _app);
         
         ~SVRenderMesh();
-        
-        virtual void create(SVRendererPtr _renderer);
-        
-        virtual void destroy(SVRendererPtr _renderer);
     
         virtual void render(SVRendererPtr _renderer);
         

@@ -32,7 +32,7 @@ bool SVFilterShinning::create(){
     SVRendererPtr t_renderer = mApp->getRenderer();
     if(!t_renderer)
         return false;
-    SVTexturePtr t_tex = t_renderer->getSVTex(E_TEX_MAIN);
+    //SVTexturePtr t_tex = t_renderer->getSVTex(E_TEX_MAIN);
     //t_renderer->createSVTex(E_TEX_FILTER_1, t_w, t_h, GL_RGBA);
     //创建多passnode
     m_pPassNode = MakeSharedPtr<SVMultPassNode>(mApp);
@@ -64,10 +64,6 @@ void SVFilterShinning::destroy(){
     }
     m_pPassNode = nullptr;
     m_mtlShinning = nullptr;
-    SVRendererPtr t_renderer = mApp->getRenderer();
-    if(t_renderer){
-        t_renderer->destroySVTex(E_TEX_FILTER_1);
-    }
 }
 
 void SVFilterShinning::update(f32 dt){

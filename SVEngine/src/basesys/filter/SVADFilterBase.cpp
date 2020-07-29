@@ -36,7 +36,7 @@ bool SVADFilterBase::create(){
     SVRendererPtr t_renderer = mApp->getRenderer();
     if(!t_renderer)
         return false;
-    SVTexturePtr t_tex = t_renderer->getSVTex(E_TEX_MAIN);
+    //SVTexturePtr t_tex = t_renderer->getSVTex(E_TEX_MAIN);
     //创建多passnode
     m_pPassNode = MakeSharedPtr<SVMultPassNode>(mApp);
     m_pPassNode->setname("SVAdvanceFilterNode");
@@ -59,10 +59,6 @@ bool SVADFilterBase::create(){
 }
 
 void SVADFilterBase::destroy(){
-    SVRendererPtr t_renderer = mApp->getRenderer();
-    if(t_renderer){
-        t_renderer->destroySVTex(E_TEX_FILTER_1);
-    }
 }
 
 void SVADFilterBase::update(f32 dt){

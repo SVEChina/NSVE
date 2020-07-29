@@ -93,13 +93,6 @@ BufferDsp* SVRenderMesh::getInstanceDsp() {
     return &m_instance_dsp;
 }
 
-//
-void SVRenderMesh::create(SVRendererPtr _renderer){
-}
-
-void SVRenderMesh::destroy(SVRendererPtr _renderer) {
-}
-
 void SVRenderMesh::render(SVRendererPtr _renderer) {
     if(m_res_buffer) {
         m_res_buffer->process(_renderer);
@@ -113,12 +106,20 @@ void SVRenderMesh::setVertNum(s32 _vertexNum){
 }
 
 void SVRenderMesh::setIndexData(SVDataSwapPtr _data,s32 _num){
-}
-
-void SVRenderMesh::setVertexData(SVDataSwapPtr _data,s32 _channel,VFTYPE type){
+    if(m_use_index) {
+        //
+        
+    }
 }
 
 void SVRenderMesh::setInstanceData(SVDataSwapPtr _pdata, u32 _instanceCount){
+    if(m_use_instance) {
+        //
+        
+    }
 }
 
+void SVRenderMesh::setVertexData(SVDataSwapPtr _data,s32 _channel,VFTYPE type){
+    
+}
 

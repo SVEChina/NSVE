@@ -52,11 +52,11 @@ bool SVFilterGenLUT::create(){
     //
     s32 t_w = 0;// inTex->m_width;
     s32 t_h = 0;//inTex->m_height;
-    t_renderer->createSVTex(E_TEX_FILTER_GENLUT_OUT, t_w, t_h, GL_RGBA);
-    t_renderer->createSVTex(E_TEX_FILTER_GENLUT_H1, t_w, t_h, GL_RGBA);
-    t_renderer->createSVTex(E_TEX_FILTER_GENLUT_H2, t_w, t_h, GL_RGBA);
-    t_renderer->createSVTex(E_TEX_FILTER_GENLUT_H3, 256, 1, GL_RGBA);
-    t_renderer->createSVTex(E_TEX_FILTER_GENLUT_H4, 256, 1, GL_RGBA);
+//    t_renderer->createSVTex(E_TEX_FILTER_GENLUT_OUT, t_w, t_h, GL_RGBA);
+//    t_renderer->createSVTex(E_TEX_FILTER_GENLUT_H1, t_w, t_h, GL_RGBA);
+//    t_renderer->createSVTex(E_TEX_FILTER_GENLUT_H2, t_w, t_h, GL_RGBA);
+//    t_renderer->createSVTex(E_TEX_FILTER_GENLUT_H3, 256, 1, GL_RGBA);
+//    t_renderer->createSVTex(E_TEX_FILTER_GENLUT_H4, 256, 1, GL_RGBA);
     
     //增加pass
     m_pPassNode = MakeSharedPtr<SVMultPassNode>(mApp);
@@ -187,15 +187,6 @@ bool SVFilterGenLUT::create(){
 
 void SVFilterGenLUT::destroy(){
     //
-    SVRendererPtr t_renderer = mApp->getRenderer();
-    if(t_renderer) {
-        t_renderer->destroySVTex(E_TEX_FILTER_GENLUT_OUT);
-        t_renderer->destroySVTex(E_TEX_FILTER_GENLUT_H1);
-        t_renderer->destroySVTex(E_TEX_FILTER_GENLUT_H2);
-        t_renderer->destroySVTex(E_TEX_FILTER_GENLUT_H3);
-        t_renderer->destroySVTex(E_TEX_FILTER_GENLUT_H4);
-    }
-    //
     m_BCMtl=nullptr;//brightness contrast
     m_SaturationMtl=nullptr;
     m_colorBalanceMtl=nullptr;
@@ -212,10 +203,6 @@ void SVFilterGenLUT::destroy(){
 }
 
 SVTexturePtr SVFilterGenLUT::getOutTex(){
-    SVRendererPtr t_renderer = mApp->getRenderer();
-    if(t_renderer) {
-        return t_renderer->getSVTex(E_TEX_FILTER_GENLUT_OUT);
-    }
     return nullptr;
 }
 

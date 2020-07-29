@@ -83,12 +83,6 @@ void SVFilterBlur::destroy(){
         m_pPassNode = nullptr;
     }
     m_pPassNode = nullptr;
-    
-    SVRendererPtr t_renderer = mApp->getRenderer();
-    if(t_renderer){
-        t_renderer->destroySVTex(E_TEX_FILTER_GLOW_2);
-        t_renderer->destroySVTex(E_TEX_FILTER_GLOW_3);
-    }
 }
 
 

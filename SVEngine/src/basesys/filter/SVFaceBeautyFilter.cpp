@@ -155,18 +155,18 @@ bool SVFairDataBlur::create() {
     m_pPassNode->create(t_w, t_h);
     m_pPassNode->setRSType(RST_BEAUTY);
 
-    //
-    if (!t_renderer->getSVTex(E_TEX_HELP0)) {
-        t_renderer->createSVTex(E_TEX_HELP0, t_w, t_h, GL_RGBA);
-    }
-    //
-    if (!t_renderer->getSVTex(E_TEX_HELP1)) {
-        t_renderer->createSVTex(E_TEX_HELP1, t_w, t_h, GL_RGBA);
-    }
-    //
-    if (!t_renderer->getSVTex(E_TEX_HELP2)) {
-        t_renderer->createSVTex(E_TEX_HELP2, t_w, t_h, GL_RGBA);
-    }
+//    //
+//    if (!t_renderer->getSVTex(E_TEX_HELP0)) {
+//        t_renderer->createSVTex(E_TEX_HELP0, t_w, t_h, GL_RGBA);
+//    }
+//    //
+//    if (!t_renderer->getSVTex(E_TEX_HELP1)) {
+//        t_renderer->createSVTex(E_TEX_HELP1, t_w, t_h, GL_RGBA);
+//    }
+//    //
+//    if (!t_renderer->getSVTex(E_TEX_HELP2)) {
+//        t_renderer->createSVTex(E_TEX_HELP2, t_w, t_h, GL_RGBA);
+//    }
 
     SVPassPtr t_pass = MakeSharedPtr<SVPass>();
     t_pass->mTag = "SVFairDataBlur";
@@ -238,13 +238,6 @@ void SVFairDataBlur::destroy() {
     if (m_pPassNode) {
         m_pPassNode = nullptr;
     }
-    SVRendererPtr t_renderer = mApp->getRenderer();
-    if (!t_renderer) {
-        return;
-    }
-    t_renderer->destroySVTex(E_TEX_HELP0);
-    t_renderer->destroySVTex(E_TEX_HELP1);
-    t_renderer->destroySVTex(E_TEX_HELP2);
 }
 
 void SVFairDataBlur::setFilterParam(f32 _smooth, SVFILTERITEMTYPE _type) {

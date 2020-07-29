@@ -99,19 +99,6 @@ namespace sv {
         SVRTargetPtr m_cur_target;      //当前的target
         
     public:
-        
-        //创建内置纹理
-        virtual SVTexturePtr createSVTex(SVTEXINID _type,s32 _w,s32 _h,s32 _formate, bool _enableMipMap = false);
-        //创建内置纹理
-        virtual SVTexturePtr createSVTex(SVTEXINID _type,s32 _w,s32 _h,s32 _informate,s32 _daformate, bool _enableMipMap = false);
-        //创建内置纹理
-        virtual SVTexturePtr createSVTexIOS(SVTEXINID _type,s32 _w,s32 _h,s32 _formate, bool _enableMipMap = false);
-        //创建内置纹理 ios
-        virtual SVTexturePtr createSVTexIOS(SVTEXINID _type,s32 _w,s32 _h,s32 _informate,s32 _daformate, bool _enableMipMap = false);
-        //销毁内置纹理
-        void destroySVTex(SVTEXINID _type);
-        //获取内置纹理
-        SVTexturePtr getSVTex(SVTEXINID _type);
         //是否存在内置纹理
         bool hasSVTex(SVTEXINID _type);
         //获取渲染状态

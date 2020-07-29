@@ -77,7 +77,7 @@ void SVBillboardNode::syncTexSize() {
     if(m_inTexType == E_TEX_END) {
         m_pTex = mApp->getTexMgr()->getTexture(m_pTexPath.c_str(),true);
     }else {
-        m_pTex = mApp->getRenderer()->getSVTex(m_inTexType);
+        //m_pTex = mApp->getRenderer()->getSVTex(m_inTexType);
     }
     if(m_pTex) {
 //        s32 t_w = m_pTex->getwidth();

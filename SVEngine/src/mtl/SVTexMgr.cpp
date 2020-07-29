@@ -34,16 +34,16 @@ SVTexMgr::~SVTexMgr() {
 }
 
 void SVTexMgr::init() {
+    m_sve_tex = getTexture("svres/sve.png",true);
+    //
     m_intex_pool.resize(E_TEX_END);
     for(s32 i=0;i<E_TEX_END;i++) {
         m_intex_pool[i] = nullptr;
     }
-    m_sve_tex = getTexture("svres/sve.png",true);
 }
 
 void SVTexMgr::destroy() {
     m_intex_pool.clear();
-    m_outtex_pool.clear();
     m_ftex_pool.clear();
     m_sve_tex = nullptr;
 }
@@ -53,7 +53,8 @@ SVTexturePtr SVTexMgr::getSVETexture(){
 }
 
 void SVTexMgr::update(f32 _dt){
-    //_removeUnuseTexture();
+    //
+    _removeUnuseTexture();
 }
 
 void SVTexMgr::clear() {
@@ -174,41 +175,34 @@ void SVTexMgr::_removeUnuseTexture() {
 //    return tTexture;
 //}
 
-SVTexturePtr SVTexMgr::_createTextureSet(cptr8 _name, bool _sync, bool _enableMipMap) {
-    //返回空壳纹理
-    SVTexturePtr tTexture = nullptr;
-    m_texLock->lock();
-    SVImagePtr t_img = MakeSharedPtr<SVImage>(mApp);
-    if (_sync) {
-        if( t_img->load(_name) ) {
-            tTexture = t_img->toTexture();
-        }
-    } else {
-        if( t_img->load(_name) ) {
-            tTexture = t_img->toTexture();
-        }
-    }
-    if(tTexture) {
-        m_ftex_pool.insert(std::make_pair(_name, tTexture));
-    }
-    t_img = nullptr;
-    m_texLock->unlock();
-    return tTexture;
-}
-
-bool SVTexMgr::hasTexture(SVTexturePtr _tex){
-//    TEXPOOL::Iterator it = m_filetex_pool.findData(_tex);
-//    if(it != mTexpool.end() ) {
-//        return true;
+//SVTexturePtr SVTexMgr::_createTextureSet(cptr8 _name, bool _sync, bool _enableMipMap) {
+//    //返回空壳纹理
+//    SVTexturePtr tTexture = nullptr;
+//    m_texLock->lock();
+//    SVImagePtr t_img = MakeSharedPtr<SVImage>(mApp);
+//    if (_sync) {
+//        if( t_img->load(_name) ) {
+//            tTexture = t_img->toTexture();
+//        }
+//    } else {
+//        if( t_img->load(_name) ) {
+//            tTexture = t_img->toTexture();
+//        }
 //    }
-    return false;
-}
+//    if(tTexture) {
+//        m_ftex_pool.insert(std::make_pair(_name, tTexture));
+//    }
+//    t_img = nullptr;
+//    m_texLock->unlock();
+//    return tTexture;
+//}
 
 bool SVTexMgr::hasTexture(cptr8 _name) {
-//    TEXPOOL::Iterator it = m_filetex_pool.find(_name);
-//    if( it!=mTexpool.end() ) {
-//        return true;
-//    }
+    FTEXPOOL::iterator it = m_ftex_pool.find(_name);
+    if( it!=m_ftex_pool.end() ) {
+        return true;
+    }
+    //内置纹理中寻找
     return false;
 }
 

@@ -54,17 +54,6 @@ void SVRendererMetal::init(id<MTLDevice> _device,id<MTLDrawable> _target,id<MTLT
     //
     m_pCmdQueue = m_pDevice.newCommandQueue;
     m_pLibrary = [m_pDevice newDefaultLibrary];
-//    m_renderPipelineDescriptor   = newRenderPipelineDescriptor();
-//    m_depthStencilDescriptor     = newDepthStencilDescriptor();
-//    m_frontFaceStencilDescriptor = newStencilDescriptor();
-//    m_backFaceStencilDescriptor  = newStencilDescriptor();
-//    m_vertexDescriptor  = newVertexDescriptor();
-//    m_textureDescriptor = newTextureDescriptor();
-//    m_samplerDescriptor = newSamplerDescriptor();
-//    for (uint8_t ii = 0; ii < MTL_MAX_FRAMES_IN_FLIGHT; ++ii)
-//    {
-//        m_uniformBuffers[ii] = m_device.newBufferWithLength(UNIFORM_BUFFER_SIZE, 0);
-//    }
     //创建主target
     SVRTargetPtr t_target = MakeSharedPtr<SVRTarget>(mApp);
     SVTargetDsp* t_dsp = t_target->getTargetDsp();
@@ -96,6 +85,7 @@ void SVRendererMetal::destroy(){
 
 //重置大小
 void SVRendererMetal::resize(s32 _w,s32 _h) {
+    //
 }
 
 SVRTexPtr SVRendererMetal::createResTexture()  {
@@ -117,64 +107,17 @@ SVRFboPtr SVRendererMetal::createResFbo()  {
     return MakeSharedPtr<SVRFboMetal>(mApp);
 }
 
-//创建纹理接口
-s32 SVRendererMetal::createTexIn(s32 _texid,SVTexDsp _tdsp) {
-    MTLPixelFormat pf = MTLPixelFormatRGBA8Uint;
-    MTLTextureDescriptor* texdsp = [MTLTextureDescriptor texture2DDescriptorWithPixelFormat:pf
-                                                                                      width:_tdsp.m_width
-                                                                                     height:_tdsp.m_height
-                                                                                  mipmapped:_tdsp.m_mipmap];
-    id <MTLTexture> t_tex = [m_pDevice newTextureWithDescriptor:texdsp];
-    m_texPoolIn.append(t_tex);
-    return m_texPoolIn.size()-1;
-}
-
-s32 SVRendererMetal::createTexOut(SVTexDsp _tdsp,void* _pdata) {
-    MTLPixelFormat pf = MTLPixelFormatRGBA8Uint;
-    MTLTextureDescriptor* texdsp = [MTLTextureDescriptor texture2DDescriptorWithPixelFormat:pf
-                                                                                      width:_tdsp.m_width
-                                                                                     height:_tdsp.m_height
-                                                                                  mipmapped:_tdsp.m_mipmap];
-    id <MTLTexture> t_tex = [m_pDevice newTextureWithDescriptor:texdsp];
-    m_texPoolOut.append(t_tex);
-    return m_texPoolOut.size()-1;
-}
-
-//s32 SVRendererMetal::createTexCubeOut(s32 _w,s32 _h,s32 _ifmt,s32 _dfmt,s32 _mipmap,s32 _size,void* _pdata) {
-////    MTLPixelFormat pf = MTLPixelFormatRGBA8Uint;
-////    MTLTextureDescriptor* texdsp = [MTLTextureDescriptor textureCubeDescriptorWithPixelFormat:pf
-////                                                                                      width:_w
-////                                                                                     height:_h
-////                                                                                  mipmapped:_mipmap];
-////    id <MTLTexture> t_tex = [m_pDevice newTextureWithDescriptor:texdsp];
-////    m_texPoolOut.append(t_tex);
-////    return m_texPoolOut.size()-1;
-//    return 0;
-//}
-
 ////创建纹理接口
-//s32 SVRendererMetal::createTexIn(s32 _texid) {
-//    //id<MTLTexture>
-//    return _texid;
-//    return 0;
+//s32 SVRendererMetal::createTexIn(s32 _texid,SVTexDsp _tdsp) {
+//    MTLPixelFormat pf = MTLPixelFormatRGBA8Uint;
+//    MTLTextureDescriptor* texdsp = [MTLTextureDescriptor texture2DDescriptorWithPixelFormat:pf
+//                                                                                      width:_tdsp.m_width
+//                                                                                     height:_tdsp.m_height
+//                                                                                  mipmapped:_tdsp.m_mipmap];
+//    id <MTLTexture> t_tex = [m_pDevice newTextureWithDescriptor:texdsp];
+//    m_texPoolIn.append(t_tex);
+//    return m_texPoolIn.size()-1;
 //}
-//
-//s32 SVRendererMetal::createTexOut() {
-//    return _texid;
-//}
-
-//创建buf
-s32 SVRendererMetal::createBuf(s32 _len) {
-    id<MTLBuffer> t_buf = [m_pDevice newBufferWithLength:_len options: MTLResourceStorageModeShared ];
-    m_bufPool.append(t_buf);
-    return m_bufPool.size()-1;
-}
-
-s32 SVRendererMetal::createBuf(s32 _len,void* _data) {
-    id<MTLBuffer> t_buf = [m_pDevice newBufferWithBytes:_data length: _len options: MTLResourceStorageModeShared ];
-    m_bufPool.append(t_buf);
-    return m_bufPool.size()-1;
-}
 
 //处理技术
 void SVRendererMetal::processTech(SVRTechPtr _tech) {
@@ -198,3 +141,8 @@ void SVRendererMetal::processMesh(SVRenderMeshPtr _mesh) {
         _mesh->render( std::dynamic_pointer_cast<SVRendererMetal>(shareObject()) );
     }
 }
+
+void SVRendererMetal::drawBox() {
+//    - (void)setVertexBytes:(const void *)bytes length:(NSUInteger)length atIndex:(NSUInteger)index API_AVAILABLE(macos(10.11), ios(8.3));
+}
+
