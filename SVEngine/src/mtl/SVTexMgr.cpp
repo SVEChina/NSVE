@@ -14,8 +14,6 @@
 #include "../base/SVDataChunk.h"
 #include "../app/SVInst.h"
 #include "../core/SVImage.h"
-#include "../operate/SVOpCreate.h"
-#include "../operate/SVOpParse.h"
 #include "../rendercore/SVRenderMgr.h"
 #include "../work/SVThreadPool.h"
 
@@ -26,6 +24,19 @@ SVTexMgr::SVTexMgr(SVInstPtr _app)
     mAsync = false;
     m_sve_tex = nullptr;
     m_texLock = MakeSharedPtr<SVLock>();
+    //主纹理
+    m_pMainTex = nullptr;
+    //阴影纹理
+    m_pShadowTex = nullptr;
+    //G-BUFFER
+    m_pMainPosTex = nullptr;
+    m_pMainNorTex = nullptr;
+    m_pMainColoreTex = nullptr;
+    //后处理纹理
+    m_pPostTex0 = nullptr;
+    m_pPostTex1 = nullptr;
+    m_pPostTex2 = nullptr;
+    m_pPostTex3 = nullptr;
 }
 
 SVTexMgr::~SVTexMgr() {
@@ -35,15 +46,9 @@ SVTexMgr::~SVTexMgr() {
 
 void SVTexMgr::init() {
     m_sve_tex = getTexture("svres/sve.png",true);
-    //
-    m_intex_pool.resize(E_TEX_END);
-    for(s32 i=0;i<E_TEX_END;i++) {
-        m_intex_pool[i] = nullptr;
-    }
 }
 
 void SVTexMgr::destroy() {
-    m_intex_pool.clear();
     m_ftex_pool.clear();
     m_sve_tex = nullptr;
 }
@@ -96,9 +101,9 @@ SVTexturePtr SVTexMgr::_createTexture(cptr8 _name, bool _sync, bool _enableMipMa
 
 SVTexturePtr SVTexMgr::getTexture(SVTEXINID _texname) {
     //获取内置纹理
-    if(_texname>=E_TEX_MAIN && _texname<E_TEX_END){
-        return m_intex_pool[_texname];
-    }
+//    if(_texname>=E_TEX_MAIN && _texname<E_TEX_END){
+//        return m_intex_pool[_texname];
+//    }
     return nullptr;
 }
 
@@ -106,7 +111,7 @@ SVTexturePtr SVTexMgr::createTexture(SVTEXINID _texname,SVTextureDsp _param) {
     if(_texname>=E_TEX_MAIN && _texname<E_TEX_END){
         SVTexturePtr tTexture = MakeSharedPtr<SVTexture>(mApp);
         tTexture->init(_param);
-        m_intex_pool[_texname] = tTexture;
+        //m_intex_pool[_texname] = tTexture;
     }
     return nullptr;
 }

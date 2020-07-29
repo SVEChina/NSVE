@@ -63,14 +63,26 @@ namespace sv {
         //文件纹理池
         typedef std::map<SVString, SVTexturePtr> FTEXPOOL;
         FTEXPOOL m_ftex_pool;
-        
-        //内部纹理池
-        typedef std::vector<SVTexturePtr> INTEXPOOL;
-        INTEXPOOL m_intex_pool;
-        
+        //
         SVLockPtr m_texLock;
         SVTexturePtr m_sve_tex;
         bool mAsync;
+        //
+    public:
+        //所有内置纹理都在这里
+        //主纹理
+        SVTexturePtr m_pMainTex;
+        //阴影纹理
+        SVTexturePtr m_pShadowTex;
+        //G-BUFFER
+        SVTexturePtr m_pMainPosTex;
+        SVTexturePtr m_pMainNorTex;
+        SVTexturePtr m_pMainColoreTex;
+        //后处理纹理
+        SVTexturePtr m_pPostTex0;
+        SVTexturePtr m_pPostTex1;
+        SVTexturePtr m_pPostTex2;
+        SVTexturePtr m_pPostTex3;
     };
 
     
