@@ -94,10 +94,6 @@ namespace sv {
         
         FVec3& getBindOffset();
         
-        void enableMipMap();
-        
-        void disableMipMap();
-        
         void setRSType(RENDERSTREAMTYPE _retype);
         
         RENDERSTREAMTYPE getRSType();
@@ -127,21 +123,24 @@ namespace sv {
         void setLocalMatrix(FMat4 &_mat);
         
         inline cptr8 getType(){ return ntype.c_str(); }
+        
         inline cptr8 getname(){return m_name.c_str();}
+        
         inline s32 getZOrder(){ return m_iZOrder;}
+        
         inline bool getcanSelect(){ return m_canSelect; }
+        
         inline bool getbeSelect(){ return m_beSelect; }
+        
         inline bool getcanProcEvent(){ return m_canProcEvent; }
+        
         inline bool getvisible(){ return m_visible; }
+        
         inline bool getIsAutoAdaptDesign(){ return m_adaptDesign; }
+        
         inline void setname(const char* _name){ m_name = _name; }
+        
         inline void setvisible(bool _visible){ m_visible = _visible; }
-        inline void setPeronID(s32 _personID){ m_personID = _personID;}
-        inline s32  getPersonID(){ return m_personID; }
-        inline bool getIsMipMap(){ return m_enableMipMap; }
-
-        //获取材质
-        SVMtlCorePtr getMtl();
         
     protected:
         //更新

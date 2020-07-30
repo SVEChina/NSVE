@@ -23,7 +23,7 @@ SVActMtl::~SVActMtl() {
 
 void SVActMtl::enter(SVNodePtr _nodePtr) {
     if (m_pNewMtl && _nodePtr) {
-        m_pOldMtl = _nodePtr->getMtl();
+        //m_pOldMtl = _nodePtr->getMtl();
        // _nodePtr->setMtl(m_pNewMtl);
     }
 }

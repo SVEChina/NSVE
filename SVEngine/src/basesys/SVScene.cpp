@@ -9,17 +9,20 @@
 #include "SVSceneMgr.h"
 #include "SVCameraMgr.h"
 #include "SVConfig.h"
+#include "../work/SVTdCore.h"
 #include "../node/SVNodeVisit.h"
-#include "../basesys/SVCameraNode.h"
 #include "../node/SVNode.h"
+#include "../node/SV3DBox.h"
 #include "../node/SVSpriteNode.h"
 #include "../app/SVGlobalMgr.h"
 #include "../app/SVGlobalParam.h"
+
+#include "../basesys/SVCameraNode.h"
 #include "../basesys/SVComData.h"
+
 #include "../rendercore/SVRenderMgr.h"
 #include "../rendercore/SVRenderScene.h"
 #include "../rendercore/SVRenderer.h"
-#include "../rendercore/SVRenderObject.h"
 #include "../rendercore/SVRenderCmd.h"
 #include "../event/SVEventMgr.h"
 #include "../event/SVEvent.h"
@@ -30,144 +33,159 @@
 
 using namespace sv;
 
-SVTree4::SVTree4(SVInstPtr _app)
+SVTreeLeaf::SVTreeLeaf(SVInstPtr _app)
 :SVGBaseEx(_app){
-    m_treeLock = MakeSharedPtr<SVLock>();
-    for(s32 i=0;i<4;i++){
-        m_pTreeNode[i] = nullptr;
-    }
-    m_node = nullptr;
+}
+       
+SVTreeLeaf::~SVTreeLeaf() {
+    m_nodePool.clear();
 }
 
-SVTree4::~SVTree4(){
-    m_node = nullptr;
-    for(s32 i=0;i<4;i++){
-        m_pTreeNode[i] = nullptr;
-    }
-    m_treeLock = nullptr;
-}
-
-//世界大小和深度
-void SVTree4::create(SVBoundBox& _box,s32 _depth){
-    m_treeBox = _box;
-    //构建场景树
-    if(_depth>0){
-        FVec3 t_max = _box.getMax();
-        FVec3 t_min = _box.getMin();
-        FVec3 t_center = (t_max + t_min)*0.5f;
-        //0 第一象限
-        SVBoundBox t_box0(t_center,t_max);
-        m_pTreeNode[0] = MakeSharedPtr<SVTree4>(mApp);
-        m_pTreeNode[0]->create(t_box0,_depth-1);
-        //1 第二象限
-        SVBoundBox t_box1( FVec3(t_min.x,t_center.y,0.0f),FVec3(t_center.x,t_max.y,0.0f) );
-        m_pTreeNode[1] = MakeSharedPtr<SVTree4>(mApp);
-        m_pTreeNode[1]->create(t_box1,_depth-1);
-        //2 第三象限
-        SVBoundBox t_box2(t_min,t_center);
-        m_pTreeNode[2] = MakeSharedPtr<SVTree4>(mApp);
-        m_pTreeNode[2]->create(t_box2,_depth-1);
-        //3 第四象限
-        SVBoundBox t_box3( FVec3(t_center.x,t_min.y,0.0f),FVec3(t_max.x,t_center.y,0.0f) );
-        m_pTreeNode[3] = MakeSharedPtr<SVTree4>(mApp);
-        m_pTreeNode[3]->create(t_box3,_depth-1);
-    }else{
-        //叶子节点
-        m_node = MakeSharedPtr<SVNode>(mApp);
-    }
-}
-
-void SVTree4::destroy(){
-    m_treeLock->lock();
-    for(s32 i=0;i<4;i++){
-        if(m_pTreeNode[i]){
-            m_pTreeNode[i]->destroy();
-        }
-    }
-    m_treeLock->unlock();
-    clearNode();
-}
-
-void SVTree4::update(f32 _dt){
-    m_treeLock->lock();
-    //本身挂载的节点进行更新
-    if(m_node) {
-        m_node->deep_update(_dt);
-    }else{
-        for(s32 i=0;i<4;i++){
-            if(m_pTreeNode[i]){
-                m_pTreeNode[i]->update(_dt);
-            }
-        }
-    }
-    m_treeLock->unlock();
-}
-
-void SVTree4::visit(SVVisitorBasePtr _visitor){
-    m_treeLock->lock();
-    if(m_node) {
-        m_node->deep_visit(_visitor);
-    }else{
-        for(s32 i=0;i<4;i++){
-            if(m_pTreeNode[i]){
-                m_pTreeNode[i]->visit(_visitor);
-            }
-        }
-    }
-    m_treeLock->unlock();
-}
-
-bool SVTree4::_isIn(SVNodePtr _node) {
-    FVec3 t_pos = _node->getPosition();
-    //这块z先改为了0！！！！！！！！！！！！
-    t_pos.z = 0;
-    //在内部(以1，2，3，4)现象为顺序
-    if( m_treeBox.inside(t_pos) ){
+bool SVTreeLeaf::addNode(SVNodePtr _node) {
+    if(_node) {
+        m_nodePool.push_back(_node);
         return true;
     }
     return false;
 }
 
-void SVTree4::addNode(SVNodePtr _node, s32 iZOrder){
+bool SVTreeLeaf::removeNode(SVNodePtr _node) {
+    NODEPOOL::iterator it = m_nodePool.begin();
+    while( it!= m_nodePool.end() ) {
+        if( (*it) == _node ) {
+            m_nodePool.erase(it);
+            return true;
+        }
+        it++;
+    }
+    return false;
+}
+
+bool SVTreeLeaf::hasNode(SVNodePtr _node) {
+    for(s32 i=0;i<m_nodePool.size();i++) {
+        if(m_nodePool[i] == _node) {
+            return true;
+        }
+    }
+    return false;
+}
+
+void SVTreeLeaf::clear() {
+    m_nodePool.clear();
+}
+
+void SVTreeLeaf::update(f32 _dt) {
+    //需要做剔除操作
+    for(s32 i=0;i<m_nodePool.size();i++) {
+        m_nodePool[i]->deep_update(_dt);
+    }
+}
+
+void SVTreeLeaf::visit(SVVisitorBasePtr _visitor) {
+    //需要做剔除操作
+    for(s32 i=0;i<m_nodePool.size();i++) {
+        m_nodePool[i]->deep_visit(_visitor);
+    }
+}
+
+//
+SVSceneTree::SVSceneTree(SVInstPtr _app)
+:SVGBaseEx(_app){
+    m_treeLock = MakeSharedPtr<SVLockSpin>();
+    resize( FVec3(512,512,512) );
+}
+
+SVSceneTree::~SVSceneTree(){
+    m_treeLock = nullptr;
+}
+
+void SVSceneTree::clear() {
+    LEAFPOOL::iterator it = m_leafPool.begin();
+    while (it!=m_leafPool.end()) {
+        it->second->clear();
+        it++;
+    }
+    m_leafPool.clear();
+}
+
+void SVSceneTree::resize(FVec3 _unit) {
+    m_leafSize = _unit;
+    FVec3 t_max_world_size = m_leafSize*pow(2,9);
+    m_wold_range.set(-t_max_world_size,t_max_world_size);
+}
+
+s32 SVSceneTree::_transID(FVec3 _pos) {
+    if(m_wold_range.inside(_pos)) {
+        //位置转叶子结点ID
+        s32 t_x_id = ceil32(_pos.x/m_leafSize.x);  //低10位
+        s32 t_y_id = ceil32(_pos.y/m_leafSize.y);  //中10位
+        s32 t_z_id = ceil32(_pos.z/m_leafSize.z);  //高10位
+        s32 t_leaf_id = t_x_id + (t_y_id<<10) + (t_z_id<<20);
+        return t_leaf_id;
+    }
+    return 0;
+}
+
+FVec3 SVSceneTree::getWorldSize() {
+    return m_wold_range.getMax() - m_wold_range.getMin();
+}
+
+void SVSceneTree::update(f32 _dt){
+    //需要做剔除操作
+    LEAFPOOL::iterator it = m_leafPool.begin();
+    while (it!=m_leafPool.end()) {
+        it->second->update(_dt);
+        it++;
+    }
+}
+
+void SVSceneTree::visit(SVVisitorBasePtr _visitor){
+    //需要做剔除操作
+    LEAFPOOL::iterator it = m_leafPool.begin();
+    while (it!=m_leafPool.end()) {
+        it->second->visit(_visitor);
+        it++;
+    }
+}
+
+bool SVSceneTree::addNode(SVNodePtr _node, s32 iZOrder){
     if (_node){
         _node->setZOrder(iZOrder);
-        addNode(_node);
+        return addNode(_node);
     }
+    return false;
 }
 
 //增加节点
-void SVTree4::addNode(SVNodePtr _node) {
-    for(s32 i=0;i<4;i++){
-        if( m_pTreeNode[i]->_isIn(_node) ){
-            m_pTreeNode[i]->addNode(_node);
-            break;
-        }
+bool SVSceneTree::addNode(SVNodePtr _node) {
+    s32 t_leaf_id = _transID(_node->getPosition());
+    LEAFPOOL::iterator it = m_leafPool.find(t_leaf_id);
+    if(it == m_leafPool.end() ) {
+        SVTreeLeafPtr t_leaf = MakeSharedPtr<SVTreeLeaf>(mApp);
+        t_leaf->addNode(_node);
+        m_leafPool.insert(std::make_pair(t_leaf_id, t_leaf));
+    }else{
+        it->second->addNode(_node);
     }
+    return true;
 }
 
 //移除节点
-bool SVTree4::removeNode(SVNodePtr _node) {
-    bool t_ret = false;
-    for(s32 i=0;i<4;i++){
-        if( m_pTreeNode[i]->removeNode(_node) ) {
-            return true;
-        }
+bool SVSceneTree::removeNode(SVNodePtr _node) {
+    s32 t_leaf_id = _transID(_node->getPosition());
+    LEAFPOOL::iterator it = m_leafPool.find(t_leaf_id);
+    if(it != m_leafPool.end() ) {
+        it->second->removeNode(_node);
+        return true;
     }
-    return t_ret;
+    return false;
 }
 
-//清理节点
-void SVTree4::clearNode() {
-    for(s32 i=0;i<4;i++){
-        m_pTreeNode[i]->clearNode();
-    }
-}
-
-bool SVTree4::hasNode(SVNodePtr _node) {
-    for(s32 i=0;i<4;i++){
-        if( m_pTreeNode[i]->hasNode(_node) ){
-            return true;
-        }
+bool SVSceneTree::hasNode(SVNodePtr _node) {
+    s32 t_leaf_id = _transID(_node->getPosition());
+    LEAFPOOL::iterator it = m_leafPool.find(t_leaf_id);
+    if(it != m_leafPool.end() ) {
+        return true;
     }
     return false;
 }
@@ -177,32 +195,32 @@ SVScene::SVScene(SVInstPtr _app,cptr8 _name)
 :SVGBaseEx(_app) {
     m_name = _name;
     m_color.setColorARGB(0x00000000);
-    m_worldW = 0;
-    m_worldH = 0;
-    m_worldD = 0;
-    //场景树
-    m_pSceneTree = MakeSharedPtr<SVTree4>(_app);
+    m_pSceneTree = MakeSharedPtr<SVSceneTree>(_app);
 }
 
 SVScene::~SVScene() {
-    if(m_pSceneTree){
-        m_pSceneTree->destroy();
-        m_pSceneTree = nullptr;
-    }
+    m_pSceneTree = nullptr;
 }
 
-void SVScene::create(f32 _worldw ,f32 _worldh,s32 _depth){
-    m_worldW = _worldw;
-    m_worldH = _worldh;
-    m_worldD = _depth;
-    if(m_pSceneTree){
-        SVBoundBox _box;
-        FVec3 t_min,t_max;
-        t_min.set(-0.5f*_worldw,-0.5f*_worldh, 0.0f);
-        t_max.set(0.5f*_worldw,0.5f*_worldh, 0.0f);
-        _box.set(t_min, t_max);
-        m_pSceneTree->create(_box,_depth);
-    }
+FVec3 SVScene::getWorldSize() {
+    return m_pSceneTree->getWorldSize();\
+}
+
+void SVScene::create(){
+    //scene tree 可以 resize
+    
+//    m_worldSize.x = _worldw;
+//    m_worldSize.y = _worldh;
+//    m_worldSize.z = _depth;
+//    if(m_pSceneTree){
+////        SVBoundBox _box;
+////        FVec3 t_min,t_max;
+////        f32 t_z = 100000.0f;
+////        t_min.set(-0.5f*_worldw,-0.5f*_worldh, -0.5f*t_z);
+////        t_max.set(0.5f*_worldw,0.5f*_worldh, 0.5f*t_z);
+////        _box.set(t_min, t_max);
+////        m_pSceneTree->create(_box,_depth);
+//    }
 //    s32 m_sw = mApp->m_pGlobalParam->m_inner_width;
 //    s32 m_sh = mApp->m_pGlobalParam->m_inner_height;
 //    SVCameraNodePtr mainCamera = mApp->getCameraMgr()->getMainCamera();
@@ -291,13 +309,12 @@ void SVScene::toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator,
     locationObj.AddMember("name",  RAPIDJSON_NAMESPACE::StringRef(m_name.c_str()), _allocator);
     u32 t_color = m_color.getColorARGB();
     locationObj.AddMember("color", t_color, _allocator);
-    locationObj.AddMember("worldw", m_worldW, _allocator);
-    locationObj.AddMember("worldh", m_worldH, _allocator);
-    locationObj.AddMember("worldd", m_worldD, _allocator);
+//    locationObj.AddMember("worldw", m_worldW, _allocator);
+//    locationObj.AddMember("worldh", m_worldH, _allocator);
+//    locationObj.AddMember("worldd", m_worldD, _allocator);
     //序列化树 ? 要做这么复杂吗
-    if(m_pSceneTree){
-        
-    }
+//    if(m_pSceneTree){
+//    }
     //
     _objValue.AddMember("SVScene", locationObj, _allocator);
 }
@@ -310,24 +327,26 @@ void SVScene::fromJSON(RAPIDJSON_NAMESPACE::Value &item) {
         u32 t_color = item["color"].GetUint();
         m_color.setColorARGB(t_color);
     }
-    if (item.HasMember("worldw") && item["worldw"].IsFloat()) {
-        m_worldW = item["worldw"].GetFloat();
-    }
-    if (item.HasMember("worldh") && item["worldh"].IsFloat()) {
-        m_worldH = item["worldh"].GetFloat();
-    }
-    if (item.HasMember("worldd") && item["worldd"].IsInt()) {
-        m_worldD = item["worldd"].GetInt();
-    }
+//    if (item.HasMember("worldw") && item["worldw"].IsFloat()) {
+//        m_worldW = item["worldw"].GetFloat();
+//    }
+//    if (item.HasMember("worldh") && item["worldh"].IsFloat()) {
+//        m_worldH = item["worldh"].GetFloat();
+//    }
+//    if (item.HasMember("worldd") && item["worldd"].IsInt()) {
+//        m_worldD = item["worldd"].GetInt();
+//    }
     //
-    if(!m_pSceneTree){
-        create(m_worldW,m_worldH,m_worldD);
-    }
+//    if(!m_pSceneTree){
+//        create(m_worldW,m_worldH,m_worldD);
+//    }
 }
 
 void SVScene::test() {
     //创建一个测试场景
     SVSpriteNodePtr t_sp_node = MakeSharedPtr<SVSpriteNode>(mApp);
-    //t_sp_node->
     addNode(t_sp_node);
+    //
+    SV3DBoxPtr t_box_node = MakeSharedPtr<SV3DBox>(mApp);
+    addNode(t_box_node);
 }

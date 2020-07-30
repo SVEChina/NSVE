@@ -59,15 +59,10 @@ void SVSceneMgr::uiToScene(f32& _x,f32& _y) {
 }
 
 //更新
-void SVSceneMgr::update(f32 dt) {
+void SVSceneMgr::update(f32 _dt) {
     m_sceneLock->lock();
     if(m_pMainScene){
-        //激活场景
-//        mApp->m_pGlobalParam->m_curScene = m_pMainScene;
-//        m_pMainScene->active();
-//        m_pMainScene->update(dt);
-//        m_pMainScene->unactive();
-//        mApp->m_pGlobalParam->m_curScene = nullptr;
+        m_pMainScene->update(_dt);
     }
     m_sceneLock->unlock();
 }

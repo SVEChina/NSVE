@@ -36,7 +36,6 @@ SVNode::SVNode(SVInstPtr _app)
     m_bindIndex = -1;
     m_personID = 1;
     m_alpha = 1.0f;
-    m_enableMipMap = false;
     //基础属性
     m_postion.set(0.0f, 0.0f, 0.0f);
     m_offpos.set(0.0f, 0.0f, 0.0f);
@@ -143,10 +142,6 @@ void SVNode::render() {
     }
 }
 
-SVMtlCorePtr SVNode::getMtl(){
-    return m_pMtl;
-}
-
 //获取本地空间矩阵
 FMat4& SVNode::getLocalMat() {
     return m_localMat;
@@ -227,14 +222,6 @@ void SVNode::setBindOffset(f32 _offsetX, f32 _offsetY, f32 _offsetZ){
 
 FVec3& SVNode::getBindOffset(){
     return m_bindOffset;
-}
-
-void SVNode::enableMipMap(){
-    m_enableMipMap = true;
-}
-
-void SVNode::disableMipMap(){
-    m_enableMipMap = false;
 }
 
 FVec3& SVNode::getRotation() {
@@ -351,7 +338,6 @@ void SVNode::_toJsonData(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocato
     locationObj.AddMember("canprocevent", m_canProcEvent, _allocator);
     locationObj.AddMember("autoadaptdesign", m_adaptDesign, _allocator);
     locationObj.AddMember("visible", m_visible, _allocator);
-    locationObj.AddMember("mipmap", m_enableMipMap, _allocator);
 }
 
 void SVNode::_fromJsonData(RAPIDJSON_NAMESPACE::Value &item){
@@ -440,9 +426,6 @@ void SVNode::_fromJsonData(RAPIDJSON_NAMESPACE::Value &item){
     }
     if (item.HasMember("visible") && item["visible"].IsBool()) {
         m_visible = item["visible"].GetBool();
-    }
-    if (item.HasMember("mipmap") && item["mipmap"].IsBool()) {
-        m_enableMipMap = item["mipmap"].GetBool();
     }
     m_dirty = true;
 }

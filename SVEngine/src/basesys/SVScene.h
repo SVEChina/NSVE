@@ -14,57 +14,84 @@
 #include "../base/SVColor.h"
 #include "../node/SVNodeDeclare.h"
 #include "../event/SVEventDeclare.h"
+#include "../work/SVWorkDeclare.h"
+
+#include <vector>
+#include <map>
 
 namespace sv {
     
     /*
-     四叉数进行场景管理
+     scenetree进行场景管理
      scenetree BVH
      */
 
-    class SVTree4 :public SVGBaseEx{
+    class SVTreeLeaf :public SVGBaseEx {
     public:
-        SVTree4(SVInstPtr _app);
+        SVTreeLeaf(SVInstPtr _app);
+               
+        ~SVTreeLeaf();
         
-        ~SVTree4();
-        
-        //世界大小和深度
-        void create(SVBoundBox& _box,s32 _depth);
-        
-        void destroy();
-        
-        void update(f32 _dt);
-        
-        void visit(SVVisitorBasePtr _visitor);
-        //节点模块
-        void addNode(SVNodePtr node);
-        
-        void addNode(SVNodePtr node, s32 iZOrder);
+        bool addNode(SVNodePtr node);
         
         bool removeNode(SVNodePtr node);
         
         bool hasNode(SVNodePtr node);
         
-        void clearNode();
+        void clear();
         
-    protected:
-        //判断是否in
-        bool _isIn(SVNodePtr _node);
-        //锁
-        SVLockPtr m_treeLock;
-        //子节点
-        SVTree4Ptr m_pTreeNode[4];
-        //关联节点
-        SVNodePtr m_node;
+        void update(f32 _dt);
+        
+        void visit(SVVisitorBasePtr _visitor);
+        
+    public:
         //节点列表
-        typedef SVArray<SVNodePtr> NODEPOOL;
+        typedef std::vector<SVNodePtr> NODEPOOL;
         NODEPOOL m_nodePool;
+        //
         //树包围盒
         SVBoundBox m_treeBox;
     };
+
+    class SVSceneTree :public SVGBaseEx{
+    public:
+        SVSceneTree(SVInstPtr _app);
+        
+        ~SVSceneTree();
+        
+        void clear();
+        
+        void resize(FVec3 _unit);
+        
+        FVec3 getWorldSize();
+        
+        void update(f32 _dt);
+        
+        void visit(SVVisitorBasePtr _visitor);
+        
+        bool addNode(SVNodePtr node);
+        
+        bool addNode(SVNodePtr node, s32 iZOrder);
+        
+        bool removeNode(SVNodePtr node);
+        
+        bool hasNode(SVNodePtr node);
+        
+    protected:
+        s32 _transID(FVec3 _pos);
+        
+        //锁
+        SVLockSpinPtr m_treeLock;
+        //
+        FVec3 m_leafSize;     //节点的尺寸
+        //
+        typedef std::map<s32,SVTreeLeafPtr> LEAFPOOL;
+        LEAFPOOL m_leafPool;
+        //
+        SVBoundBox m_wold_range;
+    };
             
     /*场景*/
-
     class SVScene : public SVGBaseEx {
     public:
         SVScene(SVInstPtr _app,cptr8 name);
@@ -72,7 +99,7 @@ namespace sv {
         ~SVScene();
         
         //世界大小和深度
-        void create(f32 _worldw = SV_WORLD_SIZE ,f32 _worldh = SV_WORLD_SIZE ,s32 _depth = SV_WORLD_DEPTH);
+        void create();
         
         void destroy();
         
@@ -90,22 +117,19 @@ namespace sv {
         
         void visit(SVVisitorBasePtr _visitor);
         
-        
         cptr8 getname(){ return m_name.c_str(); }
         
         void setSceneColor(f32 _r,f32 _g,f32 _b,f32 _a);
+        
+        FVec3 getWorldSize();
         
     protected:
         //场景名称
         SVString m_name;
         //世界树
-        SVTree4Ptr m_pSceneTree;
+        SVSceneTreePtr m_pSceneTree;
         //
         SVColor m_color;
-        //
-        f32 m_worldW;
-        f32 m_worldH;
-        s32 m_worldD;
 
     public:
         bool procEvent(SVEventPtr _event);
