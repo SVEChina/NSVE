@@ -13,9 +13,12 @@ using namespace sv;
 //参数表
 
 SVParamTbl::SVParamTbl(){
+    m_param_values = MakeSharedPtr<SVDataChunk>();
 }
 
 SVParamTbl::~SVParamTbl() {
+    m_param_dsps.clear();
+    m_param_values = nullptr;
 }
 
 bool SVParamTbl::hasParam(cptr8 _name) {

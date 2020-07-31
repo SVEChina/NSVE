@@ -13,7 +13,10 @@ using namespace sv;
 
 SVShader::SVShader(SVInstPtr _app)
 :SVGBaseEx(_app)
-,m_res_shader(nullptr){
+,m_res_shader(nullptr)
+,m_vs_paramtbl(nullptr)
+,m_fs_paramtbl(nullptr)
+,m_gs_paramtbl(nullptr){
 }
 
 SVShader::~SVShader() {
@@ -21,6 +24,9 @@ SVShader::~SVShader() {
     m_fs_sampler.clear();
     m_gs_sampler.clear();
     m_res_shader = nullptr;
+    m_vs_paramtbl = nullptr;
+    m_fs_paramtbl = nullptr;
+    m_gs_paramtbl = nullptr;
 }
 
 //渲染内核

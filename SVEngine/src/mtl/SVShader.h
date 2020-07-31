@@ -66,6 +66,10 @@ namespace sv {
         std::vector<SamplerDsp> m_fs_sampler;
         std::vector<SamplerDsp> m_gs_sampler;
         
+        SVParamTblPtr m_vs_paramtbl;
+        SVParamTblPtr m_fs_paramtbl;
+        SVParamTblPtr m_gs_paramtbl;
+        
     protected:
         SVRShaderPtr m_res_shader;
     };
