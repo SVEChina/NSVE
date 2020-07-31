@@ -74,10 +74,10 @@ void SVRMeshRes::create(SVRendererPtr _renderer) {
 void SVRMeshRes::destroy(SVRendererPtr _renderer) {
 }
 
-s32 SVRMeshRes::process(SVRendererPtr _renderer,SVRTargetPtr _target) {
+s32 SVRMeshRes::process(SVRendererPtr _renderer) {
     return -1;
 }
 
-void SVRMeshRes::draw(SVRendererPtr _renderer,SVRTargetPtr _target) {
+void SVRMeshRes::draw(SVRendererPtr _renderer) {
     return ;
 }

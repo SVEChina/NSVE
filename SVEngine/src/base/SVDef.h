@@ -23,6 +23,16 @@
 
 namespace sv {
 
+    enum {
+        SV_INT = 0,
+        SV_FLOAT,
+        SV_FVEC2,
+        SV_FVEC3,
+        SV_FVEC4,
+        SV_FMAT4,
+        SV_BLOCK
+    };
+
     enum SV_STATE{
         SV_ST_NULL = 0,
         SV_ST_WAIT,         //等待

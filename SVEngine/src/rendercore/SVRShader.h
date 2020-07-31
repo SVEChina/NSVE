@@ -94,8 +94,6 @@ namespace sv {
         virtual void destroy(SVRendererPtr _renderer){}
 
         virtual bool active(SVRendererPtr _render){ return false; }
-        
-        virtual s32 process(SVRendererPtr _renderer) { return -1; }
     };
         
 }//!namespace sv

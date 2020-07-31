@@ -330,27 +330,25 @@ void SVRMeshMetal::destroy(SVRendererPtr _renderer) {
     m_dbufs.clear();
 }
 
-s32 SVRMeshMetal::process(SVRendererPtr _renderer,SVRTargetPtr _target) {
+s32 SVRMeshMetal::process(SVRendererPtr _renderer) {
     SVRendererMetalPtr t_rm = std::dynamic_pointer_cast<SVRendererMetal>(_renderer);
-    SVRFboMetalPtr t_fbo = std::dynamic_pointer_cast<SVRFboMetal>( _target->getResFbo() );
-    if(t_rm && t_fbo) {
+    if(t_rm && t_rm->m_pCurEncoder) {
         for(s32 i=0;i<SV_MAX_STREAM_NUM;i++) {
             if(m_dbufs[i]) {
-                [t_fbo->m_cmdEncoder setVertexBuffer:m_dbufs[i] offset:0 atIndex:i];    //i表示的buf和索引的对应
+                [t_rm->m_pCurEncoder setVertexBuffer:m_dbufs[i] offset:0 atIndex:i];    //i表示的buf和索引的对应
             }
         }
     }
     return 0;
 }
 
-void SVRMeshMetal::draw(SVRendererPtr _renderer,SVRTargetPtr _target) {
+void SVRMeshMetal::draw(SVRendererPtr _renderer) {
     SVRendererMetalPtr t_rm = std::dynamic_pointer_cast<SVRendererMetal>(_renderer);
-    SVRFboMetalPtr t_fbo = std::dynamic_pointer_cast<SVRFboMetal>( _target->getResFbo() );
-    if(t_rm && t_fbo) {
+    if(t_rm && t_rm->m_pCurEncoder) {
         if( m_ibuf ) {
             if(m_instance_buf) {
                 //多实体
-                [t_fbo->m_cmdEncoder drawIndexedPrimitives:MTLPrimitiveTypeTriangle
+                [t_rm->m_pCurEncoder drawIndexedPrimitives:MTLPrimitiveTypeTriangle
                                                 indexCount:m_iCnt
                                                  indexType:MTLIndexTypeUInt16
                                                indexBuffer:m_ibuf
@@ -358,7 +356,7 @@ void SVRMeshMetal::draw(SVRendererPtr _renderer,SVRTargetPtr _target) {
                                          instanceCount:m_instCnt];
             }else{
                 //非多实例，索引绘制
-                [t_fbo->m_cmdEncoder drawIndexedPrimitives:MTLPrimitiveTypeTriangle
+                [t_rm->m_pCurEncoder drawIndexedPrimitives:MTLPrimitiveTypeTriangle
                                                 indexCount:m_iCnt
                                                  indexType:MTLIndexTypeUInt16
                                                indexBuffer:m_ibuf
@@ -368,21 +366,12 @@ void SVRMeshMetal::draw(SVRendererPtr _renderer,SVRTargetPtr _target) {
             //正常顶点绘制
             if(m_instance_buf) {
                 //多实体
-                [t_fbo->m_cmdEncoder drawPrimitives:MTLPrimitiveTypeTriangle vertexStart:m_vertStart vertexCount:m_vertCnt instanceCount:m_instCnt baseInstance:0];
+                [t_rm->m_pCurEncoder drawPrimitives:MTLPrimitiveTypeTriangle vertexStart:m_vertStart vertexCount:m_vertCnt instanceCount:m_instCnt baseInstance:0];
             }else{
                 //非多实例，顶点绘制
-                [t_fbo->m_cmdEncoder drawPrimitives:MTLPrimitiveTypeTriangle vertexStart:m_vertStart vertexCount:m_vertCnt];
+                [t_rm->m_pCurEncoder drawPrimitives:MTLPrimitiveTypeTriangle vertexStart:m_vertStart vertexCount:m_vertCnt];
             }
         }
-        [t_fbo->m_cmdEncoder endEncoding]; // 结束
+        [t_rm->m_pCurEncoder endEncoding]; // 结束
     }
 }
-
-//void SVRMeshMetal::render(SVRendererPtr _renderer,SVRTargetPtr _target,SVRenderMeshPtr _rmesh) {
-//
-//        
-////        - (void)setVertexBuffers:(const id <MTLBuffer> __nullable [__nonnull])buffers offsets:(const NSUInteger [__nonnull])offsets withRange:(NSRange)range;
-//        //绘
-//    
-////    -(void)setTessellationFactorBuffer:(nullable id <MTLBuffer>)buffer offset:(NSUInteger)offset instanceStride:(NSUInteger)instanceStride API_AVAILABLE(macos(10.12), ios(10.0));
-//}

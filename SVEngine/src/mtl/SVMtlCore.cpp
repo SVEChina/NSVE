@@ -23,6 +23,7 @@ using namespace sv;
 //
 SVMtlCore::SVMtlCore(SVInstPtr _app)
 :SVGBaseEx(_app){
+    m_shader_obj = nullptr;
     m_paramValues = MakeSharedPtr<SVDataChunk>();
     reset();
 }
@@ -31,13 +32,17 @@ SVMtlCore::SVMtlCore(SVInstPtr _app)
 SVMtlCore::SVMtlCore(SVInstPtr _app, cptr8 _shader)
 :SVGBaseEx(_app)
 ,m_shader_name(_shader){
+    m_shader_obj = nullptr;
     m_paramValues = MakeSharedPtr<SVDataChunk>();
     reset();
 }
 
 SVMtlCore::SVMtlCore(SVInstPtr _app, SVShaderPtr _shader)
 :SVGBaseEx(_app)
-,m_shader(_shader){
+,m_shader_obj(_shader){
+    if(m_shader_obj) {
+        //m_shader_name = m_shader_obj->
+    }
 }
 
 SVMtlCore::SVMtlCore(SVMtlCore* _mtl)
@@ -154,7 +159,7 @@ void SVMtlCore::setParam(cptr8 _name,s32 _value) {
     //推送目标参数
     MtlParamDsp t_param;
     t_param.m_name = _name;
-    t_param.m_type = "s32";
+    t_param.m_type = SV_INT;
     t_param.m_size = sizeof(s32);
     t_param.m_off = m_paramValues->push(_value);
     m_paramTbl.push_back(t_param);
@@ -171,7 +176,7 @@ void SVMtlCore::setParam(cptr8 _name,f32 _value) {
     //推送目标参数
     MtlParamDsp t_param;
     t_param.m_name = _name;
-    t_param.m_type = "f32";
+    t_param.m_type = SV_FLOAT;
     t_param.m_size = sizeof(f32);
     t_param.m_off = m_paramValues->push(_value);
     m_paramTbl.push_back(t_param);
@@ -188,7 +193,7 @@ void SVMtlCore::setParam(cptr8 _name,FVec2 _value) {
     //推送目标参数
     MtlParamDsp t_param;
     t_param.m_name = _name;
-    t_param.m_type = "fvec2";
+    t_param.m_type = SV_FVEC2;
     t_param.m_size = sizeof(FVec2);
     t_param.m_off = m_paramValues->push(_value);
     m_paramTbl.push_back(t_param);
@@ -205,7 +210,7 @@ void SVMtlCore::setParam(cptr8 _name,FVec3 _value) {
     //推送目标参数
     MtlParamDsp t_param;
     t_param.m_name = _name;
-    t_param.m_type = "fvec3";
+    t_param.m_type = SV_FVEC3;
     t_param.m_size = sizeof(FVec3);
     t_param.m_off = m_paramValues->push(_value);
     m_paramTbl.push_back(t_param);
@@ -222,7 +227,7 @@ void SVMtlCore::setParam(cptr8 _name,FVec4 _value) {
     //推送目标参数
     MtlParamDsp t_param;
     t_param.m_name = _name;
-    t_param.m_type = "fvec4";
+    t_param.m_type = SV_FVEC4;
     t_param.m_size = sizeof(FVec4);
     t_param.m_off = m_paramValues->push(_value);
     m_paramTbl.push_back(t_param);
@@ -239,7 +244,7 @@ void SVMtlCore::setParam(cptr8 _name,FMat4 _value) {
     //推送目标参数
     MtlParamDsp t_param;
     t_param.m_name = _name;
-    t_param.m_type = "fmat4";
+    t_param.m_type = SV_FMAT4;
     t_param.m_size = sizeof(FMat4);
     t_param.m_off = m_paramValues->push(_value);
     m_paramTbl.push_back(t_param);
@@ -321,6 +326,9 @@ void SVMtlCore::update(f32 dt) {
 
 void SVMtlCore::reloadShader(){
     //m_shader_name
+    if(mApp->getShaderMgr()) {
+        m_shader_obj = mApp->getShaderMgr()->getShader(m_shader_name.c_str());
+    }
 }
 
 //提交参数到GPU
@@ -366,32 +374,6 @@ void SVMtlCore::recoverMtl() {
 void SVMtlCore::swap() {
     
 }
-
-//void SVMtlCore::_refreshMatrix(){
-////    SVRendererPtr t_renderer = mApp->getRenderer();
-////    if(t_renderer){
-////        if( m_LogicParamMatrix.m_self_view == 0 ) {
-////            //使用堆栈的
-////            FMat4 t_mat_view = t_renderer->getViewMat();
-////            memcpy(m_LogicParamMatrix.m_mat_view, t_mat_view.get(), sizeof(f32) * 16);
-////            m_LogicMtlFlag0 |= MTL_F0_MAT_V;
-////        }
-////
-////        if( m_LogicParamMatrix.m_self_proj == 0 ) {
-////            //使用堆栈的
-////            FMat4 t_mat_proj = t_renderer->getProjMat();
-////            memcpy(m_LogicParamMatrix.m_mat_project, t_mat_proj.get(), sizeof(f32) * 16);
-////            m_LogicMtlFlag0 |= MTL_F0_MAT_P;
-////        }
-////
-////        if( m_LogicParamMatrix.m_self_vp == 0 ) {
-////            //使用堆栈的
-////            FMat4 t_mat_vp = t_renderer->getVPMat();
-////            memcpy(m_LogicParamMatrix.m_mat_vp, t_mat_vp.get(), sizeof(f32) * 16);
-////            m_LogicMtlFlag0 |= MTL_F0_MAT_VP;
-////        }
-////    }
-//}
 
 void SVMtlCore::_submitUniform(SVRendererPtr _render) {
 }

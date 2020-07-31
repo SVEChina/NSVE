@@ -262,10 +262,3 @@ bool SVRShaderGL::active(SVRendererPtr _renderer) {
     }
     return false;
 }
-
-s32 SVRShaderGL::process(SVRendererPtr _renderer) {
-    if( active(_renderer) ) {
-        return 0;
-    }
-    return -1;
-}

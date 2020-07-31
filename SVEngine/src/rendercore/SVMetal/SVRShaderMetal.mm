@@ -15,7 +15,6 @@ using namespace sv;
 
 SVRShaderMetal::SVRShaderMetal(SVInstPtr _app)
 :SVRShader(_app){
-    m_rp_dsp = nullptr;
     m_vsf = nullptr;
     m_gsf = nullptr;
     m_tscf = nullptr;
@@ -136,7 +135,6 @@ void SVRShaderMetal::destroy(SVRendererPtr _renderer) {
     m_gs_sampler_st.clear();
     //
     if(m_pl_state!=nullptr) {
-        
     }
 }
 
@@ -145,6 +143,7 @@ bool SVRShaderMetal::active(SVRendererPtr _renderer) {
     if(!t_rm) {
         return false;
     }
+    //设置采样器
     for(s32 i=0;i<m_vs_sampler_st.size();i++) {
         [t_rm->m_pCurEncoder setVertexSamplerState:m_vs_sampler_st[i] atIndex:i];
     }
@@ -156,6 +155,7 @@ bool SVRShaderMetal::active(SVRendererPtr _renderer) {
     for(s32 i=0;i<m_gs_sampler_st.size();i++) {
         //[t_rm->m_pCurEncoder setFragmentSamplerState:m_gs_sampler_st[i] atIndex:i];
     }
+    //
     [t_rm->m_pCurEncoder setRenderPipelineState:m_pl_state];
     return true;
 }

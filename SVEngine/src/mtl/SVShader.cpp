@@ -37,7 +37,7 @@ SVRShaderPtr SVShader::getResShader() {
 }
 
 bool SVShader::active() {
-    if(m_res_shader) {
+    if(m_res_shader && mApp->getRenderer() ) {
         return m_res_shader->active( mApp->getRenderer() );
     }
     return false;

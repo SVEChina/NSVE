@@ -21,7 +21,8 @@ namespace sv {
     DECLARE_SHAREPTR(SVObject);
     DECLARE_SHAREPTR(SVGBaseEx);
     DECLARE_SHAREPTR(SVDataChunk);
-    
+    DECLARE_SHAREPTR(SVParamTbl);
+
     //MainApp
     DECLARE_SHAREPTR(SVInst);
     DECLARE_SHAREPTR(SVGlobalMgr);

@@ -63,12 +63,12 @@ namespace sv {
         void processMtl(SVMtlCorePtr _mtl);
 
         //处理mesh
-        void processMesh(SVRenderMeshPtr _mesh,SVRTargetPtr _target);
+        void processMesh(SVRenderMeshPtr _mesh);
 
         /*
         draw
         */
-        void drawMesh(SVRenderMeshPtr _mesh,SVRTargetPtr _target);
+        void drawMesh(SVRenderMeshPtr _mesh);
 
     public:
         id<MTLDevice> m_pDevice;
@@ -87,8 +87,6 @@ namespace sv {
         void drawBox();
     };
         
-    
-    
 }//!namespace sv
 //
 #endif //SV_RENDERER_METAL_H

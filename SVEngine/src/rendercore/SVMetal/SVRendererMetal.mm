@@ -127,26 +127,39 @@ SVRFboPtr SVRendererMetal::createResFbo()  {
 void SVRendererMetal::processMtl(SVMtlCorePtr _mtl) {
     if(!m_pCurEncoder)
         return ;
-//    if(_mtl->m_shader && _mtl->m_shader->active() ) {
-//        //传递uniform
-//        //m_pCurEncoder
-//    }
-}
-
-//处理mesh
-void SVRendererMetal::processMesh(SVRenderMeshPtr _mesh,SVRTargetPtr _target) {
-    if(!m_pCurEncoder)
-        return ;
-    if(_mesh->getResBuffer()) {
-        _mesh->getResBuffer()->process( share(), _target);
+    if(_mtl && _mtl->getShader() ) {
+        bool t_ret = _mtl->getShader()->active();
+        if(t_ret) {
+            //传递uniform
+            //        id<MTLBuffer> buffer = [device newBufferWithLength:bufferDataByteSize options:MTLResourceStorageModeShared];
+            //        struct MyUniforms *uniforms = (struct MyUniforms*)buffer.content;
+            //        uniforms->modelViewProjection = modelViewProjection;
+            //        uniforms->sunPosition = sunPosition;
+            
+//            [encoder setVertexBuffer:myUniforms offset:0 atIndex:1];
+//            [encoder setFragmentBuffer:myUniforms offset:0 atIndex:1];
+            
+            //[m_pCurEncoder setVertexBuffer:m_dbufs[i] offset:0 atIndex:i];
+            //m_pCurEncoder
+            //设置各种状态
+        }
     }
 }
 
-void SVRendererMetal::drawMesh(SVRenderMeshPtr _mesh,SVRTargetPtr _target) {
+//处理mesh
+void SVRendererMetal::processMesh(SVRenderMeshPtr _mesh) {
     if(!m_pCurEncoder)
         return ;
     if(_mesh->getResBuffer()) {
-        _mesh->getResBuffer()->draw( share(), _target);
+        _mesh->getResBuffer()->process( share() );
+    }
+}
+
+void SVRendererMetal::drawMesh(SVRenderMeshPtr _mesh) {
+    if(!m_pCurEncoder)
+        return ;
+    if(_mesh->getResBuffer()) {
+        _mesh->getResBuffer()->draw( share() );
     }
 }
 

@@ -131,7 +131,7 @@ void SVRMeshGL::destroy(SVRendererPtr _renderer) {
     }
 }
 
-s32 SVRMeshGL::process(SVRendererPtr _renderer,SVRTargetPtr _target){
+s32 SVRMeshGL::process(SVRendererPtr _renderer){
     SVRRes::process(_renderer);
     SVRendererGLPtr t_rm = std::dynamic_pointer_cast<SVRendererGL>(_renderer);
     if(m_ver_dsp.size()>0) {
@@ -244,7 +244,7 @@ s32 SVRMeshGL::process(SVRendererPtr _renderer,SVRTargetPtr _target){
     return 1;
 }
 
-void SVRMeshGL::draw(SVRendererPtr _renderer,SVRTargetPtr _target) {
+void SVRMeshGL::draw(SVRendererPtr _renderer) {
     
 }
 

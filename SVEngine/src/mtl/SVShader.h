@@ -59,7 +59,7 @@ namespace sv {
         SVRShaderPtr getResShader();
         
         bool active();
-        
+
     public:
         ShaderDsp m_dsp;
         std::vector<SamplerDsp> m_vs_sampler;

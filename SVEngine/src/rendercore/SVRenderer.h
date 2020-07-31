@@ -82,12 +82,12 @@ namespace sv {
         SVRTargetPtr curTarget(){ return m_cur_target; }
         
         //处理材质
-        virtual void processMtl(SVMtlCorePtr _mtl);
+        virtual void processMtl(SVMtlCorePtr _mtl){ }
         
         //处理mesh
-        virtual void processMesh(SVRenderMeshPtr _mesh,SVRTargetPtr _target);
+        virtual void processMesh(SVRenderMeshPtr _mesh){ }
         
-        virtual void drawMesh(SVRenderMeshPtr _mesh,SVRTargetPtr _target){}
+        virtual void drawMesh(SVRenderMeshPtr _mesh){ }
         
         //自动回收
         virtual void removeUnuseRes();

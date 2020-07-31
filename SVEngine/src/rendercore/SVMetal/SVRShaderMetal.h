@@ -31,6 +31,8 @@ namespace sv {
 
         bool active(SVRendererPtr _renderer);
         
+        //id<> getUniformBlock();
+        
     protected:
         id<MTLFunction> m_vsf;
         id<MTLFunction> m_gsf;
@@ -38,7 +40,6 @@ namespace sv {
         id<MTLFunction> m_tsdf;
         id<MTLFunction> m_fsf;
         id<MTLFunction> m_csf;
-        MTLRenderPipelineDescriptor* m_rp_dsp;
         //
         std::vector< id<MTLSamplerState> > m_vs_sampler_st;
         std::vector< id<MTLSamplerState> > m_fs_sampler_st;

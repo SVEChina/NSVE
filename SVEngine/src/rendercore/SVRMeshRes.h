@@ -29,9 +29,9 @@ namespace sv {
         
         virtual void destroy(SVRendererPtr _renderer);
         
-        virtual s32 process(SVRendererPtr _renderer,SVRTargetPtr _target);
+        virtual s32 process(SVRendererPtr _renderer);
         
-        virtual void draw(SVRendererPtr _renderer,SVRTargetPtr _target);
+        virtual void draw(SVRendererPtr _renderer);
         
     };
         

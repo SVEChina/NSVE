@@ -30,9 +30,9 @@ namespace sv {
 
         void destroy(SVRendererPtr _renderer);
 
-        s32 process(SVRendererPtr _renderer,SVRTargetPtr _target);
+        s32 process(SVRendererPtr _renderer);
 
-        void draw(SVRendererPtr _renderer,SVRTargetPtr _target);
+        void draw(SVRendererPtr _renderer);
     
         id<MTLBuffer> m_ibuf;
         id<MTLBuffer> m_instance_buf;

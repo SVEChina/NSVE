@@ -111,7 +111,7 @@ void SVFrameOutRead::update(f32 _dt){
     SVFrameOutNode::update(_dt);
     SVRendererPtr t_renderer = mApp->getRenderer();
     if(m_pMtl){
-        m_pMtl->setModelMatrix(m_absolutMat);
+        //m_pMtl->setModelMatrix(m_absolutMat);
         m_pMtl->setTexture(0,E_TEX_MAIN);    //那第一张纹理
         m_pMtl->setBlendEnable(false);
         m_pMtl->setParam("texclip",FVec2(1.0f, 1.0f));

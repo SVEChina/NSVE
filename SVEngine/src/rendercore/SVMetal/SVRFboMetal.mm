@@ -185,12 +185,17 @@ void SVRFboMetal::bind(SVRendererPtr _renderer) {
         //
         m_cmdBuffer = [t_rm->m_pCmdQueue commandBuffer];
         m_cmdEncoder = [m_cmdBuffer renderCommandEncoderWithDescriptor:m_passDsp];
+        //设置当前encoder
+        t_rm->m_pCurEncoder = m_cmdEncoder;
     }
 }
 
 void SVRFboMetal::unbind(SVRendererPtr _renderer) {
-    //SVRendererMetalPtr t_rm = std::dynamic_pointer_cast<SVRendererMetal>(_renderer);
-    [m_cmdEncoder endEncoding];
-    [m_cmdBuffer presentDrawable:m_pTarget];
-    [m_cmdBuffer commit];
+    SVRendererMetalPtr t_rm = std::dynamic_pointer_cast<SVRendererMetal>(_renderer);
+    if(t_rm) {
+        [m_cmdEncoder endEncoding];
+        [m_cmdBuffer presentDrawable:m_pTarget];
+        [m_cmdBuffer commit];
+        t_rm->m_pCurEncoder = nullptr;
+    }
 }

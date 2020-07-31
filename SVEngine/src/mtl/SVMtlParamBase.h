@@ -40,7 +40,7 @@ namespace sv {
     //材质参数描述
     struct MtlParamDsp {
         std::string m_name; //参数名称
-        std::string m_type; //参数类型
+        s32 m_type;         //参数类型
         s32 m_size;         //参数数据大小
         u64 m_off;          //参数数据偏移
     };

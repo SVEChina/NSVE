@@ -22,6 +22,13 @@ namespace sv {
 
     //
     class SVMtlCore : public SVGBaseEx {
+        //
+        friend class SVRenderer;
+        friend class SVRendererMetal;
+        friend class SVRendererGL;
+        friend class std::shared_ptr<SVRenderer> ;
+        friend class std::shared_ptr<SVRendererMetal> ;
+        friend class std::shared_ptr<SVRendererGL> ;
     public:
         SVMtlCore(SVInstPtr _app);
         
@@ -67,7 +74,7 @@ namespace sv {
                
         void setTexture(s32 _chanel,sv::SVTEXINID _from);
         
-        SVShaderPtr getShader() { return m_shader; }
+        SVShaderPtr getShader() { return m_shader_obj; }
         
     protected:
         //材质名称
@@ -112,7 +119,7 @@ namespace sv {
         TexUnit m_texUnit[MAX_TEXUNIT];
         //SVTextureParam m_paramTex;
         //
-        SVShaderPtr m_shader;   //pointer
+        SVShaderPtr m_shader_obj;   //pointer
         
     public:
         void swap();
