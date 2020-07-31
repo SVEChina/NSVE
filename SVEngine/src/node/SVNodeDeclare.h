@@ -36,12 +36,12 @@ namespace sv {
     DECLARE_SHAREPTR(SVVisitorNodeName);
 
     //
-    DECLARE_SHAREPTR(SVTree4);
+    DECLARE_SHAREPTR(SVTreeLeaf);
+    DECLARE_SHAREPTR(SVSceneTree);
     DECLARE_SHAREPTR(SVScene);
+
     //node
     DECLARE_SHAREPTR(SVNode);
-    //        DECLARE_SHAREPTR(SV2DFaceMaskNode);
-    //        DECLARE_SHAREPTR(SV2DFaceMaskSTNode);
     DECLARE_SHAREPTR(SVFaceCoord);
     DECLARE_SHAREPTR(SV3DBox);
     DECLARE_SHAREPTR(SVBitFontNode);

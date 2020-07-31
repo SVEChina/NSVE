@@ -5,7 +5,7 @@
 // yizhou Fu,long Yin,longfei Lin,ziyu Xu,xiaofan Li,daming Li
 //
 #include "SVFacePointNode.h"
-#include "SVScene.h"
+#include "../basesys/SVScene.h"
 #include "../app/SVInst.h"
 #include "../basesys/SVSceneMgr.h"
 #include "../rendercore/SVRenderMgr.h"
@@ -41,7 +41,7 @@ SVFacePointNode::~SVFacePointNode(){
 void SVFacePointNode::update(f32 _dt){
     SVNode::update(_dt);
 //    if(m_pRenderObj && m_pMtl){
-//        m_pMtl->setModelMatrix(m_absolutMat.get());
+//        m_pMtl->setModelMatrix(m_absolutMat);
 //        m_pMtl->update(_dt);
 //        m_pMtl->setBlendEnable(false);
 //        m_pMtl->setTexcoordFlip(1.0, 1.0);

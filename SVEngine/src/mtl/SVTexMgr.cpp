@@ -14,8 +14,6 @@
 #include "../base/SVDataChunk.h"
 #include "../app/SVInst.h"
 #include "../core/SVImage.h"
-#include "../operate/SVOpCreate.h"
-#include "../operate/SVOpParse.h"
 #include "../rendercore/SVRenderMgr.h"
 #include "../work/SVThreadPool.h"
 
@@ -26,6 +24,19 @@ SVTexMgr::SVTexMgr(SVInstPtr _app)
     mAsync = false;
     m_sve_tex = nullptr;
     m_texLock = MakeSharedPtr<SVLock>();
+    //主纹理
+    m_pMainTex = nullptr;
+    //阴影纹理
+    m_pShadowTex = nullptr;
+    //G-BUFFER
+    m_pMainPosTex = nullptr;
+    m_pMainNorTex = nullptr;
+    m_pMainColoreTex = nullptr;
+    //后处理纹理
+    m_pPostTex0 = nullptr;
+    m_pPostTex1 = nullptr;
+    m_pPostTex2 = nullptr;
+    m_pPostTex3 = nullptr;
 }
 
 SVTexMgr::~SVTexMgr() {
@@ -34,16 +45,10 @@ SVTexMgr::~SVTexMgr() {
 }
 
 void SVTexMgr::init() {
-    m_intex_pool.resize(E_TEX_END);
-    for(s32 i=0;i<E_TEX_END;i++) {
-        m_intex_pool[i] = nullptr;
-    }
     m_sve_tex = getTexture("svres/sve.png",true);
 }
 
 void SVTexMgr::destroy() {
-    m_intex_pool.clear();
-    m_outtex_pool.clear();
     m_ftex_pool.clear();
     m_sve_tex = nullptr;
 }
@@ -53,7 +58,7 @@ SVTexturePtr SVTexMgr::getSVETexture(){
 }
 
 void SVTexMgr::update(f32 _dt){
-    //_removeUnuseTexture();
+    _removeUnuseTexture();
 }
 
 void SVTexMgr::clear() {
@@ -95,9 +100,9 @@ SVTexturePtr SVTexMgr::_createTexture(cptr8 _name, bool _sync, bool _enableMipMa
 
 SVTexturePtr SVTexMgr::getTexture(SVTEXINID _texname) {
     //获取内置纹理
-    if(_texname>=E_TEX_MAIN && _texname<E_TEX_END){
-        return m_intex_pool[_texname];
-    }
+//    if(_texname>=E_TEX_MAIN && _texname<E_TEX_END){
+//        return m_intex_pool[_texname];
+//    }
     return nullptr;
 }
 
@@ -105,17 +110,8 @@ SVTexturePtr SVTexMgr::createTexture(SVTEXINID _texname,SVTextureDsp _param) {
     if(_texname>=E_TEX_MAIN && _texname<E_TEX_END){
         SVTexturePtr tTexture = MakeSharedPtr<SVTexture>(mApp);
         tTexture->init(_param);
-        m_intex_pool[_texname] = tTexture;
+        //m_intex_pool[_texname] = tTexture;
     }
-    return nullptr;
-}
-
-//创建外部纹理
-SVTexturePtr SVTexMgr::createTexture(SVTextureDsp _param) {
-    return nullptr;
-}
-
-SVTexturePtr SVTexMgr::createTexture(SVTextureDsp _param,SVDataSwapPtr _data) {
     return nullptr;
 }
 
@@ -174,41 +170,34 @@ void SVTexMgr::_removeUnuseTexture() {
 //    return tTexture;
 //}
 
-SVTexturePtr SVTexMgr::_createTextureSet(cptr8 _name, bool _sync, bool _enableMipMap) {
-    //返回空壳纹理
-    SVTexturePtr tTexture = nullptr;
-    m_texLock->lock();
-    SVImagePtr t_img = MakeSharedPtr<SVImage>(mApp);
-    if (_sync) {
-        if( t_img->load(_name) ) {
-            tTexture = t_img->toTexture();
-        }
-    } else {
-        if( t_img->load(_name) ) {
-            tTexture = t_img->toTexture();
-        }
-    }
-    if(tTexture) {
-        m_ftex_pool.insert(std::make_pair(_name, tTexture));
-    }
-    t_img = nullptr;
-    m_texLock->unlock();
-    return tTexture;
-}
-
-bool SVTexMgr::hasTexture(SVTexturePtr _tex){
-//    TEXPOOL::Iterator it = m_filetex_pool.findData(_tex);
-//    if(it != mTexpool.end() ) {
-//        return true;
+//SVTexturePtr SVTexMgr::_createTextureSet(cptr8 _name, bool _sync, bool _enableMipMap) {
+//    //返回空壳纹理
+//    SVTexturePtr tTexture = nullptr;
+//    m_texLock->lock();
+//    SVImagePtr t_img = MakeSharedPtr<SVImage>(mApp);
+//    if (_sync) {
+//        if( t_img->load(_name) ) {
+//            tTexture = t_img->toTexture();
+//        }
+//    } else {
+//        if( t_img->load(_name) ) {
+//            tTexture = t_img->toTexture();
+//        }
 //    }
-    return false;
-}
+//    if(tTexture) {
+//        m_ftex_pool.insert(std::make_pair(_name, tTexture));
+//    }
+//    t_img = nullptr;
+//    m_texLock->unlock();
+//    return tTexture;
+//}
 
 bool SVTexMgr::hasTexture(cptr8 _name) {
-//    TEXPOOL::Iterator it = m_filetex_pool.find(_name);
-//    if( it!=mTexpool.end() ) {
-//        return true;
-//    }
+    FTEXPOOL::iterator it = m_ftex_pool.find(_name);
+    if( it!=m_ftex_pool.end() ) {
+        return true;
+    }
+    //内置纹理中寻找
     return false;
 }
 

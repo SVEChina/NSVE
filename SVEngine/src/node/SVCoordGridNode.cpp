@@ -9,7 +9,7 @@
 #include "../core/SVGeoGen.h"
 #include "../mtl/SVMtlNocolor.h"
 #include "../mtl/SVTexMgr.h"
-#include "../node/SVScene.h"
+#include "../basesys/SVScene.h"
 #include "../rendercore/SVRenderObject.h"
 #include "../rendercore/SVRenderScene.h"
 #include "../rendercore/SVRenderMgr.h"
@@ -50,7 +50,7 @@ void SVCoordGridNode::update(f32 dt){
 //    t_mtl_coord->setTexture(0, m_gridTex);
 //    t_mtl_coord->setTextureParam(0, E_T_PARAM_WRAP_S, E_T_WRAP_REPEAT);
 //    t_mtl_coord->setTextureParam(0, E_T_PARAM_WRAP_T, E_T_WRAP_REPEAT);
-//    t_mtl_coord->setModelMatrix(m_absolutMat.get());
+//    t_mtl_coord->setModelMatrix(m_absolutMat);
 //    t_mtl_coord->setTexcoordFlip(1.0, -1.0f);
 //    t_mtl_coord->setDepthEnable(true);
 //    t_mtl_coord->setZOffEnable(true);

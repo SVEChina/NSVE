@@ -6,7 +6,7 @@
 //
 
 #include "SVMultPassNode.h"
-#include "SVScene.h"
+#include "../basesys/SVScene.h"
 #include "../mtl/SVMtlCore.h"
 #include "../basesys/SVSceneMgr.h"
 #include "../basesys/SVComData.h"

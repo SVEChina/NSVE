@@ -10,34 +10,35 @@
 
 #include "SVNode.h"
 #include "../base/SVBounds.h"
+#include "../base/SVVec3.h"
 
 namespace sv {
     
-        class SV3DBox : public SVNode {
-        public:
-            SV3DBox(SVInstPtr _app);
-            
-            virtual ~SV3DBox();
-            
-            virtual void update(f32 dt);
-            
-            virtual void render();
-            
-            void setMesh(SVRenderMeshPtr _pMesh);
-            
-            void randomInit();
-            
-            SVMtlCorePtr getMtl();
-            
-            SVMtlGeo3dPtr m_mtl_box;
+    class SV3DBox : public SVNode {
+    public:
+        SV3DBox(SVInstPtr _app);
+        
+        virtual ~SV3DBox();
+        
+        virtual void update(f32 dt);
+        
+        virtual void render();
+        
+        void setSize(FVec3 _size);
+        
+        SVMtlCorePtr getMtl();
+        
+        SVMtlGeo3dPtr m_mtl_box;
 
-        public:
-            SVRenderObjectPtr m_pRenderObj;
-            
-            SVRenderMeshPtr m_pMesh;
-            
-            SVColor m_color;
-        };
+        SVRenderMeshPtr m_pMesh;
+        
+        SVColor m_color;
+        
+        FVec3& getSize() { return m_size; }
+        
+    private:
+        FVec3 m_size;
+    };
     
 }//!namespace sv
 

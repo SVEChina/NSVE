@@ -6,8 +6,8 @@
 //
 
 #include "SVSkyDomeNode.h"
-#include "SVScene.h"
-#include "SVCameraNode.h"
+#include "../basesys/SVScene.h"
+#include "../basesys/SVCameraNode.h"
 #include "../mtl/SVTexture.h"
 #include "../mtl/SVMtlCore.h"
 #include "../rendercore/SVRenderObject.h"
@@ -60,7 +60,7 @@ void SVSkyDomeNode::update(f32 _dt){
 //    t_mtl_sky->m_LogicParamBlend.enable = true;
 //    t_mtl_sky->m_LogicParamBlend.srcParam = MTL_BLEND_ONE;
 //    t_mtl_sky->m_LogicParamBlend.dstParam = MTL_BLEND_ONE_MINUS_SRC_ALPHA;
-//    t_mtl_sky->setModelMatrix(m_absolutMat.get());
+//    t_mtl_sky->setModelMatrix(m_absolutMat);
 //    t_mtl_sky->setTexture(0,mDomeTex);
 //    m_renderObject->setMtl(t_mtl_sky);
 }

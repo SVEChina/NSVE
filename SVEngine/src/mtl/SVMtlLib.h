@@ -17,7 +17,6 @@
 namespace sv {
     
     /*引擎提供的默认材质库*/
-    
     class SVMtlLib : public SVObject {
     public:
         static void clear();
@@ -31,13 +30,13 @@ namespace sv {
         static SVMtlCorePtr createMtl(SVInstPtr _app,cptr8 _mtlname);
         
     protected:
-        static SVMtlCorePtr m_pSkinMtl;
+        //static SVMtlCorePtr m_pSkinMtl;
         
         static SVString mapName(cptr8 _name);
         
         static bool parseMtl1(SVMtlCorePtr _mtl,RAPIDJSON_NAMESPACE::Document& _doc);
     };
-    
+
 }//!namespace sv
 
 

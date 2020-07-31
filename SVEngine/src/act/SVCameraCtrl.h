@@ -9,7 +9,7 @@
 #define SV_CAMERA_CTRL_H
 
 #include "../base/SVGBase.h"
-#include "../node/SVCameraNode.h"
+#include "../basesys/SVCameraNode.h"
 #include "../base/SVMat4.h"
 
 namespace sv {

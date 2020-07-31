@@ -6,6 +6,7 @@
 //
 
 #include "SVMtlLib.h"
+#include "SVMtlCore.h"
 #include "SVMtlGLTF.h"
 #include "../app/SVInst.h"
 #include "../file/SVFileMgr.h"
@@ -13,36 +14,37 @@
 
 using namespace sv;
 
-SVMtlCorePtr SVMtlLib::m_pSkinMtl = nullptr;
+//SVMtlCorePtr SVMtlLib::m_pSkinMtl = nullptr;
 
 void SVMtlLib::clear() {
-    m_pSkinMtl = nullptr;
+    //m_pSkinMtl = nullptr;
 }
 
 SVMtlCorePtr SVMtlLib::getSkinMtl(SVInstPtr _app) {
-    if(!m_pSkinMtl) {
-         m_pSkinMtl = MakeSharedPtr<SVMtlGLTF>(_app);
-    }
-    //
-    FMat4 tMat_rotx;
-    tMat_rotx.setIdentity();
-    tMat_rotx.setRotateX(45.0f);
-
-    FMat4 tMat_roty;
-    tMat_roty.setIdentity();
-    tMat_roty.setRotateY(45.0f);
-
-    FMat4 tMat_sc;
-    tMat_sc.setIdentity();
-    tMat_sc.setScale(FVec3(200.0f,200.0f,200.0f));
-    //
-    FMat4 tMat = tMat_sc * tMat_roty * tMat_rotx;
-    m_pSkinMtl->setModelMatrix(tMat.get());
-    m_pSkinMtl->setBlendEnable(false);
-    m_pSkinMtl->setDepthEnable(true);
-    m_pSkinMtl->update(0.03f);
-    //
-    return m_pSkinMtl;
+//    if(!m_pSkinMtl) {
+//         m_pSkinMtl = MakeSharedPtr<SVMtlGLTF>(_app);
+//    }
+//    //
+//    FMat4 tMat_rotx;
+//    tMat_rotx.setIdentity();
+//    tMat_rotx.setRotateX(45.0f);
+//
+//    FMat4 tMat_roty;
+//    tMat_roty.setIdentity();
+//    tMat_roty.setRotateY(45.0f);
+//
+//    FMat4 tMat_sc;
+//    tMat_sc.setIdentity();
+//    tMat_sc.setScale(FVec3(200.0f,200.0f,200.0f));
+//    //
+//    FMat4 tMat = tMat_sc * tMat_roty * tMat_rotx;
+//    m_pSkinMtl->setModelMatrix(tMat.get());
+//    m_pSkinMtl->setBlendEnable(false);
+//    m_pSkinMtl->setDepthEnable(true);
+//    m_pSkinMtl->update(0.03f);
+//    //
+//    return m_pSkinMtl;
+    return nullptr;
 }
 
 SVMtlCorePtr SVMtlLib::get3DNorMtl(SVInstPtr _app) {
@@ -87,7 +89,7 @@ SVMtlCorePtr SVMtlLib::createMtl(SVInstPtr _app,cptr8 _mtlname) {
         t_version = doc["version"].GetString();
     }
     if(t_version == "1.0") {
-        SVMtlCorePtr t_mtl = MakeSharedPtr<SVMtlGLTF>(_app);
+        SVMtlCorePtr t_mtl = MakeSharedPtr<SVMtlCore>(_app);
         parseMtl1(t_mtl,doc);
         return t_mtl;
     }
@@ -118,8 +120,8 @@ bool SVMtlLib::parseMtl1(SVMtlCorePtr _mtl,RAPIDJSON_NAMESPACE::Document& _doc) 
         RAPIDJSON_NAMESPACE::Document::Array t_value_array = _doc["texture-tbl"].GetArray();
         for(s32 i=0;i<t_value_array.Size();i++) {
             RAPIDJSON_NAMESPACE::Document::Object element = t_value_array[i].GetObject();
-            s32 t_param_chan = element["channel"].GetInt();
-            SVString t_param_type = element["type"].GetString();
+            s32 t_param_chan = element["chn"].GetInt();
+            SVString t_param_type = element["from"].GetString();
             SVString t_param_path = element["path"].GetString();
             if(t_param_type == "file") {
                 _mtl->setTexture(t_param_chan, t_param_path.c_str());

@@ -12,29 +12,27 @@
 #include "../base/SVColor.h"
 namespace sv {
     
-    
+    class SVMtlColor : public SVMtlCore {
+    public:
+        SVMtlColor(SVInstPtr _app);
         
-        class SVMtlColor : public SVMtlCore {
-        public:
-            SVMtlColor(SVInstPtr _app);
-            
-            SVMtlColor(SVMtlColor *_mtl);
-            
-            ~SVMtlColor();
-            
-            virtual void reset();
-            
-            virtual SVMtlCorePtr clone();
-            
-            void update(f32 dt);
-            
-            void setColor(f32 _r, f32 _g, f32 _b, f32 _a);
-        protected:
-            virtual void _submitUniform(SVRendererPtr _render);
-            
-            SVColor m_color;
-            
-        };
+        SVMtlColor(SVMtlColor *_mtl);
+        
+        ~SVMtlColor();
+        
+        virtual void reset();
+        
+        virtual SVMtlCorePtr clone();
+        
+        void update(f32 dt);
+        
+        void setColor(f32 _r, f32 _g, f32 _b, f32 _a);
+    protected:
+        virtual void _submitUniform(SVRendererPtr _render);
+        
+        SVColor m_color;
+        
+    };
 
     
     

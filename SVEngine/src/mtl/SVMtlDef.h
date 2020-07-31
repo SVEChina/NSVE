@@ -116,7 +116,6 @@ namespace sv {
         MTL_F0_TEX5         = 0x00000200,
         MTL_F0_TEX6         = 0x00000400,
         MTL_F0_TEX7         = 0x00000800,
-        MTL_F0_TEX_FLIP     = 0x00001000,
         MTL_F0_POINT_SIZE   = 0x00002000,
         MTL_F0_LINE_SIZE    = 0x00004000,
         MTL_F0_BLEND        = 0x00010000,

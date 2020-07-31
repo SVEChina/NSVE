@@ -6,8 +6,8 @@
 //
 
 #include "SVIOSInstreamNode.h"
-#include "SVCameraNode.h"
-#include "SVScene.h"
+#include "../basesys/SVCameraNode.h"
+#include "../basesys/SVScene.h"
 #include "../app/SVInst.h"
 #include "../basesys/SVSceneMgr.h"
 #include "../basesys/SVComData.h"
@@ -48,7 +48,7 @@ void SVIOSInstreamNode::update(f32 dt) {
 //    if(m_pRenderObj && m_pMtl){
 //        m_pMtl->setTexcoordFlip(1.0f, -1.0f);
 //        m_pMtl->setTexture(0, m_tt);    //那第一张纹理
-//        m_pMtl->setModelMatrix(m_absolutMat.get());
+//        m_pMtl->setModelMatrix(m_absolutMat);
 //        m_pMtl->update(dt);
 //        m_pRenderObj->setMtl(m_pMtl);
 //        m_pRenderObj->setMesh(mApp->getDataMgr()->m_screenMesh);

@@ -10,7 +10,7 @@
 #include "../work/SVTdCore.h"
 #include "../base/SVPreDeclare.h"
 #include "../basesys/SVSceneMgr.h"
-#include "../node/SVScene.h"
+#include "../basesys/SVScene.h"
 #include "../node/SVNode.h"
 #include "../core/SVBMFont.h"
 #include "../node/SVBMFontNode.h"

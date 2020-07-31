@@ -62,14 +62,12 @@ namespace sv {
         virtual SVRShaderPtr createResShader() { return nullptr; }
         
         //buf-vbo 等
-        virtual SVRBufferPtr createResBuf() { return nullptr; }
+        virtual SVRMeshResPtr createResBuf() { return nullptr; }
         
         //fbo
         virtual SVRFboPtr createResFbo() { return nullptr; }
         
-        
     public:
-        
         //增加渲染内核资源
         void addRes(SVRResPtr _res);
         
@@ -83,14 +81,13 @@ namespace sv {
         
         SVRTargetPtr curTarget(){ return m_cur_target; }
         
-        //处理技术
-        virtual void processTech(SVRTechPtr _tech);
-        
         //处理材质
         virtual void processMtl(SVMtlCorePtr _mtl);
         
         //处理mesh
-        virtual void processMesh(SVRenderMeshPtr _mesh);
+        virtual void processMesh(SVRenderMeshPtr _mesh,SVRTargetPtr _target);
+        
+        virtual void drawMesh(SVRenderMeshPtr _mesh,SVRTargetPtr _target){}
         
         //自动回收
         virtual void removeUnuseRes();
@@ -99,19 +96,6 @@ namespace sv {
         SVRTargetPtr m_cur_target;      //当前的target
         
     public:
-        
-        //创建内置纹理
-        virtual SVTexturePtr createSVTex(SVTEXINID _type,s32 _w,s32 _h,s32 _formate, bool _enableMipMap = false);
-        //创建内置纹理
-        virtual SVTexturePtr createSVTex(SVTEXINID _type,s32 _w,s32 _h,s32 _informate,s32 _daformate, bool _enableMipMap = false);
-        //创建内置纹理
-        virtual SVTexturePtr createSVTexIOS(SVTEXINID _type,s32 _w,s32 _h,s32 _formate, bool _enableMipMap = false);
-        //创建内置纹理 ios
-        virtual SVTexturePtr createSVTexIOS(SVTEXINID _type,s32 _w,s32 _h,s32 _informate,s32 _daformate, bool _enableMipMap = false);
-        //销毁内置纹理
-        void destroySVTex(SVTEXINID _type);
-        //获取内置纹理
-        SVTexturePtr getSVTex(SVTEXINID _type);
         //是否存在内置纹理
         bool hasSVTex(SVTEXINID _type);
         //获取渲染状态

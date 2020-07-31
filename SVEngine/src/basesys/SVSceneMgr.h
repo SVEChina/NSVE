@@ -12,11 +12,9 @@
 #include "../work/SVWorkDeclare.h"
 
 namespace sv {
-
     /*
      场景管理
      */
-
     class SVSceneMgr : public SVSysBase {
     public:
         SVSceneMgr(SVInstPtr _app);

@@ -125,48 +125,48 @@ bool SVFairDataBlur::create() {
     s32 t_h = mApp->m_pGlobalParam->m_inner_height;
     //
     m_mtl_a = MakeSharedPtr<SVMtlCore>(mApp, "blur_fair_01");
-    m_mtl_a->setTexcoordFlip(1.0f, 1.0f);
+    //m_mtl_a->setTexcoordFlip(1.0f, 1.0f);
     m_mtl_a->setTexSizeIndex(0, 0.0, m_pParam->m_param01 / t_h);
 
     m_mtl_b = MakeSharedPtr<SVMtlCore>(mApp, "blur_fair_01");
-    m_mtl_b->setTexcoordFlip(1.0f, 1.0f);
+    //m_mtl_b->setTexcoordFlip(1.0f, 1.0f);
     m_mtl_b->setTexSizeIndex(0, m_pParam->m_param02 / t_w, 0.0);
 
     m_mtl_c = MakeSharedPtr<SVMtlCore>(mApp, "blur_fair_mean");
-    m_mtl_c->setTexcoordFlip(1.0f, 1.0f);
+    //m_mtl_c->setTexcoordFlip(1.0f, 1.0f);
     m_mtl_c->setTexSizeIndex(0, m_pParam->m_param03 / t_w, m_pParam->m_param03 / t_h);
 
     m_mtl_e = MakeSharedPtr<SVMtlCore>(mApp, "blur_fair_01");
-    m_mtl_e->setTexcoordFlip(1.0f, 1.0f);
+    //m_mtl_e->setTexcoordFlip(1.0f, 1.0f);
     m_mtl_e->setTexSizeIndex(0, 0.0, m_pParam->m_param04 / t_h);
 
     m_mtl_f = MakeSharedPtr<SVMtlCore>(mApp, "blur_fair_01");
-    m_mtl_f->setTexcoordFlip(1.0f, 1.0f);
+    //m_mtl_f->setTexcoordFlip(1.0f, 1.0f);
     m_mtl_f->setTexSizeIndex(0, m_pParam->m_param05 / t_w, 0.0);
 
     m_mtl_d = MakeSharedPtr<SVMtlBlurFair>(mApp);
-    m_mtl_d->setTexcoordFlip(1.0f, 1.0f);
+    //m_mtl_d->setTexcoordFlip(1.0f, 1.0f);
     m_mtl_d->setTexSizeIndex(0, m_pParam->m_param06 / t_w, m_pParam->m_param06 / t_h);
 
     m_mtl_back = MakeSharedPtr<SVMtlCore>(mApp, "screennor");
-    m_mtl_back->setTexcoordFlip(1.0f, 1.0f);
+    //m_mtl_back->setTexcoordFlip(1.0f, 1.0f);
 
     m_pPassNode = MakeSharedPtr<SVMultPassNode>(mApp);
     m_pPassNode->create(t_w, t_h);
     m_pPassNode->setRSType(RST_BEAUTY);
 
-    //
-    if (!t_renderer->getSVTex(E_TEX_HELP0)) {
-        t_renderer->createSVTex(E_TEX_HELP0, t_w, t_h, GL_RGBA);
-    }
-    //
-    if (!t_renderer->getSVTex(E_TEX_HELP1)) {
-        t_renderer->createSVTex(E_TEX_HELP1, t_w, t_h, GL_RGBA);
-    }
-    //
-    if (!t_renderer->getSVTex(E_TEX_HELP2)) {
-        t_renderer->createSVTex(E_TEX_HELP2, t_w, t_h, GL_RGBA);
-    }
+//    //
+//    if (!t_renderer->getSVTex(E_TEX_HELP0)) {
+//        t_renderer->createSVTex(E_TEX_HELP0, t_w, t_h, GL_RGBA);
+//    }
+//    //
+//    if (!t_renderer->getSVTex(E_TEX_HELP1)) {
+//        t_renderer->createSVTex(E_TEX_HELP1, t_w, t_h, GL_RGBA);
+//    }
+//    //
+//    if (!t_renderer->getSVTex(E_TEX_HELP2)) {
+//        t_renderer->createSVTex(E_TEX_HELP2, t_w, t_h, GL_RGBA);
+//    }
 
     SVPassPtr t_pass = MakeSharedPtr<SVPass>();
     t_pass->mTag = "SVFairDataBlur";
@@ -238,13 +238,6 @@ void SVFairDataBlur::destroy() {
     if (m_pPassNode) {
         m_pPassNode = nullptr;
     }
-    SVRendererPtr t_renderer = mApp->getRenderer();
-    if (!t_renderer) {
-        return;
-    }
-    t_renderer->destroySVTex(E_TEX_HELP0);
-    t_renderer->destroySVTex(E_TEX_HELP1);
-    t_renderer->destroySVTex(E_TEX_HELP2);
 }
 
 void SVFairDataBlur::setFilterParam(f32 _smooth, SVFILTERITEMTYPE _type) {
@@ -264,33 +257,33 @@ void SVFairDataBlur::update(f32 dt) {
     s32 t_w = mApp->m_pGlobalParam->m_inner_width;
     s32 t_h = mApp->m_pGlobalParam->m_inner_height;
     if (m_mtl_a) {
-        m_mtl_a->setTexcoordFlip(1.0, 1.0);
+        //m_mtl_a->setTexcoordFlip(1.0, 1.0);
         m_mtl_a->setTexSizeIndex(0, 0.0, m_pParam->m_param01 / t_h);
     }
 
     if (m_mtl_b) {
-        m_mtl_b->setTexcoordFlip(1.0, 1.0);
+        //m_mtl_b->setTexcoordFlip(1.0, 1.0);
         m_mtl_b->setTexSizeIndex(0, m_pParam->m_param02 / t_w, 0.0);
     }
 
     if (m_mtl_c) {
-        m_mtl_c->setTexcoordFlip(1.0, 1.0);
+        //m_mtl_c->setTexcoordFlip(1.0, 1.0);
         m_mtl_c->setTexSizeIndex(0, m_pParam->m_param03 / t_w, m_pParam->m_param03 / t_h);
     }
 
     if (m_mtl_d) {
-        m_mtl_d->setTexcoordFlip(1.0, 1.0);
+        //m_mtl_d->setTexcoordFlip(1.0, 1.0);
         m_mtl_d->setTexSizeIndex(0, m_pParam->m_param06 / t_w, m_pParam->m_param06 / t_h);
         m_mtl_d->setSmooth(m_pParam->m_smooth);
     }
 
     if (m_mtl_e) {
-        m_mtl_e->setTexcoordFlip(1.0, 1.0);
+        //m_mtl_e->setTexcoordFlip(1.0, 1.0);
         m_mtl_e->setTexSizeIndex(0, 0.0, m_pParam->m_param04 / t_h);
     }
 
     if (m_mtl_f) {
-        m_mtl_f->setTexcoordFlip(1.0, 1.0);
+        //m_mtl_f->setTexcoordFlip(1.0, 1.0);
         m_mtl_f->setTexSizeIndex(0, m_pParam->m_param05 / t_w, 0.0);
     }
 }
@@ -413,7 +406,7 @@ void SVFairLtraLow::update(f32 dt) {
     if (m_mtl_a) {
         SVMtlFairLtraLowPtr t_tmp = std::dynamic_pointer_cast<SVMtlFairLtraLow>(m_mtl_a);
         if (t_tmp) {
-            t_tmp->setTexcoordFlip(1.0, 1.0);
+            //t_tmp->setTexcoordFlip(1.0, 1.0);
             t_tmp->setSmooth(m_smooth);
         }
     }

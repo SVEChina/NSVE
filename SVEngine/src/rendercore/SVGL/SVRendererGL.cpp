@@ -11,7 +11,7 @@
 #include "SVRTechGL.h"
 #include "SVRFboGL.h"
 #include "SVRShaderGL.h"
-#include "SVRBufferGL.h"
+#include "SVRMeshGL.h"
 //
 #include "../SVRenderMgr.h"
 #include "../SVRTarget.h"
@@ -55,11 +55,9 @@ void SVRendererGL::init(s32 _w,s32 _h){
 }
 
 void SVRendererGL::init(s32 _w,s32 _h,bool _offline) {
-    
 }
 
 void SVRendererGL::resize(s32 _w,s32 _h) {
-//    //
 //    m_inWidth = _w;
 //    m_inHeight = _h;
 //    //重置size
@@ -79,19 +77,13 @@ SVRShaderPtr SVRendererGL::createResShader() {
 }
 
 //buf-vbo 等
-SVRBufferPtr SVRendererGL::createResBuf() {
-    return MakeSharedPtr<SVRBufferGL>(mApp);
+SVRMeshResPtr SVRendererGL::createResBuf() {
+    return MakeSharedPtr<SVRMeshGL>(mApp);
 }
 
 //fbo
 SVRFboPtr SVRendererGL::createResFbo() {
     return MakeSharedPtr<SVRFboGL>(mApp);
-}
-
-//处理技术
-void SVRendererGL::processTech(SVRTechPtr _tech) {
-    if(!_tech)
-        return ;
 }
 
 //处理材质
@@ -104,10 +96,17 @@ void SVRendererGL::processMtl(SVMtlCorePtr _mtl) {
 }
 
 //处理mesh
-void SVRendererGL::processMesh(SVRenderMeshPtr _mesh) {
+void SVRendererGL::processMesh(SVRenderMeshPtr _mesh,SVRTargetPtr _target) {
     if(_mesh && _mesh->getResBuffer() ) {
-        _mesh->getResBuffer()->process( std::dynamic_pointer_cast<SVRendererGL>(shareObject()) );
+        _mesh->getResBuffer()->process( std::dynamic_pointer_cast<SVRendererGL>(shareObject()) ,_target);
     }
+}
+
+//处理mesh
+void SVRendererGL::drawMesh(SVRenderMeshPtr _mesh,SVRTargetPtr _target) {
+//    if(_mesh && _mesh->getResBuffer() ) {
+//        _mesh->getResBuffer()->process( std::dynamic_pointer_cast<SVRendererGL>(shareObject()) ,_target);
+//    }
 }
 
 //
@@ -145,13 +144,6 @@ void SVRendererGL::submitTex(u32 _channel,TexUnit& _unit){
     s32 m_uni_tex = glGetUniformLocation(m_pRState->m_shaderID, atexture.c_str() );
     if (m_uni_tex>=0) {
         glUniform1i(m_uni_tex, _channel);
-    }
-    //
-    if(_channel == 0) {
-        s32 m_uni_clip = glGetUniformLocation(m_pRState->m_shaderID, "texcoordClip" );
-        if (m_uni_clip>=0) {
-            glUniform2fv(m_uni_clip, 1 , _unit.m_texcoordFlip);
-        }
     }
     //最小过滤器
     u32 t_filter = GL_TEXTURE_MIN_FILTER;

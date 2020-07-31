@@ -6,8 +6,8 @@
 //
 
 #include "SVPatchNode.h"
-#include "SVCameraNode.h"
-#include "SVScene.h"
+#include "../basesys/SVCameraNode.h"
+#include "../basesys/SVScene.h"
 #include "../app/SVInst.h"
 #include "../basesys/SVComData.h"
 #include "../mtl/SVMtlNocolor.h"
@@ -54,7 +54,7 @@ void SVPatchNode::update(f32 _dt) {
     SVNode::update(_dt);
 //    if (m_pRenderObj && m_pMesh) {
 //        m_patchMtl->update(_dt);
-//        m_patchMtl->setModelMatrix(m_absolutMat.get());
+//        m_patchMtl->setModelMatrix(m_absolutMat);
 //        m_patchMtl->setColor(1.0f, 0.0f, 0.0f, 1.0f);
 //        m_patchMtl->setBlendEnable(false);
 //        m_patchMtl->setTexcoordFlip(1.0, 1.0);

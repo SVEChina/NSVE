@@ -1,18 +1,18 @@
 //
-// SVRBuffer.cpp
+// SVRMeshRes.cpp
 // SVEngine
 // Copyright 2017-2020
 // yizhou Fu,long Yin,longfei Lin,ziyu Xu,xiaofan Li,daming Li
 //
 
-#include "SVRBuffer.h"
+#include "SVRMeshRes.h"
 #include "../app/SVInst.h"
 #include "../work/SVTdCore.h"
 #include "SVRenderer.h"
 
 using namespace sv;
 
-s32 SVRBuffer::getVertexFormateSize(VFTYPE _type) {
+s32 SVRMeshRes::getVertexFormateSize(VFTYPE _type) {
     if (_type == E_VF_V2) {
         return sizeof(V2);
     } else if (_type == E_VF_V2_T0) {
@@ -61,19 +61,23 @@ s32 SVRBuffer::getVertexFormateSize(VFTYPE _type) {
     return 0;
 }
 
-SVRBuffer::SVRBuffer(SVInstPtr _app)
+SVRMeshRes::SVRMeshRes(SVInstPtr _app)
 :SVRRes(_app){
 }
 
-SVRBuffer::~SVRBuffer(){
+SVRMeshRes::~SVRMeshRes(){
 }
 
-void SVRBuffer::create(SVRendererPtr _renderer) {
+void SVRMeshRes::create(SVRendererPtr _renderer) {
 }
 
-void SVRBuffer::destroy(SVRendererPtr _renderer) {
+void SVRMeshRes::destroy(SVRendererPtr _renderer) {
 }
 
-s32 SVRBuffer::process(SVRendererPtr _renderer) {
+s32 SVRMeshRes::process(SVRendererPtr _renderer,SVRTargetPtr _target) {
     return -1;
+}
+
+void SVRMeshRes::draw(SVRendererPtr _renderer,SVRTargetPtr _target) {
+    return ;
 }

@@ -11,7 +11,7 @@
 #include "../basesys/SVSceneMgr.h"
 #include "../basesys/SVCameraMgr.h"
 #include "../node/SVNode.h"
-#include "../node/SVCameraNode.h"
+#include "../basesys/SVCameraNode.h"
 
 using namespace sv;
 

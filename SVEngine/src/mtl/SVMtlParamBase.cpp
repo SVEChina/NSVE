@@ -11,7 +11,8 @@
 
 using namespace sv;
 
-//
+//矩阵参数
+
 SVMatrixParam::SVMatrixParam(){
     reset();
 }
@@ -46,7 +47,9 @@ void SVMatrixParam::copy(SVMatrixParam& _param){
     m_self_null = _param.m_self_null;
 }
 
-//
+/*
+ 纹理单元
+ */
 
 TexUnit::TexUnit(){
     m_texForm = E_TEX_END;
@@ -63,13 +66,10 @@ TexUnit::~TexUnit(){
 
 void TexUnit::reset(){
     m_pTex = nullptr;
-    memset(m_texcoordFlip, 1, sizeof(f32) * 2);
 }
 
 void TexUnit::copy(TexUnit& _texunit){
     m_pTex = _texunit.m_pTex;
-    m_texcoordFlip[0] = _texunit.m_texcoordFlip[0];
-    m_texcoordFlip[1] = _texunit.m_texcoordFlip[1];
     m_texForm = _texunit.m_texForm;
     m_min_filter = _texunit.m_min_filter;
     m_mag_filter = _texunit.m_mag_filter;
@@ -92,13 +92,6 @@ void SVTextureParam::setTexture(u32 _index,sv::SVTEXINID _from){
     if(_index<0 ||_index>=MAX_TEXUNIT)
         return;
     m_texUnit[_index].m_texForm = _from;
-}
-
-void SVTextureParam::setTexClip(u32 _index,f32 _x,f32 _y){
-    if(_index<0 ||_index>=MAX_TEXUNIT)
-        return;
-    m_texUnit[_index].m_texcoordFlip[0] = _x;
-    m_texUnit[_index].m_texcoordFlip[1] = _y;
 }
 
 //设置纹理环绕

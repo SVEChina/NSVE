@@ -29,6 +29,8 @@ namespace sv {
         SVRendererMetal(SVInstPtr _app);
 
         ~SVRendererMetal();
+        
+        SVRendererMetalPtr share();
 
         virtual void init(id<MTLDevice> _device,id<MTLDrawable> _target,id<MTLTexture> _targetTex);
 
@@ -46,37 +48,27 @@ namespace sv {
         SVRShaderPtr createResShader() ;
 
         //buf-vbo 等
-        SVRBufferPtr createResBuf() ;
+        SVRMeshResPtr createResBuf() ;
 
         //fbo
         SVRFboPtr createResFbo() ;
 
-
     public:
-        //创建纹理接口
-        s32 createTexIn(s32 _texid,SVTexDsp _tdsp);
-        s32 createTexOut(SVTexDsp _tdsp,void* _pdata);
-        //
-        s32 createBuf(s32 _len);                //return buf index
-        s32 createBuf(s32 _len,void* _data);    //return buf index
-
-        virtual void processTech(SVRTechPtr _tech);
 
         //处理材质
-        virtual void processMtl(SVMtlCorePtr _mtl);
+        void processMtl(SVMtlCorePtr _mtl);
 
         //处理mesh
-        virtual void processMesh(SVRenderMeshPtr _mesh);
+        void processMesh(SVRenderMeshPtr _mesh,SVRTargetPtr _target);
+
+        //
+        void drawMesh(SVRenderMeshPtr _mesh,SVRTargetPtr _target);
 
     public:
         id<MTLDevice> m_pDevice;
         id<MTLCommandQueue> m_pCmdQueue;
         id<MTLLibrary> m_pLibrary;
         id<MTLRenderCommandEncoder> m_pCurEncoder;
-        //
-        SVArray< id<MTLTexture> > m_texPoolIn;      //内部纹理池 内部使用的纹理
-        SVArray< id<MTLTexture> > m_texPoolOut;     //外部纹理池
-        SVArray< id<MTLBuffer> > m_bufPool;         //buf池
         
     public:
         //prop
@@ -84,6 +76,9 @@ namespace sv {
         bool m_macOS11Runtime;
         bool m_hasPixelFormatDepth32Float_Stencil8;
         s32 m_samplenum;
+        
+    public:
+        void drawBox();
     };
         
     

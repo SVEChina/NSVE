@@ -17,6 +17,9 @@ SVShader::SVShader(SVInstPtr _app)
 }
 
 SVShader::~SVShader() {
+    m_vs_sampler.clear();
+    m_fs_sampler.clear();
+    m_gs_sampler.clear();
     m_res_shader = nullptr;
 }
 
@@ -31,4 +34,11 @@ void SVShader::unbindRes() {
 
 SVRShaderPtr SVShader::getResShader() {
     return m_res_shader;
+}
+
+bool SVShader::active() {
+    if(m_res_shader) {
+        return m_res_shader->active( mApp->getRenderer() );
+    }
+    return false;
 }

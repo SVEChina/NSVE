@@ -5,7 +5,7 @@
 // yizhou Fu,long Yin,longfei Lin,ziyu Xu,xiaofan Li,daming Li
 //
 
-#include "SVCameraNode.h"
+#include "../basesys/SVCameraNode.h"
 #include "../basesys/SVConfig.h"
 #include "../rendercore/SVFboObject.h"
 #include "../act/SVCameraCtrl.h"

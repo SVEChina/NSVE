@@ -18,7 +18,7 @@
 #include "../rendercore/SVRenderMgr.h"
 #include "../rendercore/SVRenderObject.h"
 #include "../detect/SVDetectMgr.h"
-#include "SVScene.h"
+#include "../basesys/SVScene.h"
 
 using namespace sv;
 
@@ -80,7 +80,7 @@ using namespace sv;
 ////    }
 ////    if (m_mtlFace2D) {
 ////        m_mtlFace2D->update(dt);
-////        m_mtlFace2D->setModelMatrix(m_absolutMat.get());
+////        m_mtlFace2D->setModelMatrix(m_absolutMat);
 ////        m_mtlFace2D->setBlendEnable(true);
 ////        m_mtlFace2D->setBlendState(MTL_BLEND_ONE, MTL_BLEND_ONE_MINUS_SRC_ALPHA);
 ////        m_mtlFace2D->setTexcoordFlip(1.0, 1.0);

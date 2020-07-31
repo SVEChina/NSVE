@@ -12,7 +12,7 @@
 #include "../work/SVTdCore.h"
 #include "../base/SVPreDeclare.h"
 #include "../node/SVNode.h"
-#include "../node/SVScene.h"
+#include "../basesys/SVScene.h"
 #include "../node/SVSpineNode.h"
 #include "../node/SVSpriteNode.h"
 #include "../node/SVBitFontNode.h"

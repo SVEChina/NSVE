@@ -12,7 +12,7 @@
 #include "SVOpBase.h"
 #include "../rendercore/SVRenderDef.h"
 #include "../node/SVNodeDef.h"
-#include "../node/SVScene.h"
+#include "../basesys/SVScene.h"
 #include "../node/SVSpineNode.h"
 
 namespace sv {

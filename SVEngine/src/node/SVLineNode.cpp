@@ -6,8 +6,8 @@
 //
 
 #include "SVLineNode.h"
-#include "SVCameraNode.h"
-#include "SVScene.h"
+#include "../basesys/SVCameraNode.h"
+#include "../basesys/SVScene.h"
 #include "../app/SVInst.h"
 #include "../mtl/SVMtlNocolor.h"
 #include "../rendercore/SVRenderObject.h"
@@ -48,7 +48,7 @@ void SVLineNode::update(f32 _dt) {
     SVNode::update(_dt);
 //    if (m_pRenderObj && m_pMesh) {
 //        m_lineMtl->update(_dt);
-//        m_lineMtl->setModelMatrix(m_absolutMat.get());
+//        m_lineMtl->setModelMatrix(m_absolutMat);
 //        m_lineMtl->setLineSize(4.0f);
 //        m_lineMtl->setColor(1.0f, 0.0f, 0.0f, 1.0f);
 //        m_lineMtl->setBlendEnable(false);

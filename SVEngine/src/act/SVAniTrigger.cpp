@@ -7,7 +7,7 @@
 
 #include "SVAniTrigger.h"
 #include "../basesys/SVSceneMgr.h"
-#include "../node/SVScene.h"
+#include "../basesys/SVScene.h"
 #include "../node/SVNodeVisit.h"
 #include "../node/SVSpineNode.h"
 

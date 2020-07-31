@@ -6,8 +6,8 @@
 //
 
 #include "SVFaceCoord.h"
-#include "SVCameraNode.h"
-#include "SVScene.h"
+#include "../basesys/SVCameraNode.h"
+#include "../basesys/SVScene.h"
 #include "../app/SVInst.h"
 #include "../rendercore/SVRenderObject.h"
 #include "../rendercore/SVRenderMesh.h"
@@ -205,7 +205,7 @@ void SVFaceCoord::update(f32 dt) {
 //        SVMtlGeo3dPtr t_mtl_box = MakeSharedPtr<SVMtlGeo3d>(mApp);
 //        t_mtl_box->setColor(0.1f, 0.80f, 0.05f, 1.0f);
 //        t_mtl_box->update(dt);
-//        t_mtl_box->setModelMatrix(m_absolutMat.get());
+//        t_mtl_box->setModelMatrix(m_absolutMat);
 //        t_mtl_box->setTexcoordFlip(1.0, -1.0f);
 //        t_mtl_box->setDepthEnable(false);
 //        t_mtl_box->setBlendEnable(true);
@@ -218,7 +218,7 @@ void SVFaceCoord::update(f32 dt) {
 //        SVMtlGeo3dPtr t_mtl_box = MakeSharedPtr<SVMtlGeo3d>(mApp);
 //        t_mtl_box->setColor( 0.80f, 0.02f, 0.05f, 1.0f);
 //        t_mtl_box->update(dt);
-//        t_mtl_box->setModelMatrix(m_absolutMat.get());
+//        t_mtl_box->setModelMatrix(m_absolutMat);
 //        t_mtl_box->setTexcoordFlip(1.0, -1.0f);
 //        t_mtl_box->setDepthEnable(false);
 //        t_mtl_box->setBlendEnable(true);

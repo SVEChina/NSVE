@@ -16,9 +16,8 @@
 namespace sv {
 
     /*
-    逻辑概念的shader
+     * shader描述
     */
-
     struct ShaderDsp {
         s32 m_dsp;
         SVString m_programme_fname;
@@ -30,6 +29,21 @@ namespace sv {
         SVString m_tse_fname;
         SVString m_attri_formate;
     };
+
+    /*
+     * 采样描述
+     */
+    struct SamplerDsp {
+        s32 m_chn;
+        SVString m_warps;
+        SVString m_warpt;
+        SVString m_min;
+        SVString m_mag;
+    };
+
+    /*
+     * 包含文件和采样器
+     */
 
     class SVShader : public SVGBaseEx {
     public:
@@ -44,24 +58,18 @@ namespace sv {
         
         SVRShaderPtr getResShader();
         
-    protected:
-        SVRShaderPtr m_res_shader;
-        
-        //参数表
-        struct InParam {
-            std::string m_name; //参数名称
-            int m_size;         //参数数据大小
-            u64 m_off;          //参数数据偏移
-        };
-        //
-        std::vector<InParam> m_paramTbl;
-        //参数值
-        SVDataChunkPtr m_paramValues;
+        bool active();
         
     public:
         ShaderDsp m_dsp;
-    };
+        std::vector<SamplerDsp> m_vs_sampler;
+        std::vector<SamplerDsp> m_fs_sampler;
+        std::vector<SamplerDsp> m_gs_sampler;
         
+    protected:
+        SVRShaderPtr m_res_shader;
+    };
+
 }//!namespace sv
 
 

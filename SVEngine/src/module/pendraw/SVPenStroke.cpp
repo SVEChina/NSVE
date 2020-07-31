@@ -30,10 +30,10 @@
 #include "../../basesys/SVPickProcess.h"
 #include "../../basesys/SVSensorProcess.h"
 #include "../../basesys/SVSceneMgr.h"
-#include "../../node/SVCameraNode.h"
+#include "../../basesys/SVCameraNode.h"
+#include "../../basesys/SVScene.h"
 #include "../../node/SVBillboardNode.h"
 #include "../../node/SVSpriteNode.h"
-#include "../../node/SVScene.h"
 #include "SVPenPackData.h"
 
 using namespace sv;

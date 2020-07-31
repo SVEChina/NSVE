@@ -8,7 +8,7 @@
 #ifndef SV_RENDERMESH_H
 #define SV_RENDERMESH_H
 
-#include "SVRBuffer.h"
+#include "SVRMeshRes.h"
 #include "SVRenderDef.h"
 #include "../core/SVVertDef.h"
 #include "../mtl/SVShaderMgr.h"
@@ -67,12 +67,6 @@ namespace sv {
         
         ~SVRenderMesh();
         
-        virtual void create(SVRendererPtr _renderer);
-        
-        virtual void destroy(SVRendererPtr _renderer);
-    
-        virtual void render(SVRendererPtr _renderer);
-        
         //设置各种描述
         void setIndexDsp(BufferDsp& _dsp);
         
@@ -118,14 +112,14 @@ namespace sv {
         BufferDsp m_instance_dsp;
        
     public:
-        void bindRes(SVRBufferPtr _res);
+        void bindRes(SVRMeshResPtr _res);
         
         void unbindRes();
         
-        SVRBufferPtr getResBuffer();
+        SVRMeshResPtr getResBuffer();
         
     protected:
-        SVRBufferPtr m_res_buffer;      //最主要的是他
+        SVRMeshResPtr m_res_buffer;      //最主要的是他
     };
     
 

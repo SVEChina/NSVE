@@ -20,7 +20,6 @@ namespace sv {
     struct SVTextureDsp {
         SVTextureDsp() {
             m_kind = SV_IMAGE_2D;
-            m_inFormate = SV_FORMAT_RGBA8;   //内部格式
             m_dataFormate = SV_FORMAT_RGBA8; //数据格式
             m_warp_s = E_TEX_CLAMP;     //S方向环绕
             m_warp_t = E_TEX_CLAMP;     //T方向环绕
@@ -34,7 +33,6 @@ namespace sv {
         };
         
         s32 m_kind;
-        s32 m_inFormate;   //内部格式
         s32 m_dataFormate; //数据格式
         SVTEXWRAP m_warp_s;
         SVTEXWRAP m_warp_t;

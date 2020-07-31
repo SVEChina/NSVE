@@ -35,10 +35,10 @@ bool SVFilterShake::create(){
     SVRendererPtr t_renderer = mApp->getRenderer();
     if(!t_renderer)
         return false;
-    SVTexturePtr t_tex = t_renderer->getSVTex(E_TEX_MAIN);
-    s32 t_w = t_tex->getTextureDsp()->m_width;
-    s32 t_h = t_tex->getTextureDsp()->m_height;
-    t_renderer->createSVTex(E_TEX_FILTER_SHAKE, t_w, t_h, GL_RGBA);
+    //SVTexturePtr t_tex = t_renderer->getSVTex(E_TEX_MAIN);
+    s32 t_w = 0;//t_tex->m_width;
+    s32 t_h = 0;//t_tex->m_height;
+//    t_renderer->createSVTex(E_TEX_FILTER_SHAKE, t_w, t_h, GL_RGBA);
     //创建多passnode
     m_pPassNode = MakeSharedPtr<SVMultPassNode>(mApp);
     m_pPassNode->setname("SVFilterShakeNode");
@@ -47,7 +47,7 @@ bool SVFilterShake::create(){
     //创建pass
     SVPassPtr t_pass1 = MakeSharedPtr<SVPass>();
     m_mtlShake = MakeSharedPtr<SVMtlShake>(mApp);
-    m_mtlShake->setTexcoordFlip(1.0f, 1.0f);
+    //m_mtlShake->setTexcoordFlip(1.0f, 1.0f);
     //t_pass1->setMtl(m_mtlShake);
     t_pass1->setInTex(0,E_TEX_MAIN);
     t_pass1->setOutTex(E_TEX_FILTER_SHAKE);
@@ -55,7 +55,7 @@ bool SVFilterShake::create(){
 
     SVPassPtr t_pass2 = MakeSharedPtr<SVPass>();
     SVMtlCorePtr t_mtl_back= MakeSharedPtr<SVMtlCore>(mApp,"screennor");
-    t_mtl_back->setTexcoordFlip(1.0f, 1.0f);
+    //t_mtl_back->setTexcoordFlip(1.0f, 1.0f);
     //t_pass2->setMtl(t_mtl_back);
     t_pass2->setInTex(0, E_TEX_FILTER_SHAKE);
     t_pass2->setOutTex(E_TEX_MAIN);
@@ -64,10 +64,6 @@ bool SVFilterShake::create(){
 }
 
 void SVFilterShake::destroy(){
-    SVRendererPtr t_renderer = mApp->getRenderer();
-    if(t_renderer){
-        t_renderer->destroySVTex(E_TEX_FILTER_SHAKE);
-    }
 }
 
 void SVFilterShake::update(f32 dt){

@@ -66,8 +66,6 @@ namespace sv {
         
         SVTexturePtr m_pTex;
         
-        f32 m_texcoordFlip[2];
-        
         SVTEXINID m_texForm;  //纹理来源
         
         u32 m_min_filter;
@@ -91,8 +89,6 @@ namespace sv {
         
         void setTexture(u32 _index,sv::SVTEXINID _from);
         
-        void setTexClip(u32 _index,f32 _x,f32 _y);
-        
         //设置纹理环绕
         void setTexWrapS(u32 _index,s32 _type);
         
@@ -103,7 +99,7 @@ namespace sv {
         
         void setTexFilterMin(u32 _index,s32 _type);
 
-    
+    public:
         TexUnit m_texUnit[MAX_TEXUNIT];
     };
         

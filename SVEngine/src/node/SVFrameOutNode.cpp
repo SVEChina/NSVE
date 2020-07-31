@@ -6,7 +6,7 @@
 //
 
 #include "SVFrameOutNode.h"
-#include "SVScene.h"
+#include "../basesys/SVScene.h"
 #include "../basesys/SVComData.h"
 #include "../basesys/SVSceneMgr.h"
 #include "../mtl/SVMtlRGB2YUV.h"

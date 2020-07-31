@@ -6,8 +6,8 @@
 //
 
 #include "SVFrameOutTex.h"
-#include "SVCameraNode.h"
-#include "SVScene.h"
+#include "../basesys/SVCameraNode.h"
+#include "../basesys/SVScene.h"
 #include "../basesys/SVSceneMgr.h"
 #include "../basesys/SVComData.h"
 #include "../app/SVInst.h"
@@ -58,17 +58,15 @@ void SVFrameOutTex::update(f32 _dt){
     SVNode::update(_dt);
     SVRendererPtr t_renderer = mApp->getRenderer();
     if(m_pMtl){
-        m_pMtl->setModelMatrix(m_absolutMat.get());
-        m_pMtl->setTexture(0,t_renderer->getSVTex(E_TEX_MAIN));    //那第一张纹理
+        m_pMtl->setModelMatrix(m_absolutMat);
+        //m_pMtl->setTexture(0,E_TEX_MAIN);    //那第一张纹理
         m_pMtl->setBlendEnable(false);
-        m_pMtl->setTexcoordFlip(1.0f, 1.0f);
+        m_pMtl->setParam("texclip",FVec2(1.0f, 1.0f));
         m_pMtl->update(_dt);
     }
 }
 
 s32 SVFrameOutTex::getTexId(){
-    SVRendererPtr t_renderer = mApp->getRenderer();
-    SVTexturePtr t_out_tex = t_renderer->getSVTex(E_TEX_OUTSTREAM);
     return 0;
 }
 

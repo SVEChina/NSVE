@@ -9,8 +9,8 @@
 #include <spine/RegionAttachment.h>
 #include <spine/MeshAttachment.h>
 #include "SVSpineNode.h"
-//#include "SVCameraNode.h"
-//#include "SVScene.h"
+//#include "../basesys/SVCameraNode.h"
+//#include "../basesys/SVScene.h"
 //#include "../rendercore/SVRenderMgr.h"
 //#include "../rendercore/SVRenderScene.h"
 //#include "../rendercore/SVRenderMesh.h"
@@ -145,7 +145,7 @@ void SVSpineNode::update(f32 dt) {
 //            }
 //            SpineMeshDataPtr pMeshData = m_spine->m_spineDataPool[i];
 //            SVMtlAni2DPtr t_mtl = MakeSharedPtr<SVMtlAni2D>(mApp);
-//            t_mtl->setModelMatrix(m_absolutMat.get());
+//            t_mtl->setModelMatrix(m_absolutMat);
 //            t_mtl->setTexture(0,pMeshData->m_pTex);
 //            t_mtl->setBlendEnable(true);
 //            t_mtl->setBlendState(MTL_BLEND_ONE, MTL_BLEND_ONE_MINUS_SRC_ALPHA);

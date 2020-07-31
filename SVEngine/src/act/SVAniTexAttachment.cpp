@@ -11,7 +11,7 @@
 #include "../node/SVSpineNode.h"
 #include "../node/SVSpriteNode.h"
 #include "../basesys/SVSceneMgr.h"
-#include "../node/SVScene.h"
+#include "../basesys/SVScene.h"
 #include "../node/SVNodeVisit.h"
 #include "../mtl/SVTexMgr.h"
 #include "../mtl/SVTexture.h"
@@ -45,11 +45,6 @@ void SVAniTexAttachment::init() {
 }
 
 void SVAniTexAttachment::destroy() {
-    SVRendererPtr t_renderer = mApp->getRenderer();
-    SVTEXINID t_texType = SVTEXINID(E_TEX_AVATAR_0 + m_param.channel);
-    if (t_renderer->hasSVTex(t_texType)) {
-        t_renderer->destroySVTex(t_texType);
-    }
 }
 
 void SVAniTexAttachment::enter(){
@@ -166,11 +161,11 @@ void SVAniTexAttachment::_genTexture(){
     if (m_texInfo.dataSwap) {
         SVRendererPtr t_renderer = mApp->getRenderer();
         SVTEXINID t_texType = SVTEXINID(E_TEX_AVATAR_0 + m_param.channel);
-        if (t_renderer->hasSVTex(t_texType)) {
-            m_texture = t_renderer->getSVTex(t_texType);
-        }else{
-            m_texture = t_renderer->createSVTex(t_texType, m_texInfo.width, m_texInfo.height, GL_RGBA,GL_RGBA);
-        }
+//        if (t_renderer->hasSVTex(t_texType)) {
+//            m_texture = t_renderer->getSVTex(t_texType);
+//        }else{
+//            //m_texture = t_renderer->createSVTex(t_texType, m_texInfo.width, m_texInfo.height, GL_RGBA,GL_RGBA);
+//        }
         //m_texture->setTexData(m_texInfo.dataSwap->getData(), m_texInfo.dataSwap->getSize());
     }
 }

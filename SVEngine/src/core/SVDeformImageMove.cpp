@@ -7,7 +7,7 @@
 
 
 #include "SVDeformImageMove.h"
-#include "../node/SVScene.h"
+#include "../basesys/SVScene.h"
 #include "../app/SVInst.h"
 #include "../event/SVEventMgr.h"
 #include "../event/SVEvent.h"
@@ -28,7 +28,7 @@
 #include "../mtl/SVMtlShapeVaried.h"
 #include "../mtl/SVTexMgr.h"
 #include "../base/SVVec2.h"
-#include "../node/SVCameraNode.h"
+#include "../basesys/SVCameraNode.h"
 #include "../node/SVNode.h"
 #include "../detect/SVDetectMgr.h"
 #include "../detect/SVDetectST.h"
@@ -81,11 +81,6 @@ SVDeformImageMove::~SVDeformImageMove(){
     m_pMtlBg = nullptr;
     m_pIUMP = nullptr;
     m_dataPoint = nullptr;
-    //m_fbo = nullptr;
-    SVRendererPtr t_renderer = mApp->getRenderer();
-    if(t_renderer) {
-        t_renderer->destroySVTex(E_TEX_FILTER_DEFORM02);
-    }
 }
 
 void SVDeformImageMove::init(SVTexturePtr _intex,SVTexturePtr _texout){
@@ -274,17 +269,17 @@ void SVDeformImageMove::render(){
             //图片翻转这块需要校正一下 by fyz
             if(m_pMtlBg){
                 if(m_flip){
-                    m_pMtlBg->setTexcoordFlip(1.0f, -1.0f);
+                    m_pMtlBg->setParam("texclip",FVec2(1.0f, 1.0f));
                 }else{
-                    m_pMtlBg->setTexcoordFlip(1.0f, 1.0f);
+                    m_pMtlBg->setParam("texclip",FVec2(1.0f, 1.0f));
                 }
             }
             //
             if( m_passDeform->m_outTexType == E_TEX_END ) {
                 t_cmd->setTexture(m_passDeform->m_outTex);
             }else{
-                SVTexturePtr t_tex = mApp->getRenderer()->getSVTex(m_passDeform->m_outTexType);
-                t_cmd->setTexture(t_tex);
+//                SVTexturePtr t_tex = mApp->getRenderer()->getSVTex(m_passDeform->m_outTexType);
+//                t_cmd->setTexture(t_tex);
             }
             if(m_passDeform->m_pMesh){
                 t_cmd->addMtlMesh(m_passDeform->m_pMtl,m_passDeform->m_pMesh);
@@ -304,9 +299,9 @@ void SVDeformImageMove::render(){
             t_cmd->setTexture(m_passBack->m_outTex);
             t_cmd->setMesh(m_passBack->m_pMesh);
             if(m_flip){
-                m_passBack->m_pMtl->setTexcoordFlip(1.0f, -1.0f);
+                //m_passBack->m_pMtl->setTexcoordFlip(1.0f, -1.0f);
             }else{
-                m_passBack->m_pMtl->setTexcoordFlip(1.0f, 1.0f);
+                //m_passBack->m_pMtl->setTexcoordFlip(1.0f, 1.0f);
             }
 //            t_cmd->setMaterial(m_passBack->m_pMtl);
             t_rs->pushRenderCmd(RST_FACEMORPH, t_cmd);

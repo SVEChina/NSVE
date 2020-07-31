@@ -7,8 +7,8 @@
 
 
 #include "SVSpriteNode.h"
-#include "SVScene.h"
-#include "SVCameraNode.h"
+#include "../basesys/SVScene.h"
+#include "../basesys/SVCameraNode.h"
 #include "../mtl/SVMtlCore.h"
 #include "../mtl/SVMtl2D.h"
 #include "../rendercore/SVRenderMesh.h"
@@ -28,33 +28,25 @@ using namespace sv;
 SVSpriteNode::SVSpriteNode(SVInstPtr _app)
 :SVNode(_app) {
     ntype = "SVSpriteNode";
-    m_inTexType = E_TEX_END;
-    m_pTexPath = "default";
     m_rsType = RST_SOLID_3D;
-    m_pRenderObj = MakeSharedPtr<SVRenderObject>();
     m_canSelect = false;
     m_pTex = nullptr;
     m_pMesh = nullptr;
-    setTexcoord(1.0,-1.0);
     setSize(100,100);
 }
 
 SVSpriteNode::SVSpriteNode(SVInstPtr _app,f32 _w,f32 _h)
 :SVNode(_app) {
     ntype = "SVSpriteNode";
-    m_inTexType = E_TEX_END;
     m_rsType = RST_SOLID_3D;
-    m_pRenderObj = MakeSharedPtr<SVRenderObject>();
     m_canSelect = false;
     m_pTex = nullptr;
     m_pMesh = nullptr;
-    setTexcoord(1.0,-1.0);
     setSize(_w,_h);
 }
 
 SVSpriteNode::~SVSpriteNode() {
     m_pMesh = nullptr;
-    m_pRenderObj = nullptr;
     m_pMtl = nullptr;
     m_pTex = nullptr;
 }
@@ -66,68 +58,20 @@ void SVSpriteNode::setSize(f32 _w,f32 _h) {
     m_pMesh = SVGeoGen::genRect(mApp, m_width, m_height, 0, 0, m_width, m_height,m_aabbBox);
 }
 
-void SVSpriteNode::syncTexSize() {
-    if(m_inTexType == E_TEX_END) {
-        m_pTex = mApp->getTexMgr()->getTexture(m_pTexPath.c_str(),true);
-    }else {
-        m_pTex = mApp->getRenderer()->getSVTex(m_inTexType);
-    }
-    if(m_pTex) {
-//        s32 t_w = m_pTex->getwidth();
-//        s32 t_h = m_pTex->getheight();
-//        setSize(t_w,t_h);
-    }
-}
-
-void SVSpriteNode::setTexcoord(f32 _x,f32 _y){
-    m_texcoordX=_x;
-    m_texcoordY=_y;
-}
-
-f32 SVSpriteNode::getRelativeWidth(){
+f32 SVSpriteNode::getWidth(){
     return m_width;
 }
 
-f32 SVSpriteNode::getRelativeHeight(){
+f32 SVSpriteNode::getHeight(){
     return m_height;
 }
 
-f32 SVSpriteNode::getWidth(){
-    f32 t_scaleX = 1.0f;
-    SVNodePtr t_curNode = THIS_TO_SHAREPTR(SVSpriteNode);
-    return m_width*t_scaleX;
-}
-
-f32 SVSpriteNode::getHeight(){
-    f32 t_scaleY = 1.0f;
-//    SVNodePtr t_curNode = THIS_TO_SHAREPTR(SVSpriteNode);
-//    while (t_curNode) {
-//        t_scaleY = t_scaleY * t_curNode->getScale().y;
-//        if (t_curNode->getParent()) {
-//            t_curNode = t_curNode->getParent();
-//        } else {
-//            break;
-//        }
-//    }
-    return m_height*t_scaleY;
-}
-
-void SVSpriteNode::setTexture(cptr8 _path, bool enableMipMap){
-    if(m_pTexPath!=_path) {
-        m_pTexPath = _path;
-        m_pTex = mApp->getTexMgr()->getTexture(m_pTexPath.c_str(),true);
-    }
-}
-
-cptr8 SVSpriteNode::getTexturePath(){
-//    if (m_pTex) {
-//        return m_pTex->m_;
-//    }
-    return m_pTexPath.c_str();
+void SVSpriteNode::setTexture(cptr8 _path){
+    m_pTex = mApp->getTexMgr()->getTexture(_path,true);
 }
 
 void SVSpriteNode::setTexture(SVTEXINID _textype){
-    m_inTexType = _textype;
+    //m_inTexType = _textype;
 }
 
 void SVSpriteNode::setTexture(SVTexturePtr _tex){
@@ -137,26 +81,25 @@ void SVSpriteNode::setTexture(SVTexturePtr _tex){
     m_pTex = _tex;
 }
 
-void SVSpriteNode::setTexture(void * _data, s32 _w, s32 _h, bool enableMipMap){
-//    if (m_pTex) {
-//        m_pTex = nullptr;
-//    }
-//    m_pTex = mApp->getTexMgr()->createUnctrlTextureWithData(_w, _h, GL_RGBA, GL_RGBA, (void *)_data);;
+SVTexturePtr SVSpriteNode::getTexture() {
+    return m_pTex;
 }
 
-void SVSpriteNode::setMesh(SVRenderMeshPtr _mesh){
-    if (_mesh) {
-        m_pMesh = _mesh;
+void SVSpriteNode::syncTexSize() {
+    if(m_pTex) {
+        s32 t_w = m_pTex->getTextureDsp()->m_width;
+        s32 t_h = m_pTex->getTextureDsp()->m_height;
+        setSize(t_w,t_h);
     }
 }
 
 void SVSpriteNode::update(f32 dt) {
     SVNode::update(dt);
-//    if (m_pRenderObj && m_pMesh) {
+//    if ( m_pMesh ) {
 //        if(m_pMtl){
 //            m_pMtl->setBlendEnable(true);
 //            m_pMtl->setBlendState(MTL_BLEND_ONE, MTL_BLEND_ONE_MINUS_SRC_ALPHA);
-//            m_pMtl->setModelMatrix(m_absolutMat.get());
+//            m_pMtl->setModelMatrix(m_absolutMat);
 //            m_pMtl->setTexcoordFlip(m_texcoordX, m_texcoordY);
 //            if(m_inTexType == E_TEX_END) {
 //                m_pMtl->setTexture(0,m_pTex);
@@ -174,7 +117,7 @@ void SVSpriteNode::update(f32 dt) {
 //        }else{
 //            //创建新的材质
 //            SVMtl2DPtr t_mtl = MakeSharedPtr<SVMtl2D>(mApp, "normal2d_c");
-//            t_mtl->setModelMatrix(m_absolutMat.get());
+//            t_mtl->setModelMatrix(m_absolutMat);
 //            t_mtl->setTexcoordFlip(m_texcoordX, m_texcoordY);
 //            t_mtl->setBlendEnable(true);
 //            t_mtl->setBlendState(MTL_BLEND_ONE, MTL_BLEND_ONE_MINUS_SRC_ALPHA);
@@ -195,10 +138,10 @@ void SVSpriteNode::update(f32 dt) {
 
 void SVSpriteNode::render() {
     if ( m_visible ){
-        SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
-        if (m_pRenderObj) {
-            m_pRenderObj->pushCmd(t_rs, m_rsType, "SVSpriteNode");
-        }
+//        SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
+//        if (m_pRenderObj) {
+//            m_pRenderObj->pushCmd(t_rs, m_rsType, "SVSpriteNode");
+//        }
     }
     SVNode::render();
 }
@@ -209,29 +152,29 @@ void SVSpriteNode::toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocat
     _toJsonData(_allocator, locationObj);
     locationObj.AddMember("spriteW", m_width, _allocator);
     locationObj.AddMember("spriteH", m_height, _allocator);
-    s32 pos = m_pTexPath.rfind('/');
-    m_pTexName = SVString::substr(m_pTexPath.c_str(), pos+1);
-    locationObj.AddMember("texture", RAPIDJSON_NAMESPACE::StringRef(m_pTexName.c_str()), _allocator);
-    locationObj.AddMember("textype", s32(m_inTexType), _allocator);
-    _objValue.AddMember("SVSpriteNode", locationObj, _allocator);
+    //s32 pos = m_pTexPath.rfind('/');
+    //m_pTexName = SVString::substr(m_pTexPath.c_str(), pos+1);
+    //locationObj.AddMember("texture", RAPIDJSON_NAMESPACE::StringRef(m_pTexName.c_str()), _allocator);
+    //locationObj.AddMember("textype", s32(m_inTexType), _allocator);
+    //_objValue.AddMember("SVSpriteNode", locationObj, _allocator);
 }
 
 void SVSpriteNode::fromJSON(RAPIDJSON_NAMESPACE::Value &item){
     _fromJsonData(item);
-    if (item.HasMember("spriteW") && item["spriteW"].IsFloat()) {
-        m_width = item["spriteW"].GetFloat();
-    }
-    if (item.HasMember("spriteH") && item["spriteH"].IsFloat()) {
-        m_height = item["spriteH"].GetFloat();
-    }
-    setSize(m_width, m_height);
-    if (item.HasMember("texture") && item["texture"].IsString()) {
-        SVString t_textureName = item["texture"].GetString();
-        SVString t_texturePath = m_rootPath + t_textureName;
-        setTexture(t_texturePath.c_str(), m_enableMipMap);
-    }
-    if (item.HasMember("textype") && item["textype"].IsInt()) {
-        m_inTexType = SVTEXINID(item["textype"].GetInt());
-    }
+//    if (item.HasMember("spriteW") && item["spriteW"].IsFloat()) {
+//        m_width = item["spriteW"].GetFloat();
+//    }
+//    if (item.HasMember("spriteH") && item["spriteH"].IsFloat()) {
+//        m_height = item["spriteH"].GetFloat();
+//    }
+//    setSize(m_width, m_height);
+//    if (item.HasMember("texture") && item["texture"].IsString()) {
+//        SVString t_textureName = item["texture"].GetString();
+//        SVString t_texturePath = m_rootPath + t_textureName;
+//        setTexture(t_texturePath.c_str(), m_enableMipMap);
+//    }
+//    if (item.HasMember("textype") && item["textype"].IsInt()) {
+//        m_inTexType = SVTEXINID(item["textype"].GetInt());
+//    }
     m_dirty = true;
 }

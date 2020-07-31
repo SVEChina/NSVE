@@ -5,8 +5,8 @@
 // yizhou Fu,long Yin,longfei Lin,ziyu Xu,xiaofan Li,daming Li
 //
 #include "SVFaceDetectPointNode.h"
-#include "SVScene.h"
-#include "SVCameraNode.h"
+#include "../basesys/SVScene.h"
+#include "../basesys/SVCameraNode.h"
 #include "../mtl/SVMtlCore.h"
 #include "../rendercore/SVRenderMesh.h"
 #include "../core/SVGeoGen.h"
@@ -108,7 +108,7 @@ void SVFaceDetectPointNode::update(f32 _dt){
 //        SVMtlCorePtr t_mtl = MakeSharedPtr<SVMtlCore>(mApp, "normal2d");
 //        t_mtl->setBlendEnable(false);
 //        t_mtl->setBlendState(MTL_BLEND_ONE, MTL_BLEND_ONE_MINUS_SRC_ALPHA);
-//        t_mtl->setModelMatrix(m_absolutMat.get());
+//        t_mtl->setModelMatrix(m_absolutMat);
 //        t_mtl->setTexcoordFlip(1.0, -1.0);
 //        t_mtl->setTexture(0,m_pTex);
 //        t_mtl->setBlendEnable(true);

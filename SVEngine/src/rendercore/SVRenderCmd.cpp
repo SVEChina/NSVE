@@ -15,7 +15,7 @@
 #include "../event/SVEvent.h"
 #include "../event/SVEventMgr.h"
 #include "../event/SVOpEvent.h"
-#include "../node/SVScene.h"
+#include "../basesys/SVScene.h"
 #include "../mtl/SVMtlCore.h"
 #include "../mtl/SVTexMgr.h"
 #include "../mtl/SVTexture.h"
@@ -55,12 +55,12 @@ void SVRenderCmdNor::setMaterial(SVMtlCorePtr _mtl){
 }
 
 void SVRenderCmdNor::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
-    if (m_pMtl && m_pMesh && _renderer) {
+    if ( _renderer && _target && m_pMtl && m_pMesh ) {
+        _renderer->processMesh(m_pMesh,_target);
         _renderer->processMtl(m_pMtl);
-        _renderer->processMesh(m_pMesh);
+        _renderer->drawMesh(m_pMesh,_target);
     }
 }
-
 
 //
 SVRenderCmdClear::SVRenderCmdClear()

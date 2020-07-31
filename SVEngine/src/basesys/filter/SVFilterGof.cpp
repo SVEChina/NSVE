@@ -32,7 +32,7 @@ bool SVFilterGof::create(){
     SVRendererPtr t_renderer = mApp->getRenderer();
     if(!t_renderer)
         return false;
-    SVTexturePtr t_tex = t_renderer->getSVTex(E_TEX_MAIN);
+    //SVTexturePtr t_tex = t_renderer->getSVTex(E_TEX_MAIN);
 //    s32 t_w = t_tex->m_width;
 //    s32 t_h = t_tex->m_height;
 //    if(! t_renderer->getSVTex(E_TEX_HELP0) ){
@@ -53,7 +53,7 @@ bool SVFilterGof::create(){
     //创建pass
     SVPassPtr t_pass1 = MakeSharedPtr<SVPass>();
     SVMtlCorePtr t_lkMtl=MakeSharedPtr<SVMtlCore>(mApp,"screennor");
-    t_lkMtl->setTexcoordFlip(1.0f, 1.0f);
+    t_lkMtl->setParam("texclip",FVec2(1.0f, 1.0f));
     //t_pass1->setMtl(t_lkMtl);
     t_pass1->setInTex(0,E_TEX_MAIN);
     t_pass1->setOutTex(E_TEX_HELP0);
@@ -61,7 +61,7 @@ bool SVFilterGof::create(){
     
     t_pass1 = MakeSharedPtr<SVPass>();
     SVMtlSmoothPtr t_lkMtl02=MakeSharedPtr<SVMtlSmooth>(mApp,"blurtex");
-    t_lkMtl02->setTexcoordFlip(1.0f, 1.0f);
+    t_lkMtl02->setParam("texclip",FVec2(1.0f, 1.0f));
     //t_lkMtl02->setImgWH(t_w/2,t_h/2);
     //t_pass1->setMtl(t_lkMtl02);
     t_pass1->setInTex(0,E_TEX_MAIN);
@@ -69,7 +69,7 @@ bool SVFilterGof::create(){
     m_pPassNode->addPass(t_pass1);
     
     SVMtlSmoothPtr t_lkMtl01=MakeSharedPtr<SVMtlSmooth>(mApp,"blurtex");
-    t_lkMtl01->setTexcoordFlip(1.0f, 1.0f);
+    t_lkMtl01->setParam("texclip",FVec2(1.0f, 1.0f));
     ///t_lkMtl01->setImgWH(t_w/2,t_h/2);
     t_pass1 = MakeSharedPtr<SVPass>();
     //t_pass1->setMtl(t_lkMtl01);
@@ -79,7 +79,7 @@ bool SVFilterGof::create(){
     
     SVPassPtr t_pass2 = MakeSharedPtr<SVPass>();
     m_mtl_smooth =MakeSharedPtr<SVMtlSmooth>(mApp,"gof");
-    m_mtl_smooth->setTexcoordFlip(1.0, 1.0);
+    m_mtl_smooth->setParam("texclip",FVec2(1.0f, 1.0f));
     //m_mtl_smooth->setImgWH(t_w,t_h);
     //t_pass2->setMtl(m_mtl_smooth);
     t_pass2->setInTex(0, E_TEX_HELP0);
@@ -94,11 +94,6 @@ void SVFilterGof::destroy(){
         m_pPassNode = nullptr;
     }
     m_pPassNode = nullptr;
-    
-    SVRendererPtr t_renderer = mApp->getRenderer();
-    if(t_renderer){
-        t_renderer->destroySVTex(E_TEX_FILTER_MIP_1);
-    }
 }
 
 

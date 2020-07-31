@@ -11,8 +11,8 @@
 
 #include "ft2build.h"
 #include "freetype.h"
-#include "SVCameraNode.h"
-#include "SVScene.h"
+#include "../basesys/SVCameraNode.h"
+#include "../basesys/SVScene.h"
 #include "../core/SVGeoGen.h"
 #include "../basesys/SVBasicSys.h"
 #include "../basesys/SVFontProcess.h"
@@ -64,7 +64,7 @@ void SVFreeTypeNode::update(f32 dt) {
 //    }
 //    if (m_renderObject && m_pMesh && m_pMtl) {
 //        m_pMtl->update(dt);
-//        m_pMtl->setModelMatrix(m_absolutMat.get());
+//        m_pMtl->setModelMatrix(m_absolutMat);
 //        m_pMtl->setTexcoordFlip(1.0, -1.0f);
 //        m_pMtl->setTexture(0,m_texture);
 //        m_pMtl->setBlendEnable(true);

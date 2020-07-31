@@ -69,59 +69,90 @@ void SVShaderMgr::_loadAllShader() {
                 assert(shaderitem.IsObject());
                 SVString t_shader_name = "";
                 SVString t_file_name = "";
-                SVString t_vs_func = "";
-                SVString t_fs_func = "";
-                SVString t_gs_func = "";
-                SVString t_tsc_func = "";
-                SVString t_tse_func= "";
                 if (shaderitem.HasMember("file") && shaderitem["file"].IsString()) {
                     t_shader_name = shaderitem["file"].GetString();
                     t_file_name = SVString("shader/") + t_shader_name + ".metal";
+                }else{
+                    break;
                 }
-                if (shaderitem.HasMember("vs") && shaderitem["vs"].IsString()) {
-                    t_vs_func = shaderitem["vs"].GetString();
-                }
-                if (shaderitem.HasMember("fs") && shaderitem["fs"].IsString()) {
-                    t_fs_func = shaderitem["fs"].GetString();
-                }
-                if (shaderitem.HasMember("gs") && shaderitem["gs"].IsString()) {
-                    t_gs_func = shaderitem["gs"].GetString();
-                }
-                if (shaderitem.HasMember("tsd") && shaderitem["tsd"].IsString()) {
-                    t_tsc_func = shaderitem["tsd"].GetString();
-                }
-                if (shaderitem.HasMember("tse") && shaderitem["tse"].IsString()) {
-                    t_tse_func = shaderitem["tse"].GetString();
-                }
-                //
                 SVShaderPtr t_shader = MakeSharedPtr<SVShader>(mApp);
                 if(t_shader) {
-                    m_shaderMap.insert( std::make_pair(t_shader_name, t_shader) );
                     //
-                    t_shader->m_dsp.m_vs_fname = t_vs_func;
-                    t_shader->m_dsp.m_fs_fname = t_fs_func;
-                    t_shader->m_dsp.m_gs_fname = t_gs_func;
-                    t_shader->m_dsp.m_tsc_fname = t_tsc_func;
-                    t_shader->m_dsp.m_tse_fname = t_tse_func;
                     t_shader->m_dsp.m_programme_fname = t_file_name;
+                    //解析vs
+                    if (shaderitem.HasMember("vs") && shaderitem["vs"].IsObject() ) {
+                        RAPIDJSON_NAMESPACE::Document::Object vs_obj = shaderitem["vs"].GetObject();
+                        t_shader->m_dsp.m_vs_fname = vs_obj["entry"].GetString();
+                        //采样器
+                        if( vs_obj.HasMember("sampler")  && vs_obj["sampler"].IsArray() ) {
+                            RAPIDJSON_NAMESPACE::Document::Array t_sampler = vs_obj["sampler"].GetArray();
+                            for(s32 i=0;i<t_sampler.Size();i++) {
+                                SamplerDsp t_sampler_dsp;
+                                t_sampler_dsp.m_chn = t_sampler[i]["chn"].GetInt();
+                                t_sampler_dsp.m_warps = t_sampler[i]["warps"].GetString();
+                                t_sampler_dsp.m_warpt = t_sampler[i]["warpt"].GetString();
+                                t_sampler_dsp.m_min = t_sampler[i]["min"].GetString();
+                                t_sampler_dsp.m_mag = t_sampler[i]["mag"].GetString();
+                                t_shader->m_vs_sampler.push_back(t_sampler_dsp);
+                            }
+                        }
+                    }
+                    //解析fs
+                    if (shaderitem.HasMember("fs") && shaderitem["fs"].IsObject()) {
+                        RAPIDJSON_NAMESPACE::Document::Object fs_obj = shaderitem["fs"].GetObject();
+                        t_shader->m_dsp.m_fs_fname = fs_obj["entry"].GetString();
+                        //采样器
+                        if( fs_obj.HasMember("sampler")  && fs_obj["sampler"].IsArray() ) {
+                            RAPIDJSON_NAMESPACE::Document::Array t_sampler = fs_obj["sampler"].GetArray();
+                            for(s32 i=0;i<t_sampler.Size();i++) {
+                                SamplerDsp t_sampler_dsp;
+                                t_sampler_dsp.m_chn = t_sampler[i]["chn"].GetInt();
+                                t_sampler_dsp.m_warps = t_sampler[i]["warps"].GetString();
+                                t_sampler_dsp.m_warpt = t_sampler[i]["warpt"].GetString();
+                                t_sampler_dsp.m_min = t_sampler[i]["min"].GetString();
+                                t_sampler_dsp.m_mag = t_sampler[i]["mag"].GetString();
+                                t_shader->m_fs_sampler.push_back(t_sampler_dsp);
+                            }
+                        }
+                    }
+                    //解析gs
+                    if (shaderitem.HasMember("gs") && shaderitem["gs"].IsObject()) {
+                        RAPIDJSON_NAMESPACE::Document::Object gs_obj = shaderitem["gs"].GetObject();
+                        t_shader->m_dsp.m_gs_fname = gs_obj["entry"].GetString();
+                        //采样器
+                        if( gs_obj.HasMember("sampler")  && gs_obj["sampler"].IsArray() ) {
+                            RAPIDJSON_NAMESPACE::Document::Array t_sampler = gs_obj["sampler"].GetArray();
+                            for(s32 i=0;i<t_sampler.Size();i++) {
+                                //
+                            }
+                        }
+                    }
+                    if (shaderitem.HasMember("tsd") && shaderitem["tsd"].IsObject()) {
+                        RAPIDJSON_NAMESPACE::Document::Object tsd_obj = shaderitem["tsd"].GetObject();
+                        t_shader->m_dsp.m_tsc_fname = tsd_obj["entry"].GetString();
+                    }
+                    if (shaderitem.HasMember("tse") && shaderitem["tse"].IsObject()) {
+                        RAPIDJSON_NAMESPACE::Document::Object tse_obj = shaderitem["tse"].GetObject();
+                        t_shader->m_dsp.m_tse_fname = tse_obj["entry"].GetString();
+                    }
                     //
-                    if(t_vs_func!="null") {
+                    if(t_shader->m_dsp.m_vs_fname!="null") {
                         t_shader->m_dsp.m_dsp |= SV_E_TECH_VS;
                     }
-                    if(t_fs_func!="null") {
+                    if(t_shader->m_dsp.m_fs_fname!="null") {
                         t_shader->m_dsp.m_dsp |= SV_E_TECH_FS;
                     }
-                    if(t_gs_func!="null") {
+                    if(t_shader->m_dsp.m_gs_fname!="null") {
                         t_shader->m_dsp.m_dsp |= SV_E_TECH_GS;
                     }
-                    if(t_tsc_func!="null") {
+                    if(t_shader->m_dsp.m_tsc_fname!="null") {
                         t_shader->m_dsp.m_dsp |= SV_E_TECH_TSC;
                     }
-                    if(t_tse_func!="null") {
+                    if(t_shader->m_dsp.m_tse_fname!="null") {
                         t_shader->m_dsp.m_dsp |= SV_E_TECH_TSD;
                     }
                     //创建shader
-                    //
+                    m_shaderMap.insert( std::make_pair(t_shader_name, t_shader) );
                     SVDispatch::dispatchShaderCreate(mApp,t_shader);
                     //SV_LOG_ERROR("shader : vs(%s) fs(%s)\n", t_vs_fname.c_str(),t_fs_fname.c_str());
                 }

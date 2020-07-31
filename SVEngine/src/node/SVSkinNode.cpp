@@ -6,8 +6,8 @@
 //
 
 #include "SVSkinNode.h"
-#include "SVCameraNode.h"
-#include "SVScene.h"
+#include "../basesys/SVCameraNode.h"
+#include "../basesys/SVScene.h"
 #include "../event/SVEventMgr.h"
 #include "../basesys/SVConfig.h"
 #include "../core/SVModel.h"

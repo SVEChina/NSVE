@@ -7,7 +7,7 @@
 
 #include "SVOpOutCamera.h"
 #include "../app/SVInst.h"
-#include "../node/SVScene.h"
+#include "../basesys/SVScene.h"
 #include "../node/SVIOSInstreamNode.h"
 #include "../basesys/SVBasicSys.h"
 #include "../basesys/SVStreamIn.h"

@@ -40,7 +40,7 @@ SVRenderMesh::~SVRenderMesh() {
     m_use_instance = false;
 }
 
-void SVRenderMesh::bindRes(SVRBufferPtr _res) {
+void SVRenderMesh::bindRes(SVRMeshResPtr _res) {
     m_res_buffer = _res;
 }
 
@@ -48,7 +48,7 @@ void SVRenderMesh::unbindRes() {
     m_res_buffer = nullptr;
 }
 
-SVRBufferPtr SVRenderMesh::getResBuffer() {
+SVRMeshResPtr SVRenderMesh::getResBuffer() {
     return m_res_buffer;
 }
 
@@ -93,14 +93,6 @@ BufferDsp* SVRenderMesh::getInstanceDsp() {
     return &m_instance_dsp;
 }
 
-//
-void SVRenderMesh::create(SVRendererPtr _renderer){
-}
-
-void SVRenderMesh::destroy(SVRendererPtr _renderer) {
-}
-
-
 void SVRenderMesh::setDrawMethod(DRAWMETHOD drawtype) {
 }
 
@@ -108,13 +100,20 @@ void SVRenderMesh::setVertNum(s32 _vertexNum){
 }
 
 void SVRenderMesh::setIndexData(SVDataSwapPtr _data,s32 _num){
-}
-
-void SVRenderMesh::setVertexData(SVDataSwapPtr _data,s32 _channel,VFTYPE type){
+    if(m_use_index) {
+        //
+        
+    }
 }
 
 void SVRenderMesh::setInstanceData(SVDataSwapPtr _pdata, u32 _instanceCount){
+    if(m_use_instance) {
+        //
+        
+    }
 }
 
-void SVRenderMesh::render(SVRendererPtr _renderer) {
+void SVRenderMesh::setVertexData(SVDataSwapPtr _data,s32 _channel,VFTYPE type){
+    
 }
+
