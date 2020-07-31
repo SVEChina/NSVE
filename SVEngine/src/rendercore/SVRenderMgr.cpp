@@ -140,7 +140,7 @@ void SVRenderMgr::_adapt() {
 //            }else {
 //                t_pMtl->setTexcoordFlip(1.0f, 1.0f);
 //            }
-//            SVRenderCmdAdaptPtr t_cmd = MakeSharedPtr<SVRenderCmdAdapt>();
+//            SVRCmdAdaptPtr t_cmd = MakeSharedPtr<SVRCmdAdapt>();
 //            t_cmd->mTag = "adaptscene";
 //            t_cmd->setRenderer(m_pRenderer);
 //            t_cmd->setClearColor(0.0f, 0.0f, 0.0f, 0.0f);

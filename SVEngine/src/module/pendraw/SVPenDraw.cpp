@@ -151,7 +151,7 @@ void SVPenDraw::_drawStroke(){
 //    SVRendererPtr t_renderer = mApp->getRenderer();
 //    SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
 //    if (t_rs && t_renderer && m_pRenderObj && m_fbo2) {
-//        SVRenderCmdFboResizePtr t_fbo_bind = MakeSharedPtr<SVRenderCmdFboResize>(m_fbo2);
+//        SVRCmdFboResizePtr t_fbo_bind = MakeSharedPtr<SVRCmdFboResize>(m_fbo2);
 //        t_fbo_bind->mTag = "pen_draw_fbo2_bind";
 //        t_rs->pushRenderCmd(RST_AR, t_fbo_bind);
 //
@@ -186,7 +186,7 @@ void SVPenDraw::_drawGlow(){
 //    SVRendererPtr t_renderer = mApp->getRenderer();
 //    SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
 //    if (t_rs && t_renderer && m_pRenderObj && m_fbo1) {
-//        SVRenderCmdFboResizePtr t_fbo_bind = MakeSharedPtr<SVRenderCmdFboResize>(m_fbo1);
+//        SVRCmdFboResizePtr t_fbo_bind = MakeSharedPtr<SVRCmdFboResize>(m_fbo1);
 //        t_fbo_bind->mTag = "pen_draw_fbo1_bind";
 //        t_rs->pushRenderCmd(RST_AR, t_fbo_bind);
 //        

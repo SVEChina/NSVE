@@ -106,7 +106,7 @@ void SVShapeVariedNode::render(){
 //        if (t_rs && false  == t_rs->isSuspend() ) {
 //            for(s32 i=0;i<m_passPool.size();i++){
 //                if(m_passPool[i]->m_pMtl){
-//                    SVRenderCmdPassPtr t_cmd = MakeSharedPtr<SVRenderCmdPass>();
+//                    SVRCmdPassPtr t_cmd = MakeSharedPtr<SVRCmdPass>();
 //                    t_cmd->mTag = "SVFaceShapeNode";
 //                    t_cmd->setFbo(m_fbo);
 //                    t_cmd->setTexture(m_passPool[i]->m_outTex);

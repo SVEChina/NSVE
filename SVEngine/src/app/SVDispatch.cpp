@@ -59,7 +59,7 @@ void SVDispatch::dispatchTargetResize(SVInstPtr _app,SVRTargetPtr _target) {
             //
             s32 t_w = _target->getTargetDsp()->m_width;
             s32 t_h = _target->getTargetDsp()->m_height;
-            SVRenderCmdFboResizePtr t_cmd = MakeSharedPtr<SVRenderCmdFboResize>(t_rfbo,t_w,t_h);
+            SVRCmdFboResizePtr t_cmd = MakeSharedPtr<SVRCmdFboResize>(t_rfbo,t_w,t_h);
             _app->getRenderMgr()->pushRCmdCreate(t_cmd);
         }
     }

@@ -84,7 +84,7 @@ void SVMesh::render() {
 //    //先渲染自己
 //    SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
 //    if(m_pRenderMesh && t_rs) {
-//        SVRenderCmdNorPtr t_cmd = MakeSharedPtr<SVRenderCmdNor>();
+//        SVRCmdNorPtr t_cmd = MakeSharedPtr<SVRCmdNor>();
 //        if(m_pMtl) {
 //            //t_cmd->setMaterial(m_pMtl->clone());
 //        }else{
@@ -104,7 +104,7 @@ void SVMesh::createShadow() {
 //    //先渲染自己
 //    SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
 //    if(m_pRenderMesh && t_rs) {
-//        SVRenderCmdNorPtr t_cmd = MakeSharedPtr<SVRenderCmdNor>();
+//        SVRCmdNorPtr t_cmd = MakeSharedPtr<SVRCmdNor>();
 //        if(m_pMtl) {
 //            SVMtlCorePtr t_mtl= MakeSharedPtr<SVMtlCore>(mApp,"depth3d");
                 //t_mtl->setParam("mmat", m_mat_unit);

@@ -101,7 +101,7 @@ void SVRenderObject::pushCmd(SVRenderScenePtr _rs, RENDERSTREAMTYPE streamtype, 
         return;
     if(_rs->isSuspend())
         return;
-    SVRenderCmdNorPtr t_cmd = MakeSharedPtr<SVRenderCmdNor>();
+    SVRCmdNorPtr t_cmd = MakeSharedPtr<SVRCmdNor>();
     t_cmd->mTag = tag;
     t_cmd->setMesh(m_pMesh);
     t_cmd->setMaterial(m_pMtl);

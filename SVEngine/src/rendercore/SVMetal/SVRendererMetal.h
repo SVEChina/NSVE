@@ -41,7 +41,9 @@ namespace sv {
         //重置大小
         virtual void resize(s32 _w,s32 _h);
 
-    public:
+        /*
+         create
+         */
         SVRTexPtr createResTexture();
 
         //shader
@@ -53,7 +55,9 @@ namespace sv {
         //fbo
         SVRFboPtr createResFbo() ;
 
-    public:
+        /*
+        process
+        */
 
         //处理材质
         void processMtl(SVMtlCorePtr _mtl);
@@ -61,7 +65,9 @@ namespace sv {
         //处理mesh
         void processMesh(SVRenderMeshPtr _mesh,SVRTargetPtr _target);
 
-        //
+        /*
+        draw
+        */
         void drawMesh(SVRenderMeshPtr _mesh,SVRTargetPtr _target);
 
     public:

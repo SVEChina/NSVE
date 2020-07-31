@@ -263,7 +263,7 @@ void SVDeformImageMove::render(){
     SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
     if (is_swith && t_rs && false  == t_rs->isSuspend() ) {
         if(m_passDeform && m_passDeform->m_pMtl){
-            SVRenderCmdPassCollectionPtr t_cmd = MakeSharedPtr<SVRenderCmdPassCollection>();
+            SVRCmdPassCollectionPtr t_cmd = MakeSharedPtr<SVRCmdPassCollection>();
             t_cmd->mTag = "SVBackGroundNode";
             //t_cmd->setFbo(m_fbo);
             //图片翻转这块需要校正一下 by fyz
@@ -293,7 +293,7 @@ void SVDeformImageMove::render(){
         }
         
         if(m_passBack){
-            SVRenderCmdPassPtr t_cmd = MakeSharedPtr<SVRenderCmdPass>();
+            SVRCmdPassPtr t_cmd = MakeSharedPtr<SVRCmdPass>();
             t_cmd->mTag = "SVFaceDeform";
             //t_cmd->setFbo(m_fbo);
             t_cmd->setTexture(m_passBack->m_outTex);

@@ -19,8 +19,6 @@
 
 namespace sv {
     
-    
-     
     class SVRenderObjInst{
     public:
         static void pushLineCmd(SVRenderScenePtr _rs,

@@ -315,7 +315,7 @@ void StreamInCore::pushTexture(u32 _tex0ID, u32 _tex1ID, u32 _tex2ID,s32 width,s
 void StreamInCore::_updateTrans(){
 //    //trans render
 //    SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
-//    SVRenderCmdTransGPUPtr transCmd = MakeSharedPtr<SVRenderCmdTransGPU>(m_trans);
+//    SVRCmdTransGPUPtr transCmd = MakeSharedPtr<SVRCmdTransGPU>(m_trans);
 //    if(t_rs){
 //        t_rs->pushRenderCmd(RST_SKY, transCmd);
 //    }

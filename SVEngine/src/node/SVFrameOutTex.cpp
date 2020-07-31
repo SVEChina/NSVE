@@ -58,7 +58,7 @@ void SVFrameOutTex::update(f32 _dt){
     SVNode::update(_dt);
     SVRendererPtr t_renderer = mApp->getRenderer();
     if(m_pMtl){
-        m_pMtl->setModelMatrix(m_absolutMat);
+        //m_pMtl->setModelMatrix(m_absolutMat);
         //m_pMtl->setTexture(0,E_TEX_MAIN);    //那第一张纹理
         m_pMtl->setBlendEnable(false);
         m_pMtl->setParam("texclip",FVec2(1.0f, 1.0f));
@@ -75,7 +75,7 @@ void SVFrameOutTex::render(){
 //    SVRendererPtr t_renderer = mApp->getRenderer();
 //    SVTexturePtr t_out_tex = t_renderer->getSVTex(E_TEX_OUTSTREAM);
 //    if (t_rs && false  == t_rs->isSuspend() ) {
-//                SVRenderCmdPassPtr t_cmd = MakeSharedPtr<SVRenderCmdPass>();
+//                SVRCmdPassPtr t_cmd = MakeSharedPtr<SVRCmdPass>();
 //                t_cmd->mTag = "SVFrameOutTex";
 //                t_cmd->setFbo(m_fbo);
 //                t_cmd->setTexture(t_out_tex);

@@ -18,124 +18,124 @@
 
 namespace sv {
     
-        //渲染命令基类
-        class SVRenderCmd : public SVObject {
-        public:
-            SVRenderCmd();
-            
-            ~SVRenderCmd();
-            
-            virtual void render(SVRendererPtr _renderer,SVRTargetPtr _target);
-            
-            SVString mTag;
-            
-        };
+    //渲染命令基类
+    class SVRenderCmd : public SVObject {
+    public:
+        SVRenderCmd();
         
-        //普通渲染命令
-        class SVRenderCmdNor : public SVRenderCmd {
-        public:
-            SVRenderCmdNor();
-            
-            ~SVRenderCmdNor();
-            
-            virtual void render(SVRendererPtr _renderer,SVRTargetPtr _target);
-            
-            void setMesh(SVRenderMeshPtr _mesh);
-            
-            void setMaterial(SVMtlCorePtr _material);
-            
-        protected:
-            SVRenderMeshPtr m_pMesh;
-            SVMtlCorePtr m_pMtl;
-        };
+        ~SVRenderCmd();
         
-        //适配命令
-        class SVRenderCmdAdapt : public SVRenderCmd {
-        public:
-            SVRenderCmdAdapt();
-            
-            ~SVRenderCmdAdapt();
-            
-            void setWinSize(s32 _w,s32 _h);
-            
-            virtual void render(SVRendererPtr _renderer,SVRTargetPtr _target);
-            
-        protected:
-            s32 m_winWidth;
-            
-            s32 m_winHeight;
-        };
+        virtual void render(SVRendererPtr _renderer,SVRTargetPtr _target);
         
-        //多批次渲染命令
-        class SVRenderCmdPass : public SVRenderCmdNor {
-        public:
-            SVRenderCmdPass();
-            
-            ~SVRenderCmdPass();
+        SVString mTag;
+        
+    };
+    
+    //普通渲染命令
+    class SVRCmdNor : public SVRenderCmd {
+    public:
+        SVRCmdNor();
+        
+        ~SVRCmdNor();
+        
+        virtual void render(SVRendererPtr _renderer,SVRTargetPtr _target);
+        
+        void setMesh(SVRenderMeshPtr _mesh);
+        
+        void setMaterial(SVMtlCorePtr _material);
+        
+    protected:
+        SVRenderMeshPtr m_pMesh;
+        SVMtlCorePtr m_pMtl;
+    };
+    
+    //适配命令
+    class SVRCmdAdapt : public SVRenderCmd {
+    public:
+        SVRCmdAdapt();
+        
+        ~SVRCmdAdapt();
+        
+        void setWinSize(s32 _w,s32 _h);
+        
+        virtual void render(SVRendererPtr _renderer,SVRTargetPtr _target);
+        
+    protected:
+        s32 m_winWidth;
+        
+        s32 m_winHeight;
+    };
+    
+    //多批次渲染命令
+    class SVRCmdPass : public SVRCmdNor {
+    public:
+        SVRCmdPass();
+        
+        ~SVRCmdPass();
 
-            virtual void render(SVRendererPtr _renderer,SVRTargetPtr _target);
-            
-            void setFbo(SVRenderTexturePtr _fbo);
-            
-            void setTexture(SVTexturePtr _tex);
-            
-        protected:
-            SVRenderTexturePtr m_fbo;
-            
-            SVTexturePtr m_tex;
-        };
+        virtual void render(SVRendererPtr _renderer,SVRTargetPtr _target);
         
-        //多批次渲染命令集合
-        class SVRenderCmdPassCollection : public SVRenderCmdNor {
-        public:
-            SVRenderCmdPassCollection();
-            
-            ~SVRenderCmdPassCollection();
-            
-            virtual void render(SVRendererPtr _renderer,SVRTargetPtr _target);
-            
-            void setFbo(SVRenderTexturePtr _fbo);
-            
-            void setTexture(SVTexturePtr _tex);
-            
-            void addMtlMesh(SVMtlCorePtr _mtl ,SVRenderMeshPtr _mesh);
-            
-        protected:
-            SVRenderTexturePtr m_fbo;
-            
-            SVTexturePtr m_tex;
-            
-            SVArray<SVMtlCorePtr> m_MtlArray;
-            SVArray<SVRenderMeshPtr> m_MeshArray;
-        };
+        void setFbo(SVRenderTexturePtr _fbo);
         
-        //FBO绑定(推送FBO)
-        class SVRenderCmdFboResize : public SVRenderCmd {
-        public:
-            SVRenderCmdFboResize(SVRFboPtr _fbo,s32 _w,s32 _h);
-            
-            ~SVRenderCmdFboResize();
-            
-            virtual void render(SVRendererPtr _renderer,SVRTargetPtr _target);
-            
-        protected:
-            SVRFboPtr m_fbo;
-            s32 m_width;
-            s32 m_height;
-        };
+        void setTexture(SVTexturePtr _tex);
+        
+    protected:
+        SVRenderTexturePtr m_fbo;
+        
+        SVTexturePtr m_tex;
+    };
+    
+    //多批次渲染命令集合
+    class SVRCmdPassCollection : public SVRCmdNor {
+    public:
+        SVRCmdPassCollection();
+        
+        ~SVRCmdPassCollection();
+        
+        virtual void render(SVRendererPtr _renderer,SVRTargetPtr _target);
+        
+        void setFbo(SVRenderTexturePtr _fbo);
+        
+        void setTexture(SVTexturePtr _tex);
+        
+        void addMtlMesh(SVMtlCorePtr _mtl ,SVRenderMeshPtr _mesh);
+        
+    protected:
+        SVRenderTexturePtr m_fbo;
+        
+        SVTexturePtr m_tex;
+        
+        SVArray<SVMtlCorePtr> m_MtlArray;
+        SVArray<SVRenderMeshPtr> m_MeshArray;
+    };
+    
+    //FBO绑定(推送FBO)
+    class SVRCmdFboResize : public SVRenderCmd {
+    public:
+        SVRCmdFboResize(SVRFboPtr _fbo,s32 _w,s32 _h);
+        
+        ~SVRCmdFboResize();
+        
+        virtual void render(SVRendererPtr _renderer,SVRTargetPtr _target);
+        
+    protected:
+        SVRFboPtr m_fbo;
+        s32 m_width;
+        s32 m_height;
+    };
 
-        //
-        class SVRenderCmdTransGPU : public SVRenderCmd {
-        public:
-            SVRenderCmdTransGPU(SVTransPtr _trans);
-            
-            ~SVRenderCmdTransGPU();
-            
-            virtual void render(SVRendererPtr _renderer,SVRTargetPtr _target);
-            
-        protected:
-            SVTransPtr m_trans;
-        };
+    //
+    class SVRCmdTransGPU : public SVRenderCmd {
+    public:
+        SVRCmdTransGPU(SVTransPtr _trans);
+        
+        ~SVRCmdTransGPU();
+        
+        virtual void render(SVRendererPtr _renderer,SVRTargetPtr _target);
+        
+    protected:
+        SVTransPtr m_trans;
+    };
 
         
 

@@ -67,14 +67,14 @@ namespace sv {
     
     //rendercmd
     DECLARE_SHAREPTR(SVRenderCmd);
-    DECLARE_SHAREPTR(SVRenderCmdTransGPU);
+    DECLARE_SHAREPTR(SVRCmdTransGPU);
     DECLARE_SHAREPTR(SVRCmdLine);
     DECLARE_SHAREPTR(SVRCmdAABB);
-    DECLARE_SHAREPTR(SVRenderCmdNor);
-    DECLARE_SHAREPTR(SVRenderCmdPass);
-    DECLARE_SHAREPTR(SVRenderCmdPassCollection);
-    DECLARE_SHAREPTR(SVRenderCmdFboResize);
-    DECLARE_SHAREPTR(SVRenderCmdAdapt);
+    DECLARE_SHAREPTR(SVRCmdNor);
+    DECLARE_SHAREPTR(SVRCmdPass);
+    DECLARE_SHAREPTR(SVRCmdPassCollection);
+    DECLARE_SHAREPTR(SVRCmdFboResize);
+    DECLARE_SHAREPTR(SVRCmdAdapt);
     DECLARE_SHAREPTR(SVRenderCmdStreamOutNor);
     DECLARE_SHAREPTR(SVRenderCmdStreamOutIOS);
     DECLARE_SHAREPTR(SVRCmdCreate);
