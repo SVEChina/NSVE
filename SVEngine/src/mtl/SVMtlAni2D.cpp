@@ -14,10 +14,6 @@ using namespace sv;
 
 SVMtlAni2D::SVMtlAni2D(SVInstPtr _app)
 :SVMtlCore(_app,"normal2dani_c") {
-    m_LogicParamDepth.enable = false;
-    m_LogicParamBlend.enable = true;
-    m_LogicParamBlend.srcParam = MTL_BLEND_ONE;
-    m_LogicParamBlend.dstParam = MTL_BLEND_ONE_MINUS_SRC_ALPHA;
 }
 
 SVMtlAni2D::SVMtlAni2D(SVMtlAni2D *_mtl)

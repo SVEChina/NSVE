@@ -13,10 +13,6 @@ using namespace sv;
 SVMtlFace2D::SVMtlFace2D(SVInstPtr _app)
 :SVMtlCore(_app,"mask2d")
 ,m_pMaskTexture(nullptr) {
-    m_LogicParamDepth.enable = false;
-    m_LogicParamBlend.enable = true;
-    m_LogicParamBlend.srcParam = MTL_BLEND_ONE;
-    m_LogicParamBlend.dstParam = MTL_BLEND_ONE_MINUS_SRC_ALPHA;
 }
 
 SVMtlFace2D::SVMtlFace2D(SVMtlFace2D *_mtl)

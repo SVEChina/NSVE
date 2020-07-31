@@ -14,10 +14,9 @@ using namespace sv;
 SVMtl2D::SVMtl2D(SVInstPtr _app , cptr8 _shader)
 :SVMtlCore(_app, _shader) {
     m_alpha = 1.0f;
-    m_LogicParamDepth.enable = false;
-    m_LogicParamBlend.enable = true;
-    m_LogicParamBlend.srcParam = MTL_BLEND_ONE;
-    m_LogicParamBlend.dstParam = MTL_BLEND_ONE_MINUS_SRC_ALPHA;
+//    m_LogicParamBlend.enable = true;
+//    m_LogicParamBlend.srcParam = MTL_BLEND_ONE;
+//    m_LogicParamBlend.dstParam = MTL_BLEND_ONE_MINUS_SRC_ALPHA;
 }
 
 SVMtl2D::SVMtl2D(SVMtl2D *_mtl)

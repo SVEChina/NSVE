@@ -9,8 +9,9 @@
 #define SV_GLOBALMGR_H
 
 #include "../base/SVGBase.h"
-#include "../base/SVPreDeclare.h"
 #include "../act/SVActDeclare.h"
+#include "../mtl/SVMtlDeclare.h"
+
 namespace sv {
     
     class SVGlobalMgr : public SVGBaseEx {
@@ -47,6 +48,8 @@ namespace sv {
         SVShaderMgrPtr m_pShaderMgr;
         //纹理部分
         SVTexMgrPtr m_pTexMgr;
+        //材质库
+        SVMtlLibPtr m_pMtlLib;
         //识别部分
         SVDetectMgrPtr m_pDetectMgr;
         //模型部分

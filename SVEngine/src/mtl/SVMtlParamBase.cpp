@@ -136,131 +136,23 @@ void SVTextureParam::copy(SVTextureParam& _param){
 }
 
 //
-SVBlendParam::SVBlendParam(){
-    reset();
-}
+//void SVCullFaceParam::reset(){
+//    enable = false;
+//    frontFace = GL_CCW;
+//    cullFace = GL_BACK;
+//}
 
-SVBlendParam::~SVBlendParam(){
-}
-
-void SVBlendParam::reset(){
-    enable = false;
-    srcParam = MTL_BLEND_ONE;
-    dstParam = MTL_BLEND_ONE_MINUS_SRC_ALPHA;
-}
-
-void SVBlendParam::copy(SVBlendParam& _param){
-    enable = _param.enable;
-    srcParam = _param.srcParam;
-    dstParam = _param.dstParam;
-}
-
-SVCullFaceParam::SVCullFaceParam(){
-    reset();
-}
-
-SVCullFaceParam::~SVCullFaceParam(){
-}
-
-void SVCullFaceParam::reset(){
-    enable = false;
-    frontFace = GL_CCW;
-    cullFace = GL_BACK;
-}
-
-void SVCullFaceParam::copy(SVCullFaceParam& _param){
-    enable = _param.enable;
-    frontFace = _param.frontFace;
-    cullFace = _param.cullFace;
-}
-
-//
-SVDepthParam::SVDepthParam(){
-    reset();
-}
-
-SVDepthParam::~SVDepthParam(){
-}
-
-void SVDepthParam::reset(){
-    //
-    enable = false;
-    clear = false;
-    testMethod = GL_LEQUAL;
-}
-
-void SVDepthParam::copy(SVDepthParam& _param){
-    enable = _param.enable;
-    clear = _param.clear;
-    testMethod = _param.testMethod;
-}
-
-//
-SVStencilParam::SVStencilParam(){
-    reset();
-}
-
-SVStencilParam::~SVStencilParam(){
-}
-
-void SVStencilParam::reset(){
-    //
-    enable = false;
-    clear = false;
-    passMethod = GL_ALWAYS;
-    refValue = 1;
-    maskValue = 1;
-    sfail = GL_KEEP;
-    zfail = GL_INCR;
-    zpass = GL_INCR;
-}
-
-void SVStencilParam::copy(SVStencilParam& _param){
-    enable = _param.enable;
-    clear = _param.clear;
-    passMethod = _param.passMethod;
-    refValue = _param.refValue;
-    maskValue = _param.maskValue;
-    sfail = _param.sfail;
-    zfail = _param.zfail;
-    zpass = _param.zpass;
-}
-
-//
-SVAlphaParam::SVAlphaParam(){
-    reset();
-}
-
-SVAlphaParam::~SVAlphaParam(){
-}
-
-void SVAlphaParam::reset(){
-}
-
-void SVAlphaParam::copy(SVAlphaParam& _param){
-}
-
-//
-//
-SVZOffParam::SVZOffParam(){
-    reset();
-}
-
-SVZOffParam::~SVZOffParam(){
-}
-
-void SVZOffParam::reset(){
-    enable = false;
-    m_factor = 0.0f;
-    m_unit = 0.0f;
-}
-
-void SVZOffParam::copy(SVZOffParam& _param){
-    enable = _param.enable;
-    m_factor = _param.m_factor;
-    m_unit = _param.m_unit;
-}
-
+//void SVStencilParam::reset(){
+//    //
+//    enable = false;
+//    clear = false;
+//    passMethod = GL_ALWAYS;
+//    refValue = 1;
+//    maskValue = 1;
+//    sfail = GL_KEEP;
+//    zfail = GL_INCR;
+//    zpass = GL_INCR;
+//}
 
 
 

@@ -28,8 +28,6 @@ SVMtlShadowMapping::~SVMtlShadowMapping(){
 
 void SVMtlShadowMapping::setLightVPMat(f32 *_vp){
       memcpy(m_LightVPMat, _vp, sizeof(f32) * 16);
-      m_LogicParamDepth.clear=true;
-      setDepthEnable(true);
 }
 
 SVMtlCorePtr SVMtlShadowMapping::clone() {

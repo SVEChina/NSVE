@@ -15,8 +15,8 @@ using namespace sv;
 
 SVMtl3D::SVMtl3D(SVInstPtr _app, cptr8 _shader)
 :SVMtlCore(_app, _shader) {
-    m_LogicParamBlend.srcParam = MTL_BLEND_ONE;
-    m_LogicParamBlend.dstParam = MTL_BLEND_ONE_MINUS_SRC_ALPHA;
+//    m_LogicParamBlend.srcParam = MTL_BLEND_ONE;
+//    m_LogicParamBlend.dstParam = MTL_BLEND_ONE_MINUS_SRC_ALPHA;
     m_ambientStrength = 1.0f;
     m_ambient_color.set(1.0f, 1.0f, 1.0f);
     m_lightColor.set(1.0f, 1.0f, 1.0f);
@@ -88,7 +88,7 @@ void SVMtl3D::_submitMtl(SVRendererPtr _render){
 
 void SVMtl3D::toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator,
                     RAPIDJSON_NAMESPACE::Value &_objValue){
-    _toJsonData(_allocator, _objValue);
+    //_toJsonData(_allocator, _objValue);
     //lighting
     RAPIDJSON_NAMESPACE::Value lightObj(RAPIDJSON_NAMESPACE::kObjectType);
     //ambient
@@ -113,7 +113,6 @@ void SVMtl3D::toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator,
 }
 
 void SVMtl3D::fromJSON(RAPIDJSON_NAMESPACE::Value &item){
-    _fromJsonData(item);
     //lighting
 //    if (item.HasMember("light") && item["light"].IsObject()) {
 //        RAPIDJSON_NAMESPACE::Value &t_light = item["light"];

@@ -11,6 +11,7 @@
 #include "../base/SVIDPool.h"
 #include "../rendercore/SVRenderDeclare.h"
 #include "../env/SVEnvDeclare.h"
+#include "../mtl/SVMtlDeclare.h"
 #include "SVGlobalMgr.h"
 #include "SVGlobalParam.h"
 
@@ -33,7 +34,7 @@ namespace sv {
         
         //初始化SV
         virtual void init();
-        //销毁SVå
+        //销毁SV
         virtual void destroy();
         //创建渲染器
         SVRendererPtr createRM(SV_RM_TYPE _type);
@@ -94,6 +95,7 @@ namespace sv {
         SVModuleSysPtr getModuleSys();
         SVShaderMgrPtr getShaderMgr();
         SVTexMgrPtr getTexMgr();
+        SVMtlLibPtr getMtlLib();
         SVRenderMgrPtr getRenderMgr();
         SVDetectMgrPtr getDetectMgr();
         SVDeformMgrPtr getDeformMgr();

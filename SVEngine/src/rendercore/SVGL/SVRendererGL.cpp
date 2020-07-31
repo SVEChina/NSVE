@@ -400,100 +400,100 @@ void SVRendererGL::submitUniformf4v(cptr8 _name,f32* _data,s32 _size){
     }
 }
 
-//提交融合参数
-void SVRendererGL::submitBlend(SVBlendParam& _param){
-    assert(_param.srcParam >= 0 && _param.srcParam < NUM_BLEND_FUNC && "SVRendererGL::submitBlend(): bad blend source function");
-    assert(_param.dstParam >= 0 && _param.dstParam < NUM_BLEND_FUNC && "SVRendererGL::submitBlend(): bad blend destination function");
-    static const GLuint blend_functions[] = {
-        0,
-        GL_ZERO,
-        GL_ONE,
-        GL_SRC_COLOR,
-        GL_ONE_MINUS_SRC_COLOR,
-        GL_SRC_ALPHA,
-        GL_ONE_MINUS_SRC_ALPHA,
-        GL_DST_COLOR,
-        GL_ONE_MINUS_DST_COLOR,
-        GL_DST_ALPHA,
-        GL_ONE_MINUS_DST_ALPHA
-    };
-    if (_param.enable) {
-        if (!glIsEnabled(GL_BLEND)) {
-            glEnable(GL_BLEND);
-        }
-        glBlendFunc(blend_functions[_param.srcParam], blend_functions[_param.dstParam]);
-    } else {
-        if (glIsEnabled(GL_BLEND)) {
-            glDisable(GL_BLEND);
-        }
-    }
-}
+////提交融合参数
+//void SVRendererGL::submitBlend(SVBlendParam& _param){
+////    assert(_param.srcParam >= 0 && _param.srcParam < NUM_BLEND_FUNC && "SVRendererGL::submitBlend(): bad blend source function");
+////    assert(_param.dstParam >= 0 && _param.dstParam < NUM_BLEND_FUNC && "SVRendererGL::submitBlend(): bad blend destination function");
+////    static const GLuint blend_functions[] = {
+////        0,
+////        GL_ZERO,
+////        GL_ONE,
+////        GL_SRC_COLOR,
+////        GL_ONE_MINUS_SRC_COLOR,
+////        GL_SRC_ALPHA,
+////        GL_ONE_MINUS_SRC_ALPHA,
+////        GL_DST_COLOR,
+////        GL_ONE_MINUS_DST_COLOR,
+////        GL_DST_ALPHA,
+////        GL_ONE_MINUS_DST_ALPHA
+////    };
+////    if (_param.enable) {
+////        if (!glIsEnabled(GL_BLEND)) {
+////            glEnable(GL_BLEND);
+////        }
+////        glBlendFunc(blend_functions[_param.srcParam], blend_functions[_param.dstParam]);
+////    } else {
+////        if (glIsEnabled(GL_BLEND)) {
+////            glDisable(GL_BLEND);
+////        }
+////    }
+//}
 
-//提交模板参数
-void SVRendererGL::submitStencil(SVStencilParam& _param){
-    if (_param.clear) {
-        //glClearStencil(0);
-        glClear(GL_STENCIL_BUFFER_BIT);
-    }
-    if (_param.enable) {
-        if (!glIsEnabled(GL_STENCIL_TEST)) {
-            glEnable(GL_STENCIL_TEST);
-        }
-        glStencilFunc(_param.passMethod, _param.refValue, _param.maskValue);
-        glStencilOp(_param.sfail, _param.zfail, _param.zpass);
-    } else {
-        if (glIsEnabled(GL_STENCIL_TEST)) {
-            glDisable(GL_STENCIL_TEST);
-        }
-    }
-}
+////提交模板参数
+//void SVRendererGL::submitStencil(SVStencilParam& _param){
+//    if (_param.clear) {
+//        //glClearStencil(0);
+//        glClear(GL_STENCIL_BUFFER_BIT);
+//    }
+//    if (_param.enable) {
+//        if (!glIsEnabled(GL_STENCIL_TEST)) {
+//            glEnable(GL_STENCIL_TEST);
+//        }
+//        glStencilFunc(_param.passMethod, _param.refValue, _param.maskValue);
+//        glStencilOp(_param.sfail, _param.zfail, _param.zpass);
+//    } else {
+//        if (glIsEnabled(GL_STENCIL_TEST)) {
+//            glDisable(GL_STENCIL_TEST);
+//        }
+//    }
+//}
 
-//提交深度参数
-void SVRendererGL::submitDepth(SVDepthParam& _param){
-    if (_param.clear) {
-        glClear(GL_DEPTH_BUFFER_BIT);
-        glClearDepthf(1.0f);
-    }
-    if (_param.enable) {
-        if (!glIsEnabled(GL_DEPTH_TEST)) {
-            glEnable(GL_DEPTH_TEST);
-        }
-    } else {
-        if (glIsEnabled(GL_DEPTH_TEST)) {
-            glDisable(GL_DEPTH_TEST);
-        }
-    }
-}
+////提交深度参数
+//void SVRendererGL::submitDepth(SVDepthParam& _param){
+//    if (_param.clear) {
+//        glClear(GL_DEPTH_BUFFER_BIT);
+//        glClearDepthf(1.0f);
+//    }
+//    if (_param.enable) {
+//        if (!glIsEnabled(GL_DEPTH_TEST)) {
+//            glEnable(GL_DEPTH_TEST);
+//        }
+//    } else {
+//        if (glIsEnabled(GL_DEPTH_TEST)) {
+//            glDisable(GL_DEPTH_TEST);
+//        }
+//    }
+//}
 
-//提交zfighting
-void SVRendererGL::submitZOff(SVZOffParam& _param) {
-    if (_param.enable) {
-        if (!glIsEnabled(GL_POLYGON_OFFSET_FILL)) {
-            glEnable(GL_POLYGON_OFFSET_FILL);
-        }
-        glPolygonOffset(_param.m_factor,_param.m_unit);
-    } else {
-        if (glIsEnabled(GL_POLYGON_OFFSET_FILL)) {
-            glPolygonOffset(0.0f,0.0f);
-            glDisable(GL_POLYGON_OFFSET_FILL);
-        }
-    }
-}
+////提交zfighting
+//void SVRendererGL::submitZOff(SVZOffParam& _param) {
+//    if (_param.enable) {
+//        if (!glIsEnabled(GL_POLYGON_OFFSET_FILL)) {
+//            glEnable(GL_POLYGON_OFFSET_FILL);
+//        }
+//        glPolygonOffset(_param.m_factor,_param.m_unit);
+//    } else {
+//        if (glIsEnabled(GL_POLYGON_OFFSET_FILL)) {
+//            glPolygonOffset(0.0f,0.0f);
+//            glDisable(GL_POLYGON_OFFSET_FILL);
+//        }
+//    }
+//}
 
-//提交隐藏面参数
-void SVRendererGL::submitCull(SVCullFaceParam& _param){
-    if (_param.enable) {
-        if (!glIsEnabled(GL_CULL_FACE)) {
-            glEnable(GL_CULL_FACE);
-        }
-        glFrontFace(_param.frontFace);
-        glCullFace(_param.cullFace);
-    } else {
-        if (glIsEnabled(GL_CULL_FACE)) {
-            glDisable(GL_CULL_FACE);
-        }
-    }
-}
+////提交隐藏面参数
+//void SVRendererGL::submitCull(SVCullFaceParam& _param){
+//    if (_param.enable) {
+//        if (!glIsEnabled(GL_CULL_FACE)) {
+//            glEnable(GL_CULL_FACE);
+//        }
+//        glFrontFace(_param.frontFace);
+//        glCullFace(_param.cullFace);
+//    } else {
+//        if (glIsEnabled(GL_CULL_FACE)) {
+//            glDisable(GL_CULL_FACE);
+//        }
+//    }
+//}
 
 //提交线宽
 void SVRendererGL::submitLineWidth(f32 _width){

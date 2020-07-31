@@ -94,16 +94,6 @@ namespace sv {
             virtual void submitUniformf3v(cptr8 _name,f32* _data,s32 _size = 1);
             //提交unifrom f32 v4
             virtual void submitUniformf4v(cptr8 _name,f32* _data,s32 _size = 1);
-            //提交融合参数
-            virtual void submitBlend(SVBlendParam& _param);
-            //提交模板参数
-            virtual void submitStencil(SVStencilParam& _param);
-            //提交深度参数
-            virtual void submitDepth(SVDepthParam& _param);
-            //提交隐藏面参数
-            virtual void submitCull(SVCullFaceParam& _param);
-            //提交zfighting
-            virtual void submitZOff(SVZOffParam& _param);
             //提交线宽
             virtual void submitLineWidth(f32 _width);
             //提交点大小

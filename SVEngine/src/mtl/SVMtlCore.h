@@ -69,18 +69,49 @@ namespace sv {
         void setTexture(s32 _chanel,sv::SVTEXINID _from);
         
     protected:
+        SVString m_mtl_name;
+        SVString m_shader_name;
         //param
         std::vector<MtlParamDsp> m_paramTbl;  //参数表
         SVDataChunkPtr m_paramValues;    //参数值
         
+        //
+        bool m_blend_enable;
+        MTLBLENDFUNC m_blend_src_param;
+        MTLBLENDFUNC m_blend_dst_param;
+        
+        //裁剪面参数
+        bool m_cull_enable;
+        s32 frontFace;
+        s32 cullFace;
+        
+        //深度参数
+        bool m_depth_clear;
+        bool m_depth_enable;        //开启深度测试
+        //深度测试方法(GL_NEVER,GL_ALWAYS,GL_LESS,GL_LEQUAL,GL_GREATER,GL_GEQUAL,GL_NOTEQUAL)
+        s32 m_depthtest_method;
+        
+        //模板参数
+        bool m_stencil_clear;         //
+        bool m_stencil_enable;        //开启模板测试
+        s32 m_stencil_passMethod;     //通过模板测试的规则(GL_NEVER,GL_LESS < ,GL_LEQUAL <= ,GL_GREATER > ,GL_GEEQUAL >= ,GL_EQUAL == ,GL_ALWAYS)
+        s32 m_stencil_refValue;       //通过模板测试的参考值(0-255)
+        s32 m_stencil_maskValue;      //掩码( 模板值&掩码 * 参考值&掩码 )
+        s32 m_stencil_sfail;          //模板测试失败     (GL_KEEP,GL_ZERO,GL_REPLACE(参考值代替写入),GL_INCR,GL_DECR,GL_INVERT(按位取反))
+        s32 m_stencil_zfail;          //模板通过 深度失败 (GL_KEEP,GL_ZERO,GL_REPLACE(参考值代替写入),GL_INCR,GL_DECR,GL_INVERT(按位取反))
+        s32 m_stencil_zpass;          //模板通过 深度通过 (GL_KEEP,GL_ZERO,GL_REPLACE(参考值代替写≤
+        
+        //Z偏移参数
+        bool m_zoff_enable;
+        f32 m_zoff_factor;
+        f32 m_zoff_unit;
+        
+         //alpha参数
+        bool m_alpha_enable;        //开启alpha测试
+        s32 m_alpha_testMethod;     //alpha测试方法(GL_NEVER,GL_ALWAYS,GL_LESS,GL_LEQUAL,GL_GREATER,GL_GEQUAL,GL_NOTEQUAL)
+        
         //纹理参数
-        SVTextureParam m_paramTex;              //纹理参数
-        SVBlendParam m_LogicParamBlend;         //融合参数
-        SVCullFaceParam m_LogicParamCull;       //裁剪面参数
-        SVDepthParam m_LogicParamDepth;         //深度参数
-        SVStencilParam m_LogicParamStencil;     //模板参数
-        SVAlphaParam m_LogicParamAlpha;         //alpha参数
-        SVZOffParam m_LogicParamZOff;           //Z偏移参数
+        SVTextureParam m_paramTex;
         
     public:
         SVShaderPtr m_shader;
@@ -124,10 +155,7 @@ namespace sv {
         
         void setStencilSfail(s32 _method);
         
-        void reloadShader(cptr8 _shader);
-        
-    public:
-        SVString m_mtlname;
+        void reloadShader();
         
         s32 m_LogicMtlFlag0;  //MTLFLAG0;
         
@@ -142,7 +170,6 @@ namespace sv {
         virtual void _submitState(SVRendererPtr _render);
         virtual void _submitMtl(SVRendererPtr _render);
         
-        
     public:
         //快捷接口而已
         void setModelMatrix(FMat4& _mat);
@@ -156,12 +183,7 @@ namespace sv {
         virtual void toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator,
                             RAPIDJSON_NAMESPACE::Value &_objValue);
         
-        virtual void fromJSON(RAPIDJSON_NAMESPACE::Value &item);
-    
-    protected:
-        virtual void _toJsonData(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator,
-                                 RAPIDJSON_NAMESPACE::Value &locationObj);
-        virtual void _fromJsonData(RAPIDJSON_NAMESPACE::Value &item);
+        virtual void fromJSON1(RAPIDJSON_NAMESPACE::Value &item);
     };
 
     

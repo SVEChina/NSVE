@@ -302,7 +302,7 @@ void SVNode::setLocalMatrix(FMat4 &_mat){
 void SVNode::toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator,
                     RAPIDJSON_NAMESPACE::Value &_objValue){
     RAPIDJSON_NAMESPACE::Value locationObj(RAPIDJSON_NAMESPACE::kObjectType);//创建一个Object类型的元素
-    _toJsonData(_allocator, locationObj);
+    //_toJsonData(_allocator, locationObj);
     _objValue.AddMember("SVNode", locationObj, _allocator);
 }
 

@@ -85,6 +85,9 @@ namespace sv {
     DECLARE_SHAREPTR(SVGLModifyShader);
     DECLARE_SHAREPTR(SVGLModifyUnif32);
     DECLARE_SHAREPTR(SVGLModifyUniMatrix);
+    //
+    DECLARE_SHAREPTR(SVMtlPack);
+    DECLARE_SHAREPTR(SVMtlLib);
     
 }//!namespace sv
 

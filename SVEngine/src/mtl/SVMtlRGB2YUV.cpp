@@ -14,16 +14,16 @@ using namespace sv;
 SVMtlRGB2YUV::SVMtlRGB2YUV(SVInstPtr _app, SV_OUTSTEAMFORMATE formate)
 :SVMtlCore(_app,"rgb2yuvnv21") {
     if (formate == SV_OUT_STEAM_RGB2YUVNV21) {
-        reloadShader("rgb2yuvnv21");
+        //reloadShader("rgb2yuvnv21");
     }
     if (formate == SV_OUT_STEAM_RGB2YUVNV12) {
-        reloadShader("rgb2yuvnv12");
+        //reloadShader("rgb2yuvnv12");
     }
     if (formate == SV_OUT_STEAM_RGB2YUVYV12) {
-        reloadShader("rgb2yuvyv12");
+        //reloadShader("rgb2yuvyv12");
     }
     if (formate == SV_OUT_STEAM_RGB2YUVI420) {
-        reloadShader("rgb2yuvi420");
+        //reloadShader("rgb2yuvi420");
     }
 }
 

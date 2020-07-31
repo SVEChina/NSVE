@@ -149,7 +149,7 @@ void SVSpriteNode::render() {
 //序列化
 void SVSpriteNode::toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator, RAPIDJSON_NAMESPACE::Value &_objValue){
     RAPIDJSON_NAMESPACE::Value locationObj(RAPIDJSON_NAMESPACE::kObjectType);//创建一个Object类型的元素
-    _toJsonData(_allocator, locationObj);
+    //_toJsonData(_allocator, locationObj);
     locationObj.AddMember("spriteW", m_width, _allocator);
     locationObj.AddMember("spriteH", m_height, _allocator);
     //s32 pos = m_pTexPath.rfind('/');

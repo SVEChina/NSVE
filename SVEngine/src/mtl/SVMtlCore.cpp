@@ -30,7 +30,7 @@ SVMtlCore::SVMtlCore(SVInstPtr _app)
 //
 SVMtlCore::SVMtlCore(SVInstPtr _app, cptr8 _shader)
 :SVGBaseEx(_app)
-,m_mtlname(_shader){
+,m_shader_name(_shader){
     m_paramValues = MakeSharedPtr<SVDataChunk>();
     reset();
 }
@@ -42,16 +42,6 @@ SVMtlCore::SVMtlCore(SVInstPtr _app, SVShaderPtr _shader)
 
 SVMtlCore::SVMtlCore(SVMtlCore* _mtl)
 :SVGBaseEx(_mtl->mApp){
-    m_mtlname = _mtl->m_mtlname;
-    m_LogicMtlFlag0 = _mtl->m_LogicMtlFlag0;
-    m_paramTex.copy(_mtl->m_paramTex);
-    m_LogicParamBlend.copy(_mtl->m_LogicParamBlend);
-    m_LogicParamCull.copy(_mtl->m_LogicParamCull);
-    m_LogicParamDepth.copy(_mtl->m_LogicParamDepth);
-    m_LogicParamStencil.copy(_mtl->m_LogicParamStencil);
-    m_LogicParamAlpha.copy(_mtl->m_LogicParamAlpha);
-    m_LogicParamMatrix.copy(_mtl->m_LogicParamMatrix);
-    m_LogicParamZOff.copy(_mtl->m_LogicParamZOff);
 }
 
 SVMtlCore::~SVMtlCore() {
@@ -59,19 +49,28 @@ SVMtlCore::~SVMtlCore() {
 }
 
 SVMtlCorePtr SVMtlCore::clone() {
-    return PointerSharedPtr<SVMtlCore>(new SVMtlCore(this));
+//    m_mtl_name = _mtl->m_mtl_name;
+//    m_LogicMtlFlag0 = _mtl->m_LogicMtlFlag0;
+//    m_paramTex.copy(_mtl->m_paramTex);
+//    m_LogicParamAlpha.copy(_mtl->m_LogicParamAlpha);
+//    m_LogicParamMatrix.copy(_mtl->m_LogicParamMatrix);
+//    m_LogicParamZOff.copy(_mtl->m_LogicParamZOff);
+    
+    //return PointerSharedPtr<SVMtlCore>(new SVMtlCore(this));
+    return nullptr;
 }
 
 void SVMtlCore::reset() {
     m_LogicMtlFlag0 = 0;
     m_paramTex.reset();
-    m_LogicParamBlend.reset();
-    m_LogicParamCull.reset();
-    m_LogicParamDepth.reset();
-    m_LogicParamStencil.reset();
-    m_LogicParamAlpha.reset();
+    //
+    m_blend_enable = false;
+//    srcParam = MTL_BLEND_ONE;
+//    dstParam = MTL_BLEND_ONE_MINUS_SRC_ALPHA;
+    //
+    m_cull_enable = false;
+    //
     m_LogicParamMatrix.reset();
-    m_LogicParamZOff.reset();
 }
 
 void SVMtlCore::addParam(cptr8 _name,cptr8 _type,cptr8 _value)  {
@@ -259,19 +258,19 @@ void SVMtlCore::setTexture(s32 _chanel,cptr8 _fname) {
     m_LogicMtlFlag0 |= t_flag;
 }
 
-void SVMtlCore::setTexture(s32 _chanel,SVTexturePtr _texture) {
+void SVMtlCore::setTexture(s32 _chanel,sv::SVTEXINID _from) {
     if(_chanel<0 || _chanel>=MAX_TEXUNIT)
         return;
-    m_paramTex.setTexture(_chanel, _texture);
+    m_paramTex.setTexture(_chanel, _from);
     s32 t_flag = MTL_F0_TEX0;
     t_flag = t_flag<<_chanel;
     m_LogicMtlFlag0 |= t_flag;
 }
 
-void SVMtlCore::setTexture(s32 _chanel,sv::SVTEXINID _from) {
+void SVMtlCore::setTexture(s32 _chanel,SVTexturePtr _texture) {
     if(_chanel<0 || _chanel>=MAX_TEXUNIT)
         return;
-    m_paramTex.setTexture(_chanel, _from);
+    m_paramTex.setTexture(_chanel, _texture);
     s32 t_flag = MTL_F0_TEX0;
     t_flag = t_flag<<_chanel;
     m_LogicMtlFlag0 |= t_flag;
@@ -299,8 +298,8 @@ void SVMtlCore::setTextureParam(s32 _chanel,TEXTUREPARAM _type,s32 _value) {
 void SVMtlCore::update(f32 dt) {
 }
 
-void SVMtlCore::reloadShader(cptr8 _shader){
-    m_mtlname = _shader;
+void SVMtlCore::reloadShader(){
+    //m_mtl_name = _shader;
 }
 
 //提交参数到GPU
@@ -327,32 +326,30 @@ void SVMtlCore::recoverMtl() {
     //状态回滚 先
     //融合
     if((m_LogicMtlFlag0&MTL_F0_BLEND)>0){
-        m_LogicParamBlend.enable = false;
-        t_renderer->submitBlend(m_LogicParamBlend);
+        //m_LogicParamBlend.enable = false;
+        //t_renderer->submitBlend(m_LogicParamBlend);
     }
     //隐藏面消除
     if((m_LogicMtlFlag0&MTL_F0_CULL)>0){
-        m_LogicParamCull.enable = false;
-        t_renderer->submitCull(m_LogicParamCull);
+        //m_LogicParamCull.enable = false;
     }
     //模板测试
     if((m_LogicMtlFlag0&MTL_F0_STENCIL)>0){
-        m_LogicParamStencil.enable = false;
-        m_LogicParamStencil.clear = false;
-        t_renderer->submitStencil(m_LogicParamStencil);
+//        m_LogicParamStencil.enable = false;
+//        m_LogicParamStencil.clear = false;
     }
     //alpha测试
     if((m_LogicMtlFlag0&MTL_F0_ALPHA)>0){
     }
     //深度测试
     if((m_LogicMtlFlag0&MTL_F0_DEPTH)>0){
-        m_LogicParamDepth.enable = false;
-        t_renderer->submitDepth(m_LogicParamDepth);
+//        m_LogicParamDepth.enable = false;
+//        t_renderer->submitDepth(m_LogicParamDepth);
     }
     //Z冲突
     if((m_LogicMtlFlag0&MTL_F0_ZOFF)>0){
-        m_LogicParamZOff.enable = false;
-        t_renderer->submitZOff(m_LogicParamZOff);
+        //m_LogicParamZOff.enable = false;
+        //t_renderer->submitZOff(m_LogicParamZOff);
     }
 }
 
@@ -446,28 +443,26 @@ void SVMtlCore::_submitState(SVRendererPtr _render) {
     }
     //融合
     if((m_LogicMtlFlag0&MTL_F0_BLEND)>0){
-        _render->submitBlend(m_LogicParamBlend);
+        //_render->submitBlend(m_LogicParamBlend);
     }
     //隐藏面消除
     if((m_LogicMtlFlag0&MTL_F0_CULL)>0){
-        _render->submitCull(m_LogicParamCull);
+        //_render->submitCull(m_LogicParamCull);
     }
     //模板测试
     if((m_LogicMtlFlag0&MTL_F0_STENCIL)>0){
-        _render->submitStencil(m_LogicParamStencil);
     }
     //alpha测试
     if((m_LogicMtlFlag0&MTL_F0_ALPHA)>0){
     }
     //深度测试
     if((m_LogicMtlFlag0&MTL_F0_DEPTH)>0){
-        _render->submitDepth(m_LogicParamDepth);
     }
     //Z冲突
     if((m_LogicMtlFlag0&MTL_F0_ZOFF)>0){
-        _render->submitZOff(m_LogicParamZOff);
+        //_render->submitZOff(m_LogicParamZOff);
     }else{
-        _render->submitZOff(m_LogicParamZOff);
+        //_render->submitZOff(m_LogicParamZOff);
     }
 }
 
@@ -482,191 +477,239 @@ void SVMtlCore::setLineSize(f32 _linewidth){
 }
 
 void SVMtlCore::setBlendState(MTLBLENDFUNC _src , MTLBLENDFUNC _dst){
-    m_LogicParamBlend.srcParam = _src;
-    m_LogicParamBlend.dstParam = _dst;
+//    m_LogicParamBlend.srcParam = _src;
+//    m_LogicParamBlend.dstParam = _dst;
 }
 
 void SVMtlCore::setBlendEnable(bool _bBlendEnable){
-    m_LogicParamBlend.enable = _bBlendEnable;
+    
+    //m_LogicParamBlend.enable = _bBlendEnable;
     m_LogicMtlFlag0 |= MTL_F0_BLEND;
 }
 
 void SVMtlCore::setCullEnable(bool _bCullEnable){
-    m_LogicParamCull.enable = _bCullEnable;
-    m_LogicMtlFlag0 |= MTL_F0_CULL;
+//    m_LogicParamCull.enable = _bCullEnable;
+//    m_LogicMtlFlag0 |= MTL_F0_CULL;
 }
 
 void SVMtlCore::setCullFace(s32 _frontFace, s32 _cullFace){
-    m_LogicParamCull.frontFace = _frontFace;
-    m_LogicParamCull.cullFace = _cullFace;
+//    m_LogicParamCull.frontFace = _frontFace;
+//    m_LogicParamCull.cullFace = _cullFace;
 }
 
 void SVMtlCore::setDepthEnable(bool _bDepthEnable){
-    m_LogicParamDepth.enable = _bDepthEnable;
+    //m_LogicParamDepth.enable = _bDepthEnable;
     m_LogicMtlFlag0 |= MTL_F0_DEPTH;
 }
 
 void SVMtlCore::setZOffEnable(bool _enable) {
-    m_LogicParamZOff.enable = _enable;
+    //m_LogicParamZOff.enable = _enable;
     m_LogicMtlFlag0 |= MTL_F0_ZOFF;
 }
 
 void SVMtlCore::setZOffParam(f32 _factor,f32 _unit) {
-    m_LogicParamZOff.m_factor = _factor;
-    m_LogicParamZOff.m_unit = _unit;
+//    m_LogicParamZOff.m_factor = _factor;
+//    m_LogicParamZOff.m_unit = _unit;
 }
 
 //设置模版测试
 void SVMtlCore::setStencilEnable(bool _bStencilEnable) {
-    m_LogicParamStencil.enable = _bStencilEnable;
+    //m_LogicParamStencil.enable = _bStencilEnable;
     m_LogicMtlFlag0 |= MTL_F0_STENCIL;
 }
 
 void SVMtlCore::setStencilClear(bool _clear) {
-    m_LogicParamStencil.clear = _clear;
+    //m_LogicParamStencil.clear = _clear;
     m_LogicMtlFlag0 |= MTL_F0_STENCIL;
 }
 
 void SVMtlCore::setStencilPass(s32 _pass) {
-    m_LogicParamStencil.passMethod = _pass;
+    //m_LogicParamStencil.passMethod = _pass;
     m_LogicMtlFlag0 |= MTL_F0_STENCIL;
 }
 
 void SVMtlCore::setStencilRef(s32 _ref) {
-    m_LogicParamStencil.refValue = _ref;
+    //m_LogicParamStencil.refValue = _ref;
     m_LogicMtlFlag0 |= MTL_F0_STENCIL;
 }
 
 void SVMtlCore::setStencilMask(s32 _mask) {
-    m_LogicParamStencil.maskValue = _mask;
+    //m_LogicParamStencil.maskValue = _mask;
     m_LogicMtlFlag0 |= MTL_F0_STENCIL;
 }
 
 void SVMtlCore::setStencilZPass(s32 _method) {
-    m_LogicParamStencil.zpass = _method;
+    //m_LogicParamStencil.zpass = _method;
     m_LogicMtlFlag0 |= MTL_F0_STENCIL;
 }
 
 void SVMtlCore::setStencilZfail(s32 _method) {
-    m_LogicParamStencil.zfail = _method;
+    //m_LogicParamStencil.zfail = _method;
     m_LogicMtlFlag0 |= MTL_F0_STENCIL;
 }
 
 void SVMtlCore::setStencilSfail(s32 _method) {
-    m_LogicParamStencil.sfail = _method;
+    //m_LogicParamStencil.sfail = _method;
     m_LogicMtlFlag0 |= MTL_F0_STENCIL;
+}
+
+void SVMtlCore::fromJSON1(RAPIDJSON_NAMESPACE::Value &_item){
+    if (_item.HasMember("shader") && _item["shader"].IsString()) {
+        RAPIDJSON_NAMESPACE::Value &t_value = _item["shader"];
+        m_shader_name = t_value.GetString();
+    }else{
+        return ;
+    }
+    //uniform参数
+    if (_item.HasMember("param-tbl") && _item["param-tbl"].IsArray()) {
+        RAPIDJSON_NAMESPACE::Document::Array t_value_array = _item["param-tbl"].GetArray();
+        for(s32 i=0;i<t_value_array.Size();i++) {
+            RAPIDJSON_NAMESPACE::Document::Object element = t_value_array[i].GetObject();
+            SVString t_param_name = element["name"].GetString();
+            SVString t_param_type = element["type"].GetString();
+            SVString t_param_value = element["value"].GetString();
+            addParam(t_param_name.c_str(),t_param_type.c_str(),t_param_value.c_str());
+        }
+    }
+    //texture参数
+    if (_item.HasMember("texture-tbl") && _item["texture-tbl"].IsArray()) {
+        RAPIDJSON_NAMESPACE::Document::Array t_value_array = _item["texture-tbl"].GetArray();
+        for(s32 i=0;i<t_value_array.Size();i++) {
+            RAPIDJSON_NAMESPACE::Document::Object element = t_value_array[i].GetObject();
+            s32 t_param_chan = element["chn"].GetInt();
+            SVString t_param_type = element["from"].GetString();
+            SVString t_param_path = element["path"].GetString();
+            if(t_param_type == "file") {
+                setTexture(t_param_chan, t_param_path.c_str());
+            }else if(t_param_type == "inner") {
+                if(t_param_path == "SV_MAIN") {
+                    setTexture(t_param_chan,E_TEX_MAIN);
+                }
+            }
+        }
+    }
+    //blend param 融合
+    if (_item.HasMember("blend-param") && _item["blend-param"].IsObject()) {
+        RAPIDJSON_NAMESPACE::Document::Object t_value_obj = _item["blend-param"].GetObject();
+        s32 t_enable = t_value_obj["enable"].GetInt();
+        if(t_enable>0) {
+            setBlendEnable(true);
+        }else{
+            setBlendEnable(false);
+        }
+    }else{
+        //默认融合
+        setBlendEnable(false);
+    }
+    
+    //stencil param 融合
+    if (_item.HasMember("stencil-param") && _item["stencil-param"].IsObject()) {
+        RAPIDJSON_NAMESPACE::Document::Object t_value_obj = _item["stencil-param"].GetObject();
+        s32 t_enable = t_value_obj["enable"].GetInt();
+        if(t_enable>0) {
+            setStencilEnable(true);
+        }else{
+            setStencilEnable(false);
+        }
+    }else{
+        //默认模版
+        setStencilEnable(false);
+    }
+    
+    //alpha param 融合
+    if (_item.HasMember("alpha-param") && _item["alpha-param"].IsObject()) {
+        RAPIDJSON_NAMESPACE::Document::Object t_value_obj = _item["alpha-param"].GetObject();
+        s32 t_enable = t_value_obj["enable"].GetInt();
+        
+    }else{
+        //默认alpha
+    }
 }
 
 //
 void SVMtlCore::toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator,
                        RAPIDJSON_NAMESPACE::Value &_objValue){
-    _toJsonData(_allocator, _objValue);
+    //_toJsonData(_allocator, _objValue);
 }
 
-void SVMtlCore::fromJSON(RAPIDJSON_NAMESPACE::Value &item){
-    _fromJsonData(item);
-}
-
-void SVMtlCore::_toJsonData(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator,
-                 RAPIDJSON_NAMESPACE::Value &locationObj){
-    //blending
-    RAPIDJSON_NAMESPACE::Value blendObj(RAPIDJSON_NAMESPACE::kObjectType);
-    blendObj.AddMember("enable", m_LogicParamBlend.enable, _allocator);
-    blendObj.AddMember("src", m_LogicParamBlend.srcParam, _allocator);
-    blendObj.AddMember("dst", m_LogicParamBlend.dstParam, _allocator);
-    //shader
-    locationObj.AddMember("shader", RAPIDJSON_NAMESPACE::StringRef(m_mtlname.c_str()), _allocator);
-    //parameter
-    RAPIDJSON_NAMESPACE::Value parameterObj(RAPIDJSON_NAMESPACE::kObjectType);
-    parameterObj.AddMember("depth", m_LogicParamDepth.enable, _allocator);
-    RAPIDJSON_NAMESPACE::Value cullObj(RAPIDJSON_NAMESPACE::kObjectType);
-    //cull
-    cullObj.AddMember("enable", m_LogicParamCull.enable, _allocator);
-    cullObj.AddMember("frontFace", m_LogicParamCull.frontFace, _allocator);
-    cullObj.AddMember("cullFace", m_LogicParamCull.cullFace, _allocator);
-    parameterObj.AddMember("cull", cullObj, _allocator);
-}
-
-void SVMtlCore::_fromJsonData(RAPIDJSON_NAMESPACE::Value &item){
-    //blending
-    if (item.HasMember("blend") && item["blend"].IsObject()) {
-        RAPIDJSON_NAMESPACE::Value &t_blend = item["blend"];
-        if (t_blend.HasMember("enable") && t_blend["enable"].IsBool()) {
-            bool enable = t_blend["enable"].GetBool();
-            setBlendEnable(enable);
-        }
-        s32 src = 1;
-        s32 dst = 1;
-        if (t_blend.HasMember("src") && t_blend["src"].IsInt()) {
-            src = t_blend["src"].GetInt();
-        }
-        if (t_blend.HasMember("dst") && t_blend["dst"].IsInt()) {
-            dst = t_blend["dst"].GetInt();
-        }
-        setBlendState((MTLBLENDFUNC)src, (MTLBLENDFUNC)dst);
-    }
-    //shader
-    if (item.HasMember("shader") && item["shader"].IsString()) {
-        SVString shader = item["shader"].GetString();
-        reloadShader(shader);
-    }
-    //parameter
-    if (item.HasMember("parameter") && item["parameter"].IsObject()) {
-        RAPIDJSON_NAMESPACE::Value &t_paprmeter = item["parameter"];
-        if (t_paprmeter.HasMember("depth") && t_paprmeter["depth"].IsBool()) {
-            bool enable = t_paprmeter["depth"].GetBool();
-            setDepthEnable(enable);
-        }
-        if (t_paprmeter.HasMember("cull") && t_paprmeter["cull"].IsObject()) {
-            RAPIDJSON_NAMESPACE::Value &t_cull = item["cull"];
-            if (t_cull.HasMember("enable") && t_cull["enable"].IsBool()) {
-                bool enable = t_cull["enable"].GetBool();
-                setCullEnable(enable);
-            }
-            s32 t_frontFace = 1;
-            s32 t_cullFace = 1;
-            if (t_cull.HasMember("frontFace") && t_cull["frontFace"].IsInt()) {
-                t_frontFace = t_cull["frontFace"].GetInt();
-            }
-            if (t_cull.HasMember("cullFace") && t_cull["cullFace"].IsInt()) {
-                t_cullFace = t_cull["cullFace"].GetInt();
-            }
-            setCullFace(t_frontFace, t_cullFace);
-        }
-    }
-    //textures
-    if (item.HasMember("textures") && item["textures"].IsArray()) {
-        RAPIDJSON_NAMESPACE::Value &t_textures = item["textures"];
-        for (s32 i = 0; i<t_textures.Size(); i++) {
-            RAPIDJSON_NAMESPACE::Value &t_texture = t_textures[i];
-            if(t_texture.HasMember("texture") && t_texture["texture"].IsString()){
-                SVString textureName = t_texture["texture"].GetString();
-            }
-            if(t_texture.HasMember("channel") && t_texture["channel"].IsInt()){
-                s32 channel = t_texture["channel"].GetInt();
-            }
-            if(t_texture.HasMember("internalformat") && t_texture["internalformat"].IsInt()){
-                s32 informat = t_texture["internalformat"].GetInt();
-            }
-            if(t_texture.HasMember("format") && t_texture["format"].IsInt()){
-                s32 format = t_texture["format"].GetInt();
-            }
-            if(t_texture.HasMember("sampler") && t_texture["sampler"].IsObject()){
-                RAPIDJSON_NAMESPACE::Value &sampler = t_texture["sampler"];
-                if(sampler.HasMember("magFilter") && sampler["magFilter"].IsInt()){
-                    s32 magFilter = sampler["magFilter"].GetInt();
-                }
-                if(sampler.HasMember("minFilter") && sampler["minFilter"].IsInt()){
-                    s32 minFilter = sampler["minFilter"].GetInt();
-                }
-                if(sampler.HasMember("wrapS") && sampler["wrapS"].IsInt()){
-                    s32 wrapS = sampler["wrapS"].GetInt();
-                }
-                if(sampler.HasMember("wrapT") && sampler["wrapT"].IsInt()){
-                    s32 wrapT = sampler["wrapT"].GetInt();
-                }
-            }
-        }
-    }
-    //stencil
-}
+//    //blending
+//    if (item.HasMember("blend") && item["blend"].IsObject()) {
+//        RAPIDJSON_NAMESPACE::Value &t_blend = item["blend"];
+//        if (t_blend.HasMember("enable") && t_blend["enable"].IsBool()) {
+//            bool enable = t_blend["enable"].GetBool();
+//            setBlendEnable(enable);
+//        }
+//        s32 src = 1;
+//        s32 dst = 1;
+//        if (t_blend.HasMember("src") && t_blend["src"].IsInt()) {
+//            src = t_blend["src"].GetInt();
+//        }
+//        if (t_blend.HasMember("dst") && t_blend["dst"].IsInt()) {
+//            dst = t_blend["dst"].GetInt();
+//        }
+//        setBlendState((MTLBLENDFUNC)src, (MTLBLENDFUNC)dst);
+//    }
+//    //shader
+//    if (item.HasMember("shader") && item["shader"].IsString()) {
+//        SVString shader = item["shader"].GetString();
+//        reloadShader();
+//    }
+//    //parameter
+//    if (item.HasMember("parameter") && item["parameter"].IsObject()) {
+//        RAPIDJSON_NAMESPACE::Value &t_paprmeter = item["parameter"];
+//        if (t_paprmeter.HasMember("depth") && t_paprmeter["depth"].IsBool()) {
+//            bool enable = t_paprmeter["depth"].GetBool();
+//            setDepthEnable(enable);
+//        }
+//        if (t_paprmeter.HasMember("cull") && t_paprmeter["cull"].IsObject()) {
+//            RAPIDJSON_NAMESPACE::Value &t_cull = item["cull"];
+//            if (t_cull.HasMember("enable") && t_cull["enable"].IsBool()) {
+//                bool enable = t_cull["enable"].GetBool();
+//                setCullEnable(enable);
+//            }
+//            s32 t_frontFace = 1;
+//            s32 t_cullFace = 1;
+//            if (t_cull.HasMember("frontFace") && t_cull["frontFace"].IsInt()) {
+//                t_frontFace = t_cull["frontFace"].GetInt();
+//            }
+//            if (t_cull.HasMember("cullFace") && t_cull["cullFace"].IsInt()) {
+//                t_cullFace = t_cull["cullFace"].GetInt();
+//            }
+//            setCullFace(t_frontFace, t_cullFace);
+//        }
+//    }
+//    //textures
+//    if (item.HasMember("textures") && item["textures"].IsArray()) {
+//        RAPIDJSON_NAMESPACE::Value &t_textures = item["textures"];
+//        for (s32 i = 0; i<t_textures.Size(); i++) {
+//            RAPIDJSON_NAMESPACE::Value &t_texture = t_textures[i];
+//            if(t_texture.HasMember("texture") && t_texture["texture"].IsString()){
+//                SVString textureName = t_texture["texture"].GetString();
+//            }
+//            if(t_texture.HasMember("channel") && t_texture["channel"].IsInt()){
+//                s32 channel = t_texture["channel"].GetInt();
+//            }
+//            if(t_texture.HasMember("internalformat") && t_texture["internalformat"].IsInt()){
+//                s32 informat = t_texture["internalformat"].GetInt();
+//            }
+//            if(t_texture.HasMember("format") && t_texture["format"].IsInt()){
+//                s32 format = t_texture["format"].GetInt();
+//            }
+//            if(t_texture.HasMember("sampler") && t_texture["sampler"].IsObject()){
+//                RAPIDJSON_NAMESPACE::Value &sampler = t_texture["sampler"];
+//                if(sampler.HasMember("magFilter") && sampler["magFilter"].IsInt()){
+//                    s32 magFilter = sampler["magFilter"].GetInt();
+//                }
+//                if(sampler.HasMember("minFilter") && sampler["minFilter"].IsInt()){
+//                    s32 minFilter = sampler["minFilter"].GetInt();
+//                }
+//                if(sampler.HasMember("wrapS") && sampler["wrapS"].IsInt()){
+//                    s32 wrapS = sampler["wrapS"].GetInt();
+//                }
+//                if(sampler.HasMember("wrapT") && sampler["wrapT"].IsInt()){
+//                    s32 wrapT = sampler["wrapT"].GetInt();
+//                }
+//            }
+//        }
+//    }
+//    //stencil

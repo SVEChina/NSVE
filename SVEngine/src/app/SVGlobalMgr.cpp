@@ -20,8 +20,9 @@
 #include "../light/SVLightSys.h"
 #include "../event/SVEventMgr.h"
 #include "../mtl/SVTexMgr.h"
-#include "../detect/SVDetectMgr.h"
 #include "../mtl/SVShaderMgr.h"
+#include "../mtl/SVMtlLib.h"
+#include "../detect/SVDetectMgr.h"
 #include "../rendercore/SVRenderMgr.h"
 #include "../act/SVActionMgr.h"
 #include "../base/svstr.h"
@@ -46,6 +47,9 @@ SVGlobalMgr::SVGlobalMgr(SVInstPtr _app)
     m_pDeformSys = nullptr;
     m_pPhysicSys =nullptr;
     m_pLightSys = nullptr;
+    m_pMtlLib = nullptr;
+    
+    //SVMtlLibPtr m_pMtlLib;
 }
 
 SVGlobalMgr::~SVGlobalMgr() {
@@ -62,6 +66,7 @@ SVGlobalMgr::~SVGlobalMgr() {
     m_pDeformSys = nullptr;
     m_pPhysicSys =nullptr;
     m_pLightSys = nullptr;
+    m_pMtlLib = nullptr;
 }
 
 void SVGlobalMgr::init() {
@@ -98,6 +103,9 @@ void SVGlobalMgr::init() {
     //场景系统
     m_pSceneMgr = MakeSharedPtr<SVSceneMgr>(mApp);
     m_pSceneMgr->init();
+    //材质库
+    m_pMtlLib = MakeSharedPtr<SVMtlLib>(mApp);
+    m_pMtlLib->init();
 //    //模型管理部分
 //    m_pModelMgr = MakeSharedPtr<SVModelMgr>(mApp.get());
 //    m_pModelMgr->init();

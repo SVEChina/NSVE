@@ -479,7 +479,7 @@ void SVParticlesNode::toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allo
     RAPIDJSON_NAMESPACE::Value locationObj(RAPIDJSON_NAMESPACE::kObjectType);//创建一个Object类型的元素
     //节点属性部分
     RAPIDJSON_NAMESPACE::Value nodeObj(RAPIDJSON_NAMESPACE::kObjectType);
-    _toJsonData(_allocator, nodeObj);
+    //_toJsonData(_allocator, nodeObj);
     locationObj.AddMember("node", nodeObj, _allocator);
     s32 pos = m_texturePath.rfind('/');
     m_textureName = SVString::substr(m_texturePath.c_str(), pos+1);

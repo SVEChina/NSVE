@@ -73,9 +73,6 @@ void SVInst::init() {
     m_pGlobalMgr = MakeSharedPtr<SVGlobalMgr>( share() );
     m_pGlobalMgr->init();
     //
-    //test
-    SVMtlCorePtr t_mtl = SVMtlLib::createMtl(share(), "scene.mtl");
-    //
     m_svst = SV_ST_WAIT;
 }
 
@@ -208,6 +205,12 @@ SVTexMgrPtr SVInst::getTexMgr(){
     if(!m_pGlobalMgr)
         return nullptr;
     return m_pGlobalMgr->m_pTexMgr;
+}
+
+SVMtlLibPtr SVInst::getMtlLib() {
+    if(!m_pGlobalMgr)
+        return nullptr;
+    return m_pGlobalMgr->m_pMtlLib;
 }
 
 SVRenderMgrPtr SVInst::getRenderMgr(){
