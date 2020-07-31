@@ -31,11 +31,11 @@ void SVCameraMgr::init() {
     //主相机
     m_mainCamera = MakeSharedPtr<SVCameraNode>(mApp);
     m_mainCamera->init();
-    m_mainCamera->project();
+    m_mainCamera->setProject();
     //ui相机
     m_uiCamera = MakeSharedPtr<SVCameraNode>(mApp);
     m_uiCamera->init();
-    m_uiCamera->ortho();
+    m_uiCamera->setOrtho();
 }
 
 //
@@ -100,9 +100,9 @@ SVCameraNodePtr SVCameraMgr::getUICamera() {
 
 void SVCameraMgr::resize(f32 _w,f32 _h) {
     if(m_mainCamera){
-        m_mainCamera->resetCamera(_w,_h);
+        m_mainCamera->resetSize(_w,_h);
     }
     if(m_uiCamera){
-        m_uiCamera->resetCamera(_w,_h);
+        m_uiCamera->resetSize(_w,_h);
     }
 }

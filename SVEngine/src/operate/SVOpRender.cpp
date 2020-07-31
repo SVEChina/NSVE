@@ -60,11 +60,11 @@ void SVOpResizeRenderder::_process(float dt) {
         t_renderer->resize(m_width,m_height);
         SVCameraNodePtr t_camera = mApp->m_pGlobalMgr->m_pCameraMgr->getMainCamera();
         if(t_camera){
-            t_camera->resetCamera(m_width, m_height);
+            t_camera->resetSize(m_width, m_height);
         }
         SVCameraNodePtr t_uiCamera = mApp->m_pGlobalMgr->m_pCameraMgr->getUICamera();
         if(t_uiCamera){
-            t_uiCamera->resetCamera(m_width, m_height);
+            t_uiCamera->resetSize(m_width, m_height);
         }
     }
 }
