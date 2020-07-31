@@ -127,10 +127,10 @@ SVRFboPtr SVRendererMetal::createResFbo()  {
 void SVRendererMetal::processMtl(SVMtlCorePtr _mtl) {
     if(!m_pCurEncoder)
         return ;
-    if(_mtl->m_shader && _mtl->m_shader->active() ) {
-        //传递uniform
-        //m_pCurEncoder
-    }
+//    if(_mtl->m_shader && _mtl->m_shader->active() ) {
+//        //传递uniform
+//        //m_pCurEncoder
+//    }
 }
 
 //处理mesh

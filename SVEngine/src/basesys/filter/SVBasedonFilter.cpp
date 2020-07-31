@@ -54,14 +54,14 @@ bool SVBasedonFilter::create() {
     s32 t_h =  mApp->m_pGlobalParam->m_inner_height;
     //创建材质
     m_acutancemtl=MakeSharedPtr<SVMtlAcutance>(mApp);
-    //m_acutancemtl->setTexcoordFlip(1.0f, 1.0f);
-    m_acutancemtl->setTexSizeIndex(0,0.5/t_w,0.5/ t_h);
-    m_acutancemtl->setTexSizeIndex(1,0.5/255.0,0.0);
+//    //m_acutancemtl->setTexcoordFlip(1.0f, 1.0f);
+//    m_acutancemtl->setTexSizeIndex(0,0.5/t_w,0.5/ t_h);
+//    m_acutancemtl->setTexSizeIndex(1,0.5/255.0,0.0);
     
     m_baseOnmtl=MakeSharedPtr<SVMtlBasedOn>(mApp);
     //m_baseOnmtl->setTexcoordFlip(1.0f, 1.0f);
-    m_baseOnmtl->setTexSizeIndex(0,0.5/t_w,0.5/ t_h);
-    m_baseOnmtl->setTexSizeIndex(1,0.5/255.0,0.0);
+//    m_baseOnmtl->setTexSizeIndex(0,0.5/t_w,0.5/ t_h);
+//    m_baseOnmtl->setTexSizeIndex(1,0.5/255.0,0.0);
     //创建多passnode
     m_pPassNode = MakeSharedPtr<SVMultPassNode>(mApp);
     m_pPassNode->setname("SVfilterBaseOn");

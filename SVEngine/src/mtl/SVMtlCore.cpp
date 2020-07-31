@@ -49,28 +49,45 @@ SVMtlCore::~SVMtlCore() {
 }
 
 SVMtlCorePtr SVMtlCore::clone() {
-//    m_mtl_name = _mtl->m_mtl_name;
-//    m_LogicMtlFlag0 = _mtl->m_LogicMtlFlag0;
-//    m_paramTex.copy(_mtl->m_paramTex);
-//    m_LogicParamAlpha.copy(_mtl->m_LogicParamAlpha);
-//    m_LogicParamMatrix.copy(_mtl->m_LogicParamMatrix);
-//    m_LogicParamZOff.copy(_mtl->m_LogicParamZOff);
-    
-    //return PointerSharedPtr<SVMtlCore>(new SVMtlCore(this));
     return nullptr;
 }
 
 void SVMtlCore::reset() {
     m_LogicMtlFlag0 = 0;
-    m_paramTex.reset();
     //
-    m_blend_enable = false;
-//    srcParam = MTL_BLEND_ONE;
-//    dstParam = MTL_BLEND_ONE_MINUS_SRC_ALPHA;
+    for(s32 i=0;i<MAX_TEXUNIT;i++){
+        m_texUnit[i].reset();
+    }
     //
-    m_cull_enable = false;
-    //
-    m_LogicParamMatrix.reset();
+    //融合参数
+    m_blend_enable = 0;
+    m_blend_src_param = 0;
+    m_blend_dst_param = 0;
+//    //裁剪面参数
+//    m_cull_enable;
+//    m_frontFace;
+//    m_cullFace;
+//    //深度参数
+//    m_depth_clear;
+//    m_depth_enable;        //开启深度测试
+//    //深度测试方法(GL_NEVER,GL_ALWAYS,GL_LESS,GL_LEQUAL,GL_GREATER,GL_GEQUAL,GL_NOTEQUAL)
+//    m_depthtest_method;
+//    //模板参数
+//    m_stencil_clear;         //
+//    m_stencil_enable;        //开启模板测试
+//    m_stencil_passMethod;     //通过模板测试的规则(GL_NEVER,GL_LESS < ,GL_LEQUAL <= ,GL_GREATER > ,GL_GEEQUAL >= ,GL_EQUAL == ,GL_ALWAYS)
+//    m_stencil_refValue;       //通过模板测试的参考值(0-255)
+//    m_stencil_maskValue;      //掩码( 模板值&掩码 * 参考值&掩码 )
+//    m_stencil_sfail;          //模板测试失败     (GL_KEEP,GL_ZERO,GL_REPLACE(参考值代替写入),GL_INCR,GL_DECR,GL_INVERT(按位取反))
+//    m_stencil_zfail;          //模板通过 深度失败 (GL_KEEP,GL_ZERO,GL_REPLACE(参考值代替写入),GL_INCR,GL_DECR,GL_INVERT(按位取反))
+//    m_stencil_zpass;          //模板通过 深度通过 (GL_KEEP,GL_ZERO,GL_REPLACE(参考值代替写≤
+//    //Z偏移参数
+//    m_zoff_enable;
+//    m_zoff_factor;
+//    m_zoff_unit;
+//    //alpha参数
+//    m_alpha_enable;         //开启alpha测试
+//    m_alpha_testMethod;     //alpha测试方法(GL_NEVER,GL_ALWAYS,GL_LESS,GL_LEQUAL,GL_GREATER,GL_GEQUAL,GL_NOTEQUAL)
 }
 
 void SVMtlCore::addParam(cptr8 _name,cptr8 _type,cptr8 _value)  {
@@ -252,7 +269,9 @@ void SVMtlCore::setTexture(s32 _chanel,cptr8 _fname) {
         //error 报错 用默认纹理代替
         t_tex = mApp->getTexMgr()->getSVETexture();
     }
-    m_paramTex.setTexture(_chanel, t_tex);
+    //
+    m_texUnit[_chanel].m_pTex = t_tex;
+    //
     s32 t_flag = MTL_F0_TEX0;
     t_flag = t_flag<<_chanel;
     m_LogicMtlFlag0 |= t_flag;
@@ -261,7 +280,7 @@ void SVMtlCore::setTexture(s32 _chanel,cptr8 _fname) {
 void SVMtlCore::setTexture(s32 _chanel,sv::SVTEXINID _from) {
     if(_chanel<0 || _chanel>=MAX_TEXUNIT)
         return;
-    m_paramTex.setTexture(_chanel, _from);
+    m_texUnit[_chanel].m_texForm = _from;
     s32 t_flag = MTL_F0_TEX0;
     t_flag = t_flag<<_chanel;
     m_LogicMtlFlag0 |= t_flag;
@@ -270,7 +289,9 @@ void SVMtlCore::setTexture(s32 _chanel,sv::SVTEXINID _from) {
 void SVMtlCore::setTexture(s32 _chanel,SVTexturePtr _texture) {
     if(_chanel<0 || _chanel>=MAX_TEXUNIT)
         return;
-    m_paramTex.setTexture(_chanel, _texture);
+    //
+    m_texUnit[_chanel].m_pTex = _texture;
+    //
     s32 t_flag = MTL_F0_TEX0;
     t_flag = t_flag<<_chanel;
     m_LogicMtlFlag0 |= t_flag;
@@ -280,16 +301,16 @@ void SVMtlCore::setTextureParam(s32 _chanel,TEXTUREPARAM _type,s32 _value) {
     if(_chanel>=0 && _chanel<MAX_TEXUNIT) {
         if(_type == E_T_PARAM_FILTER_MAG) {
             //filter_max
-            m_paramTex.m_texUnit[_chanel].m_mag_filter = _value;
+            m_texUnit[_chanel].m_mag_filter = _value;
         }else if(_type == E_T_PARAM_FILTER_MIN) {
             //filter_min
-            m_paramTex.m_texUnit[_chanel].m_min_filter = _value;
+            m_texUnit[_chanel].m_min_filter = _value;
         }else if(_type == E_T_PARAM_WRAP_S) {
             //wrap_s
-            m_paramTex.m_texUnit[_chanel].m_s_wrap = _value;
+            m_texUnit[_chanel].m_s_wrap = _value;
         }else if(_type == E_T_PARAM_WRAP_T) {
             //wrap_t
-            m_paramTex.m_texUnit[_chanel].m_t_wrap = _value;
+            m_texUnit[_chanel].m_t_wrap = _value;
         }
     }
 }
@@ -299,23 +320,11 @@ void SVMtlCore::update(f32 dt) {
 }
 
 void SVMtlCore::reloadShader(){
-    //m_mtl_name = _shader;
+    //m_shader_name
 }
 
 //提交参数到GPU
 s32 SVMtlCore::submitMtl() {
-    //根据渲染器来，提交不同的数据和状态
-    SVRendererPtr t_renderer = mApp->getRenderer();
-    if(!t_renderer)
-        return 0;
-    //激活shader
-    
-    //提交UNIFORM
-    _submitUniform(t_renderer);
-    //提交纹理
-    _submitTexture(t_renderer);
-    //提交状态
-    _submitState(t_renderer);
     return 0;
 }
 
@@ -323,7 +332,6 @@ void SVMtlCore::recoverMtl() {
     SVRendererPtr t_renderer = mApp->getRenderer();
     if(!t_renderer)
         return ;
-    //状态回滚 先
     //融合
     if((m_LogicMtlFlag0&MTL_F0_BLEND)>0){
         //m_LogicParamBlend.enable = false;
@@ -356,133 +364,103 @@ void SVMtlCore::recoverMtl() {
 
 //交换
 void SVMtlCore::swap() {
+    
 }
 
-//
-void SVMtlCore::setModelMatrix(FMat4& _mat) {
-    setParam("mmat",_mat);
-}
-
-void SVMtlCore::setViewMatrix(FMat4& _mat) {
-    setParam("vmat",_mat);
-}
-
-void SVMtlCore::setProjMatrix(FMat4& _mat) {
-    setParam("pmat",_mat);
-}
-
-void SVMtlCore::setVPMatrix(FMat4& _mat) {
-    setParam("vpmat",_mat);
-}
-
-void SVMtlCore::_refreshMatrix(){
-    SVRendererPtr t_renderer = mApp->getRenderer();
-    if(t_renderer){
-        if( m_LogicParamMatrix.m_self_view == 0 ) {
-            //使用堆栈的
-            FMat4 t_mat_view = t_renderer->getViewMat();
-            memcpy(m_LogicParamMatrix.m_mat_view, t_mat_view.get(), sizeof(f32) * 16);
-            m_LogicMtlFlag0 |= MTL_F0_MAT_V;
-        }
-        
-        if( m_LogicParamMatrix.m_self_proj == 0 ) {
-            //使用堆栈的
-            FMat4 t_mat_proj = t_renderer->getProjMat();
-            memcpy(m_LogicParamMatrix.m_mat_project, t_mat_proj.get(), sizeof(f32) * 16);
-            m_LogicMtlFlag0 |= MTL_F0_MAT_P;
-        }
-        
-        if( m_LogicParamMatrix.m_self_vp == 0 ) {
-            //使用堆栈的
-            FMat4 t_mat_vp = t_renderer->getVPMat();
-            memcpy(m_LogicParamMatrix.m_mat_vp, t_mat_vp.get(), sizeof(f32) * 16);
-            m_LogicMtlFlag0 |= MTL_F0_MAT_VP;
-        }
-    }
-}
-
-//执行修正系统
-void SVMtlCore::_refreshModify(){
-}
+//void SVMtlCore::_refreshMatrix(){
+////    SVRendererPtr t_renderer = mApp->getRenderer();
+////    if(t_renderer){
+////        if( m_LogicParamMatrix.m_self_view == 0 ) {
+////            //使用堆栈的
+////            FMat4 t_mat_view = t_renderer->getViewMat();
+////            memcpy(m_LogicParamMatrix.m_mat_view, t_mat_view.get(), sizeof(f32) * 16);
+////            m_LogicMtlFlag0 |= MTL_F0_MAT_V;
+////        }
+////
+////        if( m_LogicParamMatrix.m_self_proj == 0 ) {
+////            //使用堆栈的
+////            FMat4 t_mat_proj = t_renderer->getProjMat();
+////            memcpy(m_LogicParamMatrix.m_mat_project, t_mat_proj.get(), sizeof(f32) * 16);
+////            m_LogicMtlFlag0 |= MTL_F0_MAT_P;
+////        }
+////
+////        if( m_LogicParamMatrix.m_self_vp == 0 ) {
+////            //使用堆栈的
+////            FMat4 t_mat_vp = t_renderer->getVPMat();
+////            memcpy(m_LogicParamMatrix.m_mat_vp, t_mat_vp.get(), sizeof(f32) * 16);
+////            m_LogicMtlFlag0 |= MTL_F0_MAT_VP;
+////        }
+////    }
+//}
 
 void SVMtlCore::_submitUniform(SVRendererPtr _render) {
 }
 
-void SVMtlCore::_submitTexture(SVRendererPtr _render){
-}
-
-void SVMtlCore::_submitState(SVRendererPtr _render) {
-    //更新纹理
-    if((m_LogicMtlFlag0&MTL_F0_TEX0)>0){
-        _render->submitTex(0, m_paramTex.m_texUnit[0]);
-    }
-    if((m_LogicMtlFlag0&MTL_F0_TEX1)>0){
-        _render->submitTex(1, m_paramTex.m_texUnit[1]);
-    }
-    if((m_LogicMtlFlag0&MTL_F0_TEX2)>0){
-        _render->submitTex(2, m_paramTex.m_texUnit[2]);
-    }
-    if((m_LogicMtlFlag0&MTL_F0_TEX3)>0){
-        _render->submitTex(3, m_paramTex.m_texUnit[3]);
-    }
-    if((m_LogicMtlFlag0&MTL_F0_TEX4)>0){
-        _render->submitTex(4, m_paramTex.m_texUnit[4]);
-    }
-    if((m_LogicMtlFlag0&MTL_F0_TEX5)>0){
-        _render->submitTex(5, m_paramTex.m_texUnit[5]);
-    }
-    if((m_LogicMtlFlag0&MTL_F0_TEX6)>0){
-        _render->submitTex(6, m_paramTex.m_texUnit[6]);
-    }
-    if((m_LogicMtlFlag0&MTL_F0_TEX7)>0){
-        _render->submitTex(7, m_paramTex.m_texUnit[7]);
-    }
-    //
-    if((m_LogicMtlFlag0&MTL_F0_LINE_SIZE)>0){
-        //_render->submitLineWidth(m_LogicParamSize.m_linewidth);
-    }
-    //融合
-    if((m_LogicMtlFlag0&MTL_F0_BLEND)>0){
-        //_render->submitBlend(m_LogicParamBlend);
-    }
-    //隐藏面消除
-    if((m_LogicMtlFlag0&MTL_F0_CULL)>0){
-        //_render->submitCull(m_LogicParamCull);
-    }
-    //模板测试
-    if((m_LogicMtlFlag0&MTL_F0_STENCIL)>0){
-    }
-    //alpha测试
-    if((m_LogicMtlFlag0&MTL_F0_ALPHA)>0){
-    }
-    //深度测试
-    if((m_LogicMtlFlag0&MTL_F0_DEPTH)>0){
-    }
-    //Z冲突
-    if((m_LogicMtlFlag0&MTL_F0_ZOFF)>0){
-        //_render->submitZOff(m_LogicParamZOff);
-    }else{
-        //_render->submitZOff(m_LogicParamZOff);
-    }
-}
+//void SVMtlCore::_submitState(SVRendererPtr _render) {
+////    //更新纹理
+////    if((m_LogicMtlFlag0&MTL_F0_TEX0)>0){
+////        _render->submitTex(0, m_paramTex.m_texUnit[0]);
+////    }
+////    if((m_LogicMtlFlag0&MTL_F0_TEX1)>0){
+////        _render->submitTex(1, m_paramTex.m_texUnit[1]);
+////    }
+////    if((m_LogicMtlFlag0&MTL_F0_TEX2)>0){
+////        _render->submitTex(2, m_paramTex.m_texUnit[2]);
+////    }
+////    if((m_LogicMtlFlag0&MTL_F0_TEX3)>0){
+////        _render->submitTex(3, m_paramTex.m_texUnit[3]);
+////    }
+////    if((m_LogicMtlFlag0&MTL_F0_TEX4)>0){
+////        _render->submitTex(4, m_paramTex.m_texUnit[4]);
+////    }
+////    if((m_LogicMtlFlag0&MTL_F0_TEX5)>0){
+////        _render->submitTex(5, m_paramTex.m_texUnit[5]);
+////    }
+////    if((m_LogicMtlFlag0&MTL_F0_TEX6)>0){
+////        _render->submitTex(6, m_paramTex.m_texUnit[6]);
+////    }
+////    if((m_LogicMtlFlag0&MTL_F0_TEX7)>0){
+////        _render->submitTex(7, m_paramTex.m_texUnit[7]);
+////    }
+////    //
+////    if((m_LogicMtlFlag0&MTL_F0_LINE_SIZE)>0){
+////        //_render->submitLineWidth(m_LogicParamSize.m_linewidth);
+////    }
+////    //融合
+////    if((m_LogicMtlFlag0&MTL_F0_BLEND)>0){
+////        //_render->submitBlend(m_LogicParamBlend);
+////    }
+////    //隐藏面消除
+////    if((m_LogicMtlFlag0&MTL_F0_CULL)>0){
+////        //_render->submitCull(m_LogicParamCull);
+////    }
+////    //模板测试
+////    if((m_LogicMtlFlag0&MTL_F0_STENCIL)>0){
+////    }
+////    //alpha测试
+////    if((m_LogicMtlFlag0&MTL_F0_ALPHA)>0){
+////    }
+////    //深度测试
+////    if((m_LogicMtlFlag0&MTL_F0_DEPTH)>0){
+////    }
+////    //Z冲突
+////    if((m_LogicMtlFlag0&MTL_F0_ZOFF)>0){
+////        //_render->submitZOff(m_LogicParamZOff);
+////    }else{
+////        //_render->submitZOff(m_LogicParamZOff);
+////    }
+//}
 
 void SVMtlCore::_submitMtl(SVRendererPtr _render) {
+    
 }
 
-void SVMtlCore::setTexSizeIndex(s32 index, f32 _w, f32 _h) {
-}
-
-void SVMtlCore::setLineSize(f32 _linewidth){
-    m_LogicMtlFlag0 |= MTL_F0_LINE_SIZE;
-}
-
-void SVMtlCore::setBlendState(MTLBLENDFUNC _src , MTLBLENDFUNC _dst){
+void SVMtlCore::setBlendState(s32 _src , s32 _dst){
 //    m_LogicParamBlend.srcParam = _src;
 //    m_LogicParamBlend.dstParam = _dst;
 }
 
 void SVMtlCore::setBlendEnable(bool _bBlendEnable){
-    
     //m_LogicParamBlend.enable = _bBlendEnable;
     m_LogicMtlFlag0 |= MTL_F0_BLEND;
 }
@@ -591,125 +569,23 @@ void SVMtlCore::fromJSON1(RAPIDJSON_NAMESPACE::Value &_item){
     //blend param 融合
     if (_item.HasMember("blend-param") && _item["blend-param"].IsObject()) {
         RAPIDJSON_NAMESPACE::Document::Object t_value_obj = _item["blend-param"].GetObject();
-        s32 t_enable = t_value_obj["enable"].GetInt();
-        if(t_enable>0) {
-            setBlendEnable(true);
-        }else{
-            setBlendEnable(false);
-        }
-    }else{
-        //默认融合
-        setBlendEnable(false);
+        m_blend_enable = t_value_obj["enable"].GetInt();
     }
     
     //stencil param 融合
     if (_item.HasMember("stencil-param") && _item["stencil-param"].IsObject()) {
         RAPIDJSON_NAMESPACE::Document::Object t_value_obj = _item["stencil-param"].GetObject();
-        s32 t_enable = t_value_obj["enable"].GetInt();
-        if(t_enable>0) {
-            setStencilEnable(true);
-        }else{
-            setStencilEnable(false);
-        }
-    }else{
-        //默认模版
-        setStencilEnable(false);
+        m_stencil_enable = t_value_obj["enable"].GetInt();
     }
     
     //alpha param 融合
     if (_item.HasMember("alpha-param") && _item["alpha-param"].IsObject()) {
         RAPIDJSON_NAMESPACE::Document::Object t_value_obj = _item["alpha-param"].GetObject();
-        s32 t_enable = t_value_obj["enable"].GetInt();
-        
-    }else{
-        //默认alpha
+        m_alpha_enable = t_value_obj["enable"].GetInt();
     }
 }
 
 //
 void SVMtlCore::toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator,
                        RAPIDJSON_NAMESPACE::Value &_objValue){
-    //_toJsonData(_allocator, _objValue);
 }
-
-//    //blending
-//    if (item.HasMember("blend") && item["blend"].IsObject()) {
-//        RAPIDJSON_NAMESPACE::Value &t_blend = item["blend"];
-//        if (t_blend.HasMember("enable") && t_blend["enable"].IsBool()) {
-//            bool enable = t_blend["enable"].GetBool();
-//            setBlendEnable(enable);
-//        }
-//        s32 src = 1;
-//        s32 dst = 1;
-//        if (t_blend.HasMember("src") && t_blend["src"].IsInt()) {
-//            src = t_blend["src"].GetInt();
-//        }
-//        if (t_blend.HasMember("dst") && t_blend["dst"].IsInt()) {
-//            dst = t_blend["dst"].GetInt();
-//        }
-//        setBlendState((MTLBLENDFUNC)src, (MTLBLENDFUNC)dst);
-//    }
-//    //shader
-//    if (item.HasMember("shader") && item["shader"].IsString()) {
-//        SVString shader = item["shader"].GetString();
-//        reloadShader();
-//    }
-//    //parameter
-//    if (item.HasMember("parameter") && item["parameter"].IsObject()) {
-//        RAPIDJSON_NAMESPACE::Value &t_paprmeter = item["parameter"];
-//        if (t_paprmeter.HasMember("depth") && t_paprmeter["depth"].IsBool()) {
-//            bool enable = t_paprmeter["depth"].GetBool();
-//            setDepthEnable(enable);
-//        }
-//        if (t_paprmeter.HasMember("cull") && t_paprmeter["cull"].IsObject()) {
-//            RAPIDJSON_NAMESPACE::Value &t_cull = item["cull"];
-//            if (t_cull.HasMember("enable") && t_cull["enable"].IsBool()) {
-//                bool enable = t_cull["enable"].GetBool();
-//                setCullEnable(enable);
-//            }
-//            s32 t_frontFace = 1;
-//            s32 t_cullFace = 1;
-//            if (t_cull.HasMember("frontFace") && t_cull["frontFace"].IsInt()) {
-//                t_frontFace = t_cull["frontFace"].GetInt();
-//            }
-//            if (t_cull.HasMember("cullFace") && t_cull["cullFace"].IsInt()) {
-//                t_cullFace = t_cull["cullFace"].GetInt();
-//            }
-//            setCullFace(t_frontFace, t_cullFace);
-//        }
-//    }
-//    //textures
-//    if (item.HasMember("textures") && item["textures"].IsArray()) {
-//        RAPIDJSON_NAMESPACE::Value &t_textures = item["textures"];
-//        for (s32 i = 0; i<t_textures.Size(); i++) {
-//            RAPIDJSON_NAMESPACE::Value &t_texture = t_textures[i];
-//            if(t_texture.HasMember("texture") && t_texture["texture"].IsString()){
-//                SVString textureName = t_texture["texture"].GetString();
-//            }
-//            if(t_texture.HasMember("channel") && t_texture["channel"].IsInt()){
-//                s32 channel = t_texture["channel"].GetInt();
-//            }
-//            if(t_texture.HasMember("internalformat") && t_texture["internalformat"].IsInt()){
-//                s32 informat = t_texture["internalformat"].GetInt();
-//            }
-//            if(t_texture.HasMember("format") && t_texture["format"].IsInt()){
-//                s32 format = t_texture["format"].GetInt();
-//            }
-//            if(t_texture.HasMember("sampler") && t_texture["sampler"].IsObject()){
-//                RAPIDJSON_NAMESPACE::Value &sampler = t_texture["sampler"];
-//                if(sampler.HasMember("magFilter") && sampler["magFilter"].IsInt()){
-//                    s32 magFilter = sampler["magFilter"].GetInt();
-//                }
-//                if(sampler.HasMember("minFilter") && sampler["minFilter"].IsInt()){
-//                    s32 minFilter = sampler["minFilter"].GetInt();
-//                }
-//                if(sampler.HasMember("wrapS") && sampler["wrapS"].IsInt()){
-//                    s32 wrapS = sampler["wrapS"].GetInt();
-//                }
-//                if(sampler.HasMember("wrapT") && sampler["wrapT"].IsInt()){
-//                    s32 wrapT = sampler["wrapT"].GetInt();
-//                }
-//            }
-//        }
-//    }
-//    //stencil

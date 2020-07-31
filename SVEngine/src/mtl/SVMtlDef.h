@@ -157,7 +157,7 @@ namespace sv {
     
     /* Blending
      */
-    enum MTLBLENDFUNC{
+    enum {
         MTL_BLEND_NONE = 0,
         MTL_BLEND_ZERO,
         MTL_BLEND_ONE,

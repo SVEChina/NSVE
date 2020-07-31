@@ -76,33 +76,6 @@ namespace sv {
         
         u32 m_t_wrap;
     };
-    
-    struct SVTextureParam {
-        
-        SVTextureParam();
-        
-        void reset();
-        
-        void copy(SVTextureParam& _param);
-        
-        void setTexture(u32 _index,SVTexturePtr _tex);
-        
-        void setTexture(u32 _index,sv::SVTEXINID _from);
-        
-        //设置纹理环绕
-        void setTexWrapS(u32 _index,s32 _type);
-        
-        void setTexWrapT(u32 _index,s32 _type);
-        
-        //设置纹理过滤器
-        void setTexFilterMax(u32 _index,s32 _type);
-        
-        void setTexFilterMin(u32 _index,s32 _type);
-
-    public:
-        TexUnit m_texUnit[MAX_TEXUNIT];
-    };
-
         
     
 }//!namespace sv

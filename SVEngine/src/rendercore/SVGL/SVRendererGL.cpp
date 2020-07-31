@@ -90,9 +90,9 @@ SVRFboPtr SVRendererGL::createResFbo() {
 void SVRendererGL::processMtl(SVMtlCorePtr _mtl) {
     if(!_mtl)
         return ;
-    if( _mtl->m_shader && _mtl->m_shader->getResShader() ) {
-        _mtl->m_shader->getResShader()->process( std::dynamic_pointer_cast<SVRendererGL>(shareObject()) );
-    }
+//    if( _mtl->m_shader && _mtl->m_shader->getResShader() ) {
+//        _mtl->m_shader->getResShader()->process( std::dynamic_pointer_cast<SVRendererGL>(shareObject()) );
+//    }
 }
 
 //处理mesh
