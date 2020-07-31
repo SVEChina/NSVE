@@ -30,7 +30,7 @@ void SVRenderObjInst::pushLineCmd(SVRenderScenePtr _rs,
 //        return;
 //    if(_rs->isSuspend())
 //        return;
-//    SVRenderCmdLinePtr t_cmd = MakeSharedPtr<SVRenderCmdLine>();
+//    SVRCmdLinePtr t_cmd = MakeSharedPtr<SVRCmdLine>();
 //    t_cmd->mTag = tag;
 //    t_cmd->setLine(_start,_end);
 //    t_cmd->setMtl(_mtl);
@@ -46,7 +46,7 @@ void SVRenderObjInst::pushRectCmd(SVRenderScenePtr _rs,
 //        return;
 //    if(_rs->isSuspend())
 //        return;
-//    SVRenderCmdRectPtr t_cmd = MakeSharedPtr<SVRenderCmdRect>();
+//    SVRCmdRectPtr t_cmd = MakeSharedPtr<SVRCmdRect>();
 //    t_cmd->mTag = tag;
 //    t_cmd->setRect(_rect);
 //    t_cmd->setMtl(_mtl);
@@ -62,7 +62,7 @@ void SVRenderObjInst::pushAABBCmd(SVRenderScenePtr _rs,
 //        return;
 //    if(_rs->isSuspend())
 //        return;
-//    SVRenderCmdAABBPtr t_cmd = MakeSharedPtr<SVRenderCmdAABB>();
+//    SVRCmdAABBPtr t_cmd = MakeSharedPtr<SVRCmdAABB>();
 //    t_cmd->mTag = tag;
 //    t_cmd->setAABB(_aabb);
 //    t_cmd->setMtl(_mtl);

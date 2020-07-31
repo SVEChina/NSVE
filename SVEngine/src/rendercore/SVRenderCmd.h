@@ -49,26 +49,8 @@ namespace sv {
             SVMtlCorePtr m_pMtl;
         };
         
-        //清空命令
-        class SVRenderCmdClear : public SVRenderCmdNor {
-        public:
-            SVRenderCmdClear();
-            
-            ~SVRenderCmdClear();
-            
-            void setClearColor(f32 _r,f32 _g,f32 _b,f32 _a);
-            
-            virtual void render(SVRendererPtr _renderer,SVRTargetPtr _target);
-            
-        protected:
-            f32 m_color_r;
-            f32 m_color_g;
-            f32 m_color_b;
-            f32 m_color_a;
-        };
-        
         //适配命令
-        class SVRenderCmdAdapt : public SVRenderCmdClear {
+        class SVRenderCmdAdapt : public SVRenderCmd {
         public:
             SVRenderCmdAdapt();
             

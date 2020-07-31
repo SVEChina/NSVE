@@ -279,12 +279,6 @@ void SVScene::update(f32 dt) {
 //            t_fbo_bind->mTag = "main_frame_bind";
 //            m_pRenderScene->pushRenderCmd(RST_SCENE_BEGIN, t_fbo_bind);
 //            //
-//            SVRenderCmdClearPtr t_clear = MakeSharedPtr<SVRenderCmdClear>();
-//            t_clear->mTag = "main_frame_clear";
-//            t_clear->setRenderer(t_renderer);
-//            t_clear->setClearColor(m_color.r, m_color.g, m_color.b, m_color.a);
-//            m_pRenderScene->pushRenderCmd(RST_SCENE_BEGIN, t_clear);
-//            //
 //            SVRenderCmdFboUnbindPtr t_fbo_unbind = MakeSharedPtr<SVRenderCmdFboUnbind>(t_renderer->getRenderTexture());
 //            t_fbo_unbind->mTag = "main_frame_unbind";
 //            m_pRenderScene->pushRenderCmd(RST_SCENE_END, t_fbo_unbind);

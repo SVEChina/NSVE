@@ -63,30 +63,6 @@ void SVRenderCmdNor::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
 }
 
 //
-SVRenderCmdClear::SVRenderCmdClear()
-:m_color_r(1.0f)
-,m_color_g(1.0f)
-,m_color_b(1.0f)
-,m_color_a(1.0f){
-}
-
-SVRenderCmdClear::~SVRenderCmdClear(){
-}
-
-void SVRenderCmdClear::setClearColor(f32 _r,f32 _g,f32 _b,f32 _a) {
-    m_color_r = _r;
-    m_color_g = _g;
-    m_color_b = _b;
-    m_color_a = _a;
-}
-
-void SVRenderCmdClear::render(SVRendererPtr _renderer,SVRTargetPtr _target){
-    if(_renderer){
-        //_renderer->clear();
-    }
-}
-
-//
 SVRenderCmdAdapt::SVRenderCmdAdapt()
 :m_winWidth(720)
 ,m_winHeight(1280){
@@ -104,9 +80,7 @@ void SVRenderCmdAdapt::render(SVRendererPtr _renderer,SVRTargetPtr _target){
  //   glViewport( 0, 0,m_winWidth,m_winHeight);
 //    m_pRenderer->svClearColor(m_color_r,m_color_g,m_color_b,m_color_a);
 //    m_pRenderer->svClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-////    glClearColor(m_color_r,m_color_g,m_color_b,m_color_a);
-////    glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-    SVRenderCmdNor::render(_renderer,_target);
+    SVRenderCmd::render(_renderer,_target);
 }
 
 //渲染命令批次

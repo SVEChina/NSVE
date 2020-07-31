@@ -25,8 +25,6 @@ namespace sv {
             
             virtual void render(SVRendererPtr _renderer,SVRTargetPtr _target);
             
-//            void setMtl(SVMtlCorePtr _material);
-            
         protected:
             virtual void _render();
             
@@ -34,7 +32,7 @@ namespace sv {
         };
         
         //线绘制
-        class SVRenderCmdLine : public SVRenderCmdGeo {
+        class SVRCmdLine : public SVRenderCmdGeo {
         public:
             void setLine(FVec3& _start,FVec3& _end);
             
@@ -46,7 +44,7 @@ namespace sv {
         };
         
         //矩形绘制
-        class SVRenderCmdRect : public SVRenderCmdGeo {
+        class SVRCmdRect : public SVRenderCmdGeo {
         public:
             void setRect(SVRect& _rect);
             
@@ -56,8 +54,13 @@ namespace sv {
             SVRect m_rect;
         };
         
+        class SVRCmdRectSolid : public SVRCmdRect {
+        protected:
+            virtual void _render(SVRendererPtr _renderer,SVRTargetPtr _target);
+        };
+        
         //曲线绘制
-        class SVRenderCmdCurve : public SVRenderCmdGeo {
+        class SVRCmdCurve : public SVRenderCmdGeo {
         public:
             
         protected:
@@ -68,7 +71,7 @@ namespace sv {
         };
         
         //原型绘制
-        class SVRenderCmdCircle : public SVRenderCmdGeo {
+        class SVRCmdCircle : public SVRenderCmdGeo {
         public:
             
         protected:
@@ -78,8 +81,8 @@ namespace sv {
             f32 m_angle;
         };
         
-        //圆固体绘制
-        class SVRenderCmdCircleSolid : public SVRenderCmdGeo {
+        //圆固体绘制（实体）
+        class SVRCmdCircleSolid : public SVRenderCmdGeo {
         public:
             
         protected:
@@ -88,9 +91,9 @@ namespace sv {
             f32 m_radius;
             f32 m_angle;
         };
-        
+
         //AABB绘制
-        class SVRenderCmdAABB : public SVRenderCmdGeo {
+        class SVRCmdAABB : public SVRenderCmdGeo {
         public:
             void setAABB(SVBoundBox& _aabb);
             
@@ -99,8 +102,13 @@ namespace sv {
             
             SVBoundBox m_aabb;
         };
-        
-    
+
+        //AABB绘制(实体)
+        class SVRCmdAABBSolid : public SVRCmdAABB {
+        protected:
+            virtual void _render(SVRendererPtr _renderer,SVRTargetPtr _target);
+        };
+
     
 }//!namespace sv
 
