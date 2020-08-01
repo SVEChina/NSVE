@@ -24,7 +24,6 @@ using namespace sv;
 SVMtlCore::SVMtlCore(SVInstPtr _app)
 :SVGBaseEx(_app){
     m_shader_obj = nullptr;
-    m_paramValues = MakeSharedPtr<SVDataChunk>();
     reset();
 }
 
@@ -33,7 +32,6 @@ SVMtlCore::SVMtlCore(SVInstPtr _app, cptr8 _shader)
 :SVGBaseEx(_app)
 ,m_shader_name(_shader){
     m_shader_obj = nullptr;
-    m_paramValues = MakeSharedPtr<SVDataChunk>();
     reset();
 }
 
@@ -93,173 +91,6 @@ void SVMtlCore::reset() {
 //    //alpha参数
 //    m_alpha_enable;         //开启alpha测试
 //    m_alpha_testMethod;     //alpha测试方法(GL_NEVER,GL_ALWAYS,GL_LESS,GL_LEQUAL,GL_GREATER,GL_GEQUAL,GL_NOTEQUAL)
-}
-
-void SVMtlCore::addParam(cptr8 _name,cptr8 _type,cptr8 _value)  {
-    if( strcmp(_type,"s32") == 0) {
-        s32 tmp = atoi(_value);
-        if(strcmp(_value,"identify") == 0) {
-            setParam(_name,1);
-        }else{
-            setParam(_name,tmp);
-        }
-    }else if( strcmp(_type,"f32") == 0 ) {
-        if(strcmp(_value,"identify") == 0) {
-            setParam(_name,1.0f);
-        }else{
-            f32 tmp = atof(_value);
-            setParam(_name,tmp);
-        }
-    }else if( strcmp(_type,"fvec2") == 0 ) {
-        if(strcmp(_value,"identify") == 0) {
-            FVec2 tmp = FVec2_one;;
-            setParam(_name,tmp);
-        }else{
-            FVec2 tmp(_value);
-            setParam(_name,tmp);
-        }
-        
-    }else if( strcmp(_type,"fvec3") == 0 ) {
-        if(strcmp(_value,"identify") == 0) {
-            FVec3 tmp = FVec3_one;
-            setParam(_name,tmp);
-        }else{
-            FVec3 tmp(_value);
-            setParam(_name,tmp);
-        }
-        
-    }else if( strcmp(_type,"fvec4") == 0 ) {
-        if(strcmp(_value,"identify") == 0) {
-            FVec4 tmp = FVec4_one;
-            setParam(_name,tmp);
-        }else{
-            FVec4 tmp(_value);
-            setParam(_name,tmp);
-        }
-    }else if( strcmp(_type,"fmat4") == 0 ) {
-        if(strcmp(_value,"identify") == 0) {
-            FMat4 tmp;
-            tmp.setIdentity();
-            setParam(_name,tmp);
-        }else{
-            FMat4 tmp(_value);
-            setParam(_name,tmp);
-        }
-    }
-}
-
-void SVMtlCore::setParam(cptr8 _name,s32 _value) {
-    for(int i=0;i<m_paramTbl.size();i++) {
-        if( strcmp( m_paramTbl[i].m_name.c_str() ,_name) == 0 ) {
-            //找到目标参数 ，拷贝即可
-            m_paramValues->set(m_paramTbl[i].m_off,_value);
-            return ;
-        }
-    }
-    //推送目标参数
-    MtlParamDsp t_param;
-    t_param.m_name = _name;
-    t_param.m_type = SV_INT;
-    t_param.m_size = sizeof(s32);
-    t_param.m_off = m_paramValues->push(_value);
-    m_paramTbl.push_back(t_param);
-}
-
-void SVMtlCore::setParam(cptr8 _name,f32 _value) {
-    for(int i=0;i<m_paramTbl.size();i++) {
-        if( strcmp( m_paramTbl[i].m_name.c_str() ,_name) == 0 ) {
-            //找到目标参数 ，拷贝即可
-            m_paramValues->set(m_paramTbl[i].m_off,_value);
-            return ;
-        }
-    }
-    //推送目标参数
-    MtlParamDsp t_param;
-    t_param.m_name = _name;
-    t_param.m_type = SV_FLOAT;
-    t_param.m_size = sizeof(f32);
-    t_param.m_off = m_paramValues->push(_value);
-    m_paramTbl.push_back(t_param);
-}
-
-void SVMtlCore::setParam(cptr8 _name,FVec2 _value) {
-    for(int i=0;i<m_paramTbl.size();i++) {
-        if( strcmp( m_paramTbl[i].m_name.c_str() ,_name) == 0 ) {
-            //找到目标参数 ，拷贝即可
-            m_paramValues->set(m_paramTbl[i].m_off,_value);
-            return ;
-        }
-    }
-    //推送目标参数
-    MtlParamDsp t_param;
-    t_param.m_name = _name;
-    t_param.m_type = SV_FVEC2;
-    t_param.m_size = sizeof(FVec2);
-    t_param.m_off = m_paramValues->push(_value);
-    m_paramTbl.push_back(t_param);
-}
-
-void SVMtlCore::setParam(cptr8 _name,FVec3 _value) {
-    for(int i=0;i<m_paramTbl.size();i++) {
-        if( strcmp( m_paramTbl[i].m_name.c_str() ,_name) == 0 ) {
-            //找到目标参数 ，拷贝即可
-            m_paramValues->set(m_paramTbl[i].m_off,_value);
-            return ;
-        }
-    }
-    //推送目标参数
-    MtlParamDsp t_param;
-    t_param.m_name = _name;
-    t_param.m_type = SV_FVEC3;
-    t_param.m_size = sizeof(FVec3);
-    t_param.m_off = m_paramValues->push(_value);
-    m_paramTbl.push_back(t_param);
-}
-
-void SVMtlCore::setParam(cptr8 _name,FVec4 _value) {
-    for(int i=0;i<m_paramTbl.size();i++) {
-        if( strcmp( m_paramTbl[i].m_name.c_str() ,_name) == 0 ) {
-            //找到目标参数 ，拷贝即可
-            m_paramValues->set(m_paramTbl[i].m_off,_value);
-            return ;
-        }
-    }
-    //推送目标参数
-    MtlParamDsp t_param;
-    t_param.m_name = _name;
-    t_param.m_type = SV_FVEC4;
-    t_param.m_size = sizeof(FVec4);
-    t_param.m_off = m_paramValues->push(_value);
-    m_paramTbl.push_back(t_param);
-}
-
-void SVMtlCore::setParam(cptr8 _name,FMat4 _value) {
-    for(int i=0;i<m_paramTbl.size();i++) {
-        if( strcmp( m_paramTbl[i].m_name.c_str() ,_name) == 0 ) {
-            //找到目标参数 ，拷贝即可
-            m_paramValues->set(m_paramTbl[i].m_off,_value);
-            return ;
-        }
-    }
-    //推送目标参数
-    MtlParamDsp t_param;
-    t_param.m_name = _name;
-    t_param.m_type = SV_FMAT4;
-    t_param.m_size = sizeof(FMat4);
-    t_param.m_off = m_paramValues->push(_value);
-    m_paramTbl.push_back(t_param);
-}
-
-void* SVMtlCore::getParam(cptr8 _name) {
-    u64 t_off = 0;
-    for(int i=0;i<m_paramTbl.size();i++) {
-        if( strcmp( m_paramTbl[i].m_name.c_str() ,_name) == 0 ) {
-            //找到目标参数 ，拷贝即可
-            t_off = m_paramTbl[i].m_off;
-            break;
-        }
-    }
-    return m_paramValues->getPointer(t_off);
 }
 
 //
@@ -519,17 +350,6 @@ void SVMtlCore::fromJSON1(RAPIDJSON_NAMESPACE::Value &_item){
         m_shader_name = t_value.GetString();
     }else{
         return ;
-    }
-    //uniform参数
-    if (_item.HasMember("param-tbl") && _item["param-tbl"].IsArray()) {
-        RAPIDJSON_NAMESPACE::Document::Array t_value_array = _item["param-tbl"].GetArray();
-        for(s32 i=0;i<t_value_array.Size();i++) {
-            RAPIDJSON_NAMESPACE::Document::Object element = t_value_array[i].GetObject();
-            SVString t_param_name = element["name"].GetString();
-            SVString t_param_type = element["type"].GetString();
-            SVString t_param_value = element["value"].GetString();
-            addParam(t_param_name.c_str(),t_param_type.c_str(),t_param_value.c_str());
-        }
     }
     //texture参数
     if (_item.HasMember("texture-tbl") && _item["texture-tbl"].IsArray()) {

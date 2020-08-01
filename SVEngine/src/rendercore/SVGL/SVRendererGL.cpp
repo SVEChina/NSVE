@@ -36,6 +36,10 @@ SVRendererGL::~SVRendererGL(){
     m_cur_program = 0;
 }
 
+SVRendererGLPtr SVRendererGL::share() {
+    return std::dynamic_pointer_cast<SVRendererGL>(shareObject());
+}
+
 void SVRendererGL::init(s32 _w,s32 _h){
     SVRenderer::init(_w,_h);
     m_inWidth = _w;
@@ -91,66 +95,21 @@ void SVRendererGL::processMtl(SVMtlCorePtr _mtl) {
     if(_mtl && _mtl->getShader() ) {
         bool t_ret = _mtl->getShader()->active();
         if(t_ret) {
-            //传递uniform
-            for(s32 i=0;i<_mtl->m_paramTbl.size();i++) {
-                u32 t_locate = glGetUniformLocation(m_cur_program, _mtl->m_paramTbl[i].m_name.c_str());
-                if(t_locate>0) {
-                    if( _mtl->m_paramTbl[i].m_type == SV_INT) {
-                        s32 t_cnt = _mtl->m_paramTbl[i].m_size/sizeof(s32);
-                        s32* t_p = (s32*)(_mtl->m_paramValues->getPointer( _mtl->m_paramTbl[i].m_off));
-                        if(t_cnt == 1) {
-                            glUniform1i(t_locate,*t_p);
-                        }else{
-                            glUniform1iv(t_locate,t_cnt,t_p);
-                        }
-                    }else if( _mtl->m_paramTbl[i].m_type == SV_FLOAT) {
-                        s32 t_cnt = _mtl->m_paramTbl[i].m_size/sizeof(f32);
-                        f32* t_p = (f32*)(_mtl->m_paramValues->getPointer( _mtl->m_paramTbl[i].m_off));
-                        if(t_cnt == 1){
-                            glUniform1f(t_locate,*t_p);
-                        }else{
-                            glUniform1fv(t_locate,t_cnt,t_p);
-                        }
-                    }else if( _mtl->m_paramTbl[i].m_type == SV_FVEC2) {
-                        s32 t_cnt = _mtl->m_paramTbl[i].m_size/sizeof(FVec2);
-                        f32* t_p = (f32*)(_mtl->m_paramValues->getPointer( _mtl->m_paramTbl[i].m_off));
-                        if(t_cnt == 1){
-                            glUniform2f(t_locate,*t_p,*(t_p+1));
-                        }else{
-                            glUniform2fv(t_locate,t_cnt,t_p);
-                        }
-                    }else if( _mtl->m_paramTbl[i].m_type == SV_FVEC3) {
-                        s32 t_cnt = _mtl->m_paramTbl[i].m_size/sizeof(FVec3);
-                        f32* t_p = (f32*)(_mtl->m_paramValues->getPointer( _mtl->m_paramTbl[i].m_off));
-                        if(t_cnt == 1){
-                            glUniform3f(t_locate,*t_p,*(t_p+1),*(t_p+2));
-                        }else{
-                            glUniform3fv(t_locate,t_cnt,t_p);
-                        }
-                        glUniform3fv(t_locate,1,t_p);
-                    }else if( _mtl->m_paramTbl[i].m_type == SV_FVEC4) {
-                        s32 t_cnt = _mtl->m_paramTbl[i].m_size/sizeof(FVec4);
-                        f32* t_p = (f32*)(_mtl->m_paramValues->getPointer( _mtl->m_paramTbl[i].m_off));
-                        if(t_cnt == 1){
-                            glUniform4f(t_locate,*t_p,*(t_p+1),*(t_p+2),*(t_p+3));
-                        }else{
-                            glUniform4fv(t_locate,t_cnt,t_p);
-                        }
-                        glUniform4fv(t_locate,1,t_p);
-                    }else if( _mtl->m_paramTbl[i].m_type == SV_FMAT4) {
-                        s32 t_cnt = _mtl->m_paramTbl[i].m_size/sizeof(FMat4);
-                        f32* t_p = (f32*)(_mtl->m_paramValues->getPointer( _mtl->m_paramTbl[i].m_off));
-                        if(t_cnt == 1){
-                            glUniformMatrix4fv(t_locate,1,GL_FALSE,t_p);
-                        }else{
-                            glUniformMatrix4fv(t_locate,t_cnt,GL_FALSE,t_p);
-                        }
-                    }else if( _mtl->m_paramTbl[i].m_type == SV_BLOCK) {
-                        
-                    }
+            //传递参数
+            SVRShaderPtr t_rshader = _mtl->getShader()->getResShader();
+            if(t_rshader) {
+                SVRShaderGLPtr t_gl_shader = std::dynamic_pointer_cast<SVRShaderGL>(t_rshader);
+                if(t_gl_shader) {
+                    t_gl_shader->submitParamTbl(_mtl->getShader()->m_vs_paramtbl);
+                    t_gl_shader->submitParamTbl(_mtl->getShader()->m_fs_paramtbl);
+                    t_gl_shader->submitParamTbl(_mtl->getShader()->m_gs_paramtbl);
                 }
-             }
-            //设置各种状态
+            }
+            //提交纹理
+            for(s32 i=0;i<MAX_TEXUNIT;i++) {
+                submitTex(i,_mtl->m_texUnit[i]);
+            }
+            //设置状态
             //blend
             
             //stencil
@@ -167,15 +126,15 @@ void SVRendererGL::processMtl(SVMtlCorePtr _mtl) {
 //处理mesh
 void SVRendererGL::processMesh(SVRenderMeshPtr _mesh) {
     if(_mesh && _mesh->getResBuffer() ) {
-        _mesh->getResBuffer()->process( std::dynamic_pointer_cast<SVRendererGL>(shareObject()) );
+        _mesh->getResBuffer()->process( share() );
     }
 }
 
 //处理mesh
 void SVRendererGL::drawMesh(SVRenderMeshPtr _mesh ) {
-//    if(_mesh && _mesh->getResBuffer() ) {
-//        _mesh->getResBuffer()->process( std::dynamic_pointer_cast<SVRendererGL>(shareObject()) ,_target);
-//    }
+    if(_mesh && _mesh->getResBuffer() ) {
+        _mesh->getResBuffer()->draw( share() );
+    }
 }
 
 //

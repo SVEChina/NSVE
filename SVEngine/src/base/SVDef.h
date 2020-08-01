@@ -101,7 +101,7 @@ namespace sv {
         SV_E_TECH_VS = 0x00000001,
         SV_E_TECH_FS = 0x00000010,
         SV_E_TECH_GS = 0x00000100,
-        SV_E_TECH_TSC = 0x00001000,
+        SV_E_TECH_TSE = 0x00001000,
         SV_E_TECH_TSD = 0x00010000,
         SV_E_TECH_CS = 0x00100000,
     };

@@ -33,7 +33,7 @@ void SVRTechGL::build(SVRendererPtr _renderer) {
 //    if(m_techDsp&SV_E_TECH_CS){
 //        //m_vsf = _complie_shader(GL_VERTEX_SHADER,m_cs_name.c_str());
 //    }
-//    if(m_techDsp&SV_E_TECH_TSC){
+//    if(m_techDsp&SV_E_TECH_TSE){
 //        m_tscf = _complie_shader(GL_TESS_CONTROL_SHADER,m_tsc_name.c_str());
 //    }
 //    if(m_techDsp&SV_E_TECH_TSD){

@@ -59,9 +59,14 @@ namespace sv {
         SVRShaderPtr getResShader();
         
         bool active();
+        
+        bool toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator,
+                        RAPIDJSON_NAMESPACE::Value &_objValue);
+
+        bool fromJSON(RAPIDJSON_NAMESPACE::Value &item);
 
     public:
-        ShaderDsp m_dsp;
+        ShaderDsp m_shader_dsp;
         std::vector<SamplerDsp> m_vs_sampler;
         std::vector<SamplerDsp> m_fs_sampler;
         std::vector<SamplerDsp> m_gs_sampler;

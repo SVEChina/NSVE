@@ -1,14 +1,6 @@
 {
     "version" : "1.0",
     "shader" : "screen",
-    "param-tbl" : [
-        { "name" : "test-f32", "type" : "f32", "value" : "1.23456" },
-        { "name" : "test-s32", "type" : "s32", "value" : "1" },
-        { "name" : "test-fvec2", "type" : "fvec2", "value" : "1.0,2.0" },
-        { "name" : "test-fvec3", "type" : "fvec3", "value" : "1.0,2.0,3.0" },
-        { "name" : "test-fvec4", "type" : "fvec4", "value" : "1.0,2.0,3.0,4.0" },
-        { "name" : "test-fmat4", "type" : "fmat4", "value" : "identity" }
-    ],
     "texture-tbl" : [
         { "chn" : 0, "from" : "file", "path" : "svres/sve.png" },
         { "chn" : 1, "from" : "inner", "path" : "SV_MAIN" }

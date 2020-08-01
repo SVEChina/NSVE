@@ -23,6 +23,8 @@ namespace sv {
         
         ~SVRendererGL();
         
+        SVRendererGLPtr share();
+        
         virtual void init(s32 _w,s32 _h);
         
         virtual void init(s32 _w,s32 _h,bool _offline);

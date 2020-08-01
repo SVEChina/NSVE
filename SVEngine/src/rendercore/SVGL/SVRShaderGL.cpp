@@ -10,7 +10,7 @@
 #include "../../mtl/SVShader.h"
 #include "../../app/SVInst.h"
 #include "../../file/SVFileMgr.h"
-
+#include "../../base/SVParamTbl.h"
 
 using namespace sv;
 
@@ -48,23 +48,23 @@ void SVRShaderGL::create(SVRendererPtr _renderer) {
         return ;
     }
     //
-    if( t_shader->m_dsp.m_dsp &SV_E_TECH_VS ) {
-         m_vs = _loadShader(mApp,t_shader->m_dsp.m_vs_fname.c_str(),SV_E_TECH_VS);
+    if( t_shader->m_shader_dsp.m_dsp &SV_E_TECH_VS ) {
+         m_vs = _loadShader(mApp,t_shader->m_shader_dsp.m_vs_fname.c_str(),SV_E_TECH_VS);
     }
-    if( t_shader->m_dsp.m_dsp&SV_E_TECH_FS ) {
-        m_fs = _loadShader(mApp,t_shader->m_dsp.m_fs_fname.c_str(),SV_E_TECH_FS);
+    if( t_shader->m_shader_dsp.m_dsp&SV_E_TECH_FS ) {
+        m_fs = _loadShader(mApp,t_shader->m_shader_dsp.m_fs_fname.c_str(),SV_E_TECH_FS);
     }
-    if( t_shader->m_dsp.m_dsp&SV_E_TECH_GS ) {
-       m_gs = _loadShader(mApp,t_shader->m_dsp.m_gs_fname.c_str(),SV_E_TECH_GS);
+    if( t_shader->m_shader_dsp.m_dsp&SV_E_TECH_GS ) {
+       m_gs = _loadShader(mApp,t_shader->m_shader_dsp.m_gs_fname.c_str(),SV_E_TECH_GS);
     }
 //    if( m_shader_dsp&SV_E_TECH_CS ) {
 //     m_cs = _loadShader(mApp,t_shader->m_dsp.m_gs_fname.c_str(),SV_E_TECH_GS);
 //    }
-    if( t_shader->m_dsp.m_dsp&SV_E_TECH_TSC ) {
-        m_tsc = _loadShader(mApp,t_shader->m_dsp.m_tsc_fname.c_str(),SV_E_TECH_TSC);
+    if( t_shader->m_shader_dsp.m_dsp&SV_E_TECH_TSE ) {
+        m_tsc = _loadShader(mApp,t_shader->m_shader_dsp.m_tsc_fname.c_str(),SV_E_TECH_TSE);
     }
-    if( t_shader->m_dsp.m_dsp&SV_E_TECH_TSD ) {
-        m_tse = _loadShader(mApp,t_shader->m_dsp.m_tse_fname.c_str(),SV_E_TECH_TSD);
+    if( t_shader->m_shader_dsp.m_dsp&SV_E_TECH_TSD ) {
+        m_tse = _loadShader(mApp,t_shader->m_shader_dsp.m_tse_fname.c_str(),SV_E_TECH_TSD);
     }
     m_programm = _createProgram();
     //生产program后就删除shader资源
@@ -96,7 +96,7 @@ u32 SVRShaderGL::_loadShader(SVInstPtr _app,cptr8 _filename,s32 _shaderType){
         t_shader_type = GL_GEOMETRY_SHADER;
     }else if(_shaderType == SV_E_TECH_TSD) {
         t_shader_type = GL_TESS_EVALUATION_SHADER;
-    }else if(_shaderType == SV_E_TECH_TSC) {
+    }else if(_shaderType == SV_E_TECH_TSE) {
         t_shader_type = GL_TESS_CONTROL_SHADER;
     }else if(_shaderType == 6) {
     }
@@ -149,7 +149,7 @@ u32 SVRShaderGL::_createProgram(){
     }
     //
     SVShaderPtr t_shader = std::dynamic_pointer_cast<SVShader>(m_logic_obj);
-    if( t_shader->m_dsp.m_attri_formate == "all" ) {
+    if( t_shader->m_shader_dsp.m_attri_formate == "all" ) {
         //bind prop
         glBindAttribLocation(t_program_id, CHANNEL_POSITION, NAME_POSITION);
         glBindAttribLocation(t_program_id, CHANNEL_NORMAL, NAME_NORMAL);
@@ -173,7 +173,7 @@ u32 SVRShaderGL::_createProgram(){
         glBindAttribLocation(t_program_id, CHANNEL_ATTRI_7, "s_attribute_7");
     } else {
         SVStringArray t_str_array;
-        t_str_array.setData( t_shader->m_dsp.m_attri_formate.c_str(),'-');
+        t_str_array.setData( t_shader->m_shader_dsp.m_attri_formate.c_str(),'-');
         for(s32 i=0;i<t_str_array.size();i++) {
             SVString t_str = t_str_array[i];
             if( t_str == "V2" ) {
@@ -261,4 +261,68 @@ bool SVRShaderGL::active(SVRendererPtr _renderer) {
         return true;
     }
     return false;
+}
+
+void SVRShaderGL::submitParamTbl(SVParamTblPtr _paramTbl) {
+    if(!_paramTbl) {
+        return;
+    }
+    for(s32 i=0;i<_paramTbl->m_param_dsps.size();i++) {
+        u32 t_locate = glGetUniformLocation(m_programm, _paramTbl->m_param_dsps[i].m_name.c_str());
+        if(t_locate>0) {
+            if( _paramTbl->m_param_dsps[i].m_type == SV_INT) {
+                s32 t_cnt = _paramTbl->m_param_dsps[i].m_size/sizeof(s32);
+                s32* t_p = (s32*)(_paramTbl->m_param_values->getPointer( _paramTbl->m_param_dsps[i].m_off));
+                if(t_cnt == 1) {
+                    glUniform1i(t_locate,*t_p);
+                }else{
+                    glUniform1iv(t_locate,t_cnt,t_p);
+                }
+            }else if( _paramTbl->m_param_dsps[i].m_type == SV_FLOAT) {
+                s32 t_cnt = _paramTbl->m_param_dsps[i].m_size/sizeof(f32);
+                f32* t_p = (f32*)(_paramTbl->m_param_values->getPointer( _paramTbl->m_param_dsps[i].m_off));
+                if(t_cnt == 1){
+                    glUniform1f(t_locate,*t_p);
+                }else{
+                    glUniform1fv(t_locate,t_cnt,t_p);
+                }
+            }else if( _paramTbl->m_param_dsps[i].m_type == SV_FVEC2) {
+                s32 t_cnt = _paramTbl->m_param_dsps[i].m_size/sizeof(FVec2);
+                f32* t_p = (f32*)(_paramTbl->m_param_values->getPointer( _paramTbl->m_param_dsps[i].m_off));
+                if(t_cnt == 1){
+                    glUniform2f(t_locate,*t_p,*(t_p+1));
+                }else{
+                    glUniform2fv(t_locate,t_cnt,t_p);
+                }
+            }else if( _paramTbl->m_param_dsps[i].m_type == SV_FVEC3) {
+                s32 t_cnt = _paramTbl->m_param_dsps[i].m_size/sizeof(FVec3);
+                f32* t_p = (f32*)(_paramTbl->m_param_values->getPointer( _paramTbl->m_param_dsps[i].m_off));
+                if(t_cnt == 1){
+                    glUniform3f(t_locate,*t_p,*(t_p+1),*(t_p+2));
+                }else{
+                    glUniform3fv(t_locate,t_cnt,t_p);
+                }
+                glUniform3fv(t_locate,1,t_p);
+            }else if( _paramTbl->m_param_dsps[i].m_type == SV_FVEC4) {
+                s32 t_cnt = _paramTbl->m_param_dsps[i].m_size/sizeof(FVec4);
+                f32* t_p = (f32*)(_paramTbl->m_param_values->getPointer( _paramTbl->m_param_dsps[i].m_off));
+                if(t_cnt == 1){
+                    glUniform4f(t_locate,*t_p,*(t_p+1),*(t_p+2),*(t_p+3));
+                }else{
+                    glUniform4fv(t_locate,t_cnt,t_p);
+                }
+                glUniform4fv(t_locate,1,t_p);
+            }else if( _paramTbl->m_param_dsps[i].m_type == SV_FMAT4) {
+                s32 t_cnt = _paramTbl->m_param_dsps[i].m_size/sizeof(FMat4);
+                f32* t_p = (f32*)(_paramTbl->m_param_values->getPointer( _paramTbl->m_param_dsps[i].m_off));
+                if(t_cnt == 1){
+                    glUniformMatrix4fv(t_locate,1,GL_FALSE,t_p);
+                }else{
+                    glUniformMatrix4fv(t_locate,t_cnt,GL_FALSE,t_p);
+                }
+            }else if( _paramTbl->m_param_dsps[i].m_type == SV_BLOCK) {
+
+            }
+        }
+    }
 }

@@ -50,24 +50,6 @@ namespace sv {
         
         virtual void recoverMtl();
         
-        //增加参数
-        void addParam(cptr8 _name,cptr8 _type,cptr8 _value);
-        
-        //设置参数值 主要是针对uniform
-        void setParam(cptr8 _name,s32 _value);
-        
-        void setParam(cptr8 _name,f32 _value);
-        
-        void setParam(cptr8 _name,FVec2 _value);
-        
-        void setParam(cptr8 _name,FVec3 _value);
-        
-        void setParam(cptr8 _name,FVec4 _value);
-        
-        void setParam(cptr8 _name,FMat4 _value);
-        
-        void* getParam(cptr8 _name);
-        
         void setTexture(s32 _chanel,cptr8 _fname);
         
         void setTexture(s32 _chanel,SVTexturePtr _texture);
@@ -81,9 +63,6 @@ namespace sv {
         SVString m_mtl_name;
         //shader名称
         SVString m_shader_name;
-        //参数表
-        std::vector<MtlParamDsp> m_paramTbl;    //参数表
-        SVDataChunkPtr m_paramValues;           //参数值
         //MTLFLAG0;
         s32 m_LogicMtlFlag0;
         //融合参数
@@ -117,10 +96,9 @@ namespace sv {
         s32 m_alpha_testMethod;     //alpha测试方法(GL_NEVER,GL_ALWAYS,GL_LESS,GL_LEQUAL,GL_GREATER,GL_GEQUAL,GL_NOTEQUAL)
         //纹理参数
         TexUnit m_texUnit[MAX_TEXUNIT];
-        //SVTextureParam m_paramTex;
         //
         SVShaderPtr m_shader_obj;   //pointer
-        
+        //
     public:
         void swap();
         

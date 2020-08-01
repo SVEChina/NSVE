@@ -194,6 +194,14 @@ void* SVParamTbl::getParamData(cptr8 _name) {
     return m_param_values->getPointer(t_off);
 }
 
+void* SVParamTbl::getDataPointer() {
+    return m_param_values->getPointer();
+}
+
+s32 SVParamTbl::getDataSize() {
+    return m_param_values->getRealSize();
+}
+
 void SVParamTbl::fromJSON(RAPIDJSON_NAMESPACE::Value &_item){
     if (_item.HasMember("param-tbl") && _item["param-tbl"].IsArray()) {
         RAPIDJSON_NAMESPACE::Document::Array t_value_array = _item["param-tbl"].GetArray();

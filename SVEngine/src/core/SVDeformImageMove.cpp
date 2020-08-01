@@ -269,9 +269,9 @@ void SVDeformImageMove::render(){
             //图片翻转这块需要校正一下 by fyz
             if(m_pMtlBg){
                 if(m_flip){
-                    m_pMtlBg->setParam("texclip",FVec2(1.0f, 1.0f));
+                    //m_pMtlBg->setParam("texclip",FVec2(1.0f, 1.0f));
                 }else{
-                    m_pMtlBg->setParam("texclip",FVec2(1.0f, 1.0f));
+                    //m_pMtlBg->setParam("texclip",FVec2(1.0f, 1.0f));
                 }
             }
             //

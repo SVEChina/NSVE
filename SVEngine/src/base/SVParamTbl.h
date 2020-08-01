@@ -58,6 +58,10 @@ namespace sv {
         s32 getParam(cptr8 _name);
         
         void* getParamData(cptr8 _name);
+        
+        void* getDataPointer();
+        
+        s32 getDataSize();
            
         void fromJSON(RAPIDJSON_NAMESPACE::Value &_item);
 

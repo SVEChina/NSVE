@@ -8,6 +8,7 @@
 #include "SVRShaderMetal.h"
 #include "SVRendererMetal.h"
 #include "../../mtl/SVShader.h"
+#include "../../base/SVParamTbl.h"
 #include "../../app/SVInst.h"
 #include "../../file/SVFileMgr.h"
 
@@ -42,7 +43,7 @@ void SVRShaderMetal::create(SVRendererPtr _renderer) {
     }
     //同步创建
     SVDataChunk _datachunk;
-    bool t_ret = mApp->m_pFileMgr->loadFileContentStr(&_datachunk, t_shader->m_dsp.m_programme_fname.c_str());
+    bool t_ret = mApp->m_pFileMgr->loadFileContentStr(&_datachunk, t_shader->m_shader_dsp.m_programme_fname.c_str());
     if(!t_ret){
         // error
         return ;
@@ -54,8 +55,8 @@ void SVRShaderMetal::create(SVRendererPtr _renderer) {
         //编译出错了
         return;
     }
-    if( t_shader->m_dsp.m_dsp &SV_E_TECH_VS ) {
-        NSString* t_str = [NSString stringWithFormat:@"%s",t_shader->m_dsp.m_vs_fname.c_str()];
+    if( t_shader->m_shader_dsp.m_dsp &SV_E_TECH_VS ) {
+        NSString* t_str = [NSString stringWithFormat:@"%s",t_shader->m_shader_dsp.m_vs_fname.c_str()];
         m_vsf = [t_lib newFunctionWithName:t_str];
         //生成vs采样器
         for(s32 i=0;i<t_shader->m_vs_sampler.size();i++) {
@@ -67,9 +68,15 @@ void SVRShaderMetal::create(SVRendererPtr _renderer) {
             id<MTLSamplerState> t_sampler_state = [t_rm->m_pDevice newSamplerStateWithDescriptor:samplerDsp];
             m_vs_sampler_st.push_back(t_sampler_state);
         }
+        //
+        if(t_shader->m_vs_paramtbl) {
+            void* t_pointer = t_shader->m_vs_paramtbl->getDataPointer();
+            s32 t_len = t_shader->m_vs_paramtbl->getDataSize();
+            m_vs_ubuf = [t_rm->m_pDevice newBufferWithBytes:t_pointer length: t_len options: MTLResourceStorageModeShared ];
+        }
     }
-    if( t_shader->m_dsp.m_dsp&SV_E_TECH_FS ) {
-        NSString* t_str = [NSString stringWithFormat:@"%s",t_shader->m_dsp.m_fs_fname.c_str()];
+    if( t_shader->m_shader_dsp.m_dsp&SV_E_TECH_FS ) {
+        NSString* t_str = [NSString stringWithFormat:@"%s",t_shader->m_shader_dsp.m_fs_fname.c_str()];
         m_fsf = [t_lib newFunctionWithName:t_str];
         //生成fs采样器
         for(s32 i=0;i<t_shader->m_fs_sampler.size();i++) {
@@ -81,9 +88,15 @@ void SVRShaderMetal::create(SVRendererPtr _renderer) {
             id<MTLSamplerState> t_sampler_state = [t_rm->m_pDevice newSamplerStateWithDescriptor:samplerDsp];
             m_fs_sampler_st.push_back(t_sampler_state);
         }
+        //
+        if(t_shader->m_fs_paramtbl) {
+            void* t_pointer = t_shader->m_fs_paramtbl->getDataPointer();
+            s32 t_len = t_shader->m_fs_paramtbl->getDataSize();
+            m_fs_ubuf = [t_rm->m_pDevice newBufferWithBytes:t_pointer length: t_len options: MTLResourceStorageModeShared ];
+        }
     }
-    if( t_shader->m_dsp.m_dsp&SV_E_TECH_GS ) {
-        NSString* t_str = [NSString stringWithFormat:@"%s",t_shader->m_dsp.m_gs_fname.c_str()];
+    if( t_shader->m_shader_dsp.m_dsp&SV_E_TECH_GS ) {
+        NSString* t_str = [NSString stringWithFormat:@"%s",t_shader->m_shader_dsp.m_gs_fname.c_str()];
         m_gsf = [t_lib newFunctionWithName:t_str];
         //生成gs采样器
         for(s32 i=0;i<t_shader->m_vs_sampler.size();i++) {
@@ -95,13 +108,17 @@ void SVRShaderMetal::create(SVRendererPtr _renderer) {
             id<MTLSamplerState> t_sampler_state = [t_rm->m_pDevice newSamplerStateWithDescriptor:samplerDsp];
             m_gs_sampler_st.push_back(t_sampler_state);
         }
+        //
+        if(t_shader->m_gs_paramtbl) {
+            //
+        }
     }
-    if( t_shader->m_dsp.m_dsp&SV_E_TECH_TSC ) {
-        NSString* t_str = [NSString stringWithFormat:@"%s",t_shader->m_dsp.m_tsc_fname.c_str()];
+    if( t_shader->m_shader_dsp.m_dsp&SV_E_TECH_TSE ) {
+        NSString* t_str = [NSString stringWithFormat:@"%s",t_shader->m_shader_dsp.m_tsc_fname.c_str()];
         m_tscf = [t_rm->m_pLibrary newFunctionWithName:t_str];
     }
-    if( t_shader->m_dsp.m_dsp&SV_E_TECH_TSD ) {
-        NSString* t_str = [NSString stringWithFormat:@"%s",t_shader->m_dsp.m_tse_fname.c_str()];
+    if( t_shader->m_shader_dsp.m_dsp&SV_E_TECH_TSD ) {
+        NSString* t_str = [NSString stringWithFormat:@"%s",t_shader->m_shader_dsp.m_tse_fname.c_str()];
         m_tsdf = [t_rm->m_pLibrary newFunctionWithName:t_str];
     }
     
@@ -121,12 +138,10 @@ void SVRShaderMetal::create(SVRendererPtr _renderer) {
 void SVRShaderMetal::destroy(SVRendererPtr _renderer) {
     //采样器销毁
     for(s32 i=0;i<m_vs_sampler_st.size();i++) {
-        
     }
     m_vs_sampler_st.clear();
     //
     for(s32 i=0;i<m_fs_sampler_st.size();i++) {
-        
     }
     m_fs_sampler_st.clear();
     //
