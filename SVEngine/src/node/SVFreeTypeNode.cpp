@@ -108,7 +108,7 @@ void SVFreeTypeNode::_updateTextTexture() {
 //    s32 t_texw = TransChar.size()*m_fontPixelSize;  //这块是跟advance走的
 //    s32 t_texh = s32( (t_fface->size->metrics.ascender - t_fface->size->metrics.descender)/64 );
 //    //
-//    m_pMesh = SVGeoGen::genRect(mApp,t_texw, t_texh,0,0,t_texw,t_texh,m_aabbBox); //矩形
+//    m_pMesh = SVGeoGen::genRect(mApp,t_texw, t_texh,m_aabbBox); //矩形
 //    m_texture = mApp->getTexMgr()->createUnctrlTexture(t_texw, t_texh,GL_RGBA,GL_RGBA);
 //    SVDataSwapPtr t_texture_data = MakeSharedPtr<SVDataSwap>();
 //    t_texture_data->resize(t_texw*t_texh*4);

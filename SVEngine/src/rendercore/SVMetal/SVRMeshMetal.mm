@@ -118,6 +118,7 @@ void SVRMeshMetal::create(SVRendererPtr _renderer) {
                 m_vert_dsp.attributes[t_attri_index].bufferIndex = 0;
                 t_attri_index++;
                 t_vert_size += 2*sizeof(f32);
+                t_off = t_vert_size;
             }
             if (_vf & D_VF_T1) {
                 m_vert_dsp.attributes[t_attri_index].format = MTLVertexFormatFloat2;

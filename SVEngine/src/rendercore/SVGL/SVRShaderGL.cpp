@@ -20,6 +20,7 @@ GL Shader
 
 SVRShaderGL::SVRShaderGL(SVInstPtr _app)
 :SVRShader(_app){
+    m_block = false;
     m_programm = 0;
     m_vs = 0;
     m_fs = 0;
@@ -71,6 +72,10 @@ void SVRShaderGL::create(SVRendererPtr _renderer) {
     _clearShaderRes();
     //创建完毕，资源释放
     m_logic_obj = nullptr;
+    //
+    if(m_block) {
+        //创建参数block
+    }
 }
 
 u32 SVRShaderGL::_loadShader(SVInstPtr _app,cptr8 _filename,s32 _shaderType){

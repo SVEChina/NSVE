@@ -6,6 +6,7 @@
 //
 
 #include "SVGeoGen.h"
+#include "../app/SVDispatch.h"
 #include "../base/SVCoreMath.h"
 #include "../base/SVDataSwap.h"
 #include "../rendercore/SVRenderMesh.h"
@@ -23,65 +24,71 @@ SVRenderMeshPtr SVGeoGen::genTri(SVInstPtr _app,
 }
 
 //方形
-SVRenderMeshPtr SVGeoGen::genRect(SVInstPtr _app,
-                                      f32 _w,
-                                      f32 _h,
-                                      f32 _inx,
-                                      f32 _iny,
-                                      f32 _inw,
-                                      f32 _inh,
-                                      SVBoundBox& _aabb) {
-//    //
-//    _aabb.clear();
-//    //
-//    f32 texcoord_minx = _inx/_w;
-//    f32 texcoord_miny = _iny/_h;
-//    f32 texcoord_maxx = (_inx + _inw)/_w;
-//    f32 texcoord_maxy = (_iny + _inh)/_h;
-//
-//    V2_T0 verts[4];
-//    verts[0].x = -0.5f * _inw;
-//    verts[0].y = -0.5f * _inh;
-//    verts[0].t0x = texcoord_minx;
-//    verts[0].t0y = texcoord_miny;
-//
-//    verts[1].x = 0.5f * _inw;
-//    verts[1].y = -0.5f * _inh;
-//    verts[1].t0x = texcoord_maxx;
-//    verts[1].t0y = texcoord_miny;
-//
-//    verts[2].x = -0.5f * _inw;
-//    verts[2].y = 0.5f * _inh;
-//    verts[2].t0x = texcoord_minx;
-//    verts[2].t0y = texcoord_maxy;
-//
-//    verts[3].x = 0.5f * _inw;
-//    verts[3].y = 0.5f * _inh;
-//    verts[3].t0x = texcoord_maxx;
-//    verts[3].t0y = texcoord_maxy;
-//    //设置包围盒
-//    for(s32 i=0;i<4;i++){
-//        if (i == 0) {
-//            _aabb.clear();
-//            _aabb.expand(FVec3(verts[i].x, verts[i].y, 0.0f));
-//        }else{
-//            _aabb.expand(FVec3(verts[i].x, verts[i].y, 0.0f));
-//        }
-//    }
-//    //
-//    SVRenderMeshPtr t_mesh = _app->getRenderMgr()->createMeshRObj();
-//    SVDataSwapPtr t_data = MakeSharedPtr<SVDataSwap>();
-//    t_data->writeData(&verts[0], sizeof(V2_T0) * 4);
-//    t_mesh->setVertNum(4);
-//    t_mesh->setVertexData(t_data);
-//    t_mesh->setVertexType(E_VF_V2_T0);
-//    t_mesh->setDrawMethod(E_DM_TRIANGLE_STRIP);
-//    t_mesh->createMesh();
-//    return t_mesh;
-    return nullptr;
+SVRenderMeshPtr SVGeoGen::genRect(SVInstPtr _app,f32 _w,f32 _h,SVBoundBox& _aabb) {
+    _aabb.clear();
+    //索引
+    s16 t_index_data[] = { 0,1,2,2,1,3 };
+    //数据
+    V3_T0 t_verts[4];
+    t_verts[0].x = -0.5f * _w;
+    t_verts[0].y = -0.5f * _h;
+    t_verts[0].z = 0.0f;
+    t_verts[0].t0x = 0.0f;
+    t_verts[0].t0y = 0.0f;
+
+    t_verts[1].x = 0.5f * _w;
+    t_verts[1].y = -0.5f * _h;
+    t_verts[1].z = 0.0f;
+    t_verts[1].t0x = 1.0f;
+    t_verts[1].t0y = 0.0f;
+
+    t_verts[2].x = -0.5f * _w;
+    t_verts[2].y = 0.5f * _h;
+    t_verts[2].z = 0.0f;
+    t_verts[2].t0x = 0.0f;
+    t_verts[2].t0y = 1.0f;
+
+    t_verts[3].x = 0.5f * _w;
+    t_verts[3].y = 0.5f * _h;
+    t_verts[3].z = 0.0f;
+    t_verts[3].t0x = 1.0f;
+    t_verts[3].t0y = 1.0f;
+    //
+    for(s32 i=0;i<4;i++) {
+        _aabb.expand(FVec3(t_verts[i].x,t_verts[i].y,t_verts[i].z));
+    }
+    //
+    SVRenderMeshPtr t_mesh = MakeSharedPtr<SVRenderMesh>(_app);
+    //
+    BufferDsp t_index_dsp;
+    SVRenderMesh::buildBufferDsp(E_VF_INDEX,E_BFT_STATIC_DRAW,6,6*sizeof(u16),t_index_data,&t_index_dsp);
+    t_mesh->setIndexDsp(t_index_dsp);
+    //
+    BufferDsp t_vert_dsp;
+    SVRenderMesh::buildBufferDsp(E_VF_V3_T0,E_BFT_STATIC_DRAW,4,4*sizeof(V3_T0),t_verts,&t_vert_dsp);
+    t_mesh->setVertDsp(t_vert_dsp);
+    //这个必须有渲染器才可以执行
+    SVDispatch::dispatchMeshCreate(_app, t_mesh);
+    return t_mesh;
 }
 
 SVRenderMeshPtr SVGeoGen::genRectARCHO(SVInstPtr _app,f32 _w,f32 _h,EUIARCHO _archo,SVBoundBox& _aabb) {
+//    //
+//    s16 t_index_data[] = { 0,1,2,2,1,3 };
+//    V3_T0 t_verts[4];
+//    //
+//    SVRenderMeshPtr t_mesh = MakeSharedPtr<SVRenderMesh>(_app);
+//    BufferDsp t_index_dsp;
+//    SVRenderMesh::buildBufferDsp(E_VF_INDEX,E_BFT_STATIC_DRAW,6,6*sizeof(u16),t_index_data,&t_index_dsp);
+//    t_mesh->setIndexDsp(t_index_dsp);
+//    //
+//    BufferDsp t_vert_dsp;
+//    SVRenderMesh::buildBufferDsp(E_VF_V3_T0,E_BFT_STATIC_DRAW,4,6*sizeof(u16),t_verts,&t_vert_dsp);
+//    t_mesh->setVertDsp(t_vert_dsp);
+//
+//    //这个必须有渲染器才可以执行
+//    SVDispatch::dispatchMeshCreate(_app, t_mesh);
+//    return t_mesh;
 //    //
 //    f32 t_off_x = 0.0f;
 //    f32 t_off_y = 0.0f;
@@ -237,213 +244,216 @@ SVRenderMeshPtr SVGeoGen::_getPolygonDiy(SVInstPtr _app,
 
 //AABB盒
 SVRenderMeshPtr SVGeoGen::genAABB(SVInstPtr _app,SVBoundBox& _aabb){
-//    //
-//    V3_T0 m_verts[36];
-//    //8个面 一个面6个点
-//    //0-4-1,1-4-5
-//    s16 i_base = 0;
-//    m_verts[i_base+0].x = _aabb.getMin().x;
-//    m_verts[i_base+0].y = _aabb.getMin().y;
-//    m_verts[i_base+0].z = _aabb.getMin().z;
-//    m_verts[i_base+0].t0x = 0.0f;
-//    m_verts[i_base+0].t0y = 1.0f;
-//    m_verts[i_base+1].x = _aabb.getMax().x;
-//    m_verts[i_base+1].y = _aabb.getMin().y;
-//    m_verts[i_base+1].z = _aabb.getMin().z;
-//    m_verts[i_base+1].t0x = 0.0f;
-//    m_verts[i_base+1].t0y = 0.0f;
-//    m_verts[i_base+2].x = _aabb.getMin().x;
-//    m_verts[i_base+2].y = _aabb.getMax().y;
-//    m_verts[i_base+2].z = _aabb.getMin().z;
-//    m_verts[i_base+2].t0x = 1.0f;
-//    m_verts[i_base+2].t0y = 1.0f;
-//    m_verts[i_base+3].x = _aabb.getMin().x;
-//    m_verts[i_base+3].y = _aabb.getMax().y;
-//    m_verts[i_base+3].z = _aabb.getMin().z;
-//    m_verts[i_base+3].t0x = 1.0f;
-//    m_verts[i_base+3].t0y = 1.0f;
-//    m_verts[i_base+4].x = _aabb.getMax().x;
-//    m_verts[i_base+4].y = _aabb.getMin().y;
-//    m_verts[i_base+4].z = _aabb.getMin().z;
-//    m_verts[i_base+4].t0x = 0.0f;
-//    m_verts[i_base+4].t0y = 0.0f;
-//    m_verts[i_base+5].x = _aabb.getMax().x;
-//    m_verts[i_base+5].y = _aabb.getMax().y;
-//    m_verts[i_base+5].z = _aabb.getMin().z;
-//    m_verts[i_base+5].t0x = 1.0f;
-//    m_verts[i_base+5].t0y = 0.0f;
-//    //4-6-5,5-6-7
-//    i_base = 6;
-//    m_verts[i_base+0].x = _aabb.getMax().x;
-//    m_verts[i_base+0].y = _aabb.getMin().y;
-//    m_verts[i_base+0].z = _aabb.getMin().z;
-//    m_verts[i_base+0].t0x = 0.0f;
-//    m_verts[i_base+0].t0y = 1.0f;
-//    m_verts[i_base+1].x = _aabb.getMax().x;
-//    m_verts[i_base+1].y = _aabb.getMin().y;
-//    m_verts[i_base+1].z = _aabb.getMax().z;
-//    m_verts[i_base+1].t0x = 0.0f;
-//    m_verts[i_base+1].t0y = 0.0f;
-//    m_verts[i_base+2].x = _aabb.getMax().x;
-//    m_verts[i_base+2].y = _aabb.getMax().y;
-//    m_verts[i_base+2].z = _aabb.getMin().z;
-//    m_verts[i_base+2].t0x = 1.0f;
-//    m_verts[i_base+2].t0y = 1.0f;
-//    m_verts[i_base+3].x = _aabb.getMax().x;
-//    m_verts[i_base+3].y = _aabb.getMax().y;
-//    m_verts[i_base+3].z = _aabb.getMin().z;
-//    m_verts[i_base+3].t0x = 1.0f;
-//    m_verts[i_base+3].t0y = 1.0f;
-//    m_verts[i_base+4].x = _aabb.getMax().x;
-//    m_verts[i_base+4].y = _aabb.getMin().y;
-//    m_verts[i_base+4].z = _aabb.getMax().z;
-//    m_verts[i_base+4].t0x = 0.0f;
-//    m_verts[i_base+4].t0y = 0.0f;
-//    m_verts[i_base+5].x = _aabb.getMax().x;
-//    m_verts[i_base+5].y = _aabb.getMax().y;
-//    m_verts[i_base+5].z = _aabb.getMax().z;
-//    m_verts[i_base+5].t0x = 1.0f;
-//    m_verts[i_base+5].t0y = 0.0f;
-//    //1-5-3,3-5-7
-//    i_base = 12;
-//    m_verts[i_base+0].x = _aabb.getMin().x;
-//    m_verts[i_base+0].y = _aabb.getMax().y;
-//    m_verts[i_base+0].z = _aabb.getMin().z;
-//    m_verts[i_base+0].t0x = 0.0f;
-//    m_verts[i_base+0].t0y = 0.0f;
-//    m_verts[i_base+1].x = _aabb.getMax().x;
-//    m_verts[i_base+1].y = _aabb.getMax().y;
-//    m_verts[i_base+1].t0x = 1.0f;
-//    m_verts[i_base+1].t0y = 0.0f;
-//    m_verts[i_base+1].z = _aabb.getMin().z;
-//    m_verts[i_base+2].x = _aabb.getMin().x;
-//    m_verts[i_base+2].y = _aabb.getMax().y;
-//    m_verts[i_base+2].t0x = 0.0f;
-//    m_verts[i_base+2].t0y = 1.0f;
-//    m_verts[i_base+2].z = _aabb.getMax().z;
-//    m_verts[i_base+3].x = _aabb.getMin().x;
-//    m_verts[i_base+3].y = _aabb.getMax().y;
-//    m_verts[i_base+3].z = _aabb.getMax().z;
-//    m_verts[i_base+3].t0x = 0.0f;
-//    m_verts[i_base+3].t0y = 1.0f;
-//    m_verts[i_base+4].x = _aabb.getMax().x;
-//    m_verts[i_base+4].y = _aabb.getMax().y;
-//    m_verts[i_base+4].z = _aabb.getMin().z;
-//    m_verts[i_base+4].t0x = 1.0f;
-//    m_verts[i_base+4].t0y = 0.0f;
-//    m_verts[i_base+5].x = _aabb.getMax().x;
-//    m_verts[i_base+5].y = _aabb.getMax().y;
-//    m_verts[i_base+5].z = _aabb.getMax().z;
-//    m_verts[i_base+5].t0x = 1.0f;
-//    m_verts[i_base+5].t0y = 1.0f;
-//    //2-0-3,3-0-1
-//    i_base = 18;
-//    m_verts[i_base+0].x = _aabb.getMin().x;
-//    m_verts[i_base+0].y = _aabb.getMin().y;
-//    m_verts[i_base+0].z = _aabb.getMax().z;
-//    m_verts[i_base+0].t0x = 0.0f;
-//    m_verts[i_base+0].t0y = 1.0f;
-//    m_verts[i_base+1].x = _aabb.getMin().x;
-//    m_verts[i_base+1].y = _aabb.getMin().y;
-//    m_verts[i_base+1].z = _aabb.getMin().z;
-//    m_verts[i_base+1].t0x = 0.0f;
-//    m_verts[i_base+1].t0y = 0.0f;
-//    m_verts[i_base+2].x = _aabb.getMin().x;
-//    m_verts[i_base+2].y = _aabb.getMax().y;
-//    m_verts[i_base+2].z = _aabb.getMax().z;
-//    m_verts[i_base+2].t0x = 1.0f;
-//    m_verts[i_base+2].t0y = 1.0f;
-//    m_verts[i_base+3].x = _aabb.getMin().x;
-//    m_verts[i_base+3].y = _aabb.getMax().y;
-//    m_verts[i_base+3].z = _aabb.getMax().z;
-//    m_verts[i_base+3].t0x = 1.0f;
-//    m_verts[i_base+3].t0y = 1.0f;
-//    m_verts[i_base+4].x = _aabb.getMin().x;
-//    m_verts[i_base+4].y = _aabb.getMin().y;
-//    m_verts[i_base+4].z = _aabb.getMin().z;
-//    m_verts[i_base+4].t0x = 0.0f;
-//    m_verts[i_base+4].t0y = 0.0f;
-//    m_verts[i_base+5].x = _aabb.getMin().x;
-//    m_verts[i_base+5].y = _aabb.getMax().y;
-//    m_verts[i_base+5].z = _aabb.getMin().z;
-//    m_verts[i_base+5].t0x = 1.0f;
-//    m_verts[i_base+5].t0y = 0.0f;
-//    //2-6-0,0-6-4
-//    i_base = 24;
-//    m_verts[i_base+0].x = _aabb.getMin().x;
-//    m_verts[i_base+0].y = _aabb.getMin().y;
-//    m_verts[i_base+0].z = _aabb.getMax().z;
-//    m_verts[i_base+0].t0x = 0.0f;
-//    m_verts[i_base+0].t0y = 1.0f;
-//    m_verts[i_base+1].x = _aabb.getMax().x;
-//    m_verts[i_base+1].y = _aabb.getMin().y;
-//    m_verts[i_base+1].z = _aabb.getMax().z;
-//    m_verts[i_base+1].t0x = 0.0f;
-//    m_verts[i_base+1].t0y = 0.0f;
-//    m_verts[i_base+2].x = _aabb.getMin().x;
-//    m_verts[i_base+2].y = _aabb.getMin().y;
-//    m_verts[i_base+2].z = _aabb.getMin().z;
-//    m_verts[i_base+2].t0x = 1.0f;
-//    m_verts[i_base+2].t0y = 1.0f;
-//    m_verts[i_base+3].x = _aabb.getMin().x;
-//    m_verts[i_base+3].y = _aabb.getMin().y;
-//    m_verts[i_base+3].z = _aabb.getMin().z;
-//    m_verts[i_base+3].t0x = 1.0f;
-//    m_verts[i_base+3].t0y = 1.0f;
-//    m_verts[i_base+4].x = _aabb.getMax().x;
-//    m_verts[i_base+4].y = _aabb.getMin().y;
-//    m_verts[i_base+4].z = _aabb.getMax().z;
-//    m_verts[i_base+4].t0x = 0.0f;
-//    m_verts[i_base+4].t0y = 0.0f;
-//    m_verts[i_base+5].x = _aabb.getMax().x;
-//    m_verts[i_base+5].y = _aabb.getMin().y;
-//    m_verts[i_base+5].z = _aabb.getMin().z;
-//    m_verts[i_base+5].t0x = 1.0f;
-//    m_verts[i_base+5].t0y = 0.0f;
-//    //6-2-7,7-2-3
-//    i_base = 30;
-//    m_verts[i_base+0].x = _aabb.getMax().x;
-//    m_verts[i_base+0].y = _aabb.getMin().y;
-//    m_verts[i_base+0].z = _aabb.getMax().z;
-//    m_verts[i_base+0].t0x = 0.0f;
-//    m_verts[i_base+0].t0y = 1.0f;
-//    m_verts[i_base+1].x = _aabb.getMin().x;
-//    m_verts[i_base+1].y = _aabb.getMin().y;
-//    m_verts[i_base+1].z = _aabb.getMax().z;
-//    m_verts[i_base+1].t0x = 0.0f;
-//    m_verts[i_base+1].t0y = 0.0f;
-//    m_verts[i_base+2].x = _aabb.getMax().x;
-//    m_verts[i_base+2].y = _aabb.getMax().y;
-//    m_verts[i_base+2].z = _aabb.getMax().z;
-//    m_verts[i_base+2].t0x = 1.0f;
-//    m_verts[i_base+2].t0y = 1.0f;
-//    m_verts[i_base+3].x = _aabb.getMax().x;
-//    m_verts[i_base+3].y = _aabb.getMax().y;
-//    m_verts[i_base+3].z = _aabb.getMax().z;
-//    m_verts[i_base+3].t0x = 1.0f;
-//    m_verts[i_base+3].t0y = 1.0f;
-//    m_verts[i_base+4].x = _aabb.getMin().x;
-//    m_verts[i_base+4].y = _aabb.getMin().y;
-//    m_verts[i_base+4].z = _aabb.getMax().z;
-//    m_verts[i_base+4].t0x = 0.0f;
-//    m_verts[i_base+4].t0y = 0.0f;
-//    m_verts[i_base+5].x = _aabb.getMin().x;
-//    m_verts[i_base+5].y = _aabb.getMax().y;
-//    m_verts[i_base+5].z = _aabb.getMax().z;
-//    m_verts[i_base+5].t0x = 1.0f;
-//    m_verts[i_base+5].t0y = 0.0f;
-//    //
-//    SVRenderMeshPtr t_mesh = _app->getRenderMgr()->createMeshRObj();
-//    SVDataSwapPtr t_data = MakeSharedPtr<SVDataSwap>();
-//    t_data->writeData((void*)(&m_verts[0]), sizeof(V3_T0) * 36);
-//    t_mesh->setVertNum(36);
-//    t_mesh->setVertexData(t_data);
-//    t_mesh->setVertexType(E_VF_V3_T0);
-//    t_mesh->setDrawMethod(E_DM_TRIANGLES);
-//    t_mesh->createMesh();
-//    //
-//    return t_mesh;
     return nullptr;
+    //
+    V3_T0 m_verts[36];
+    //8个面 一个面6个点
+    //0-4-1,1-4-5
+    s16 i_base = 0;
+    m_verts[i_base+0].x = _aabb.getMin().x;
+    m_verts[i_base+0].y = _aabb.getMin().y;
+    m_verts[i_base+0].z = _aabb.getMin().z;
+    m_verts[i_base+0].t0x = 0.0f;
+    m_verts[i_base+0].t0y = 1.0f;
+    m_verts[i_base+1].x = _aabb.getMax().x;
+    m_verts[i_base+1].y = _aabb.getMin().y;
+    m_verts[i_base+1].z = _aabb.getMin().z;
+    m_verts[i_base+1].t0x = 0.0f;
+    m_verts[i_base+1].t0y = 0.0f;
+    m_verts[i_base+2].x = _aabb.getMin().x;
+    m_verts[i_base+2].y = _aabb.getMax().y;
+    m_verts[i_base+2].z = _aabb.getMin().z;
+    m_verts[i_base+2].t0x = 1.0f;
+    m_verts[i_base+2].t0y = 1.0f;
+    m_verts[i_base+3].x = _aabb.getMin().x;
+    m_verts[i_base+3].y = _aabb.getMax().y;
+    m_verts[i_base+3].z = _aabb.getMin().z;
+    m_verts[i_base+3].t0x = 1.0f;
+    m_verts[i_base+3].t0y = 1.0f;
+    m_verts[i_base+4].x = _aabb.getMax().x;
+    m_verts[i_base+4].y = _aabb.getMin().y;
+    m_verts[i_base+4].z = _aabb.getMin().z;
+    m_verts[i_base+4].t0x = 0.0f;
+    m_verts[i_base+4].t0y = 0.0f;
+    m_verts[i_base+5].x = _aabb.getMax().x;
+    m_verts[i_base+5].y = _aabb.getMax().y;
+    m_verts[i_base+5].z = _aabb.getMin().z;
+    m_verts[i_base+5].t0x = 1.0f;
+    m_verts[i_base+5].t0y = 0.0f;
+    //4-6-5,5-6-7
+    i_base = 6;
+    m_verts[i_base+0].x = _aabb.getMax().x;
+    m_verts[i_base+0].y = _aabb.getMin().y;
+    m_verts[i_base+0].z = _aabb.getMin().z;
+    m_verts[i_base+0].t0x = 0.0f;
+    m_verts[i_base+0].t0y = 1.0f;
+    m_verts[i_base+1].x = _aabb.getMax().x;
+    m_verts[i_base+1].y = _aabb.getMin().y;
+    m_verts[i_base+1].z = _aabb.getMax().z;
+    m_verts[i_base+1].t0x = 0.0f;
+    m_verts[i_base+1].t0y = 0.0f;
+    m_verts[i_base+2].x = _aabb.getMax().x;
+    m_verts[i_base+2].y = _aabb.getMax().y;
+    m_verts[i_base+2].z = _aabb.getMin().z;
+    m_verts[i_base+2].t0x = 1.0f;
+    m_verts[i_base+2].t0y = 1.0f;
+    m_verts[i_base+3].x = _aabb.getMax().x;
+    m_verts[i_base+3].y = _aabb.getMax().y;
+    m_verts[i_base+3].z = _aabb.getMin().z;
+    m_verts[i_base+3].t0x = 1.0f;
+    m_verts[i_base+3].t0y = 1.0f;
+    m_verts[i_base+4].x = _aabb.getMax().x;
+    m_verts[i_base+4].y = _aabb.getMin().y;
+    m_verts[i_base+4].z = _aabb.getMax().z;
+    m_verts[i_base+4].t0x = 0.0f;
+    m_verts[i_base+4].t0y = 0.0f;
+    m_verts[i_base+5].x = _aabb.getMax().x;
+    m_verts[i_base+5].y = _aabb.getMax().y;
+    m_verts[i_base+5].z = _aabb.getMax().z;
+    m_verts[i_base+5].t0x = 1.0f;
+    m_verts[i_base+5].t0y = 0.0f;
+    //1-5-3,3-5-7
+    i_base = 12;
+    m_verts[i_base+0].x = _aabb.getMin().x;
+    m_verts[i_base+0].y = _aabb.getMax().y;
+    m_verts[i_base+0].z = _aabb.getMin().z;
+    m_verts[i_base+0].t0x = 0.0f;
+    m_verts[i_base+0].t0y = 0.0f;
+    m_verts[i_base+1].x = _aabb.getMax().x;
+    m_verts[i_base+1].y = _aabb.getMax().y;
+    m_verts[i_base+1].t0x = 1.0f;
+    m_verts[i_base+1].t0y = 0.0f;
+    m_verts[i_base+1].z = _aabb.getMin().z;
+    m_verts[i_base+2].x = _aabb.getMin().x;
+    m_verts[i_base+2].y = _aabb.getMax().y;
+    m_verts[i_base+2].t0x = 0.0f;
+    m_verts[i_base+2].t0y = 1.0f;
+    m_verts[i_base+2].z = _aabb.getMax().z;
+    m_verts[i_base+3].x = _aabb.getMin().x;
+    m_verts[i_base+3].y = _aabb.getMax().y;
+    m_verts[i_base+3].z = _aabb.getMax().z;
+    m_verts[i_base+3].t0x = 0.0f;
+    m_verts[i_base+3].t0y = 1.0f;
+    m_verts[i_base+4].x = _aabb.getMax().x;
+    m_verts[i_base+4].y = _aabb.getMax().y;
+    m_verts[i_base+4].z = _aabb.getMin().z;
+    m_verts[i_base+4].t0x = 1.0f;
+    m_verts[i_base+4].t0y = 0.0f;
+    m_verts[i_base+5].x = _aabb.getMax().x;
+    m_verts[i_base+5].y = _aabb.getMax().y;
+    m_verts[i_base+5].z = _aabb.getMax().z;
+    m_verts[i_base+5].t0x = 1.0f;
+    m_verts[i_base+5].t0y = 1.0f;
+    //2-0-3,3-0-1
+    i_base = 18;
+    m_verts[i_base+0].x = _aabb.getMin().x;
+    m_verts[i_base+0].y = _aabb.getMin().y;
+    m_verts[i_base+0].z = _aabb.getMax().z;
+    m_verts[i_base+0].t0x = 0.0f;
+    m_verts[i_base+0].t0y = 1.0f;
+    m_verts[i_base+1].x = _aabb.getMin().x;
+    m_verts[i_base+1].y = _aabb.getMin().y;
+    m_verts[i_base+1].z = _aabb.getMin().z;
+    m_verts[i_base+1].t0x = 0.0f;
+    m_verts[i_base+1].t0y = 0.0f;
+    m_verts[i_base+2].x = _aabb.getMin().x;
+    m_verts[i_base+2].y = _aabb.getMax().y;
+    m_verts[i_base+2].z = _aabb.getMax().z;
+    m_verts[i_base+2].t0x = 1.0f;
+    m_verts[i_base+2].t0y = 1.0f;
+    m_verts[i_base+3].x = _aabb.getMin().x;
+    m_verts[i_base+3].y = _aabb.getMax().y;
+    m_verts[i_base+3].z = _aabb.getMax().z;
+    m_verts[i_base+3].t0x = 1.0f;
+    m_verts[i_base+3].t0y = 1.0f;
+    m_verts[i_base+4].x = _aabb.getMin().x;
+    m_verts[i_base+4].y = _aabb.getMin().y;
+    m_verts[i_base+4].z = _aabb.getMin().z;
+    m_verts[i_base+4].t0x = 0.0f;
+    m_verts[i_base+4].t0y = 0.0f;
+    m_verts[i_base+5].x = _aabb.getMin().x;
+    m_verts[i_base+5].y = _aabb.getMax().y;
+    m_verts[i_base+5].z = _aabb.getMin().z;
+    m_verts[i_base+5].t0x = 1.0f;
+    m_verts[i_base+5].t0y = 0.0f;
+    //2-6-0,0-6-4
+    i_base = 24;
+    m_verts[i_base+0].x = _aabb.getMin().x;
+    m_verts[i_base+0].y = _aabb.getMin().y;
+    m_verts[i_base+0].z = _aabb.getMax().z;
+    m_verts[i_base+0].t0x = 0.0f;
+    m_verts[i_base+0].t0y = 1.0f;
+    m_verts[i_base+1].x = _aabb.getMax().x;
+    m_verts[i_base+1].y = _aabb.getMin().y;
+    m_verts[i_base+1].z = _aabb.getMax().z;
+    m_verts[i_base+1].t0x = 0.0f;
+    m_verts[i_base+1].t0y = 0.0f;
+    m_verts[i_base+2].x = _aabb.getMin().x;
+    m_verts[i_base+2].y = _aabb.getMin().y;
+    m_verts[i_base+2].z = _aabb.getMin().z;
+    m_verts[i_base+2].t0x = 1.0f;
+    m_verts[i_base+2].t0y = 1.0f;
+    m_verts[i_base+3].x = _aabb.getMin().x;
+    m_verts[i_base+3].y = _aabb.getMin().y;
+    m_verts[i_base+3].z = _aabb.getMin().z;
+    m_verts[i_base+3].t0x = 1.0f;
+    m_verts[i_base+3].t0y = 1.0f;
+    m_verts[i_base+4].x = _aabb.getMax().x;
+    m_verts[i_base+4].y = _aabb.getMin().y;
+    m_verts[i_base+4].z = _aabb.getMax().z;
+    m_verts[i_base+4].t0x = 0.0f;
+    m_verts[i_base+4].t0y = 0.0f;
+    m_verts[i_base+5].x = _aabb.getMax().x;
+    m_verts[i_base+5].y = _aabb.getMin().y;
+    m_verts[i_base+5].z = _aabb.getMin().z;
+    m_verts[i_base+5].t0x = 1.0f;
+    m_verts[i_base+5].t0y = 0.0f;
+    //6-2-7,7-2-3
+    i_base = 30;
+    m_verts[i_base+0].x = _aabb.getMax().x;
+    m_verts[i_base+0].y = _aabb.getMin().y;
+    m_verts[i_base+0].z = _aabb.getMax().z;
+    m_verts[i_base+0].t0x = 0.0f;
+    m_verts[i_base+0].t0y = 1.0f;
+    m_verts[i_base+1].x = _aabb.getMin().x;
+    m_verts[i_base+1].y = _aabb.getMin().y;
+    m_verts[i_base+1].z = _aabb.getMax().z;
+    m_verts[i_base+1].t0x = 0.0f;
+    m_verts[i_base+1].t0y = 0.0f;
+    m_verts[i_base+2].x = _aabb.getMax().x;
+    m_verts[i_base+2].y = _aabb.getMax().y;
+    m_verts[i_base+2].z = _aabb.getMax().z;
+    m_verts[i_base+2].t0x = 1.0f;
+    m_verts[i_base+2].t0y = 1.0f;
+    m_verts[i_base+3].x = _aabb.getMax().x;
+    m_verts[i_base+3].y = _aabb.getMax().y;
+    m_verts[i_base+3].z = _aabb.getMax().z;
+    m_verts[i_base+3].t0x = 1.0f;
+    m_verts[i_base+3].t0y = 1.0f;
+    m_verts[i_base+4].x = _aabb.getMin().x;
+    m_verts[i_base+4].y = _aabb.getMin().y;
+    m_verts[i_base+4].z = _aabb.getMax().z;
+    m_verts[i_base+4].t0x = 0.0f;
+    m_verts[i_base+4].t0y = 0.0f;
+    m_verts[i_base+5].x = _aabb.getMin().x;
+    m_verts[i_base+5].y = _aabb.getMax().y;
+    m_verts[i_base+5].z = _aabb.getMax().z;
+    m_verts[i_base+5].t0x = 1.0f;
+    m_verts[i_base+5].t0y = 0.0f;
+    
+    //
+    SVRenderMeshPtr t_mesh = MakeSharedPtr<SVRenderMesh>(_app);
+//    BufferDsp t_index_dsp;
+//    SVRenderMesh::buildBufferDsp(E_VF_INDEX,E_BFT_STATIC_DRAW,6,6*sizeof(u16),m_rect_index,&t_index_dsp);
+//    t_mesh->setIndexDsp(t_index_dsp);
+    //
+    BufferDsp t_vert_dsp;
+    SVRenderMesh::buildBufferDsp(E_VF_V3_T0,E_BFT_STATIC_DRAW,4,6*sizeof(u16),m_verts,&t_vert_dsp);
+    t_mesh->setVertDsp(t_vert_dsp);
+    
+    //这个必须有渲染器才可以执行
+    SVDispatch::dispatchMeshCreate(_app, t_mesh);
+    return t_mesh;
 }
 
 SVRenderMeshPtr SVGeoGen::createRectMesh(SVInstPtr _app,f32 _w ,f32 _h , s32 _wPointCount , s32 _hPointCont){

@@ -22,7 +22,7 @@ namespace sv {
         static SVRenderMeshPtr genTri(SVInstPtr _app,f32 _len,SVBoundBox& _aabb);
         
         //方形
-        static SVRenderMeshPtr genRect(SVInstPtr _app,f32 _w,f32 _h,f32 _inx,f32 _iny,f32 _inw,f32 _inh,SVBoundBox& _aabb);
+        static SVRenderMeshPtr genRect(SVInstPtr _app,f32 _w,f32 _h,SVBoundBox& _aabb);
         
         //
         static SVRenderMeshPtr genRectARCHO(SVInstPtr _app,f32 _w,f32 _h,EUIARCHO _archo,SVBoundBox& _aabb);

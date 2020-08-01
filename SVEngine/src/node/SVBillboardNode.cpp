@@ -70,7 +70,7 @@ SVBillboardNode::~SVBillboardNode() {
 void SVBillboardNode::setSize(f32 _w,f32 _h) {
     m_width = _w;
     m_height = _h;
-    m_pMesh = SVGeoGen::genRect(mApp, m_width, m_height, 0, 0, m_width, m_height,m_aabbBox);
+    m_pMesh = SVGeoGen::genRect(mApp, m_width, m_height,m_aabbBox);
 }
 
 void SVBillboardNode::syncTexSize() {

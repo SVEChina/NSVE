@@ -111,18 +111,6 @@ SVRFboPtr SVRendererMetal::createResFbo()  {
     return MakeSharedPtr<SVRFboMetal>(mApp);
 }
 
-////创建纹理接口
-//s32 SVRendererMetal::createTexIn(s32 _texid,SVTexDsp _tdsp) {
-//    MTLPixelFormat pf = MTLPixelFormatRGBA8Uint;
-//    MTLTextureDescriptor* texdsp = [MTLTextureDescriptor texture2DDescriptorWithPixelFormat:pf
-//                                                                                      width:_tdsp.m_width
-//                                                                                     height:_tdsp.m_height
-//                                                                                  mipmapped:_tdsp.m_mipmap];
-//    id <MTLTexture> t_tex = [m_pDevice newTextureWithDescriptor:texdsp];
-//    m_texPoolIn.append(t_tex);
-//    return m_texPoolIn.size()-1;
-//}
-
 //处理材质
 void SVRendererMetal::processMtl(SVMtlCorePtr _mtl) {
     if(!m_pCurEncoder)
@@ -130,18 +118,16 @@ void SVRendererMetal::processMtl(SVMtlCorePtr _mtl) {
     if(_mtl && _mtl->getShader() ) {
         bool t_ret = _mtl->getShader()->active();
         if(t_ret) {
-            //传递uniform
-            //        id<MTLBuffer> buffer = [device newBufferWithLength:bufferDataByteSize options:MTLResourceStorageModeShared];
-            //        struct MyUniforms *uniforms = (struct MyUniforms*)buffer.content;
-            //        uniforms->modelViewProjection = modelViewProjection;
-            //        uniforms->sunPosition = sunPosition;
-            
-//            [encoder setVertexBuffer:myUniforms offset:0 atIndex:1];
-//            [encoder setFragmentBuffer:myUniforms offset:0 atIndex:1];
-            
-            //[m_pCurEncoder setVertexBuffer:m_dbufs[i] offset:0 atIndex:i];
-            //m_pCurEncoder
-            //设置各种状态
+            SVRShaderMetalPtr t_shader_metal = std::dynamic_pointer_cast<SVRShaderMetal>(_mtl->getShader());
+            if(t_shader_metal->m_vs_ubuf) {
+                [m_pCurEncoder setVertexBuffer:t_shader_metal->m_vs_ubuf offset:0 atIndex:0];
+            }
+            if(t_shader_metal->m_fs_ubuf) {
+                [m_pCurEncoder setFragmentBuffer:t_shader_metal->m_fs_ubuf offset:0 atIndex:0];
+            }
+            if(t_shader_metal->m_gs_ubuf) {
+                //[m_pCurEncoder setVertexBuffer:m_dbufs[i] offset:0 atIndex:i];
+            }
         }
     }
 }

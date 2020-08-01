@@ -55,7 +55,36 @@ SVSpriteNode::~SVSpriteNode() {
 void SVSpriteNode::setSize(f32 _w,f32 _h) {
     m_width = _w;
     m_height = _h;
-    m_pMesh = SVGeoGen::genRect(mApp, m_width, m_height, 0, 0, m_width, m_height,m_aabbBox);
+    if( m_pMesh ){
+        //更新数据
+        V3_T0 t_verts[4];
+        t_verts[0].x = -0.5f * m_width;
+        t_verts[0].y = -0.5f * m_height;
+        t_verts[0].z = 0.0f;
+        t_verts[0].t0x = 0.0f;
+        t_verts[0].t0y = 0.0f;
+        t_verts[1].x = 0.5f * m_width;
+        t_verts[1].y = -0.5f * m_height;
+        t_verts[1].z = 0.0f;
+        t_verts[1].t0x = 1.0f;
+        t_verts[1].t0y = 0.0f;
+        t_verts[2].x = -0.5f * m_width;
+        t_verts[2].y = 0.5f * m_height;
+        t_verts[2].z = 0.0f;
+        t_verts[2].t0x = 0.0f;
+        t_verts[2].t0y = 1.0f;
+        t_verts[3].x = 0.5f * m_width;
+        t_verts[3].y = 0.5f * m_height;
+        t_verts[3].z = 0.0f;
+        t_verts[3].t0x = 1.0f;
+        t_verts[3].t0y = 1.0f;
+        SVDataSwapPtr _data = MakeSharedPtr<SVDataSwap>();
+        _data->appendData(t_verts, sizeof(V3_T0)*4);
+        m_pMesh->setVertexData(_data);
+    }else{
+        //创建mesh
+        m_pMesh = SVGeoGen::genRect(mApp, m_width, m_height,m_aabbBox);
+    }
 }
 
 f32 SVSpriteNode::getWidth(){

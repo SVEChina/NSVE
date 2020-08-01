@@ -21,6 +21,9 @@ namespace sv {
 
     class SVRShaderMetal : public SVRShader {
     public:
+        friend class SVRendererMetal;
+        friend class std::shared_ptr<SVRendererMetal> ;
+
         SVRShaderMetal(SVInstPtr _app);
         
         ~SVRShaderMetal();

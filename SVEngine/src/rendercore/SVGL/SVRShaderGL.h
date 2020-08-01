@@ -50,6 +50,8 @@ namespace sv {
         u32 m_tse;
 
         u32 m_cs;
+        
+        bool m_block;
     };
         
 }//!namespace sv
