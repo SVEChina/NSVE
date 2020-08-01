@@ -14661,6 +14661,7 @@
 					"\"$(SRCROOT)/../src/third/spine/include\"",
 					"\"$(SRCROOT)/library\"",
 					"\"$(SRCROOT)/../src/third/bulletphysics/src\"",
+					"\"$(SRCROOT)/../src/third/libjpeg\"",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				ONLY_ACTIVE_ARCH = NO;
@@ -14695,6 +14696,7 @@
 					"\"$(SRCROOT)/../src/third/spine/include\"",
 					"\"$(SRCROOT)/library\"",
 					"\"$(SRCROOT)/../src/third/bulletphysics/src\"",
+					"\"$(SRCROOT)/../src/third/libjpeg\"",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				ONLY_ACTIVE_ARCH = NO;
@@ -14828,6 +14830,7 @@
 					"\"$(SRCROOT)/../src/third/libpng\"",
 					"\"$(SRCROOT)/library\"",
 					"\"$(SRCROOT)/../src/third/bulletphysics/src\"",
+					"\"$(SRCROOT)/../src/third/libjpeg\"",
 				);
 				INFOPLIST_FILE = SVEngine/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -14878,6 +14881,7 @@
 					"\"$(SRCROOT)/../src/third/libpng\"",
 					"\"$(SRCROOT)/library\"",
 					"\"$(SRCROOT)/../src/third/bulletphysics/src\"",
+					"\"$(SRCROOT)/../src/third/libjpeg\"",
 				);
 				INFOPLIST_FILE = SVEngine/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -15051,6 +15055,7 @@
 					"\"$(SRCROOT)/../src/third/libpng\"",
 					"\"$(SRCROOT)/library\"",
 					"\"$(SRCROOT)/../src/third/bulletphysics/src\"",
+					"\"$(SRCROOT)/../src/third/libjpeg\"",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LIBRARY_SEARCH_PATHS = (
@@ -15099,6 +15104,7 @@
 					"\"$(SRCROOT)/../src/third/libpng\"",
 					"\"$(SRCROOT)/library\"",
 					"\"$(SRCROOT)/../src/third/bulletphysics/src\"",
+					"\"$(SRCROOT)/../src/third/libjpeg\"",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LIBRARY_SEARCH_PATHS = (
