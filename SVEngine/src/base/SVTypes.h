@@ -37,6 +37,7 @@ typedef unsigned char* ptru8;
 
 typedef const char* cptr8;
 
+typedef const unsigned char* cptru8;
 //! 16 bit unsigned variable.
 /** This is a typedef for unsigned short, it ensures portability of the engine. */
 #if defined(_MSC_VER) || ((__BORLANDC__ >= 0x530) && !defined(__STRICT_ANSI__))
