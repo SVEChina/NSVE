@@ -15,14 +15,15 @@
 using namespace sv;
 
 SVMtlLib::SVMtlLib(SVInstPtr _app)
-:SVGBaseEx(_app) {
+:SVGBaseEx(_app)
+,m_pTestMtl(nullptr){
 }
 
 SVMtlLib::~SVMtlLib() {
 }
 
 void SVMtlLib::init() {
-    createMtl("scene.mtl");
+    m_pTestMtl = createMtl("scene.mtl");
 }
 
 void SVMtlLib::destroy() {
@@ -34,27 +35,35 @@ void SVMtlLib::loadMtlPack(cptr8 _pack) {
 }
 
 void SVMtlLib::clear() {
+    //    //运行时的材质库
+    //   typedef std::vector<SVMtlCorePtr> MTLPOOLRUN;
+    //   MTLPOOL m_mtlPool_run;
+    //
+    //   //空闲的材质
+    //   typedef std::vector<s32> EMPTYMTLPOOL;
+    //   EMPTYMTLPOOL m_empty_mtl_ool;
+    //
     MTLPOOL::iterator it = m_mtlPool.begin();
     while ( it!=m_mtlPool.end() ) {
         it++;
     }
 }
 
+SVMtlCorePtr SVMtlLib::getMtl(s32 _mtlID) {
+    return m_pTestMtl;
+//    if(m_mtlpool_run.size()>_mtlID && m_mtlpool_run[_mtlID]) {
+//        return m_mtlpool_run[_mtlID];
+//    }
+//    return nullptr;
+}
+
 SVMtlCorePtr SVMtlLib::getMtl(cptr8 _mtlname) {
-    //pack里面找
-    
     //本身找
     MTLPOOL::iterator it = m_mtlPool.find(_mtlname);
     if(it!=m_mtlPool.end()) {
         return it->second;
     }
     return nullptr;
-}
-
-
-//材质名称和shader名称有个映射关系
-SVString SVMtlLib::_mapName(cptr8 _name) {
-    return "";
 }
 
 SVMtlCorePtr SVMtlLib::createMtl(cptr8 _mtlname) {

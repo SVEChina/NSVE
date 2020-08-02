@@ -11,6 +11,7 @@
 #include "../base/SVObject.h"
 #include "../work/SVWorkDeclare.h"
 #include "SVRenderDeclare.h"
+#include <vector>
 
 namespace sv {
     
@@ -30,11 +31,17 @@ namespace sv {
         
         void render(SVRendererPtr _renderer,SVRTargetPtr _target);
         
+        void setValid() { m_valid = true; }
+        
+        bool isValid() { return m_valid; }
+        
     protected:
         SVLockSpinPtr m_lock;
         //数据流
-        typedef SVArray<SVRenderCmdPtr> CMDPOOL;
+        typedef std::vector<SVRenderCmdPtr> CMDPOOL;
         CMDPOOL m_cmdArray;
+        //
+        bool m_valid;
     };
 
     

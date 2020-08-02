@@ -18,14 +18,12 @@
 using namespace sv;
 
 SV3DBox::SV3DBox(SVInstPtr _app)
-: SVNode(_app) {
+:SVNode(_app) {
     ntype = "SV3DBox";
     m_size.set(100.0f, 100.0f, 100.0f);
-    //
     m_aabbBox.clear();
     m_aabbBox.expand(m_size*-0.5f);
     m_aabbBox.expand(m_size*0.5f);
-    //
     m_pMesh = SVGeoGen::genAABB(mApp,m_aabbBox);
     m_drawBox = true;
 }

@@ -45,6 +45,8 @@ namespace sv {
         
         void pushRCmdDestory(SVRenderCmdPtr _rcmd);
         
+        void pushRCmd(SVRenderCmdPtr _rcmd,SV_RSTREAM_TYPE _rstype);
+        
         void addRTarget(SVRTargetPtr _rt,bool _pre);
         
         SVRTargetPtr getRTarget(cptr8 _name);

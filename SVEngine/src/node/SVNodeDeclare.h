@@ -12,7 +12,6 @@
 
 namespace sv {
 
-    DECLARE_SHAREPTR(SVProjMethod);
     DECLARE_SHAREPTR(SVProject);
     DECLARE_SHAREPTR(SVOrtho);
     DECLARE_SHAREPTR(SVARProj);

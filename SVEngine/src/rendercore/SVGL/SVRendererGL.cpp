@@ -55,6 +55,7 @@ void SVRendererGL::init(s32 _w,s32 _h){
     SVRTargetPtr t_target = MakeSharedPtr<SVRTarget>(mApp);
     t_target->bindRes(t_fbo);
     //设置主RTarget
+    t_target->setRenderPath();
     mApp->getRenderMgr()->setMainRT(t_target);
 }
 

@@ -81,21 +81,6 @@ namespace sv {
         SVString mPath;
     };
     
-    //纹理加载
-    class SVOpTexLoad : public SVOpBase {
-    public:
-        SVOpTexLoad(SVInstPtr _app, SVTexturePtr _tex,cptr8 _fname, bool _enableMipMap = false);
-        
-        ~SVOpTexLoad();
-        
-    protected:
-        void _process(f32 dt);
-        
-        SVTexturePtr mTex;
-        SVString mFilename;
-        bool m_enableMipMap;
-    };
-    
 }//!namespace sv
 
 

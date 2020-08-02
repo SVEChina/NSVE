@@ -149,7 +149,6 @@ namespace sv {
     DECLARE_SHAREPTR(SVOpSaveEft);
     DECLARE_SHAREPTR(SVOpFilterEft);
     DECLARE_SHAREPTR(SVOpGenerate);
-    DECLARE_SHAREPTR(SVOpTexLoad);
     DECLARE_SHAREPTR(SVOpTexAttachment);
     
     DECLARE_SHAREPTR(SVOpDestroyEffect);

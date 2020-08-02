@@ -7,10 +7,11 @@
 
 
 #include "SVSpriteNode.h"
+#include "../app/SVDispatch.h"
 #include "../basesys/SVScene.h"
 #include "../basesys/SVCameraNode.h"
+#include "../mtl/SVMtlLib.h"
 #include "../mtl/SVMtlCore.h"
-#include "../mtl/SVMtl2D.h"
 #include "../rendercore/SVRenderMesh.h"
 #include "../core/SVGeoGen.h"
 #include "../basesys/SVConfig.h"
@@ -42,6 +43,7 @@ SVSpriteNode::SVSpriteNode(SVInstPtr _app,f32 _w,f32 _h)
     m_canSelect = false;
     m_pTex = nullptr;
     m_pMesh = nullptr;
+    m_mtlID = 0;
     setSize(_w,_h);
 }
 
@@ -49,6 +51,7 @@ SVSpriteNode::~SVSpriteNode() {
     m_pMesh = nullptr;
     m_pMtl = nullptr;
     m_pTex = nullptr;
+    m_mtlID = 0;
 }
 
 //
@@ -122,55 +125,17 @@ void SVSpriteNode::syncTexSize() {
     }
 }
 
-void SVSpriteNode::update(f32 dt) {
-    SVNode::update(dt);
-//    if ( m_pMesh ) {
-//        if(m_pMtl){
-//            m_pMtl->setBlendEnable(true);
-//            m_pMtl->setBlendState(MTL_BLEND_ONE, MTL_BLEND_ONE_MINUS_SRC_ALPHA);
-//            m_pMtl->setModelMatrix(m_absolutMat);
-//            m_pMtl->setTexcoordFlip(m_texcoordX, m_texcoordY);
-//            if(m_inTexType == E_TEX_END) {
-//                m_pMtl->setTexture(0,m_pTex);
-//            }else{
-//                SVTexturePtr t_tex = mApp->getRenderer()->getSVTex(m_inTexType);
-//                m_pMtl->setTexture(0,t_tex);
-//            }
-//            m_pMtl->update(dt);
-//            SVMtl2DPtr t_mtl2D = DYN_TO_SHAREPTR(SVMtl2D, m_pMtl);
-//            if (t_mtl2D) {
-//                t_mtl2D->setAlpha(m_alpha);
-//            }
-//            m_pRenderObj->setMesh(m_pMesh);
-//            m_pRenderObj->setMtl(m_pMtl);
-//        }else{
-//            //创建新的材质
-//            SVMtl2DPtr t_mtl = MakeSharedPtr<SVMtl2D>(mApp, "normal2d_c");
-//            t_mtl->setModelMatrix(m_absolutMat);
-//            t_mtl->setTexcoordFlip(m_texcoordX, m_texcoordY);
-//            t_mtl->setBlendEnable(true);
-//            t_mtl->setBlendState(MTL_BLEND_ONE, MTL_BLEND_ONE_MINUS_SRC_ALPHA);
-//            t_mtl->setAlpha(1.0f);
-//            if(m_inTexType == E_TEX_END) {
-//                t_mtl->setTexture(0,m_pTex);
-//            }else{
-//                SVTexturePtr t_tex = mApp->getRenderer()->getSVTex(m_inTexType);
-//                t_mtl->setTexture(0,t_tex);
-//            }
-//            t_mtl->update(dt);
-//            m_pRenderObj->setMesh(m_pMesh);
-//            m_pRenderObj->setMtl(t_mtl);
-//            m_pMtl = t_mtl;
-//        }
-//    }
+void SVSpriteNode::update(f32 _dt) {
+    SVNode::update(_dt);
+    SVMtlCorePtr t_mtl = mApp->getMtlLib()->getMtl(m_mtlID);
+    if(t_mtl) {
+        t_mtl->update(_dt);
+    }
 }
 
 void SVSpriteNode::render() {
-    if ( m_visible ){
-//        SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
-//        if (m_pRenderObj) {
-//            m_pRenderObj->pushCmd(t_rs, m_rsType, "SVSpriteNode");
-//        }
+    if ( m_visible && m_pMesh){
+        SVDispatch::dispatchMeshDraw(mApp, m_pMesh, m_mtlID);
     }
     SVNode::render();
 }

@@ -38,9 +38,6 @@ SVMtlCore::SVMtlCore(SVInstPtr _app, cptr8 _shader)
 SVMtlCore::SVMtlCore(SVInstPtr _app, SVShaderPtr _shader)
 :SVGBaseEx(_app)
 ,m_shader_obj(_shader){
-    if(m_shader_obj) {
-        //m_shader_name = m_shader_obj->
-    }
 }
 
 SVMtlCore::SVMtlCore(SVMtlCore* _mtl)
@@ -153,10 +150,10 @@ void SVMtlCore::setTextureParam(s32 _chanel,TEXTUREPARAM _type,s32 _value) {
 
 //逻辑更新
 void SVMtlCore::update(f32 dt) {
+    reloadShader();
 }
 
 void SVMtlCore::reloadShader(){
-    //m_shader_name
     if(mApp->getShaderMgr()) {
         m_shader_obj = mApp->getShaderMgr()->getShader(m_shader_name.c_str());
     }

@@ -65,6 +65,7 @@ void SVRendererMetal::init(id<MTLDevice> _device,id<MTLDrawable> _target,id<MTLT
     t_dsp->m_oc_texture = (__bridge_retained void*)_targetTex;
     SVDispatch::dispatchTargetCreate(mApp,t_target);
     //设置主RTarget
+    t_target->setRenderPath();
     mApp->getRenderMgr()->setMainRT(t_target);
 }
 
