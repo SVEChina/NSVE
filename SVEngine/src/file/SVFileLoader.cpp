@@ -17,7 +17,3 @@ SVFileLoader::SVFileLoader(SVInstPtr _app)
 SVFileLoader::~SVFileLoader() {
 
 }
-
-SVTexture *SVFileLoader::load(cptr8 _filename) {
-    return nullptr;
-}

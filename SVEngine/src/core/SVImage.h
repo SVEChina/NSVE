@@ -42,7 +42,7 @@ namespace sv {
         void clear();
         
         // create image
-        s32 create2D(s32 _width, s32 _height, s32 _format, bool _allocate = true);
+        s32 create2D(s32 _width, s32 _height, s32 _format);
         
         s32 create3D(s32 _width, s32 _height, s32 _depth, s32 _format, bool _allocate = true);
         

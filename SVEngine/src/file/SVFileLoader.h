@@ -18,9 +18,7 @@ namespace sv {
     public:
         SVFileLoader(SVInstPtr _app);
 
-        ~SVFileLoader();
-
-        virtual SVTexture *load(cptr8 _filename);
+        virtual ~SVFileLoader();
     };
 
 }//!namespace sv

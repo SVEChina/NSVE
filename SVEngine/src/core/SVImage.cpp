@@ -101,17 +101,15 @@ void SVImage::clear(){
     m_depth = 1;
 }
 
-s32 SVImage::create2D(s32 _width, s32 _height, s32 _format , bool _allocate ){
+s32 SVImage::create2D(s32 _width, s32 _height, s32 _format){
     assert(_width > 0 && _height > 0 && "SVImage::create2D(): bad image size");
     clear();
     m_type = SV_IMAGE_2D;
     m_format = _format;
     m_width = _width;
     m_height = _height;
-    if(_allocate) {
-        s32 t_size = getSize();
-        m_pData->resize(t_size);
-    }
+    s32 t_size = getSize();
+    m_pData->resize(t_size);
     return 1;
 }
 
