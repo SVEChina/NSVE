@@ -63,24 +63,24 @@ bool SVShader::fromJSON(RAPIDJSON_NAMESPACE::Value &item) {
     }else{
         return false;
     }
+    //
+    if( item.HasMember("formate")  && item["formate"].IsString() ) {
+        SVString t_formate = item["formate"].GetString();
+        std::map<std::string,s32>::iterator it = SVVertDef::g_vf_name.find( t_formate.c_str() );
+        if(it!=SVVertDef::g_vf_name.end()) {
+           m_shader_dsp.m_vft = VFTYPE(it->second);
+        }else{
+           m_shader_dsp.m_vft = E_VF_V2;
+        }
+    }else{
+        m_shader_dsp.m_vft = E_VF_V2;
+    }
     //解析vs
     if (item.HasMember("vs") && item["vs"].IsObject() ) {
         //
         m_shader_dsp.m_dsp |= SV_E_TECH_VS;
         //
         RAPIDJSON_NAMESPACE::Document::Object vs_obj = item["vs"].GetObject();
-        if( vs_obj.HasMember("formate")  && vs_obj["formate"].IsString() ) {
-            SVString t_formate = vs_obj["formate"].GetString();
-            std::string tt = t_formate.c_str();
-            std::map<std::string,VFTYPE>::iterator it = g_vf_name.find(tt);
-            if(it!=g_vf_name.end()) {
-                m_shader_dsp.m_vft = it->second;
-            }else{
-                 m_shader_dsp.m_vft = E_VF_V2;
-            }
-        }else{
-            m_shader_dsp.m_vft = E_VF_V2;
-        }
         m_shader_dsp.m_vs_fname = vs_obj["entry"].GetString();
         //采样器
         if( vs_obj.HasMember("sampler")  && vs_obj["sampler"].IsArray() ) {

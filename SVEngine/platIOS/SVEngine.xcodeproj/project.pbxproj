@@ -5488,6 +5488,10 @@
 		5FF2B85524D4278E00FC0BC9 /* SVParamTbl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FF2B84F24D4278E00FC0BC9 /* SVParamTbl.cpp */; };
 		5FF2B85624D4278E00FC0BC9 /* SVParamTbl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FF2B84F24D4278E00FC0BC9 /* SVParamTbl.cpp */; };
 		5FF2B85724D4278E00FC0BC9 /* SVParamTbl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FF2B84F24D4278E00FC0BC9 /* SVParamTbl.cpp */; };
+		5FF2B85A24D90E9B00FC0BC9 /* SVVertDef.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FF2B85924D90E9B00FC0BC9 /* SVVertDef.cpp */; };
+		5FF2B85B24D90E9B00FC0BC9 /* SVVertDef.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FF2B85924D90E9B00FC0BC9 /* SVVertDef.cpp */; };
+		5FF2B85C24D90E9B00FC0BC9 /* SVVertDef.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FF2B85924D90E9B00FC0BC9 /* SVVertDef.cpp */; };
+		5FF2B85D24D90E9B00FC0BC9 /* SVVertDef.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FF2B85924D90E9B00FC0BC9 /* SVVertDef.cpp */; };
 		5FFB8A4721C4F948002480D0 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FFB8A4621C4F948002480D0 /* Metal.framework */; };
 		5FFB8A4921C4F950002480D0 /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FFB8A4821C4F94F002480D0 /* MetalKit.framework */; };
 /* End PBXBuildFile section */
@@ -6872,6 +6876,7 @@
 		5FF2B84524D123C800FC0BC9 /* SVScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVScene.h; sourceTree = "<group>"; };
 		5FF2B84E24D4278E00FC0BC9 /* SVParamTbl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVParamTbl.h; sourceTree = "<group>"; };
 		5FF2B84F24D4278E00FC0BC9 /* SVParamTbl.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVParamTbl.cpp; sourceTree = "<group>"; };
+		5FF2B85924D90E9B00FC0BC9 /* SVVertDef.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVVertDef.cpp; sourceTree = "<group>"; };
 		5FFB8A4621C4F948002480D0 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
 		5FFB8A4821C4F94F002480D0 /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
 		822A3F971E70069800CF3953 /* SVEngine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SVEngine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -8041,6 +8046,7 @@
 				5F7D5DAF215F407700803BCF /* SVSpineObjc.h */,
 				0288F9F8217896AC0089E61C /* SVUnicode.cpp */,
 				0288F9F7217896AC0089E61C /* SVUnicode.h */,
+				5FF2B85924D90E9B00FC0BC9 /* SVVertDef.cpp */,
 				5F7D5DB7215F407700803BCF /* SVVertDef.h */,
 			);
 			path = core;
@@ -12574,6 +12580,7 @@
 				5F7D657F215F407800803BCF /* SVCtxIOS.cpp in Sources */,
 				020C456522DC5DCD00201753 /* btCollisionDispatcherMt.cpp in Sources */,
 				020C441922DC5DCC00201753 /* MultiBodyTreeInitCache.cpp in Sources */,
+				5FF2B85D24D90E9B00FC0BC9 /* SVVertDef.cpp in Sources */,
 				020C4CF322DC5DD200201753 /* b3DynamicBvhBroadphase.cpp in Sources */,
 				5F7D64EB215F407800803BCF /* SVActDeform.cpp in Sources */,
 				020C443322DC5DCC00201753 /* MultiBodyTree.cpp in Sources */,
@@ -13062,6 +13069,7 @@
 				5F7D61EA215F407700803BCF /* SVParseMask.cpp in Sources */,
 				020C497422DC5DCF00201753 /* btGeneric6DofSpring2Constraint.cpp in Sources */,
 				020C463E22DC5DCD00201753 /* btTriangleShapeEx.cpp in Sources */,
+				5FF2B85A24D90E9B00FC0BC9 /* SVVertDef.cpp in Sources */,
 				020C518822DCA2E200201753 /* SVPhysicsCollider.cpp in Sources */,
 				020C469222DC5DCD00201753 /* btGImpactShape.cpp in Sources */,
 				5F7D656C215F407800803BCF /* SVRenderCmdGeo.cpp in Sources */,
@@ -13569,6 +13577,7 @@
 				5F7D6374215F407800803BCF /* ClippingAttachment.c in Sources */,
 				5FD9B05F2265F5A700522317 /* SVRShaderGL.cpp in Sources */,
 				5F7D6368215F407800803BCF /* Atlas.c in Sources */,
+				5FF2B85C24D90E9B00FC0BC9 /* SVVertDef.cpp in Sources */,
 				5C0C606E219BFF790052A826 /* FIFOSampleBuffer.cpp in Sources */,
 				020C44FA22DC5DCC00201753 /* btSubSimplexConvexCast.cpp in Sources */,
 				5C0C6042219BFF790052A826 /* SoundTouch.cpp in Sources */,
@@ -14151,6 +14160,7 @@
 				5F7D6373215F407800803BCF /* ClippingAttachment.c in Sources */,
 				5FD9B05E2265F5A700522317 /* SVRShaderGL.cpp in Sources */,
 				5F7D6367215F407800803BCF /* Atlas.c in Sources */,
+				5FF2B85B24D90E9B00FC0BC9 /* SVVertDef.cpp in Sources */,
 				5C0C606D219BFF790052A826 /* FIFOSampleBuffer.cpp in Sources */,
 				020C44F922DC5DCC00201753 /* btSubSimplexConvexCast.cpp in Sources */,
 				5C0C6041219BFF790052A826 /* SoundTouch.cpp in Sources */,

@@ -339,12 +339,12 @@ enum VFTYPE {
     E_VF_V3_PARTICLE = D_VF_PARTICLE
 };
 
-//
-static std::map<std::string,VFTYPE> g_vf_name;
-
 class SVVertDef {
 public:
+    static std::map<std::string,s32> g_vf_name;
+    
     SVVertDef() {
+        g_vf_name.clear();
         g_vf_name.insert(std::make_pair("E_VF_INDEX",E_VF_INDEX));
         g_vf_name.insert(std::make_pair("E_VF_V2",E_VF_V2));
         g_vf_name.insert(std::make_pair("E_VF_V2_T0",E_VF_V2_T0));
@@ -377,8 +377,6 @@ public:
         g_vf_name.clear();
     }
 };
-static SVVertDef g_vert_def;
-
 
 //
 enum BUFFERMODE {
