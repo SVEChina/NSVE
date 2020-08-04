@@ -22,7 +22,7 @@ SVMtlLib::~SVMtlLib() {
 }
 
 void SVMtlLib::init() {
-    createMtl("scene.mtl");
+    createMtl("screen.mtl");
     createMtl("sprite.mtl");
 }
 
@@ -75,7 +75,7 @@ SVMtlCorePtr SVMtlLib::createMtl(cptr8 _mtlname) {
     doc.Parse(t_data.getPointerChar());
     if (doc.HasParseError()) {
         RAPIDJSON_NAMESPACE::ParseErrorCode code = doc.GetParseError();
-        SV_LOG_ERROR("rapidjson error code:%d \n", code);
+        SV_LOG_ERROR("rapidjson error code:%d - %s\n", code,_mtlname);
         return nullptr;
     }
     SVString t_version = "1.0";
