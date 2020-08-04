@@ -4,7 +4,8 @@
     "shader" : "sprite",
     "chn0" : {
         "from" : "file",
-        "path" : "svres/sve.png"
+        "path" : "svres/sve.png",
+        "stage": "fs"
     },
     "blend-param" : {
         "enable" : 0,

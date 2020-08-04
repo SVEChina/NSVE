@@ -158,24 +158,9 @@ void SVRTexMetal::setTexData(SVDataSwapPtr _data){
     m_texLock->unlock();
 }
 
-//if (_vertex)
-//{
-//    s_renderMtl->m_renderCommandEncoder.setVertexTexture(m_ptr, _stage);
-//    s_renderMtl->m_renderCommandEncoder.setVertexSamplerState(
-//          0 == (BGFX_SAMPLER_INTERNAL_DEFAULT & _flags)
-//            ? s_renderMtl->getSamplerState(_flags)
-//            : m_sampler
-//        , _stage
-//        );
-//}
-//
-//if (_fragment)
-//{
-//    s_renderMtl->m_renderCommandEncoder.setFragmentTexture(m_ptr, _stage);
-//    s_renderMtl->m_renderCommandEncoder.setFragmentSamplerState(
-//          0 == (BGFX_SAMPLER_INTERNAL_DEFAULT & _flags)
-//            ? s_renderMtl->getSamplerState(_flags)
-//            : m_sampler
-//        , _stage
-//        );
-//}
+id<MTLTexture> SVRTexMetal::getInner() {
+    if(m_msaa) {
+        return m_src_tex_msaa;
+    }
+    return m_src_tex;
+}

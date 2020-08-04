@@ -106,10 +106,10 @@ bool SVRendererGL::processMtl(SVMtlCorePtr _mtl) {
                     t_gl_shader->submitParamTbl(_mtl->getShader()->m_gs_paramtbl);
                 }
             }
-            //提交纹理
-            for(s32 i=0;i<MAX_TEXUNIT;i++) {
-                submitTex(i,_mtl->m_texUnit[i]);
-            }
+//            //提交纹理
+//            for(s32 i=0;i<MAX_TEXUNIT;i++) {
+//                submitTex(i,_mtl->m_texUnit[i]);
+//            }
             //设置状态
             //blend
             
@@ -135,162 +135,165 @@ bool SVRendererGL::processMesh(SVRenderMeshPtr _mesh) {
     return false;
 }
 
+bool SVRendererGL::processTexture(SVRTexPtr _tex,s32 _chn,s32 _type) {
+    return true;
+}
+
 //处理mesh
 void SVRendererGL::drawMesh(SVRenderMeshPtr _mesh ) {
     if(_mesh && _mesh->getResBuffer() ) {
         _mesh->getResBuffer()->draw( share() );
     }
 }
-
 //
-void SVRendererGL::submitTex(u32 _channel,TexUnit& _unit){
-    SVRenderStateGLPtr pState = std::static_pointer_cast<SVRenderStateGL>(m_pRState);
-    //设置纹理通道
-    s32 t_texGL = GL_TEXTURE0 + _channel;
-    u32 texid = 0;
-    SVTexturePtr t_aimTex = nullptr;
-    glActiveTexture(t_texGL);
-    if(_unit.m_texForm == E_TEX_END) {
-        t_aimTex = _unit.m_pTex;
-    }else {
-        t_aimTex = m_svTex[_unit.m_texForm];
-    }
-    //
-    if (!t_aimTex) {
-        return ;
-    }
-    bool t_load = t_aimTex->getbLoad();
-    if (!t_load){
-        return ;
-    }
-    //渲染器主动提交纹理
-    t_aimTex->lockData();
-    if( t_aimTex->getTextureData() ) {
-        //主动提交纹理
-        t_aimTex->setTexData(nullptr);
-    }
-    t_aimTex->unlockData();
-    //
-    texid = 0;
-    glBindTexture(GL_TEXTURE_2D, texid);
-    SVString atexture = SVString::format("aTexture%d",_channel);
-    s32 m_uni_tex = glGetUniformLocation(m_pRState->m_shaderID, atexture.c_str() );
-    if (m_uni_tex>=0) {
-        glUniform1i(m_uni_tex, _channel);
-    }
-    //最小过滤器
-    u32 t_filter = GL_TEXTURE_MIN_FILTER;
-    switch (_unit.m_min_filter) {
-        case E_T_FILTER_NEAREST:
-            t_filter = GL_NEAREST;
-            break;
-        case E_T_FILTER_LINEAR:
-            t_filter = GL_LINEAR;
-            break;
-    }
-    if( pState->m_texState[_channel].m_min_filter != t_filter) {
-        pState->m_texState[_channel].m_min_filter = t_filter;
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, t_filter );
-    }
-    //最大过滤器
-    t_filter = GL_TEXTURE_MAG_FILTER;
-    switch (_unit.m_mag_filter) {
-        case E_T_FILTER_NEAREST:
-            t_filter = GL_NEAREST;
-            break;
-        case E_T_FILTER_LINEAR:
-            t_filter = GL_LINEAR;
-            break;
-    }
-    if( pState->m_texState[_channel].m_mag_filter != t_filter) {
-        pState->m_texState[_channel].m_mag_filter = t_filter;
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, t_filter);
-    }
-#if defined SV_OSX
-    //环绕
-    u32 s_wrap = GL_CLAMP;
-    switch (_unit.m_s_wrap) {
-        case E_T_WRAP_CLAMP:
-            s_wrap = GL_CLAMP;
-            break;
-        case E_T_WRAP_CLAMP_TO_EDAGE:
-            s_wrap = GL_CLAMP_TO_EDGE;
-            break;
-        case E_T_WRAP_REPEAT:
-            s_wrap = GL_REPEAT;
-            break;
-        case E_T_WRAP_MIRROR:
-            s_wrap = GL_MIRRORED_REPEAT;
-            break;
-    }
-    if( pState->m_texState[_channel].m_s_wrap != s_wrap) {
-        pState->m_texState[_channel].m_s_wrap = s_wrap;
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, s_wrap );
-    }
-    //
-    u32 t_wrap = GL_CLAMP;
-    switch (_unit.m_t_wrap) {
-        case E_T_WRAP_CLAMP:
-            t_wrap = GL_CLAMP;
-            break;
-        case E_T_WRAP_CLAMP_TO_EDAGE:
-            t_wrap = GL_CLAMP_TO_EDGE;
-            break;
-        case E_T_WRAP_REPEAT:
-            t_wrap = GL_REPEAT;
-            break;
-        case E_T_WRAP_MIRROR:
-            t_wrap = GL_MIRRORED_REPEAT;
-            break;
-    }
-    if( pState->m_texState[_channel].m_t_wrap != t_wrap) {
-        pState->m_texState[_channel].m_t_wrap = t_wrap;
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, t_wrap);
-    }
-#else
-    //环绕
-    u32 s_wrap = GL_CLAMP_TO_EDGE;
-    switch (_unit.m_s_wrap) {
-        case E_T_WRAP_CLAMP:
-            s_wrap = GL_CLAMP_TO_EDGE;
-            break;
-        case E_T_WRAP_CLAMP_TO_EDAGE:
-            s_wrap = GL_CLAMP_TO_EDGE;
-            break;
-        case E_T_WRAP_REPEAT:
-            s_wrap = GL_REPEAT;
-            break;
-        case E_T_WRAP_MIRROR:
-            s_wrap = GL_MIRRORED_REPEAT;
-            break;
-    }
-    if( pState->m_texState[_channel].m_s_wrap != s_wrap) {
-        pState->m_texState[_channel].m_s_wrap = s_wrap;
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, s_wrap );
-    }
-    //
-    u32 t_wrap = GL_CLAMP_TO_EDGE;
-    switch (_unit.m_t_wrap) {
-        case E_T_WRAP_CLAMP:
-            t_wrap = GL_CLAMP_TO_EDGE;
-            break;
-        case E_T_WRAP_CLAMP_TO_EDAGE:
-            t_wrap = GL_CLAMP_TO_EDGE;
-            break;
-        case E_T_WRAP_REPEAT:
-            t_wrap = GL_REPEAT;
-            break;
-        case E_T_WRAP_MIRROR:
-            t_wrap = GL_MIRRORED_REPEAT;
-            break;
-    }
-    if( pState->m_texState[_channel].m_t_wrap != t_wrap) {
-        pState->m_texState[_channel].m_t_wrap = t_wrap;
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, t_wrap);
-    }
-#endif
- 
-}
+////
+//void SVRendererGL::submitTex(u32 _channel,TexUnit& _unit){
+//    SVRenderStateGLPtr pState = std::static_pointer_cast<SVRenderStateGL>(m_pRState);
+//    //设置纹理通道
+//    s32 t_texGL = GL_TEXTURE0 + _channel;
+//    u32 texid = 0;
+//    SVTexturePtr t_aimTex = nullptr;
+//    glActiveTexture(t_texGL);
+//    if(_unit.m_texForm == E_TEX_END) {
+//        t_aimTex = _unit.m_pTex;
+//    }else {
+//        t_aimTex = m_svTex[_unit.m_texForm];
+//    }
+//    //
+//    if (!t_aimTex) {
+//        return ;
+//    }
+//    bool t_load = t_aimTex->getbLoad();
+//    if (!t_load){
+//        return ;
+//    }
+//    //渲染器主动提交纹理
+//    t_aimTex->lockData();
+//    if( t_aimTex->getTextureData() ) {
+//        //主动提交纹理
+//        t_aimTex->setTexData(nullptr);
+//    }
+//    t_aimTex->unlockData();
+//    //
+//    texid = 0;
+//    glBindTexture(GL_TEXTURE_2D, texid);
+//    SVString atexture = SVString::format("aTexture%d",_channel);
+//    s32 m_uni_tex = glGetUniformLocation(m_pRState->m_shaderID, atexture.c_str() );
+//    if (m_uni_tex>=0) {
+//        glUniform1i(m_uni_tex, _channel);
+//    }
+//    //最小过滤器
+//    u32 t_filter = GL_TEXTURE_MIN_FILTER;
+//    switch (_unit.m_min_filter) {
+//        case E_T_FILTER_NEAREST:
+//            t_filter = GL_NEAREST;
+//            break;
+//        case E_T_FILTER_LINEAR:
+//            t_filter = GL_LINEAR;
+//            break;
+//    }
+//    if( pState->m_texState[_channel].m_min_filter != t_filter) {
+//        pState->m_texState[_channel].m_min_filter = t_filter;
+//        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, t_filter );
+//    }
+//    //最大过滤器
+//    t_filter = GL_TEXTURE_MAG_FILTER;
+//    switch (_unit.m_mag_filter) {
+//        case E_T_FILTER_NEAREST:
+//            t_filter = GL_NEAREST;
+//            break;
+//        case E_T_FILTER_LINEAR:
+//            t_filter = GL_LINEAR;
+//            break;
+//    }
+//    if( pState->m_texState[_channel].m_mag_filter != t_filter) {
+//        pState->m_texState[_channel].m_mag_filter = t_filter;
+//        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, t_filter);
+//    }
+//#if defined SV_OSX
+//    //环绕
+//    u32 s_wrap = GL_CLAMP;
+//    switch (_unit.m_s_wrap) {
+//        case E_T_WRAP_CLAMP:
+//            s_wrap = GL_CLAMP;
+//            break;
+//        case E_T_WRAP_CLAMP_TO_EDAGE:
+//            s_wrap = GL_CLAMP_TO_EDGE;
+//            break;
+//        case E_T_WRAP_REPEAT:
+//            s_wrap = GL_REPEAT;
+//            break;
+//        case E_T_WRAP_MIRROR:
+//            s_wrap = GL_MIRRORED_REPEAT;
+//            break;
+//    }
+//    if( pState->m_texState[_channel].m_s_wrap != s_wrap) {
+//        pState->m_texState[_channel].m_s_wrap = s_wrap;
+//        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, s_wrap );
+//    }
+//    //
+//    u32 t_wrap = GL_CLAMP;
+//    switch (_unit.m_t_wrap) {
+//        case E_T_WRAP_CLAMP:
+//            t_wrap = GL_CLAMP;
+//            break;
+//        case E_T_WRAP_CLAMP_TO_EDAGE:
+//            t_wrap = GL_CLAMP_TO_EDGE;
+//            break;
+//        case E_T_WRAP_REPEAT:
+//            t_wrap = GL_REPEAT;
+//            break;
+//        case E_T_WRAP_MIRROR:
+//            t_wrap = GL_MIRRORED_REPEAT;
+//            break;
+//    }
+//    if( pState->m_texState[_channel].m_t_wrap != t_wrap) {
+//        pState->m_texState[_channel].m_t_wrap = t_wrap;
+//        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, t_wrap);
+//    }
+//#else
+//    //环绕
+//    u32 s_wrap = GL_CLAMP_TO_EDGE;
+//    switch (_unit.m_s_wrap) {
+//        case E_T_WRAP_CLAMP:
+//            s_wrap = GL_CLAMP_TO_EDGE;
+//            break;
+//        case E_T_WRAP_CLAMP_TO_EDAGE:
+//            s_wrap = GL_CLAMP_TO_EDGE;
+//            break;
+//        case E_T_WRAP_REPEAT:
+//            s_wrap = GL_REPEAT;
+//            break;
+//        case E_T_WRAP_MIRROR:
+//            s_wrap = GL_MIRRORED_REPEAT;
+//            break;
+//    }
+//    if( pState->m_texState[_channel].m_s_wrap != s_wrap) {
+//        pState->m_texState[_channel].m_s_wrap = s_wrap;
+//        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, s_wrap );
+//    }
+//    //
+//    u32 t_wrap = GL_CLAMP_TO_EDGE;
+//    switch (_unit.m_t_wrap) {
+//        case E_T_WRAP_CLAMP:
+//            t_wrap = GL_CLAMP_TO_EDGE;
+//            break;
+//        case E_T_WRAP_CLAMP_TO_EDAGE:
+//            t_wrap = GL_CLAMP_TO_EDGE;
+//            break;
+//        case E_T_WRAP_REPEAT:
+//            t_wrap = GL_REPEAT;
+//            break;
+//        case E_T_WRAP_MIRROR:
+//            t_wrap = GL_MIRRORED_REPEAT;
+//            break;
+//    }
+//    if( pState->m_texState[_channel].m_t_wrap != t_wrap) {
+//        pState->m_texState[_channel].m_t_wrap = t_wrap;
+//        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, t_wrap);
+//    }
+//#endif
+//}
 
 //提交unifrom matrix
 void SVRendererGL::submitUniformMatrix(cptr8 _name,f32* _data){

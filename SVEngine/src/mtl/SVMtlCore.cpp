@@ -20,6 +20,35 @@
 
 using namespace sv;
 
+/*
+ 纹理单元
+ */
+
+//    m_min_filter = E_T_FILTER_LINEAR;
+//    m_mag_filter = E_T_FILTER_LINEAR;
+//    m_s_wrap = E_T_WRAP_CLAMP_TO_EDAGE;
+//    m_t_wrap = E_T_WRAP_CLAMP_TO_EDAGE;
+
+TexUnit::TexUnit(){
+    m_texForm = E_TEX_END;
+    m_pTex = nullptr;
+    m_stage_type = 0;   //纹理使用阶段类型，0:fs 1:vs
+    m_chn = -1;          //纹理使用的通道
+};
+
+TexUnit::~TexUnit(){
+    m_pTex = nullptr;
+}
+
+void TexUnit::reset(){
+    m_pTex = nullptr;
+}
+
+void TexUnit::copy(TexUnit& _texunit){
+    m_pTex = _texunit.m_pTex;
+    m_texForm = _texunit.m_texForm;
+}
+
 //
 SVMtlCore::SVMtlCore(SVInstPtr _app)
 :SVGBaseEx(_app){
@@ -91,61 +120,58 @@ void SVMtlCore::reset() {
 }
 
 //
-void SVMtlCore::setTexture(s32 _chanel,cptr8 _fname) {
+void SVMtlCore::setTexture(s32 _chn,cptr8 _fname) {
     //从文件加载纹理
-    if(_chanel<0 || _chanel>=MAX_TEXUNIT) {
-         //error 报错
+    if(_chn<0 || _chn>=MAX_TEXUNIT) {
         return ;
     }
     SVTexturePtr t_tex = mApp->getTexMgr()->getTexture(_fname);
     if(!t_tex) {
-        //error 报错 用默认纹理代替
-        t_tex = mApp->getTexMgr()->getSVETexture();
+        t_tex = mApp->getTexMgr()->getSVETexture(); //error 报错 用默认纹理代替
     }
-    //
-    m_texUnit[_chanel].m_pTex = t_tex;
+    m_texUnit[_chn].m_pTex = t_tex;
     //
     s32 t_flag = MTL_F0_TEX0;
-    t_flag = t_flag<<_chanel;
+    t_flag = t_flag<<_chn;
     m_LogicMtlFlag0 |= t_flag;
 }
 
-void SVMtlCore::setTexture(s32 _chanel,sv::SVTEXINID _from) {
-    if(_chanel<0 || _chanel>=MAX_TEXUNIT)
+void SVMtlCore::setTexture(s32 _chn,sv::SVTEXINID _from) {
+//    if(_chn<0 || _chn>=MAX_TEXUNIT)
+//        return;
+//    m_texUnit[_chanel].m_texForm = _from;
+//    s32 t_flag = MTL_F0_TEX0;
+//    t_flag = t_flag<<_chanel;
+//    m_LogicMtlFlag0 |= t_flag;
+}
+
+void SVMtlCore::setTexture(s32 _chn,SVTexturePtr _texture) {
+    if(_chn<0 || _chn>=MAX_TEXUNIT)
         return;
-    m_texUnit[_chanel].m_texForm = _from;
+    m_texUnit[_chn].m_pTex = _texture;
     s32 t_flag = MTL_F0_TEX0;
-    t_flag = t_flag<<_chanel;
+    t_flag = t_flag<<_chn;
     m_LogicMtlFlag0 |= t_flag;
 }
 
-void SVMtlCore::setTexture(s32 _chanel,SVTexturePtr _texture) {
-    if(_chanel<0 || _chanel>=MAX_TEXUNIT)
-        return;
-    //
-    m_texUnit[_chanel].m_pTex = _texture;
-    //
-    s32 t_flag = MTL_F0_TEX0;
-    t_flag = t_flag<<_chanel;
-    m_LogicMtlFlag0 |= t_flag;
-}
-
-void SVMtlCore::setTextureParam(s32 _chanel,TEXTUREPARAM _type,s32 _value) {
-    if(_chanel>=0 && _chanel<MAX_TEXUNIT) {
-        if(_type == E_T_PARAM_FILTER_MAG) {
-            //filter_max
-            m_texUnit[_chanel].m_mag_filter = _value;
-        }else if(_type == E_T_PARAM_FILTER_MIN) {
-            //filter_min
-            m_texUnit[_chanel].m_min_filter = _value;
-        }else if(_type == E_T_PARAM_WRAP_S) {
-            //wrap_s
-            m_texUnit[_chanel].m_s_wrap = _value;
-        }else if(_type == E_T_PARAM_WRAP_T) {
-            //wrap_t
-            m_texUnit[_chanel].m_t_wrap = _value;
-        }
-    }
+void SVMtlCore::setTextureParam(s32 _chn,TEXTUREPARAM _type,s32 _value) {
+    //可以动态设置吗？ 答案是应该在shader中更改
+    
+//    if(_chanel>=0 && _chanel<MAX_TEXUNIT) {
+//        if(_type == E_T_PARAM_FILTER_MAG) {
+//            //filter_max
+//            m_texUnit[_chanel].m_mag_filter = _value;
+//        }else if(_type == E_T_PARAM_FILTER_MIN) {
+//            //filter_min
+//            m_texUnit[_chanel].m_min_filter = _value;
+//        }else if(_type == E_T_PARAM_WRAP_S) {
+//            //wrap_s
+//            m_texUnit[_chanel].m_s_wrap = _value;
+//        }else if(_type == E_T_PARAM_WRAP_T) {
+//            //wrap_t
+//            m_texUnit[_chanel].m_t_wrap = _value;
+//        }
+//    }
 }
 
 //逻辑更新
@@ -168,40 +194,6 @@ void SVMtlCore::reloadShader(){
 s32 SVMtlCore::submitMtl() {
     return 0;
 }
-
-void SVMtlCore::recoverMtl() {
-    SVRendererPtr t_renderer = mApp->getRenderer();
-    if(!t_renderer)
-        return ;
-    //融合
-    if((m_LogicMtlFlag0&MTL_F0_BLEND)>0){
-        //m_LogicParamBlend.enable = false;
-        //t_renderer->submitBlend(m_LogicParamBlend);
-    }
-    //隐藏面消除
-    if((m_LogicMtlFlag0&MTL_F0_CULL)>0){
-        //m_LogicParamCull.enable = false;
-    }
-    //模板测试
-    if((m_LogicMtlFlag0&MTL_F0_STENCIL)>0){
-//        m_LogicParamStencil.enable = false;
-//        m_LogicParamStencil.clear = false;
-    }
-    //alpha测试
-    if((m_LogicMtlFlag0&MTL_F0_ALPHA)>0){
-    }
-    //深度测试
-    if((m_LogicMtlFlag0&MTL_F0_DEPTH)>0){
-//        m_LogicParamDepth.enable = false;
-//        t_renderer->submitDepth(m_LogicParamDepth);
-    }
-    //Z冲突
-    if((m_LogicMtlFlag0&MTL_F0_ZOFF)>0){
-        //m_LogicParamZOff.enable = false;
-        //t_renderer->submitZOff(m_LogicParamZOff);
-    }
-}
-
 
 //交换
 void SVMtlCore::swap() {
@@ -314,6 +306,7 @@ void SVMtlCore::fromJSON1(RAPIDJSON_NAMESPACE::Value &_item){
             RAPIDJSON_NAMESPACE::Document::Object element = _item[t_chn.c_str()].GetObject();
             SVString t_param_type = element["from"].GetString();
             SVString t_param_path = element["path"].GetString();
+            SVString t_param_stage = element["stage"].GetString();
             if(t_param_type == "file") {
                 setTexture(i, t_param_path.c_str());
             }else if(t_param_type == "inner") {
@@ -344,61 +337,6 @@ void SVMtlCore::fromJSON1(RAPIDJSON_NAMESPACE::Value &_item){
 
 //
 void SVMtlCore::toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator,
-                       RAPIDJSON_NAMESPACE::Value &_objValue){
+                       RAPIDJSON_NAMESPACE::Value &_objValue) {
+    
 }
-
-
-//void SVMtlCore::_submitState(SVRendererPtr _render) {
-////    //更新纹理
-////    if((m_LogicMtlFlag0&MTL_F0_TEX0)>0){
-////        _render->submitTex(0, m_paramTex.m_texUnit[0]);
-////    }
-////    if((m_LogicMtlFlag0&MTL_F0_TEX1)>0){
-////        _render->submitTex(1, m_paramTex.m_texUnit[1]);
-////    }
-////    if((m_LogicMtlFlag0&MTL_F0_TEX2)>0){
-////        _render->submitTex(2, m_paramTex.m_texUnit[2]);
-////    }
-////    if((m_LogicMtlFlag0&MTL_F0_TEX3)>0){
-////        _render->submitTex(3, m_paramTex.m_texUnit[3]);
-////    }
-////    if((m_LogicMtlFlag0&MTL_F0_TEX4)>0){
-////        _render->submitTex(4, m_paramTex.m_texUnit[4]);
-////    }
-////    if((m_LogicMtlFlag0&MTL_F0_TEX5)>0){
-////        _render->submitTex(5, m_paramTex.m_texUnit[5]);
-////    }
-////    if((m_LogicMtlFlag0&MTL_F0_TEX6)>0){
-////        _render->submitTex(6, m_paramTex.m_texUnit[6]);
-////    }
-////    if((m_LogicMtlFlag0&MTL_F0_TEX7)>0){
-////        _render->submitTex(7, m_paramTex.m_texUnit[7]);
-////    }
-////    //
-////    if((m_LogicMtlFlag0&MTL_F0_LINE_SIZE)>0){
-////        //_render->submitLineWidth(m_LogicParamSize.m_linewidth);
-////    }
-////    //融合
-////    if((m_LogicMtlFlag0&MTL_F0_BLEND)>0){
-////        //_render->submitBlend(m_LogicParamBlend);
-////    }
-////    //隐藏面消除
-////    if((m_LogicMtlFlag0&MTL_F0_CULL)>0){
-////        //_render->submitCull(m_LogicParamCull);
-////    }
-////    //模板测试
-////    if((m_LogicMtlFlag0&MTL_F0_STENCIL)>0){
-////    }
-////    //alpha测试
-////    if((m_LogicMtlFlag0&MTL_F0_ALPHA)>0){
-////    }
-////    //深度测试
-////    if((m_LogicMtlFlag0&MTL_F0_DEPTH)>0){
-////    }
-////    //Z冲突
-////    if((m_LogicMtlFlag0&MTL_F0_ZOFF)>0){
-////        //_render->submitZOff(m_LogicParamZOff);
-////    }else{
-////        //_render->submitZOff(m_LogicParamZOff);
-////    }
-//}

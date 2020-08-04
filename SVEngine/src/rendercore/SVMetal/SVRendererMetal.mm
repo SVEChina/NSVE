@@ -19,6 +19,7 @@
 #include "../../base/SVDataSwap.h"
 #include "../../mtl/SVMtlCore.h"
 #include "../../mtl/SVShader.h"
+#include "../../mtl/SVTexture.h"
 
 #include <Cocoa/Cocoa.h>
 #import <Foundation/Foundation.h>
@@ -119,9 +120,32 @@ bool SVRendererMetal::processMtl(SVMtlCorePtr _mtl) {
     if(_mtl && _mtl->getShader() ) {
         bool t_ret = _mtl->getShader()->active();
         if(t_ret) {
+            //传递uniform（单独或者block）
             processShader( _mtl->getShader()->getResShader() );
+            //传递纹理
+            for(s32 i=0;i<MAX_TEXUNIT;i++) {
+                if( _mtl->m_texUnit[i].m_pTex ) {
+                    processTexture( _mtl->m_texUnit[i].m_pTex->getResTex() , i , 0);
+                }
+            }
             return t_ret;
         }
+    }
+    return false;
+}
+
+bool SVRendererMetal::processTexture(SVRTexPtr _tex,s32 _chn,s32 _type) {
+    if(_tex) {
+        SVRTexMetalPtr t_tex = std::dynamic_pointer_cast<SVRTexMetal>(_tex);
+        t_tex->commit();    //提交数据
+        if(_type == 0) {
+            //fs纹理
+            [m_pCurEncoder setFragmentTexture:t_tex->getInner() atIndex:_chn];
+        }else if(_type == 1) {
+            //vs纹理
+            [m_pCurEncoder setVertexTexture:t_tex->getInner() atIndex:_chn];
+        }
+        return true;
     }
     return false;
 }

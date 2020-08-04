@@ -33,7 +33,7 @@ SVSpriteNode::SVSpriteNode(SVInstPtr _app)
     m_canSelect = false;
     m_pTex = nullptr;
     m_pMesh = nullptr;
-    setSize(100,100);
+    setSize(0.5f,0.5f);
 }
 
 SVSpriteNode::SVSpriteNode(SVInstPtr _app,f32 _w,f32 _h)

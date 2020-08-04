@@ -19,6 +19,8 @@ virtual SVMtlCorePtr clone() {\
 
 namespace sv {
 
+#define MAX_TEXUNIT 8
+
 //暂时用这个
 
 /* AccumOp */

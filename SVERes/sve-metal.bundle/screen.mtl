@@ -4,11 +4,13 @@
     "shader" : "screen",
     "chn0" : {
         "from" : "file",
-        "path" : "svres/sve.png"
+        "path" : "svres/sve.png",
+        "stage": "fs"
     },
     "chn1" : {
         "from" : "inner",
-        "path" : "SV_MAIN"
+        "path" : "SV_MAIN",
+        "stage": "fs"
     },
     "blend-param" : {
         "enable" : 0,

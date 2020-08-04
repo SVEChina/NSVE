@@ -63,6 +63,9 @@ namespace sv {
         
         //处理shader
         bool processShader(SVRShaderPtr _shader);
+        
+        //处理纹理
+        bool processTexture(SVRTexPtr _tex,s32 _chn,s32 _type);
 
         //处理mesh
         bool processMesh(SVRenderMeshPtr _mesh);

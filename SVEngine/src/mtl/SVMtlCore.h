@@ -13,12 +13,32 @@
 #include "../app/SVInst.h"
 #include "../rendercore/SVRenderDeclare.h"
 #include "SVShaderMgr.h"
-#include "SVMtlParamBase.h"
+
 //
 #include <vector>
 #include <string>
 
 namespace sv {
+
+    //
+    struct TexUnit {
+    public:
+        TexUnit();
+        
+        ~TexUnit();
+        
+        void copy(TexUnit& _texunit);
+        
+        void reset();
+        
+        SVTexturePtr m_pTex;
+        
+        s32 m_stage_type;   //纹理使用阶段类型，0:fs 1:vs
+        
+        s32 m_chn;          //纹理使用的通道
+        
+        SVTEXINID m_texForm;  //纹理来源
+    };
 
     //
     class SVMtlCore : public SVGBaseEx {
@@ -49,14 +69,12 @@ namespace sv {
         virtual void update(f32 dt);
         
         virtual s32 submitMtl();
+
+        void setTexture(s32 _chn,cptr8 _fname);
         
-        virtual void recoverMtl();
-        
-        void setTexture(s32 _chanel,cptr8 _fname);
-        
-        void setTexture(s32 _chanel,SVTexturePtr _texture);
+        void setTexture(s32 _chn,SVTexturePtr _texture);
                
-        void setTexture(s32 _chanel,sv::SVTEXINID _from);
+        void setTexture(s32 _chn,sv::SVTEXINID _from);
         
         SVShaderPtr getShader() { return m_shader_obj; }
         
@@ -146,6 +164,7 @@ namespace sv {
         
     protected:
         virtual void _submitUniform(SVRendererPtr _render);
+        
         virtual void _submitMtl(SVRendererPtr _render);
     };
 
