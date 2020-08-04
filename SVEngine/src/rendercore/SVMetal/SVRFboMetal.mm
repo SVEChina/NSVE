@@ -145,9 +145,7 @@ void SVRFboMetal::resize(s32 _width,s32 _height) {
         m_width = _width;
         m_height = _height;
         //销毁旧的纹理
-        
         //创建新的纹理
-        
     }
 }
 

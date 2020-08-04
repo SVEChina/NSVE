@@ -135,7 +135,7 @@ void SVSpriteNode::update(f32 _dt) {
 
 void SVSpriteNode::render() {
     if ( m_visible && m_pMesh){
-        SVDispatch::dispatchMeshDraw(mApp, m_pMesh, m_mtlID);
+        SVDispatch::dispatchMeshDraw(mApp, m_pMesh, "sprite");
     }
     SVNode::render();
 }

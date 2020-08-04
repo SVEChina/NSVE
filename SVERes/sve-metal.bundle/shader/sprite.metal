@@ -34,6 +34,6 @@ vertex VertexOut vertexShader( Vertex input [[stage_in]] ) {
 //
 fragment FSOutput fragmentShader( VertexOut in [[stage_in]]) {
     FSOutput out;
-    out.frag_data0 = half4(1.0f, 1.0f, 0.0f, 1.0f);
+    out.frag_data0 = half4(0.0f, 1.0f, 1.0f, 1.0f);
     return out;
 }

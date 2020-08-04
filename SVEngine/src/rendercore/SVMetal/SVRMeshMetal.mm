@@ -208,6 +208,6 @@ void SVRMeshMetal::draw(SVRendererPtr _renderer) {
                 [t_rm->m_pCurEncoder drawPrimitives:MTLPrimitiveTypeTriangle vertexStart:m_vertStart vertexCount:m_vertCnt];
             }
         }
-        [t_rm->m_pCurEncoder endEncoding]; // 结束
+        //; // 结束
     }
 }

@@ -82,6 +82,21 @@ void SVDispatch::dispatchMeshDraw(SVInstPtr _app,SVRenderMeshPtr _mesh,s32 _mtlI
 }
 
 //投递rendermesh
+void SVDispatch::dispatchMeshDraw(SVInstPtr _app,SVRenderMeshPtr _mesh,cptr8 _mtlname) {
+    SVRendererPtr t_renderer = _app->getRenderer();
+    if(t_renderer) {
+        //
+        SVMtlCorePtr t_mtl = _app->getMtlLib()->getMtl(_mtlname);
+        if(t_mtl) {
+            SVRCmdNorPtr t_cmd_nor = MakeSharedPtr<SVRCmdNor>();
+            t_cmd_nor->setMesh(_mesh);
+            t_cmd_nor->setMaterial(t_mtl);
+            _app->getRenderMgr()->pushRCmd(t_cmd_nor,E_RSM_SOLID);
+        }
+    }
+}
+
+//投递rendermesh
 void SVDispatch::dispatchMeshDraw(SVInstPtr _app,SVRenderMeshPtr _mesh,s32 _mtlID,SVRTargetPtr _target) {
     SVRendererPtr t_renderer = _app->getRenderer();
     if(t_renderer && _target) {
