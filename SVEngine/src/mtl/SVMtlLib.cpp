@@ -66,7 +66,7 @@ SVMtlCorePtr SVMtlLib::getMtl(cptr8 _mtlname) {
 
 SVMtlCorePtr SVMtlLib::createMtl(cptr8 _mtlname) {
     SVDataChunk t_data;
-    bool t_ret = mApp->m_pFileMgr->loadFileContent(&t_data, _mtlname);
+    bool t_ret = mApp->m_pFileMgr->loadFileContentStr(&t_data, _mtlname);   //解析JSON一定要用这个函数
     if(!t_ret) {
         return nullptr;
     }
