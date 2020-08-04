@@ -1,6 +1,7 @@
 {
     "dspfiles": [
         "shader/nor.dsp",
-        "shader/screen.dsp"
+        "shader/screen.dsp",
+        "shader/sprite.dsp"
     ]
 }

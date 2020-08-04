@@ -127,7 +127,7 @@ void SVSpriteNode::syncTexSize() {
 
 void SVSpriteNode::update(f32 _dt) {
     SVNode::update(_dt);
-    SVMtlCorePtr t_mtl = mApp->getMtlLib()->getMtl(m_mtlID);
+    SVMtlCorePtr t_mtl = mApp->getMtlLib()->getMtl("sprite");
     if(t_mtl) {
         t_mtl->update(_dt);
     }

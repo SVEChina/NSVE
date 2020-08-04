@@ -84,8 +84,6 @@ namespace sv {
         //空闲的材质
         typedef std::vector<s32> EMPTYMTLPOOL;
         EMPTYMTLPOOL m_empty_mtl_ool;
-        
-        SVMtlCorePtr m_pTestMtl;
     };
 
 }//!namespace sv

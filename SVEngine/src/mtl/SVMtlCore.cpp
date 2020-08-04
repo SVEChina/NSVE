@@ -299,18 +299,18 @@ void SVMtlCore::fromJSON1(RAPIDJSON_NAMESPACE::Value &_item){
         return ;
     }
     //texture参数
-    if (_item.HasMember("texture-tbl") && _item["texture-tbl"].IsArray()) {
-        RAPIDJSON_NAMESPACE::Document::Array t_value_array = _item["texture-tbl"].GetArray();
-        for(s32 i=0;i<t_value_array.Size();i++) {
-            RAPIDJSON_NAMESPACE::Document::Object element = t_value_array[i].GetObject();
-            s32 t_param_chan = element["chn"].GetInt();
+    SVString t_chn = "chn";
+    for(s32 i=0;i<8;i++) {
+        t_chn.printf("chn%d",i);
+        if (_item.HasMember(t_chn.c_str()) && _item[t_chn.c_str()].IsObject()) {
+            RAPIDJSON_NAMESPACE::Document::Object element = _item[t_chn.c_str()].GetObject();
             SVString t_param_type = element["from"].GetString();
             SVString t_param_path = element["path"].GetString();
             if(t_param_type == "file") {
-                setTexture(t_param_chan, t_param_path.c_str());
+                setTexture(i, t_param_path.c_str());
             }else if(t_param_type == "inner") {
                 if(t_param_path == "SV_MAIN") {
-                    setTexture(t_param_chan,E_TEX_MAIN);
+                    setTexture(i,E_TEX_MAIN);
                 }
             }
         }

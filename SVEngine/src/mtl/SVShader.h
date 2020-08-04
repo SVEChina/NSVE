@@ -20,6 +20,19 @@ namespace sv {
      * shader描述
     */
     struct ShaderDsp {
+        ShaderDsp() {
+            m_dsp = 0;
+            m_vft = E_VF_BASE;
+            m_programme_fname;
+            m_vs_fname = "null";
+            m_fs_fname = "null";
+            m_gs_fname = "null";
+            m_cs_fname = "null";
+            m_tsc_fname = "null";
+            m_tse_fname = "null";
+            m_attri_formate = "null";
+        };
+        //
         s32 m_dsp;
         VFTYPE m_vft;
         SVString m_programme_fname;

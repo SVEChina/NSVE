@@ -154,17 +154,13 @@ bool SVShader::fromJSON(RAPIDJSON_NAMESPACE::Value &item) {
     }
     //
     if (item.HasMember("tsd") && item["tsd"].IsObject()) {
-        //
         m_shader_dsp.m_dsp |= SV_E_TECH_TSD;
-        //
         RAPIDJSON_NAMESPACE::Document::Object tsd_obj = item["tsd"].GetObject();
         m_shader_dsp.m_tsc_fname = tsd_obj["entry"].GetString();
     }
     //
     if (item.HasMember("tse") && item["tse"].IsObject()) {
-        //
         m_shader_dsp.m_dsp |= SV_E_TECH_TSE;
-        //
         RAPIDJSON_NAMESPACE::Document::Object tse_obj = item["tse"].GetObject();
         m_shader_dsp.m_tse_fname = tse_obj["entry"].GetString();
     }

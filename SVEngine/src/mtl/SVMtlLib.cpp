@@ -15,18 +15,15 @@
 using namespace sv;
 
 SVMtlLib::SVMtlLib(SVInstPtr _app)
-:SVGBaseEx(_app)
-,m_pTestMtl(nullptr){
+:SVGBaseEx(_app){
 }
 
 SVMtlLib::~SVMtlLib() {
 }
 
 void SVMtlLib::init() {
-    m_pTestMtl = createMtl("scene.mtl");
-    if(m_pTestMtl) {
-        m_pTestMtl->reloadShader();
-    }
+    createMtl("scene.mtl");
+    createMtl("sprite.mtl");
 }
 
 void SVMtlLib::destroy() {
@@ -34,7 +31,6 @@ void SVMtlLib::destroy() {
 
 //加载材质库
 void SVMtlLib::loadMtlPack(cptr8 _pack) {
-    
 }
 
 void SVMtlLib::clear() {
@@ -45,7 +41,6 @@ void SVMtlLib::clear() {
     //   //空闲的材质
     //   typedef std::vector<s32> EMPTYMTLPOOL;
     //   EMPTYMTLPOOL m_empty_mtl_ool;
-    //
     MTLPOOL::iterator it = m_mtlPool.begin();
     while ( it!=m_mtlPool.end() ) {
         it++;
@@ -53,11 +48,11 @@ void SVMtlLib::clear() {
 }
 
 SVMtlCorePtr SVMtlLib::getMtl(s32 _mtlID) {
-    return m_pTestMtl;
 //    if(m_mtlpool_run.size()>_mtlID && m_mtlpool_run[_mtlID]) {
 //        return m_mtlpool_run[_mtlID];
 //    }
 //    return nullptr;
+    return nullptr;
 }
 
 SVMtlCorePtr SVMtlLib::getMtl(cptr8 _mtlname) {
