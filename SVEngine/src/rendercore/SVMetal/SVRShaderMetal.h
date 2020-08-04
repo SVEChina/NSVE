@@ -10,6 +10,8 @@
 
 #include "../SVRShader.h"
 #include "SVRenderDeclare.h"
+#include "../../core/SVVertDef.h"
+
 #import <Metal/Metal.h>
 #include <vector>
 
@@ -35,6 +37,8 @@ namespace sv {
         bool active(SVRendererPtr _renderer);
         
     protected:
+        MTLVertexDescriptor* _genVertexDsp(VFTYPE _vf);
+        
         id<MTLFunction> m_vsf;
         id<MTLFunction> m_gsf;
         id<MTLFunction> m_tscf;

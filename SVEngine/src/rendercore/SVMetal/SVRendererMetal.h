@@ -58,12 +58,14 @@ namespace sv {
         /*
         process
         */
-
         //处理材质
-        void processMtl(SVMtlCorePtr _mtl);
+        bool processMtl(SVMtlCorePtr _mtl);
+        
+        //处理shader
+        bool processShader(SVRShaderPtr _shader);
 
         //处理mesh
-        void processMesh(SVRenderMeshPtr _mesh);
+        bool processMesh(SVRenderMeshPtr _mesh);
 
         /*
         draw

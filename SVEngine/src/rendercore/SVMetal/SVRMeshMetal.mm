@@ -54,101 +54,8 @@ void SVRMeshMetal::create(SVRendererPtr _renderer) {
                 m_instance_buf = [t_rm->m_pDevice newBufferWithLength:t_instance_dsp->_bufSize options: MTLResourceStorageModeShared ];
             }
         }
-        //创建buf
         BufferDsp* t_buf_dsp = t_rendermesh->getStreamDsp();
-        //E_BFM_AOS
-        m_bufmode = t_buf_dsp->_bufMode;
         if( t_buf_dsp->_bufMode == E_BFM_AOS ) {
-            m_vert_dsp = [[MTLVertexDescriptor alloc] init];
-            VFTYPE _vf = t_buf_dsp->_bufVertDsp;
-            s32 t_attri_index = 0;
-            s32 t_vert_size = 0;
-            s32 t_off = 0;
-            if (_vf & D_VF_V2) {
-                m_vert_dsp.attributes[t_attri_index].format = MTLVertexFormatFloat2;
-                m_vert_dsp.attributes[t_attri_index].offset = t_off;
-                m_vert_dsp.attributes[t_attri_index].bufferIndex = 0;
-                t_attri_index++;
-                t_vert_size += 2*sizeof(f32);
-                t_off = t_vert_size;
-            }
-            if (_vf & D_VF_V3) {
-                m_vert_dsp.attributes[t_attri_index].format = MTLVertexFormatFloat3;
-                m_vert_dsp.attributes[t_attri_index].offset = t_off;
-                m_vert_dsp.attributes[t_attri_index].bufferIndex = 0;
-                t_attri_index++;
-                t_vert_size += 3*sizeof(f32);
-                t_off = t_vert_size;
-            }
-            if (_vf & D_VF_NOR) {
-                m_vert_dsp.attributes[t_attri_index].format = MTLVertexFormatFloat3;
-                m_vert_dsp.attributes[t_attri_index].offset = t_off;
-                m_vert_dsp.attributes[t_attri_index].bufferIndex = 0;
-                t_attri_index++;
-                t_vert_size += 3*sizeof(f32);
-                t_off = t_vert_size;
-            }
-            if (_vf & D_VF_TAG) {
-                m_vert_dsp.attributes[t_attri_index].format = MTLVertexFormatFloat3;
-                m_vert_dsp.attributes[t_attri_index].offset = t_off;
-                m_vert_dsp.attributes[t_attri_index].bufferIndex = 0;
-                t_attri_index++;
-                t_vert_size += 3*sizeof(f32);
-                t_off = t_vert_size;
-            }
-            if (_vf & D_VF_BTAG) {
-                m_vert_dsp.attributes[t_attri_index].format = MTLVertexFormatFloat3;
-                m_vert_dsp.attributes[t_attri_index].offset = t_off;
-                m_vert_dsp.attributes[t_attri_index].bufferIndex = 0;
-                t_attri_index++;
-                t_vert_size += 3*sizeof(f32);
-                t_off = t_vert_size;
-            }
-            if (_vf & D_VF_C0) {
-                m_vert_dsp.attributes[t_attri_index].format = MTLVertexFormatUChar4;
-                m_vert_dsp.attributes[t_attri_index].offset = t_off;
-                m_vert_dsp.attributes[t_attri_index].bufferIndex = 0;
-                t_attri_index++;
-                t_vert_size += 4*sizeof(u8);
-                t_off = t_vert_size;
-            }
-            if (_vf & D_VF_T0) {
-                m_vert_dsp.attributes[t_attri_index].format = MTLVertexFormatFloat2;
-                m_vert_dsp.attributes[t_attri_index].offset = t_off;
-                m_vert_dsp.attributes[t_attri_index].bufferIndex = 0;
-                t_attri_index++;
-                t_vert_size += 2*sizeof(f32);
-                t_off = t_vert_size;
-            }
-            if (_vf & D_VF_T1) {
-                m_vert_dsp.attributes[t_attri_index].format = MTLVertexFormatFloat2;
-                m_vert_dsp.attributes[t_attri_index].offset = t_off;
-                m_vert_dsp.attributes[t_attri_index].bufferIndex = 0;
-                t_attri_index++;
-                t_vert_size += 2*sizeof(f32);
-                t_off = t_vert_size;
-            }
-            if (_vf & D_VF_BONE) {
-                m_vert_dsp.attributes[t_attri_index].format = MTLVertexFormatUShort4;
-                m_vert_dsp.attributes[t_attri_index].offset = t_off;
-                m_vert_dsp.attributes[t_attri_index].bufferIndex = 0;
-                t_attri_index++;
-                t_vert_size += 4*sizeof(u16);
-                t_off = t_vert_size;
-            }
-            if (_vf & D_VF_BONE_W) {
-                m_vert_dsp.attributes[t_attri_index].format = MTLVertexFormatFloat4;
-                m_vert_dsp.attributes[t_attri_index].offset = t_off;
-                m_vert_dsp.attributes[t_attri_index].bufferIndex = 0;
-                t_attri_index++;
-                t_vert_size += 4*sizeof(f32);
-                t_off = t_vert_size;
-            }
-            // Position Buffer Layout
-            m_vert_dsp.layouts[0].stride = t_vert_size;
-            //stepRate和stepFunction 在inst技术和tess技术中可以被设置
-            m_vert_dsp.layouts[0].stepRate = 1;
-            m_vert_dsp.layouts[0].stepFunction = MTLVertexStepFunctionPerVertex;
             //创建一个buf
             id<MTLBuffer> posBuf = [t_rm->m_pDevice newBufferWithBytes:t_buf_dsp->_bufData->getData()
                                                      length: t_buf_dsp->_bufSize
@@ -156,22 +63,14 @@ void SVRMeshMetal::create(SVRendererPtr _renderer) {
             //单一流
             m_dbufs[0] = posBuf;
             m_streanNum = 1;
-        }else {
+        }else{
             //混合流模式
-            m_vert_dsp = [[MTLVertexDescriptor alloc] init];
             VFTYPE _vf = t_buf_dsp->_bufVertDsp;
             s32 t_attri_index = 0;
             s32 t_vert_size = 0;
             s8* t_pointer = (s8*)(t_buf_dsp->_bufData->getData());
             s32 t_pointer_off = 0;
             if (_vf & D_VF_V2) {
-                m_vert_dsp.attributes[t_attri_index].format = MTLVertexFormatFloat2;
-                m_vert_dsp.attributes[t_attri_index].offset = 0;
-                m_vert_dsp.attributes[t_attri_index].bufferIndex = 0;
-                m_vert_dsp.layouts[t_attri_index].stride = 2*sizeof(f32);
-                m_vert_dsp.layouts[t_attri_index].stepRate = 1;
-                m_vert_dsp.layouts[t_attri_index].stepFunction = MTLVertexStepFunctionPerVertex;
-                //
                 t_vert_size += 2*sizeof(f32)*t_buf_dsp->_vertCnt;
                 m_dbufs[t_attri_index] = [t_rm->m_pDevice newBufferWithBytes:t_pointer + t_pointer_off
                                                          length: t_vert_size
@@ -180,13 +79,6 @@ void SVRMeshMetal::create(SVRendererPtr _renderer) {
                 t_attri_index++;
             }
             if (_vf & D_VF_V3) {
-                m_vert_dsp.attributes[t_attri_index].format = MTLVertexFormatFloat3;
-                m_vert_dsp.attributes[t_attri_index].offset = 0;
-                m_vert_dsp.attributes[t_attri_index].bufferIndex = 0;
-                m_vert_dsp.layouts[t_attri_index].stride = 3*sizeof(f32);
-                m_vert_dsp.layouts[t_attri_index].stepRate = 1;
-                m_vert_dsp.layouts[t_attri_index].stepFunction = MTLVertexStepFunctionPerVertex;
-                //
                 t_vert_size += 3*sizeof(f32)*t_buf_dsp->_vertCnt;
                 m_dbufs[t_attri_index] = [t_rm->m_pDevice newBufferWithBytes:t_pointer + t_pointer_off
                                                          length: t_vert_size
@@ -195,13 +87,6 @@ void SVRMeshMetal::create(SVRendererPtr _renderer) {
                 t_attri_index++;
             }
             if (_vf & D_VF_NOR) {
-                m_vert_dsp.attributes[t_attri_index].format = MTLVertexFormatFloat3;
-                m_vert_dsp.attributes[t_attri_index].offset = 0;
-                m_vert_dsp.attributes[t_attri_index].bufferIndex = 0;
-                m_vert_dsp.layouts[t_attri_index].stride = 3*sizeof(f32);
-                m_vert_dsp.layouts[t_attri_index].stepRate = 1;
-                m_vert_dsp.layouts[t_attri_index].stepFunction = MTLVertexStepFunctionPerVertex;
-                
                 t_vert_size += 3*sizeof(f32)*t_buf_dsp->_vertCnt;
                 m_dbufs[t_attri_index] = [t_rm->m_pDevice newBufferWithBytes:t_pointer + t_pointer_off
                                                          length: t_vert_size
@@ -210,13 +95,6 @@ void SVRMeshMetal::create(SVRendererPtr _renderer) {
                 t_attri_index++;
             }
             if (_vf & D_VF_TAG) {
-                m_vert_dsp.attributes[t_attri_index].format = MTLVertexFormatFloat3;
-                m_vert_dsp.attributes[t_attri_index].offset = 0;
-                m_vert_dsp.attributes[t_attri_index].bufferIndex = 0;
-                m_vert_dsp.layouts[t_attri_index].stride = 3*sizeof(f32);
-                m_vert_dsp.layouts[t_attri_index].stepRate = 1;
-                m_vert_dsp.layouts[t_attri_index].stepFunction = MTLVertexStepFunctionPerVertex;
-                //
                 t_vert_size += 3*sizeof(f32)*t_buf_dsp->_vertCnt;
                 m_dbufs[t_attri_index] = [t_rm->m_pDevice newBufferWithBytes:t_pointer + t_pointer_off
                                                          length: t_vert_size
@@ -225,14 +103,6 @@ void SVRMeshMetal::create(SVRendererPtr _renderer) {
                 t_attri_index++;
             }
             if (_vf & D_VF_BTAG) {
-                m_vert_dsp.attributes[t_attri_index].format = MTLVertexFormatFloat3;
-                m_vert_dsp.attributes[t_attri_index].offset = 0;
-                m_vert_dsp.attributes[t_attri_index].bufferIndex = 0;
-                //
-                m_vert_dsp.layouts[t_attri_index].stride = 3*sizeof(f32);
-                m_vert_dsp.layouts[t_attri_index].stepRate = 1;
-                m_vert_dsp.layouts[t_attri_index].stepFunction = MTLVertexStepFunctionPerVertex;
-                //
                 t_vert_size += 3*sizeof(f32)*t_buf_dsp->_vertCnt;
                 m_dbufs[t_attri_index] = [t_rm->m_pDevice newBufferWithBytes:t_pointer + t_pointer_off
                                                          length: t_vert_size
@@ -241,13 +111,6 @@ void SVRMeshMetal::create(SVRendererPtr _renderer) {
                 t_attri_index++;
             }
             if (_vf & D_VF_C0) {
-                m_vert_dsp.attributes[t_attri_index].format = MTLVertexFormatUChar4;
-                m_vert_dsp.attributes[t_attri_index].offset = 0;
-                m_vert_dsp.attributes[t_attri_index].bufferIndex = 0;
-                m_vert_dsp.layouts[t_attri_index].stride = 4*sizeof(u8);
-                m_vert_dsp.layouts[t_attri_index].stepRate = 1;
-                m_vert_dsp.layouts[t_attri_index].stepFunction = MTLVertexStepFunctionPerVertex;
-                //
                 t_vert_size += 4*sizeof(u8)*t_buf_dsp->_vertCnt;
                 m_dbufs[t_attri_index] = [t_rm->m_pDevice newBufferWithBytes:t_pointer + t_pointer_off
                                                          length: t_vert_size
@@ -256,13 +119,6 @@ void SVRMeshMetal::create(SVRendererPtr _renderer) {
                 t_attri_index++;
             }
             if (_vf & D_VF_T0) {
-                m_vert_dsp.attributes[t_attri_index].format = MTLVertexFormatFloat2;
-                m_vert_dsp.attributes[t_attri_index].offset = 0;
-                m_vert_dsp.attributes[t_attri_index].bufferIndex = 0;
-                m_vert_dsp.layouts[t_attri_index].stride = 2*sizeof(f32);
-                m_vert_dsp.layouts[t_attri_index].stepRate = 1;
-                m_vert_dsp.layouts[t_attri_index].stepFunction = MTLVertexStepFunctionPerVertex;
-                //
                 t_vert_size += 2*sizeof(f32)*t_buf_dsp->_vertCnt;
                 m_dbufs[t_attri_index] = [t_rm->m_pDevice newBufferWithBytes:t_pointer + t_pointer_off
                                                          length: t_vert_size
@@ -271,13 +127,6 @@ void SVRMeshMetal::create(SVRendererPtr _renderer) {
                 t_attri_index++;
             }
             if (_vf & D_VF_T1) {
-                m_vert_dsp.attributes[t_attri_index].format = MTLVertexFormatFloat2;
-                m_vert_dsp.attributes[t_attri_index].offset = 0;
-                m_vert_dsp.attributes[t_attri_index].bufferIndex = 0;
-                m_vert_dsp.layouts[t_attri_index].stride = 2*sizeof(f32);
-                m_vert_dsp.layouts[t_attri_index].stepRate = 1;
-                m_vert_dsp.layouts[t_attri_index].stepFunction = MTLVertexStepFunctionPerVertex;
-                //
                 t_vert_size += 2*sizeof(f32)*t_buf_dsp->_vertCnt;
                 m_dbufs[t_attri_index] = [t_rm->m_pDevice newBufferWithBytes:t_pointer + t_pointer_off
                                                          length: t_vert_size
@@ -286,13 +135,6 @@ void SVRMeshMetal::create(SVRendererPtr _renderer) {
                 t_attri_index++;
             }
             if (_vf & D_VF_BONE) {
-                m_vert_dsp.attributes[t_attri_index].format = MTLVertexFormatUShort4;
-                m_vert_dsp.attributes[t_attri_index].offset = 0;
-                m_vert_dsp.attributes[t_attri_index].bufferIndex = 0;
-                m_vert_dsp.layouts[t_attri_index].stride = 4*sizeof(u16);
-                m_vert_dsp.layouts[t_attri_index].stepRate = 1;
-                m_vert_dsp.layouts[t_attri_index].stepFunction = MTLVertexStepFunctionPerVertex;
-                //
                 t_vert_size += 4*sizeof(u16)*t_buf_dsp->_vertCnt;
                 m_dbufs[t_attri_index] = [t_rm->m_pDevice newBufferWithBytes:t_pointer + t_pointer_off
                                                          length: t_vert_size
@@ -301,13 +143,6 @@ void SVRMeshMetal::create(SVRendererPtr _renderer) {
                 t_attri_index++;
             }
             if (_vf & D_VF_BONE_W) {
-                m_vert_dsp.attributes[t_attri_index].format = MTLVertexFormatFloat4;
-                m_vert_dsp.attributes[t_attri_index].offset = 0;
-                m_vert_dsp.attributes[t_attri_index].bufferIndex = 0;
-                m_vert_dsp.layouts[t_attri_index].stride = 4*sizeof(f32);
-                m_vert_dsp.layouts[t_attri_index].stepRate = 1;
-                m_vert_dsp.layouts[t_attri_index].stepFunction = MTLVertexStepFunctionPerVertex;
-                //
                 t_vert_size += 4*sizeof(f32)*t_buf_dsp->_vertCnt;
                 m_dbufs[t_attri_index] = [t_rm->m_pDevice newBufferWithBytes:t_pointer + t_pointer_off
                                                          length: t_vert_size
@@ -317,8 +152,8 @@ void SVRMeshMetal::create(SVRendererPtr _renderer) {
             }
             m_streanNum = t_attri_index;
         }
-        m_exist = true;
     }
+    m_exist = true;
 }
 
 void SVRMeshMetal::destroy(SVRendererPtr _renderer) {

@@ -24,6 +24,9 @@ SVMtlLib::~SVMtlLib() {
 
 void SVMtlLib::init() {
     m_pTestMtl = createMtl("scene.mtl");
+    if(m_pTestMtl) {
+        m_pTestMtl->reloadShader();
+    }
 }
 
 void SVMtlLib::destroy() {
@@ -67,7 +70,6 @@ SVMtlCorePtr SVMtlLib::getMtl(cptr8 _mtlname) {
 }
 
 SVMtlCorePtr SVMtlLib::createMtl(cptr8 _mtlname) {
-    //SVDataChunk *_datachunk
     SVDataChunk t_data;
     bool t_ret = mApp->m_pFileMgr->loadFileContent(&t_data, _mtlname);
     if(!t_ret) {

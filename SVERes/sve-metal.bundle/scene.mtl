@@ -10,11 +10,9 @@
         "src" : "SVE_ONE",
         "dst" : "SVE_ZERO"
     },
-
     "stencil-param" : {
         "enable" : 0
     },
-
     "alpha-param" : {
         "enable" : 0
     }

@@ -46,10 +46,10 @@ namespace sv {
         
         //处理部分
         //处理材质
-        void processMtl(SVMtlCorePtr _mtl);
+        bool processMtl(SVMtlCorePtr _mtl);
        
         //处理mesh
-        void processMesh(SVRenderMeshPtr _mesh);
+        bool processMesh(SVRenderMeshPtr _mesh);
         
         void drawMesh(SVRenderMeshPtr _mesh);
         

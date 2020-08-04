@@ -113,33 +113,45 @@ SVRFboPtr SVRendererMetal::createResFbo()  {
 }
 
 //处理材质
-void SVRendererMetal::processMtl(SVMtlCorePtr _mtl) {
+bool SVRendererMetal::processMtl(SVMtlCorePtr _mtl) {
     if(!m_pCurEncoder)
-        return ;
+        return false;
     if(_mtl && _mtl->getShader() ) {
         bool t_ret = _mtl->getShader()->active();
         if(t_ret) {
-            SVRShaderMetalPtr t_shader_metal = std::dynamic_pointer_cast<SVRShaderMetal>(_mtl->getShader());
-            if(t_shader_metal->m_vs_ubuf) {
-                [m_pCurEncoder setVertexBuffer:t_shader_metal->m_vs_ubuf offset:0 atIndex:0];
-            }
-            if(t_shader_metal->m_fs_ubuf) {
-                [m_pCurEncoder setFragmentBuffer:t_shader_metal->m_fs_ubuf offset:0 atIndex:0];
-            }
-            if(t_shader_metal->m_gs_ubuf) {
-                //[m_pCurEncoder setVertexBuffer:m_dbufs[i] offset:0 atIndex:i];
-            }
+            processShader( _mtl->getShader()->getResShader() );
+            return t_ret;
         }
     }
+    return false;
+}
+
+bool SVRendererMetal::processShader(SVRShaderPtr _shader) {
+    SVRShaderMetalPtr t_shader_metal = std::dynamic_pointer_cast<SVRShaderMetal>(_shader);
+    if(t_shader_metal) {
+        //传递uniform buffer
+        if(t_shader_metal->m_vs_ubuf) {
+            [m_pCurEncoder setVertexBuffer:t_shader_metal->m_vs_ubuf offset:0 atIndex:0];
+        }
+        if(t_shader_metal->m_fs_ubuf) {
+            [m_pCurEncoder setFragmentBuffer:t_shader_metal->m_fs_ubuf offset:0 atIndex:0];
+        }
+        if(t_shader_metal->m_gs_ubuf) {
+            //[m_pCurEncoder setVertexBuffer:m_dbufs[i] offset:0 atIndex:i];
+        }
+    }
+    return true;
 }
 
 //处理mesh
-void SVRendererMetal::processMesh(SVRenderMeshPtr _mesh) {
+bool SVRendererMetal::processMesh(SVRenderMeshPtr _mesh) {
     if(!m_pCurEncoder)
-        return ;
+        return false;
     if(_mesh->getResBuffer()) {
         _mesh->getResBuffer()->process( share() );
+        return true;
     }
+    return false;
 }
 
 void SVRendererMetal::drawMesh(SVRenderMeshPtr _mesh) {

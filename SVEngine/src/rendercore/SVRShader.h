@@ -10,6 +10,7 @@
 
 #include "SVRRes.h"
 #include "../base/SVPreDeclare.h"
+#include "../core/SVVertDef.h"
 
 /*
   GL DEF 暂时先放这里
@@ -94,6 +95,9 @@ namespace sv {
         virtual void destroy(SVRendererPtr _renderer){}
 
         virtual bool active(SVRendererPtr _render){ return false; }
+        
+    protected:
+        VFTYPE m_vft;
     };
         
 }//!namespace sv

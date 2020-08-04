@@ -169,14 +169,14 @@ void SVRFboMetal::bind(SVRendererPtr _renderer) {
             }
         }
         //支持深度
-        if(m_pDepthTex) {
+        if(m_pDepthTex && false) {
             m_passDsp.depthAttachment.texture = m_pDepthTex;
             m_passDsp.depthAttachment.loadAction = MTLLoadActionClear;
             m_passDsp.depthAttachment.storeAction = MTLStoreActionDontCare;
             m_passDsp.depthAttachment.clearDepth = 1.0;
         }
         //支持模版
-        if(m_pStencilTex) {
+        if(m_pStencilTex && false) {
             m_passDsp.stencilAttachment.texture = m_pStencilTex;
             m_passDsp.stencilAttachment.loadAction = MTLLoadActionClear;
             m_passDsp.stencilAttachment.storeAction = MTLStoreActionDontCare;

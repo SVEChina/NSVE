@@ -9,6 +9,8 @@
 #define SV_VERTDEF_H
 
 #include "../base/SVObject.h"
+#include <map>
+#include <string>
 
 typedef struct V2 {
     f32 x;
@@ -336,6 +338,47 @@ enum VFTYPE {
     E_VF_V3_N_T_T0 = D_VF_V3 | D_VF_NOR | D_VF_TAG | D_VF_T0,
     E_VF_V3_PARTICLE = D_VF_PARTICLE
 };
+
+//
+static std::map<std::string,VFTYPE> g_vf_name;
+
+class SVVertDef {
+public:
+    SVVertDef() {
+        g_vf_name.insert(std::make_pair("E_VF_INDEX",E_VF_INDEX));
+        g_vf_name.insert(std::make_pair("E_VF_V2",E_VF_V2));
+        g_vf_name.insert(std::make_pair("E_VF_V2_T0",E_VF_V2_T0));
+        g_vf_name.insert(std::make_pair("E_VF_V2_T0_T1",E_VF_V2_T0_T1));
+        g_vf_name.insert(std::make_pair("E_VF_V2_T0_T1_T2",E_VF_V2_T0_T1_T2));
+        g_vf_name.insert(std::make_pair("E_VF_V2_C",E_VF_V2_C));
+        g_vf_name.insert(std::make_pair("E_VF_V2_C_T0",E_VF_V2_C_T0));
+        g_vf_name.insert(std::make_pair("E_VF_V2_C_T0_T1",E_VF_V2_C_T0_T1));
+        g_vf_name.insert(std::make_pair("E_VF_V3",E_VF_V3));
+        g_vf_name.insert(std::make_pair("E_VF_V3_T0",E_VF_V3_T0));
+        g_vf_name.insert(std::make_pair("E_VF_V3_T0_T1",E_VF_V3_T0_T1));
+        g_vf_name.insert(std::make_pair("E_VF_V3_N",E_VF_V3_N));
+        g_vf_name.insert(std::make_pair("E_VF_V3_N_T0",E_VF_V3_N_T0));
+        g_vf_name.insert(std::make_pair("E_VF_V3_N_T0_T1",E_VF_V3_N_T0_T1));
+        g_vf_name.insert(std::make_pair("E_VF_V3_C",E_VF_V3_C));
+        g_vf_name.insert(std::make_pair("E_VF_V3_N_C_T0",E_VF_V3_N_C_T0));
+        g_vf_name.insert(std::make_pair("E_VF_V3_N_C_T0_T1",E_VF_V3_N_C_T0_T1));
+        g_vf_name.insert(std::make_pair("E_VF_V3_N_T0_BONE_W",E_VF_V3_N_T0_BONE_W));
+        g_vf_name.insert(std::make_pair("E_VF_V3_N_C_T0_BONE_W",E_VF_V3_N_C_T0_BONE_W));
+        g_vf_name.insert(std::make_pair("E_VF_V3_C_BTAG",E_VF_V3_C_BTAG));
+        g_vf_name.insert(std::make_pair("E_VF_V3_N_T_T0",E_VF_V3_N_T_T0));
+        g_vf_name.insert(std::make_pair("E_VF_V3_PARTICLE",E_VF_V3_PARTICLE));
+    }
+    
+    ~SVVertDef() {
+        clear();
+    }
+    
+    void clear() {
+        g_vf_name.clear();
+    }
+};
+static SVVertDef g_vert_def;
+
 
 //
 enum BUFFERMODE {

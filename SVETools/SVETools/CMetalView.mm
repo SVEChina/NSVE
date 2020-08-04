@@ -32,7 +32,7 @@
         //创建metal环境
         metalLayer = [CAMetalLayer layer];
         metalLayer.device = self.mDevice;
-        metalLayer.pixelFormat = MTLPixelFormatBGRA8Unorm;
+        metalLayer.pixelFormat = MTLPixelFormatBGRA8Unorm;  //MTLPixelFormatBGRA8Unorm_sRGB
         metalLayer.frame = frameRect;
         [self buildMetal];
     }

@@ -9,6 +9,7 @@
 #include "../rendercore/SVRShader.h"
 #include "../app/SVInst.h"
 #include "../base/SVParamTbl.h"
+#include "../core/SVVertDef.h"
 
 using namespace sv;
 
@@ -57,31 +58,36 @@ bool SVShader::toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator,
 
 bool SVShader::fromJSON(RAPIDJSON_NAMESPACE::Value &item) {
     assert(item.IsObject());
-    SVString t_shader_name = "";
-    SVString t_file_name = "";
     if (item.HasMember("file") && item["file"].IsString()) {
-        t_shader_name = item["file"].GetString();
-        t_file_name = SVString("shader/") + t_shader_name + ".metal";
+        m_shader_dsp.m_programme_fname = item["file"].GetString();
+    }else{
+        return false;
     }
-    //
-    m_shader_dsp.m_programme_fname = t_file_name;
     //解析vs
     if (item.HasMember("vs") && item["vs"].IsObject() ) {
         //
         m_shader_dsp.m_dsp |= SV_E_TECH_VS;
         //
         RAPIDJSON_NAMESPACE::Document::Object vs_obj = item["vs"].GetObject();
+        if( vs_obj.HasMember("formate")  && vs_obj["formate"].IsString() ) {
+            SVString t_formate = vs_obj["formate"].GetString();
+            std::string tt = t_formate.c_str();
+            std::map<std::string,VFTYPE>::iterator it = g_vf_name.find(tt);
+            if(it!=g_vf_name.end()) {
+                m_shader_dsp.m_vft = it->second;
+            }else{
+                 m_shader_dsp.m_vft = E_VF_V2;
+            }
+        }else{
+            m_shader_dsp.m_vft = E_VF_V2;
+        }
         m_shader_dsp.m_vs_fname = vs_obj["entry"].GetString();
         //采样器
         if( vs_obj.HasMember("sampler")  && vs_obj["sampler"].IsArray() ) {
             RAPIDJSON_NAMESPACE::Document::Array t_sampler = vs_obj["sampler"].GetArray();
             for(s32 i=0;i<t_sampler.Size();i++) {
                 SamplerDsp t_sampler_dsp;
-                t_sampler_dsp.m_chn = t_sampler[i]["chn"].GetInt();
-                t_sampler_dsp.m_warps = t_sampler[i]["warps"].GetString();
-                t_sampler_dsp.m_warpt = t_sampler[i]["warpt"].GetString();
-                t_sampler_dsp.m_min = t_sampler[i]["min"].GetString();
-                t_sampler_dsp.m_mag = t_sampler[i]["mag"].GetString();
+                SamplerDspFromJson(t_sampler[i],t_sampler_dsp);
                 m_vs_sampler.push_back(t_sampler_dsp);
             }
         }
@@ -112,11 +118,7 @@ bool SVShader::fromJSON(RAPIDJSON_NAMESPACE::Value &item) {
             RAPIDJSON_NAMESPACE::Document::Array t_sampler = fs_obj["sampler"].GetArray();
             for(s32 i=0;i<t_sampler.Size();i++) {
                 SamplerDsp t_sampler_dsp;
-                t_sampler_dsp.m_chn = t_sampler[i]["chn"].GetInt();
-                t_sampler_dsp.m_warps = t_sampler[i]["warps"].GetString();
-                t_sampler_dsp.m_warpt = t_sampler[i]["warpt"].GetString();
-                t_sampler_dsp.m_min = t_sampler[i]["min"].GetString();
-                t_sampler_dsp.m_mag = t_sampler[i]["mag"].GetString();
+                SamplerDspFromJson(t_sampler[i],t_sampler_dsp);
                 m_fs_sampler.push_back(t_sampler_dsp);
             }
         }
@@ -167,4 +169,18 @@ bool SVShader::fromJSON(RAPIDJSON_NAMESPACE::Value &item) {
         m_shader_dsp.m_tse_fname = tse_obj["entry"].GetString();
     }
     return true;
+}
+
+/**
+ static function
+ */
+
+void SVShader::SamplerDspFromJson(RAPIDJSON_NAMESPACE::Value &item,SamplerDsp& _dsp) {
+    if( item.IsObject() ) {
+        _dsp.m_chn = item["chn"].GetInt();
+        _dsp.m_warps = item["warp-s"].GetString();
+        _dsp.m_warpt = item["warp-t"].GetString();
+        _dsp.m_min = item["min"].GetString();
+        _dsp.m_mag = item["mag"].GetString();
+    }
 }

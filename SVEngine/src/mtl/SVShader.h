@@ -10,6 +10,7 @@
 
 #include "../base/SVGBase.h"
 #include "../rendercore/SVRenderDeclare.h"
+#include "../core/SVVertDef.h"
 #include <string>
 #include <vector>
 
@@ -20,6 +21,7 @@ namespace sv {
     */
     struct ShaderDsp {
         s32 m_dsp;
+        VFTYPE m_vft;
         SVString m_programme_fname;
         SVString m_vs_fname;
         SVString m_fs_fname;
@@ -34,11 +36,13 @@ namespace sv {
      * 采样描述
      */
     struct SamplerDsp {
+        //
         s32 m_chn;
         SVString m_warps;
         SVString m_warpt;
         SVString m_min;
         SVString m_mag;
+        //
     };
 
     /*
@@ -77,6 +81,9 @@ namespace sv {
         
     protected:
         SVRShaderPtr m_res_shader;
+        
+    public:
+        static void SamplerDspFromJson(RAPIDJSON_NAMESPACE::Value &item,SamplerDsp& _dsp);
     };
 
 }//!namespace sv

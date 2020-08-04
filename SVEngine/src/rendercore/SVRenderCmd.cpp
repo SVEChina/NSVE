@@ -56,8 +56,15 @@ void SVRCmdNor::setMaterial(SVMtlCorePtr _mtl){
 
 void SVRCmdNor::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
     if ( _renderer && _target && m_pMtl && m_pMesh ) {
-        _renderer->processMesh(m_pMesh);
-        _renderer->processMtl(m_pMtl);
+        bool t_ret = false;
+        t_ret = _renderer->processMesh(m_pMesh);
+        if(!t_ret){
+            return ;
+        }
+        t_ret =_renderer->processMtl(m_pMtl);
+        if(!t_ret){
+            return ;
+        }
         _renderer->drawMesh(m_pMesh);
     }
 }

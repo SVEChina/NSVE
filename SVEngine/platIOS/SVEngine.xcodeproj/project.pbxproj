@@ -3311,10 +3311,6 @@
 		5F7D611B215F407700803BCF /* SVGeoGen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F7D5DAC215F407700803BCF /* SVGeoGen.cpp */; };
 		5F7D611C215F407700803BCF /* SVGeoGen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F7D5DAC215F407700803BCF /* SVGeoGen.cpp */; };
 		5F7D611D215F407700803BCF /* SVGeoGen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F7D5DAC215F407700803BCF /* SVGeoGen.cpp */; };
-		5F7D611E215F407700803BCF /* SVVertDef.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F7D5DAD215F407700803BCF /* SVVertDef.cpp */; };
-		5F7D611F215F407700803BCF /* SVVertDef.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F7D5DAD215F407700803BCF /* SVVertDef.cpp */; };
-		5F7D6120215F407700803BCF /* SVVertDef.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F7D5DAD215F407700803BCF /* SVVertDef.cpp */; };
-		5F7D6121215F407700803BCF /* SVVertDef.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F7D5DAD215F407700803BCF /* SVVertDef.cpp */; };
 		5F7D6122215F407700803BCF /* SVSpine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F7D5DAE215F407700803BCF /* SVSpine.cpp */; };
 		5F7D6123215F407700803BCF /* SVSpine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F7D5DAE215F407700803BCF /* SVSpine.cpp */; };
 		5F7D6124215F407700803BCF /* SVSpine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F7D5DAE215F407700803BCF /* SVSpine.cpp */; };
@@ -6329,7 +6325,6 @@
 		5F7D5DAA215F407700803BCF /* SVPass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPass.h; sourceTree = "<group>"; };
 		5F7D5DAB215F407700803BCF /* SVMathHelper.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVMathHelper.cpp; sourceTree = "<group>"; };
 		5F7D5DAC215F407700803BCF /* SVGeoGen.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVGeoGen.cpp; sourceTree = "<group>"; };
-		5F7D5DAD215F407700803BCF /* SVVertDef.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVVertDef.cpp; sourceTree = "<group>"; };
 		5F7D5DAE215F407700803BCF /* SVSpine.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVSpine.cpp; sourceTree = "<group>"; };
 		5F7D5DAF215F407700803BCF /* SVSpineObjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVSpineObjc.h; sourceTree = "<group>"; };
 		5F7D5DB0215F407700803BCF /* SVModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVModel.h; sourceTree = "<group>"; };
@@ -8046,7 +8041,6 @@
 				5F7D5DAF215F407700803BCF /* SVSpineObjc.h */,
 				0288F9F8217896AC0089E61C /* SVUnicode.cpp */,
 				0288F9F7217896AC0089E61C /* SVUnicode.h */,
-				5F7D5DAD215F407700803BCF /* SVVertDef.cpp */,
 				5F7D5DB7215F407700803BCF /* SVVertDef.h */,
 			);
 			path = core;
@@ -12632,7 +12626,6 @@
 				5F7D692F215F407900803BCF /* SVDataSwap.cpp in Sources */,
 				5F7D656F215F407800803BCF /* SVRenderCmdGeo.cpp in Sources */,
 				5F44287B21848CBC00AF4A5B /* SVFrameOutRead.cpp in Sources */,
-				5F7D6121215F407700803BCF /* SVVertDef.cpp in Sources */,
 				020C44CF22DC5DCC00201753 /* btGjkEpa2.cpp in Sources */,
 				5F7D653B215F407800803BCF /* SVOpBase.cpp in Sources */,
 				5F7D64C9215F407800803BCF /* SVTimeLineEvent.cpp in Sources */,
@@ -13104,7 +13097,6 @@
 				020C44F822DC5DCC00201753 /* btSubSimplexConvexCast.cpp in Sources */,
 				020C45EE22DC5DCD00201753 /* btCollisionObject.cpp in Sources */,
 				5F8E68BF236FF736003FE1E0 /* SVFrameAniNode.cpp in Sources */,
-				5F7D611E215F407700803BCF /* SVVertDef.cpp in Sources */,
 				5F7D60F6215F407700803BCF /* SVModel.cpp in Sources */,
 				020C48CA22DC5DCF00201753 /* btMultiBodyJointLimitConstraint.cpp in Sources */,
 				020C443022DC5DCC00201753 /* MultiBodyTree.cpp in Sources */,
@@ -13801,7 +13793,6 @@
 				5F7D692E215F407900803BCF /* SVDataSwap.cpp in Sources */,
 				5F7D656E215F407800803BCF /* SVRenderCmdGeo.cpp in Sources */,
 				5F44287A21848CBC00AF4A5B /* SVFrameOutRead.cpp in Sources */,
-				5F7D6120215F407700803BCF /* SVVertDef.cpp in Sources */,
 				020C44CE22DC5DCC00201753 /* btGjkEpa2.cpp in Sources */,
 				5F7D653A215F407800803BCF /* SVOpBase.cpp in Sources */,
 				5F7D64C8215F407800803BCF /* SVTimeLineEvent.cpp in Sources */,
@@ -14384,7 +14375,6 @@
 				5F7D692D215F407900803BCF /* SVDataSwap.cpp in Sources */,
 				5F7D656D215F407800803BCF /* SVRenderCmdGeo.cpp in Sources */,
 				5F44287921848CBC00AF4A5B /* SVFrameOutRead.cpp in Sources */,
-				5F7D611F215F407700803BCF /* SVVertDef.cpp in Sources */,
 				020C44CD22DC5DCC00201753 /* btGjkEpa2.cpp in Sources */,
 				5F7D6539215F407800803BCF /* SVOpBase.cpp in Sources */,
 				5F7D64C7215F407800803BCF /* SVTimeLineEvent.cpp in Sources */,

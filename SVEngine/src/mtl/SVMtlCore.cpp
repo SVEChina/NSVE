@@ -150,10 +150,15 @@ void SVMtlCore::setTextureParam(s32 _chanel,TEXTUREPARAM _type,s32 _value) {
 
 //逻辑更新
 void SVMtlCore::update(f32 dt) {
+    //更新shader
     reloadShader();
+    //更新surface
+    
 }
 
 void SVMtlCore::reloadShader(){
+    if(m_shader_obj)
+        return ;
     if(mApp->getShaderMgr()) {
         m_shader_obj = mApp->getShaderMgr()->getShader(m_shader_name.c_str());
     }
@@ -205,61 +210,6 @@ void SVMtlCore::swap() {
 
 void SVMtlCore::_submitUniform(SVRendererPtr _render) {
 }
-
-//void SVMtlCore::_submitState(SVRendererPtr _render) {
-////    //更新纹理
-////    if((m_LogicMtlFlag0&MTL_F0_TEX0)>0){
-////        _render->submitTex(0, m_paramTex.m_texUnit[0]);
-////    }
-////    if((m_LogicMtlFlag0&MTL_F0_TEX1)>0){
-////        _render->submitTex(1, m_paramTex.m_texUnit[1]);
-////    }
-////    if((m_LogicMtlFlag0&MTL_F0_TEX2)>0){
-////        _render->submitTex(2, m_paramTex.m_texUnit[2]);
-////    }
-////    if((m_LogicMtlFlag0&MTL_F0_TEX3)>0){
-////        _render->submitTex(3, m_paramTex.m_texUnit[3]);
-////    }
-////    if((m_LogicMtlFlag0&MTL_F0_TEX4)>0){
-////        _render->submitTex(4, m_paramTex.m_texUnit[4]);
-////    }
-////    if((m_LogicMtlFlag0&MTL_F0_TEX5)>0){
-////        _render->submitTex(5, m_paramTex.m_texUnit[5]);
-////    }
-////    if((m_LogicMtlFlag0&MTL_F0_TEX6)>0){
-////        _render->submitTex(6, m_paramTex.m_texUnit[6]);
-////    }
-////    if((m_LogicMtlFlag0&MTL_F0_TEX7)>0){
-////        _render->submitTex(7, m_paramTex.m_texUnit[7]);
-////    }
-////    //
-////    if((m_LogicMtlFlag0&MTL_F0_LINE_SIZE)>0){
-////        //_render->submitLineWidth(m_LogicParamSize.m_linewidth);
-////    }
-////    //融合
-////    if((m_LogicMtlFlag0&MTL_F0_BLEND)>0){
-////        //_render->submitBlend(m_LogicParamBlend);
-////    }
-////    //隐藏面消除
-////    if((m_LogicMtlFlag0&MTL_F0_CULL)>0){
-////        //_render->submitCull(m_LogicParamCull);
-////    }
-////    //模板测试
-////    if((m_LogicMtlFlag0&MTL_F0_STENCIL)>0){
-////    }
-////    //alpha测试
-////    if((m_LogicMtlFlag0&MTL_F0_ALPHA)>0){
-////    }
-////    //深度测试
-////    if((m_LogicMtlFlag0&MTL_F0_DEPTH)>0){
-////    }
-////    //Z冲突
-////    if((m_LogicMtlFlag0&MTL_F0_ZOFF)>0){
-////        //_render->submitZOff(m_LogicParamZOff);
-////    }else{
-////        //_render->submitZOff(m_LogicParamZOff);
-////    }
-//}
 
 void SVMtlCore::_submitMtl(SVRendererPtr _render) {
     
@@ -388,3 +338,59 @@ void SVMtlCore::fromJSON1(RAPIDJSON_NAMESPACE::Value &_item){
 void SVMtlCore::toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator,
                        RAPIDJSON_NAMESPACE::Value &_objValue){
 }
+
+
+//void SVMtlCore::_submitState(SVRendererPtr _render) {
+////    //更新纹理
+////    if((m_LogicMtlFlag0&MTL_F0_TEX0)>0){
+////        _render->submitTex(0, m_paramTex.m_texUnit[0]);
+////    }
+////    if((m_LogicMtlFlag0&MTL_F0_TEX1)>0){
+////        _render->submitTex(1, m_paramTex.m_texUnit[1]);
+////    }
+////    if((m_LogicMtlFlag0&MTL_F0_TEX2)>0){
+////        _render->submitTex(2, m_paramTex.m_texUnit[2]);
+////    }
+////    if((m_LogicMtlFlag0&MTL_F0_TEX3)>0){
+////        _render->submitTex(3, m_paramTex.m_texUnit[3]);
+////    }
+////    if((m_LogicMtlFlag0&MTL_F0_TEX4)>0){
+////        _render->submitTex(4, m_paramTex.m_texUnit[4]);
+////    }
+////    if((m_LogicMtlFlag0&MTL_F0_TEX5)>0){
+////        _render->submitTex(5, m_paramTex.m_texUnit[5]);
+////    }
+////    if((m_LogicMtlFlag0&MTL_F0_TEX6)>0){
+////        _render->submitTex(6, m_paramTex.m_texUnit[6]);
+////    }
+////    if((m_LogicMtlFlag0&MTL_F0_TEX7)>0){
+////        _render->submitTex(7, m_paramTex.m_texUnit[7]);
+////    }
+////    //
+////    if((m_LogicMtlFlag0&MTL_F0_LINE_SIZE)>0){
+////        //_render->submitLineWidth(m_LogicParamSize.m_linewidth);
+////    }
+////    //融合
+////    if((m_LogicMtlFlag0&MTL_F0_BLEND)>0){
+////        //_render->submitBlend(m_LogicParamBlend);
+////    }
+////    //隐藏面消除
+////    if((m_LogicMtlFlag0&MTL_F0_CULL)>0){
+////        //_render->submitCull(m_LogicParamCull);
+////    }
+////    //模板测试
+////    if((m_LogicMtlFlag0&MTL_F0_STENCIL)>0){
+////    }
+////    //alpha测试
+////    if((m_LogicMtlFlag0&MTL_F0_ALPHA)>0){
+////    }
+////    //深度测试
+////    if((m_LogicMtlFlag0&MTL_F0_DEPTH)>0){
+////    }
+////    //Z冲突
+////    if((m_LogicMtlFlag0&MTL_F0_ZOFF)>0){
+////        //_render->submitZOff(m_LogicParamZOff);
+////    }else{
+////        //_render->submitZOff(m_LogicParamZOff);
+////    }
+//}

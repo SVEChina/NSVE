@@ -92,7 +92,7 @@ SVRFboPtr SVRendererGL::createResFbo() {
 }
 
 //处理材质
-void SVRendererGL::processMtl(SVMtlCorePtr _mtl) {
+bool SVRendererGL::processMtl(SVMtlCorePtr _mtl) {
     if(_mtl && _mtl->getShader() ) {
         bool t_ret = _mtl->getShader()->active();
         if(t_ret) {
@@ -121,14 +121,18 @@ void SVRendererGL::processMtl(SVMtlCorePtr _mtl) {
             
             //depth
         }
+        return true;
     }
+    return false;
 }
 
 //处理mesh
-void SVRendererGL::processMesh(SVRenderMeshPtr _mesh) {
+bool SVRendererGL::processMesh(SVRenderMeshPtr _mesh) {
     if(_mesh && _mesh->getResBuffer() ) {
         _mesh->getResBuffer()->process( share() );
+        return true;
     }
+    return false;
 }
 
 //处理mesh

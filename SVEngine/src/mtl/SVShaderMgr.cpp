@@ -36,6 +36,7 @@ void SVShaderMgr::destroy() {
 }
 
 void SVShaderMgr::_loadAllShader() {
+    //
     SVDataChunk tDataStream;
     SV_LOG_ERROR("load shadercfg.json begin\n");
     bool tflag = mApp->getFileMgr()->loadFileContentStr(&tDataStream, "shader/shadercfg.json");
@@ -51,26 +52,51 @@ void SVShaderMgr::_loadAllShader() {
         SV_LOG_ERROR("rapidjson error code:%d \n", code);
         return;
     }
+    //获取文件列表
+    RAPIDJSON_NAMESPACE::Value &dspfiles = doc["dspfiles"];
+    if( dspfiles.IsArray() ) {
+        RAPIDJSON_NAMESPACE::Document::Array t_files = dspfiles.GetArray();
+        for(s32 i=0;i<t_files.Size();i++) {
+            SVString t_filename = t_files[i].GetString();
+            loadSDSP(t_filename.c_str());
+        }
+    }
+    SV_LOG_DEBUG("load shader end\n");
+}
+
+void SVShaderMgr::loadSDSP(cptr8 _sdsp) {
+    SVDataChunk tDataStream;
+    bool tflag = mApp->getFileMgr()->loadFileContentStr(&tDataStream, _sdsp);
+    if (!tflag) {
+        SV_LOG_INFO("not find _sdsp file!please check shader file path!\n");
+        return ;
+    }
+    SV_LOG_ERROR("file context %s \n", tDataStream.getPointerChar());
+    RAPIDJSON_NAMESPACE::Document doc;
+    doc.Parse<0>(tDataStream.getPointerChar());
+    if (doc.HasParseError()) {
+        RAPIDJSON_NAMESPACE::ParseErrorCode code = doc.GetParseError();
+        SV_LOG_ERROR("rapidjson error code:%d \n", code);
+        return ;
+    }
+    //
     s32 t_shader_language = 1;
-    RAPIDJSON_NAMESPACE::Value &shadertype = doc["shadertype"];
-    if( shadertype.IsString() ) {
+    if ( doc.HasMember("shadertype") && doc["shadertype"].IsString() ) {
+        RAPIDJSON_NAMESPACE::Value &shadertype = doc["shadertype"];
         SVString t_shadertype_str = shadertype.GetString();
         if(t_shadertype_str == "metal") {
             t_shader_language = 2;
         }
     }
-    //"shadertype" :"metal",
-    RAPIDJSON_NAMESPACE::Value &shader = doc["shader"];
-    if ( shader.IsArray() ) {
-        for (s32 i = 0; i < shader.Size(); ++i) {
-            RAPIDJSON_NAMESPACE::Value &shaderitem = shader[i];
-            SVShaderPtr t_shader = MakeSharedPtr<SVShader>(mApp);
-            if( t_shader->fromJSON( shaderitem ) ) {
-                SVDispatch::dispatchShaderCreate(mApp,t_shader);
-            }
+    //
+    if ( doc.HasMember("name") && doc["name"].IsString() ) {
+        RAPIDJSON_NAMESPACE::Value &shadername = doc["name"];
+        SVShaderPtr t_shader = MakeSharedPtr<SVShader>(mApp);
+        if( t_shader->fromJSON( doc ) ) {
+            m_shaderMap.insert(std::make_pair(shadername.GetString(), t_shader));
+            SVDispatch::dispatchShaderCreate(mApp,t_shader);
         }
     }
-    SV_LOG_DEBUG("load shader end\n");
 }
 
 void SVShaderMgr::_clearAllShader() {
