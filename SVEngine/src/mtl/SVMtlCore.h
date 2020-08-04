@@ -23,12 +23,14 @@ namespace sv {
     //
     class SVMtlCore : public SVGBaseEx {
         //
+        friend class SVMtlLib;
         friend class SVRenderer;
         friend class SVRendererMetal;
         friend class SVRendererGL;
         friend class std::shared_ptr<SVRenderer> ;
         friend class std::shared_ptr<SVRendererMetal> ;
         friend class std::shared_ptr<SVRendererGL> ;
+        
     public:
         SVMtlCore(SVInstPtr _app);
         

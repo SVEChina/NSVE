@@ -85,6 +85,8 @@ SVMtlCorePtr SVMtlLib::createMtl(cptr8 _mtlname) {
     if(t_version == "1.0") {
         SVMtlCorePtr t_mtl = MakeSharedPtr<SVMtlCore>(mApp);
         t_mtl->fromJSON1(doc);
+        //
+        m_mtlPool.insert(std::make_pair(t_mtl->m_mtl_name, t_mtl));
         return t_mtl;
     }
     return nullptr;

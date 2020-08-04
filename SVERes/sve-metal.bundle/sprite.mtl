@@ -1,5 +1,6 @@
 {
     "version" : "1.0",
+    "name" : "sprite",
     "shader" : "sprite",
     "chn0" : { "from" : "file", "path" : "svres/sve.png" },
     "blend-param" : { "enable" : 0, "src" : "SVE_ONE", "dst" : "SVE_ZERO" },
