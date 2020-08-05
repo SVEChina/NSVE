@@ -66,8 +66,8 @@ bool SVShader::fromJSON(RAPIDJSON_NAMESPACE::Value &item) {
     //
     if( item.HasMember("formate")  && item["formate"].IsString() ) {
         SVString t_formate = item["formate"].GetString();
-        std::map<std::string,s32>::iterator it = SVVertDef::g_vf_name.find( t_formate.c_str() );
-        if(it!=SVVertDef::g_vf_name.end()) {
+        std::map<std::string,s32>::iterator it = SVJsonDef::g_vf_name.find( t_formate.c_str() );
+        if(it!=SVJsonDef::g_vf_name.end()) {
            m_shader_dsp.m_vft = VFTYPE(it->second);
         }else{
            m_shader_dsp.m_vft = E_VF_V2;

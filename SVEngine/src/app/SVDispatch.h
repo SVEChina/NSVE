@@ -47,10 +47,6 @@ namespace sv {
         //投递rendermesh
         static void dispatchMeshDraw(SVInstPtr _app,SVRenderMeshPtr _mesh,s32 _mtlID,SVRTargetPtr _target);
         
-        
-        
-        
-       
     };
     
 }//!namespace sv

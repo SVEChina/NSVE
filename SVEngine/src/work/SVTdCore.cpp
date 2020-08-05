@@ -11,10 +11,12 @@ SVLockSpin::~SVLockSpin(){
 }
 
 void SVLockSpin::lock() {
+    //SV_LOG_INFO("SVLockSpin lock \n!");
     while (mflag.test_and_set());
 }
 
 void SVLockSpin::unlock() {
+    //SV_LOG_INFO("SVLockSpin unlock \n!");
     mflag.clear();
 }
 
@@ -28,10 +30,12 @@ SVLock::~SVLock(){
 }
 
 void SVLock::lock() {
+    //SV_LOG_INFO("SVLock lock \n!");
     pthread_mutex_lock(&mutex);
 }
 
 void SVLock::unlock() {
+    //SV_LOG_INFO("SVLock unlock \n!");
     pthread_mutex_unlock(&mutex);
 }
 

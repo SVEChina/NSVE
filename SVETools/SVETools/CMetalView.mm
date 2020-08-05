@@ -53,15 +53,17 @@
 }
 
 -(void)creatTimer {
-    CGDirectDisplayID   displayID = CGMainDisplayID();
-    CVReturn            error = kCVReturnSuccess;
-    error = CVDisplayLinkCreateWithCGDisplay(displayID, &displayLink);
+    NSLog(@"creatTimer begin!\n");
+    CGDirectDisplayID displayID = CGMainDisplayID();
+    CVReturn error = CVDisplayLinkCreateWithCGDisplay(displayID, &displayLink);
     if (error){
         NSLog(@"DisplayLink created with error:%d", error);
         displayLink = nullptr;
+        return ;
     }
     CVDisplayLinkSetOutputCallback(displayLink, renderCallback, (__bridge void *)self);
     CVDisplayLinkStart(displayLink);
+    NSLog(@"creatTimer end!\n");
 }
 
 -(void)destroyTimer{
@@ -79,11 +81,13 @@ static CVReturn renderCallback(CVDisplayLinkRef displayLink,
                                CVOptionFlags flagsIn,
                                CVOptionFlags *flagsOut,
                                void *displayLinkContext){
-    //NSLog(@"sve timers \n ");
-    dispatch_sync(dispatch_get_main_queue(), ^{
-        //NSLog(@"sve timers \n ");
+    NSLog(@"sve timers renderCallback begin\n ");
+    //改成异步推给主线程的任务，同步会造成死锁
+    dispatch_async( dispatch_get_main_queue(), ^{
+        NSLog(@"sve timers - run \n ");
         [(__bridge CMetalView*)displayLinkContext renderMetal];
     });
+    NSLog(@"sve timers renderCallback end\n ");
     return kCVReturnSuccess;
 }
 

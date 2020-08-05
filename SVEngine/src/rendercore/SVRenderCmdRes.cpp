@@ -34,6 +34,7 @@ void SVRCmdCreateMesh::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
         //
         t_rbuffer->create(_renderer);
         _renderer->addRes(t_rbuffer);
+        SV_LOG_ERROR("sve create mesh end!\n");
     }
 }
 
@@ -55,6 +56,7 @@ void SVRCmdCreateShader::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
         //
         t_rshader->create(_renderer);
         _renderer->addRes(t_rshader);
+        SV_LOG_ERROR("sve create shader end!\n");
     }
 }
 
@@ -76,6 +78,7 @@ void SVRCmdCreateTex::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
         //
         t_rtex->create(_renderer);
         _renderer->addRes(t_rtex);
+        SV_LOG_ERROR("sve create tex end!\n");
     }
 }
 
@@ -97,6 +100,7 @@ void SVRCmdCreateFbo::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
         //
         t_rfbo->create(_renderer);
         _renderer->addRes(t_rfbo);
+        SV_LOG_ERROR("sve create fbo end!\n");
     }
 }
 

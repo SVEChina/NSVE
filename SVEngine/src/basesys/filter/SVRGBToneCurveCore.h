@@ -13,6 +13,8 @@
 #include "../../node/SVNodeDeclare.h"
 #include "../../core/SVVertDef.h"
 
+namespace sv {
+
 void createSplineCurve(sv::SVArray<V2> points,
                        sv::SVArray<f32> *preparedSplinePoints);
 
@@ -21,5 +23,7 @@ void getPreparedSplineCurve(sv::SVArray<V2>  mRgbCompositeControlPoints,
                             sv::SVArray<V2>  mGreenControlPoints,
                             sv::SVArray<V2>  mBlueControlPoints,
                             u8* outRgba);
+}
+
 
 #endif /* SV_RGBTONECURVECORE_H */

@@ -53,15 +53,13 @@ static CGInst *mInst;
 }
 
 -(void)initSVE{
+    SV_LOG_ERROR("sve init begin!");
     m_pSVE = sv::SVInst::makeCreate();
-    //
     NSString* t_sve_path = [[NSBundle mainBundle] pathForResource:@"sve-metal" ofType:@"bundle"];
     NSString* t_sve_path_ = [t_sve_path stringByAppendingString:@"/"];
     m_pSVE->addRespath([t_sve_path_ UTF8String]);
-    //
     m_pSVE->init();
-   
-//    m_pSVE->startSVE();
+    SV_LOG_ERROR("sve init end!");
 }
 
 -(void)destroySVE{
@@ -73,7 +71,6 @@ static CGInst *mInst;
 
 -(void*)getSVE {
     return m_pSVE.get();
-    //return nullptr;
 }
 
 //
@@ -83,7 +80,9 @@ static CGInst *mInst;
         sv::SVRendererMetalPtr t_rm_metal = std::dynamic_pointer_cast<sv::SVRendererMetal>(t_rm);
         if(t_rm_metal) {
             //渲染器初始化
+            SV_LOG_ERROR("sve createRM begin! \n");
             t_rm_metal->init(_device,_drawable,_drawable.texture);
+            SV_LOG_ERROR("sve createRM end! \n");
         }
     }
 }
@@ -94,31 +93,11 @@ static CGInst *mInst;
 }
 
 -(void)render {
-    //
+    SV_LOG_ERROR("sve render begin!");
     m_pSVE->updateSVE(0.33f);
     m_pSVE->renderSVE();
+    SV_LOG_ERROR("sve render end!");
 }
 
-////数据重置
-//-(void)reset {
-//    [self.m_pDataMgr reset];
-//    [self.m_pLogic reset];
-//}
-//
-////改变编辑器模式
-//-(void)setEditMode:(EDITMODE)_mode {
-//    if(m_editMode!=_mode) {
-//        //赋值
-//        m_editMode = _mode;
-//        //逻辑变化
-//        [self.m_pLogic setEditMode:_mode];
-//        //ui变化
-//        [[CGUI getInst] setEditMode:_mode];
-//    }
-//}
-//
-//-(EDITMODE)getEditMode {
-//    return m_editMode;
-//}
 
 @end

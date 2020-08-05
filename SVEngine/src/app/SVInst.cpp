@@ -90,7 +90,6 @@ SVRendererPtr SVInst::createRM(SV_RM_TYPE _type) {
     }else if(_type == E_M_GLES) {
         m_pRM = MakeSharedPtr<SVRendererGL>( share() );
     }else if(_type == E_M_VUNKAN) {
-        //m_pRM = MakeSharedPtr<>();
     }
     return m_pRM;
 }

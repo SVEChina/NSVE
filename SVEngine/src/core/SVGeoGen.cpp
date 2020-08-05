@@ -28,31 +28,32 @@ SVRenderMeshPtr SVGeoGen::genRect(SVInstPtr _app,f32 _w,f32 _h,SVBoundBox& _aabb
     _aabb.clear();
     //索引
     s16 t_index_data[] = { 0,1,2,2,1,3 };
+    f32 t_coord_size = 2.0f;
     //数据
     V3_T0 t_verts[4];
     t_verts[0].x = -0.5f * _w;
     t_verts[0].y = -0.5f * _h;
     t_verts[0].z = 0.0f;
-    t_verts[0].t0x = 0.0f;
-    t_verts[0].t0y = 0.0f;
+    t_verts[0].t0x = 0.0f * t_coord_size;
+    t_verts[0].t0y = 0.0f * t_coord_size;
 
     t_verts[1].x = 0.5f * _w;
     t_verts[1].y = -0.5f * _h;
     t_verts[1].z = 0.0f;
-    t_verts[1].t0x = 1.0f;
-    t_verts[1].t0y = 0.0f;
+    t_verts[1].t0x = 1.0f * t_coord_size;
+    t_verts[1].t0y = 0.0f * t_coord_size;
 
     t_verts[2].x = -0.5f * _w;
     t_verts[2].y = 0.5f * _h;
     t_verts[2].z = 0.0f;
-    t_verts[2].t0x = 0.0f;
-    t_verts[2].t0y = 1.0f;
+    t_verts[2].t0x = 0.0f * t_coord_size;
+    t_verts[2].t0y = 1.0f * t_coord_size;
 
     t_verts[3].x = 0.5f * _w;
     t_verts[3].y = 0.5f * _h;
     t_verts[3].z = 0.0f;
-    t_verts[3].t0x = 1.0f;
-    t_verts[3].t0y = 1.0f;
+    t_verts[3].t0x = 1.0f * t_coord_size;
+    t_verts[3].t0y = 1.0f * t_coord_size;
     //
     for(s32 i=0;i<4;i++) {
         _aabb.expand(FVec3(t_verts[i].x,t_verts[i].y,t_verts[i].z));

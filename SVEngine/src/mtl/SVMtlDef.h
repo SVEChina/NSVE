@@ -44,27 +44,6 @@ namespace sv {
 #define SV_REPLACE                        0x1E01
 #define SV_INCR                           0x1E02
 #define SV_DECR                           0x1E03
-    
-enum TEXTUREPARAM{
-    E_T_PARAM_FILTER_MAG = 0,
-    E_T_PARAM_FILTER_MIN,
-    E_T_PARAM_WRAP_S,
-    E_T_PARAM_WRAP_T
-};
-
-//纹理过滤器
-enum TEXTUREFILTER{
-    E_T_FILTER_NEAREST = 0,
-    E_T_FILTER_LINEAR
-};
-
-//纹理环绕规则
-enum TEXTUREWRAP{
-    E_T_WRAP_CLAMP = 0,
-    E_T_WRAP_CLAMP_TO_EDAGE,
-    E_T_WRAP_REPEAT,
-    E_T_WRAP_MIRROR
-};
 
 struct BlendParam{
     bool enable;

@@ -73,9 +73,11 @@ void SVGlobalMgr::init() {
     //渲染管理
     m_pRenderMgr = MakeSharedPtr<SVRenderMgr>(mApp);
     m_pRenderMgr->init();
+    SV_LOG_ERROR("sve init m_pRenderMgr end!\n");
     //构建静态数据
     m_pComData = MakeSharedPtr<SVComData>(mApp);
     m_pComData->init();
+    SV_LOG_ERROR("sve init m_pComData end!\n");
 //    //消息系统建立起来
 //    m_pEventMgr = MakeSharedPtr<SVEventMgr>(mApp);
 //    m_pEventMgr->init();
@@ -97,15 +99,19 @@ void SVGlobalMgr::init() {
     //纹理管理器初始化
     m_pTexMgr = MakeSharedPtr<SVTexMgr>(mApp);
     m_pTexMgr->init();
+    SV_LOG_ERROR("sve init m_pTexMgr end!\n");
     //shader程序初始化
     m_pShaderMgr = MakeSharedPtr<SVShaderMgr>(mApp);
     m_pShaderMgr->init();
+    SV_LOG_ERROR("sve init m_pShaderMgr end!\n");
     //场景系统
     m_pSceneMgr = MakeSharedPtr<SVSceneMgr>(mApp);
     m_pSceneMgr->init();
+    SV_LOG_ERROR("sve init SVSceneMgr end!\n");
     //材质库
     m_pMtlLib = MakeSharedPtr<SVMtlLib>(mApp);
     m_pMtlLib->init();
+    SV_LOG_ERROR("sve init SVMtlLib end! \n");
 //    //模型管理部分
 //    m_pModelMgr = MakeSharedPtr<SVModelMgr>(mApp.get());
 //    m_pModelMgr->init();

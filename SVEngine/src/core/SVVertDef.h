@@ -12,6 +12,8 @@
 #include <map>
 #include <string>
 
+namespace sv {
+
 typedef struct V2 {
     f32 x;
     f32 y;
@@ -288,6 +290,30 @@ struct V3_PARTICLE {
     };
 };
 
+//TEXTUREPARAM
+enum {
+    E_T_PARAM_FILTER_MAG = 0,
+    E_T_PARAM_FILTER_MIN,
+    E_T_PARAM_WRAP_S,
+    E_T_PARAM_WRAP_T
+};
+
+//TEXTUREFILTER
+//纹理过滤器
+enum {
+    E_T_FILTER_NEAREST = 0,
+    E_T_FILTER_LINEAR
+};
+
+//TEXTUREWRAP
+//纹理环绕规则
+enum {
+    E_T_WRAP_CLAMP = 0,
+    E_T_WRAP_CLAMP_TO_EDAGE,
+    E_T_WRAP_REPEAT,
+    E_T_WRAP_MIRROR
+};
+
 //
 //顶点格式索引
 #define D_VF_NULL  0x0000
@@ -339,43 +365,17 @@ enum VFTYPE {
     E_VF_V3_PARTICLE = D_VF_PARTICLE
 };
 
-class SVVertDef {
+class SVJsonDef {
 public:
-    static std::map<std::string,s32> g_vf_name;
+    //
+    static std::map<std::string,s32> g_vf_name;         //顶点格式表
+    static std::map<std::string,s32> g_sampler_name;    //采样表
+    //
+    SVJsonDef();
     
-    SVVertDef() {
-        g_vf_name.clear();
-        g_vf_name.insert(std::make_pair("E_VF_INDEX",E_VF_INDEX));
-        g_vf_name.insert(std::make_pair("E_VF_V2",E_VF_V2));
-        g_vf_name.insert(std::make_pair("E_VF_V2_T0",E_VF_V2_T0));
-        g_vf_name.insert(std::make_pair("E_VF_V2_T0_T1",E_VF_V2_T0_T1));
-        g_vf_name.insert(std::make_pair("E_VF_V2_T0_T1_T2",E_VF_V2_T0_T1_T2));
-        g_vf_name.insert(std::make_pair("E_VF_V2_C",E_VF_V2_C));
-        g_vf_name.insert(std::make_pair("E_VF_V2_C_T0",E_VF_V2_C_T0));
-        g_vf_name.insert(std::make_pair("E_VF_V2_C_T0_T1",E_VF_V2_C_T0_T1));
-        g_vf_name.insert(std::make_pair("E_VF_V3",E_VF_V3));
-        g_vf_name.insert(std::make_pair("E_VF_V3_T0",E_VF_V3_T0));
-        g_vf_name.insert(std::make_pair("E_VF_V3_T0_T1",E_VF_V3_T0_T1));
-        g_vf_name.insert(std::make_pair("E_VF_V3_N",E_VF_V3_N));
-        g_vf_name.insert(std::make_pair("E_VF_V3_N_T0",E_VF_V3_N_T0));
-        g_vf_name.insert(std::make_pair("E_VF_V3_N_T0_T1",E_VF_V3_N_T0_T1));
-        g_vf_name.insert(std::make_pair("E_VF_V3_C",E_VF_V3_C));
-        g_vf_name.insert(std::make_pair("E_VF_V3_N_C_T0",E_VF_V3_N_C_T0));
-        g_vf_name.insert(std::make_pair("E_VF_V3_N_C_T0_T1",E_VF_V3_N_C_T0_T1));
-        g_vf_name.insert(std::make_pair("E_VF_V3_N_T0_BONE_W",E_VF_V3_N_T0_BONE_W));
-        g_vf_name.insert(std::make_pair("E_VF_V3_N_C_T0_BONE_W",E_VF_V3_N_C_T0_BONE_W));
-        g_vf_name.insert(std::make_pair("E_VF_V3_C_BTAG",E_VF_V3_C_BTAG));
-        g_vf_name.insert(std::make_pair("E_VF_V3_N_T_T0",E_VF_V3_N_T_T0));
-        g_vf_name.insert(std::make_pair("E_VF_V3_PARTICLE",E_VF_V3_PARTICLE));
-    }
+    ~SVJsonDef();
     
-    ~SVVertDef() {
-        clear();
-    }
-    
-    void clear() {
-        g_vf_name.clear();
-    }
+    void clear() ;
 };
 
 //
@@ -401,6 +401,9 @@ enum DRAWMETHOD {
     E_DM_TRIANGLE_STRIP = 0x0005,
     E_DM_TRIANGLE_FAN = 0x0006
 };
+
+
+}//!namespace sv
 
 //
 #endif //SV_VERTDEF_H
