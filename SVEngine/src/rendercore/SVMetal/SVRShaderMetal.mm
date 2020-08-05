@@ -29,17 +29,6 @@ SVRShaderMetal::SVRShaderMetal(SVInstPtr _app)
 SVRShaderMetal::~SVRShaderMetal() {
 }
 
-//id <MTLLibrary> defaultLibrary = [device newDefaultLibrary];
-//id <MTLFunction> vertexFunction = [defaultLibrary newFunctionWithName:@"vertexShader"];
-//id <MTLFunction> fragmentFunction = [defaultLibrary newFunctionWithName:@"fragmentShader"];
-//MTLRenderPipelineDescriptor *pipelineStateDescriptor = [MTLRenderPipelineDescriptor new];
-//pipelineStateDescriptor.vertexFunction = vertexFunction;
-//pipelineStateDescriptor.fragmentFunction = fragmentFunction;
-//pipelineStateDescriptor.colorAttachement[0].pixelFormt = MTLPixelFormatRGBA8Unorm;
-//
-//id<MTLRenderPipelineState> pipelineState;
-//pipelineState = [device newRenderPipelineStateWithDescriptor:pipelineStateDescriptor error:nil];
-
 void SVRShaderMetal::create(SVRendererPtr _renderer) {
     if(!m_logic_obj) {
         return ;
@@ -56,15 +45,16 @@ void SVRShaderMetal::create(SVRendererPtr _renderer) {
     SVDataChunk _datachunk;
     bool t_ret = mApp->m_pFileMgr->loadFileContentStr(&_datachunk, t_shader->m_shader_dsp.m_programme_fname.c_str());
     if(!t_ret){
-        // error
-        return ;
+        return ; // error
     }
     NSError *t_errors;
     NSString* t_shader_str = [NSString stringWithUTF8String:(const char*)(_datachunk.getPointer())];
     id<MTLLibrary> t_lib = [t_rm->m_pDevice newLibraryWithSource:t_shader_str options:nullptr error:&t_errors];
     if(t_errors!=nullptr) {
-        //编译出错了
-        return;
+        if(t_errors.code != 4) {
+            //code = 4 是警告
+            return; //编译出错了
+        }
     }
     if( t_shader->m_shader_dsp.m_dsp &SV_E_TECH_VS ) {
         NSString* t_str = [NSString stringWithFormat:@"%s",t_shader->m_shader_dsp.m_vs_fname.c_str()];
@@ -110,7 +100,7 @@ void SVRShaderMetal::create(SVRendererPtr _renderer) {
         NSString* t_str = [NSString stringWithFormat:@"%s",t_shader->m_shader_dsp.m_gs_fname.c_str()];
         m_gsf = [t_lib newFunctionWithName:t_str];
         //生成gs采样器
-        for(s32 i=0;i<t_shader->m_vs_sampler.size();i++) {
+        for(s32 i=0;i<t_shader->m_gs_sampler.size();i++) {
             MTLSamplerDescriptor *samplerDsp = [MTLSamplerDescriptor new];
             samplerDsp.minFilter = MTLSamplerMinMagFilterLinear;
             samplerDsp.magFilter = MTLSamplerMinMagFilterLinear;
