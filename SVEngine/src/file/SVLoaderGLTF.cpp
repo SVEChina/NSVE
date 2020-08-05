@@ -858,63 +858,63 @@ SVMtlCorePtr SVLoaderGLTF::_buildMtl(Primitive* _prim,s32 _vtf) {
             if(t_param) {
                 s32 textureIndex = t_param->TextureIndex();
                 if(textureIndex>=0) {
-                    Texture* texture = &(m_gltf.textures[textureIndex]);
-                    Image* image = &(m_gltf.images[texture->source]);
-                    tMtl->m_pBaseColorTex = image->texture;
-                    
-                    Sampler* t_sampler = &( m_gltf.samplers[texture->sampler] );
-                    //
-                    if( t_sampler->minFilter == SVGLTF_TEXTURE_FILTER_NEAREST) {
-                        
-                    }else if( t_sampler->minFilter == SVGLTF_TEXTURE_FILTER_LINEAR) {
-                        
-                    }else if( t_sampler->minFilter == SVGLTF_TEXTURE_FILTER_NEAREST_MIPMAP_NEAREST) {
-                        
-                    }else if( t_sampler->minFilter == SVGLTF_TEXTURE_FILTER_LINEAR_MIPMAP_NEAREST) {
-                        
-                    }else if( t_sampler->minFilter == SVGLTF_TEXTURE_FILTER_NEAREST_MIPMAP_LINEAR) {
-                        
-                    }else if( t_sampler->minFilter == SVGLTF_TEXTURE_FILTER_LINEAR_MIPMAP_LINEAR) {
-                        
-                    }
-                    //
-                    if( t_sampler->magFilter == SVGLTF_TEXTURE_FILTER_NEAREST) {
-                        
-                    }else if( t_sampler->magFilter == SVGLTF_TEXTURE_FILTER_LINEAR) {
-                        
-                    }else if( t_sampler->magFilter == SVGLTF_TEXTURE_FILTER_NEAREST_MIPMAP_NEAREST) {
-                        
-                    }else if( t_sampler->magFilter == SVGLTF_TEXTURE_FILTER_LINEAR_MIPMAP_NEAREST) {
-                        
-                    }else if( t_sampler->magFilter == SVGLTF_TEXTURE_FILTER_NEAREST_MIPMAP_LINEAR) {
-                        
-                    }else if( t_sampler->magFilter == SVGLTF_TEXTURE_FILTER_LINEAR_MIPMAP_LINEAR) {
-                        
-                    }
-                    //
-                    if( t_sampler->wrapS == SVGLTF_TEXTURE_WRAP_REPEAT ) {
-                        tMtl->setTextureParam(0, E_T_PARAM_WRAP_S, E_T_WRAP_REPEAT);
-                    }else if( t_sampler->wrapS == SVGLTF_TEXTURE_WRAP_CLAMP_TO_EDGE ) {
-                        tMtl->setTextureParam(0, E_T_PARAM_WRAP_S, E_T_WRAP_CLAMP_TO_EDAGE);
-                    }else if( t_sampler->wrapS == SVGLTF_TEXTURE_WRAP_MIRRORED_REPEAT ) {
-                        tMtl->setTextureParam(0, E_T_PARAM_WRAP_S, E_T_WRAP_MIRROR);
-                    }
-                    //
-                    if( t_sampler->wrapT == SVGLTF_TEXTURE_WRAP_REPEAT ) {
-                        tMtl->setTextureParam(0, E_T_PARAM_WRAP_T, E_T_WRAP_REPEAT);
-                    }else if( t_sampler->wrapT == SVGLTF_TEXTURE_WRAP_CLAMP_TO_EDGE ) {
-                        tMtl->setTextureParam(0, E_T_PARAM_WRAP_T, E_T_WRAP_CLAMP_TO_EDAGE);
-                    }else if( t_sampler->wrapT == SVGLTF_TEXTURE_WRAP_MIRRORED_REPEAT ) {
-                        tMtl->setTextureParam(0, E_T_PARAM_WRAP_T, E_T_WRAP_MIRROR);
-                    }
-                    //
-                    if( t_sampler->wrapR == SVGLTF_TEXTURE_WRAP_REPEAT ) {
-                        //tMtl->setTextureParam(0, E_T_PARAM_WRAP_T, E_T_WRAP_REPEAT);
-                    }else if( t_sampler->wrapR == SVGLTF_TEXTURE_WRAP_CLAMP_TO_EDGE ) {
-                        //tMtl->setTextureParam(0, E_T_PARAM_WRAP_T, E_T_WRAP_CLAMP_TO_EDAGE);
-                    }else if( t_sampler->wrapR == SVGLTF_TEXTURE_WRAP_MIRRORED_REPEAT ) {
-                        //tMtl->setTextureParam(0, E_T_PARAM_WRAP_T, E_T_WRAP_MIRROR);
-                    }
+//                    Texture* texture = &(m_gltf.textures[textureIndex]);
+//                    Image* image = &(m_gltf.images[texture->source]);
+//                    tMtl->m_pBaseColorTex = image->texture;
+//                    
+//                    Sampler* t_sampler = &( m_gltf.samplers[texture->sampler] );
+//                    //
+//                    if( t_sampler->minFilter == SVGLTF_TEXTURE_FILTER_NEAREST) {
+//                        
+//                    }else if( t_sampler->minFilter == SVGLTF_TEXTURE_FILTER_LINEAR) {
+//                        
+//                    }else if( t_sampler->minFilter == SVGLTF_TEXTURE_FILTER_NEAREST_MIPMAP_NEAREST) {
+//                        
+//                    }else if( t_sampler->minFilter == SVGLTF_TEXTURE_FILTER_LINEAR_MIPMAP_NEAREST) {
+//                        
+//                    }else if( t_sampler->minFilter == SVGLTF_TEXTURE_FILTER_NEAREST_MIPMAP_LINEAR) {
+//                        
+//                    }else if( t_sampler->minFilter == SVGLTF_TEXTURE_FILTER_LINEAR_MIPMAP_LINEAR) {
+//                        
+//                    }
+//                    //
+//                    if( t_sampler->magFilter == SVGLTF_TEXTURE_FILTER_NEAREST) {
+//                        
+//                    }else if( t_sampler->magFilter == SVGLTF_TEXTURE_FILTER_LINEAR) {
+//                        
+//                    }else if( t_sampler->magFilter == SVGLTF_TEXTURE_FILTER_NEAREST_MIPMAP_NEAREST) {
+//                        
+//                    }else if( t_sampler->magFilter == SVGLTF_TEXTURE_FILTER_LINEAR_MIPMAP_NEAREST) {
+//                        
+//                    }else if( t_sampler->magFilter == SVGLTF_TEXTURE_FILTER_NEAREST_MIPMAP_LINEAR) {
+//                        
+//                    }else if( t_sampler->magFilter == SVGLTF_TEXTURE_FILTER_LINEAR_MIPMAP_LINEAR) {
+//                        
+//                    }
+//                    //
+//                    if( t_sampler->wrapS == SVGLTF_TEXTURE_WRAP_REPEAT ) {
+//                        tMtl->setTextureParam(0, E_T_PARAM_WRAP_S, E_T_WRAP_REPEAT);
+//                    }else if( t_sampler->wrapS == SVGLTF_TEXTURE_WRAP_CLAMP_TO_EDGE ) {
+//                        tMtl->setTextureParam(0, E_T_PARAM_WRAP_S, E_T_WRAP_CLAMP_TO_EDAGE);
+//                    }else if( t_sampler->wrapS == SVGLTF_TEXTURE_WRAP_MIRRORED_REPEAT ) {
+//                        tMtl->setTextureParam(0, E_T_PARAM_WRAP_S, E_T_WRAP_MIRROR);
+//                    }
+//                    //
+//                    if( t_sampler->wrapT == SVGLTF_TEXTURE_WRAP_REPEAT ) {
+//                        tMtl->setTextureParam(0, E_T_PARAM_WRAP_T, E_T_WRAP_REPEAT);
+//                    }else if( t_sampler->wrapT == SVGLTF_TEXTURE_WRAP_CLAMP_TO_EDGE ) {
+//                        tMtl->setTextureParam(0, E_T_PARAM_WRAP_T, E_T_WRAP_CLAMP_TO_EDAGE);
+//                    }else if( t_sampler->wrapT == SVGLTF_TEXTURE_WRAP_MIRRORED_REPEAT ) {
+//                        tMtl->setTextureParam(0, E_T_PARAM_WRAP_T, E_T_WRAP_MIRROR);
+//                    }
+//                    //
+//                    if( t_sampler->wrapR == SVGLTF_TEXTURE_WRAP_REPEAT ) {
+//                        //tMtl->setTextureParam(0, E_T_PARAM_WRAP_T, E_T_WRAP_REPEAT);
+//                    }else if( t_sampler->wrapR == SVGLTF_TEXTURE_WRAP_CLAMP_TO_EDGE ) {
+//                        //tMtl->setTextureParam(0, E_T_PARAM_WRAP_T, E_T_WRAP_CLAMP_TO_EDAGE);
+//                    }else if( t_sampler->wrapR == SVGLTF_TEXTURE_WRAP_MIRRORED_REPEAT ) {
+//                        //tMtl->setTextureParam(0, E_T_PARAM_WRAP_T, E_T_WRAP_MIRROR);
+//                    }
                 }
             }
         }else if(t_key == "baseColorFactor") {

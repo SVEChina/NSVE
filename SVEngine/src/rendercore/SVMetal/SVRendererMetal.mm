@@ -125,7 +125,7 @@ bool SVRendererMetal::processMtl(SVMtlCorePtr _mtl) {
             //传递纹理
             for(s32 i=0;i<MAX_TEXUNIT;i++) {
                 if( _mtl->m_texUnit[i].m_pTex ) {
-                    processTexture( _mtl->m_texUnit[i].m_pTex->getResTex() , i , 0);
+                    processTexture( _mtl->m_texUnit[i].m_pTex->getResTex() , i , _mtl->m_texUnit[i].m_stage_type);
                 }
             }
             return t_ret;
@@ -134,16 +134,16 @@ bool SVRendererMetal::processMtl(SVMtlCorePtr _mtl) {
     return false;
 }
 
-bool SVRendererMetal::processTexture(SVRTexPtr _tex,s32 _chn,s32 _type) {
+bool SVRendererMetal::processTexture(SVRTexPtr _tex,s32 _chn,s32 _stage) {
     if(_tex) {
         SVRTexMetalPtr t_tex = std::dynamic_pointer_cast<SVRTexMetal>(_tex);
         t_tex->commit();    //提交数据
-        if(_type == 0) {
-            //fs纹理
-            [m_pCurEncoder setFragmentTexture:t_tex->getInner() atIndex:_chn];
-        }else if(_type == 1) {
+        if(_stage == 0) {
             //vs纹理
             [m_pCurEncoder setVertexTexture:t_tex->getInner() atIndex:_chn];
+        }else if(_stage == 1) {
+            //fs纹理
+            [m_pCurEncoder setFragmentTexture:t_tex->getInner() atIndex:_chn];
         }
         return true;
     }

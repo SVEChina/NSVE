@@ -31,13 +31,15 @@ namespace sv {
         
         void reset();
         
-        SVTexturePtr m_pTex;
-        
         s32 m_stage_type;   //纹理使用阶段类型，0:fs 1:vs
         
         s32 m_chn;          //纹理使用的通道
         
         SVTEXINID m_texForm;  //纹理来源
+        
+        SVString m_fname;
+        
+        SVTexturePtr m_pTex;
     };
 
     //
@@ -69,6 +71,8 @@ namespace sv {
         virtual void update(f32 dt);
         
         virtual s32 submitMtl();
+        
+        void setTexture(s32 _chn,s32 _stage,SVTEXINID _from,cptr8 _name);
 
         void setTexture(s32 _chn,cptr8 _fname);
         
@@ -121,8 +125,6 @@ namespace sv {
         //
     public:
         void swap();
-        
-        void setTextureParam(s32 _chanel,TEXTUREPARAM _type,s32 _value);
         
         void setBlendEnable(bool _bBlendEnable);
         

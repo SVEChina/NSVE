@@ -144,7 +144,8 @@ namespace sv {
     //SV 支持的内置纹理种类
     enum SVTEXINID {
         E_TEX_MAIN = 0,
-        E_TEX_CAMERA = 1,
+        E_TEX_FILE,
+        E_TEX_CAMERA,
         E_TEX_SHADOW,
         E_TEX_INSTREAM = 10,
         E_TEX_OUTSTREAM = 20,
