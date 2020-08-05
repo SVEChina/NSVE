@@ -61,11 +61,9 @@ void SVRShaderMetal::create(SVRendererPtr _renderer) {
         m_vsf = [t_lib newFunctionWithName:t_str];
         //生成vs采样器
         for(s32 i=0;i<t_shader->m_vs_sampler.size();i++) {
-            MTLSamplerDescriptor *samplerDsp = [MTLSamplerDescriptor new];
-            samplerDsp.minFilter = MTLSamplerMinMagFilterLinear;
-            samplerDsp.magFilter = MTLSamplerMinMagFilterLinear;
-            samplerDsp.sAddressMode = MTLSamplerAddressModeRepeat;
-            samplerDsp.tAddressMode = MTLSamplerAddressModeRepeat;
+            //生成sampler-dsp
+            MTLSamplerDescriptor *samplerDsp = _genSampler(t_shader->m_vs_sampler[i]);
+            //生成sampler-state
             id<MTLSamplerState> t_sampler_state = [t_rm->m_pDevice newSamplerStateWithDescriptor:samplerDsp];
             m_vs_sampler_st.push_back(t_sampler_state);
         }
@@ -81,11 +79,9 @@ void SVRShaderMetal::create(SVRendererPtr _renderer) {
         m_fsf = [t_lib newFunctionWithName:t_str];
         //生成fs采样器
         for(s32 i=0;i<t_shader->m_fs_sampler.size();i++) {
-            MTLSamplerDescriptor *samplerDsp = [MTLSamplerDescriptor new];
-            samplerDsp.minFilter = MTLSamplerMinMagFilterLinear;
-            samplerDsp.magFilter = MTLSamplerMinMagFilterLinear;
-            samplerDsp.sAddressMode = MTLSamplerAddressModeRepeat;
-            samplerDsp.tAddressMode = MTLSamplerAddressModeRepeat;
+            //生成sampler-dsp
+            MTLSamplerDescriptor *samplerDsp = _genSampler(t_shader->m_fs_sampler[i]);
+            //生成sampler-state
             id<MTLSamplerState> t_sampler_state = [t_rm->m_pDevice newSamplerStateWithDescriptor:samplerDsp];
             m_fs_sampler_st.push_back(t_sampler_state);
         }
@@ -101,11 +97,9 @@ void SVRShaderMetal::create(SVRendererPtr _renderer) {
         m_gsf = [t_lib newFunctionWithName:t_str];
         //生成gs采样器
         for(s32 i=0;i<t_shader->m_gs_sampler.size();i++) {
-            MTLSamplerDescriptor *samplerDsp = [MTLSamplerDescriptor new];
-            samplerDsp.minFilter = MTLSamplerMinMagFilterLinear;
-            samplerDsp.magFilter = MTLSamplerMinMagFilterLinear;
-            samplerDsp.sAddressMode = MTLSamplerAddressModeRepeat;
-            samplerDsp.tAddressMode = MTLSamplerAddressModeRepeat;
+            //生成sampler-dsp
+            MTLSamplerDescriptor *samplerDsp = _genSampler(t_shader->m_gs_sampler[i]);
+            //生成sampler-state
             id<MTLSamplerState> t_sampler_state = [t_rm->m_pDevice newSamplerStateWithDescriptor:samplerDsp];
             m_gs_sampler_st.push_back(t_sampler_state);
         }
@@ -142,6 +136,79 @@ void SVRShaderMetal::create(SVRendererPtr _renderer) {
     t_pl_dsp = nullptr;
     //
     m_exist = true;
+}
+
+MTLSamplerDescriptor* SVRShaderMetal::_genSampler(SamplerDsp& _dsp) {
+    MTLSamplerDescriptor *samplerDsp = [MTLSamplerDescriptor new];
+    //warp-s
+    s32 t_warp_s = SV_V_WRAP_CLAMP; //default
+    if( _dsp.m_warps != "default" ) {
+      t_warp_s = SVJsonDef::g_sampler_name[_dsp.m_warps.c_str()];
+      if(t_warp_s == 0) {
+          t_warp_s = SV_V_WRAP_CLAMP;
+      }
+    }
+    if(t_warp_s == SV_V_WRAP_CLAMP) {
+      samplerDsp.sAddressMode = MTLSamplerAddressModeClampToEdge;
+    }else if(t_warp_s == SV_V_WRAP_BORDER) {
+      samplerDsp.sAddressMode = MTLSamplerAddressModeClampToBorderColor;
+    }else if(t_warp_s == SV_V_WRAP_REPEAT) {
+      samplerDsp.sAddressMode = MTLSamplerAddressModeRepeat;
+    }else if(t_warp_s == SV_V_WRAP_MIRROR) {
+      samplerDsp.sAddressMode = MTLSamplerAddressModeMirrorRepeat;
+    }else if(t_warp_s == SV_V_WRAP_BLACK) {
+      samplerDsp.sAddressMode = MTLSamplerAddressModeClampToZero;
+    }else if(t_warp_s == SV_V_WRAP_WHITE) {
+      samplerDsp.sAddressMode = MTLSamplerAddressModeMirrorClampToEdge;
+    }
+    //warp-t
+    s32 t_warp_t = SV_V_WRAP_CLAMP; //default
+    if( _dsp.m_warpt != "default" ) {
+      t_warp_t = SVJsonDef::g_sampler_name[_dsp.m_warpt.c_str()];
+      if(t_warp_t == 0) {
+          t_warp_t = SV_V_WRAP_CLAMP;
+      }
+    }
+    if(t_warp_t == SV_V_WRAP_CLAMP) {
+      samplerDsp.tAddressMode = MTLSamplerAddressModeClampToEdge;
+    }else if(t_warp_t == SV_V_WRAP_BORDER) {
+      samplerDsp.tAddressMode = MTLSamplerAddressModeClampToBorderColor;
+    }else if(t_warp_t == SV_V_WRAP_REPEAT) {
+      samplerDsp.tAddressMode = MTLSamplerAddressModeRepeat;
+    }else if(t_warp_t == SV_V_WRAP_MIRROR) {
+      samplerDsp.tAddressMode = MTLSamplerAddressModeMirrorRepeat;
+    }else if(t_warp_t == SV_V_WRAP_BLACK) {
+      samplerDsp.tAddressMode = MTLSamplerAddressModeClampToZero;
+    }else if(t_warp_t == SV_V_WRAP_WHITE) {
+      samplerDsp.tAddressMode = MTLSamplerAddressModeMirrorClampToEdge;
+    }
+    //min-filter
+    s32 t_min_filter = SV_V_FILTER_LINEAR;
+    if( _dsp.m_min != "default" ) {
+      t_min_filter = SVJsonDef::g_sampler_name[_dsp.m_min.c_str()];
+      if(t_min_filter == 0) {
+          t_min_filter = SV_V_FILTER_LINEAR;
+      }
+    }
+    if(t_min_filter == SV_V_FILTER_NEAREST) {
+      samplerDsp.minFilter = MTLSamplerMinMagFilterLinear;
+    }else if(t_min_filter == SV_V_FILTER_LINEAR) {
+      samplerDsp.minFilter = MTLSamplerMinMagFilterNearest;
+    }
+    //mag-filter
+    s32 t_mag_filter = SV_V_FILTER_LINEAR; //default
+    if( _dsp.m_mag != "default" ) {
+      t_mag_filter = SVJsonDef::g_sampler_name[_dsp.m_mag.c_str()];
+      if(t_mag_filter == 0) {
+          t_mag_filter = SV_V_FILTER_LINEAR;
+      }
+    }
+    if(t_mag_filter == SV_V_FILTER_NEAREST) {
+      samplerDsp.magFilter = MTLSamplerMinMagFilterLinear;
+    }else if(t_mag_filter == SV_V_FILTER_LINEAR) {
+      samplerDsp.magFilter = MTLSamplerMinMagFilterNearest;
+    }
+    return samplerDsp;
 }
 
 MTLVertexDescriptor* SVRShaderMetal::_genVertexDsp(VFTYPE _vf) {

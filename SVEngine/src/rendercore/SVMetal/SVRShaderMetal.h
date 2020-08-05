@@ -20,6 +20,8 @@ namespace sv {
     /*
      render tech metal
      */
+    
+    struct SamplerDsp;
 
     class SVRShaderMetal : public SVRShader {
     public:
@@ -37,6 +39,7 @@ namespace sv {
         bool active(SVRendererPtr _renderer);
         
     protected:
+        MTLSamplerDescriptor* _genSampler(SamplerDsp& _dsp);
         MTLVertexDescriptor* _genVertexDsp(VFTYPE _vf);
         
         id<MTLFunction> m_vsf;

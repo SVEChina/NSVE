@@ -17,14 +17,5 @@
         "sampler": [
             { "chn" : 0 , "warp-s" : "default" ,  "warp-t" : "default" , "min" : "default", "mag" : "default" }
         ]
-    },
-    "gs": {
-        "entry": "null"
-    },
-    "tse": {
-        "entry": "null"
-    },
-    "tsd": {
-        "entry": "null"
     }
 }

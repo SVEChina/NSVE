@@ -40,6 +40,19 @@ SVJsonDef::SVJsonDef() {
     g_vf_name.insert(std::make_pair("E_VF_V3_C_BTAG",E_VF_V3_C_BTAG));
     g_vf_name.insert(std::make_pair("E_VF_V3_N_T_T0",E_VF_V3_N_T_T0));
     g_vf_name.insert(std::make_pair("E_VF_V3_PARTICLE",E_VF_V3_PARTICLE));
+    //
+    g_sampler_name.insert(std::make_pair("SV_P_FILTER_MAG",SV_P_FILTER_MAG));
+    g_sampler_name.insert(std::make_pair("SV_P_FILTER_MIN",SV_P_FILTER_MIN));
+    g_sampler_name.insert(std::make_pair("SV_V_FILTER_NEAREST",SV_V_FILTER_NEAREST));
+    g_sampler_name.insert(std::make_pair("SV_V_FILTER_LINEAR",SV_V_FILTER_LINEAR));
+    g_sampler_name.insert(std::make_pair("SV_P_WRAP_S",SV_P_WRAP_S));
+    g_sampler_name.insert(std::make_pair("SV_P_WRAP_T",SV_P_WRAP_T));
+    g_sampler_name.insert(std::make_pair("SV_V_WRAP_CLAMP",SV_V_WRAP_CLAMP));
+    g_sampler_name.insert(std::make_pair("SV_V_WRAP_BORDER",SV_V_WRAP_BORDER));
+    g_sampler_name.insert(std::make_pair("SV_V_WRAP_REPEAT",SV_V_WRAP_REPEAT));
+    g_sampler_name.insert(std::make_pair("SV_V_WRAP_MIRROR",SV_V_WRAP_MIRROR));
+    g_sampler_name.insert(std::make_pair("SV_V_WRAP_BLACK",SV_V_WRAP_BLACK));
+    g_sampler_name.insert(std::make_pair("SV_V_WRAP_WHITE",SV_V_WRAP_WHITE));
 }
 
 SVJsonDef::~SVJsonDef() {

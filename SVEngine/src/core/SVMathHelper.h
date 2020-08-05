@@ -12,6 +12,8 @@
 #include "../base/SVArray.h"
 #define EPS 1e-8
 
+namespace sv {
+
 class SVMathHelper{
 public:
     static f32 vec2Length(f32 _x1, f32 _x2, f32 _y1, f32 _y2);
@@ -36,6 +38,9 @@ public:
     //龙贝格积分
     static f64 rombergIntegration(f64 _low, f64 _high, f64 _e = EPS);
 };
+
+//!namespace sv
+}
 
 
 #endif //SV_MATHHELPER_H

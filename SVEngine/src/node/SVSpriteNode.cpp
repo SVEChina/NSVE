@@ -12,7 +12,6 @@
 #include "../basesys/SVCameraNode.h"
 #include "../mtl/SVMtlLib.h"
 #include "../mtl/SVMtlCore.h"
-#include "../rendercore/SVRenderMesh.h"
 #include "../core/SVGeoGen.h"
 #include "../basesys/SVConfig.h"
 #include "../mtl/SVTexture.h"
@@ -21,6 +20,7 @@
 #include "../rendercore/SVRenderObject.h"
 #include "../rendercore/SVRenderMgr.h"
 #include "../rendercore/SVRenderer.h"
+#include "../rendercore/SVRenderMesh.h"
 #include "../basesys/SVComData.h"
 
 using namespace sv;

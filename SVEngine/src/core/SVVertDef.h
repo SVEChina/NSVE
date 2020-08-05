@@ -290,28 +290,20 @@ struct V3_PARTICLE {
     };
 };
 
-//TEXTUREPARAM
+//sampler state
 enum {
-    E_T_PARAM_FILTER_MAG = 0,
-    E_T_PARAM_FILTER_MIN,
-    E_T_PARAM_WRAP_S,
-    E_T_PARAM_WRAP_T
-};
-
-//TEXTUREFILTER
-//纹理过滤器
-enum {
-    E_T_FILTER_NEAREST = 0,
-    E_T_FILTER_LINEAR
-};
-
-//TEXTUREWRAP
-//纹理环绕规则
-enum {
-    E_T_WRAP_CLAMP = 0,
-    E_T_WRAP_CLAMP_TO_EDAGE,
-    E_T_WRAP_REPEAT,
-    E_T_WRAP_MIRROR
+    SV_P_FILTER_MAG = 0,
+    SV_P_FILTER_MIN,
+    SV_V_FILTER_NEAREST,
+    SV_V_FILTER_LINEAR,
+    SV_P_WRAP_S,
+    SV_P_WRAP_T,
+    SV_V_WRAP_CLAMP,
+    SV_V_WRAP_BORDER,
+    SV_V_WRAP_BLACK,
+    SV_V_WRAP_WHITE,
+    SV_V_WRAP_REPEAT,
+    SV_V_WRAP_MIRROR
 };
 
 //
@@ -391,8 +383,8 @@ enum BUFFERTYPE {
     E_BFT_STREAM_DRAW
 };
 
-//
-enum DRAWMETHOD {
+//DRAWMETHOD
+enum {
     E_DM_POINTS = 0x0000,
     E_DM_LINES = 0x0001,
     E_DM_LINE_LOOP = 0x0002,
@@ -400,7 +392,7 @@ enum DRAWMETHOD {
     E_DM_TRIANGLES = 0x0004,
     E_DM_TRIANGLE_STRIP = 0x0005,
     E_DM_TRIANGLE_FAN = 0x0006
-};
+} DRAWMETHOD;
 
 
 }//!namespace sv

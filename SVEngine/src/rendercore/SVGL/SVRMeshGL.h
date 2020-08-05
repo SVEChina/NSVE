@@ -37,7 +37,7 @@ namespace sv {
         
     protected:
         //渲染属性
-        DRAWMETHOD m_draw_method;
+        s32 m_draw_method;
         s32 m_draw_num;
         //数据属性
         u32 m_indexID;

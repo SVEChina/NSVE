@@ -60,7 +60,12 @@ namespace sv {
      */
     class SVRenderMesh : public SVGBaseEx {
     public:
-        static void buildBufferDsp(VFTYPE _vertype,BUFFERTYPE _buftype,s32 _vertCnt,s32 _bufsize,void* _data,BufferDsp* _dsp);
+        static void buildBufferDsp(VFTYPE _vertype,
+                                   BUFFERTYPE _buftype,
+                                   s32 _vertCnt,
+                                   s32 _bufsize,
+                                   void* _data,
+                                   BufferDsp* _dsp);
         
     public:
         SVRenderMesh(SVInstPtr _app);
@@ -77,29 +82,29 @@ namespace sv {
         //是否使用索引
         bool useIndex();
         
+        bool useInstance();
+        
         //获取索引数据描述
         BufferDsp* getIndexDsp();
         
-        //获取流数目
-        s32 getStreamNum();
-        
         //获取流数据描述
         BufferDsp* getStreamDsp();
-        
-        bool useInstance();
-        
+    
         //获取多实例描述
         BufferDsp* getInstanceDsp();
+
+        //获取流数目
+        s32 getStreamNum();
         
         //设置数据
         void setIndexData(SVDataSwapPtr _data,s32 _num);
         
-        void setVertexData(SVDataSwapPtr _data,s32 _index = 0,VFTYPE type = E_VF_BASE);
+        void setVertexData(SVDataSwapPtr _data);
         
         void setInstanceData(SVDataSwapPtr _pdata, u32 _instanceCount);
 
         //设置其他属性
-        void setDrawMethod(DRAWMETHOD drawtype);
+        void setDrawMethod(s32 _method);
         
         void setVertNum(s32 _vertexNum);
         
@@ -110,8 +115,9 @@ namespace sv {
         BufferDsp m_index_dsp;
         BufferDsp m_vert_dsp;
         BufferDsp m_instance_dsp;
-       
-    public:
+        //
+        s32 m_draw_method;
+
         void bindRes(SVRMeshResPtr _res);
         
         void unbindRes();
@@ -119,7 +125,7 @@ namespace sv {
         SVRMeshResPtr getResBuffer();
         
     protected:
-        SVRMeshResPtr m_res_buffer;      //最主要的是他
+        SVRMeshResPtr m_res_buffer;      //最主要的是它
     };
     
 

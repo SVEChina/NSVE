@@ -93,17 +93,16 @@ BufferDsp* SVRenderMesh::getInstanceDsp() {
     return &m_instance_dsp;
 }
 
-void SVRenderMesh::setDrawMethod(DRAWMETHOD drawtype) {
+void SVRenderMesh::setDrawMethod(s32 _method) {
+    m_draw_method = _method;
 }
 
 void SVRenderMesh::setVertNum(s32 _vertexNum){
 }
 
 void SVRenderMesh::setIndexData(SVDataSwapPtr _data,s32 _num){
-    if(m_use_index) {
-        //
-        
-    }
+//    if(m_use_index) {
+//    }
 }
 
 void SVRenderMesh::setInstanceData(SVDataSwapPtr _pdata, u32 _instanceCount){
@@ -113,7 +112,7 @@ void SVRenderMesh::setInstanceData(SVDataSwapPtr _pdata, u32 _instanceCount){
     }
 }
 
-void SVRenderMesh::setVertexData(SVDataSwapPtr _data,s32 _channel,VFTYPE type){
+void SVRenderMesh::setVertexData(SVDataSwapPtr _data){
     
 }
 
