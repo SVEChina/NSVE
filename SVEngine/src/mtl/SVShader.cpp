@@ -15,20 +15,18 @@ using namespace sv;
 
 SVShader::SVShader(SVInstPtr _app)
 :SVGBaseEx(_app)
-,m_res_shader(nullptr)
-,m_vs_paramtbl(nullptr)
-,m_fs_paramtbl(nullptr)
-,m_gs_paramtbl(nullptr){
+,m_res_shader(nullptr){
 }
 
 SVShader::~SVShader() {
-    m_vs_sampler.clear();
-    m_fs_sampler.clear();
-    m_gs_sampler.clear();
+    //
+    m_samplers.clear();
     m_res_shader = nullptr;
-    m_vs_paramtbl = nullptr;
-    m_fs_paramtbl = nullptr;
-    m_gs_paramtbl = nullptr;
+    //
+    for(s32 i=0;i<m_paramtbl.size();i++) {
+        m_paramtbl[i].m_tbl = nullptr;
+    }
+    m_paramtbl.clear();
 }
 
 //渲染内核
@@ -49,6 +47,39 @@ bool SVShader::active() {
         return m_res_shader->active( mApp->getRenderer() );
     }
     return false;
+}
+
+//设置参数
+void SVShader::setParam(cptr8 _name,s32 _value) {
+    
+}
+
+void SVShader::setParam(cptr8 _name,f32 _value) {
+    
+}
+
+void SVShader::setParam(cptr8 _name,FVec2 _value) {
+    
+}
+
+void SVShader::setParam(cptr8 _name,FVec3 _value) {
+    
+}
+
+void SVShader::setParam(cptr8 _name,FVec4 _value) {
+    
+}
+
+void SVShader::setParam(cptr8 _name,FMat2 _value) {
+    
+}
+
+void SVShader::setParam(cptr8 _name,FMat3 _value) {
+    
+}
+
+void SVShader::setParam(cptr8 _name,FMat4 _value) {
+    
 }
 
 bool SVShader::toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator,
@@ -77,9 +108,8 @@ bool SVShader::fromJSON(RAPIDJSON_NAMESPACE::Value &item) {
     }
     //解析vs
     if (item.HasMember("vs") && item["vs"].IsObject() ) {
-        //
         m_shader_dsp.m_dsp |= SV_E_TECH_VS;
-        //
+        //函数入口
         RAPIDJSON_NAMESPACE::Document::Object vs_obj = item["vs"].GetObject();
         m_shader_dsp.m_vs_fname = vs_obj["entry"].GetString();
         //采样器
@@ -87,30 +117,26 @@ bool SVShader::fromJSON(RAPIDJSON_NAMESPACE::Value &item) {
             RAPIDJSON_NAMESPACE::Document::Array t_sampler = vs_obj["sampler"].GetArray();
             for(s32 i=0;i<t_sampler.Size();i++) {
                 SamplerDsp t_sampler_dsp;
+                t_sampler_dsp.m_type = 0;
                 SamplerDspFromJson(t_sampler[i],t_sampler_dsp);
-                m_vs_sampler.push_back(t_sampler_dsp);
+                m_samplers.push_back(t_sampler_dsp);
             }
         }
         //uniform参数
-        if( vs_obj.HasMember("uniform")  && vs_obj["uniform"].IsArray() ) {
+        if( vs_obj.HasMember("uniform") && vs_obj["uniform"].IsArray() ) {
             RAPIDJSON_NAMESPACE::Document::Array t_uniform = vs_obj["uniform"].GetArray();
             for(s32 i=0;i<t_uniform.Size();i++) {
-                RAPIDJSON_NAMESPACE::Document::Object element = t_uniform[i].GetObject();
-                SVString t_param_name = element["name"].GetString();
-                SVString t_param_type = element["type"].GetString();
-                SVString t_param_value = element["value"].GetString();
-                if(!m_vs_paramtbl) {
-                    m_vs_paramtbl = MakeSharedPtr<SVParamTbl>();
-                }
-                m_vs_paramtbl->addParam(t_param_name.c_str(),t_param_type.c_str(),t_param_value.c_str());
+                ParamTblDsp _dsp;
+                _dsp.m_type = 0;
+                ParamTblFromJson(t_uniform[i],_dsp);
+                m_paramtbl.push_back(_dsp);
             }
         }
     }
     //解析fs
     if (item.HasMember("fs") && item["fs"].IsObject()) {
-        //
         m_shader_dsp.m_dsp |= SV_E_TECH_FS;
-        //
+        //函数入口
         RAPIDJSON_NAMESPACE::Document::Object fs_obj = item["fs"].GetObject();
         m_shader_dsp.m_fs_fname = fs_obj["entry"].GetString();
         //采样器
@@ -118,37 +144,46 @@ bool SVShader::fromJSON(RAPIDJSON_NAMESPACE::Value &item) {
             RAPIDJSON_NAMESPACE::Document::Array t_sampler = fs_obj["sampler"].GetArray();
             for(s32 i=0;i<t_sampler.Size();i++) {
                 SamplerDsp t_sampler_dsp;
+                t_sampler_dsp.m_type = 1;
                 SamplerDspFromJson(t_sampler[i],t_sampler_dsp);
-                m_fs_sampler.push_back(t_sampler_dsp);
+                m_samplers.push_back(t_sampler_dsp);
             }
         }
         //uniform参数
         if( fs_obj.HasMember("uniform")  && fs_obj["uniform"].IsArray() ) {
             RAPIDJSON_NAMESPACE::Document::Array t_uniform = fs_obj["uniform"].GetArray();
             for(s32 i=0;i<t_uniform.Size();i++) {
-                RAPIDJSON_NAMESPACE::Document::Object element = t_uniform[i].GetObject();
-                SVString t_param_name = element["name"].GetString();
-                SVString t_param_type = element["type"].GetString();
-                SVString t_param_value = element["value"].GetString();
-                if(!m_fs_paramtbl) {
-                    m_fs_paramtbl = MakeSharedPtr<SVParamTbl>();
-                }
-                m_fs_paramtbl->addParam(t_param_name.c_str(),t_param_type.c_str(),t_param_value.c_str());
+                ParamTblDsp _dsp;
+                _dsp.m_type = 1;
+                ParamTblFromJson(t_uniform[i],_dsp);
+                m_paramtbl.push_back(_dsp);
             }
         }
     }
     //解析gs
     if (item.HasMember("gs") && item["gs"].IsObject()) {
-        //
         m_shader_dsp.m_dsp |= SV_E_TECH_GS;
-        //
+        //函数入口
         RAPIDJSON_NAMESPACE::Document::Object gs_obj = item["gs"].GetObject();
         m_shader_dsp.m_gs_fname = gs_obj["entry"].GetString();
         //采样器
         if( gs_obj.HasMember("sampler")  && gs_obj["sampler"].IsArray() ) {
             RAPIDJSON_NAMESPACE::Document::Array t_sampler = gs_obj["sampler"].GetArray();
             for(s32 i=0;i<t_sampler.Size();i++) {
-                //
+                SamplerDsp t_sampler_dsp;
+                t_sampler_dsp.m_type = 2;
+                SamplerDspFromJson(t_sampler[i],t_sampler_dsp);
+                m_samplers.push_back(t_sampler_dsp);
+            }
+        }
+        //uniform参数
+        if( gs_obj.HasMember("uniform") && gs_obj["uniform"].IsArray() ) {
+            RAPIDJSON_NAMESPACE::Document::Array t_uniform = gs_obj["uniform"].GetArray();
+            for(s32 i=0;i<t_uniform.Size();i++) {
+                ParamTblDsp _dsp;
+                _dsp.m_type = 2;
+                ParamTblFromJson(t_uniform[i],_dsp);
+                m_paramtbl.push_back(_dsp);
             }
         }
     }
@@ -173,10 +208,54 @@ bool SVShader::fromJSON(RAPIDJSON_NAMESPACE::Value &item) {
 
 void SVShader::SamplerDspFromJson(RAPIDJSON_NAMESPACE::Value &item,SamplerDsp& _dsp) {
     if( item.IsObject() ) {
-        _dsp.m_chn = item["chn"].GetInt();
-        _dsp.m_warps = item["warp-s"].GetString();
-        _dsp.m_warpt = item["warp-t"].GetString();
-        _dsp.m_min = item["min"].GetString();
-        _dsp.m_mag = item["mag"].GetString();
+        if( item.HasMember("chn") && item["chn"].IsInt() ) {
+            _dsp.m_chn = item["chn"].GetInt();
+        }
+        if( item.HasMember("warp-s") && item["warp-s"].GetString() ) {
+            _dsp.m_warps = item["warp-s"].GetString();
+        }else{
+            _dsp.m_warps = "default";
+        }
+        //
+        if( item.HasMember("warp-t") && item["warp-t"].GetString() ) {
+            _dsp.m_warpt = item["warp-t"].GetString();
+        }else{
+            _dsp.m_warpt = "default";
+        }
+        //
+        if( item.HasMember("min") && item["min"].GetString() ) {
+            _dsp.m_min = item["min"].GetString();
+        }else{
+            _dsp.m_min = "default";
+        }
+        //
+        if( item.HasMember("mag") && item["mag"].GetString() ) {
+            _dsp.m_mag = item["mag"].GetString();
+        }else{
+            _dsp.m_mag = "default";
+        }
+    }
+}
+
+
+void SVShader::ParamTblFromJson(RAPIDJSON_NAMESPACE::Value &item,ParamTblDsp& _dsp) {
+    if( !item.IsObject() ) {
+        return;
+    }
+    //buf-id
+    if( item.HasMember("bufID") && item["bufID"].IsInt() ) {
+        _dsp.m_id = item["bufID"].GetInt();
+    }
+    //参数列表
+    if( item.HasMember("tbl") && item["tbl"].IsArray() ) {
+        _dsp.m_tbl = MakeSharedPtr<SVParamTbl>();
+        RAPIDJSON_NAMESPACE::Document::Array tbl = item["tbl"].GetArray();
+        for(s32 j=0;j<tbl.Size();j++) {
+            RAPIDJSON_NAMESPACE::Document::Object param = tbl[j].GetObject();
+            SVString t_param_name = param["name"].GetString();
+            SVString t_param_type = param["type"].GetString();
+            SVString t_param_value = param["value"].GetString();
+            _dsp.m_tbl->addParam(t_param_name.c_str(),t_param_type.c_str(),t_param_value.c_str());
+        }
     }
 }

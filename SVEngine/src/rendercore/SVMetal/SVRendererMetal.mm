@@ -154,15 +154,6 @@ bool SVRendererMetal::processShader(SVRShaderPtr _shader) {
     SVRShaderMetalPtr t_shader_metal = std::dynamic_pointer_cast<SVRShaderMetal>(_shader);
     if(t_shader_metal) {
         //传递uniform buffer
-        if(t_shader_metal->m_vs_ubuf) {
-            [m_pCurEncoder setVertexBuffer:t_shader_metal->m_vs_ubuf offset:0 atIndex:1];
-        }
-        if(t_shader_metal->m_fs_ubuf) {
-            [m_pCurEncoder setFragmentBuffer:t_shader_metal->m_fs_ubuf offset:0 atIndex:0];
-        }
-        if(t_shader_metal->m_gs_ubuf) {
-            //[m_pCurEncoder setVertexBuffer:m_dbufs[i] offset:0 atIndex:i];
-        }
     }
     return true;
 }

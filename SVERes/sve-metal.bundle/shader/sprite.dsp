@@ -6,7 +6,12 @@
     "vs": {
         "entry": "vertexShader",
         "uniform": [
-            { "name" : "matw", "type" : "fmat4", "value" : "null" }
+            {
+                "bufID" : 1,
+                "tbl" : [
+                            { "name" : "matw", "type" : "fmat4", "value" : "null" }
+                        ]
+            }
         ]
     },
     "fs":{

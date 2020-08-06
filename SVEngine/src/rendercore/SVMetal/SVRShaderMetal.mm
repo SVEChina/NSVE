@@ -56,57 +56,18 @@ void SVRShaderMetal::create(SVRendererPtr _renderer) {
             return; //编译出错了
         }
     }
+    //函数入口
     if( t_shader->m_shader_dsp.m_dsp &SV_E_TECH_VS ) {
         NSString* t_str = [NSString stringWithFormat:@"%s",t_shader->m_shader_dsp.m_vs_fname.c_str()];
         m_vsf = [t_lib newFunctionWithName:t_str];
-        //生成vs采样器
-        for(s32 i=0;i<t_shader->m_vs_sampler.size();i++) {
-            //生成sampler-dsp
-            MTLSamplerDescriptor *samplerDsp = _genSampler(t_shader->m_vs_sampler[i]);
-            //生成sampler-state
-            id<MTLSamplerState> t_sampler_state = [t_rm->m_pDevice newSamplerStateWithDescriptor:samplerDsp];
-            m_vs_sampler_st.push_back(t_sampler_state);
-        }
-        //
-        if(t_shader->m_vs_paramtbl) {
-            void* t_pointer = t_shader->m_vs_paramtbl->getDataPointer();
-            s32 t_len = t_shader->m_vs_paramtbl->getDataSize();
-            m_vs_ubuf = [t_rm->m_pDevice newBufferWithBytes:t_pointer length: t_len options: MTLResourceStorageModeShared ];
-        }
     }
     if( t_shader->m_shader_dsp.m_dsp&SV_E_TECH_FS ) {
         NSString* t_str = [NSString stringWithFormat:@"%s",t_shader->m_shader_dsp.m_fs_fname.c_str()];
         m_fsf = [t_lib newFunctionWithName:t_str];
-        //生成fs采样器
-        for(s32 i=0;i<t_shader->m_fs_sampler.size();i++) {
-            //生成sampler-dsp
-            MTLSamplerDescriptor *samplerDsp = _genSampler(t_shader->m_fs_sampler[i]);
-            //生成sampler-state
-            id<MTLSamplerState> t_sampler_state = [t_rm->m_pDevice newSamplerStateWithDescriptor:samplerDsp];
-            m_fs_sampler_st.push_back(t_sampler_state);
-        }
-        //
-        if(t_shader->m_fs_paramtbl) {
-            void* t_pointer = t_shader->m_fs_paramtbl->getDataPointer();
-            s32 t_len = t_shader->m_fs_paramtbl->getDataSize();
-            m_fs_ubuf = [t_rm->m_pDevice newBufferWithBytes:t_pointer length: t_len options: MTLResourceStorageModeShared ];
-        }
     }
     if( t_shader->m_shader_dsp.m_dsp&SV_E_TECH_GS ) {
         NSString* t_str = [NSString stringWithFormat:@"%s",t_shader->m_shader_dsp.m_gs_fname.c_str()];
         m_gsf = [t_lib newFunctionWithName:t_str];
-        //生成gs采样器
-        for(s32 i=0;i<t_shader->m_gs_sampler.size();i++) {
-            //生成sampler-dsp
-            MTLSamplerDescriptor *samplerDsp = _genSampler(t_shader->m_gs_sampler[i]);
-            //生成sampler-state
-            id<MTLSamplerState> t_sampler_state = [t_rm->m_pDevice newSamplerStateWithDescriptor:samplerDsp];
-            m_gs_sampler_st.push_back(t_sampler_state);
-        }
-        //
-        if(t_shader->m_gs_paramtbl) {
-            //
-        }
     }
     if( t_shader->m_shader_dsp.m_dsp&SV_E_TECH_TSE ) {
         NSString* t_str = [NSString stringWithFormat:@"%s",t_shader->m_shader_dsp.m_tsc_fname.c_str()];
@@ -116,7 +77,27 @@ void SVRShaderMetal::create(SVRendererPtr _renderer) {
         NSString* t_str = [NSString stringWithFormat:@"%s",t_shader->m_shader_dsp.m_tse_fname.c_str()];
         m_tsdf = [t_rm->m_pLibrary newFunctionWithName:t_str];
     }
-    //
+    //生成vs采样器(都在一起)
+    for(s32 i=0;i<t_shader->m_samplers.size();i++) {
+        INSAMPLE t_sampler;
+        //生成sampler-dsp
+        MTLSamplerDescriptor *samplerDsp = _genSampler(t_shader->m_samplers[i]);
+        //生成sampler-state
+        t_sampler.m_st = [t_rm->m_pDevice newSamplerStateWithDescriptor:samplerDsp];
+        t_sampler.m_chn = t_shader->m_samplers[i].m_chn;
+        t_sampler.m_type = t_shader->m_samplers[i].m_type;
+        m_sampler_st.push_back(t_sampler);
+    }
+    //生成uniform-buf
+    for(s32 i=0;i<t_shader->m_paramtbl.size();i++) {
+        void* t_pointer = t_shader->m_paramtbl[i].m_tbl->getDataPointer();
+        s32 t_len = t_shader->m_paramtbl[i].m_tbl->getDataSize();
+        UBUF t_ubuf;
+        t_ubuf.m_bufid = t_shader->m_paramtbl[i].m_id;
+        t_ubuf.m_type = t_shader->m_paramtbl[i].m_type;
+        t_ubuf.m_ubuf = [t_rm->m_pDevice newBufferWithBytes:t_pointer length: t_len options: MTLResourceStorageModeShared ];
+        m_ubuf_pool.push_back(t_ubuf);
+    }
     m_vft = t_shader->m_shader_dsp.m_vft;
     //创建渲染描述
     MTLRenderPipelineDescriptor *t_pl_dsp = [[MTLRenderPipelineDescriptor alloc] init];
@@ -311,21 +292,15 @@ MTLVertexDescriptor* SVRShaderMetal::_genVertexDsp(VFTYPE _vf,BUFFERMODE _mode) 
 }
 
 void SVRShaderMetal::destroy(SVRendererPtr _renderer) {
-    //采样器销毁
-    for(s32 i=0;i<m_vs_sampler_st.size();i++) {
+    //in-sampler销毁
+    for(s32 i=0;i<m_sampler_st.size();i++) {
     }
-    m_vs_sampler_st.clear();
-    //
-    for(s32 i=0;i<m_fs_sampler_st.size();i++) {
-    }
-    m_fs_sampler_st.clear();
-    //
-    for(s32 i=0;i<m_gs_sampler_st.size();i++) {
-    }
-    m_gs_sampler_st.clear();
+    m_sampler_st.clear();
+    //u-buf销毁
     //
     if(m_pl_state!=nullptr) {
     }
+    //uniform-buf销毁
 }
 
 bool SVRShaderMetal::active(SVRendererPtr _renderer) {
@@ -339,33 +314,27 @@ bool SVRShaderMetal::active(SVRendererPtr _renderer) {
     if(!m_pl_state) {
         return false;
     }
-    //设置采样器
-    for(s32 i=0;i<m_vs_sampler_st.size();i++) {
-        [t_rm->m_pCurEncoder setVertexSamplerState:m_vs_sampler_st[i] atIndex:i];
+    //采样器更新
+    for(s32 i=0;i<m_sampler_st.size();i++) {
+        if(m_sampler_st[i].m_type == 0) {
+            [t_rm->m_pCurEncoder setVertexSamplerState:m_sampler_st[i].m_st atIndex:m_sampler_st[i].m_chn];
+        }else if(m_sampler_st[i].m_type == 1) {
+            [t_rm->m_pCurEncoder setFragmentSamplerState:m_sampler_st[i].m_st atIndex:m_sampler_st[i].m_chn];
+        }
     }
-    //
-    for(s32 i=0;i<m_fs_sampler_st.size();i++) {
-        [t_rm->m_pCurEncoder setFragmentSamplerState:m_fs_sampler_st[i] atIndex:i];
+    //u-buf更新
+    for(s32 i=0;i<m_ubuf_pool.size();i++) {
+        if( m_ubuf_pool[i].m_type == 0 ) {
+            //vs
+            [t_rm->m_pCurEncoder setVertexBuffer:m_ubuf_pool[i].m_ubuf offset:0 atIndex:m_ubuf_pool[i].m_bufid];
+        }else if( m_ubuf_pool[i].m_type == 1 ) {
+            //fs
+            [t_rm->m_pCurEncoder setFragmentBuffer:m_ubuf_pool[i].m_ubuf offset:0 atIndex:m_ubuf_pool[i].m_bufid];
+        }else if( m_ubuf_pool[i].m_type == 2 ) {
+            //gs
+            //[t_rm->m_pCurEncoder setFragmentBuffer:m_ubuf_pool[i].m_ubuf offset:0 atIndex:m_ubuf_pool[i].m_bufid];
+        }
     }
-    //
-    for(s32 i=0;i<m_gs_sampler_st.size();i++) {
-        //[t_rm->m_pCurEncoder setFragmentSamplerState:m_gs_sampler_st[i] atIndex:i];
-    }
-    //
-    if(m_vs_ubuf) {
-        
-    }
-    if(m_fs_ubuf) {
-        
-    }
-    if(m_gs_ubuf) {
-        
-    }
-//    //
-//    id<MTLBuffer> m_vs_ubuf;
-//    id<MTLBuffer> m_fs_ubuf;
-//    id<MTLBuffer> m_gs_ubuf;
-    //
     [t_rm->m_pCurEncoder setRenderPipelineState:m_pl_state];
     return true;
 }

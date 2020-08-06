@@ -79,7 +79,6 @@ SVRenderMeshPtr SVGeoGen::genRect(SVInstPtr _app,f32 _w,f32 _h,SVBoundBox& _aabb
 }
 
 SVRenderMeshPtr SVGeoGen::genRectARCHO(SVInstPtr _app,f32 _w,f32 _h,EUIARCHO _archo,SVBoundBox& _aabb) {
-//    //
 //    s16 t_index_data[] = { 0,1,2,2,1,3 };
 //    V3_T0 t_verts[4];
 //    //

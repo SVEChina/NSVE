@@ -101,9 +101,9 @@ bool SVRendererGL::processMtl(SVMtlCorePtr _mtl) {
             if(t_rshader) {
                 SVRShaderGLPtr t_gl_shader = std::dynamic_pointer_cast<SVRShaderGL>(t_rshader);
                 if(t_gl_shader) {
-                    t_gl_shader->submitParamTbl(_mtl->getShader()->m_vs_paramtbl);
-                    t_gl_shader->submitParamTbl(_mtl->getShader()->m_fs_paramtbl);
-                    t_gl_shader->submitParamTbl(_mtl->getShader()->m_gs_paramtbl);
+//                    t_gl_shader->submitParamTbl(_mtl->getShader()->m_vs_paramtbl);
+//                    t_gl_shader->submitParamTbl(_mtl->getShader()->m_fs_paramtbl);
+//                    t_gl_shader->submitParamTbl(_mtl->getShader()->m_gs_paramtbl);
                 }
             }
 //            //提交纹理
