@@ -30,7 +30,6 @@ namespace sv {
     public:
         BufferDsp(BUFFERMODE _mode) {
             _bufMode = _mode;           //E_BFM_AOS;
-            _bufVertDsp = E_VF_BASE;
             _bufType = E_BFT_STATIC_DRAW;
             _vertCnt = 0;
             _bufSize = 0;
@@ -39,20 +38,18 @@ namespace sv {
         
         ~BufferDsp() {
             _bufMode = E_BFM_AOS;
-            _bufVertDsp = E_VF_BASE;
             _bufType = E_BFT_STATIC_DRAW;
             _vertCnt = 0;
             _bufSize = 0;
             reset();
         };
         //
-        BufferDspPtr push(s32 _stype) {
+        void push(s32 _stype) {
             std::map<s32,SVDataSwapPtr>::iterator it = m_streamData.find(_stype);
             if( it == m_streamData.end() ) {
                 m_streamDsp.push_back(_stype);
                 m_streamData.insert(std::make_pair(_stype,nullptr));
             }
-            return std::dynamic_pointer_cast<BufferDsp>(shared_from_this());
         }
         
         //重置
@@ -60,6 +57,53 @@ namespace sv {
             _bufData = nullptr;
             m_streamDsp.clear();
             m_streamData.clear();
+        }
+        
+        //数据顶点描述
+        VFTYPE getVertType() {
+            s32 t_vt = E_VF_BASE;
+            for(s32 i=0;i<m_streamDsp.size();i++) {
+                t_vt = t_vt | m_streamDsp[i];
+            }
+            return VFTYPE(t_vt);
+        }
+        
+        static s32 getVertSize(VFTYPE _vf) {
+            s32 t_size = 0;
+            if (_vf & SV_SMT_INDEX) {
+                t_size += sizeof(u16);
+            }
+            if (_vf & SV_SMT_V2) {
+                t_size += 2 * sizeof(f32);
+            }
+            if (_vf & SV_SMT_V3) {
+                t_size += 3 * sizeof(f32);
+            }
+            if (_vf & SV_SMT_NOR) {
+                t_size += 3 * sizeof(f32);
+            }
+            if (_vf & SV_SMT_TAG) {
+                t_size += 4 * sizeof(f32);
+            }
+            if (_vf & SV_SMT_BTAG) {
+                t_size += 4 * sizeof(f32);
+            }
+            if (_vf & SV_SMT_C0) {
+                t_size += 4 * sizeof(u8);
+            }
+            if (_vf & SV_SMT_T0) {
+                t_size += 2 * sizeof(f32);
+            }
+            if (_vf & SV_SMT_T1) {
+                t_size += 2 * sizeof(f32);
+            }
+            if (_vf & SV_SMT_BONE) {
+                t_size += 4 * sizeof(u16);
+            }
+            if (_vf & SV_SMT_BONE_W) {
+                t_size += 4 * sizeof(f32);
+            }
+            return t_size;
         }
         
         //设置流数据
@@ -103,8 +147,6 @@ namespace sv {
         
         //
         BUFFERMODE _bufMode;    //E_BFM_AOS 混合流，E_BFM_SOA 单一流
-        //数据顶点描述
-        VFTYPE _bufVertDsp;     //顶点描述信息
         //数据类型
         BUFFERTYPE _bufType;    //BUFFER类型
         //数据个数
@@ -124,10 +166,7 @@ namespace sv {
      */
     class SVRenderMesh : public SVGBaseEx {
     public:
-        static void buildBufferDsp(VFTYPE _vertype,
-                                   BUFFERTYPE _buftype,
-                                   s32 _vertCnt,
-                                   BufferDspPtr _dsp);
+        static void buildBufferDsp(BUFFERTYPE _buftype,s32 _vertCnt,BufferDspPtr _dsp);
         
     public:
         SVRenderMesh(SVInstPtr _app);

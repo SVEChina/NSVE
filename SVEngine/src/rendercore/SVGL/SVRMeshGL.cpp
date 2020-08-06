@@ -145,62 +145,62 @@ s32 SVRMeshGL::process(SVRendererPtr _renderer){
             //设置顶点描述
             VFTYPE _vf = m_ver_dsp[i];
             s8* t_off = 0;
-            if (_vf & D_VF_V2) {
+            if (_vf & SV_SMT_V2) {
                 s32 t_attr = glGetAttribLocation(t_program,NAME_POSITION);
                 glEnableVertexAttribArray(t_attr);
                 glVertexAttribPointer(t_attr, 2, GL_FLOAT, GL_FALSE, 0,(void *)t_off);
                 t_off += 2 * sizeof(f32);
             }
-            if (_vf & D_VF_V3) {
+            if (_vf & SV_SMT_V3) {
                 s32 t_attr = glGetAttribLocation(t_program,NAME_POSITION);
                 glEnableVertexAttribArray(t_attr);
                 glVertexAttribPointer(t_attr, 3, GL_FLOAT, GL_FALSE, 0,(void *)t_off);
                 t_off += 3 * sizeof(f32);
             }
-            if (_vf & D_VF_NOR) {
+            if (_vf & SV_SMT_NOR) {
                 s32 t_attr = glGetAttribLocation(t_program,NAME_NORMAL);
                 glEnableVertexAttribArray(t_attr);
                 glVertexAttribPointer(t_attr, 3, GL_FLOAT, GL_FALSE, 0,(void *)t_off);
                 t_off += 3 * sizeof(f32);
             }
-            if (_vf & D_VF_TAG) {
+            if (_vf & SV_SMT_TAG) {
                 s32 t_attr = glGetAttribLocation(t_program,NAME_TAGENT);
                 glEnableVertexAttribArray(t_attr);
                 glVertexAttribPointer(t_attr, 4, GL_FLOAT, GL_FALSE, 0,(void *)t_off);
                 t_off += 4 * sizeof(f32);
             }
-            if (_vf & D_VF_BTAG) {
+            if (_vf & SV_SMT_BTAG) {
                 s32 t_attr = glGetAttribLocation(t_program,NAME_BNOR);
                 glEnableVertexAttribArray(t_attr);
                 glVertexAttribPointer(t_attr, 4, GL_FLOAT, GL_FALSE, 0,(void *)t_off);
                 t_off += 4 * sizeof(f32);
             }
-            if (_vf & D_VF_C0) {
+            if (_vf & SV_SMT_C0) {
                 s32 t_attr = glGetAttribLocation(t_program,NAME_COLOR);
                 glEnableVertexAttribArray(t_attr);
                 glVertexAttribPointer(t_attr, 4, GL_UNSIGNED_BYTE, GL_TRUE, 0, (void *)t_off);
                 t_off += 4 * sizeof(u8);
             }
-            if (_vf & D_VF_T0) {
+            if (_vf & SV_SMT_T0) {
                 s32 t_attr = glGetAttribLocation(t_program,NAME_TEXCOORD0);
                 glEnableVertexAttribArray(t_attr);
                 glVertexAttribPointer(t_attr, 2, GL_FLOAT, GL_FALSE, 0,(void *)t_off);
                 t_off += 2 * sizeof(f32);
             }
-            if (_vf & D_VF_T1) {
+            if (_vf & SV_SMT_T1) {
                 s32 t_attr = glGetAttribLocation(t_program,NAME_TEXCOORD1);
                 glEnableVertexAttribArray(t_attr);
                 glVertexAttribPointer(t_attr, 2, GL_FLOAT, GL_FALSE, 0,(void *)t_off);
                 t_off += 2 * sizeof(f32);
             }
-            if (_vf & D_VF_BONE) {
+            if (_vf & SV_SMT_BONE) {
                 //骨骼ID
                 s32 t_attr = glGetAttribLocation(t_program,NAME_BONE_ID);
                 glEnableVertexAttribArray(t_attr);
                 glVertexAttribPointer(t_attr, 4, GL_UNSIGNED_SHORT, GL_FALSE, 0,(void *)t_off);
                 t_off += 4 * sizeof(u16);
             }
-            if (_vf & D_VF_BONE_W) {
+            if (_vf & SV_SMT_BONE_W) {
                 //骨骼权重
                 s32 t_attr = glGetAttribLocation(t_program,NAME_BONE_WEIGHT);
                 glEnableVertexAttribArray(t_attr);

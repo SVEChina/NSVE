@@ -40,7 +40,7 @@ namespace sv {
         
     protected:
         MTLSamplerDescriptor* _genSampler(SamplerDsp& _dsp);
-        MTLVertexDescriptor* _genVertexDsp(VFTYPE _vf);
+        MTLVertexDescriptor* _genVertexDsp(VFTYPE _vf,BUFFERMODE _mode);
         
         id<MTLFunction> m_vsf;
         id<MTLFunction> m_gsf;

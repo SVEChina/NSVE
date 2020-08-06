@@ -13,14 +13,11 @@
 
 using namespace sv;
 
-void SVRenderMesh::buildBufferDsp(VFTYPE _vertype,BUFFERTYPE _buftype,s32 _vertCnt,BufferDspPtr _dsp) {
+void SVRenderMesh::buildBufferDsp(BUFFERTYPE _buftype,s32 _vertCnt,BufferDspPtr _dsp) {
     if(_dsp) {
-        _dsp->_bufVertDsp = _vertype;
         _dsp->_bufType = _buftype;
         _dsp->_vertCnt = _vertCnt;
-//        _dsp->_bufSize = _bufsize;
-//        _dsp->_bufData = MakeSharedPtr<SVDataSwap>();
-//        _dsp->_bufData->appendData(_data, _bufsize);
+        _dsp->_bufSize = _vertCnt * BufferDsp::getVertSize(_dsp->getVertType());
     }
 }
 

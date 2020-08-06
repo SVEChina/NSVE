@@ -41,116 +41,56 @@ void SVRMeshMetal::create(SVRendererPtr _renderer) {
     if(t_rm && t_rendermesh) {
         //索引
         BufferDspPtr t_index_dsp = t_rendermesh->getIndexDsp();
-        if(t_index_dsp && t_index_dsp->_bufVertDsp ==E_VF_INDEX) {
+        if(t_index_dsp && t_index_dsp->getVertType() == E_VF_INDEX) {
             m_iCnt = t_index_dsp->_vertCnt;
-            m_ibuf = [t_rm->m_pDevice newBufferWithBytes:t_index_dsp->_bufData->getData() length: t_index_dsp->_bufSize options: MTLResourceStorageModeShared ];
+            if(t_index_dsp->_bufData) {
+                void* t_p = t_index_dsp->_bufData->getData();
+                s32 t_len = t_index_dsp->_bufData->getSize();
+                m_ibuf = [t_rm->m_pDevice newBufferWithBytes:t_p length:t_len options: MTLResourceStorageModeShared ];
+            }else{
+                s32 t_len = t_index_dsp->_bufSize;
+                m_ibuf = [t_rm->m_pDevice newBufferWithLength:t_len options: MTLResourceStorageModeShared ];
+            }
         }
         //多实例
         BufferDspPtr t_instance_dsp = t_rendermesh->getInstanceDsp();
         if(t_instance_dsp && t_instance_dsp->_bufSize>0) {
             if(t_instance_dsp->_bufData) {
-                m_instance_buf = [t_rm->m_pDevice newBufferWithBytes:t_instance_dsp->_bufData->getData() length: t_instance_dsp->_bufSize options: MTLResourceStorageModeShared ];
+                void* t_p = t_instance_dsp->_bufData->getData();
+                s32 t_len = t_instance_dsp->_bufData->getSize();
+                m_instance_buf = [t_rm->m_pDevice newBufferWithBytes:t_p length:t_len options: MTLResourceStorageModeShared ];
             }else{
                 m_instance_buf = [t_rm->m_pDevice newBufferWithLength:t_instance_dsp->_bufSize options: MTLResourceStorageModeShared ];
             }
         }
+        //顶点数据
         BufferDspPtr t_buf_dsp = t_rendermesh->getStreamDsp();
         if( t_buf_dsp->_bufMode == E_BFM_AOS ) {
-            //创建一个buf
-            id<MTLBuffer> posBuf = [t_rm->m_pDevice newBufferWithBytes:t_buf_dsp->_bufData->getData()
-                                                     length: t_buf_dsp->_bufSize
-                                                    options: MTLResourceStorageModeShared ];
-            //单一流
-            m_dbufs[0] = posBuf;
+            //单流
+            if(t_buf_dsp->_bufData) {
+                void* t_p = t_buf_dsp->_bufData->getData();
+                s32 t_len = t_buf_dsp->_bufData->getSize();
+                m_dbufs[0] = [t_rm->m_pDevice newBufferWithBytes:t_p length: t_len options:MTLResourceStorageModeShared ];
+            }else{
+                s32 t_len = t_buf_dsp->_bufSize;
+                m_dbufs[0] = [t_rm->m_pDevice newBufferWithLength:t_len options:MTLResourceStorageModeShared ];
+            }
             m_streanNum = 1;
         }else{
-            //混合流模式
-            VFTYPE _vf = t_buf_dsp->_bufVertDsp;
-            s32 t_attri_index = 0;
-            s32 t_vert_size = 0;
-            s8* t_pointer = (s8*)(t_buf_dsp->_bufData->getData());
-            s32 t_pointer_off = 0;
-            if (_vf & D_VF_V2) {
-                t_vert_size += 2*sizeof(f32)*t_buf_dsp->_vertCnt;
-                m_dbufs[t_attri_index] = [t_rm->m_pDevice newBufferWithBytes:t_pointer + t_pointer_off
-                                                         length: t_vert_size
-                                                        options: MTLResourceStorageModeShared ];
-                t_pointer_off = t_vert_size;
-                t_attri_index++;
+            //多流
+            m_streanNum = s32(t_buf_dsp->m_streamDsp.size());
+            for(s32 i=0;i<m_streanNum;i++) {
+                s32 t_smt = t_buf_dsp->m_streamDsp[i];
+                SVDataSwapPtr t_data = t_buf_dsp->m_streamData[t_smt];
+                if(t_data) {
+                    void* t_point = t_data->getData();
+                    s32 t_len = t_data->getSize();
+                    m_dbufs[i] = [t_rm->m_pDevice newBufferWithBytes:t_point length:t_len options:MTLResourceStorageModeShared];
+                }else{
+                    s32 t_len = t_buf_dsp->_vertCnt*BufferDsp::getVertSize(t_buf_dsp->getVertType());
+                    m_dbufs[i] = [t_rm->m_pDevice newBufferWithLength:t_len options:MTLResourceStorageModeShared];
+                }
             }
-            if (_vf & D_VF_V3) {
-                t_vert_size += 3*sizeof(f32)*t_buf_dsp->_vertCnt;
-                m_dbufs[t_attri_index] = [t_rm->m_pDevice newBufferWithBytes:t_pointer + t_pointer_off
-                                                         length: t_vert_size
-                                                        options: MTLResourceStorageModeShared ];
-                t_pointer_off = t_vert_size;
-                t_attri_index++;
-            }
-            if (_vf & D_VF_NOR) {
-                t_vert_size += 3*sizeof(f32)*t_buf_dsp->_vertCnt;
-                m_dbufs[t_attri_index] = [t_rm->m_pDevice newBufferWithBytes:t_pointer + t_pointer_off
-                                                         length: t_vert_size
-                                                        options: MTLResourceStorageModeShared ];
-                t_pointer_off = t_vert_size;
-                t_attri_index++;
-            }
-            if (_vf & D_VF_TAG) {
-                t_vert_size += 3*sizeof(f32)*t_buf_dsp->_vertCnt;
-                m_dbufs[t_attri_index] = [t_rm->m_pDevice newBufferWithBytes:t_pointer + t_pointer_off
-                                                         length: t_vert_size
-                                                        options: MTLResourceStorageModeShared ];
-                t_pointer_off = t_vert_size;
-                t_attri_index++;
-            }
-            if (_vf & D_VF_BTAG) {
-                t_vert_size += 3*sizeof(f32)*t_buf_dsp->_vertCnt;
-                m_dbufs[t_attri_index] = [t_rm->m_pDevice newBufferWithBytes:t_pointer + t_pointer_off
-                                                         length: t_vert_size
-                                                        options: MTLResourceStorageModeShared ];
-                t_pointer_off = t_vert_size;
-                t_attri_index++;
-            }
-            if (_vf & D_VF_C0) {
-                t_vert_size += 4*sizeof(u8)*t_buf_dsp->_vertCnt;
-                m_dbufs[t_attri_index] = [t_rm->m_pDevice newBufferWithBytes:t_pointer + t_pointer_off
-                                                         length: t_vert_size
-                                                        options: MTLResourceStorageModeShared ];
-                t_pointer_off = t_vert_size;
-                t_attri_index++;
-            }
-            if (_vf & D_VF_T0) {
-                t_vert_size += 2*sizeof(f32)*t_buf_dsp->_vertCnt;
-                m_dbufs[t_attri_index] = [t_rm->m_pDevice newBufferWithBytes:t_pointer + t_pointer_off
-                                                         length: t_vert_size
-                                                        options: MTLResourceStorageModeShared ];
-                t_pointer_off = t_vert_size;
-                t_attri_index++;
-            }
-            if (_vf & D_VF_T1) {
-                t_vert_size += 2*sizeof(f32)*t_buf_dsp->_vertCnt;
-                m_dbufs[t_attri_index] = [t_rm->m_pDevice newBufferWithBytes:t_pointer + t_pointer_off
-                                                         length: t_vert_size
-                                                        options: MTLResourceStorageModeShared ];
-                t_pointer_off = t_vert_size;
-                t_attri_index++;
-            }
-            if (_vf & D_VF_BONE) {
-                t_vert_size += 4*sizeof(u16)*t_buf_dsp->_vertCnt;
-                m_dbufs[t_attri_index] = [t_rm->m_pDevice newBufferWithBytes:t_pointer + t_pointer_off
-                                                         length: t_vert_size
-                                                        options: MTLResourceStorageModeShared ];
-                t_pointer_off = t_vert_size;
-                t_attri_index++;
-            }
-            if (_vf & D_VF_BONE_W) {
-                t_vert_size += 4*sizeof(f32)*t_buf_dsp->_vertCnt;
-                m_dbufs[t_attri_index] = [t_rm->m_pDevice newBufferWithBytes:t_pointer + t_pointer_off
-                                                         length: t_vert_size
-                                                        options: MTLResourceStorageModeShared ];
-                t_pointer_off = t_vert_size;
-                t_attri_index++;
-            }
-            m_streanNum = t_attri_index;
         }
     }
     m_exist = true;

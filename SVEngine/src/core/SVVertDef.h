@@ -307,74 +307,53 @@ enum {
 };
 
 //
-#define SV_SMT_INDEX  0
-#define SV_SMT_INSTANCE 1
-#define SV_SMT_V2    2
-#define SV_SMT_V3    3
-#define SV_SMT_NOR  4
-#define SV_SMT_TAG  5
-#define SV_SMT_BTAG 6
-#define SV_SMT_C0   7
-#define SV_SMT_C1   8
-#define SV_SMT_C2   9
-#define SV_SMT_C3   10
-#define SV_SMT_T0       11
-#define SV_SMT_T1       12
-#define SV_SMT_T2       13
-#define SV_SMT_T3       14
-#define SV_SMT_BONE     15
-#define SV_SMT_BONE_W   16
-#define SV_SMT_PARTICLE 17
-#define SV_SMT_INSOFFSET 18
-
-//顶点格式索引
-#define D_VF_NULL  0x0000
-#define D_VF_INDEX 0x0001
-#define D_VF_V2    0x0002
-#define D_VF_V3    0x0004
-#define D_VF_NOR  0x0010
-#define D_VF_TAG  0x0020
-#define D_VF_BTAG 0x0040
-#define D_VF_C0   0x0100
-#define D_VF_C1   0x0200
-#define D_VF_C2   0x0400
-#define D_VF_C3   0x0800
-#define D_VF_T0       0x1000
-#define D_VF_T1       0x2000
-#define D_VF_T2       0x4000
-#define D_VF_T3       0x8000
-#define D_VF_BONE     0x00010000
-#define D_VF_BONE_W   0x00020000
-#define D_VF_PARTICLE 0x00100000
-#define D_VF_INSOFFSET 0x00200000
+#define SV_SMT_NULL         0x0000
+#define SV_SMT_INDEX        0x0001
+#define SV_SMT_V2           0x0002
+#define SV_SMT_V3           0x0004
+#define SV_SMT_NOR          0x0010
+#define SV_SMT_TAG          0x0020
+#define SV_SMT_BTAG         0x0040
+#define SV_SMT_C0           0x0100
+#define SV_SMT_C1           0x0200
+#define SV_SMT_C2           0x0400
+#define SV_SMT_C3           0x0800
+#define SV_SMT_T0           0x1000
+#define SV_SMT_T1           0x2000
+#define SV_SMT_T2           0x4000
+#define SV_SMT_T3           0x8000
+#define SV_SMT_BONE         0x00010000
+#define SV_SMT_BONE_W       0x00020000
+#define SV_SMT_PARTICLE     0x00100000
+#define SV_SMT_INSOFFSET    0x00200000
 
 enum VFTYPE {
-    E_VF_BASE = D_VF_NULL,
-    E_VF_INDEX = D_VF_INDEX,
-    E_VF_V2 = D_VF_V2,
-    E_VF_V2_T0 = D_VF_V2 | D_VF_T0,
-    E_VF_V2_T0_T1 = D_VF_V2 | D_VF_T0 | D_VF_T1,
-    E_VF_V2_T0_T1_T2 = D_VF_V2 | D_VF_T0 | D_VF_T1 | D_VF_T2,
-    E_VF_V2_C = D_VF_V2 | D_VF_C0,
-    E_VF_V2_C_T0 = D_VF_V2 | D_VF_C0 | D_VF_T0,
-    E_VF_V2_C_T0_T1 = D_VF_V2 | D_VF_C0 | D_VF_T0 | D_VF_T1,
-    E_VF_V3 = D_VF_V3,
-    E_VF_V3_T0 = D_VF_V3 | D_VF_T0,
-    E_VF_V3_T0_T1 = D_VF_V3 | D_VF_T0 | D_VF_T1,
-    E_VF_V3_N = D_VF_V3 | D_VF_NOR,
-    E_VF_V3_N_T0 = D_VF_V3 | D_VF_NOR | D_VF_T0,
-    E_VF_V3_N_T0_T1 = D_VF_V3 | D_VF_NOR | D_VF_T0 | D_VF_T1,
-    E_VF_V3_C = D_VF_V3 | D_VF_C0,
-    E_VF_V3_C_T0 = D_VF_V3 | D_VF_C0 | D_VF_T0,
-    E_VF_V3_C_T0_T1 = D_VF_V3 | D_VF_C0 | D_VF_T0 | D_VF_T1,
-    E_VF_V3_N_C = D_VF_V3 | D_VF_NOR | D_VF_C0,
-    E_VF_V3_N_C_T0 = D_VF_V3 | D_VF_NOR | D_VF_C0 | D_VF_T0,
-    E_VF_V3_N_C_T0_T1 = D_VF_V3 | D_VF_NOR | D_VF_C0 | D_VF_T0 | D_VF_T1,
-    E_VF_V3_N_T0_BONE_W = D_VF_V3 | D_VF_NOR | D_VF_T0 | D_VF_BONE |D_VF_BONE_W,
-    E_VF_V3_N_C_T0_BONE_W = D_VF_V3 | D_VF_NOR | D_VF_C0 | D_VF_T0 | D_VF_BONE | D_VF_BONE_W,
-    E_VF_V3_C_BTAG = D_VF_V3 | D_VF_C0 | D_VF_BTAG,
-    E_VF_V3_N_T_T0 = D_VF_V3 | D_VF_NOR | D_VF_TAG | D_VF_T0,
-    E_VF_V3_PARTICLE = D_VF_PARTICLE
+    E_VF_BASE = SV_SMT_NULL,
+    E_VF_INDEX = SV_SMT_INDEX,
+    E_VF_V2 = SV_SMT_V2,
+    E_VF_V2_T0 = SV_SMT_V2 | SV_SMT_T0,
+    E_VF_V2_T0_T1 = SV_SMT_V2 | SV_SMT_T0 | SV_SMT_T1,
+    E_VF_V2_T0_T1_T2 = SV_SMT_V2 | SV_SMT_T0 | SV_SMT_T1 | SV_SMT_T2,
+    E_VF_V2_C = SV_SMT_V2 | SV_SMT_C0,
+    E_VF_V2_C_T0 = SV_SMT_V2 | SV_SMT_C0 | SV_SMT_T0,
+    E_VF_V2_C_T0_T1 = SV_SMT_V2 | SV_SMT_C0 | SV_SMT_T0 | SV_SMT_T1,
+    E_VF_V3 = SV_SMT_V3,
+    E_VF_V3_T0 = SV_SMT_V3 | SV_SMT_T0,
+    E_VF_V3_T0_T1 = SV_SMT_V3 | SV_SMT_T0 | SV_SMT_T1,
+    E_VF_V3_N = SV_SMT_V3 | SV_SMT_NOR,
+    E_VF_V3_N_T0 = SV_SMT_V3 | SV_SMT_NOR | SV_SMT_T0,
+    E_VF_V3_N_T0_T1 = SV_SMT_V3 | SV_SMT_NOR | SV_SMT_T0 | SV_SMT_T1,
+    E_VF_V3_C = SV_SMT_V3 | SV_SMT_C0,
+    E_VF_V3_C_T0 = SV_SMT_V3 | SV_SMT_C0 | SV_SMT_T0,
+    E_VF_V3_C_T0_T1 = SV_SMT_V3 | SV_SMT_C0 | SV_SMT_T0 | SV_SMT_T1,
+    E_VF_V3_N_C = SV_SMT_V3 | SV_SMT_NOR | SV_SMT_C0,
+    E_VF_V3_N_C_T0 = SV_SMT_V3 | SV_SMT_NOR | SV_SMT_C0 | SV_SMT_T0,
+    E_VF_V3_N_C_T0_T1 = SV_SMT_V3 | SV_SMT_NOR | SV_SMT_C0 | SV_SMT_T0 | SV_SMT_T1,
+    E_VF_V3_N_T0_BONE_W = SV_SMT_V3 | SV_SMT_NOR | SV_SMT_T0 | SV_SMT_BONE |SV_SMT_BONE_W,
+    E_VF_V3_N_C_T0_BONE_W = SV_SMT_V3 | SV_SMT_NOR | SV_SMT_C0 | SV_SMT_T0 | SV_SMT_BONE | SV_SMT_BONE_W,
+    E_VF_V3_C_BTAG = SV_SMT_V3 | SV_SMT_C0 | SV_SMT_BTAG,
+    E_VF_V3_N_T_T0 = SV_SMT_V3 | SV_SMT_NOR | SV_SMT_TAG | SV_SMT_T0,
+    E_VF_V3_PARTICLE = SV_SMT_PARTICLE
 };
 
 class SVJsonDef {

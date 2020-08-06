@@ -41,15 +41,14 @@ void SVComData::init() {
     m_screenMesh = MakeSharedPtr<SVRenderMesh>(mApp);
     BufferDspPtr t_index_dsp = MakeSharedPtr<BufferDsp>(E_BFM_AOS);
     t_index_dsp->push(SV_SMT_INDEX);
-    SVRenderMesh::buildBufferDsp(E_VF_INDEX,E_BFT_STATIC_DRAW,6,t_index_dsp);
-    
+    SVRenderMesh::buildBufferDsp(E_BFT_STATIC_DRAW,6,t_index_dsp);
     t_index_dsp->setStreamData(0, m_rect_index, 6*sizeof(u16));
     m_screenMesh->setIndexDsp(t_index_dsp);
     //
     BufferDspPtr t_vert_dsp= MakeSharedPtr<BufferDsp>(E_BFM_AOS);
     t_vert_dsp->push(SV_SMT_V2);
     t_vert_dsp->push(SV_SMT_T0);
-    SVRenderMesh::buildBufferDsp(E_VF_V3_T0,E_BFT_STATIC_DRAW,4,t_vert_dsp);
+    SVRenderMesh::buildBufferDsp(E_BFT_STATIC_DRAW,4,t_vert_dsp);
     t_vert_dsp->setStreamData(0, m_screen_rect_v2_t0, 16*sizeof(f32));
     m_screenMesh->setVertDsp(t_vert_dsp);
     

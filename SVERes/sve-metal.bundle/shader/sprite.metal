@@ -31,10 +31,10 @@ struct FSOutput{
 };
 
 //
-vertex VertexOut vertexShader( Vertex input [[stage_in]] ,
-                               constant Uniforms & uniforms [[ buffer(1) ]] ) {
+//constant Uniforms & uniforms [[ buffer(1) ]]
+vertex VertexOut vertexShader( Vertex input [[stage_in]]  ) {
     VertexOut vert;
-    vert.position = float4(input.position,0.0,1.0) * uniforms.matw;
+    vert.position = float4(input.position,0.0,1.0);// * uniforms.matw;
     vert.texcoord0 = input.texcoord0;
     return vert;
 }
