@@ -39,11 +39,13 @@ void SVRenderCmd::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
 SVRCmdNor::SVRCmdNor() {
     m_pMtl  = nullptr;
     m_pMesh = nullptr;
+    m_pSurface = nullptr;
 }
 
 SVRCmdNor::~SVRCmdNor() {
     m_pMtl  = nullptr;
     m_pMesh = nullptr;
+    m_pSurface = nullptr;
 }
 
 void SVRCmdNor::setMesh(SVRenderMeshPtr _mesh){
@@ -52,6 +54,10 @@ void SVRCmdNor::setMesh(SVRenderMeshPtr _mesh){
 
 void SVRCmdNor::setMaterial(SVMtlCorePtr _mtl){
     m_pMtl = _mtl;
+}
+
+void SVRCmdNor::setSurface(SVSurfacePtr _surface) {
+    m_pSurface = _surface;
 }
 
 void SVRCmdNor::render(SVRendererPtr _renderer,SVRTargetPtr _target) {

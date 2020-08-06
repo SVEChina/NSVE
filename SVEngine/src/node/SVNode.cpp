@@ -10,6 +10,7 @@
 #include "../basesys/SVScene.h"
 #include "../basesys/SVCameraNode.h"
 #include "../mtl/SVMtlCore.h"
+#include "../mtl/SVSurface.h"
 #include "../mtl/SVMtlNocolor.h"
 #include "../act/SVActBase.h"
 #include "../event/SVEventMgr.h"
@@ -50,9 +51,12 @@ SVNode::SVNode(SVInstPtr _app)
     m_aabbBox_sw.clear();
     //
     m_pMtl = nullptr;
+    //
+    m_surface = MakeSharedPtr<SVSurface>();
 }
 
 SVNode::~SVNode() {
+    m_surface = nullptr;
     m_pMtl = nullptr;
 }
 
@@ -119,6 +123,9 @@ void SVNode::update(f32 dt) {
 //    } else {
 //        m_absolutMat = m_localMat;
 //    }
+    if(m_surface) {
+        m_surface->setParam("worldMat", m_localMat);
+    }
     //更新包围盒
     m_aabbBox_sw = m_aabbBox;
     m_aabbBox_sw.setTransform(m_absolutMat);

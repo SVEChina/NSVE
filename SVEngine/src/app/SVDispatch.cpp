@@ -11,6 +11,7 @@
 #include "../mtl/SVMtlLib.h"
 #include "../mtl/SVTexture.h"
 #include "../mtl/SVShader.h"
+#include "../mtl/SVSurface.h"
 #include "../rendercore/SVRenderMesh.h"
 #include "../rendercore/SVRenderer.h"
 #include "../rendercore/SVRenderCmd.h"
@@ -82,7 +83,7 @@ void SVDispatch::dispatchMeshDraw(SVInstPtr _app,SVRenderMeshPtr _mesh,s32 _mtlI
 }
 
 //投递rendermesh
-void SVDispatch::dispatchMeshDraw(SVInstPtr _app,SVRenderMeshPtr _mesh,cptr8 _mtlname) {
+void SVDispatch::dispatchMeshDraw(SVInstPtr _app,SVRenderMeshPtr _mesh,cptr8 _mtlname,SVSurfacePtr _surface) {
     SVRendererPtr t_renderer = _app->getRenderer();
     if(t_renderer) {
         //
@@ -91,13 +92,14 @@ void SVDispatch::dispatchMeshDraw(SVInstPtr _app,SVRenderMeshPtr _mesh,cptr8 _mt
             SVRCmdNorPtr t_cmd_nor = MakeSharedPtr<SVRCmdNor>();
             t_cmd_nor->setMesh(_mesh);
             t_cmd_nor->setMaterial(t_mtl);
+            t_cmd_nor->setSurface(_surface);
             _app->getRenderMgr()->pushRCmd(t_cmd_nor,E_RSM_SOLID);
         }
     }
 }
 
 //投递rendermesh
-void SVDispatch::dispatchMeshDraw(SVInstPtr _app,SVRenderMeshPtr _mesh,s32 _mtlID,SVRTargetPtr _target) {
+void SVDispatch::dispatchMeshDraw(SVInstPtr _app,SVRenderMeshPtr _mesh,s32 _mtlID,SVSurfacePtr _surface,SVRTargetPtr _target) {
     SVRendererPtr t_renderer = _app->getRenderer();
     if(t_renderer && _target) {
         //_target->pushRenderCommand(<#SVRenderCmdPtr _rcmd#>);

@@ -10,6 +10,7 @@
 
 #include "SVRRes.h"
 #include "../base/SVPreDeclare.h"
+#include "../mtl/SVMtlDeclare.h"
 #include "../core/SVVertDef.h"
 
 /*
@@ -96,8 +97,10 @@ namespace sv {
 
         virtual bool active(SVRendererPtr _render){ return false; }
         
-    protected:
-        VFTYPE m_vft;
+        virtual void submitSurface(SVSurfacePtr _surface){}
+
+//    protected:
+//        VFTYPE m_vft;
     };
         
 }//!namespace sv

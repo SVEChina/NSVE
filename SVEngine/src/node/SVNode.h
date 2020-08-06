@@ -170,8 +170,8 @@ namespace sv {
         FVec3 m_scale;          //缩放
         FVec3 m_offpos;         //偏移
         s32 m_bindIndex;        //绑定索引
-        f32 m_alpha;
         FVec3 m_bindOffset;
+        f32 m_alpha;
         bool m_dirty;
         bool m_beSelect;        //是否被选择
         bool m_adaptDesign;
@@ -180,10 +180,13 @@ namespace sv {
         FMat4 m_localMat;       //本地矩阵
         FMat4 m_absolutMat;     //绝对世界矩阵
         FMat4 m_iabsolutMat;    //逆绝对世界矩阵
+        
+        //材质表面
+        SVSurfacePtr m_surface;
+        //
         SVMtlCorePtr m_pMtl;    //材质
 
     protected:
-        //void _sort_child(){ }
         bool m_needsort;
         
         //序列化接口
@@ -201,7 +204,6 @@ namespace sv {
         virtual void _fromJsonData(RAPIDJSON_NAMESPACE::Value &item);
 
     };
-        
 
 }//!namespace sv
 

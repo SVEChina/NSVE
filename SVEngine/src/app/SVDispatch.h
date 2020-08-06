@@ -42,10 +42,10 @@ namespace sv {
         static void dispatchMeshDraw(SVInstPtr _app,SVRenderMeshPtr _mesh,s32 _mtlID);
         
         //投递rendermesh
-        static void dispatchMeshDraw(SVInstPtr _app,SVRenderMeshPtr _mesh,cptr8 _mtlname);
+        static void dispatchMeshDraw(SVInstPtr _app,SVRenderMeshPtr _mesh,cptr8 _mtlname,SVSurfacePtr _surface);
         
         //投递rendermesh
-        static void dispatchMeshDraw(SVInstPtr _app,SVRenderMeshPtr _mesh,s32 _mtlID,SVRTargetPtr _target);
+        static void dispatchMeshDraw(SVInstPtr _app,SVRenderMeshPtr _mesh,s32 _mtlID,SVSurfacePtr _surface,SVRTargetPtr _target);
         
     };
     

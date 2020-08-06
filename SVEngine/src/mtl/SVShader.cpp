@@ -62,16 +62,15 @@ bool SVShader::fromJSON(RAPIDJSON_NAMESPACE::Value &item) {
         return false;
     }
     //
-    if( item.HasMember("formate")  && item["formate"].IsString() ) {
-        SVString t_formate = item["formate"].GetString();
-        std::map<std::string,s32>::iterator it = SVJsonDef::g_vf_name.find( t_formate.c_str() );
-        if(it!=SVJsonDef::g_vf_name.end()) {
-           m_shader_dsp.m_vft = VFTYPE(it->second);
-        }else{
-           m_shader_dsp.m_vft = E_VF_V2;
+    if( item.HasMember("formate")  && item["formate"].IsArray() ) {
+        RAPIDJSON_NAMESPACE::Document::Array t_formate = item["formate"].GetArray();
+        for(s32 i=0;i<t_formate.Size();i++) {
+            SVString t_str = t_formate[i].GetString();
+            std::map<std::string,s32>::iterator it = SVJsonDef::g_vf_name.find( t_str.c_str() );
+            if(it!=SVJsonDef::g_vf_name.end()) {
+                m_shader_dsp.m_vft.push_back(it->second);
+            }
         }
-    }else{
-        m_shader_dsp.m_vft = E_VF_V2;
     }
     //解析vs
     if (item.HasMember("vs") && item["vs"].IsObject() ) {

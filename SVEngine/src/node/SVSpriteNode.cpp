@@ -29,6 +29,7 @@ using namespace sv;
 SVSpriteNode::SVSpriteNode(SVInstPtr _app)
 :SVNode(_app) {
     ntype = "SVSpriteNode";
+    m_mtl_name = "sprite";
     m_rsType = RST_SOLID_3D;
     m_canSelect = false;
     m_pTex = nullptr;
@@ -39,11 +40,11 @@ SVSpriteNode::SVSpriteNode(SVInstPtr _app)
 SVSpriteNode::SVSpriteNode(SVInstPtr _app,f32 _w,f32 _h)
 :SVNode(_app) {
     ntype = "SVSpriteNode";
+    m_mtl_name = "sprite";
     m_rsType = RST_SOLID_3D;
     m_canSelect = false;
     m_pTex = nullptr;
     m_pMesh = nullptr;
-    m_mtlID = 0;
     setSize(_w,_h);
 }
 
@@ -51,7 +52,6 @@ SVSpriteNode::~SVSpriteNode() {
     m_pMesh = nullptr;
     m_pMtl = nullptr;
     m_pTex = nullptr;
-    m_mtlID = 0;
 }
 
 //
@@ -128,7 +128,7 @@ void SVSpriteNode::syncTexSize() {
 
 void SVSpriteNode::update(f32 _dt) {
     SVNode::update(_dt);
-    SVMtlCorePtr t_mtl = mApp->getMtlLib()->getMtl("sprite");
+    SVMtlCorePtr t_mtl = mApp->getMtlLib()->getMtl(m_mtl_name.c_str());
     if(t_mtl) {
         t_mtl->update(_dt);
     }
@@ -136,7 +136,7 @@ void SVSpriteNode::update(f32 _dt) {
 
 void SVSpriteNode::render() {
     if ( m_visible && m_pMesh){
-        SVDispatch::dispatchMeshDraw(mApp, m_pMesh, "sprite");
+        SVDispatch::dispatchMeshDraw(mApp, m_pMesh, m_mtl_name.c_str(),m_surface);
     }
     SVNode::render();
 }
@@ -144,14 +144,8 @@ void SVSpriteNode::render() {
 //序列化
 void SVSpriteNode::toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator, RAPIDJSON_NAMESPACE::Value &_objValue){
     RAPIDJSON_NAMESPACE::Value locationObj(RAPIDJSON_NAMESPACE::kObjectType);//创建一个Object类型的元素
-    //_toJsonData(_allocator, locationObj);
     locationObj.AddMember("spriteW", m_width, _allocator);
     locationObj.AddMember("spriteH", m_height, _allocator);
-    //s32 pos = m_pTexPath.rfind('/');
-    //m_pTexName = SVString::substr(m_pTexPath.c_str(), pos+1);
-    //locationObj.AddMember("texture", RAPIDJSON_NAMESPACE::StringRef(m_pTexName.c_str()), _allocator);
-    //locationObj.AddMember("textype", s32(m_inTexType), _allocator);
-    //_objValue.AddMember("SVSpriteNode", locationObj, _allocator);
 }
 
 void SVSpriteNode::fromJSON(RAPIDJSON_NAMESPACE::Value &item){

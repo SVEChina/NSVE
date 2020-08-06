@@ -52,7 +52,7 @@ namespace sv {
     protected:
         f32 m_width;
         f32 m_height;
-        s32 m_mtlID;        //材质ID
+        SVString m_mtl_name;
         SVTexturePtr m_pTex;
         SVRenderMeshPtr m_pMesh;
     };

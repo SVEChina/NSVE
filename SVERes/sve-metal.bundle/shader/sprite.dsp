@@ -2,7 +2,7 @@
     "shadertype" : "metal",
     "name" : "sprite",
     "file": "shader/sprite.metal",
-    "formate" : "E_VF_V3_T0",
+    "formate" : ["E_V3","E_T0"],
     "vs": {
         "entry": "vertexShader",
         "uniform": [

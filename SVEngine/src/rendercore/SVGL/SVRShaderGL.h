@@ -20,15 +20,17 @@ namespace sv {
     public:
         SVRShaderGL(SVInstPtr _app);
 
-        virtual ~SVRShaderGL();
+        ~SVRShaderGL();
 
-        virtual void create(SVRendererPtr _renderer);
+        void create(SVRendererPtr _renderer);
+        
+        void destroy(SVRendererPtr _renderer);
 
-        virtual void destroy(SVRendererPtr _renderer);
+        bool active(SVRendererPtr _renderer);
+
+        void submitSurface(SVSurfacePtr _surface);
         
-        virtual bool active(SVRendererPtr _renderer);
-        
-        virtual void submitParamTbl(SVParamTblPtr _paramTbl);
+        void submitParamTbl();
 
     private:
         static u32 _loadShader(SVInstPtr _app,cptr8 _filename,s32 _shaderType);
@@ -52,6 +54,8 @@ namespace sv {
         u32 m_cs;
         
         bool m_block;
+        
+        SVParamTblPtr m_tbl;
     };
         
 }//!namespace sv

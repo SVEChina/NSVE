@@ -50,7 +50,6 @@ SVBackGroundNode::SVBackGroundNode(SVInstPtr _app)
     m_isSyncTex = true;
     setSize(m_width, m_height);
     m_pTex = nullptr;
-    m_pRenderObj = MakeSharedPtr<SVRenderObject>();
     setInScreen(m_inScreen);
 }
 
@@ -68,13 +67,11 @@ SVBackGroundNode::SVBackGroundNode(SVInstPtr _app,f32 _w,f32 _h)
     m_isSyncTex = true;
     setSize(m_width, m_height);
     m_pTex = nullptr;
-    m_pRenderObj = MakeSharedPtr<SVRenderObject>();
     setInScreen(m_inScreen);
 }
 
 SVBackGroundNode::~SVBackGroundNode(){
     disableDeform();
-    m_pRenderObj = nullptr;
 }
 
 void SVBackGroundNode::setSize(f32 _w,f32 _h) {
@@ -204,10 +201,10 @@ void SVBackGroundNode::update(f32 _dt){
 void SVBackGroundNode::render(){
     if ( !m_visible )
         return ;
-    SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
-    if (m_pRenderObj) {
-        m_pRenderObj->pushCmd(t_rs, m_rsType, "SVBackGroundNode");
-    }
+//    SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
+//    if (m_pRenderObj) {
+//        m_pRenderObj->pushCmd(t_rs, m_rsType, "SVBackGroundNode");
+//    }
 }
 
 //序列化

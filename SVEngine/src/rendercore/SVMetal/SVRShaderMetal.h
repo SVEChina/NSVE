@@ -38,9 +38,12 @@ namespace sv {
 
         bool active(SVRendererPtr _renderer);
         
+        void submitSurface(SVSurfacePtr _surface);
+        
     protected:
         MTLSamplerDescriptor* _genSampler(SamplerDsp& _dsp);
-        MTLVertexDescriptor* _genVertexDsp(VFTYPE _vf,BUFFERMODE _mode);
+        
+        MTLVertexDescriptor* _genVertexDsp(BUFFERMODE _mode);
         
         id<MTLFunction> m_vsf;
         id<MTLFunction> m_gsf;

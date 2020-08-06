@@ -2,7 +2,7 @@
     "shadertype" : "metal",
     "name" : "nor",
     "file": "shader/screen.metal",
-    "formate" : "E_VF_V2_T0",
+    "formate" : ["E_V2","E_T0"],
     "vs": {
         "entry": "vertexShader"
     },

@@ -22,7 +22,6 @@ namespace sv {
     struct ShaderDsp {
         ShaderDsp() {
             m_dsp = 0;
-            m_vft = E_VF_BASE;
             m_programme_fname = "null";
             m_vs_fname = "null";
             m_fs_fname = "null";
@@ -31,10 +30,11 @@ namespace sv {
             m_tsc_fname = "null";
             m_tse_fname = "null";
             m_attri_formate = "null";
+            m_vft.clear();
         };
         //
         s32 m_dsp;
-        VFTYPE m_vft;
+        std::vector<s32> m_vft;
         SVString m_programme_fname;
         SVString m_vs_fname;
         SVString m_fs_fname;

@@ -123,8 +123,6 @@ namespace sv {
         //
         SVShaderPtr m_shader_obj;   //pointer
         //
-        SVSurfacePtr m_surface;     //更新用
-        //
     public:
         void swap();
         

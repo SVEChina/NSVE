@@ -48,7 +48,6 @@ void TexUnit::copy(TexUnit& _texunit){
 SVMtlCore::SVMtlCore(SVInstPtr _app)
 :SVGBaseEx(_app){
     m_shader_obj = nullptr;
-    m_surface = nullptr;
     reset();
 }
 
