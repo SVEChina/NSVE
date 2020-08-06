@@ -53,7 +53,6 @@ void SVParamTbl::addParam(cptr8 _name,cptr8 _type,cptr8 _value)  {
             FVec2 tmp(_value);
             setParam(_name,tmp);
         }
-        
     }else if( strcmp(_type,"fvec3") == 0 ) {
         if(strcmp(_value,"identify") == 0) {
             FVec3 tmp = FVec3_one;
@@ -62,13 +61,30 @@ void SVParamTbl::addParam(cptr8 _name,cptr8 _type,cptr8 _value)  {
             FVec3 tmp(_value);
             setParam(_name,tmp);
         }
-        
     }else if( strcmp(_type,"fvec4") == 0 ) {
         if(strcmp(_value,"identify") == 0) {
             FVec4 tmp = FVec4_one;
             setParam(_name,tmp);
         }else{
             FVec4 tmp(_value);
+            setParam(_name,tmp);
+        }
+    }else if( strcmp(_type,"fmat2") == 0 ) {
+        if(strcmp(_value,"identify") == 0) {
+            FMat2 tmp;
+            tmp.setIdentity();
+            setParam(_name,tmp);
+        }else{
+            FMat2 tmp(_value);
+            setParam(_name,tmp);
+        }
+    }else if( strcmp(_type,"fmat3") == 0 ) {
+        if(strcmp(_value,"identify") == 0) {
+            FMat3 tmp;
+            tmp.setIdentity();
+            setParam(_name,tmp);
+        }else{
+            FMat3 tmp(_value);
             setParam(_name,tmp);
         }
     }else if( strcmp(_type,"fmat4") == 0 ) {
@@ -158,6 +174,36 @@ void SVParamTbl::setParam(cptr8 _name,FVec4 _value) {
     }
 }
 
+void SVParamTbl::setParam(cptr8 _name,FMat2 _value) {
+    s32 t_index = getParam(_name);
+    if( t_index>=0 ) {
+        m_param_values->set(m_param_dsps[t_index].m_off,_value);
+    }else{
+        //推送目标参数
+        SVParamDsp t_param;
+        t_param.m_name = _name;
+        t_param.m_type = SV_FMAT2;
+        t_param.m_size = sizeof(FMat2);
+        t_param.m_off = m_param_values->push(_value);
+        m_param_dsps.push_back(t_param);
+    }
+}
+
+void SVParamTbl::setParam(cptr8 _name,FMat3 _value) {
+    s32 t_index = getParam(_name);
+    if( t_index>=0 ) {
+        m_param_values->set(m_param_dsps[t_index].m_off,_value);
+    }else{
+        //推送目标参数
+        SVParamDsp t_param;
+        t_param.m_name = _name;
+        t_param.m_type = SV_FMAT3;
+        t_param.m_size = sizeof(FMat3);
+        t_param.m_off = m_param_values->push(_value);
+        m_param_dsps.push_back(t_param);
+    }
+}
+
 void SVParamTbl::setParam(cptr8 _name,FMat4 _value) {
     s32 t_index = getParam(_name);
     if( t_index>=0 ) {
@@ -218,4 +264,5 @@ void SVParamTbl::fromJSON(RAPIDJSON_NAMESPACE::Value &_item){
 //
 void SVParamTbl::toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator,
                        RAPIDJSON_NAMESPACE::Value &_objValue){
+    
 }

@@ -49,6 +49,10 @@ namespace sv {
         void setParam(cptr8 _name,FVec3 _value);
 
         void setParam(cptr8 _name,FVec4 _value);
+        
+        void setParam(cptr8 _name,FMat2 _value);
+
+        void setParam(cptr8 _name,FMat3 _value);
 
         void setParam(cptr8 _name,FMat4 _value);
         
@@ -71,7 +75,6 @@ namespace sv {
         //参数表
         std::vector<SVParamDsp> m_param_dsps;    //参数表
         SVDataChunkPtr m_param_values;           //参数值
-
     };
     
 }//!namespace sv

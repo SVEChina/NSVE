@@ -29,6 +29,8 @@ namespace sv {
         SV_FVEC2,
         SV_FVEC3,
         SV_FVEC4,
+        SV_FMAT2,
+        SV_FMAT3,
         SV_FMAT4,
         SV_BLOCK
     };

@@ -8,6 +8,7 @@
 
 #include "SVMtlCore.h"
 #include "SVGLModify.h"
+#include "SVSurface.h"
 #include "../base/SVDataChunk.h"
 #include "../operate/SVOpCreate.h"
 #include "../mtl/SVTexMgr.h"
@@ -23,12 +24,6 @@ using namespace sv;
 /*
  纹理单元
  */
-
-//    m_min_filter = E_T_FILTER_LINEAR;
-//    m_mag_filter = E_T_FILTER_LINEAR;
-//    m_s_wrap = E_T_WRAP_CLAMP_TO_EDAGE;
-//    m_t_wrap = E_T_WRAP_CLAMP_TO_EDAGE;
-
 TexUnit::TexUnit(){
     m_texForm = E_TEX_END;
     m_pTex = nullptr;
@@ -53,6 +48,7 @@ void TexUnit::copy(TexUnit& _texunit){
 SVMtlCore::SVMtlCore(SVInstPtr _app)
 :SVGBaseEx(_app){
     m_shader_obj = nullptr;
+    m_surface = nullptr;
     reset();
 }
 
@@ -83,7 +79,6 @@ SVMtlCorePtr SVMtlCore::clone() {
 
 void SVMtlCore::reset() {
     m_LogicMtlFlag0 = 0;
-    //
     for(s32 i=0;i<MAX_TEXUNIT;i++){
         m_texUnit[i].reset();
     }
@@ -131,7 +126,6 @@ void SVMtlCore::setTexture(s32 _chn,s32 _stage,SVTEXINID _from,cptr8 _fname) {
         //从文件加载纹理
         m_texUnit[_chn].m_pTex = mApp->getTexMgr()->getTexture(_fname);
     }else{
-        
     }
 }
 

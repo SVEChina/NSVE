@@ -11,12 +11,6 @@
 #include "../base/SVGBase.h"
 #include "../rendercore/SVRenderDeclare.h"
 #include "../core/SVVertDef.h"
-#include "../base/SVVec2.h"
-#include "../base/SVVec3.h"
-#include "../base/SVVec4.h"
-#include "../base/SVMat2.h"
-#include "../base/SVMat3.h"
-#include "../base/SVMat4.h"
 #include <string>
 #include <vector>
 
@@ -94,23 +88,6 @@ namespace sv {
                         RAPIDJSON_NAMESPACE::Value &_objValue);
 
         bool fromJSON(RAPIDJSON_NAMESPACE::Value &item);
-        
-        //设置参数
-        void setParam(cptr8 _name,s32 _value);
-        
-        void setParam(cptr8 _name,f32 _value);
-        
-        void setParam(cptr8 _name,FVec2 _value);
-        
-        void setParam(cptr8 _name,FVec3 _value);
-        
-        void setParam(cptr8 _name,FVec4 _value);
-        
-        void setParam(cptr8 _name,FMat2 _value);
-        
-        void setParam(cptr8 _name,FMat3 _value);
-        
-        void setParam(cptr8 _name,FMat4 _value);
 
     public:
         ShaderDsp m_shader_dsp;

@@ -52,7 +52,7 @@ namespace sv {
         friend class std::shared_ptr<SVRenderer> ;
         friend class std::shared_ptr<SVRendererMetal> ;
         friend class std::shared_ptr<SVRendererGL> ;
-        
+        //
     public:
         SVMtlCore(SVInstPtr _app);
         
@@ -122,6 +122,8 @@ namespace sv {
         TexUnit m_texUnit[MAX_TEXUNIT];
         //
         SVShaderPtr m_shader_obj;   //pointer
+        //
+        SVSurfacePtr m_surface;     //更新用
         //
     public:
         void swap();

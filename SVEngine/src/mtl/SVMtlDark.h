@@ -12,31 +12,27 @@
 
 namespace sv {
     
-    
+    class SVMtlDark : public SVMtlCore {
+    public:
+        SVMtlDark(SVInstPtr _app);
         
-        class SVMtlDark : public SVMtlCore {
-        public:
-            SVMtlDark(SVInstPtr _app);
-            
-            SVMtlDark(SVMtlDark *_mtl);
-            
-            ~SVMtlDark();
-            
-            virtual void reset();
-            
-            virtual SVMtlCorePtr clone();
-            
-            void update(f32 dt);
-            
-            void setDarkIntensity(f32 _intensity);
-        protected:
-            virtual void _submitUniform(SVRendererPtr _render);
-            
-            f32 m_intensity;
-            
-        };
-
-    
+        SVMtlDark(SVMtlDark *_mtl);
+        
+        ~SVMtlDark();
+        
+        virtual void reset();
+        
+        virtual SVMtlCorePtr clone();
+        
+        void update(f32 dt);
+        
+        void setDarkIntensity(f32 _intensity);
+    protected:
+        virtual void _submitUniform(SVRendererPtr _render);
+        
+        f32 m_intensity;
+        
+    };
     
 }//!namespace sv
 
