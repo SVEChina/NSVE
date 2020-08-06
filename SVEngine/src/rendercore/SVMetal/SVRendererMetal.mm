@@ -155,7 +155,7 @@ bool SVRendererMetal::processShader(SVRShaderPtr _shader) {
     if(t_shader_metal) {
         //传递uniform buffer
         if(t_shader_metal->m_vs_ubuf) {
-            [m_pCurEncoder setVertexBuffer:t_shader_metal->m_vs_ubuf offset:0 atIndex:0];
+            [m_pCurEncoder setVertexBuffer:t_shader_metal->m_vs_ubuf offset:0 atIndex:1];
         }
         if(t_shader_metal->m_fs_ubuf) {
             [m_pCurEncoder setFragmentBuffer:t_shader_metal->m_fs_ubuf offset:0 atIndex:0];

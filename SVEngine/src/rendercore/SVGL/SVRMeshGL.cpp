@@ -29,7 +29,7 @@ void SVRMeshGL::create(SVRendererPtr _renderer) {
     if(t_rm && t_rendermesh) {
         if( t_rendermesh->useIndex() ) {
             glGenBuffers(1, &m_indexID);
-            BufferDsp* t_dsp = t_rendermesh->getIndexDsp();
+            BufferDspPtr t_dsp = t_rendermesh->getIndexDsp();
             if(t_dsp ){
                 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexID);
                 s32 t_pool_type = GL_STATIC_DRAW;
@@ -58,7 +58,7 @@ void SVRMeshGL::create(SVRendererPtr _renderer) {
         if(t_stream_num>0 && t_stream_num<MAX_VERTEX_STEAM_NUM) {
             m_bufnum = t_stream_num;
             glGenBuffers(t_stream_num, m_bufID);
-            BufferDsp* t_dsp = t_rendermesh->getStreamDsp();
+            BufferDspPtr t_dsp = t_rendermesh->getStreamDsp();
 //            for(s32 i=0;i<t_stream_num;i++) {
 //                glBindBuffer(GL_ARRAY_BUFFER, m_bufID[i]);
 //                m_ver_dsp.push_back(t_dsp->_bufVertDsp);
@@ -89,7 +89,7 @@ void SVRMeshGL::create(SVRendererPtr _renderer) {
         //多实例
         if( t_rendermesh->useInstance() ) {
             glGenBuffers(1, &m_instanceID);
-            BufferDsp* t_dsp = t_rendermesh->getInstanceDsp();
+            BufferDspPtr t_dsp = t_rendermesh->getInstanceDsp();
             if(t_dsp ){
                 //m_instacne_count = t_dsp->_bufSize;
                 glBindBuffer(GL_ARRAY_BUFFER, m_instanceID);

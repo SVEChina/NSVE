@@ -15,6 +15,11 @@ struct Vertex {
     float2 texcoord0 [[attribute(1)]];
 };
 
+struct Uniforms {
+    float4x4 matw;
+    //float4x4 matvp;
+};
+
 struct VertexOut {
     float4 position [[position]];
     float2 texcoord0;
@@ -26,9 +31,10 @@ struct FSOutput{
 };
 
 //
-vertex VertexOut vertexShader( Vertex input [[stage_in]]) {
+vertex VertexOut vertexShader( Vertex input [[stage_in]] ,
+                               constant Uniforms & uniforms [[ buffer(1) ]] ) {
     VertexOut vert;
-    vert.position = float4(input.position,0.0,1.0);
+    vert.position = float4(input.position,0.0,1.0) * uniforms.matw;
     vert.texcoord0 = input.texcoord0;
     return vert;
 }

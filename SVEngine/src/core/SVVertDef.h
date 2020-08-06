@@ -307,6 +307,26 @@ enum {
 };
 
 //
+#define SV_SMT_INDEX  0
+#define SV_SMT_INSTANCE 1
+#define SV_SMT_V2    2
+#define SV_SMT_V3    3
+#define SV_SMT_NOR  4
+#define SV_SMT_TAG  5
+#define SV_SMT_BTAG 6
+#define SV_SMT_C0   7
+#define SV_SMT_C1   8
+#define SV_SMT_C2   9
+#define SV_SMT_C3   10
+#define SV_SMT_T0       11
+#define SV_SMT_T1       12
+#define SV_SMT_T2       13
+#define SV_SMT_T3       14
+#define SV_SMT_BONE     15
+#define SV_SMT_BONE_W   16
+#define SV_SMT_PARTICLE 17
+#define SV_SMT_INSOFFSET 18
+
 //顶点格式索引
 #define D_VF_NULL  0x0000
 #define D_VF_INDEX 0x0001

@@ -347,6 +347,20 @@ bool SVRShaderMetal::active(SVRendererPtr _renderer) {
         //[t_rm->m_pCurEncoder setFragmentSamplerState:m_gs_sampler_st[i] atIndex:i];
     }
     //
+    if(m_vs_ubuf) {
+        
+    }
+    if(m_fs_ubuf) {
+        
+    }
+    if(m_gs_ubuf) {
+        
+    }
+//    //
+//    id<MTLBuffer> m_vs_ubuf;
+//    id<MTLBuffer> m_fs_ubuf;
+//    id<MTLBuffer> m_gs_ubuf;
+    //
     [t_rm->m_pCurEncoder setRenderPipelineState:m_pl_state];
     return true;
 }

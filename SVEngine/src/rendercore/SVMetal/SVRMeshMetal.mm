@@ -40,13 +40,13 @@ void SVRMeshMetal::create(SVRendererPtr _renderer) {
     SVRenderMeshPtr t_rendermesh = std::dynamic_pointer_cast<SVRenderMesh>(m_logic_obj);
     if(t_rm && t_rendermesh) {
         //索引
-        BufferDsp* t_index_dsp = t_rendermesh->getIndexDsp();
+        BufferDspPtr t_index_dsp = t_rendermesh->getIndexDsp();
         if(t_index_dsp && t_index_dsp->_bufVertDsp ==E_VF_INDEX) {
             m_iCnt = t_index_dsp->_vertCnt;
             m_ibuf = [t_rm->m_pDevice newBufferWithBytes:t_index_dsp->_bufData->getData() length: t_index_dsp->_bufSize options: MTLResourceStorageModeShared ];
         }
         //多实例
-        BufferDsp* t_instance_dsp = t_rendermesh->getInstanceDsp();
+        BufferDspPtr t_instance_dsp = t_rendermesh->getInstanceDsp();
         if(t_instance_dsp && t_instance_dsp->_bufSize>0) {
             if(t_instance_dsp->_bufData) {
                 m_instance_buf = [t_rm->m_pDevice newBufferWithBytes:t_instance_dsp->_bufData->getData() length: t_instance_dsp->_bufSize options: MTLResourceStorageModeShared ];
@@ -54,7 +54,7 @@ void SVRMeshMetal::create(SVRendererPtr _renderer) {
                 m_instance_buf = [t_rm->m_pDevice newBufferWithLength:t_instance_dsp->_bufSize options: MTLResourceStorageModeShared ];
             }
         }
-        BufferDsp* t_buf_dsp = t_rendermesh->getStreamDsp();
+        BufferDspPtr t_buf_dsp = t_rendermesh->getStreamDsp();
         if( t_buf_dsp->_bufMode == E_BFM_AOS ) {
             //创建一个buf
             id<MTLBuffer> posBuf = [t_rm->m_pDevice newBufferWithBytes:t_buf_dsp->_bufData->getData()

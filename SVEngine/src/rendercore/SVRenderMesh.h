@@ -13,7 +13,9 @@
 #include "../core/SVVertDef.h"
 #include "../mtl/SVShaderMgr.h"
 #include "../base/SVPreDeclare.h"
+#include "../base/SVDataSwap.h"
 #include <vector>
+#include <map>
 
 namespace sv {
 
@@ -23,14 +25,16 @@ namespace sv {
     //1.AOS模式  混合流
     //2.SOA模式  拆分流
     //
-    struct BufferDsp {
-        BufferDsp() {
-            _bufMode = E_BFM_AOS;
+    DECLARE_SHAREPTR(BufferDsp);
+    class BufferDsp :public SVObject {
+    public:
+        BufferDsp(BUFFERMODE _mode) {
+            _bufMode = _mode;           //E_BFM_AOS;
             _bufVertDsp = E_VF_BASE;
             _bufType = E_BFT_STATIC_DRAW;
             _vertCnt = 0;
             _bufSize = 0;
-            _bufData = nullptr;
+            reset();
         };
         
         ~BufferDsp() {
@@ -39,18 +43,78 @@ namespace sv {
             _bufType = E_BFT_STATIC_DRAW;
             _vertCnt = 0;
             _bufSize = 0;
-            _bufData = nullptr;
+            reset();
         };
         //
-        BUFFERMODE _bufMode;
+        BufferDspPtr push(s32 _stype) {
+            std::map<s32,SVDataSwapPtr>::iterator it = m_streamData.find(_stype);
+            if( it == m_streamData.end() ) {
+                m_streamDsp.push_back(_stype);
+                m_streamData.insert(std::make_pair(_stype,nullptr));
+            }
+            return std::dynamic_pointer_cast<BufferDsp>(shared_from_this());
+        }
+        
+        //重置
+        void reset() {
+            _bufData = nullptr;
+            m_streamDsp.clear();
+            m_streamData.clear();
+        }
+        
+        //设置流数据
+        bool setStreamData(s32 _stype,SVDataSwapPtr _data) {
+            if(_bufMode == E_BFM_AOS) {
+                //混合流模式，设定给单一目标就好
+                _bufData = _data;
+                return true;
+            } else {
+                //单一流模式，需要按流分开存储
+                std::map<s32,SVDataSwapPtr>::iterator it = m_streamData.find(_stype);
+                if( it == m_streamData.end() ) {
+                    return false;
+                }
+                m_streamData[_stype] = _data;
+                return true;
+            }
+        }
+        
+        bool setStreamData(s32 _stype,void* _data,s32 _len) {
+               if(_bufMode == E_BFM_AOS) {
+                   //混合流模式，设定给单一目标就好
+                   if(!_bufData) {
+                       _bufData = MakeSharedPtr<SVDataSwap>();
+                   }
+                   _bufData->appendData(_data,_len);
+                   return true;
+               } else {
+                   //单一流模式，需要按流分开存储
+                   std::map<s32,SVDataSwapPtr>::iterator it = m_streamData.find(_stype);
+                   if( it == m_streamData.end() ) {
+                       return false;
+                   }
+                   if( !m_streamData[_stype] ) {
+                       m_streamData[_stype] = MakeSharedPtr<SVDataSwap>();
+                   }
+                   m_streamData[_stype]->appendData(_data,_len);
+                   return true;
+               }
+           }
+        
+        //
+        BUFFERMODE _bufMode;    //E_BFM_AOS 混合流，E_BFM_SOA 单一流
         //数据顶点描述
-        VFTYPE _bufVertDsp;
+        VFTYPE _bufVertDsp;     //顶点描述信息
         //数据类型
-        BUFFERTYPE _bufType;
+        BUFFERTYPE _bufType;    //BUFFER类型
         //数据个数
-        s32 _vertCnt;
+        s32 _vertCnt;           //顶点数目
         //数据尺寸
-        s32 _bufSize;
+        s32 _bufSize;           //buf 尺寸
+        //流描述
+        std::vector<s32>  m_streamDsp;  //流描述
+        //流数据
+        std::map<s32,SVDataSwapPtr> m_streamData;
         //数据
         SVDataSwapPtr _bufData;
     };
@@ -63,9 +127,7 @@ namespace sv {
         static void buildBufferDsp(VFTYPE _vertype,
                                    BUFFERTYPE _buftype,
                                    s32 _vertCnt,
-                                   s32 _bufsize,
-                                   void* _data,
-                                   BufferDsp* _dsp);
+                                   BufferDspPtr _dsp);
         
     public:
         SVRenderMesh(SVInstPtr _app);
@@ -73,11 +135,11 @@ namespace sv {
         ~SVRenderMesh();
         
         //设置各种描述
-        void setIndexDsp(BufferDsp& _dsp);
+        void setIndexDsp(BufferDspPtr _dsp);
         
-        void setVertDsp(BufferDsp& _dsp);
+        void setVertDsp(BufferDspPtr _dsp);
         
-        void setInstanceDsp(BufferDsp& _dsp);
+        void setInstanceDsp(BufferDspPtr _dsp);
         
         //是否使用索引
         bool useIndex();
@@ -85,13 +147,13 @@ namespace sv {
         bool useInstance();
         
         //获取索引数据描述
-        BufferDsp* getIndexDsp();
+        BufferDspPtr getIndexDsp();
         
         //获取流数据描述
-        BufferDsp* getStreamDsp();
+        BufferDspPtr getStreamDsp();
     
         //获取多实例描述
-        BufferDsp* getInstanceDsp();
+        BufferDspPtr getInstanceDsp();
 
         //获取流数目
         s32 getStreamNum();
@@ -100,6 +162,8 @@ namespace sv {
         void setIndexData(SVDataSwapPtr _data,s32 _num);
         
         void setVertexData(SVDataSwapPtr _data);
+        
+        void setVertexData(SVDataSwapPtr _data,s32 _streamtype);
         
         void setInstanceData(SVDataSwapPtr _pdata, u32 _instanceCount);
 
@@ -112,9 +176,9 @@ namespace sv {
         bool m_use_index;
         bool m_use_instance;
         //索引数据
-        BufferDsp m_index_dsp;
-        BufferDsp m_vert_dsp;
-        BufferDsp m_instance_dsp;
+        BufferDspPtr m_index_dsp;
+        BufferDspPtr m_vert_dsp;
+        BufferDspPtr m_instance_dsp;
         //
         s32 m_draw_method;
 

@@ -4,7 +4,10 @@
     "file": "shader/sprite.metal",
     "formate" : "E_VF_V3_T0",
     "vs": {
-        "entry": "vertexShader"
+        "entry": "vertexShader",
+        "uniform": [
+            { "name" : "matw", "type" : "fmat4", "value" : "null" }
+        ]
     },
     "fs":{
         "entry": "fragmentShader",
