@@ -21,7 +21,6 @@ GL Shader
 
 SVRShaderGL::SVRShaderGL(SVInstPtr _app)
 :SVRShader(_app){
-    m_tbl = MakeSharedPtr<SVParamTbl>();    //参数表
     m_block = false;
     m_programm = 0;
     m_vs = 0;
@@ -33,7 +32,6 @@ SVRShaderGL::SVRShaderGL(SVInstPtr _app)
 }
 
 SVRShaderGL::~SVRShaderGL(){
-    m_tbl = nullptr;
     m_programm = 0;
     m_vs = 0;
     m_fs = 0;
@@ -260,128 +258,154 @@ bool SVRShaderGL::active(SVRendererPtr _renderer) {
     if(t_rm && m_programm>0) {
         glUseProgram(m_programm);
         t_rm->m_cur_program = m_programm;
+        //提交参数
+        submitParamTbl();
+        //提交纹理
+        
         return true;
     }
     return false;
 }
 
-void SVRShaderGL::submitSurface(SVSurfacePtr _surface) {
-    //更新surface
-    if(_surface) {
-        //更新纹理
-        for(s32 i=0;i<_surface->m_texpool.size();i++){
-            
-        }
-        //更新uni
-//        //参数表
-//        std::vector<SVParamDsp> m_param_dsps;    //参数表
-//        SVDataChunkPtr m_param_values;           //参数值
-        for( s32 i=0;i<_surface->m_tbl->m_param_dsps.size();i++ ) {
-            SVParamDsp* t_dsp = &(_surface->m_tbl->m_param_dsps[i]);
-            if(t_dsp->m_type == SV_INT) {
-                s32 t_value = 0;
-                m_tbl->setParam(t_dsp->m_name.c_str(),t_value);
-            }else if(t_dsp->m_type == SV_FLOAT) {
-                //f32 t_value = 0;
-                //m_tbl->setParam(t_dsp->m_name.c_str(),);
-            }else if(t_dsp->m_type == SV_FVEC2) {
-                FVec2 t_value;
-                //m_tbl->setParam(t_dsp->m_name.c_str(),);
-            }else if(t_dsp->m_type == SV_FVEC3) {
-                FVec3 t_value;
-                //m_tbl->setParam(t_dsp->m_name.c_str(),);
-            }else if(t_dsp->m_type == SV_FVEC4) {
-                FVec4 t_value;
-                //m_tbl->setParam(t_dsp->m_name.c_str(),);
-            }else if(t_dsp->m_type == SV_FMAT2) {
-                FMat2 t_value;
-                //m_tbl->setParam(t_dsp->m_name.c_str(),);
-            }else if(t_dsp->m_type == SV_FMAT3) {
-                FMat3 t_value;
-                //m_tbl->setParam(t_dsp->m_name.c_str(),);
-            }else if(t_dsp->m_type == SV_FMAT4) {
-                FMat4 t_value;
-                //m_tbl->setParam(t_dsp->m_name.c_str(),);
+void SVRShaderGL::submitParamTbl() {
+    SVShaderPtr t_shader = std::dynamic_pointer_cast<SVShader>(m_logic_obj);
+    if(!t_shader){
+        return ;
+    }
+    for(s32 i=0;i<t_shader->m_paramtbl.size();i++) {
+        ParamTblDsp* t_dsp = &(t_shader->m_paramtbl[i]);
+        SVParamTblPtr t_tbl = t_dsp->m_tbl;
+        for(s32 i=0;i<t_tbl->m_param_dsps.size();i++) {
+            u32 t_locate = glGetUniformLocation(m_programm, t_tbl->m_param_dsps[i].m_name.c_str());
+            if(t_locate<=0) {
+                continue;
+            }
+            //
+            if( t_tbl->m_param_dsps[i].m_type == SV_INT) {
+                s32 t_cnt = t_tbl->m_param_dsps[i].m_size/sizeof(s32);
+                s32* t_p = (s32*)(t_tbl->m_param_values->getPointer( t_tbl->m_param_dsps[i].m_off));
+                if(t_cnt == 1) {
+                    glUniform1i(t_locate,*t_p);
+                }else{
+                    glUniform1iv(t_locate,t_cnt,t_p);
+                }
+            }else if( t_tbl->m_param_dsps[i].m_type == SV_FLOAT) {
+                s32 t_cnt = t_tbl->m_param_dsps[i].m_size/sizeof(f32);
+                f32* t_p = (f32*)(t_tbl->m_param_values->getPointer( t_tbl->m_param_dsps[i].m_off));
+                if(t_cnt == 1){
+                    glUniform1f(t_locate,*t_p);
+                }else{
+                    glUniform1fv(t_locate,t_cnt,t_p);
+                }
+            }else if( t_tbl->m_param_dsps[i].m_type == SV_FVEC2) {
+                s32 t_cnt = t_tbl->m_param_dsps[i].m_size/sizeof(FVec2);
+                f32* t_p = (f32*)(t_tbl->m_param_values->getPointer( t_tbl->m_param_dsps[i].m_off));
+                if(t_cnt == 1){
+                    glUniform2f(t_locate,*t_p,*(t_p+1));
+                }else{
+                    glUniform2fv(t_locate,t_cnt,t_p);
+                }
+            }else if( t_tbl->m_param_dsps[i].m_type == SV_FVEC3) {
+                s32 t_cnt = t_tbl->m_param_dsps[i].m_size/sizeof(FVec3);
+                f32* t_p = (f32*)(t_tbl->m_param_values->getPointer( t_tbl->m_param_dsps[i].m_off));
+                if(t_cnt == 1){
+                    glUniform3f(t_locate,*t_p,*(t_p+1),*(t_p+2));
+                }else{
+                    glUniform3fv(t_locate,t_cnt,t_p);
+                }
+                glUniform3fv(t_locate,1,t_p);
+            }else if( t_tbl->m_param_dsps[i].m_type == SV_FVEC4) {
+                s32 t_cnt = t_tbl->m_param_dsps[i].m_size/sizeof(FVec4);
+                f32* t_p = (f32*)(t_tbl->m_param_values->getPointer( t_tbl->m_param_dsps[i].m_off));
+                if(t_cnt == 1){
+                    glUniform4f(t_locate,*t_p,*(t_p+1),*(t_p+2),*(t_p+3));
+                }else{
+                    glUniform4fv(t_locate,t_cnt,t_p);
+                }
+                glUniform4fv(t_locate,1,t_p);
+            }else if( t_tbl->m_param_dsps[i].m_type == SV_FMAT2) {
+                s32 t_cnt = t_tbl->m_param_dsps[i].m_size/sizeof(FMat2);
+                f32* t_p = (f32*)(t_tbl->m_param_values->getPointer( t_tbl->m_param_dsps[i].m_off));
+                if(t_cnt == 1){
+                    glUniformMatrix4fv(t_locate,1,GL_FALSE,t_p);
+                }else{
+                    glUniformMatrix4fv(t_locate,t_cnt,GL_FALSE,t_p);
+                }
+            }else if( t_tbl->m_param_dsps[i].m_type == SV_FMAT3) {
+                s32 t_cnt = t_tbl->m_param_dsps[i].m_size/sizeof(FMat3);
+                f32* t_p = (f32*)(t_tbl->m_param_values->getPointer( t_tbl->m_param_dsps[i].m_off));
+                if(t_cnt == 1){
+                    glUniformMatrix4fv(t_locate,1,GL_FALSE,t_p);
+                }else{
+                    glUniformMatrix4fv(t_locate,t_cnt,GL_FALSE,t_p);
+                }
+            }else if( t_tbl->m_param_dsps[i].m_type == SV_FMAT4) {
+                s32 t_cnt = t_tbl->m_param_dsps[i].m_size/sizeof(FMat4);
+                f32* t_p = (f32*)(t_tbl->m_param_values->getPointer( t_tbl->m_param_dsps[i].m_off));
+                if(t_cnt == 1){
+                    glUniformMatrix4fv(t_locate,1,GL_FALSE,t_p);
+                }else{
+                    glUniformMatrix4fv(t_locate,t_cnt,GL_FALSE,t_p);
+                }
+            }else if( t_tbl->m_param_dsps[i].m_type == SV_BLOCK) {
             }
         }
     }
 }
 
-void SVRShaderGL::submitParamTbl() {
-    for(s32 i=0;i<m_tbl->m_param_dsps.size();i++) {
-        u32 t_locate = glGetUniformLocation(m_programm, m_tbl->m_param_dsps[i].m_name.c_str());
-        if(t_locate<=0) {
-            continue;
-        }
-        //
-        if( m_tbl->m_param_dsps[i].m_type == SV_INT) {
-            s32 t_cnt = m_tbl->m_param_dsps[i].m_size/sizeof(s32);
-            s32* t_p = (s32*)(m_tbl->m_param_values->getPointer( m_tbl->m_param_dsps[i].m_off));
-            if(t_cnt == 1) {
-                glUniform1i(t_locate,*t_p);
-            }else{
-                glUniform1iv(t_locate,t_cnt,t_p);
-            }
-        }else if( m_tbl->m_param_dsps[i].m_type == SV_FLOAT) {
-            s32 t_cnt = m_tbl->m_param_dsps[i].m_size/sizeof(f32);
-            f32* t_p = (f32*)(m_tbl->m_param_values->getPointer( m_tbl->m_param_dsps[i].m_off));
-            if(t_cnt == 1){
-                glUniform1f(t_locate,*t_p);
-            }else{
-                glUniform1fv(t_locate,t_cnt,t_p);
-            }
-        }else if( m_tbl->m_param_dsps[i].m_type == SV_FVEC2) {
-            s32 t_cnt = m_tbl->m_param_dsps[i].m_size/sizeof(FVec2);
-            f32* t_p = (f32*)(m_tbl->m_param_values->getPointer( m_tbl->m_param_dsps[i].m_off));
-            if(t_cnt == 1){
-                glUniform2f(t_locate,*t_p,*(t_p+1));
-            }else{
-                glUniform2fv(t_locate,t_cnt,t_p);
-            }
-        }else if( m_tbl->m_param_dsps[i].m_type == SV_FVEC3) {
-            s32 t_cnt = m_tbl->m_param_dsps[i].m_size/sizeof(FVec3);
-            f32* t_p = (f32*)(m_tbl->m_param_values->getPointer( m_tbl->m_param_dsps[i].m_off));
-            if(t_cnt == 1){
-                glUniform3f(t_locate,*t_p,*(t_p+1),*(t_p+2));
-            }else{
-                glUniform3fv(t_locate,t_cnt,t_p);
-            }
-            glUniform3fv(t_locate,1,t_p);
-        }else if( m_tbl->m_param_dsps[i].m_type == SV_FVEC4) {
-            s32 t_cnt = m_tbl->m_param_dsps[i].m_size/sizeof(FVec4);
-            f32* t_p = (f32*)(m_tbl->m_param_values->getPointer( m_tbl->m_param_dsps[i].m_off));
-            if(t_cnt == 1){
-                glUniform4f(t_locate,*t_p,*(t_p+1),*(t_p+2),*(t_p+3));
-            }else{
-                glUniform4fv(t_locate,t_cnt,t_p);
-            }
-            glUniform4fv(t_locate,1,t_p);
-        }else if( m_tbl->m_param_dsps[i].m_type == SV_FMAT2) {
-//                s32 t_cnt = m_tbl->m_param_dsps[i].m_size/sizeof(FMat2);
-//                f32* t_p = (f32*)(m_tbl->m_param_values->getPointer( m_tbl->m_param_dsps[i].m_off));
-//                if(t_cnt == 1){
-//                    glUniformMatrix4fv(t_locate,1,GL_FALSE,t_p);
-//                }else{
-//                    glUniformMatrix4fv(t_locate,t_cnt,GL_FALSE,t_p);
-//                }
-        }else if( m_tbl->m_param_dsps[i].m_type == SV_FMAT3) {
-//                s32 t_cnt = m_tbl->m_param_dsps[i].m_size/sizeof(FMat3);
-//                f32* t_p = (f32*)(m_tbl->m_param_values->getPointer( m_tbl->m_param_dsps[i].m_off));
-//                if(t_cnt == 1){
-//                    glUniformMatrix4fv(t_locate,1,GL_FALSE,t_p);
-//                }else{
-//                    glUniformMatrix4fv(t_locate,t_cnt,GL_FALSE,t_p);
-//                }
-        }else if( m_tbl->m_param_dsps[i].m_type == SV_FMAT4) {
-            s32 t_cnt = m_tbl->m_param_dsps[i].m_size/sizeof(FMat4);
-            f32* t_p = (f32*)(m_tbl->m_param_values->getPointer( m_tbl->m_param_dsps[i].m_off));
-            if(t_cnt == 1){
-                glUniformMatrix4fv(t_locate,1,GL_FALSE,t_p);
-            }else{
-                glUniformMatrix4fv(t_locate,t_cnt,GL_FALSE,t_p);
-            }
-        }else if( m_tbl->m_param_dsps[i].m_type == SV_BLOCK) {
-
-        }
+void SVRShaderGL::submitSurface(SVSurfacePtr _surface) {
+    if(!_surface) {
+        return ;
     }
+    SVShaderPtr t_shader = std::dynamic_pointer_cast<SVShader>(m_logic_obj);
+    if(!t_shader){
+        return ;
+    }
+//    for(s32 i=0;i<t_shader->m_paramtbl.size();i++) {
+//        ParamTblDsp* t_dsp = &(t_shader->m_paramtbl[i]);
+//        SVParamTblPtr t_tbl = t_dsp->m_tbl;
+//    }
+    //surface中的tbl提交到shader
+    
+//    //更新纹理
+//    for(s32 i=0;i<_surface->m_texpool.size();i++){
+//
+//    }
+//    //更新uni
+//    for( s32 i=0;i<_surface->m_tbl->m_param_dsps.size();i++ ) {
+//        SVParamDsp* t_dsp = &(_surface->m_tbl->m_param_dsps[i]);
+//        if(t_dsp->m_type == SV_INT) {
+//            s32 t_value = 0;
+//            _surface->m_tbl->m_param_values->get(t_dsp->m_off, t_value);
+//            m_tbl->setParam(t_dsp->m_name.c_str(),t_value);
+//        }else if(t_dsp->m_type == SV_FLOAT) {
+//            f32 t_value = 0;
+//            _surface->m_tbl->m_param_values->get(t_dsp->m_off, t_value);
+//            m_tbl->setParam(t_dsp->m_name.c_str(),t_value);
+//        }else if(t_dsp->m_type == SV_FVEC2) {
+//            FVec2 t_value;
+//            _surface->m_tbl->m_param_values->get(t_dsp->m_off, t_value);
+//            m_tbl->setParam(t_dsp->m_name.c_str(),t_value);
+//        }else if(t_dsp->m_type == SV_FVEC3) {
+//            FVec3 t_value;
+//            _surface->m_tbl->m_param_values->get(t_dsp->m_off, t_value);
+//            m_tbl->setParam(t_dsp->m_name.c_str(),t_value);
+//        }else if(t_dsp->m_type == SV_FVEC4) {
+//            FVec4 t_value;
+//            _surface->m_tbl->m_param_values->get(t_dsp->m_off, t_value);
+//            m_tbl->setParam(t_dsp->m_name.c_str(),t_value);
+//        }else if(t_dsp->m_type == SV_FMAT2) {
+//            FMat2 t_value;
+//            _surface->m_tbl->m_param_values->get(t_dsp->m_off, t_value);
+//            m_tbl->setParam(t_dsp->m_name.c_str(),t_value);
+//        }else if(t_dsp->m_type == SV_FMAT3) {
+//            FMat3 t_value;
+//            _surface->m_tbl->m_param_values->get(t_dsp->m_off, t_value);
+//            m_tbl->setParam(t_dsp->m_name.c_str(),t_value);
+//        }else if(t_dsp->m_type == SV_FMAT4) {
+//            FMat4 t_value;
+//            _surface->m_tbl->m_param_values->get(t_dsp->m_off, t_value);
+//            m_tbl->setParam(t_dsp->m_name.c_str(),t_value);
+//        }
+//    }
 }

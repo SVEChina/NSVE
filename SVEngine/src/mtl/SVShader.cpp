@@ -203,7 +203,6 @@ void SVShader::SamplerDspFromJson(RAPIDJSON_NAMESPACE::Value &item,SamplerDsp& _
     }
 }
 
-
 void SVShader::ParamTblFromJson(RAPIDJSON_NAMESPACE::Value &item,ParamTblDsp& _dsp) {
     if( !item.IsObject() ) {
         return;

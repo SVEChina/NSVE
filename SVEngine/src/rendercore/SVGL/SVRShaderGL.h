@@ -54,8 +54,6 @@ namespace sv {
         u32 m_cs;
         
         bool m_block;
-        
-        SVParamTblPtr m_tbl;
     };
         
 }//!namespace sv

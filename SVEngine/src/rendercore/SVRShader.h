@@ -98,9 +98,6 @@ namespace sv {
         virtual bool active(SVRendererPtr _render){ return false; }
         
         virtual void submitSurface(SVSurfacePtr _surface){}
-
-//    protected:
-//        VFTYPE m_vft;
     };
         
 }//!namespace sv
