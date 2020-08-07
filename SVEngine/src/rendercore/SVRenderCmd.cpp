@@ -11,15 +11,12 @@
 #include "SVRenderTexture.h"
 #include "SVRenderer.h"
 #include "SVRenderMesh.h"
-#include "../base/SVDataSwap.h"
-#include "../event/SVEvent.h"
-#include "../event/SVEventMgr.h"
-#include "../event/SVOpEvent.h"
-#include "../basesys/SVScene.h"
+#include "SVRShader.h"
 #include "../mtl/SVMtlCore.h"
 #include "../mtl/SVTexMgr.h"
 #include "../mtl/SVTexture.h"
-#include "../basesys/SVTrans.h"
+#include "../mtl/SVShader.h"
+
 #include <sys/time.h>
 
 using namespace sv;
@@ -67,6 +64,11 @@ void SVRCmdNor::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
         if(!t_ret){
             return ;
         }
+        //更新材质
+        if(m_pSurface && m_pMtl->getShader() && m_pMtl->getShader()->getResShader() ) {
+            m_pMtl->getShader()->getResShader()->submitSurface(m_pSurface);
+        }
+        //激活材质
         t_ret =_renderer->processMtl(m_pMtl);
         if(!t_ret){
             return ;

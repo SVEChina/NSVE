@@ -90,6 +90,7 @@ namespace sv {
         //处理mesh
         virtual bool processMesh(SVRenderMeshPtr _mesh){ return false; }
         
+        //绘制mesh
         virtual void drawMesh(SVRenderMeshPtr _mesh){ }
         
         //自动回收
