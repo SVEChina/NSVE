@@ -72,11 +72,11 @@ namespace sv {
         TS_FREE
     };
 
-    //sv渲染器类型
-    enum SV_RM_TYPE {
-        E_M_GLES,
-        E_M_VUNKAN,
-        E_M_METAL
+    //sv渲染器类型 renderer
+    enum SV_RE_TYPE {
+        E_R_GLES,
+        E_R_VUNKAN,
+        E_R_METAL
     };
 
     //sv渲染流类型

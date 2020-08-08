@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		024E0DBA24D6BA58006B15E3 /* CGLESView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 024E0DB824D6BA58006B15E3 /* CGLESView.mm */; };
 		5F64D59A2480F0D40005CF47 /* CMetalView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5F64D5992480F0D40005CF47 /* CMetalView.mm */; };
 		5FD7F1F0247D064F00A53A1D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FD7F1EF247D064F00A53A1D /* AppDelegate.m */; };
 		5FD7F1F2247D065000A53A1D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5FD7F1F1247D065000A53A1D /* Assets.xcassets */; };
@@ -19,7 +20,7 @@
 		5FD7F21D247D294F00A53A1D /* CGInst.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5FD7F219247D294F00A53A1D /* CGInst.mm */; };
 		5FD7F21E247D294F00A53A1D /* CGState.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5FD7F21A247D294F00A53A1D /* CGState.mm */; };
 		5FF2B80B24C1509300FC0BC9 /* sve-metal.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5FF2B80424C1509200FC0BC9 /* sve-metal.bundle */; };
-		5FF2B80C24C1509300FC0BC9 /* sve.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5FF2B80524C1509200FC0BC9 /* sve.bundle */; };
+		5FF2B80C24C1509300FC0BC9 /* sve-gles.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5FF2B80524C1509200FC0BC9 /* sve-gles.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		024E0DB224D6B534006B15E3 /* CGDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGDef.h; sourceTree = "<group>"; };
+		024E0DB824D6BA58006B15E3 /* CGLESView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CGLESView.mm; sourceTree = "<group>"; };
+		024E0DB924D6BA58006B15E3 /* CGLESView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGLESView.h; sourceTree = "<group>"; };
 		5F64D5982480F0D40005CF47 /* CMetalView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CMetalView.h; sourceTree = "<group>"; };
 		5F64D5992480F0D40005CF47 /* CMetalView.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = CMetalView.mm; sourceTree = "<group>"; };
 		5FD7F1EB247D064F00A53A1D /* SVETools.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SVETools.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -74,7 +78,7 @@
 		5FD7F21A247D294F00A53A1D /* CGState.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = CGState.mm; sourceTree = "<group>"; };
 		5FD7F21B247D294F00A53A1D /* CGUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGUI.h; sourceTree = "<group>"; };
 		5FF2B80424C1509200FC0BC9 /* sve-metal.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "sve-metal.bundle"; sourceTree = "<group>"; };
-		5FF2B80524C1509200FC0BC9 /* sve.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = sve.bundle; sourceTree = "<group>"; };
+		5FF2B80524C1509200FC0BC9 /* sve-gles.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "sve-gles.bundle"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +117,7 @@
 		5FD7F1ED247D064F00A53A1D /* SVETools */ = {
 			isa = PBXGroup;
 			children = (
+				024E0DB224D6B534006B15E3 /* CGDef.h */,
 				5FD7F1EE247D064F00A53A1D /* AppDelegate.h */,
 				5FD7F1EF247D064F00A53A1D /* AppDelegate.m */,
 				5FD7F1F1247D065000A53A1D /* Assets.xcassets */,
@@ -124,6 +129,8 @@
 				5FD7F218247D294F00A53A1D /* CGUI.mm */,
 				5F64D5982480F0D40005CF47 /* CMetalView.h */,
 				5F64D5992480F0D40005CF47 /* CMetalView.mm */,
+				024E0DB924D6BA58006B15E3 /* CGLESView.h */,
+				024E0DB824D6BA58006B15E3 /* CGLESView.mm */,
 				5FD7F1F6247D065000A53A1D /* Info.plist */,
 				5FD7F1F7247D065000A53A1D /* main.m */,
 				5FD7F1F3247D065000A53A1D /* MainMenu.xib */,
@@ -156,7 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				5FF2B80424C1509200FC0BC9 /* sve-metal.bundle */,
-				5FF2B80524C1509200FC0BC9 /* sve.bundle */,
+				5FF2B80524C1509200FC0BC9 /* sve-gles.bundle */,
 			);
 			name = SVERes;
 			path = ../SVERes;
@@ -256,7 +263,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5FF2B80C24C1509300FC0BC9 /* sve.bundle in Resources */,
+				5FF2B80C24C1509300FC0BC9 /* sve-gles.bundle in Resources */,
 				5FD7F1F2247D065000A53A1D /* Assets.xcassets in Resources */,
 				5FD7F1F5247D065000A53A1D /* MainMenu.xib in Resources */,
 				5FF2B80B24C1509300FC0BC9 /* sve-metal.bundle in Resources */,
@@ -275,6 +282,7 @@
 				5FD7F21D247D294F00A53A1D /* CGInst.mm in Sources */,
 				5FD7F1F8247D065000A53A1D /* main.m in Sources */,
 				5FD7F1F0247D064F00A53A1D /* AppDelegate.m in Sources */,
+				024E0DBA24D6BA58006B15E3 /* CGLESView.mm in Sources */,
 				5FD7F21E247D294F00A53A1D /* CGState.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

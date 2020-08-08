@@ -23,10 +23,12 @@
 -(void)cgDestroy;
 //
 -(void*)getSVE;
-//
+//renderer metal
 -(void)createRM:(id<MTLDevice>)_device drawable:(id<CAMetalDrawable>)_drawable;
-//
 -(void)destroyRM;
+//renderer gles
+- (void)createGLWidth:(int)_w Height:(int)_h;
+- (void)destroyGL;
 //
 -(void)render;
 

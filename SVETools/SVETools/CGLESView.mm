@@ -1,18 +1,18 @@
 //
-//  CMetalView.m
+//  CGLESView.m
 //  SVETools
 //
 //  Created by 付一洲 on 2020/5/29.
 //  Copyright © 2020 付一洲. All rights reserved.
 //
 
-#import "CMetalView.h"
+#import "CGLESView.h"
 #import <QuartzCore/CAMetalLayer.h>
 #import <QuartzCore/CVDisplayLink.h>
 #import "CGInst.h"
 #include "src/app/SVInst.h"
 
-@interface CMetalView () {
+@interface CGLESView () {
     CAMetalLayer* metalLayer;
     CVDisplayLinkRef displayLink;
 }
@@ -22,7 +22,7 @@
 
 @end
 
-@implementation CMetalView
+@implementation CGLESView
 
 - (instancetype)initWithFrame:(NSRect)frameRect {
     self = [super initWithFrame:frameRect];
@@ -82,7 +82,7 @@ static CVReturn renderCallback(CVDisplayLinkRef displayLink,
     //NSLog(@"sve timers \n ");
     dispatch_sync(dispatch_get_main_queue(), ^{
         //NSLog(@"sve timers \n ");
-        [(__bridge CMetalView*)displayLinkContext renderMetal];
+        [(__bridge CGLESView*)displayLinkContext renderMetal];
     });
     return kCVReturnSuccess;
 }

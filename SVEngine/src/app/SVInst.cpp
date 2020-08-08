@@ -56,7 +56,7 @@ SVInstPtr SVInst::share() {
 
 //构建各个模块的逻辑部分，引擎可以运行的最简模式
 void SVInst::init() {
-    m_pRM = nullptr;
+    m_pRE = nullptr;
     //
     if(!m_pFileMgr) {
         m_pFileMgr = MakeSharedPtr<SVFileMgr>(share());
@@ -84,21 +84,25 @@ void SVInst::destroy() {
 }
 
 //创建渲染器
-SVRendererPtr SVInst::createRM(SV_RM_TYPE _type) {
-    if(_type == E_M_METAL) {
-        m_pRM = MakeSharedPtr<SVRendererMetal>( share() );
-    }else if(_type == E_M_GLES) {
-        m_pRM = MakeSharedPtr<SVRendererGL>( share() );
-    }else if(_type == E_M_VUNKAN) {
-        //m_pRM = MakeSharedPtr<>();
+SVRendererPtr SVInst::createRenderer(SV_RE_TYPE _type) {
+    if(_type == E_R_METAL) {
+        m_pRE = MakeSharedPtr<SVRendererMetal>( share() );
+    }else if(_type == E_R_GLES) {
+        m_pRE = MakeSharedPtr<SVRendererGL>( share() );
+    }else if(_type == E_R_VUNKAN) {
+        //m_pRE = MakeSharedPtr<>();
     }
-    return m_pRM;
+    return m_pRE;
 }
 
 //销毁渲染器
-void SVInst::destroyRM() {
+void SVInst::destroyRenderer() {
     //
-    
+    if(m_pRE){
+        m_pRE->clearRes();
+        m_pRE->destroy();
+        m_pRE = nullptr;
+    }
 }
 
 //跑线程模型 就是引擎运行
@@ -251,5 +255,5 @@ SVPhysicsWorldMgrPtr SVInst::getPhysicsWorldMgr(){
 }
 
 SVRendererPtr SVInst::getRenderer() {
-    return m_pRM;
+    return m_pRE;
 }
