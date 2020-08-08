@@ -244,6 +244,11 @@ s32 SVRMeshGL::process(SVRendererPtr _renderer){
     return 1;
 }
 
+void SVRMeshGL::submit(SVDataSwapPtr _data,s32 _offset,s32 _size,s32 _bufid,s32 _buftype) {
+    //提交数据
+    
+}
+
 void SVRMeshGL::draw(SVRendererPtr _renderer) {
     
 }

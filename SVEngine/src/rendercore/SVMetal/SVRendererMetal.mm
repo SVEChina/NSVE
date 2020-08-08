@@ -10,7 +10,6 @@
 #include "SVRTexMetal.h"
 #include "SVRShaderMetal.h"
 #include "SVRMeshMetal.h"
-
 #include "../SVRTarget.h"
 #include "../../app/SVInst.h"
 #include "../../app/SVDispatch.h"
@@ -20,6 +19,7 @@
 #include "../../mtl/SVMtlCore.h"
 #include "../../mtl/SVShader.h"
 #include "../../mtl/SVTexture.h"
+#include "../../mtl/SVSurface.h"
 
 #include <Cocoa/Cocoa.h>
 #import <Foundation/Foundation.h>
@@ -114,20 +114,24 @@ SVRFboPtr SVRendererMetal::createResFbo()  {
 }
 
 //处理材质
-bool SVRendererMetal::processMtl(SVMtlCorePtr _mtl) {
+bool SVRendererMetal::processMtl(SVMtlCorePtr _mtl,SVSurfacePtr _surface) {
     if(!m_pCurEncoder)
         return false;
     if(_mtl && _mtl->getShader() ) {
+        if(_surface ) {
+            //更新uniform
+            _mtl->getShader()->submitParam(_surface->m_tbl);
+            //更新纹理
+        }
         bool t_ret = _mtl->getShader()->active();
         if(t_ret) {
-            //传递uniform（单独或者block）
-            processShader( _mtl->getShader()->getResShader() );
-            //传递纹理
-            for(s32 i=0;i<MAX_TEXUNIT;i++) {
-                if( _mtl->m_texUnit[i].m_pTex ) {
-                    processTexture( _mtl->m_texUnit[i].m_pTex->getResTex() , i , _mtl->m_texUnit[i].m_stage_type);
-                }
-            }
+//            processShader( _mtl->getShader()->getResShader() );
+//            //传递纹理
+//            for(s32 i=0;i<MAX_TEXUNIT;i++) {
+//                if( _mtl->m_texUnit[i].m_pTex ) {
+//                    processTexture( _mtl->m_texUnit[i].m_pTex->getResTex() , i , _mtl->m_texUnit[i].m_stage_type);
+//                }
+//            }
             return t_ret;
         }
     }

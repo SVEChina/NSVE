@@ -23,6 +23,7 @@
 #include "../../mtl/SVTexture.h"
 #include "../../mtl/SVMtlCore.h"
 #include "../../mtl/SVShader.h"
+#include "../../mtl/SVSurface.h"
 
 using namespace sv;
 
@@ -92,33 +93,24 @@ SVRFboPtr SVRendererGL::createResFbo() {
 }
 
 //处理材质
-bool SVRendererGL::processMtl(SVMtlCorePtr _mtl) {
+bool SVRendererGL::processMtl(SVMtlCorePtr _mtl,SVSurfacePtr _surface) {
     if(_mtl && _mtl->getShader() ) {
+        if(_surface ) {
+            //更新uniform
+            _mtl->getShader()->submitParam(_surface->m_tbl);
+            //更新纹理
+            
+        }
+        //
         bool t_ret = _mtl->getShader()->active();
         if(t_ret) {
-            //传递参数
-            SVRShaderPtr t_rshader = _mtl->getShader()->getResShader();
-            if(t_rshader) {
-                SVRShaderGLPtr t_gl_shader = std::dynamic_pointer_cast<SVRShaderGL>(t_rshader);
-                if(t_gl_shader) {
-//                    t_gl_shader->submitParamTbl(_mtl->getShader()->m_vs_paramtbl);
-//                    t_gl_shader->submitParamTbl(_mtl->getShader()->m_fs_paramtbl);
-//                    t_gl_shader->submitParamTbl(_mtl->getShader()->m_gs_paramtbl);
-                }
-            }
-//            //提交纹理
-//            for(s32 i=0;i<MAX_TEXUNIT;i++) {
-//                submitTex(i,_mtl->m_texUnit[i]);
-//            }
+            //提交纹理
+            
             //设置状态
             //blend
-            
             //stencil
-            
             //cull
-            
             //alpha
-            
             //depth
         }
         return true;

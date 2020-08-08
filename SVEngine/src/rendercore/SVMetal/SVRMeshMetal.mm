@@ -118,6 +118,18 @@ s32 SVRMeshMetal::process(SVRendererPtr _renderer) {
     return 0;
 }
 
+void SVRMeshMetal::submit(SVDataSwapPtr _data,s32 _offset,s32 _size,s32 _bufid,s32 _buftype) {
+    //提交数据
+    
+}
+
+////替换uniform
+//for(s32 i=0;i<t_shader->m_paramtbl.size();i++) {
+//    void* t_pointer = t_shader->m_paramtbl[i].m_tbl->getDataPointer();
+//    s32 t_len = t_shader->m_paramtbl[i].m_tbl->getDataSize();
+//    memcpy( m_ubuf_pool[i].m_ubuf.contents , t_pointer ,t_len);
+//}
+
 void SVRMeshMetal::draw(SVRendererPtr _renderer) {
     SVRendererMetalPtr t_rm = std::dynamic_pointer_cast<SVRendererMetal>(_renderer);
     if(t_rm && t_rm->m_pCurEncoder) {

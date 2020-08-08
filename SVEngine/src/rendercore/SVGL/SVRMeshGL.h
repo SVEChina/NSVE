@@ -35,6 +35,8 @@ namespace sv {
 
         void draw(SVRendererPtr _renderer);
         
+        void submit(SVDataSwapPtr _data,s32 _offset,s32 _size,s32 _bufid,s32 _buftype);
+        
     protected:
         //渲染属性
         s32 m_draw_method;

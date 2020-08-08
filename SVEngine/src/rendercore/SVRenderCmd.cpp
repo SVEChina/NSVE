@@ -16,6 +16,7 @@
 #include "../mtl/SVTexMgr.h"
 #include "../mtl/SVTexture.h"
 #include "../mtl/SVShader.h"
+#include "../mtl/SVSurface.h"
 
 #include <sys/time.h>
 
@@ -64,12 +65,8 @@ void SVRCmdNor::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
         if(!t_ret){
             return ;
         }
-        //更新材质
-        if(m_pSurface && m_pMtl->getShader() && m_pMtl->getShader()->getResShader() ) {
-            m_pMtl->getShader()->getResShader()->submitSurface(m_pSurface);
-        }
         //激活材质
-        t_ret =_renderer->processMtl(m_pMtl);
+        t_ret =_renderer->processMtl(m_pMtl,m_pSurface);
         if(!t_ret){
             return ;
         }

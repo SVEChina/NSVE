@@ -262,6 +262,8 @@ bool SVRShaderGL::active(SVRendererPtr _renderer) {
         submitParamTbl();
         //提交纹理
         
+        //设置各种属性
+        
         return true;
     }
     return false;
@@ -361,51 +363,4 @@ void SVRShaderGL::submitSurface(SVSurfacePtr _surface) {
     if(!t_shader){
         return ;
     }
-//    for(s32 i=0;i<t_shader->m_paramtbl.size();i++) {
-//        ParamTblDsp* t_dsp = &(t_shader->m_paramtbl[i]);
-//        SVParamTblPtr t_tbl = t_dsp->m_tbl;
-//    }
-    //surface中的tbl提交到shader
-    
-//    //更新纹理
-//    for(s32 i=0;i<_surface->m_texpool.size();i++){
-//
-//    }
-//    //更新uni
-//    for( s32 i=0;i<_surface->m_tbl->m_param_dsps.size();i++ ) {
-//        SVParamDsp* t_dsp = &(_surface->m_tbl->m_param_dsps[i]);
-//        if(t_dsp->m_type == SV_INT) {
-//            s32 t_value = 0;
-//            _surface->m_tbl->m_param_values->get(t_dsp->m_off, t_value);
-//            m_tbl->setParam(t_dsp->m_name.c_str(),t_value);
-//        }else if(t_dsp->m_type == SV_FLOAT) {
-//            f32 t_value = 0;
-//            _surface->m_tbl->m_param_values->get(t_dsp->m_off, t_value);
-//            m_tbl->setParam(t_dsp->m_name.c_str(),t_value);
-//        }else if(t_dsp->m_type == SV_FVEC2) {
-//            FVec2 t_value;
-//            _surface->m_tbl->m_param_values->get(t_dsp->m_off, t_value);
-//            m_tbl->setParam(t_dsp->m_name.c_str(),t_value);
-//        }else if(t_dsp->m_type == SV_FVEC3) {
-//            FVec3 t_value;
-//            _surface->m_tbl->m_param_values->get(t_dsp->m_off, t_value);
-//            m_tbl->setParam(t_dsp->m_name.c_str(),t_value);
-//        }else if(t_dsp->m_type == SV_FVEC4) {
-//            FVec4 t_value;
-//            _surface->m_tbl->m_param_values->get(t_dsp->m_off, t_value);
-//            m_tbl->setParam(t_dsp->m_name.c_str(),t_value);
-//        }else if(t_dsp->m_type == SV_FMAT2) {
-//            FMat2 t_value;
-//            _surface->m_tbl->m_param_values->get(t_dsp->m_off, t_value);
-//            m_tbl->setParam(t_dsp->m_name.c_str(),t_value);
-//        }else if(t_dsp->m_type == SV_FMAT3) {
-//            FMat3 t_value;
-//            _surface->m_tbl->m_param_values->get(t_dsp->m_off, t_value);
-//            m_tbl->setParam(t_dsp->m_name.c_str(),t_value);
-//        }else if(t_dsp->m_type == SV_FMAT4) {
-//            FMat4 t_value;
-//            _surface->m_tbl->m_param_values->get(t_dsp->m_off, t_value);
-//            m_tbl->setParam(t_dsp->m_name.c_str(),t_value);
-//        }
-//    }
 }

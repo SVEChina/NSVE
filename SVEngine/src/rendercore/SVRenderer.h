@@ -82,7 +82,7 @@ namespace sv {
         SVRTargetPtr curTarget(){ return m_cur_target; }
         
         //处理材质
-        virtual bool processMtl(SVMtlCorePtr _mtl){ return false; }
+        virtual bool processMtl(SVMtlCorePtr _mtl,SVSurfacePtr _surface){ return false; }
         
         //处理纹理
         virtual bool processTexture(SVRTexPtr _tex,s32 _chn,s32 _type) { return false; }

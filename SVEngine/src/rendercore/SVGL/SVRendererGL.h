@@ -44,15 +44,16 @@ namespace sv {
         //fbo
         SVRFboPtr createResFbo() ;
         
-        //处理部分
         //处理材质
-        bool processMtl(SVMtlCorePtr _mtl);
+        bool processMtl(SVMtlCorePtr _mtl,SVSurfacePtr _surface);
         
+        //处理纹理
         bool processTexture(SVRTexPtr _tex,s32 _chn,s32 _type);
        
         //处理mesh
         bool processMesh(SVRenderMeshPtr _mesh);
         
+        //绘制mesh
         void drawMesh(SVRenderMeshPtr _mesh);
         
         u32 m_cur_program;  //当前的program

@@ -309,6 +309,10 @@ bool SVRShaderMetal::active(SVRendererPtr _renderer) {
     if(!t_rm) {
         return false;
     }
+    SVShaderPtr t_shader = std::dynamic_pointer_cast<SVShader>(m_logic_obj);
+    if(!t_shader){
+        return false;
+    }
     if(!m_pl_state) {
         return false;
     }
@@ -320,7 +324,13 @@ bool SVRShaderMetal::active(SVRendererPtr _renderer) {
             [t_rm->m_pCurEncoder setFragmentSamplerState:m_sampler_st[i].m_st atIndex:m_sampler_st[i].m_chn];
         }
     }
-    //u-buf更新
+    //替换uniform
+    for(s32 i=0;i<t_shader->m_paramtbl.size();i++) {
+        void* t_pointer = t_shader->m_paramtbl[i].m_tbl->getDataPointer();
+        s32 t_len = t_shader->m_paramtbl[i].m_tbl->getDataSize();
+        memcpy( m_ubuf_pool[i].m_ubuf.contents , t_pointer ,t_len);
+    }
+    //上传uniform
     for(s32 i=0;i<m_ubuf_pool.size();i++) {
         if( m_ubuf_pool[i].m_type == 0 ) {
             //vs
@@ -345,45 +355,4 @@ void SVRShaderMetal::submitSurface(SVSurfacePtr _surface) {
     if(!t_shader){
         return ;
     }
-//    //更新uni
-//    for( s32 i=0;i<_surface->m_tbl->m_param_dsps.size();i++ ) {
-//        SVParamDsp* t_dsp = &(_surface->m_tbl->m_param_dsps[i]);
-//        if(t_dsp->m_type == SV_INT) {
-//            s32 t_value = 0;
-//            _surface->m_tbl->m_param_values->get(t_dsp->m_off, t_value);
-//            //m_tbl->setParam(t_dsp->m_name.c_str(),t_value);
-//        }else if(t_dsp->m_type == SV_FLOAT) {
-//            f32 t_value = 0;
-//            _surface->m_tbl->m_param_values->get(t_dsp->m_off, t_value);
-//            //m_tbl->setParam(t_dsp->m_name.c_str(),t_value);
-//        }else if(t_dsp->m_type == SV_FVEC2) {
-//            FVec2 t_value;
-//            _surface->m_tbl->m_param_values->get(t_dsp->m_off, t_value);
-//            //m_tbl->setParam(t_dsp->m_name.c_str(),t_value);
-//        }else if(t_dsp->m_type == SV_FVEC3) {
-//            FVec3 t_value;
-//            _surface->m_tbl->m_param_values->get(t_dsp->m_off, t_value);
-//            //m_tbl->setParam(t_dsp->m_name.c_str(),t_value);
-//        }else if(t_dsp->m_type == SV_FVEC4) {
-//            FVec4 t_value;
-//            _surface->m_tbl->m_param_values->get(t_dsp->m_off, t_value);
-//            //m_tbl->setParam(t_dsp->m_name.c_str(),t_value);
-//        }else if(t_dsp->m_type == SV_FMAT2) {
-//            FMat2 t_value;
-//            _surface->m_tbl->m_param_values->get(t_dsp->m_off, t_value);
-//            //m_tbl->setParam(t_dsp->m_name.c_str(),t_value);
-//        }else if(t_dsp->m_type == SV_FMAT3) {
-//            FMat3 t_value;
-//            _surface->m_tbl->m_param_values->get(t_dsp->m_off, t_value);
-//            //m_tbl->setParam(t_dsp->m_name.c_str(),t_value);
-//        }else if(t_dsp->m_type == SV_FMAT4) {
-//            FMat4 t_value;
-//            _surface->m_tbl->m_param_values->get(t_dsp->m_off, t_value);
-//            //m_tbl->setParam(t_dsp->m_name.c_str(),t_value);
-//        }
-//    }
-    
-//    //更新纹理
-//    for(s32 i=0;i<_surface->m_texpool.size();i++){
-//    }
 }

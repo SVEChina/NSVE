@@ -59,7 +59,7 @@ namespace sv {
         process
         */
         //处理材质
-        bool processMtl(SVMtlCorePtr _mtl);
+        bool processMtl(SVMtlCorePtr _mtl,SVSurfacePtr _surface);
         
         //处理shader
         bool processShader(SVRShaderPtr _shader);

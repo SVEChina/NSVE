@@ -84,6 +84,8 @@ namespace sv {
         
         bool active();
         
+        void submitParam(SVParamTblPtr _param);
+        
         bool toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator,
                         RAPIDJSON_NAMESPACE::Value &_objValue);
 
