@@ -1,20 +1,20 @@
 {
     "version" : "1.0",
-    "shader" : "screen",
-    "texture-tbl" : [
-        { "chn" : 0, "from" : "file", "path" : "svres/sve.png" },
-        { "chn" : 1, "from" : "inner", "path" : "SV_MAIN" }
-    ],
+    "name" : "sprite",
+    "shader" : "sprite",
+    "chn0" : {
+        "from" : "file",
+        "path" : "svres/sve.png",
+        "stage": "fs"
+    },
     "blend-param" : {
         "enable" : 0,
         "src" : "SVE_ONE",
         "dst" : "SVE_ZERO"
     },
-
     "stencil-param" : {
         "enable" : 0
     },
-
     "alpha-param" : {
         "enable" : 0
     }

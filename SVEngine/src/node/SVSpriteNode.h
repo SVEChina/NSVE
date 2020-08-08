@@ -52,10 +52,9 @@ namespace sv {
     protected:
         f32 m_width;
         f32 m_height;
-        //FVec2 m_size;
+        SVString m_mtl_name;
         SVTexturePtr m_pTex;
         SVRenderMeshPtr m_pMesh;
-        SVRenderObjectPtr m_pRenderObj;
     };
     
 }//!namespace sv

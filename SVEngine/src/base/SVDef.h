@@ -29,6 +29,8 @@ namespace sv {
         SV_FVEC2,
         SV_FVEC3,
         SV_FVEC4,
+        SV_FMAT2,
+        SV_FMAT3,
         SV_FMAT4,
         SV_BLOCK
     };
@@ -73,7 +75,7 @@ namespace sv {
     };
 
     //sv渲染器类型 renderer
-    enum SV_RE_TYPE {
+    enum SV_R_TYPE {
         E_R_GLES,
         E_R_VUNKAN,
         E_R_METAL
@@ -82,12 +84,15 @@ namespace sv {
     //sv渲染流类型
     enum SV_RSTREAM_TYPE {
         E_RSM_NOR = 0,          //普通流
+        E_RSM_SOLID,
+        E_RSM_TRANSLATE,
         E_RSM_PRE,              //前向流
         E_RSM_AFTER,            //后处理流
         E_RSM_DEBUG,            //调试流
         E_RSM_CREATE_SHADOW,    //产生阴影流
         E_RSM_RECEIVE_SHADOW,   //接收阴影流
-        E_RSM_PARTICLE          //粒子流
+        E_RSM_PARTICLE,          //粒子流
+        E_RSM_MAX
     };
 
 //设计适配模式
@@ -141,7 +146,8 @@ namespace sv {
     //SV 支持的内置纹理种类
     enum SVTEXINID {
         E_TEX_MAIN = 0,
-        E_TEX_CAMERA = 1,
+        E_TEX_FILE,
+        E_TEX_CAMERA,
         E_TEX_SHADOW,
         E_TEX_INSTREAM = 10,
         E_TEX_OUTSTREAM = 20,

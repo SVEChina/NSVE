@@ -206,7 +206,7 @@ void SVBillboardNode::fromJSON(RAPIDJSON_NAMESPACE::Value &item){
     if (item.HasMember("texture") && item["texture"].IsString()) {
         SVString t_textureName = item["texture"].GetString();
         SVString t_texturePath = m_rootPath + t_textureName;
-        setTexture(t_texturePath.c_str(), m_enableMipMap);
+        //setTexture(t_texturePath.c_str(), m_enableMipMap);
     }
     if (item.HasMember("textype") && item["textype"].IsInt()) {
         m_inTexType = SVTEXINID(item["textype"].GetInt());

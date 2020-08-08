@@ -9,12 +9,12 @@
 #define SV_RENDERER_BASE_H
 
 #include "SVRenderDeclare.h"
+#include "../mtl/SVMtlDeclare.h"
 #include "../base/SVGBase.h"
 #include "../base/SVMat4.h"
 #include "../base/SVArray.h"
 #include "../base/SVStack.h"
 #include "../core/SVVertDef.h"
-#include "../mtl/SVMtlParamBase.h"
 
 //渲染器封装的是算法
 
@@ -82,11 +82,15 @@ namespace sv {
         SVRTargetPtr curTarget(){ return m_cur_target; }
         
         //处理材质
-        virtual void processMtl(SVMtlCorePtr _mtl){ }
+        virtual bool processMtl(SVMtlCorePtr _mtl,SVSurfacePtr _surface){ return false; }
+        
+        //处理纹理
+        virtual bool processTexture(SVRTexPtr _tex,s32 _chn,s32 _type) { return false; }
         
         //处理mesh
-        virtual void processMesh(SVRenderMeshPtr _mesh){ }
+        virtual bool processMesh(SVRenderMeshPtr _mesh){ return false; }
         
+        //绘制mesh
         virtual void drawMesh(SVRenderMeshPtr _mesh){ }
         
         //自动回收
@@ -148,8 +152,6 @@ namespace sv {
         s32 m_outHeight;
         
     public:
-        //提交纹理
-        virtual void submitTex(u32 _channel,TexUnit& _unit){}
         //提交unifrom matrix
         virtual void submitUniformMatrix(cptr8 _name,f32* _data){}
         //提交unifrom matrix array

@@ -32,6 +32,7 @@ namespace sv {
             SVLockSpinPtr m_texLock;
             SVDataSwapPtr m_data;
             SVDataSwapPtr m_cube_data[6];
+            s32 m_msaa;
         };
         
     

@@ -66,6 +66,70 @@ bool SVDataChunk::set(u64 _off,void* _value,s32 _size) {
     return true;
 }
 
+void SVDataChunk::get(u64 _off,s32& _value) {
+    if(_off + sizeof(s32) <= m_realsize ) {
+        memcpy(&_value,m_data + _off,sizeof(s32));
+        return;
+    }
+    _value = 0;
+}
+
+void SVDataChunk::get(u64 _off,f32& _value) {
+    if(_off + sizeof(f32) <= m_realsize ) {
+        memcpy(&_value,m_data + _off,sizeof(f32));
+        return;
+    }
+    _value = 0.0f;
+}
+
+void SVDataChunk::get(u64 _off,FVec2& _value) {
+    if(_off + sizeof(FVec2) <= m_realsize ) {
+        memcpy(&_value,m_data + _off,sizeof(FVec2));
+        return;
+    }
+    _value.set(1.0f);
+}
+
+void SVDataChunk::get(u64 _off,FVec3& _value) {
+    if(_off + sizeof(FVec3) <= m_realsize ) {
+        memcpy(&_value,m_data + _off,sizeof(FVec3));
+        return;
+    }
+    _value.set(1.0f);
+}
+
+void SVDataChunk::get(u64 _off,FVec4& _value) {
+    if(_off + sizeof(FVec4) <= m_realsize ) {
+        memcpy(&_value,m_data + _off,sizeof(FVec4));
+        return;
+    }
+    _value.set(1.0f);
+}
+
+void SVDataChunk::get(u64 _off,FMat2& _value) {
+    if(_off + sizeof(FMat2) <= m_realsize ) {
+        memcpy(&_value,m_data + _off,sizeof(FMat2));
+        return;
+    }
+    _value.setIdentity();
+}
+
+void SVDataChunk::get(u64 _off,FMat3& _value) {
+    if(_off + sizeof(FMat3) <= m_realsize ) {
+        memcpy(&_value,m_data + _off,sizeof(FMat3));
+        return;
+    }
+    _value.setIdentity();
+}
+
+void SVDataChunk::get(u64 _off,FMat4& _value) {
+    if(_off + sizeof(FMat4) <= m_realsize ) {
+        memcpy(&_value,m_data + _off,sizeof(FMat4));
+        return;
+    }
+    _value.setIdentity();
+}
+
 //
 u64 SVDataChunk::push(s32 _value) {
     return push(&_value,sizeof(s32));

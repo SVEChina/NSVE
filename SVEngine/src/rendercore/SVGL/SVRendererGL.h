@@ -44,20 +44,21 @@ namespace sv {
         //fbo
         SVRFboPtr createResFbo() ;
         
-        //处理部分
         //处理材质
-        void processMtl(SVMtlCorePtr _mtl);
+        bool processMtl(SVMtlCorePtr _mtl,SVSurfacePtr _surface);
+        
+        //处理纹理
+        bool processTexture(SVRTexPtr _tex,s32 _chn,s32 _type);
        
         //处理mesh
-        void processMesh(SVRenderMeshPtr _mesh);
+        bool processMesh(SVRenderMeshPtr _mesh);
         
+        //绘制mesh
         void drawMesh(SVRenderMeshPtr _mesh);
         
         u32 m_cur_program;  //当前的program
         
     public:
-        //提交纹理
-        virtual void submitTex(u32 _channel,TexUnit& _unit);
         //提交unifrom matrix
         virtual void submitUniformMatrix(cptr8 _name,f32* _data);
         //提交unifrom matrix array

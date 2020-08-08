@@ -15,14 +15,15 @@
 using namespace sv;
 
 SVMtlLib::SVMtlLib(SVInstPtr _app)
-:SVGBaseEx(_app) {
+:SVGBaseEx(_app){
 }
 
 SVMtlLib::~SVMtlLib() {
 }
 
 void SVMtlLib::init() {
-    createMtl("scene.mtl");
+    createMtl("screen.mtl");
+    createMtl("sprite.mtl");
 }
 
 void SVMtlLib::destroy() {
@@ -30,19 +31,31 @@ void SVMtlLib::destroy() {
 
 //加载材质库
 void SVMtlLib::loadMtlPack(cptr8 _pack) {
-    
 }
 
 void SVMtlLib::clear() {
+    //    //运行时的材质库
+    //   typedef std::vector<SVMtlCorePtr> MTLPOOLRUN;
+    //   MTLPOOL m_mtlPool_run;
+    //
+    //   //空闲的材质
+    //   typedef std::vector<s32> EMPTYMTLPOOL;
+    //   EMPTYMTLPOOL m_empty_mtl_ool;
     MTLPOOL::iterator it = m_mtlPool.begin();
     while ( it!=m_mtlPool.end() ) {
         it++;
     }
 }
 
+SVMtlCorePtr SVMtlLib::getMtl(s32 _mtlID) {
+//    if(m_mtlpool_run.size()>_mtlID && m_mtlpool_run[_mtlID]) {
+//        return m_mtlpool_run[_mtlID];
+//    }
+//    return nullptr;
+    return nullptr;
+}
+
 SVMtlCorePtr SVMtlLib::getMtl(cptr8 _mtlname) {
-    //pack里面找
-    
     //本身找
     MTLPOOL::iterator it = m_mtlPool.find(_mtlname);
     if(it!=m_mtlPool.end()) {
@@ -51,16 +64,9 @@ SVMtlCorePtr SVMtlLib::getMtl(cptr8 _mtlname) {
     return nullptr;
 }
 
-
-//材质名称和shader名称有个映射关系
-SVString SVMtlLib::_mapName(cptr8 _name) {
-    return "";
-}
-
 SVMtlCorePtr SVMtlLib::createMtl(cptr8 _mtlname) {
-    //SVDataChunk *_datachunk
     SVDataChunk t_data;
-    bool t_ret = mApp->m_pFileMgr->loadFileContent(&t_data, _mtlname);
+    bool t_ret = mApp->m_pFileMgr->loadFileContentStr(&t_data, _mtlname);   //解析JSON一定要用这个函数
     if(!t_ret) {
         return nullptr;
     }
@@ -69,7 +75,7 @@ SVMtlCorePtr SVMtlLib::createMtl(cptr8 _mtlname) {
     doc.Parse(t_data.getPointerChar());
     if (doc.HasParseError()) {
         RAPIDJSON_NAMESPACE::ParseErrorCode code = doc.GetParseError();
-        SV_LOG_ERROR("rapidjson error code:%d \n", code);
+        SV_LOG_ERROR("rapidjson error code:%d - %s\n", code,_mtlname);
         return nullptr;
     }
     SVString t_version = "1.0";
@@ -79,6 +85,8 @@ SVMtlCorePtr SVMtlLib::createMtl(cptr8 _mtlname) {
     if(t_version == "1.0") {
         SVMtlCorePtr t_mtl = MakeSharedPtr<SVMtlCore>(mApp);
         t_mtl->fromJSON1(doc);
+        //
+        m_mtlPool.insert(std::make_pair(t_mtl->m_mtl_name, t_mtl));
         return t_mtl;
     }
     return nullptr;

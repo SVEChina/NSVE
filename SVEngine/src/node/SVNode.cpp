@@ -10,6 +10,7 @@
 #include "../basesys/SVScene.h"
 #include "../basesys/SVCameraNode.h"
 #include "../mtl/SVMtlCore.h"
+#include "../mtl/SVSurface.h"
 #include "../mtl/SVMtlNocolor.h"
 #include "../act/SVActBase.h"
 #include "../event/SVEventMgr.h"
@@ -34,7 +35,6 @@ SVNode::SVNode(SVInstPtr _app)
     m_dirty = false;
     m_iZOrder = 0;
     m_bindIndex = -1;
-    m_personID = 1;
     m_alpha = 1.0f;
     //基础属性
     m_postion.set(0.0f, 0.0f, 0.0f);
@@ -51,9 +51,12 @@ SVNode::SVNode(SVInstPtr _app)
     m_aabbBox_sw.clear();
     //
     m_pMtl = nullptr;
+    //
+    m_surface = MakeSharedPtr<SVSurface>();
 }
 
 SVNode::~SVNode() {
+    m_surface = nullptr;
     m_pMtl = nullptr;
 }
 
@@ -120,6 +123,9 @@ void SVNode::update(f32 dt) {
 //    } else {
 //        m_absolutMat = m_localMat;
 //    }
+    if(m_surface) {
+        m_surface->setParam("worldMat", m_localMat);
+    }
     //更新包围盒
     m_aabbBox_sw = m_aabbBox;
     m_aabbBox_sw.setTransform(m_absolutMat);
@@ -328,7 +334,6 @@ void SVNode::_toJsonData(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocato
     locationObj.AddMember("zorder", m_iZOrder, _allocator);
     locationObj.AddMember("renderstream", (s32)m_rsType, _allocator);
     locationObj.AddMember("bind", m_bindIndex, _allocator);
-    locationObj.AddMember("person", m_personID, _allocator);
     locationObj.AddMember("bindOffsetX", m_bindOffset.x, _allocator);
     locationObj.AddMember("bindOffsetY", m_bindOffset.y, _allocator);
     locationObj.AddMember("bindOffsetZ", m_bindOffset.z, _allocator);
@@ -393,9 +398,6 @@ void SVNode::_fromJsonData(RAPIDJSON_NAMESPACE::Value &item){
     }
     if (item.HasMember("bind") && item["bind"].IsInt()) {
         m_bindIndex  = item["bind"].GetInt();
-    }
-    if (item.HasMember("person") && item["person"].IsInt()) {
-        m_personID  = item["person"].GetInt();
     }
     FVec3 t_bindOffset = FVec3(0.0f, 0.0f, 0.0f);
     if (item.HasMember("bindOffsetX") && item["bindOffsetX"].IsFloat()) {

@@ -10,7 +10,6 @@
 #include "SVRTexMetal.h"
 #include "SVRShaderMetal.h"
 #include "SVRMeshMetal.h"
-
 #include "../SVRTarget.h"
 #include "../../app/SVInst.h"
 #include "../../app/SVDispatch.h"
@@ -19,6 +18,8 @@
 #include "../../base/SVDataSwap.h"
 #include "../../mtl/SVMtlCore.h"
 #include "../../mtl/SVShader.h"
+#include "../../mtl/SVTexture.h"
+#include "../../mtl/SVSurface.h"
 
 #include <Cocoa/Cocoa.h>
 #import <Foundation/Foundation.h>
@@ -65,6 +66,7 @@ void SVRendererMetal::init(id<MTLDevice> _device,id<MTLDrawable> _target,id<MTLT
     t_dsp->m_oc_texture = (__bridge_retained void*)_targetTex;
     SVDispatch::dispatchTargetCreate(mApp,t_target);
     //设置主RTarget
+    t_target->setRenderPath();
     mApp->getRenderMgr()->setMainRT(t_target);
 }
 
@@ -112,33 +114,63 @@ SVRFboPtr SVRendererMetal::createResFbo()  {
 }
 
 //处理材质
-void SVRendererMetal::processMtl(SVMtlCorePtr _mtl) {
+bool SVRendererMetal::processMtl(SVMtlCorePtr _mtl,SVSurfacePtr _surface) {
     if(!m_pCurEncoder)
-        return ;
+        return false;
     if(_mtl && _mtl->getShader() ) {
+        if(_surface ) {
+            //更新uniform
+            _mtl->getShader()->submitParam(_surface->m_tbl);
+            //更新纹理
+        }
         bool t_ret = _mtl->getShader()->active();
         if(t_ret) {
-            SVRShaderMetalPtr t_shader_metal = std::dynamic_pointer_cast<SVRShaderMetal>(_mtl->getShader());
-            if(t_shader_metal->m_vs_ubuf) {
-                [m_pCurEncoder setVertexBuffer:t_shader_metal->m_vs_ubuf offset:0 atIndex:0];
-            }
-            if(t_shader_metal->m_fs_ubuf) {
-                [m_pCurEncoder setFragmentBuffer:t_shader_metal->m_fs_ubuf offset:0 atIndex:0];
-            }
-            if(t_shader_metal->m_gs_ubuf) {
-                //[m_pCurEncoder setVertexBuffer:m_dbufs[i] offset:0 atIndex:i];
-            }
+//            processShader( _mtl->getShader()->getResShader() );
+//            //传递纹理
+//            for(s32 i=0;i<MAX_TEXUNIT;i++) {
+//                if( _mtl->m_texUnit[i].m_pTex ) {
+//                    processTexture( _mtl->m_texUnit[i].m_pTex->getResTex() , i , _mtl->m_texUnit[i].m_stage_type);
+//                }
+//            }
+            return t_ret;
         }
     }
+    return false;
+}
+
+bool SVRendererMetal::processTexture(SVRTexPtr _tex,s32 _chn,s32 _stage) {
+    if(_tex) {
+        SVRTexMetalPtr t_tex = std::dynamic_pointer_cast<SVRTexMetal>(_tex);
+        t_tex->commit();    //提交数据
+        if(_stage == 0) {
+            //vs纹理
+            [m_pCurEncoder setVertexTexture:t_tex->getInner() atIndex:_chn];
+        }else if(_stage == 1) {
+            //fs纹理
+            [m_pCurEncoder setFragmentTexture:t_tex->getInner() atIndex:_chn];
+        }
+        return true;
+    }
+    return false;
+}
+
+bool SVRendererMetal::processShader(SVRShaderPtr _shader) {
+    SVRShaderMetalPtr t_shader_metal = std::dynamic_pointer_cast<SVRShaderMetal>(_shader);
+    if(t_shader_metal) {
+        //传递uniform buffer
+    }
+    return true;
 }
 
 //处理mesh
-void SVRendererMetal::processMesh(SVRenderMeshPtr _mesh) {
+bool SVRendererMetal::processMesh(SVRenderMeshPtr _mesh) {
     if(!m_pCurEncoder)
-        return ;
+        return false;
     if(_mesh->getResBuffer()) {
         _mesh->getResBuffer()->process( share() );
+        return true;
     }
+    return false;
 }
 
 void SVRendererMetal::drawMesh(SVRenderMeshPtr _mesh) {

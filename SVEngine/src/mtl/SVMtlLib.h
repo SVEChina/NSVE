@@ -59,17 +59,17 @@ namespace sv {
         
         void clear();
         
+        SVMtlCorePtr getMtl(s32 _mtlID);
+        
         SVMtlCorePtr getMtl(cptr8 _mtlname);
         
         SVMtlCorePtr createMtl(cptr8 _mtlname);
         
     protected:
         
-        static SVString _mapName(cptr8 _name);
-        
         static bool parseMtl1(SVMtlCorePtr _mtl,RAPIDJSON_NAMESPACE::Document& _doc);
         
-        //
+        //材质库(静态，模版)
         typedef std::map<SVString,SVMtlCorePtr> MTLPOOL;
         MTLPOOL m_mtlPool;
         
@@ -77,7 +77,13 @@ namespace sv {
         typedef std::vector<SVMtlPackPtr> PACKPOOL;
         PACKPOOL m_pack_pool;
         
-        //SVMtlCorePtr getSkinMtl(SVInstPtr _app);
+        //运行时的材质库
+        typedef std::vector<SVMtlCorePtr> MTLPOOLRUN;
+        MTLPOOLRUN m_mtlpool_run;
+        
+        //空闲的材质
+        typedef std::vector<s32> EMPTYMTLPOOL;
+        EMPTYMTLPOOL m_empty_mtl_ool;
     };
 
 }//!namespace sv

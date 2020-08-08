@@ -154,7 +154,7 @@ bool SVFileMgr::loadFileContentStr(SVDataChunk *_datachunk,cptr8 _fname) {
         return false;
     SVString t_fullname = getFileFullName(_fname);
     if (strcmp(t_fullname.c_str(), "") != 0) {
-        SV_LOG_ERROR("SVFileMgr::getFileFullName %s\n", t_fullname.c_str());
+        //SV_LOG_ERROR("SVFileMgr::getFileFullName %s\n", t_fullname.c_str());
         FILE *fp = fopen(t_fullname.c_str(), "r");
         fseek(fp, 0, SEEK_END);
         s64 t_file_len = ftell(fp);
@@ -176,7 +176,6 @@ SVString SVFileMgr::getFileFullName(cptr8 _fname) {
     m_fileLock->lock();
     for (s32 i = 0; i < m_searchPathPool.size(); i++) {
         SVString t_fullpath = m_searchPathPool[i] + _fname;
-        SV_LOG_ERROR("SVFileMgr::getFileFullName %s\n", t_fullpath.c_str());
         FILE *fp = fopen(t_fullpath.c_str(), "r");
         if (fp) {
             fclose(fp);
@@ -185,6 +184,5 @@ SVString SVFileMgr::getFileFullName(cptr8 _fname) {
         }
     }
     m_fileLock->unlock();
-    SV_LOG_ERROR("find file %s\n", tFileName.c_str());
     return tFileName;
 }

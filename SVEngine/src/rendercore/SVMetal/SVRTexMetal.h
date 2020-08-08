@@ -47,6 +47,8 @@ namespace sv {
         
         virtual void commit();  //数据提交到显卡
         
+        id<MTLTexture> getInner();
+        
     protected:
         //
         id<MTLTexture> m_src_tex;

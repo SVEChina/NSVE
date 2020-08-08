@@ -18,7 +18,7 @@ using namespace sv;
 
 static u16 m_rect_index[6] = {0,1,2,2,1,3 };
     
-static f32 m_screen_rect_v3_t0[] = {
+static f32 m_screen_rect_v2_t0[] = {
     -1.0f,-1.0f, 0.0f,0.0f,
     1.0f,-1.0f, 0.0f,0.0f,
     -1.0f,1.0f, 0.0f,0.0f,
@@ -39,12 +39,17 @@ SVComData::~SVComData() {
 
 void SVComData::init() {
     m_screenMesh = MakeSharedPtr<SVRenderMesh>(mApp);
-    BufferDsp t_index_dsp;
-    SVRenderMesh::buildBufferDsp(E_VF_INDEX,E_BFT_STATIC_DRAW,6,6*sizeof(u16),m_rect_index,&t_index_dsp);
+    BufferDspPtr t_index_dsp = MakeSharedPtr<BufferDsp>(E_BFM_AOS);
+    t_index_dsp->push(SV_SMT_INDEX);
+    SVRenderMesh::buildBufferDsp(E_BFT_STATIC_DRAW,6,t_index_dsp);
+    t_index_dsp->setStreamData(0, m_rect_index, 6*sizeof(u16));
     m_screenMesh->setIndexDsp(t_index_dsp);
     //
-    BufferDsp t_vert_dsp;
-    SVRenderMesh::buildBufferDsp(E_VF_V3_T0,E_BFT_STATIC_DRAW,4,6*sizeof(u16),m_screen_rect_v3_t0,&t_vert_dsp);
+    BufferDspPtr t_vert_dsp= MakeSharedPtr<BufferDsp>(E_BFM_AOS);
+    t_vert_dsp->push(SV_SMT_V2);
+    t_vert_dsp->push(SV_SMT_T0);
+    SVRenderMesh::buildBufferDsp(E_BFT_STATIC_DRAW,4,t_vert_dsp);
+    t_vert_dsp->setStreamData(0, m_screen_rect_v2_t0, 16*sizeof(f32));
     m_screenMesh->setVertDsp(t_vert_dsp);
     
     //这个必须有渲染器才可以执行

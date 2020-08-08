@@ -119,28 +119,3 @@ void SVOpGenerate::_process(f32 dt) {
         mParseDataPtr->suspend();
     }
 }
-
-//加载纹理
-SVOpTexLoad::SVOpTexLoad(SVInstPtr _app, SVTexturePtr _tex, cptr8 _fname, bool _enableMipMap)
- : SVOpBase(_app) {
-    mTex = _tex;
-    mFilename = _fname;
-    m_enableMipMap = _enableMipMap;
-}
-
-SVOpTexLoad::~SVOpTexLoad() {
-    mTex = nullptr;
-}
-
-void SVOpTexLoad::_process(f32 dt) {
-    SV_LOG_INFO("load texture: %s \n",mFilename.c_str() );
-    SVLoaderPng pngLoad(mApp);
-    u8 *pTexData = nullptr;
-    pngLoad.loadData(mFilename.c_str(), &pTexData);
-//    if (pTexData) {
-//        mTex->init(mFilename.c_str(), GL_TEXTURE_2D, pngLoad.m_iWidth, pngLoad.m_iHeight, pngLoad.mRenderFormat, pngLoad.mRenderFormat, m_enableMipMap);
-//        mTex->setTexData(pTexData, pngLoad.m_iDataLength);  //数据
-//        //mApp->getRenderMgr()->pushRCmdCreate(mTex);
-//        free(pTexData);
-//    }
-}

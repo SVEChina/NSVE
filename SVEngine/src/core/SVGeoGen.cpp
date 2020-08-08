@@ -27,32 +27,33 @@ SVRenderMeshPtr SVGeoGen::genTri(SVInstPtr _app,
 SVRenderMeshPtr SVGeoGen::genRect(SVInstPtr _app,f32 _w,f32 _h,SVBoundBox& _aabb) {
     _aabb.clear();
     //索引
-    s16 t_index_data[] = { 0,1,2,2,1,3 };
+    u16 t_index_data[] = { 0,1,2,2,1,3 };
+    f32 t_coord_size = 2.0f;
     //数据
     V3_T0 t_verts[4];
     t_verts[0].x = -0.5f * _w;
     t_verts[0].y = -0.5f * _h;
     t_verts[0].z = 0.0f;
-    t_verts[0].t0x = 0.0f;
-    t_verts[0].t0y = 0.0f;
+    t_verts[0].t0x = 0.0f * t_coord_size;
+    t_verts[0].t0y = 0.0f * t_coord_size;
 
     t_verts[1].x = 0.5f * _w;
     t_verts[1].y = -0.5f * _h;
     t_verts[1].z = 0.0f;
-    t_verts[1].t0x = 1.0f;
-    t_verts[1].t0y = 0.0f;
+    t_verts[1].t0x = 1.0f * t_coord_size;
+    t_verts[1].t0y = 0.0f * t_coord_size;
 
     t_verts[2].x = -0.5f * _w;
     t_verts[2].y = 0.5f * _h;
     t_verts[2].z = 0.0f;
-    t_verts[2].t0x = 0.0f;
-    t_verts[2].t0y = 1.0f;
+    t_verts[2].t0x = 0.0f * t_coord_size;
+    t_verts[2].t0y = 1.0f * t_coord_size;
 
     t_verts[3].x = 0.5f * _w;
     t_verts[3].y = 0.5f * _h;
     t_verts[3].z = 0.0f;
-    t_verts[3].t0x = 1.0f;
-    t_verts[3].t0y = 1.0f;
+    t_verts[3].t0x = 1.0f * t_coord_size;
+    t_verts[3].t0y = 1.0f * t_coord_size;
     //
     for(s32 i=0;i<4;i++) {
         _aabb.expand(FVec3(t_verts[i].x,t_verts[i].y,t_verts[i].z));
@@ -60,12 +61,17 @@ SVRenderMeshPtr SVGeoGen::genRect(SVInstPtr _app,f32 _w,f32 _h,SVBoundBox& _aabb
     //
     SVRenderMeshPtr t_mesh = MakeSharedPtr<SVRenderMesh>(_app);
     //
-    BufferDsp t_index_dsp;
-    SVRenderMesh::buildBufferDsp(E_VF_INDEX,E_BFT_STATIC_DRAW,6,6*sizeof(u16),t_index_data,&t_index_dsp);
+    BufferDspPtr t_index_dsp = MakeSharedPtr<BufferDsp>(E_BFM_AOS);
+    t_index_dsp->push(SV_SMT_INDEX);
+    SVRenderMesh::buildBufferDsp(E_BFT_STATIC_DRAW,6,t_index_dsp);
+    t_index_dsp->setStreamData(0, t_index_data, 6*sizeof(u16));
     t_mesh->setIndexDsp(t_index_dsp);
     //
-    BufferDsp t_vert_dsp;
-    SVRenderMesh::buildBufferDsp(E_VF_V3_T0,E_BFT_STATIC_DRAW,4,4*sizeof(V3_T0),t_verts,&t_vert_dsp);
+    BufferDspPtr t_vert_dsp = MakeSharedPtr<BufferDsp>(E_BFM_AOS);
+    t_vert_dsp->push(SV_SMT_V3);
+    t_vert_dsp->push(SV_SMT_T0);
+    SVRenderMesh::buildBufferDsp(E_BFT_STATIC_DRAW,4,t_vert_dsp);
+    t_vert_dsp->setStreamData(0, t_verts, 4*sizeof(V3_T0));
     t_mesh->setVertDsp(t_vert_dsp);
     //这个必须有渲染器才可以执行
     SVDispatch::dispatchMeshCreate(_app, t_mesh);
@@ -73,17 +79,16 @@ SVRenderMeshPtr SVGeoGen::genRect(SVInstPtr _app,f32 _w,f32 _h,SVBoundBox& _aabb
 }
 
 SVRenderMeshPtr SVGeoGen::genRectARCHO(SVInstPtr _app,f32 _w,f32 _h,EUIARCHO _archo,SVBoundBox& _aabb) {
-//    //
 //    s16 t_index_data[] = { 0,1,2,2,1,3 };
 //    V3_T0 t_verts[4];
 //    //
 //    SVRenderMeshPtr t_mesh = MakeSharedPtr<SVRenderMesh>(_app);
-//    BufferDsp t_index_dsp;
-//    SVRenderMesh::buildBufferDsp(E_VF_INDEX,E_BFT_STATIC_DRAW,6,6*sizeof(u16),t_index_data,&t_index_dsp);
+//    BufferDspPtr t_index_dsp= MakeSharedPtr<BufferDsp>(E_BFM_AOS);
+//    SVRenderMesh::buildBufferDsp(E_BFT_STATIC_DRAW,6,6*sizeof(u16),t_index_data,t_index_dsp);
 //    t_mesh->setIndexDsp(t_index_dsp);
 //    //
-//    BufferDsp t_vert_dsp;
-//    SVRenderMesh::buildBufferDsp(E_VF_V3_T0,E_BFT_STATIC_DRAW,4,6*sizeof(u16),t_verts,&t_vert_dsp);
+//    BufferDspPtr t_vert_dsp= MakeSharedPtr<BufferDsp>(E_BFM_AOS);
+//    SVRenderMesh::buildBufferDsp(E_BFT_STATIC_DRAW,4,6*sizeof(u16),t_verts,t_vert_dsp);
 //    t_mesh->setVertDsp(t_vert_dsp);
 //
 //    //这个必须有渲染器才可以执行
@@ -440,17 +445,14 @@ SVRenderMeshPtr SVGeoGen::genAABB(SVInstPtr _app,SVBoundBox& _aabb){
     m_verts[i_base+5].z = _aabb.getMax().z;
     m_verts[i_base+5].t0x = 1.0f;
     m_verts[i_base+5].t0y = 0.0f;
-    
     //
     SVRenderMeshPtr t_mesh = MakeSharedPtr<SVRenderMesh>(_app);
-//    BufferDsp t_index_dsp;
-//    SVRenderMesh::buildBufferDsp(E_VF_INDEX,E_BFT_STATIC_DRAW,6,6*sizeof(u16),m_rect_index,&t_index_dsp);
-//    t_mesh->setIndexDsp(t_index_dsp);
-    //
-    BufferDsp t_vert_dsp;
-    SVRenderMesh::buildBufferDsp(E_VF_V3_T0,E_BFT_STATIC_DRAW,4,6*sizeof(u16),m_verts,&t_vert_dsp);
+    BufferDspPtr t_vert_dsp = MakeSharedPtr<BufferDsp>(E_BFM_AOS);
+    t_vert_dsp->push(SV_SMT_V3);
+    t_vert_dsp->push(SV_SMT_T0);
+    SVRenderMesh::buildBufferDsp(E_BFT_STATIC_DRAW,4,t_vert_dsp);
+    t_vert_dsp->setStreamData(0, m_verts, 36*sizeof(V3_T0));
     t_mesh->setVertDsp(t_vert_dsp);
-    
     //这个必须有渲染器才可以执行
     SVDispatch::dispatchMeshCreate(_app, t_mesh);
     return t_mesh;

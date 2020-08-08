@@ -271,7 +271,6 @@ void SVSpineNode::_spine_stop() {
 void SVSpineNode::_sendAniEvent(cptr8 _eventName) {
 //    SVString t_eventName = m_name + SVString("_") + SVString(_eventName);
 //    SVAnimateEventPtr t_event = MakeSharedPtr<SVAnimateEvent>();
-//    t_event->personID = m_personID;
 //    t_event->m_AnimateName = m_spine->getSpineName();
 //    t_event->eventName = t_eventName;
 //    mApp->getEventMgr()->pushEventToSecondPool(t_event);

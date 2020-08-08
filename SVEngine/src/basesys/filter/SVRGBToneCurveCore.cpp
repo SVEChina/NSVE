@@ -153,10 +153,10 @@ void getPreparedSplineCurve(SVArray<V2>  mRgbCompositeControlPoints,
     SVArray<f32> outPointsR;
     SVArray<f32> outPointsG;
     SVArray<f32> outPointsB;
-    createSplineCurve(mRgbCompositeControlPoints, &outPointsRGB);
-    createSplineCurve(mRedControlPoints, &outPointsR);
-    createSplineCurve(mGreenControlPoints, &outPointsG);
-    createSplineCurve(mBlueControlPoints, &outPointsB);
+//    createSplineCurve(mRgbCompositeControlPoints, &outPointsRGB);
+//    createSplineCurve(mRedControlPoints, &outPointsR);
+//    createSplineCurve(mGreenControlPoints, &outPointsG);
+//    createSplineCurve(mBlueControlPoints, &outPointsB);
     if ( (outPointsRGB.size() >= 256) && (outPointsR.size() >= 256) && (outPointsG.size() >= 256) && (outPointsB.size() >= 256)){
         for (unsigned int currentCurveIndex = 0; currentCurveIndex < 256; currentCurveIndex++)
         {

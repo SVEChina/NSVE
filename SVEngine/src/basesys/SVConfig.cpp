@@ -106,147 +106,147 @@ s32 SVConfig::getRealCameraHeight() {
 }
 
 void SVConfig::loadConfig() {
-    //加载配置文件
-    SVDataChunk tDataStream;
-    bool tflag = mApp->getFileMgr()->loadFileContentStr(&tDataStream, "svres/fmcfg.json");
-    if (!tflag)
-        return ;
-    if (!tDataStream.getPointer()) {
-        SV_LOG_ERROR("data stream is null");
-        return ;
-    }
-    RAPIDJSON_NAMESPACE::Document doc;
-    doc.Parse(tDataStream.getPointerChar() );
-    if (doc.HasParseError()) {
-        RAPIDJSON_NAMESPACE::ParseErrorCode code = doc.GetParseError();
-        SV_LOG_ERROR("rapidjson error code:%d \n", code);
-        return ;
-    }
-    if (doc.HasMember("param")) {
-        RAPIDJSON_NAMESPACE::Value &t_param = doc["param"];
-        if(t_param.IsObject()){
-            if (t_param.HasMember("detecttype")) {
-                RAPIDJSON_NAMESPACE::Value &t_value = t_param["detecttype"];
-                detectType = (DETECTTYPE)t_value.GetInt();
-            }
-            if (t_param.HasMember("design_width")) {
-                RAPIDJSON_NAMESPACE::Value &t_value = t_param["design_width"];
-                designWidth = t_value.GetInt();
-            }
-            if (t_param.HasMember("design_height")) {
-                RAPIDJSON_NAMESPACE::Value &t_value = t_param["design_height"];
-                designHeight = t_value.GetInt();
-            }
-            if (t_param.HasMember("design_img_width")) {
-                RAPIDJSON_NAMESPACE::Value &t_value = t_param["design_img_width"];
-                cameraWidth = t_value.GetInt();
-            }
-            if (t_param.HasMember("design_img_height")) {
-                RAPIDJSON_NAMESPACE::Value &t_value = t_param["design_img_height"];
-                cameraHeight = t_value.GetInt();
-            }
-            if (t_param.HasMember("camera_width")) {
-                RAPIDJSON_NAMESPACE::Value &t_value = t_param["camera_width"];
-                cameraWidth = t_value.GetInt();
-            }
-            if (t_param.HasMember("camera_height")) {
-                RAPIDJSON_NAMESPACE::Value &t_value = t_param["camera_height"];
-                cameraHeight = t_value.GetInt();
-            }
-            if (t_param.HasMember("camera_angle")) {
-                RAPIDJSON_NAMESPACE::Value &t_value = t_param["camera_angle"];
-                cameraAngle = t_value.GetFloat();
-            }
-            if (t_param.HasMember("designadaptmode")) {
-                RAPIDJSON_NAMESPACE::Value &t_value = t_param["designadaptmode"];
-                m_designAdaptmode = (SV_DESIGN_ADAPT_MODE)t_value.GetInt();
-            }
-            if (t_param.HasMember("glversion")) {
-                RAPIDJSON_NAMESPACE::Value &t_value = t_param["glversion"];
-                glVersion = t_value.GetInt();
-            }
-            if (t_param.HasMember("usepbo")) {
-                RAPIDJSON_NAMESPACE::Value &t_value = t_param["usepbo"];
+//    //加载配置文件
+//    SVDataChunk tDataStream;
+//    bool tflag = mApp->getFileMgr()->loadFileContentStr(&tDataStream, "svres/fmcfg.json");
+//    if (!tflag)
+//        return ;
+//    if (!tDataStream.getPointer()) {
+//        SV_LOG_ERROR("data stream is null");
+//        return ;
+//    }
+//    RAPIDJSON_NAMESPACE::Document doc;
+//    doc.Parse(tDataStream.getPointerChar() );
+//    if (doc.HasParseError()) {
+//        RAPIDJSON_NAMESPACE::ParseErrorCode code = doc.GetParseError();
+//        SV_LOG_ERROR("rapidjson error code:%d \n", code);
+//        return ;
+//    }
+//    if (doc.HasMember("param")) {
+//        RAPIDJSON_NAMESPACE::Value &t_param = doc["param"];
+//        if(t_param.IsObject()){
+//            if (t_param.HasMember("detecttype")) {
+//                RAPIDJSON_NAMESPACE::Value &t_value = t_param["detecttype"];
+//                detectType = (DETECTTYPE)t_value.GetInt();
+//            }
+//            if (t_param.HasMember("design_width")) {
+//                RAPIDJSON_NAMESPACE::Value &t_value = t_param["design_width"];
 //                designWidth = t_value.GetInt();
-            }
-            if (t_param.HasMember("stroke_width") && t_param["stroke_width"].IsFloat()) {
-                RAPIDJSON_NAMESPACE::Value &t_value = t_param["stroke_width"];
-                m_strokeWidth = t_value.GetFloat();
-            }
-            if (t_param.HasMember("stroke_color") && t_param["stroke_color"].IsArray()) {
-                RAPIDJSON_NAMESPACE::Value &t_values = t_param["stroke_color"];
-                if (t_values.Size() > 3) {
-                    m_strokeColor.x = t_values[0].GetFloat();
-                    m_strokeColor.y = t_values[1].GetFloat();
-                    m_strokeColor.z = t_values[2].GetFloat();
-                    m_strokeColor.w = t_values[3].GetFloat();
-                }
-            }
-            if (t_param.HasMember("stroke_glowidth") && t_param["stroke_glowidth"].IsFloat()) {
-                RAPIDJSON_NAMESPACE::Value &t_value = t_param["stroke_glowidth"];
-                m_strokeGlowWidth = t_value.GetFloat();
-            }
-            if (t_param.HasMember("stroke_glowcolor") && t_param["stroke_glowcolor"].IsArray()) {
-                RAPIDJSON_NAMESPACE::Value &t_values = t_param["stroke_glowcolor"];
-                if (t_values.Size() > 3) {
-                    m_strokeGlowColor.x = t_values[0].GetFloat();
-                    m_strokeGlowColor.y = t_values[1].GetFloat();
-                    m_strokeGlowColor.z = t_values[2].GetFloat();
-                    m_strokeGlowColor.w = t_values[3].GetFloat();
-                }
-            }
-        }
-    }
-    if (doc.HasMember("filter")) {
-        RAPIDJSON_NAMESPACE::Value &t_filter = doc["filter"];
-        if(t_filter.IsObject()){
-            if (t_filter.HasMember("2dmask")) {
-                RAPIDJSON_NAMESPACE::Value &t_value = t_filter["2dmask"];
-                m_cfgFilter.m_2dmask = t_value.GetInt();
-            }
-            if (t_filter.HasMember("3dmask")) {
-                RAPIDJSON_NAMESPACE::Value &t_value = t_filter["3dmask"];
-                m_cfgFilter.m_3dmask = t_value.GetInt();
-            }
-            if (t_filter.HasMember("2dbone")) {
-                RAPIDJSON_NAMESPACE::Value &t_value = t_filter["2dbone"];
-                m_cfgFilter.m_2dbone = t_value.GetInt();
-            }
-            if (t_filter.HasMember("3dbone")) {
-                RAPIDJSON_NAMESPACE::Value &t_value = t_filter["3dbone"];
-                m_cfgFilter.m_3dbone = t_value.GetInt();
-            }
-            if (t_filter.HasMember("2dframe")) {
-                RAPIDJSON_NAMESPACE::Value &t_value = t_filter["2dframe"];
-                m_cfgFilter.m_2dframe = t_value.GetInt();
-            }
-            if (t_filter.HasMember("distorb")) {
-                RAPIDJSON_NAMESPACE::Value &t_value = t_filter["distorb"];
-                m_cfgFilter.m_distorb = t_value.GetInt();
-            }
-            if (t_filter.HasMember("gpumorph")) {
-                RAPIDJSON_NAMESPACE::Value &t_value = t_filter["gpumorph"];
-                m_cfgFilter.m_gpumorph = t_value.GetInt();
-            }
-            if (t_filter.HasMember("morph")) {
-                RAPIDJSON_NAMESPACE::Value &t_value = t_filter["morph"];
-                m_cfgFilter.m_morph = t_value.GetInt();
-            }
-            if (t_filter.HasMember("particle")) {
-                RAPIDJSON_NAMESPACE::Value &t_value = t_filter["particle"];
-                m_cfgFilter.m_particle = t_value.GetInt();
-            }
-            if (t_filter.HasMember("sky")) {
-                RAPIDJSON_NAMESPACE::Value &t_value = t_filter["sky"];
-                m_cfgFilter.m_sky = t_value.GetInt();
-            }
-            if (t_filter.HasMember("audio")) {
-                RAPIDJSON_NAMESPACE::Value &t_value = t_filter["audio"];
-                m_cfgFilter.m_audio = t_value.GetInt();
-            }
-        }
-    }
-    _adaptScale();
+//            }
+//            if (t_param.HasMember("design_height")) {
+//                RAPIDJSON_NAMESPACE::Value &t_value = t_param["design_height"];
+//                designHeight = t_value.GetInt();
+//            }
+//            if (t_param.HasMember("design_img_width")) {
+//                RAPIDJSON_NAMESPACE::Value &t_value = t_param["design_img_width"];
+//                cameraWidth = t_value.GetInt();
+//            }
+//            if (t_param.HasMember("design_img_height")) {
+//                RAPIDJSON_NAMESPACE::Value &t_value = t_param["design_img_height"];
+//                cameraHeight = t_value.GetInt();
+//            }
+//            if (t_param.HasMember("camera_width")) {
+//                RAPIDJSON_NAMESPACE::Value &t_value = t_param["camera_width"];
+//                cameraWidth = t_value.GetInt();
+//            }
+//            if (t_param.HasMember("camera_height")) {
+//                RAPIDJSON_NAMESPACE::Value &t_value = t_param["camera_height"];
+//                cameraHeight = t_value.GetInt();
+//            }
+//            if (t_param.HasMember("camera_angle")) {
+//                RAPIDJSON_NAMESPACE::Value &t_value = t_param["camera_angle"];
+//                cameraAngle = t_value.GetFloat();
+//            }
+//            if (t_param.HasMember("designadaptmode")) {
+//                RAPIDJSON_NAMESPACE::Value &t_value = t_param["designadaptmode"];
+//                m_designAdaptmode = (SV_DESIGN_ADAPT_MODE)t_value.GetInt();
+//            }
+//            if (t_param.HasMember("glversion")) {
+//                RAPIDJSON_NAMESPACE::Value &t_value = t_param["glversion"];
+//                glVersion = t_value.GetInt();
+//            }
+//            if (t_param.HasMember("usepbo")) {
+//                RAPIDJSON_NAMESPACE::Value &t_value = t_param["usepbo"];
+////                designWidth = t_value.GetInt();
+//            }
+//            if (t_param.HasMember("stroke_width") && t_param["stroke_width"].IsFloat()) {
+//                RAPIDJSON_NAMESPACE::Value &t_value = t_param["stroke_width"];
+//                m_strokeWidth = t_value.GetFloat();
+//            }
+//            if (t_param.HasMember("stroke_color") && t_param["stroke_color"].IsArray()) {
+//                RAPIDJSON_NAMESPACE::Value &t_values = t_param["stroke_color"];
+//                if (t_values.Size() > 3) {
+//                    m_strokeColor.x = t_values[0].GetFloat();
+//                    m_strokeColor.y = t_values[1].GetFloat();
+//                    m_strokeColor.z = t_values[2].GetFloat();
+//                    m_strokeColor.w = t_values[3].GetFloat();
+//                }
+//            }
+//            if (t_param.HasMember("stroke_glowidth") && t_param["stroke_glowidth"].IsFloat()) {
+//                RAPIDJSON_NAMESPACE::Value &t_value = t_param["stroke_glowidth"];
+//                m_strokeGlowWidth = t_value.GetFloat();
+//            }
+//            if (t_param.HasMember("stroke_glowcolor") && t_param["stroke_glowcolor"].IsArray()) {
+//                RAPIDJSON_NAMESPACE::Value &t_values = t_param["stroke_glowcolor"];
+//                if (t_values.Size() > 3) {
+//                    m_strokeGlowColor.x = t_values[0].GetFloat();
+//                    m_strokeGlowColor.y = t_values[1].GetFloat();
+//                    m_strokeGlowColor.z = t_values[2].GetFloat();
+//                    m_strokeGlowColor.w = t_values[3].GetFloat();
+//                }
+//            }
+//        }
+//    }
+//    if (doc.HasMember("filter")) {
+//        RAPIDJSON_NAMESPACE::Value &t_filter = doc["filter"];
+//        if(t_filter.IsObject()){
+//            if (t_filter.HasMember("2dmask")) {
+//                RAPIDJSON_NAMESPACE::Value &t_value = t_filter["2dmask"];
+//                m_cfgFilter.m_2dmask = t_value.GetInt();
+//            }
+//            if (t_filter.HasMember("3dmask")) {
+//                RAPIDJSON_NAMESPACE::Value &t_value = t_filter["3dmask"];
+//                m_cfgFilter.m_3dmask = t_value.GetInt();
+//            }
+//            if (t_filter.HasMember("2dbone")) {
+//                RAPIDJSON_NAMESPACE::Value &t_value = t_filter["2dbone"];
+//                m_cfgFilter.m_2dbone = t_value.GetInt();
+//            }
+//            if (t_filter.HasMember("3dbone")) {
+//                RAPIDJSON_NAMESPACE::Value &t_value = t_filter["3dbone"];
+//                m_cfgFilter.m_3dbone = t_value.GetInt();
+//            }
+//            if (t_filter.HasMember("2dframe")) {
+//                RAPIDJSON_NAMESPACE::Value &t_value = t_filter["2dframe"];
+//                m_cfgFilter.m_2dframe = t_value.GetInt();
+//            }
+//            if (t_filter.HasMember("distorb")) {
+//                RAPIDJSON_NAMESPACE::Value &t_value = t_filter["distorb"];
+//                m_cfgFilter.m_distorb = t_value.GetInt();
+//            }
+//            if (t_filter.HasMember("gpumorph")) {
+//                RAPIDJSON_NAMESPACE::Value &t_value = t_filter["gpumorph"];
+//                m_cfgFilter.m_gpumorph = t_value.GetInt();
+//            }
+//            if (t_filter.HasMember("morph")) {
+//                RAPIDJSON_NAMESPACE::Value &t_value = t_filter["morph"];
+//                m_cfgFilter.m_morph = t_value.GetInt();
+//            }
+//            if (t_filter.HasMember("particle")) {
+//                RAPIDJSON_NAMESPACE::Value &t_value = t_filter["particle"];
+//                m_cfgFilter.m_particle = t_value.GetInt();
+//            }
+//            if (t_filter.HasMember("sky")) {
+//                RAPIDJSON_NAMESPACE::Value &t_value = t_filter["sky"];
+//                m_cfgFilter.m_sky = t_value.GetInt();
+//            }
+//            if (t_filter.HasMember("audio")) {
+//                RAPIDJSON_NAMESPACE::Value &t_value = t_filter["audio"];
+//                m_cfgFilter.m_audio = t_value.GetInt();
+//            }
+//        }
+//    }
+//    _adaptScale();
     SV_LOG_ERROR("SVConfig::_loadConfig\n");
 }
 

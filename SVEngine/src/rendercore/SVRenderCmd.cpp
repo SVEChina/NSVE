@@ -11,15 +11,13 @@
 #include "SVRenderTexture.h"
 #include "SVRenderer.h"
 #include "SVRenderMesh.h"
-#include "../base/SVDataSwap.h"
-#include "../event/SVEvent.h"
-#include "../event/SVEventMgr.h"
-#include "../event/SVOpEvent.h"
-#include "../basesys/SVScene.h"
+#include "SVRShader.h"
 #include "../mtl/SVMtlCore.h"
 #include "../mtl/SVTexMgr.h"
 #include "../mtl/SVTexture.h"
-#include "../basesys/SVTrans.h"
+#include "../mtl/SVShader.h"
+#include "../mtl/SVSurface.h"
+
 #include <sys/time.h>
 
 using namespace sv;
@@ -39,11 +37,13 @@ void SVRenderCmd::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
 SVRCmdNor::SVRCmdNor() {
     m_pMtl  = nullptr;
     m_pMesh = nullptr;
+    m_pSurface = nullptr;
 }
 
 SVRCmdNor::~SVRCmdNor() {
     m_pMtl  = nullptr;
     m_pMesh = nullptr;
+    m_pSurface = nullptr;
 }
 
 void SVRCmdNor::setMesh(SVRenderMeshPtr _mesh){
@@ -54,10 +54,22 @@ void SVRCmdNor::setMaterial(SVMtlCorePtr _mtl){
     m_pMtl = _mtl;
 }
 
+void SVRCmdNor::setSurface(SVSurfacePtr _surface) {
+    m_pSurface = _surface;
+}
+
 void SVRCmdNor::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
     if ( _renderer && _target && m_pMtl && m_pMesh ) {
-        _renderer->processMesh(m_pMesh);
-        _renderer->processMtl(m_pMtl);
+        bool t_ret = false;
+        t_ret = _renderer->processMesh(m_pMesh);
+        if(!t_ret){
+            return ;
+        }
+        //激活材质
+        t_ret =_renderer->processMtl(m_pMtl,m_pSurface);
+        if(!t_ret){
+            return ;
+        }
         _renderer->drawMesh(m_pMesh);
     }
 }

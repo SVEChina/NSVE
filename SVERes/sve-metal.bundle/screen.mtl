@@ -1,0 +1,26 @@
+{
+    "version" : "1.0",
+    "name" : "screen",
+    "shader" : "screen",
+    "chn0" : {
+        "from" : "file",
+        "path" : "svres/sve.png",
+        "stage": "fs"
+    },
+    "chn1" : {
+        "from" : "inner",
+        "path" : "SV_MAIN",
+        "stage": "fs"
+    },
+    "blend-param" : {
+        "enable" : 0,
+        "src" : "SVE_ONE",
+        "dst" : "SVE_ZERO"
+    },
+    "stencil-param" : {
+        "enable" : 0
+    },
+    "alpha-param" : {
+        "enable" : 0
+    }
+}

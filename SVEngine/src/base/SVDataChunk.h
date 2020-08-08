@@ -44,6 +44,22 @@ namespace sv {
         
         bool set(u64 _off,void* _value,s32 _size);
         
+        void get(u64 _off,s32& _value);
+        
+        void get(u64 _off,f32& _value);
+        
+        void get(u64 _off,FVec2& _value);
+        
+        void get(u64 _off,FVec3& _value);
+        
+        void get(u64 _off,FVec4& _value);
+        
+        void get(u64 _off,FMat2& _value);
+        
+        void get(u64 _off,FMat3& _value);
+        
+        void get(u64 _off,FMat4& _value);
+        
         u64 push(s32 _value);
         
         u64 push(f32 _value);
@@ -63,7 +79,6 @@ namespace sv {
         u64 push(void* _value,s32 _size);
         
         //
-        
         void* getPointer() { return m_data; }
         
         void* getPointer(u64 _off) { return (void*)(m_data + _off); }

@@ -33,18 +33,21 @@ namespace sv {
         s32 process(SVRendererPtr _renderer);
 
         void draw(SVRendererPtr _renderer);
+        
+        void submit(SVDataSwapPtr _data,s32 _offset,s32 _size,s32 _bufid,s32 _buftype);
+        
+    public:
     
         id<MTLBuffer> m_ibuf;
         id<MTLBuffer> m_instance_buf;
         SVArray<id<MTLBuffer>> m_dbufs;
+        //
         s32 m_vertStart;
         s32 m_vertCnt;
         s32 m_iCnt;
         s32 m_ibufOff;
         s32 m_instCnt;
         s32 m_streanNum;
-        //
-        MTLVertexDescriptor* m_vert_dsp;
         BUFFERMODE m_bufmode;
     };
     

@@ -10,6 +10,7 @@
 
 #include "../base/SVGBase.h"
 #include "../rendercore/SVRenderDeclare.h"
+#include "../core/SVVertDef.h"
 #include <string>
 #include <vector>
 
@@ -19,7 +20,21 @@ namespace sv {
      * shader描述
     */
     struct ShaderDsp {
+        ShaderDsp() {
+            m_dsp = 0;
+            m_programme_fname = "null";
+            m_vs_fname = "null";
+            m_fs_fname = "null";
+            m_gs_fname = "null";
+            m_cs_fname = "null";
+            m_tsc_fname = "null";
+            m_tse_fname = "null";
+            m_attri_formate = "null";
+            m_vft.clear();
+        };
+        //
         s32 m_dsp;
+        std::vector<s32> m_vft;
         SVString m_programme_fname;
         SVString m_vs_fname;
         SVString m_fs_fname;
@@ -34,6 +49,7 @@ namespace sv {
      * 采样描述
      */
     struct SamplerDsp {
+        s32 m_type; //0:vs 1:fs 2:gs
         s32 m_chn;
         SVString m_warps;
         SVString m_warpt;
@@ -42,9 +58,17 @@ namespace sv {
     };
 
     /*
+     * 参数表描述
+     */
+    struct ParamTblDsp {
+        s32 m_id;               //传递的bufid
+        s32 m_type;             // 0:vs, 1:fs
+        SVParamTblPtr m_tbl;    //表
+    };
+
+    /*
      * 包含文件和采样器
      */
-
     class SVShader : public SVGBaseEx {
     public:
         SVShader(SVInstPtr _app);
@@ -60,6 +84,8 @@ namespace sv {
         
         bool active();
         
+        void submitParam(SVParamTblPtr _param);
+        
         bool toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator,
                         RAPIDJSON_NAMESPACE::Value &_objValue);
 
@@ -67,16 +93,20 @@ namespace sv {
 
     public:
         ShaderDsp m_shader_dsp;
-        std::vector<SamplerDsp> m_vs_sampler;
-        std::vector<SamplerDsp> m_fs_sampler;
-        std::vector<SamplerDsp> m_gs_sampler;
-        
-        SVParamTblPtr m_vs_paramtbl;
-        SVParamTblPtr m_fs_paramtbl;
-        SVParamTblPtr m_gs_paramtbl;
+        //采样器
+        std::vector<SamplerDsp> m_samplers;
+        //参数表
+        std::vector<ParamTblDsp> m_paramtbl;
         
     protected:
         SVRShaderPtr m_res_shader;
+        
+    public:
+        //创建采样器描述
+        static void SamplerDspFromJson(RAPIDJSON_NAMESPACE::Value &item,SamplerDsp& _dsp);
+        
+        //创建参数表描述
+        static void ParamTblFromJson(RAPIDJSON_NAMESPACE::Value &item,ParamTblDsp& _dsp);
     };
 
 }//!namespace sv

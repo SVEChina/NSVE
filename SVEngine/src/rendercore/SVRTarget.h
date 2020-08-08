@@ -50,6 +50,10 @@ namespace sv {
 
         ~SVRTarget();
         
+        SVRTargetPtr share();
+        
+        void setRenderPath();
+        
         void resize(s32 _width,s32 _height);
         
         void render(SVRendererPtr _renderer);
@@ -59,6 +63,7 @@ namespace sv {
         void clearRenderCommand();
 
     protected:
+        std::vector<SV_RSTREAM_TYPE> m_stream_quene;    //流序，流顺的设定就是渲染路径的设定
         std::vector<SVRenderStreamPtr> m_stream_pool;
         
     public:

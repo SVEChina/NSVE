@@ -54,17 +54,19 @@ static CGInst *mInst;
 }
 
 -(void)initSVE{
+    SV_LOG_INFO("sve init begin!");
     m_pSVE = sv::SVInst::makeCreate();
-    NSString* t_sve_path = @"";
+    NSString *t_sveResource = @"sve-metal";
 #if SVE_TOOL_USE_METAL
-    t_sve_path = [[NSBundle mainBundle] pathForResource:@"sve-metal" ofType:@"bundle"];
+    t_sveResource = @"sve-metal";
 #elif SVE_TOOL_USE_GLES
-    t_sve_path = [[NSBundle mainBundle] pathForResource:@"sve-gles" ofType:@"bundle"];
+    t_sveResource = @"sve-gles";
 #endif
-    NSString* t_sve_path_ = [t_sve_path stringByAppendingString:@"/"];
-    m_pSVE->addRespath([t_sve_path_ UTF8String]);
-    //
+    NSString* t_sve_path = [[NSBundle mainBundle] pathForResource:t_sveResource ofType:@"bundle"];
+    t_sve_path = [t_sve_path stringByAppendingString:@"/"];
+    m_pSVE->addRespath([t_sve_path UTF8String]);
     m_pSVE->init();
+    SV_LOG_INFO("sve init end!");
 }
 
 -(void)destroySVE{
@@ -76,18 +78,19 @@ static CGInst *mInst;
 
 -(void*)getSVE {
     return m_pSVE.get();
-    //return nullptr;
 }
 /*
   Renderer Metal
  */
 -(void)createRM:(id<MTLDevice>)_device drawable:(id<CAMetalDrawable>)_drawable {
     if( m_pSVE ) {
-        sv::SVRendererPtr t_re =m_pSVE->createRenderer(sv::E_R_METAL);
-        sv::SVRendererMetalPtr t_re_metal = std::dynamic_pointer_cast<sv::SVRendererMetal>(t_re);
-        if(t_re_metal) {
+        sv::SVRendererPtr t_renderer =m_pSVE->createRenderer(sv::E_R_METAL);
+        sv::SVRendererMetalPtr t_r_metal = std::dynamic_pointer_cast<sv::SVRendererMetal>(t_renderer);
+        if(t_r_metal) {
             //渲染器初始化
-            t_re_metal->init(_device,_drawable,_drawable.texture);
+            SV_LOG_INFO("sve createRM begin! \n");
+            t_r_metal->init(_device,_drawable,_drawable.texture);
+            SV_LOG_INFO("sve createRM end! \n");
         }
     }
 }
@@ -119,31 +122,11 @@ static CGInst *mInst;
 }
 
 -(void)render {
-    //
+    SV_LOG_ERROR("sve render begin!");
     m_pSVE->updateSVE(0.33f);
     m_pSVE->renderSVE();
+    SV_LOG_ERROR("sve render end!");
 }
 
-////数据重置
-//-(void)reset {
-//    [self.m_pDataMgr reset];
-//    [self.m_pLogic reset];
-//}
-//
-////改变编辑器模式
-//-(void)setEditMode:(EDITMODE)_mode {
-//    if(m_editMode!=_mode) {
-//        //赋值
-//        m_editMode = _mode;
-//        //逻辑变化
-//        [self.m_pLogic setEditMode:_mode];
-//        //ui变化
-//        [[CGUI getInst] setEditMode:_mode];
-//    }
-//}
-//
-//-(EDITMODE)getEditMode {
-//    return m_editMode;
-//}
 
 @end

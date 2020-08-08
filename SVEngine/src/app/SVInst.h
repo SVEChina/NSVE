@@ -37,7 +37,7 @@ namespace sv {
         //销毁SV
         virtual void destroy();
         //创建渲染器
-        SVRendererPtr createRenderer(SV_RE_TYPE _type);
+        SVRendererPtr createRenderer(SV_R_TYPE _type);
         //销毁渲染器
         void destroyRenderer();
         //开始SV

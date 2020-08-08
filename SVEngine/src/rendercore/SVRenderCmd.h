@@ -44,9 +44,12 @@ namespace sv {
         
         void setMaterial(SVMtlCorePtr _material);
         
+        void setSurface(SVSurfacePtr _surface);
+        
     protected:
         SVRenderMeshPtr m_pMesh;
         SVMtlCorePtr m_pMtl;
+        SVSurfacePtr m_pSurface;
     };
     
     //适配命令

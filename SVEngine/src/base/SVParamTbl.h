@@ -49,13 +49,31 @@ namespace sv {
         void setParam(cptr8 _name,FVec3 _value);
 
         void setParam(cptr8 _name,FVec4 _value);
+        
+        void setParam(cptr8 _name,FMat2 _value);
+
+        void setParam(cptr8 _name,FMat3 _value);
 
         void setParam(cptr8 _name,FMat4 _value);
         
+        void getParam(cptr8 _name,s32& _value);
+
+        void getParam(cptr8 _name,f32& _value);
+
+        void getParam(cptr8 _name,FVec2& _value);
+
+        void getParam(cptr8 _name,FVec3& _value);
+
+        void getParam(cptr8 _name,FVec4& _value);
+        
+        void getParam(cptr8 _name,FMat2& _value);
+
+        void getParam(cptr8 _name,FMat3& _value);
+
+        void getParam(cptr8 _name,FMat4& _value);
+        
         //增加参数
         void addParam(cptr8 _name,cptr8 _type,cptr8 _value);
-
-        s32 getParam(cptr8 _name);
         
         void* getParamData(cptr8 _name);
         
@@ -71,7 +89,10 @@ namespace sv {
         //参数表
         std::vector<SVParamDsp> m_param_dsps;    //参数表
         SVDataChunkPtr m_param_values;           //参数值
-
+        
+    protected:
+        s32 _getParamIndex(cptr8 _name);
+        u64 _getParamOff(cptr8 _name);
     };
     
 }//!namespace sv

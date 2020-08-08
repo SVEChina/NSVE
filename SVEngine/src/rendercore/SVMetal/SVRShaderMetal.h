@@ -10,6 +10,8 @@
 
 #include "../SVRShader.h"
 #include "SVRenderDeclare.h"
+#include "../../core/SVVertDef.h"
+
 #import <Metal/Metal.h>
 #include <vector>
 
@@ -18,6 +20,8 @@ namespace sv {
     /*
      render tech metal
      */
+    
+    struct SamplerDsp;
 
     class SVRShaderMetal : public SVRShader {
     public:
@@ -34,7 +38,13 @@ namespace sv {
 
         bool active(SVRendererPtr _renderer);
         
+        void submitSurface(SVSurfacePtr _surface);
+        
     protected:
+        MTLSamplerDescriptor* _genSampler(SamplerDsp& _dsp);
+        
+        MTLVertexDescriptor* _genVertexDsp(BUFFERMODE _mode);
+        
         id<MTLFunction> m_vsf;
         id<MTLFunction> m_gsf;
         id<MTLFunction> m_tscf;
@@ -42,13 +52,19 @@ namespace sv {
         id<MTLFunction> m_fsf;
         id<MTLFunction> m_csf;
         //
-        std::vector< id<MTLSamplerState> > m_vs_sampler_st;
-        std::vector< id<MTLSamplerState> > m_fs_sampler_st;
-        std::vector< id<MTLSamplerState> > m_gs_sampler_st;
+        struct INSAMPLE {
+            id<MTLSamplerState> m_st;   //采样
+            s32 m_type;             //0:vs 1:fs 2:gs
+            s32 m_chn;              //通道
+        };
+        std::vector<INSAMPLE> m_sampler_st;
         //
-        id<MTLBuffer> m_vs_ubuf;
-        id<MTLBuffer> m_fs_ubuf;
-        id<MTLBuffer> m_gs_ubuf;
+        struct UBUF {
+            id<MTLBuffer> m_ubuf;   //对应buf
+            s32 m_type;             //0:vs 1:fs 2:gs
+            s32 m_bufid;            //buf-id
+        };
+        std::vector<UBUF> m_ubuf_pool;
         //
         id<MTLRenderPipelineState> m_pl_state;
     };
