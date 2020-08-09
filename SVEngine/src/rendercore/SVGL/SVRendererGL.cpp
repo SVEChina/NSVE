@@ -48,11 +48,7 @@ void SVRendererGL::init(s32 _w,s32 _h){
     mApp->m_pGlobalParam->m_inner_width = _w;
     mApp->m_pGlobalParam->m_inner_height = _h;
     //
-    SVRFboGLPtr t_fbo = std::dynamic_pointer_cast<SVRFboGL>( createResFbo() );
-    if(t_fbo) {
-        //t_fbo->init(_target,_targetTex);
-    }
-    //
+    SVRFboGLPtr t_fbo = std::dynamic_pointer_cast<SVRFboGL>( createResFbo() );    //
     SVRTargetPtr t_target = MakeSharedPtr<SVRTarget>(mApp);
     t_target->bindRes(t_fbo);
     //设置主RTarget

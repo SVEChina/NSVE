@@ -75,6 +75,7 @@
 
 - (void)dealloc{
     [self clearGLContext];
+    
     [self destroyTimer];
 }
 
