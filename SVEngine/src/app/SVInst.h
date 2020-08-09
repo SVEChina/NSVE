@@ -37,7 +37,7 @@ namespace sv {
         //销毁SV
         virtual void destroy();
         //创建渲染器
-        SVRendererPtr createRenderer(SV_R_TYPE _type);
+        SVRendererPtr createRenderer(SV_R_CORE _type);
         //销毁渲染器
         void destroyRenderer();
         //开始SV
@@ -80,8 +80,11 @@ namespace sv {
         SVCtxBasePtr m_ctx;
         //
         SV_STATE m_svst;
+        //渲染器内核
+        SV_R_CORE m_rcore;
         //
         SV_ENG_TIMESTATE m_engTimeState;
+        //
         
     public:
         //获取各种模块，管理类

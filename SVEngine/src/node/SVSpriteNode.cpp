@@ -133,7 +133,13 @@ void SVSpriteNode::update(f32 _dt) {
     }
     if(m_surface) {
         m_surface->setTexture(0,m_pTex,1);
-        m_surface->setParam("wmat",m_localMat);
+        if( mApp->m_rcore == E_R_METAL) {
+            //metal需要转至一下矩阵
+            FMat4 tt = transpose(m_localMat);
+            m_surface->setParam("matw",tt);
+        }else{
+            m_surface->setParam("matw",m_localMat);
+        }
     }
 }
 

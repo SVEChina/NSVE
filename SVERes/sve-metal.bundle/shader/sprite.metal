@@ -17,7 +17,6 @@ struct Vertex {
 
 struct Uniforms {
     float4x4 matw;
-    //float4x4 matvp;
 };
 
 struct VertexOut {
@@ -31,10 +30,11 @@ struct FSOutput{
 };
 
 //
-//constant Uniforms & uniforms [[ buffer(1) ]]
-vertex VertexOut vertexShader( Vertex input [[stage_in]]  ) {
+//
+vertex VertexOut vertexShader( Vertex input [[stage_in]] ,
+                              constant Uniforms & uniforms [[ buffer(1) ]] ) {
     VertexOut vert;
-    vert.position = float4(input.position,0.0,1.0);// * uniforms.matw;
+    vert.position = float4(input.position,0.0,1.0) * uniforms.matw;
     vert.texcoord0 = input.texcoord0;
     return vert;
 }

@@ -75,7 +75,7 @@ namespace sv {
     };
 
     //sv渲染器类型 renderer
-    enum SV_R_TYPE {
+    enum SV_R_CORE {
         E_R_GLES,
         E_R_VUNKAN,
         E_R_METAL

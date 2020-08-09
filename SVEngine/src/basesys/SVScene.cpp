@@ -340,6 +340,7 @@ void SVScene::test() {
     //创建一个测试场景
     SVSpriteNodePtr t_sp_node = MakeSharedPtr<SVSpriteNode>(mApp);
     t_sp_node->setTexture("svres/test1.png");
+    t_sp_node->setPosition(0.1f, 0.3f, 0.0f);
     addNode(t_sp_node);
     //
     SV3DBoxPtr t_box_node = MakeSharedPtr<SV3DBox>(mApp);

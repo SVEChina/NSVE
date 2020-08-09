@@ -119,13 +119,13 @@ bool SVRendererMetal::processMtl(SVMtlCorePtr _mtl,SVSurfacePtr _surface) {
         return false;
     if(_mtl && _mtl->getShader() ) {
         if(_surface ) {
-            //更新uniform
+            //surface-uni到shader-uni
             _mtl->getShader()->submitParam(_surface->m_tbl);
-            //更新纹理
         }
         bool t_ret = _mtl->getShader()->active();
         if(t_ret) {
             if(_surface ) {
+                //更新纹理
                 for(s32 i=0;i<_surface->m_vs_texs.size();i++) {
                     if( _surface->m_vs_texs[i] ) {
                         processTexture( _surface->m_vs_texs[i]->getResTex() , i , 0);

@@ -84,13 +84,15 @@ void SVInst::destroy() {
 }
 
 //创建渲染器
-SVRendererPtr SVInst::createRenderer(SV_R_TYPE _type) {
+SVRendererPtr SVInst::createRenderer(SV_R_CORE _type) {
     if(_type == E_R_METAL) {
+        m_rcore = E_R_METAL;
         m_pRE = MakeSharedPtr<SVRendererMetal>( share() );
     }else if(_type == E_R_GLES) {
+        m_rcore = E_R_GLES;
         m_pRE = MakeSharedPtr<SVRendererGL>( share() );
     }else if(_type == E_R_VUNKAN) {
-        
+        m_rcore = E_R_VUNKAN;
     }
     return m_pRE;
 }
