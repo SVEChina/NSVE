@@ -74,8 +74,6 @@ namespace sv {
         
         virtual void setAlpha(f32 _alpha);
         
-        void setAutoAdaptDesign(bool _adapt);
-        
         void setbeSelect(bool _select);
         
         void setcanSelect(bool _select);
@@ -119,18 +117,10 @@ namespace sv {
         inline bool getcanProcEvent(){ return m_canProcEvent; }
         
         inline bool getvisible(){ return m_visible; }
-        
-        inline bool getIsAutoAdaptDesign(){ return m_adaptDesign; }
-        
+    
         inline void setname(const char* _name){ m_name = _name; }
         
         inline void setvisible(bool _visible){ m_visible = _visible; }
-        
-        //渲染属性
-        SVRenderProp m_render_prop;
-        
-        //位置属性
-        SVTransProp m_trans_prop;
         
     protected:
         //更新
@@ -152,18 +142,22 @@ namespace sv {
         f32 m_alpha;
         bool m_dirty;
         bool m_beSelect;        //是否被选择
-        bool m_adaptDesign;
+        //
         SVBoundBox m_aabbBox;   //AABB包围盒
         SVBoundBox m_aabbBox_sw;//AABB世界包围盒
         //
         FMat4 m_localMat;       //本地矩阵
         FMat4 m_absolutMat;     //绝对世界矩阵
         FMat4 m_iabsolutMat;    //逆绝对世界矩阵
+
         //位置属性
         SVAttriPos m_attri_pos;
+        //渲染属性
+        SVAttriRender m_attri_render;
         //材质表面
         SVSurfacePtr m_surface;
         //
+        SVNodePtr m_parent;
     protected:
         bool m_needsort;
         

@@ -49,8 +49,8 @@ namespace sv {
      * 采样描述
      */
     struct SamplerDsp {
-        s32 m_type; //0:vs 1:fs 2:gs
         s32 m_chn;
+        s32 m_stage; //0:vs 1:fs 2:gs
         SVString m_warps;
         SVString m_warpt;
         SVString m_min;
@@ -62,7 +62,7 @@ namespace sv {
      */
     struct ParamTblDsp {
         s32 m_id;               //传递的bufid
-        s32 m_type;             // 0:vs, 1:fs
+        s32 m_stage;            // 0:vs, 1:fs
         SVParamTblPtr m_tbl;    //表
     };
 

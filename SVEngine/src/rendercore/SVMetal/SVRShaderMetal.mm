@@ -86,7 +86,7 @@ void SVRShaderMetal::create(SVRendererPtr _renderer) {
         //生成sampler-state
         t_sampler.m_st = [t_rm->m_pDevice newSamplerStateWithDescriptor:samplerDsp];
         t_sampler.m_chn = t_shader->m_samplers[i].m_chn;
-        t_sampler.m_type = t_shader->m_samplers[i].m_type;
+        t_sampler.m_stage = t_shader->m_samplers[i].m_stage;
         m_sampler_st.push_back(t_sampler);
     }
     //生成uniform-buf
@@ -95,7 +95,7 @@ void SVRShaderMetal::create(SVRendererPtr _renderer) {
         s32 t_len = t_shader->m_paramtbl[i].m_tbl->getDataSize();
         UBUF t_ubuf;
         t_ubuf.m_bufid = t_shader->m_paramtbl[i].m_id;
-        t_ubuf.m_type = t_shader->m_paramtbl[i].m_type;
+        t_ubuf.m_stage = t_shader->m_paramtbl[i].m_stage;
         t_ubuf.m_ubuf = [t_rm->m_pDevice newBufferWithBytes:t_pointer length: t_len options: MTLResourceStorageModeShared ];
         m_ubuf_pool.push_back(t_ubuf);
     }
@@ -318,9 +318,9 @@ bool SVRShaderMetal::active(SVRendererPtr _renderer) {
     }
     //采样器更新
     for(s32 i=0;i<m_sampler_st.size();i++) {
-        if(m_sampler_st[i].m_type == 0) {
+        if(m_sampler_st[i].m_stage == 0) {
             [t_rm->m_pCurEncoder setVertexSamplerState:m_sampler_st[i].m_st atIndex:m_sampler_st[i].m_chn];
-        }else if(m_sampler_st[i].m_type == 1) {
+        }else if(m_sampler_st[i].m_stage == 1) {
             [t_rm->m_pCurEncoder setFragmentSamplerState:m_sampler_st[i].m_st atIndex:m_sampler_st[i].m_chn];
         }
     }
@@ -332,13 +332,13 @@ bool SVRShaderMetal::active(SVRendererPtr _renderer) {
     }
     //上传uniform
     for(s32 i=0;i<m_ubuf_pool.size();i++) {
-        if( m_ubuf_pool[i].m_type == 0 ) {
+        if( m_ubuf_pool[i].m_stage == 0 ) {
             //vs
             [t_rm->m_pCurEncoder setVertexBuffer:m_ubuf_pool[i].m_ubuf offset:0 atIndex:m_ubuf_pool[i].m_bufid];
-        }else if( m_ubuf_pool[i].m_type == 1 ) {
+        }else if( m_ubuf_pool[i].m_stage == 1 ) {
             //fs
             [t_rm->m_pCurEncoder setFragmentBuffer:m_ubuf_pool[i].m_ubuf offset:0 atIndex:m_ubuf_pool[i].m_bufid];
-        }else if( m_ubuf_pool[i].m_type == 2 ) {
+        }else if( m_ubuf_pool[i].m_stage == 2 ) {
             //gs
             //[t_rm->m_pCurEncoder setFragmentBuffer:m_ubuf_pool[i].m_ubuf offset:0 atIndex:m_ubuf_pool[i].m_bufid];
         }

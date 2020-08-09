@@ -96,15 +96,15 @@ void SVBackGroundNode::syncTexSize() {
 //屏幕空间下材质更新
 void SVBackGroundNode::setInScreen(bool _inscreen) {
     m_inScreen = _inscreen;
-    if(m_inScreen) {
-        m_pMtl = MakeSharedPtr<SVMtlCore>(mApp, "screennor");
-        m_pMtl->setBlendEnable(false);
-        m_pMtl->setDepthEnable(false);
-    }else{
-        m_pMtl = MakeSharedPtr<SVMtlCore>(mApp, "normal2d");
-        m_pMtl->setBlendEnable(false);
-        m_pMtl->setDepthEnable(false);
-    }
+//    if(m_inScreen) {
+//        m_pMtl = MakeSharedPtr<SVMtlCore>(mApp, "screennor");
+//        m_pMtl->setBlendEnable(false);
+//        m_pMtl->setDepthEnable(false);
+//    }else{
+//        m_pMtl = MakeSharedPtr<SVMtlCore>(mApp, "normal2d");
+//        m_pMtl->setBlendEnable(false);
+//        m_pMtl->setDepthEnable(false);
+//    }
 }
 
 void SVBackGroundNode::setTexture(cptr8 _path) {

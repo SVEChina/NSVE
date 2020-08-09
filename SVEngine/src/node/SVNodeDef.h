@@ -40,19 +40,12 @@ namespace sv {
     };
 
     //渲染属性
-    struct SVRenderProp {
+    struct SVAttriRender {
         s8 m_shadow_create;     //产生阴影
         s8 m_shadow_receive;    //接收阴影
         s8 m_refelct;           //接收反射
         s8 m_light_receive;     //接收光照
         s8 m_render_type;       //渲染类型
-    };
-
-    //位移属性
-    struct SVTransProp {
-        FVec3 m_pos;
-        FVec3 m_rot;
-        FVec3 m_scale;
     };
 
     //位置属性

@@ -25,12 +25,12 @@ using namespace sv;
 SVNode::SVNode(SVInstPtr _app)
 :SVEventProc(_app) {
     ntype = "SVNode";
+    m_parent = nullptr;
     m_name = "";
     m_rsType = RST_DEBUG;
     m_canSelect = false;
     m_beSelect = false;
     m_canProcEvent = false;
-    m_adaptDesign = false;
     m_visible = true;
     m_dirty = false;
     m_iZOrder = 0;
@@ -48,6 +48,7 @@ SVNode::SVNode(SVInstPtr _app)
 }
 
 SVNode::~SVNode() {
+    //m_parent = nullptr;
     m_surface = nullptr;
 }
 
@@ -81,39 +82,18 @@ void SVNode::select_visit(SVVisitorBasePtr _visit) {
 }
 
 void SVNode::update(f32 dt) {
-    SV_LOG_INFO("node type %s \n",ntype.c_str());
     //计算相对矩阵(local)
     if (m_dirty) {
-//        //更新本地矩阵
-//        m_localMat.setIdentity();
-//        FMat4 t_mat_scale = FMat4_identity;
-//        FMat4 t_mat_rotX = FMat4_identity;
-//        FMat4 t_mat_rotY = FMat4_identity;
-//        FMat4 t_mat_rotZ = FMat4_identity;
-//        FMat4 t_mat_trans = FMat4_identity;
-//        //
-//        FVec3 t_scale = FVec3(m_scale.x,m_scale.y,m_scale.z);
-//        FVec3 t_translate = FVec3(m_postion.x + m_offpos.x,m_postion.y + m_offpos.y, m_postion.z + m_offpos.z);
-//        //适配设计分辨率
-//        if (m_adaptDesign) {
-//            f32 t_adaptScale = mApp->getConfig()->getDesignAdaptScale();
-//            t_scale *= t_adaptScale;
-//            t_translate *= t_adaptScale;
-//        }
-//        t_mat_scale.setScale(t_scale);
-//        t_mat_rotX.setRotateX(m_rotation.x);
-//        t_mat_rotY.setRotateY(m_rotation.y);
-//        t_mat_rotZ.setRotateZ(m_rotation.z);
-//        t_mat_trans.setTranslate(t_translate);
-//        m_localMat = t_mat_trans*t_mat_rotZ*t_mat_rotY*t_mat_rotX*t_mat_scale;
+        m_localMat = m_attri_pos.getMatrix();
         m_dirty = false;
     }
     //计算绝对矩阵(world_matrix)
-//    if (m_parent) {
-//        m_absolutMat = m_parent->m_absolutMat*m_localMat;
-//    } else {
-//        m_absolutMat = m_localMat;
-//    }
+    if (m_parent) {
+        m_absolutMat = m_parent->m_absolutMat*m_localMat;
+    } else {
+        m_absolutMat = m_localMat;
+    }
+    //
     if(m_surface) {
         m_surface->setParam("worldMat", m_localMat);
     }
@@ -206,11 +186,6 @@ FVec3& SVNode::getScale() {
     return m_attri_pos.m_scale;
 }
 
-void SVNode::setAutoAdaptDesign(bool _adapt){
-    m_adaptDesign = _adapt;
-    m_dirty = true;
-}
-
 void SVNode::setbeSelect(bool _select){
     m_beSelect = _select;
 }
@@ -290,7 +265,6 @@ void SVNode::_toJsonData(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocato
     locationObj.AddMember("canselect", m_canSelect, _allocator);
     locationObj.AddMember("drawaabb", m_drawBox, _allocator);
     locationObj.AddMember("canprocevent", m_canProcEvent, _allocator);
-    locationObj.AddMember("autoadaptdesign", m_adaptDesign, _allocator);
     locationObj.AddMember("visible", m_visible, _allocator);
 }
 
@@ -345,12 +319,6 @@ void SVNode::_fromJsonData(RAPIDJSON_NAMESPACE::Value &item){
     }
     if (item.HasMember("canprocevent") && item["canprocevent"].IsBool()) {
         m_canProcEvent = item["canprocevent"].GetBool();
-    }
-    if (item.HasMember("autoadaptdesign") && item["autoadaptdesign"].IsBool()) {
-        m_adaptDesign = item["autoadaptdesign"].GetBool();
-    }else{
-        //特效包里要是没有“m_adaptDesign”这个属性，默认是适配设计分辨率的
-        m_adaptDesign = true;
     }
     if (item.HasMember("visible") && item["visible"].IsBool()) {
         m_visible = item["visible"].GetBool();

@@ -31,7 +31,6 @@ SVBillboardNode::SVBillboardNode(SVInstPtr _app)
     m_inTexType = E_TEX_END;
     m_pTexPath = "default";
     m_rsType = RST_SOLID_3D;
-    m_pRenderObj = MakeSharedPtr<SVRenderObject>();
     m_canSelect = false;
     m_pTex = nullptr;
     m_pMesh = nullptr;
@@ -39,10 +38,10 @@ SVBillboardNode::SVBillboardNode(SVInstPtr _app)
     m_up.set(0.0f, 0.0f, 0.0f);
     setTexcoord(1.0,-1.0);
 //    setSize(100,100);
-    m_pMtl = MakeSharedPtr<SVMtlBillboard>(_app);
-    m_pMtl->setDepthEnable(false);
-    m_pMtl->setBlendEnable(true);
-    m_pMtl->setBlendState(MTL_BLEND_ONE, MTL_BLEND_ONE_MINUS_SRC_ALPHA);
+//    m_pMtl = MakeSharedPtr<SVMtlBillboard>(_app);
+//    m_pMtl->setDepthEnable(false);
+//    m_pMtl->setBlendEnable(true);
+//    m_pMtl->setBlendState(MTL_BLEND_ONE, MTL_BLEND_ONE_MINUS_SRC_ALPHA);
 }
 
 SVBillboardNode::SVBillboardNode(SVInstPtr _app,f32 _w,f32 _h)
@@ -50,19 +49,15 @@ SVBillboardNode::SVBillboardNode(SVInstPtr _app,f32 _w,f32 _h)
     ntype = "SVBillboardNode";
     m_inTexType = E_TEX_END;
     m_rsType = RST_SOLID_3D;
-    m_pRenderObj = MakeSharedPtr<SVRenderObject>();
     m_canSelect = false;
     m_pTex = nullptr;
     m_pMesh = nullptr;
     setTexcoord(1.0,-1.0);
     setSize(_w,_h);
-    m_pMtl = MakeSharedPtr<SVMtlBillboard>(_app);
 }
 
 SVBillboardNode::~SVBillboardNode() {
     m_pMesh = nullptr;
-    m_pRenderObj = nullptr;
-    m_pMtl = nullptr;
     m_pTex = nullptr;
 }
 
@@ -173,10 +168,10 @@ void SVBillboardNode::update(f32 dt) {
 
 void SVBillboardNode::render() {
     if (m_visible){
-        SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
-        if (m_pRenderObj) {
-            m_pRenderObj->pushCmd(t_rs, m_rsType, "SVBillboardNode");
-        }
+//        SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
+//        if (m_pRenderObj) {
+//            m_pRenderObj->pushCmd(t_rs, m_rsType, "SVBillboardNode");
+//        }
     }
     SVNode::render();
 }

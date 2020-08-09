@@ -141,7 +141,7 @@ bool SVShader::fromJSON(RAPIDJSON_NAMESPACE::Value &item) {
             RAPIDJSON_NAMESPACE::Document::Array t_sampler = vs_obj["sampler"].GetArray();
             for(s32 i=0;i<t_sampler.Size();i++) {
                 SamplerDsp t_sampler_dsp;
-                t_sampler_dsp.m_type = 0;
+                t_sampler_dsp.m_stage = 0;
                 SamplerDspFromJson(t_sampler[i],t_sampler_dsp);
                 m_samplers.push_back(t_sampler_dsp);
             }
@@ -151,7 +151,7 @@ bool SVShader::fromJSON(RAPIDJSON_NAMESPACE::Value &item) {
             RAPIDJSON_NAMESPACE::Document::Array t_uniform = vs_obj["uniform"].GetArray();
             for(s32 i=0;i<t_uniform.Size();i++) {
                 ParamTblDsp _dsp;
-                _dsp.m_type = 0;
+                _dsp.m_stage = 0;
                 ParamTblFromJson(t_uniform[i],_dsp);
                 m_paramtbl.push_back(_dsp);
             }
@@ -168,7 +168,7 @@ bool SVShader::fromJSON(RAPIDJSON_NAMESPACE::Value &item) {
             RAPIDJSON_NAMESPACE::Document::Array t_sampler = fs_obj["sampler"].GetArray();
             for(s32 i=0;i<t_sampler.Size();i++) {
                 SamplerDsp t_sampler_dsp;
-                t_sampler_dsp.m_type = 1;
+                t_sampler_dsp.m_stage = 1;
                 SamplerDspFromJson(t_sampler[i],t_sampler_dsp);
                 m_samplers.push_back(t_sampler_dsp);
             }
@@ -178,7 +178,7 @@ bool SVShader::fromJSON(RAPIDJSON_NAMESPACE::Value &item) {
             RAPIDJSON_NAMESPACE::Document::Array t_uniform = fs_obj["uniform"].GetArray();
             for(s32 i=0;i<t_uniform.Size();i++) {
                 ParamTblDsp _dsp;
-                _dsp.m_type = 1;
+                _dsp.m_stage = 1;
                 ParamTblFromJson(t_uniform[i],_dsp);
                 m_paramtbl.push_back(_dsp);
             }
@@ -195,7 +195,7 @@ bool SVShader::fromJSON(RAPIDJSON_NAMESPACE::Value &item) {
             RAPIDJSON_NAMESPACE::Document::Array t_sampler = gs_obj["sampler"].GetArray();
             for(s32 i=0;i<t_sampler.Size();i++) {
                 SamplerDsp t_sampler_dsp;
-                t_sampler_dsp.m_type = 2;
+                t_sampler_dsp.m_stage = 2;
                 SamplerDspFromJson(t_sampler[i],t_sampler_dsp);
                 m_samplers.push_back(t_sampler_dsp);
             }
@@ -205,7 +205,7 @@ bool SVShader::fromJSON(RAPIDJSON_NAMESPACE::Value &item) {
             RAPIDJSON_NAMESPACE::Document::Array t_uniform = gs_obj["uniform"].GetArray();
             for(s32 i=0;i<t_uniform.Size();i++) {
                 ParamTblDsp _dsp;
-                _dsp.m_type = 2;
+                _dsp.m_stage = 2;
                 ParamTblFromJson(t_uniform[i],_dsp);
                 m_paramtbl.push_back(_dsp);
             }

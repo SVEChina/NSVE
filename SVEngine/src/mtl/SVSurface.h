@@ -18,7 +18,8 @@
 #include "../base/SVMat4.h"
 
 namespace sv {
-    
+
+    //
     class SVSurface : public SVObject {
     public:
         SVSurface();
@@ -46,9 +47,11 @@ namespace sv {
         SVParamTblPtr m_tbl;
         
         //纹理表
-        void setTexture(s32 _chn,SVTexturePtr _tex);
+        void setTexture(s32 _chn,SVTexturePtr _tex,s32 _stage);
         
-        std::vector<SVTexturePtr> m_texpool;
+        //
+        std::vector<SVTexturePtr> m_vs_texs;
+        std::vector<SVTexturePtr> m_fs_texs;
     };
 
 }//!namespace sv

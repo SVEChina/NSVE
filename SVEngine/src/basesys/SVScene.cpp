@@ -339,6 +339,7 @@ void SVScene::fromJSON(RAPIDJSON_NAMESPACE::Value &item) {
 void SVScene::test() {
     //创建一个测试场景
     SVSpriteNodePtr t_sp_node = MakeSharedPtr<SVSpriteNode>(mApp);
+    t_sp_node->setTexture("svres/test1.png");
     addNode(t_sp_node);
     //
     SV3DBoxPtr t_box_node = MakeSharedPtr<SV3DBox>(mApp);

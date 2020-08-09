@@ -8,20 +8,16 @@
 
 #include "SVSpriteNode.h"
 #include "../app/SVDispatch.h"
-#include "../basesys/SVScene.h"
+#include "../app/SVInst.h"
 #include "../basesys/SVCameraNode.h"
+#include "../basesys/SVComData.h"
 #include "../mtl/SVMtlLib.h"
 #include "../mtl/SVMtlCore.h"
+#include "../mtl/SVSurface.h"
 #include "../core/SVGeoGen.h"
-#include "../basesys/SVConfig.h"
 #include "../mtl/SVTexture.h"
 #include "../mtl/SVTexMgr.h"
-#include "../app/SVInst.h"
-#include "../rendercore/SVRenderObject.h"
-#include "../rendercore/SVRenderMgr.h"
-#include "../rendercore/SVRenderer.h"
 #include "../rendercore/SVRenderMesh.h"
-#include "../basesys/SVComData.h"
 
 using namespace sv;
 
@@ -130,6 +126,12 @@ void SVSpriteNode::update(f32 _dt) {
     SVMtlCorePtr t_mtl = mApp->getMtlLib()->getMtl(m_mtl_name.c_str());
     if(t_mtl) {
         t_mtl->update(_dt);
+    }
+    if(m_surface) {
+        //设置纹理
+        m_surface->setTexture(0,m_pTex,1);
+        //设置世界矩阵
+        m_surface->setParam("wmat",m_localMat);
     }
 }
 
