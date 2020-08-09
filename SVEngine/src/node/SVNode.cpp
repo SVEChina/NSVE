@@ -34,14 +34,8 @@ SVNode::SVNode(SVInstPtr _app)
     m_visible = true;
     m_dirty = false;
     m_iZOrder = 0;
-    m_bindIndex = -1;
     m_alpha = 1.0f;
     //基础属性
-    m_postion.set(0.0f, 0.0f, 0.0f);
-    m_offpos.set(0.0f, 0.0f, 0.0f);
-    m_rotation.set(0.0f, 0.0f, 0.0f);
-    m_scale.set(1.0f, 1.0f, 1.0f);
-    m_bindOffset.set(0.0f, 0.0f, 0.0f);
     m_localMat.setIdentity();
     m_absolutMat.setIdentity();
     m_iabsolutMat.setIdentity();
@@ -50,14 +44,11 @@ SVNode::SVNode(SVInstPtr _app)
     m_aabbBox.clear();
     m_aabbBox_sw.clear();
     //
-    m_pMtl = nullptr;
-    //
     m_surface = MakeSharedPtr<SVSurface>();
 }
 
 SVNode::~SVNode() {
     m_surface = nullptr;
-    m_pMtl = nullptr;
 }
 
 void SVNode::enter(){
@@ -93,28 +84,28 @@ void SVNode::update(f32 dt) {
     SV_LOG_INFO("node type %s \n",ntype.c_str());
     //计算相对矩阵(local)
     if (m_dirty) {
-        //更新本地矩阵
-        m_localMat.setIdentity();
-        FMat4 t_mat_scale = FMat4_identity;
-        FMat4 t_mat_rotX = FMat4_identity;
-        FMat4 t_mat_rotY = FMat4_identity;
-        FMat4 t_mat_rotZ = FMat4_identity;
-        FMat4 t_mat_trans = FMat4_identity;
-        //
-        FVec3 t_scale = FVec3(m_scale.x,m_scale.y,m_scale.z);
-        FVec3 t_translate = FVec3(m_postion.x + m_offpos.x,m_postion.y + m_offpos.y, m_postion.z + m_offpos.z);
-        //适配设计分辨率
-        if (m_adaptDesign) {
-            f32 t_adaptScale = mApp->getConfig()->getDesignAdaptScale();
-            t_scale *= t_adaptScale;
-            t_translate *= t_adaptScale;
-        }
-        t_mat_scale.setScale(t_scale);
-        t_mat_rotX.setRotateX(m_rotation.x);
-        t_mat_rotY.setRotateY(m_rotation.y);
-        t_mat_rotZ.setRotateZ(m_rotation.z);
-        t_mat_trans.setTranslate(t_translate);
-        m_localMat = t_mat_trans*t_mat_rotZ*t_mat_rotY*t_mat_rotX*t_mat_scale;
+//        //更新本地矩阵
+//        m_localMat.setIdentity();
+//        FMat4 t_mat_scale = FMat4_identity;
+//        FMat4 t_mat_rotX = FMat4_identity;
+//        FMat4 t_mat_rotY = FMat4_identity;
+//        FMat4 t_mat_rotZ = FMat4_identity;
+//        FMat4 t_mat_trans = FMat4_identity;
+//        //
+//        FVec3 t_scale = FVec3(m_scale.x,m_scale.y,m_scale.z);
+//        FVec3 t_translate = FVec3(m_postion.x + m_offpos.x,m_postion.y + m_offpos.y, m_postion.z + m_offpos.z);
+//        //适配设计分辨率
+//        if (m_adaptDesign) {
+//            f32 t_adaptScale = mApp->getConfig()->getDesignAdaptScale();
+//            t_scale *= t_adaptScale;
+//            t_translate *= t_adaptScale;
+//        }
+//        t_mat_scale.setScale(t_scale);
+//        t_mat_rotX.setRotateX(m_rotation.x);
+//        t_mat_rotY.setRotateY(m_rotation.y);
+//        t_mat_rotZ.setRotateZ(m_rotation.z);
+//        t_mat_trans.setTranslate(t_translate);
+//        m_localMat = t_mat_trans*t_mat_rotZ*t_mat_rotY*t_mat_rotX*t_mat_scale;
         m_dirty = false;
     }
     //计算绝对矩阵(world_matrix)
@@ -162,85 +153,57 @@ FMat4& SVNode::getIAbsoluteMat() {
 }
 
 void SVNode::setPosition(f32 _x, f32 _y, f32 _z) {
-    m_postion.set(_x, _y, _z);
-    m_dirty = true;
-}
-
-void SVNode::setOffset(f32 _x, f32 _y, f32 _z){
-    m_offpos.set(_x, _y, _z);
+    m_attri_pos.m_pos.set(_x, _y, _z);
     m_dirty = true;
 }
 
 void SVNode::setRotation(f32 _x, f32 _y, f32 _z) {
-    m_rotation.set(_x, _y, _z);
+    m_attri_pos.m_rot.set(_x, _y, _z);
     m_dirty = true;
 }
 
 void SVNode::setScale(f32 _x, f32 _y, f32 _z) {
-    m_scale.set(_x, _y, _z);
+    m_attri_pos.m_scale.set(_x, _y, _z);
     m_dirty = true;
 }
 
 void SVNode::setPosition(FVec3& _pos) {
-    m_postion = _pos;
-    m_dirty = true;
-}
-
-void SVNode::setOffset(FVec3& _pos) {
-    m_offpos = _pos;
+    m_attri_pos.m_pos = _pos;
     m_dirty = true;
 }
 
 void SVNode::setRotation(FVec3& _rot) {
-    m_rotation = _rot;
+    m_attri_pos.m_rot = _rot;
     m_dirty = true;
 }
 
 void SVNode::setQuat(SVQuat& _quat) {
-    m_rotation.x = _quat.getAngle(FVec3(1.0f,0.0f,0.0f));
-    m_rotation.y = _quat.getAngle(FVec3(0.0f,1.0f,0.0f));
-    m_rotation.z = _quat.getAngle(FVec3(0.0f,0.0f,1.0f));
+//    m_rotation.x = _quat.getAngle(FVec3(1.0f,0.0f,0.0f));
+//    m_rotation.y = _quat.getAngle(FVec3(0.0f,1.0f,0.0f));
+//    m_rotation.z = _quat.getAngle(FVec3(0.0f,0.0f,1.0f));
     m_dirty = true;
 }
 
 void SVNode::setScale(FVec3& _scale) {
-    m_scale = _scale;
+    m_attri_pos.m_scale = _scale;
     m_dirty = true;
 }
 
 FVec3& SVNode::getPosition() {
-    return m_postion;
-}
-
-FVec3& SVNode::getOffset() {
-    return m_offpos;
-}
-
-void SVNode::setBindOffset(FVec3& _offset){
-    m_bindOffset = _offset;
-    m_dirty = true;
-}
-
-void SVNode::setBindOffset(f32 _offsetX, f32 _offsetY, f32 _offsetZ){
-    m_bindOffset.set(_offsetX, _offsetY, _offsetZ);
-    m_dirty = true;
-}
-
-FVec3& SVNode::getBindOffset(){
-    return m_bindOffset;
+    return m_attri_pos.m_pos;
 }
 
 FVec3& SVNode::getRotation() {
-    return m_rotation;
+    return m_attri_pos.m_rot;
 }
 
 SVQuat SVNode::getQuat() {
-    SVQuat t_quat(m_rotation.x,m_rotation.y,m_rotation.z);
+    SVQuat t_quat(m_attri_pos.m_rot);
     return t_quat;
 }
 
 FVec3& SVNode::getScale() {
-    return m_scale;
+    return m_attri_pos.m_scale;
 }
 
 void SVNode::setAutoAdaptDesign(bool _adapt){
@@ -254,14 +217,6 @@ void SVNode::setbeSelect(bool _select){
 
 void SVNode::setcanSelect(bool _select){
     m_canSelect = _select;
-}
-
-void SVNode::setBindIndex(s32 _index){
-    m_bindIndex = _index;
-}
-
-s32  SVNode::getBindIndex(){
-    return m_bindIndex;
 }
 
 void SVNode::setRSType(RENDERSTREAMTYPE _rsType) {
@@ -319,24 +274,18 @@ void SVNode::fromJSON(RAPIDJSON_NAMESPACE::Value &item){
 void SVNode::_toJsonData(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator,
                              RAPIDJSON_NAMESPACE::Value &locationObj){
     locationObj.AddMember("name",  RAPIDJSON_NAMESPACE::StringRef(m_name.c_str()), _allocator);
-    locationObj.AddMember("posX", m_postion.x, _allocator);
-    locationObj.AddMember("posY", m_postion.y, _allocator);
-    locationObj.AddMember("posZ", m_postion.z, _allocator);
-    locationObj.AddMember("rotX", m_rotation.x, _allocator);
-    locationObj.AddMember("rotY", m_rotation.y, _allocator);
-    locationObj.AddMember("rotZ", m_rotation.z, _allocator);
-    locationObj.AddMember("scaleX", m_scale.x, _allocator);
-    locationObj.AddMember("scaleY", m_scale.y, _allocator);
-    locationObj.AddMember("scaleZ", m_scale.z, _allocator);
-    locationObj.AddMember("offsetX", m_offpos.x, _allocator);
-    locationObj.AddMember("offsetY", m_offpos.y, _allocator);
-    //
+//    locationObj.AddMember("posX", m_postion.x, _allocator);
+//    locationObj.AddMember("posY", m_postion.y, _allocator);
+//    locationObj.AddMember("posZ", m_postion.z, _allocator);
+//    locationObj.AddMember("rotX", m_rotation.x, _allocator);
+//    locationObj.AddMember("rotY", m_rotation.y, _allocator);
+//    locationObj.AddMember("rotZ", m_rotation.z, _allocator);
+//    locationObj.AddMember("scaleX", m_scale.x, _allocator);
+//    locationObj.AddMember("scaleY", m_scale.y, _allocator);
+//    locationObj.AddMember("scaleZ", m_scale.z, _allocator);
+//    //
     locationObj.AddMember("zorder", m_iZOrder, _allocator);
     locationObj.AddMember("renderstream", (s32)m_rsType, _allocator);
-    locationObj.AddMember("bind", m_bindIndex, _allocator);
-    locationObj.AddMember("bindOffsetX", m_bindOffset.x, _allocator);
-    locationObj.AddMember("bindOffsetY", m_bindOffset.y, _allocator);
-    locationObj.AddMember("bindOffsetZ", m_bindOffset.z, _allocator);
     //
     locationObj.AddMember("canselect", m_canSelect, _allocator);
     locationObj.AddMember("drawaabb", m_drawBox, _allocator);
@@ -349,46 +298,37 @@ void SVNode::_fromJsonData(RAPIDJSON_NAMESPACE::Value &item){
     if (item.HasMember("name") && item["name"].IsString()) {
         m_name = item["name"].GetString();
     }
-    FVec3 t_pos = FVec3(0.0f, 0.0f, 0.0f);
-    if (item.HasMember("posX") && item["posX"].IsFloat()) {
-        t_pos.x = item["posX"].GetFloat();
-    }
-    if (item.HasMember("posY") && item["posY"].IsFloat()) {
-        t_pos.y = item["posY"].GetFloat();
-    }
-    if (item.HasMember("posZ") && item["posZ"].IsFloat()) {
-        t_pos.z = item["posZ"].GetFloat();
-    }
-    setPosition(t_pos);
-    if (item.HasMember("rotX") && item["rotX"].IsFloat()) {
-        m_rotation.x = item["rotX"].GetFloat();
-    }
-    if (item.HasMember("rotY") && item["rotY"].IsFloat()) {
-        m_rotation.y  = item["rotY"].GetFloat();
-    }
-    if (item.HasMember("rotZ") && item["rotZ"].IsFloat()) {
-        m_rotation.z = item["rotZ"].GetFloat();
-    }
-    FVec3 t_scale = FVec3(1.0f, 1.0f, 1.0f);
-    if (item.HasMember("scaleX") && item["scaleX"].IsFloat()) {
-        t_scale.x = item["scaleX"].GetFloat();
-    }
-    if (item.HasMember("scaleY") && item["scaleY"].IsFloat()) {
-        t_scale.y = item["scaleY"].GetFloat();
-    }
-    if (item.HasMember("scaleZ") && item["scaleZ"].IsFloat()) {
-        t_scale.z = item["scaleZ"].GetFloat();
-    }
-    setScale(t_scale);
-    if (item.HasMember("offsetX") && item["offsetX"].IsFloat()) {
-        m_offpos.x = item["offsetX"].GetFloat();
-    }
-    if (item.HasMember("offsetY") && item["offsetY"].IsFloat()) {
-        m_offpos.y = item["offsetY"].GetFloat();
-    }
-    if (item.HasMember("offsetZ") && item["offsetZ"].IsFloat()) {
-        m_offpos.z = item["offsetZ"].GetFloat();
-    }
+//    FVec3 t_pos = FVec3(0.0f, 0.0f, 0.0f);
+//    if (item.HasMember("posX") && item["posX"].IsFloat()) {
+//        t_pos.x = item["posX"].GetFloat();
+//    }
+//    if (item.HasMember("posY") && item["posY"].IsFloat()) {
+//        t_pos.y = item["posY"].GetFloat();
+//    }
+//    if (item.HasMember("posZ") && item["posZ"].IsFloat()) {
+//        t_pos.z = item["posZ"].GetFloat();
+//    }
+//    setPosition(t_pos);
+//    if (item.HasMember("rotX") && item["rotX"].IsFloat()) {
+//        m_rotation.x = item["rotX"].GetFloat();
+//    }
+//    if (item.HasMember("rotY") && item["rotY"].IsFloat()) {
+//        m_rotation.y  = item["rotY"].GetFloat();
+//    }
+//    if (item.HasMember("rotZ") && item["rotZ"].IsFloat()) {
+//        m_rotation.z = item["rotZ"].GetFloat();
+//    }
+//    FVec3 t_scale = FVec3(1.0f, 1.0f, 1.0f);
+//    if (item.HasMember("scaleX") && item["scaleX"].IsFloat()) {
+//        t_scale.x = item["scaleX"].GetFloat();
+//    }
+//    if (item.HasMember("scaleY") && item["scaleY"].IsFloat()) {
+//        t_scale.y = item["scaleY"].GetFloat();
+//    }
+//    if (item.HasMember("scaleZ") && item["scaleZ"].IsFloat()) {
+//        t_scale.z = item["scaleZ"].GetFloat();
+//    }
+//    setScale(t_scale);
     //
     if (item.HasMember("zorder") && item["zorder"].IsInt()) {
         m_iZOrder = item["zorder"].GetInt();
@@ -396,20 +336,6 @@ void SVNode::_fromJsonData(RAPIDJSON_NAMESPACE::Value &item){
     if (item.HasMember("renderstream") && item["renderstream"].IsInt()) {
         m_rsType = (RENDERSTREAMTYPE)item["renderstream"].GetInt();
     }
-    if (item.HasMember("bind") && item["bind"].IsInt()) {
-        m_bindIndex  = item["bind"].GetInt();
-    }
-    FVec3 t_bindOffset = FVec3(0.0f, 0.0f, 0.0f);
-    if (item.HasMember("bindOffsetX") && item["bindOffsetX"].IsFloat()) {
-        t_bindOffset.x  = item["bindOffsetX"].GetFloat();
-    }
-    if (item.HasMember("bindOffsetY") && item["bindOffsetY"].IsFloat()) {
-        t_bindOffset.y  = item["bindOffsetY"].GetFloat();
-    }
-    if (item.HasMember("bindOffsetZ") && item["bindOffsetZ"].IsFloat()) {
-        t_bindOffset.z  = item["bindOffsetZ"].GetFloat();
-    }
-    setBindOffset(t_bindOffset);
     //
     if (item.HasMember("canselect") && item["canselect"].IsBool()) {
         m_canSelect = item["canselect"].GetBool();

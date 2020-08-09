@@ -42,7 +42,6 @@ SVBGRAInstreamNode::SVBGRAInstreamNode(SVInstPtr _app,f32 _w,f32 _h)
 SVBGRAInstreamNode::~SVBGRAInstreamNode() {
     m_pMesh = nullptr;
     m_pRenderObj = nullptr;
-    m_pMtl = nullptr;
     m_pTex = nullptr;
 }
 

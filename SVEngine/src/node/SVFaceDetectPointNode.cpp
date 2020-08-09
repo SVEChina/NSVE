@@ -33,7 +33,6 @@ SVFaceDetectPointNode::SVFaceDetectPointNode(SVInstPtr _app):SVNode(_app) {
 SVFaceDetectPointNode::~SVFaceDetectPointNode(){
     m_pMesh = nullptr;
     m_pRenderObj = nullptr;
-    m_pMtl = nullptr;
     m_pTex =nullptr;
 }
 

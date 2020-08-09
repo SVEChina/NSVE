@@ -50,7 +50,6 @@ SVSpriteNode::SVSpriteNode(SVInstPtr _app,f32 _w,f32 _h)
 
 SVSpriteNode::~SVSpriteNode() {
     m_pMesh = nullptr;
-    m_pMtl = nullptr;
     m_pTex = nullptr;
 }
 
@@ -150,20 +149,5 @@ void SVSpriteNode::toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocat
 
 void SVSpriteNode::fromJSON(RAPIDJSON_NAMESPACE::Value &item){
     _fromJsonData(item);
-//    if (item.HasMember("spriteW") && item["spriteW"].IsFloat()) {
-//        m_width = item["spriteW"].GetFloat();
-//    }
-//    if (item.HasMember("spriteH") && item["spriteH"].IsFloat()) {
-//        m_height = item["spriteH"].GetFloat();
-//    }
-//    setSize(m_width, m_height);
-//    if (item.HasMember("texture") && item["texture"].IsString()) {
-//        SVString t_textureName = item["texture"].GetString();
-//        SVString t_texturePath = m_rootPath + t_textureName;
-//        setTexture(t_texturePath.c_str(), m_enableMipMap);
-//    }
-//    if (item.HasMember("textype") && item["textype"].IsInt()) {
-//        m_inTexType = SVTEXINID(item["textype"].GetInt());
-//    }
     m_dirty = true;
 }

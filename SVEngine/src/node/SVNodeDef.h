@@ -10,6 +10,7 @@
 
 #include "SVNodeDeclare.h"
 #include "../base/SVVec3.h"
+#include "../base/SVMat4.h"
 
 //动画状态(停止 播放 暂停)
 //停止:不更新+不渲染
@@ -49,6 +50,37 @@ namespace sv {
 
     //位移属性
     struct SVTransProp {
+        FVec3 m_pos;
+        FVec3 m_rot;
+        FVec3 m_scale;
+    };
+
+    //位置属性
+    struct SVAttriPos {
+        
+        SVAttriPos() {
+            m_pos.set(0.0f);
+            m_rot.set(0.0f);
+            m_scale.set(1.0f);
+        };
+        
+        FMat4 getMatrix() {
+            FMat4 t_mat;
+            FMat4 t_mat_pos,t_mat_rot_x,t_mat_rot_y,t_mat_rot_z,t_mat_scale;
+            t_mat_pos.setIdentity();
+            t_mat_pos.setTranslate(m_pos);
+            t_mat_scale.setIdentity();
+            t_mat_scale.setScale(m_scale);
+            t_mat_rot_x.setIdentity();
+            t_mat_rot_x.setRotateX(m_rot.x);
+            t_mat_rot_y.setIdentity();
+            t_mat_rot_y.setRotateY(m_rot.y);
+            t_mat_rot_z.setIdentity();
+            t_mat_rot_z.setRotateZ(m_rot.z);
+            t_mat = t_mat_scale*t_mat_rot_x*t_mat_rot_y*t_mat_rot_z*t_mat_pos;
+            return t_mat;
+        };
+        
         FVec3 m_pos;
         FVec3 m_rot;
         FVec3 m_scale;
