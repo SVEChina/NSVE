@@ -6,12 +6,16 @@
 //  Copyright © 2020 付一洲. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
-#import <MetalKit/MetalKit.h>
+#import <Foundation/Foundation.h>
+#import <AppKit/NSOpenGL.h>
+#import <AppKit/NSOpenGLView.h>
+#include <OpenGL/gl.h>
+#include <OpenGL/OpenGL.h>
+#include <OpenGL/CGLRenderers.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CGLESView : NSView
+@interface CGLESView : NSOpenGLView
 
 @end
 

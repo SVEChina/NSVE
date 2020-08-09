@@ -8,13 +8,10 @@
 
 #import "AppDelegate.h"
 #import "CMetalView.h"
+#import "CGLESView.h"
 #import "CGInst.h"
-#import <QuartzCore/CAMetalLayer.h>
-#import <Metal/MTLDevice.h>
-
 @interface AppDelegate () {
-    CMetalView* metalview;
-    //CAMetalLayer* metallayer;
+    
 }
 
 @property (weak) IBOutlet NSWindow *window;
@@ -27,8 +24,13 @@
     //
     [[CGInst getInst] cgInit];
     // Insert code here to initialize your application
-    metalview = [[CMetalView alloc] initWithFrame:self.window.contentView.bounds];
-    [self.window.contentView addSubview:metalview];
+    NSView *renderV = [[CMetalView alloc] initWithFrame:self.window.contentView.bounds];
+    #if SVE_TOOL_USE_METAL
+        renderV = [[CMetalView alloc] initWithFrame:self.window.contentView.bounds];
+    #elif SVE_TOOL_USE_GLES
+        renderV = [[CGLESView alloc] initWithFrame:self.window.contentView.bounds];
+    #endif
+    [self.window.contentView addSubview:renderV];
     //
     [[NSNotificationCenter defaultCenter] addObserver:self.window
                                              selector:@selector(windowDidResize:)

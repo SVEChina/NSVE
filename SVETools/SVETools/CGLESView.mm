@@ -13,12 +13,11 @@
 #include "src/app/SVInst.h"
 
 @interface CGLESView () {
-    CAMetalLayer* metalLayer;
+    NSOpenGLPixelFormat *m_format;
+    NSOpenGLContext* m_context;
     CVDisplayLinkRef displayLink;
 }
 
-@property (nonatomic, strong) id<MTLDevice>  mDevice;
-@property (nonatomic, strong) id<MTLCommandQueue>   mCommandQueue;
 
 @end
 
@@ -27,28 +26,33 @@
 - (instancetype)initWithFrame:(NSRect)frameRect {
     self = [super initWithFrame:frameRect];
     if( self ) {
-        self.mDevice = MTLCreateSystemDefaultDevice();
-        self.mCommandQueue = [self.mDevice newCommandQueue];
-        //创建metal环境
-        metalLayer = [CAMetalLayer layer];
-        metalLayer.device = self.mDevice;
-        metalLayer.pixelFormat = MTLPixelFormatBGRA8Unorm;
-        metalLayer.frame = frameRect;
-        [self buildMetal];
+        static const NSOpenGLPixelFormatAttribute attr[] = {
+            NSOpenGLPFAColorSize, 24,
+            NSOpenGLPFADepthSize, 24,
+            NSOpenGLPFAAlphaSize, 8,
+            NSOpenGLPFADoubleBuffer,
+            NSOpenGLPFAAccelerated,
+            NSOpenGLPFAOpenGLProfile, NSOpenGLProfileVersion3_2Core,
+            0
+        };
+        m_format = [[NSOpenGLPixelFormat alloc] initWithAttributes:(const NSOpenGLPixelFormatAttribute*)&attr];
+        m_context = [[NSOpenGLContext alloc] initWithFormat:m_format shareContext:nil];
+        [self setPixelFormat:m_format];
+        [self setOpenGLContext:m_context];
+        [m_context makeCurrentContext];
+        //
+        [self buildOpenGL];
     }
     return self;
     
 }
 
--(void)buildMetal {
-    //NSLog(@"sve renderMetal!");
-    id<CAMetalDrawable> drawable = [metalLayer nextDrawable];
-    id<MTLTexture> texture = drawable.texture;
-    //创建渲染器,Metal渲染器。
-    [[CGInst getInst] createRM:self.mDevice drawable:drawable];
-    //
-    [self setWantsLayer:true];
-    [self setLayer:metalLayer];
+
+- (void)buildOpenGL{
+    int t_w = self.frame.size.width;
+    int t_h = self.frame.size.height;
+    //创建渲染器,OPENGL渲染器
+    [[CGInst getInst] createGLWidth:t_w Height:t_h];
     [self creatTimer];
 }
 
@@ -70,6 +74,7 @@
 }
 
 - (void)dealloc{
+    [self clearGLContext];
     [self destroyTimer];
 }
 
@@ -82,32 +87,14 @@ static CVReturn renderCallback(CVDisplayLinkRef displayLink,
     //NSLog(@"sve timers \n ");
     dispatch_sync(dispatch_get_main_queue(), ^{
         //NSLog(@"sve timers \n ");
-        [(__bridge CGLESView*)displayLinkContext renderMetal];
+        [(__bridge CGLESView*)displayLinkContext renderGL];
     });
     return kCVReturnSuccess;
 }
 
--(void)renderMetal {
-    if(false) {
-        //NSLog(@"sve renderMetal!");
-        id<CAMetalDrawable> drawable = [metalLayer nextDrawable];
-        id<MTLTexture> texture = drawable.texture;
-        //相当于rt
-        MTLRenderPassDescriptor  *passDescriptor = [MTLRenderPassDescriptor renderPassDescriptor];
-        passDescriptor.colorAttachments[0].texture = texture;
-        passDescriptor.colorAttachments[0].loadAction = MTLLoadActionClear;
-        passDescriptor.colorAttachments[0].storeAction = MTLStoreActionStore;
-        passDescriptor.colorAttachments[0].clearColor = MTLClearColorMake(1, 0, 0, 1);
-        //
-        id<MTLCommandBuffer> commandBuffer = [self.mCommandQueue commandBuffer];
-        id<MTLRenderCommandEncoder> commandEncoder = [commandBuffer renderCommandEncoderWithDescriptor:passDescriptor];
-        //
-        [commandEncoder endEncoding];
-        [commandBuffer presentDrawable:drawable];
-        [commandBuffer commit];
-    }else{
-        [[CGInst getInst] render];
-    }
+-(void)renderGL {
+    [m_context makeCurrentContext];
+    [[CGInst getInst] render];
     
 }
 
@@ -118,5 +105,6 @@ static CVReturn renderCallback(CVDisplayLinkRef displayLink,
     //[self render];
     // Drawing code here.
 }
+
 
 @end

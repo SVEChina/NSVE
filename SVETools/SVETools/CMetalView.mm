@@ -41,9 +41,7 @@
 }
 
 -(void)buildMetal {
-    //NSLog(@"sve renderMetal!");
     id<CAMetalDrawable> drawable = [metalLayer nextDrawable];
-    id<MTLTexture> texture = drawable.texture;
     //创建渲染器,Metal渲染器。
     [[CGInst getInst] createRM:self.mDevice drawable:drawable];
     //
