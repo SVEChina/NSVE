@@ -37,9 +37,9 @@ namespace sv {
         //销毁SV
         virtual void destroy();
         //创建渲染器
-        SVRendererPtr createRM(SV_RM_TYPE _type);
+        SVRendererPtr createRenderer(SV_R_TYPE _type);
         //销毁渲染器
-        void destroyRM();
+        void destroyRenderer();
         //开始SV
         virtual void start();
         //停止SV
@@ -74,8 +74,8 @@ namespace sv {
         SVGlobalMgrPtr m_pGlobalMgr;
         //全局参数
         SVGlobalParamPtr m_pGlobalParam;
-        //渲染器
-        SVRendererPtr m_pRM;
+        //渲染器 renderer
+        SVRendererPtr m_pRE;
         //渲染环境
         SVCtxBasePtr m_ctx;
         //

@@ -463,5 +463,10 @@
       "fs": "mask",
       "programme": "mask2d"
     }
+  ],
+  "dspfiles": [
+      "shader/nor.dsp",
+      "shader/screen.dsp",
+      "shader/sprite.dsp"
   ]
 }
