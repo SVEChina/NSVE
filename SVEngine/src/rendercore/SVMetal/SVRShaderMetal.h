@@ -54,8 +54,8 @@ namespace sv {
         //
         struct INSAMPLE {
             id<MTLSamplerState> m_st;   //采样
-            s32 m_stage;             //0:vs 1:fs 2:gs
-            s32 m_chn;              //通道
+            s32 m_stage;                //0:vs 1:fs 2:gs
+            s32 m_chn;                  //通道
         };
         std::vector<INSAMPLE> m_sampler_st;
         //

@@ -9,9 +9,6 @@
 
 using namespace sv;
 
-//std::vector<SVTexturePtr> m_vs_texs;
-//std::vector<SVTexturePtr> m_fs_texs;
-
 SVSurface::SVSurface() {
     m_tbl = MakeSharedPtr<SVParamTbl>();
     m_vs_texs.resize(MAX_TEXUNIT);
@@ -23,53 +20,55 @@ SVSurface::~SVSurface() {
         m_vs_texs[i] = nullptr;
         m_fs_texs[i] = nullptr;
     }
+    m_vs_texs.clear();
+    m_fs_texs.clear();
     m_tbl = nullptr;
 }
 
 //设置参数
-void SVSurface::setParam(cptr8 _name,s32 _value) {
+void SVSurface::setParam(cptr8 _name,s32& _value) {
     if(m_tbl) {
         m_tbl->setParam(_name, _value);
     }
 }
 
-void SVSurface::setParam(cptr8 _name,f32 _value) {
+void SVSurface::setParam(cptr8 _name,f32& _value) {
     if(m_tbl) {
         m_tbl->setParam(_name, _value);
     }
 }
 
-void SVSurface::setParam(cptr8 _name,FVec2 _value) {
+void SVSurface::setParam(cptr8 _name,FVec2& _value) {
     if(m_tbl) {
         m_tbl->setParam(_name, _value);
     }
 }
 
-void SVSurface::setParam(cptr8 _name,FVec3 _value) {
+void SVSurface::setParam(cptr8 _name,FVec3& _value) {
     if(m_tbl) {
         m_tbl->setParam(_name, _value);
     }
 }
 
-void SVSurface::setParam(cptr8 _name,FVec4 _value) {
+void SVSurface::setParam(cptr8 _name,FVec4& _value) {
     if(m_tbl) {
         m_tbl->setParam(_name, _value);
     }
 }
 
-void SVSurface::setParam(cptr8 _name,FMat2 _value) {
+void SVSurface::setParam(cptr8 _name,FMat2& _value) {
     if(m_tbl) {
         m_tbl->setParam(_name, _value);
     }
 }
 
-void SVSurface::setParam(cptr8 _name,FMat3 _value) {
+void SVSurface::setParam(cptr8 _name,FMat3& _value) {
     if(m_tbl) {
         m_tbl->setParam(_name, _value);
     }
 }
 
-void SVSurface::setParam(cptr8 _name,FMat4 _value) {
+void SVSurface::setParam(cptr8 _name,FMat4& _value) {
     if(m_tbl) {
         m_tbl->setParam(_name, _value);
     }

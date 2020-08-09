@@ -38,23 +38,40 @@ namespace sv {
         virtual ~SVParamTbl();
         
         bool hasParam(cptr8 _name);
+        
+        //增加 主要是针对uniform
+        void addParam(cptr8 _name,s32& _value);
+
+        void addParam(cptr8 _name,f32& _value);
+
+        void addParam(cptr8 _name,FVec2& _value);
+
+        void addParam(cptr8 _name,FVec3& _value);
+
+        void addParam(cptr8 _name,FVec4& _value);
+        
+        void addParam(cptr8 _name,FMat2& _value);
+
+        void addParam(cptr8 _name,FMat3& _value);
+
+        void addParam(cptr8 _name,FMat4& _value);
 
         //设置参数值 主要是针对uniform
-        void setParam(cptr8 _name,s32 _value);
+        bool setParam(cptr8 _name,s32& _value);
 
-        void setParam(cptr8 _name,f32 _value);
+        bool setParam(cptr8 _name,f32& _value);
 
-        void setParam(cptr8 _name,FVec2 _value);
+        bool setParam(cptr8 _name,FVec2& _value);
 
-        void setParam(cptr8 _name,FVec3 _value);
+        bool setParam(cptr8 _name,FVec3& _value);
 
-        void setParam(cptr8 _name,FVec4 _value);
+        bool setParam(cptr8 _name,FVec4& _value);
         
-        void setParam(cptr8 _name,FMat2 _value);
+        bool setParam(cptr8 _name,FMat2& _value);
 
-        void setParam(cptr8 _name,FMat3 _value);
+        bool setParam(cptr8 _name,FMat3& _value);
 
-        void setParam(cptr8 _name,FMat4 _value);
+        bool setParam(cptr8 _name,FMat4& _value);
         
         void getParam(cptr8 _name,s32& _value);
 

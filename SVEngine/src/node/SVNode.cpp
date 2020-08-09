@@ -93,10 +93,6 @@ void SVNode::update(f32 dt) {
     } else {
         m_absolutMat = m_localMat;
     }
-    //
-    if(m_surface) {
-        m_surface->setParam("worldMat", m_localMat);
-    }
     //更新包围盒
     m_aabbBox_sw = m_aabbBox;
     m_aabbBox_sw.setTransform(m_absolutMat);

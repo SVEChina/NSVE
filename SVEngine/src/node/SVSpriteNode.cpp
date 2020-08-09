@@ -31,6 +31,10 @@ SVSpriteNode::SVSpriteNode(SVInstPtr _app)
     m_pTex = nullptr;
     m_pMesh = nullptr;
     setSize(1.9f,1.9f);
+    //
+    if(m_surface) {
+        m_surface->m_tbl->addParam("matw",m_localMat);
+    }
 }
 
 SVSpriteNode::SVSpriteNode(SVInstPtr _app,f32 _w,f32 _h)
@@ -128,9 +132,7 @@ void SVSpriteNode::update(f32 _dt) {
         t_mtl->update(_dt);
     }
     if(m_surface) {
-        //设置纹理
         m_surface->setTexture(0,m_pTex,1);
-        //设置世界矩阵
         m_surface->setParam("wmat",m_localMat);
     }
 }

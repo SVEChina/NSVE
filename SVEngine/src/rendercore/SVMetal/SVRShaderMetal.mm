@@ -318,9 +318,9 @@ bool SVRShaderMetal::active(SVRendererPtr _renderer) {
     }
     //采样器更新
     for(s32 i=0;i<m_sampler_st.size();i++) {
-        if(m_sampler_st[i].m_stage == 0) {
+        if(m_sampler_st[i].m_stage == SV_STAGE_VS) {
             [t_rm->m_pCurEncoder setVertexSamplerState:m_sampler_st[i].m_st atIndex:m_sampler_st[i].m_chn];
-        }else if(m_sampler_st[i].m_stage == 1) {
+        }else if(m_sampler_st[i].m_stage == SV_STAGE_FS) {
             [t_rm->m_pCurEncoder setFragmentSamplerState:m_sampler_st[i].m_st atIndex:m_sampler_st[i].m_chn];
         }
     }
@@ -332,13 +332,13 @@ bool SVRShaderMetal::active(SVRendererPtr _renderer) {
     }
     //上传uniform
     for(s32 i=0;i<m_ubuf_pool.size();i++) {
-        if( m_ubuf_pool[i].m_stage == 0 ) {
+        if( m_ubuf_pool[i].m_stage == SV_STAGE_VS ) {
             //vs
             [t_rm->m_pCurEncoder setVertexBuffer:m_ubuf_pool[i].m_ubuf offset:0 atIndex:m_ubuf_pool[i].m_bufid];
-        }else if( m_ubuf_pool[i].m_stage == 1 ) {
+        }else if( m_ubuf_pool[i].m_stage == SV_STAGE_FS ) {
             //fs
             [t_rm->m_pCurEncoder setFragmentBuffer:m_ubuf_pool[i].m_ubuf offset:0 atIndex:m_ubuf_pool[i].m_bufid];
-        }else if( m_ubuf_pool[i].m_stage == 2 ) {
+        }else if( m_ubuf_pool[i].m_stage == SV_STAGE_GS ) {
             //gs
             //[t_rm->m_pCurEncoder setFragmentBuffer:m_ubuf_pool[i].m_ubuf offset:0 atIndex:m_ubuf_pool[i].m_bufid];
         }

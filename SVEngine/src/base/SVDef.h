@@ -111,6 +111,13 @@ namespace sv {
         SV_E_TECH_CS = 0x00100000,
     };
 
+#define SV_STAGE_VS     0
+#define SV_STAGE_FS     1
+#define SV_STAGE_GS     2
+#define SV_STAGE_TSC    3
+#define SV_STAGE_TSE    4
+#define SV_STAGE_CS     5
+
     //输出纹理格式
     enum SV_OUTSTEAMFORMATE {
         SV_OUT_STEAM_RGB2YUVNV12 = 0,
