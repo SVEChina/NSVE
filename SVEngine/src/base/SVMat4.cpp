@@ -1884,4 +1884,11 @@ namespace sv {
         return mul(ret,offset,projection);
     }
 
-}//!namespace sv
+    const FMat4 &hardwareProjectionMetal(const FMat4 &projection) {
+        static FMat4 ret;
+        static const FMat4 offset = translate(0.0f,0.0f,0.5f) * scale(1.0f,1.0f,0.5f);
+        return mul(ret,offset,projection);
+    }
+
+//!namespace sv
+}

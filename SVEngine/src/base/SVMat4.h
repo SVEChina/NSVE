@@ -262,6 +262,7 @@ namespace sv {
     const FMat4 &hardwareProjectionGL(const FMat4 &projection,s32 width,s32 height);
     const FMat4 &hardwareProjectionD3D9(const FMat4 &projection,s32 width,s32 height);
     const FMat4 &hardwareProjectionD3D10(const FMat4 &projection,s32 width,s32 height);
+    const FMat4 &hardwareProjectionMetal(const FMat4 &projection);
 
     extern const FMat4 &(*hardwareProjection)(const FMat4 &projection,s32 width,s32 height);
 

@@ -90,6 +90,8 @@ void SVDispatch::dispatchMeshDraw(SVInstPtr _app,SVRenderMeshPtr _mesh,cptr8 _mt
         //投递到主目标，在这里更新VP矩阵
         if(_surface) {
             _surface->setParam("matvp", t_target->m_vp_mat);
+            _surface->setParam("matv", t_target->m_v_mat);
+            _surface->setParam("matp", t_target->m_p_mat);
         }
         //投递命令
         SVMtlCorePtr t_mtl = _app->getMtlLib()->getMtl(_mtlname);
@@ -110,6 +112,8 @@ void SVDispatch::dispatchMeshDraw(SVInstPtr _app,SVRenderMeshPtr _mesh,s32 _mtlI
         //投递到Target，在这里更新VP矩阵
         if(_surface) {
             _surface->setParam("matvp", _target->m_vp_mat);
+            _surface->setParam("matv", _target->m_v_mat);
+            _surface->setParam("matp", _target->m_p_mat);
         }
         SVMtlCorePtr t_mtl = _app->getMtlLib()->getMtl(_mtlID);
         if(t_mtl) {

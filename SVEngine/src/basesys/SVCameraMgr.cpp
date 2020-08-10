@@ -53,7 +53,9 @@ void SVCameraMgr::update(f32 dt) {
         m_mainCamera->update(dt);
         SVRTargetPtr t_main_rt = mApp->getRenderMgr()->getMainRT();
         if( t_main_rt ) {
-            t_main_rt->setVPMat(m_mainCamera->getVPMatObj());
+            t_main_rt->setVMat(m_mainCamera->viewMat());
+            t_main_rt->setPMat(m_mainCamera->projectMat());
+            t_main_rt->setVPMat(m_mainCamera->vpMat());
         }
     }
     //更新ui相机

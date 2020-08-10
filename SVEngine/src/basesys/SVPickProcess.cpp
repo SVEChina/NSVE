@@ -126,7 +126,7 @@ bool SVPickProcess::_getRay(SVCameraNodePtr _cam,s32 _sx,s32 _sy,FVec3& _rayStar
         //投影坐标x(-1,1.0),y(-1,1.0)
         FVec4 t_proj_v_begin = FVec4((_sx/m_screenW - 0.5f)*2.0f,(_sy/m_screenH - 0.5f)*2.0f,-1.0f,1.0f);
         FVec4 t_proj_v_end = FVec4((_sx/m_screenW - 0.5f)*2.0f,(_sy/m_screenH - 0.5f)*2.0f,1.0f,1.0f);
-        FMat4 t_vp_inv = inverse(_cam->getVPMatObj());
+        FMat4 t_vp_inv = inverse(_cam->vpMat());
         FVec4 t_world_begin = t_vp_inv*t_proj_v_begin;
         FVec4 t_world_end = t_vp_inv*t_proj_v_end;
         t_world_begin = t_world_begin/t_world_begin.w;
@@ -172,7 +172,7 @@ bool SVPickProcess::pickScene(SVCameraNodePtr _cam,s32 _sx,s32 _sy){
     SVScenePtr t_sc = mApp->getSceneMgr()->getScene();
     if (_cam && t_sc) {
         FVec3 t_start,t_end;
-        if( _getRayMat(_cam,_cam->getVPMatObj(),_sx,_sy,t_start,t_end) ){
+        if( _getRayMat(_cam,_cam->vpMat(),_sx,_sy,t_start,t_end) ){
             //射线求交
             SVVisitRayPickPtr t_visit = MakeSharedPtr<SVVisitRayPick>(t_start,t_end);
             t_sc->visit(t_visit);
@@ -265,7 +265,7 @@ bool SVPickProcess::getCrossPointUI(SVCameraNodePtr _cam,s32 _sx,s32 _sy,FVec3& 
     FVec3 t_start,t_end;
     //error fyz
 //    if(_cam){
-//        if(_getRayMat(_cam,mApp->getCameraMgr()->getMainCamera()->getVPMatObjUI(),_sx,_sy,t_start,t_end)){
+//        if(_getRayMat(_cam,mApp->getCameraMgr()->getMainCamera()->vpMat(),_sx,_sy,t_start,t_end)){
 //            //构建移动平面(这个平面可以绘制出来)
 //            FVec3 t_pos = t_start;
 //            FVec3 t_dir = t_end - t_start;
@@ -342,7 +342,7 @@ bool SVPickProcess::procEvent(SVEventPtr _event){
 
 void SVPickProcess::transScreenPtToWorld(FVec2 &_screenPt, FVec3 &_worldPt){
     SVCameraNodePtr t_camera = mApp->getCameraMgr()->getMainCamera();
-    FMat4 t_cameraMatrix = t_camera->getViewMatObj();
+    FMat4 t_cameraMatrix = t_camera->viewMat();
     FVec3 t_cameraEye = t_camera->getPosition();
     //构建虚拟平面
     FVec3 t_cameraDir = FVec3(-t_cameraMatrix[2],

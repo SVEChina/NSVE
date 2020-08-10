@@ -271,19 +271,6 @@ void SVScene::update(f32 dt) {
     if(m_pSceneTree){
         m_pSceneTree->update(dt);
     }
-//    //
-//    SVRendererPtr t_renderer = mApp->getRenderer();
-//    if( t_renderer && t_renderer->hasSVTex(E_TEX_MAIN) ){
-//        if (m_pRenderScene && false == m_pRenderScene->isSuspend() ) {
-//            SVRCmdFboResizePtr t_fbo_bind = MakeSharedPtr<SVRCmdFboResize>(t_renderer->getRenderTexture());
-//            t_fbo_bind->mTag = "main_frame_bind";
-//            m_pRenderScene->pushRenderCmd(RST_SCENE_BEGIN, t_fbo_bind);
-//            //
-//            SVRenderCmdFboUnbindPtr t_fbo_unbind = MakeSharedPtr<SVRenderCmdFboUnbind>(t_renderer->getRenderTexture());
-//            t_fbo_unbind->mTag = "main_frame_unbind";
-//            m_pRenderScene->pushRenderCmd(RST_SCENE_END, t_fbo_unbind);
-//        }
-//    }
 }
 
 void SVScene::visit(SVVisitorBasePtr _visitor){
@@ -321,26 +308,13 @@ void SVScene::fromJSON(RAPIDJSON_NAMESPACE::Value &item) {
         u32 t_color = item["color"].GetUint();
         m_color.setColorARGB(t_color);
     }
-//    if (item.HasMember("worldw") && item["worldw"].IsFloat()) {
-//        m_worldW = item["worldw"].GetFloat();
-//    }
-//    if (item.HasMember("worldh") && item["worldh"].IsFloat()) {
-//        m_worldH = item["worldh"].GetFloat();
-//    }
-//    if (item.HasMember("worldd") && item["worldd"].IsInt()) {
-//        m_worldD = item["worldd"].GetInt();
-//    }
-    //
-//    if(!m_pSceneTree){
-//        create(m_worldW,m_worldH,m_worldD);
-//    }
 }
 
 void SVScene::test() {
     //创建一个测试场景
     SVSpriteNodePtr t_sp_node = MakeSharedPtr<SVSpriteNode>(mApp);
     t_sp_node->setTexture("svres/test1.png");
-    t_sp_node->setPosition(0.1f, 0.3f, 0.0f);
+    //t_sp_node->setPosition(0.1f, 0.3f, 0.0f);
     addNode(t_sp_node);
     //
     SV3DBoxPtr t_box_node = MakeSharedPtr<SV3DBox>(mApp);

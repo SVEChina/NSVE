@@ -76,6 +76,14 @@ namespace sv {
         void setVPMat(FMat4& _mat) {
             m_vp_mat = _mat;
         }
+        
+        void setVMat(FMat4& _mat) {
+            m_v_mat = _mat;
+        }
+        
+        void setPMat(FMat4& _mat) {
+            m_p_mat = _mat;
+        }
 
     protected:
         std::vector<SV_RSTREAM_TYPE> m_stream_quene;    //流序，流顺的设定就是渲染路径的设定
@@ -87,6 +95,8 @@ namespace sv {
         SVTargetDsp m_target_dsp;
         
     public:
+        FMat4 m_v_mat;
+        FMat4 m_p_mat;
         FMat4 m_vp_mat;
     };
 

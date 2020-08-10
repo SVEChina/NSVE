@@ -11,10 +11,10 @@
 #include "../app/SVInst.h"
 #include "../basesys/SVCameraNode.h"
 #include "../basesys/SVComData.h"
+#include "../core/SVGeoGen.h"
 #include "../mtl/SVMtlLib.h"
 #include "../mtl/SVMtlCore.h"
 #include "../mtl/SVSurface.h"
-#include "../core/SVGeoGen.h"
 #include "../mtl/SVTexture.h"
 #include "../mtl/SVTexMgr.h"
 #include "../rendercore/SVRenderMesh.h"
@@ -30,13 +30,14 @@ SVSpriteNode::SVSpriteNode(SVInstPtr _app)
     m_canSelect = false;
     m_pTex = nullptr;
     m_pMesh = nullptr;
-    setSize(1.9f,1.9f);
+    setSize(200.0f,200.0f);
     //
     if(m_surface) {
         FMat4 t_mat;
         t_mat.setIdentity();
         m_surface->m_tbl->addParam("matw",t_mat);
-        m_surface->m_tbl->addParam("matvp",t_mat);
+        m_surface->m_tbl->addParam("matv",t_mat);
+        m_surface->m_tbl->addParam("matp",t_mat);
     }
 }
 
@@ -60,7 +61,7 @@ SVSpriteNode::~SVSpriteNode() {
 void SVSpriteNode::setSize(f32 _w,f32 _h) {
     m_width = _w;
     m_height = _h;
-    f32 t_texcoord_size = 4;
+    f32 t_texcoord_size = 1.0f;
     if( m_pMesh ){
         //更新数据
         V3_T0 t_verts[4];

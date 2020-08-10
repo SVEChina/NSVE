@@ -24,14 +24,14 @@ SVCameraNode::SVCameraNode(SVInstPtr _app)
     m_mat_vp.setIdentity();
     //
     m_znear = 1.0f;
-    m_zfar = 100.0f;
+    m_zfar = 1000.0f;
     m_width = 720.0f;
     m_height = 1280.0f;
     m_fovy = 60.0f;
     //
-    m_pos.set(0.0f,0.0f,100.0f);
+    m_pos.set(0.0f,0.0f,500.0f);
     m_up.set(0.0f, 1.0f, 0.0f);
-    m_direction.set(0.0f,0.0f,-1.0f);
+    m_direction.set(0.0f,0.0f,0.0f);    //m_direction 就是target
     m_distance = 100.0f;
 }
 
@@ -54,10 +54,11 @@ void SVCameraNode::destroy() {
 void SVCameraNode::update(f32 _dt) {
     //移除关联fbo
     m_resLock->lock();
+    m_dirty = true;
     if (m_dirty) {
-        m_dirty = true;
+        m_dirty = false;
         //更新相机矩阵
-        m_mat_v = setTo(m_pos,m_direction,m_up);
+        m_mat_v = lookAt(m_pos,m_direction,m_up);
         if(mApp->m_rcore == E_R_METAL) {
             m_mat_v = transpose(m_mat_v);
         }
@@ -69,14 +70,18 @@ void SVCameraNode::update(f32 _dt) {
 
 void SVCameraNode::_updateProj() {
     if(m_is_ortho) {
-        m_mat_p = ortho(-m_width*0.5f,m_width*0.5f,-m_height*0.5f,m_height*0.5f,m_znear,m_zfar);
+        m_mat_p = ortho(-m_width*0.5f,m_width*0.5f,
+                        -m_height*0.5f,m_height*0.5f,
+                        m_znear,m_zfar);
         if(mApp->m_rcore == E_R_METAL) {
+            m_mat_p = hardwareProjectionMetal(m_mat_p);
             m_mat_p = transpose(m_mat_p);
         }
     }else{
         f32 t_aspect = m_width/m_height;
         m_mat_p = perspective(m_fovy,t_aspect,m_znear,m_zfar);
         if(mApp->m_rcore == E_R_METAL) {
+            m_mat_p = hardwareProjectionMetal(m_mat_p);
             m_mat_p = transpose(m_mat_p);
         }
     }
@@ -120,6 +125,7 @@ void SVCameraNode::setSize(f32 _w, f32 _h) {
     m_width = _w;
     m_height = _h;
     _updateProj();
+    m_dirty = true;
     m_resLock->unlock();
 }
 
@@ -129,6 +135,7 @@ void SVCameraNode::setZ(f32 _near, f32 _far) {
     m_znear = _near;
     m_zfar = _far;
     _updateProj();
+    m_dirty = true;
     m_resLock->unlock();
 }
 
@@ -136,14 +143,14 @@ FVec3& SVCameraNode::getPosition() {
     return m_pos;
 }
 
-FMat4& SVCameraNode::getProjectMatObj(){
+FMat4& SVCameraNode::projectMat(){
     return m_mat_p;
 }
 
-FMat4& SVCameraNode::getViewMatObj(){
+FMat4& SVCameraNode::viewMat(){
     return m_mat_v;
 }
 
-FMat4& SVCameraNode::getVPMatObj(){
+FMat4& SVCameraNode::vpMat(){
     return m_mat_vp;
 }

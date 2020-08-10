@@ -174,7 +174,7 @@ void SVARAnchor::_screenPointToWorldAnchorPoint(FVec2 &_point, SVAnchorPoint &_w
     SVCameraNodePtr t_arCam = t_sensor->getARCamera();
     if(!t_arCam)
         return;
-    FMat4 t_cameraMatrix = t_arCam->getViewMatObj();
+    FMat4 t_cameraMatrix = t_arCam->viewMat();
     FVec3 t_cameraEye = t_arCam->getPosition();
     //构建虚拟平面
     FVec3 t_cameraDir = FVec3(-t_cameraMatrix[2],

@@ -47,11 +47,11 @@ namespace sv {
         
         FVec3& getPosition();
         
-        FMat4& getProjectMatObj();
+        FMat4& projectMat();
         
-        FMat4& getViewMatObj();
+        FMat4& viewMat();
         
-        FMat4& getVPMatObj();
+        FMat4& vpMat();
 
     protected:
         void _updateProj();

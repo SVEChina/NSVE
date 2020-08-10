@@ -28,7 +28,7 @@ SVRenderMeshPtr SVGeoGen::genRect(SVInstPtr _app,f32 _w,f32 _h,SVBoundBox& _aabb
     _aabb.clear();
     //索引
     u16 t_index_data[] = { 0,1,2,2,1,3 };
-    f32 t_coord_size = 2.0f;
+    f32 t_coord_size = 1.0f;
     //数据
     V3_T0 t_verts[4];
     t_verts[0].x = -0.5f * _w;

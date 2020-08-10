@@ -38,7 +38,7 @@ void SVRenderPipline::render() {
 //            if(i == RST_UI){
 //                mApp->getRenderer()->pushProjMat(mApp->getCameraMgr()->getMainCamera()->getProjectMatObjUI());
 //                mApp->getRenderer()->pushViewMat(mApp->getCameraMgr()->getMainCamera()->getViewMatObjUI());
-//                mApp->getRenderer()->pushVPMat(mApp->getCameraMgr()->getMainCamera()->getVPMatObjUI());
+//                mApp->getRenderer()->pushVPMat(mApp->getCameraMgr()->getMainCamera()->vpMat());
 //            }
 //        }
         
