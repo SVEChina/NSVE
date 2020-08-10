@@ -59,51 +59,19 @@ void SVFboObject::setLink(bool _link) {
 }
 
 void SVFboObject::bind() {
-//    SVRResGLFBOPtr t_tmp = std::dynamic_pointer_cast<SVRResGLFBO>(m_objFBOPtr);
-//    if (t_tmp) {
-//        t_tmp->bind();
-//        SVRendererPtr t_renderBasePtr = mApp->getRenderer();
-//        if(m_link && t_renderBasePtr){
-//            t_renderBasePtr->pushViewMat(m_mat_view);
-//            t_renderBasePtr->pushProjMat(m_mat_proj);
-//            t_renderBasePtr->pushVPMat(m_mat_vp);
-//        }
-//    }
 }
 
 void SVFboObject::clear(){
-//    SVRResGLFBOPtr t_tmp = std::dynamic_pointer_cast<SVRResGLFBO>(m_objFBOPtr);
-//    if (t_tmp) {
-//        t_tmp->clear();
-//    }
 }
 
 void SVFboObject::unbind() {
-//    SVRResGLFBOPtr t_tmp = std::dynamic_pointer_cast<SVRResGLFBO>(m_objFBOPtr);
-//    if (t_tmp) {
-//        t_tmp->unbind();
-//        SVRendererPtr t_renderBasePtr = mApp->getRenderer();
-//        if(m_link && t_renderBasePtr){
-//            t_renderBasePtr->popViewMat();
-//            t_renderBasePtr->popProjMat();
-//            t_renderBasePtr->popVPMat();
-//        }
-//    }
 }
 
 u32 SVFboObject::getFboID(){
-//    SVRResGLFBOPtr t_tmp = std::dynamic_pointer_cast<SVRResGLFBO>(m_objFBOPtr);
-//    if (t_tmp) {
-//        return t_tmp->getFboID();
-//    }
     return 0;
 }
 
 u32 SVFboObject::getWidth(){
-//    SVRResGLFBOPtr t_tmp = std::dynamic_pointer_cast<SVRResGLFBO>(m_objFBOPtr);
-//    if (t_tmp) {
-//        return t_tmp->getWidth();
-//    }
     return 0;
 }
 

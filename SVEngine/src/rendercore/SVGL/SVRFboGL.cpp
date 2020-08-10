@@ -104,7 +104,7 @@ void SVRFboGL::destroy(SVRendererPtr _renderer) {
     SVRFbo::destroy(_renderer);
 }
 
-void SVRFboGL::resize(s32 _width,s32 _height) {
+void SVRFboGL::resize(s32 _width,s32 _height,SVRendererPtr _renderer) {
     if(m_width!=_width || m_height!=_height ) {
         m_width = _width;
         m_height = _height;

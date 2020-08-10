@@ -113,11 +113,11 @@ namespace sv {
     };
     
     //FBO绑定(推送FBO)
-    class SVRCmdFboResize : public SVRenderCmd {
+    class SVRCmdTargetResize : public SVRenderCmd {
     public:
-        SVRCmdFboResize(SVRFboPtr _fbo,s32 _w,s32 _h);
+        SVRCmdTargetResize(SVRFboPtr _fbo,s32 _w,s32 _h);
         
-        ~SVRCmdFboResize();
+        ~SVRCmdTargetResize();
         
         virtual void render(SVRendererPtr _renderer,SVRTargetPtr _target);
         

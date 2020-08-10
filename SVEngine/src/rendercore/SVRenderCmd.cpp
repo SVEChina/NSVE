@@ -178,19 +178,19 @@ void SVRCmdPassCollection::addMtlMesh(SVMtlCorePtr _mtl , SVRenderMeshPtr _mesh)
 }
 
 //fbo 重置大小
-SVRCmdFboResize::SVRCmdFboResize(SVRFboPtr _fbo,s32 _w,s32 _h) {
+SVRCmdTargetResize::SVRCmdTargetResize(SVRFboPtr _fbo,s32 _w,s32 _h) {
     m_fbo = _fbo;
     m_width = _w;
     m_height = _h;
 }
 
-SVRCmdFboResize::~SVRCmdFboResize(){
+SVRCmdTargetResize::~SVRCmdTargetResize(){
     m_fbo = nullptr;
 }
 
-void SVRCmdFboResize::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
+void SVRCmdTargetResize::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
     if (m_fbo) {
-        m_fbo->resize(m_width,m_height);
+        m_fbo->resize(m_width,m_height,_renderer);
     }
 }
 

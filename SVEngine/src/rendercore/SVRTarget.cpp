@@ -19,6 +19,7 @@ using namespace sv;
 SVRTarget::SVRTarget(SVInstPtr _app)
 :SVGBaseEx(_app)
 ,m_fbo(nullptr){
+    m_auto = true;
     m_vp_mat.setIdentity();
     m_stream_pool.resize(E_RSM_MAX);
     for(s32 i=0;i<E_RSM_MAX;i++) {
@@ -45,13 +46,13 @@ void SVRTarget::setRenderPath() {
 }
 
 void SVRTarget::resize(s32 _width,s32 _height) {
-    if( m_target_dsp.m_width!=_width ||
-        m_target_dsp.m_height!=_height) {
-        //
-        m_target_dsp.m_width = _width;
-        m_target_dsp.m_height = _height;
-        //
-        SVDispatch::dispatchTargetResize(mApp,share());
+    if(m_auto) {
+        if( m_target_dsp.m_width!=_width ||
+            m_target_dsp.m_height!=_height) {
+            m_target_dsp.m_width = _width;
+            m_target_dsp.m_height = _height;
+            SVDispatch::dispatchTargetResize(mApp,share());
+        }
     }
 }
 

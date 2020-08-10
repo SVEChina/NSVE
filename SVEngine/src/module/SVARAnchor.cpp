@@ -101,7 +101,7 @@ void SVARAnchor::update(f32 _dt) {
 //    SVRendererPtr t_renderer = mApp->getRenderer();
 //    SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
 //    if (t_rs && t_renderer && m_fbo) {
-//        SVRCmdFboResizePtr t_fbo_bind = MakeSharedPtr<SVRCmdFboResize>(m_fbo);
+//        SVRCmdTargetResizePtr t_fbo_bind = MakeSharedPtr<SVRCmdTargetResize>(m_fbo);
 //        t_fbo_bind->mTag = "draw_aranchor_bind";
 //        t_rs->pushRenderCmd(RST_AR, t_fbo_bind);
 //

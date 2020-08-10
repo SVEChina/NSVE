@@ -34,6 +34,7 @@ void SVRFboMetal::create(SVRendererPtr _renderer) {
         SVTargetDsp* t_dsp = t_target->getTargetDsp();
         //非创建，直接引用外部参数
         if(t_dsp->m_oc_target ) {
+            //配置rendertarget
             m_pTarget = (__bridge id<MTLDrawable>)(t_dsp->m_oc_target);
             m_passDsp = [MTLRenderPassDescriptor renderPassDescriptor];
             if( t_dsp->m_oc_texture) {
@@ -41,7 +42,7 @@ void SVRFboMetal::create(SVRendererPtr _renderer) {
                 m_pTargetTex[0] = (__bridge id<MTLTexture>)(t_dsp->m_oc_texture);
                 m_width = s32(m_pTargetTex[0].width);
                 m_height = s32(m_pTargetTex[0].height);
-            }else{
+            } else {
                 //创建color纹理，支持多目标渲染,暂时不支持不同目标，不同的格式
                 m_width = t_dsp->m_width;
                 m_height = t_dsp->m_height;
@@ -51,7 +52,7 @@ void SVRFboMetal::create(SVRendererPtr _renderer) {
                 MTLTextureDescriptor* t_descriptor = [MTLTextureDescriptor texture2DDescriptorWithPixelFormat:t_pfmt width:m_width height:m_height mipmapped:true];
                 t_descriptor.usage |= MTLTextureUsageRenderTarget;
                 for(s32 i=0;i<m_target_num;i++) {
-                    //创建rt类型的颜色纹理
+                    //创建MRT多目标
                     m_pTargetTex[i] =  [t_rm->m_pDevice newTextureWithDescriptor:t_descriptor];
                 }
             }
@@ -70,8 +71,14 @@ void SVRFboMetal::create(SVRendererPtr _renderer) {
                 //只有模版
                 _createStencilBuf(t_rm);
             }
-        }
-    }
+        } else {
+            //创建新的RenderTarget
+            
+            
+        } //m_oc_target
+        
+    }//rm or target
+    
 }
 
 void SVRFboMetal::_createCommonBuf(SVRendererMetalPtr _renderer) {
@@ -130,7 +137,6 @@ void SVRFboMetal::_createStencilBuf(SVRendererMetalPtr _renderer) {
 }
 
 void SVRFboMetal::destroy(SVRendererPtr _renderer) {
-    //
     if(m_pTarget) {
         m_pTarget = nullptr;
     }
@@ -140,13 +146,23 @@ void SVRFboMetal::destroy(SVRendererPtr _renderer) {
     SVRFbo::destroy(_renderer);
 }
 
-void SVRFboMetal::resize(s32 _width,s32 _height) {
+void SVRFboMetal::resize(s32 _width,s32 _height,SVRendererPtr _renderer) {
     if(m_width!=_width || m_height!=_height) {
         m_width = _width;
         m_height = _height;
         //销毁旧的纹理
+        
         //创建新的纹理
-    }
+        SVRendererMetalPtr t_rm = std::dynamic_pointer_cast<SVRendererMetal>(_renderer);
+        SVRTargetPtr t_target = std::dynamic_pointer_cast<SVRTarget>(m_logic_obj);
+        SVTargetDsp* t_dsp = t_target->getTargetDsp();
+        //非创建，直接引用外部参数
+        if(t_dsp->m_oc_target ) {
+            //外部传递的target
+        } else {
+            //自己创建的target
+        }
+    }//width height
 }
 
 void SVRFboMetal::bind(SVRendererPtr _renderer) {

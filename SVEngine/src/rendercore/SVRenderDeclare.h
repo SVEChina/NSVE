@@ -73,7 +73,7 @@ namespace sv {
     DECLARE_SHAREPTR(SVRCmdNor);
     DECLARE_SHAREPTR(SVRCmdPass);
     DECLARE_SHAREPTR(SVRCmdPassCollection);
-    DECLARE_SHAREPTR(SVRCmdFboResize);
+    DECLARE_SHAREPTR(SVRCmdTargetResize);
     DECLARE_SHAREPTR(SVRCmdAdapt);
     DECLARE_SHAREPTR(SVRenderCmdStreamOutNor);
     DECLARE_SHAREPTR(SVRenderCmdStreamOutIOS);

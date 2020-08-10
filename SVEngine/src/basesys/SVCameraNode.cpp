@@ -31,7 +31,7 @@ SVCameraNode::SVCameraNode(SVInstPtr _app)
     //
     m_pos.set(0.0f,0.0f,500.0f);
     m_up.set(0.0f, 1.0f, 0.0f);
-    m_direction.set(0.0f,0.0f,0.0f);    //m_direction 就是target
+    m_target.set(0.0f,0.0f,0.0f);    //m_target 就是target
     m_distance = 100.0f;
 }
 
@@ -58,13 +58,25 @@ void SVCameraNode::update(f32 _dt) {
     if (m_dirty) {
         m_dirty = false;
         //更新相机矩阵
-        m_mat_v = lookAt(m_pos,m_direction,m_up);
+        m_mat_v = lookAt(m_pos,m_target,m_up);
         if(mApp->m_rcore == E_R_METAL) {
             m_mat_v = transpose(m_mat_v);
         }
         //
         m_mat_vp =m_mat_p*m_mat_v;
     }
+    m_resLock->unlock();
+}
+
+void SVCameraNode::updateForce() {
+    m_resLock->lock();
+    //更新相机矩阵
+    m_mat_v = lookAt(m_pos,m_target,m_up);
+    if(mApp->m_rcore == E_R_METAL) {
+        m_mat_v = transpose(m_mat_v);
+    }
+    _updateProj();
+    m_mat_vp =m_mat_p*m_mat_v;
     m_resLock->unlock();
 }
 
@@ -85,16 +97,6 @@ void SVCameraNode::_updateProj() {
             m_mat_p = transpose(m_mat_p);
         }
     }
-}
-
-void SVCameraNode::_updateForce() {
-    m_dirty = false;
-    if(m_is_ortho) {
-        setOrtho();
-    }else{
-        setProject();
-    }
-    m_mat_vp =m_mat_p*m_mat_v;
 }
 
 void SVCameraNode::setProject() {

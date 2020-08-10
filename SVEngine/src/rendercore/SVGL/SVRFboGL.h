@@ -27,7 +27,7 @@ namespace sv {
 
         virtual void destroy(SVRendererPtr _renderer);
         
-        virtual void resize(s32 _width,s32 _height);
+        virtual void resize(s32 _width,s32 _height,SVRendererPtr _renderer);
 
     protected:
         u32 m_fbo_id;

@@ -19,7 +19,7 @@ namespace sv {
     渲染目标（主目标，其他目标，都包含在内）
     */
 
-    //
+    //目标描述
     struct SVTargetDsp {
         //
         SVTargetDsp() {
@@ -32,7 +32,7 @@ namespace sv {
             m_oc_target = nullptr;
             m_oc_texture = nullptr;
         }
-        //
+        
         s32 m_width;
         s32 m_height;
         s32 m_target_num;
@@ -62,7 +62,6 @@ namespace sv {
         
         void clearRenderCommand();
 
-        //
         void bindRes(SVRFboPtr _res);
 
         void unbindRes();
@@ -70,6 +69,14 @@ namespace sv {
         SVRFboPtr getResFbo();
         
         SVTargetDsp* getTargetDsp() { return &m_target_dsp; }
+        
+        void setFixSize() {
+            m_auto = false;
+        }
+        
+        void setAutoSize() {
+            m_auto = true;
+        }
         
         void setRenderPath();
         
@@ -94,12 +101,26 @@ namespace sv {
         
         SVTargetDsp m_target_dsp;
         
+        bool m_auto;    //同步大小
+        
     public:
         FMat4 m_v_mat;
         FMat4 m_p_mat;
         FMat4 m_vp_mat;
     };
 
+//    //环境target
+//    class SVRTargetEnv : public SVGBaseEx {
+//    public:
+//        SVRTargetEnv(SVInstPtr _app);
+//
+//        ~SVRTargetEnv();
+//
+//    };
+//
+//    //直接渲染，就是直接渲染到环境target
+//
+//    //间接渲染，就是构建自己的主RT，然后渲染到环境Target上
     
 }//!namespace sv
 

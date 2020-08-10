@@ -178,8 +178,8 @@ void SVCamCtrlProj::setTarget(f32 _x, f32 _y, f32 _z) {
 }
 
 void SVCamCtrlProj::setDirection(f32 _x, f32 _y, f32 _z) {
-    m_direction.set(_x, _y, _z);
-    m_direction.normalize();
+    m_target.set(_x, _y, _z);
+    m_target.normalize();
     m_dirty = true;
 }
 
@@ -194,7 +194,7 @@ FVec3& SVCamCtrlProj::getUp(){
 }
 
 FVec3& SVCamCtrlProj::getDirection(){
-    return m_direction;
+    return m_target;
 }
 
 void SVCamCtrlProj::reset(){

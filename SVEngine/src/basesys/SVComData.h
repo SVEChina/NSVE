@@ -32,8 +32,6 @@ namespace sv {
         
         SVFaceDataMeshPtr getFaceDataMesh();
         
-        SVRenderMeshPtr generateAdaptScreenMesh(f32 _fromW, f32 _fromH, f32 _toW, f32 _toH);
-        
         SVRenderMeshPtr generatePatchMesh(FVec3 &_corner00, FVec3 &_corner10, FVec3 &_corner01, FVec3 &_corner11, s32 _rx = 2, s32 _ry = 2);
         
         SVRenderMeshPtr m_screenMesh;

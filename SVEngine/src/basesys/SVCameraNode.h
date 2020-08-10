@@ -23,12 +23,17 @@ namespace sv {
         
         ~SVCameraNode();
         
+        //初始化
         void init();
         
+        //销毁
         void destroy();
         
         //更新
         void update(f32 _dt);
+        
+        //强制更新
+        void updateForce();
         
         //重制默认矩阵
         void resetDefault();
@@ -56,14 +61,12 @@ namespace sv {
     protected:
         void _updateProj();
         
-        void _updateForce();
-        
         //位置
         FVec3 m_pos;
         //向上分量
         FVec3 m_up;
-        //方向
-        FVec3 m_direction;
+        //目标
+        FVec3 m_target;
         //距离
         f32 m_distance;
         //
