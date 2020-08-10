@@ -15,6 +15,7 @@
 #include "../file/SVFileMgr.h"
 #include "../basesys/SVBasicSys.h"
 #include "../basesys/SVConfig.h"
+#include "../basesys/SVCameraMgr.h"
 #include "../file/SVFileMgr.h"
 #include "../operate/SVOpBase.h"
 #include "../operate/SVOpCreate.h"
@@ -83,6 +84,17 @@ void SVInst::destroy() {
     m_svst = SV_ST_NULL;
 }
 
+void SVInst::resize(s32 _w,s32 _h) {
+    //相机重置size
+    if(m_pGlobalMgr && m_pGlobalMgr->m_pCameraMgr ) {
+        m_pGlobalMgr->m_pCameraMgr->resize(_w, _h);
+    }
+    //所有target重置大小
+    if(m_pGlobalMgr && m_pGlobalMgr->m_pRenderMgr ) {
+        m_pGlobalMgr->m_pRenderMgr->resize(_w, _h);
+    }
+}
+
 //创建渲染器
 SVRendererPtr SVInst::createRenderer(SV_R_CORE _type) {
     if(_type == E_R_METAL) {
@@ -99,7 +111,6 @@ SVRendererPtr SVInst::createRenderer(SV_R_CORE _type) {
 
 //销毁渲染器
 void SVInst::destroyRenderer() {
-    //
     if(m_pRE){
         m_pRE->clearRes();
         m_pRE->destroy();

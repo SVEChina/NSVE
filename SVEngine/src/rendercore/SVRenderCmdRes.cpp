@@ -83,24 +83,24 @@ void SVRCmdCreateTex::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
 }
 
 //
-SVRCmdCreateFbo::SVRCmdCreateFbo(SVRTargetPtr _target)
+SVRCmdCreateTarget::SVRCmdCreateTarget(SVRTargetPtr _target)
 :m_rtarget(_target){
     
 }
 
-SVRCmdCreateFbo::~SVRCmdCreateFbo(){
+SVRCmdCreateTarget::~SVRCmdCreateTarget(){
     m_rtarget = nullptr;
 }
 
-void SVRCmdCreateFbo::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
+void SVRCmdCreateTarget::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
     if(m_rtarget && _renderer) {
         SVRFboPtr t_rfbo = _renderer->createResFbo() ;
-        t_rfbo->m_logic_obj = m_rtarget;
-        m_rtarget->bindRes(t_rfbo);
-        //
-        t_rfbo->create(_renderer);
-        _renderer->addRes(t_rfbo);
-        SV_LOG_ERROR("sve create fbo end!\n");
+        if(t_rfbo) {
+            t_rfbo->m_logic_obj = m_rtarget;
+            m_rtarget->bindRes(t_rfbo);
+            t_rfbo->create(_renderer);
+            _renderer->addRes(t_rfbo);
+        }
     }
 }
 

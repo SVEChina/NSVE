@@ -9,6 +9,7 @@
 #define SV_RENDER_TARGET_H
 
 #include "../base/SVGBase.h"
+#include "../base/SVMat4.h"
 #include "SVRenderDeclare.h"
 #include <vector>
 
@@ -20,6 +21,7 @@ namespace sv {
 
     //
     struct SVTargetDsp {
+        //
         SVTargetDsp() {
             m_width = 512;
             m_height = 512;
@@ -52,8 +54,6 @@ namespace sv {
         
         SVRTargetPtr share();
         
-        void setRenderPath();
-        
         void resize(s32 _width,s32 _height);
         
         void render(SVRendererPtr _renderer);
@@ -62,11 +62,7 @@ namespace sv {
         
         void clearRenderCommand();
 
-    protected:
-        std::vector<SV_RSTREAM_TYPE> m_stream_quene;    //流序，流顺的设定就是渲染路径的设定
-        std::vector<SVRenderStreamPtr> m_stream_pool;
-        
-    public:
+        //
         void bindRes(SVRFboPtr _res);
 
         void unbindRes();
@@ -74,11 +70,24 @@ namespace sv {
         SVRFboPtr getResFbo();
         
         SVTargetDsp* getTargetDsp() { return &m_target_dsp; }
+        
+        void setRenderPath();
+        
+        void setVPMat(FMat4& _mat) {
+            m_vp_mat = _mat;
+        }
 
     protected:
+        std::vector<SV_RSTREAM_TYPE> m_stream_quene;    //流序，流顺的设定就是渲染路径的设定
+        
+        std::vector<SVRenderStreamPtr> m_stream_pool;
+        
         SVRFboPtr m_fbo;
         
         SVTargetDsp m_target_dsp;
+        
+    public:
+        FMat4 m_vp_mat;
     };
 
     

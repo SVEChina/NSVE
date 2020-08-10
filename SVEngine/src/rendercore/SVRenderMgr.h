@@ -33,7 +33,11 @@ namespace sv {
         
         void destroy();
         
+        void resize(s32 _w,s32 _h);
+        
         void setMainRT(SVRTargetPtr _rt);
+        
+        SVRTargetPtr getMainRT();
         
         void clear();
         
@@ -51,7 +55,6 @@ namespace sv {
         
         SVRTargetPtr getRTarget(cptr8 _name);
 
-    
     protected:
         void _sort();
         void _adapt();

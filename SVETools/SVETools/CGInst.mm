@@ -42,7 +42,7 @@ static CGInst *mInst;
 }
 
 -(void)cgInit{
-//    //创建SVE引擎
+    //创建SVE引擎
     [self initSVE];
     //创建UI系统
     [[CGUI getInst] cgInit:0];
@@ -82,20 +82,17 @@ static CGInst *mInst;
 /*
   Renderer Metal
  */
--(void)createRM:(id<MTLDevice>)_device drawable:(id<CAMetalDrawable>)_drawable {
+-(void)createMetal:(id<MTLDevice>)_device drawable:(id<CAMetalDrawable>)_drawable {
     if( m_pSVE ) {
         sv::SVRendererPtr t_renderer =m_pSVE->createRenderer(sv::E_R_METAL);
         sv::SVRendererMetalPtr t_r_metal = std::dynamic_pointer_cast<sv::SVRendererMetal>(t_renderer);
         if(t_r_metal) {
-            //渲染器初始化
-            SV_LOG_INFO("sve createRM begin! \n");
             t_r_metal->init(_device,_drawable,_drawable.texture);
-            SV_LOG_INFO("sve createRM end! \n");
         }
     }
 }
 
--(void)destroyRM {
+-(void)destroyMetal {
     if( m_pSVE ){
         m_pSVE->destroyRenderer();
     }
@@ -105,26 +102,35 @@ static CGInst *mInst;
  Renderer OpenGL
  */
 - (void)createGLWidth:(int)_w Height:(int)_h{
-    if( m_pSVE ) {
-        sv::SVRendererPtr t_re =m_pSVE->createRenderer(sv::E_R_GLES);
-        sv::SVRendererGLPtr t_re_gles = std::dynamic_pointer_cast<sv::SVRendererGL>(t_re);
-        if(t_re_gles) {
-            //渲染器初始化
-            t_re_gles->init(_w, _h);
-        }
-    }
+//    if( m_pSVE ) {
+//        sv::SVRendererPtr t_re =m_pSVE->createRenderer(sv::E_R_GLES);
+//        sv::SVRendererGLPtr t_re_gles = std::dynamic_pointer_cast<sv::SVRendererGL>(t_re);
+//        if(t_re_gles) {
+//            //渲染器初始化
+//            t_re_gles->init(_w, _h);
+//        }
+//    }
 }
 
 - (void)destroyGL{
-    if( m_pSVE ){
-        m_pSVE->destroyRenderer();
+//    if( m_pSVE ){
+//        m_pSVE->destroyRenderer();
+//    }
+}
+
+-(void)resizeWidth:(int)_w Height:_h {
+    //重置宽高
+    if(m_pSVE) {
+        //m_pSVE->resize(_w,_h);
     }
 }
 
 -(void)render {
     SV_LOG_ERROR("sve render begin!");
-    m_pSVE->updateSVE(0.33f);
-    m_pSVE->renderSVE();
+    if(m_pSVE) {
+        m_pSVE->updateSVE(0.33f);
+        m_pSVE->renderSVE();
+    }
     SV_LOG_ERROR("sve render end!");
 }
 

@@ -47,6 +47,7 @@ SVRendererMetalPtr SVRendererMetal::share() {
     return std::dynamic_pointer_cast<SVRendererMetal>(shareObject());
 }
 
+//metal渲染器初始化
 void SVRendererMetal::init(id<MTLDevice> _device,id<MTLDrawable> _target,id<MTLTexture> _targetTex) {
     m_pDevice = _device;
     if (m_pDevice == nil) {
@@ -56,18 +57,29 @@ void SVRendererMetal::init(id<MTLDevice> _device,id<MTLDrawable> _target,id<MTLT
         SV_LOG_INFO("don't support metal !");
         return ;
     }
-    //
+    //命令队列
     m_pCmdQueue = m_pDevice.newCommandQueue;
+    //库
     m_pLibrary = [m_pDevice newDefaultLibrary];
     //创建主target
     SVRTargetPtr t_target = MakeSharedPtr<SVRTarget>(mApp);
+    //创建描述
     SVTargetDsp* t_dsp = t_target->getTargetDsp();
+    t_dsp->m_target_num = 1;
+    t_dsp->m_width = s32(_targetTex.width);
+    t_dsp->m_height = s32(_targetTex.height);
+    t_dsp->m_use_depth = true;
+    t_dsp->m_use_stencil = true;
     t_dsp->m_oc_target = (__bridge_retained void*)_target;
     t_dsp->m_oc_texture = (__bridge_retained void*)_targetTex;
+    //创建RT
     SVDispatch::dispatchTargetCreate(mApp,t_target);
-    //设置主RTarget
+    //设置渲染路径
     t_target->setRenderPath();
+    //设置主RT
     mApp->getRenderMgr()->setMainRT(t_target);
+    //重置大小
+    mApp->resize(t_dsp->m_width,t_dsp->m_height);
 }
 
 //初始化

@@ -32,19 +32,23 @@
         //创建metal环境
         metalLayer = [CAMetalLayer layer];
         metalLayer.device = self.mDevice;
-        metalLayer.pixelFormat = MTLPixelFormatBGRA8Unorm;  //MTLPixelFormatBGRA8Unorm_sRGB
+        metalLayer.pixelFormat = MTLPixelFormatBGRA8Unorm;
         metalLayer.frame = frameRect;
         [self buildMetal];
     }
     return self;
-    
+}
+
+- (void)resizeSubviewsWithOldSize:(NSSize)oldSize {
+    [super resizeSubviewsWithOldSize:oldSize];
 }
 
 -(void)buildMetal {
-    id<CAMetalDrawable> drawable = [metalLayer nextDrawable];
     //创建渲染器,Metal渲染器。
-    [[CGInst getInst] createRM:self.mDevice drawable:drawable];
-    //
+    id<CAMetalDrawable> drawable = [metalLayer nextDrawable];
+    if(drawable) {
+        [[CGInst getInst] createMetal:self.mDevice drawable:drawable];
+    }
     [self setWantsLayer:true];
     [self setLayer:metalLayer];
     [self creatTimer];
@@ -90,35 +94,12 @@ static CVReturn renderCallback(CVDisplayLinkRef displayLink,
 }
 
 -(void)renderMetal {
-    if(false) {
-        //NSLog(@"sve renderMetal!");
-        id<CAMetalDrawable> drawable = [metalLayer nextDrawable];
-        id<MTLTexture> texture = drawable.texture;
-        //相当于rt
-        MTLRenderPassDescriptor  *passDescriptor = [MTLRenderPassDescriptor renderPassDescriptor];
-        passDescriptor.colorAttachments[0].texture = texture;
-        passDescriptor.colorAttachments[0].loadAction = MTLLoadActionClear;
-        passDescriptor.colorAttachments[0].storeAction = MTLStoreActionStore;
-        passDescriptor.colorAttachments[0].clearColor = MTLClearColorMake(1, 0, 0, 1);
-        //
-        id<MTLCommandBuffer> commandBuffer = [self.mCommandQueue commandBuffer];
-        id<MTLRenderCommandEncoder> commandEncoder = [commandBuffer renderCommandEncoderWithDescriptor:passDescriptor];
-        //
-        [commandEncoder endEncoding];
-        [commandBuffer presentDrawable:drawable];
-        [commandBuffer commit];
-    }else{
-        [[CGInst getInst] render];
-    }
-    
+    [[CGInst getInst] render];
 }
 
 - (void)drawRect:(NSRect)dirtyRect {
-    //NSLog(@"sve drawRect!");
-    //
     [super drawRect:dirtyRect];
-    //[self render];
-    // Drawing code here.
+    //NSLog(@"sve drawRect!");
 }
 
 @end

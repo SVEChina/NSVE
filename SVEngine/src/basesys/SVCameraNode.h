@@ -9,6 +9,8 @@
 #define SV_CAMERANODE_H
 
 #include "SVNode.h"
+#include "../event/SVEventProc.h"
+#include "../work/SVWorkDeclare.h"
 
 namespace sv {
     
@@ -31,16 +33,17 @@ namespace sv {
         //重制默认矩阵
         void resetDefault();
         
-        //重制
-        virtual void resetSize(f32 w, f32 h);
-
+        //设置宽高
+        void setSize(f32 w, f32 h);
+        
+        //设置远近裁剪
         void setZ(f32 _near, f32 _far);
+
+        //设置投影
+        void setProject();
         
-        f32 *getProjectMat();
-        
-        f32 *getCameraMat();
-        
-        f32 *getVPMat();
+        //设置正交
+        void setOrtho();
         
         FVec3& getPosition();
         
@@ -50,38 +53,36 @@ namespace sv {
         
         FMat4& getVPMatObj();
 
-        virtual void updateViewProj();
-
-        //
-        void setProject();
-        
-        void setOrtho();
-        
     protected:
-        //马上更新
+        void _updateProj();
+        
         void _updateForce();
-
-        //
+        
+        //位置
         FVec3 m_pos;
+        //向上分量
+        FVec3 m_up;
+        //方向
+        FVec3 m_direction;
+        //距离
+        f32 m_distance;
         //
         f32 m_znear;
         f32 m_zfar;
         f32 m_width;
         f32 m_height;
         f32 m_fovy;
+        
         //各种矩阵
         FMat4 m_mat_v;      //视矩阵
         FMat4 m_mat_p;      //投影矩阵
-        FMat4 m_mat_vp;     //乘积
+        FMat4 m_mat_vp;
         //
-        SVLockPtr m_resLock;
+        SVLockSpinPtr m_resLock;
         //
         bool m_dirty;
         bool m_is_ortho;
     };
-    
-
-    
     
 }//!namespace sv
 

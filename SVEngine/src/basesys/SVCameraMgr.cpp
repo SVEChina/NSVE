@@ -6,14 +6,10 @@
 //
 
 #include "SVCameraMgr.h"
-#include "../basesys/SVBasicSys.h"
 #include "../basesys/SVCameraNode.h"
 #include "../work/SVTdCore.h"
 #include "../rendercore/SVRenderMgr.h"
-#include "../rendercore/SVRenderer.h"
-#include "../rendercore/SVRenderTexture.h"
-#include "../rendercore/SVRenderScene.h"
-#include "../rendercore/SVRenderCmd.h"
+#include "../rendercore/SVRTarget.h"
 
 using namespace sv;
 
@@ -31,11 +27,11 @@ void SVCameraMgr::init() {
     //主相机
     m_mainCamera = MakeSharedPtr<SVCameraNode>(mApp);
     m_mainCamera->init();
-    //m_mainCamera->setProject();
+    m_mainCamera->setProject();
     //ui相机
     m_uiCamera = MakeSharedPtr<SVCameraNode>(mApp);
     m_uiCamera->init();
-    //m_uiCamera->ortho();
+    m_uiCamera->setOrtho();
 }
 
 //
@@ -55,38 +51,14 @@ void SVCameraMgr::update(f32 dt) {
      //主相机更新
     if(m_mainCamera){
         m_mainCamera->update(dt);
-        //
-        SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
-        SVRendererPtr t_renderer = mApp->getRenderer();
-        if(t_rs && t_renderer) {
-//            //这不知道要写到哪，先写这了. 晓帆
-//            FMat4 t_vm = m_mainCamera->getViewMatObj();
-//            FMat4 t_pm = m_mainCamera->getProjectMatObj();
-//            SVRenderCmdPushVPMatPtr t_cmd = MakeSharedPtr<SVRenderCmdPushVPMat>(t_vm,t_pm);
-//            t_cmd->setRenderer(t_renderer);
-//            t_cmd->mTag = "main_camera_begin";
-//            t_rs->pushRenderCmd(RST_SCENE_BEGIN, t_cmd);
+        SVRTargetPtr t_main_rt = mApp->getRenderMgr()->getMainRT();
+        if( t_main_rt ) {
+            t_main_rt->setVPMat(m_mainCamera->getVPMatObj());
         }
     }
     //更新ui相机
     if(m_uiCamera) {
         m_uiCamera->update(dt);
-//        //
-//        SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
-//        SVRendererPtr t_renderer = mApp->getRenderer();
-//        if(t_rs && t_renderer) {
-//            FMat4 t_vm = m_uiCamera->getViewMatObj();
-//            FMat4 t_pm = m_uiCamera->getProjectMatObj();
-//            SVRenderCmdPushVPMatPtr t_cmd_push_ui = MakeSharedPtr<SVRenderCmdPushVPMat>(t_vm,t_pm);
-//            t_cmd_push_ui->setRenderer(t_renderer);
-//            t_cmd_push_ui->mTag = "ui_camera_begin";
-//            t_rs->pushRenderCmd(RST_UI_BEGIN, t_cmd_push_ui);
-//            //
-//            SVRenderCmdPopVPMatPtr t_cmd_pop_ui = MakeSharedPtr<SVRenderCmdPopVPMat>();
-//            t_cmd_pop_ui->setRenderer(t_renderer);
-//            t_cmd_pop_ui->mTag = "ui_camera_end";
-//            t_rs->pushRenderCmd(RST_UI_END, t_cmd_pop_ui);
-//        }
     }
 }
 
@@ -99,10 +71,10 @@ SVCameraNodePtr SVCameraMgr::getUICamera() {
 }
 
 void SVCameraMgr::resize(f32 _w,f32 _h) {
-//    if(m_mainCamera){
-//        m_mainCamera->resetCamera(_w,_h);
-//    }
-//    if(m_uiCamera){
-//        m_uiCamera->resetCamera(_w,_h);
-//    }
+    if(m_mainCamera){
+        m_mainCamera->setSize(_w,_h);
+    }
+    if(m_uiCamera){
+        m_uiCamera->setSize(_w,_h);
+    }
 }

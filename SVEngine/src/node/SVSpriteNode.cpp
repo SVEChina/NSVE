@@ -33,7 +33,10 @@ SVSpriteNode::SVSpriteNode(SVInstPtr _app)
     setSize(1.9f,1.9f);
     //
     if(m_surface) {
-        m_surface->m_tbl->addParam("matw",m_localMat);
+        FMat4 t_mat;
+        t_mat.setIdentity();
+        m_surface->m_tbl->addParam("matw",t_mat);
+        m_surface->m_tbl->addParam("matvp",t_mat);
     }
 }
 

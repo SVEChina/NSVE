@@ -82,19 +82,19 @@ void SVGlobalMgr::init() {
 //    m_pEventMgr = MakeSharedPtr<SVEventMgr>(mApp);
 //    m_pEventMgr->init();
 //    //基础系统
-//    m_pBasicSys = MakeSharedPtr<SVBasicSys>(mApp.get());
+//    m_pBasicSys = MakeSharedPtr<SVBasicSys>(mApp));
 //    m_pBasicSys->init();
 //    //
-//    m_pPythonSys = MakeSharedPtr<SVPythonSys>(mApp.get());
+//    m_pPythonSys = MakeSharedPtr<SVPythonSys>(mApp));
 //    m_pPythonSys->init();
-//    //相机系统
-//    m_pCameraMgr = MakeSharedPtr<SVCameraMgr>(mApp.get());
-//    m_pCameraMgr->init();
+    //相机系统
+    m_pCameraMgr = MakeSharedPtr<SVCameraMgr>(mApp);
+    m_pCameraMgr->init();
 //    //灯光系统
-//    m_pLightSys = MakeSharedPtr<SVLightSys>(mApp.get());
+//    m_pLightSys = MakeSharedPtr<SVLightSys>(mApp);
 //    m_pLightSys->init();
 //    //组件系统
-//    m_pModuleSys = MakeSharedPtr<SVModuleSys>(mApp.get());
+//    m_pModuleSys = MakeSharedPtr<SVModuleSys>(mApp));
 //    m_pModuleSys->init();
     //纹理管理器初始化
     m_pTexMgr = MakeSharedPtr<SVTexMgr>(mApp);
@@ -135,12 +135,12 @@ void SVGlobalMgr::destroy() {
 //        m_pDetectMgr->destroy();
 //        SV_LOG_ERROR("SVDetectMgr:destroy sucess");
 //    }
-//    //相机析构
-//    if (m_pCameraMgr) {
-//        //要先析构相机上的节点，才能析构场景
-//        m_pCameraMgr->destroy();
-//        SV_LOG_ERROR("SVCameraMgr:destroy sucess");
-//    }
+    //相机析构
+    if (m_pCameraMgr) {
+        //要先析构相机上的节点，才能析构场景
+        m_pCameraMgr->destroy();
+        SV_LOG_ERROR("SVCameraMgr:destroy sucess");
+    }
     //场景析构
     if (m_pSceneMgr) {
         //场景析够(场景虽然也是节点 但是需要单独管理,因为节点需要挂在场景上,所以在节点没析够前,场景不能析构掉)
@@ -222,12 +222,16 @@ void SVGlobalMgr::update(f32 dt) {
 //    timeTag(false,"model cost");
 //    m_pPhysicSys->update(dt);             //物理更新
 //    timeTag(false,"physics cost");
-//    m_pCameraMgr->update(dt);           //相机更新(节点系统)
-//    timeTag(false,"camera cost");
+    if(m_pCameraMgr) {
+        //相机更新
+        m_pCameraMgr->update(dt);
+        timeTag(false,"camera cost");
+    }
 //    m_pLightSys->update(dt);            //灯光系统更新
 //    timeTag(false,"light cost");
     if(m_pSceneMgr) {
-        m_pSceneMgr->update(dt);            //场景更新(节点系统)
+        //场景更新(节点系统)
+        m_pSceneMgr->update(dt);
         timeTag(false,"scene cost");
     }
 //    m_pDeformSys->update(dt);           //变形更新

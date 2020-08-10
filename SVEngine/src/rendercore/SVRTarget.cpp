@@ -19,6 +19,7 @@ using namespace sv;
 SVRTarget::SVRTarget(SVInstPtr _app)
 :SVGBaseEx(_app)
 ,m_fbo(nullptr){
+    m_vp_mat.setIdentity();
     m_stream_pool.resize(E_RSM_MAX);
     for(s32 i=0;i<E_RSM_MAX;i++) {
         m_stream_pool[i] = MakeSharedPtr<SVRenderStream>();
@@ -38,6 +39,7 @@ SVRTargetPtr SVRTarget::share() {
 }
 
 void SVRTarget::setRenderPath() {
+    //设置渲染路径的代替接口
     m_stream_quene.push_back(E_RSM_SOLID);
     m_stream_pool[E_RSM_SOLID]->setValid();
 }

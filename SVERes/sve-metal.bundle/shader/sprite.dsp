@@ -9,7 +9,8 @@
             {
                 "bufID" : 1,
                 "tbl" : [
-                            { "name" : "matw", "type" : "fmat4", "value" : "null" }
+                            { "name" : "matw", "type" : "fmat4", "value" : "null" },
+                            { "name" : "matvp", "type" : "fmat4", "value" : "null" }
                         ]
             }
         ]

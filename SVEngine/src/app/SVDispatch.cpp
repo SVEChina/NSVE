@@ -48,7 +48,7 @@ void SVDispatch::dispatchTextureCreate(SVInstPtr _app,SVTexturePtr _tex) {
 
 void SVDispatch::dispatchTargetCreate(SVInstPtr _app,SVRTargetPtr _target) {
     if(_target) {
-        SVRCmdCreateFboPtr t_cmd = MakeSharedPtr<SVRCmdCreateFbo>(_target);
+        SVRCmdCreateTargetPtr t_cmd = MakeSharedPtr<SVRCmdCreateTarget>(_target);
         _app->getRenderMgr()->pushRCmdCreate(t_cmd);
     }
 }
@@ -85,15 +85,20 @@ void SVDispatch::dispatchMeshDraw(SVInstPtr _app,SVRenderMeshPtr _mesh,s32 _mtlI
 //投递rendermesh
 void SVDispatch::dispatchMeshDraw(SVInstPtr _app,SVRenderMeshPtr _mesh,cptr8 _mtlname,SVSurfacePtr _surface) {
     SVRendererPtr t_renderer = _app->getRenderer();
-    if(t_renderer) {
-        //
+    SVRTargetPtr t_target = _app->getRenderMgr()->getMainRT();
+    if(t_renderer && t_target) {
+        //投递到主目标，在这里更新VP矩阵
+        if(_surface) {
+            _surface->setParam("matvp", t_target->m_vp_mat);
+        }
+        //投递命令
         SVMtlCorePtr t_mtl = _app->getMtlLib()->getMtl(_mtlname);
         if(t_mtl) {
             SVRCmdNorPtr t_cmd_nor = MakeSharedPtr<SVRCmdNor>();
             t_cmd_nor->setMesh(_mesh);
             t_cmd_nor->setMaterial(t_mtl);
             t_cmd_nor->setSurface(_surface);
-            _app->getRenderMgr()->pushRCmd(t_cmd_nor,E_RSM_SOLID);
+            t_target->pushRenderCommand(t_cmd_nor,E_RSM_SOLID);
         }
     }
 }
@@ -102,6 +107,17 @@ void SVDispatch::dispatchMeshDraw(SVInstPtr _app,SVRenderMeshPtr _mesh,cptr8 _mt
 void SVDispatch::dispatchMeshDraw(SVInstPtr _app,SVRenderMeshPtr _mesh,s32 _mtlID,SVSurfacePtr _surface,SVRTargetPtr _target) {
     SVRendererPtr t_renderer = _app->getRenderer();
     if(t_renderer && _target) {
-        //_target->pushRenderCommand(<#SVRenderCmdPtr _rcmd#>);
+        //投递到Target，在这里更新VP矩阵
+        if(_surface) {
+            _surface->setParam("matvp", _target->m_vp_mat);
+        }
+        SVMtlCorePtr t_mtl = _app->getMtlLib()->getMtl(_mtlID);
+        if(t_mtl) {
+            SVRCmdNorPtr t_cmd_nor = MakeSharedPtr<SVRCmdNor>();
+            t_cmd_nor->setMesh(_mesh);
+            t_cmd_nor->setMaterial(t_mtl);
+            t_cmd_nor->setSurface(_surface);
+            _target->pushRenderCommand(t_cmd_nor,E_RSM_SOLID);
+        }
     }
 }

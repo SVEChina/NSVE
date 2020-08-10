@@ -50,8 +50,16 @@ void SVRenderMgr::destroy() {
     clear();
 }
 
+void SVRenderMgr::resize(s32 _w,s32 _h) {
+    
+}
+
 void SVRenderMgr::setMainRT(SVRTargetPtr _rt) {
     m_mainRT = _rt;
+}
+
+SVRTargetPtr SVRenderMgr::getMainRT() {
+    return m_mainRT;
 }
 
 void SVRenderMgr::addRTarget(SVRTargetPtr _rt,bool _pre) {

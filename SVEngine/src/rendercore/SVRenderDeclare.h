@@ -89,7 +89,7 @@ namespace sv {
     DECLARE_SHAREPTR(SVRCmdCreateMesh);
     DECLARE_SHAREPTR(SVRCmdCreateShader);
     DECLARE_SHAREPTR(SVRCmdCreateTex);
-    DECLARE_SHAREPTR(SVRCmdCreateFbo);
+    DECLARE_SHAREPTR(SVRCmdCreateTarget);
 
     //renderobject
     DECLARE_SHAREPTR(SVRRes);

@@ -29,21 +29,22 @@ namespace sv {
         SVInst();
         //
         virtual ~SVInst();
-        
+        //
         SVInstPtr share();
-        
         //初始化SV
-        virtual void init();
+        void init();
         //销毁SV
-        virtual void destroy();
+        void destroy();
+        //重置大小
+        void resize(s32 _w,s32 _h);
         //创建渲染器
         SVRendererPtr createRenderer(SV_R_CORE _type);
         //销毁渲染器
         void destroyRenderer();
         //开始SV
-        virtual void start();
+        void start();
         //停止SV
-        virtual void stop();
+        void stop();
         //增加资源路径
         void addRespath(cptr8 _path);
         //更新引擎
