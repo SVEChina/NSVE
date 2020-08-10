@@ -14,29 +14,25 @@
 //2D动画材质
 namespace sv {
     
-    
+    class SVMtl2D : public SVMtlCore {
+    public:
+        SVMtl2D(SVInstPtr _app, cptr8 _shader);
         
-        class SVMtl2D : public SVMtlCore {
-        public:
-            SVMtl2D(SVInstPtr _app, cptr8 _shader);
-            
-            SVMtl2D(SVMtl2D *_mtl);
-            
-            ~SVMtl2D();
-            
-            virtual void reset();
-            
-            virtual SVMtlCorePtr clone();
-            
-            void setAlpha(f32 _alpha);
-            
-        protected:
-            virtual void _submitUniform(SVRendererPtr _render);
-            f32  m_alpha;
-        };
+        SVMtl2D(SVMtl2D *_mtl);
+        
+        ~SVMtl2D();
+        
+        virtual void reset();
+        
+        virtual SVMtlCorePtr clone();
+        
+        void setAlpha(f32 _alpha);
+        
+    protected:
+        virtual void _submitUniform(SVRendererPtr _render);
+        f32  m_alpha;
+    };
 
-    
-    
 }//!namespace sv
 
 

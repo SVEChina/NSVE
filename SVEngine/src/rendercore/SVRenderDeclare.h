@@ -21,11 +21,11 @@ namespace sv {
     DECLARE_SHAREPTR(SVRMeshRes);
     DECLARE_SHAREPTR(SVRShader);
     DECLARE_SHAREPTR(SVRDPState);
+    DECLARE_SHAREPTR(SVREnv);
 
     //渲染器
     DECLARE_SHAREPTR(SVRenderer);
     DECLARE_SHAREPTR(SVRenderState);
-    DECLARE_SHAREPTR(SVRenderTexture);
     DECLARE_SHAREPTR(SVRTech);
 
     //gl
@@ -58,7 +58,6 @@ namespace sv {
     DECLARE_SHAREPTR(SVRendererVK);
     
     //渲染框架
-    DECLARE_SHAREPTR(SVFboObject);
     DECLARE_SHAREPTR(SVRTarget);
     DECLARE_SHAREPTR(SVRenderScene);
     DECLARE_SHAREPTR(SVRenderPipline);
@@ -75,8 +74,6 @@ namespace sv {
     DECLARE_SHAREPTR(SVRCmdPassCollection);
     DECLARE_SHAREPTR(SVRCmdTargetResize);
     DECLARE_SHAREPTR(SVRCmdAdapt);
-    DECLARE_SHAREPTR(SVRenderCmdStreamOutNor);
-    DECLARE_SHAREPTR(SVRenderCmdStreamOutIOS);
     DECLARE_SHAREPTR(SVRCmdCreate);
     DECLARE_SHAREPTR(SVRenderCmdGeo);
     DECLARE_SHAREPTR(SVRCmdLine);

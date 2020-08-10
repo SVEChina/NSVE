@@ -8,8 +8,8 @@
 #ifndef SV_RENDERSCENE_H
 #define SV_RENDERSCENE_H
 
-#include "SVRenderTexture.h"
 #include "SVRenderStream.h"
+#include "../base/SVGBase.h"
 #include "../base/SVStack.h"
 
 namespace sv {

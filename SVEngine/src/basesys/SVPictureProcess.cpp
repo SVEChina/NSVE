@@ -16,7 +16,6 @@
 #include "../mtl/SVTexMgr.h"
 #include "../mtl/SVTexture.h"
 #include "../mtl/SVMtlBasedOn.h"
-#include "../rendercore/SVRenderTexture.h"
 #include "../rendercore/SVRenderMgr.h"
 #include "../rendercore/SVRenderer.h"
 #include "filter/SVRGBToneCurveFilter.h"

@@ -109,19 +109,7 @@ namespace sv {
         FMat4 m_vp_mat;
     };
 
-//    //环境target
-//    class SVRTargetEnv : public SVGBaseEx {
-//    public:
-//        SVRTargetEnv(SVInstPtr _app);
-//
-//        ~SVRTargetEnv();
-//
-//    };
-//
-//    //直接渲染，就是直接渲染到环境target
-//
-//    //间接渲染，就是构建自己的主RT，然后渲染到环境Target上
-    
+
 }//!namespace sv
 
 

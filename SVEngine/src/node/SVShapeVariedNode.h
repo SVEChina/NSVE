@@ -40,7 +40,7 @@ namespace sv {
     protected:
         typedef SVArray<SVPassPtr> PASSPOOL;
         PASSPOOL m_passPool;
-        SVRenderTexturePtr m_fbo;
+        //SVRenderTexturePtr m_fbo;
     };
         
     

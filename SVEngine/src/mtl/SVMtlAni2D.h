@@ -14,34 +14,30 @@
 //2D动画材质
 namespace sv {
     
-    
-        
-        class SVMtlAni2D : public SVMtlCore {
-        public:
-            enum SVMTLBLENDMODE{
-                SV_MTL_BLENDMODE_NORMAL = 0,
-                SV_MTL_BLENDMODE_ADDITIVE,
-                SV_MTL_BLENDMODE_MULTIPLY,
-                SV_MTL_BLENDMODE_SCREEN
-            };
-            SVMtlAni2D(SVInstPtr _app);
-            
-            SVMtlAni2D(SVMtlAni2D *_mtl);
-            
-            ~SVMtlAni2D();
-            
-            virtual void reset();
-            
-            virtual SVMtlCorePtr clone();
-            
-            void setBlendMode(SVMTLBLENDMODE _blendMode);
-            
-        protected:
-            virtual void _submitUniform(SVRendererPtr _render);
+    class SVMtlAni2D : public SVMtlCore {
+    public:
+        enum SVMTLBLENDMODE{
+            SV_MTL_BLENDMODE_NORMAL = 0,
+            SV_MTL_BLENDMODE_ADDITIVE,
+            SV_MTL_BLENDMODE_MULTIPLY,
+            SV_MTL_BLENDMODE_SCREEN
         };
+        SVMtlAni2D(SVInstPtr _app);
+        
+        SVMtlAni2D(SVMtlAni2D *_mtl);
+        
+        ~SVMtlAni2D();
+        
+        virtual void reset();
+        
+        virtual SVMtlCorePtr clone();
+        
+        void setBlendMode(SVMTLBLENDMODE _blendMode);
+        
+    protected:
+        virtual void _submitUniform(SVRendererPtr _render);
+    };
 
-    
-    
 }//!namespace sv
 
 

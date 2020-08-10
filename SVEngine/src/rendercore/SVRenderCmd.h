@@ -78,12 +78,12 @@ namespace sv {
 
         virtual void render(SVRendererPtr _renderer,SVRTargetPtr _target);
         
-        void setFbo(SVRenderTexturePtr _fbo);
+        //void setFbo(SVRenderTexturePtr _fbo);
         
         void setTexture(SVTexturePtr _tex);
         
     protected:
-        SVRenderTexturePtr m_fbo;
+        //SVRenderTexturePtr m_fbo;
         
         SVTexturePtr m_tex;
     };
@@ -97,14 +97,14 @@ namespace sv {
         
         virtual void render(SVRendererPtr _renderer,SVRTargetPtr _target);
         
-        void setFbo(SVRenderTexturePtr _fbo);
+        //void setFbo(SVRenderTexturePtr _fbo);
         
         void setTexture(SVTexturePtr _tex);
         
         void addMtlMesh(SVMtlCorePtr _mtl ,SVRenderMeshPtr _mesh);
         
     protected:
-        SVRenderTexturePtr m_fbo;
+        //SVRenderTexturePtr m_fbo;
         
         SVTexturePtr m_tex;
         

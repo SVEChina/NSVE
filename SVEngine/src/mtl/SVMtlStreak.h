@@ -12,29 +12,26 @@
 
 namespace sv {
     
-    
+    class SVMtlStreak : public SVMtlADFilterBase {
+    public:
+        SVMtlStreak(SVInstPtr _app);
         
-        class SVMtlStreak : public SVMtlADFilterBase {
-        public:
-            SVMtlStreak(SVInstPtr _app);
-            
-            SVMtlStreak(SVMtlStreak *_mtl);
-            
-            ~SVMtlStreak();
-            
-            virtual void reset();
-            
-            virtual SVMtlCorePtr clone();
-            
-            void update(f32 dt);
-        protected:
-            virtual void _submitUniform(SVRendererPtr _render);
-            void _resetTime();
-            f32 m_lerp;
-        };
+        SVMtlStreak(SVMtlStreak *_mtl);
+        
+        ~SVMtlStreak();
+        
+        virtual void reset();
+        
+        virtual SVMtlCorePtr clone();
+        
+        void update(f32 dt);
+        
+    protected:
+        virtual void _submitUniform(SVRendererPtr _render);
+        void _resetTime();
+        f32 m_lerp;
+    };
 
-    
-    
 }//!namespace sv
 
 #endif //SV_MTLSTREAK_H

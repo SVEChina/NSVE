@@ -49,7 +49,6 @@ SVFrameOutTex::SVFrameOutTex(SVInstPtr _app)
 }
 
 SVFrameOutTex::~SVFrameOutTex(){
-    m_fbo = nullptr;
     m_pMtl = nullptr;
     m_pMesh= nullptr;
 }

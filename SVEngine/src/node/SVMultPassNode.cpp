@@ -13,7 +13,6 @@
 #include "../rendercore/SVRenderMesh.h"
 #include "../rendercore/SVRenderMgr.h"
 #include "../rendercore/SVRenderObject.h"
-#include "../rendercore/SVRenderTexture.h"
 #include "../rendercore/SVRenderCmd.h"
 #include "../rendercore/SVRenderScene.h"
 #include "../rendercore/SVRenderer.h"
@@ -31,7 +30,6 @@ SVMultPassNode::SVMultPassNode(SVInstPtr _app)
 }
 
 SVMultPassNode::~SVMultPassNode() {
-    m_fbo = nullptr;
 }
 
 void SVMultPassNode::create(s32 _w,s32 _h) {
@@ -39,13 +37,12 @@ void SVMultPassNode::create(s32 _w,s32 _h) {
     //mApp->getRenderMgr()->pushRCmdCreate(m_fbo);
 }
 
-void SVMultPassNode::setFbo(SVRenderTexturePtr _fbo){
-    m_fbo = _fbo;
-}
+//void SVMultPassNode::setFbo(SVRenderTexturePtr _fbo){
+//    m_fbo = _fbo;
+//}
 
 void SVMultPassNode::destroy() {
     m_passPool.destroy();
-    m_fbo = nullptr;
 }
 
 void SVMultPassNode::update(f32 dt) {

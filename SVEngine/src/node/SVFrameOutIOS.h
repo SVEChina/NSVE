@@ -42,7 +42,7 @@ namespace sv {
             virtual void* getData();
             
         protected:
-            SVRenderTexturePtr m_outStreamFbo;
+            //SVRenderTexturePtr m_outStreamFbo;
             SVDataSwapPtr m_dataswap;
             SVRenderMeshPtr m_mesh;
             cb_out_stream m_pOutStreamCB;

@@ -16,7 +16,6 @@
 #include "../mtl/SVTexMgr.h"
 #include "../mtl/SVMtlCore.h"
 #include "../mtl/SVTexture.h"
-#include "../rendercore/SVRenderTexture.h"
 #include "../rendercore/SVRenderMgr.h"
 #include "../rendercore/SVRenderCmd.h"
 #include "../rendercore/SVRenderScene.h"
@@ -33,7 +32,6 @@ using namespace sv;
 SVARAnchor::SVARAnchor(SVInstPtr _app)
 :SVModuleBase(_app){
     m_plane_dis = 0.3f;
-    m_fbo = nullptr;
     m_pTex = nullptr;
     m_pRenderObj = nullptr;
     m_mtl = nullptr;
@@ -43,7 +41,6 @@ SVARAnchor::SVARAnchor(SVInstPtr _app)
 }
 
 SVARAnchor::~SVARAnchor(){
-    m_fbo = nullptr;
     m_pTex = nullptr;
     m_pRenderObj = nullptr;
     m_mtl = nullptr;

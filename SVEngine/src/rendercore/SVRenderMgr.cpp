@@ -24,11 +24,12 @@ using namespace sv;
 
 SVRenderMgr::SVRenderMgr(SVInstPtr _app)
 :SVGBaseEx(_app) {
+    m_renderEnv = nullptr;
     m_mainRT = nullptr;
     m_preRT.clear();
     m_afterRT.clear();
-    m_renderLock = MakeSharedPtr<SVLock>();
-    m_logicLock = MakeSharedPtr<SVLock>();
+    m_renderLock = MakeSharedPtr<SVLockSpin>();
+    m_logicLock = MakeSharedPtr<SVLockSpin>();
     m_adaptMode = 0;
     m_stream_create = nullptr;
     m_stream_destroy = nullptr;
@@ -37,6 +38,8 @@ SVRenderMgr::SVRenderMgr(SVInstPtr _app)
 SVRenderMgr::~SVRenderMgr() {
     m_logicLock = nullptr;
     m_renderLock = nullptr;
+    m_renderEnv = nullptr;
+    m_mainRT = nullptr;
 }
 
 void SVRenderMgr::init() {
@@ -51,7 +54,11 @@ void SVRenderMgr::destroy() {
 }
 
 void SVRenderMgr::resize(s32 _w,s32 _h) {
+    m_renderLock->lock();
+    //
     
+    //
+    m_renderLock->unlock();
 }
 
 void SVRenderMgr::setMainRT(SVRTargetPtr _rt) {
@@ -81,23 +88,39 @@ void SVRenderMgr::render(){
     if(!t_renderer){
         return;
     }
+    m_renderLock->lock();
     if( mApp->m_ctx && mApp->m_ctx->activeContext() ) {
         //激活
         //创建流
         if(m_stream_create) {
             m_stream_create->render(t_renderer,m_mainRT);
         }
-        //前向RT
-        for(s32 i=0;i<m_preRT.size();i++) {
-            m_preRT[i]->render( t_renderer);
-        }
-        //中间RT
-        if( m_mainRT ) {
-            m_mainRT->render( t_renderer);
-        }
-        //后向RT
-        for(s32 i=0;i<m_afterRT.size();i++) {
-            m_afterRT[i]->render(  t_renderer);
+        if(m_renderEnv) {
+//            //前向RT
+//            for(s32 i=0;i<m_preRT.size();i++) {
+//                m_preRT[i]->render( t_renderer);
+//            }
+//            //中间RT
+//            if( m_mainRT ) {
+//                m_mainRT->render( t_renderer);
+//            }
+//            //后向RT
+//            for(s32 i=0;i<m_afterRT.size();i++) {
+//                m_afterRT[i]->render(  t_renderer);
+//            }
+        }else{
+            //前向RT
+            for(s32 i=0;i<m_preRT.size();i++) {
+                m_preRT[i]->render( t_renderer);
+            }
+            //中间RT
+            if( m_mainRT ) {
+                m_mainRT->render( t_renderer);
+            }
+            //后向RT
+            for(s32 i=0;i<m_afterRT.size();i++) {
+                m_afterRT[i]->render(  t_renderer);
+            }
         }
         //销毁流
         if(m_stream_destroy) {
@@ -106,27 +129,43 @@ void SVRenderMgr::render(){
         //
         mApp->m_ctx->swap();
     }else{
-       //创建流
+        //创建流
         if(m_stream_create) {
             m_stream_create->render(t_renderer,m_mainRT);
         }
-        //前向RT
-        for(s32 i=0;i<m_preRT.size();i++) {
-            m_preRT[i]->render( t_renderer);
-        }
-        //中间RT
-        if( m_mainRT ) {
-            m_mainRT->render( t_renderer);
-        }
-        //后向RT
-        for(s32 i=0;i<m_afterRT.size();i++) {
-            m_afterRT[i]->render(  t_renderer);
+        if(m_renderEnv) {
+            //前向RT
+            for(s32 i=0;i<m_preRT.size();i++) {
+                m_preRT[i]->render( t_renderer);
+            }
+            //中间RT
+            if( m_mainRT ) {
+                m_mainRT->render( t_renderer);
+            }
+            //后向RT
+            for(s32 i=0;i<m_afterRT.size();i++) {
+                m_afterRT[i]->render(  t_renderer);
+            }
+        } else {
+            //前向RT
+            for(s32 i=0;i<m_preRT.size();i++) {
+                m_preRT[i]->render( t_renderer);
+            }
+            //中间RT
+            if( m_mainRT ) {
+                m_mainRT->render( t_renderer);
+            }
+            //后向RT
+            for(s32 i=0;i<m_afterRT.size();i++) {
+                m_afterRT[i]->render(  t_renderer);
+            }
         }
         //销毁流
         if(m_stream_destroy) {
             m_stream_destroy->render( t_renderer,m_mainRT);
         }
     }
+    m_renderLock->unlock();
 }
 
 void SVRenderMgr::_sort() {

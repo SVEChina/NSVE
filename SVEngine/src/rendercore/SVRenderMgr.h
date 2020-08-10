@@ -14,6 +14,7 @@
 #include "../base/SVPreDeclare.h"
 #include "../base/SVMat4d.h"
 #include "../base/SVStack.h"
+#include "../work/SVWorkDeclare.h"
 
 namespace sv {
     
@@ -57,7 +58,9 @@ namespace sv {
 
     protected:
         void _sort();
+        
         void _adapt();
+        
         s32 m_adaptMode;
         
         //资源创建流
@@ -65,8 +68,10 @@ namespace sv {
         //资源销毁流
         SVRenderStreamPtr m_stream_destroy;
         
-        SVLockPtr m_renderLock;
-        SVLockPtr m_logicLock;
+        SVLockSpinPtr m_renderLock;
+        SVLockSpinPtr m_logicLock;
+        //
+        SVREnvPtr m_renderEnv;  //渲染环境 用于外面对接的渲染目标
         //
         SVArray<SVRTargetPtr> m_preRT; //前向RT
         SVArray<SVRTargetPtr> m_afterRT; //后向RT

@@ -15,7 +15,6 @@
 //
 #include "../SVRenderMgr.h"
 #include "../SVRTarget.h"
-#include "../SVRenderTexture.h"
 #include "../SVRenderMesh.h"
 #include "../../app/SVInst.h"
 #include "../../app/SVGlobalParam.h"

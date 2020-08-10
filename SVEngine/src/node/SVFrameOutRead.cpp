@@ -17,7 +17,6 @@
 #include "../rendercore/SVRenderCmd.h"
 #include "../rendercore/SVRenderer.h"
 #include "../rendercore/SVRenderScene.h"
-#include "../rendercore/SVRenderCmdOut.h"
 #include "../mtl/SVTexMgr.h"
 #include "../mtl/SVTexture.h"
 #include "../mtl/SVMtlCore.h"
@@ -37,7 +36,7 @@ SVFrameOutRead::SVFrameOutRead(SVInstPtr _app)
 
 SVFrameOutRead::~SVFrameOutRead(){
     m_pDataSwap = nullptr;
-    m_fbo = nullptr;
+    //m_fbo = nullptr;
     m_pMtl = nullptr;
 }
 

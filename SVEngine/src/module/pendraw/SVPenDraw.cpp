@@ -16,7 +16,6 @@
 #include "../../mtl/SVTexMgr.h"
 #include "../../mtl/SVTexture.h"
 #include "../../event/SVOpEvent.h"
-#include "../../rendercore/SVRenderTexture.h"
 #include "../../rendercore/SVRenderMgr.h"
 #include "../../rendercore/SVRenderCmd.h"
 #include "../../rendercore/SVRenderScene.h"
@@ -55,8 +54,6 @@ SVPenDraw::SVPenDraw(SVInstPtr _app)
 SVPenDraw::~SVPenDraw() {
     m_curStroke = nullptr;
     m_lock = nullptr;
-    m_fbo1 = nullptr;
-    m_fbo2 = nullptr;
     m_pTex1 = nullptr;
     m_pTex2 = nullptr;
     m_mtl1 = nullptr;

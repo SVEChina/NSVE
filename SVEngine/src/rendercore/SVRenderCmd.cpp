@@ -6,17 +6,18 @@
 //
 
 #include "SVRenderCmd.h"
-#include "SVFboObject.h"
 #include "SVRenderScene.h"
-#include "SVRenderTexture.h"
 #include "SVRenderer.h"
 #include "SVRenderMesh.h"
 #include "SVRShader.h"
+#include "SVRFbo.h"
 #include "../mtl/SVMtlCore.h"
 #include "../mtl/SVTexMgr.h"
 #include "../mtl/SVTexture.h"
 #include "../mtl/SVShader.h"
 #include "../mtl/SVSurface.h"
+
+
 
 #include <sys/time.h>
 
@@ -97,20 +98,18 @@ void SVRCmdAdapt::render(SVRendererPtr _renderer,SVRTargetPtr _target){
 
 //渲染命令批次
 SVRCmdPass::SVRCmdPass() {
-    m_fbo = nullptr;
     m_tex = nullptr;
 }
 
 SVRCmdPass::~SVRCmdPass(){
-    m_fbo = nullptr;
     m_tex = nullptr;
     m_pMtl = nullptr;
     m_pMesh = nullptr;
 }
 
-void SVRCmdPass::setFbo(SVRenderTexturePtr _fbo) {
-    m_fbo = _fbo;
-}
+//void SVRCmdPass::setFbo(SVRenderTexturePtr _fbo) {
+//    m_fbo = _fbo;
+//}
 
 void SVRCmdPass::setTexture(SVTexturePtr _tex) {
     m_tex = _tex;
@@ -132,14 +131,14 @@ void SVRCmdPass::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
 }
 
 SVRCmdPassCollection::SVRCmdPassCollection(){
-    m_fbo = nullptr;
+    //m_fbo = nullptr;
     m_tex = nullptr;
     m_MtlArray.clear();
     m_MeshArray.clear();
 }
 
 SVRCmdPassCollection::~SVRCmdPassCollection(){
-    m_fbo = nullptr;
+    //m_fbo = nullptr;
     m_tex = nullptr;
     m_MtlArray.clear();
     m_MeshArray.clear();
@@ -164,9 +163,9 @@ void SVRCmdPassCollection::render(SVRendererPtr _renderer,SVRTargetPtr _target){
 //    }
 }
 
-void SVRCmdPassCollection::setFbo(SVRenderTexturePtr _fbo){
-    m_fbo = _fbo;
-}
+//void SVRCmdPassCollection::setFbo(SVRenderTexturePtr _fbo){
+//    m_fbo = _fbo;
+//}
 
 void SVRCmdPassCollection::setTexture(SVTexturePtr _tex){
     m_tex = _tex;

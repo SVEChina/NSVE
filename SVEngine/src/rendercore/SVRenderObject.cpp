@@ -11,10 +11,8 @@
 #include "../basesys/SVConfig.h"
 #include "../mtl/SVMtlCore.h"
 #include "../base/SVDataSwap.h"
-#include "SVFboObject.h"
 #include "../rendercore/SVRenderMesh.h"
 #include "../rendercore/SVRenderCmd.h"
-#include "../rendercore/SVRenderCmdOut.h"
 #include "../rendercore/SVRenderCmdGeo.h"
 
 using namespace sv;
