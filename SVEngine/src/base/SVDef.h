@@ -75,10 +75,13 @@ namespace sv {
     };
 
     //sv渲染器类型 renderer
-    enum SV_R_CORE {
-        E_R_GLES,
-        E_R_VUNKAN,
-        E_R_METAL
+    enum SV_R_ENV {
+        E_R_GLES_ANDORID,
+        E_R_VULKAN_ANDORID,
+        E_R_METAL_OSX,
+        E_R_GL_OSX,
+        E_R_METAL_IOS,
+        E_R_GLES_IOS
     };
 
     //sv渲染流类型
@@ -151,11 +154,14 @@ namespace sv {
     };
 
     //SV 支持的内置纹理种类
-    enum SVTEXINID {
+    enum SVINTEX {
         E_TEX_MAIN = 0,
         E_TEX_FILE,
         E_TEX_CAMERA,
         E_TEX_SHADOW,
+        E_TEX_GBUF_POS,
+        E_TEX_GBUF_NOR,
+        E_TEX_GBUF_COLOR,
         E_TEX_INSTREAM = 10,
         E_TEX_OUTSTREAM = 20,
         E_TEX_HELP0 = 21,

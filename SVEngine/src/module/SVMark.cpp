@@ -74,8 +74,8 @@ void SVMark::open(){
 //    m_actAlphaUnit->play();
 //    //
 //    SVActPositionPtr t_actPos = MakeSharedPtr<SVActPosition>(mApp);
-//    s32 t_w =  mApp->m_pGlobalParam->m_inner_width;
-//    s32 t_h =  mApp->m_pGlobalParam->m_inner_height;
+//    s32 t_w =  mApp->m_global_param.m_sv_width;
+//    s32 t_h =  mApp->m_global_param.m_sv_height;
 //    t_actPos->setMinPosition(FVec3(-t_w*0.4f, -t_h*0.4f, 0.0f));
 //    t_actPos->setMaxPosition(FVec3(t_w*0.4f, t_h*0.4f, 0.0f));
 //    t_actPos->setTime(m_appearTime);

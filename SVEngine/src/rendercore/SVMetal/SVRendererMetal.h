@@ -31,15 +31,15 @@ namespace sv {
         ~SVRendererMetal();
         
         SVRendererMetalPtr share();
+        
+        void init(s32 _w,s32 _h);
 
-        virtual void init(id<MTLDevice> _device,id<MTLDrawable> _target,id<MTLTexture> _targetTex);
-
-        //初始化
-        virtual void init(s32 _w,s32 _h);
+        void init(id<MTLDevice> _device,s32 _w,s32 _h);
+        
         //销毁
-        virtual void destroy();
+        void destroy();
         //重置大小
-        virtual void resize(s32 _w,s32 _h);
+        void resize(s32 _w,s32 _h);
 
         /*
          create

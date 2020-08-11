@@ -89,81 +89,28 @@ void SVRenderMgr::render(){
         return;
     }
     m_renderLock->lock();
-    if( mApp->m_ctx && mApp->m_ctx->activeContext() ) {
-        //激活
-        //创建流
-        if(m_stream_create) {
-            m_stream_create->render(t_renderer,m_mainRT);
-        }
-        if(m_renderEnv) {
-//            //前向RT
-//            for(s32 i=0;i<m_preRT.size();i++) {
-//                m_preRT[i]->render( t_renderer);
-//            }
-//            //中间RT
-//            if( m_mainRT ) {
-//                m_mainRT->render( t_renderer);
-//            }
-//            //后向RT
-//            for(s32 i=0;i<m_afterRT.size();i++) {
-//                m_afterRT[i]->render(  t_renderer);
-//            }
-        }else{
-            //前向RT
-            for(s32 i=0;i<m_preRT.size();i++) {
-                m_preRT[i]->render( t_renderer);
-            }
-            //中间RT
-            if( m_mainRT ) {
-                m_mainRT->render( t_renderer);
-            }
-            //后向RT
-            for(s32 i=0;i<m_afterRT.size();i++) {
-                m_afterRT[i]->render(  t_renderer);
-            }
-        }
-        //销毁流
-        if(m_stream_destroy) {
-            m_stream_destroy->render( t_renderer,m_mainRT);
-        }
-        //
-        mApp->m_ctx->swap();
-    }else{
-        //创建流
-        if(m_stream_create) {
-            m_stream_create->render(t_renderer,m_mainRT);
-        }
-        if(m_renderEnv) {
-            //前向RT
-            for(s32 i=0;i<m_preRT.size();i++) {
-                m_preRT[i]->render( t_renderer);
-            }
-            //中间RT
-            if( m_mainRT ) {
-                m_mainRT->render( t_renderer);
-            }
-            //后向RT
-            for(s32 i=0;i<m_afterRT.size();i++) {
-                m_afterRT[i]->render(  t_renderer);
-            }
-        } else {
-            //前向RT
-            for(s32 i=0;i<m_preRT.size();i++) {
-                m_preRT[i]->render( t_renderer);
-            }
-            //中间RT
-            if( m_mainRT ) {
-                m_mainRT->render( t_renderer);
-            }
-            //后向RT
-            for(s32 i=0;i<m_afterRT.size();i++) {
-                m_afterRT[i]->render(  t_renderer);
-            }
-        }
-        //销毁流
-        if(m_stream_destroy) {
-            m_stream_destroy->render( t_renderer,m_mainRT);
-        }
+    if( mApp->m_ctx && mApp->m_ctx->activeContext(t_renderer) ) {
+//        //激活,创建流
+//        if(m_stream_create) {
+//            m_stream_create->render(t_renderer,m_mainRT);
+//        }
+//        //前向RT
+//        for(s32 i=0;i<m_preRT.size();i++) {
+//            m_preRT[i]->render( t_renderer);
+//        }
+//        //中间RT
+//        if( m_mainRT ) {
+//            m_mainRT->render( t_renderer);
+//        }
+//        //后向RT
+//        for(s32 i=0;i<m_afterRT.size();i++) {
+//            m_afterRT[i]->render(  t_renderer);
+//        }
+//        //销毁流
+//        if(m_stream_destroy) {
+//            m_stream_destroy->render( t_renderer,m_mainRT);
+//        }
+        mApp->m_ctx->swap(t_renderer);
     }
     m_renderLock->unlock();
 }
@@ -174,61 +121,13 @@ void SVRenderMgr::_sort() {
 }
 
 void SVRenderMgr::_adapt() {
-//    if(m_pRenderer) {
-//        if(m_adaptMode == 0) {
-//            //形变 填充
-//            SVMtlCorePtr t_pMtl = MakeSharedPtr<SVMtlCore>(mApp, "screennor");
-//            t_pMtl->setTexture(0,E_TEX_MAIN);    //那第一张纹理
-//            t_pMtl->setBlendEnable(false);
-//            t_pMtl->setBlendState(MTL_BLEND_ONE,MTL_BLEND_ZERO);
-//            bool t_mirror = mApp->getConfig()->mirror;
-//            if( !t_mirror ) {
-//                t_pMtl->setTexcoordFlip(-1.0f, 1.0f);
-//            }else {
-//                t_pMtl->setTexcoordFlip(1.0f, 1.0f);
-//            }
-//            SVRCmdAdaptPtr t_cmd = MakeSharedPtr<SVRCmdAdapt>();
-//            t_cmd->mTag = "adaptscene";
-//            t_cmd->setRenderer(m_pRenderer);
-//            t_cmd->setClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-//            t_cmd->setWinSize(mApp->m_pGlobalParam->m_inner_width,mApp->m_pGlobalParam->m_inner_height);
-//            t_cmd->setMesh(mApp->getDataMgr()->m_screenMesh);
-//            t_cmd->setMaterial(t_pMtl->clone());
-//        }else if(m_adaptMode == 1) {
-//            //非形变 固定
-//
-//        }else if(m_adaptMode == 2) {
-//            //非形变 固定 内接
-//
-//        }else if(m_adaptMode == 3) {
-//            //非形变 固定 外接
-//        }
-//    }
 }
 
 void SVRenderMgr::clear() {
-    m_renderLock->lock();
-    m_renderLock->unlock();
 }
-
 
 //这里相当于准备数据
 void SVRenderMgr::swapData(){
-//    m_logicLock->lock();
-//    m_renderLock->lock();
-////    //交换全局(逻辑流,渲染流)
-////    if(m_pRenderScene && m_pRenderer){
-////        //准备的cache推送到流中
-////        for(s32 i=0;i<m_RStreamCache->m_cmdArray.size();i++){
-////            m_RStreamCache->m_cmdArray[i]->setRenderer(m_pRenderer);
-////            m_pRenderScene->pushCacheCmd(RST_BEGIN,m_RStreamCache->m_cmdArray[i]);
-////        }
-////        m_RStreamCache->clearRenderCmd();
-////        //交换管线
-////        m_pRenderScene->swapPipline();
-////    }
-//    m_renderLock->unlock();
-//    m_logicLock->unlock();
 }
 
 void SVRenderMgr::pushRCmdCreate(SVRenderCmdPtr _rcmd){

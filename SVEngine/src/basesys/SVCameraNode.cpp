@@ -59,7 +59,7 @@ void SVCameraNode::update(f32 _dt) {
         m_dirty = false;
         //更新相机矩阵
         m_mat_v = lookAt(m_pos,m_target,m_up);
-        if(mApp->m_rcore == E_R_METAL) {
+        if(mApp->m_rcore == E_R_METAL_OSX || mApp->m_rcore == E_R_METAL_IOS) {
             m_mat_v = transpose(m_mat_v);
         }
         //
@@ -72,7 +72,7 @@ void SVCameraNode::updateForce() {
     m_resLock->lock();
     //更新相机矩阵
     m_mat_v = lookAt(m_pos,m_target,m_up);
-    if(mApp->m_rcore == E_R_METAL) {
+    if(mApp->m_rcore == E_R_METAL_OSX || mApp->m_rcore == E_R_METAL_IOS) {
         m_mat_v = transpose(m_mat_v);
     }
     _updateProj();
@@ -85,14 +85,14 @@ void SVCameraNode::_updateProj() {
         m_mat_p = ortho(-m_width*0.5f,m_width*0.5f,
                         -m_height*0.5f,m_height*0.5f,
                         m_znear,m_zfar);
-        if(mApp->m_rcore == E_R_METAL) {
+        if(mApp->m_rcore == E_R_METAL_OSX || mApp->m_rcore == E_R_METAL_IOS) {
             m_mat_p = hardwareProjectionMetal(m_mat_p);
             m_mat_p = transpose(m_mat_p);
         }
     }else{
         f32 t_aspect = m_width/m_height;
         m_mat_p = perspective(m_fovy,t_aspect,m_znear,m_zfar);
-        if(mApp->m_rcore == E_R_METAL) {
+        if(mApp->m_rcore == E_R_METAL_OSX || mApp->m_rcore == E_R_METAL_IOS) {
             m_mat_p = hardwareProjectionMetal(m_mat_p);
             m_mat_p = transpose(m_mat_p);
         }

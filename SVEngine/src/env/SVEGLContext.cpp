@@ -13,7 +13,7 @@ using namespace sv;
 SVEGLContext::SVEGLContext(void* _window,void* _context,s32 _glversion)
 : SVCtxBase(_app) {
     m_Display = nullptr;
-    m_pConfigsList = nullptr;
+    m_configsList = nullptr;
     //离线环境
     m_pGLContext = nullptr;
     m_pGLSurface = nullptr;
@@ -25,11 +25,11 @@ SVEGLContext::SVEGLContext(void* _window,void* _context,s32 _glversion)
 }
 
 SVEGLContext::~SVEGLContext() {
-    if (m_pConfigsList) {
-        free(m_pConfigsList);
+    if (m_configsList) {
+        free(m_configsList);
     }
     destroyContext();
-    m_pConfigsList = nullptr;
+    m_configsList = nullptr;
 }
 
 void SVEGLContext::initGLES() {
@@ -154,7 +154,7 @@ bool SVEGLContext::active() {
     return false;
 }
 
-bool  SVEGLContext::swap(){
+bool  SVEGLContext::swap(SVRendererPtr _renderer){
     bool b = eglSwapBuffers(m_Display, m_pGLSurface);
     if (!b) {
         EGLint err = eglGetError();
@@ -234,7 +234,7 @@ EGLint SVEGLContext::resume(ANativeWindow* window) {
     return err;
 }
 
-bool SVEGLContext::activeContext(){
+bool SVEGLContext::activeContext(SVRendererPtr _renderer){
      if(!active()){
          SV_LOG_ERROR("SVEContext::active! ERROR");
          return false;

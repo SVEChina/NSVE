@@ -18,7 +18,7 @@ namespace sv {
             
             virtual ~SVTransCPU();
             
-            void init(s32 _w, s32 _h,f32 _angle,PICFORMATE _picformate,SVTEXINID _tt);
+            void init(s32 _w, s32 _h,f32 _angle,PICFORMATE _picformate,SVINTEX _tt);
             
             void destroy();
             

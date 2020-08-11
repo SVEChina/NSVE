@@ -208,8 +208,8 @@ void SVRFboMetal::unbind(SVRendererPtr _renderer) {
     SVRendererMetalPtr t_rm = std::dynamic_pointer_cast<SVRendererMetal>(_renderer);
     if(t_rm) {
         [m_cmdEncoder endEncoding];
-        [m_cmdBuffer presentDrawable:m_pTarget];
         [m_cmdBuffer commit];
+        [m_cmdBuffer presentDrawable:m_pTarget];
         t_rm->m_pCurEncoder = nullptr;
     }
 }

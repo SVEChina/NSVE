@@ -13,7 +13,7 @@ using namespace sv;
 #ifdef SV_IOS
 
 //设备上下文 真的不能随意切换啊 否则这这个设备上下文中创建的所有GL资源全部都失效
-SVCtxIOS::SVCtxIOS(void* _context,s32 _glversion)
+SVCtxIOSGLES::SVCtxIOSGLES(void* _context,s32 _glversion)
 :SVCtxBase() {
     m_glversion = _glversion;
     if(_context){
@@ -31,20 +31,16 @@ SVCtxIOS::SVCtxIOS(void* _context,s32 _glversion)
         }
         SV_LOG_INFO("create context ios share\n");
     }
-    activeContext();
+    //activeContext();
 }
 
-SVCtxIOS::~SVCtxIOS() {
+SVCtxIOSGLES::~SVCtxIOSGLES() {
     [EAGLContext setCurrentContext:nil];
     m_pGLContext = nil;
     SV_LOG_INFO("destroy context ios\n");
 }
 
-SVRendererPtr SVCtxIOS::createRenderer(SVInstPtr _handle) {
-    return nullptr;
-}
-
-bool SVCtxIOS::activeContext(){
+bool SVCtxIOSGLES::activeContext(SVRendererPtr _renderer){
     if(m_pGLContext){
         return [EAGLContext setCurrentContext:m_pGLContext];
     }
@@ -53,7 +49,7 @@ bool SVCtxIOS::activeContext(){
 }
 
 //交换场景
-bool SVCtxIOS::swap(){
+bool SVCtxIOSGLES::swap(SVRendererPtr _renderer){
     if(m_pGLContext){
         bool t_flag = [m_pGLContext presentRenderbuffer:GL_RENDERBUFFER];
         if(!t_flag){
@@ -74,16 +70,12 @@ SVCtxIOSMetal::SVCtxIOSMetal()
 SVCtxIOSMetal::~SVCtxIOSMetal() {
 }
 
-SVRendererPtr SVCtxIOSMetal::createRenderer(SVInstPtr _handle) {
-    return nullptr;
-}
-
-bool SVCtxIOSMetal::activeContext(){
+bool SVCtxIOSMetal::activeContext(SVRendererPtr _renderer){
     return false;
 }
 
 //交换场景
-bool SVCtxIOSMetal::swap(){
+bool SVCtxIOSMetal::swap(SVRendererPtr _renderer){
     return false;
 }
 

@@ -127,7 +127,7 @@ void SVBackGroundNode::setTexture(SVTexturePtr _tex) {
     m_useTexType = E_TEX_END;
 }
 
-void SVBackGroundNode:: setTexture(SVTEXINID _textype) {
+void SVBackGroundNode:: setTexture(SVINTEX _textype) {
     m_useTexType = _textype;
     m_pTex = nullptr;
     if(m_isSyncTex){
@@ -234,13 +234,13 @@ void SVBackGroundNode::fromJSON(RAPIDJSON_NAMESPACE::Value &item){
         m_height = item["height"].GetInt();
     }
     if (item.HasMember("textype") && item["textype"].IsInt()) {
-       // m_inTexType = SVTEXINID(item["textype"].GetInt());
+       // m_inTexType = SVINTEX(item["textype"].GetInt());
     }
     if (item.HasMember("texname") && item["texname"].IsString()) {
         m_pTexName = item["texname"].GetString();
     }
     if (item.HasMember("useTextype") && item["useTextype"].IsInt()) {
-        m_useTexType = SVTEXINID(item["useTextype"].GetInt());
+        m_useTexType = SVINTEX(item["useTextype"].GetInt());
     }
     //
     bool t_hasDeform = false;

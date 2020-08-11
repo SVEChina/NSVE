@@ -101,7 +101,7 @@ namespace sv {
         
     public:
         //是否存在内置纹理
-        bool hasSVTex(SVTEXINID _type);
+        bool hasSVTex(SVINTEX _type);
         //获取渲染状态
         SVRenderStatePtr getState();
         //重置状态

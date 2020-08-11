@@ -44,8 +44,8 @@ void SVRendererGL::init(s32 _w,s32 _h){
     SVRenderer::init(_w,_h);
     m_inWidth = _w;
     m_inHeight = _h;
-    mApp->m_pGlobalParam->m_inner_width = _w;
-    mApp->m_pGlobalParam->m_inner_height = _h;
+    mApp->m_global_param.m_sv_width = _w;
+    mApp->m_global_param.m_sv_height = _h;
     //
     SVRFboGLPtr t_fbo = std::dynamic_pointer_cast<SVRFboGL>( createResFbo() );    //
     SVRTargetPtr t_target = MakeSharedPtr<SVRTarget>(mApp);
@@ -62,8 +62,8 @@ void SVRendererGL::resize(s32 _w,s32 _h) {
 //    m_inWidth = _w;
 //    m_inHeight = _h;
 //    //重置size
-//    mApp->m_pGlobalParam->m_inner_width = _w;
-//    mApp->m_pGlobalParam->m_inner_height = _h;
+//    mApp->m_global_param.m_sv_width = _w;
+//    mApp->m_global_param.m_sv_height = _h;
 //    //重新创建主纹理
 //    SVTexturePtr t_tex = createSVTex(E_TEX_MAIN,_w,_h,GL_RGBA);
 }

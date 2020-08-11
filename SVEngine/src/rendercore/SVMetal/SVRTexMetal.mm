@@ -81,19 +81,19 @@ void SVRTexMetal:: create(SVRendererPtr _renderer) {
             }
         }
         //设置类型，创建纹理
-        if(t_dsp->m_kind == SV_IMAGE_1D) {
+        if(t_dsp->m_imgtype == SV_IMAGE_1D) {
             t_descriptor.pixelFormat = MTLPixelFormatRGBA8Unorm;
             t_descriptor.textureType = MTLTextureType1D;
             m_src_tex =  [t_rm->m_pDevice newTextureWithDescriptor:t_descriptor];
-        }else if(t_dsp->m_kind == SV_IMAGE_2D) {
+        }else if(t_dsp->m_imgtype == SV_IMAGE_2D) {
             t_descriptor.pixelFormat = MTLPixelFormatRGBA8Unorm;
             t_descriptor.textureType = MTLTextureType2D;
             m_src_tex =  [t_rm->m_pDevice newTextureWithDescriptor:t_descriptor];
-        }else if(t_dsp->m_kind == SV_IMAGE_2D) {
+        }else if(t_dsp->m_imgtype == SV_IMAGE_2D) {
             t_descriptor.pixelFormat = MTLPixelFormatRGBA8Unorm;
             t_descriptor.textureType = MTLTextureType3D;
             m_src_tex =  [t_rm->m_pDevice newTextureWithDescriptor:t_descriptor];
-        }else if(t_dsp->m_kind == SV_IMAGE_CUBE) {
+        }else if(t_dsp->m_imgtype == SV_IMAGE_CUBE) {
             t_descriptor.pixelFormat = MTLPixelFormatRGBA8Unorm;
             t_descriptor.textureType = MTLTextureTypeCube;
             m_src_tex =  [t_rm->m_pDevice newTextureWithDescriptor:t_descriptor];

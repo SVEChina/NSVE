@@ -118,7 +118,7 @@ void SVRenderer::setCurTarget(SVRTargetPtr _target) {
     m_cur_target = _target;
 }
            
-bool SVRenderer::hasSVTex(SVTEXINID _type) {
+bool SVRenderer::hasSVTex(SVINTEX _type) {
     if( m_svTex[_type] )
         return true;
     return false;

@@ -47,8 +47,11 @@ SVRendererMetalPtr SVRendererMetal::share() {
     return std::dynamic_pointer_cast<SVRendererMetal>(shareObject());
 }
 
-//metal渲染器初始化
-void SVRendererMetal::init(id<MTLDevice> _device,id<MTLDrawable> _target,id<MTLTexture> _targetTex) {
+void SVRendererMetal::init(s32 _w,s32 _h) {
+    init( MTLCreateSystemDefaultDevice(),_w,_h );
+}
+
+void SVRendererMetal::init(id<MTLDevice> _device,s32 _w,s32 _h) {
     m_pDevice = _device;
     if (m_pDevice == nil) {
         m_pDevice = MTLCreateSystemDefaultDevice();
@@ -57,21 +60,24 @@ void SVRendererMetal::init(id<MTLDevice> _device,id<MTLDrawable> _target,id<MTLT
         SV_LOG_INFO("don't support metal !");
         return ;
     }
-    //命令队列
     m_pCmdQueue = m_pDevice.newCommandQueue;
-    //库
     m_pLibrary = [m_pDevice newDefaultLibrary];
+    //
+    m_inWidth = _w;
+    m_inHeight = _h;
+    //创建主纹理
+    mApp->m_global_param.m_sv_width = _w;
+    mApp->m_global_param.m_sv_height = _h;
+    
     //创建主target
     SVRTargetPtr t_target = MakeSharedPtr<SVRTarget>(mApp);
     //创建描述
     SVTargetDsp* t_dsp = t_target->getTargetDsp();
     t_dsp->m_target_num = 1;
-    t_dsp->m_width = s32(_targetTex.width);
-    t_dsp->m_height = s32(_targetTex.height);
+    t_dsp->m_width = _w;
+    t_dsp->m_height = _h;
     t_dsp->m_use_depth = true;
     t_dsp->m_use_stencil = true;
-    t_dsp->m_oc_target = (__bridge_retained void*)_target;
-    t_dsp->m_oc_texture = (__bridge_retained void*)_targetTex;
     //创建RT
     SVDispatch::dispatchTargetCreate(mApp,t_target);
     //设置渲染路径
@@ -80,21 +86,6 @@ void SVRendererMetal::init(id<MTLDevice> _device,id<MTLDrawable> _target,id<MTLT
     mApp->getRenderMgr()->setMainRT(t_target);
     //重置大小
     mApp->resize(t_dsp->m_width,t_dsp->m_height);
-}
-
-//初始化
-void SVRendererMetal::init(s32 _w,s32 _h){
-    if (m_pDevice == nil) {
-        SV_LOG_INFO("don't support metal !");
-    }
-    m_pCmdQueue = m_pDevice.newCommandQueue;
-    m_pLibrary = [m_pDevice newDefaultLibrary];
-    //创建主fbo
-    m_inWidth = _w;
-    m_inHeight = _h;
-    //创建主纹理
-    mApp->m_pGlobalParam->m_inner_width = _w;
-    mApp->m_pGlobalParam->m_inner_height = _h;
 }
 
 //销毁

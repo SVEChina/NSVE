@@ -11,11 +11,9 @@
 
 using namespace sv;
 
-SVGlobalParam::SVGlobalParam(SVInstPtr _app)
-:SVGBaseEx(_app) {
-    m_inner_width = 720;
-    m_inner_height = 1280;
-    m_engCore = SV_E_CORE_GL;
+SVGlobalParam::SVGlobalParam(){
+    m_sv_width = 720;
+    m_sv_height = 1280;
     setSeed(0);
 }
 
@@ -24,8 +22,8 @@ SVGlobalParam::~SVGlobalParam() {
 }
 
 void SVGlobalParam::clear() {
-    m_inner_width = 720;
-    m_inner_height = 1280;
+    m_sv_width = 720;
+    m_sv_height = 1280;
 }
 
 void SVGlobalParam::setSeed(u32 seed) {

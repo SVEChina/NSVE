@@ -121,8 +121,8 @@ bool SVFairDataBlur::create() {
     SVRendererPtr t_renderer = mApp->getRenderer();
     if (!t_renderer)
         return false;
-    s32 t_w = mApp->m_pGlobalParam->m_inner_width;
-    s32 t_h = mApp->m_pGlobalParam->m_inner_height;
+    s32 t_w = mApp->m_global_param.m_sv_width;
+    s32 t_h = mApp->m_global_param.m_sv_height;
     //
     m_mtl_a = MakeSharedPtr<SVMtlCore>(mApp, "blur_fair_01");
     //m_mtl_a->setTexcoordFlip(1.0f, 1.0f);
@@ -254,8 +254,8 @@ f32 SVFairDataBlur::getFilterParam(SVFILTERITEMTYPE _type) {
 }
 
 void SVFairDataBlur::update(f32 dt) {
-    s32 t_w = mApp->m_pGlobalParam->m_inner_width;
-    s32 t_h = mApp->m_pGlobalParam->m_inner_height;
+    s32 t_w = mApp->m_global_param.m_sv_width;
+    s32 t_h = mApp->m_global_param.m_sv_height;
     if (m_mtl_a) {
         //m_mtl_a->setTexcoordFlip(1.0, 1.0);
         //m_mtl_a->setTexSizeIndex(0, 0.0, m_pParam->m_param01 / t_h);
@@ -350,8 +350,8 @@ bool SVFairLtraLow::create() {
 //    SVRendererPtr t_renderer = mApp->getRenderMgr()->getRenderer();
 //    if (!t_renderer)
 //        return false;
-//    s32 t_w = mApp->m_pGlobalParam->m_inner_width;
-//    s32 t_h = mApp->m_pGlobalParam->m_inner_height;
+//    s32 t_w = mApp->m_global_param.m_sv_width;
+//    s32 t_h = mApp->m_global_param.m_sv_height;
 //    m_mtl_a = MakeSharedPtr<SVMtlFairLtraLow>(mApp);
 //    m_mtl_a->setTexcoordFlip(1.0f, 1.0f);
 //    m_mtl_back = MakeSharedPtr<SVMtlCore>(mApp, "screennor");

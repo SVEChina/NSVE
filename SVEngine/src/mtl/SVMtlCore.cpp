@@ -113,7 +113,7 @@ void SVMtlCore::reset() {
 //    m_alpha_testMethod;     //alpha测试方法(GL_NEVER,GL_ALWAYS,GL_LESS,GL_LEQUAL,GL_GREATER,GL_GEQUAL,GL_NOTEQUAL)
 }
 
-void SVMtlCore::setTexture(s32 _chn,s32 _stage,SVTEXINID _from,cptr8 _fname) {
+void SVMtlCore::setTexture(s32 _chn,s32 _stage,SVINTEX _from,cptr8 _fname) {
     if(_chn<0 || _chn>=MAX_TEXUNIT) {
         return ;
     }
@@ -147,7 +147,7 @@ void SVMtlCore::setTexture(s32 _chn,cptr8 _fname) {
 //    m_LogicMtlFlag0 |= t_flag;
 }
 
-void SVMtlCore::setTexture(s32 _chn,sv::SVTEXINID _from) {
+void SVMtlCore::setTexture(s32 _chn,sv::SVINTEX _from) {
     if(_chn<0 || _chn>=MAX_TEXUNIT)
         return;
     m_texUnit[_chn].m_fname = "default";
@@ -308,7 +308,7 @@ void SVMtlCore::fromJSON1(RAPIDJSON_NAMESPACE::Value &_item){
                 t_stage = 1;
             }
             //
-            SVTEXINID t_from;
+            SVINTEX t_from;
             if(t_param_type == "file") {
                 t_from = E_TEX_FILE;
             }else{

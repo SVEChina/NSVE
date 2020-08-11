@@ -184,11 +184,6 @@ void SVGlobalMgr::destroy() {
 //        m_pEventMgr->destroy();
 //        SV_LOG_ERROR("SVEventMgr:destroy sucess");
 //    }
-//    if (m_pConfig) {
-//        //配置系统析够
-//        m_pConfig->destroy();
-//        SV_LOG_ERROR("SVConfig:destroy sucess");
-//    }
 //    if(m_pDeformSys){
 //        //
 //        m_pDeformSys->destroy();

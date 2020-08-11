@@ -17,9 +17,9 @@
 
 namespace sv {
 
-    class SVGlobalParam: public SVGBaseEx {
+    class SVGlobalParam: public SVObject {
     public:
-        SVGlobalParam(SVInstPtr _app);
+        SVGlobalParam();
         
         ~SVGlobalParam();
         
@@ -38,18 +38,12 @@ namespace sv {
         f64 getRandomDouble(f64 from,f64 to) ;
         
         //内部宽高
-        s32 m_inner_width;
+        s32 m_sv_width;
         
-        s32 m_inner_height;
+        s32 m_sv_height;
         
         //UI矩阵
         SVRandom m_random;
-        
-        //获取引擎内核
-        SV_ENGCORE getEngCore(){ return m_engCore; };
-    
-    protected:
-        SV_ENGCORE m_engCore;   //引擎内核
     };
 
 

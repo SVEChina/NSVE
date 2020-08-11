@@ -56,7 +56,7 @@ void SVRTexGL::create(SVRendererPtr _renderer) {
         }
         SVDataSwapPtr t_data = t_texture->getTextureData();
         //生成纹理
-        m_tex_kind = t_dsp->m_kind;
+        m_tex_kind = t_dsp->m_imgtype;
         m_width = t_dsp->m_width;
         m_height = t_dsp->m_height;
         m_depth = t_dsp->m_depth;

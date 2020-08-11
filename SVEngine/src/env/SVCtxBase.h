@@ -24,11 +24,9 @@ namespace sv {
         
         ~SVCtxBase();
         
-        virtual bool activeContext();           //激活上下文
+        virtual bool activeContext(SVRendererPtr _renderer);
         
-        virtual bool swap();
-        
-        virtual SVRendererPtr createRenderer(SVInstPtr _handle){ return nullptr;}
+        virtual bool swap(SVRendererPtr _renderer);
     };
     
 }//!namespace sv

@@ -8,7 +8,12 @@
 #include "SVInst.h"
 #include "SVGlobalMgr.h"
 #include "SVGlobalParam.h"
+//
 #include "../env/SVCtxBase.h"
+#include "../env/SVCtxIOS.h"
+#include "../env/SVCtxOSX.h"
+#include "../env/SVEGLContext.h"
+//
 #include "../basesys/SVRPath.h"
 #include "../work/SVTdCore.h"
 #include "../work/SVThreadPool.h"
@@ -16,10 +21,10 @@
 #include "../basesys/SVBasicSys.h"
 #include "../basesys/SVConfig.h"
 #include "../basesys/SVCameraMgr.h"
-#include "../file/SVFileMgr.h"
 #include "../operate/SVOpBase.h"
 #include "../operate/SVOpCreate.h"
 #include "../operate/SVOpThread.h"
+//
 #include "../rendercore/SVRenderMgr.h"
 #include "../rendercore/SVRenderState.h"
 #include "../rendercore/SVRenderer.h"
@@ -34,13 +39,11 @@ SVInst::SVInst() {
     m_engTimeState = ENG_TS_NOR;
     m_ctx = nullptr;
     m_pFileMgr = nullptr;
-    m_pConfig = nullptr;
 }
 
 SVInst::~SVInst() {
     m_ctx = nullptr;
     m_pFileMgr = nullptr;
-    m_pConfig = nullptr;
 }
 
 SVInstPtr SVInst::makeCreate() {
@@ -57,20 +60,15 @@ SVInstPtr SVInst::share() {
 
 //构建各个模块的逻辑部分，引擎可以运行的最简模式
 void SVInst::init() {
-    m_pRE = nullptr;
+    m_renderer = nullptr;
     //
     if(!m_pFileMgr) {
         m_pFileMgr = MakeSharedPtr<SVFileMgr>(share());
     }
-    //配置系统
-    if (!m_pConfig) {
-        m_pConfig = MakeSharedPtr<SVConfig>(share());
-        m_pConfig->init();
-    }
     //加载配置
-    m_pConfig->loadConfig();
+    m_config.init();
+    m_config.loadConfig();
     //
-    m_pGlobalParam = MakeSharedPtr<SVGlobalParam>( share() );
     m_pGlobalMgr = MakeSharedPtr<SVGlobalMgr>( share() );
     m_pGlobalMgr->init();
     //
@@ -79,7 +77,6 @@ void SVInst::init() {
 
 void SVInst::destroy() {
     m_pGlobalMgr = nullptr;
-    m_pGlobalParam = nullptr;
     m_pFileMgr = nullptr;
     m_svst = SV_ST_NULL;
 }
@@ -96,26 +93,41 @@ void SVInst::resize(s32 _w,s32 _h) {
 }
 
 //创建渲染器
-SVRendererPtr SVInst::createRenderer(SV_R_CORE _type) {
-    if(_type == E_R_METAL) {
-        m_rcore = E_R_METAL;
-        m_pRE = MakeSharedPtr<SVRendererMetal>( share() );
-    }else if(_type == E_R_GLES) {
-        m_rcore = E_R_GLES;
-        m_pRE = MakeSharedPtr<SVRendererGL>( share() );
-    }else if(_type == E_R_VUNKAN) {
-        m_rcore = E_R_VUNKAN;
+SVCtxBasePtr SVInst::createEnv(SV_R_ENV _type) {
+    SVCtxBasePtr t_ctx = nullptr;
+    if(_type == E_R_GLES_ANDORID) {
+        m_rcore = E_R_GLES_ANDORID;
+        //m_ctx = MakeSharedPtr<SVCtxOSXMetal>();
+    }else if(_type == E_R_VULKAN_ANDORID) {
+        m_rcore = E_R_VULKAN_ANDORID;
+        //m_ctx = MakeSharedPtr<SVCtxOSXMetal>();
+    }else if(_type == E_R_METAL_OSX) {
+        m_rcore = E_R_METAL_OSX;
+        m_ctx = MakeSharedPtr<SVCtxOSXMetal>();
+    }else if(_type == E_R_GL_OSX) {
+        m_rcore = E_R_GL_OSX;
+        m_ctx = MakeSharedPtr<SVCtxOSXGL>();
+    }else if(_type == E_R_METAL_IOS) {
+        m_rcore = E_R_METAL_IOS;
+        m_ctx = MakeSharedPtr<SVCtxOSXMetal>();
+    }else if(_type == E_R_GLES_IOS) {
+        m_rcore = E_R_GLES_IOS;
+        //m_ctx = MakeSharedPtr<SVCtxIOSGLES>();
     }
-    return m_pRE;
+    return m_ctx;
 }
 
 //销毁渲染器
-void SVInst::destroyRenderer() {
-    if(m_pRE){
-        m_pRE->clearRes();
-        m_pRE->destroy();
-        m_pRE = nullptr;
+void SVInst::destroyEnv() {
+    if(m_renderer){
+        m_renderer->clearRes();
+        m_renderer->destroy();
+        m_renderer = nullptr;
     }
+}
+
+void SVInst::setRenderer(SVRendererPtr _renderer) {
+    m_renderer = _renderer;
 }
 
 //跑线程模型 就是引擎运行
@@ -170,10 +182,6 @@ SV_ENG_TIMESTATE SVInst::getTimeState(){
 //
 SVFileMgrPtr SVInst::getFileMgr(){
     return m_pFileMgr;
-}
-
-SVConfigPtr SVInst::getConfig(){
-    return m_pConfig;
 }
 
 SVEventMgrPtr SVInst::getEventMgr(){
@@ -268,5 +276,5 @@ SVPhysicsWorldMgrPtr SVInst::getPhysicsWorldMgr(){
 }
 
 SVRendererPtr SVInst::getRenderer() {
-    return m_pRE;
+    return m_renderer;
 }

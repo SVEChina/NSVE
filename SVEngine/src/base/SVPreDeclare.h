@@ -26,7 +26,6 @@ namespace sv {
     //MainApp
     DECLARE_SHAREPTR(SVInst);
     DECLARE_SHAREPTR(SVGlobalMgr);
-    DECLARE_SHAREPTR(SVGlobalParam);
     
     //模块module
     DECLARE_SHAREPTR(SVFileMgr);

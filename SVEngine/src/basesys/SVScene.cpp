@@ -221,8 +221,8 @@ void SVScene::create(){
 ////        _box.set(t_min, t_max);
 ////        m_pSceneTree->create(_box,_depth);
 //    }
-//    s32 m_sw = mApp->m_pGlobalParam->m_inner_width;
-//    s32 m_sh = mApp->m_pGlobalParam->m_inner_height;
+//    s32 m_sw = mApp->m_global_param.m_sv_width;
+//    s32 m_sh = mApp->m_global_param.m_sv_height;
 //    SVCameraNodePtr mainCamera = mApp->getCameraMgr()->getMainCamera();
 //    if(mainCamera) {
 //        mainCamera->resetSize(m_sw,m_sh);

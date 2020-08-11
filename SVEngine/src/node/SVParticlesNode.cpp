@@ -25,7 +25,7 @@ SVParticlesNode::SVParticlesNode(SVInstPtr _app)
 //    m_rsType = RST_SOLID_3D;
 //    m_pParticles = MakeSharedPtr<SVParticles>(mApp);
 //    m_pParticlesWorld = MakeSharedPtr<SVParticlesWorld>(mApp);
-//    m_pParticles->setSeed(mApp->m_pGlobalParam->getRandom());
+//    m_pParticles->setSeed(mApp->m_global_param.getRandom());
 //    m_pParticles->setWorld(m_pParticlesWorld);
 //    physical_mask = 1;
 //    emitter_sync = 1;
@@ -436,7 +436,7 @@ FMat4 SVParticlesNode::getDeflectorTransform(s32 num) const {
 s32 SVParticlesNode::getRandomPoint(FVec3 &ret_point,FVec3 &ret_normal,FVec3 &ret_velocity,s32 surface) {
     s32 num_particles = m_pParticles->getNumParticles();
     if(num_particles) {
-        s32 num = mApp->m_pGlobalParam->getRandomInt(0,num_particles);
+        s32 num = mApp->m_global_param.getRandomInt(0,num_particles);
         FMat4 transform;// = FMat4(getIWorldTransform() * translate(world_offset));
         mul(ret_point,transform,m_pParticles->getParticlePosition(num));
         ret_normal = Vec3_zero;

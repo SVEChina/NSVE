@@ -110,6 +110,6 @@ void SVOpSetRenderMirror::setTargetParam(bool _mirror){
 }
 
 void SVOpSetRenderMirror::_process(f32 dt){
-    mApp->getConfig()->mirror = m_mirror;
+    mApp->m_config.mirror = m_mirror;
 }
 

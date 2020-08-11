@@ -41,10 +41,10 @@ SVPenDraw::SVPenDraw(SVInstPtr _app)
 :SVGameBase(_app)
 ,m_curStroke(nullptr){
     m_lock = MakeSharedPtr<SVLock>();
-    m_strokeWidth = mApp->m_pConfig->m_strokeWidth;
-    m_strokeColor = mApp->m_pConfig->m_strokeColor;
-    m_glowWidth = mApp->m_pConfig->m_strokeGlowWidth;
-    m_glowColor = mApp->m_pConfig->m_strokeGlowColor;
+    m_strokeWidth = mApp->m_config.m_strokeWidth;
+    m_strokeColor = mApp->m_config.m_strokeColor;
+    m_glowWidth = mApp->m_config.m_strokeGlowWidth;
+    m_glowColor = mApp->m_config.m_strokeGlowColor;
     m_faceRot.set(0.0f, 0.0f, 0.0f);
     m_noseCenter.set(0.0f, 0.0f, 0.0f);
     m_faceEyeDis = 1.0f;
@@ -322,7 +322,7 @@ void SVPenDraw::_updateFaceParam(){
     SVPersonPtr t_person = mApp->getDetectMgr()->getPersonModule()->getPerson(1);
     if (t_person && t_person->getExist()) {
         SVPersonTrackerPtr t_personTracker = t_person->getTracker();
-        f32 m_screenH = mApp->m_pGlobalParam->m_inner_height;
+        f32 m_screenH = mApp->m_global_param.m_sv_height;
         f32 t_pt_x = t_person->getFaceDataOriginalX(46);
         f32 t_pt_y = m_screenH - t_person->getFaceDataOriginalY(46);
         f32 t_yaw = t_person->getFaceRot().y;

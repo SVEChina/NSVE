@@ -53,14 +53,14 @@ StreamInCore::~StreamInCore() {
 
 void StreamInCore::init(s32 _w,s32 _h,PICFORMATE _fromate,f32 _angle,bool _show) {
 //    for(s32 t_tt = E_TEX_INSTREAM ;t_tt<E_TEX_OUTSTREAM; t_tt++ ) {
-//        if(!mApp->getRenderer()->getSVTex( SVTEXINID(t_tt) ) ){
-//            init(_w,_h,_fromate,_angle,_show,SVTEXINID(t_tt) );
+//        if(!mApp->getRenderer()->getSVTex( SVINTEX(t_tt) ) ){
+//            init(_w,_h,_fromate,_angle,_show,SVINTEX(t_tt) );
 //            return ;
 //        }
 //    }
 }
 
-void StreamInCore::init(s32 _w,s32 _h,PICFORMATE _fromate,f32 _angle,bool _show,SVTEXINID _tex){
+void StreamInCore::init(s32 _w,s32 _h,PICFORMATE _fromate,f32 _angle,bool _show,SVINTEX _tex){
 //    m_tt = _tex;
 //    //创建稳定的合成后的流
 //    m_formate = _fromate;
@@ -125,14 +125,14 @@ void StreamInCore::init(s32 _w,s32 _h,PICFORMATE _fromate,f32 _angle,bool _show,
 //
 void StreamInCore::init(u32 _tex0ID, u32 _tex1ID, u32 _tex2ID, s32 _w,s32 _h,PICFORMATE _fromate,f32 _angle,bool _show) {
 //    for(s32 t_tt = E_TEX_INSTREAM ;t_tt<E_TEX_OUTSTREAM; t_tt++ ) {
-//        if(!mApp->getRenderer()->getSVTex( SVTEXINID(t_tt) ) ){
-//            init(_tex0ID, _tex1ID, _tex2ID,  _w,_h,_fromate,_angle,_show,SVTEXINID(t_tt) );
+//        if(!mApp->getRenderer()->getSVTex( SVINTEX(t_tt) ) ){
+//            init(_tex0ID, _tex1ID, _tex2ID,  _w,_h,_fromate,_angle,_show,SVINTEX(t_tt) );
 //            return ;
 //        }
 //    }
 }
 
-void StreamInCore::init(u32 _tex0ID, u32 _tex1ID, u32 _tex2ID, s32 _w,s32 _h,PICFORMATE _fromate,f32 _angle,bool _show,SVTEXINID _tex){
+void StreamInCore::init(u32 _tex0ID, u32 _tex1ID, u32 _tex2ID, s32 _w,s32 _h,PICFORMATE _fromate,f32 _angle,bool _show,SVINTEX _tex){
 //    m_tt = _tex;
 //    //创建稳定的合成后的流
 //    m_formate = _fromate;
@@ -352,7 +352,7 @@ void SVStreamIn::createInStream(cptr8 _name,s32 _type,PICFORMATE _formate,s32 _w
 //    m_streamLock->unlock();
 }
 
-void SVStreamIn::createInStream(cptr8 _name,s32 _type,PICFORMATE _formate,s32 _w,s32 _h,f32 _angle,SVTEXINID _tex, bool _show){
+void SVStreamIn::createInStream(cptr8 _name,s32 _type,PICFORMATE _formate,s32 _w,s32 _h,f32 _angle,SVINTEX _tex, bool _show){
 //    if(!mApp->getRenderer()) {
 //        return ;
 //    }

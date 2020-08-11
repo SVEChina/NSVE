@@ -229,7 +229,7 @@ void SVFaceCoord::update(f32 dt) {
 }
 
 void SVFaceCoord::render() {
-//    if (mApp->m_pGlobalParam->m_curScene && m_visible ){
+//    if (mApp->m_global_param.m_curScene && m_visible ){
 //        SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
 //        if (m_pRObjNor) {
 //            m_pRObjNor->pushCmd(t_rs, m_rsType, "SVFaceCoord-nor");
