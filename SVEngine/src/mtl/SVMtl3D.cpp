@@ -76,14 +76,14 @@ FVec3& SVMtl3D::getAmbientLightColor(){
 }
 
 void SVMtl3D::_submitMtl(SVRendererPtr _render){
-    _render->submitUniformf("u_ambientStrength", m_ambientStrength);
-    _render->submitUniformf3v("u_ambient_color", m_ambient_color.get());
-    _render->submitUniformf3v("u_lightPos", m_lightPos.get());
-    _render->submitUniformf3v("u_lightColor", m_lightColor.get());
-    SVCameraNodePtr t_cameraNode = mApp->getCameraMgr()->getMainCamera();
-//    FVec3 cameraPos = t_cameraNode->getPosition();
-    FVec3 cameraPos = FVec3(0.0f, 0.0f, 0.0f);
-    _render->submitUniformf3v("u_viewPos", cameraPos.get());
+//    _render->submitUniformf("u_ambientStrength", m_ambientStrength);
+//    _render->submitUniformf3v("u_ambient_color", m_ambient_color.get());
+//    _render->submitUniformf3v("u_lightPos", m_lightPos.get());
+//    _render->submitUniformf3v("u_lightColor", m_lightColor.get());
+//    SVCameraNodePtr t_cameraNode = mApp->getCameraMgr()->getMainCamera();
+////    FVec3 cameraPos = t_cameraNode->getPosition();
+//    FVec3 cameraPos = FVec3(0.0f, 0.0f, 0.0f);
+//    _render->submitUniformf3v("u_viewPos", cameraPos.get());
 }
 
 void SVMtl3D::toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator,

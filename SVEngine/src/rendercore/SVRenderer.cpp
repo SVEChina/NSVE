@@ -26,10 +26,7 @@ SVRenderer::SVRenderer(SVInstPtr _app)
 ,m_inHeight(256)
 ,m_outWidth(256)
 ,m_outHeight(256){
-    m_resLock = MakeSharedPtr<SVLock>();
-    for(s32 i=E_TEX_MAIN ;i<E_TEX_END;i++) {
-        m_svTex[i] = nullptr;
-    }
+    m_resLock = MakeSharedPtr<SVLockSpin>();
 }
 
 SVRenderer::~SVRenderer(){
@@ -43,9 +40,6 @@ void SVRenderer::init(s32 _w,s32 _h){
 }
 
 void SVRenderer::destroy(){
-    for(s32 i=E_TEX_MAIN ;i<E_TEX_END;i++) {
-        m_svTex[i] = nullptr;
-    }
     clearRes();
     m_stack_proj.destroy();
     m_stack_view.destroy();
@@ -116,12 +110,6 @@ void SVRenderer::removeUnuseRes() {
 //需要控制当前的fbo
 void SVRenderer::setCurTarget(SVRTargetPtr _target) {
     m_cur_target = _target;
-}
-           
-bool SVRenderer::hasSVTex(SVINTEX _type) {
-    if( m_svTex[_type] )
-        return true;
-    return false;
 }
 
 //视口

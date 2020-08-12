@@ -71,21 +71,21 @@ namespace sv {
         draw
         */
         void drawMesh(SVRenderMeshPtr _mesh);
+        
+        //
+        SVRTargetPtr createTarget(SVINTEX _texid);
 
     public:
         id<MTLDevice> m_pDevice;
         id<MTLCommandQueue> m_pCmdQueue;
         id<MTLLibrary> m_pLibrary;
         id<MTLRenderCommandEncoder> m_pCurEncoder;
-        
-    public:
         //prop
         bool m_iOS9Runtime;
         bool m_macOS11Runtime;
         bool m_hasPixelFormatDepth32Float_Stencil8;
         s32 m_samplenum;
-        
-    public:
+        //
         void drawBox();
     };
         

@@ -16,7 +16,9 @@ SVRFbo::SVRFbo(SVInstPtr _app)
 :SVRRes(_app)
 ,m_width(1)
 ,m_height(1)
-,m_target_num(1){
+,m_target_num(1)
+,m_use_depth(false)
+,m_use_stencil(false){
 }
 
 SVRFbo:: ~SVRFbo(){

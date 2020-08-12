@@ -14,6 +14,7 @@
 
 #define SV_DEBUG_RENDERTIME 1
 #define SV_SUPPORT_MAX_PERSON_NUM 4
+#define SV_SUPPORT_MAX_TAREGT 4
 #define SV_PI       3.14159265359f
 #define SV_HALF_PI  SV_PI/2.0f
 
@@ -155,28 +156,25 @@ namespace sv {
 
     //SV 支持的内置纹理种类
     enum SVINTEX {
-        E_TEX_MAIN = 0,
-        E_TEX_FILE,
-        E_TEX_CAMERA,
+        E_TEX_BEGIN = 0,
+        E_TEX_MAIN,
         E_TEX_SHADOW,
+        E_TEX_DEPTH,
         E_TEX_GBUF_POS,
         E_TEX_GBUF_NOR,
         E_TEX_GBUF_COLOR,
-        E_TEX_INSTREAM = 10,
-        E_TEX_OUTSTREAM = 20,
-        E_TEX_HELP0 = 21,
+        E_TEX_FILE,
+        E_TEX_CAMERA,
+        E_TEX_INSTREAM,
+        E_TEX_OUTSTREAM,
+        E_TEX_HELP0,
         E_TEX_HELP1,
         E_TEX_HELP2,
         E_TEX_HELP3,
-        E_TEX_HELP4,
-        E_TEX_HELP5,
-        E_TEX_HELP6,
-        E_TEX_HELP7,
         E_TEX_VIDEO0,
         E_TEX_VIDEO1,
         E_TEX_VIDEO2,
         E_TEX_VIDEO3,
-        E_TEX_VIDEO4,
         E_TEX_FLITER_GUASS,
         E_TEX_FLITER_GUASS01,
         E_TEX_FILTER_DEFORM01,
@@ -197,25 +195,18 @@ namespace sv {
         E_TEX_FILTER_GLOW_1,
         E_TEX_FILTER_GLOW_2,
         E_TEX_FILTER_GLOW_3,
+        E_TEX_FILTER_0,
         E_TEX_FILTER_1,
         E_TEX_FILTER_2,
         E_TEX_FILTER_3,
-        E_TEX_FILTER_4,
         E_TEX_FILTER_SHAKE,
         E_TEX_FILTER_FLASHWHITE,
         E_TEX_INSTREAM_BEGIN,
-        E_TEX_DEPTH,
-        E_TEX_AVATAR_0 = 60,
+        E_TEX_AVATAR_0,
         E_TEX_AVATAR_1,
         E_TEX_AVATAR_2,
         E_TEX_AVATAR_3,
-        E_TEX_AVATAR_4,
-        E_TEX_AVATAR_5,
-        E_TEX_AVATAR_6,
-        E_TEX_AVATAR_7,
-        E_TEX_AVATAR_8,
-        E_TEX_AVATAR_9,
-        E_TEX_END = 70
+        E_TEX_END = 64
     };
 
     //相机图片格式

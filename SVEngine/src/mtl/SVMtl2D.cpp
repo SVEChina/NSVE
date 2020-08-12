@@ -38,7 +38,7 @@ void SVMtl2D::reset() {
 
 void SVMtl2D::_submitUniform(SVRendererPtr _render) {
     SVMtlCore::_submitUniform(_render);
-    _render->submitUniformf("alpha", m_alpha);
+    //_render->submitUniformf("alpha", m_alpha);
 }
 
 void SVMtl2D::setAlpha(f32 _alpha){

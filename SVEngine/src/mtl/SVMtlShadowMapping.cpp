@@ -36,7 +36,7 @@ SVMtlCorePtr SVMtlShadowMapping::clone() {
 
 void SVMtlShadowMapping::_submitMtl(SVRendererPtr _render) {
     SVMtlCore::_submitMtl(_render);
-   _render->submitUniformMatrix("aMatrixVPlight", m_LightVPMat);
+    //_render->submitUniformMatrix("aMatrixVPlight", m_LightVPMat);
 }
 
 

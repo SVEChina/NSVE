@@ -99,24 +99,27 @@ void SVRShaderMetal::create(SVRendererPtr _renderer) {
         t_ubuf.m_ubuf = [t_rm->m_pDevice newBufferWithBytes:t_pointer length: t_len options: MTLResourceStorageModeShared ];
         m_ubuf_pool.push_back(t_ubuf);
     }
-    //m_vft = t_shader->m_shader_dsp.m_vft;
     //创建渲染描述
     MTLRenderPipelineDescriptor *t_pl_dsp = [[MTLRenderPipelineDescriptor alloc] init];
     t_pl_dsp.label = @"Simple Pipeline";
     t_pl_dsp.vertexFunction = m_vsf;
     t_pl_dsp.fragmentFunction = m_fsf;
     t_pl_dsp.vertexDescriptor = _genVertexDsp(E_BFM_AOS);
-    t_pl_dsp.colorAttachments[0].pixelFormat = MTLPixelFormatBGRA8Unorm;
-    t_pl_dsp.depthAttachmentPixelFormat = MTLPixelFormatInvalid;//MTLPixelFormatDepth32Float_Stencil8;
+    t_pl_dsp.colorAttachments[0].pixelFormat = MTLPixelFormatRGBA8Unorm;
+    if(t_shader->m_shader_dsp.m_post == 1) {
+        t_pl_dsp.depthAttachmentPixelFormat = MTLPixelFormatInvalid;
+        t_pl_dsp.stencilAttachmentPixelFormat = MTLPixelFormatInvalid;
+    }else{
+        t_pl_dsp.depthAttachmentPixelFormat = MTLPixelFormatDepth32Float_Stencil8;
+        t_pl_dsp.stencilAttachmentPixelFormat = MTLPixelFormatDepth32Float_Stencil8;
+    }
     t_errors = nullptr;
     m_pl_state = [t_rm->m_pDevice newRenderPipelineStateWithDescriptor:t_pl_dsp error:&t_errors];
     if(t_errors!=nullptr) {
-        //error
         m_exist = false;
         return ;
     }
     t_pl_dsp = nullptr;
-    //
     m_exist = true;
 }
 

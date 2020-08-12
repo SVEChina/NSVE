@@ -54,13 +54,13 @@ void SVMtlFilterBrilaterl::setDistance(f32 _dis) {
 void SVMtlFilterBrilaterl::_submitMtl(SVRendererPtr _render) {
     if(m_paramDirty) {
         m_paramDirty = false;
-        f32 tt_w = m_texelWidthOffset /mApp->m_global_param.m_sv_width;
-        f32 tt_h = m_texelHeightOffset /mApp->m_global_param.m_sv_height;
-        _render->submitUniformf("texelWidthOffset", tt_w);
-        _render->submitUniformf("texelHeightOffset", tt_h);
-        _render->submitUniformf("distanceNormalizationFactor", m_distanceNormalizationFactor);
-        _render->submitUniformf("hlafWidth", 0.5/mApp->m_global_param.m_sv_width);
-        _render->submitUniformf("hlafHeight", 0.5/mApp->m_global_param.m_sv_height);
+//        f32 tt_w = m_texelWidthOffset /mApp->m_global_param.m_sv_width;
+//        f32 tt_h = m_texelHeightOffset /mApp->m_global_param.m_sv_height;
+//        _render->submitUniformf("texelWidthOffset", tt_w);
+//        _render->submitUniformf("texelHeightOffset", tt_h);
+//        _render->submitUniformf("distanceNormalizationFactor", m_distanceNormalizationFactor);
+//        _render->submitUniformf("hlafWidth", 0.5/mApp->m_global_param.m_sv_width);
+//        _render->submitUniformf("hlafHeight", 0.5/mApp->m_global_param.m_sv_height);
     }
 }
 
@@ -107,13 +107,13 @@ void SVMtlFilterBrilaterl2::setDistance(f32 _dis) {
 void SVMtlFilterBrilaterl2::_submitMtl(SVRendererPtr _render) {
     if(m_paramDirty) {
         m_paramDirty = false;
-        f32 tt_w = m_texelWidthOffset /mApp->m_global_param.m_sv_width;
-        f32 tt_h = m_texelHeightOffset /mApp->m_global_param.m_sv_height;
-        _render->submitUniformf("texelWidthOffset", tt_w);
-        _render->submitUniformf("texelHeightOffset", tt_h);
-        _render->submitUniformf("distanceNormalizationFactor", m_distanceNormalizationFactor);
-        _render->submitUniformf("hlafWidth", 0.5/mApp->m_global_param.m_sv_width);
-        _render->submitUniformf("hlafHeight", 0.5/mApp->m_global_param.m_sv_height);
+//        f32 tt_w = m_texelWidthOffset /mApp->m_global_param.m_sv_width;
+//        f32 tt_h = m_texelHeightOffset /mApp->m_global_param.m_sv_height;
+//        _render->submitUniformf("texelWidthOffset", tt_w);
+//        _render->submitUniformf("texelHeightOffset", tt_h);
+//        _render->submitUniformf("distanceNormalizationFactor", m_distanceNormalizationFactor);
+//        _render->submitUniformf("hlafWidth", 0.5/mApp->m_global_param.m_sv_width);
+//        _render->submitUniformf("hlafHeight", 0.5/mApp->m_global_param.m_sv_height);
     }
 }
 
@@ -147,11 +147,11 @@ void SVMtlGaussian::setRadius(f32 _radius) {
 void SVMtlGaussian::_submitMtl(SVRendererPtr _render) {
     if(m_paramDirty) {
         m_paramDirty = false;
-        f32 t_w = mApp->m_global_param.m_sv_width;
-        f32 t_h = mApp->m_global_param.m_sv_height;
-        _render->submitUniformf("texelWidthOffset", t_w);
-        _render->submitUniformf("texelHeightOffset", t_h);
-        _render->submitUniformf("radius", m_radius);
+//        f32 t_w = mApp->m_global_param.m_sv_width;
+//        f32 t_h = mApp->m_global_param.m_sv_height;
+//        _render->submitUniformf("texelWidthOffset", t_w);
+//        _render->submitUniformf("texelHeightOffset", t_h);
+//        _render->submitUniformf("radius", m_radius);
     }
 }
 
@@ -210,11 +210,11 @@ void SVMtlBlur::setRadius(f32 _radius) {
 void SVMtlBlur::_submitMtl(SVRendererPtr _render) {
     if(m_paramDirty) {
         m_paramDirty = false;
-        f32 t_w = mApp->m_global_param.m_sv_width;
-        f32 t_h = mApp->m_global_param.m_sv_height;
-        _render->submitUniformf("texelWidthOffset", t_w);
-        _render->submitUniformf("texelHeightOffset", t_h);
-        _render->submitUniformf("softenStrength", m_radius);
+//        f32 t_w = mApp->m_global_param.m_sv_width;
+//        f32 t_h = mApp->m_global_param.m_sv_height;
+//        _render->submitUniformf("texelWidthOffset", t_w);
+//        _render->submitUniformf("texelHeightOffset", t_h);
+//        _render->submitUniformf("softenStrength", m_radius);
     }
 }
 
@@ -232,7 +232,7 @@ SVMtlBlurFair::~SVMtlBlurFair(){
 }
 
 void SVMtlBlurFair::_submitMtl(SVRendererPtr _render){
-    _render->submitUniformf("blurAlpha", m_blurAlpha);
+    //_render->submitUniformf("blurAlpha", m_blurAlpha);
 }
 
 void SVMtlBlurFair::setSmooth(f32 _smooth){
@@ -261,7 +261,7 @@ void SVMtlFairLtraLow::setSmooth(f32 _smooth){
 }
 
 void SVMtlFairLtraLow::_submitMtl(SVRendererPtr _render){
-    _render->submitUniformf("softenStrength", m_smooth);
+    //_render->submitUniformf("softenStrength", m_smooth);
 }
 
 SVMtlCorePtr SVMtlFairLtraLow::clone(){

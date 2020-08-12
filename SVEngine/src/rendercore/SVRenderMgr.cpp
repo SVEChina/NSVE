@@ -90,26 +90,26 @@ void SVRenderMgr::render(){
     }
     m_renderLock->lock();
     if( mApp->m_ctx && mApp->m_ctx->activeContext(t_renderer) ) {
-//        //激活,创建流
-//        if(m_stream_create) {
-//            m_stream_create->render(t_renderer,m_mainRT);
-//        }
-//        //前向RT
-//        for(s32 i=0;i<m_preRT.size();i++) {
-//            m_preRT[i]->render( t_renderer);
-//        }
-//        //中间RT
-//        if( m_mainRT ) {
-//            m_mainRT->render( t_renderer);
-//        }
-//        //后向RT
-//        for(s32 i=0;i<m_afterRT.size();i++) {
-//            m_afterRT[i]->render(  t_renderer);
-//        }
-//        //销毁流
-//        if(m_stream_destroy) {
-//            m_stream_destroy->render( t_renderer,m_mainRT);
-//        }
+        //激活,创建流
+        if(m_stream_create) {
+            m_stream_create->render(t_renderer,m_mainRT);
+        }
+        //前向RT
+        for(s32 i=0;i<m_preRT.size();i++) {
+            m_preRT[i]->render( t_renderer);
+        }
+        //中间RT
+        if( m_mainRT ) {
+            m_mainRT->render( t_renderer);
+        }
+        //后向RT
+        for(s32 i=0;i<m_afterRT.size();i++) {
+            m_afterRT[i]->render(  t_renderer);
+        }
+        //销毁流
+        if(m_stream_destroy) {
+            m_stream_destroy->render( t_renderer,m_mainRT);
+        }
         mApp->m_ctx->swap(t_renderer);
     }
     m_renderLock->unlock();

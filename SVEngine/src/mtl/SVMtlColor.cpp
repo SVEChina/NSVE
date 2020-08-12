@@ -48,6 +48,6 @@ void SVMtlColor::setColor(f32 _r, f32 _g, f32 _b, f32 _a){
 void SVMtlColor::_submitUniform(SVRendererPtr _render) {
     SVMtlCore::_submitUniform(_render);
     SVMtlCore::_submitMtl(_render);
-    _render->submitUniformf4("u_color", m_color.r, m_color.g, m_color.b, m_color.a);
+ //   _render->submitUniformf4("u_color", m_color.r, m_color.g, m_color.b, m_color.a);
 //    _render->submitUniformf("u_color", m_color);
 }

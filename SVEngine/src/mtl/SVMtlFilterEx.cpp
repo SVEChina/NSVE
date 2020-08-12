@@ -42,8 +42,8 @@ void SVMtlBrightnessContrast::setContrast(f32 _smooth){
 
 void SVMtlBrightnessContrast::_submitMtl(SVRendererPtr _render) {
     SVMtlCore::_submitMtl(_render);
-    _render->submitUniformf("brightness", m_brightness);
-    _render->submitUniformf("contrast", m_contrast);
+//    _render->submitUniformf("brightness", m_brightness);
+//    _render->submitUniformf("contrast", m_contrast);
 }
 
 
@@ -73,7 +73,7 @@ void SVMtlSaturation::setSaturation(f32 _smooth){
 
 void SVMtlSaturation::_submitMtl(SVRendererPtr _render) {
     SVMtlCore::_submitMtl(_render);
-       _render->submitUniformf("saturation", m_saturation);
+    //_render->submitUniformf("saturation", m_saturation);
 }
 
 SVMtlVibrance::SVMtlVibrance(SVInstPtr _app)
@@ -101,7 +101,7 @@ void SVMtlVibrance::setVibrance(f32 _smooth){
 
 void SVMtlVibrance::_submitMtl(SVRendererPtr _render) {
     SVMtlCore::_submitMtl(_render);
-    _render->submitUniformf("vibrance", m_vibrance);
+    //_render->submitUniformf("vibrance", m_vibrance);
 }
 
 SVMtlShadowHighlight::SVMtlShadowHighlight(SVInstPtr _app)
@@ -125,8 +125,8 @@ SVMtlCorePtr SVMtlShadowHighlight::clone(){
 
 void SVMtlShadowHighlight::_submitMtl(SVRendererPtr _render){
     SVMtlCore::_submitMtl(_render);
-    _render->submitUniformf("shadows", m_shadow);
-    _render->submitUniformf("highlights", m_HighLight);
+//    _render->submitUniformf("shadows", m_shadow);
+//    _render->submitUniformf("highlights", m_HighLight);
 }
 
 SVMtlWhiteBlackLevel::SVMtlWhiteBlackLevel(SVInstPtr _app)
@@ -150,8 +150,8 @@ SVMtlCorePtr SVMtlWhiteBlackLevel::clone(){
 
 void SVMtlWhiteBlackLevel::_submitMtl(SVRendererPtr _render){
     SVMtlCore::_submitMtl(_render);
-    _render->submitUniformf("shadows", m_shadow);
-    _render->submitUniformf("highlights", m_HighLight);
+//    _render->submitUniformf("shadows", m_shadow);
+//    _render->submitUniformf("highlights", m_HighLight);
 }
 
 SVMtlColorBalance::SVMtlColorBalance(SVInstPtr _app)
@@ -190,15 +190,15 @@ SVMtlCorePtr SVMtlColorBalance::clone(){
 
 void SVMtlColorBalance::_submitMtl(SVRendererPtr _render){
      SVMtlCore::_submitMtl(_render);
-    _render->submitUniformf("redShift", m_redShift);
-    _render->submitUniformf("greenShift", m_greenShift);
-    _render->submitUniformf("blueShift", m_blueShift);
-    _render->submitUniformf("sdredShift", m_sdredShift);
-    _render->submitUniformf("sdgreenShift", m_sdgreenShift);
-    _render->submitUniformf("sdblueShift", m_sdblueShift);
-    _render->submitUniformf("hhredShift", m_hhredShift);
-    _render->submitUniformf("hhgreenShift", m_hhgreenShift);
-    _render->submitUniformf("hhblueShift", m_hhblueShift);
+//    _render->submitUniformf("redShift", m_redShift);
+//    _render->submitUniformf("greenShift", m_greenShift);
+//    _render->submitUniformf("blueShift", m_blueShift);
+//    _render->submitUniformf("sdredShift", m_sdredShift);
+//    _render->submitUniformf("sdgreenShift", m_sdgreenShift);
+//    _render->submitUniformf("sdblueShift", m_sdblueShift);
+//    _render->submitUniformf("hhredShift", m_hhredShift);
+//    _render->submitUniformf("hhgreenShift", m_hhgreenShift);
+//    _render->submitUniformf("hhblueShift", m_hhblueShift);
 }
 
 
@@ -242,30 +242,29 @@ SVMtlCorePtr SVMtlHSL::clone(){
 
 void SVMtlHSL::_submitMtl(SVRendererPtr _render){
     SVMtlCore::_submitMtl(_render);
-    
-    _render->submitUniformf("m_saturationRed", m_saturationRed);
-    _render->submitUniformf("m_HueRed", m_HueRed);
-    _render->submitUniformf("m_LightnessRed", m_LightnessRed);
-    
-    _render->submitUniformf("m_saturationYellow", m_saturationYellow);
-    _render->submitUniformf("m_HueYellow", m_HueYellow);
-    _render->submitUniformf("m_LightnessYellow", m_LightnessYellow);
-    
-    _render->submitUniformf("m_saturationGreen", m_saturationGreen);
-    _render->submitUniformf("m_HueGreen", m_HueGreen);
-    _render->submitUniformf("m_LightnessGreen", m_LightnessGreen);
-    
-    _render->submitUniformf("m_saturationMagenta", m_saturationMagenta);
-    _render->submitUniformf("m_HueMagenta", m_HueMagenta);
-    _render->submitUniformf("m_LightnessMagenta", m_LightnessMagenta);
-    
-    _render->submitUniformf("m_saturationBlue", m_saturationBlue);
-    _render->submitUniformf("m_HueBlue", m_HueBlue);
-    _render->submitUniformf("m_LightnessBlue", m_LightnessBlue);
-    
-    _render->submitUniformf("m_saturationCyan", m_saturationCyan);
-    _render->submitUniformf("m_HueCyan", m_HueCyan);
-    _render->submitUniformf("m_LightnessCyan", m_LightnessCyan);
+//    _render->submitUniformf("m_saturationRed", m_saturationRed);
+//    _render->submitUniformf("m_HueRed", m_HueRed);
+//    _render->submitUniformf("m_LightnessRed", m_LightnessRed);
+//
+//    _render->submitUniformf("m_saturationYellow", m_saturationYellow);
+//    _render->submitUniformf("m_HueYellow", m_HueYellow);
+//    _render->submitUniformf("m_LightnessYellow", m_LightnessYellow);
+//
+//    _render->submitUniformf("m_saturationGreen", m_saturationGreen);
+//    _render->submitUniformf("m_HueGreen", m_HueGreen);
+//    _render->submitUniformf("m_LightnessGreen", m_LightnessGreen);
+//
+//    _render->submitUniformf("m_saturationMagenta", m_saturationMagenta);
+//    _render->submitUniformf("m_HueMagenta", m_HueMagenta);
+//    _render->submitUniformf("m_LightnessMagenta", m_LightnessMagenta);
+//
+//    _render->submitUniformf("m_saturationBlue", m_saturationBlue);
+//    _render->submitUniformf("m_HueBlue", m_HueBlue);
+//    _render->submitUniformf("m_LightnessBlue", m_LightnessBlue);
+//
+//    _render->submitUniformf("m_saturationCyan", m_saturationCyan);
+//    _render->submitUniformf("m_HueCyan", m_HueCyan);
+//    _render->submitUniformf("m_LightnessCyan", m_LightnessCyan);
 
 }
 
@@ -299,8 +298,8 @@ void SVMtlWhiteBalance::setTint(f32 _smooth){
 
 void SVMtlWhiteBalance::_submitMtl(SVRendererPtr _render){
     SVMtlCore::_submitMtl(_render);
-    _render->submitUniformf("m_temperature", m_Temperature);
-    _render->submitUniformf("m_tint", m_Tint);
+//    _render->submitUniformf("m_temperature", m_Temperature);
+//    _render->submitUniformf("m_tint", m_Tint);
 }
 
 SVMtlGamma::SVMtlGamma(SVInstPtr _app)
@@ -327,7 +326,7 @@ void SVMtlGamma::setGamma(f32 _smooth){
 
 void SVMtlGamma::_submitMtl(SVRendererPtr _render){
     SVMtlCore::_submitMtl(_render);
-    _render->submitUniformf("m_gamma", m_Gamma);
+    //_render->submitUniformf("m_gamma", m_Gamma);
 }
 
 SVMtlExposure::SVMtlExposure(SVInstPtr _app)
@@ -354,5 +353,5 @@ void SVMtlExposure::setExposure(f32 _smooth){
 
 void SVMtlExposure::_submitMtl(SVRendererPtr _render){
     SVMtlCore::_submitMtl(_render);
-    _render->submitUniformf("m_exposure", m_Exposure);
+    //_render->submitUniformf("m_exposure", m_Exposure);
 }

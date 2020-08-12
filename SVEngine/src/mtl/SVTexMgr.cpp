@@ -111,10 +111,15 @@ SVTexturePtr SVTexMgr::getInTexture(SVINTEX _texid) {
     return nullptr;
 }
 
-SVTexturePtr SVTexMgr::createInTexture(SVINTEX _texname,SVTextureDsp _param) {
+SVTexturePtr SVTexMgr::createInTexture(SVINTEX _texname,SVTextureDsp _dsp) {
     if(_texname>=E_TEX_MAIN && _texname<E_TEX_END){
+        if(m_intex_pool[_texname]) {
+            return m_intex_pool[_texname];
+        }
         m_intex_pool[_texname] = MakeSharedPtr<SVTexture>(mApp);
-        //m_intex_pool[_texname] ->init(_param);
+        m_intex_pool[_texname] ->init(_dsp);
+        SVDispatch::dispatchTextureCreate(mApp, m_intex_pool[_texname]);
+        return m_intex_pool[_texname];
     }
     return nullptr;
 }

@@ -10,6 +10,7 @@
 
 #include "SVRenderDeclare.h"
 #include "../mtl/SVMtlDeclare.h"
+#include "../work/SVWorkDeclare.h"
 #include "../base/SVGBase.h"
 #include "../base/SVMat4.h"
 #include "../base/SVArray.h"
@@ -17,8 +18,6 @@
 #include "../core/SVVertDef.h"
 
 //渲染器封装的是算法
-
-//渲染内核跨平台
 
 namespace sv {
 
@@ -53,7 +52,6 @@ namespace sv {
         //重置大小
         virtual void resize(s32 _w,s32 _h);
         
-    public:
         //创建资源接口
         //纹理
         virtual SVRTexPtr createResTexture() { return nullptr; }
@@ -67,7 +65,6 @@ namespace sv {
         //fbo
         virtual SVRFboPtr createResFbo() { return nullptr; }
         
-    public:
         //增加渲染内核资源
         void addRes(SVRResPtr _res);
         
@@ -78,9 +75,7 @@ namespace sv {
         void clearRes();
         
         virtual void setCurTarget(SVRTargetPtr _target);
-        
-        SVRTargetPtr curTarget(){ return m_cur_target; }
-        
+    
         //处理材质
         virtual bool processMtl(SVMtlCorePtr _mtl,SVSurfacePtr _surface){ return false; }
         
@@ -96,12 +91,7 @@ namespace sv {
         //自动回收
         virtual void removeUnuseRes();
         
-    protected:
-        SVRTargetPtr m_cur_target;      //当前的target
-        
     public:
-        //是否存在内置纹理
-        bool hasSVTex(SVINTEX _type);
         //获取渲染状态
         SVRenderStatePtr getState();
         //重置状态
@@ -122,23 +112,28 @@ namespace sv {
         void clearMatStack();
         
     protected:
+        //当前的target
+        SVRTargetPtr m_cur_target;
+        
         //资源创建，销毁pipline
         SVRenderPiplinePtr m_resPipline; //写管线
+        
         //渲染pipline
         SVRenderPiplinePtr m_readPipline;  //读管线
-        //各种内置纹理
-        SVTexturePtr m_svTex[E_TEX_END];
         
         //渲染内核资源,起到资源统计和管理的作用
         typedef SVArray<SVRResPtr> ROBJLIST;
         ROBJLIST m_robjList;
         
         //资源锁
-        SVLockPtr m_resLock;
+        SVLockSpinPtr m_resLock;
+        
         //渲染状态
         SVRenderStatePtr m_pRState;
+        
         //渲染VP
         SVStack<VPParam,10> m_vpStack;  //viewport堆栈
+        
         //
         typedef SVStack<FMat4,10> MAT4STACK;//注意：栈最大支持的矩阵个数为10个
         MAT4STACK m_stack_proj;
@@ -152,42 +147,6 @@ namespace sv {
         s32 m_outHeight;
         
     public:
-        //提交unifrom matrix
-        virtual void submitUniformMatrix(cptr8 _name,f32* _data){}
-        //提交unifrom matrix array
-        virtual void submitUniformMatrixArray(cptr8 _name,f32* _data,s32 _size){}
-        //提交unifrom i1
-        virtual void submitUniformi(cptr8 _name,s32 _data){}
-        //提交unifrom i2
-        virtual void submitUniformi2(cptr8 _name,s32 _data1,s32 _data2){}
-        //提交unifrom i3
-        virtual void submitUniformi3(cptr8 _name,s32 _data1,s32 _data2,s32 _data3){}
-        //提交unifrom i4
-        virtual void submitUniformi4(cptr8 _name,s32 _data1,s32 _data2,s32 _data3,s32 _data4){}
-        //提交unifrom f1
-        virtual void submitUniformf(cptr8 _name,f32 _data){}
-        //提交unifrom f2
-        virtual void submitUniformf2(cptr8 _name,f32 _data1,f32 _data2){}
-        //提交unifrom f3
-        virtual void submitUniformf3(cptr8 _name,f32 _data1,f32 _data2,f32 _data3){}
-        //提交unifrom f4
-        virtual void submitUniformf4(cptr8 _name,f32 _data1,f32 _data2,f32 _data3,f32 _data4){}
-        //提交unifrom s32 v1
-        virtual void submitUniformi1v(cptr8 _name,s32* _data,s32 _size = 1){}
-        //提交unifrom s32 v2
-        virtual void submitUniformi2v(cptr8 _name,s32* _data,s32 _size = 1){}
-        //提交unifrom s32 v3
-        virtual void submitUniformi3v(cptr8 _name,s32* _data,s32 _size = 1){}
-        //提交unifrom s32 v4
-        virtual void submitUniformi4v(cptr8 _name,s32* _data,s32 _size = 1){}
-        //提交unifrom f32 v1
-        virtual void submitUniformf1v(cptr8 _name,f32* _data,s32 _size = 1){}
-        //提交unifrom f32 v2
-        virtual void submitUniformf2v(cptr8 _name,f32* _data,s32 _size = 1){}
-        //提交unifrom f32 v3
-        virtual void submitUniformf3v(cptr8 _name,f32* _data,s32 _size = 1){}
-        //提交unifrom f32 v4
-        virtual void submitUniformf4v(cptr8 _name,f32* _data,s32 _size = 1){}
         //提交线宽
         virtual void submitLineWidth(f32 _width){}
         //提交点大小

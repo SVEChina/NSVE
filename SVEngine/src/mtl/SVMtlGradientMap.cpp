@@ -22,7 +22,6 @@ SVMtlGradientMap::SVMtlGradientMap(SVMtlGradientMap* _mtl)
 }
 
 SVMtlGradientMap::~SVMtlGradientMap(){
-    
 }
 
 SVMtlCorePtr SVMtlGradientMap::clone(){
@@ -37,6 +36,6 @@ void SVMtlGradientMap::setSmooth(f32 _smooth){
 
 void SVMtlGradientMap::_submitMtl(SVRendererPtr _render){
     SVMtlCore::_submitMtl(_render);
-    _render->submitUniformf("softenStrength", m_lSmoothSize);
+    //_render->submitUniformf("softenStrength", m_lSmoothSize);
 }
 

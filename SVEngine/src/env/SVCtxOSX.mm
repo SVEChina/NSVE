@@ -74,6 +74,7 @@ bool SVCtxOSXMetal::activeContext(SVRendererPtr _renderer){
         m_pass.colorAttachments[0].clearColor = MTLClearColorMake(0.5f, 0.0f, 0.5f, 1);
         m_cmdBuffer = [t_rm->m_pCmdQueue commandBuffer];
         m_cmdEncoder = [m_cmdBuffer renderCommandEncoderWithDescriptor:m_pass];
+        t_rm->m_pCurEncoder = m_cmdEncoder;
         return true;
     }
     return false;

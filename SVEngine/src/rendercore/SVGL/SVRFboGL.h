@@ -31,9 +31,9 @@ namespace sv {
 
     protected:
         u32 m_fbo_id;
-        u32 m_pTargetTex[MAX_SUPPORT_TEXTAREGT];
-        u32 m_pDepthTex;
-        u32 m_pStencilTex;
+        u32 m_color_tex[SV_SUPPORT_MAX_TAREGT];
+        u32 m_depth_Tex;
+        u32 m_stencil_Tex;
         bool m_out_tex;
     };
 

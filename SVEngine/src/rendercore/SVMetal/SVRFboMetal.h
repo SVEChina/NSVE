@@ -42,12 +42,11 @@ namespace sv {
         void _createStencilBuf(SVRendererMetalPtr _renderer) ;
         
     public:
-        id<MTLDrawable> m_pTarget;
-        id<MTLTexture> m_pTargetTex[MAX_SUPPORT_TEXTAREGT];
-        id<MTLTexture> m_pDepthTex;
-        id<MTLTexture> m_pStencilTex;
+        id<MTLTexture> m_color_tex[SV_SUPPORT_MAX_TAREGT];
+        id<MTLTexture> m_depth_tex;
+        id<MTLTexture> m_stencil_tex;
         //
-        MTLRenderPassDescriptor* m_passDsp;
+        MTLRenderPassDescriptor* m_pass;
         id<MTLCommandBuffer> m_cmdBuffer;
         id<MTLRenderCommandEncoder> m_cmdEncoder;
     };

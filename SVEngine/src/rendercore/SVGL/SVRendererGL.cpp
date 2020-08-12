@@ -46,13 +46,13 @@ void SVRendererGL::init(s32 _w,s32 _h){
     m_inHeight = _h;
     mApp->m_global_param.m_sv_width = _w;
     mApp->m_global_param.m_sv_height = _h;
-    //
-    SVRFboGLPtr t_fbo = std::dynamic_pointer_cast<SVRFboGL>( createResFbo() );    //
-    SVRTargetPtr t_target = MakeSharedPtr<SVRTarget>(mApp);
-    t_target->bindRes(t_fbo);
-    //设置主RTarget
-    t_target->setRenderPath();
-    mApp->getRenderMgr()->setMainRT(t_target);
+//    //
+//    SVRFboGLPtr t_fbo = std::dynamic_pointer_cast<SVRFboGL>( createResFbo() );    //
+//    SVRTargetPtr t_target = MakeSharedPtr<SVRTarget>(mApp);
+//    t_target->bindRes(t_fbo);
+//    //设置主RTarget
+//    t_target->setRenderPath();
+//    mApp->getRenderMgr()->setMainRT(t_target);
 }
 
 void SVRendererGL::init(s32 _w,s32 _h,bool _offline) {
@@ -144,7 +144,6 @@ void SVRendererGL::drawMesh(SVRenderMeshPtr _mesh ) {
 //    if(_unit.m_texForm == E_TEX_END) {
 //        t_aimTex = _unit.m_pTex;
 //    }else {
-//        t_aimTex = m_svTex[_unit.m_texForm];
 //    }
 //    //
 //    if (!t_aimTex) {
@@ -282,146 +281,146 @@ void SVRendererGL::drawMesh(SVRenderMeshPtr _mesh ) {
 //#endif
 //}
 
-//提交unifrom matrix
-void SVRendererGL::submitUniformMatrix(cptr8 _name,f32* _data){
-    s32 m_uni_m = glGetUniformLocation(m_pRState->m_shaderID, _name);
-    if(m_uni_m>=0) {
-        glUniformMatrix4fv(m_uni_m, 1, GL_FALSE, _data);
-    }
-}
-
-//提交unifrom matrix
-void SVRendererGL::submitUniformMatrixArray(cptr8 _name,f32* _data,s32 _size){
-    s32 m_uni_m = glGetUniformLocation(m_pRState->m_shaderID, _name);
-    if(m_uni_m>=0) {
-        glUniformMatrix4fv(m_uni_m, _size, GL_FALSE, _data);
-    }
-}
-
-//提交unifrom i1
-void SVRendererGL::submitUniformi(cptr8 _name,s32 _data) {
-    s32 m_uni_m = glGetUniformLocation(m_pRState->m_shaderID, _name);
-    if(m_uni_m>=0) {
-        glUniform1i(m_uni_m, _data);
-    }
-}
-//提交unifrom i2
-void SVRendererGL::submitUniformi2(cptr8 _name,s32 _data1,s32 _data2) {
-    s32 m_uni_m = glGetUniformLocation(m_pRState->m_shaderID, _name);
-    if(m_uni_m>=0) {
-        glUniform2i(m_uni_m, _data1,_data2);
-    }
-}
-
-//提交unifrom i3
-void SVRendererGL::submitUniformi3(cptr8 _name,s32 _data1,s32 _data2,s32 _data3) {
-    s32 m_uni_m = glGetUniformLocation(m_pRState->m_shaderID, _name);
-    if(m_uni_m>=0) {
-        glUniform3i(m_uni_m, _data1,_data2,_data3);
-    }
-}
-
-//提交unifrom i4
-void SVRendererGL::submitUniformi4(cptr8 _name,s32 _data1,s32 _data2,s32 _data3,s32 _data4) {
-    s32 m_uni_m = glGetUniformLocation(m_pRState->m_shaderID, _name);
-    if(m_uni_m>=0) {
-        glUniform4i(m_uni_m, _data1,_data2,_data3,_data4);
-    }
-}
-
-//提交unifrom f1
-void SVRendererGL::submitUniformf(cptr8 _name,f32 _data){
-    s32 m_uni_m = glGetUniformLocation(m_pRState->m_shaderID, _name);
-    if(m_uni_m>=0) {
-        glUniform1f(m_uni_m, _data);
-    }
-}
-
-//提交unifrom f2
-void SVRendererGL::submitUniformf2(cptr8 _name,f32 _data1,f32 _data2) {
-    s32 m_uni_m = glGetUniformLocation(m_pRState->m_shaderID, _name);
-    if(m_uni_m>=0) {
-        glUniform2f(m_uni_m, _data1,_data2);
-    }
-}
-//提交unifrom f3
-void SVRendererGL::submitUniformf3(cptr8 _name,f32 _data1,f32 _data2,f32 _data3) {
-    s32 m_uni_m = glGetUniformLocation(m_pRState->m_shaderID, _name);
-    if(m_uni_m>=0) {
-        glUniform3f(m_uni_m,_data1,_data2,_data3);
-    }
-}
-
-//提交unifrom f4
-void SVRendererGL::submitUniformf4(cptr8 _name,f32 _data1,f32 _data2,f32 _data3,f32 _data4) {
-    s32 m_uni_m = glGetUniformLocation(m_pRState->m_shaderID, _name);
-    if(m_uni_m>=0) {
-        glUniform4f(m_uni_m,_data1,_data2,_data3,_data4);
-    }
-}
-
-//提交unifrom s32 v1
-void SVRendererGL::submitUniformi1v(cptr8 _name,s32* _data,s32 _size) {
-    s32 m_uni_m = glGetUniformLocation(m_pRState->m_shaderID, _name);
-    if(m_uni_m>=0) {
-        glUniform1iv(m_uni_m, _size , _data);
-    }
-}
-
-//提交unifrom s32 v2
-void SVRendererGL::submitUniformi2v(cptr8 _name,s32* _data,s32 _size) {
-    s32 m_uni_m = glGetUniformLocation(m_pRState->m_shaderID, _name);
-    if(m_uni_m>=0) {
-        glUniform2iv(m_uni_m, _size , _data);
-    }
-}
-
-//提交unifrom s32 v3
-void SVRendererGL::submitUniformi3v(cptr8 _name,s32* _data,s32 _size) {
-    s32 m_uni_m = glGetUniformLocation(m_pRState->m_shaderID, _name);
-    if(m_uni_m>=0) {
-        glUniform3iv(m_uni_m, _size , _data);
-    }
-}
-
-//提交unifrom s32 v4
-void SVRendererGL::submitUniformi4v(cptr8 _name,s32* _data,s32 _size) {
-    s32 m_uni_m = glGetUniformLocation(m_pRState->m_shaderID, _name);
-    if(m_uni_m>=0) {
-        glUniform4iv(m_uni_m, _size , _data);
-    }
-}
-
-//提交unifrom f32 v1
-void SVRendererGL::submitUniformf1v(cptr8 _name,f32* _data,s32 _size){
-    s32 m_uni_m = glGetUniformLocation(m_pRState->m_shaderID, _name);
-    if(m_uni_m>=0) {
-        glUniform1fv(m_uni_m, _size , _data);
-    }
-}
-
-//提交unifrom f32 v2
-void SVRendererGL::submitUniformf2v(cptr8 _name,f32* _data,s32 _size){
-    s32 m_uni_m = glGetUniformLocation(m_pRState->m_shaderID, _name);
-    if(m_uni_m>=0) {
-        glUniform2fv(m_uni_m, _size , _data);
-    }
-}
-
-//提交unifrom f32 v3
-void SVRendererGL::submitUniformf3v(cptr8 _name,f32* _data,s32 _size){
-    s32 m_uni_m = glGetUniformLocation(m_pRState->m_shaderID, _name);
-    if(m_uni_m>=0) {
-        glUniform3fv(m_uni_m, _size , _data);
-    }
-}
-//提交unifrom f32 v4
-void SVRendererGL::submitUniformf4v(cptr8 _name,f32* _data,s32 _size){
-    s32 m_uni_m = glGetUniformLocation(m_pRState->m_shaderID, _name);
-    if(m_uni_m>=0) {
-        glUniform4fv(m_uni_m, _size , _data);
-    }
-}
+////提交unifrom matrix
+//void SVRendererGL::submitUniformMatrix(cptr8 _name,f32* _data){
+//    s32 m_uni_m = glGetUniformLocation(m_pRState->m_shaderID, _name);
+//    if(m_uni_m>=0) {
+//        glUniformMatrix4fv(m_uni_m, 1, GL_FALSE, _data);
+//    }
+//}
+//
+////提交unifrom matrix
+//void SVRendererGL::submitUniformMatrixArray(cptr8 _name,f32* _data,s32 _size){
+//    s32 m_uni_m = glGetUniformLocation(m_pRState->m_shaderID, _name);
+//    if(m_uni_m>=0) {
+//        glUniformMatrix4fv(m_uni_m, _size, GL_FALSE, _data);
+//    }
+//}
+//
+////提交unifrom i1
+//void SVRendererGL::submitUniformi(cptr8 _name,s32 _data) {
+//    s32 m_uni_m = glGetUniformLocation(m_pRState->m_shaderID, _name);
+//    if(m_uni_m>=0) {
+//        glUniform1i(m_uni_m, _data);
+//    }
+//}
+////提交unifrom i2
+//void SVRendererGL::submitUniformi2(cptr8 _name,s32 _data1,s32 _data2) {
+//    s32 m_uni_m = glGetUniformLocation(m_pRState->m_shaderID, _name);
+//    if(m_uni_m>=0) {
+//        glUniform2i(m_uni_m, _data1,_data2);
+//    }
+//}
+//
+////提交unifrom i3
+//void SVRendererGL::submitUniformi3(cptr8 _name,s32 _data1,s32 _data2,s32 _data3) {
+//    s32 m_uni_m = glGetUniformLocation(m_pRState->m_shaderID, _name);
+//    if(m_uni_m>=0) {
+//        glUniform3i(m_uni_m, _data1,_data2,_data3);
+//    }
+//}
+//
+////提交unifrom i4
+//void SVRendererGL::submitUniformi4(cptr8 _name,s32 _data1,s32 _data2,s32 _data3,s32 _data4) {
+//    s32 m_uni_m = glGetUniformLocation(m_pRState->m_shaderID, _name);
+//    if(m_uni_m>=0) {
+//        glUniform4i(m_uni_m, _data1,_data2,_data3,_data4);
+//    }
+//}
+//
+////提交unifrom f1
+//void SVRendererGL::submitUniformf(cptr8 _name,f32 _data){
+//    s32 m_uni_m = glGetUniformLocation(m_pRState->m_shaderID, _name);
+//    if(m_uni_m>=0) {
+//        glUniform1f(m_uni_m, _data);
+//    }
+//}
+//
+////提交unifrom f2
+//void SVRendererGL::submitUniformf2(cptr8 _name,f32 _data1,f32 _data2) {
+//    s32 m_uni_m = glGetUniformLocation(m_pRState->m_shaderID, _name);
+//    if(m_uni_m>=0) {
+//        glUniform2f(m_uni_m, _data1,_data2);
+//    }
+//}
+////提交unifrom f3
+//void SVRendererGL::submitUniformf3(cptr8 _name,f32 _data1,f32 _data2,f32 _data3) {
+//    s32 m_uni_m = glGetUniformLocation(m_pRState->m_shaderID, _name);
+//    if(m_uni_m>=0) {
+//        glUniform3f(m_uni_m,_data1,_data2,_data3);
+//    }
+//}
+//
+////提交unifrom f4
+//void SVRendererGL::submitUniformf4(cptr8 _name,f32 _data1,f32 _data2,f32 _data3,f32 _data4) {
+//    s32 m_uni_m = glGetUniformLocation(m_pRState->m_shaderID, _name);
+//    if(m_uni_m>=0) {
+//        glUniform4f(m_uni_m,_data1,_data2,_data3,_data4);
+//    }
+//}
+//
+////提交unifrom s32 v1
+//void SVRendererGL::submitUniformi1v(cptr8 _name,s32* _data,s32 _size) {
+//    s32 m_uni_m = glGetUniformLocation(m_pRState->m_shaderID, _name);
+//    if(m_uni_m>=0) {
+//        glUniform1iv(m_uni_m, _size , _data);
+//    }
+//}
+//
+////提交unifrom s32 v2
+//void SVRendererGL::submitUniformi2v(cptr8 _name,s32* _data,s32 _size) {
+//    s32 m_uni_m = glGetUniformLocation(m_pRState->m_shaderID, _name);
+//    if(m_uni_m>=0) {
+//        glUniform2iv(m_uni_m, _size , _data);
+//    }
+//}
+//
+////提交unifrom s32 v3
+//void SVRendererGL::submitUniformi3v(cptr8 _name,s32* _data,s32 _size) {
+//    s32 m_uni_m = glGetUniformLocation(m_pRState->m_shaderID, _name);
+//    if(m_uni_m>=0) {
+//        glUniform3iv(m_uni_m, _size , _data);
+//    }
+//}
+//
+////提交unifrom s32 v4
+//void SVRendererGL::submitUniformi4v(cptr8 _name,s32* _data,s32 _size) {
+//    s32 m_uni_m = glGetUniformLocation(m_pRState->m_shaderID, _name);
+//    if(m_uni_m>=0) {
+//        glUniform4iv(m_uni_m, _size , _data);
+//    }
+//}
+//
+////提交unifrom f32 v1
+//void SVRendererGL::submitUniformf1v(cptr8 _name,f32* _data,s32 _size){
+//    s32 m_uni_m = glGetUniformLocation(m_pRState->m_shaderID, _name);
+//    if(m_uni_m>=0) {
+//        glUniform1fv(m_uni_m, _size , _data);
+//    }
+//}
+//
+////提交unifrom f32 v2
+//void SVRendererGL::submitUniformf2v(cptr8 _name,f32* _data,s32 _size){
+//    s32 m_uni_m = glGetUniformLocation(m_pRState->m_shaderID, _name);
+//    if(m_uni_m>=0) {
+//        glUniform2fv(m_uni_m, _size , _data);
+//    }
+//}
+//
+////提交unifrom f32 v3
+//void SVRendererGL::submitUniformf3v(cptr8 _name,f32* _data,s32 _size){
+//    s32 m_uni_m = glGetUniformLocation(m_pRState->m_shaderID, _name);
+//    if(m_uni_m>=0) {
+//        glUniform3fv(m_uni_m, _size , _data);
+//    }
+//}
+////提交unifrom f32 v4
+//void SVRendererGL::submitUniformf4v(cptr8 _name,f32* _data,s32 _size){
+//    s32 m_uni_m = glGetUniformLocation(m_pRState->m_shaderID, _name);
+//    if(m_uni_m>=0) {
+//        glUniform4fv(m_uni_m, _size , _data);
+//    }
+//}
 
 ////提交融合参数
 //void SVRendererGL::submitBlend(SVBlendParam& _param){

@@ -39,7 +39,7 @@ namespace sv {
         SVTexturePtr getInTexture(SVINTEX _texname);
         
         //创建内部纹理
-        SVTexturePtr createInTexture(SVINTEX _texname,SVTextureDsp _param);
+        SVTexturePtr createInTexture(SVINTEX _texname,SVTextureDsp _dsp);
         
         bool hasInTexture(SVINTEX _texid);
         

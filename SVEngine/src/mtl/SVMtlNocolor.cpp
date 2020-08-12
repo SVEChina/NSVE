@@ -42,7 +42,7 @@ void SVMtlNocolor::update(f32 dt) {
 
 void SVMtlNocolor::_submitMtl(SVRendererPtr _render) {
     SVMtlCore::_submitMtl(_render);
-    _render->submitUniformf("u_lerp", m_lerp);
+    //_render->submitUniformf("u_lerp", m_lerp);
 }
 
 //
@@ -65,7 +65,7 @@ void SVMtlGeo3d::setColor(f32 _r,f32 _g,f32 _b,f32 _a){
 
 void SVMtlGeo3d::_submitMtl(SVRendererPtr _render) {
     SVMtlCore::_submitMtl(_render);
-    _render->submitUniformf4("u_color", m_color.r, m_color.g, m_color.b, m_color.a);
+    //_render->submitUniformf4("u_color", m_color.r, m_color.g, m_color.b, m_color.a);
 }
 
 //坐标
@@ -116,23 +116,23 @@ SVMtlNetGrid::~SVMtlNetGrid() {
 
 void SVMtlNetGrid::_submitMtl(SVRendererPtr _render) {
     SVMtlCore::_submitMtl(_render);
-    _render->submitUniformf("u_gsize", m_gridsize);
-    _render->submitUniformf("u_border", m_boder); //最小是2.0f
-    _render->submitUniformf("u_tbl_w", m_width); //最小是2.0f
-    _render->submitUniformf("u_tbl_h", m_height); //最小是2.0f
-    //设置颜色
-    _render->submitUniformf4("u_bg_color", m_bg_color.r,
-                             m_bg_color.g,
-                             m_bg_color.b,
-                             m_bg_color.a);
-    _render->submitUniformf4("u_border_color", m_border_color.r,
-                             m_border_color.g,
-                             m_border_color.b,
-                             m_border_color.a);
-    _render->submitUniformf4("u_line_color", m_line_color.r,
-                             m_line_color.g,
-                             m_line_color.b,
-                             m_line_color.a);
+//    _render->submitUniformf("u_gsize", m_gridsize);
+//    _render->submitUniformf("u_border", m_boder); //最小是2.0f
+//    _render->submitUniformf("u_tbl_w", m_width); //最小是2.0f
+//    _render->submitUniformf("u_tbl_h", m_height); //最小是2.0f
+//    //设置颜色
+//    _render->submitUniformf4("u_bg_color", m_bg_color.r,
+//                             m_bg_color.g,
+//                             m_bg_color.b,
+//                             m_bg_color.a);
+//    _render->submitUniformf4("u_border_color", m_border_color.r,
+//                             m_border_color.g,
+//                             m_border_color.b,
+//                             m_border_color.a);
+//    _render->submitUniformf4("u_line_color", m_line_color.r,
+//                             m_line_color.g,
+//                             m_line_color.b,
+//                             m_line_color.a);
 }
 
 void SVMtlNetGrid::setGridParam(s32 _gridsize,s32 _border) {
@@ -184,13 +184,13 @@ SVMtlParticleAni::~SVMtlParticleAni() {
 
 void SVMtlParticleAni::_submitMtl(SVRendererPtr _render) {
     SVMtlCore::_submitMtl(_render);
-    _render->submitUniformMatrix("s_p_transform", m_p_transform.get());
-    _render->submitUniformf4v("animation_transform", m_ani_trans.get());
-    _render->submitUniformf4v("diffuse_color", m_diffuse_color.get());
-    _render->submitUniformf("diffuse_scale", m_diffuse_scale);
-    _render->submitUniformf4v("s_ambient_color", m_ambient_color.get());
-    _render->submitUniformf("s_particles_fade", m_p_fade);
-    _render->submitUniformf("s_particles_radius", m_p_radius);
+//    _render->submitUniformMatrix("s_p_transform", m_p_transform.get());
+//    _render->submitUniformf4v("animation_transform", m_ani_trans.get());
+//    _render->submitUniformf4v("diffuse_color", m_diffuse_color.get());
+//    _render->submitUniformf("diffuse_scale", m_diffuse_scale);
+//    _render->submitUniformf4v("s_ambient_color", m_ambient_color.get());
+//    _render->submitUniformf("s_particles_fade", m_p_fade);
+//    _render->submitUniformf("s_particles_radius", m_p_radius);
 }
 
 

@@ -26,23 +26,16 @@ namespace sv {
             m_width = 512;
             m_height = 512;
             m_target_num = 1;
+            memset(m_color_texid,0,sizeof(s32)*SV_SUPPORT_MAX_TAREGT);
             m_use_depth = true;
             m_use_stencil = true;
-            m_gl_tex = 0;
-            m_oc_target = nullptr;
-            m_oc_texture = nullptr;
         }
-        
         s32 m_width;
         s32 m_height;
         s32 m_target_num;
+        s32 m_color_texid[SV_SUPPORT_MAX_TAREGT];
         bool m_use_depth;
         bool m_use_stencil;
-        //gl
-        u32 m_gl_tex;
-        //metal专用参数
-        void* m_oc_target;
-        void* m_oc_texture;
     };
 
     //
