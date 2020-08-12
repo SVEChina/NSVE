@@ -22,8 +22,37 @@ SVMtlLib::~SVMtlLib() {
 }
 
 void SVMtlLib::init() {
-    createMtl("screen.mtl");
-    createMtl("sprite.mtl");
+    //加载默认的材质包
+    SVDataChunk tDataStream;
+    SV_LOG_ERROR("load mtlpack begin\n");
+    bool tflag = mApp->getFileMgr()->loadFileContentStr(&tDataStream, "base.pack");
+    if (!tflag) {
+       SV_LOG_INFO("not find base.pack! please check pack!\n");
+       return;
+    }
+    SV_LOG_ERROR("file context %s \n", tDataStream.getPointerChar());
+    RAPIDJSON_NAMESPACE::Document doc;
+    doc.Parse<0>(tDataStream.getPointerChar());
+    if (doc.HasParseError()) {
+       RAPIDJSON_NAMESPACE::ParseErrorCode code = doc.GetParseError();
+       SV_LOG_ERROR("rapidjson error code:%d \n", code);
+       return;
+    }
+    //包名
+    if ( doc.HasMember("name") && doc["name"].IsString() ) {
+        RAPIDJSON_NAMESPACE::Value &t_name = doc["name"];
+        SVString t_packname = t_name.GetString();
+    }
+    //文件列表
+    if ( doc.HasMember("files") && doc["files"].IsArray() ) {
+        RAPIDJSON_NAMESPACE::Value &t_mtlfiles = doc["files"];
+        RAPIDJSON_NAMESPACE::Document::Array t_files = t_mtlfiles.GetArray();
+        for(s32 i=0;i<t_files.Size();i++) {
+            SVString t_filename = t_files[i].GetString();
+            createMtl(t_filename.c_str());
+        }
+    }
+    SV_LOG_DEBUG("load mtlpack end\n");
 }
 
 void SVMtlLib::destroy() {
@@ -56,7 +85,6 @@ SVMtlCorePtr SVMtlLib::getMtl(s32 _mtlID) {
 }
 
 SVMtlCorePtr SVMtlLib::getMtl(cptr8 _mtlname) {
-    //本身找
     MTLPOOL::iterator it = m_mtlPool.find(_mtlname);
     if(it!=m_mtlPool.end()) {
         return it->second;

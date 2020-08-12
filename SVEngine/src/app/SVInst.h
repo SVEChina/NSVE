@@ -104,7 +104,7 @@ namespace sv {
         SVRenderMgrPtr getRenderMgr();
         SVDetectMgrPtr getDetectMgr();
         SVDeformMgrPtr getDeformMgr();
-        SVComDataPtr getDataMgr();
+        SVComDataPtr getComData();
         SVModelMgrPtr getModelMgr();
         SVPhysicsWorldMgrPtr getPhysicsWorldMgr();
         SVRendererPtr getRenderer();

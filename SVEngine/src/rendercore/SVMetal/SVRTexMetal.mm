@@ -69,7 +69,7 @@ void SVRTexMetal:: create(SVRendererPtr _renderer) {
         t_descriptor.mipmapLevelCount = 1;
         t_descriptor.sampleCount      = t_rm->m_samplenum;  //跟msaa相关
         t_descriptor.arrayLength      = 1;
-        if (t_rm->m_iOS9Runtime ||  t_rm->m_macOS11Runtime){
+        if (t_rm->m_iOS9Runtime || t_rm->m_macOS11Runtime){
             t_descriptor.cpuCacheMode = MTLCPUCacheModeDefaultCache;
             t_descriptor.storageMode = MTLStorageModeManaged;   //存储方式 MTLStorageModeShared/MTLStorageModeManaged/MTLStorageModePrivate/MTLStorageModeMemoryless
             t_descriptor.usage = MTLTextureUsageShaderRead;
@@ -102,7 +102,7 @@ void SVRTexMetal:: create(SVRendererPtr _renderer) {
             t_descriptor.textureType = MTLTextureType2DMultisample;
             t_descriptor.sampleCount = t_rm->m_samplenum;
 
-            if (t_rm->m_iOS9Runtime ||  t_rm->m_macOS11Runtime){
+            if (t_rm->m_iOS9Runtime || t_rm->m_macOS11Runtime){
                 t_descriptor.storageMode = (MTLStorageMode)(2 /* MTLStorageModePrivate */);
             }
             //m_src_tex =  [t_rm->m_pDevice newTextureWithDescriptor:t_descriptor];

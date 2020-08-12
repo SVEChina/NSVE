@@ -37,47 +37,45 @@ SVGlobalMgr::SVGlobalMgr(SVInstPtr _app)
     m_pEventMgr = nullptr;
     m_pBasicSys = nullptr;
     m_pSceneMgr = nullptr;
-    m_pCameraMgr = nullptr;
-    m_pShaderMgr = nullptr;
-    m_pTexMgr = nullptr;
-    m_pRenderMgr = nullptr;
-    m_pDetectMgr = nullptr;
-    m_pComData = nullptr;
+    m_camera_mgr = nullptr;
+    m_shader_mgr = nullptr;
+    m_tex_mgr = nullptr;
+    m_render_mgr = nullptr;
+    m_detect_mgr = nullptr;
+    m_commonData = nullptr;
     m_pModelMgr = nullptr;
     m_pDeformSys = nullptr;
     m_pPhysicSys =nullptr;
     m_pLightSys = nullptr;
-    m_pMtlLib = nullptr;
-    
-    //SVMtlLibPtr m_pMtlLib;
+    m_mtlLib = nullptr;
 }
 
 SVGlobalMgr::~SVGlobalMgr() {
     m_pEventMgr = nullptr;
     m_pBasicSys = nullptr;
     m_pSceneMgr = nullptr;
-    m_pCameraMgr = nullptr;
-    m_pShaderMgr = nullptr;
-    m_pTexMgr = nullptr;
-    m_pRenderMgr = nullptr;
-    m_pDetectMgr = nullptr;
-    m_pComData = nullptr;
+    m_camera_mgr = nullptr;
+    m_shader_mgr = nullptr;
+    m_tex_mgr = nullptr;
+    m_render_mgr = nullptr;
+    m_detect_mgr = nullptr;
+    m_commonData = nullptr;
     m_pModelMgr = nullptr;
     m_pDeformSys = nullptr;
     m_pPhysicSys =nullptr;
     m_pLightSys = nullptr;
-    m_pMtlLib = nullptr;
+    m_mtlLib = nullptr;
 }
 
 void SVGlobalMgr::init() {
     //渲染管理
-    m_pRenderMgr = MakeSharedPtr<SVRenderMgr>(mApp);
-    m_pRenderMgr->init();
-    SV_LOG_ERROR("sve init m_pRenderMgr end!\n");
+    m_render_mgr = MakeSharedPtr<SVRenderMgr>(mApp);
+    m_render_mgr->init();
+    SV_LOG_ERROR("sve init m_render_mgr end!\n");
     //构建静态数据
-    m_pComData = MakeSharedPtr<SVComData>(mApp);
-    m_pComData->init();
-    SV_LOG_ERROR("sve init m_pComData end!\n");
+    m_commonData = MakeSharedPtr<SVComData>(mApp);
+    m_commonData->init();
+    SV_LOG_ERROR("sve init m_commonData end!\n");
 //    //消息系统建立起来
 //    m_pEventMgr = MakeSharedPtr<SVEventMgr>(mApp);
 //    m_pEventMgr->init();
@@ -88,8 +86,8 @@ void SVGlobalMgr::init() {
 //    m_pPythonSys = MakeSharedPtr<SVPythonSys>(mApp));
 //    m_pPythonSys->init();
     //相机系统
-    m_pCameraMgr = MakeSharedPtr<SVCameraMgr>(mApp);
-    m_pCameraMgr->init();
+    m_camera_mgr = MakeSharedPtr<SVCameraMgr>(mApp);
+    m_camera_mgr->init();
 //    //灯光系统
 //    m_pLightSys = MakeSharedPtr<SVLightSys>(mApp);
 //    m_pLightSys->init();
@@ -97,28 +95,28 @@ void SVGlobalMgr::init() {
 //    m_pModuleSys = MakeSharedPtr<SVModuleSys>(mApp));
 //    m_pModuleSys->init();
     //纹理管理器初始化
-    m_pTexMgr = MakeSharedPtr<SVTexMgr>(mApp);
-    m_pTexMgr->init();
-    SV_LOG_ERROR("sve init m_pTexMgr end!\n");
+    m_tex_mgr = MakeSharedPtr<SVTexMgr>(mApp);
+    m_tex_mgr->init();
+    SV_LOG_ERROR("sve init m_tex_mgr end!\n");
     //shader程序初始化
-    m_pShaderMgr = MakeSharedPtr<SVShaderMgr>(mApp);
-    m_pShaderMgr->init();
-    SV_LOG_ERROR("sve init m_pShaderMgr end!\n");
+    m_shader_mgr = MakeSharedPtr<SVShaderMgr>(mApp);
+    m_shader_mgr->init();
+    SV_LOG_ERROR("sve init m_shader_mgr end!\n");
     //场景系统
     m_pSceneMgr = MakeSharedPtr<SVSceneMgr>(mApp);
     m_pSceneMgr->init();
     SV_LOG_ERROR("sve init SVSceneMgr end!\n");
     //材质库
-    m_pMtlLib = MakeSharedPtr<SVMtlLib>(mApp);
-    m_pMtlLib->init();
+    m_mtlLib = MakeSharedPtr<SVMtlLib>(mApp);
+    m_mtlLib->init();
     SV_LOG_ERROR("sve init SVMtlLib end! \n");
 //    //模型管理部分
 //    m_pModelMgr = MakeSharedPtr<SVModelMgr>(mApp.get());
 //    m_pModelMgr->init();
 
 //    //创建识别对象成功
-//    m_pDetectMgr = MakeSharedPtr<SVDetectMgr>(mApp.get());
-//    m_pDetectMgr->init(DETECT_T_ST);
+//    m_detect_mgr = MakeSharedPtr<SVDetectMgr>(mApp.get());
+//    m_detect_mgr->init(DETECT_T_ST);
 //    //变形系统
 //    m_pDeformSys = MakeSharedPtr<SVDeformMgr>(mApp.get());
 //    m_pDeformSys->init();
@@ -130,15 +128,15 @@ void SVGlobalMgr::init() {
 }
 
 void SVGlobalMgr::destroy() {
-//    if (m_pDetectMgr) {
+//    if (m_detect_mgr) {
 //        //识别模块
-//        m_pDetectMgr->destroy();
+//        m_detect_mgr->destroy();
 //        SV_LOG_ERROR("SVDetectMgr:destroy sucess");
 //    }
     //相机析构
-    if (m_pCameraMgr) {
+    if (m_camera_mgr) {
         //要先析构相机上的节点，才能析构场景
-        m_pCameraMgr->destroy();
+        m_camera_mgr->destroy();
         SV_LOG_ERROR("SVCameraMgr:destroy sucess");
     }
     //场景析构
@@ -149,14 +147,14 @@ void SVGlobalMgr::destroy() {
     }
 
     //纹理析够 析构都要用到渲染模块
-    if (m_pTexMgr) {
-        m_pTexMgr->destroy();
+    if (m_tex_mgr) {
+        m_tex_mgr->destroy();
         SV_LOG_ERROR("SVTexMgr:destroy sucess");
     }
     //shader析构
-    if (m_pShaderMgr) {
+    if (m_shader_mgr) {
         //shader 析构都要用到渲染模块
-        m_pShaderMgr->destroy();
+        m_shader_mgr->destroy();
         SV_LOG_ERROR("SVShaderMgr:destroy sucess");
     }
 //    //模型析构
@@ -169,9 +167,9 @@ void SVGlobalMgr::destroy() {
 //        m_pModuleSys->destroy();
 //        SV_LOG_ERROR("m_pModuleSys:destroy sucess");
 //    }
-    if (m_pRenderMgr) {
+    if (m_render_mgr) {
         //渲染析够
-        m_pRenderMgr->destroy();
+        m_render_mgr->destroy();
         SV_LOG_ERROR("SVRenderMgr:destroy sucess");
     }
 //    if(m_pBasicSys){
@@ -204,7 +202,7 @@ void SVGlobalMgr::destroy() {
 
 void SVGlobalMgr::update(f32 dt) {
 //    //
-//    m_pDetectMgr->update(dt);           //识别数据新更新
+//    m_detect_mgr->update(dt);           //识别数据新更新
 //    timeTag(false,"detect cost");
 //    //
 //    m_pModuleSys->update(dt);           //组件系统更新
@@ -217,9 +215,9 @@ void SVGlobalMgr::update(f32 dt) {
 //    timeTag(false,"model cost");
 //    m_pPhysicSys->update(dt);             //物理更新
 //    timeTag(false,"physics cost");
-    if(m_pCameraMgr) {
+    if(m_camera_mgr) {
         //相机更新
-        m_pCameraMgr->update(dt);
+        m_camera_mgr->update(dt);
         timeTag(false,"camera cost");
     }
 //    m_pLightSys->update(dt);            //灯光系统更新
@@ -231,7 +229,7 @@ void SVGlobalMgr::update(f32 dt) {
     }
 //    m_pDeformSys->update(dt);           //变形更新
 //    timeTag(false,"deform cost");
-//    m_pTexMgr->update(dt);              //删除不用的纹理
+//    m_tex_mgr->update(dt);              //删除不用的纹理
 //    timeTag(false,"texmgr cost");
 }
 

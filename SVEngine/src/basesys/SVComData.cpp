@@ -20,16 +20,15 @@ static u16 m_rect_index[6] = {0,1,2,2,1,3 };
     
 static f32 m_screen_rect_v2_t0[] = {
     -1.0f,-1.0f, 0.0f,0.0f,
-    1.0f,-1.0f, 0.0f,0.0f,
-    -1.0f,1.0f, 0.0f,0.0f,
-    1.0f,1.0f, 0.0f,0.0f
+    1.0f,-1.0f, 1.0f,0.0f,
+    -1.0f,1.0f, 0.0f,1.0f,
+    1.0f,1.0f, 1.0f,1.0f
 };
 
 SVComData::SVComData
 (SVInstPtr _app)
 :SVGBaseEx(_app) {
     m_screenMesh = nullptr;
-    m_screenAdaptMesh = nullptr;
     m_faceDataMesh = nullptr;
 }
 
@@ -38,20 +37,21 @@ SVComData::~SVComData() {
 }
 
 void SVComData::init() {
+    //
     m_screenMesh = MakeSharedPtr<SVRenderMesh>(mApp);
+    //索引描述
     BufferDspPtr t_index_dsp = MakeSharedPtr<BufferDsp>(E_BFM_AOS);
     t_index_dsp->push(SV_SMT_INDEX);
-    SVRenderMesh::buildBufferDsp(E_BFT_STATIC_DRAW,6,t_index_dsp);
+    t_index_dsp->build(E_BFT_STATIC_DRAW,6);
     t_index_dsp->setStreamData(0, m_rect_index, 6*sizeof(u16));
     m_screenMesh->setIndexDsp(t_index_dsp);
-    //
+    //顶点描述
     BufferDspPtr t_vert_dsp= MakeSharedPtr<BufferDsp>(E_BFM_AOS);
     t_vert_dsp->push(SV_SMT_V2);
     t_vert_dsp->push(SV_SMT_T0);
-    SVRenderMesh::buildBufferDsp(E_BFT_STATIC_DRAW,4,t_vert_dsp);
+    t_vert_dsp->build(E_BFT_STATIC_DRAW,4);
     t_vert_dsp->setStreamData(0, m_screen_rect_v2_t0, 16*sizeof(f32));
     m_screenMesh->setVertDsp(t_vert_dsp);
-    
     //这个必须有渲染器才可以执行
     SVDispatch::dispatchMeshCreate(mApp, m_screenMesh);
 }
@@ -131,14 +131,8 @@ SVRenderMeshPtr SVComData::generatePatchMesh(FVec3 &_corner00, FVec3 &_corner10,
 }
 
 void SVComData::destroy() {
-    m_screenMesh        = nullptr;
-    m_screenAdaptMesh = nullptr;
-    m_faceDataMesh       = nullptr;
-}
-
-SVFaceDataMeshPtr SVComData
-::getFaceDataMesh(){
-    return m_faceDataMesh;
+    m_screenMesh = nullptr;
+    m_faceDataMesh = nullptr;
 }
 
 //void SVComData::_initTwoDivisionMesh(){

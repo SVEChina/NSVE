@@ -35,7 +35,7 @@ SVShapeVariedNode::SVShapeVariedNode(SVInstPtr _app)
     ntype = "SVFaceShapeVariedNode";
 //    m_pRenderObj = MakeSharedPtr<SVRenderObject>();
 //    m_pMtl = MakeSharedPtr<SVMtlFaceShapeVaried>(mApp);
-//    m_pMesh =  mApp->getDataMgr()->m_screenMesh;
+//    m_pMesh =  mApp->getComData()->m_screenMesh;
 }
 
 SVShapeVariedNode::~SVShapeVariedNode(){
@@ -78,7 +78,7 @@ void SVShapeVariedNode::init(){
 //    SVPassPtr t_pass2 = MakeSharedPtr<SVPass>();
 //    t_pass2->setMtl(t_mtl);
 //    t_pass2->setInTex(0, t_tex);
-//    t_pass2->setMesh(mApp->getDataMgr()->m_screenMesh);
+//    t_pass2->setMesh(mApp->getComData()->screenMesh();
 //    t_pass2->setOutTex(t_renderer->getSVTex(E_TEX_MAIN));
 //    addPass(t_pass2);
 }

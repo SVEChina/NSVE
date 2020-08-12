@@ -3,6 +3,7 @@
     "name" : "sprite",
     "file": "shader/sprite.metal",
     "formate" : ["E_V3","E_T0"],
+    "pass" : "nor",
     "vs": {
         "entry": "vertexShader",
         "uniform": [

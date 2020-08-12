@@ -129,7 +129,7 @@ void SVDeformImageMove::init(SVTexturePtr _intex,SVTexturePtr _texout){
 //        t_mtl->setTexcoordFlip(1.0, -1.0);
 //        m_passBack = MakeSharedPtr<SVPass>();
 //        m_passBack->setMtl(t_mtl);
-//        m_passBack->setMesh(mApp->getDataMgr()->m_screenMesh);
+//        m_passBack->setMesh(mApp->getComData()->m_screenMesh);
 //        m_passBack->setInTex(0,E_TEX_FILTER_DEFORM02);
 //        m_passBack->setOutTex(_texout);
 //    }
@@ -283,7 +283,7 @@ void SVDeformImageMove::render(){
             if(m_passDeform->m_pMesh){
                 t_cmd->addMtlMesh(m_passDeform->m_pMtl,m_passDeform->m_pMesh);
             }else{
-                t_cmd->addMtlMesh(m_passDeform->m_pMtl,mApp->getDataMgr()->m_screenMesh);
+                t_cmd->addMtlMesh(m_passDeform->m_pMtl,mApp->getComData()->screenMesh());
             }
             if(m_passPoint->m_pMtl&&m_is_point){
                  t_cmd->addMtlMesh(m_passPoint->m_pMtl,m_passPoint->m_pMesh);

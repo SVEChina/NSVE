@@ -27,7 +27,7 @@ SVFrameOutTex::SVFrameOutTex(SVInstPtr _app)
 :SVFrameOutNode(_app){
     ntype = "SVFrameOutTex";
     m_pMtl = MakeSharedPtr<SVMtlCore>(mApp,"rgba");
-    m_pMesh = mApp->getDataMgr()->m_screenMesh;
+    m_pMesh = mApp->getComData()->screenMesh();
     SVRendererPtr t_renderer = mApp->getRenderer();
     if( t_renderer ) {
 //#if defined (SV_IOS)
@@ -77,7 +77,7 @@ void SVFrameOutTex::render(){
 //                t_cmd->mTag = "SVFrameOutTex";
 //                t_cmd->setFbo(m_fbo);
 //                t_cmd->setTexture(t_out_tex);
-//                t_cmd->setMesh(mApp->getDataMgr()->m_screenMesh);
+//                t_cmd->setMesh(mApp->getComData()->m_screenMesh);
 //                t_cmd->setMaterial(m_pMtl);
 //                t_rs->pushRenderCmd(RST_DATATRANS, t_cmd);
 //    }

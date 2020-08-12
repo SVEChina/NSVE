@@ -67,7 +67,7 @@ void SVFrameOutIOS::init(SV_OUTSTEAMFORMATE _outformate,s32 _w,s32 _h) {
 //    m_pMtl = MakeSharedPtr<SVMtlCore>(mApp, "rgba");
 //    s32 t_w =  mApp->m_global_param.m_sv_width;
 //    s32 t_h =  mApp->m_global_param.m_sv_height;
-//    m_mesh = mApp->getDataMgr()->generateAdaptScreenMesh(t_w, t_h, _w, _h);
+//    m_mesh = mApp->getComData()->generateAdaptScreenMesh(t_w, t_h, _w, _h);
 }
 
 void SVFrameOutIOS::destroy(){

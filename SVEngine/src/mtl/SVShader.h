@@ -22,20 +22,18 @@ namespace sv {
     struct ShaderDsp {
         ShaderDsp() {
             m_dsp = 0;
-            m_post = 0;
             m_programme_fname = "null";
+            m_pass = "null",
             m_vs_fname = "null";
             m_fs_fname = "null";
             m_gs_fname = "null";
             m_cs_fname = "null";
             m_tsc_fname = "null";
             m_tse_fname = "null";
-            m_attri_formate = "null";
             m_vft.clear();
         };
         //
         s32 m_dsp;
-        s32 m_post; //是否是后处理
         std::vector<s32> m_vft;
         SVString m_programme_fname;
         SVString m_vs_fname;
@@ -44,7 +42,7 @@ namespace sv {
         SVString m_cs_fname;
         SVString m_tsc_fname;
         SVString m_tse_fname;
-        SVString m_attri_formate;
+        SVString m_pass;
     };
 
     /*

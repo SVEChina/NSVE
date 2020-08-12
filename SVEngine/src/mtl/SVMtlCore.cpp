@@ -170,10 +170,7 @@ void SVMtlCore::setTexture(s32 _chn,SVTexturePtr _texture) {
 
 //逻辑更新
 void SVMtlCore::update(f32 dt) {
-    //更新shader
     reloadShader();
-    //更新surface
-    
 }
 
 void SVMtlCore::reloadShader(){
@@ -191,14 +188,12 @@ s32 SVMtlCore::submitMtl() {
 
 //交换
 void SVMtlCore::swap() {
-    
 }
 
 void SVMtlCore::_submitUniform(SVRendererPtr _render) {
 }
 
 void SVMtlCore::_submitMtl(SVRendererPtr _render) {
-    
 }
 
 void SVMtlCore::setBlendState(s32 _src , s32 _dst){
@@ -322,13 +317,11 @@ void SVMtlCore::fromJSON1(RAPIDJSON_NAMESPACE::Value &_item){
         RAPIDJSON_NAMESPACE::Document::Object t_value_obj = _item["blend-param"].GetObject();
         m_blend_enable = t_value_obj["enable"].GetInt();
     }
-    
     //stencil param 融合
     if (_item.HasMember("stencil-param") && _item["stencil-param"].IsObject()) {
         RAPIDJSON_NAMESPACE::Document::Object t_value_obj = _item["stencil-param"].GetObject();
         m_stencil_enable = t_value_obj["enable"].GetInt();
     }
-    
     //alpha param 融合
     if (_item.HasMember("alpha-param") && _item["alpha-param"].IsObject()) {
         RAPIDJSON_NAMESPACE::Document::Object t_value_obj = _item["alpha-param"].GetObject();

@@ -41,9 +41,6 @@ void SVRenderer::init(s32 _w,s32 _h){
 
 void SVRenderer::destroy(){
     clearRes();
-    m_stack_proj.destroy();
-    m_stack_view.destroy();
-    m_stack_vp.destroy();
     m_resLock = nullptr;
 }
 
@@ -121,50 +118,8 @@ void SVRenderer::svPushViewPort(u32 _x,u32 _y,u32 _w,u32 _h) {
     t_pm.m_height = _h;
     m_vpStack.push(t_pm);
 }
+
 //退出视口
 void SVRenderer::svPopViewPort() {
     m_vpStack.pop();
-}
-
-//
-void SVRenderer::pushProjMat(FMat4 _mat){
-    FMat4 mat4 = _mat;
-    m_stack_proj.push(mat4);
-}
-FMat4 SVRenderer::getProjMat(){
-    FMat4 mat4Proj = m_stack_proj.top();
-    return mat4Proj;
-}
-void SVRenderer::popProjMat(){
-    m_stack_proj.pop();
-}
-//
-void SVRenderer::pushViewMat(FMat4 _mat){
-    FMat4 mat4 = _mat;
-    m_stack_view.push(mat4);
-}
-FMat4 SVRenderer::getViewMat(){
-    FMat4 mat4View = m_stack_view.top();;
-    return mat4View;
-}
-void SVRenderer::popViewMat(){
-    m_stack_view.pop();
-}
-//
-void SVRenderer::pushVPMat(FMat4 _mat){
-    FMat4 mat4 = _mat;
-    m_stack_vp.push(mat4);
-}
-FMat4 SVRenderer::getVPMat(){
-    FMat4 mat4VP = m_stack_vp.top();;
-    return mat4VP;
-}
-void SVRenderer::popVPMat(){
-    m_stack_vp.pop();
-}
-
-void SVRenderer::clearMatStack(){
-    m_stack_proj.clear();
-    m_stack_view.clear();
-    m_stack_vp.clear();
 }

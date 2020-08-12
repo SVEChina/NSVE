@@ -43,13 +43,29 @@ namespace sv {
             _bufSize = 0;
             reset();
         };
-        //
+        
+        //推送类型
         void push(s32 _stype) {
             std::map<s32,SVDataSwapPtr>::iterator it = m_streamData.find(_stype);
             if( it == m_streamData.end() ) {
                 m_streamDsp.push_back(_stype);
                 m_streamData.insert(std::make_pair(_stype,nullptr));
             }
+        }
+        
+        //设置BUF-TYPE
+        void setBufType(BUFFERTYPE _btype) {
+            _bufType = _btype;
+        }
+        
+        //设置顶点数
+        void setVertCnt(s32 _cnt) {
+            _vertCnt = _cnt;
+        }
+        
+        void build(BUFFERTYPE _btype,s32 _cnt) {
+            setBufType(_btype);
+            setVertCnt(_cnt);
         }
         
         //重置
@@ -164,10 +180,7 @@ namespace sv {
     /*
      逻辑和渲染之间的桥梁，其实就是数据和数据描述
      */
-    class SVRenderMesh : public SVGBaseEx {
-    public:
-        static void buildBufferDsp(BUFFERTYPE _buftype,s32 _vertCnt,BufferDspPtr _dsp);
-        
+    class SVRenderMesh : public SVGBaseEx { 
     public:
         SVRenderMesh(SVInstPtr _app);
         

@@ -320,7 +320,7 @@ void SVPickProcess::_pickUI(SVNodePtr _node){
 }
 
 bool SVPickProcess::procEvent(SVEventPtr _event){
-    SVCameraNodePtr t_camera = mApp->m_pGlobalMgr->m_pCameraMgr->getMainCamera();
+    SVCameraNodePtr t_camera = mApp->m_pGlobalMgr->m_camera_mgr->getMainCamera();
     if(_event->eventType == EVN_T_TOUCH_BEGIN){
         SVTouchEventPtr t_touch = DYN_TO_SHAREPTR(SVTouchEvent,_event);
         f32 t_mod_x = t_touch->x;

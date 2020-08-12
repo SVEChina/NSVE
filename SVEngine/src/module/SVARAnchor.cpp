@@ -71,7 +71,7 @@ void SVARAnchor::init(){
 //    m_mtl->setTexture(0, E_TEX_HELP7);
 //    m_mtl->setBlendEnable(true);
 //    m_mtl->setBlendState(MTL_BLEND_ONE, MTL_BLEND_ONE_MINUS_SRC_ALPHA);
-//    m_pMesh = mApp->getDataMgr()->m_screenMesh;
+//    m_pMesh = mApp->getComData()->m_screenMesh;
 }
 
 void SVARAnchor::destroy(){

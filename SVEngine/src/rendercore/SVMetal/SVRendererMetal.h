@@ -68,10 +68,11 @@ namespace sv {
         //处理mesh
         bool processMesh(SVRenderMeshPtr _mesh);
 
-        /*
-        draw
-        */
+        //
         void drawMesh(SVRenderMeshPtr _mesh);
+        
+        //
+        void drawScreen(SVINTEX _texid);
         
         //
         SVRTargetPtr createTarget(SVINTEX _texid);

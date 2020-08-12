@@ -83,12 +83,12 @@ void SVInst::destroy() {
 
 void SVInst::resize(s32 _w,s32 _h) {
     //相机重置size
-    if(m_pGlobalMgr && m_pGlobalMgr->m_pCameraMgr ) {
-        m_pGlobalMgr->m_pCameraMgr->resize(_w, _h);
+    if(m_pGlobalMgr && m_pGlobalMgr->m_camera_mgr ) {
+        m_pGlobalMgr->m_camera_mgr->resize(_w, _h);
     }
     //所有target重置大小
-    if(m_pGlobalMgr && m_pGlobalMgr->m_pRenderMgr ) {
-        m_pGlobalMgr->m_pRenderMgr->resize(_w, _h);
+    if(m_pGlobalMgr && m_pGlobalMgr->m_render_mgr ) {
+        m_pGlobalMgr->m_render_mgr->resize(_w, _h);
     }
 }
 
@@ -149,8 +149,8 @@ void SVInst::updateSVE(f32 _dt) {
 }
 
 void SVInst::renderSVE() {
-    if( m_pGlobalMgr->m_pRenderMgr ) {
-        m_pGlobalMgr->m_pRenderMgr->render();
+    if( m_pGlobalMgr->m_render_mgr ) {
+        m_pGlobalMgr->m_render_mgr->render();
     }
 }
 
@@ -199,7 +199,7 @@ SVBasicSysPtr SVInst::getBasicSys(){
 SVCameraMgrPtr SVInst::getCameraMgr(){
     if(!m_pGlobalMgr)
         return nullptr;
-    return m_pGlobalMgr->m_pCameraMgr;
+    return m_pGlobalMgr->m_camera_mgr;
 }
 
 SVSceneMgrPtr SVInst::getSceneMgr(){
@@ -223,31 +223,31 @@ SVModuleSysPtr SVInst::getModuleSys(){
 SVShaderMgrPtr SVInst::getShaderMgr(){
     if(!m_pGlobalMgr)
         return nullptr;
-    return m_pGlobalMgr->m_pShaderMgr;
+    return m_pGlobalMgr->m_shader_mgr;
 }
 
 SVTexMgrPtr SVInst::getTexMgr(){
     if(!m_pGlobalMgr)
         return nullptr;
-    return m_pGlobalMgr->m_pTexMgr;
+    return m_pGlobalMgr->m_tex_mgr;
 }
 
 SVMtlLibPtr SVInst::getMtlLib() {
     if(!m_pGlobalMgr)
         return nullptr;
-    return m_pGlobalMgr->m_pMtlLib;
+    return m_pGlobalMgr->m_mtlLib;
 }
 
 SVRenderMgrPtr SVInst::getRenderMgr(){
     if(!m_pGlobalMgr)
         return nullptr;
-    return m_pGlobalMgr->m_pRenderMgr;
+    return m_pGlobalMgr->m_render_mgr;
 }
 
 SVDetectMgrPtr SVInst::getDetectMgr(){
     if(!m_pGlobalMgr)
         return nullptr;
-    return m_pGlobalMgr->m_pDetectMgr;
+    return m_pGlobalMgr->m_detect_mgr;
 }
 
 SVDeformMgrPtr SVInst::getDeformMgr(){
@@ -256,10 +256,10 @@ SVDeformMgrPtr SVInst::getDeformMgr(){
     return m_pGlobalMgr->m_pDeformSys;
 }
 
-SVComDataPtr SVInst::getDataMgr(){
+SVComDataPtr SVInst::getComData(){
     if(!m_pGlobalMgr)
         return nullptr;
-    return m_pGlobalMgr->m_pComData
+    return m_pGlobalMgr->m_commonData
 ;
 }
 

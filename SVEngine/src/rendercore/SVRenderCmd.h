@@ -10,11 +10,11 @@
 
 #include "SVRenderDef.h"
 #include "SVRenderDeclare.h"
-#include "../base/SVObject.h"
-#include "../base/SVMat4.h"
 #include "../base/SVPreDeclare.h"
 #include "../basesys/SVLogicDeclare.h"
 #include "../mtl/SVMtlDeclare.h"
+#include "../base/SVObject.h"
+#include "../base/SVMat4.h"
 
 namespace sv {
     
@@ -28,7 +28,6 @@ namespace sv {
         virtual void render(SVRendererPtr _renderer,SVRTargetPtr _target);
         
         SVString mTag;
-        
     };
     
     //普通渲染命令
@@ -38,7 +37,7 @@ namespace sv {
         
         ~SVRCmdNor();
         
-        virtual void render(SVRendererPtr _renderer,SVRTargetPtr _target);
+        void render(SVRendererPtr _renderer,SVRTargetPtr _target);
         
         void setMesh(SVRenderMeshPtr _mesh);
         
@@ -61,7 +60,7 @@ namespace sv {
         
         void setWinSize(s32 _w,s32 _h);
         
-        virtual void render(SVRendererPtr _renderer,SVRTargetPtr _target);
+        void render(SVRendererPtr _renderer,SVRTargetPtr _target);
         
     protected:
         s32 m_winWidth;
@@ -76,15 +75,13 @@ namespace sv {
         
         ~SVRCmdPass();
 
-        virtual void render(SVRendererPtr _renderer,SVRTargetPtr _target);
+        void render(SVRendererPtr _renderer,SVRTargetPtr _target);
         
         //void setFbo(SVRenderTexturePtr _fbo);
         
         void setTexture(SVTexturePtr _tex);
         
     protected:
-        //SVRenderTexturePtr m_fbo;
-        
         SVTexturePtr m_tex;
     };
     
@@ -95,7 +92,7 @@ namespace sv {
         
         ~SVRCmdPassCollection();
         
-        virtual void render(SVRendererPtr _renderer,SVRTargetPtr _target);
+        void render(SVRendererPtr _renderer,SVRTargetPtr _target);
         
         //void setFbo(SVRenderTexturePtr _fbo);
         
@@ -119,7 +116,7 @@ namespace sv {
         
         ~SVRCmdTargetResize();
         
-        virtual void render(SVRendererPtr _renderer,SVRTargetPtr _target);
+        void render(SVRendererPtr _renderer,SVRTargetPtr _target);
         
     protected:
         SVRFboPtr m_fbo;
@@ -134,13 +131,11 @@ namespace sv {
         
         ~SVRCmdTransGPU();
         
-        virtual void render(SVRendererPtr _renderer,SVRTargetPtr _target);
+        void render(SVRendererPtr _renderer,SVRTargetPtr _target);
         
     protected:
         SVTransPtr m_trans;
     };
-
-        
 
 }//!namespace sv
 

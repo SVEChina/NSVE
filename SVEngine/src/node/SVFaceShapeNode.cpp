@@ -66,7 +66,7 @@ void SVFaceShapeNode::init(){
 //    SVPassPtr t_pass2 = MakeSharedPtr<SVPass>();
 //    t_pass2->setMtl(t_mtl);
 //    t_pass2->setInTex(0, t_tex);
-//    t_pass2->setMesh(mApp->getDataMgr()->m_screenMesh);
+//    t_pass2->setMesh(mApp->getComData()->m_screenMesh);
 //    t_pass2->setOutTex(t_texmain);
 //    addPass(t_pass2);
 }

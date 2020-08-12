@@ -245,16 +245,6 @@ void SVNode::fromJSON(RAPIDJSON_NAMESPACE::Value &item){
 void SVNode::_toJsonData(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator,
                              RAPIDJSON_NAMESPACE::Value &locationObj){
     locationObj.AddMember("name",  RAPIDJSON_NAMESPACE::StringRef(m_name.c_str()), _allocator);
-//    locationObj.AddMember("posX", m_postion.x, _allocator);
-//    locationObj.AddMember("posY", m_postion.y, _allocator);
-//    locationObj.AddMember("posZ", m_postion.z, _allocator);
-//    locationObj.AddMember("rotX", m_rotation.x, _allocator);
-//    locationObj.AddMember("rotY", m_rotation.y, _allocator);
-//    locationObj.AddMember("rotZ", m_rotation.z, _allocator);
-//    locationObj.AddMember("scaleX", m_scale.x, _allocator);
-//    locationObj.AddMember("scaleY", m_scale.y, _allocator);
-//    locationObj.AddMember("scaleZ", m_scale.z, _allocator);
-//    //
     locationObj.AddMember("zorder", m_iZOrder, _allocator);
     locationObj.AddMember("renderstream", (s32)m_rsType, _allocator);
     //

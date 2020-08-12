@@ -105,11 +105,12 @@ void SVRShaderMetal::create(SVRendererPtr _renderer) {
     t_pl_dsp.vertexFunction = m_vsf;
     t_pl_dsp.fragmentFunction = m_fsf;
     t_pl_dsp.vertexDescriptor = _genVertexDsp(E_BFM_AOS);
-    t_pl_dsp.colorAttachments[0].pixelFormat = MTLPixelFormatRGBA8Unorm;
-    if(t_shader->m_shader_dsp.m_post == 1) {
+    if( t_shader->m_shader_dsp.m_pass == "reback" ) {
+        t_pl_dsp.colorAttachments[0].pixelFormat = MTLPixelFormatBGRA8Unorm;
         t_pl_dsp.depthAttachmentPixelFormat = MTLPixelFormatInvalid;
         t_pl_dsp.stencilAttachmentPixelFormat = MTLPixelFormatInvalid;
-    }else{
+    } else {
+        t_pl_dsp.colorAttachments[0].pixelFormat = MTLPixelFormatRGBA8Unorm;
         t_pl_dsp.depthAttachmentPixelFormat = MTLPixelFormatDepth32Float_Stencil8;
         t_pl_dsp.stencilAttachmentPixelFormat = MTLPixelFormatDepth32Float_Stencil8;
     }

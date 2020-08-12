@@ -51,7 +51,7 @@ void SVIOSInstreamNode::update(f32 dt) {
 //        m_pMtl->setModelMatrix(m_absolutMat);
 //        m_pMtl->update(dt);
 //        m_pRenderObj->setMtl(m_pMtl);
-//        m_pRenderObj->setMesh(mApp->getDataMgr()->m_screenMesh);
+//        m_pRenderObj->setMesh(mApp->getComData()->m_screenMesh);
 //    }
 }
 

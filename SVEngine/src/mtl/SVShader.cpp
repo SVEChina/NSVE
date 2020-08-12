@@ -130,6 +130,10 @@ bool SVShader::fromJSON(RAPIDJSON_NAMESPACE::Value &item) {
             }
         }
     }
+    //
+    if( item.HasMember("pass")  && item["pass"].IsString() ) {
+        m_shader_dsp.m_pass = item["pass"].GetString();
+    }
     //解析vs
     if (item.HasMember("vs") && item["vs"].IsObject() ) {
         m_shader_dsp.m_dsp |= SV_E_TECH_VS;

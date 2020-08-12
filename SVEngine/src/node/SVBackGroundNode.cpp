@@ -165,7 +165,7 @@ void SVBackGroundNode::update(f32 _dt){
 //    
 //    if(m_inScreen) {
 //        //屏幕空间下更新
-//            m_pRenderObj->setMesh(mApp->getDataMgr()->m_screenMesh);
+//            m_pRenderObj->setMesh(mApp->getComData()->m_screenMesh);
 //            if(m_pMtl){
 //                m_pMtl->setTexcoordFlip(m_texcoordX, m_texcoordY);
 //                if(m_useTexType!=E_TEX_END){

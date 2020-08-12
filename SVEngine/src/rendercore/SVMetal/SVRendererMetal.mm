@@ -13,12 +13,13 @@
 #include "../SVRTarget.h"
 #include "../../app/SVInst.h"
 #include "../../app/SVDispatch.h"
+#include "../../basesys/SVComData.h"
 #include "../../rendercore/SVRenderMgr.h"
 #include "../../rendercore/SVRenderMesh.h"
-#include "../../base/SVDataSwap.h"
 #include "../../mtl/SVTexture.h"
 #include "../../mtl/SVTexMgr.h"
 #include "../../mtl/SVSurface.h"
+#include "../../mtl/SVMtlLib.h"
 #include "../../mtl/SVMtlCore.h"
 #include "../../mtl/SVShader.h"
 
@@ -197,7 +198,7 @@ bool SVRendererMetal::processTexture(SVRTexPtr _tex,s32 _chn,s32 _stage) {
 bool SVRendererMetal::processMesh(SVRenderMeshPtr _mesh) {
     if(!m_curEncoder)
         return false;
-    if(_mesh->getResBuffer()) {
+    if(_mesh && _mesh->getResBuffer()) {
         _mesh->getResBuffer()->process( share() );
         return true;
     }
@@ -214,5 +215,32 @@ void SVRendererMetal::drawMesh(SVRenderMeshPtr _mesh) {
 
 void SVRendererMetal::drawBox() {
 //    - (void)setVertexBytes:(const void *)bytes length:(NSUInteger)length atIndex:(NSUInteger)index API_AVAILABLE(macos(10.11), ios(8.3));
+}
+
+//屏幕空间绘制
+void SVRendererMetal::drawScreen(SVINTEX _texid) {
+    //
+    SVTexturePtr t_tex = mApp->getTexMgr()->getInTexture(_texid);
+    if(!t_tex){
+        return ;
+    }
+    SVSurfacePtr t_surface = MakeSharedPtr<SVSurface>();
+    t_surface->setTexture(0,t_tex,1);
+    //
+    SVRenderMeshPtr t_mesh = mApp->getComData()->screenMesh();
+    bool t_ret = processMesh(t_mesh);
+    if(!t_ret){
+        return ;
+    }
+    //激活材质
+    SVMtlCorePtr t_mtl = mApp->getMtlLib()->getMtl("back");
+    if(t_mtl) {
+        t_mtl->reloadShader();
+        t_ret = processMtl(t_mtl,t_surface);
+        if(t_ret){
+            drawMesh(t_mesh);
+        }
+    }
+    t_surface = nullptr;
 }
 

@@ -82,7 +82,8 @@ bool SVCtxOSXMetal::swap(SVRendererPtr _renderer) {
         m_pass.colorAttachments[0].clearColor = MTLClearColorMake(0.5f, 0.0f, 0.5f, 1);
         id<MTLRenderCommandEncoder> t_encoder  = [t_rm->m_cmdBuffer renderCommandEncoderWithDescriptor:m_pass];
         t_rm->pushEncoder(t_encoder);
-        //绘制
+        //屏幕空间绘制
+        t_rm->drawScreen(E_TEX_MAIN);
         //
         [t_encoder endEncoding];
         [t_rm->m_cmdBuffer presentDrawable:m_target];

@@ -71,7 +71,7 @@ void SVMultPassNode::render() {
 //                if(m_passPool[i]->m_pMesh){
 //                    t_cmd->setMesh(m_passPool[i]->m_pMesh);
 //                }else{
-//                    t_cmd->setMesh(mApp->getDataMgr()->m_screenMesh);
+//                    t_cmd->setMesh(mApp->getComData()->m_screenMesh);
 //                }
 //                t_cmd->setMaterial(m_passPool[i]->m_pMtl);
 //                t_rs->pushRenderCmd(m_rsType, t_cmd);

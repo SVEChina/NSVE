@@ -26,7 +26,7 @@ SVPatchNode::SVPatchNode(SVInstPtr _app)
     FVec3 t_corner10 = FVec3(100.0, 0.0f, 0.0f);
     FVec3 t_corner01 = FVec3(-100.0, 100.0f, 0.0f);
     FVec3 t_corner11 = FVec3(100.0, 100.0f, 0.0f);
-    m_pMesh = mApp->getDataMgr()->generatePatchMesh(t_corner00, t_corner10, t_corner01, t_corner11, 20, 20);
+    m_pMesh = mApp->getComData()->generatePatchMesh(t_corner00, t_corner10, t_corner01, t_corner11, 20, 20);
     m_drawBox = true;
     m_visible = true;
 }

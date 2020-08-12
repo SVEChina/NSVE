@@ -32,8 +32,8 @@ using namespace sv;
 ////    memset(m_newmesh, 0, sizeof(m_newmesh));
 ////    FaceMesh* facemesh = nullptr;
 ////    StanderFace *standerface = nullptr;
-////    facemesh = mApp->getDataMgr()->getFaceDataMesh()->getFaceMesh("facemesh_st_simplify");
-////    standerface = mApp->getDataMgr()->getFaceDataMesh()->getStanderFace("standerface_st_simplify");
+////    facemesh = mApp->getComData()->getFaceDataMesh()->getFaceMesh("facemesh_st_simplify");
+////    standerface = mApp->getComData()->getFaceDataMesh()->getStanderFace("standerface_st_simplify");
 ////    
 ////    if (facemesh == nullptr || standerface == nullptr) {
 ////        return;

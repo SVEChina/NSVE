@@ -13,14 +13,6 @@
 
 using namespace sv;
 
-void SVRenderMesh::buildBufferDsp(BUFFERTYPE _buftype,s32 _vertCnt,BufferDspPtr _dsp) {
-    if(_dsp) {
-        _dsp->_bufType = _buftype;
-        _dsp->_vertCnt = _vertCnt;
-        _dsp->_bufSize = _vertCnt * BufferDsp::getVertSize(_dsp->getVertType());
-    }
-}
-
 SVRenderMesh::SVRenderMesh(SVInstPtr _app)
 :SVGBaseEx(_app){
     m_index_dsp = nullptr;

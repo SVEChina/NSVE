@@ -9,7 +9,13 @@
     "fs":{
         "entry": "fragmentShader",
         "sampler": [
-            { "chn" : 0 , "warp-s" : "default" ,  "warp-t" : "default" , "min" : "default", "mag" : "default" }
+            {
+                "chn" : 0 ,
+                "warp-s" : "default" ,
+                "warp-t" : "default" ,
+                "min" : "default",
+                "mag" : "default"
+            }
         ]
     }
 }

@@ -51,7 +51,7 @@ void SVOpPick::_process(f32 dt){
         f32 t_new_y = m_ui_y;
         //反适配
         mApp->getSceneMgr()->uiToScene(t_new_x,t_new_y);
-        SVCameraNodePtr t_camera = mApp->m_pGlobalMgr->m_pCameraMgr->getMainCamera();
+        SVCameraNodePtr t_camera = mApp->m_pGlobalMgr->m_camera_mgr->getMainCamera();
         if( t_pickModule->pickScene(t_camera,t_new_x, t_new_y) ){
             SVNodePtr t_pickNode = t_pickModule->getPickNode();
             if( t_pickNode ) {

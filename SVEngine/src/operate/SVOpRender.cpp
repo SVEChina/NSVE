@@ -58,11 +58,11 @@ void SVOpResizeRenderder::_process(float dt) {
     SVRendererPtr t_renderer = mApp->getRenderer();
     if(t_renderer){
         t_renderer->resize(m_width,m_height);
-//        SVCameraNodePtr t_camera = mApp->m_pGlobalMgr->m_pCameraMgr->getMainCamera();
+//        SVCameraNodePtr t_camera = mApp->m_pGlobalMgr->m_camera_mgr->getMainCamera();
 //        if(t_camera){
 //            t_camera->resetSize(m_width, m_height);
 //        }
-//        SVCameraNodePtr t_uiCamera = mApp->m_pGlobalMgr->m_pCameraMgr->getUICamera();
+//        SVCameraNodePtr t_uiCamera = mApp->m_pGlobalMgr->m_camera_mgr->getUICamera();
 //        if(t_uiCamera){
 //            t_uiCamera->resetSize(m_width, m_height);
 //        }

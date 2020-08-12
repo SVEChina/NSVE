@@ -58,6 +58,9 @@ namespace sv {
         //绘制mesh
         void drawMesh(SVRenderMeshPtr _mesh);
         
+        //
+        void drawScreen(SVINTEX _texid);
+        
         u32 m_cur_program;  //当前的program
         
     public:
@@ -73,18 +76,14 @@ namespace sv {
         void svBindColorBuffer(u32 _id);
         //顶点缓存
         void svBindVertexBuffer(u32 _id);
+        
         //索引缓存
         void svBindIndexBuffer(u32 _id);
-        //顶点格式更新
-        void svUpdateVertexFormate(VFTYPE _vf,s32 _count = 0,s32 _mode = 1);
+        
         //视口
         void svPushViewPort(u32 _x,u32 _y,u32 _w,u32 _h);
         //
         void svPopViewPort();
-        //设置清理颜色
-        virtual void svClearColor(f32 _r,f32 _g,f32 _b,f32 _a);
-        //设置清理掩码
-        virtual void svClear(s32 _mask);
     };
 
 }//!namespace sv

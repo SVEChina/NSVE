@@ -88,38 +88,21 @@ namespace sv {
         //绘制mesh
         virtual void drawMesh(SVRenderMeshPtr _mesh){ }
         
+        //
+        virtual void drawScreen(SVINTEX _texid) { }
+        
         //自动回收
         virtual void removeUnuseRes();
         
-    public:
         //获取渲染状态
         SVRenderStatePtr getState();
+        
         //重置状态
         void resetState();
-        //投影矩阵
-        void pushProjMat(FMat4 _mat);
-        FMat4 getProjMat();
-        void popProjMat();
-        //视矩阵
-        void pushViewMat(FMat4 _mat);
-        FMat4 getViewMat();
-        void popViewMat();
-        //vp矩阵
-        void pushVPMat(FMat4 _mat);
-        FMat4 getVPMat();
-        void popVPMat();
-        //
-        void clearMatStack();
-        
+
     protected:
         //当前的target
         SVRTargetPtr m_cur_target;
-        
-        //资源创建，销毁pipline
-        SVRenderPiplinePtr m_resPipline; //写管线
-        
-        //渲染pipline
-        SVRenderPiplinePtr m_readPipline;  //读管线
         
         //渲染内核资源,起到资源统计和管理的作用
         typedef SVArray<SVRResPtr> ROBJLIST;
@@ -134,12 +117,6 @@ namespace sv {
         //渲染VP
         SVStack<VPParam,10> m_vpStack;  //viewport堆栈
         
-        //
-        typedef SVStack<FMat4,10> MAT4STACK;//注意：栈最大支持的矩阵个数为10个
-        MAT4STACK m_stack_proj;
-        MAT4STACK m_stack_view;
-        MAT4STACK m_stack_vp;
-
         //inner size
         s32 m_inWidth;
         s32 m_inHeight;
@@ -149,28 +126,30 @@ namespace sv {
     public:
         //提交线宽
         virtual void submitLineWidth(f32 _width){}
+        
         //提交点大小
         virtual void submitPointSize(f32 _size){}
+        
         //绑定FBO
         virtual void svBindFrameBuffer(u32 _id){}
+        
         //清理颜色
         virtual void svBindClearColor(u32 _id){}
+        
         //颜色缓存
         virtual void svBindColorBuffer(u32 _id){}
+        
         //顶点缓存
         virtual void svBindVertexBuffer(u32 _id){}
+        
         //索引缓存
         virtual void svBindIndexBuffer(u32 _id){}
-        //顶点格式更新
-        virtual void svUpdateVertexFormate(VFTYPE _vf,s32 _count = 0,s32 _mode = 1){}
+
         //视口
         virtual void svPushViewPort(u32 _x,u32 _y,u32 _w,u32 _h);
+        
         //退出视口
         virtual void svPopViewPort();
-        //设置清理颜色
-        virtual void svClearColor(f32 _r,f32 _g,f32 _b,f32 _a){}
-        //设置清理掩码
-        virtual void svClear(s32 _mask){}
     };
     
 }//!namespace sv
