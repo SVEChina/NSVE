@@ -108,10 +108,10 @@ void SVRMeshMetal::destroy(SVRendererPtr _renderer) {
 
 s32 SVRMeshMetal::process(SVRendererPtr _renderer) {
     SVRendererMetalPtr t_rm = std::dynamic_pointer_cast<SVRendererMetal>(_renderer);
-    if(t_rm && t_rm->m_pCurEncoder) {
+    if(t_rm && t_rm->m_curEncoder) {
         for(s32 i=0;i<SV_MAX_STREAM_NUM;i++) {
             if(m_dbufs[i]) {
-                [t_rm->m_pCurEncoder setVertexBuffer:m_dbufs[i] offset:0 atIndex:i];    //i表示的buf和索引的对应
+                [t_rm->m_curEncoder setVertexBuffer:m_dbufs[i] offset:0 atIndex:i];    //i表示的buf和索引的对应
             }
         }
     }
@@ -132,11 +132,11 @@ void SVRMeshMetal::submit(SVDataSwapPtr _data,s32 _offset,s32 _size,s32 _bufid,s
 
 void SVRMeshMetal::draw(SVRendererPtr _renderer) {
     SVRendererMetalPtr t_rm = std::dynamic_pointer_cast<SVRendererMetal>(_renderer);
-    if(t_rm && t_rm->m_pCurEncoder) {
+    if(t_rm && t_rm->m_curEncoder) {
         if( m_ibuf ) {
             if(m_instance_buf) {
                 //多实体
-                [t_rm->m_pCurEncoder drawIndexedPrimitives:MTLPrimitiveTypeTriangle
+                [t_rm->m_curEncoder drawIndexedPrimitives:MTLPrimitiveTypeTriangle
                                                 indexCount:m_iCnt
                                                  indexType:MTLIndexTypeUInt16
                                                indexBuffer:m_ibuf
@@ -144,7 +144,7 @@ void SVRMeshMetal::draw(SVRendererPtr _renderer) {
                                          instanceCount:m_instCnt];
             }else{
                 //非多实例，索引绘制
-                [t_rm->m_pCurEncoder drawIndexedPrimitives:MTLPrimitiveTypeTriangle
+                [t_rm->m_curEncoder drawIndexedPrimitives:MTLPrimitiveTypeTriangle
                                                 indexCount:m_iCnt
                                                  indexType:MTLIndexTypeUInt16
                                                indexBuffer:m_ibuf
@@ -154,10 +154,10 @@ void SVRMeshMetal::draw(SVRendererPtr _renderer) {
             //正常顶点绘制
             if(m_instance_buf) {
                 //多实体
-                [t_rm->m_pCurEncoder drawPrimitives:MTLPrimitiveTypeTriangle vertexStart:m_vertStart vertexCount:m_vertCnt instanceCount:m_instCnt baseInstance:0];
+                [t_rm->m_curEncoder drawPrimitives:MTLPrimitiveTypeTriangle vertexStart:m_vertStart vertexCount:m_vertCnt instanceCount:m_instCnt baseInstance:0];
             }else{
                 //非多实例，顶点绘制
-                [t_rm->m_pCurEncoder drawPrimitives:MTLPrimitiveTypeTriangle vertexStart:m_vertStart vertexCount:m_vertCnt];
+                [t_rm->m_curEncoder drawPrimitives:MTLPrimitiveTypeTriangle vertexStart:m_vertStart vertexCount:m_vertCnt];
             }
         }
         //; // 结束

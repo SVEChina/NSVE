@@ -102,8 +102,7 @@ SVTexturePtr SVTexMgr::_createTexture(cptr8 _name, bool _sync, bool _enableMipMa
 }
 
 SVTexturePtr SVTexMgr::getInTexture(SVINTEX _texid) {
-    //获取内置纹理
-    if(_texid>=E_TEX_MAIN && _texid<E_TEX_END){
+    if(_texid>E_TEX_BEGIN && _texid<E_TEX_END){
         if(m_intex_pool[_texid] ) {
             return m_intex_pool[_texid];
         }
@@ -112,7 +111,7 @@ SVTexturePtr SVTexMgr::getInTexture(SVINTEX _texid) {
 }
 
 SVTexturePtr SVTexMgr::createInTexture(SVINTEX _texname,SVTextureDsp _dsp) {
-    if(_texname>=E_TEX_MAIN && _texname<E_TEX_END){
+    if(_texname>E_TEX_BEGIN && _texname<E_TEX_END){
         if(m_intex_pool[_texname]) {
             return m_intex_pool[_texname];
         }
@@ -125,7 +124,7 @@ SVTexturePtr SVTexMgr::createInTexture(SVINTEX _texname,SVTextureDsp _dsp) {
 }
 
 bool SVTexMgr::hasInTexture(SVINTEX _texid) {
-    if(_texid>=E_TEX_MAIN && _texid<E_TEX_END){
+    if(_texid>E_TEX_BEGIN && _texid<E_TEX_END){
         if(m_intex_pool[_texid] ) {
             return true;
         }

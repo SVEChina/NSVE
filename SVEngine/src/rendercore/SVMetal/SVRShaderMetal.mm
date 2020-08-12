@@ -322,9 +322,9 @@ bool SVRShaderMetal::active(SVRendererPtr _renderer) {
     //采样器更新
     for(s32 i=0;i<m_sampler_st.size();i++) {
         if(m_sampler_st[i].m_stage == SV_STAGE_VS) {
-            [t_rm->m_pCurEncoder setVertexSamplerState:m_sampler_st[i].m_st atIndex:m_sampler_st[i].m_chn];
+            [t_rm->m_curEncoder setVertexSamplerState:m_sampler_st[i].m_st atIndex:m_sampler_st[i].m_chn];
         }else if(m_sampler_st[i].m_stage == SV_STAGE_FS) {
-            [t_rm->m_pCurEncoder setFragmentSamplerState:m_sampler_st[i].m_st atIndex:m_sampler_st[i].m_chn];
+            [t_rm->m_curEncoder setFragmentSamplerState:m_sampler_st[i].m_st atIndex:m_sampler_st[i].m_chn];
         }
     }
     //替换uniform
@@ -337,16 +337,16 @@ bool SVRShaderMetal::active(SVRendererPtr _renderer) {
     for(s32 i=0;i<m_ubuf_pool.size();i++) {
         if( m_ubuf_pool[i].m_stage == SV_STAGE_VS ) {
             //vs
-            [t_rm->m_pCurEncoder setVertexBuffer:m_ubuf_pool[i].m_ubuf offset:0 atIndex:m_ubuf_pool[i].m_bufid];
+            [t_rm->m_curEncoder setVertexBuffer:m_ubuf_pool[i].m_ubuf offset:0 atIndex:m_ubuf_pool[i].m_bufid];
         }else if( m_ubuf_pool[i].m_stage == SV_STAGE_FS ) {
             //fs
-            [t_rm->m_pCurEncoder setFragmentBuffer:m_ubuf_pool[i].m_ubuf offset:0 atIndex:m_ubuf_pool[i].m_bufid];
+            [t_rm->m_curEncoder setFragmentBuffer:m_ubuf_pool[i].m_ubuf offset:0 atIndex:m_ubuf_pool[i].m_bufid];
         }else if( m_ubuf_pool[i].m_stage == SV_STAGE_GS ) {
             //gs
-            //[t_rm->m_pCurEncoder setFragmentBuffer:m_ubuf_pool[i].m_ubuf offset:0 atIndex:m_ubuf_pool[i].m_bufid];
+            //[t_rm->m_curEncoder setFragmentBuffer:m_ubuf_pool[i].m_ubuf offset:0 atIndex:m_ubuf_pool[i].m_bufid];
         }
     }
-    [t_rm->m_pCurEncoder setRenderPipelineState:m_pl_state];
+    [t_rm->m_curEncoder setRenderPipelineState:m_pl_state];
     return true;
 }
 

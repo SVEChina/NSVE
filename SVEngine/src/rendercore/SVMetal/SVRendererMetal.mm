@@ -30,9 +30,9 @@ using namespace sv;
 SVRendererMetal::SVRendererMetal(SVInstPtr _app)
 :SVRenderer(_app){
     m_pDevice = nullptr;
-    m_pCmdQueue = nullptr;
+    m_cmdQuene = nullptr;
     m_pLibrary = nullptr;
-    m_pCurEncoder = nullptr;
+    m_curEncoder = nullptr;
     //prop
     m_iOS9Runtime = false;
     m_macOS11Runtime = true;
@@ -61,7 +61,7 @@ void SVRendererMetal::init(id<MTLDevice> _device,s32 _w,s32 _h) {
         SV_LOG_INFO("don't support metal !");
         return ;
     }
-    m_pCmdQueue = m_pDevice.newCommandQueue;
+    m_cmdQuene = m_pDevice.newCommandQueue;
     m_pLibrary = [m_pDevice newDefaultLibrary];
     //
     m_inWidth = _w;
@@ -134,9 +134,21 @@ SVRFboPtr SVRendererMetal::createResFbo()  {
     return MakeSharedPtr<SVRFboMetal>(mApp);
 }
 
+//
+void SVRendererMetal::pushEncoder(id<MTLRenderCommandEncoder> _encoder) {
+    if(_encoder) {
+        m_curEncoder = _encoder;
+    }
+}
+
+//
+void SVRendererMetal::popEncoder() {
+    m_curEncoder = nullptr;
+}
+
 //处理材质
 bool SVRendererMetal::processMtl(SVMtlCorePtr _mtl,SVSurfacePtr _surface) {
-    if(!m_pCurEncoder)
+    if(!m_curEncoder)
         return false;
     if(_mtl && _mtl->getShader() ) {
         if(_surface ) {
@@ -171,10 +183,10 @@ bool SVRendererMetal::processTexture(SVRTexPtr _tex,s32 _chn,s32 _stage) {
         t_tex->commit();    //提交数据
         if(_stage == 0) {
             //vs纹理
-            [m_pCurEncoder setVertexTexture:t_tex->getInner() atIndex:_chn];
+            [m_curEncoder setVertexTexture:t_tex->getInner() atIndex:_chn];
         }else if(_stage == 1) {
             //fs纹理
-            [m_pCurEncoder setFragmentTexture:t_tex->getInner() atIndex:_chn];
+            [m_curEncoder setFragmentTexture:t_tex->getInner() atIndex:_chn];
         }
         return true;
     }
@@ -183,7 +195,7 @@ bool SVRendererMetal::processTexture(SVRTexPtr _tex,s32 _chn,s32 _stage) {
 
 //处理mesh
 bool SVRendererMetal::processMesh(SVRenderMeshPtr _mesh) {
-    if(!m_pCurEncoder)
+    if(!m_curEncoder)
         return false;
     if(_mesh->getResBuffer()) {
         _mesh->getResBuffer()->process( share() );
@@ -193,7 +205,7 @@ bool SVRendererMetal::processMesh(SVRenderMeshPtr _mesh) {
 }
 
 void SVRendererMetal::drawMesh(SVRenderMeshPtr _mesh) {
-    if(!m_pCurEncoder)
+    if(!m_curEncoder)
         return ;
     if(_mesh->getResBuffer()) {
         _mesh->getResBuffer()->draw( share() );

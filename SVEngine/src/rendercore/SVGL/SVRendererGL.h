@@ -31,7 +31,9 @@ namespace sv {
         
         virtual void resize(s32 _w,s32 _);
         
-    public:
+        //
+        SVRTargetPtr createTarget(SVINTEX _texid);
+        
         //创建部分
         SVRTexPtr createResTexture() ;
 

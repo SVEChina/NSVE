@@ -98,4 +98,3 @@ void SVRTarget::unbindRes() {
 SVRFboPtr SVRTarget::getResFbo() {
     return m_fbo;
 }
-

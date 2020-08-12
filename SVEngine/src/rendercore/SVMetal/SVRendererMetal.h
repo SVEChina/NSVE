@@ -11,6 +11,7 @@
 #include "../SVRenderer.h"
 #include "../SVRenderDeclare.h"
 #include "SVRTexMetal.h"
+#include <vector>
 
 #import <Foundation/Foundation.h>
 #import <AudioToolbox/AudioToolbox.h>
@@ -75,11 +76,19 @@ namespace sv {
         //
         SVRTargetPtr createTarget(SVINTEX _texid);
 
+        //
+        void pushEncoder(id<MTLRenderCommandEncoder> _encoder);
+        
+        //
+        void popEncoder();
+        
     public:
         id<MTLDevice> m_pDevice;
-        id<MTLCommandQueue> m_pCmdQueue;
+        id<MTLCommandQueue> m_cmdQuene;
+        id<MTLCommandBuffer> m_cmdBuffer;
         id<MTLLibrary> m_pLibrary;
-        id<MTLRenderCommandEncoder> m_pCurEncoder;
+        //
+        id<MTLRenderCommandEncoder> m_curEncoder;   //encoder不要支持嵌套
         //prop
         bool m_iOS9Runtime;
         bool m_macOS11Runtime;

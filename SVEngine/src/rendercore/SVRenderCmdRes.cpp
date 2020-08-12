@@ -31,10 +31,8 @@ void SVRCmdCreateMesh::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
         SVRMeshResPtr t_rbuffer = _renderer->createResBuf() ;
         t_rbuffer->m_logic_obj = m_rendermesh;
         m_rendermesh->bindRes(t_rbuffer);
-        //
         t_rbuffer->create(_renderer);
         _renderer->addRes(t_rbuffer);
-        SV_LOG_ERROR("sve create mesh end!\n");
     }
 }
 
@@ -53,10 +51,8 @@ void SVRCmdCreateShader::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
         SVRShaderPtr t_rshader = _renderer->createResShader() ;
         t_rshader->m_logic_obj = m_shader;
         m_shader->bindRes(t_rshader);
-        //
         t_rshader->create(_renderer);
         _renderer->addRes(t_rshader);
-        SV_LOG_ERROR("sve create shader end!\n");
     }
 }
 
@@ -75,10 +71,8 @@ void SVRCmdCreateTex::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
         SVRTexPtr t_rtex = _renderer->createResTexture() ;
         t_rtex->m_logic_obj = m_texture;
         m_texture->bindRes(t_rtex);
-        //
         t_rtex->create(_renderer);
         _renderer->addRes(t_rtex);
-        SV_LOG_ERROR("sve create tex end!\n");
     }
 }
 

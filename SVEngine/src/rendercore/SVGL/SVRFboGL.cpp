@@ -30,7 +30,7 @@ void SVRFboGL::create(SVRendererPtr _renderer) {
         glBindFramebuffer(GL_FRAMEBUFFER, m_fbo_id);
         m_width = t_dsp->m_width;
         m_height = t_dsp->m_height;
-        m_target_num = t_dsp->m_target_num;
+        m_target_num = t_dsp->m_target_num>SV_SUPPORT_MAX_TAREGT ? SV_SUPPORT_MAX_TAREGT : t_dsp->m_target_num;
 //        //color
 //        if(t_dsp->m_gl_tex>0) {
 //            m_out_tex = true;

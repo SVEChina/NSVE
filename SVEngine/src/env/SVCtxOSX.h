@@ -52,8 +52,6 @@ namespace sv {
         id<MTLDrawable> m_target;
         id<MTLTexture> m_texture;
         MTLRenderPassDescriptor* m_pass;
-        id<MTLCommandBuffer> m_cmdBuffer;
-        id<MTLRenderCommandEncoder> m_cmdEncoder;
     };
     
 }//!namespace sv

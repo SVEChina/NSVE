@@ -8,6 +8,9 @@
 #include "SVRFboMetal.h"
 #include "SVRendererMetal.h"
 #include "../SVRTarget.h"
+#include "../../app/SVInst.h"
+#include "../../mtl/SVTexMgr.h"
+#include "../../mtl/SVTexture.h"
 
 using namespace sv;
 
@@ -15,8 +18,9 @@ using namespace sv;
 SVRFboMetal::SVRFboMetal(SVInstPtr _app)
 :SVRFbo(_app) {
     m_pass = nullptr;
-    m_cmdBuffer = nullptr;
-    m_cmdEncoder = nullptr;
+    m_render_encoder = nullptr;
+    m_blit_encoder = nullptr;
+    m_compute_encoder = nullptr;
     //
     for(s32 i=0;i<SV_SUPPORT_MAX_TAREGT;i++) {
         m_color_tex[i] = nullptr;
@@ -26,6 +30,9 @@ SVRFboMetal::SVRFboMetal(SVInstPtr _app)
 }
 
 SVRFboMetal::~SVRFboMetal() {
+    for(s32 i=0;i<SV_SUPPORT_MAX_TAREGT;i++) {
+        m_color_tex[i] = nullptr;
+    }
 }
 
 void SVRFboMetal::create(SVRendererPtr _renderer) {
@@ -38,14 +45,22 @@ void SVRFboMetal::create(SVRendererPtr _renderer) {
         //创建color纹理，支持多目标渲染,暂时不支持不同目标，不同的格式
         m_width = t_dsp->m_width;
         m_height = t_dsp->m_height;
-        m_target_num = t_dsp->m_target_num;
+        m_target_num = t_dsp->m_target_num>SV_SUPPORT_MAX_TAREGT ? SV_SUPPORT_MAX_TAREGT : t_dsp->m_target_num;
         m_use_depth = t_dsp->m_use_depth;
         m_use_stencil = t_dsp->m_use_stencil;
         MTLPixelFormat t_pfmt = MTLPixelFormatRGBA8Unorm;
         MTLTextureDescriptor* t_descriptor = [MTLTextureDescriptor texture2DDescriptorWithPixelFormat:t_pfmt width:m_width height:m_height mipmapped:false];
         t_descriptor.usage |= MTLTextureUsageRenderTarget;
         for(s32 i=0;i<m_target_num;i++) {
-            m_color_tex[i] =  [t_rm->m_pDevice newTextureWithDescriptor:t_descriptor]; //创建MRT多目标
+            s32 t_tex_id = t_dsp->m_color_texid[i];
+            SVTexturePtr t_tex = mApp->getTexMgr()->getInTexture(SVINTEX(t_tex_id));
+            if(t_tex) {
+                SVRTexPtr t_res_tex = t_tex->getResTex();
+                SVRTexMetalPtr t_metal_tex = std::dynamic_pointer_cast<SVRTexMetal>(t_res_tex);
+                if(t_metal_tex) {
+                    m_color_tex[i] = t_metal_tex;
+                }
+            }
         }
         //
         if(m_use_depth && m_use_stencil) {
@@ -122,9 +137,6 @@ void SVRFboMetal::destroy(SVRendererPtr _renderer) {
     //颜色重置
     //深度重置
     //模版重置
-//    if(m_color_tex[0]){
-//        m_color_tex[0] = nullptr;
-//    }
     SVRFbo::destroy(_renderer);
 }
 
@@ -146,7 +158,7 @@ void SVRFboMetal::bind(SVRendererPtr _renderer) {
         //支持多目标
         for(s32 i=0;i<SV_SUPPORT_MAX_TAREGT;i++) {
             if(m_color_tex[i]) {
-                m_pass.colorAttachments[i].texture = m_color_tex[i];
+                m_pass.colorAttachments[i].texture = m_color_tex[i]->getInner();
                 m_pass.colorAttachments[i].loadAction = MTLLoadActionClear;
                 m_pass.colorAttachments[i].storeAction = MTLStoreActionDontCare;
                 m_pass.colorAttachments[i].clearColor = MTLClearColorMake(1, 0, 0, 1);
@@ -171,19 +183,17 @@ void SVRFboMetal::bind(SVRendererPtr _renderer) {
             m_pass.stencilAttachment.storeAction = MTLStoreActionDontCare;
             m_pass.stencilAttachment.clearStencil = 0;
         }
-        //
-        m_cmdBuffer = [t_rm->m_pCmdQueue commandBuffer];
-        m_cmdEncoder = [m_cmdBuffer renderCommandEncoderWithDescriptor:m_pass];
-        //设置当前encoder
-        t_rm->m_pCurEncoder = m_cmdEncoder;
+        m_render_encoder = [t_rm->m_cmdBuffer renderCommandEncoderWithDescriptor:m_pass];
+//        m_compute_encoder = [t_rm->m_cmdBuffer computeCommandEncoder];
+//        m_blit_encoder = [t_rm->m_cmdBuffer blitCommandEncoder];
+        t_rm->pushEncoder(m_render_encoder);
     }
 }
 
 void SVRFboMetal::unbind(SVRendererPtr _renderer) {
     SVRendererMetalPtr t_rm = std::dynamic_pointer_cast<SVRendererMetal>(_renderer);
     if(t_rm) {
-        [m_cmdEncoder endEncoding];
-        [m_cmdBuffer commit];
-        t_rm->m_pCurEncoder = nullptr;
+        [m_render_encoder endEncoding];
+        t_rm->popEncoder();
     }
 }
