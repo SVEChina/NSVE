@@ -50,38 +50,38 @@ bool SVFilterGof::create(){
     m_pPassNode->setname("SVFilterGOFNode");
     //m_pPassNode->create(t_w, t_h);
     m_pPassNode->setRSType(RST_IMGFILTER);
-    //创建pass
-    SVPassPtr t_pass1 = MakeSharedPtr<SVPass>();
-    SVMtlCorePtr t_lkMtl=MakeSharedPtr<SVMtlCore>(mApp,"screennor");
-    //t_pass1->setMtl(t_lkMtl);
-    t_pass1->setInTex(0,E_TEX_MAIN);
-    t_pass1->setOutTex(E_TEX_HELP0);
-    m_pPassNode->addPass(t_pass1);
-    
-    t_pass1 = MakeSharedPtr<SVPass>();
-    SVMtlSmoothPtr t_lkMtl02=MakeSharedPtr<SVMtlSmooth>(mApp,"blurtex");
-    //t_lkMtl02->setImgWH(t_w/2,t_h/2);
-    //t_pass1->setMtl(t_lkMtl02);
-    t_pass1->setInTex(0,E_TEX_MAIN);
-    t_pass1->setOutTex(E_TEX_FILTER_GOF_1);
-    m_pPassNode->addPass(t_pass1);
-    
-    SVMtlSmoothPtr t_lkMtl01=MakeSharedPtr<SVMtlSmooth>(mApp,"blurtex");
-    ///t_lkMtl01->setImgWH(t_w/2,t_h/2);
-    t_pass1 = MakeSharedPtr<SVPass>();
-    //t_pass1->setMtl(t_lkMtl01);
-    t_pass1->setInTex(0,E_TEX_FILTER_GOF_1);
-    t_pass1->setOutTex(E_TEX_FILTER_GOF_2);
-    m_pPassNode->addPass(t_pass1);
-    
-    SVPassPtr t_pass2 = MakeSharedPtr<SVPass>();
-    m_mtl_smooth =MakeSharedPtr<SVMtlSmooth>(mApp,"gof");
-    //m_mtl_smooth->setImgWH(t_w,t_h);
-    //t_pass2->setMtl(m_mtl_smooth);
-    t_pass2->setInTex(0, E_TEX_HELP0);
-    t_pass2->setInTex(1, E_TEX_FILTER_GOF_2);
-    t_pass2->setOutTex(E_TEX_MAIN);
-    m_pPassNode->addPass(t_pass2);
+//    //创建pass
+//    SVPassPtr t_pass1 = MakeSharedPtr<SVPass>();
+//    SVMtlCorePtr t_lkMtl=MakeSharedPtr<SVMtlCore>(mApp,"screennor");
+//    //t_pass1->setMtl(t_lkMtl);
+//    t_pass1->setInTex(0,E_TEX_MAIN);
+//    t_pass1->setOutTex(E_TEX_HELP0);
+//    m_pPassNode->addPass(t_pass1);
+//    
+//    t_pass1 = MakeSharedPtr<SVPass>();
+//    SVMtlSmoothPtr t_lkMtl02=MakeSharedPtr<SVMtlSmooth>(mApp,"blurtex");
+//    //t_lkMtl02->setImgWH(t_w/2,t_h/2);
+//    //t_pass1->setMtl(t_lkMtl02);
+//    t_pass1->setInTex(0,E_TEX_MAIN);
+//    t_pass1->setOutTex(E_TEX_FILTER_GOF_1);
+//    m_pPassNode->addPass(t_pass1);
+//    
+//    SVMtlSmoothPtr t_lkMtl01=MakeSharedPtr<SVMtlSmooth>(mApp,"blurtex");
+//    ///t_lkMtl01->setImgWH(t_w/2,t_h/2);
+//    t_pass1 = MakeSharedPtr<SVPass>();
+//    //t_pass1->setMtl(t_lkMtl01);
+//    t_pass1->setInTex(0,E_TEX_FILTER_GOF_1);
+//    t_pass1->setOutTex(E_TEX_FILTER_GOF_2);
+//    m_pPassNode->addPass(t_pass1);
+//    
+//    SVPassPtr t_pass2 = MakeSharedPtr<SVPass>();
+//    m_mtl_smooth =MakeSharedPtr<SVMtlSmooth>(mApp,"gof");
+//    //m_mtl_smooth->setImgWH(t_w,t_h);
+//    //t_pass2->setMtl(m_mtl_smooth);
+//    t_pass2->setInTex(0, E_TEX_HELP0);
+//    t_pass2->setInTex(1, E_TEX_FILTER_GOF_2);
+//    t_pass2->setOutTex(E_TEX_MAIN);
+//    m_pPassNode->addPass(t_pass2);
     return true;
 }
 

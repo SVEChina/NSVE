@@ -42,7 +42,7 @@ namespace sv {
         void _createStencilBuf(SVRendererMetalPtr _renderer) ;
         
     public:
-        SVRTexMetalPtr m_color_tex[SV_SUPPORT_MAX_TAREGT];
+        SVINTEX m_color_tex[SV_SUPPORT_MAX_TAREGT];
         id<MTLTexture> m_depth_tex;
         id<MTLTexture> m_stencil_tex;
         //

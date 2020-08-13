@@ -52,37 +52,37 @@ bool SVBasedonFilter::create() {
         return false;
     s32 t_w =  mApp->m_global_param.m_sv_width;
     s32 t_h =  mApp->m_global_param.m_sv_height;
-    //创建材质
-    m_acutancemtl=MakeSharedPtr<SVMtlAcutance>(mApp);
-//    //m_acutancemtl->setTexcoordFlip(1.0f, 1.0f);
-//    m_acutancemtl->setTexSizeIndex(0,0.5/t_w,0.5/ t_h);
-//    m_acutancemtl->setTexSizeIndex(1,0.5/255.0,0.0);
-    
-    m_baseOnmtl=MakeSharedPtr<SVMtlBasedOn>(mApp);
-    //m_baseOnmtl->setTexcoordFlip(1.0f, 1.0f);
-//    m_baseOnmtl->setTexSizeIndex(0,0.5/t_w,0.5/ t_h);
-//    m_baseOnmtl->setTexSizeIndex(1,0.5/255.0,0.0);
-    //创建多passnode
-    m_pPassNode = MakeSharedPtr<SVMultPassNode>(mApp);
-    m_pPassNode->setname("SVfilterBaseOn");
-    m_pPassNode->create(t_w, t_h);
-    m_pPassNode->setRSType(RST_IMGFILTER);
-    //创建pass
-    SVPassPtr t_pass1 = MakeSharedPtr<SVPass>();
-    //t_pass1->setMtl(m_baseOnmtl);
-    t_pass1->setInTex(0,E_TEX_MAIN);
-    SVTexturePtr teximg = mApp->getTexMgr()->getTexture("svres/filterimg/facewhitefilter.png", true);
-    t_pass1->setInTex(1,teximg);
-    t_pass1->setOutTex(E_TEX_HELP0);
-    t_pass1->mTag = "filter-baseon";
-    m_pPassNode->addPass(t_pass1);
-    //
-    SVPassPtr t_pass2 = MakeSharedPtr<SVPass>();
-    //t_pass2->setMtl(m_acutancemtl);
-    t_pass2->setInTex(0, E_TEX_HELP0);
-    t_pass2->setOutTex(E_TEX_MAIN);
-    t_pass2->mTag = "write-back";
-    m_pPassNode->addPass(t_pass2);
+//    //创建材质
+//    m_acutancemtl=MakeSharedPtr<SVMtlAcutance>(mApp);
+////    //m_acutancemtl->setTexcoordFlip(1.0f, 1.0f);
+////    m_acutancemtl->setTexSizeIndex(0,0.5/t_w,0.5/ t_h);
+////    m_acutancemtl->setTexSizeIndex(1,0.5/255.0,0.0);
+//    
+//    m_baseOnmtl=MakeSharedPtr<SVMtlBasedOn>(mApp);
+//    //m_baseOnmtl->setTexcoordFlip(1.0f, 1.0f);
+////    m_baseOnmtl->setTexSizeIndex(0,0.5/t_w,0.5/ t_h);
+////    m_baseOnmtl->setTexSizeIndex(1,0.5/255.0,0.0);
+//    //创建多passnode
+//    m_pPassNode = MakeSharedPtr<SVMultPassNode>(mApp);
+//    m_pPassNode->setname("SVfilterBaseOn");
+//    m_pPassNode->create(t_w, t_h);
+//    m_pPassNode->setRSType(RST_IMGFILTER);
+//    //创建pass
+//    SVPassPtr t_pass1 = MakeSharedPtr<SVPass>();
+//    //t_pass1->setMtl(m_baseOnmtl);
+//    t_pass1->setInTex(0,E_TEX_MAIN);
+//    SVTexturePtr teximg = mApp->getTexMgr()->getTexture("svres/filterimg/facewhitefilter.png", true);
+//    t_pass1->setInTex(1,teximg);
+//    t_pass1->setOutTex(E_TEX_HELP0);
+//    t_pass1->mTag = "filter-baseon";
+//    m_pPassNode->addPass(t_pass1);
+//    //
+//    SVPassPtr t_pass2 = MakeSharedPtr<SVPass>();
+//    //t_pass2->setMtl(m_acutancemtl);
+//    t_pass2->setInTex(0, E_TEX_HELP0);
+//    t_pass2->setOutTex(E_TEX_MAIN);
+//    t_pass2->mTag = "write-back";
+//    m_pPassNode->addPass(t_pass2);
     return true;
 }
 

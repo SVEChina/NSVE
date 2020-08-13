@@ -49,7 +49,14 @@ namespace sv {
         
         void resize(s32 _width,s32 _height);
         
+        //渲染前景
+        void renderPre(SVRendererPtr _renderer);
+        
+        //正常渲染
         void render(SVRendererPtr _renderer);
+        
+        //渲染后景
+        void renderAfter(SVRendererPtr _renderer);
         
         void pushRenderCommand(SVRenderCmdPtr _rcmd,SV_RSTREAM_TYPE _rstype);
         

@@ -21,9 +21,8 @@ SVRFboMetal::SVRFboMetal(SVInstPtr _app)
     m_render_encoder = nullptr;
     m_blit_encoder = nullptr;
     m_compute_encoder = nullptr;
-    //
     for(s32 i=0;i<SV_SUPPORT_MAX_TAREGT;i++) {
-        m_color_tex[i] = nullptr;
+        m_color_tex[i] = E_TEX_BEGIN;
     }
     m_depth_tex = nullptr;
     m_stencil_tex = nullptr;
@@ -31,7 +30,7 @@ SVRFboMetal::SVRFboMetal(SVInstPtr _app)
 
 SVRFboMetal::~SVRFboMetal() {
     for(s32 i=0;i<SV_SUPPORT_MAX_TAREGT;i++) {
-        m_color_tex[i] = nullptr;
+        m_color_tex[i] = E_TEX_BEGIN;
     }
 }
 
@@ -52,15 +51,7 @@ void SVRFboMetal::create(SVRendererPtr _renderer) {
         MTLTextureDescriptor* t_descriptor = [MTLTextureDescriptor texture2DDescriptorWithPixelFormat:t_pfmt width:m_width height:m_height mipmapped:false];
         t_descriptor.usage |= MTLTextureUsageRenderTarget;
         for(s32 i=0;i<m_target_num;i++) {
-            s32 t_tex_id = t_dsp->m_color_texid[i];
-            SVTexturePtr t_tex = mApp->getTexMgr()->getInTexture(SVINTEX(t_tex_id));
-            if(t_tex) {
-                SVRTexPtr t_res_tex = t_tex->getResTex();
-                SVRTexMetalPtr t_metal_tex = std::dynamic_pointer_cast<SVRTexMetal>(t_res_tex);
-                if(t_metal_tex) {
-                    m_color_tex[i] = t_metal_tex;
-                }
-            }
+            m_color_tex[i]= SVINTEX(t_dsp->m_color_texid[i]);
         }
         //
         if(m_use_depth && m_use_stencil) {
@@ -157,12 +148,15 @@ void SVRFboMetal::bind(SVRendererPtr _renderer) {
     if(t_rm) {
         //支持多目标
         for(s32 i=0;i<SV_SUPPORT_MAX_TAREGT;i++) {
-            if(m_color_tex[i]) {
-                m_pass.colorAttachments[i].texture = m_color_tex[i]->getInner();
+            SVTexturePtr t_tex = mApp->getTexMgr()->getInTexture(m_color_tex[i]);
+            if(t_tex && t_tex->getResTex() ) {
+                SVRTexPtr t_res_tex = t_tex->getResTex();
+                SVRTexMetalPtr t_metal_tex = std::dynamic_pointer_cast<SVRTexMetal>(t_res_tex);
+                m_pass.colorAttachments[i].texture = t_metal_tex->getInner();
                 m_pass.colorAttachments[i].loadAction = MTLLoadActionClear;
                 m_pass.colorAttachments[i].storeAction = MTLStoreActionDontCare;
                 m_pass.colorAttachments[i].clearColor = MTLClearColorMake(1, 0, 0, 1);
-            }else{
+            } else {
                 m_pass.colorAttachments[i].texture = nullptr;
                 m_pass.colorAttachments[i].loadAction = MTLLoadActionClear;
                 m_pass.colorAttachments[i].storeAction = MTLStoreActionDontCare;

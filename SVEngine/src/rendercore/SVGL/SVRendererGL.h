@@ -30,21 +30,21 @@ namespace sv {
         virtual void init(s32 _w,s32 _h,bool _offline);
         
         virtual void resize(s32 _w,s32 _);
-        
-        //
-        SVRTargetPtr createTarget(SVINTEX _texid);
-        
-        //创建部分
+    
+        //create-texture
         SVRTexPtr createResTexture() ;
 
-        //shader
+        //create-shader
         SVRShaderPtr createResShader() ;
 
-        //buf-vbo 等
+        //create-buf-vbo
         SVRMeshResPtr createResBuf() ;
 
-        //fbo
+        //create-fbo
         SVRFboPtr createResFbo() ;
+        
+        //create-target
+        SVRTargetPtr createTarget(SVINTEX _texid);
         
         //处理材质
         bool processMtl(SVMtlCorePtr _mtl,SVSurfacePtr _surface);

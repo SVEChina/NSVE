@@ -64,7 +64,6 @@ namespace sv {
         FACEMESHPOOL m_facemeshpool;
     };
 
-
 };
 
 #endif /* SV_FACEMESHDATA_H */

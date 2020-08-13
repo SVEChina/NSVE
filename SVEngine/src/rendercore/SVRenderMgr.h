@@ -9,12 +9,11 @@
 #define SV_RENDERMGR_H
 
 #include "SVRenderDeclare.h"
+#include "../base/SVPreDeclare.h"
+#include "../work/SVWorkDeclare.h"
 #include "../base/SVGBase.h"
 #include "../base/SVMap.h"
-#include "../base/SVPreDeclare.h"
-#include "../base/SVMat4d.h"
-#include "../base/SVStack.h"
-#include "../work/SVWorkDeclare.h"
+#include "../base/SVMat4.h"
 
 namespace sv {
     

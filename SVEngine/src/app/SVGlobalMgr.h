@@ -56,10 +56,12 @@ namespace sv {
         SVModelMgrPtr  m_pModelMgr;
         //静态数据
         SVComDataPtr m_commonData;
-        //
+        //python
         SVPythonSysPtr m_pPythonSys;
         //变形形同
         SVDeformMgrPtr m_pDeformSys;
+        //AR背景
+        SVARBackgroundMgrPtr m_arbg_mgr;
         //物理世界
         SVPhysicsWorldMgrPtr m_pPhysicSys;
         //时间标志

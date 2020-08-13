@@ -65,6 +65,9 @@ namespace sv {
         //fbo
         virtual SVRFboPtr createResFbo() { return nullptr; }
         
+        //create-target
+        virtual SVRTargetPtr createTarget(SVINTEX _texid){ return nullptr; }
+        
         //增加渲染内核资源
         void addRes(SVRResPtr _res);
         

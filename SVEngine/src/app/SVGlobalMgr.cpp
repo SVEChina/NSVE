@@ -16,6 +16,7 @@
 #include "../basesys/SVDeformMgr.h"
 #include "../basesys/SVModelMgr.h"
 #include "../basesys/SVPhysicsWorldMgr.h"
+#include "../basesys/SVARBackgroundMgr.h"
 #include "../module/SVModuleSys.h"
 #include "../light/SVLightSys.h"
 #include "../event/SVEventMgr.h"
@@ -26,7 +27,9 @@
 #include "../rendercore/SVRenderMgr.h"
 #include "../act/SVActionMgr.h"
 #include "../base/svstr.h"
+
 #include <sys/time.h>
+
 //#include <Python/Python.h>
 
 using namespace sv;
@@ -48,6 +51,7 @@ SVGlobalMgr::SVGlobalMgr(SVInstPtr _app)
     m_pPhysicSys =nullptr;
     m_pLightSys = nullptr;
     m_mtlLib = nullptr;
+    m_arbg_mgr = nullptr;
 }
 
 SVGlobalMgr::~SVGlobalMgr() {
@@ -65,6 +69,7 @@ SVGlobalMgr::~SVGlobalMgr() {
     m_pPhysicSys =nullptr;
     m_pLightSys = nullptr;
     m_mtlLib = nullptr;
+    m_arbg_mgr = nullptr;
 }
 
 void SVGlobalMgr::init() {
@@ -76,6 +81,10 @@ void SVGlobalMgr::init() {
     m_commonData = MakeSharedPtr<SVComData>(mApp);
     m_commonData->init();
     SV_LOG_ERROR("sve init m_commonData end!\n");
+    m_arbg_mgr = MakeSharedPtr<SVARBackgroundMgr>(mApp);
+    m_arbg_mgr->init();
+    SV_LOG_ERROR("sve init m_arbg_mgr end!\n");
+    
 //    //消息系统建立起来
 //    m_pEventMgr = MakeSharedPtr<SVEventMgr>(mApp);
 //    m_pEventMgr->init();
@@ -145,7 +154,11 @@ void SVGlobalMgr::destroy() {
         m_pSceneMgr->destroy();
         SV_LOG_ERROR("SVSceneMgr:destroy sucess");
     }
-
+    //AR 背景
+    if(m_arbg_mgr) {
+        m_arbg_mgr->destroy();
+        SV_LOG_ERROR("SVARBackgroundMgr:destroy sucess");
+    }
     //纹理析够 析构都要用到渲染模块
     if (m_tex_mgr) {
         m_tex_mgr->destroy();

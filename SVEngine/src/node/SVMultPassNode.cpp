@@ -47,11 +47,11 @@ void SVMultPassNode::destroy() {
 
 void SVMultPassNode::update(f32 dt) {
     SVNode::update(dt);
-    for(s32 i=0;i<m_passPool.size();i++){
-        if(m_passPool[i]->m_pMtl){
-            m_passPool[i]->m_pMtl->update(0.0f);
-        }
-    }
+//    for(s32 i=0;i<m_passPool.size();i++){
+//        if(m_passPool[i]->m_pMtl){
+//            m_passPool[i]->m_pMtl->update(0.0f);
+//        }
+//    }
 }
 
 void SVMultPassNode::render() {

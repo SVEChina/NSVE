@@ -103,83 +103,83 @@ bool SVFilterGenLUT::create(){
    
     SVPassPtr m_pass = MakeSharedPtr<SVPass>();
     //m_pass->setMtl(m_BCMtl);
-    m_pass->setInTex(0,inTex);
-    m_pass->setOutTex(E_TEX_FILTER_GENLUT_H1);
+//    m_pass->setInTex(0,inTex);
+//    m_pass->setOutTex(E_TEX_FILTER_GENLUT_H1);
     m_pPassNode->addPass(m_pass);
     
     m_pass=MakeSharedPtr<SVPass>();
     //m_pass->setMtl(m_SaturationMtl);
-    m_pass->setInTex(0,E_TEX_FILTER_GENLUT_H1);
-    m_pass->setOutTex(E_TEX_FILTER_GENLUT_H2);
+//    m_pass->setInTex(0,E_TEX_FILTER_GENLUT_H1);
+//    m_pass->setOutTex(E_TEX_FILTER_GENLUT_H2);
     m_pPassNode->addPass(m_pass);
    
     m_pass=MakeSharedPtr<SVPass>();
     //m_pass->setMtl(m_VibranceMtl);
-    m_pass->setInTex(0,E_TEX_FILTER_GENLUT_H2);
-    m_pass->setOutTex(E_TEX_FILTER_GENLUT_H1);
+//    m_pass->setInTex(0,E_TEX_FILTER_GENLUT_H2);
+//    m_pass->setOutTex(E_TEX_FILTER_GENLUT_H1);
     m_pPassNode->addPass(m_pass);
     
     m_pass=MakeSharedPtr<SVPass>();
     //m_pass->setMtl(m_hslMtl);
-    m_pass->setInTex(0, E_TEX_FILTER_GENLUT_H1);
-    m_pass->setOutTex(E_TEX_FILTER_GENLUT_H2);
+//    m_pass->setInTex(0, E_TEX_FILTER_GENLUT_H1);
+//    m_pass->setOutTex(E_TEX_FILTER_GENLUT_H2);
     m_pPassNode->addPass(m_pass);
     
     m_pass=MakeSharedPtr<SVPass>();
     //m_pass->setMtl(m_colorBalanceMtl);
-    m_pass->setInTex(0, E_TEX_FILTER_GENLUT_H2);
-    m_pass->setOutTex(E_TEX_FILTER_GENLUT_H1);
+//    m_pass->setInTex(0, E_TEX_FILTER_GENLUT_H2);
+//    m_pass->setOutTex(E_TEX_FILTER_GENLUT_H1);
     m_pPassNode->addPass(m_pass);
     
     m_pass=MakeSharedPtr<SVPass>();
     //m_pass->setMtl(m_shadowHighlightMtl);
-    m_pass->setInTex(0, E_TEX_FILTER_GENLUT_H1);
-    m_pass->setOutTex(E_TEX_FILTER_GENLUT_H2);
+//    m_pass->setInTex(0, E_TEX_FILTER_GENLUT_H1);
+//    m_pass->setOutTex(E_TEX_FILTER_GENLUT_H2);
     m_pPassNode->addPass(m_pass);
     
     m_pass=MakeSharedPtr<SVPass>();
     //m_pass->setMtl(m_whiteBalckLeveMtl);
-    m_pass->setInTex(0, E_TEX_FILTER_GENLUT_H2);
-    m_pass->setOutTex(E_TEX_FILTER_GENLUT_H1);
+//    m_pass->setInTex(0, E_TEX_FILTER_GENLUT_H2);
+//    m_pass->setOutTex(E_TEX_FILTER_GENLUT_H1);
     m_pPassNode->addPass(m_pass);
     
     m_pass=MakeSharedPtr<SVPass>();
     //m_pass->setMtl(m_whiteBalanceMtl);
-    m_pass->setInTex(0, E_TEX_FILTER_GENLUT_H1);
-    m_pass->setOutTex(E_TEX_FILTER_GENLUT_H2);
+//    m_pass->setInTex(0, E_TEX_FILTER_GENLUT_H1);
+//    m_pass->setOutTex(E_TEX_FILTER_GENLUT_H2);
     m_pPassNode->addPass(m_pass);
     
     m_pass=MakeSharedPtr<SVPass>();
     //m_pass->setMtl(m_gammaMtl);
-    m_pass->setInTex(0, E_TEX_FILTER_GENLUT_H2);
-    m_pass->setOutTex(E_TEX_FILTER_GENLUT_H1);
+//    m_pass->setInTex(0, E_TEX_FILTER_GENLUT_H2);
+//    m_pass->setOutTex(E_TEX_FILTER_GENLUT_H1);
     m_pPassNode->addPass(m_pass);
     
     m_pass=MakeSharedPtr<SVPass>();
     //m_pass->setMtl(m_exposureMtl);
-    m_pass->setInTex(0, E_TEX_FILTER_GENLUT_H1);
-    m_pass->setOutTex(E_TEX_FILTER_GENLUT_H2);
+//    m_pass->setInTex(0, E_TEX_FILTER_GENLUT_H1);
+//    m_pass->setOutTex(E_TEX_FILTER_GENLUT_H2);
     m_pPassNode->addPass(m_pass);
     
     m_pass=MakeSharedPtr<SVPass>();
     //m_pass->setMtl(t_curveMtl);
-    m_pass->setInTex(0, E_TEX_FILTER_GENLUT_H2);
-    m_pass->setInTex(1 ,E_TEX_FILTER_GENLUT_H3);
-    m_pass->setOutTex(E_TEX_FILTER_GENLUT_H1);
+//    m_pass->setInTex(0, E_TEX_FILTER_GENLUT_H2);
+//    m_pass->setInTex(1 ,E_TEX_FILTER_GENLUT_H3);
+//    m_pass->setOutTex(E_TEX_FILTER_GENLUT_H1);
     m_pPassNode->addPass(m_pass);
     
     SVMtlCorePtr t_mtl_rgba=MakeSharedPtr<SVMtlCore>(mApp,"screennor");
     m_GradientMapPass=MakeSharedPtr<SVPass>();
     //m_GradientMapPass->setMtl(t_mtl_rgba);
-    m_GradientMapPass->setInTex(0,E_TEX_FILTER_GENLUT_H1);
-    m_GradientMapPass->setInTex(1,E_TEX_FILTER_GENLUT_H4);
-    m_GradientMapPass->setOutTex(E_TEX_FILTER_GENLUT_H2);
+//    m_GradientMapPass->setInTex(0,E_TEX_FILTER_GENLUT_H1);
+//    m_GradientMapPass->setInTex(1,E_TEX_FILTER_GENLUT_H4);
+//    m_GradientMapPass->setOutTex(E_TEX_FILTER_GENLUT_H2);
     m_pPassNode->addPass(m_GradientMapPass);
 
     m_pass=MakeSharedPtr<SVPass>();
     //m_pass->setMtl(t_mtl_back);
-    m_pass->setInTex(0,E_TEX_FILTER_GENLUT_H2);
-    m_pass->setOutTex(E_TEX_FILTER_GENLUT_OUT);
+//    m_pass->setInTex(0,E_TEX_FILTER_GENLUT_H2);
+//    m_pass->setOutTex(E_TEX_FILTER_GENLUT_OUT);
     m_pPassNode->addPass(m_pass);
 
     return true;

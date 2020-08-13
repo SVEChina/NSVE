@@ -8,51 +8,24 @@
 #include "SVPass.h"
 #include "../app/SVInst.h"
 #include "../mtl/SVMtlCore.h"
+#include "../mtl/SVSurface.h"
 #include "../rendercore/SVRenderer.h"
+#include "../rendercore/SVRTarget.h"
 
 using namespace sv;
 
 SVPass::SVPass(){
-    mTag = "SVPass";
-    m_pMtl = nullptr;
-    m_outTex = nullptr;
-    m_pMesh= nullptr;
-    m_outTexType = E_TEX_END;
+    m_surface = MakeSharedPtr<SVSurface>();
 }
 
 SVPass::~SVPass(){
-    m_pMtl = nullptr;
-    m_outTex = nullptr;
-    m_outTexType = E_TEX_END;
+    m_surface = nullptr;
 }
 
-bool SVPass::setInTex(s32 _index,SVTexturePtr _tex){
-    if( m_pMtl ){
-        m_pMtl->setTexture(_index, _tex);
-        return true;
-    }
-    return false;
+void SVPass::update(f32 _dt) {
+//    //m_target
+//    SVRTargetPtr t_aim_target = ;
+//    if(t_aim_target) {
+//        //t_aim_target->
+//    }
 }
-
-bool SVPass::setInTex(s32 _index,SVINTEX _tt){
-    if( m_pMtl ){
-        m_pMtl->setTexture(_index, _tt);
-        return true;
-    }
-    return false;
-}
-
-bool SVPass::setOutTex(SVTexturePtr _tex){
-    m_outTex = _tex;
-    return true;
-}
-
-bool SVPass::setOutTex(SVINTEX _tt) {
-    m_outTexType = _tt;
-    return true;
-}
-
-void SVPass::setMesh(SVRenderMeshPtr _pMesh){
-    m_pMesh=_pMesh;
-}
-

@@ -39,22 +39,24 @@ namespace sv {
         
         //销毁
         void destroy();
+        
         //重置大小
         void resize(s32 _w,s32 _h);
 
-        /*
-         create
-         */
+        //create-texture
         SVRTexPtr createResTexture();
 
-        //shader
-        SVRShaderPtr createResShader() ;
+        //create-shader
+        SVRShaderPtr createResShader();
 
-        //buf-vbo 等
-        SVRMeshResPtr createResBuf() ;
+        //create-buf
+        SVRMeshResPtr createResBuf();
 
-        //fbo
-        SVRFboPtr createResFbo() ;
+        //create-fbo
+        SVRFboPtr createResFbo();
+        
+        //create-target
+        SVRTargetPtr createTarget(SVINTEX _texid);
 
         /*
         process
@@ -73,9 +75,6 @@ namespace sv {
         
         //
         void drawScreen(SVINTEX _texid);
-        
-        //
-        SVRTargetPtr createTarget(SVINTEX _texid);
 
         //
         void pushEncoder(id<MTLRenderCommandEncoder> _encoder);

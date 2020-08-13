@@ -88,11 +88,11 @@ void SVFaceShapeNode::destroy(){
 
 void SVFaceShapeNode::update(f32 _dt){
     SVNode::update(_dt);
-    for(s32 i=0;i<m_passPool.size();i++){
-        if(m_passPool[i]->m_pMtl){
-            m_passPool[i]->m_pMtl->update(_dt);
-        }
-    }
+//    for(s32 i=0;i<m_passPool.size();i++){
+//        if(m_passPool[i]->m_pMtl){
+//            m_passPool[i]->m_pMtl->update(_dt);
+//        }
+//    }
 }
 
 void SVFaceShapeNode::render(){

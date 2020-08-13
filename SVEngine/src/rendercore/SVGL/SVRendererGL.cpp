@@ -69,33 +69,6 @@ void SVRendererGL::resize(s32 _w,s32 _h) {
 //    SVTexturePtr t_tex = createSVTex(E_TEX_MAIN,_w,_h,GL_RGBA);
 }
 
-SVRTargetPtr SVRendererGL::createTarget(SVINTEX _texid) {
-    //创建主纹理
-    SVTextureDsp t_tex_dsp;
-    t_tex_dsp.m_imgtype = SV_IMAGE_2D;
-    t_tex_dsp.m_dataFormate = SV_FORMAT_RGBA8;
-    t_tex_dsp.m_width = mApp->m_global_param.m_sv_width;    //宽
-    t_tex_dsp.m_height = mApp->m_global_param.m_sv_height;  //高
-    t_tex_dsp.m_depth = 1;                                  //深度
-    t_tex_dsp.m_minmap = false;         //是否开启mipmap
-    t_tex_dsp.m_computeWrite = true;    //metal 是否可以
-    t_tex_dsp.m_renderTarget = true;    //metal 是否是renderTarget
-    SVTexturePtr t_main_tex = mApp->getTexMgr()->createInTexture(E_TEX_MAIN,t_tex_dsp);
-    
-    //创建主target
-    SVRTargetPtr t_target = MakeSharedPtr<SVRTarget>(mApp);
-    SVTargetDsp* t_dsp = t_target->getTargetDsp();
-    t_dsp->m_color_texid[0] = _texid;
-    t_dsp->m_target_num = 1;
-    t_dsp->m_width = mApp->m_global_param.m_sv_width;
-    t_dsp->m_height = mApp->m_global_param.m_sv_height;
-    t_dsp->m_use_depth = true;
-    t_dsp->m_use_stencil = true;
-    //创建RT
-    SVDispatch::dispatchTargetCreate(mApp,t_target);
-    return t_target;
-}
-
 SVRTexPtr SVRendererGL::createResTexture() {
     return MakeSharedPtr<SVRTexGL>(mApp);
 }
@@ -114,6 +87,33 @@ SVRMeshResPtr SVRendererGL::createResBuf() {
 SVRFboPtr SVRendererGL::createResFbo() {
     return MakeSharedPtr<SVRFboGL>(mApp);
 }
+
+SVRTargetPtr SVRendererGL::createTarget(SVINTEX _texid) {
+    //创建主纹理
+    SVTextureDsp t_tex_dsp;
+    t_tex_dsp.m_imgtype = SV_IMAGE_2D;
+    t_tex_dsp.m_dataFormate = SV_FORMAT_RGBA8;
+    t_tex_dsp.m_width = mApp->m_global_param.m_sv_width;    //宽
+    t_tex_dsp.m_height = mApp->m_global_param.m_sv_height;  //高
+    t_tex_dsp.m_depth = 1;                                  //深度
+    t_tex_dsp.m_minmap = false;         //是否开启mipmap
+    t_tex_dsp.m_computeWrite = true;    //metal 是否可以
+    t_tex_dsp.m_renderTarget = true;    //metal 是否是renderTarget
+    SVTexturePtr t_main_tex = mApp->getTexMgr()->createInTexture(_texid,t_tex_dsp);
+    //创建主target
+    SVRTargetPtr t_target = MakeSharedPtr<SVRTarget>(mApp);
+    SVTargetDsp* t_dsp = t_target->getTargetDsp();
+    t_dsp->m_color_texid[0] = _texid;
+    t_dsp->m_target_num = 1;
+    t_dsp->m_width = mApp->m_global_param.m_sv_width;
+    t_dsp->m_height = mApp->m_global_param.m_sv_height;
+    t_dsp->m_use_depth = true;
+    t_dsp->m_use_stencil = true;
+    //创建RT
+    SVDispatch::dispatchTargetCreate(mApp,t_target);
+    return t_target;
+}
+
 
 //处理材质
 bool SVRendererGL::processMtl(SVMtlCorePtr _mtl,SVSurfacePtr _surface) {

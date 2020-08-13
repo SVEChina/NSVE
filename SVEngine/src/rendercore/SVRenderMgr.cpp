@@ -71,7 +71,7 @@ SVRTargetPtr SVRenderMgr::getMainRT() {
 
 void SVRenderMgr::addRTarget(SVRTargetPtr _rt,bool _pre) {
     if(_pre) {
-        m_preRT.append(_rt);    //push 前向
+        m_preRT.append(_rt);
     }else{
         m_afterRT.append(_rt);
     }
@@ -94,6 +94,7 @@ void SVRenderMgr::render(){
         if(m_stream_create) {
             m_stream_create->render(t_renderer,m_mainRT);
         }
+
         //前向RT
         for(s32 i=0;i<m_preRT.size();i++) {
             m_preRT[i]->render( t_renderer);
@@ -106,10 +107,12 @@ void SVRenderMgr::render(){
         for(s32 i=0;i<m_afterRT.size();i++) {
             m_afterRT[i]->render(  t_renderer);
         }
+    
         //销毁流
         if(m_stream_destroy) {
             m_stream_destroy->render( t_renderer,m_mainRT);
         }
+        //
         mApp->m_ctx->swap(t_renderer);
     }
     m_renderLock->unlock();

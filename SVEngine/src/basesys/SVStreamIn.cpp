@@ -6,25 +6,6 @@
 //
 
 #include "SVStreamIn.h"
-//#include "SVTransGPU.h"
-//#include "SVTransCPU.h"
-//#include "../app/SVInst.h"
-//#include "../app/SVGlobalMgr.h"
-//#include "../basesys/SVSceneMgr.h"
-//#include "../node/SVNode.h"
-//#include "../basesys/SVCameraNode.h"
-//#include "../node/SVSpineNode.h"
-//#include "../basesys/SVScene.h"
-//#include "../node/SVIOSInstreamNode.h"
-//#include "../node/SVFaceShapeNode.h"
-//#include "../node/SVShapeVariedNode.h"
-//#include "../node/SVSpriteNode.h"
-//#include "../rendercore/SVRenderMgr.h"
-//#include "../rendercore/SVRenderer.h"
-//#include "../rendercore/SVRenderCmd.h"
-//#include "../rendercore/SVRenderScene.h"
-//#include "../mtl/SVTexture.h"
-//#include "../mtl/SVTexMgr.h"
 
 using namespace sv;
 

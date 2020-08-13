@@ -15,34 +15,34 @@
 
 namespace sv {
         
-        //图片处理
-        class SVDeformMgr : public SVSysBase {
-        public:
-            SVDeformMgr(SVInstPtr _app);
-            
-            ~SVDeformMgr();
-            //
-            void init();
-            
-            void update(f32 _dt);
-            
-            void destroy();
-    
-            void pushDeform(SVDeformImageMovePtr deform);
-            
-            SVDeformImageMovePtr getDeform(s32 _postion);
-            
-            void clear();
-        protected:
-            
-            void removeEnd();
+    //图片处理
+    class SVDeformMgr : public SVSysBase {
+    public:
+        SVDeformMgr(SVInstPtr _app);
         
-        protected:
-            SVLockPtr m_defromLock;
-            SVArray<SVDeformImageMovePtr> m_deformArray;
-            SVArray<SVDeformImageMovePtr> m_deformCir;
-            
-        };
+        ~SVDeformMgr();
+        //
+        void init();
+        
+        void update(f32 _dt);
+        
+        void destroy();
+
+        void pushDeform(SVDeformImageMovePtr deform);
+        
+        SVDeformImageMovePtr getDeform(s32 _postion);
+        
+        void clear();
+        
+    protected:
+        
+        void removeEnd();
+
+        SVLockPtr m_defromLock;
+        SVArray<SVDeformImageMovePtr> m_deformArray;
+        SVArray<SVDeformImageMovePtr> m_deformCir;
+        
+    };
     
 }//!namespace sv
 

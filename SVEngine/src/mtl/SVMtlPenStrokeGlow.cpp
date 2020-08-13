@@ -42,7 +42,7 @@ void SVMtlPenStrokeGlow::setColor(FVec4 &_color){
 
 void SVMtlPenStrokeGlow::_submitUniform(SVRendererPtr _render) {
     SVMtlBillboard::_submitUniform(_render);
-    FVec4 t_color = m_strokeColor/255.0;
-    _render->submitUniformf4v("u_strokecolor", t_color.get());
+    //FVec4 t_color = m_strokeColor/255.0;
+    //_render->submitUniformf4v("u_strokecolor", t_color.get());
 }
 

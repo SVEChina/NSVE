@@ -248,64 +248,64 @@ void SVDeformImageMove::update(f32 _dt){
         }
         _updateMesh();
     }
-    //
-    if(m_passDeform && m_passDeform->m_pMtl){
-        m_passDeform->m_pMtl->update(_dt);
-    }
-    
-    if(m_passPoint && m_passPoint->m_pMtl){
-        m_passPoint->m_pMtl->update(_dt);
-    }
+//    //
+//    if(m_passDeform && m_passDeform->m_pMtl){
+//        m_passDeform->m_pMtl->update(_dt);
+//    }
+//    
+//    if(m_passPoint && m_passPoint->m_pMtl){
+//        m_passPoint->m_pMtl->update(_dt);
+//    }
 }
 
 void SVDeformImageMove::render(){
-    SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
-    if (is_swith && t_rs && false  == t_rs->isSuspend() ) {
-        if(m_passDeform && m_passDeform->m_pMtl){
-            SVRCmdPassCollectionPtr t_cmd = MakeSharedPtr<SVRCmdPassCollection>();
-            t_cmd->mTag = "SVBackGroundNode";
-            //t_cmd->setFbo(m_fbo);
-            //图片翻转这块需要校正一下 by fyz
-            if(m_pMtlBg){
-                if(m_flip){
-                    //m_pMtlBg->setParam("texclip",FVec2(1.0f, 1.0f));
-                }else{
-                    //m_pMtlBg->setParam("texclip",FVec2(1.0f, 1.0f));
-                }
-            }
-            //
-            if( m_passDeform->m_outTexType == E_TEX_END ) {
-                t_cmd->setTexture(m_passDeform->m_outTex);
-            }else{
-//                SVTexturePtr t_tex = mApp->getRenderer()->getSVTex(m_passDeform->m_outTexType);
-//                t_cmd->setTexture(t_tex);
-            }
-            if(m_passDeform->m_pMesh){
-                t_cmd->addMtlMesh(m_passDeform->m_pMtl,m_passDeform->m_pMesh);
-            }else{
-                t_cmd->addMtlMesh(m_passDeform->m_pMtl,mApp->getComData()->screenMesh());
-            }
-            if(m_passPoint->m_pMtl&&m_is_point){
-                 t_cmd->addMtlMesh(m_passPoint->m_pMtl,m_passPoint->m_pMesh);
-            }
-            t_rs->pushRenderCmd(RST_FACEMORPH, t_cmd);//m_rsType
-        }
-        
-        if(m_passBack){
-            SVRCmdPassPtr t_cmd = MakeSharedPtr<SVRCmdPass>();
-            t_cmd->mTag = "SVFaceDeform";
-            //t_cmd->setFbo(m_fbo);
-            t_cmd->setTexture(m_passBack->m_outTex);
-            t_cmd->setMesh(m_passBack->m_pMesh);
-            if(m_flip){
-                //m_passBack->m_pMtl->setTexcoordFlip(1.0f, -1.0f);
-            }else{
-                //m_passBack->m_pMtl->setTexcoordFlip(1.0f, 1.0f);
-            }
-//            t_cmd->setMaterial(m_passBack->m_pMtl);
-            t_rs->pushRenderCmd(RST_FACEMORPH, t_cmd);
-        }
-    }
+//    SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
+//    if (is_swith && t_rs && false  == t_rs->isSuspend() ) {
+//        if(m_passDeform && m_passDeform->m_pMtl){
+//            SVRCmdPassCollectionPtr t_cmd = MakeSharedPtr<SVRCmdPassCollection>();
+//            t_cmd->mTag = "SVBackGroundNode";
+//            //t_cmd->setFbo(m_fbo);
+//            //图片翻转这块需要校正一下 by fyz
+//            if(m_pMtlBg){
+//                if(m_flip){
+//                    //m_pMtlBg->setParam("texclip",FVec2(1.0f, 1.0f));
+//                }else{
+//                    //m_pMtlBg->setParam("texclip",FVec2(1.0f, 1.0f));
+//                }
+//            }
+//            //
+//            if( m_passDeform->m_outTexType == E_TEX_END ) {
+//                t_cmd->setTexture(m_passDeform->m_outTex);
+//            }else{
+////                SVTexturePtr t_tex = mApp->getRenderer()->getSVTex(m_passDeform->m_outTexType);
+////                t_cmd->setTexture(t_tex);
+//            }
+//            if(m_passDeform->m_pMesh){
+//                t_cmd->addMtlMesh(m_passDeform->m_pMtl,m_passDeform->m_pMesh);
+//            }else{
+//                t_cmd->addMtlMesh(m_passDeform->m_pMtl,mApp->getComData()->screenMesh());
+//            }
+//            if(m_passPoint->m_pMtl&&m_is_point){
+//                 t_cmd->addMtlMesh(m_passPoint->m_pMtl,m_passPoint->m_pMesh);
+//            }
+//            t_rs->pushRenderCmd(RST_FACEMORPH, t_cmd);//m_rsType
+//        }
+//        
+//        if(m_passBack){
+//            SVRCmdPassPtr t_cmd = MakeSharedPtr<SVRCmdPass>();
+//            t_cmd->mTag = "SVFaceDeform";
+//            //t_cmd->setFbo(m_fbo);
+//            t_cmd->setTexture(m_passBack->m_outTex);
+//            t_cmd->setMesh(m_passBack->m_pMesh);
+//            if(m_flip){
+//                //m_passBack->m_pMtl->setTexcoordFlip(1.0f, -1.0f);
+//            }else{
+//                //m_passBack->m_pMtl->setTexcoordFlip(1.0f, 1.0f);
+//            }
+////            t_cmd->setMaterial(m_passBack->m_pMtl);
+//            t_rs->pushRenderCmd(RST_FACEMORPH, t_cmd);
+//        }
+//    }
 }
 
 s32 SVDeformImageMove::getWidth(){
