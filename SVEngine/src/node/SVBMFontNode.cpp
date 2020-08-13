@@ -84,10 +84,10 @@ void SVBMFontNode::update(f32 dt) {
 
 void SVBMFontNode::render() {
     if (m_visible){
-        SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
-        if (m_pRenderObj && m_pMesh) {
-            m_pRenderObj->pushCmd(t_rs, m_rsType, "SVBMFontNode");
-        }
+//        SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
+//        if (m_pRenderObj && m_pMesh) {
+//            m_pRenderObj->pushCmd(t_rs, m_rsType, "SVBMFontNode");
+//        }
     }
     SVNode::render();
 }

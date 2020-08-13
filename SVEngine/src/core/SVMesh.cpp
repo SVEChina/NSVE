@@ -15,7 +15,6 @@
 #include "../rendercore/SVRenderCmd.h"
 #include "../rendercore/SVRenderer.h"
 #include "../rendercore/SVRenderMgr.h"
-#include "../rendercore/SVRenderScene.h"
 
 using namespace sv;
 

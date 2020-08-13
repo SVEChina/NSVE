@@ -8,7 +8,7 @@
 #ifndef SV_PASS_H
 #define SV_PASS_H
 
-#include "../base/SVObject.h"
+#include "../base/SVGBase.h"
 #include "../rendercore/SVRenderDeclare.h"
 #include "../mtl/SVMtlDeclare.h"
 #include <vector>
@@ -18,9 +18,9 @@ namespace sv {
     
     //屏幕空间处理
 
-    class SVPass :public SVObject {
+    class SVPass :public SVGBaseEx {
     public:
-        SVPass();
+        SVPass(SVInstPtr _inst);
 
         ~SVPass();
 

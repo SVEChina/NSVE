@@ -32,7 +32,6 @@ SVRMeshMetal::SVRMeshMetal(SVInstPtr _app)
 }
 
 SVRMeshMetal::~SVRMeshMetal() {
-    //destroy(nullptr);
 }
 
 void SVRMeshMetal::create(SVRendererPtr _renderer) {
@@ -106,12 +105,13 @@ void SVRMeshMetal::destroy(SVRendererPtr _renderer) {
     m_dbufs.clear();
 }
 
+//处理
 s32 SVRMeshMetal::process(SVRendererPtr _renderer) {
     SVRendererMetalPtr t_rm = std::dynamic_pointer_cast<SVRendererMetal>(_renderer);
     if(t_rm && t_rm->m_curEncoder) {
         for(s32 i=0;i<SV_MAX_STREAM_NUM;i++) {
             if(m_dbufs[i]) {
-                [t_rm->m_curEncoder setVertexBuffer:m_dbufs[i] offset:0 atIndex:i];    //i表示的buf和索引的对应
+                [t_rm->m_curEncoder setVertexBuffer:m_dbufs[i] offset:0 atIndex:i];
             }
         }
     }
@@ -120,16 +120,9 @@ s32 SVRMeshMetal::process(SVRendererPtr _renderer) {
 
 void SVRMeshMetal::submit(SVDataSwapPtr _data,s32 _offset,s32 _size,s32 _bufid,s32 _buftype) {
     //提交数据
-    
 }
 
-////替换uniform
-//for(s32 i=0;i<t_shader->m_paramtbl.size();i++) {
-//    void* t_pointer = t_shader->m_paramtbl[i].m_tbl->getDataPointer();
-//    s32 t_len = t_shader->m_paramtbl[i].m_tbl->getDataSize();
-//    memcpy( m_ubuf_pool[i].m_ubuf.contents , t_pointer ,t_len);
-//}
-
+//绘制
 void SVRMeshMetal::draw(SVRendererPtr _renderer) {
     SVRendererMetalPtr t_rm = std::dynamic_pointer_cast<SVRendererMetal>(_renderer);
     if(t_rm && t_rm->m_curEncoder) {
@@ -160,6 +153,5 @@ void SVRMeshMetal::draw(SVRendererPtr _renderer) {
                 [t_rm->m_curEncoder drawPrimitives:MTLPrimitiveTypeTriangle vertexStart:m_vertStart vertexCount:m_vertCnt];
             }
         }
-        //; // 结束
     }
 }

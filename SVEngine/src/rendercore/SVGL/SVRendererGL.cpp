@@ -34,7 +34,6 @@ SVRendererGL::SVRendererGL(SVInstPtr _app)
 }
 
 SVRendererGL::~SVRendererGL(){
-    m_pRState = nullptr;
     m_cur_program = 0;
 }
 
@@ -44,8 +43,6 @@ SVRendererGLPtr SVRendererGL::share() {
 
 void SVRendererGL::init(s32 _w,s32 _h){
     SVRenderer::init(_w,_h);
-    m_inWidth = _w;
-    m_inHeight = _h;
     mApp->m_global_param.m_sv_width = _w;
     mApp->m_global_param.m_sv_height = _h;
     //创建主纹理
@@ -89,6 +86,10 @@ SVRFboPtr SVRendererGL::createResFbo() {
 }
 
 SVRTargetPtr SVRendererGL::createTarget(SVINTEX _texid) {
+    SVRTargetPtr t_target = getTarget(_texid);
+    if(t_target) {
+        return t_target;
+    }
     //创建主纹理
     SVTextureDsp t_tex_dsp;
     t_tex_dsp.m_imgtype = SV_IMAGE_2D;
@@ -101,7 +102,7 @@ SVRTargetPtr SVRendererGL::createTarget(SVINTEX _texid) {
     t_tex_dsp.m_renderTarget = true;    //metal 是否是renderTarget
     SVTexturePtr t_main_tex = mApp->getTexMgr()->createInTexture(_texid,t_tex_dsp);
     //创建主target
-    SVRTargetPtr t_target = MakeSharedPtr<SVRTarget>(mApp);
+    t_target = MakeSharedPtr<SVRTarget>(mApp);
     SVTargetDsp* t_dsp = t_target->getTargetDsp();
     t_dsp->m_color_texid[0] = _texid;
     t_dsp->m_target_num = 1;
@@ -111,6 +112,8 @@ SVRTargetPtr SVRendererGL::createTarget(SVINTEX _texid) {
     t_dsp->m_use_stencil = true;
     //创建RT
     SVDispatch::dispatchTargetCreate(mApp,t_target);
+    //增加target
+    _addTarget(_texid,t_target);
     return t_target;
 }
 
@@ -163,9 +166,7 @@ void SVRendererGL::drawMesh(SVRenderMeshPtr _mesh ) {
 
 //屏幕空间绘制
 void SVRendererGL::drawScreen(SVINTEX _texid) {
-    
 }
-
 
 //
 ////
@@ -410,67 +411,61 @@ void SVRendererGL::drawScreen(SVINTEX _texid) {
 //        }
 //    }
 //}
-
-//提交线宽
-void SVRendererGL::submitLineWidth(f32 _width){
-    glLineWidth(_width);
-}
-
-//提交点大小
-void SVRendererGL::submitPointSize(f32 _size){
-    
-}
-
-//绑定fbo
-void SVRendererGL::svBindFrameBuffer(u32 _id) {
-    SVRenderStateGLPtr m_pRStateGL = std::dynamic_pointer_cast<SVRenderStateGL>(m_pRState);
-    if( m_pRStateGL->m_fbo!=_id ) {
-        m_pRStateGL->m_fbo = _id;
-        glBindFramebuffer(GL_FRAMEBUFFER, m_pRStateGL->m_fbo);
-    }
-}
-
-void SVRendererGL::svBindClearColor(u32 _id) {
-    glClearColor(0.0, 0.0, 0.0, 0.0);
-    glClear(GL_COLOR_BUFFER_BIT);
-}
-
-void SVRendererGL::svBindColorBuffer(u32 _id) {
-    SVRenderStateGLPtr m_pRStateGL = std::dynamic_pointer_cast<SVRenderStateGL>(m_pRState);
-    if( m_pRStateGL->m_colorBufferID!=_id ) {
-        m_pRStateGL->m_colorBufferID = _id;
-        glBindFramebuffer(GL_RENDERBUFFER, _id);
-    }
-}
-
-//顶点缓存
-void SVRendererGL::svBindVertexBuffer(u32 _id) {
-    SVRenderStateGLPtr m_pRStateGL = std::dynamic_pointer_cast<SVRenderStateGL>(m_pRState);
-    if( m_pRStateGL->m_vertexBufID!=_id ) {
-        m_pRStateGL->m_vertexBufID = _id;
-        glBindBuffer(GL_ARRAY_BUFFER, _id);
-    }
-}
-
-//索引缓存
-void SVRendererGL::svBindIndexBuffer(u32 _id) {
-    SVRenderStateGLPtr m_pRStateGL = std::dynamic_pointer_cast<SVRenderStateGL>(m_pRState);
-    if( m_pRStateGL->m_indexBufID!=_id ) {
-        m_pRStateGL->m_indexBufID = _id;
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _id);
-    }
-}
-
-//视口
-void SVRendererGL::svPushViewPort(u32 _x,u32 _y,u32 _w,u32 _h) {
-    SVRenderer::svPushViewPort(_x,_y,_w,_h);
-    glViewport(_x, _y, _w, _h);
-}
-
-void SVRendererGL::svPopViewPort() {
-    m_vpStack.pop();
-    if(m_vpStack.size()>0) {
-        VPParam t_vp = m_vpStack.top();
-        glViewport(t_vp.m_x, t_vp.m_y, t_vp.m_width, t_vp.m_height);
-    }
-}
+//
+////提交线宽
+//void SVRendererGL::submitLineWidth(f32 _width){
+//    glLineWidth(_width);
+//}
+////绑定fbo
+//void SVRendererGL::svBindFrameBuffer(u32 _id) {
+//    SVRenderStateGLPtr m_pRStateGL = std::dynamic_pointer_cast<SVRenderStateGL>(m_pRState);
+//    if( m_pRStateGL->m_fbo!=_id ) {
+//        m_pRStateGL->m_fbo = _id;
+//        glBindFramebuffer(GL_FRAMEBUFFER, m_pRStateGL->m_fbo);
+//    }
+//}
+//
+//void SVRendererGL::svBindClearColor(u32 _id) {
+//    glClearColor(0.0, 0.0, 0.0, 0.0);
+//    glClear(GL_COLOR_BUFFER_BIT);
+//}
+//
+//void SVRendererGL::svBindColorBuffer(u32 _id) {
+//    SVRenderStateGLPtr m_pRStateGL = std::dynamic_pointer_cast<SVRenderStateGL>(m_pRState);
+//    if( m_pRStateGL->m_colorBufferID!=_id ) {
+//        m_pRStateGL->m_colorBufferID = _id;
+//        glBindFramebuffer(GL_RENDERBUFFER, _id);
+//    }
+//}
+//
+////顶点缓存
+//void SVRendererGL::svBindVertexBuffer(u32 _id) {
+//    SVRenderStateGLPtr m_pRStateGL = std::dynamic_pointer_cast<SVRenderStateGL>(m_pRState);
+//    if( m_pRStateGL->m_vertexBufID!=_id ) {
+//        m_pRStateGL->m_vertexBufID = _id;
+//        glBindBuffer(GL_ARRAY_BUFFER, _id);
+//    }
+//}
+//
+////索引缓存
+//void SVRendererGL::svBindIndexBuffer(u32 _id) {
+//    SVRenderStateGLPtr m_pRStateGL = std::dynamic_pointer_cast<SVRenderStateGL>(m_pRState);
+//    if( m_pRStateGL->m_indexBufID!=_id ) {
+//        m_pRStateGL->m_indexBufID = _id;
+//        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _id);
+//    }
+//}
+//
+////视口
+//void SVRendererGL::svPushViewPort(u32 _x,u32 _y,u32 _w,u32 _h) {
+//    SVRenderer::svPushViewPort(_x,_y,_w,_h);
+//    glViewport(_x, _y, _w, _h);
+//}
+//
+//void SVRendererGL::svPopViewPort() {
+//    m_vpStack.pop();
+//    if(m_vpStack.size()>0) {
+//        VPParam t_vp = m_vpStack.top();
+//        glViewport(t_vp.m_x, t_vp.m_y, t_vp.m_width, t_vp.m_height);
+//    }
+//}

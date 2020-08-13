@@ -76,10 +76,10 @@ void SVFreeTypeNode::update(f32 dt) {
 
 void SVFreeTypeNode::render() {
     if ( m_visible ){
-        SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
-        if (m_renderObject && m_pMesh && m_pMtl) {
-            m_renderObject->pushCmd(t_rs, RST_SOLID_3D, "SVFreeTypeNode");
-        }
+//        SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
+//        if (m_renderObject && m_pMesh && m_pMtl) {
+//            m_renderObject->pushCmd(t_rs, RST_SOLID_3D, "SVFreeTypeNode");
+//        }
     }
     SVNode::render();
 }

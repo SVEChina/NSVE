@@ -86,10 +86,10 @@ void SVBGRAInstreamNode::update(f32 dt) {
 
 void SVBGRAInstreamNode::render() {
     if (m_visible ){
-        SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
-        if (m_pRenderObj) {
-            m_pRenderObj->pushCmd(t_rs, m_rsType, "SVBGRAInstreamNode");
-        }
+//        SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
+//        if (m_pRenderObj) {
+//            m_pRenderObj->pushCmd(t_rs, m_rsType, "SVBGRAInstreamNode");
+//        }
     }
     SVNode::render();
 }

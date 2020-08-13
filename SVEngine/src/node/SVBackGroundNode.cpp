@@ -24,7 +24,7 @@
 #include "../rendercore/SVRenderObject.h"
 #include "../rendercore/SVRenderMesh.h"
 #include "../rendercore/SVRenderCmd.h"
-#include "../rendercore/SVRenderScene.h"
+
 #include "../rendercore/SVRenderer.h"
 #include "../mtl/SVMtlFaceShape.h"
 #include "../mtl/SVMtlShapeVaried.h"

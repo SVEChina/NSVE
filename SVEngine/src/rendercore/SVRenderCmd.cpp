@@ -6,11 +6,11 @@
 //
 
 #include "SVRenderCmd.h"
-#include "SVRenderScene.h"
 #include "SVRenderer.h"
 #include "SVRenderMesh.h"
 #include "SVRShader.h"
 #include "SVRFbo.h"
+#include "SVRTarget.h"
 #include "../mtl/SVMtlCore.h"
 #include "../mtl/SVTexMgr.h"
 #include "../mtl/SVTexture.h"
@@ -79,7 +79,7 @@ SVRCmdPass::SVRCmdPass() {
 }
 
 SVRCmdPass::~SVRCmdPass(){
-    m_target
+    m_target = nullptr;
 }
 
 void SVRCmdPass::setTarget(SVRTargetPtr _target) {

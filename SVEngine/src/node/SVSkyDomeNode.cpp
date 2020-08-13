@@ -63,10 +63,10 @@ void SVSkyDomeNode::update(f32 _dt){
 void SVSkyDomeNode::render(){
     if (!m_visible)
         return;
-    SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
-    if (m_renderObject) {
-        m_renderObject->pushCmd(t_rs, RST_SKY, "SkyDome");
-    }
+//    SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
+//    if (m_renderObject) {
+//        m_renderObject->pushCmd(t_rs, RST_SKY, "SkyDome");
+//    }
 }
 
 void SVSkyDomeNode::_generateMesh(){

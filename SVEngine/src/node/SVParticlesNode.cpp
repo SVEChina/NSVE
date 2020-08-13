@@ -8,7 +8,7 @@
 #include "../mtl/SVTexMgr.h"
 #include "../mtl/SVTexture.h"
 #include "../rendercore/SVRenderMgr.h"
-#include "../rendercore/SVRenderScene.h"
+
 #include "../rendercore/SVRenderMesh.h"
 #include "../rendercore/SVRenderObject.h"
 

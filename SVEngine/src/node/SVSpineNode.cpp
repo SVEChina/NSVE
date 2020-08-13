@@ -12,7 +12,7 @@
 //#include "../basesys/SVCameraNode.h"
 //#include "../basesys/SVScene.h"
 //#include "../rendercore/SVRenderMgr.h"
-//#include "../rendercore/SVRenderScene.h"
+//
 //#include "../rendercore/SVRenderMesh.h"
 //#include "../rendercore/SVRenderObject.h"
 //#include "../core/SVSpine.h"

@@ -19,27 +19,27 @@
 
 namespace sv {
     
-    class SVRenderObjInst{
-    public:
-        static void pushLineCmd(SVRenderScenePtr _rs,
-                                RENDERSTREAMTYPE streamtype,
-                                FVec3 _start,
-                                FVec3 _end,
-                                SVMtlCorePtr _mtl,
-                                cptr8 tag = "null");
-        
-        static void pushRectCmd(SVRenderScenePtr _rs,
-                                RENDERSTREAMTYPE streamtype,
-                                SVRect& _rect,
-                                SVMtlCorePtr _mtl,
-                                cptr8 tag = "null");
-        
-        static void pushAABBCmd(SVRenderScenePtr _rs,
-                                RENDERSTREAMTYPE streamtype,
-                                SVBoundBox& _aabb,
-                                SVMtlCorePtr _mtl,
-                                cptr8 tag = "null");
-    };
+//    class SVRenderObjInst{
+//    public:
+//        static void pushLineCmd(SVRenderScenePtr _rs,
+//                                RENDERSTREAMTYPE streamtype,
+//                                FVec3 _start,
+//                                FVec3 _end,
+//                                SVMtlCorePtr _mtl,
+//                                cptr8 tag = "null");
+//
+//        static void pushRectCmd(SVRenderScenePtr _rs,
+//                                RENDERSTREAMTYPE streamtype,
+//                                SVRect& _rect,
+//                                SVMtlCorePtr _mtl,
+//                                cptr8 tag = "null");
+//
+//        static void pushAABBCmd(SVRenderScenePtr _rs,
+//                                RENDERSTREAMTYPE streamtype,
+//                                SVBoundBox& _aabb,
+//                                SVMtlCorePtr _mtl,
+//                                cptr8 tag = "null");
+//    };
     
     //
     class SVRenderObject : public SVObject {
@@ -48,9 +48,9 @@ namespace sv {
         
         ~SVRenderObject();
         
-        virtual void pushCmd(SVRenderScenePtr _rs,
-                             RENDERSTREAMTYPE streamtype,
-                             cptr8 tag = "null");
+//        virtual void pushCmd(SVRenderScenePtr _rs,
+//                             RENDERSTREAMTYPE streamtype,
+//                             cptr8 tag = "null");
         
         void setMesh(SVRenderMeshPtr _mesh);
         

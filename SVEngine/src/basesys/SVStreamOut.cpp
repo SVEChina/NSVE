@@ -15,7 +15,6 @@
 #include "../node/SVFrameOutRead.h"
 #include "../basesys/SVSceneMgr.h"
 #include "../rendercore/SVRenderMgr.h"
-#include "../rendercore/SVRenderScene.h"
 
 using namespace sv;
 

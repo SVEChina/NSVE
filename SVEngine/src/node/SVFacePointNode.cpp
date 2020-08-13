@@ -60,9 +60,9 @@ void SVFacePointNode::update(f32 _dt){
 void SVFacePointNode::render(){
     SVPersonPtr t_person = mApp->getDetectMgr()->getPersonModule()->getPerson(1);
     if (t_person->getExist()) {
-        SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
-        if (m_pRenderObj) {
-            m_pRenderObj->pushCmd(t_rs, RST_SOLID_2D, "SVFacePointNode");
-        }
+//        SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
+//        if (m_pRenderObj) {
+//            m_pRenderObj->pushCmd(t_rs, RST_SOLID_2D, "SVFacePointNode");
+//        }
     }
 }

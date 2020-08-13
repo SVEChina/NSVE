@@ -17,8 +17,8 @@ using namespace sv;
 
 SVFaceDataMesh::SVFaceDataMesh(SVInstPtr _app)
 :SVGBaseEx(_app){
-    
 }
+
 //
 void SVFaceDataMesh::init(){
     //加载as标准脸数据

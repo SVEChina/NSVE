@@ -13,7 +13,7 @@
 #include "../mtl/SVTexMgr.h"
 #include "../core/SVGeoGen.h"
 #include "../rendercore/SVRenderObject.h"
-#include "../rendercore/SVRenderScene.h"
+
 #include "../rendercore/SVRenderMgr.h"
 
 using namespace sv;
@@ -113,10 +113,10 @@ void SVFrameAniNode::render() {
     if (m_state == tANI_STATE_STOP) {
         return;
     }
-    if (m_visible && m_pRenderObj ){
-        SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
-        m_pRenderObj->pushCmd(t_rs, m_rsType, "SVFrameAniNode");
-    }
+//    if (m_visible && m_pRenderObj ){
+//        SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
+//        m_pRenderObj->pushCmd(t_rs, m_rsType, "SVFrameAniNode");
+//    }
     SVNode::render();
 }
 

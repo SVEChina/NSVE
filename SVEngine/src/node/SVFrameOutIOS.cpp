@@ -14,7 +14,7 @@
 #include "../mtl/SVTextureIOS.h"
 #include "../rendercore/SVRenderMgr.h"
 #include "../rendercore/SVRenderObject.h"
-#include "../rendercore/SVRenderScene.h"
+
 #include "../rendercore/SVRenderer.h"
 #include "../mtl/SVMtlCore.h"
 #include "../basesys/SVConfig.h"

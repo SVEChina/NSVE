@@ -67,10 +67,10 @@ void SVPatchNode::update(f32 _dt) {
 
 void SVPatchNode::render() {
     if (m_visible ){
-        SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
-        if (m_pRenderObj) {
-            m_pRenderObj->pushCmd(t_rs, RST_SOLID_3D, "SVPatchNode");
-        }
+//        SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
+//        if (m_pRenderObj) {
+//            m_pRenderObj->pushCmd(t_rs, RST_SOLID_3D, "SVPatchNode");
+//        }
     }
     SVNode::render();
 }

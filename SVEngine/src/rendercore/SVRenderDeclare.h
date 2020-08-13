@@ -22,13 +22,16 @@ namespace sv {
     DECLARE_SHAREPTR(SVRShader);
     DECLARE_SHAREPTR(SVRDPState);
     DECLARE_SHAREPTR(SVREnv);
-
-    //渲染器
+    
+    //渲染框架
     DECLARE_SHAREPTR(SVRenderer);
     DECLARE_SHAREPTR(SVRenderState);
     DECLARE_SHAREPTR(SVRTech);
+    DECLARE_SHAREPTR(SVRTarget);
+    DECLARE_SHAREPTR(SVRenderStream);
+    DECLARE_SHAREPTR(SVRenderMesh);
 
-    //gl
+    //GL
     DECLARE_SHAREPTR(SVRendererGL);
     DECLARE_SHAREPTR(SVRTechGL);
     DECLARE_SHAREPTR(SVRFboGL);
@@ -36,33 +39,18 @@ namespace sv {
     DECLARE_SHAREPTR(SVRenderStateGL);
     DECLARE_SHAREPTR(SVRTexGL);
     DECLARE_SHAREPTR(SVRShaderGL);
-    DECLARE_SHAREPTR(SVResGLRenderTarget);
-    DECLARE_SHAREPTR(SVResGLRenderTargetOut);
-    DECLARE_SHAREPTR(SVResGLRenderTexture);
-    DECLARE_SHAREPTR(SVResGLRenderMesh);
-    DECLARE_SHAREPTR(SVResGLRenderMeshData);
-    
-    
-    //metal
-    #if defined(SV_IOS) || defined(SV_OSX)
 
+    //metal
+#if defined(SV_IOS) || defined(SV_OSX)
     DECLARE_SHAREPTR(SVRendererMetal);
     DECLARE_SHAREPTR(SVRFboMetal);
     DECLARE_SHAREPTR(SVRMeshMetal);
     DECLARE_SHAREPTR(SVRTexMetal);
     DECLARE_SHAREPTR(SVRShaderMetal);
-
-    #endif
+#endif
 
     //vulkan
     DECLARE_SHAREPTR(SVRendererVK);
-    
-    //渲染框架
-    DECLARE_SHAREPTR(SVRTarget);
-    DECLARE_SHAREPTR(SVRenderScene);
-    DECLARE_SHAREPTR(SVRenderPipline);
-    DECLARE_SHAREPTR(SVRenderStream);
-    DECLARE_SHAREPTR(SVRenderMesh);
     
     //rendercmd
     DECLARE_SHAREPTR(SVRenderCmd);
@@ -88,7 +76,6 @@ namespace sv {
     DECLARE_SHAREPTR(SVRCmdCreateTarget);
 
     //renderobject
-    DECLARE_SHAREPTR(SVRRes);
     DECLARE_SHAREPTR(SVRenderObject);
 
 

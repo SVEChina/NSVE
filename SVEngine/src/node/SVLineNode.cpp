@@ -61,10 +61,10 @@ void SVLineNode::update(f32 _dt) {
 
 void SVLineNode::render() {
     if (m_visible ){
-        SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
-        if (m_pRenderObj) {
-            m_pRenderObj->pushCmd(t_rs, RST_SOLID_3D, "SVLineNode");
-        }
+//        SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
+//        if (m_pRenderObj) {
+//            m_pRenderObj->pushCmd(t_rs, RST_SOLID_3D, "SVLineNode");
+//        }
     }
     SVNode::render();
 }

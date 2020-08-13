@@ -89,8 +89,6 @@ namespace sv {
         
         inline f32 getDesignAdaptScale() { return m_designAdaptScale; }
         
-        void setCameraDsp(s32 inCameraWidth, s32 inCameraHeight, s32 inCameraAngle);
-        
         s32 getRealCameraWidth();
         
         s32 getRealCameraHeight();

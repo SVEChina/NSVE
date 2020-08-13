@@ -249,13 +249,6 @@ void SVConfig::loadConfig() {
     SV_LOG_ERROR("SVConfig::_loadConfig\n");
 }
 
-void SVConfig::setCameraDsp(s32 inCameraWidth, s32 inCameraHeight, s32 inCameraAngle) {
-    cameraWidth = inCameraWidth;
-    cameraHeight = inCameraHeight;
-    cameraAngle = inCameraAngle;
-    _adaptScale();
-}
-
 void SVConfig::_adaptScale() {
     f32 t_ratio_design = designImageWidth*1.0f/designImageHeight;
     f32 t_ratio_camera = cameraWidth*1.0f/cameraHeight;

@@ -227,7 +227,7 @@ namespace sv {
     public:
         bool m_use_index;
         bool m_use_instance;
-        //索引数据
+        //BUF描述
         BufferDspPtr m_index_dsp;
         BufferDspPtr m_vert_dsp;
         BufferDspPtr m_instance_dsp;

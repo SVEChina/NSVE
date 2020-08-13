@@ -93,24 +93,13 @@ void SVRenderMesh::setVertNum(s32 _vertexNum){
 }
 
 void SVRenderMesh::setIndexData(SVDataSwapPtr _data,s32 _num){
-//    if(m_use_index) {
-//    }
 }
 
 void SVRenderMesh::setInstanceData(SVDataSwapPtr _pdata, u32 _instanceCount){
-    if(m_use_instance) {
-        //
-        
-    }
 }
 
 void SVRenderMesh::setVertexData(SVDataSwapPtr _data){
-    //更改混合流数据
-    
 }
 
 void SVRenderMesh::setVertexData(SVDataSwapPtr _data,s32 _streamtype) {
-    //更改目标流数据
-    
 }
-

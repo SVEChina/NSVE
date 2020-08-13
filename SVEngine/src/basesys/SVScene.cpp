@@ -16,12 +16,9 @@
 #include "../node/SVSpriteNode.h"
 #include "../app/SVGlobalMgr.h"
 #include "../app/SVGlobalParam.h"
-
 #include "../basesys/SVCameraNode.h"
 #include "../basesys/SVComData.h"
-
 #include "../rendercore/SVRenderMgr.h"
-#include "../rendercore/SVRenderScene.h"
 #include "../rendercore/SVRenderer.h"
 #include "../rendercore/SVRenderCmd.h"
 #include "../event/SVEventMgr.h"

@@ -53,6 +53,8 @@ namespace sv {
         
         void addRTarget(SVRTargetPtr _rt,bool _pre);
         
+        void delRTarget(SVRTargetPtr _rt);
+        
         SVRTargetPtr getRTarget(cptr8 _name);
 
     protected:
@@ -75,9 +77,6 @@ namespace sv {
         SVArray<SVRTargetPtr> m_preRT; //前向RT
         SVArray<SVRTargetPtr> m_afterRT; //后向RT
         SVRTargetPtr m_mainRT; //主RT
-        
-    public:
-        SVRenderScenePtr getRenderScene();
     };
 
 

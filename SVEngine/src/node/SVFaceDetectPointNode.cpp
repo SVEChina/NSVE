@@ -120,10 +120,10 @@ void SVFaceDetectPointNode::update(f32 _dt){
 
 void SVFaceDetectPointNode::render(){
     if ( m_visible ){
-        SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
-        if (m_pRenderObj) {
-            m_pRenderObj->pushCmd(t_rs, m_rsType, "SVFaceDetectPointNode");
-        }
+//        SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
+//        if (m_pRenderObj) {
+//            m_pRenderObj->pushCmd(t_rs, m_rsType, "SVFaceDetectPointNode");
+//        }
     }
     SVNode::render();
 }

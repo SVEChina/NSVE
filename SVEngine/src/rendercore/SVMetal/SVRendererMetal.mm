@@ -64,9 +64,6 @@ void SVRendererMetal::init(id<MTLDevice> _device,s32 _w,s32 _h) {
     }
     m_cmdQuene = m_pDevice.newCommandQueue;
     m_pLibrary = [m_pDevice newDefaultLibrary];
-    //
-    m_inWidth = _w;
-    m_inHeight = _h;
     //创建主纹理
     mApp->m_global_param.m_sv_width = _w;
     mApp->m_global_param.m_sv_height = _h;
@@ -90,27 +87,32 @@ void SVRendererMetal::resize(s32 _w,s32 _h) {
     //
 }
 
+//创建texture资源
 SVRTexPtr SVRendererMetal::createResTexture()  {
     return MakeSharedPtr<SVRTexMetal>(mApp);
 }
 
-//shader
+//创建shader资源
 SVRShaderPtr SVRendererMetal::createResShader() {
     return MakeSharedPtr<SVRShaderMetal>(mApp);
 }
 
-//buf-vbo 等
+//创建buf资源
 SVRMeshResPtr SVRendererMetal::createResBuf()  {
     return MakeSharedPtr<SVRMeshMetal>(mApp);
 }
 
-//fbo
+//创建fbo资源
 SVRFboPtr SVRendererMetal::createResFbo()  {
     return MakeSharedPtr<SVRFboMetal>(mApp);
 }
 
+//创建target资源
 SVRTargetPtr SVRendererMetal::createTarget(SVINTEX _texid) {
-    //E_TEX_MAIN
+    SVRTargetPtr t_target = getTarget(_texid);
+    if(t_target) {
+        return t_target;
+    }
     //创建主纹理
     SVTextureDsp t_tex_dsp;
     t_tex_dsp.m_imgtype = SV_IMAGE_2D;
@@ -123,7 +125,7 @@ SVRTargetPtr SVRendererMetal::createTarget(SVINTEX _texid) {
     t_tex_dsp.m_renderTarget = true;    //metal 是否是renderTarget
     SVTexturePtr t_main_tex = mApp->getTexMgr()->createInTexture(_texid,t_tex_dsp);
     //创建主target
-    SVRTargetPtr t_target = MakeSharedPtr<SVRTarget>(mApp);
+    t_target = MakeSharedPtr<SVRTarget>(mApp);
     SVTargetDsp* t_dsp = t_target->getTargetDsp();
     t_dsp->m_color_texid[0] = _texid;
     t_dsp->m_target_num = 1;
@@ -133,6 +135,8 @@ SVRTargetPtr SVRendererMetal::createTarget(SVINTEX _texid) {
     t_dsp->m_use_stencil = true;
     //创建RT
     SVDispatch::dispatchTargetCreate(mApp,t_target);
+    //增加target
+    _addTarget(_texid,t_target);
     return t_target;
 }
 
