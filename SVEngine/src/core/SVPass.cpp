@@ -9,8 +9,10 @@
 #include "../app/SVInst.h"
 #include "../mtl/SVMtlCore.h"
 #include "../mtl/SVSurface.h"
+#include "../rendercore/SVRenderMgr.h"
 #include "../rendercore/SVRenderer.h"
 #include "../rendercore/SVRTarget.h"
+#include "../rendercore/SVRenderCmd.h"
 
 using namespace sv;
 
@@ -23,9 +25,11 @@ SVPass::~SVPass(){
 }
 
 void SVPass::update(f32 _dt) {
-//    //m_target
-//    SVRTargetPtr t_aim_target = ;
-//    if(t_aim_target) {
-//        //t_aim_target->
-//    }
+    SVRCmdPassPtr t_r_pass = MakeSharedPtr<SVRCmdPass>();
+    //t_r_pass->setMtl();
+    //t_r_pass->setMesh();
+    //t_r_pass->setSurface();
+    //t_r_pass->setTarget();//SVRTargetPtr _target
+    //
+    //mApp->getRenderMgr()->
 }

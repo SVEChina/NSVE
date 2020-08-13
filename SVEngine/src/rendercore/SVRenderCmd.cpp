@@ -17,8 +17,6 @@
 #include "../mtl/SVShader.h"
 #include "../mtl/SVSurface.h"
 
-
-
 #include <sys/time.h>
 
 using namespace sv;
@@ -75,105 +73,25 @@ void SVRCmdNor::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
     }
 }
 
-//
-SVRCmdAdapt::SVRCmdAdapt()
-:m_winWidth(720)
-,m_winHeight(1280){
-}
-
-SVRCmdAdapt::~SVRCmdAdapt(){
-}
-
-void SVRCmdAdapt::setWinSize(s32 _w,s32 _h){
-    m_winWidth = _w;
-    m_winHeight = _h;
-}
-
-void SVRCmdAdapt::render(SVRendererPtr _renderer,SVRTargetPtr _target){
- //   glViewport( 0, 0,m_winWidth,m_winHeight);
-//    m_pRenderer->svClearColor(m_color_r,m_color_g,m_color_b,m_color_a);
-//    m_pRenderer->svClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-    SVRenderCmd::render(_renderer,_target);
-}
-
 //渲染命令批次
 SVRCmdPass::SVRCmdPass() {
-    m_tex = nullptr;
+    m_target = nullptr;
 }
 
 SVRCmdPass::~SVRCmdPass(){
-    m_tex = nullptr;
-    m_pMtl = nullptr;
-    m_pMesh = nullptr;
+    m_target
 }
 
-//void SVRCmdPass::setFbo(SVRenderTexturePtr _fbo) {
-//    m_fbo = _fbo;
-//}
-
-void SVRCmdPass::setTexture(SVTexturePtr _tex) {
-    m_tex = _tex;
+void SVRCmdPass::setTarget(SVRTargetPtr _target) {
+    m_target = _target;
 }
 
 void SVRCmdPass::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
-//    if(m_fbo && m_tex ) {
-//        m_fbo->setTexture(m_tex);
-//        m_fbo->bind();
-//        m_fbo->clear();
-////        if(m_pMtl && m_pMesh) {
-////            if (m_pMtl->submitMtl()) {
-////                m_pMesh->render(m_pRenderer);
-////                m_pMtl->recoverMtl();
-////            }
-////        }
-//        m_fbo->unbind();
-//    }
-}
-
-SVRCmdPassCollection::SVRCmdPassCollection(){
-    //m_fbo = nullptr;
-    m_tex = nullptr;
-    m_MtlArray.clear();
-    m_MeshArray.clear();
-}
-
-SVRCmdPassCollection::~SVRCmdPassCollection(){
-    //m_fbo = nullptr;
-    m_tex = nullptr;
-    m_MtlArray.clear();
-    m_MeshArray.clear();
-}
-
-void SVRCmdPassCollection::render(SVRendererPtr _renderer,SVRTargetPtr _target){
-//    if(m_fbo && m_tex ) {
-//        m_fbo->setTexture(m_tex);
-//        m_fbo->bind();
-//        m_fbo->clear();
-////        for(int i=0;i<m_MtlArray.size();i++){
-////            SVMtlCorePtr t_mtl = m_MtlArray.get(i);
-////            SVRenderMeshPtr t_mesh = m_MeshArray.get(i);
-////            if(t_mtl && t_mesh) {
-////                if (t_mtl->submitMtl()) {
-////                    t_mesh->render(m_pRenderer);
-////                    t_mtl->recoverMtl();
-////                }
-////            }
-////        }
-//        m_fbo->unbind();
-//    }
-}
-
-//void SVRCmdPassCollection::setFbo(SVRenderTexturePtr _fbo){
-//    m_fbo = _fbo;
-//}
-
-void SVRCmdPassCollection::setTexture(SVTexturePtr _tex){
-    m_tex = _tex;
-}
-
-void SVRCmdPassCollection::addMtlMesh(SVMtlCorePtr _mtl , SVRenderMeshPtr _mesh){
-    m_MtlArray.append(_mtl);
-    m_MeshArray.append(_mesh);
+    if(m_target && m_target->getResFbo()) {
+        m_target->getResFbo()->bind(_renderer);
+        SVRCmdNor::render(_renderer, _target);
+        m_target->getResFbo()->unbind(_renderer);
+    }
 }
 
 //fbo 重置大小
@@ -208,4 +126,25 @@ void SVRCmdTransGPU::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
 //        m_trans->update(0.0f);
 //        m_trans->render();
 //    }
+}
+
+//
+SVRCmdAdapt::SVRCmdAdapt()
+:m_winWidth(720)
+,m_winHeight(1280){
+}
+
+SVRCmdAdapt::~SVRCmdAdapt(){
+}
+
+void SVRCmdAdapt::setWinSize(s32 _w,s32 _h){
+    m_winWidth = _w;
+    m_winHeight = _h;
+}
+
+void SVRCmdAdapt::render(SVRendererPtr _renderer,SVRTargetPtr _target){
+ //   glViewport( 0, 0,m_winWidth,m_winHeight);
+//    m_pRenderer->svClearColor(m_color_r,m_color_g,m_color_b,m_color_a);
+//    m_pRenderer->svClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+    SVRenderCmd::render(_renderer,_target);
 }

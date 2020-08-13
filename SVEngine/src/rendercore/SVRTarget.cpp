@@ -56,21 +56,6 @@ void SVRTarget::resize(s32 _width,s32 _height) {
     }
 }
 
-void SVRTarget::renderPre(SVRendererPtr _renderer) {
-    if(m_fbo) {
-        _renderer->setCurTarget( share() );
-        m_fbo->bind(_renderer);
-//        for(s32 i=0;i<m_stream_quene.size();i++) {
-//            s32 t_s_id = m_stream_quene[i];
-//            if(m_stream_pool[t_s_id]) {
-//                 m_stream_pool[t_s_id]->render(_renderer,share() );
-//            }
-//        }
-        m_fbo->unbind(_renderer);
-        _renderer->setCurTarget(nullptr);
-    }
-}
-
 void SVRTarget::render(SVRendererPtr _renderer) {
     if(m_fbo) {
         _renderer->setCurTarget( share() );
@@ -81,21 +66,6 @@ void SVRTarget::render(SVRendererPtr _renderer) {
                  m_stream_pool[t_s_id]->render(_renderer,share() );
             }
         }
-        m_fbo->unbind(_renderer);
-        _renderer->setCurTarget(nullptr);
-    }
-}
-
-void SVRTarget::renderAfter(SVRendererPtr _renderer) {
-    if(m_fbo) {
-        _renderer->setCurTarget( share() );
-        m_fbo->bind(_renderer);
-//        for(s32 i=0;i<m_stream_quene.size();i++) {
-//            s32 t_s_id = m_stream_quene[i];
-//            if(m_stream_pool[t_s_id]) {
-//                 m_stream_pool[t_s_id]->render(_renderer,share() );
-//            }
-//        }
         m_fbo->unbind(_renderer);
         _renderer->setCurTarget(nullptr);
     }
