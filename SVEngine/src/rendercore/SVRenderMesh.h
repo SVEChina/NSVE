@@ -215,14 +215,15 @@ namespace sv {
         
         void setVertexData(SVDataSwapPtr _data);
         
-        void setVertexData(SVDataSwapPtr _data,s32 _streamtype);
+        void setVertexData(SVDataSwapPtr _data,s32 _streamnum);
         
         void setInstanceData(SVDataSwapPtr _pdata, u32 _instanceCount);
 
         //设置其他属性
         void setDrawMethod(s32 _method);
         
-        void setVertNum(s32 _vertexNum);
+        //设置绘制顶点数目
+        void setDrawVertNum(s32 _vertexNum);
         
     public:
         bool m_use_index;
@@ -233,11 +234,11 @@ namespace sv {
         BufferDspPtr m_instance_dsp;
         //
         s32 m_draw_method;
-
+        //
         void bindRes(SVRMeshResPtr _res);
-        
+        //
         void unbindRes();
-        
+        //
         SVRMeshResPtr getResBuffer();
         
     protected:

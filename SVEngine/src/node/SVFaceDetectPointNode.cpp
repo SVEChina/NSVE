@@ -93,10 +93,10 @@ void SVFaceDetectPointNode::createMesh( V2* _facepoint){
 //    }
 //    SVDataSwapPtr t_data = MakeSharedPtr<SVDataSwap>();
 //    t_data->writeData(&verts[0], sizeof(V2_T0) * 636);
-//    m_pMesh->setVertNum(636);
+//    m_pMesh->setDrawVertNum(636);
 //    m_pMesh->setVertexData(t_data);
 //    m_pMesh->setVertexType(E_VF_V2_T0);
-//    m_pMesh->setDrawMethod(E_DM_TRIANGLES);
+//    m_pMesh->setDrawMethod(E_DRAW_TRIANGLES);
 //    m_pMesh->createMesh();
 }
 

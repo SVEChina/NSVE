@@ -161,10 +161,10 @@ SVRenderMeshPtr SVGeoGen::genRectARCHO(SVInstPtr _app,f32 _w,f32 _h,EUIARCHO _ar
 //    SVRenderMeshPtr t_mesh = _app->getRenderMgr()->createMeshRObj();
 //    SVDataSwapPtr t_data = MakeSharedPtr<SVDataSwap>();
 //    t_data->writeData(&verts[0], sizeof(V2_T0) * 4);
-//    t_mesh->setVertNum(4);
+//    t_mesh->setDrawVertNum(4);
 //    t_mesh->setVertexData(t_data);
 //    t_mesh->setVertexType(E_VF_V2_T0);
-//    t_mesh->setDrawMethod(E_DM_TRIANGLE_STRIP);
+//    t_mesh->setDrawMethod(E_DRAW_TRIANGLE_STRIP);
 //    t_mesh->createMesh();
 //    return t_mesh;
     return nullptr;
@@ -236,10 +236,10 @@ SVRenderMeshPtr SVGeoGen::_getPolygonDiy(SVInstPtr _app,
 //    SVRenderMeshPtr t_mesh = _app->getRenderMgr()->createMeshRObj();
 //    SVDataSwapPtr t_data = MakeSharedPtr<SVDataSwap>();
 //    t_data->writeData(verts, sizeof(V2_T0) * (_edagenum + 2));
-//    t_mesh->setVertNum(_edagenum + 2);
+//    t_mesh->setDrawVertNum(_edagenum + 2);
 //    t_mesh->setVertexData(t_data);
 //    t_mesh->setVertexType(E_VF_V2_T0);
-//    t_mesh->setDrawMethod(E_DM_TRIANGLE_FAN);
+//    t_mesh->setDrawMethod(E_DRAW_TRIANGLE_FAN);
 //    t_mesh->createMesh();
 //    delete[] verts;
 //    //
@@ -512,7 +512,7 @@ SVRenderMeshPtr SVGeoGen::createRectMesh(SVInstPtr _app,f32 _w ,f32 _h , s32 _wP
 //    pRenderMesh->setVertexType(E_VF_V2_C_T0);
 //    SVDataSwapPtr t_data = MakeSharedPtr<SVDataSwap>();
 //    t_data->writeData(pVer, sizeof(V2_C_T0) * iDataCount);
-//    pRenderMesh->setVertNum(iDataCount);
+//    pRenderMesh->setDrawVertNum(iDataCount);
 //    pRenderMesh->setVertexData(t_data);
 //    pRenderMesh->createMesh();
 //    return pRenderMesh;
@@ -587,9 +587,9 @@ SVRenderMeshPtr SVGeoGen::createNetGrid(SVInstPtr _app,s32 _size,s32 _axis) {
 //    pRenderMesh->setVertexType(E_VF_V3_T0);
 //    SVDataSwapPtr t_data = MakeSharedPtr<SVDataSwap>();
 //    t_data->writeData(pVer, sizeof(V3_T0) * 4);
-//    pRenderMesh->setVertNum(4);
+//    pRenderMesh->setDrawVertNum(4);
 //    pRenderMesh->setVertexData(t_data);
-//    pRenderMesh->setDrawMethod(E_DM_TRIANGLE_STRIP);
+//    pRenderMesh->setDrawMethod(E_DRAW_TRIANGLE_STRIP);
 //    pRenderMesh->createMesh();
 //    return pRenderMesh;
     return nullptr;

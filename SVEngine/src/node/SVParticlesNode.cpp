@@ -38,7 +38,7 @@ SVParticlesNode::SVParticlesNode(SVInstPtr _app)
 //    m_pMesh = _app->getRenderMgr()->createMeshRObj();
 //    m_pMesh->createMesh();
 //    m_pMesh->setVertexType(E_VF_V3_PARTICLE);
-//    m_pMesh->setDrawMethod(E_DM_TRIANGLES);
+//    m_pMesh->setDrawMethod(E_DRAW_TRIANGLES);
 //    //
 //    m_pVertData = MakeSharedPtr<SVDataSwap>( );
 //    m_pIndexData = MakeSharedPtr<SVDataSwap>();
@@ -260,7 +260,7 @@ void SVParticlesNode::render() {
 //        //更新顶点数据
 //        m_pVertData->writeData(m_pParticles->pVertex,
 //                               m_pParticles->m_vertexBufNum*sizeof(V3_PARTICLE));
-//        m_pMesh->setVertNum(m_pParticles->m_vertexBufNum);
+//        m_pMesh->setDrawVertNum(m_pParticles->m_vertexBufNum);
 //        m_pMesh->setVertexData(m_pVertData);
 //    }
 //    //

@@ -801,7 +801,7 @@ SVMeshPtr SVLoaderGLTF::_buildMeshPri(Primitive* _prim) {
     SVRenderMeshPtr t_rMesh;// = MakeSharedPtr<SVRenderMesh>(mApp);
 //    t_rMesh->setVertexType(VFTYPE(t_vtf));
 //    //t_rMesh->setSeqMode(1);
-//    t_rMesh->setVertNum(t_count);
+//    t_rMesh->setDrawVertNum(t_count);
 //    t_rMesh->setVertexData(t_data);
 //    //索引数据
 //    if( _prim->indices >=0) {
@@ -812,17 +812,17 @@ SVMeshPtr SVLoaderGLTF::_buildMeshPri(Primitive* _prim) {
 //    }
 //    //绘制模式
 //    if(_prim->mode == SVGLTF_MODE_POINTS) {
-//        t_rMesh->setDrawMethod(E_DM_POINTS);
+//        t_rMesh->setDrawMethod(E_DRAW_POINTS);
 //    }else if(_prim->mode == SVGLTF_MODE_LINE) {
-//        t_rMesh->setDrawMethod(E_DM_LINES);
+//        t_rMesh->setDrawMethod(E_DRAW_LINES);
 //    }else if(_prim->mode == SVGLTF_MODE_LINE_LOOP) {
-//        t_rMesh->setDrawMethod(E_DM_LINE_LOOP);
+//        t_rMesh->setDrawMethod(E_DRAW_LINE_LOOP);
 //    }else if(_prim->mode == SVGLTF_MODE_TRIANGLES) {
-//        t_rMesh->setDrawMethod(E_DM_TRIANGLES);
+//        t_rMesh->setDrawMethod(E_DRAW_TRIANGLES);
 //    }else if(_prim->mode == SVGLTF_MODE_TRIANGLE_STRIP) {
-//        t_rMesh->setDrawMethod(E_DM_TRIANGLE_STRIP);
+//        t_rMesh->setDrawMethod(E_DRAW_TRIANGLE_STRIP);
 //    }else if(_prim->mode == SVGLTF_MODE_TRIANGLE_FAN) {
-//        t_rMesh->setDrawMethod(E_DM_TRIANGLE_FAN);
+//        t_rMesh->setDrawMethod(E_DRAW_TRIANGLE_FAN);
 //    }
 //    t_rMesh->createMesh();
 //    t_mesh->setRenderMesh(t_rMesh);

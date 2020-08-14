@@ -64,7 +64,7 @@ using namespace sv;
 ////        m_pFaceMesh->setIndexPoolType(GL_STATIC_DRAW);
 ////        m_pFaceMesh->setIndexData(m_pIndexs, m_meshsize*3);
 ////        m_pFaceMesh->setTexcoord0Data(m_pT0);
-////        m_pFaceMesh->setDrawMethod(E_DM_TRIANGLES);
+////        m_pFaceMesh->setDrawMethod(E_DRAW_TRIANGLES);
 ////        m_pFaceMesh->createMesh();
 ////    }
 //}

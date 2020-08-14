@@ -305,7 +305,7 @@ void SVSpine::update(f32 deltaTime) {
                                                   t_len);
             pMeshData->m_pRenderIndex->writeData(pMeshData->m_aRenderIndexData.get(),
                                                  pMeshData->m_indexCount *sizeof(u16));
-            pMeshData->m_pRenderMesh->setVertNum(pMeshData->m_vertexCount);
+            pMeshData->m_pRenderMesh->setDrawVertNum(pMeshData->m_vertexCount);
             pMeshData->m_pRenderMesh->setVertexData(pMeshData->m_pRenderVertex);
             pMeshData->m_pRenderMesh->setIndexData(pMeshData->m_pRenderIndex,
                                                    pMeshData->m_indexCount);

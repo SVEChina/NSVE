@@ -10,7 +10,9 @@
 
 #include "SVRRes.h"
 #include "../base/SVPreDeclare.h"
+#include "../work/SVWorkDeclare.h"
 #include "../core/SVVertDef.h"
+#include <vector>
 
 namespace sv {
         
@@ -33,6 +35,39 @@ namespace sv {
         
         virtual void draw(SVRendererPtr _renderer);
         
+        //设置渲染方法
+        void setDrawMethod(s32 _dm);
+        
+        //设置绘制的数目
+        void setDrawNum(s32 _num);
+        
+        //
+        void setInstData(SVDataSwapPtr _data);
+        
+        //
+        void setIndexData(SVDataSwapPtr _data);
+        
+        //
+        void setVertData(SVDataSwapPtr _data,s32 _chn);
+        
+    protected:
+        //绘制方法
+        s32 m_draw_method;
+        
+        //绘制个数
+        s32 m_draw_num;
+        
+        SVLockSpinPtr m_data_lock;
+        
+        SVDataSwapPtr m_index;
+        
+        SVDataSwapPtr m_inst;
+        //
+        struct InVertDataUp {
+            s32 _chn;
+            SVDataSwapPtr _data;
+        };
+        std::vector<InVertDataUp> m_verts;
     };
         
 }//!namespace sv

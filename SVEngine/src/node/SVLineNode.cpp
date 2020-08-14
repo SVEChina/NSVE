@@ -23,7 +23,7 @@ SVLineNode::SVLineNode(SVInstPtr _app)
 //    m_lineMtl = MakeSharedPtr<SVMtlGeo3d>(mApp);
 //    m_pMesh = mApp->getRenderMgr()->createMeshRObj();
 //    m_pMesh->setVertexType(E_VF_V3);
-//    m_pMesh->setDrawMethod(E_DM_LINES);
+//    m_pMesh->setDrawMethod(E_DRAW_LINES);
 //    m_pMesh->createMesh();
 //    m_drawBox = true;
 //    m_visible = true;
@@ -39,7 +39,7 @@ void SVLineNode::setLineData(f32 *_data, s32 _size, s32 _count){
     if (m_lineMtl && _data) {
         SVDataSwapPtr t_data = MakeSharedPtr<SVDataSwap>();
         t_data->writeData(_data, _size);
-        m_pMesh->setVertNum(_count);
+        m_pMesh->setDrawVertNum(_count);
         m_pMesh->setVertexData(t_data);
     }
 }

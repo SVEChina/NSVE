@@ -123,9 +123,9 @@ SVRenderMeshPtr SVComData::generatePatchMesh(FVec3 &_corner00, FVec3 &_corner10,
     
     SVRenderMeshPtr patchMesh =nullptr;// MakeSharedPtr<SVRenderMesh>(mApp);
 //    patchMesh->setVertexType(E_VF_V3);
-//    patchMesh->setVertNum(t_vertexCount);
+//    patchMesh->setDrawVertNum(t_vertexCount);
 //    patchMesh->setVertexData(t_pVertexData);
-//    patchMesh->setDrawMethod(E_DM_LINES);
+//    patchMesh->setDrawMethod(E_DRAW_LINES);
 //    patchMesh->createMesh();
     return patchMesh;
 }
@@ -139,7 +139,7 @@ void SVComData::destroy() {
 //    //二分屏
 //    //m_screenTwoDivisionMesh  = MakeSharedPtr<SVRenderMesh>(mApp);
 //    m_screenTwoDivisionMesh->setVertexType(E_VF_V2_C_T0);
-//    m_screenTwoDivisionMesh->setDrawMethod(E_DM_TRIANGLES);
+//    m_screenTwoDivisionMesh->setDrawMethod(E_DRAW_TRIANGLES);
 //
 //    SVDataSwapPtr t_pMeshData_TwoVidion = MakeSharedPtr<SVDataSwap>();
 //    //渲染数据
@@ -196,7 +196,7 @@ void SVComData::destroy() {
 //    VerData[11].x = 1.0f;
 //    VerData[11].y = 1.0f;
 //    t_pMeshData_TwoVidion->writeData(&VerData[0],sizeof(V2_C_T0)*12);
-//    m_screenTwoDivisionMesh->setVertNum(12);
+//    m_screenTwoDivisionMesh->setDrawVertNum(12);
 //    m_screenTwoDivisionMesh->setVertexData(t_pMeshData_TwoVidion);
 //    m_screenTwoDivisionMesh->createMesh();
 //}
@@ -205,7 +205,7 @@ void SVComData::destroy() {
 //    //四分屏
 //    //m_screenFourDivisionMesh  = MakeSharedPtr<SVRenderMesh>(mApp);
 //    m_screenFourDivisionMesh->setVertexType(E_VF_V2_C_T0);
-//    m_screenFourDivisionMesh->setDrawMethod(E_DM_TRIANGLES);
+//    m_screenFourDivisionMesh->setDrawMethod(E_DRAW_TRIANGLES);
 //    SVDataSwapPtr t_pMeshData_FourVidion = MakeSharedPtr<SVDataSwap>();
 //    //渲染数据
 //    V2_C_T0 VerData[24];
@@ -291,7 +291,7 @@ void SVComData::destroy() {
 //
 //    t_pMeshData_FourVidion->writeData(&VerData[0],sizeof(V2_C_T0)*24);
 //
-//    m_screenFourDivisionMesh->setVertNum(24);
+//    m_screenFourDivisionMesh->setDrawVertNum(24);
 //    m_screenFourDivisionMesh->setVertexData(t_pMeshData_FourVidion);
 //    m_screenFourDivisionMesh->createMesh();
 //}
@@ -300,7 +300,7 @@ void SVComData::destroy() {
 //    //四分屏
 //    //m_screenFourXDivisionMesh  = MakeSharedPtr<SVRenderMesh>(mApp);
 //    m_screenFourXDivisionMesh->setVertexType(E_VF_V2_C_T0);
-//    m_screenFourXDivisionMesh->setDrawMethod(E_DM_TRIANGLES);
+//    m_screenFourXDivisionMesh->setDrawMethod(E_DRAW_TRIANGLES);
 //    SVDataSwapPtr t_pMeshData_FourVidion = MakeSharedPtr<SVDataSwap>();
 //    //渲染数据
 //    V2_C_T0 VerData[12];
@@ -386,7 +386,7 @@ void SVComData::destroy() {
 //    VerData[11].y = 0.0f;
 //    t_pMeshData_FourVidion->writeData(&VerData[0],sizeof(V2_C_T0)*12);
 //
-//    m_screenFourXDivisionMesh->setVertNum(12);
+//    m_screenFourXDivisionMesh->setDrawVertNum(12);
 //    m_screenFourXDivisionMesh->setVertexData(t_pMeshData_FourVidion);
 //    m_screenFourXDivisionMesh->createMesh();
 //}

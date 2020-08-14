@@ -134,6 +134,17 @@ void SVRMeshGL::destroy(SVRendererPtr _renderer) {
 s32 SVRMeshGL::process(SVRendererPtr _renderer){
     SVRRes::process(_renderer);
     SVRendererGLPtr t_rm = std::dynamic_pointer_cast<SVRendererGL>(_renderer);
+    //数据更新
+            
+    //        m_data_lock->lock();
+    //        InVertDataUp t_up;
+    //        t_up._chn = _chn;
+    //        t_up._data = _data;
+    //        m_verts.push_back(t_up);
+    //        m_data_lock->unlock();
+    
+    
+    
     if(m_ver_dsp.size()>0) {
         u32 t_program = t_rm->m_cur_program;
         if(m_ver_dsp.size()!=m_bufnum) {
@@ -209,19 +220,19 @@ s32 SVRMeshGL::process(SVRendererPtr _renderer){
             }
         }
         s32 t_method = GL_TRIANGLES;
-        if(m_draw_method == E_DM_POINTS) {
+        if(m_draw_method == E_DRAW_POINTS) {
             t_method = GL_POINTS;
-        }else if(m_draw_method == E_DM_LINES) {
+        }else if(m_draw_method == E_DRAW_LINES) {
             t_method = GL_LINES;
-        }else if(m_draw_method == E_DM_LINE_LOOP) {
+        }else if(m_draw_method == E_DRAW_LINE_LOOP) {
             t_method = GL_LINE_LOOP;
-        }else if(m_draw_method == E_DM_LINE_STRIP) {
+        }else if(m_draw_method == E_DRAW_LINE_STRIP) {
             t_method = GL_LINE_STRIP;
-        }else if(m_draw_method == E_DM_TRIANGLES) {
+        }else if(m_draw_method == E_DRAW_TRIANGLES) {
             t_method = GL_TRIANGLES;
-        }else if(m_draw_method == E_DM_TRIANGLE_STRIP) {
+        }else if(m_draw_method == E_DRAW_TRIANGLE_STRIP) {
             t_method = GL_TRIANGLE_STRIP;
-        }else if(m_draw_method == E_DM_TRIANGLE_FAN) {
+        }else if(m_draw_method == E_DRAW_TRIANGLE_FAN) {
             t_method = GL_TRIANGLE_FAN;
         }
         //draw
@@ -244,10 +255,6 @@ s32 SVRMeshGL::process(SVRendererPtr _renderer){
     return 1;
 }
 
-void SVRMeshGL::submit(SVDataSwapPtr _data,s32 _offset,s32 _size,s32 _bufid,s32 _buftype) {
-    //提交数据
-    
-}
 
 void SVRMeshGL::draw(SVRendererPtr _renderer) {
     

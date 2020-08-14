@@ -196,7 +196,7 @@ void SVPenStroke::_createStrokeMesh(f32 _strokeWidth, FVec4 &_strokeColor){
 //    m_pStrokeMesh = MakeSharedPtr<SVRenderMeshDvid>(mApp);
 //    m_pStrokeMesh->createMesh();
 //    m_pStrokeMesh->setVertexType(E_VF_V3_C);
-//    m_pStrokeMesh->setDrawMethod(E_DM_TRIANGLES);
+//    m_pStrokeMesh->setDrawMethod(E_DRAW_TRIANGLES);
 //    V3 t_ver[vn_stroke];
 //    V2 t_texcoord[vn_stroke];
 //    C t_color[vn_stroke];
@@ -556,7 +556,7 @@ void SVPenStroke::_createStrokeMesh(f32 _strokeWidth, FVec4 &_strokeColor){
 //    t_pVertexData->resize(vn_stroke*sizeof(V3));
 //    t_pVertexData->writeData(t_ver, vn_stroke*sizeof(V3));
 //    m_pStrokeMesh->setVertex3Data(t_pVertexData);
-//    m_pStrokeMesh->setVertNum(vn_stroke);
+//    m_pStrokeMesh->setDrawVertNum(vn_stroke);
 //    SVDataSwapPtr t_pColorData = MakeSharedPtr<SVDataSwap>();
 //    t_pColorData->resize(vn_stroke*sizeof(C));
 //    t_pColorData->writeData(t_color, vn_stroke*sizeof(C));
@@ -577,7 +577,7 @@ void SVPenStroke::_createGlowMesh(f32 _glowWidth, FVec4 &_glowColor){
 //    m_pGlowMesh = MakeSharedPtr<SVRenderMeshDvid>(mApp);
 //    m_pGlowMesh->createMesh();
 //    m_pGlowMesh->setVertexType(E_VF_V3_C_T0);
-//    m_pGlowMesh->setDrawMethod(E_DM_TRIANGLES);
+//    m_pGlowMesh->setDrawMethod(E_DRAW_TRIANGLES);
 //    V3 t_ver[vn_glow];
 //    V2 t_texcoord[vn_glow];
 //    C t_color[vn_glow];
@@ -777,7 +777,7 @@ void SVPenStroke::_createGlowMesh(f32 _glowWidth, FVec4 &_glowColor){
 //    t_pVertexData->resize(vn_glow*sizeof(V3));
 //    t_pVertexData->writeData(t_ver, vn_glow*sizeof(V3));
 //    m_pGlowMesh->setVertex3Data(t_pVertexData);
-//    m_pGlowMesh->setVertNum(vn_glow);
+//    m_pGlowMesh->setDrawVertNum(vn_glow);
 //    SVDataSwapPtr t_pColorData = MakeSharedPtr<SVDataSwap>();
 //    t_pColorData->resize(vn_glow*sizeof(C));
 //    t_pColorData->writeData(t_color, vn_glow*sizeof(C));

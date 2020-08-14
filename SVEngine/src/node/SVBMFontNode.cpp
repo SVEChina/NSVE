@@ -297,7 +297,7 @@ void SVBMFontNode::_refresh(){
     }
     s32 t_len = i;
     m_pRenderVertex->writeData(&tVerts[0], sizeof(V2_C_T0) * t_len * 6);
-    m_pMesh->setVertNum(t_len * 6);
+    m_pMesh->setDrawVertNum(t_len * 6);
     m_pMesh->setVertexData(m_pRenderVertex);
 }
 
@@ -360,9 +360,9 @@ void SVBMFontNode::_genMesh(){
     }
     //
     m_pRenderVertex->writeData(&t_Verts[0], sizeof(V2_C_T0) * SV_BMFONT_MAX_NUM * 6);
-    m_pMesh->setVertNum(SV_BMFONT_MAX_NUM * 6);
+    m_pMesh->setDrawVertNum(SV_BMFONT_MAX_NUM * 6);
     m_pMesh->setVertexData(m_pRenderVertex);
-    m_pMesh->setDrawMethod(E_DM_TRIANGLES);
+    m_pMesh->setDrawMethod(E_DRAW_TRIANGLES);
     //m_pMesh->createMesh();
 }
 

@@ -111,7 +111,7 @@ void SVSkyDomeNode::_generateMesh(){
 //    
 //    SVDataSwapPtr tmpDataSwap = MakeSharedPtr<SVDataSwap>();
 //    tmpDataSwap->writeData((void*)&VecPoint[0], sizeof(V3_T0) * VecPoint.size() );
-//    mMesh->setVertNum(VecPoint.size());
+//    mMesh->setDrawVertNum(VecPoint.size());
 //    mMesh->setVertexData(tmpDataSwap);
 //    SVArray<u16> VecIndex;
 //    for (i = 0; i < mHorizontalResolution; ++i){
