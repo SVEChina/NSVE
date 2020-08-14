@@ -12,5 +12,4 @@ using namespace sv;
 
 SVDummyNode::SVDummyNode(SVInstPtr _app)
 :SVNode(_app) {
-
 }

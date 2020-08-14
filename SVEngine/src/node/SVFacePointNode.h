@@ -23,7 +23,6 @@ namespace sv {
         
         void render();
     protected:
-        SVRenderObjectPtr m_pRenderObj;
         SVRenderMeshPtr m_pMesh;
         SVMtlCorePtr m_pMtl;
     };
