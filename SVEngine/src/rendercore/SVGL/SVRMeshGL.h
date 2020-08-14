@@ -36,6 +36,8 @@ namespace sv {
         void draw(SVRendererPtr _renderer);
         
     protected:
+        //
+        BUFFERMODE m_mode;
         //数据属性
         u32 m_indexID;
         //vbo

@@ -19,7 +19,7 @@ SVRenderStateGL::SVRenderStateGL(SVInstPtr _app)
     m_colorBufferID = 0;
     m_vertexBufID = 0;
     m_indexBufID = 0;
-    m_VFType = E_VF_BASE;
+    m_VFType = E_VF_NULL;
     //
     m_view_x = 0;
     m_view_y = 0;

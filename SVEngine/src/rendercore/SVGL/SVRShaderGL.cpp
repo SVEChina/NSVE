@@ -179,25 +179,25 @@ u32 SVRShaderGL::_createProgram(){
     for(s32 i=0;i<t_shader->m_shader_dsp.m_vft.size();i++) {
         //单一混合流
         s32 t_vf = t_shader->m_shader_dsp.m_vft[i];
-        if (t_vf & SV_SMT_V2) {
+        if (t_vf & E_VF_V2) {
             glBindAttribLocation(t_program_id, CHANNEL_POSITION, NAME_POSITION);
-        }else if (t_vf & SV_SMT_V3) {
+        }else if (t_vf & E_VF_V3) {
             glBindAttribLocation(t_program_id, CHANNEL_POSITION, NAME_POSITION);
-        }else if (t_vf & SV_SMT_NOR) {
+        }else if (t_vf & E_VF_NOR) {
             glBindAttribLocation(t_program_id, CHANNEL_POSITION, NAME_POSITION);
-        }else if (t_vf & SV_SMT_TAG) {
+        }else if (t_vf & E_VF_TAG) {
             glBindAttribLocation(t_program_id, CHANNEL_POSITION, NAME_POSITION);
-        }else if (t_vf & SV_SMT_BTAG) {
+        }else if (t_vf & E_VF_BTAG) {
             glBindAttribLocation(t_program_id, CHANNEL_POSITION, NAME_POSITION);
-        }else if (t_vf & SV_SMT_C0) {
+        }else if (t_vf & E_VF_C0) {
             glBindAttribLocation(t_program_id, CHANNEL_POSITION, NAME_POSITION);
-        }else if (t_vf & SV_SMT_T0) {
+        }else if (t_vf & E_VF_T0) {
             glBindAttribLocation(t_program_id, CHANNEL_POSITION, NAME_POSITION);
-        }else if (t_vf & SV_SMT_T1) {
+        }else if (t_vf & E_VF_T1) {
             glBindAttribLocation(t_program_id, CHANNEL_POSITION, NAME_POSITION);
-        }else if (t_vf & SV_SMT_BONE) {
+        }else if (t_vf & E_VF_BONE) {
             glBindAttribLocation(t_program_id, CHANNEL_POSITION, NAME_POSITION);
-        }else if (t_vf & SV_SMT_BONE_W) {
+        }else if (t_vf & E_VF_BONE_W) {
             glBindAttribLocation(t_program_id, CHANNEL_POSITION, NAME_POSITION);
         }
     }

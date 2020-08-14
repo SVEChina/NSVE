@@ -21,8 +21,6 @@ namespace sv {
 
     class SVRMeshRes: public SVRRes{
     public:
-        static int getVertexFormateSize(VFTYPE _type);
-        
         SVRMeshRes(SVInstPtr _app);
         
         virtual ~SVRMeshRes();

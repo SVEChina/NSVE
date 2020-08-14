@@ -45,8 +45,8 @@ namespace sv {
         };
         
         //推送类型
-        void push(s32 _stype) {
-            std::map<s32,SVDataSwapPtr>::iterator it = m_streamData.find(_stype);
+        void push(VFTYPE _stype) {
+            std::map<VFTYPE,SVDataSwapPtr>::iterator it = m_streamData.find(_stype);
             if( it == m_streamData.end() ) {
                 m_streamDsp.push_back(_stype);
                 m_streamData.insert(std::make_pair(_stype,nullptr));
@@ -77,60 +77,60 @@ namespace sv {
         
         //数据顶点描述
         VFTYPE getVertType() {
-            s32 t_vt = E_VF_BASE;
+            s32 t_vt = 0;
             for(s32 i=0;i<m_streamDsp.size();i++) {
-                t_vt = t_vt | m_streamDsp[i];
+                t_vt = t_vt | s32(m_streamDsp[i]);
             }
             return VFTYPE(t_vt);
         }
         
         static s32 getVertSize(VFTYPE _vf) {
             s32 t_size = 0;
-            if (_vf & SV_SMT_INDEX) {
+            if (_vf & E_VF_INDEX) {
                 t_size += sizeof(u16);
             }
-            if (_vf & SV_SMT_V2) {
+            if (_vf & E_VF_V2) {
                 t_size += 2 * sizeof(f32);
             }
-            if (_vf & SV_SMT_V3) {
+            if (_vf & E_VF_V3) {
                 t_size += 3 * sizeof(f32);
             }
-            if (_vf & SV_SMT_NOR) {
+            if (_vf & E_VF_NOR) {
                 t_size += 3 * sizeof(f32);
             }
-            if (_vf & SV_SMT_TAG) {
+            if (_vf & E_VF_TAG) {
                 t_size += 4 * sizeof(f32);
             }
-            if (_vf & SV_SMT_BTAG) {
+            if (_vf & E_VF_BTAG) {
                 t_size += 4 * sizeof(f32);
             }
-            if (_vf & SV_SMT_C0) {
+            if (_vf & E_VF_C0) {
                 t_size += 4 * sizeof(u8);
             }
-            if (_vf & SV_SMT_T0) {
+            if (_vf & E_VF_T0) {
                 t_size += 2 * sizeof(f32);
             }
-            if (_vf & SV_SMT_T1) {
+            if (_vf & E_VF_T1) {
                 t_size += 2 * sizeof(f32);
             }
-            if (_vf & SV_SMT_BONE) {
+            if (_vf & E_VF_BONE) {
                 t_size += 4 * sizeof(u16);
             }
-            if (_vf & SV_SMT_BONE_W) {
+            if (_vf & E_VF_BONE_W) {
                 t_size += 4 * sizeof(f32);
             }
             return t_size;
         }
         
         //设置流数据
-        bool setStreamData(s32 _stype,SVDataSwapPtr _data) {
+        bool setStreamData(VFTYPE _stype,SVDataSwapPtr _data) {
             if(_bufMode == E_BFM_AOS) {
                 //混合流模式，设定给单一目标就好
                 _bufData = _data;
                 return true;
             } else {
                 //单一流模式，需要按流分开存储
-                std::map<s32,SVDataSwapPtr>::iterator it = m_streamData.find(_stype);
+                std::map<VFTYPE,SVDataSwapPtr>::iterator it = m_streamData.find(_stype);
                 if( it == m_streamData.end() ) {
                     return false;
                 }
@@ -139,7 +139,7 @@ namespace sv {
             }
         }
         
-        bool setStreamData(s32 _stype,void* _data,s32 _len) {
+        bool setStreamData(VFTYPE _stype,void* _data,s32 _len) {
                if(_bufMode == E_BFM_AOS) {
                    //混合流模式，设定给单一目标就好
                    if(!_bufData) {
@@ -149,7 +149,7 @@ namespace sv {
                    return true;
                } else {
                    //单一流模式，需要按流分开存储
-                   std::map<s32,SVDataSwapPtr>::iterator it = m_streamData.find(_stype);
+                   std::map<VFTYPE,SVDataSwapPtr>::iterator it = m_streamData.find(_stype);
                    if( it == m_streamData.end() ) {
                        return false;
                    }
@@ -170,9 +170,9 @@ namespace sv {
         //数据尺寸
         s32 _bufSize;           //buf 尺寸
         //流描述
-        std::vector<s32>  m_streamDsp;  //流描述
+        std::vector<VFTYPE> m_streamDsp;  //流描述
         //流数据
-        std::map<s32,SVDataSwapPtr> m_streamData;
+        std::map<VFTYPE,SVDataSwapPtr> m_streamData;
         //数据
         SVDataSwapPtr _bufData;
     };

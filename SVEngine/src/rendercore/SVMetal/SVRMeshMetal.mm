@@ -81,7 +81,7 @@ void SVRMeshMetal::create(SVRendererPtr _renderer) {
             //多流
             m_streanNum = s32(t_buf_dsp->m_streamDsp.size());
             for(s32 i=0;i<m_streanNum;i++) {
-                s32 t_smt = t_buf_dsp->m_streamDsp[i];
+                VFTYPE t_smt = t_buf_dsp->m_streamDsp[i];
                 SVDataSwapPtr t_data = t_buf_dsp->m_streamData[t_smt];
                 if(t_data) {
                     void* t_point = t_data->getData();
