@@ -188,12 +188,15 @@ s32 SVMtlCore::submitMtl() {
 
 //交换
 void SVMtlCore::swap() {
+    
 }
 
 void SVMtlCore::_submitUniform(SVRendererPtr _render) {
+    
 }
 
 void SVMtlCore::_submitMtl(SVRendererPtr _render) {
+    
 }
 
 void SVMtlCore::setBlendState(s32 _src , s32 _dst){
