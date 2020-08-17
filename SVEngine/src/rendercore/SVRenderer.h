@@ -70,7 +70,10 @@ namespace sv {
         virtual SVRFboPtr createResFbo() { return nullptr; }
         
         //创建target资源
-        virtual SVRTargetPtr createTarget(SVINTEX _texid){ return nullptr; }
+        virtual SVRTargetPtr createTarget(SVINTEX _texid,bool _depth,bool _stencil){ return nullptr; }
+        
+        //创建target资源,自定义大小
+        virtual SVRTargetPtr createTarget(SVINTEX _texid,s32 _w,s32 _h,bool _depth,bool _stencil){ return nullptr; }
         
         //获取target
         virtual SVRTargetPtr getTarget(SVINTEX _texid);

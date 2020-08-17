@@ -68,7 +68,7 @@ void SVRendererMetal::init(id<MTLDevice> _device,s32 _w,s32 _h) {
     mApp->m_global_param.m_sv_width = _w;
     mApp->m_global_param.m_sv_height = _h;
     //创建主target
-    SVRTargetPtr t_target = createTarget(E_TEX_MAIN);
+    SVRTargetPtr t_target = createTarget(E_TEX_MAIN,true,true);
     //设置渲染路径
     t_target->setRenderPath();
     //设置主RT
@@ -108,7 +108,7 @@ SVRFboPtr SVRendererMetal::createResFbo()  {
 }
 
 //创建target资源
-SVRTargetPtr SVRendererMetal::createTarget(SVINTEX _texid) {
+SVRTargetPtr SVRendererMetal::createTarget(SVINTEX _texid,bool _depth,bool _stencil) {
     SVRTargetPtr t_target = getTarget(_texid);
     if(t_target) {
         return t_target;
@@ -134,8 +134,43 @@ SVRTargetPtr SVRendererMetal::createTarget(SVINTEX _texid) {
     t_dsp->m_target_num = 1;
     t_dsp->m_width = mApp->m_global_param.m_sv_width;
     t_dsp->m_height = mApp->m_global_param.m_sv_height;
-    t_dsp->m_use_depth = true;
-    t_dsp->m_use_stencil = true;
+    t_dsp->m_use_depth = _depth;
+    t_dsp->m_use_stencil = _stencil;
+    //创建RT
+    SVDispatch::dispatchTargetCreate(mApp,t_target);
+    //增加target
+    _addTarget(_texid,t_target);
+    return t_target;
+}
+
+SVRTargetPtr SVRendererMetal::createTarget(SVINTEX _texid,s32 _w,s32 _h,bool _depth,bool _stencil){
+    SVRTargetPtr t_target = getTarget(_texid);
+    if(t_target) {
+        return t_target;
+    }
+    //创建主纹理
+    SVTextureDsp t_tex_dsp;
+    t_tex_dsp.m_imgtype = SV_IMAGE_2D;
+    t_tex_dsp.m_dataFormate = SV_FORMAT_RGBA8;
+    t_tex_dsp.m_width = _w;    //宽
+    t_tex_dsp.m_height = _h;  //高
+    t_tex_dsp.m_depth = 1;                                  //深度
+    t_tex_dsp.m_minmap = false;         //是否开启mipmap
+    t_tex_dsp.m_computeWrite = true;    //metal 是否可以
+    t_tex_dsp.m_renderTarget = true;    //metal 是否是renderTarget
+    SVTexturePtr t_target_tex = mApp->getTexMgr()->createInTexture(_texid,t_tex_dsp);
+    if(!t_target_tex) {
+        return nullptr;
+    }
+    //创建主target
+    t_target = MakeSharedPtr<SVRTarget>(mApp);
+    SVTargetDsp* t_dsp = t_target->getTargetDsp();
+    t_dsp->m_color_texid[0] = _texid;
+    t_dsp->m_target_num = 1;
+    t_dsp->m_width = _w;
+    t_dsp->m_height = _h;
+    t_dsp->m_use_depth = _depth;
+    t_dsp->m_use_stencil = _stencil;
     //创建RT
     SVDispatch::dispatchTargetCreate(mApp,t_target);
     //增加target

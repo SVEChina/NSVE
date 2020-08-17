@@ -46,7 +46,7 @@ void SVRendererGL::init(s32 _w,s32 _h){
     mApp->m_global_param.m_sv_width = _w;
     mApp->m_global_param.m_sv_height = _h;
     //创建主纹理
-    SVRTargetPtr t_target = createTarget(E_TEX_MAIN);
+    SVRTargetPtr t_target = createTarget(E_TEX_MAIN,true,true);
     if(t_target) {
         t_target->setRenderPath();
         mApp->getRenderMgr()->setMainRT(t_target);
@@ -85,7 +85,7 @@ SVRFboPtr SVRendererGL::createResFbo() {
     return MakeSharedPtr<SVRFboGL>(mApp);
 }
 
-SVRTargetPtr SVRendererGL::createTarget(SVINTEX _texid) {
+SVRTargetPtr SVRendererGL::createTarget(SVINTEX _texid,bool _depth,bool _stencil) {
     SVRTargetPtr t_target = getTarget(_texid);
     if(t_target) {
         return t_target;
@@ -117,6 +117,9 @@ SVRTargetPtr SVRendererGL::createTarget(SVINTEX _texid) {
     return t_target;
 }
 
+SVRTargetPtr SVRendererGL::createTarget(SVINTEX _texid,s32 _w,s32 _h,bool _depth,bool _stencil) {
+    return nullptr;
+}
 
 //处理材质
 bool SVRendererGL::processMtl(SVMtlCorePtr _mtl,SVSurfacePtr _surface) {

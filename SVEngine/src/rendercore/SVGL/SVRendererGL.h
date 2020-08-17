@@ -44,7 +44,9 @@ namespace sv {
         SVRFboPtr createResFbo() ;
         
         //create-target
-        SVRTargetPtr createTarget(SVINTEX _texid);
+        SVRTargetPtr createTarget(SVINTEX _texid,bool _depth,bool _stencil);
+        
+        SVRTargetPtr createTarget(SVINTEX _texid,s32 _w,s32 _h,bool _depth,bool _stencil);
         
         //处理材质
         bool processMtl(SVMtlCorePtr _mtl,SVSurfacePtr _surface);
