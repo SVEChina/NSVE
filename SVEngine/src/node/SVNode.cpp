@@ -226,10 +226,6 @@ void SVNode::setAlpha(f32 _alpha){
     m_alpha = _alpha;
 }
 
-void SVNode::setLocalMatrix(FMat4 &_mat){
-    m_localMat = _mat;
-}
-
 //序列化接口
 void SVNode::toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator,
                     RAPIDJSON_NAMESPACE::Value &_objValue){

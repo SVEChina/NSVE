@@ -23,7 +23,6 @@ SVSharpFilter::SVSharpFilter(SVInstPtr _app)
     m_type=SV_FUNC_SHARP;
     m_name="SVFilterSharp";
     m_smooth=0.0f;
-    m_pPassNode = nullptr;
 }
 
 SVSharpFilter::~SVSharpFilter(){
@@ -67,10 +66,6 @@ bool SVSharpFilter::create(){
 }
 
 void SVSharpFilter::destroy(){
-    if(m_pPassNode){
-        m_pPassNode = nullptr;
-    }
-    m_pPassNode = nullptr;
 }
 
 void SVSharpFilter::update(f32 dt){

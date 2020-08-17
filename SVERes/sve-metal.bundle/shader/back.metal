@@ -10,16 +10,19 @@
 
 using namespace metal;
 
+//
 struct Vertex {
     float2 position [[attribute(0)]];
     float2 texcoord0 [[attribute(1)]];
 };
 
+//
 struct VertexOut {
     float4 position [[position]];
     float2 texcoord0;
 };
 
+//
 struct FSOutput{
     float4 frag_data0 [[color(0)]];
 };

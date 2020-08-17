@@ -57,20 +57,16 @@ bool SVFilterDark::create(){
 }
 
 void SVFilterDark::destroy(){
-    if(m_pPassNode){
-        m_pPassNode = nullptr;
-    }
-    m_pPassNode = nullptr;
     m_mtlDark = nullptr;
 }
 
 void SVFilterDark::update(f32 dt){
-    //
-    if(m_pPassNode && m_mtlDark){
-        m_pPassNode->setvisible(true);
-        m_mtlDark->update(dt);
-        m_mtlDark->setDarkIntensity(m_intensity);
-    }
+//    //
+//    if(m_pPassNode && m_mtlDark){
+//        m_pPassNode->setvisible(true);
+//        m_mtlDark->update(dt);
+//        m_mtlDark->setDarkIntensity(m_intensity);
+//    }
 }
 
 void SVFilterDark::setDarkIntensity(f32 _intensity){

@@ -37,7 +37,6 @@ SVFaceShapeNode::SVFaceShapeNode(SVInstPtr _app)
 }
 
 SVFaceShapeNode::~SVFaceShapeNode(){
-    
 }
 
 void SVFaceShapeNode::init(){

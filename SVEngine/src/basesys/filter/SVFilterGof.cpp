@@ -22,7 +22,6 @@ SVFilterGof::SVFilterGof(SVInstPtr _app)
     m_type=SV_FUNC_GOF;
     m_name="SVFilterGof";
     m_smooth=0.0f;
-    m_pPassNode = nullptr;
 }
 
 SVFilterGof::~SVFilterGof(){
@@ -45,11 +44,11 @@ bool SVFilterGof::create(){
 //         t_renderer->createSVTex(E_TEX_FILTER_GOF_2,t_w/2, t_h/2, GL_RGBA);
 //    }
 //
-    //创建多passnode
-    m_pPassNode = MakeSharedPtr<SVMultPassNode>(mApp);
-    m_pPassNode->setname("SVFilterGOFNode");
-    //m_pPassNode->create(t_w, t_h);
-    m_pPassNode->setRSType(RST_IMGFILTER);
+//    //创建多passnode
+//    m_pPassNode = MakeSharedPtr<SVMultPassNode>(mApp);
+//    m_pPassNode->setname("SVFilterGOFNode");
+//    //m_pPassNode->create(t_w, t_h);
+//    m_pPassNode->setRSType(RST_IMGFILTER);
 //    //创建pass
 //    SVPassPtr t_pass1 = MakeSharedPtr<SVPass>();
 //    SVMtlCorePtr t_lkMtl=MakeSharedPtr<SVMtlCore>(mApp,"screennor");
@@ -86,15 +85,10 @@ bool SVFilterGof::create(){
 }
 
 void SVFilterGof::destroy(){
-    if(m_pPassNode){
-        m_pPassNode = nullptr;
-    }
-    m_pPassNode = nullptr;
 }
 
-
 void SVFilterGof::update(f32 dt){
-    m_mtl_smooth->setSmooth(3.5);
+    //m_mtl_smooth->setSmooth(3.5);
 }
 
 void SVFilterGof::toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator,

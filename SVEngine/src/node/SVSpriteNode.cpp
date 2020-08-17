@@ -30,7 +30,7 @@ SVSpriteNode::SVSpriteNode(SVInstPtr _app)
     m_canSelect = false;
     m_pTex = nullptr;
     m_pMesh = nullptr;
-    setSize(200.0f,200.0f);
+    setSize(400.0f,400.0f);
     //
     if(m_surface) {
         FMat4 t_mat;

@@ -70,9 +70,6 @@ void SVRGBToneCurveFilter::destroy() {
     m_mtl_rgba = nullptr;
     m_mtl_back = nullptr;
     texrgb = nullptr;
-    if(m_pPassNode) {
-        m_pPassNode = nullptr;
-    }
 }
 
 void SVRGBToneCurveFilter::update(f32 dt){

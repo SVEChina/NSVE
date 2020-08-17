@@ -12,43 +12,39 @@
 
 namespace sv {
     
-    
-        /*
-         normal 3d node
-         */
+    /*
+     normal 3d node
+     */
+    class SVModelNode : public SVNode {
+    public:
+        SVModelNode(SVInstPtr _app);
         
-        class SVModelNode : public SVNode {
-        public:
-            SVModelNode(SVInstPtr _app);
-            
-            ~SVModelNode();
+        ~SVModelNode();
 
-            //更新
-            virtual void update(f32 dt);
-   
-            //渲染
-            virtual void render();
-            
-            virtual void createShadow();
-            
-            void enableDebugNormal(bool _enable);
-            
-            bool getDebugNormalEnable();
-            
-            void setModel(SVModelPtr _model);
-            
-            SVModelPtr getModel();
-            
-        protected:
-            void _showDebugNormalLines();
-            
-            bool m_enableDebugNormal;
-            
-            SVModelPtr m_pModel;
-        };
+        //更新
+        virtual void update(f32 dt);
+
+        //渲染
+        virtual void render();
         
-    
-    
+        virtual void createShadow();
+        
+        void enableDebugNormal(bool _enable);
+        
+        bool getDebugNormalEnable();
+        
+        void setModel(SVModelPtr _model);
+        
+        SVModelPtr getModel();
+        
+    protected:
+        void _showDebugNormalLines();
+        
+        bool m_enableDebugNormal;
+        
+        SVModelPtr m_pModel;
+    };
+        
 }//!namespace sv
 
 

@@ -20,7 +20,7 @@
 #include "../basesys/SVConfig.h"
 #include "../rendercore/SVRenderer.h"
 #include "../core/SVModel.h"
-#include "../core/SVMesh.h"
+#include "../core/SVMesh3d.h"
 
 using namespace sv;
 

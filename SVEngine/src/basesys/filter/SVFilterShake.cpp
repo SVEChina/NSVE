@@ -27,7 +27,6 @@ SVFilterShake::SVFilterShake(SVInstPtr _app)
 }
 
 SVFilterShake::~SVFilterShake(){
-    m_pPassNode = nullptr;
     m_mtlShake = nullptr;
 }
 
@@ -67,14 +66,14 @@ void SVFilterShake::destroy(){
 }
 
 void SVFilterShake::update(f32 dt){
-    //
-    if(m_pPassNode && m_mtlShake){
-        m_pPassNode->setvisible(true);
-        m_mtlShake->update(dt);
-        m_mtlShake->setTime(m_time);
-        m_mtlShake->setAmount(m_amount);
-        m_mtlShake->setSpeed(m_speed);
-    }
+//    //
+//    if(m_pPassNode && m_mtlShake){
+//        m_pPassNode->setvisible(true);
+//        m_mtlShake->update(dt);
+//        m_mtlShake->setTime(m_time);
+//        m_mtlShake->setAmount(m_amount);
+//        m_mtlShake->setSpeed(m_speed);
+//    }
 }
 
 void SVFilterShake::setTime(f32 _time){

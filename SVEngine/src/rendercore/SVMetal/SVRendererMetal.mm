@@ -123,7 +123,10 @@ SVRTargetPtr SVRendererMetal::createTarget(SVINTEX _texid) {
     t_tex_dsp.m_minmap = false;         //是否开启mipmap
     t_tex_dsp.m_computeWrite = true;    //metal 是否可以
     t_tex_dsp.m_renderTarget = true;    //metal 是否是renderTarget
-    SVTexturePtr t_main_tex = mApp->getTexMgr()->createInTexture(_texid,t_tex_dsp);
+    SVTexturePtr t_target_tex = mApp->getTexMgr()->createInTexture(_texid,t_tex_dsp);
+    if(!t_target_tex) {
+        return nullptr;
+    }
     //创建主target
     t_target = MakeSharedPtr<SVRTarget>(mApp);
     SVTargetDsp* t_dsp = t_target->getTargetDsp();

@@ -22,7 +22,6 @@ SVFilterClarity::SVFilterClarity(SVInstPtr _app)
     m_type=SV_FUNC_CLARITY;
     m_name="SVFilterClarity";
     m_smooth=0.0f;
-    m_pPassNode = nullptr;
 }
 
 SVFilterClarity::~SVFilterClarity(){
@@ -38,11 +37,11 @@ bool SVFilterClarity::create(){
 //    if(! t_renderer->getSVTex(E_TEX_FILTER_MIP_1) ){
 //        t_renderer->createSVTex(E_TEX_FILTER_MIP_1,t_w, t_h, GL_RGBA,true);
 //    }
-    //创建多passnode
-    m_pPassNode = MakeSharedPtr<SVMultPassNode>(mApp);
-    m_pPassNode->setname("SVFilterClarityNode");
-    //m_pPassNode->create(t_w, t_h);
-    m_pPassNode->setRSType(RST_IMGFILTER);
+//    //创建多passnode
+//    m_pPassNode = MakeSharedPtr<SVMultPassNode>(mApp);
+//    m_pPassNode->setname("SVFilterClarityNode");
+//    //m_pPassNode->create(t_w, t_h);
+//    m_pPassNode->setRSType(RST_IMGFILTER);
 //    //创建pass
 //    SVPassPtr t_pass1 = MakeSharedPtr<SVPass>();
 //    SVMtlCorePtr t_lkMtl=MakeSharedPtr<SVMtlCore>(mApp,"screennor");
@@ -62,14 +61,10 @@ bool SVFilterClarity::create(){
 }
 
 void SVFilterClarity::destroy(){
-    if(m_pPassNode){
-        m_pPassNode = nullptr;
-    }
-    m_pPassNode = nullptr;
 }
 
 void SVFilterClarity::update(f32 dt){
-    m_mtl_smooth->setSmooth(m_smooth);
+    //m_mtl_smooth->setSmooth(m_smooth);
 }
 
 void SVFilterClarity::toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator,

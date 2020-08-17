@@ -6,7 +6,7 @@
 //
 
 #include "SVModel.h"
-#include "SVMesh.h"
+#include "SVMesh3d.h"
 #include "../mtl/SVMtlGLTF.h"
 
 using namespace sv;
@@ -28,7 +28,7 @@ void SVModel::setName(cptr8 _name){
     m_name = _name;
 }
 
-void SVModel::addMesh(SVMeshPtr _mesh) {
+void SVModel::addMesh(SVMesh3dPtr _mesh) {
     m_meshPool.append(_mesh);
     if(m_meshPool.size() == 1) {
         m_box = _mesh->getBox();
@@ -37,7 +37,7 @@ void SVModel::addMesh(SVMeshPtr _mesh) {
     }
 }
 
-SVMeshPtr SVModel::getMesh(s32 _index) {
+SVMesh3dPtr SVModel::getMesh(s32 _index) {
     if(_index<0 || _index>=m_meshPool.size() )
         return nullptr;
     return m_meshPool[_index];
@@ -68,27 +68,27 @@ void SVModel::render() {
 }
 
 void SVModel::createShadow() {
-    for (s32 i = 0; i < m_meshPool.size(); i++) {
-        m_meshPool[i]->createShadow();
-    }
+//    for (s32 i = 0; i < m_meshPool.size(); i++) {
+//        m_meshPool[i]->createShadow();
+//    }
 }
 
 void SVModel::bindSke(SVSkeletonPtr _ske) {
-    for (s32 i = 0; i < m_meshPool.size(); i++) {
-        SVMtlCorePtr t_mtl = m_meshPool[i]->getMtl();
-        SVMtlGLTFSkinPtr skin_mtl = DYN_TO_SHAREPTR(SVMtlGLTFSkin, t_mtl);
-        if(skin_mtl) {
-            skin_mtl->bindSke(_ske);
-        }
-    }
+//    for (s32 i = 0; i < m_meshPool.size(); i++) {
+//        SVMtlCorePtr t_mtl = m_meshPool[i]->getMtl();
+//        SVMtlGLTFSkinPtr skin_mtl = DYN_TO_SHAREPTR(SVMtlGLTFSkin, t_mtl);
+//        if(skin_mtl) {
+//            skin_mtl->bindSke(_ske);
+//        }
+//    }
 }
 
 void SVModel::unbindSke() {
-    for (s32 i = 0; i < m_meshPool.size(); i++) {
-        SVMtlCorePtr t_mtl = m_meshPool[i]->getMtl();
-        SVMtlGLTFSkinPtr skin_mtl = DYN_TO_SHAREPTR(SVMtlGLTFSkin, t_mtl);
-        if(skin_mtl) {
-            skin_mtl->unbindSke();
-        }
-    }
+//    for (s32 i = 0; i < m_meshPool.size(); i++) {
+//        SVMtlCorePtr t_mtl = m_meshPool[i]->getMtl();
+//        SVMtlGLTFSkinPtr skin_mtl = DYN_TO_SHAREPTR(SVMtlGLTFSkin, t_mtl);
+//        if(skin_mtl) {
+//            skin_mtl->unbindSke();
+//        }
+//    }
 }

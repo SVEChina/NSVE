@@ -11,7 +11,7 @@
 #include "../core/SVSpine.h"
 #include "../core/SVBMFont.h"
 #include "../core/SVModel.h"
-#include "../core/SVMesh.h"
+#include "../core/SVMesh3d.h"
 #include "../rendercore/SVRenderMgr.h"
 #include "../rendercore/SVRenderer.h"
 #include "../rendercore/SVRenderMesh.h"
@@ -37,7 +37,7 @@
 #include "../node/SVBMFontNode.h"
 #include "../node/SVFacePointNode.h"
 #include "../node/SVSkinNode.h"
-#include "../node/SVLineNode.h"
+#include "../node/SVMesh2DNode.h"
 #include "../node/SVPatchNode.h"
 #include "../node/SVModelNode.h"
 #include "../node/SVFrameAniNode.h"
@@ -323,23 +323,19 @@ SVOpCreateTestLine::~SVOpCreateTestLine(){
 }
 
 void SVOpCreateTestLine::_process(f32 dt) {
-    SVScenePtr t_pScene = mApp->getSceneMgr()->getScene();
-    if (t_pScene) {
-        SVLineNodePtr t_lineNode = MakeSharedPtr<SVLineNode>(mApp);
-        t_pScene->addNode(t_lineNode);
-        
-        f32 t_testLine[6] = {0, 300.0f, 0.0f, 200.0f, 300.0f, 0.0f};
-        SVPhysicsSoftRigidWorldPtr t_softWorld = mApp->getPhysicsWorldMgr()->getSoftWorld();
-        FVec3 t_from = FVec3(t_testLine[0], t_testLine[1], t_testLine[2]);
-        FVec3 t_to = FVec3(t_testLine[3], t_testLine[4], t_testLine[5]);
-        SVPhysicsBodyRopePtr t_bodyRope = MakeSharedPtr<SVPhysicsBodyRope>(mApp, t_softWorld->getWorldInfo(), t_from, t_to, 30, 1);
-        t_bodyRope->setTimeScale(2);
-        t_softWorld->addSoftBody(t_bodyRope);
-//        SVActBodyRopePtr t_actRope = MakeSharedPtr<SVActBodyRope>(mApp, t_bodyRope);
-//         SVActionMgrPtr t_actSys = mApp->getActionMgr();
-//         SVActionUnitPtr t_unit = t_actSys->addAction(t_actRope, t_lineNode);
-//         t_unit->play();
-    }
+//    SVScenePtr t_pScene = mApp->getSceneMgr()->getScene();
+//    if (t_pScene) {
+//        SVMesh2DNodePtr t_lineNode = MakeSharedPtr<SVMesh2DNode>(mApp);
+//        t_pScene->addNode(t_lineNode);
+//        
+//        f32 t_testLine[6] = {0, 300.0f, 0.0f, 200.0f, 300.0f, 0.0f};
+//        SVPhysicsSoftRigidWorldPtr t_softWorld = mApp->getPhysicsWorldMgr()->getSoftWorld();
+//        FVec3 t_from = FVec3(t_testLine[0], t_testLine[1], t_testLine[2]);
+//        FVec3 t_to = FVec3(t_testLine[3], t_testLine[4], t_testLine[5]);
+//        SVPhysicsBodyRopePtr t_bodyRope = MakeSharedPtr<SVPhysicsBodyRope>(mApp, t_softWorld->getWorldInfo(), t_from, t_to, 30, 1);
+//        t_bodyRope->setTimeScale(2);
+//        t_softWorld->addSoftBody(t_bodyRope);
+//    }
 }
 
 //测试操作
@@ -411,7 +407,7 @@ void SVOpCreateTestMianSha::_process(f32 dt) {
 //             SVPhysicsSoftRigidWorldPtr t_softWorld = mApp->getPhysicsWorldMgr()->getSoftWorld();
 //            SVModelPtr t_model = t_modelNode->getModel();
 //            for (s32 i = 0; i<t_model->getMeshNum(); i++) {
-//                SVMeshPtr t_mesh = t_model->getMesh(i);
+//                SVMesh3dPtr t_mesh = t_model->getMesh(i);
 //                SVRenderMeshPtr t_renderMesh = t_mesh->getRenderMesh();
 //                SVDataSwapPtr t_indcesData = MakeSharedPtr<SVDataSwap>();
 //                s32 t_indcesNum = 0;

@@ -175,7 +175,7 @@ namespace sv {
     DECLARE_SHAREPTR(SVParticles);
     DECLARE_SHAREPTR(SVImageUsingMove);
     //
-    DECLARE_SHAREPTR(SVMesh);
+    DECLARE_SHAREPTR(SVMesh3d);
     DECLARE_SHAREPTR(SVModel);
     //
     DECLARE_SHAREPTR(SVPass);

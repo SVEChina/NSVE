@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "WinDelegate.h"
 #import "CMetalView.h"
 #import "CGLESView.h"
 #import "CGInst.h"
@@ -24,14 +25,19 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     //
+    [self.window setTitle: @"光子工作室—"];
+    [self.window setAcceptsMouseMovedEvents: YES];
+    [self.window setReleasedWhenClosed: NO];
+    [self.window makeKeyAndOrderFront:self]; // shows and focuses the window
+    [self.window center];
+    
+    //
+    self.window.delegate = [[WinDelegate alloc] init];
+    
+    //
     [[NSNotificationCenter defaultCenter] addObserver:self.window
                                              selector:@selector(windowDidResize:)
                                                  name:NSWindowDidResizeNotification
-                                               object:self];
-    //
-    [[NSNotificationCenter defaultCenter] addObserver:self.window
-                                             selector:@selector(windowDidClose:)
-                                                 name:NSWindowWillCloseNotification
                                                object:self];
     //
     [[CGInst getInst] cgInit];
@@ -49,17 +55,6 @@
     // Insert code here to tear down your application
     int a = 0;
 }
-
-- (void)windowDidResize:(NSNotification*)aNotification {
-    NSLog(@"window resize!");
-    //[[CGInst getInst] resize];
-}
-
-- (void)windowDidClose:(NSNotification*)aNotification {
-    NSLog(@"window close!");
-}
-
-
 
 
 @end

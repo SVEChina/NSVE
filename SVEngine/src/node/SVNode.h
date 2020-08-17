@@ -102,8 +102,6 @@ namespace sv {
         //设置z顺序
         void setZOrder(s32 _zorder);
         
-        void setLocalMatrix(FMat4 &_mat);
-        
         inline cptr8 getType(){ return ntype.c_str(); }
         
         inline cptr8 getname(){return m_name.c_str();}
@@ -149,7 +147,7 @@ namespace sv {
         FMat4 m_localMat;       //本地矩阵
         FMat4 m_absolutMat;     //绝对世界矩阵
         FMat4 m_iabsolutMat;    //逆绝对世界矩阵
-
+        
         //位置属性
         SVAttriPos m_attri_pos;
         //渲染属性
@@ -158,11 +156,11 @@ namespace sv {
         SVSurfacePtr m_surface;
         //
         SVNodePtr m_parent;
-    protected:
+        //
         bool m_needsort;
-        
-        //序列化接口
+
     public:
+        //序列化接口
         SVString m_rootPath;
         virtual void toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator,
                             RAPIDJSON_NAMESPACE::Value &_objValue);

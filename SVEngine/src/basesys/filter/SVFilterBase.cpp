@@ -13,15 +13,13 @@ using namespace sv;
 
 SVFilterBase::SVFilterBase(SVInstPtr _app)
 :SVGBaseEx(_app){
-    m_pPassNode=nullptr;
-    m_mtl=nullptr;
-    m_name="SVFilterBase";
-    m_type=SV_FUNC_NONE;
-    m_rstype=RST_IMGFILTER;
+    m_name = "SVFilterBase";
+    m_mtl = nullptr;
+    m_type = SV_FUNC_NONE;
+    m_rstype = RST_IMGFILTER;
 }
 
 SVFilterBase::~SVFilterBase(){
-    destroy();
 }
 
 bool SVFilterBase::create(){
@@ -29,15 +27,11 @@ bool SVFilterBase::create(){
 }
 
 void SVFilterBase::destroy(){
-    m_pPassNode=nullptr;
-    m_mtl=nullptr;
+    m_mtl = nullptr;
 }
 
 void SVFilterBase::update(f32 dt){
-}
-
-SVNodePtr SVFilterBase::getNode(){
-    return m_pPassNode;
+    
 }
 
 void SVFilterBase::setFilterParam(f32 _smooth,SVFILTERITEMTYPE _type){
@@ -48,10 +42,8 @@ f32 SVFilterBase::getFilterParam(SVFILTERITEMTYPE _type){
 }
 
 void SVFilterBase::setVisible(bool _visible){
-    if (m_pPassNode) {
-        m_pPassNode->setvisible(_visible);
-    }
 }
+
 //序列化
 void SVFilterBase::toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator,
                     RAPIDJSON_NAMESPACE::Value &_objValue){

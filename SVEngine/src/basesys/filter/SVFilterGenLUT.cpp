@@ -23,7 +23,7 @@ SVFilterGenLUT::SVFilterGenLUT(SVInstPtr _app)
 :SVFilterBase(_app){
     m_type=SV_FUNC_BRIGHTNESSCONTRAST;
     m_name="SVFilterGenLUT";
-    m_BCMtl=nullptr;//brightness contrast
+    m_BCMtl = nullptr;//brightness contrast
     m_SaturationMtl=nullptr;
     m_colorBalanceMtl=nullptr;
     m_VibranceMtl=nullptr;
@@ -52,17 +52,18 @@ bool SVFilterGenLUT::create(){
     //
     s32 t_w = 0;// inTex->m_width;
     s32 t_h = 0;//inTex->m_height;
+    
 //    t_renderer->createSVTex(E_TEX_FILTER_GENLUT_OUT, t_w, t_h, GL_RGBA);
 //    t_renderer->createSVTex(E_TEX_FILTER_GENLUT_H1, t_w, t_h, GL_RGBA);
 //    t_renderer->createSVTex(E_TEX_FILTER_GENLUT_H2, t_w, t_h, GL_RGBA);
 //    t_renderer->createSVTex(E_TEX_FILTER_GENLUT_H3, 256, 1, GL_RGBA);
 //    t_renderer->createSVTex(E_TEX_FILTER_GENLUT_H4, 256, 1, GL_RGBA);
     
-    //增加pass
-    m_pPassNode = MakeSharedPtr<SVMultPassNode>(mApp);
-    m_pPassNode->create(t_w,t_h);
-    m_pPassNode->setRSType(RST_IMGFILTER);
-    m_pPassNode->setname("SVFilterGenLUT");
+//    //增加pass
+//    m_pPassNode = MakeSharedPtr<SVMultPassNode>(mApp);
+//    m_pPassNode->create(t_w,t_h);
+//    m_pPassNode->setRSType(RST_IMGFILTER);
+//    m_pPassNode->setname("SVFilterGenLUT");
     
 //    //创建材质
 //    m_BCMtl=MakeSharedPtr<SVMtlBrightnessContrast>(mApp);
@@ -186,7 +187,6 @@ bool SVFilterGenLUT::create(){
 }
 
 void SVFilterGenLUT::destroy(){
-    //
     m_BCMtl=nullptr;//brightness contrast
     m_SaturationMtl=nullptr;
     m_colorBalanceMtl=nullptr;
@@ -223,6 +223,7 @@ void SVFilterGenLUT::setGradientMap(ptr8  data,u32 size){
 }
 
 void SVFilterGenLUT::update(f32 dt){
+    
     m_BCMtl->setBrightness(m_genParam->m_brightness);
     m_BCMtl->setContrast(m_genParam->m_contrast);
     m_SaturationMtl->setSaturation(m_genParam->m_saturation);

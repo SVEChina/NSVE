@@ -24,7 +24,7 @@
 #include "../basesys/SVScene.h"
 #include "../basesys/SVSceneMgr.h"
 #include "../core/SVModel.h"
-#include "../core/SVMesh.h"
+#include "../core/SVMesh3d.h"
 #include "../core/SVModel.h"
 #include "../core/SVAnimateSkin.h"
 #include "../core/SVAnimateMorph.h"
@@ -642,7 +642,7 @@ SVModelPtr SVLoaderGLTF::_buildModel(s32 _index){
     //非权重方式
     for(s32 i=0;i<t_meshdata->primitives.size();i++) {
         Primitive* t_pri = &(t_meshdata->primitives[i]);
-        SVMeshPtr t_mesh = _buildMeshPri(t_pri);
+        SVMesh3dPtr t_mesh = _buildMeshPri(t_pri);
         if(t_mesh) {
             t_model->addMesh(t_mesh);
         }
@@ -673,7 +673,7 @@ s8* SVLoaderGLTF::_getAccDataPointer(Accessor* acc) {
     return nullptr;
 }
 
-SVMeshPtr SVLoaderGLTF::_buildMeshPri(Primitive* _prim) {
+SVMesh3dPtr SVLoaderGLTF::_buildMeshPri(Primitive* _prim) {
     //构建数据
     Accessor* accV3 = nullptr;
     Accessor* accNOR = nullptr;
@@ -744,7 +744,7 @@ SVMeshPtr SVLoaderGLTF::_buildMeshPri(Primitive* _prim) {
         return nullptr;
     }
     s32 t_verSize = sv_vert_size( VFTYPE(t_vtf) );
-    SVMeshPtr t_mesh = MakeSharedPtr<SVMesh>(mApp);
+    SVMesh3dPtr t_mesh = MakeSharedPtr<SVMesh3d>(mApp);
     //设置box
     s64 t_count = accV3->count;
     if(accV3->minValues.size() == 3  && accV3->maxValues.size()==3) {

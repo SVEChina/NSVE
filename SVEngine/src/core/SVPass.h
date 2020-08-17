@@ -23,6 +23,10 @@ namespace sv {
         SVPass(SVInstPtr _inst);
 
         ~SVPass();
+        
+        void bindTarget(SVRTargetPtr _target);
+        
+        void unbindTarget();
 
         SVSurfacePtr getSurface() {
             return m_surface;
@@ -39,7 +43,7 @@ namespace sv {
         //材质名称
         std::string m_mtl_name;
         //目标target
-        s32 m_target;
+        SVRTargetPtr m_target;
     };
 
 };//!namespace sv

@@ -59,19 +59,15 @@ bool SVFilterShinning::create(){
 }
 
 void SVFilterShinning::destroy(){
-    if(m_pPassNode){
-        m_pPassNode = nullptr;
-    }
-    m_pPassNode = nullptr;
     m_mtlShinning = nullptr;
 }
 
 void SVFilterShinning::update(f32 dt){
-    //
-    if(m_pPassNode && m_mtlShinning){
-        m_pPassNode->setvisible(true);
-        m_mtlShinning->update(dt);
-    }
+//    //
+//    if(m_pPassNode && m_mtlShinning){
+//        m_pPassNode->setvisible(true);
+//        m_mtlShinning->update(dt);
+//    }
 }
 
 void SVFilterShinning::toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator,

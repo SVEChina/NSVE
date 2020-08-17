@@ -13,35 +13,32 @@
 
 namespace sv {
     
-    
+    class SVFilterLUT : public SVFilterBase {
+    public:
+        SVFilterLUT(SVInstPtr _app);
         
-        class SVFilterLUT : public SVFilterBase {
-        public:
-            SVFilterLUT(SVInstPtr _app);
-            
-            ~SVFilterLUT();
-            
-            virtual bool create();
-            
-            virtual void destroy();
-            
-            virtual void update(f32 dt);
-            
-            void setLUTTex(SVTexturePtr _looktex);
-            
-            SVTexturePtr getLUTTex();
-            
-            void toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator,
-                                        RAPIDJSON_NAMESPACE::Value &_objValue);
-            
-            void fromJSON(RAPIDJSON_NAMESPACE::Value &item);
-        protected:
-            SVTexturePtr m_texLUT;
-            bool m_dirtyLUT;
-        };
+        ~SVFilterLUT();
         
-    
-    
+        virtual bool create();
+        
+        virtual void destroy();
+        
+        virtual void update(f32 dt);
+        
+        void setLUTTex(SVTexturePtr _looktex);
+        
+        SVTexturePtr getLUTTex();
+        
+        void toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator,
+                                    RAPIDJSON_NAMESPACE::Value &_objValue);
+        
+        void fromJSON(RAPIDJSON_NAMESPACE::Value &item);
+        
+    protected:
+        SVTexturePtr m_texLUT;
+        bool m_dirtyLUT;
+    };
+
 }//!namespace sv
 
 

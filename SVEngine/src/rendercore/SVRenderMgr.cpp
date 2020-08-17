@@ -31,6 +31,12 @@ SVRenderMgr::SVRenderMgr(SVInstPtr _app)
     m_adaptMode = 0;
     m_stream_create = nullptr;
     m_stream_destroy = nullptr;
+    m_stream_main_pre = nullptr;
+    m_stream_main_aft = nullptr;
+//    //主流前
+//    SVRenderStreamPtr m_stream_main_pre;
+//    //主流后
+//    SVRenderStreamPtr m_stream_main_aft;
 }
 
 SVRenderMgr::~SVRenderMgr() {
@@ -38,23 +44,30 @@ SVRenderMgr::~SVRenderMgr() {
     m_renderLock = nullptr;
     m_renderEnv = nullptr;
     m_mainRT = nullptr;
+    m_stream_create = nullptr;
+    m_stream_destroy = nullptr;
+    m_stream_main_pre = nullptr;
+    m_stream_main_aft = nullptr;
 }
 
 void SVRenderMgr::init() {
     m_stream_create = MakeSharedPtr<SVRenderStream>();
     m_stream_destroy = MakeSharedPtr<SVRenderStream>();
+    m_stream_main_pre = MakeSharedPtr<SVRenderStream>();
+    m_stream_main_aft = MakeSharedPtr<SVRenderStream>();
 }
 
 void SVRenderMgr::destroy() {
     m_stream_create = nullptr;
     m_stream_destroy = nullptr;
+    m_stream_main_pre = nullptr;
+    m_stream_main_aft = nullptr;
     clear();
 }
 
 void SVRenderMgr::resize(s32 _w,s32 _h) {
     m_renderLock->lock();
     //
-    
     //
     m_renderLock->unlock();
 }
@@ -93,7 +106,7 @@ void SVRenderMgr::render(){
     }
     m_renderLock->lock();
     if( mApp->m_ctx && mApp->m_ctx->activeContext(t_renderer) ) {
-        //激活,创建流
+        //cmd-创建流
         if(m_stream_create) {
             m_stream_create->render(t_renderer,m_mainRT);
         }
@@ -101,19 +114,27 @@ void SVRenderMgr::render(){
         for(s32 i=0;i<m_preRT.size();i++) {
             m_preRT[i]->render( t_renderer);
         }
-        //中间RT
+        //主RT前
+        if(m_stream_main_pre) {
+            m_stream_main_pre->render(t_renderer, m_mainRT);
+        }
+        //主RT
         if( m_mainRT ) {
             m_mainRT->render( t_renderer);
+        }
+        //主RT后
+        if(m_stream_main_aft) {
+            m_stream_main_aft->render(t_renderer, m_mainRT);
         }
         //后向RT
         for(s32 i=0;i<m_afterRT.size();i++) {
             m_afterRT[i]->render(  t_renderer);
         }
-        //销毁流
+        //cmd-销毁流
         if(m_stream_destroy) {
             m_stream_destroy->render( t_renderer,m_mainRT);
         }
-        //
+        //交换
         mApp->m_ctx->swap(t_renderer);
     }
     m_renderLock->unlock();
@@ -145,6 +166,22 @@ void SVRenderMgr::pushRCmdDestory(SVRenderCmdPtr _rcmd){
     m_logicLock->lock();
     if(_rcmd && m_stream_destroy){
         m_stream_destroy->addRenderCmd(_rcmd);
+    }
+    m_logicLock->unlock();
+}
+
+void SVRenderMgr::pushRCmdPreMain(SVRenderCmdPtr _rcmd){
+    m_logicLock->lock();
+    if(_rcmd && m_stream_main_pre){
+        m_stream_main_pre->addRenderCmd(_rcmd);
+    }
+    m_logicLock->unlock();
+}
+
+void SVRenderMgr::pushRCmdAftMain(SVRenderCmdPtr _rcmd){
+    m_logicLock->lock();
+    if(_rcmd && m_stream_main_aft){
+        m_stream_main_aft->addRenderCmd(_rcmd);
     }
     m_logicLock->unlock();
 }

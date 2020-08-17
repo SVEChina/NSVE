@@ -95,7 +95,11 @@ namespace sv {
         
         SVTargetDsp m_target_dsp;
         
-        bool m_auto;    //同步大小
+        //同步大小
+        bool m_auto;
+        
+        //是否开启输出
+        bool m_output;
         
     public:
         FMat4 m_v_mat;

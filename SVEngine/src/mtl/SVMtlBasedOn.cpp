@@ -60,7 +60,6 @@ SVMtlBasedOn::~SVMtlBasedOn(){
 }
 
 SVMtlCorePtr SVMtlBasedOn::clone() {
-    //return MakeSharedPtr<SVMtlBasedOn>(THIS_TO_SHAREPTR(SVMtlBasedOn));
     return PointerSharedPtr<SVMtlBasedOn>(new SVMtlBasedOn(this));
 }
 
@@ -265,6 +264,7 @@ void SVMtlBasedOn::_submitMtl(SVRendererPtr _render) {
     m_BaseOnFlag = MTL_F_BASEON_NONE;
 }
 
+//
 SVMtlAcutance::SVMtlAcutance(SVInstPtr _app)
 :SVMtlCore(_app,"acutance") {
     m_BaseOnFlag = MTL_F_BASEON_NONE;

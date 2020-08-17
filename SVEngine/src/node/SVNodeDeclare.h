@@ -65,7 +65,7 @@ namespace sv {
     DECLARE_SHAREPTR(SVBillboardNode);
     DECLARE_SHAREPTR(SVBackGroundNode);
     DECLARE_SHAREPTR(SVFacePointNode);
-    DECLARE_SHAREPTR(SVLineNode);
+    DECLARE_SHAREPTR(SVMesh2DNode);
     DECLARE_SHAREPTR(SVPatchNode);
     DECLARE_SHAREPTR(SVFaceDetectPointNode);
     DECLARE_SHAREPTR(SVFaceShapeNode);

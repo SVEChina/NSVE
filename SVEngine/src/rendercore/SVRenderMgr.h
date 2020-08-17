@@ -49,6 +49,10 @@ namespace sv {
         
         void pushRCmdDestory(SVRenderCmdPtr _rcmd);
         
+        void pushRCmdPreMain(SVRenderCmdPtr _rcmd);
+
+        void pushRCmdAftMain(SVRenderCmdPtr _rcmd);
+        
         void pushRCmd(SVRenderCmdPtr _rcmd,SV_RSTREAM_TYPE _rstype);
         
         void addRTarget(SVRTargetPtr _rt,bool _pre);
@@ -68,6 +72,10 @@ namespace sv {
         SVRenderStreamPtr m_stream_create;
         //资源销毁流
         SVRenderStreamPtr m_stream_destroy;
+        //主流前
+        SVRenderStreamPtr m_stream_main_pre;
+        //主流后
+        SVRenderStreamPtr m_stream_main_aft;
         
         SVLockSpinPtr m_renderLock;
         SVLockSpinPtr m_logicLock;

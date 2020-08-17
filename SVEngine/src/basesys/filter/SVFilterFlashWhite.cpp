@@ -26,7 +26,6 @@ SVFilterFlashWhite::SVFilterFlashWhite(SVInstPtr _app)
 }
 
 SVFilterFlashWhite::~SVFilterFlashWhite(){
-    m_pPassNode = nullptr;
     m_mtlFlashWhite = nullptr;
 }
 
@@ -66,12 +65,12 @@ void SVFilterFlashWhite::destroy(){
 }
 
 void SVFilterFlashWhite::update(f32 dt){
-    if(m_pPassNode && m_mtlFlashWhite){
-        m_pPassNode->setvisible(true);
-        m_mtlFlashWhite->update(dt);
-        m_mtlFlashWhite->setTime(m_time);
-        m_mtlFlashWhite->setCycle(m_cycle);
-    }
+//    if(m_pPassNode && m_mtlFlashWhite){
+//        m_pPassNode->setvisible(true);
+//        m_mtlFlashWhite->update(dt);
+//        m_mtlFlashWhite->setTime(m_time);
+//        m_mtlFlashWhite->setCycle(m_cycle);
+//    }
 }
 
 void SVFilterFlashWhite::setTime(f32 _time){

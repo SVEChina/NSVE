@@ -23,7 +23,6 @@ SVFilterBlur::SVFilterBlur(SVInstPtr _app)
     m_type=SV_FUNC_BLUR;
     m_name="SVFilterBlur";
     m_smooth=1.0f;
-    m_pPassNode = nullptr;
 }
 
 SVFilterBlur::~SVFilterBlur(){
@@ -79,10 +78,6 @@ bool SVFilterBlur::create(SVINTEX _inType,SVINTEX _outType){
 }
 
 void SVFilterBlur::destroy(){
-    if(m_pPassNode){
-        m_pPassNode = nullptr;
-    }
-    m_pPassNode = nullptr;
 }
 
 

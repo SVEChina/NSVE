@@ -7,9 +7,8 @@
 
 #include "SVActPhysics.h"
 #include "../core/SVModel.h"
-#include "../core/SVMesh.h"
+#include "../core/SVMesh3d.h"
 #include "../node/SVPatchNode.h"
-#include "../node/SVLineNode.h"
 #include "../node/SVModelNode.h"
 #include "../physics/bodies/SVPhysicsBodyRope.h"
 #include "../physics/bodies/SVPhysicsBodyCloth.h"
@@ -47,19 +46,19 @@ SVActBodyRope::~SVActBodyRope() {
 
 //运行
 void SVActBodyRope::run(SVNodePtr _nodePtr, f32 dt) {
-    SVPhysicsBodyRopePtr t_bodyLine = DYN_TO_SHAREPTR(SVPhysicsBodyRope, m_physicsBody);
-    if (t_bodyLine) {
-        //test!!!
-        SVLineNodePtr t_lineNode = DYN_TO_SHAREPTR(SVLineNode, _nodePtr);
-        if (t_lineNode) {
-            void *t_data = t_bodyLine->getLineVertexData();
-            u32 t_size = t_bodyLine->getLineVertexDataSize();
-            u32 t_count = t_bodyLine->getLineVertexCount();
-            if (t_data && t_size > 0) {
-                t_lineNode->setLineData((f32 *)t_data, t_size, t_count);
-            }
-        }
-    }
+//    SVPhysicsBodyRopePtr t_bodyLine = DYN_TO_SHAREPTR(SVPhysicsBodyRope, m_physicsBody);
+//    if (t_bodyLine) {
+//        //test!!!
+//        SVMesh2DNodePtr t_lineNode = DYN_TO_SHAREPTR(SVMesh2DNode, _nodePtr);
+//        if (t_lineNode) {
+//            void *t_data = t_bodyLine->getLineVertexData();
+//            u32 t_size = t_bodyLine->getLineVertexDataSize();
+//            u32 t_count = t_bodyLine->getLineVertexCount();
+//            if (t_data && t_size > 0) {
+//                t_lineNode->setLineData((f32 *)t_data, t_size, t_count);
+//            }
+//        }
+//    }
 }
 
 bool SVActBodyRope::isEnd() {
@@ -101,7 +100,7 @@ void SVActBodyCloth::run(SVNodePtr _nodePtr, f32 dt) {
                 int a = 0;
                 //测试面纱就一个mesh
                 SVModelPtr t_model = t_modelNode->getModel();
-                SVMeshPtr t_mesh = t_model->getMesh(0);
+                SVMesh3dPtr t_mesh = t_model->getMesh(0);
                 SVRenderMeshPtr t_renderMesh = t_mesh->getRenderMesh();
                 SVDataSwapPtr t_vertexData = MakeSharedPtr<SVDataSwap>();
                 t_vertexData->writeData(t_data, t_size);
