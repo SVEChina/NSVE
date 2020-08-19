@@ -21,10 +21,8 @@
 #include "../basesys/SVComData.h"
 #include "../basesys/SVDeformMgr.h"
 #include "../rendercore/SVRenderMgr.h"
-#include "../rendercore/SVRenderObject.h"
 #include "../rendercore/SVRenderMesh.h"
 #include "../rendercore/SVRenderCmd.h"
-
 #include "../rendercore/SVRenderer.h"
 #include "../mtl/SVMtlFaceShape.h"
 #include "../mtl/SVMtlShapeVaried.h"

@@ -42,14 +42,18 @@ namespace sv {
         SVCtxBasePtr createEnv(SV_R_ENV _type);
         //销毁渲染器
         void destroyEnv();
-        //
+        //设置渲染器
         void setRenderer(SVRendererPtr _renderer);
+        //设置渲染路径
+        void setRenderPath(s32 _rpath);
         //开始SV
         void start();
         //停止SV
         void stop();
         //增加资源路径
         void addRespath(cptr8 _path);
+        //清理资源路径
+        void clearRespath();
         //更新引擎
         void updateSVE(f32 _dt);
         //渲染引擎

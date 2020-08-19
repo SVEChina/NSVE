@@ -16,7 +16,6 @@
 #include "../mtl/SVTextureIOS.h"
 #include "../mtl/SVMtlCore.h"
 #include "../rendercore/SVRenderMgr.h"
-#include "../rendercore/SVRenderObject.h"
 #include "../rendercore/SVRenderer.h"
 #include "../core/SVGeoGen.h"
 
@@ -26,13 +25,11 @@ SVIOSInstreamNode::SVIOSInstreamNode(SVInstPtr _app)
 :SVNode(_app){
     ntype = "SVIOSInstreamNode";
     m_tt = E_TEX_INSTREAM;
-    m_pRenderObj = MakeSharedPtr<SVRenderObject>();
     m_pMtl = MakeSharedPtr<SVMtlCore>(mApp,"screennorbgra");
 }
 
 SVIOSInstreamNode::~SVIOSInstreamNode() {
     destroy();
-    m_pRenderObj = nullptr;
     m_pMtl = nullptr;
 }
 

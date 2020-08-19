@@ -21,7 +21,6 @@
 #include "../mtl/SVTexMgr.h"
 #include "../mtl/SVTexture.h"
 #include "../mtl/SVMtlCore.h"
-#include "../rendercore/SVRenderObject.h"
 #include "../rendercore/SVRenderMgr.h"
 #include "../rendercore/SVRenderMesh.h"
 
@@ -36,13 +35,11 @@ SVFreeTypeNode::SVFreeTypeNode(SVInstPtr _app)
     m_Text = "";
     m_texture = nullptr;
     m_pMesh = nullptr;
-    m_renderObject = MakeSharedPtr<SVRenderObject>();
     m_pMtl= MakeSharedPtr<SVMtlCore>(mApp, "normal2d");
 }
 
 SVFreeTypeNode::~SVFreeTypeNode() {
     m_pMesh = nullptr;
-    m_renderObject = nullptr;
 }
 
 void SVFreeTypeNode::setText(cptr8 _text) {

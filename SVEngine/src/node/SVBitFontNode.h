@@ -79,7 +79,6 @@ namespace sv {
             void _genTexcoords();
             void _refresh();
             
-            SVRenderObjectPtr m_pRenderObj;
             SVRenderMeshPtr m_pMesh;
             SVDataSwapPtr m_pRenderVertex;
             SVTexturePtr m_texture;

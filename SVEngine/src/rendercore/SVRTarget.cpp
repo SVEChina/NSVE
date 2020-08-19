@@ -20,14 +20,22 @@ SVRTarget::SVRTarget(SVInstPtr _app)
 :SVGBaseEx(_app)
 ,m_fbo(nullptr){
     m_auto = true;
+    m_cmdNum = 0;
     m_vp_mat.setIdentity();
     m_stream_pool.resize(E_RSM_MAX);
     for(s32 i=0;i<E_RSM_MAX;i++) {
         m_stream_pool[i] = MakeSharedPtr<SVRenderStream>();
     }
+    //
+    m_stream_pre = MakeSharedPtr<SVRenderStream>();
+    m_stream_after = MakeSharedPtr<SVRenderStream>();
 }
 
 SVRTarget::~SVRTarget() {
+    //
+    m_stream_pre = nullptr;
+    m_stream_after = nullptr;
+    //
     for(s32 i=0;i<E_RSM_MAX;i++) {
         m_stream_pool[i] = nullptr;
     }
@@ -59,26 +67,56 @@ void SVRTarget::resize(s32 _width,s32 _height) {
 void SVRTarget::render(SVRendererPtr _renderer) {
     if(m_fbo) {
         _renderer->setCurTarget( share() );
-        m_fbo->bind(_renderer);
-        for(s32 i=0;i<m_stream_quene.size();i++) {
-            s32 t_s_id = m_stream_quene[i];
-            if(m_stream_pool[t_s_id]) {
-                 m_stream_pool[t_s_id]->render(_renderer,share() );
-            }
+        //
+        if(m_stream_pre) {
+           m_stream_pre->render(_renderer,share());
         }
-        m_fbo->unbind(_renderer);
+        if(m_cmdNum>0) {
+            m_fbo->bind(_renderer);
+            for(s32 i=0;i<m_stream_quene.size();i++) {
+                s32 t_s_id = m_stream_quene[i];
+                if(m_stream_pool[t_s_id]) {
+                     m_stream_pool[t_s_id]->render(_renderer,share() );
+                }
+            }
+            m_fbo->unbind(_renderer);
+        }
+        m_cmdNum = 0;
+        //
+        if(m_stream_after) {
+           m_stream_after->render(_renderer,share());
+        }
         _renderer->setCurTarget(nullptr);
     }
 }
 
-void SVRTarget::pushRenderCommand(SVRenderCmdPtr _rcmd,SV_RSTREAM_TYPE _rstype) {
-    //判断restype是否有效
-    if( m_stream_pool[_rstype] && m_stream_pool[_rstype]->isValid() ) {
-        m_stream_pool[_rstype]->addRenderCmd(_rcmd);
+void SVRTarget::pushCommandPre(SVRenderCmdPtr _rcmd) {
+    if(m_stream_pre && _rcmd) {
+        m_stream_pre->addRenderCmd(_rcmd);
     }
 }
 
-void SVRTarget::clearRenderCommand() {
+void SVRTarget::pushCommandAfter(SVRenderCmdPtr _rcmd) {
+    if(m_stream_after && _rcmd) {
+        m_stream_after->addRenderCmd(_rcmd);
+    }
+}
+
+void SVRTarget::pushCommand(SVRenderCmdPtr _rcmd,SV_RSTREAM_TYPE _rstype) {
+    //判断restype是否有效
+    if( m_stream_pool[_rstype] && m_stream_pool[_rstype]->isValid() ) {
+        m_stream_pool[_rstype]->addRenderCmd(_rcmd);
+        m_cmdNum++;
+    }
+}
+
+void SVRTarget::clearCommand() {
+    if(m_stream_pre) {
+        m_stream_pre->clearRenderCmd();
+    }
+    if(m_stream_after) {
+        m_stream_pre->clearRenderCmd();
+    }
     for(s32 i=0;i<m_stream_quene.size();i++) {
         s32 t_s_id = m_stream_quene[i];
         if(m_stream_pool[t_s_id]) {

@@ -31,9 +31,6 @@ namespace sv {
             void _refreshUnit();
             
             f32 m_unit;
-            
-            SVRenderObjectPtr m_pRenderObj;
-            
             SVRenderMeshPtr m_pMeshX;
             SVRenderMeshPtr m_pMeshY;
             SVRenderMeshPtr m_pMeshZ;

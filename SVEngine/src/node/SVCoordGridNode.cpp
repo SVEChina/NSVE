@@ -10,8 +10,6 @@
 #include "../mtl/SVMtlNocolor.h"
 #include "../mtl/SVTexMgr.h"
 #include "../basesys/SVScene.h"
-#include "../rendercore/SVRenderObject.h"
-
 #include "../rendercore/SVRenderMgr.h"
 
 using namespace sv;
@@ -25,7 +23,6 @@ SVCoordGridNode::SVCoordGridNode(SVInstPtr _app)
     m_pMeshX = SVGeoGen::createNetGrid(mApp,COORD_SIZE,0);
     m_pMeshY = SVGeoGen::createNetGrid(mApp,COORD_SIZE,1);
     m_pMeshZ = SVGeoGen::createNetGrid(mApp,COORD_SIZE,2);
-    m_pRenderObj = MakeSharedPtr<SVRenderObject>();
     //m_gridTex = mApp->getTexMgr()->getTexture("svres/grid6.png",true);
     m_gridTex = nullptr;
 }
@@ -34,7 +31,6 @@ SVCoordGridNode::~SVCoordGridNode(){
     m_pMeshX = nullptr;
     m_pMeshY = nullptr;
     m_pMeshZ = nullptr;
-    m_pRenderObj = nullptr;
     m_gridTex = nullptr;
 }
 

@@ -14,25 +14,24 @@
 namespace sv {
     
     
+    class SVMtlGradientMap : public SVMtlCore  {
+    public:
+        SVMtlGradientMap(SVInstPtr _app);
         
-        class SVMtlGradientMap : public SVMtlCore  {
-        public:
-            SVMtlGradientMap(SVInstPtr _app);
-            
-            SVMtlGradientMap(SVMtlGradientMap* _mtl);
-            
-            ~SVMtlGradientMap();
-            
-            virtual SVMtlCorePtr clone();
-            
-            void setSmooth(f32 _smooth);
-            
-        protected:
-            virtual void _submitMtl(SVRendererPtr _render);
-            //
-            f32 m_lSmoothSize;
-        };
+        SVMtlGradientMap(SVMtlGradientMap* _mtl);
         
+        ~SVMtlGradientMap();
+        
+        virtual SVMtlCorePtr clone();
+        
+        void setSmooth(f32 _smooth);
+        
+    protected:
+        virtual void _submitMtl(SVRendererPtr _render);
+        //
+        f32 m_lSmoothSize;
+    };
+    
     
     
 }//!namespace sv

@@ -11,38 +11,34 @@
 #include "SVMtlCore.h"
 
 namespace sv {
-    
-    
-        
-        class SVMtlADFilterBase : public SVMtlCore {
-        public:
-            enum MTLADFILTERSTATE{
-                MTL_ADFILTER_BEGIN = 1,
-                MTL_ADFILTER_RUNNING,
-                MTL_ADFILTER_END,
-            };
-            SVMtlADFilterBase(SVInstPtr _app, cptr8 _shader);
-            
-            SVMtlADFilterBase(SVMtlADFilterBase *_mtl);
-            
-            ~SVMtlADFilterBase();
-            
-            virtual void reset();
-            
-            virtual SVMtlCorePtr clone();
-            
-            void update(f32 dt);
-        protected:
-            virtual void _submitUniform(SVRendererPtr _render);
-            void _resetTime();
-            MTLADFILTERSTATE m_state;
-            f32 m_time;
-            f32 m_accTime;
-            f32 m_intervalTime;
-        };
 
-    
-    
+    class SVMtlADFilterBase : public SVMtlCore {
+    public:
+        enum MTLADFILTERSTATE{
+            MTL_ADFILTER_BEGIN = 1,
+            MTL_ADFILTER_RUNNING,
+            MTL_ADFILTER_END,
+        };
+        SVMtlADFilterBase(SVInstPtr _app, cptr8 _shader);
+        
+        SVMtlADFilterBase(SVMtlADFilterBase *_mtl);
+        
+        ~SVMtlADFilterBase();
+        
+        virtual void reset();
+        
+        virtual SVMtlCorePtr clone();
+        
+        void update(f32 dt);
+    protected:
+        virtual void _submitUniform(SVRendererPtr _render);
+        void _resetTime();
+        MTLADFILTERSTATE m_state;
+        f32 m_time;
+        f32 m_accTime;
+        f32 m_intervalTime;
+    };
+
 }//!namespace sv
 
 #endif //SV_MTLADFILTER_H

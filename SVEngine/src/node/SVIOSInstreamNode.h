@@ -28,7 +28,6 @@ namespace sv {
         void render();
         
     protected:
-        SVRenderObjectPtr m_pRenderObj;
         SVMtlCorePtr m_pMtl;
         SVINTEX m_tt;
     };

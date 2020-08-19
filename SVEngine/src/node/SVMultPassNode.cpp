@@ -12,7 +12,6 @@
 #include "../basesys/SVComData.h"
 #include "../rendercore/SVRenderMesh.h"
 #include "../rendercore/SVRenderMgr.h"
-#include "../rendercore/SVRenderObject.h"
 #include "../rendercore/SVRenderCmd.h"
 #include "../rendercore/SVRenderer.h"
 #include "../mtl/SVTexMgr.h"

@@ -12,8 +12,6 @@
 #include "../mtl/SVMtl2D.h"
 #include "../mtl/SVTexMgr.h"
 #include "../core/SVGeoGen.h"
-#include "../rendercore/SVRenderObject.h"
-
 #include "../rendercore/SVRenderMgr.h"
 
 using namespace sv;
@@ -32,7 +30,6 @@ SVFrameAniNode::SVFrameAniNode(SVInstPtr _app)
     m_texprename = "";
     m_pActTex = nullptr;
     m_pMesh = nullptr;
-    m_pRenderObj = MakeSharedPtr<SVRenderObject>();
     m_width = 850;
     m_height = 1000;
     setSize(m_width,m_height);
@@ -44,7 +41,6 @@ SVFrameAniNode::SVFrameAniNode(SVInstPtr _app)
 SVFrameAniNode::~SVFrameAniNode() {
     m_pActTex = nullptr;
     m_pMesh = nullptr;
-    m_pRenderObj = nullptr;
 }
 
 //

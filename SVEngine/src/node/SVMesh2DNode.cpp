@@ -10,7 +10,7 @@
 #include "../basesys/SVScene.h"
 #include "../app/SVInst.h"
 #include "../mtl/SVMtlNocolor.h"
-#include "../rendercore/SVRenderObject.h"
+
 #include "../rendercore/SVRenderMesh.h"
 #include "../rendercore/SVRenderMgr.h"
 

@@ -16,7 +16,6 @@
 #include "../mtl/SVTexture.h"
 #include "../mtl/SVTexMgr.h"
 #include "../app/SVInst.h"
-#include "../rendercore/SVRenderObject.h"
 #include "../rendercore/SVRenderMgr.h"
 #include "../rendercore/SVRenderer.h"
 #include "../basesys/SVComData.h"
@@ -33,7 +32,6 @@ SVBGRAInstreamNode::SVBGRAInstreamNode(SVInstPtr _app,f32 _w,f32 _h)
 :SVNode(_app) {
     ntype = "SVBGRAInstreamNode";
     m_rsType = RST_SOLID_3D;
-    m_pRenderObj = MakeSharedPtr<SVRenderObject>();
     m_canSelect = false;
     m_pMesh = nullptr;
     setSpriteSize(_w,_h);
@@ -41,7 +39,6 @@ SVBGRAInstreamNode::SVBGRAInstreamNode(SVInstPtr _app,f32 _w,f32 _h)
 
 SVBGRAInstreamNode::~SVBGRAInstreamNode() {
     m_pMesh = nullptr;
-    m_pRenderObj = nullptr;
     m_pTex = nullptr;
 }
 

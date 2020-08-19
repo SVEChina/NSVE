@@ -35,8 +35,6 @@ namespace sv {
 
     };
 
-    
-    
 }//!namespace sv
 
 #endif //SV_MTLCOLOR_H

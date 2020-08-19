@@ -14,7 +14,6 @@
 #include "../basesys/SVComData.h"
 #include "../app/SVInst.h"
 #include "../rendercore/SVRenderMgr.h"
-#include "../rendercore/SVRenderObject.h"
 #include "../rendercore/SVRenderer.h"
 #include "../mtl/SVTexMgr.h"
 #include "../mtl/SVTexture.h"
@@ -33,7 +32,6 @@ SVTransGPU::SVTransGPU(SVInstPtr _app,
 ,m_tex1(_t1)
 ,m_tex2(_t2)
 ,m_texOut(_tOut){
-    //m_pRenderObj = MakeSharedPtr<SVRenderObject>();
     m_passNode = MakeSharedPtr<SVMultPassNode>(mApp);
     m_passNode->setRSType(RST_SKY);
     m_pMtl = nullptr;
@@ -42,7 +40,6 @@ SVTransGPU::SVTransGPU(SVInstPtr _app,
 
 SVTransGPU::~SVTransGPU() {
     destroy();
-    //m_pRenderObj = nullptr;
     m_pMtl = nullptr;
 }
 

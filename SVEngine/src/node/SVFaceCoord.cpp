@@ -9,7 +9,6 @@
 #include "../basesys/SVCameraNode.h"
 #include "../basesys/SVScene.h"
 #include "../app/SVInst.h"
-#include "../rendercore/SVRenderObject.h"
 #include "../rendercore/SVRenderMesh.h"
 #include "../rendercore/SVRenderMgr.h"
 #include "../core/SVGeoGen.h"
@@ -33,16 +32,12 @@ SVFaceCoord::SVFaceCoord(SVInstPtr _app)
     m_aabbBox.clear();
     //m_pMesh = MakeSharedPtr<SVRenderMesh>(mApp);
     //m_pMeshAct = MakeSharedPtr<SVRenderMesh>(mApp);
-    m_pRObjNor = MakeSharedPtr<SVRenderObject>();
-    m_pRObjAct = MakeSharedPtr<SVRenderObject>();
 }
 
 SVFaceCoord::~SVFaceCoord() {
     m_meshLock = nullptr;
     m_pMesh = nullptr;
     m_pMeshAct = nullptr;
-    m_pRObjNor = nullptr;
-    m_pRObjAct = nullptr;
 }
 
 //加载点位文件

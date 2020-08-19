@@ -15,7 +15,6 @@
 #include "../../core/SVPass.h"
 #include "../../base/SVVec3.h"
 #include "../../base/SVDataSwap.h"
-#include "../../rendercore/SVRenderObject.h"
 #include "../../rendercore/SVRenderMesh.h"
 #include "../../rendercore/SVRenderMgr.h"
 #include "../../rendercore/SVRenderer.h"
@@ -47,7 +46,6 @@ SVPenStroke::SVPenStroke(SVInstPtr _app, SVPENMODE _mode, f32 _strokeWidth, FVec
     m_ptCachePool.clear();
     m_localMat.setIdentity();
     m_lock = MakeSharedPtr<SVLock>();
-    m_pRenderObj = MakeSharedPtr<SVRenderObject>();
     m_pInstanceOffsetData = MakeSharedPtr<SVDataSwap>();
     m_pTex = mApp->getTexMgr()->getTexture("svres/textures/a_point50.png",true);
     //
@@ -88,7 +86,6 @@ SVPenStroke::~SVPenStroke() {
     m_pInstanceOffsetData = nullptr;
     m_pGlowInstanceOffsetData->reback();
     m_pGlowInstanceOffsetData = nullptr;
-    m_pRenderObj = nullptr;
     //m_pStrokeMesh = nullptr;
     m_pMtl = nullptr;
     m_pTex = nullptr;

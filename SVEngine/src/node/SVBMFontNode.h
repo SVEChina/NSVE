@@ -69,7 +69,6 @@ namespace sv {
             
         protected:
             f32 m_fontSize;
-            SVRenderObjectPtr m_pRenderObj;
             SVRenderMeshPtr m_pMesh;
             SVDataSwapPtr m_pRenderVertex;
             SVTexturePtr m_texture;

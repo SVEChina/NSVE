@@ -33,7 +33,6 @@ namespace sv {
             void clearPass();
             
         protected:
-            SVRenderObjectPtr m_pRenderObj;
             SVRenderMeshPtr m_pMesh;
             SVMtlFaceShapePtr m_pMtl;
 

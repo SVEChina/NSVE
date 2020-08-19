@@ -14,7 +14,7 @@
 //#include "../basesys/SVSceneMgr.h"
 //#include "../basesys/SVComData.h"
 //#include "../rendercore/SVRenderMgr.h"
-//#include "../rendercore/SVRenderObject.h"
+//
 //#include "../rendercore/SVRenderMesh.h"
 //#include "../rendercore/SVRenderCmd.h"
 //
@@ -33,7 +33,6 @@ using namespace sv;
 SVShapeVariedNode::SVShapeVariedNode(SVInstPtr _app)
 :SVNode(_app){
     ntype = "SVFaceShapeVariedNode";
-//    m_pRenderObj = MakeSharedPtr<SVRenderObject>();
 //    m_pMtl = MakeSharedPtr<SVMtlFaceShapeVaried>(mApp);
 //    m_pMesh =  mApp->getComData()->m_screenMesh;
 }

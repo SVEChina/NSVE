@@ -13,37 +13,33 @@
 
 namespace sv {
     
-    
+    class SVMtlSmooth : public SVMtlCore {
+    public:
         
-        class SVMtlSmooth : public SVMtlCore {
-        public:
-            
-            SVMtlSmooth(SVInstPtr _app , SVString _name);
-            
-            SVMtlSmooth(SVMtlSmooth *_mtl);
-            
-            ~SVMtlSmooth();
-            
-            virtual SVMtlCorePtr clone();
-            
-            
-            inline void setSmooth(f32 _smooth){
-                m_smooth = _smooth;
-            }
-            
-            inline void setImgWH(f32 _w , f32 _h){
-                m_w = _w;
-                m_h = _h;
-            }
-        protected:
-            virtual void _submitMtl(SVRendererPtr _render);
-            
-            f32 m_smooth;
-            f32 m_w;
-            f32 m_h;
-        };
+        SVMtlSmooth(SVInstPtr _app , SVString _name);
         
-    
+        SVMtlSmooth(SVMtlSmooth *_mtl);
+        
+        ~SVMtlSmooth();
+        
+        virtual SVMtlCorePtr clone();
+        
+        
+        inline void setSmooth(f32 _smooth){
+            m_smooth = _smooth;
+        }
+        
+        inline void setImgWH(f32 _w , f32 _h){
+            m_w = _w;
+            m_h = _h;
+        }
+    protected:
+        virtual void _submitMtl(SVRendererPtr _render);
+        
+        f32 m_smooth;
+        f32 m_w;
+        f32 m_h;
+    };
     
 }//!namespace sv
 

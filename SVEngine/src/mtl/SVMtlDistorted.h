@@ -12,28 +12,24 @@
 
 namespace sv {
     
-    
+    class SVMtlDistorted : public SVMtlADFilterBase {
+    public:
+        SVMtlDistorted(SVInstPtr _app);
         
-        class SVMtlDistorted : public SVMtlADFilterBase {
-        public:
-            SVMtlDistorted(SVInstPtr _app);
-            
-            SVMtlDistorted(SVMtlDistorted *_mtl);
-            
-            ~SVMtlDistorted();
-            
-            virtual void reset();
-            
-            virtual SVMtlCorePtr clone();
-            
-            void update(f32 dt);
-        protected:
-            virtual void _submitUniform(SVRendererPtr _render);
-            void _resetTime();
-        };
+        SVMtlDistorted(SVMtlDistorted *_mtl);
+        
+        ~SVMtlDistorted();
+        
+        virtual void reset();
+        
+        virtual SVMtlCorePtr clone();
+        
+        void update(f32 dt);
+    protected:
+        virtual void _submitUniform(SVRendererPtr _render);
+        void _resetTime();
+    };
 
-    
-    
 }//!namespace sv
 
 #endif //SV_MTLDISTORTED_H

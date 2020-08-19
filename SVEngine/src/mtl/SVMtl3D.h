@@ -56,8 +56,6 @@ namespace sv {
         virtual void fromJSON(RAPIDJSON_NAMESPACE::Value &item);
     };
 
-    
-    
 }//!namespace sv
 
 

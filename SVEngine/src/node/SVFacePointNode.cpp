@@ -9,7 +9,6 @@
 #include "../app/SVInst.h"
 #include "../basesys/SVSceneMgr.h"
 #include "../rendercore/SVRenderMgr.h"
-#include "../rendercore/SVRenderObject.h"
 #include "../rendercore/SVRenderMesh.h"
 #include "../mtl/SVMtlCore.h"
 #include "../core/SVGeoGen.h"

@@ -30,7 +30,7 @@ namespace sv {
 
         void update(f32 dt);
         
-        void enable();
+        bool enable();
         
         void disable();
         

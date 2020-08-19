@@ -13,28 +13,24 @@
 
 namespace sv {
     
-    
+    class SVMtlShadowMapping : public SVMtlCore  {
+    public:
+        SVMtlShadowMapping(SVInstPtr _app);
         
-        class SVMtlShadowMapping : public SVMtlCore  {
-        public:
-            SVMtlShadowMapping(SVInstPtr _app);
-            
-            SVMtlShadowMapping(SVMtlShadowMapping* _mtl);
-            
-            ~SVMtlShadowMapping();
-            
-            void setLightVPMat(f32 *_vp);
-            
-            virtual SVMtlCorePtr clone();
-            
-        protected:
-            virtual void _submitMtl(SVRendererPtr _render);
-            f32 m_LightVPMat[16];
-    
-        };
+        SVMtlShadowMapping(SVMtlShadowMapping* _mtl);
         
-    
-    
+        ~SVMtlShadowMapping();
+        
+        void setLightVPMat(f32 *_vp);
+        
+        virtual SVMtlCorePtr clone();
+        
+    protected:
+        virtual void _submitMtl(SVRendererPtr _render);
+        f32 m_LightVPMat[16];
+
+    };
+        
 }//!namespace sv
 
 

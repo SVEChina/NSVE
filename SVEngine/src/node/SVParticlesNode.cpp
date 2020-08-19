@@ -8,9 +8,7 @@
 #include "../mtl/SVTexMgr.h"
 #include "../mtl/SVTexture.h"
 #include "../rendercore/SVRenderMgr.h"
-
 #include "../rendercore/SVRenderMesh.h"
-#include "../rendercore/SVRenderObject.h"
 
 using namespace sv;
 
@@ -42,7 +40,6 @@ SVParticlesNode::SVParticlesNode(SVInstPtr _app)
 //    //
 //    m_pVertData = MakeSharedPtr<SVDataSwap>( );
 //    m_pIndexData = MakeSharedPtr<SVDataSwap>();
-//    m_pRenderObj = MakeSharedPtr<SVRenderObject>();
 //    m_atten = mApp->getTexMgr()->getTexture("svres/textures/billboards_base_specular.png",true);
 //    m_diffuse = mApp->getTexMgr()->getTexture("svres/textures/a_xuehua_00.png",true);
 }
@@ -50,7 +47,6 @@ SVParticlesNode::SVParticlesNode(SVInstPtr _app)
 SVParticlesNode::~SVParticlesNode() {
     m_pParticlesWorld = nullptr;
     m_pParticles = nullptr;
-    m_pRenderObj = nullptr;
     m_pIndexData = nullptr;
     m_pVertData = nullptr;
     m_pMesh = nullptr;

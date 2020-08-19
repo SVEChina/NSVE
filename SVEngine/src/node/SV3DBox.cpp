@@ -9,7 +9,6 @@
 #include "../basesys/SVCameraNode.h"
 #include "../basesys/SVScene.h"
 #include "../app/SVInst.h"
-#include "../rendercore/SVRenderObject.h"
 #include "../rendercore/SVRenderMesh.h"
 #include "../rendercore/SVRenderMgr.h"
 #include "../core/SVGeoGen.h"

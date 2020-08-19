@@ -12,7 +12,6 @@
 #include "../mtl/SVTexture.h"
 #include "../mtl/SVMtlCore.h"
 #include "../rendercore/SVRenderMgr.h"
-#include "../rendercore/SVRenderObject.h"
 #include "../basesys/SVComData.h"
 #include "../rendercore/SVRenderMesh.h"
 #include "../event/SVEventMgr.h"
@@ -34,7 +33,6 @@ SVBitFontNode::SVBitFontNode(SVInstPtr _app)
     m_alpha = 1;
     m_atchType = ATCH_MC;
     m_pRenderVertex = MakeSharedPtr<SVDataSwap>();
-    m_pRenderObj = MakeSharedPtr<SVRenderObject>();
     //m_pMesh = MakeSharedPtr<SVRenderMesh>(mApp);
     //m_pMesh->setVertexPoolType(GL_DYNAMIC_DRAW);
     //构建基础mesh和纹理坐标
@@ -45,7 +43,6 @@ SVBitFontNode::SVBitFontNode(SVInstPtr _app)
 SVBitFontNode::~SVBitFontNode() {
     m_pRenderVertex = nullptr;
     m_pMesh = nullptr;
-    m_pRenderObj = nullptr;
     m_texture = nullptr;
 }
 

@@ -34,8 +34,6 @@ namespace sv {
         SVTexturePtr m_pMaskTexture;
     };
 
-    
-    
 }//!namespace sv
 
 

@@ -7,7 +7,6 @@
 
 
 #include "SVMtlCore.h"
-#include "SVGLModify.h"
 #include "SVSurface.h"
 #include "../base/SVDataChunk.h"
 #include "../operate/SVOpCreate.h"

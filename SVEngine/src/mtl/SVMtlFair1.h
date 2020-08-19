@@ -12,154 +12,151 @@
 
 namespace sv {
     
-        //
-        class SVMtlFilterBrilaterl : public SVMtlCore {
-        public:
-            SVMtlFilterBrilaterl(SVInstPtr _app);
-            
-            SVMtlFilterBrilaterl(SVMtlFilterBrilaterl *_mtl);
-            
-            ~SVMtlFilterBrilaterl();
-            
-            virtual SVMtlCorePtr clone();
-            
-            void setOffset(f32 _offw,f32 _offh);
-            
-            void setDistance(f32 _dis);
-            
-        protected:
-            virtual void _submitMtl(SVRendererPtr _render); 
+    //
+    class SVMtlFilterBrilaterl : public SVMtlCore {
+    public:
+        SVMtlFilterBrilaterl(SVInstPtr _app);
+        
+        SVMtlFilterBrilaterl(SVMtlFilterBrilaterl *_mtl);
+        
+        ~SVMtlFilterBrilaterl();
+        
+        virtual SVMtlCorePtr clone();
+        
+        void setOffset(f32 _offw,f32 _offh);
+        
+        void setDistance(f32 _dis);
+        
+    protected:
+        virtual void _submitMtl(SVRendererPtr _render);
 
-            f32 m_texelWidthOffset;
-            f32 m_texelHeightOffset;
-            f32 m_distanceNormalizationFactor;
-            
-            bool m_paramDirty;
-        };
+        f32 m_texelWidthOffset;
+        f32 m_texelHeightOffset;
+        f32 m_distanceNormalizationFactor;
         
-        //
-        class SVMtlFilterBrilaterl2 : public SVMtlCore {
-        public:
-            SVMtlFilterBrilaterl2(SVInstPtr _app);
-            
-            SVMtlFilterBrilaterl2(SVMtlFilterBrilaterl2 *_mtl);
-            
-            ~SVMtlFilterBrilaterl2();
-            
-            virtual SVMtlCorePtr clone();
-            
-            void setOffset(f32 _offw,f32 _offh);
-            
-            void setDistance(f32 _dis);
-            
-        protected:
-            virtual void _submitMtl(SVRendererPtr _render); 
-            
-            f32 m_texelWidthOffset;
-            f32 m_texelHeightOffset;
-            f32 m_distanceNormalizationFactor;
-            
-            bool m_paramDirty;
-        };
-        
-        //
-        class SVMtlGaussian : public SVMtlCore {
-        public:
-            SVMtlGaussian(SVInstPtr _app);
-            
-            SVMtlGaussian(SVMtlGaussian *_mtl);
-            
-            ~SVMtlGaussian();
-            
-            virtual SVMtlCorePtr clone();
-            
-            void setRadius(f32 _radius);
-            
-        protected:
-            virtual void _submitMtl(SVRendererPtr _render);
-            //
-            f32 m_radius;
-            //
-            bool m_paramDirty;
-        };
-
-        class SVMtlBlur : public SVMtlCore {
-        public:
-            SVMtlBlur(SVInstPtr _app);
-            
-            SVMtlBlur(SVMtlBlur *_mtl);
-
-            ~SVMtlBlur();
-            
-            virtual SVMtlCorePtr clone();
-
-            void setRadius(f32 _radius);
-
-        protected:
-            virtual void _submitMtl(SVRendererPtr _render);
-
-            f32 m_radius;
-            //
-            bool m_paramDirty;
-        };
-        
-        class SVMtlBlurFair : public SVMtlCore {
-        public:
-            SVMtlBlurFair(SVInstPtr _app);
-            
-            SVMtlBlurFair(SVMtlBlurFair *_mtl);
-            
-            ~SVMtlBlurFair();
-            
-            void setSmooth(f32 _smooth);
-            
-            virtual void _submitMtl(SVRendererPtr _render); 
-            
-            virtual SVMtlCorePtr clone();
-            
-        protected:
-            f32 m_blurAlpha;
-        };
-        
-        class SVMtlFairLtraLow : public SVMtlCore {
-        public:
-            SVMtlFairLtraLow(SVInstPtr _app);
-            
-            SVMtlFairLtraLow(SVMtlFairLtraLow *_mtl);
-            
-            ~SVMtlFairLtraLow();
-            
-            void setSmooth(f32 _smooth);
-            
-            virtual void _submitMtl(SVRendererPtr _render); 
-            
-            virtual SVMtlCorePtr clone();
-            
-        protected:
-            f32 m_smooth;
-        };
-        
-        class SVMtlBlurFairGus : public SVMtlCore {
-        public:
-            SVMtlBlurFairGus(SVInstPtr _app);
-            
-            SVMtlBlurFairGus(SVMtlBlurFairGus *_mtl);
-            
-            ~SVMtlBlurFairGus();
-            
-            void setSmooth(f32 _smooth);
-            
-            virtual void _submitMtl(SVRendererPtr _render);
-            
-            virtual SVMtlCorePtr clone();
-            
-        protected:
-            f32 m_smooth;
-        };
-        
-        
+        bool m_paramDirty;
+    };
     
+    //
+    class SVMtlFilterBrilaterl2 : public SVMtlCore {
+    public:
+        SVMtlFilterBrilaterl2(SVInstPtr _app);
+        
+        SVMtlFilterBrilaterl2(SVMtlFilterBrilaterl2 *_mtl);
+        
+        ~SVMtlFilterBrilaterl2();
+        
+        virtual SVMtlCorePtr clone();
+        
+        void setOffset(f32 _offw,f32 _offh);
+        
+        void setDistance(f32 _dis);
+        
+    protected:
+        virtual void _submitMtl(SVRendererPtr _render);
+        
+        f32 m_texelWidthOffset;
+        f32 m_texelHeightOffset;
+        f32 m_distanceNormalizationFactor;
+        
+        bool m_paramDirty;
+    };
     
+    //
+    class SVMtlGaussian : public SVMtlCore {
+    public:
+        SVMtlGaussian(SVInstPtr _app);
+        
+        SVMtlGaussian(SVMtlGaussian *_mtl);
+        
+        ~SVMtlGaussian();
+        
+        virtual SVMtlCorePtr clone();
+        
+        void setRadius(f32 _radius);
+        
+    protected:
+        virtual void _submitMtl(SVRendererPtr _render);
+        //
+        f32 m_radius;
+        //
+        bool m_paramDirty;
+    };
+
+    class SVMtlBlur : public SVMtlCore {
+    public:
+        SVMtlBlur(SVInstPtr _app);
+        
+        SVMtlBlur(SVMtlBlur *_mtl);
+
+        ~SVMtlBlur();
+        
+        virtual SVMtlCorePtr clone();
+
+        void setRadius(f32 _radius);
+
+    protected:
+        virtual void _submitMtl(SVRendererPtr _render);
+
+        f32 m_radius;
+        //
+        bool m_paramDirty;
+    };
+    
+    class SVMtlBlurFair : public SVMtlCore {
+    public:
+        SVMtlBlurFair(SVInstPtr _app);
+        
+        SVMtlBlurFair(SVMtlBlurFair *_mtl);
+        
+        ~SVMtlBlurFair();
+        
+        void setSmooth(f32 _smooth);
+        
+        virtual void _submitMtl(SVRendererPtr _render);
+        
+        virtual SVMtlCorePtr clone();
+        
+    protected:
+        f32 m_blurAlpha;
+    };
+    
+    class SVMtlFairLtraLow : public SVMtlCore {
+    public:
+        SVMtlFairLtraLow(SVInstPtr _app);
+        
+        SVMtlFairLtraLow(SVMtlFairLtraLow *_mtl);
+        
+        ~SVMtlFairLtraLow();
+        
+        void setSmooth(f32 _smooth);
+        
+        virtual void _submitMtl(SVRendererPtr _render);
+        
+        virtual SVMtlCorePtr clone();
+        
+    protected:
+        f32 m_smooth;
+    };
+    
+    class SVMtlBlurFairGus : public SVMtlCore {
+    public:
+        SVMtlBlurFairGus(SVInstPtr _app);
+        
+        SVMtlBlurFairGus(SVMtlBlurFairGus *_mtl);
+        
+        ~SVMtlBlurFairGus();
+        
+        void setSmooth(f32 _smooth);
+        
+        virtual void _submitMtl(SVRendererPtr _render);
+        
+        virtual SVMtlCorePtr clone();
+        
+    protected:
+        f32 m_smooth;
+    };
+
 }//!namespace sv
 
 

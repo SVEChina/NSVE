@@ -83,20 +83,6 @@ namespace sv {
     DECLARE_SHAREPTR(SVTexturePList);
     DECLARE_SHAREPTR(SVTextureIOS);
 
-    //modify
-    DECLARE_SHAREPTR(SVGLModify);
-    DECLARE_SHAREPTR(SVGLModifyTex);
-    DECLARE_SHAREPTR(SVGLModifyTexParam);
-    DECLARE_SHAREPTR(SVGLModifyLineWidth);
-    DECLARE_SHAREPTR(SVGLModifyPointSize);
-    DECLARE_SHAREPTR(SVGLModifyBlend);
-    DECLARE_SHAREPTR(SVGLModifyCullFace);
-    DECLARE_SHAREPTR(SVGLModifyDepth);
-    DECLARE_SHAREPTR(SVGLModifyStencil);
-    DECLARE_SHAREPTR(SVGLModifyShader);
-    DECLARE_SHAREPTR(SVGLModifyUnif32);
-    DECLARE_SHAREPTR(SVGLModifyUniMatrix);
-
     
 }//!namespace sv
 

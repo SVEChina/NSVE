@@ -51,10 +51,14 @@ namespace sv {
         
         //正常渲染
         void render(SVRendererPtr _renderer);
-    
-        void pushRenderCommand(SVRenderCmdPtr _rcmd,SV_RSTREAM_TYPE _rstype);
         
-        void clearRenderCommand();
+        void pushCommandPre(SVRenderCmdPtr _rcmd);
+        
+        void pushCommandAfter(SVRenderCmdPtr _rcmd);
+    
+        void pushCommand(SVRenderCmdPtr _rcmd,SV_RSTREAM_TYPE _rstype);
+        
+        void clearCommand();
 
         void bindRes(SVRFboPtr _res);
 
@@ -91,6 +95,10 @@ namespace sv {
         
         std::vector<SVRenderStreamPtr> m_stream_pool;
         
+        SVRenderStreamPtr m_stream_pre;
+        
+        SVRenderStreamPtr m_stream_after;
+        
         SVRFboPtr m_fbo;
         
         SVTargetDsp m_target_dsp;
@@ -100,6 +108,9 @@ namespace sv {
         
         //是否开启输出
         bool m_output;
+        
+        //
+        s32 m_cmdNum;
         
     public:
         FMat4 m_v_mat;

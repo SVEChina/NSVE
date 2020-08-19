@@ -11,7 +11,6 @@
 #include "../app/SVInst.h"
 #include "../basesys/SVComData.h"
 #include "../mtl/SVMtlNocolor.h"
-#include "../rendercore/SVRenderObject.h"
 #include "../rendercore/SVRenderMesh.h"
 #include "../rendercore/SVRenderMgr.h"
 
@@ -20,7 +19,6 @@ using namespace sv;
 SVPatchNode::SVPatchNode(SVInstPtr _app)
 : SVNode(_app) {
     ntype = "SVPatchNode";
-    m_pRenderObj = MakeSharedPtr<SVRenderObject>();
     m_patchMtl = MakeSharedPtr<SVMtlGeo3d>(mApp);
     FVec3 t_corner00 = FVec3(-100.0, 0.0f, 0.0f);
     FVec3 t_corner10 = FVec3(100.0, 0.0f, 0.0f);
@@ -32,7 +30,6 @@ SVPatchNode::SVPatchNode(SVInstPtr _app)
 }
 
 SVPatchNode::~SVPatchNode() {
-    m_pRenderObj = nullptr;
     m_pMesh = nullptr;
     m_patchMtl = nullptr;
 }

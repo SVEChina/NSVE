@@ -31,12 +31,6 @@ SVRenderMgr::SVRenderMgr(SVInstPtr _app)
     m_adaptMode = 0;
     m_stream_create = nullptr;
     m_stream_destroy = nullptr;
-    m_stream_main_pre = nullptr;
-    m_stream_main_aft = nullptr;
-//    //主流前
-//    SVRenderStreamPtr m_stream_main_pre;
-//    //主流后
-//    SVRenderStreamPtr m_stream_main_aft;
 }
 
 SVRenderMgr::~SVRenderMgr() {
@@ -46,22 +40,16 @@ SVRenderMgr::~SVRenderMgr() {
     m_mainRT = nullptr;
     m_stream_create = nullptr;
     m_stream_destroy = nullptr;
-    m_stream_main_pre = nullptr;
-    m_stream_main_aft = nullptr;
 }
 
 void SVRenderMgr::init() {
     m_stream_create = MakeSharedPtr<SVRenderStream>();
     m_stream_destroy = MakeSharedPtr<SVRenderStream>();
-    m_stream_main_pre = MakeSharedPtr<SVRenderStream>();
-    m_stream_main_aft = MakeSharedPtr<SVRenderStream>();
 }
 
 void SVRenderMgr::destroy() {
     m_stream_create = nullptr;
     m_stream_destroy = nullptr;
-    m_stream_main_pre = nullptr;
-    m_stream_main_aft = nullptr;
     clear();
 }
 
@@ -114,17 +102,9 @@ void SVRenderMgr::render(){
         for(s32 i=0;i<m_preRT.size();i++) {
             m_preRT[i]->render( t_renderer);
         }
-        //主RT前
-        if(m_stream_main_pre) {
-            m_stream_main_pre->render(t_renderer, m_mainRT);
-        }
         //主RT
         if( m_mainRT ) {
             m_mainRT->render( t_renderer);
-        }
-        //主RT后
-        if(m_stream_main_aft) {
-            m_stream_main_aft->render(t_renderer, m_mainRT);
         }
         //后向RT
         for(s32 i=0;i<m_afterRT.size();i++) {
@@ -170,25 +150,9 @@ void SVRenderMgr::pushRCmdDestory(SVRenderCmdPtr _rcmd){
     m_logicLock->unlock();
 }
 
-void SVRenderMgr::pushRCmdPreMain(SVRenderCmdPtr _rcmd){
-    m_logicLock->lock();
-    if(_rcmd && m_stream_main_pre){
-        m_stream_main_pre->addRenderCmd(_rcmd);
-    }
-    m_logicLock->unlock();
-}
-
-void SVRenderMgr::pushRCmdAftMain(SVRenderCmdPtr _rcmd){
-    m_logicLock->lock();
-    if(_rcmd && m_stream_main_aft){
-        m_stream_main_aft->addRenderCmd(_rcmd);
-    }
-    m_logicLock->unlock();
-}
-
 void SVRenderMgr::pushRCmd(SVRenderCmdPtr _rcmd,SV_RSTREAM_TYPE _rstype) {
     if(m_mainRT) {
         //这里要传渲染类别啊
-        m_mainRT->pushRenderCommand(_rcmd,_rstype);
+        m_mainRT->pushCommand(_rcmd,_rstype);
     }
 }

@@ -18,7 +18,6 @@
 #include "../mtl/SVTexture.h"
 #include "../rendercore/SVRenderMgr.h"
 #include "../rendercore/SVRenderCmd.h"
-#include "../rendercore/SVRenderObject.h"
 #include "../rendercore/SVRenderer.h"
 #include "../basesys/SVCameraNode.h"
 #include "../basesys/SVScene.h"
@@ -32,7 +31,6 @@ SVARAnchor::SVARAnchor(SVInstPtr _app)
 :SVModuleBase(_app){
     m_plane_dis = 0.3f;
     m_pTex = nullptr;
-    m_pRenderObj = nullptr;
     m_mtl = nullptr;
     m_pMesh = nullptr;
     t_testNode = nullptr;
@@ -41,7 +39,6 @@ SVARAnchor::SVARAnchor(SVInstPtr _app)
 
 SVARAnchor::~SVARAnchor(){
     m_pTex = nullptr;
-    m_pRenderObj = nullptr;
     m_mtl = nullptr;
     m_pMesh = nullptr;
     t_testNode = nullptr;
@@ -64,7 +61,6 @@ void SVARAnchor::init(){
 //    }
 //    m_fbo = MakeSharedPtr<SVRenderTexture>(mApp,m_pTex,true,true);
 //    //mApp->getRenderMgr()->pushRCmdCreate(m_fbo);
-//    m_pRenderObj = MakeSharedPtr<SVRenderObject>();
 //    m_mtl = MakeSharedPtr<SVMtlCore>(mApp,"screennor");
 //    m_mtl->setTexcoordFlip(1.0f, 1.0f);
 //    m_mtl->setTexture(0, E_TEX_HELP7);

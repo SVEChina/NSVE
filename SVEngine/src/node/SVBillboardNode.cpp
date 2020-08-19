@@ -17,7 +17,6 @@
 #include "../mtl/SVTexture.h"
 #include "../mtl/SVTexMgr.h"
 #include "../app/SVInst.h"
-#include "../rendercore/SVRenderObject.h"
 #include "../rendercore/SVRenderMgr.h"
 #include "../rendercore/SVRenderer.h"
 #include "../basesys/SVComData.h"

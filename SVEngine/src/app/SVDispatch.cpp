@@ -99,7 +99,7 @@ void SVDispatch::dispatchMeshDraw(SVInstPtr _app,SVRenderMeshPtr _mesh,cptr8 _mt
             t_cmd_nor->setMesh(_mesh);
             t_cmd_nor->setMaterial(t_mtl);
             t_cmd_nor->setSurface(_surface);
-            t_target->pushRenderCommand(t_cmd_nor,E_RSM_SOLID);
+            t_target->pushCommand(t_cmd_nor,E_RSM_SOLID);
         }
     }
 }
@@ -120,7 +120,7 @@ void SVDispatch::dispatchMeshDraw(SVInstPtr _app,SVRenderMeshPtr _mesh,s32 _mtlI
             t_cmd_nor->setMesh(_mesh);
             t_cmd_nor->setMaterial(t_mtl);
             t_cmd_nor->setSurface(_surface);
-            _target->pushRenderCommand(t_cmd_nor,E_RSM_SOLID);
+            _target->pushCommand(t_cmd_nor,E_RSM_SOLID);
         }
     }
 }

@@ -16,7 +16,6 @@
 #include "../basesys/SVFaceDataMesh.h"
 #include "../rendercore/SVRenderMesh.h"
 #include "../rendercore/SVRenderMgr.h"
-#include "../rendercore/SVRenderObject.h"
 #include "../detect/SVDetectMgr.h"
 #include "../basesys/SVScene.h"
 

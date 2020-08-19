@@ -33,11 +33,9 @@ namespace sv {
         void clearPass();
         
     protected:
-        SVRenderObjectPtr m_pRenderObj;
         SVRenderMeshPtr m_pMesh;
         SVMtlFaceShapeVariedPtr m_pMtl;
-        
-    protected:
+
         typedef SVArray<SVPassPtr> PASSPOOL;
         PASSPOOL m_passPool;
         //SVRenderTexturePtr m_fbo;

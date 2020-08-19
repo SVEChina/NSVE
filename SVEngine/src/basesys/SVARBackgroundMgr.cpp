@@ -44,7 +44,7 @@ void SVARBackgroundMgr::destroy() {
 }
 
 //
-void SVARBackgroundMgr::enable() {
+bool SVARBackgroundMgr::enable() {
     SVRendererPtr t_renderer = mApp->getRenderer();
     if(t_renderer) {
         m_ar_target = t_renderer->createTarget(E_TEX_CAMERA,false,false);
@@ -53,7 +53,9 @@ void SVARBackgroundMgr::enable() {
         //推送到前向渲染
         mApp->getRenderMgr()->addRTarget(m_ar_target,true);
         m_enable = true;
+        return true;
     }
+    return false;
 }
 
 //
@@ -82,6 +84,8 @@ void SVARBackgroundMgr::setInputCameraTex(cptr8 _fname) {
 //数据纹理方式
 void SVARBackgroundMgr::setInputCameraTex(SVDataSwapPtr _data,s32 _formate) {
     m_method = 2;
+    //这里有格式转换
+    
 }
 
 //其他方式，例如共享纹理方式

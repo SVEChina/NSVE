@@ -55,7 +55,6 @@ namespace sv{
         SVTexturePtr m_pTex;
         SVMtlCorePtr m_mtl;
         SVRenderMeshPtr m_pMesh;
-        SVRenderObjectPtr m_pRenderObj;
         SV3DBoxPtr t_testNode;
     };
     

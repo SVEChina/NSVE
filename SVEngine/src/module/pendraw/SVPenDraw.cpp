@@ -18,7 +18,6 @@
 #include "../../event/SVOpEvent.h"
 #include "../../rendercore/SVRenderMgr.h"
 #include "../../rendercore/SVRenderCmd.h"
-#include "../../rendercore/SVRenderObject.h"
 #include "../../rendercore/SVRenderer.h"
 #include "../../basesys/SVBasicSys.h"
 #include "../../basesys/filter/SVFilterGlow.h"

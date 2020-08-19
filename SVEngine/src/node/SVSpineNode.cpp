@@ -14,7 +14,6 @@
 //#include "../rendercore/SVRenderMgr.h"
 //
 //#include "../rendercore/SVRenderMesh.h"
-//#include "../rendercore/SVRenderObject.h"
 //#include "../core/SVSpine.h"
 //#include "../detect/SVDetectMgr.h"
 //#include "../detect/SVDetectBase.h"

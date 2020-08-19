@@ -126,8 +126,28 @@ void SVInst::destroyEnv() {
     }
 }
 
+//设置渲染器
 void SVInst::setRenderer(SVRendererPtr _renderer) {
     m_renderer = _renderer;
+    //设置渲染路径-0
+    setRenderPath(0);
+}
+
+void SVInst::setRenderPath(s32 _rpath) {
+    if(!m_renderer){
+        return;
+    }
+    //创建一堆东西
+    if(_rpath == 0) {
+        //普通渲染
+        
+    }else if(_rpath == 1) {
+        //
+        
+    }else if(_rpath == 2) {
+        //
+        
+    }
 }
 
 //跑线程模型 就是引擎运行
@@ -144,8 +164,6 @@ void SVInst::stop() {
 void SVInst::updateSVE(f32 _dt) {
     //处理一般逻辑，例如运动，消息处理等等
     m_pGlobalMgr->update(_dt);
-    //开始做渲染指令的生成（只有这里才会产生真正的渲染指令）
-    //m_pRPath->render(_dt);
 }
 
 void SVInst::renderSVE() {
@@ -169,6 +187,10 @@ void SVInst::addRespath(cptr8 path) {
          m_pFileMgr = MakeSharedPtr<SVFileMgr>(share());
     }
     m_pFileMgr->addRespath(path);
+}
+
+void SVInst::clearRespath() {
+    
 }
 
 void SVInst::setTimeState(SV_ENG_TIMESTATE _mode){

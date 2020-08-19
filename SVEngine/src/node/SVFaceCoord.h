@@ -39,9 +39,6 @@ namespace sv {
         //
         SVArray<FVec2> m_ptList;
         //
-        SVRenderObjectPtr m_pRObjNor;
-        SVRenderObjectPtr m_pRObjAct;
-        //
         SVRenderMeshPtr m_pMesh;
         SVRenderMeshPtr m_pMeshAct;
         //

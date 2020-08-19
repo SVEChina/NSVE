@@ -13,7 +13,6 @@
 #include "../mtl/SVTexMgr.h"
 #include "../mtl/SVTexture.h"
 #include "../mtl/SVMtlFace2D.h"
-#include "../rendercore/SVRenderObject.h"
 #include "../rendercore/SVRenderMesh.h"
 #include "../app/SVGlobalMgr.h"
 #include "../rendercore/SVRenderMgr.h"
@@ -26,7 +25,6 @@ using namespace sv;
 ////    m_pIndexs = MakeSharedPtr<SVDataSwap>();
 ////    m_pVerts = MakeSharedPtr<SVDataSwap>();
 ////    m_pT0 = MakeSharedPtr<SVDataSwap>();
-////    m_renderObject = MakeSharedPtr<SVRenderObject>();
 //}
 //
 //SV2DFaceMaskNode::~SV2DFaceMaskNode() {

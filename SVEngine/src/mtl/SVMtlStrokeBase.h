@@ -12,7 +12,6 @@
 
 namespace sv {
     
-
     class SVMtlStrokeBase : public SVMtlCore {
     public:
         SVMtlStrokeBase(SVInstPtr _app, cptr8 _shader);

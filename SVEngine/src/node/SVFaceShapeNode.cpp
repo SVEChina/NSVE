@@ -13,10 +13,8 @@
 #include "../basesys/SVSceneMgr.h"
 #include "../basesys/SVComData.h"
 #include "../rendercore/SVRenderMgr.h"
-#include "../rendercore/SVRenderObject.h"
 #include "../rendercore/SVRenderMesh.h"
 #include "../rendercore/SVRenderCmd.h"
-
 #include "../rendercore/SVRenderer.h"
 #include "../core/SVGeoGen.h"
 #include "../core/SVPass.h"
@@ -31,7 +29,6 @@ using namespace sv;
 SVFaceShapeNode::SVFaceShapeNode(SVInstPtr _app)
 :SVNode(_app){
     ntype = "SVFaceShapeNode";
-    m_pRenderObj = MakeSharedPtr<SVRenderObject>();
     m_pMtl = MakeSharedPtr<SVMtlFaceShape>(mApp);
     m_pMesh = SVGeoGen::createRectMesh(mApp,1.0, 1.0, 36, 64);
 }

@@ -14,7 +14,6 @@
 #include "../mtl/SVTexture.h"
 #include "../mtl/SVTexMgr.h"
 #include "../app/SVInst.h"
-#include "../rendercore/SVRenderObject.h"
 #include "../rendercore/SVRenderMgr.h"
 #include "../rendercore/SVRenderer.h"
 #include "../basesys/SVComData.h"
@@ -24,7 +23,6 @@ using namespace sv;
 SVFaceDetectPointNode::SVFaceDetectPointNode(SVInstPtr _app):SVNode(_app) {
     ntype = "SVFaceDetectPointNode";
     m_rsType = RST_DEBUG;
-    m_pRenderObj = MakeSharedPtr<SVRenderObject>();
     m_canSelect = false;
     m_pTex = mApp->getTexMgr()->getTexture("svres/point.png",true);;
     m_pMesh = nullptr;
@@ -32,7 +30,6 @@ SVFaceDetectPointNode::SVFaceDetectPointNode(SVInstPtr _app):SVNode(_app) {
 
 SVFaceDetectPointNode::~SVFaceDetectPointNode(){
     m_pMesh = nullptr;
-    m_pRenderObj = nullptr;
     m_pTex =nullptr;
 }
 

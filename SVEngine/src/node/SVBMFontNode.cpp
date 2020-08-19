@@ -21,7 +21,6 @@
 #include "../mtl/SVMtlCore.h"
 #include "../mtl/SVMtl2D.h"
 #include "../rendercore/SVRenderMgr.h"
-#include "../rendercore/SVRenderObject.h"
 #include "../rendercore/SVRenderMesh.h"
 
 using namespace sv;
@@ -40,7 +39,6 @@ SVBMFontNode::SVBMFontNode(SVInstPtr _app)
     m_alpha = 1.0f;
     m_fontSize = 1.0f;
     m_pRenderVertex = MakeSharedPtr<SVDataSwap>();
-    m_pRenderObj = MakeSharedPtr<SVRenderObject>();
     //m_pMesh = MakeSharedPtr<SVRenderMesh>(mApp);
     //m_pMesh->setVertexPoolType(GL_DYNAMIC_DRAW);
     m_spacing = 0.0f;
@@ -49,7 +47,6 @@ SVBMFontNode::SVBMFontNode(SVInstPtr _app)
 
 SVBMFontNode::~SVBMFontNode() {
     m_font = nullptr;
-    m_pRenderObj = nullptr;
     m_pMesh = nullptr;
     m_pRenderVertex = nullptr;
     m_texture = nullptr;

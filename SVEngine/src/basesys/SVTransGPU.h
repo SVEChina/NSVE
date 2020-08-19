@@ -41,7 +41,6 @@ namespace sv {
         SVTexturePtr m_texOut;
         f32 m_angle;
         SVMultPassNodePtr m_passNode;
-//        SVRenderObjectPtr m_pRenderObj;
 //        SVRenderMeshPtr m_pMesh;
         SVMtlCorePtr m_pMtl;
 

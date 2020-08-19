@@ -75,9 +75,6 @@ namespace sv {
     DECLARE_SHAREPTR(SVRCmdCreateTex);
     DECLARE_SHAREPTR(SVRCmdCreateTarget);
 
-    //renderobject
-    DECLARE_SHAREPTR(SVRenderObject);
-
 
 }//!namespace sv
 

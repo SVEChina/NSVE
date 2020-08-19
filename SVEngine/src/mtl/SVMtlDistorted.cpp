@@ -19,11 +19,9 @@ SVMtlDistorted::SVMtlDistorted(SVInstPtr _app)
 
 SVMtlDistorted::SVMtlDistorted(SVMtlDistorted *_mtl)
 :SVMtlADFilterBase(_mtl){
-    
 }
 
 SVMtlDistorted::~SVMtlDistorted() {
-    
 }
 
 SVMtlCorePtr SVMtlDistorted::clone() {

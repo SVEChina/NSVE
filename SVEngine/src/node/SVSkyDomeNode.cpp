@@ -10,7 +10,7 @@
 #include "../basesys/SVCameraNode.h"
 #include "../mtl/SVTexture.h"
 #include "../mtl/SVMtlCore.h"
-#include "../rendercore/SVRenderObject.h"
+
 #include "../rendercore/SVRenderMesh.h"
 #include "../rendercore/SVRenderMgr.h"
 
@@ -22,13 +22,11 @@ SVSkyDomeNode::SVSkyDomeNode(SVInstPtr _app)
     ntype = "SVSkyDomeNode";
     //mMesh = MakeSharedPtr<SVRenderMesh>(mApp);
     //mMesh->createMesh();
-    m_renderObject = MakeSharedPtr<SVRenderObject>();
 }
 
 SVSkyDomeNode::~SVSkyDomeNode(){
     mDomeTex = nullptr;
     mMesh = nullptr;
-    m_renderObject = nullptr;
 }
 
 void SVSkyDomeNode::generateSkyDome(SVTexturePtr _tex ,

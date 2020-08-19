@@ -16,7 +16,6 @@
 #include "../event/SVEventMgr.h"
 #include "../basesys/SVSceneMgr.h"
 #include "../basesys/SVConfig.h"
-#include "../rendercore/SVRenderObject.h"
 #include "../rendercore/SVRenderMgr.h"
 
 using namespace sv;

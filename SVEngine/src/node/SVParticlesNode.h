@@ -107,7 +107,6 @@ namespace sv {
             //
             SVMtlParticleAniPtr m_mtl_particle;
             SVRenderMeshPtr m_pMesh;
-            SVRenderObjectPtr m_pRenderObj;
             SVDataSwapPtr m_pVertData;
             SVDataSwapPtr m_pIndexData;
             SVTexturePtr m_diffuse;
