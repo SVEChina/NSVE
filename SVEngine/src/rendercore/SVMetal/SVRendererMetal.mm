@@ -67,11 +67,10 @@ void SVRendererMetal::init(id<MTLDevice> _device,s32 _w,s32 _h) {
     //创建主纹理
     mApp->m_global_param.m_sv_width = _w;
     mApp->m_global_param.m_sv_height = _h;
-    //创建主target
+    //创建主target,设置主RT
     SVRTargetPtr t_target = createTarget(E_TEX_MAIN,true,true);
-    //设置渲染路径
-    t_target->setRenderPath();
-    //设置主RT
+    t_target->pushStreamQuene(E_RSM_SKY );
+    t_target->pushStreamQuene(E_RSM_SOLID);
     mApp->getRenderMgr()->setMainRT(t_target);
     //重置大小
     //mApp->resize(t_dsp->m_width,t_dsp->m_height);

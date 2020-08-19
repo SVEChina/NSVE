@@ -52,8 +52,6 @@ bool SVARBackgroundMgr::enable() {
     if(t_renderer) {
         if(!m_enable) {
             m_ar_target = t_renderer->createTarget(E_TEX_CAMERA,false,false);
-            //设置渲染路径
-            //t_target->setRenderPath();
             //推送到前向渲染
             mApp->getRenderMgr()->addRTarget(m_ar_target,true);
             m_enable = true;
@@ -85,7 +83,7 @@ void SVARBackgroundMgr::update(f32 dt) {
         if(t_tex){
             SVSurfacePtr t_surface = MakeSharedPtr<SVSurface>();
             t_surface->setTexture(0,t_tex,1);
-            SVDispatch::dispatchMeshDraw(mApp, mApp->getComData()->screenMesh(), "back", t_surface,E_RSM_SKY);
+            //SVDispatch::dispatchMeshDraw(mApp, mApp->getComData()->screenMesh(), "back", t_surface,E_RSM_SKY);
             t_surface = nullptr;
         }
     }

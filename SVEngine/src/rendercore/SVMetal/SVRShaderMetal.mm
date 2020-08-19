@@ -109,6 +109,10 @@ void SVRShaderMetal::create(SVRendererPtr _renderer) {
         t_pl_dsp.colorAttachments[0].pixelFormat = MTLPixelFormatBGRA8Unorm;
         t_pl_dsp.depthAttachmentPixelFormat = MTLPixelFormatInvalid;
         t_pl_dsp.stencilAttachmentPixelFormat = MTLPixelFormatInvalid;
+    } else if( t_shader->m_shader_dsp.m_pass == "post" ) {
+        t_pl_dsp.colorAttachments[0].pixelFormat = MTLPixelFormatBGRA8Unorm;
+        t_pl_dsp.depthAttachmentPixelFormat = MTLPixelFormatInvalid;
+        t_pl_dsp.stencilAttachmentPixelFormat = MTLPixelFormatInvalid;
     } else {
         t_pl_dsp.colorAttachments[0].pixelFormat = MTLPixelFormatRGBA8Unorm;
         t_pl_dsp.depthAttachmentPixelFormat = MTLPixelFormatDepth32Float_Stencil8;

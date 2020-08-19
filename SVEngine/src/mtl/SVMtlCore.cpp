@@ -126,6 +126,7 @@ void SVMtlCore::setTexture(s32 _chn,s32 _stage,SVINTEX _from,cptr8 _fname) {
             //从文件加载纹理
             m_vs_texUnit[_chn].m_pTex = mApp->getTexMgr()->getTexture(_fname);
         }else{
+            
         }
     }else if(_stage == 1) {
         m_fs_texUnit[_chn].m_stage_type = _stage;
@@ -136,6 +137,7 @@ void SVMtlCore::setTexture(s32 _chn,s32 _stage,SVINTEX _from,cptr8 _fname) {
             //从文件加载纹理
             m_fs_texUnit[_chn].m_pTex = mApp->getTexMgr()->getTexture(_fname);
         }else{
+            
         }
     }
 }
@@ -211,15 +213,12 @@ s32 SVMtlCore::submitMtl() {
 
 //交换
 void SVMtlCore::swap() {
-    
 }
 
 void SVMtlCore::_submitUniform(SVRendererPtr _render) {
-    
 }
 
 void SVMtlCore::_submitMtl(SVRendererPtr _render) {
-    
 }
 
 void SVMtlCore::setBlendState(s32 _src , s32 _dst){
@@ -344,6 +343,9 @@ void SVMtlCore::fromJSON1(RAPIDJSON_NAMESPACE::Value &_item){
         m_blend_enable = t_value_obj["enable"].GetInt();
     }else{
         //默认blend
+        m_blend_enable = 0;
+        m_blend_src_param = 0;
+        m_blend_dst_param = 0;
     }
     
     //stencil param 融合
@@ -352,16 +354,24 @@ void SVMtlCore::fromJSON1(RAPIDJSON_NAMESPACE::Value &_item){
         m_stencil_enable = t_value_obj["enable"].GetInt();
     }else{
         //默认stencil
+        m_stencil_enable = 0;
+        m_stencil_clear = 0;
+        m_stencil_passMethod = 0;
+        m_stencil_refValue = 0;
+        m_stencil_maskValue = 0;
+        m_stencil_sfail = 0;
+        m_stencil_zfail = 0;
+        m_stencil_zpass = 0;
     }
-    
     //alpha param 融合
     if (_item.HasMember("alpha-param") && _item["alpha-param"].IsObject()) {
         RAPIDJSON_NAMESPACE::Document::Object t_value_obj = _item["alpha-param"].GetObject();
         m_alpha_enable = t_value_obj["enable"].GetInt();
     }else{
         //默认alpha
+        m_alpha_enable = 0;
+        m_alpha_testMethod = 0;
     }
-    
 }
 
 //

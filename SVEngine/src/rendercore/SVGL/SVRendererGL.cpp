@@ -48,7 +48,6 @@ void SVRendererGL::init(s32 _w,s32 _h){
     //创建主纹理
     SVRTargetPtr t_target = createTarget(E_TEX_MAIN,true,true);
     if(t_target) {
-        t_target->setRenderPath();
         mApp->getRenderMgr()->setMainRT(t_target);
     }
 }

@@ -178,8 +178,6 @@ void SVRFboMetal::bind(SVRendererPtr _renderer) {
             m_pass.stencilAttachment.clearStencil = 0;
         }
         m_render_encoder = [t_rm->m_cmdBuffer renderCommandEncoderWithDescriptor:m_pass];
-//        m_compute_encoder = [t_rm->m_cmdBuffer computeCommandEncoder];
-//        m_blit_encoder = [t_rm->m_cmdBuffer blitCommandEncoder];
         t_rm->pushEncoder(m_render_encoder);
     }
 }

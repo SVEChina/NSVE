@@ -31,7 +31,7 @@ namespace sv {
         
         void render(SVRendererPtr _renderer,SVRTargetPtr _target);
         
-        void setValid() { m_valid = true; }
+        void setValid(bool _valid) { m_valid = _valid; }
         
         bool isValid() { return m_valid; }
         

@@ -47,11 +47,19 @@ namespace sv {
         
         SVRTargetPtr share();
         
+        //
         void resize(s32 _width,s32 _height);
         
         //正常渲染
         void render(SVRendererPtr _renderer);
         
+        //推送流序
+        void pushStreamQuene(SV_RSTREAM _rstream);
+        
+        //清理流序
+        void clearStreamQuene();
+        
+        //推送命令
         void pushCommandPre(SVRenderCmdPtr _rcmd);
         
         void pushCommandAfter(SVRenderCmdPtr _rcmd);
@@ -60,6 +68,7 @@ namespace sv {
         
         void clearCommand();
 
+        //绑定资源
         void bindRes(SVRFboPtr _res);
 
         void unbindRes();
@@ -75,9 +84,7 @@ namespace sv {
         void setAutoSize() {
             m_auto = true;
         }
-        
-        void setRenderPath();
-        
+
         void setVPMat(FMat4& _mat) {
             m_vp_mat = _mat;
         }

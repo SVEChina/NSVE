@@ -25,6 +25,7 @@ SVRTarget::SVRTarget(SVInstPtr _app)
     m_stream_pool.resize(E_RSM_MAX);
     for(s32 i=0;i<E_RSM_MAX;i++) {
         m_stream_pool[i] = MakeSharedPtr<SVRenderStream>();
+        m_stream_pool[i]->setValid(false);
     }
     //
     m_stream_pre = MakeSharedPtr<SVRenderStream>();
@@ -47,11 +48,11 @@ SVRTargetPtr SVRTarget::share() {
     return std::dynamic_pointer_cast<SVRTarget>( shareObject() );
 }
 
-void SVRTarget::setRenderPath() {
-    //设置渲染路径的代替接口
-    m_stream_quene.push_back(E_RSM_SOLID);
-    m_stream_pool[E_RSM_SOLID]->setValid();
-}
+//void SVRTarget::setRenderPath() {
+//    //设置渲染路径的代替接口
+//    m_stream_quene.push_back(E_RSM_SOLID);
+//    m_stream_pool[E_RSM_SOLID]->setValid();
+//}
 
 void SVRTarget::resize(s32 _width,s32 _height) {
     if(m_auto) {
@@ -88,6 +89,23 @@ void SVRTarget::render(SVRendererPtr _renderer) {
         }
         _renderer->setCurTarget(nullptr);
     }
+}
+
+//推送流序
+void SVRTarget::pushStreamQuene(SV_RSTREAM _rstream) {
+    if(_rstream>=0 && _rstream<E_RSM_MAX) {
+        m_stream_quene.push_back(_rstream);
+        m_stream_pool[_rstream]->setValid(true);
+    }
+}
+
+//清理流序
+void SVRTarget::clearStreamQuene() {
+    for(s32 i=0;i<E_RSM_MAX;i++) {
+        m_stream_pool[i] = MakeSharedPtr<SVRenderStream>();
+        m_stream_pool[i]->setValid(false);
+    }
+    m_stream_quene.clear();
 }
 
 void SVRTarget::pushCommandPre(SVRenderCmdPtr _rcmd) {
