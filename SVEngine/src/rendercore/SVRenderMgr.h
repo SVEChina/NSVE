@@ -49,7 +49,7 @@ namespace sv {
         
         void pushRCmdDestory(SVRenderCmdPtr _rcmd);
         
-        void pushRCmd(SVRenderCmdPtr _rcmd,SV_RSTREAM_TYPE _rstype);
+        void pushRCmd(SVRenderCmdPtr _rcmd,SV_RSTREAM _rstype);
         
         void addRTarget(SVRTargetPtr _rt,bool _pre);
         

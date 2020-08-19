@@ -84,7 +84,6 @@ void SVGlobalMgr::init() {
     m_arbg_mgr = MakeSharedPtr<SVARBackgroundMgr>(mApp);
     m_arbg_mgr->init();
     SV_LOG_ERROR("sve init m_arbg_mgr end!\n");
-    
 //    //消息系统建立起来
 //    m_pEventMgr = MakeSharedPtr<SVEventMgr>(mApp);
 //    m_pEventMgr->init();
@@ -233,12 +232,17 @@ void SVGlobalMgr::update(f32 dt) {
         m_camera_mgr->update(dt);
         timeTag(false,"camera cost");
     }
-//    m_pLightSys->update(dt);            //灯光系统更新
-//    timeTag(false,"light cost");
     if(m_pSceneMgr) {
         //场景更新(节点系统)
         m_pSceneMgr->update(dt);
         timeTag(false,"scene cost");
+    }
+//    m_pLightSys->update(dt);            //灯光系统更新
+//    timeTag(false,"light cost");
+    if(m_arbg_mgr) {
+        //AR背景
+        m_arbg_mgr->update(dt);
+        timeTag(false,"arbg cost");
     }
 //    m_pDeformSys->update(dt);           //变形更新
 //    timeTag(false,"deform cost");

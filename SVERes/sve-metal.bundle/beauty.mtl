@@ -2,9 +2,7 @@
     "version" : "1.0",
     "name" : "beauty",
     "shader" : "beauty",
-    "chn0" : {
-        "from" : "file",
-        "path" : "svres/sve.png",
-        "stage": "fs"
-    }
+    "textures" :[
+        { "chn": 0 , "from" : "file", "path" : "svres/sve.png", "stage": "fs" }
+    ]
 }

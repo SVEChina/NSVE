@@ -2,11 +2,9 @@
     "version" : "1.0",
     "name" : "back",
     "shader" : "back",
-    "chn0" : {
-        "from" : "file",
-        "path" : "svres/sve.png",
-        "stage": "fs"
-    },
+    "textures" :[
+        { "chn": 0 , "from" : "file", "path" : "svres/sve.png", "stage": "fs" }
+    ],
     "blend-param" : {
         "enable" : 0
     },

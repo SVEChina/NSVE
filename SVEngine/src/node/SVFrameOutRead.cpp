@@ -109,7 +109,7 @@ void SVFrameOutRead::update(f32 _dt){
     SVRendererPtr t_renderer = mApp->getRenderer();
     if(m_pMtl){
         //m_pMtl->setModelMatrix(m_absolutMat);
-        m_pMtl->setTexture(0,E_TEX_MAIN);    //那第一张纹理
+        m_pMtl->setTexture(0,1,E_TEX_MAIN);    //那第一张纹理
         m_pMtl->setBlendEnable(false);
         m_pMtl->update(_dt);
     }

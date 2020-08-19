@@ -149,7 +149,7 @@ void SVSpriteNode::update(f32 _dt) {
 
 void SVSpriteNode::render() {
     if ( m_visible && m_pMesh){
-        SVDispatch::dispatchMeshDraw(mApp, m_pMesh, m_mtl_name.c_str(),m_surface);
+        SVDispatch::dispatchMeshDraw(mApp, m_pMesh, m_mtl_name.c_str(),m_surface,E_RSM_SOLID);
     }
     SVNode::render();
 }

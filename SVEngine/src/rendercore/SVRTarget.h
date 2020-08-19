@@ -56,7 +56,7 @@ namespace sv {
         
         void pushCommandAfter(SVRenderCmdPtr _rcmd);
     
-        void pushCommand(SVRenderCmdPtr _rcmd,SV_RSTREAM_TYPE _rstype);
+        void pushCommand(SVRenderCmdPtr _rcmd,SV_RSTREAM _rstype);
         
         void clearCommand();
 
@@ -91,7 +91,7 @@ namespace sv {
         }
 
     protected:
-        std::vector<SV_RSTREAM_TYPE> m_stream_quene;    //流序，流顺的设定就是渲染路径的设定
+        std::vector<SV_RSTREAM> m_stream_quene;    //流序，流顺的设定就是渲染路径的设定
         
         std::vector<SVRenderStreamPtr> m_stream_pool;
         

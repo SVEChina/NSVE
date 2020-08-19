@@ -86,8 +86,9 @@ namespace sv {
     };
 
     //sv渲染流类型
-    enum SV_RSTREAM_TYPE {
+    enum SV_RSTREAM {
         E_RSM_NOR = 0,          //普通流
+        E_RSM_SKY,              //天空-背景
         E_RSM_SOLID,
         E_RSM_TRANSLATE,
         E_RSM_PRE,              //前向流
@@ -95,7 +96,7 @@ namespace sv {
         E_RSM_DEBUG,            //调试流
         E_RSM_CREATE_SHADOW,    //产生阴影流
         E_RSM_RECEIVE_SHADOW,   //接收阴影流
-        E_RSM_PARTICLE,          //粒子流
+        E_RSM_PARTICLE,         //粒子流
         E_RSM_MAX
     };
 

@@ -74,11 +74,11 @@ namespace sv {
         
         void setTexture(s32 _chn,s32 _stage,SVINTEX _from,cptr8 _name);
 
-        void setTexture(s32 _chn,cptr8 _fname);
+        void setTexture(s32 _chn,s32 _stage,cptr8 _fname);
         
-        void setTexture(s32 _chn,SVTexturePtr _texture);
+        void setTexture(s32 _chn,s32 _stage,SVTexturePtr _texture);
                
-        void setTexture(s32 _chn,sv::SVINTEX _from);
+        void setTexture(s32 _chn,s32 _stage,sv::SVINTEX _from);
         
         SVShaderPtr getShader() { return m_shader_obj; }
         
@@ -119,7 +119,8 @@ namespace sv {
         s32 m_alpha_enable;         //开启alpha测试
         s32 m_alpha_testMethod;     //alpha测试方法(GL_NEVER,GL_ALWAYS,GL_LESS,GL_LEQUAL,GL_GREATER,GL_GEQUAL,GL_NOTEQUAL)
         //纹理参数
-        TexUnit m_texUnit[MAX_TEXUNIT];
+        TexUnit m_vs_texUnit[MAX_TEXUNIT];
+        TexUnit m_fs_texUnit[MAX_TEXUNIT];
         //
         SVShaderPtr m_shader_obj;   //pointer
         //

@@ -21,6 +21,7 @@
 #include "../basesys/SVBasicSys.h"
 #include "../basesys/SVConfig.h"
 #include "../basesys/SVCameraMgr.h"
+#include "../basesys/SVARBackgroundMgr.h"
 #include "../operate/SVOpBase.h"
 #include "../operate/SVOpCreate.h"
 #include "../operate/SVOpThread.h"
@@ -137,6 +138,12 @@ void SVInst::setRenderPath(s32 _rpath) {
     if(!m_renderer){
         return;
     }
+    //常见AR阶段
+    if(m_pGlobalMgr->m_arbg_mgr) {
+        m_pGlobalMgr->m_arbg_mgr->enable();
+    }
+
+    //创建正常的阶段
     //创建一堆东西
     if(_rpath == 0) {
         //普通渲染
@@ -281,8 +288,7 @@ SVDeformMgrPtr SVInst::getDeformMgr(){
 SVComDataPtr SVInst::getComData(){
     if(!m_pGlobalMgr)
         return nullptr;
-    return m_pGlobalMgr->m_commonData
-;
+    return m_pGlobalMgr->m_commonData;
 }
 
 SVModelMgrPtr SVInst::getModelMgr(){

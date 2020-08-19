@@ -102,7 +102,7 @@ void SVRTarget::pushCommandAfter(SVRenderCmdPtr _rcmd) {
     }
 }
 
-void SVRTarget::pushCommand(SVRenderCmdPtr _rcmd,SV_RSTREAM_TYPE _rstype) {
+void SVRTarget::pushCommand(SVRenderCmdPtr _rcmd,SV_RSTREAM _rstype) {
     //判断restype是否有效
     if( m_stream_pool[_rstype] && m_stream_pool[_rstype]->isValid() ) {
         m_stream_pool[_rstype]->addRenderCmd(_rcmd);

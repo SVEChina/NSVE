@@ -150,7 +150,7 @@ void SVRenderMgr::pushRCmdDestory(SVRenderCmdPtr _rcmd){
     m_logicLock->unlock();
 }
 
-void SVRenderMgr::pushRCmd(SVRenderCmdPtr _rcmd,SV_RSTREAM_TYPE _rstype) {
+void SVRenderMgr::pushRCmd(SVRenderCmdPtr _rcmd,SV_RSTREAM _rstype) {
     if(m_mainRT) {
         //这里要传渲染类别啊
         m_mainRT->pushCommand(_rcmd,_rstype);

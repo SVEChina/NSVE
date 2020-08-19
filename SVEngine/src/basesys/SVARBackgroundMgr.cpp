@@ -8,12 +8,15 @@
 #include "SVARBackgroundMgr.h"
 #include "../app/SVInst.h"
 #include "../app/SVDispatch.h"
+#include "../basesys/SVComData.h"
 #include "../work/SVTdCore.h"
 #include "../rendercore/SVRenderMgr.h"
 #include "../rendercore/SVRenderer.h"
 #include "../rendercore/SVRTarget.h"
+#include "../rendercore/SVRenderMesh.h"
 #include "../mtl/SVTexMgr.h"
 #include "../mtl/SVTexture.h"
+#include "../mtl/SVSurface.h"
 
 using namespace sv;
 
@@ -47,13 +50,16 @@ void SVARBackgroundMgr::destroy() {
 bool SVARBackgroundMgr::enable() {
     SVRendererPtr t_renderer = mApp->getRenderer();
     if(t_renderer) {
-        m_ar_target = t_renderer->createTarget(E_TEX_CAMERA,false,false);
-        //设置渲染路径
-        //t_target->setRenderPath();
-        //推送到前向渲染
-        mApp->getRenderMgr()->addRTarget(m_ar_target,true);
-        m_enable = true;
-        return true;
+        if(!m_enable) {
+            m_ar_target = t_renderer->createTarget(E_TEX_CAMERA,false,false);
+            //设置渲染路径
+            //t_target->setRenderPath();
+            //推送到前向渲染
+            mApp->getRenderMgr()->addRTarget(m_ar_target,true);
+            m_enable = true;
+            return true;
+        }
+        return false;
     }
     return false;
 }
@@ -72,6 +78,16 @@ void SVARBackgroundMgr::disable() {
 void SVARBackgroundMgr::update(f32 dt) {
     if(m_ar_target) {
         //将AR-相机图片渲染到主目标上
+        //将相机图片绘制到主RT上当作背景
+        
+        //将相机的后处理推送到ar_target的后处理中2
+        SVTexturePtr t_tex = mApp->getTexMgr()->getInTexture(E_TEX_CAMERA);
+        if(t_tex){
+            SVSurfacePtr t_surface = MakeSharedPtr<SVSurface>();
+            t_surface->setTexture(0,t_tex,1);
+            SVDispatch::dispatchMeshDraw(mApp, mApp->getComData()->screenMesh(), "back", t_surface,E_RSM_SKY);
+            t_surface = nullptr;
+        }
     }
 }
 
