@@ -77,13 +77,13 @@ void SVARBackgroundMgr::disable() {
 }
 
 //
-void SVARBackgroundMgr::update(f32 dt) {
+void SVARBackgroundMgr::update(f32 _dt) {
     if(m_ar_target) {
         //将AR-相机图片渲染到主目标上
         if(m_method == 1 ) {
             SVMtlCorePtr t_mtl = mApp->getMtlLib()->getMtl("screenCamera");
             if(t_mtl) {
-                t_mtl->update(dt);
+                t_mtl->update(_dt);
             }
             //直接绘制图片
             SVSurfacePtr t_surface = MakeSharedPtr<SVSurface>();
@@ -102,7 +102,31 @@ void SVARBackgroundMgr::update(f32 dt) {
             //外部渲染
         }
         //各种pass
-        
+        _renderCameraPass(_dt);
+        //渲染相机
+        _renderCameraImg(_dt);
+    }
+}
+
+void SVARBackgroundMgr::_renderCameraPass(f32 _dt) {
+    
+}
+
+void SVARBackgroundMgr::_renderCameraImg(f32 _dt) {
+    //直接绘制图片
+    SVTexturePtr t_cam_tex = mApp->getTexMgr()->getInTexture(E_TEX_CAMERA);
+    if(t_cam_tex) {
+        SVMtlCorePtr t_mtl = mApp->getMtlLib()->getMtl("skycamera");
+        if(t_mtl) {
+            t_mtl->update(_dt);
+        }
+        SVSurfacePtr t_surface = MakeSharedPtr<SVSurface>();
+        t_surface->setTexture(0,t_cam_tex,1);
+        SVDispatch::dispatchMeshDraw(mApp,
+                                     mApp->getComData()->screenMesh(),
+                                     "skycamera",
+                                     t_surface,
+                                     E_RSM_SKY);
     }
 }
 

@@ -43,10 +43,10 @@ void SVCameraMgr::destroy() {
 }
 
 //更新
-void SVCameraMgr::update(f32 dt) {
+void SVCameraMgr::update(f32 _dt) {
      //主相机更新
     if(m_main_camera){
-        m_main_camera->update(dt);
+        m_main_camera->update(_dt);
         SVRTargetPtr t_main_rt = mApp->getRenderMgr()->getMainRT();
         if( t_main_rt ) {
             FMat4 t_mat = m_main_camera->viewMat();
@@ -58,6 +58,11 @@ void SVCameraMgr::update(f32 dt) {
         }
     }
     //其他相机更新
+    CAMERAPOOL::iterator it = m_camera_pool.begin();
+    while (it!=m_camera_pool.end()) {
+        it->second->update(_dt);
+        it++;
+    }
 }
 
 SVCameraNodePtr SVCameraMgr::createCamera(s32 _cameraID) {
@@ -111,7 +116,6 @@ void SVCameraMgr::unbindCamera(SVINTEX _targetID) {
 SVCameraNodePtr SVCameraMgr::getMainCamera(){
     return m_main_camera;
 }
-
 
 void SVCameraMgr::resize(f32 _w,f32 _h) {
     if(m_main_camera){

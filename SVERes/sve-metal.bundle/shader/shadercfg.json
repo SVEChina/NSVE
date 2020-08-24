@@ -4,6 +4,7 @@
         "shader/back.dsp",
         "shader/screen.dsp",
         "shader/screenCamera.dsp",
+        "shader/skycamera.dsp",
         "shader/sprite.dsp"
     ]
 }

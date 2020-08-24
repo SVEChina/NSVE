@@ -28,7 +28,7 @@ namespace sv {
         
         void destroy();
 
-        void update(f32 dt);
+        void update(f32 _dt);
         
         bool enable();
         
@@ -49,11 +49,15 @@ namespace sv {
         void setInputCameraTex(s32 _texid);
         
     protected:
-        SVRTargetPtr m_ar_target;
+        void _renderCameraPass(f32 _dt);
+        
+        void _renderCameraImg(f32 _dt);
         
         bool m_enable;
         
         s32 m_method;   //相机纹理输入方式
+        
+        SVRTargetPtr m_ar_target;
         
         SVTexturePtr m_tex0;
         SVTexturePtr m_tex1;

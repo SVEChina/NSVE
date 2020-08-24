@@ -24,7 +24,7 @@ namespace sv {
         
         void destroy();
 
-        void update(f32 dt);
+        void update(f32 _dt);
         
         void resize(f32 _w,f32 _h);
         

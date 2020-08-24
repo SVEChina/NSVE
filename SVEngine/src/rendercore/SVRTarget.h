@@ -80,7 +80,7 @@ namespace sv {
         void clearCommand();
         
         //绑定相机
-        void bindCamera(SVCameraNodePtr _camera) { m_camera = _camera; }
+        void bindCamera(SVCameraNodePtr _camera);
 
         //绑定资源
         void bindRes(SVRFboPtr _res);

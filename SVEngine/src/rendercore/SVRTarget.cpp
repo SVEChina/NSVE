@@ -9,6 +9,7 @@
 #include "SVRFbo.h"
 #include "../app/SVInst.h"
 #include "../app/SVDispatch.h"
+#include "../basesys/SVCameraNode.h"
 #include "SVRenderMgr.h"
 #include "SVRenderStream.h"
 #include "SVRenderer.h"
@@ -163,6 +164,13 @@ void SVRTarget::clearCommand() {
         if(m_stream_pool[t_s_id]) {
             m_stream_pool[t_s_id]->clearRenderCmd();
         }
+    }
+}
+
+void SVRTarget::bindCamera(SVCameraNodePtr _camera) {
+    m_camera = _camera;
+    if(m_camera) {
+        m_camera->setSize(m_target_dsp.m_width, m_target_dsp.m_height);
     }
 }
 
