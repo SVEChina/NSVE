@@ -16,6 +16,7 @@ extern "C" {
 
     namespace sv{
     
+        //c++对象
         class SVSpineImp {
         public:
             SVSpineImp(SVInstPtr _inst);
@@ -28,7 +29,7 @@ extern "C" {
             SVInstPtr m_inst;
         };
     
-        //
+        //page实现
         class SVSpinePageImp {
         public:
             SVSpinePageImp() {

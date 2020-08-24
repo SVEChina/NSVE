@@ -60,13 +60,11 @@ SpineMeshData::~SpineMeshData(){
 SVSpinePtr
 SVSpine::createSpine(SVInstPtr _app, cptr8 skefname, cptr8 atlasfname,f32 scale, bool enableMipMap) {
     //
-    SVSpineImp* t_imp = new SVSpineImp(_app);
-    //
     SVString t_atlas_fullname = _app->getFileMgr()->getFileFullName(atlasfname);
-    //
+    SVSpineImp* t_imp = new SVSpineImp(_app);
     spAtlas *_atlas = spAtlas_createFromFile(t_atlas_fullname,t_imp);
     if (!_atlas) {
-        delete t_imp;
+        delete t_imp;   //这个对象在spine内部是不会释放的
         return nullptr;
     }
     //骨架json
@@ -117,6 +115,10 @@ SVSpine::~SVSpine() {
     m_spineDataPool.destroy();
     //
     if (m_pAtlas) {
+        if(m_pAtlas->rendererObject) {
+            delete m_pAtlas->rendererObject;
+            m_pAtlas->rendererObject = nullptr;
+        }
         spAtlas_dispose(m_pAtlas);
         m_pAtlas = nullptr;
     }
@@ -401,13 +403,19 @@ spTrackEntry *SVSpine::getCurrentForTrack(s32 trackIndex) {
 //
 SVTexturePtr SVSpine::_getTextureForRegion(spRegionAttachment *_attachment) {
     spAtlasRegion* t_region = ((spAtlasRegion *) _attachment->rendererObject);
-    //(SVSpineImp *) t_region->page->rendererObject
+    SVSpinePageImp* t_page_imp = (SVSpinePageImp*)(t_region->page->rendererObject);
+    if(t_page_imp) {
+        return t_page_imp->m_tex;
+    }
     return nullptr;
 }
 
 SVTexturePtr SVSpine::_getTextureForMesh(spMeshAttachment *_attachment) {
     spAtlasRegion* t_region = ((spAtlasRegion *) _attachment->rendererObject);
-    //return ((SVSpineImp *)((spAtlasRegion *) _attachment->rendererObject)->page->pRenderObj)->m_texture;
+    SVSpinePageImp* t_page_imp = (SVSpinePageImp*)(t_region->page->rendererObject);
+    if(t_page_imp) {
+        return t_page_imp->m_tex;
+    }
     return nullptr;
 }
 
