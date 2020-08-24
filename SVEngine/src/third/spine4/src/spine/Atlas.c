@@ -228,7 +228,6 @@ spAtlas* spAtlas_create(const char* begin, int length, const char* dir, void* re
 					page->vWrap = SP_ATLAS_REPEAT;
 				}
 			}
-
 			_spAtlasPage_createTexture(page, path);
 			FREE(path);
 		} else {

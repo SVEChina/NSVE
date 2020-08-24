@@ -133,18 +133,7 @@ bool SVFileMgr::loadFileContent(SVDataChunk *_datachunk,cptr8 _fname) {    if (!
     SVString t_fullname = getFileFullName(_fname);
     SV_LOG_ERROR("SVFileMgr::loadFileContent file name %s\n", t_fullname.c_str());
     if ( !t_fullname.empty() ) {
-        FILE *fp = fopen(t_fullname.c_str(), "r");
-        if (fp) {
-            fseek(fp, 0, SEEK_END);
-            s64 t_file_len = ftell(fp);
-            rewind(fp);
-            void* t_buf = malloc((s32)t_file_len);
-            fread(t_buf, (s32)t_file_len, 1, fp);
-            _datachunk->push(t_buf, (s32)t_file_len);
-            free(t_buf);
-            fclose(fp);
-            return true;
-        }
+        return s_loadFileContent(_datachunk,t_fullname.c_str());
     }
     return false;
 }
@@ -153,19 +142,8 @@ bool SVFileMgr::loadFileContentStr(SVDataChunk *_datachunk,cptr8 _fname) {
     if (!_datachunk)
         return false;
     SVString t_fullname = getFileFullName(_fname);
-    if (strcmp(t_fullname.c_str(), "") != 0) {
-        //SV_LOG_ERROR("SVFileMgr::getFileFullName %s\n", t_fullname.c_str());
-        FILE *fp = fopen(t_fullname.c_str(), "r");
-        fseek(fp, 0, SEEK_END);
-        s64 t_file_len = ftell(fp);
-        rewind(fp);
-        c8* t_buf = (c8*)(malloc(t_file_len+1));
-        fread(t_buf, t_file_len, 1, fp);
-        t_buf[t_file_len] = '\0';
-        _datachunk->push(t_buf, s32(t_file_len+1));
-        free(t_buf);
-        fclose(fp);
-        return true;
+    if (!t_fullname.empty()) {
+        return s_loadFileContentStr(_datachunk,t_fullname.c_str());
     }
     return false;
 }
@@ -185,4 +163,37 @@ SVString SVFileMgr::getFileFullName(cptr8 _fname) {
     }
     m_fileLock->unlock();
     return tFileName;
+}
+
+bool SVFileMgr::s_loadFileContent(SVDataChunk *_datachunk, cptr8 _fullname) {
+    FILE *fp = fopen(_fullname, "r");
+    if (fp) {
+        fseek(fp, 0, SEEK_END);
+        s64 t_file_len = ftell(fp);
+        rewind(fp);
+        void* t_buf = malloc((s32)t_file_len);
+        fread(t_buf, (s32)t_file_len, 1, fp);
+        _datachunk->push(t_buf, (s32)t_file_len);
+        free(t_buf);
+        fclose(fp);
+        return true;
+    }
+    return false;
+}
+
+bool SVFileMgr::s_loadFileContentStr(SVDataChunk *_datachunk, cptr8 _fullname) {
+    if (strcmp(_fullname, "") != 0) {
+        FILE *fp = fopen(_fullname, "r");
+        fseek(fp, 0, SEEK_END);
+        s64 t_file_len = ftell(fp);
+        rewind(fp);
+        c8* t_buf = (c8*)(malloc(t_file_len+1));
+        fread(t_buf, t_file_len, 1, fp);
+        t_buf[t_file_len] = '\0';
+        _datachunk->push(t_buf, s32(t_file_len+1));
+        free(t_buf);
+        fclose(fp);
+        return true;
+    }
+    return false;
 }

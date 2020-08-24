@@ -8,6 +8,7 @@
 #include "SVSpine.h"
 #include "SVVertDef.h"
 #include "../app/SVGlobalMgr.h"
+#include "../file/SVFileMgr.h"
 #include "../rendercore/SVRenderMgr.h"
 #include "../rendercore/SVRenderCmd.h"
 #include "../rendercore/SVRenderMesh.h"
@@ -24,7 +25,7 @@
 #include <spine/Bone.h>
 #include <spine/Slot.h>
 #include <spine/Attachment.h>
-#include "SVSpineObjc.h"
+#include "SVSpineImp.h"
 
 using namespace sv;
 
@@ -58,18 +59,28 @@ SpineMeshData::~SpineMeshData(){
 //
 SVSpinePtr
 SVSpine::createSpine(SVInstPtr _app, cptr8 skefname, cptr8 atlasfname,f32 scale, bool enableMipMap) {
-    spAtlas *_atlas = spAtlas_createFromFile(_app.get(), atlasfname, 0, enableMipMap);
-    if (!_atlas)
+    //
+    SVSpineImp* t_imp = new SVSpineImp(_app);
+    //
+    SVString t_atlas_fullname = _app->getFileMgr()->getFileFullName(atlasfname);
+    //
+    spAtlas *_atlas = spAtlas_createFromFile(t_atlas_fullname,t_imp);
+    if (!_atlas) {
+        delete t_imp;
         return nullptr;
+    }
     //骨架json
     spSkeletonJson *json = spSkeletonJson_create(_atlas);
     json->scale = scale;
+    //
+    SVString t_ske_fullname = _app->getFileMgr()->getFileFullName(skefname);
     //动画数据
-    spSkeletonData *skeletonData = spSkeletonJson_readSkeletonDataFile(_app.get(), json, skefname);
+    spSkeletonData *skeletonData = spSkeletonJson_readSkeletonDataFile(json, t_ske_fullname.c_str());
     spSkeletonJson_dispose(json);
-    if (!skeletonData)
+    if (!skeletonData) {
         return nullptr;
-    SVSpinePtr t_spine = MakeSharedPtr<SVSpine>(_app);//new SVSpine(_app);
+    }
+    SVSpinePtr t_spine = MakeSharedPtr<SVSpine>(_app);
     t_spine->init(skeletonData, _atlas);
     SVString t_json_file = skefname;
     s32 t_pos = t_json_file.rfind('/');
@@ -387,15 +398,17 @@ spTrackEntry *SVSpine::getCurrentForTrack(s32 trackIndex) {
     return spAnimationState_getCurrent(m_pSpineAniState, trackIndex);
 }
 
-//////
+//
 SVTexturePtr SVSpine::_getTextureForRegion(spRegionAttachment *_attachment) {
-    
-    return ((SVSpineObjc *)((spAtlasRegion *) _attachment->rendererObject)->page->pRenderObj)->m_texture;
+    spAtlasRegion* t_region = ((spAtlasRegion *) _attachment->rendererObject);
+    //(SVSpineImp *) t_region->page->rendererObject
+    return nullptr;
 }
 
 SVTexturePtr SVSpine::_getTextureForMesh(spMeshAttachment *_attachment) {
-   
-    return ((SVSpineObjc *)((spAtlasRegion *) _attachment->rendererObject)->page->pRenderObj)->m_texture;
+    spAtlasRegion* t_region = ((spAtlasRegion *) _attachment->rendererObject);
+    //return ((SVSpineImp *)((spAtlasRegion *) _attachment->rendererObject)->page->pRenderObj)->m_texture;
+    return nullptr;
 }
 
 //render spine
