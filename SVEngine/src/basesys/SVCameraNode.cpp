@@ -15,6 +15,7 @@ using namespace sv;
 //
 SVCameraNode::SVCameraNode(SVInstPtr _app)
 : SVEventProc(_app) {
+    m_active = false;
     m_dirty = true;
     m_is_ortho = false;
     m_resLock = MakeSharedPtr<SVLockSpin>();
@@ -52,6 +53,9 @@ void SVCameraNode::destroy() {
 
 //
 void SVCameraNode::update(f32 _dt) {
+    if(!m_active){
+        return ;
+    }
     //移除关联fbo
     m_resLock->lock();
     m_dirty = true;
@@ -63,7 +67,7 @@ void SVCameraNode::update(f32 _dt) {
             m_mat_v = transpose(m_mat_v);
         }
         //
-        m_mat_vp =m_mat_p*m_mat_v;
+        m_mat_vp = m_mat_v*m_mat_p;
     }
     m_resLock->unlock();
 }
@@ -141,18 +145,18 @@ void SVCameraNode::setZ(f32 _near, f32 _far) {
     m_resLock->unlock();
 }
 
-FVec3& SVCameraNode::getPosition() {
+FVec3 SVCameraNode::getPosition() {
     return m_pos;
 }
 
-FMat4& SVCameraNode::projectMat(){
+FMat4 SVCameraNode::projectMat(){
     return m_mat_p;
 }
 
-FMat4& SVCameraNode::viewMat(){
+FMat4 SVCameraNode::viewMat(){
     return m_mat_v;
 }
 
-FMat4& SVCameraNode::vpMat(){
+FMat4 SVCameraNode::vpMat(){
     return m_mat_vp;
 }

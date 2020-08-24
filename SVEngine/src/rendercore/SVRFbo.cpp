@@ -19,6 +19,9 @@ SVRFbo::SVRFbo(SVInstPtr _app)
 ,m_target_num(1)
 ,m_use_depth(false)
 ,m_use_stencil(false){
+    m_color_value.setColorARGB(0xff000000);
+    m_depth_value = 1.0f;
+    m_stencil_value = 0;
 }
 
 SVRFbo:: ~SVRFbo(){

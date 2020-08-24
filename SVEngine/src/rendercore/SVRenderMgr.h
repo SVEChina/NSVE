@@ -53,9 +53,7 @@ namespace sv {
         
         void addRTarget(SVRTargetPtr _rt,bool _pre);
         
-        void delRTarget(SVRTargetPtr _rt);
-        
-        SVRTargetPtr getRTarget(cptr8 _name);
+        void removeRTarget(SVRTargetPtr _rt);
 
     protected:
         void _sort();

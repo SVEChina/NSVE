@@ -9,6 +9,7 @@
 #define SV_RFBO_H
 
 #include "SVRRes.h"
+#include "../base/SVColor.h"
 
 namespace sv {
     
@@ -27,6 +28,12 @@ namespace sv {
         virtual void bind(SVRendererPtr _renderer) {}
 
         virtual void unbind(SVRendererPtr _renderer) {}
+        
+        sv_inline void setClearColor(u32 _argb){ m_color_value.setColorARGB(_argb); }
+        
+        sv_inline void setClearDepth(f32 _depth){ m_depth_value = _depth; }
+        
+        sv_inline void setClearStencil(s32 _stencil){ m_stencil_value = _stencil; }
 
     protected:
         SVLockPtr m_texLock;
@@ -35,6 +42,10 @@ namespace sv {
         s32 m_target_num;
         bool m_use_depth;
         bool m_use_stencil;
+        //值
+        SVColor m_color_value;
+        f32 m_depth_value;
+        s32 m_stencil_value;
     };
         
 }//!namespace sv

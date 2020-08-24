@@ -10,7 +10,9 @@
 
 #include "../base/SVGBase.h"
 #include "../base/SVMat4.h"
+#include "../base/SVColor.h"
 #include "SVRenderDeclare.h"
+#include "SVNodeDeclare.h"
 #include <vector>
 
 namespace sv {
@@ -41,11 +43,20 @@ namespace sv {
     //
     class SVRTarget : public SVGBaseEx {
     public:
-        SVRTarget(SVInstPtr _app);
+        SVRTarget(SVInstPtr _app,s32 _id);
 
         ~SVRTarget();
         
         SVRTargetPtr share();
+        
+        //
+        void setClearColor(f32 _r,f32 _g,f32 _b,f32 _a);
+        
+        //
+        void setDepth(f32 _value) ;
+        
+        //
+        void setStencil(s32 _value) ;
         
         //
         void resize(s32 _width,s32 _height);
@@ -67,6 +78,9 @@ namespace sv {
         void pushCommand(SVRenderCmdPtr _rcmd,SV_RSTREAM _rstype);
         
         void clearCommand();
+        
+        //绑定相机
+        void bindCamera(SVCameraNodePtr _camera) { m_camera = _camera; }
 
         //绑定资源
         void bindRes(SVRFboPtr _res);
@@ -98,16 +112,25 @@ namespace sv {
         }
 
     protected:
-        std::vector<SV_RSTREAM> m_stream_quene;    //流序，流顺的设定就是渲染路径的设定
+        //
+        s32 m_targetID;
         
-        std::vector<SVRenderStreamPtr> m_stream_pool;
+        //
+        s32 m_cmdNum;
         
-        SVRenderStreamPtr m_stream_pre;
+        //颜色
+        SVColor m_color;
         
-        SVRenderStreamPtr m_stream_after;
+        //深度值
+        f32 m_depth_value;
         
-        SVRFboPtr m_fbo;
+        //模版值
+        s32 m_stencil_value;
         
+        //绑定的相机
+        SVCameraNodePtr m_camera;
+        
+        //
         SVTargetDsp m_target_dsp;
         
         //同步大小
@@ -116,8 +139,17 @@ namespace sv {
         //是否开启输出
         bool m_output;
         
+        SVRFboPtr m_fbo;
+        
+        SVRenderStreamPtr m_stream_pre;
+         
+        SVRenderStreamPtr m_stream_after;
+        
         //
-        s32 m_cmdNum;
+        std::vector<SV_RSTREAM> m_stream_quene;    //流序，流顺的设定就是渲染路径的设定
+        
+        //
+        std::vector<SVRenderStreamPtr> m_stream_pool;
         
     public:
         FMat4 m_v_mat;

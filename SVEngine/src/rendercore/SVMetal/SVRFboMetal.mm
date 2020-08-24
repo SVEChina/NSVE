@@ -135,11 +135,6 @@ void SVRFboMetal::resize(s32 _width,s32 _height,SVRendererPtr _renderer) {
     if(m_width!=_width || m_height!=_height) {
         m_width = _width;
         m_height = _height;
-//        //创建新的纹理
-//        SVRendererMetalPtr t_rm = std::dynamic_pointer_cast<SVRendererMetal>(_renderer);
-//        SVRTargetPtr t_target = std::dynamic_pointer_cast<SVRTarget>(m_logic_obj);
-//        SVTargetDsp* t_dsp = t_target->getTargetDsp();
-        
     }//width height
 }
 
@@ -155,12 +150,18 @@ void SVRFboMetal::bind(SVRendererPtr _renderer) {
                 m_pass.colorAttachments[i].texture = t_metal_tex->getInner();
                 m_pass.colorAttachments[i].loadAction = MTLLoadActionClear;
                 m_pass.colorAttachments[i].storeAction = MTLStoreActionDontCare;
-                m_pass.colorAttachments[i].clearColor = MTLClearColorMake(1, 0, 0, 1);
+                m_pass.colorAttachments[i].clearColor = MTLClearColorMake(m_color_value.r,
+                                                                          m_color_value.g,
+                                                                          m_color_value.b,
+                                                                          m_color_value.a);
             } else {
                 m_pass.colorAttachments[i].texture = nullptr;
                 m_pass.colorAttachments[i].loadAction = MTLLoadActionClear;
                 m_pass.colorAttachments[i].storeAction = MTLStoreActionDontCare;
-                m_pass.colorAttachments[i].clearColor = MTLClearColorMake(1, 0, 0, 1);
+                m_pass.colorAttachments[i].clearColor = MTLClearColorMake(m_color_value.r,
+                                                                          m_color_value.g,
+                                                                          m_color_value.b,
+                                                                          m_color_value.a);
             }
         }
         //支持深度
@@ -168,16 +169,24 @@ void SVRFboMetal::bind(SVRendererPtr _renderer) {
             m_pass.depthAttachment.texture = m_depth_tex;
             m_pass.depthAttachment.loadAction = MTLLoadActionClear;
             m_pass.depthAttachment.storeAction = MTLStoreActionDontCare;
-            m_pass.depthAttachment.clearDepth = 1.0;
+            m_pass.depthAttachment.clearDepth = m_depth_value;
         }
         //支持模版
         if(m_stencil_tex) {
             m_pass.stencilAttachment.texture = m_stencil_tex;
             m_pass.stencilAttachment.loadAction = MTLLoadActionClear;
             m_pass.stencilAttachment.storeAction = MTLStoreActionDontCare;
-            m_pass.stencilAttachment.clearStencil = 0;
+            m_pass.stencilAttachment.clearStencil = m_stencil_value;
         }
         m_render_encoder = [t_rm->m_cmdBuffer renderCommandEncoderWithDescriptor:m_pass];
+        MTLViewport t_vp;
+        t_vp.originX = 0.0;
+        t_vp.originY = 0.0;
+        t_vp.width = m_width;
+        t_vp.height = m_height;
+        t_vp.znear = 1.0;
+        t_vp.zfar = 10000.0;
+        [m_render_encoder setViewport:t_vp];
         t_rm->pushEncoder(m_render_encoder);
     }
 }

@@ -14,9 +14,12 @@
 #include "../rendercore/SVRenderer.h"
 #include "../rendercore/SVRTarget.h"
 #include "../rendercore/SVRenderMesh.h"
+#include "../rendercore/SVRenderCmd.h"
 #include "../mtl/SVTexMgr.h"
 #include "../mtl/SVTexture.h"
 #include "../mtl/SVSurface.h"
+#include "../mtl/SVMtlLib.h"
+#include "../mtl/SVMtlCore.h"
 
 using namespace sv;
 
@@ -52,6 +55,7 @@ bool SVARBackgroundMgr::enable() {
     if(t_renderer) {
         if(!m_enable) {
             m_ar_target = t_renderer->createTarget(E_TEX_CAMERA,false,false);
+            m_ar_target->pushStreamQuene(E_RSM_NOR);    //推送NOR流
             //推送到前向渲染
             mApp->getRenderMgr()->addRTarget(m_ar_target,true);
             m_enable = true;
@@ -76,16 +80,29 @@ void SVARBackgroundMgr::disable() {
 void SVARBackgroundMgr::update(f32 dt) {
     if(m_ar_target) {
         //将AR-相机图片渲染到主目标上
-        //将相机图片绘制到主RT上当作背景
-        
-        //将相机的后处理推送到ar_target的后处理中2
-        SVTexturePtr t_tex = mApp->getTexMgr()->getInTexture(E_TEX_CAMERA);
-        if(t_tex){
+        if(m_method == 1 ) {
+            SVMtlCorePtr t_mtl = mApp->getMtlLib()->getMtl("screenCamera");
+            if(t_mtl) {
+                t_mtl->update(dt);
+            }
+            //直接绘制图片
             SVSurfacePtr t_surface = MakeSharedPtr<SVSurface>();
-            t_surface->setTexture(0,t_tex,1);
-            //SVDispatch::dispatchMeshDraw(mApp, mApp->getComData()->screenMesh(), "back", t_surface,E_RSM_SKY);
+            t_surface->setTexture(0,m_tex0,1);
+            SVDispatch::dispatchMeshDraw(mApp,
+                                         mApp->getComData()->screenMesh(),
+                                         "screenCamera",
+                                         t_surface,
+                                         m_ar_target,
+                                         E_RSM_NOR);
             t_surface = nullptr;
+        }else if(m_method == 2 ) {
+            //格式转换
+            
+        }else if(m_method == 3 ) {
+            //外部渲染
         }
+        //各种pass
+        
     }
 }
 

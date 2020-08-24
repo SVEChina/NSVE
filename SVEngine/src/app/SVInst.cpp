@@ -141,6 +141,7 @@ void SVInst::setRenderPath(s32 _rpath) {
     //常见AR阶段
     if(m_pGlobalMgr->m_arbg_mgr) {
         m_pGlobalMgr->m_arbg_mgr->enable();
+        m_pGlobalMgr->m_arbg_mgr->setInputCameraTex("svres/sve.png");
     }
 
     //创建正常的阶段

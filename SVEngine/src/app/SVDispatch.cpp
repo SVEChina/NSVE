@@ -120,3 +120,103 @@ void SVDispatch::dispatchMeshDraw(SVInstPtr _app,
         }
     }
 }
+
+//投递rendermesh-pre
+void SVDispatch::dispatchMeshDrawPre(SVInstPtr _app,
+                                     SVRenderMeshPtr _mesh,
+                                     cptr8 _mtlname,
+                                     SVSurfacePtr _surface) {
+    SVRendererPtr t_renderer = _app->getRenderer();
+    SVRTargetPtr t_target = _app->getRenderMgr()->getMainRT();
+    if(t_renderer && t_target ) {
+        //投递到Target，在这里更新VP矩阵
+        if(_surface) {
+            _surface->setParam("matvp", t_target->m_vp_mat);
+            _surface->setParam("matv", t_target->m_v_mat);
+            _surface->setParam("matp", t_target->m_p_mat);
+        }
+        SVMtlCorePtr t_mtl = _app->getMtlLib()->getMtl(_mtlname);
+        if(t_mtl) {
+            SVRCmdNorPtr t_cmd_nor = MakeSharedPtr<SVRCmdNor>();
+            t_cmd_nor->setMesh(_mesh);
+            t_cmd_nor->setMaterial(t_mtl);
+            t_cmd_nor->setSurface(_surface);
+            t_target->pushCommandPre(t_cmd_nor);
+        }
+    }
+}
+
+//投递rendermesh-pre
+void SVDispatch::dispatchMeshDrawPre(SVInstPtr _app,
+                                     SVRenderMeshPtr _mesh,
+                                     cptr8 _mtlname,
+                                     SVSurfacePtr _surface,
+                                     SVRTargetPtr _target) {
+    SVRendererPtr t_renderer = _app->getRenderer();
+    if(t_renderer && _target) {
+        //投递到Target，在这里更新VP矩阵
+        if(_surface) {
+            _surface->setParam("matvp", _target->m_vp_mat);
+            _surface->setParam("matv", _target->m_v_mat);
+            _surface->setParam("matp", _target->m_p_mat);
+        }
+        SVMtlCorePtr t_mtl = _app->getMtlLib()->getMtl(_mtlname);
+        if(t_mtl) {
+            SVRCmdNorPtr t_cmd_nor = MakeSharedPtr<SVRCmdNor>();
+            t_cmd_nor->setMesh(_mesh);
+            t_cmd_nor->setMaterial(t_mtl);
+            t_cmd_nor->setSurface(_surface);
+            _target->pushCommandPre(t_cmd_nor);
+        }
+    }
+}
+
+//投递rendermesh-pre
+void SVDispatch::dispatchMeshDrawAfter(SVInstPtr _app,
+                                       SVRenderMeshPtr _mesh,
+                                       cptr8 _mtlname,
+                                       SVSurfacePtr _surface) {
+    SVRendererPtr t_renderer = _app->getRenderer();
+    SVRTargetPtr t_target = _app->getRenderMgr()->getMainRT();
+    if(t_renderer && t_target ) {
+        //投递到Target，在这里更新VP矩阵
+        if(_surface) {
+            _surface->setParam("matvp", t_target->m_vp_mat);
+            _surface->setParam("matv", t_target->m_v_mat);
+            _surface->setParam("matp", t_target->m_p_mat);
+        }
+        SVMtlCorePtr t_mtl = _app->getMtlLib()->getMtl(_mtlname);
+        if(t_mtl) {
+            SVRCmdNorPtr t_cmd_nor = MakeSharedPtr<SVRCmdNor>();
+            t_cmd_nor->setMesh(_mesh);
+            t_cmd_nor->setMaterial(t_mtl);
+            t_cmd_nor->setSurface(_surface);
+            t_target->pushCommandAfter(t_cmd_nor);
+        }
+    }
+}
+
+//投递rendermesh-after
+void SVDispatch::dispatchMeshDrawAfter(SVInstPtr _app,
+                                       SVRenderMeshPtr _mesh,
+                                       cptr8 _mtlname,
+                                       SVSurfacePtr _surface,
+                                       SVRTargetPtr _target) {
+    SVRendererPtr t_renderer = _app->getRenderer();
+    if(t_renderer && _target) {
+        //投递到Target，在这里更新VP矩阵
+        if(_surface) {
+            _surface->setParam("matvp", _target->m_vp_mat);
+            _surface->setParam("matv", _target->m_v_mat);
+            _surface->setParam("matp", _target->m_p_mat);
+        }
+        SVMtlCorePtr t_mtl = _app->getMtlLib()->getMtl(_mtlname);
+        if(t_mtl) {
+            SVRCmdNorPtr t_cmd_nor = MakeSharedPtr<SVRCmdNor>();
+            t_cmd_nor->setMesh(_mesh);
+            t_cmd_nor->setMaterial(t_mtl);
+            t_cmd_nor->setSurface(_surface);
+            _target->pushCommandAfter(t_cmd_nor);
+        }
+    }
+}

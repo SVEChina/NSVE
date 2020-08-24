@@ -77,12 +77,8 @@ void SVRenderMgr::addRTarget(SVRTargetPtr _rt,bool _pre) {
     }
 }
 
-void SVRenderMgr::delRTarget(SVRTargetPtr _rt) {
+void SVRenderMgr::removeRTarget(SVRTargetPtr _rt) {
     //删除RTarget
-}
-
-SVRTargetPtr SVRenderMgr::getRTarget(cptr8 _name) {
-    return nullptr;
 }
 
 //只关心渲染，不应该关心环境的切换 环境放到外面去调用

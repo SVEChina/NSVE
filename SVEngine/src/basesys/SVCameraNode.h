@@ -50,13 +50,21 @@ namespace sv {
         //设置正交
         void setOrtho();
         
-        FVec3& getPosition();
+        FVec3 getPosition();
         
-        FMat4& projectMat();
+        FMat4 projectMat();
         
-        FMat4& viewMat();
+        FMat4 viewMat();
         
-        FMat4& vpMat();
+        FMat4 vpMat();
+        
+        void active() {
+            m_active = true;
+        }
+        
+        void unActive() {
+            m_active = false;
+        }
 
     protected:
         void _updateProj();
@@ -85,6 +93,7 @@ namespace sv {
         //
         bool m_dirty;
         bool m_is_ortho;
+        bool m_active;
     };
     
 }//!namespace sv

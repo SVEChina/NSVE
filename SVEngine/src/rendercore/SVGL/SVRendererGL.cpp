@@ -101,7 +101,7 @@ SVRTargetPtr SVRendererGL::createTarget(SVINTEX _texid,bool _depth,bool _stencil
     t_tex_dsp.m_renderTarget = true;    //metal 是否是renderTarget
     SVTexturePtr t_main_tex = mApp->getTexMgr()->createInTexture(_texid,t_tex_dsp);
     //创建主target
-    t_target = MakeSharedPtr<SVRTarget>(mApp);
+    t_target = MakeSharedPtr<SVRTarget>(mApp,_texid);
     SVTargetDsp* t_dsp = t_target->getTargetDsp();
     t_dsp->m_color_texid[0] = _texid;
     t_dsp->m_target_num = 1;

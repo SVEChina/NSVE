@@ -16,11 +16,19 @@
 using namespace sv;
 
 //
-SVRTarget::SVRTarget(SVInstPtr _app)
+SVRTarget::SVRTarget(SVInstPtr _app,s32 _id)
 :SVGBaseEx(_app)
-,m_fbo(nullptr){
+,m_targetID(_id)
+,m_fbo(nullptr)
+,m_camera(nullptr){
     m_auto = true;
     m_cmdNum = 0;
+    m_color.setColorARGB(0xff000000);
+    m_depth_value = 1.0f;
+    m_stencil_value = 0;
+    //
+    m_v_mat.setIdentity();
+    m_p_mat.setIdentity();
     m_vp_mat.setIdentity();
     m_stream_pool.resize(E_RSM_MAX);
     for(s32 i=0;i<E_RSM_MAX;i++) {
@@ -41,11 +49,26 @@ SVRTarget::~SVRTarget() {
         m_stream_pool[i] = nullptr;
     }
     m_stream_pool.clear();
+    m_camera = nullptr;
     m_fbo = nullptr;
 }
 
 SVRTargetPtr SVRTarget::share() {
     return std::dynamic_pointer_cast<SVRTarget>( shareObject() );
+}
+
+void SVRTarget::setClearColor(f32 _r,f32 _g,f32 _b,f32 _a) {
+    m_color.setColor(_r, _g, _b, _a);
+}
+
+//
+void SVRTarget::setDepth(f32 _value) {
+    m_depth_value = _value;
+}
+
+//
+void SVRTarget::setStencil(s32 _value) {
+    m_stencil_value = _value;
 }
 
 //void SVRTarget::setRenderPath() {
