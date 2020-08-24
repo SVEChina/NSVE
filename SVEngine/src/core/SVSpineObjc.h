@@ -8,7 +8,7 @@
 #ifndef SV_SPINEOBJC_H
 #define SV_SPINEOBJC_H
 
-#include "../third/spine/include/spine/Atlas.h"
+#include "../third/spine4/include/spine/Atlas.h"
 #include "../base/SVPreDeclare.h"
 #include "../mtl/SVMtlDeclare.h"
 

@@ -14580,10 +14580,10 @@
 				EXECUTABLE_PREFIX = lib;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/library\"",
 					"\"$(SRCROOT)/../src/third\"",
 					"\"$(SRCROOT)/../src/third/libpng\"",
-					"\"$(SRCROOT)/../src/third/spine/include\"",
-					"\"$(SRCROOT)/library\"",
+					"\"$(SRCROOT)/../src/third/spine4/include\"",
 					"\"$(SRCROOT)/../src/third/bulletphysics/src\"",
 					"\"$(SRCROOT)/../src/third/libjpeg\"",
 				);
@@ -14615,10 +14615,10 @@
 				EXECUTABLE_PREFIX = lib;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/library\"",
 					"\"$(SRCROOT)/../src/third\"",
 					"\"$(SRCROOT)/../src/third/libpng\"",
-					"\"$(SRCROOT)/../src/third/spine/include\"",
-					"\"$(SRCROOT)/library\"",
+					"\"$(SRCROOT)/../src/third/spine4/include\"",
 					"\"$(SRCROOT)/../src/third/bulletphysics/src\"",
 					"\"$(SRCROOT)/../src/third/libjpeg\"",
 				);
@@ -14878,11 +14878,11 @@
 				FRAMEWORK_VERSION = A;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				HEADER_SEARCH_PATHS = (
-					"\"$(SRCROOT)/../src/third/spine/include\"",
+					"\"$(SRCROOT)/library\"",
 					"\"$(SRCROOT)/../src/third\"",
 					"\"$(SRCROOT)/../src/third/ffmpeg\"",
-					"\"$(SRCROOT)/library\"",
 					"\"$(SRCROOT)/../src/third/bulletphysics/src\"",
+					"\"$(SRCROOT)/../src/third/spine4/include\"",
 				);
 				INFOPLIST_FILE = SVEngine/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -14927,11 +14927,11 @@
 				FRAMEWORK_VERSION = A;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				HEADER_SEARCH_PATHS = (
-					"\"$(SRCROOT)/../src/third/spine/include\"",
+					"\"$(SRCROOT)/library\"",
 					"\"$(SRCROOT)/../src/third\"",
 					"\"$(SRCROOT)/../src/third/ffmpeg\"",
-					"\"$(SRCROOT)/library\"",
 					"\"$(SRCROOT)/../src/third/bulletphysics/src\"",
+					"\"$(SRCROOT)/../src/third/spine4/include\"",
 				);
 				INFOPLIST_FILE = SVEngine/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -14974,12 +14974,12 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				HEADER_SEARCH_PATHS = (
-					"\"$(SRCROOT)/../src/third\"",
-					"\"$(SRCROOT)/../src/third/spine/include\"",
-					"\"$(SRCROOT)/../src/third/libpng\"",
 					"\"$(SRCROOT)/library\"",
+					"\"$(SRCROOT)/../src/third\"",
+					"\"$(SRCROOT)/../src/third/libpng\"",
 					"\"$(SRCROOT)/../src/third/bulletphysics/src\"",
 					"\"$(SRCROOT)/../src/third/libjpeg\"",
+					"\"$(SRCROOT)/../src/third/spine4/include\"",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LIBRARY_SEARCH_PATHS = (
@@ -15023,12 +15023,12 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				HEADER_SEARCH_PATHS = (
-					"\"$(SRCROOT)/../src/third\"",
-					"\"$(SRCROOT)/../src/third/spine/include\"",
-					"\"$(SRCROOT)/../src/third/libpng\"",
 					"\"$(SRCROOT)/library\"",
+					"\"$(SRCROOT)/../src/third\"",
+					"\"$(SRCROOT)/../src/third/libpng\"",
 					"\"$(SRCROOT)/../src/third/bulletphysics/src\"",
 					"\"$(SRCROOT)/../src/third/libjpeg\"",
+					"\"$(SRCROOT)/../src/third/spine4/include\"",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LIBRARY_SEARCH_PATHS = (

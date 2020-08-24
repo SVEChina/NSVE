@@ -8,9 +8,9 @@
 #ifndef SV_SPINE_H
 #define SV_SPINE_H
 
-#include "../third/spine/include/spine/Skeleton.h"
-#include "../third/spine/include/spine/AnimationState.h"
-#include "../third/spine/include/spine/RegionAttachment.h"
+#include "../third/spine4/include/spine/Skeleton.h"
+#include "../third/spine4/include/spine/AnimationState.h"
+#include "../third/spine4/include/spine/RegionAttachment.h"
 #include "SVSpineListen.h"
 #include "../mtl/SVTexture.h"
 #include "../node/SVNode.h"
