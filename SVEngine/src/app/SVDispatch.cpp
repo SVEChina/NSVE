@@ -48,7 +48,7 @@ void SVDispatch::dispatchTextureCreate(SVInstPtr _app,SVTexturePtr _tex) {
 
 void SVDispatch::dispatchTargetCreate(SVInstPtr _app,SVRTargetPtr _target) {
     if(_target) {
-        SVRCmdCreateFboPtr t_cmd = MakeSharedPtr<SVRCmdCreateFbo>(_target);
+        SVRCmdCreateTargetPtr t_cmd = MakeSharedPtr<SVRCmdCreateTarget>(_target);
         _app->getRenderMgr()->pushRCmdCreate(t_cmd);
     }
 }
@@ -58,50 +58,165 @@ void SVDispatch::dispatchTargetResize(SVInstPtr _app,SVRTargetPtr _target) {
     if(t_renderer && _target) {
         SVRFboPtr t_rfbo = _target->getResFbo() ;
         if(t_rfbo) {
-            //
             s32 t_w = _target->getTargetDsp()->m_width;
             s32 t_h = _target->getTargetDsp()->m_height;
-            SVRCmdFboResizePtr t_cmd = MakeSharedPtr<SVRCmdFboResize>(t_rfbo,t_w,t_h);
+            SVRCmdTargetResizePtr t_cmd = MakeSharedPtr<SVRCmdTargetResize>(t_rfbo,t_w,t_h);
             _app->getRenderMgr()->pushRCmdCreate(t_cmd);
         }
     }
 }
 
 //投递rendermesh
-void SVDispatch::dispatchMeshDraw(SVInstPtr _app,SVRenderMeshPtr _mesh,s32 _mtlID) {
+void SVDispatch::dispatchMeshDraw(SVInstPtr _app,
+                                  SVRenderMeshPtr _mesh,
+                                  cptr8 _mtlname,
+                                  SVSurfacePtr _surface,
+                                  SV_RSTREAM _stype) {
+    
     SVRendererPtr t_renderer = _app->getRenderer();
-    if(t_renderer) {
-        //
-        SVMtlCorePtr t_mtl = _app->getMtlLib()->getMtl(_mtlID);
-        if(t_mtl) {
-            SVRCmdNorPtr t_cmd_nor = MakeSharedPtr<SVRCmdNor>();
-            t_cmd_nor->setMesh(_mesh);
-            t_cmd_nor->setMaterial(t_mtl);
-            _app->getRenderMgr()->pushRCmd(t_cmd_nor,E_RSM_SOLID);
+    SVRTargetPtr t_target = _app->getRenderMgr()->getMainRT();
+    if(t_renderer && t_target) {
+        //投递到主目标，在这里更新VP矩阵
+        if(_surface) {
+            _surface->setParam("matvp", t_target->m_vp_mat);
+            _surface->setParam("matv", t_target->m_v_mat);
+            _surface->setParam("matp", t_target->m_p_mat);
         }
-    }
-}
-
-//投递rendermesh
-void SVDispatch::dispatchMeshDraw(SVInstPtr _app,SVRenderMeshPtr _mesh,cptr8 _mtlname,SVSurfacePtr _surface) {
-    SVRendererPtr t_renderer = _app->getRenderer();
-    if(t_renderer) {
-        //
+        //投递命令
         SVMtlCorePtr t_mtl = _app->getMtlLib()->getMtl(_mtlname);
         if(t_mtl) {
             SVRCmdNorPtr t_cmd_nor = MakeSharedPtr<SVRCmdNor>();
             t_cmd_nor->setMesh(_mesh);
             t_cmd_nor->setMaterial(t_mtl);
             t_cmd_nor->setSurface(_surface);
-            _app->getRenderMgr()->pushRCmd(t_cmd_nor,E_RSM_SOLID);
+            t_target->pushCommand(t_cmd_nor,_stype);
         }
     }
 }
 
 //投递rendermesh
-void SVDispatch::dispatchMeshDraw(SVInstPtr _app,SVRenderMeshPtr _mesh,s32 _mtlID,SVSurfacePtr _surface,SVRTargetPtr _target) {
+void SVDispatch::dispatchMeshDraw(SVInstPtr _app,
+                                  SVRenderMeshPtr _mesh,
+                                  cptr8 _mtlname,
+                                  SVSurfacePtr _surface,
+                                  SVRTargetPtr _target,
+                                  SV_RSTREAM _stype) {
+    
     SVRendererPtr t_renderer = _app->getRenderer();
     if(t_renderer && _target) {
-        //_target->pushRenderCommand(<#SVRenderCmdPtr _rcmd#>);
+        //投递到Target，在这里更新VP矩阵
+        if(_surface) {
+            _surface->setParam("matvp", _target->m_vp_mat);
+            _surface->setParam("matv", _target->m_v_mat);
+            _surface->setParam("matp", _target->m_p_mat);
+        }
+        SVMtlCorePtr t_mtl = _app->getMtlLib()->getMtl(_mtlname);
+        if(t_mtl) {
+            SVRCmdNorPtr t_cmd_nor = MakeSharedPtr<SVRCmdNor>();
+            t_cmd_nor->setMesh(_mesh);
+            t_cmd_nor->setMaterial(t_mtl);
+            t_cmd_nor->setSurface(_surface);
+            _target->pushCommand(t_cmd_nor,_stype);
+        }
+    }
+}
+
+//投递rendermesh-pre
+void SVDispatch::dispatchMeshDrawPre(SVInstPtr _app,
+                                     SVRenderMeshPtr _mesh,
+                                     cptr8 _mtlname,
+                                     SVSurfacePtr _surface) {
+    SVRendererPtr t_renderer = _app->getRenderer();
+    SVRTargetPtr t_target = _app->getRenderMgr()->getMainRT();
+    if(t_renderer && t_target ) {
+        //投递到Target，在这里更新VP矩阵
+        if(_surface) {
+            _surface->setParam("matvp", t_target->m_vp_mat);
+            _surface->setParam("matv", t_target->m_v_mat);
+            _surface->setParam("matp", t_target->m_p_mat);
+        }
+        SVMtlCorePtr t_mtl = _app->getMtlLib()->getMtl(_mtlname);
+        if(t_mtl) {
+            SVRCmdNorPtr t_cmd_nor = MakeSharedPtr<SVRCmdNor>();
+            t_cmd_nor->setMesh(_mesh);
+            t_cmd_nor->setMaterial(t_mtl);
+            t_cmd_nor->setSurface(_surface);
+            t_target->pushCommandPre(t_cmd_nor);
+        }
+    }
+}
+
+//投递rendermesh-pre
+void SVDispatch::dispatchMeshDrawPre(SVInstPtr _app,
+                                     SVRenderMeshPtr _mesh,
+                                     cptr8 _mtlname,
+                                     SVSurfacePtr _surface,
+                                     SVRTargetPtr _target) {
+    SVRendererPtr t_renderer = _app->getRenderer();
+    if(t_renderer && _target) {
+        //投递到Target，在这里更新VP矩阵
+        if(_surface) {
+            _surface->setParam("matvp", _target->m_vp_mat);
+            _surface->setParam("matv", _target->m_v_mat);
+            _surface->setParam("matp", _target->m_p_mat);
+        }
+        SVMtlCorePtr t_mtl = _app->getMtlLib()->getMtl(_mtlname);
+        if(t_mtl) {
+            SVRCmdNorPtr t_cmd_nor = MakeSharedPtr<SVRCmdNor>();
+            t_cmd_nor->setMesh(_mesh);
+            t_cmd_nor->setMaterial(t_mtl);
+            t_cmd_nor->setSurface(_surface);
+            _target->pushCommandPre(t_cmd_nor);
+        }
+    }
+}
+
+//投递rendermesh-pre
+void SVDispatch::dispatchMeshDrawAfter(SVInstPtr _app,
+                                       SVRenderMeshPtr _mesh,
+                                       cptr8 _mtlname,
+                                       SVSurfacePtr _surface) {
+    SVRendererPtr t_renderer = _app->getRenderer();
+    SVRTargetPtr t_target = _app->getRenderMgr()->getMainRT();
+    if(t_renderer && t_target ) {
+        //投递到Target，在这里更新VP矩阵
+        if(_surface) {
+            _surface->setParam("matvp", t_target->m_vp_mat);
+            _surface->setParam("matv", t_target->m_v_mat);
+            _surface->setParam("matp", t_target->m_p_mat);
+        }
+        SVMtlCorePtr t_mtl = _app->getMtlLib()->getMtl(_mtlname);
+        if(t_mtl) {
+            SVRCmdNorPtr t_cmd_nor = MakeSharedPtr<SVRCmdNor>();
+            t_cmd_nor->setMesh(_mesh);
+            t_cmd_nor->setMaterial(t_mtl);
+            t_cmd_nor->setSurface(_surface);
+            t_target->pushCommandAfter(t_cmd_nor);
+        }
+    }
+}
+
+//投递rendermesh-after
+void SVDispatch::dispatchMeshDrawAfter(SVInstPtr _app,
+                                       SVRenderMeshPtr _mesh,
+                                       cptr8 _mtlname,
+                                       SVSurfacePtr _surface,
+                                       SVRTargetPtr _target) {
+    SVRendererPtr t_renderer = _app->getRenderer();
+    if(t_renderer && _target) {
+        //投递到Target，在这里更新VP矩阵
+        if(_surface) {
+            _surface->setParam("matvp", _target->m_vp_mat);
+            _surface->setParam("matv", _target->m_v_mat);
+            _surface->setParam("matp", _target->m_p_mat);
+        }
+        SVMtlCorePtr t_mtl = _app->getMtlLib()->getMtl(_mtlname);
+        if(t_mtl) {
+            SVRCmdNorPtr t_cmd_nor = MakeSharedPtr<SVRCmdNor>();
+            t_cmd_nor->setMesh(_mesh);
+            t_cmd_nor->setMaterial(t_mtl);
+            t_cmd_nor->setSurface(_surface);
+            _target->pushCommandAfter(t_cmd_nor);
+        }
     }
 }

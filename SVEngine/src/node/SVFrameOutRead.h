@@ -40,7 +40,7 @@ namespace sv {
         
         SV_OUTSTEAMFORMATE m_outFormat;
         SVDataSwapPtr m_pDataSwap;
-        SVRenderTexturePtr m_fbo;
+        //SVRenderTexturePtr m_fbo;
         SVMtlCorePtr m_pMtl;
         s32 m_width;
         s32 m_height;

@@ -14,6 +14,7 @@
 
 #define SV_DEBUG_RENDERTIME 1
 #define SV_SUPPORT_MAX_PERSON_NUM 4
+#define SV_SUPPORT_MAX_TAREGT 4
 #define SV_PI       3.14159265359f
 #define SV_HALF_PI  SV_PI/2.0f
 
@@ -75,15 +76,19 @@ namespace sv {
     };
 
     //sv渲染器类型 renderer
-    enum SV_R_TYPE {
-        E_R_GLES,
-        E_R_VUNKAN,
-        E_R_METAL
+    enum SV_R_ENV {
+        E_R_GLES_ANDORID,
+        E_R_VULKAN_ANDORID,
+        E_R_METAL_OSX,
+        E_R_GL_OSX,
+        E_R_METAL_IOS,
+        E_R_GLES_IOS
     };
 
     //sv渲染流类型
-    enum SV_RSTREAM_TYPE {
+    enum SV_RSTREAM {
         E_RSM_NOR = 0,          //普通流
+        E_RSM_SKY,              //天空-背景
         E_RSM_SOLID,
         E_RSM_TRANSLATE,
         E_RSM_PRE,              //前向流
@@ -91,7 +96,7 @@ namespace sv {
         E_RSM_DEBUG,            //调试流
         E_RSM_CREATE_SHADOW,    //产生阴影流
         E_RSM_RECEIVE_SHADOW,   //接收阴影流
-        E_RSM_PARTICLE,          //粒子流
+        E_RSM_PARTICLE,         //粒子流
         E_RSM_MAX
     };
 
@@ -110,6 +115,13 @@ namespace sv {
         SV_E_TECH_TSD = 0x00010000,
         SV_E_TECH_CS = 0x00100000,
     };
+
+#define SV_STAGE_VS     0
+#define SV_STAGE_FS     1
+#define SV_STAGE_GS     2
+#define SV_STAGE_TSC    3
+#define SV_STAGE_TSE    4
+#define SV_STAGE_CS     5
 
     //输出纹理格式
     enum SV_OUTSTEAMFORMATE {
@@ -144,26 +156,27 @@ namespace sv {
     };
 
     //SV 支持的内置纹理种类
-    enum SVTEXINID {
-        E_TEX_MAIN = 0,
+    enum SVINTEX {
+        E_TEX_BEGIN = 0,
+        E_TEX_MAIN,
+        E_TEX_SHADOW,
+        E_TEX_DEPTH,
+        E_TEX_GBUF_POS,
+        E_TEX_GBUF_NOR,
+        E_TEX_GBUF_COLOR,
         E_TEX_FILE,
         E_TEX_CAMERA,
-        E_TEX_SHADOW,
-        E_TEX_INSTREAM = 10,
-        E_TEX_OUTSTREAM = 20,
-        E_TEX_HELP0 = 21,
+        E_TEX_INSTREAM,
+        E_TEX_OUTSTREAM,
+        E_TEX_HELP0,
         E_TEX_HELP1,
         E_TEX_HELP2,
         E_TEX_HELP3,
-        E_TEX_HELP4,
-        E_TEX_HELP5,
-        E_TEX_HELP6,
-        E_TEX_HELP7,
         E_TEX_VIDEO0,
         E_TEX_VIDEO1,
         E_TEX_VIDEO2,
         E_TEX_VIDEO3,
-        E_TEX_VIDEO4,
+        E_TEX_FLITER,
         E_TEX_FLITER_GUASS,
         E_TEX_FLITER_GUASS01,
         E_TEX_FILTER_DEFORM01,
@@ -184,25 +197,18 @@ namespace sv {
         E_TEX_FILTER_GLOW_1,
         E_TEX_FILTER_GLOW_2,
         E_TEX_FILTER_GLOW_3,
+        E_TEX_FILTER_0,
         E_TEX_FILTER_1,
         E_TEX_FILTER_2,
         E_TEX_FILTER_3,
-        E_TEX_FILTER_4,
         E_TEX_FILTER_SHAKE,
         E_TEX_FILTER_FLASHWHITE,
         E_TEX_INSTREAM_BEGIN,
-        E_TEX_DEPTH,
-        E_TEX_AVATAR_0 = 60,
+        E_TEX_AVATAR_0,
         E_TEX_AVATAR_1,
         E_TEX_AVATAR_2,
         E_TEX_AVATAR_3,
-        E_TEX_AVATAR_4,
-        E_TEX_AVATAR_5,
-        E_TEX_AVATAR_6,
-        E_TEX_AVATAR_7,
-        E_TEX_AVATAR_8,
-        E_TEX_AVATAR_9,
-        E_TEX_END = 70
+        E_TEX_END = 64
     };
 
     //相机图片格式

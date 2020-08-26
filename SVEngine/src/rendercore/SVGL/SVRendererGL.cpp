@@ -6,7 +6,6 @@
 //
 
 #include "SVRendererGL.h"
-#include "SVRenderStateGL.h"
 #include "SVRTexGL.h"
 #include "SVRTechGL.h"
 #include "SVRFboGL.h"
@@ -15,11 +14,12 @@
 //
 #include "../SVRenderMgr.h"
 #include "../SVRTarget.h"
-#include "../SVRenderTexture.h"
 #include "../SVRenderMesh.h"
 #include "../../app/SVInst.h"
 #include "../../app/SVGlobalParam.h"
+#include "../../app/SVDispatch.h"
 #include "../../base/SVCompileConfig.h"
+#include "../../mtl/SVTexMgr.h"
 #include "../../mtl/SVTexture.h"
 #include "../../mtl/SVMtlCore.h"
 #include "../../mtl/SVShader.h"
@@ -33,7 +33,6 @@ SVRendererGL::SVRendererGL(SVInstPtr _app)
 }
 
 SVRendererGL::~SVRendererGL(){
-    m_pRState = nullptr;
     m_cur_program = 0;
 }
 
@@ -43,17 +42,13 @@ SVRendererGLPtr SVRendererGL::share() {
 
 void SVRendererGL::init(s32 _w,s32 _h){
     SVRenderer::init(_w,_h);
-    m_inWidth = _w;
-    m_inHeight = _h;
-    mApp->m_pGlobalParam->m_inner_width = _w;
-    mApp->m_pGlobalParam->m_inner_height = _h;
-    //
-    SVRFboGLPtr t_fbo = std::dynamic_pointer_cast<SVRFboGL>( createResFbo() );    //
-    SVRTargetPtr t_target = MakeSharedPtr<SVRTarget>(mApp);
-    t_target->bindRes(t_fbo);
-    //设置主RTarget
-    t_target->setRenderPath();
-    mApp->getRenderMgr()->setMainRT(t_target);
+    mApp->m_global_param.m_sv_width = _w;
+    mApp->m_global_param.m_sv_height = _h;
+    //创建主纹理
+    SVRTargetPtr t_target = createTarget(E_TEX_MAIN,true,true);
+    if(t_target) {
+        mApp->getRenderMgr()->setMainRT(t_target);
+    }
 }
 
 void SVRendererGL::init(s32 _w,s32 _h,bool _offline) {
@@ -63,8 +58,8 @@ void SVRendererGL::resize(s32 _w,s32 _h) {
 //    m_inWidth = _w;
 //    m_inHeight = _h;
 //    //重置size
-//    mApp->m_pGlobalParam->m_inner_width = _w;
-//    mApp->m_pGlobalParam->m_inner_height = _h;
+//    mApp->m_global_param.m_sv_width = _w;
+//    mApp->m_global_param.m_sv_height = _h;
 //    //重新创建主纹理
 //    SVTexturePtr t_tex = createSVTex(E_TEX_MAIN,_w,_h,GL_RGBA);
 }
@@ -86,6 +81,42 @@ SVRMeshResPtr SVRendererGL::createResBuf() {
 //fbo
 SVRFboPtr SVRendererGL::createResFbo() {
     return MakeSharedPtr<SVRFboGL>(mApp);
+}
+
+SVRTargetPtr SVRendererGL::createTarget(SVINTEX _texid,bool _depth,bool _stencil) {
+    SVRTargetPtr t_target = getTarget(_texid);
+    if(t_target) {
+        return t_target;
+    }
+    //创建主纹理
+    SVTextureDsp t_tex_dsp;
+    t_tex_dsp.m_imgtype = SV_IMAGE_2D;
+    t_tex_dsp.m_dataFormate = SV_FORMAT_RGBA8;
+    t_tex_dsp.m_width = mApp->m_global_param.m_sv_width;    //宽
+    t_tex_dsp.m_height = mApp->m_global_param.m_sv_height;  //高
+    t_tex_dsp.m_depth = 1;                                  //深度
+    t_tex_dsp.m_minmap = false;         //是否开启mipmap
+    t_tex_dsp.m_computeWrite = true;    //metal 是否可以
+    t_tex_dsp.m_renderTarget = true;    //metal 是否是renderTarget
+    SVTexturePtr t_main_tex = mApp->getTexMgr()->createInTexture(_texid,t_tex_dsp);
+    //创建主target
+    t_target = MakeSharedPtr<SVRTarget>(mApp,_texid);
+    SVTargetDsp* t_dsp = t_target->getTargetDsp();
+    t_dsp->m_color_texid[0] = _texid;
+    t_dsp->m_target_num = 1;
+    t_dsp->m_width = mApp->m_global_param.m_sv_width;
+    t_dsp->m_height = mApp->m_global_param.m_sv_height;
+    t_dsp->m_use_depth = true;
+    t_dsp->m_use_stencil = true;
+    //创建RT
+    SVDispatch::dispatchTargetCreate(mApp,t_target);
+    //增加target
+    _addTarget(_texid,t_target);
+    return t_target;
+}
+
+SVRTargetPtr SVRendererGL::createTarget(SVINTEX _texid,s32 _w,s32 _h,bool _depth,bool _stencil) {
+    return nullptr;
 }
 
 //处理材质
@@ -133,6 +164,11 @@ void SVRendererGL::drawMesh(SVRenderMeshPtr _mesh ) {
         _mesh->getResBuffer()->draw( share() );
     }
 }
+
+//屏幕空间绘制
+void SVRendererGL::drawScreen(SVINTEX _texid) {
+}
+
 //
 ////
 //void SVRendererGL::submitTex(u32 _channel,TexUnit& _unit){
@@ -145,7 +181,6 @@ void SVRendererGL::drawMesh(SVRenderMeshPtr _mesh ) {
 //    if(_unit.m_texForm == E_TEX_END) {
 //        t_aimTex = _unit.m_pTex;
 //    }else {
-//        t_aimTex = m_svTex[_unit.m_texForm];
 //    }
 //    //
 //    if (!t_aimTex) {
@@ -283,147 +318,6 @@ void SVRendererGL::drawMesh(SVRenderMeshPtr _mesh ) {
 //#endif
 //}
 
-//提交unifrom matrix
-void SVRendererGL::submitUniformMatrix(cptr8 _name,f32* _data){
-    s32 m_uni_m = glGetUniformLocation(m_pRState->m_shaderID, _name);
-    if(m_uni_m>=0) {
-        glUniformMatrix4fv(m_uni_m, 1, GL_FALSE, _data);
-    }
-}
-
-//提交unifrom matrix
-void SVRendererGL::submitUniformMatrixArray(cptr8 _name,f32* _data,s32 _size){
-    s32 m_uni_m = glGetUniformLocation(m_pRState->m_shaderID, _name);
-    if(m_uni_m>=0) {
-        glUniformMatrix4fv(m_uni_m, _size, GL_FALSE, _data);
-    }
-}
-
-//提交unifrom i1
-void SVRendererGL::submitUniformi(cptr8 _name,s32 _data) {
-    s32 m_uni_m = glGetUniformLocation(m_pRState->m_shaderID, _name);
-    if(m_uni_m>=0) {
-        glUniform1i(m_uni_m, _data);
-    }
-}
-//提交unifrom i2
-void SVRendererGL::submitUniformi2(cptr8 _name,s32 _data1,s32 _data2) {
-    s32 m_uni_m = glGetUniformLocation(m_pRState->m_shaderID, _name);
-    if(m_uni_m>=0) {
-        glUniform2i(m_uni_m, _data1,_data2);
-    }
-}
-
-//提交unifrom i3
-void SVRendererGL::submitUniformi3(cptr8 _name,s32 _data1,s32 _data2,s32 _data3) {
-    s32 m_uni_m = glGetUniformLocation(m_pRState->m_shaderID, _name);
-    if(m_uni_m>=0) {
-        glUniform3i(m_uni_m, _data1,_data2,_data3);
-    }
-}
-
-//提交unifrom i4
-void SVRendererGL::submitUniformi4(cptr8 _name,s32 _data1,s32 _data2,s32 _data3,s32 _data4) {
-    s32 m_uni_m = glGetUniformLocation(m_pRState->m_shaderID, _name);
-    if(m_uni_m>=0) {
-        glUniform4i(m_uni_m, _data1,_data2,_data3,_data4);
-    }
-}
-
-//提交unifrom f1
-void SVRendererGL::submitUniformf(cptr8 _name,f32 _data){
-    s32 m_uni_m = glGetUniformLocation(m_pRState->m_shaderID, _name);
-    if(m_uni_m>=0) {
-        glUniform1f(m_uni_m, _data);
-    }
-}
-
-//提交unifrom f2
-void SVRendererGL::submitUniformf2(cptr8 _name,f32 _data1,f32 _data2) {
-    s32 m_uni_m = glGetUniformLocation(m_pRState->m_shaderID, _name);
-    if(m_uni_m>=0) {
-        glUniform2f(m_uni_m, _data1,_data2);
-    }
-}
-//提交unifrom f3
-void SVRendererGL::submitUniformf3(cptr8 _name,f32 _data1,f32 _data2,f32 _data3) {
-    s32 m_uni_m = glGetUniformLocation(m_pRState->m_shaderID, _name);
-    if(m_uni_m>=0) {
-        glUniform3f(m_uni_m,_data1,_data2,_data3);
-    }
-}
-
-//提交unifrom f4
-void SVRendererGL::submitUniformf4(cptr8 _name,f32 _data1,f32 _data2,f32 _data3,f32 _data4) {
-    s32 m_uni_m = glGetUniformLocation(m_pRState->m_shaderID, _name);
-    if(m_uni_m>=0) {
-        glUniform4f(m_uni_m,_data1,_data2,_data3,_data4);
-    }
-}
-
-//提交unifrom s32 v1
-void SVRendererGL::submitUniformi1v(cptr8 _name,s32* _data,s32 _size) {
-    s32 m_uni_m = glGetUniformLocation(m_pRState->m_shaderID, _name);
-    if(m_uni_m>=0) {
-        glUniform1iv(m_uni_m, _size , _data);
-    }
-}
-
-//提交unifrom s32 v2
-void SVRendererGL::submitUniformi2v(cptr8 _name,s32* _data,s32 _size) {
-    s32 m_uni_m = glGetUniformLocation(m_pRState->m_shaderID, _name);
-    if(m_uni_m>=0) {
-        glUniform2iv(m_uni_m, _size , _data);
-    }
-}
-
-//提交unifrom s32 v3
-void SVRendererGL::submitUniformi3v(cptr8 _name,s32* _data,s32 _size) {
-    s32 m_uni_m = glGetUniformLocation(m_pRState->m_shaderID, _name);
-    if(m_uni_m>=0) {
-        glUniform3iv(m_uni_m, _size , _data);
-    }
-}
-
-//提交unifrom s32 v4
-void SVRendererGL::submitUniformi4v(cptr8 _name,s32* _data,s32 _size) {
-    s32 m_uni_m = glGetUniformLocation(m_pRState->m_shaderID, _name);
-    if(m_uni_m>=0) {
-        glUniform4iv(m_uni_m, _size , _data);
-    }
-}
-
-//提交unifrom f32 v1
-void SVRendererGL::submitUniformf1v(cptr8 _name,f32* _data,s32 _size){
-    s32 m_uni_m = glGetUniformLocation(m_pRState->m_shaderID, _name);
-    if(m_uni_m>=0) {
-        glUniform1fv(m_uni_m, _size , _data);
-    }
-}
-
-//提交unifrom f32 v2
-void SVRendererGL::submitUniformf2v(cptr8 _name,f32* _data,s32 _size){
-    s32 m_uni_m = glGetUniformLocation(m_pRState->m_shaderID, _name);
-    if(m_uni_m>=0) {
-        glUniform2fv(m_uni_m, _size , _data);
-    }
-}
-
-//提交unifrom f32 v3
-void SVRendererGL::submitUniformf3v(cptr8 _name,f32* _data,s32 _size){
-    s32 m_uni_m = glGetUniformLocation(m_pRState->m_shaderID, _name);
-    if(m_uni_m>=0) {
-        glUniform3fv(m_uni_m, _size , _data);
-    }
-}
-//提交unifrom f32 v4
-void SVRendererGL::submitUniformf4v(cptr8 _name,f32* _data,s32 _size){
-    s32 m_uni_m = glGetUniformLocation(m_pRState->m_shaderID, _name);
-    if(m_uni_m>=0) {
-        glUniform4fv(m_uni_m, _size , _data);
-    }
-}
-
 ////提交融合参数
 //void SVRendererGL::submitBlend(SVBlendParam& _param){
 ////    assert(_param.srcParam >= 0 && _param.srcParam < NUM_BLEND_FUNC && "SVRendererGL::submitBlend(): bad blend source function");
@@ -518,81 +412,61 @@ void SVRendererGL::submitUniformf4v(cptr8 _name,f32* _data,s32 _size){
 //        }
 //    }
 //}
-
-//提交线宽
-void SVRendererGL::submitLineWidth(f32 _width){
-    glLineWidth(_width);
-}
-
-//提交点大小
-void SVRendererGL::submitPointSize(f32 _size){
-    
-}
-
-//绑定fbo
-void SVRendererGL::svBindFrameBuffer(u32 _id) {
-    SVRenderStateGLPtr m_pRStateGL = std::dynamic_pointer_cast<SVRenderStateGL>(m_pRState);
-    if( m_pRStateGL->m_fbo!=_id ) {
-        m_pRStateGL->m_fbo = _id;
-        glBindFramebuffer(GL_FRAMEBUFFER, m_pRStateGL->m_fbo);
-    }
-}
-
-void SVRendererGL::svBindClearColor(u32 _id) {
-    glClearColor(0.0, 0.0, 0.0, 0.0);
-    glClear(GL_COLOR_BUFFER_BIT);
-}
-
-void SVRendererGL::svBindColorBuffer(u32 _id) {
-    SVRenderStateGLPtr m_pRStateGL = std::dynamic_pointer_cast<SVRenderStateGL>(m_pRState);
-    if( m_pRStateGL->m_colorBufferID!=_id ) {
-        m_pRStateGL->m_colorBufferID = _id;
-        glBindFramebuffer(GL_RENDERBUFFER, _id);
-    }
-}
-
-//顶点缓存
-void SVRendererGL::svBindVertexBuffer(u32 _id) {
-    SVRenderStateGLPtr m_pRStateGL = std::dynamic_pointer_cast<SVRenderStateGL>(m_pRState);
-    if( m_pRStateGL->m_vertexBufID!=_id ) {
-        m_pRStateGL->m_vertexBufID = _id;
-        glBindBuffer(GL_ARRAY_BUFFER, _id);
-    }
-}
-
-//索引缓存
-void SVRendererGL::svBindIndexBuffer(u32 _id) {
-    SVRenderStateGLPtr m_pRStateGL = std::dynamic_pointer_cast<SVRenderStateGL>(m_pRState);
-    if( m_pRStateGL->m_indexBufID!=_id ) {
-        m_pRStateGL->m_indexBufID = _id;
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _id);
-    }
-}
-
-//视口
-void SVRendererGL::svPushViewPort(u32 _x,u32 _y,u32 _w,u32 _h) {
-    SVRenderer::svPushViewPort(_x,_y,_w,_h);
-    glViewport(_x, _y, _w, _h);
-}
-
-void SVRendererGL::svPopViewPort() {
-    m_vpStack.pop();
-    if(m_vpStack.size()>0) {
-        VPParam t_vp = m_vpStack.top();
-        glViewport(t_vp.m_x, t_vp.m_y, t_vp.m_width, t_vp.m_height);
-    }
-}
-
-//设置清理颜色
-void SVRendererGL::svClearColor(f32 _r,f32 _g,f32 _b,f32 _a) {
-    glClearColor(_r,_g,_b,_a);
-}
-
-//设置清理掩码
-void SVRendererGL::svClear(s32 _mask) {
-    glClear(_mask);
-}
-
-void SVRendererGL::svUpdateVertexFormate(VFTYPE _vf,s32 _count,s32 _mode) {
-}
-
+//
+////提交线宽
+//void SVRendererGL::submitLineWidth(f32 _width){
+//    glLineWidth(_width);
+//}
+////绑定fbo
+//void SVRendererGL::svBindFrameBuffer(u32 _id) {
+//    SVRenderStateGLPtr m_pRStateGL = std::dynamic_pointer_cast<SVRenderStateGL>(m_pRState);
+//    if( m_pRStateGL->m_fbo!=_id ) {
+//        m_pRStateGL->m_fbo = _id;
+//        glBindFramebuffer(GL_FRAMEBUFFER, m_pRStateGL->m_fbo);
+//    }
+//}
+//
+//void SVRendererGL::svBindClearColor(u32 _id) {
+//    glClearColor(0.0, 0.0, 0.0, 0.0);
+//    glClear(GL_COLOR_BUFFER_BIT);
+//}
+//
+//void SVRendererGL::svBindColorBuffer(u32 _id) {
+//    SVRenderStateGLPtr m_pRStateGL = std::dynamic_pointer_cast<SVRenderStateGL>(m_pRState);
+//    if( m_pRStateGL->m_colorBufferID!=_id ) {
+//        m_pRStateGL->m_colorBufferID = _id;
+//        glBindFramebuffer(GL_RENDERBUFFER, _id);
+//    }
+//}
+//
+////顶点缓存
+//void SVRendererGL::svBindVertexBuffer(u32 _id) {
+//    SVRenderStateGLPtr m_pRStateGL = std::dynamic_pointer_cast<SVRenderStateGL>(m_pRState);
+//    if( m_pRStateGL->m_vertexBufID!=_id ) {
+//        m_pRStateGL->m_vertexBufID = _id;
+//        glBindBuffer(GL_ARRAY_BUFFER, _id);
+//    }
+//}
+//
+////索引缓存
+//void SVRendererGL::svBindIndexBuffer(u32 _id) {
+//    SVRenderStateGLPtr m_pRStateGL = std::dynamic_pointer_cast<SVRenderStateGL>(m_pRState);
+//    if( m_pRStateGL->m_indexBufID!=_id ) {
+//        m_pRStateGL->m_indexBufID = _id;
+//        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _id);
+//    }
+//}
+//
+////视口
+//void SVRendererGL::svPushViewPort(u32 _x,u32 _y,u32 _w,u32 _h) {
+//    SVRenderer::svPushViewPort(_x,_y,_w,_h);
+//    glViewport(_x, _y, _w, _h);
+//}
+//
+//void SVRendererGL::svPopViewPort() {
+//    m_vpStack.pop();
+//    if(m_vpStack.size()>0) {
+//        VPParam t_vp = m_vpStack.top();
+//        glViewport(t_vp.m_x, t_vp.m_y, t_vp.m_width, t_vp.m_height);
+//    }
+//}

@@ -15,10 +15,10 @@ SVCtxBase::SVCtxBase(){
 SVCtxBase::~SVCtxBase() {
 }
 
-bool SVCtxBase::activeContext(){
+bool SVCtxBase::activeContext(SVRendererPtr _renderer){
     return false;
 }
 
-bool SVCtxBase::swap(){
+bool SVCtxBase::swap(SVRendererPtr _renderer){
     return false;
 }

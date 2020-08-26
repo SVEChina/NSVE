@@ -52,6 +52,9 @@ void SVShaderMgr::_loadAllShader() {
         SV_LOG_ERROR("rapidjson error code:%d \n", code);
         return;
     }
+    
+    //name
+    
     //获取文件列表
     RAPIDJSON_NAMESPACE::Value &dspfiles = doc["dspfiles"];
     if( dspfiles.IsArray() ) {

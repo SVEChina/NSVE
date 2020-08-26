@@ -23,13 +23,13 @@ namespace sv {
         ShaderDsp() {
             m_dsp = 0;
             m_programme_fname = "null";
+            m_pass = "null",
             m_vs_fname = "null";
             m_fs_fname = "null";
             m_gs_fname = "null";
             m_cs_fname = "null";
             m_tsc_fname = "null";
             m_tse_fname = "null";
-            m_attri_formate = "null";
             m_vft.clear();
         };
         //
@@ -42,15 +42,15 @@ namespace sv {
         SVString m_cs_fname;
         SVString m_tsc_fname;
         SVString m_tse_fname;
-        SVString m_attri_formate;
+        SVString m_pass;
     };
 
     /*
      * 采样描述
      */
     struct SamplerDsp {
-        s32 m_type; //0:vs 1:fs 2:gs
         s32 m_chn;
+        s32 m_stage; //0:vs 1:fs 2:gs
         SVString m_warps;
         SVString m_warpt;
         SVString m_min;
@@ -62,7 +62,7 @@ namespace sv {
      */
     struct ParamTblDsp {
         s32 m_id;               //传递的bufid
-        s32 m_type;             // 0:vs, 1:fs
+        s32 m_stage;            // 0:vs, 1:fs
         SVParamTblPtr m_tbl;    //表
     };
 

@@ -15,8 +15,7 @@
 
 using namespace sv;
 
-SVConfig::SVConfig(SVInstPtr _app)
-: SVGBaseEx(_app) {
+SVConfig::SVConfig(){
     //m_subsysType = 5;
     width = 720;
     height = 1280;
@@ -248,13 +247,6 @@ void SVConfig::loadConfig() {
 //    }
 //    _adaptScale();
     SV_LOG_ERROR("SVConfig::_loadConfig\n");
-}
-
-void SVConfig::setCameraDsp(s32 inCameraWidth, s32 inCameraHeight, s32 inCameraAngle) {
-    cameraWidth = inCameraWidth;
-    cameraHeight = inCameraHeight;
-    cameraAngle = inCameraAngle;
-    _adaptScale();
 }
 
 void SVConfig::_adaptScale() {

@@ -30,25 +30,27 @@ namespace sv {
         
         void destroy();
         
-        SVFaceDataMeshPtr getFaceDataMesh();
+        //动态初始化
+        SVFaceDataMeshPtr faceMesh(s32 _type);
         
-        SVRenderMeshPtr generateAdaptScreenMesh(f32 _fromW, f32 _fromH, f32 _toW, f32 _toH);
+        //引擎创建初始化
+        SVRenderMeshPtr screenMesh() { return m_screenMesh; }
         
-        SVRenderMeshPtr generatePatchMesh(FVec3 &_corner00, FVec3 &_corner10, FVec3 &_corner01, FVec3 &_corner11, s32 _rx = 2, s32 _ry = 2);
-        
-        SVRenderMeshPtr m_screenMesh;
+        SVRenderMeshPtr generatePatchMesh(FVec3 &_corner00,
+                                          FVec3 &_corner10,
+                                          FVec3 &_corner01,
+                                          FVec3 &_corner11,
+                                          s32 _rx = 2,
+                                          s32 _ry = 2);
         
     protected:
-
         void _initTwoDivisionMesh();
         
         void _initFourDivisionMesh();
         
         void _initFourDivisionMesh_X();
         
-    public:
-        SVFaceDataMeshPtr m_faceDataMesh;
-        SVRenderMeshPtr   m_screenAdaptMesh;
+        SVRenderMeshPtr m_screenMesh;
     };
     
 }//!namespace

@@ -30,36 +30,40 @@ namespace sv{
         
         //回收模块
         SVRecycleProcessPtr getRecycleModule();
+        
         //拾取模块
         SVPickProcessPtr getPickModule();
+        
         //字体模块
         SVFontProcessPtr getFontModule();
+        
         //流入
         SVStreamInPtr getStreamIn();
+        
         //流出
         SVStreamOutPtr getStreamOut();
+        
         //图片处理
         SVPictureProcessPtr getPicProc();
+        
         //传感器数据处理 
         SVSensorProcessPtr getSensorModule();
 
     protected:
+        SVStreamInPtr m_stream_in;
         
-        SVStreamInPtr m_pStreamIn;
+        SVStreamOutPtr m_stream_out;
         
-        SVStreamOutPtr m_pStreamOut;
-        
-        SVPictureProcessPtr m_pPicProc;
+        SVPictureProcessPtr m_pic_proc;
 
         SVRecycleProcessPtr m_pRecycleModule;
         
-        SVPickProcessPtr m_pPickModule;
+        SVPickProcessPtr m_picker;
 
-        SVFontProcessPtr m_pFontModule;
+        SVFontProcessPtr m_fonter;
 
-        SVSensorProcessPtr m_pSensorModule;
+        SVSensorProcessPtr m_sensor;
     };
-
 
 }//!namespace sv
 

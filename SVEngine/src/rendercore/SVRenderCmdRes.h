@@ -55,11 +55,11 @@ namespace sv {
 
     
     //创建R-fbo
-    class SVRCmdCreateFbo : public SVRenderCmd {
+    class SVRCmdCreateTarget : public SVRenderCmd {
     public:
-        SVRCmdCreateFbo(SVRTargetPtr _target);
+        SVRCmdCreateTarget(SVRTargetPtr _target);
         
-        ~SVRCmdCreateFbo();
+        ~SVRCmdCreateTarget();
         
         void render(SVRendererPtr _renderer,SVRTargetPtr _target);
         

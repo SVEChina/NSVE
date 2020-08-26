@@ -14,7 +14,6 @@
 #include "../mtl/SVTexture.h"
 #include "../mtl/SVTexMgr.h"
 #include "../app/SVInst.h"
-#include "../rendercore/SVRenderObject.h"
 #include "../rendercore/SVRenderMgr.h"
 #include "../rendercore/SVRenderer.h"
 #include "../basesys/SVComData.h"
@@ -24,7 +23,6 @@ using namespace sv;
 SVFaceDetectPointNode::SVFaceDetectPointNode(SVInstPtr _app):SVNode(_app) {
     ntype = "SVFaceDetectPointNode";
     m_rsType = RST_DEBUG;
-    m_pRenderObj = MakeSharedPtr<SVRenderObject>();
     m_canSelect = false;
     m_pTex = mApp->getTexMgr()->getTexture("svres/point.png",true);;
     m_pMesh = nullptr;
@@ -32,8 +30,6 @@ SVFaceDetectPointNode::SVFaceDetectPointNode(SVInstPtr _app):SVNode(_app) {
 
 SVFaceDetectPointNode::~SVFaceDetectPointNode(){
     m_pMesh = nullptr;
-    m_pRenderObj = nullptr;
-    m_pMtl = nullptr;
     m_pTex =nullptr;
 }
 
@@ -94,10 +90,10 @@ void SVFaceDetectPointNode::createMesh( V2* _facepoint){
 //    }
 //    SVDataSwapPtr t_data = MakeSharedPtr<SVDataSwap>();
 //    t_data->writeData(&verts[0], sizeof(V2_T0) * 636);
-//    m_pMesh->setVertNum(636);
+//    m_pMesh->setDrawVertNum(636);
 //    m_pMesh->setVertexData(t_data);
 //    m_pMesh->setVertexType(E_VF_V2_T0);
-//    m_pMesh->setDrawMethod(E_DM_TRIANGLES);
+//    m_pMesh->setDrawMethod(E_DRAW_TRIANGLES);
 //    m_pMesh->createMesh();
 }
 
@@ -121,10 +117,10 @@ void SVFaceDetectPointNode::update(f32 _dt){
 
 void SVFaceDetectPointNode::render(){
     if ( m_visible ){
-        SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
-        if (m_pRenderObj) {
-            m_pRenderObj->pushCmd(t_rs, m_rsType, "SVFaceDetectPointNode");
-        }
+//        SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
+//        if (m_pRenderObj) {
+//            m_pRenderObj->pushCmd(t_rs, m_rsType, "SVFaceDetectPointNode");
+//        }
     }
     SVNode::render();
 }

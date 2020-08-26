@@ -79,16 +79,16 @@ void SVMtlGLTF::refresh() {
 //        setTextureParam(0, E_T_PARAM_WRAP_T, E_T_WRAP_REPEAT);
     }
     if(m_pMetallicRoughnessTex) {
-        setTexture(1,m_pMetallicRoughnessTex);
+        setTexture(1,1,m_pMetallicRoughnessTex);
     }
     if(m_pNormalTex) {
-        setTexture(2,m_pNormalTex);
+        setTexture(2,1,m_pNormalTex);
     }
     if(m_pOcclusionTex) {
-        setTexture(3,m_pOcclusionTex);
+        setTexture(3,1,m_pOcclusionTex);
     }
     if(m_pEmissiveTex) {
-        setTexture(4,m_pEmissiveTex);
+        setTexture(4,1,m_pEmissiveTex);
     }
 }
 
@@ -151,7 +151,7 @@ void SVMtlGLTFSkin::refresh() {
 void SVMtlGLTFSkin::_submitUniform(SVRendererPtr _render){
     SVMtlCore::_submitUniform(_render);
     //传递骨骼数据
-    _render->submitUniformMatrixArray("uBoneMatrix", m_vecBoneMatrix,MAX_BONES);
+    //_render->submitUniformMatrixArray("uBoneMatrix", m_vecBoneMatrix,MAX_BONES);
 }
 
 void SVMtlGLTFSkin::bindSke(SVSkeletonPtr _ske) {

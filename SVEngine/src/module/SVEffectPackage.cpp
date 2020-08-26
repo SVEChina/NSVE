@@ -68,10 +68,10 @@ void SVEffectUnit::init(SVNodePtr _node){
     if(_node && t_scene){
         m_node = _node;
         t_scene->addNode(m_node);
-        //需要挂的人身上
-        if (_node->getBindIndex() >= 0 && !m_personAct) {
-            _attachToPeople(_node);
-        }
+//        //需要挂的人身上
+//        if (_node->getBindIndex() >= 0 && !m_personAct) {
+//            _attachToPeople(_node);
+//        }
         SVSpineNodePtr t_spineNode = DYN_TO_SHAREPTR(SVSpineNode, m_node);
         if (t_spineNode) {
             t_spineNode->setSpineCallback(spinenode_callback, this);

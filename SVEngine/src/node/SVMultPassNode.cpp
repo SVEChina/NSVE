@@ -12,10 +12,7 @@
 #include "../basesys/SVComData.h"
 #include "../rendercore/SVRenderMesh.h"
 #include "../rendercore/SVRenderMgr.h"
-#include "../rendercore/SVRenderObject.h"
-#include "../rendercore/SVRenderTexture.h"
 #include "../rendercore/SVRenderCmd.h"
-#include "../rendercore/SVRenderScene.h"
 #include "../rendercore/SVRenderer.h"
 #include "../mtl/SVTexMgr.h"
 #include "../core/SVPass.h"
@@ -31,7 +28,6 @@ SVMultPassNode::SVMultPassNode(SVInstPtr _app)
 }
 
 SVMultPassNode::~SVMultPassNode() {
-    m_fbo = nullptr;
 }
 
 void SVMultPassNode::create(s32 _w,s32 _h) {
@@ -39,22 +35,21 @@ void SVMultPassNode::create(s32 _w,s32 _h) {
     //mApp->getRenderMgr()->pushRCmdCreate(m_fbo);
 }
 
-void SVMultPassNode::setFbo(SVRenderTexturePtr _fbo){
-    m_fbo = _fbo;
-}
+//void SVMultPassNode::setFbo(SVRenderTexturePtr _fbo){
+//    m_fbo = _fbo;
+//}
 
 void SVMultPassNode::destroy() {
     m_passPool.destroy();
-    m_fbo = nullptr;
 }
 
 void SVMultPassNode::update(f32 dt) {
     SVNode::update(dt);
-    for(s32 i=0;i<m_passPool.size();i++){
-        if(m_passPool[i]->m_pMtl){
-            m_passPool[i]->m_pMtl->update(0.0f);
-        }
-    }
+//    for(s32 i=0;i<m_passPool.size();i++){
+//        if(m_passPool[i]->m_pMtl){
+//            m_passPool[i]->m_pMtl->update(0.0f);
+//        }
+//    }
 }
 
 void SVMultPassNode::render() {
@@ -74,7 +69,7 @@ void SVMultPassNode::render() {
 //                if(m_passPool[i]->m_pMesh){
 //                    t_cmd->setMesh(m_passPool[i]->m_pMesh);
 //                }else{
-//                    t_cmd->setMesh(mApp->getDataMgr()->m_screenMesh);
+//                    t_cmd->setMesh(mApp->getComData()->m_screenMesh);
 //                }
 //                t_cmd->setMaterial(m_passPool[i]->m_pMtl);
 //                t_rs->pushRenderCmd(m_rsType, t_cmd);

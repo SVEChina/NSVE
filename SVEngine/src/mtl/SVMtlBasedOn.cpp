@@ -60,7 +60,6 @@ SVMtlBasedOn::~SVMtlBasedOn(){
 }
 
 SVMtlCorePtr SVMtlBasedOn::clone() {
-    //return MakeSharedPtr<SVMtlBasedOn>(THIS_TO_SHAREPTR(SVMtlBasedOn));
     return PointerSharedPtr<SVMtlBasedOn>(new SVMtlBasedOn(this));
 }
 
@@ -191,81 +190,81 @@ void SVMtlBasedOn::setTint(f32 _tint){
 }
 
 void SVMtlBasedOn::_submitMtl(SVRendererPtr _render) {
-    if((m_BaseOnFlag&MTL_F_BASEON_SHADOW)>0){
-        _render->submitUniformf("shadows", m_shadows);
-    }
-    
-    if((m_BaseOnFlag&MTL_F_BASEON_HL)>0){
-        _render->submitUniformf("highlights", m_highlights);
-    }
-
-    if((m_BaseOnFlag&MTL_F_BASEON_CONSTRAST)>0){
-        _render->submitUniformf("contrast", m_contrast);
-    }
-    
-    if((m_BaseOnFlag&MTL_F_BASEON_SATURATION)>0){
-        _render->submitUniformf("saturation", m_saturation);
-    }
-    
-    if((m_BaseOnFlag&MTL_F_BASEON_BRIGHTNESS)>0){
-        _render->submitUniformf("brightness", m_brightness);
-    }
-    
-    if((m_BaseOnFlag&MTL_F_BASEON_WHITENING)>0){
-        _render->submitUniformf("whitening", m_whitening);
-    }
-    
-    if((m_BaseOnFlag&MTL_F_BASEON_GAMMA)>0){
-        _render->submitUniformf("gamma", m_gamma);
-    }
-
-    if((m_BaseOnFlag&MTL_F_BASEON_REDSHIFT)>0){
-        _render->submitUniformf("redShift", m_redShift);
-    }
-    
-    if((m_BaseOnFlag&MTL_F_BASEON_GREENSHIFT)>0){
-        _render->submitUniformf("greenShift", m_greenShift);
-    }
-    
-    if((m_BaseOnFlag&MTL_F_BASEON_BLUESHIFT)>0){
-        _render->submitUniformf("blueShift", m_blueShift);
-    }
-    
-    if((m_BaseOnFlag&MTL_F_BASEON_SDREDSHIFT)>0){
-        _render->submitUniformf("sdredShift", m_sdredShift);
-    }
-    
-    if((m_BaseOnFlag&MTL_F_BASEON_SDGREENSHIFT)>0){
-        _render->submitUniformf("sdgreenShift", m_sdgreenShift);
-    }
-    
-    if((m_BaseOnFlag&MTL_F_BASEON_SDBLUESHIFT)>0){
-        _render->submitUniformf("sdblueShift", m_sdblueShift);
-    }
-
-    if((m_BaseOnFlag&MTL_F_BASEON_HHREDSHIFT)>0){
-        _render->submitUniformf("hhredShift", m_hhredShift);
-    }
-    
-    if((m_BaseOnFlag&MTL_F_BASEON_HHGREENSHIFT)>0){
-        _render->submitUniformf("hhgreenShift", m_hhgreenShift);
-    }
-    
-    if((m_BaseOnFlag&MTL_F_BASEON_HHBLUESHIFT)>0){
-        _render->submitUniformf("hhblueShift", m_hhblueShift);
-    }
-    
-    if((m_BaseOnFlag&MTL_F_BASEON_TEMPERATURE)>0){
-        _render->submitUniformf("temperature", m_temperature);
-    }
-    
-    if((m_BaseOnFlag&MTL_F_BASEON_TINT)>0){
-        _render->submitUniformf("tint", m_tint);
-    }
-    
+//    if((m_BaseOnFlag&MTL_F_BASEON_SHADOW)>0){
+//        _render->submitUniformf("shadows", m_shadows);
+//    }
+//    
+//    if((m_BaseOnFlag&MTL_F_BASEON_HL)>0){
+//        _render->submitUniformf("highlights", m_highlights);
+//    }
+//
+//    if((m_BaseOnFlag&MTL_F_BASEON_CONSTRAST)>0){
+//        _render->submitUniformf("contrast", m_contrast);
+//    }
+//    
+//    if((m_BaseOnFlag&MTL_F_BASEON_SATURATION)>0){
+//        _render->submitUniformf("saturation", m_saturation);
+//    }
+//    
+//    if((m_BaseOnFlag&MTL_F_BASEON_BRIGHTNESS)>0){
+//        _render->submitUniformf("brightness", m_brightness);
+//    }
+//    
+//    if((m_BaseOnFlag&MTL_F_BASEON_WHITENING)>0){
+//        _render->submitUniformf("whitening", m_whitening);
+//    }
+//    
+//    if((m_BaseOnFlag&MTL_F_BASEON_GAMMA)>0){
+//        _render->submitUniformf("gamma", m_gamma);
+//    }
+//
+//    if((m_BaseOnFlag&MTL_F_BASEON_REDSHIFT)>0){
+//        _render->submitUniformf("redShift", m_redShift);
+//    }
+//    
+//    if((m_BaseOnFlag&MTL_F_BASEON_GREENSHIFT)>0){
+//        _render->submitUniformf("greenShift", m_greenShift);
+//    }
+//    
+//    if((m_BaseOnFlag&MTL_F_BASEON_BLUESHIFT)>0){
+//        _render->submitUniformf("blueShift", m_blueShift);
+//    }
+//    
+//    if((m_BaseOnFlag&MTL_F_BASEON_SDREDSHIFT)>0){
+//        _render->submitUniformf("sdredShift", m_sdredShift);
+//    }
+//    
+//    if((m_BaseOnFlag&MTL_F_BASEON_SDGREENSHIFT)>0){
+//        _render->submitUniformf("sdgreenShift", m_sdgreenShift);
+//    }
+//    
+//    if((m_BaseOnFlag&MTL_F_BASEON_SDBLUESHIFT)>0){
+//        _render->submitUniformf("sdblueShift", m_sdblueShift);
+//    }
+//
+//    if((m_BaseOnFlag&MTL_F_BASEON_HHREDSHIFT)>0){
+//        _render->submitUniformf("hhredShift", m_hhredShift);
+//    }
+//    
+//    if((m_BaseOnFlag&MTL_F_BASEON_HHGREENSHIFT)>0){
+//        _render->submitUniformf("hhgreenShift", m_hhgreenShift);
+//    }
+//    
+//    if((m_BaseOnFlag&MTL_F_BASEON_HHBLUESHIFT)>0){
+//        _render->submitUniformf("hhblueShift", m_hhblueShift);
+//    }
+//    
+//    if((m_BaseOnFlag&MTL_F_BASEON_TEMPERATURE)>0){
+//        _render->submitUniformf("temperature", m_temperature);
+//    }
+//    
+//    if((m_BaseOnFlag&MTL_F_BASEON_TINT)>0){
+//        _render->submitUniformf("tint", m_tint);
+//    }
     m_BaseOnFlag = MTL_F_BASEON_NONE;
 }
 
+//
 SVMtlAcutance::SVMtlAcutance(SVInstPtr _app)
 :SVMtlCore(_app,"acutance") {
     m_BaseOnFlag = MTL_F_BASEON_NONE;
@@ -294,7 +293,7 @@ void SVMtlAcutance::setAcutance(f32 _acutance) {
 
 void SVMtlAcutance::_submitMtl(SVRendererPtr _render) {
     if((m_BaseOnFlag&MTL_F_BASEON_ACUTANCE)>0){
-        _render->submitUniformf("acutance", m_acutance);
+        //_render->submitUniformf("acutance", m_acutance);
     }
     m_BaseOnFlag = MTL_F_BASEON_NONE;
 }

@@ -16,11 +16,8 @@
 #include "../mtl/SVTexMgr.h"
 #include "../mtl/SVMtlCore.h"
 #include "../mtl/SVTexture.h"
-#include "../rendercore/SVRenderTexture.h"
 #include "../rendercore/SVRenderMgr.h"
 #include "../rendercore/SVRenderCmd.h"
-#include "../rendercore/SVRenderScene.h"
-#include "../rendercore/SVRenderObject.h"
 #include "../rendercore/SVRenderer.h"
 #include "../basesys/SVCameraNode.h"
 #include "../basesys/SVScene.h"
@@ -33,9 +30,7 @@ using namespace sv;
 SVARAnchor::SVARAnchor(SVInstPtr _app)
 :SVModuleBase(_app){
     m_plane_dis = 0.3f;
-    m_fbo = nullptr;
     m_pTex = nullptr;
-    m_pRenderObj = nullptr;
     m_mtl = nullptr;
     m_pMesh = nullptr;
     t_testNode = nullptr;
@@ -43,9 +38,7 @@ SVARAnchor::SVARAnchor(SVInstPtr _app)
 }
 
 SVARAnchor::~SVARAnchor(){
-    m_fbo = nullptr;
     m_pTex = nullptr;
-    m_pRenderObj = nullptr;
     m_mtl = nullptr;
     m_pMesh = nullptr;
     t_testNode = nullptr;
@@ -68,13 +61,12 @@ void SVARAnchor::init(){
 //    }
 //    m_fbo = MakeSharedPtr<SVRenderTexture>(mApp,m_pTex,true,true);
 //    //mApp->getRenderMgr()->pushRCmdCreate(m_fbo);
-//    m_pRenderObj = MakeSharedPtr<SVRenderObject>();
 //    m_mtl = MakeSharedPtr<SVMtlCore>(mApp,"screennor");
 //    m_mtl->setTexcoordFlip(1.0f, 1.0f);
 //    m_mtl->setTexture(0, E_TEX_HELP7);
 //    m_mtl->setBlendEnable(true);
 //    m_mtl->setBlendState(MTL_BLEND_ONE, MTL_BLEND_ONE_MINUS_SRC_ALPHA);
-//    m_pMesh = mApp->getDataMgr()->m_screenMesh;
+//    m_pMesh = mApp->getComData()->m_screenMesh;
 }
 
 void SVARAnchor::destroy(){
@@ -101,7 +93,7 @@ void SVARAnchor::update(f32 _dt) {
 //    SVRendererPtr t_renderer = mApp->getRenderer();
 //    SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
 //    if (t_rs && t_renderer && m_fbo) {
-//        SVRCmdFboResizePtr t_fbo_bind = MakeSharedPtr<SVRCmdFboResize>(m_fbo);
+//        SVRCmdTargetResizePtr t_fbo_bind = MakeSharedPtr<SVRCmdTargetResize>(m_fbo);
 //        t_fbo_bind->mTag = "draw_aranchor_bind";
 //        t_rs->pushRenderCmd(RST_AR, t_fbo_bind);
 //
@@ -174,7 +166,7 @@ void SVARAnchor::_screenPointToWorldAnchorPoint(FVec2 &_point, SVAnchorPoint &_w
     SVCameraNodePtr t_arCam = t_sensor->getARCamera();
     if(!t_arCam)
         return;
-    FMat4 t_cameraMatrix = t_arCam->getViewMatObj();
+    FMat4 t_cameraMatrix = t_arCam->viewMat();
     FVec3 t_cameraEye = t_arCam->getPosition();
     //构建虚拟平面
     FVec3 t_cameraDir = FVec3(-t_cameraMatrix[2],

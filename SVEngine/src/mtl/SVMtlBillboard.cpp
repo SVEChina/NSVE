@@ -53,8 +53,8 @@ void SVMtlBillboard::setUp(FVec3 &_up){
 
 void SVMtlBillboard::_submitUniform(SVRendererPtr _render) {
     SVMtlCore::_submitUniform(_render);
-    _render->submitUniformf3v("u_up", m_up.get());
-    _render->submitUniformf3v("u_viewPos", m_viewPos.get());
-    _render->submitUniformf3v("u_objPos", m_objPos.get());
+//    _render->submitUniformf3v("u_up", m_up.get());
+//    _render->submitUniformf3v("u_viewPos", m_viewPos.get());
+//    _render->submitUniformf3v("u_objPos", m_objPos.get());
 }
 

@@ -25,7 +25,7 @@ namespace sv {
         s32 getTexId();
 
     private:
-        SVRenderTexturePtr m_fbo;
+        //SVRenderTexturePtr m_fbo;
         SVRenderMeshPtr m_pMesh;
         SVMtlCorePtr m_pMtl;
     };

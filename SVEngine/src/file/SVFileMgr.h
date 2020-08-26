@@ -47,6 +47,11 @@ namespace sv {
         SVLockPtr m_fileLock;
         
         bool _hasRespath(cptr8 _path);
+        
+    public:
+        static bool s_loadFileContent(SVDataChunk *_datachunk, cptr8 _fullname);
+        
+        static bool s_loadFileContentStr(SVDataChunk *_datachunk, cptr8 _fullname);
     };
     
 }//!namespace sv

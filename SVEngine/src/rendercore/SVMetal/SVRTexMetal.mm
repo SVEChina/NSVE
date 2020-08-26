@@ -69,7 +69,7 @@ void SVRTexMetal:: create(SVRendererPtr _renderer) {
         t_descriptor.mipmapLevelCount = 1;
         t_descriptor.sampleCount      = t_rm->m_samplenum;  //跟msaa相关
         t_descriptor.arrayLength      = 1;
-        if (t_rm->m_iOS9Runtime ||  t_rm->m_macOS11Runtime){
+        if (t_rm->m_iOS9Runtime || t_rm->m_macOS11Runtime){
             t_descriptor.cpuCacheMode = MTLCPUCacheModeDefaultCache;
             t_descriptor.storageMode = MTLStorageModeManaged;   //存储方式 MTLStorageModeShared/MTLStorageModeManaged/MTLStorageModePrivate/MTLStorageModeMemoryless
             t_descriptor.usage = MTLTextureUsageShaderRead;
@@ -81,19 +81,19 @@ void SVRTexMetal:: create(SVRendererPtr _renderer) {
             }
         }
         //设置类型，创建纹理
-        if(t_dsp->m_kind == SV_IMAGE_1D) {
+        if(t_dsp->m_imgtype == SV_IMAGE_1D) {
             t_descriptor.pixelFormat = MTLPixelFormatRGBA8Unorm;
             t_descriptor.textureType = MTLTextureType1D;
             m_src_tex =  [t_rm->m_pDevice newTextureWithDescriptor:t_descriptor];
-        }else if(t_dsp->m_kind == SV_IMAGE_2D) {
+        }else if(t_dsp->m_imgtype == SV_IMAGE_2D) {
             t_descriptor.pixelFormat = MTLPixelFormatRGBA8Unorm;
             t_descriptor.textureType = MTLTextureType2D;
             m_src_tex =  [t_rm->m_pDevice newTextureWithDescriptor:t_descriptor];
-        }else if(t_dsp->m_kind == SV_IMAGE_2D) {
+        }else if(t_dsp->m_imgtype == SV_IMAGE_2D) {
             t_descriptor.pixelFormat = MTLPixelFormatRGBA8Unorm;
             t_descriptor.textureType = MTLTextureType3D;
             m_src_tex =  [t_rm->m_pDevice newTextureWithDescriptor:t_descriptor];
-        }else if(t_dsp->m_kind == SV_IMAGE_CUBE) {
+        }else if(t_dsp->m_imgtype == SV_IMAGE_CUBE) {
             t_descriptor.pixelFormat = MTLPixelFormatRGBA8Unorm;
             t_descriptor.textureType = MTLTextureTypeCube;
             m_src_tex =  [t_rm->m_pDevice newTextureWithDescriptor:t_descriptor];
@@ -102,7 +102,7 @@ void SVRTexMetal:: create(SVRendererPtr _renderer) {
             t_descriptor.textureType = MTLTextureType2DMultisample;
             t_descriptor.sampleCount = t_rm->m_samplenum;
 
-            if (t_rm->m_iOS9Runtime ||  t_rm->m_macOS11Runtime){
+            if (t_rm->m_iOS9Runtime || t_rm->m_macOS11Runtime){
                 t_descriptor.storageMode = (MTLStorageMode)(2 /* MTLStorageModePrivate */);
             }
             //m_src_tex =  [t_rm->m_pDevice newTextureWithDescriptor:t_descriptor];
@@ -149,6 +149,18 @@ void SVRTexMetal::commit() {
         m_dirty = false;
     }
     m_texLock->unlock();
+}
+
+void SVRTexMetal::swap(SVRTexPtr _rtex) {
+    SVRTexMetalPtr tt = dynamic_pointer_cast<SVRTexMetal>(_rtex);
+    if(tt) {
+        id<MTLTexture> t_src_tex = tt->m_src_tex;
+        id<MTLTexture> t_src_tex_msaa = tt->m_src_tex_msaa;
+        tt->m_src_tex = m_src_tex;
+        tt->m_src_tex_msaa = m_src_tex_msaa;
+        m_src_tex = t_src_tex;
+        m_src_tex_msaa = t_src_tex_msaa;
+    }
 }
 
 void SVRTexMetal::setTexData(SVDataSwapPtr _data){

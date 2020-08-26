@@ -13,11 +13,7 @@
 #include "../mtl/SVTexture.h"
 #include "../mtl/SVTextureIOS.h"
 #include "../rendercore/SVRenderMgr.h"
-#include "../rendercore/SVRenderObject.h"
-#include "../rendercore/SVRenderCmdOut.h"
-#include "../rendercore/SVRenderScene.h"
 #include "../rendercore/SVRenderer.h"
-#include "../rendercore/SVRenderTexture.h"
 #include "../mtl/SVMtlCore.h"
 #include "../basesys/SVConfig.h"
 
@@ -67,9 +63,9 @@ void SVFrameOutIOS::init(SV_OUTSTEAMFORMATE _outformate,s32 _w,s32 _h) {
 //    }
 //    //
 //    m_pMtl = MakeSharedPtr<SVMtlCore>(mApp, "rgba");
-//    s32 t_w =  mApp->m_pGlobalParam->m_inner_width;
-//    s32 t_h =  mApp->m_pGlobalParam->m_inner_height;
-//    m_mesh = mApp->getDataMgr()->generateAdaptScreenMesh(t_w, t_h, _w, _h);
+//    s32 t_w =  mApp->m_global_param.m_sv_width;
+//    s32 t_h =  mApp->m_global_param.m_sv_height;
+//    m_mesh = mApp->getComData()->generateAdaptScreenMesh(t_w, t_h, _w, _h);
 }
 
 void SVFrameOutIOS::destroy(){
@@ -88,7 +84,7 @@ void SVFrameOutIOS::update(f32 _dt) {
         m_pMtl->update(_dt);
         m_pMtl->setTexture(0,t_renderer->getSVTex(E_TEX_MAIN));    //那第一张纹理
         m_pMtl->setBlendEnable(false);
-        bool t_mirror = mApp->getConfig()->mirror;
+        bool t_mirror = mApp->m_config.mirror;
         if (t_mirror) {
             m_pMtl->setTexcoordFlip(1.0f, -1.0f);
         }else{

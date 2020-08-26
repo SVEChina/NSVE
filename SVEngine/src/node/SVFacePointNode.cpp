@@ -9,7 +9,6 @@
 #include "../app/SVInst.h"
 #include "../basesys/SVSceneMgr.h"
 #include "../rendercore/SVRenderMgr.h"
-#include "../rendercore/SVRenderObject.h"
 #include "../rendercore/SVRenderMesh.h"
 #include "../mtl/SVMtlCore.h"
 #include "../core/SVGeoGen.h"
@@ -21,16 +20,15 @@ using namespace sv;
 SVFacePointNode::SVFacePointNode(SVInstPtr _app)
 :SVNode(_app){
     ntype = "SVFacePointNode";
-//    m_pRenderObj = MakeSharedPtr<SVRenderObject>();
 //    m_pMtl = MakeSharedPtr<SVMtlCore>(mApp,"debugFacePt");
 //    m_pMesh = mApp->getRenderMgr()->createMeshRObj();
 //    SVDataSwapPtr t_data = MakeSharedPtr<SVDataSwap>();
 //    SVPersonPtr t_person = mApp->getDetectMgr()->getPersonModule()->getPerson(1);
 //    t_data->writeData(t_person->getFaceData(), 212*sizeof(f32));
-//    m_pMesh->setVertNum(106);
+//    m_pMesh->setDrawVertNum(106);
 //    m_pMesh->setVertexData(t_data);
 //    m_pMesh->setVertexType(E_VF_V2);
-//    m_pMesh->setDrawMethod(E_DM_POINTS);
+//    m_pMesh->setDrawMethod(E_DRAW_POINTS);
 //    m_pMesh->createMesh();
 }
 
@@ -40,7 +38,7 @@ SVFacePointNode::~SVFacePointNode(){
 
 void SVFacePointNode::update(f32 _dt){
     SVNode::update(_dt);
-//    if(m_pRenderObj && m_pMtl){
+//    if(m_pMtl){
 //        m_pMtl->setModelMatrix(m_absolutMat);
 //        m_pMtl->update(_dt);
 //        m_pMtl->setBlendEnable(false);
@@ -49,10 +47,8 @@ void SVFacePointNode::update(f32 _dt){
 //        SVPersonPtr t_person = mApp->getDetectMgr()->getPersonModule()->getPerson(1);
 //        if (t_person->getExist()) {
 //            t_data->writeData(t_person->getFaceData(), 212*sizeof(f32));
-//            m_pMesh->setVertNum(106);
+//            m_pMesh->setDrawVertNum(106);
 //            m_pMesh->setVertexData(t_data);
-//            m_pRenderObj->setMtl(m_pMtl);
-//            m_pRenderObj->setMesh(m_pMesh);
 //        }
 //    }
 }
@@ -60,9 +56,6 @@ void SVFacePointNode::update(f32 _dt){
 void SVFacePointNode::render(){
     SVPersonPtr t_person = mApp->getDetectMgr()->getPersonModule()->getPerson(1);
     if (t_person->getExist()) {
-        SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
-        if (m_pRenderObj) {
-            m_pRenderObj->pushCmd(t_rs, RST_SOLID_2D, "SVFacePointNode");
-        }
+//        SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
     }
 }

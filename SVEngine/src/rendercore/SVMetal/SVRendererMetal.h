@@ -11,6 +11,7 @@
 #include "../SVRenderer.h"
 #include "../SVRenderDeclare.h"
 #include "SVRTexMetal.h"
+#include <vector>
 
 #import <Foundation/Foundation.h>
 #import <AudioToolbox/AudioToolbox.h>
@@ -31,29 +32,34 @@ namespace sv {
         ~SVRendererMetal();
         
         SVRendererMetalPtr share();
+        
+        void init(s32 _w,s32 _h);
 
-        virtual void init(id<MTLDevice> _device,id<MTLDrawable> _target,id<MTLTexture> _targetTex);
-
-        //初始化
-        virtual void init(s32 _w,s32 _h);
+        void init(id<MTLDevice> _device,s32 _w,s32 _h);
+        
         //销毁
-        virtual void destroy();
+        void destroy();
+        
         //重置大小
-        virtual void resize(s32 _w,s32 _h);
+        void resize(s32 _w,s32 _h);
 
-        /*
-         create
-         */
+        //create-texture
         SVRTexPtr createResTexture();
 
-        //shader
-        SVRShaderPtr createResShader() ;
+        //create-shader
+        SVRShaderPtr createResShader();
 
-        //buf-vbo 等
-        SVRMeshResPtr createResBuf() ;
+        //create-buf
+        SVRMeshResPtr createResBuf();
 
-        //fbo
-        SVRFboPtr createResFbo() ;
+        //create-fbo
+        SVRFboPtr createResFbo();
+        
+        //create-target
+        SVRTargetPtr createTarget(SVINTEX _texid,bool _depth,bool _stencil);
+        
+        //create-target
+        SVRTargetPtr createTarget(SVINTEX _texid,s32 _w,s32 _h,bool _depth,bool _stencil);
 
         /*
         process
@@ -61,34 +67,37 @@ namespace sv {
         //处理材质
         bool processMtl(SVMtlCorePtr _mtl,SVSurfacePtr _surface);
         
-        //处理shader
-        bool processShader(SVRShaderPtr _shader);
-        
         //处理纹理
         bool processTexture(SVRTexPtr _tex,s32 _chn,s32 _type);
 
         //处理mesh
         bool processMesh(SVRenderMeshPtr _mesh);
 
-        /*
-        draw
-        */
+        //
         void drawMesh(SVRenderMeshPtr _mesh);
+        
+        //
+        void drawScreen(SVINTEX _texid);
 
-    public:
-        id<MTLDevice> m_pDevice;
-        id<MTLCommandQueue> m_pCmdQueue;
-        id<MTLLibrary> m_pLibrary;
-        id<MTLRenderCommandEncoder> m_pCurEncoder;
+        //
+        void pushEncoder(id<MTLRenderCommandEncoder> _encoder);
+        
+        //
+        void popEncoder();
         
     public:
+        id<MTLDevice> m_pDevice;
+        id<MTLCommandQueue> m_cmdQuene;
+        id<MTLCommandBuffer> m_cmdBuffer;
+        id<MTLLibrary> m_pLibrary;
+        //
+        id<MTLRenderCommandEncoder> m_curEncoder;   //encoder不要支持嵌套
         //prop
         bool m_iOS9Runtime;
         bool m_macOS11Runtime;
         bool m_hasPixelFormatDepth32Float_Stencil8;
         s32 m_samplenum;
-        
-    public:
+        //
         void drawBox();
     };
         

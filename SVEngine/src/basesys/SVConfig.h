@@ -22,8 +22,6 @@
 #define KEY_DESIGN_IMAGE_HEIGHT "designimageheight"
 #define KEY_ADAPT_MODE "adaptmode"
 
-#endif //SV_CONFIG_H
-
 #define GLES30 0x00030000
 
 namespace sv {
@@ -55,9 +53,9 @@ namespace sv {
         s32 m_audio;
     };
     
-    class SVConfig : public SVGBaseEx {
+    class SVConfig : public SVObject {
     public:
-        SVConfig(SVInstPtr _app);
+        SVConfig();
         
         ~SVConfig();
         
@@ -91,8 +89,6 @@ namespace sv {
         
         inline f32 getDesignAdaptScale() { return m_designAdaptScale; }
         
-        void setCameraDsp(s32 inCameraWidth, s32 inCameraHeight, s32 inCameraAngle);
-        
         s32 getRealCameraWidth();
         
         s32 getRealCameraHeight();
@@ -114,6 +110,7 @@ namespace sv {
         s32 cameraAngle;        //相机转角度
         PICFORMATE cameraFormate;       //相机输出格式
         SV_OUTSTEAMFORMATE dataoutFormate;            //数据输出格式
+        
         //画笔参数相关
         f32 m_strokeWidth;
         FVec4 m_strokeColor;
@@ -122,9 +119,10 @@ namespace sv {
         
         s32 glVersion;
         bool cameraMirror;      //相机输入数据是否镜像
-        CfgFilter m_cfgFilter;
         bool mirror; //是否镜像显示,即进来什么样就是什么样，不进行翻转
         SVString m_tag;
+        CfgFilter m_cfgFilter;
+        
     private:
         void _adaptScale();
         //适配模式
@@ -132,5 +130,7 @@ namespace sv {
         f32 m_designAdaptScale;
     };
 
-
 }//!namespace sv
+
+
+#endif //SV_CONFIG_H

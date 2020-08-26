@@ -51,8 +51,7 @@ namespace sv {
             void setSrcw(bool _srcw);
             
             void setSrch(bool _srch);
-        protected:
-            void _updateData();
+
         private:
             bool m_rot;    //是否旋转
             bool m_trim;   //是否旋转

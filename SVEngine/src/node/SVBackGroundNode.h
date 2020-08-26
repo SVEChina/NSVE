@@ -44,11 +44,11 @@ namespace sv {
         //设置纹理
         void setTexture(cptr8 _path);
         
-        void setTexture(SVTEXINID _textype);
+        void setTexture(SVINTEX _textype);
         
         void setTexture(SVTexturePtr _tex);
         
-        SVTEXINID getUseInnerTex(){ return m_useTexType; }
+        SVINTEX getUseInnerTex(){ return m_useTexType; }
         
         //形变相关接口
         bool enableDeform();
@@ -66,7 +66,7 @@ namespace sv {
         
     protected:
         SVString m_pTexName;                //纹理名称
-        SVTEXINID m_useTexType;             //内置纹理类型
+        SVINTEX m_useTexType;             //内置纹理类型
         SVDeformImageMovePtr m_pDeform;     //形变算法
         bool m_inScreen;                    //是否在屏幕空间
         bool m_isSyncTex;

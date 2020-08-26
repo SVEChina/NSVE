@@ -16,11 +16,8 @@
 #include "../../mtl/SVTexMgr.h"
 #include "../../mtl/SVTexture.h"
 #include "../../event/SVOpEvent.h"
-#include "../../rendercore/SVRenderTexture.h"
 #include "../../rendercore/SVRenderMgr.h"
 #include "../../rendercore/SVRenderCmd.h"
-#include "../../rendercore/SVRenderScene.h"
-#include "../../rendercore/SVRenderObject.h"
 #include "../../rendercore/SVRenderer.h"
 #include "../../basesys/SVBasicSys.h"
 #include "../../basesys/filter/SVFilterGlow.h"
@@ -42,10 +39,10 @@ SVPenDraw::SVPenDraw(SVInstPtr _app)
 :SVGameBase(_app)
 ,m_curStroke(nullptr){
     m_lock = MakeSharedPtr<SVLock>();
-    m_strokeWidth = mApp->m_pConfig->m_strokeWidth;
-    m_strokeColor = mApp->m_pConfig->m_strokeColor;
-    m_glowWidth = mApp->m_pConfig->m_strokeGlowWidth;
-    m_glowColor = mApp->m_pConfig->m_strokeGlowColor;
+    m_strokeWidth = mApp->m_config.m_strokeWidth;
+    m_strokeColor = mApp->m_config.m_strokeColor;
+    m_glowWidth = mApp->m_config.m_strokeGlowWidth;
+    m_glowColor = mApp->m_config.m_strokeGlowColor;
     m_faceRot.set(0.0f, 0.0f, 0.0f);
     m_noseCenter.set(0.0f, 0.0f, 0.0f);
     m_faceEyeDis = 1.0f;
@@ -55,8 +52,6 @@ SVPenDraw::SVPenDraw(SVInstPtr _app)
 SVPenDraw::~SVPenDraw() {
     m_curStroke = nullptr;
     m_lock = nullptr;
-    m_fbo1 = nullptr;
-    m_fbo2 = nullptr;
     m_pTex1 = nullptr;
     m_pTex2 = nullptr;
     m_mtl1 = nullptr;
@@ -99,14 +94,14 @@ void SVPenDraw::init(SVGameReadyPtr _ready,SVGameRunPtr _run,SVGameEndPtr _end) 
 //    m_mtl1->setDepthEnable(false);
 //    m_mtl1->setBlendEnable(true);
 //    m_mtl1->setBlendState(MTL_BLEND_SRC_ALPHA, MTL_BLEND_ONE);
-//    m_mesh1 = mApp->getDataMgr()->m_screenMesh;
+//    m_mesh1 = mApp->getComData()->m_screenMesh;
 //    m_mtl2 = MakeSharedPtr<SVMtlCore>(mApp,"screennor");
 //    m_mtl2->setTexcoordFlip(1.0f, 1.0f);
 //    m_mtl2->setTexture(0, E_TEX_HELP1);
 //    m_mtl2->setDepthEnable(false);
 //    m_mtl2->setBlendEnable(true);
 //    m_mtl2->setBlendState(MTL_BLEND_SRC_ALPHA, MTL_BLEND_ONE);
-//    m_mesh2 = mApp->getDataMgr()->m_screenMesh;
+//    m_mesh2 = mApp->getComData()->m_screenMesh;
 //    //做辉光效果处理
 //    m_glowFilter = MakeSharedPtr<SVFilterGlow>(mApp);
 //    m_glowFilter->setRSType(RST_AR);
@@ -151,7 +146,7 @@ void SVPenDraw::_drawStroke(){
 //    SVRendererPtr t_renderer = mApp->getRenderer();
 //    SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
 //    if (t_rs && t_renderer && m_pRenderObj && m_fbo2) {
-//        SVRCmdFboResizePtr t_fbo_bind = MakeSharedPtr<SVRCmdFboResize>(m_fbo2);
+//        SVRCmdTargetResizePtr t_fbo_bind = MakeSharedPtr<SVRCmdTargetResize>(m_fbo2);
 //        t_fbo_bind->mTag = "pen_draw_fbo2_bind";
 //        t_rs->pushRenderCmd(RST_AR, t_fbo_bind);
 //
@@ -186,7 +181,7 @@ void SVPenDraw::_drawGlow(){
 //    SVRendererPtr t_renderer = mApp->getRenderer();
 //    SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
 //    if (t_rs && t_renderer && m_pRenderObj && m_fbo1) {
-//        SVRCmdFboResizePtr t_fbo_bind = MakeSharedPtr<SVRCmdFboResize>(m_fbo1);
+//        SVRCmdTargetResizePtr t_fbo_bind = MakeSharedPtr<SVRCmdTargetResize>(m_fbo1);
 //        t_fbo_bind->mTag = "pen_draw_fbo1_bind";
 //        t_rs->pushRenderCmd(RST_AR, t_fbo_bind);
 //        
@@ -325,7 +320,7 @@ void SVPenDraw::_updateFaceParam(){
     SVPersonPtr t_person = mApp->getDetectMgr()->getPersonModule()->getPerson(1);
     if (t_person && t_person->getExist()) {
         SVPersonTrackerPtr t_personTracker = t_person->getTracker();
-        f32 m_screenH = mApp->m_pGlobalParam->m_inner_height;
+        f32 m_screenH = mApp->m_global_param.m_sv_height;
         f32 t_pt_x = t_person->getFaceDataOriginalX(46);
         f32 t_pt_y = m_screenH - t_person->getFaceDataOriginalY(46);
         f32 t_yaw = t_person->getFaceRot().y;

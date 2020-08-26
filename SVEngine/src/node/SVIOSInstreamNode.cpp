@@ -16,7 +16,6 @@
 #include "../mtl/SVTextureIOS.h"
 #include "../mtl/SVMtlCore.h"
 #include "../rendercore/SVRenderMgr.h"
-#include "../rendercore/SVRenderObject.h"
 #include "../rendercore/SVRenderer.h"
 #include "../core/SVGeoGen.h"
 
@@ -26,17 +25,15 @@ SVIOSInstreamNode::SVIOSInstreamNode(SVInstPtr _app)
 :SVNode(_app){
     ntype = "SVIOSInstreamNode";
     m_tt = E_TEX_INSTREAM;
-    m_pRenderObj = MakeSharedPtr<SVRenderObject>();
     m_pMtl = MakeSharedPtr<SVMtlCore>(mApp,"screennorbgra");
 }
 
 SVIOSInstreamNode::~SVIOSInstreamNode() {
     destroy();
-    m_pRenderObj = nullptr;
     m_pMtl = nullptr;
 }
 
-void SVIOSInstreamNode::init(SVTEXINID _tt){
+void SVIOSInstreamNode::init(SVINTEX _tt){
     m_tt = _tt;
 }
 
@@ -51,15 +48,15 @@ void SVIOSInstreamNode::update(f32 dt) {
 //        m_pMtl->setModelMatrix(m_absolutMat);
 //        m_pMtl->update(dt);
 //        m_pRenderObj->setMtl(m_pMtl);
-//        m_pRenderObj->setMesh(mApp->getDataMgr()->m_screenMesh);
+//        m_pRenderObj->setMesh(mApp->getComData()->m_screenMesh);
 //    }
 }
 
 void SVIOSInstreamNode::render() {
-    SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
-    if (m_pRenderObj ) {
-        m_pRenderObj->pushCmd(t_rs, RST_SKY, "SVIOSInstreamNode");
-    }
+//    SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
+//    if (m_pRenderObj ) {
+//        m_pRenderObj->pushCmd(t_rs, RST_SKY, "SVIOSInstreamNode");
+//    }
 }
 
 

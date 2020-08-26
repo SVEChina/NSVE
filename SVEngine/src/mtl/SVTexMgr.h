@@ -9,11 +9,10 @@
 #define SV_TEXMGR_H
 
 #include "../base/SVGBase.h"
-#include "SVTexture.h"
-#include "../base/SVMap.h"
 #include "../mtl/SVMtlDeclare.h"
+#include "../work/SVWorkDeclare.h"
+#include "SVTexture.h"
 #include <vector>
-#include <list>
 #include <map>
 
 namespace sv {
@@ -34,16 +33,19 @@ namespace sv {
         //从文件加载纹理
         SVTexturePtr getTexture(cptr8 _name,bool _sync = true);
         
-        //创建内部纹理
-        SVTexturePtr getTexture(SVTEXINID _texname);
-        
-        //创建内部纹理
-        SVTexturePtr createTexture(SVTEXINID _texname,SVTextureDsp _param);
-        
         bool hasTexture(cptr8 _name);
+        
+        //获取内部纹理
+        SVTexturePtr getInTexture(SVINTEX _texname);
+        
+        //创建内部纹理
+        SVTexturePtr createInTexture(SVINTEX _texname,SVTextureDsp _dsp);
+        
+        bool hasInTexture(SVINTEX _texid);
         
         void clear();
         
+        //
         SVTexturePtr getSVETexture();
         
         //
@@ -58,26 +60,15 @@ namespace sv {
         //文件纹理池
         typedef std::map<SVString, SVTexturePtr> FTEXPOOL;
         FTEXPOOL m_ftex_pool;
+        //内置纹理池
+        typedef std::vector<SVTexturePtr> INTEXPOOL;
+        INTEXPOOL m_intex_pool;
         //
         SVLockPtr m_texLock;
-        SVTexturePtr m_sve_tex;
-        bool mAsync;
         //
-    public:
-        //所有内置纹理都在这里
-        //主纹理
-        SVTexturePtr m_pMainTex;
-        //阴影纹理
-        SVTexturePtr m_pShadowTex;
-        //G-BUFFER
-        SVTexturePtr m_pMainPosTex;
-        SVTexturePtr m_pMainNorTex;
-        SVTexturePtr m_pMainColoreTex;
-        //后处理纹理
-        SVTexturePtr m_pPostTex0;
-        SVTexturePtr m_pPostTex1;
-        SVTexturePtr m_pPostTex2;
-        SVTexturePtr m_pPostTex3;
+        SVTexturePtr m_sve_tex;
+        //
+        bool mAsync;
     };
 
     

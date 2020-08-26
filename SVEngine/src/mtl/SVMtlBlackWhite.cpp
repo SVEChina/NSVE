@@ -43,5 +43,5 @@ void SVMtlBlackWhite::update(f32 dt) {
 
 void SVMtlBlackWhite::_submitUniform(SVRendererPtr _render) {
     SVMtlCore::_submitUniform(_render);
-    _render->submitUniformf("mode", m_mode);
+    //_render->submitUniformf("mode", m_mode);
 }

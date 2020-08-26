@@ -19,26 +19,24 @@
 
 namespace sv {
     
-        class SVTextureIOS : public SVTexture {
-        public:
-            SVTextureIOS(SVInstPtr _app);
-            
-            ~SVTextureIOS();
-            
-            virtual void init(cptr8 _name, s32 _type, s32 _width, s32 _height, s32 _informate, s32 _dateformate, bool _enableMipMap = false);
-            
-            virtual void create(SVRendererPtr _renderer);
-            
-            virtual void destroy(SVRendererPtr _renderer);
-            
-            virtual void pushData(u8* _srcPtr,s32 _w,s32 _h,s32 _pixelformate);
-            
-            virtual void fetchData(u8* _dstPtr,s32 _w,s32 _h);
-        protected:
-            void _updateData();
-        };
+    class SVTextureIOS : public SVTexture {
+    public:
+        SVTextureIOS(SVInstPtr _app);
+        
+        ~SVTextureIOS();
+        
+        virtual void init(cptr8 _name, s32 _type, s32 _width, s32 _height, s32 _informate, s32 _dateformate, bool _enableMipMap = false);
+        
+        virtual void create(SVRendererPtr _renderer);
+        
+        virtual void destroy(SVRendererPtr _renderer);
+        
+        virtual void pushData(u8* _srcPtr,s32 _w,s32 _h,s32 _pixelformate);
+        
+        virtual void fetchData(u8* _dstPtr,s32 _w,s32 _h);
+    };
 
-}
+}//!namespace sv
 
 
 

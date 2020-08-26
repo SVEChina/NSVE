@@ -13,14 +13,6 @@
 
 using namespace sv;
 
-void SVRenderMesh::buildBufferDsp(BUFFERTYPE _buftype,s32 _vertCnt,BufferDspPtr _dsp) {
-    if(_dsp) {
-        _dsp->_bufType = _buftype;
-        _dsp->_vertCnt = _vertCnt;
-        _dsp->_bufSize = _vertCnt * BufferDsp::getVertSize(_dsp->getVertType());
-    }
-}
-
 SVRenderMesh::SVRenderMesh(SVInstPtr _app)
 :SVGBaseEx(_app){
     m_index_dsp = nullptr;
@@ -94,31 +86,36 @@ BufferDspPtr SVRenderMesh::getInstanceDsp() {
 }
 
 void SVRenderMesh::setDrawMethod(s32 _method) {
-    m_draw_method = _method;
+    if(m_res_buffer) {
+        m_res_buffer->setDrawMethod(_method);
+    }
 }
 
-void SVRenderMesh::setVertNum(s32 _vertexNum){
+void SVRenderMesh::setDrawVertNum(s32 _vertexNum){
+    if(m_res_buffer) {
+        m_res_buffer->setDrawNum(_vertexNum);
+    }
 }
 
 void SVRenderMesh::setIndexData(SVDataSwapPtr _data,s32 _num){
-//    if(m_use_index) {
-//    }
+    if(m_res_buffer) {
+        m_res_buffer->setInstData(_data);
+        m_res_buffer->setDrawNum(_num);
+    }
 }
 
 void SVRenderMesh::setInstanceData(SVDataSwapPtr _pdata, u32 _instanceCount){
-    if(m_use_instance) {
-        //
-        
+    if(m_res_buffer) {
+        m_res_buffer->setInstData(_pdata);
     }
 }
 
 void SVRenderMesh::setVertexData(SVDataSwapPtr _data){
-    //更改混合流数据
-    
+    setVertexData(_data,0);
 }
 
-void SVRenderMesh::setVertexData(SVDataSwapPtr _data,s32 _streamtype) {
-    //更改目标流数据
-    
+void SVRenderMesh::setVertexData(SVDataSwapPtr _data,s32 _streamnum) {
+    if(m_res_buffer) {
+        m_res_buffer->setVertData(_data, _streamnum);
+    }
 }
-

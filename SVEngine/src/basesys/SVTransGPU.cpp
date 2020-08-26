@@ -14,7 +14,6 @@
 #include "../basesys/SVComData.h"
 #include "../app/SVInst.h"
 #include "../rendercore/SVRenderMgr.h"
-#include "../rendercore/SVRenderObject.h"
 #include "../rendercore/SVRenderer.h"
 #include "../mtl/SVTexMgr.h"
 #include "../mtl/SVTexture.h"
@@ -33,7 +32,6 @@ SVTransGPU::SVTransGPU(SVInstPtr _app,
 ,m_tex1(_t1)
 ,m_tex2(_t2)
 ,m_texOut(_tOut){
-    //m_pRenderObj = MakeSharedPtr<SVRenderObject>();
     m_passNode = MakeSharedPtr<SVMultPassNode>(mApp);
     m_passNode->setRSType(RST_SKY);
     m_pMtl = nullptr;
@@ -42,11 +40,10 @@ SVTransGPU::SVTransGPU(SVInstPtr _app,
 
 SVTransGPU::~SVTransGPU() {
     destroy();
-    //m_pRenderObj = nullptr;
     m_pMtl = nullptr;
 }
 
-void SVTransGPU::init(s32 _w, s32 _h, f32 _angle, PICFORMATE _picformate, SVTEXINID _tt) {
+void SVTransGPU::init(s32 _w, s32 _h, f32 _angle, PICFORMATE _picformate, SVINTEX _tt) {
 //    SVTrans::init(_w, _h, _angle, _picformate, _tt);
 //    if (_picformate == SV_PF_GRAY8) {
 //        m_pMtl = MakeSharedPtr<SVMtlCore>(mApp, "yuv2y");
@@ -158,16 +155,16 @@ void SVTransGPU::setAngle(f32 _angle){
 //        m_angle=_angle;
 //        SVPassPtr t_pass=m_passNode->getPass(0);
 //        if (_angle == 90) {
-//            t_pass->setMesh(mApp->getDataMgr()->m_screenMeshRot90);
+//            t_pass->setMesh(mApp->getComData()->m_screenMeshRot90);
 //        } else if (_angle == 270) {
-//            t_pass->setMesh(mApp->getDataMgr()->m_screenMeshRot270);
+//            t_pass->setMesh(mApp->getComData()->m_screenMeshRot270);
 //        } else if(_angle == 180) {
-//            t_pass->setMesh(mApp->getDataMgr()->m_screenMeshRot180);
+//            t_pass->setMesh(mApp->getComData()->m_screenMeshRot180);
 //        }
 //    }
 }
 
-void SVTransGPU::createPass(s32 _w, s32 _h, f32 _angle, SVTEXINID _tt) {
+void SVTransGPU::createPass(s32 _w, s32 _h, f32 _angle, SVINTEX _tt) {
 //    m_passNode->create(_w, _h);
 //    SVPassPtr t_pass = MakeSharedPtr<SVPass>();
 //    m_pMtl->setTexcoordFlip(1.0,1.0);
@@ -181,11 +178,11 @@ void SVTransGPU::createPass(s32 _w, s32 _h, f32 _angle, SVTEXINID _tt) {
 //    t_pass->setMtl(m_pMtl);
 //    t_pass->mTag = "SVTransGPU";
 //    if (_angle == 90) {
-//        t_pass->setMesh(mApp->getDataMgr()->m_screenMeshRot90);
+//        t_pass->setMesh(mApp->getComData()->m_screenMeshRot90);
 //    } else if (_angle == 270) {
-//        t_pass->setMesh(mApp->getDataMgr()->m_screenMeshRot270);
+//        t_pass->setMesh(mApp->getComData()->m_screenMeshRot270);
 //    } else if(_angle == 180) {
-//        t_pass->setMesh(mApp->getDataMgr()->m_screenMeshRot180);
+//        t_pass->setMesh(mApp->getComData()->m_screenMeshRot180);
 //    }
 //    t_pass->setOutTex(_tt);
 //    m_passNode->addPass(t_pass);

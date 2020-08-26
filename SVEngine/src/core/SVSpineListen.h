@@ -8,8 +8,8 @@
 #ifndef SV_SPINELISTEN_H
 #define SV_SPINELISTEN_H
 
-#include "../third/spine/include/spine/AnimationState.h"
-#include "../third/spine/include/spine//Event.h"
+#include "../third/spine4/include/spine/AnimationState.h"
+#include "../third/spine4/include/spine/Event.h"
 #include <functional>
 
 typedef std::function<void(int trackIndex)> spStartListener;

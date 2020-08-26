@@ -16,7 +16,6 @@
 #include "../mtl/SVTexMgr.h"
 #include "../mtl/SVTexture.h"
 #include "../mtl/SVMtlBasedOn.h"
-#include "../rendercore/SVRenderTexture.h"
 #include "../rendercore/SVRenderMgr.h"
 #include "../rendercore/SVRenderer.h"
 #include "filter/SVRGBToneCurveFilter.h"
@@ -41,14 +40,13 @@ void SVPictureProcess::addFilter(SVFilterBasePtr _filter){
 }
 
 void SVPictureProcess::openFilter(SVFilterBasePtr _filter){
-  
-    SVScenePtr t_sc = mApp->getSceneMgr()->getScene();
-    if(t_sc){
-        SVNodePtr t_node=_filter->getNode();
-        if(t_node){
-            t_sc->addNode(_filter->getNode());
-        }
-    }
+//    SVScenePtr t_sc = mApp->getSceneMgr()->getScene();
+//    if(t_sc){
+//        SVNodePtr t_node=_filter->getNode();
+//        if(t_node){
+//            t_sc->addNode(_filter->getNode());
+//        }
+//    }
 }
 
 void SVPictureProcess::init() {

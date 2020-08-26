@@ -36,7 +36,7 @@ namespace sv {
         
         virtual void setTexture(cptr8 _path);
         
-        virtual void setTexture(SVTEXINID _textype);
+        virtual void setTexture(SVINTEX _textype);
         
         virtual void setTexture(SVTexturePtr _tex);
         

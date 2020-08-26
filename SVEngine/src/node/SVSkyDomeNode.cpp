@@ -10,7 +10,7 @@
 #include "../basesys/SVCameraNode.h"
 #include "../mtl/SVTexture.h"
 #include "../mtl/SVMtlCore.h"
-#include "../rendercore/SVRenderObject.h"
+
 #include "../rendercore/SVRenderMesh.h"
 #include "../rendercore/SVRenderMgr.h"
 
@@ -22,13 +22,11 @@ SVSkyDomeNode::SVSkyDomeNode(SVInstPtr _app)
     ntype = "SVSkyDomeNode";
     //mMesh = MakeSharedPtr<SVRenderMesh>(mApp);
     //mMesh->createMesh();
-    m_renderObject = MakeSharedPtr<SVRenderObject>();
 }
 
 SVSkyDomeNode::~SVSkyDomeNode(){
     mDomeTex = nullptr;
     mMesh = nullptr;
-    m_renderObject = nullptr;
 }
 
 void SVSkyDomeNode::generateSkyDome(SVTexturePtr _tex ,
@@ -63,10 +61,10 @@ void SVSkyDomeNode::update(f32 _dt){
 void SVSkyDomeNode::render(){
     if (!m_visible)
         return;
-    SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
-    if (m_renderObject) {
-        m_renderObject->pushCmd(t_rs, RST_SKY, "SkyDome");
-    }
+//    SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
+//    if (m_renderObject) {
+//        m_renderObject->pushCmd(t_rs, RST_SKY, "SkyDome");
+//    }
 }
 
 void SVSkyDomeNode::_generateMesh(){
@@ -111,7 +109,7 @@ void SVSkyDomeNode::_generateMesh(){
 //    
 //    SVDataSwapPtr tmpDataSwap = MakeSharedPtr<SVDataSwap>();
 //    tmpDataSwap->writeData((void*)&VecPoint[0], sizeof(V3_T0) * VecPoint.size() );
-//    mMesh->setVertNum(VecPoint.size());
+//    mMesh->setDrawVertNum(VecPoint.size());
 //    mMesh->setVertexData(tmpDataSwap);
 //    SVArray<u16> VecIndex;
 //    for (i = 0; i < mHorizontalResolution; ++i){

@@ -7,52 +7,44 @@
 
 #include "SVPass.h"
 #include "../app/SVInst.h"
+#include "../basesys/SVComData.h"
 #include "../mtl/SVMtlCore.h"
+#include "../mtl/SVSurface.h"
+#include "../mtl/SVMtlLib.h"
+#include "../rendercore/SVRenderMgr.h"
 #include "../rendercore/SVRenderer.h"
+#include "../rendercore/SVRTarget.h"
+#include "../rendercore/SVRenderCmd.h"
 
 using namespace sv;
 
-SVPass::SVPass(){
-    mTag = "SVPass";
-    m_pMtl = nullptr;
-    m_outTex = nullptr;
-    m_pMesh= nullptr;
-    m_outTexType = E_TEX_END;
+SVPass::SVPass(SVInstPtr _inst)
+:SVGBaseEx(_inst){
+    m_target = nullptr;
+    m_surface = MakeSharedPtr<SVSurface>();
 }
 
 SVPass::~SVPass(){
-    m_pMtl = nullptr;
-    m_outTex = nullptr;
-    m_outTexType = E_TEX_END;
+    m_target = nullptr;
+    m_surface = nullptr;
 }
 
-bool SVPass::setInTex(s32 _index,SVTexturePtr _tex){
-    if( m_pMtl ){
-        m_pMtl->setTexture(_index, _tex);
-        return true;
+void SVPass::bindTarget(SVRTargetPtr _target) {
+    m_target = _target;
+}
+
+void SVPass::unbindTarget() {
+    m_target = nullptr;
+}
+
+void SVPass::update(f32 _dt) {
+    SVMtlCorePtr t_mtl = mApp->getMtlLib()->getMtl(m_mtl_name.c_str());
+    if(t_mtl && m_target) {
+        t_mtl->update(_dt);
+        SVRCmdPassPtr t_r_pass = MakeSharedPtr<SVRCmdPass>();
+        t_r_pass->setMesh( mApp->getComData()->screenMesh() );
+        t_r_pass->setMaterial(t_mtl);
+        t_r_pass->setSurface( m_surface );
+        //t_r_pass->setTarget(m_target);
     }
-    return false;
 }
-
-bool SVPass::setInTex(s32 _index,SVTEXINID _tt){
-    if( m_pMtl ){
-        m_pMtl->setTexture(_index, _tt);
-        return true;
-    }
-    return false;
-}
-
-bool SVPass::setOutTex(SVTexturePtr _tex){
-    m_outTex = _tex;
-    return true;
-}
-
-bool SVPass::setOutTex(SVTEXINID _tt) {
-    m_outTexType = _tt;
-    return true;
-}
-
-void SVPass::setMesh(SVRenderMeshPtr _pMesh){
-    m_pMesh=_pMesh;
-}
-

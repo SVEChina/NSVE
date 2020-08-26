@@ -34,76 +34,76 @@ void SVParamTbl::addParam(cptr8 _name,cptr8 _type,cptr8 _value)  {
     if( strcmp(_type,"s32") == 0) {
         s32 tmp = atoi(_value);
         if(strcmp(_value,"identify") == 0) {
-            setParam(_name,1);
+            s32 tmp = 1;
+            addParam(_name,tmp);
         }else{
-            setParam(_name,tmp);
+            addParam(_name,tmp);
         }
     }else if( strcmp(_type,"f32") == 0 ) {
         if(strcmp(_value,"identify") == 0) {
-            setParam(_name,1.0f);
+            f32 tmp = 1.0f;
+            addParam(_name,tmp);
         }else{
             f32 tmp = atof(_value);
-            setParam(_name,tmp);
+            addParam(_name,tmp);
         }
     }else if( strcmp(_type,"fvec2") == 0 ) {
         if(strcmp(_value,"identify") == 0) {
             FVec2 tmp = FVec2_one;;
-            setParam(_name,tmp);
+            addParam(_name,tmp);
         }else{
             FVec2 tmp(_value);
-            setParam(_name,tmp);
+            addParam(_name,tmp);
         }
     }else if( strcmp(_type,"fvec3") == 0 ) {
         if(strcmp(_value,"identify") == 0) {
             FVec3 tmp = FVec3_one;
-            setParam(_name,tmp);
+            addParam(_name,tmp);
         }else{
             FVec3 tmp(_value);
-            setParam(_name,tmp);
+            addParam(_name,tmp);
         }
     }else if( strcmp(_type,"fvec4") == 0 ) {
         if(strcmp(_value,"identify") == 0) {
             FVec4 tmp = FVec4_one;
-            setParam(_name,tmp);
+            addParam(_name,tmp);
         }else{
             FVec4 tmp(_value);
-            setParam(_name,tmp);
+            addParam(_name,tmp);
         }
     }else if( strcmp(_type,"fmat2") == 0 ) {
         if(strcmp(_value,"identify") == 0) {
             FMat2 tmp;
             tmp.setIdentity();
-            setParam(_name,tmp);
+            addParam(_name,tmp);
         }else{
             FMat2 tmp(_value);
-            setParam(_name,tmp);
+            addParam(_name,tmp);
         }
     }else if( strcmp(_type,"fmat3") == 0 ) {
         if(strcmp(_value,"identify") == 0) {
             FMat3 tmp;
             tmp.setIdentity();
-            setParam(_name,tmp);
+            addParam(_name,tmp);
         }else{
             FMat3 tmp(_value);
-            setParam(_name,tmp);
+            addParam(_name,tmp);
         }
     }else if( strcmp(_type,"fmat4") == 0 ) {
         if(strcmp(_value,"identify") == 0) {
             FMat4 tmp;
             tmp.setIdentity();
-            setParam(_name,tmp);
+            addParam(_name,tmp);
         }else{
             FMat4 tmp(_value);
-            setParam(_name,tmp);
+            addParam(_name,tmp);
         }
     }
 }
 
-void SVParamTbl::setParam(cptr8 _name,s32 _value) {
+void SVParamTbl::addParam(cptr8 _name,s32& _value){
     s32 t_index = _getParamIndex(_name);
-    if( t_index>=0 ) {
-        m_param_values->set(m_param_dsps[t_index].m_off,_value);
-    }else{
+    if( t_index<0 ) {
         //推送目标参数
         SVParamDsp t_param;
         t_param.m_name = _name;
@@ -114,11 +114,9 @@ void SVParamTbl::setParam(cptr8 _name,s32 _value) {
     }
 }
 
-void SVParamTbl::setParam(cptr8 _name,f32 _value) {
+void SVParamTbl::addParam(cptr8 _name,f32& _value){
     s32 t_index = _getParamIndex(_name);
-    if( t_index>=0 ) {
-        m_param_values->set(m_param_dsps[t_index].m_off,_value);
-    }else{
+    if( t_index<0 ) {
         //推送目标参数
         SVParamDsp t_param;
         t_param.m_name = _name;
@@ -129,11 +127,9 @@ void SVParamTbl::setParam(cptr8 _name,f32 _value) {
     }
 }
 
-void SVParamTbl::setParam(cptr8 _name,FVec2 _value) {
+void SVParamTbl::addParam(cptr8 _name,FVec2& _value){
     s32 t_index = _getParamIndex(_name);
-    if( t_index>=0 ) {
-        m_param_values->set(m_param_dsps[t_index].m_off,_value);
-    }else{
+    if( t_index<0 ) {
         //推送目标参数
         SVParamDsp t_param;
         t_param.m_name = _name;
@@ -144,11 +140,9 @@ void SVParamTbl::setParam(cptr8 _name,FVec2 _value) {
     }
 }
 
-void SVParamTbl::setParam(cptr8 _name,FVec3 _value) {
+void SVParamTbl::addParam(cptr8 _name,FVec3& _value){
     s32 t_index = _getParamIndex(_name);
-    if( t_index>=0 ) {
-        m_param_values->set(m_param_dsps[t_index].m_off,_value);
-    }else{
+    if( t_index<0 ) {
         //推送目标参数
         SVParamDsp t_param;
         t_param.m_name = _name;
@@ -159,11 +153,9 @@ void SVParamTbl::setParam(cptr8 _name,FVec3 _value) {
     }
 }
 
-void SVParamTbl::setParam(cptr8 _name,FVec4 _value) {
+void SVParamTbl::addParam(cptr8 _name,FVec4& _value){
     s32 t_index = _getParamIndex(_name);
-    if( t_index>=0 ) {
-        m_param_values->set(m_param_dsps[t_index].m_off,_value);
-    }else{
+    if( t_index<0 ) {
         //推送目标参数
         SVParamDsp t_param;
         t_param.m_name = _name;
@@ -174,11 +166,9 @@ void SVParamTbl::setParam(cptr8 _name,FVec4 _value) {
     }
 }
 
-void SVParamTbl::setParam(cptr8 _name,FMat2 _value) {
+void SVParamTbl::addParam(cptr8 _name,FMat2& _value){
     s32 t_index = _getParamIndex(_name);
-    if( t_index>=0 ) {
-        m_param_values->set(m_param_dsps[t_index].m_off,_value);
-    }else{
+    if( t_index<0 ) {
         //推送目标参数
         SVParamDsp t_param;
         t_param.m_name = _name;
@@ -189,11 +179,9 @@ void SVParamTbl::setParam(cptr8 _name,FMat2 _value) {
     }
 }
 
-void SVParamTbl::setParam(cptr8 _name,FMat3 _value) {
+void SVParamTbl::addParam(cptr8 _name,FMat3& _value){
     s32 t_index = _getParamIndex(_name);
-    if( t_index>=0 ) {
-        m_param_values->set(m_param_dsps[t_index].m_off,_value);
-    }else{
+    if( t_index<0 ) {
         //推送目标参数
         SVParamDsp t_param;
         t_param.m_name = _name;
@@ -204,11 +192,9 @@ void SVParamTbl::setParam(cptr8 _name,FMat3 _value) {
     }
 }
 
-void SVParamTbl::setParam(cptr8 _name,FMat4 _value) {
+void SVParamTbl::addParam(cptr8 _name,FMat4& _value){
     s32 t_index = _getParamIndex(_name);
-    if( t_index>=0 ) {
-        m_param_values->set(m_param_dsps[t_index].m_off,_value);
-    }else{
+    if( t_index<0 ) {
         //推送目标参数
         SVParamDsp t_param;
         t_param.m_name = _name;
@@ -217,6 +203,78 @@ void SVParamTbl::setParam(cptr8 _name,FMat4 _value) {
         t_param.m_off = m_param_values->push(_value);
         m_param_dsps.push_back(t_param);
     }
+}
+
+bool SVParamTbl::setParam(cptr8 _name,s32& _value) {
+    s32 t_index = _getParamIndex(_name);
+    if( t_index>=0 ) {
+        m_param_values->set(m_param_dsps[t_index].m_off,_value);
+        return true;
+    }
+    return false;
+}
+
+bool SVParamTbl::setParam(cptr8 _name,f32& _value) {
+    s32 t_index = _getParamIndex(_name);
+    if( t_index>=0 ) {
+        m_param_values->set(m_param_dsps[t_index].m_off,_value);
+        return true;
+    }
+    return false;
+}
+
+bool SVParamTbl::setParam(cptr8 _name,FVec2& _value) {
+    s32 t_index = _getParamIndex(_name);
+    if( t_index>=0 ) {
+        m_param_values->set(m_param_dsps[t_index].m_off,_value);
+        return true;
+    }
+    return false;
+}
+
+bool SVParamTbl::setParam(cptr8 _name,FVec3& _value) {
+    s32 t_index = _getParamIndex(_name);
+    if( t_index>=0 ) {
+        m_param_values->set(m_param_dsps[t_index].m_off,_value);
+        return true;
+    }
+    return false;
+}
+
+bool SVParamTbl::setParam(cptr8 _name,FVec4& _value) {
+    s32 t_index = _getParamIndex(_name);
+    if( t_index>=0 ) {
+        m_param_values->set(m_param_dsps[t_index].m_off,_value);
+        return true;
+    }
+    return false;
+}
+
+bool SVParamTbl::setParam(cptr8 _name,FMat2& _value) {
+    s32 t_index = _getParamIndex(_name);
+    if( t_index>=0 ) {
+        m_param_values->set(m_param_dsps[t_index].m_off,_value);
+        return true;
+    }
+    return false;
+}
+
+bool SVParamTbl::setParam(cptr8 _name,FMat3& _value) {
+    s32 t_index = _getParamIndex(_name);
+    if( t_index>=0 ) {
+        m_param_values->set(m_param_dsps[t_index].m_off,_value);
+        return true;
+    }
+    return false;
+}
+
+bool SVParamTbl::setParam(cptr8 _name,FMat4& _value) {
+    s32 t_index = _getParamIndex(_name);
+    if( t_index>=0 ) {
+        m_param_values->set(m_param_dsps[t_index].m_off,_value);
+        return true;
+    }
+    return false;
 }
 
 s32 SVParamTbl::_getParamIndex(cptr8 _name) {

@@ -86,7 +86,7 @@ void SVRShaderMetal::create(SVRendererPtr _renderer) {
         //生成sampler-state
         t_sampler.m_st = [t_rm->m_pDevice newSamplerStateWithDescriptor:samplerDsp];
         t_sampler.m_chn = t_shader->m_samplers[i].m_chn;
-        t_sampler.m_type = t_shader->m_samplers[i].m_type;
+        t_sampler.m_stage = t_shader->m_samplers[i].m_stage;
         m_sampler_st.push_back(t_sampler);
     }
     //生成uniform-buf
@@ -95,28 +95,39 @@ void SVRShaderMetal::create(SVRendererPtr _renderer) {
         s32 t_len = t_shader->m_paramtbl[i].m_tbl->getDataSize();
         UBUF t_ubuf;
         t_ubuf.m_bufid = t_shader->m_paramtbl[i].m_id;
-        t_ubuf.m_type = t_shader->m_paramtbl[i].m_type;
+        t_ubuf.m_stage = t_shader->m_paramtbl[i].m_stage;
         t_ubuf.m_ubuf = [t_rm->m_pDevice newBufferWithBytes:t_pointer length: t_len options: MTLResourceStorageModeShared ];
         m_ubuf_pool.push_back(t_ubuf);
     }
-    //m_vft = t_shader->m_shader_dsp.m_vft;
     //创建渲染描述
     MTLRenderPipelineDescriptor *t_pl_dsp = [[MTLRenderPipelineDescriptor alloc] init];
     t_pl_dsp.label = @"Simple Pipeline";
     t_pl_dsp.vertexFunction = m_vsf;
     t_pl_dsp.fragmentFunction = m_fsf;
     t_pl_dsp.vertexDescriptor = _genVertexDsp(E_BFM_AOS);
-    t_pl_dsp.colorAttachments[0].pixelFormat = MTLPixelFormatBGRA8Unorm;
-    t_pl_dsp.depthAttachmentPixelFormat = MTLPixelFormatInvalid;//MTLPixelFormatDepth32Float_Stencil8;
+    if( t_shader->m_shader_dsp.m_pass == "direct" ) {
+        //直接
+        t_pl_dsp.colorAttachments[0].pixelFormat = MTLPixelFormatBGRA8Unorm;
+        t_pl_dsp.depthAttachmentPixelFormat = MTLPixelFormatInvalid;
+        t_pl_dsp.stencilAttachmentPixelFormat = MTLPixelFormatInvalid;
+    }else if( t_shader->m_shader_dsp.m_pass == "target-c" ){
+        //ar相机
+        t_pl_dsp.colorAttachments[0].pixelFormat = MTLPixelFormatRGBA8Unorm;
+        t_pl_dsp.depthAttachmentPixelFormat = MTLPixelFormatInvalid;
+        t_pl_dsp.stencilAttachmentPixelFormat = MTLPixelFormatInvalid;
+    } else {
+        //正常渲染
+        t_pl_dsp.colorAttachments[0].pixelFormat = MTLPixelFormatRGBA8Unorm;
+        t_pl_dsp.depthAttachmentPixelFormat = MTLPixelFormatDepth32Float_Stencil8;
+        t_pl_dsp.stencilAttachmentPixelFormat = MTLPixelFormatDepth32Float_Stencil8;
+    }
     t_errors = nullptr;
     m_pl_state = [t_rm->m_pDevice newRenderPipelineStateWithDescriptor:t_pl_dsp error:&t_errors];
     if(t_errors!=nullptr) {
-        //error
         m_exist = false;
         return ;
     }
     t_pl_dsp = nullptr;
-    //
     m_exist = true;
 }
 
@@ -206,70 +217,70 @@ MTLVertexDescriptor* SVRShaderMetal::_genVertexDsp(BUFFERMODE _mode) {
         for(s32 i=0;i<t_shader->m_shader_dsp.m_vft.size();i++) {
             s32 _vf = t_shader->m_shader_dsp.m_vft[i];
             //单一混合流
-            if (_vf & SV_SMT_V2) {
+            if (_vf & E_VF_V2) {
                t_vert_dsp.attributes[t_attri_index].format = MTLVertexFormatFloat2;
                t_vert_dsp.attributes[t_attri_index].offset = t_off;
                t_vert_dsp.attributes[t_attri_index].bufferIndex = 0;
                t_attri_index++;
                t_vert_size += 2*sizeof(f32);
                t_off = t_vert_size;
-            }else if (_vf & SV_SMT_V3) {
+            }else if (_vf & E_VF_V3) {
                t_vert_dsp.attributes[t_attri_index].format = MTLVertexFormatFloat3;
                t_vert_dsp.attributes[t_attri_index].offset = t_off;
                t_vert_dsp.attributes[t_attri_index].bufferIndex = 0;
                t_attri_index++;
                t_vert_size += 3*sizeof(f32);
                t_off = t_vert_size;
-            }else if (_vf & SV_SMT_NOR) {
+            }else if (_vf & E_VF_NOR) {
                t_vert_dsp.attributes[t_attri_index].format = MTLVertexFormatFloat3;
                t_vert_dsp.attributes[t_attri_index].offset = t_off;
                t_vert_dsp.attributes[t_attri_index].bufferIndex = 0;
                t_attri_index++;
                t_vert_size += 3*sizeof(f32);
                t_off = t_vert_size;
-            }else if (_vf & SV_SMT_TAG) {
+            }else if (_vf & E_VF_TAG) {
                t_vert_dsp.attributes[t_attri_index].format = MTLVertexFormatFloat3;
                t_vert_dsp.attributes[t_attri_index].offset = t_off;
                t_vert_dsp.attributes[t_attri_index].bufferIndex = 0;
                t_attri_index++;
                t_vert_size += 3*sizeof(f32);
                t_off = t_vert_size;
-            }else if (_vf & SV_SMT_BTAG) {
+            }else if (_vf & E_VF_BTAG) {
                t_vert_dsp.attributes[t_attri_index].format = MTLVertexFormatFloat3;
                t_vert_dsp.attributes[t_attri_index].offset = t_off;
                t_vert_dsp.attributes[t_attri_index].bufferIndex = 0;
                t_attri_index++;
                t_vert_size += 3*sizeof(f32);
                t_off = t_vert_size;
-            }else if (_vf & SV_SMT_C0) {
+            }else if (_vf & E_VF_C0) {
                t_vert_dsp.attributes[t_attri_index].format = MTLVertexFormatUChar4;
                t_vert_dsp.attributes[t_attri_index].offset = t_off;
                t_vert_dsp.attributes[t_attri_index].bufferIndex = 0;
                t_attri_index++;
                t_vert_size += 4*sizeof(u8);
                t_off = t_vert_size;
-            }else if (_vf & SV_SMT_T0) {
+            }else if (_vf & E_VF_T0) {
                t_vert_dsp.attributes[t_attri_index].format = MTLVertexFormatFloat2;
                t_vert_dsp.attributes[t_attri_index].offset = t_off;
                t_vert_dsp.attributes[t_attri_index].bufferIndex = 0;
                t_attri_index++;
                t_vert_size += 2*sizeof(f32);
                t_off = t_vert_size;
-            }else if (_vf & SV_SMT_T1) {
+            }else if (_vf & E_VF_T1) {
                t_vert_dsp.attributes[t_attri_index].format = MTLVertexFormatFloat2;
                t_vert_dsp.attributes[t_attri_index].offset = t_off;
                t_vert_dsp.attributes[t_attri_index].bufferIndex = 0;
                t_attri_index++;
                t_vert_size += 2*sizeof(f32);
                t_off = t_vert_size;
-            }else if (_vf & SV_SMT_BONE) {
+            }else if (_vf & E_VF_BONE) {
                t_vert_dsp.attributes[t_attri_index].format = MTLVertexFormatUShort4;
                t_vert_dsp.attributes[t_attri_index].offset = t_off;
                t_vert_dsp.attributes[t_attri_index].bufferIndex = 0;
                t_attri_index++;
                t_vert_size += 4*sizeof(u16);
                t_off = t_vert_size;
-            }else if (_vf & SV_SMT_BONE_W) {
+            }else if (_vf & E_VF_BONE_W) {
                t_vert_dsp.attributes[t_attri_index].format = MTLVertexFormatFloat4;
                t_vert_dsp.attributes[t_attri_index].offset = t_off;
                t_vert_dsp.attributes[t_attri_index].bufferIndex = 0;
@@ -318,10 +329,10 @@ bool SVRShaderMetal::active(SVRendererPtr _renderer) {
     }
     //采样器更新
     for(s32 i=0;i<m_sampler_st.size();i++) {
-        if(m_sampler_st[i].m_type == 0) {
-            [t_rm->m_pCurEncoder setVertexSamplerState:m_sampler_st[i].m_st atIndex:m_sampler_st[i].m_chn];
-        }else if(m_sampler_st[i].m_type == 1) {
-            [t_rm->m_pCurEncoder setFragmentSamplerState:m_sampler_st[i].m_st atIndex:m_sampler_st[i].m_chn];
+        if(m_sampler_st[i].m_stage == SV_STAGE_VS) {
+            [t_rm->m_curEncoder setVertexSamplerState:m_sampler_st[i].m_st atIndex:m_sampler_st[i].m_chn];
+        }else if(m_sampler_st[i].m_stage == SV_STAGE_FS) {
+            [t_rm->m_curEncoder setFragmentSamplerState:m_sampler_st[i].m_st atIndex:m_sampler_st[i].m_chn];
         }
     }
     //替换uniform
@@ -332,18 +343,18 @@ bool SVRShaderMetal::active(SVRendererPtr _renderer) {
     }
     //上传uniform
     for(s32 i=0;i<m_ubuf_pool.size();i++) {
-        if( m_ubuf_pool[i].m_type == 0 ) {
+        if( m_ubuf_pool[i].m_stage == SV_STAGE_VS ) {
             //vs
-            [t_rm->m_pCurEncoder setVertexBuffer:m_ubuf_pool[i].m_ubuf offset:0 atIndex:m_ubuf_pool[i].m_bufid];
-        }else if( m_ubuf_pool[i].m_type == 1 ) {
+            [t_rm->m_curEncoder setVertexBuffer:m_ubuf_pool[i].m_ubuf offset:0 atIndex:m_ubuf_pool[i].m_bufid];
+        }else if( m_ubuf_pool[i].m_stage == SV_STAGE_FS ) {
             //fs
-            [t_rm->m_pCurEncoder setFragmentBuffer:m_ubuf_pool[i].m_ubuf offset:0 atIndex:m_ubuf_pool[i].m_bufid];
-        }else if( m_ubuf_pool[i].m_type == 2 ) {
+            [t_rm->m_curEncoder setFragmentBuffer:m_ubuf_pool[i].m_ubuf offset:0 atIndex:m_ubuf_pool[i].m_bufid];
+        }else if( m_ubuf_pool[i].m_stage == SV_STAGE_GS ) {
             //gs
-            //[t_rm->m_pCurEncoder setFragmentBuffer:m_ubuf_pool[i].m_ubuf offset:0 atIndex:m_ubuf_pool[i].m_bufid];
+            //[t_rm->m_curEncoder setFragmentBuffer:m_ubuf_pool[i].m_ubuf offset:0 atIndex:m_ubuf_pool[i].m_bufid];
         }
     }
-    [t_rm->m_pCurEncoder setRenderPipelineState:m_pl_state];
+    [t_rm->m_curEncoder setRenderPipelineState:m_pl_state];
     return true;
 }
 

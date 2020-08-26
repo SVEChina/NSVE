@@ -21,7 +21,7 @@ namespace sv {
             
             ~SVFilterBlur();
             
-            virtual bool create(SVTEXINID _inType,SVTEXINID _outType);
+            virtual bool create(SVINTEX _inType,SVINTEX _outType);
             
             virtual void destroy();
             

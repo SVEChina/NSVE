@@ -28,7 +28,7 @@ SVRenderMeshPtr SVGeoGen::genRect(SVInstPtr _app,f32 _w,f32 _h,SVBoundBox& _aabb
     _aabb.clear();
     //索引
     u16 t_index_data[] = { 0,1,2,2,1,3 };
-    f32 t_coord_size = 2.0f;
+    f32 t_coord_size = 1.0f;
     //数据
     V3_T0 t_verts[4];
     t_verts[0].x = -0.5f * _w;
@@ -62,16 +62,16 @@ SVRenderMeshPtr SVGeoGen::genRect(SVInstPtr _app,f32 _w,f32 _h,SVBoundBox& _aabb
     SVRenderMeshPtr t_mesh = MakeSharedPtr<SVRenderMesh>(_app);
     //
     BufferDspPtr t_index_dsp = MakeSharedPtr<BufferDsp>(E_BFM_AOS);
-    t_index_dsp->push(SV_SMT_INDEX);
-    SVRenderMesh::buildBufferDsp(E_BFT_STATIC_DRAW,6,t_index_dsp);
-    t_index_dsp->setStreamData(0, t_index_data, 6*sizeof(u16));
+    t_index_dsp->push(E_VF_INDEX);
+    t_index_dsp->build(E_BFT_STATIC_DRAW,6);
+    t_index_dsp->setStreamData(E_VF_INDEX, t_index_data, 6*sizeof(u16));
     t_mesh->setIndexDsp(t_index_dsp);
     //
     BufferDspPtr t_vert_dsp = MakeSharedPtr<BufferDsp>(E_BFM_AOS);
-    t_vert_dsp->push(SV_SMT_V3);
-    t_vert_dsp->push(SV_SMT_T0);
-    SVRenderMesh::buildBufferDsp(E_BFT_STATIC_DRAW,4,t_vert_dsp);
-    t_vert_dsp->setStreamData(0, t_verts, 4*sizeof(V3_T0));
+    t_vert_dsp->push(E_VF_V3);
+    t_vert_dsp->push(E_VF_T0);
+    t_vert_dsp->build(E_BFT_STATIC_DRAW,4);
+    t_vert_dsp->setStreamData(E_VF_NULL, t_verts, 4*sizeof(V3_T0));
     t_mesh->setVertDsp(t_vert_dsp);
     //这个必须有渲染器才可以执行
     SVDispatch::dispatchMeshCreate(_app, t_mesh);
@@ -161,10 +161,10 @@ SVRenderMeshPtr SVGeoGen::genRectARCHO(SVInstPtr _app,f32 _w,f32 _h,EUIARCHO _ar
 //    SVRenderMeshPtr t_mesh = _app->getRenderMgr()->createMeshRObj();
 //    SVDataSwapPtr t_data = MakeSharedPtr<SVDataSwap>();
 //    t_data->writeData(&verts[0], sizeof(V2_T0) * 4);
-//    t_mesh->setVertNum(4);
+//    t_mesh->setDrawVertNum(4);
 //    t_mesh->setVertexData(t_data);
 //    t_mesh->setVertexType(E_VF_V2_T0);
-//    t_mesh->setDrawMethod(E_DM_TRIANGLE_STRIP);
+//    t_mesh->setDrawMethod(E_DRAW_TRIANGLE_STRIP);
 //    t_mesh->createMesh();
 //    return t_mesh;
     return nullptr;
@@ -236,10 +236,10 @@ SVRenderMeshPtr SVGeoGen::_getPolygonDiy(SVInstPtr _app,
 //    SVRenderMeshPtr t_mesh = _app->getRenderMgr()->createMeshRObj();
 //    SVDataSwapPtr t_data = MakeSharedPtr<SVDataSwap>();
 //    t_data->writeData(verts, sizeof(V2_T0) * (_edagenum + 2));
-//    t_mesh->setVertNum(_edagenum + 2);
+//    t_mesh->setDrawVertNum(_edagenum + 2);
 //    t_mesh->setVertexData(t_data);
 //    t_mesh->setVertexType(E_VF_V2_T0);
-//    t_mesh->setDrawMethod(E_DM_TRIANGLE_FAN);
+//    t_mesh->setDrawMethod(E_DRAW_TRIANGLE_FAN);
 //    t_mesh->createMesh();
 //    delete[] verts;
 //    //
@@ -448,10 +448,10 @@ SVRenderMeshPtr SVGeoGen::genAABB(SVInstPtr _app,SVBoundBox& _aabb){
     //
     SVRenderMeshPtr t_mesh = MakeSharedPtr<SVRenderMesh>(_app);
     BufferDspPtr t_vert_dsp = MakeSharedPtr<BufferDsp>(E_BFM_AOS);
-    t_vert_dsp->push(SV_SMT_V3);
-    t_vert_dsp->push(SV_SMT_T0);
-    SVRenderMesh::buildBufferDsp(E_BFT_STATIC_DRAW,4,t_vert_dsp);
-    t_vert_dsp->setStreamData(0, m_verts, 36*sizeof(V3_T0));
+    t_vert_dsp->push(E_VF_V3);
+    t_vert_dsp->push(E_VF_T0);
+    t_vert_dsp->build(E_BFT_STATIC_DRAW,4);
+    t_vert_dsp->setStreamData(E_VF_NULL, m_verts, 36*sizeof(V3_T0));
     t_mesh->setVertDsp(t_vert_dsp);
     //这个必须有渲染器才可以执行
     SVDispatch::dispatchMeshCreate(_app, t_mesh);
@@ -512,7 +512,7 @@ SVRenderMeshPtr SVGeoGen::createRectMesh(SVInstPtr _app,f32 _w ,f32 _h , s32 _wP
 //    pRenderMesh->setVertexType(E_VF_V2_C_T0);
 //    SVDataSwapPtr t_data = MakeSharedPtr<SVDataSwap>();
 //    t_data->writeData(pVer, sizeof(V2_C_T0) * iDataCount);
-//    pRenderMesh->setVertNum(iDataCount);
+//    pRenderMesh->setDrawVertNum(iDataCount);
 //    pRenderMesh->setVertexData(t_data);
 //    pRenderMesh->createMesh();
 //    return pRenderMesh;
@@ -587,9 +587,9 @@ SVRenderMeshPtr SVGeoGen::createNetGrid(SVInstPtr _app,s32 _size,s32 _axis) {
 //    pRenderMesh->setVertexType(E_VF_V3_T0);
 //    SVDataSwapPtr t_data = MakeSharedPtr<SVDataSwap>();
 //    t_data->writeData(pVer, sizeof(V3_T0) * 4);
-//    pRenderMesh->setVertNum(4);
+//    pRenderMesh->setDrawVertNum(4);
 //    pRenderMesh->setVertexData(t_data);
-//    pRenderMesh->setDrawMethod(E_DM_TRIANGLE_STRIP);
+//    pRenderMesh->setDrawMethod(E_DRAW_TRIANGLE_STRIP);
 //    pRenderMesh->createMesh();
 //    return pRenderMesh;
     return nullptr;

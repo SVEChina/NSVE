@@ -178,8 +178,8 @@ void SVCamCtrlProj::setTarget(f32 _x, f32 _y, f32 _z) {
 }
 
 void SVCamCtrlProj::setDirection(f32 _x, f32 _y, f32 _z) {
-    m_direction.set(_x, _y, _z);
-    m_direction.normalize();
+    m_target.set(_x, _y, _z);
+    m_target.normalize();
     m_dirty = true;
 }
 
@@ -194,11 +194,11 @@ FVec3& SVCamCtrlProj::getUp(){
 }
 
 FVec3& SVCamCtrlProj::getDirection(){
-    return m_direction;
+    return m_target;
 }
 
 void SVCamCtrlProj::reset(){
-    f32 t_height = mApp->m_pGlobalParam->m_inner_height;
+    f32 t_height = mApp->m_global_param.m_sv_height;
     f32 t_pos_z = (t_height*0.5f) / tan(30.0f * DEGTORAD);
     m_pos.set(0.0f,0.0f,t_pos_z);
     m_targetEx.set(0.0f,0.0f,0.0f);

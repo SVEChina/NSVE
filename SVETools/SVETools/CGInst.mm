@@ -10,13 +10,12 @@
 #import "CGUI.h"
 #import "CGDef.h"
 #include "src/app/SVInst.h"
-#include "src/rendercore/SVMetal/SVRendererMetal.h"
-#include "src/rendercore/SVGL/SVRendererGL.h"
+#include "src/env/SVCtxOSX.h"
 
 static CGInst *mInst;
 
 @interface CGInst() {
-    sv::SVInstPtr m_pSVE;
+    sv::SVInstPtr m_sve_obj;
 }
 @end
 
@@ -33,7 +32,7 @@ static CGInst *mInst;
 - (instancetype)init{
     self = [super init];
     if (self) {
-        m_pSVE = nullptr;
+        m_sve_obj = nullptr;
     }
     return self;
 }
@@ -42,10 +41,17 @@ static CGInst *mInst;
 }
 
 -(void)cgInit{
-//    //创建SVE引擎
+    //创建SVE引擎
     [self initSVE];
     //创建UI系统
     [[CGUI getInst] cgInit:0];
+    ////////监听窗口变化
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(windowDidResize:)name:NSWindowDidResizeNotification object:nil];
+}
+
+-(void)windowDidResize:(NSNotification *)notification{
+    NSWindow *window = notification.object;
+    NSLog(@"window resize:%f %f",window.frame.size.width, window.frame.size.height);
 }
 
 -(void)cgDestroy {
@@ -55,7 +61,7 @@ static CGInst *mInst;
 
 -(void)initSVE{
     SV_LOG_INFO("sve init begin!");
-    m_pSVE = sv::SVInst::makeCreate();
+    m_sve_obj = sv::SVInst::makeCreate();
     NSString *t_sveResource = @"sve-metal";
 #if SVE_TOOL_USE_METAL
     t_sveResource = @"sve-metal";
@@ -64,40 +70,39 @@ static CGInst *mInst;
 #endif
     NSString* t_sve_path = [[NSBundle mainBundle] pathForResource:t_sveResource ofType:@"bundle"];
     t_sve_path = [t_sve_path stringByAppendingString:@"/"];
-    m_pSVE->addRespath([t_sve_path UTF8String]);
-    m_pSVE->init();
+    m_sve_obj->addRespath([t_sve_path UTF8String]);
+    m_sve_obj->init();
     SV_LOG_INFO("sve init end!");
 }
 
 -(void)destroySVE{
-    if(m_pSVE) {
-        m_pSVE->destroy();
-        m_pSVE = nullptr;
+    if(m_sve_obj) {
+        m_sve_obj->destroy();
+        m_sve_obj = nullptr;
     }
 }
 
 -(void*)getSVE {
-    return m_pSVE.get();
+    return m_sve_obj.get();
 }
+
 /*
   Renderer Metal
  */
--(void)createRM:(id<MTLDevice>)_device drawable:(id<CAMetalDrawable>)_drawable {
-    if( m_pSVE ) {
-        sv::SVRendererPtr t_renderer =m_pSVE->createRenderer(sv::E_R_METAL);
-        sv::SVRendererMetalPtr t_r_metal = std::dynamic_pointer_cast<sv::SVRendererMetal>(t_renderer);
-        if(t_r_metal) {
-            //渲染器初始化
-            SV_LOG_INFO("sve createRM begin! \n");
-            t_r_metal->init(_device,_drawable,_drawable.texture);
-            SV_LOG_INFO("sve createRM end! \n");
+
+-(void)createMetal:(id<MTLDevice>)_device drawable:(id<CAMetalDrawable>)_drawable {
+    if( m_sve_obj ) {
+        sv::SVCtxBasePtr t_ctx =m_sve_obj->createEnv(sv::E_R_METAL_OSX);
+        sv::SVCtxOSXMetalPtr t_ctx_metal = std::dynamic_pointer_cast<sv::SVCtxOSXMetal>(t_ctx);
+        if(t_ctx_metal) {
+            t_ctx_metal->init(m_sve_obj,_device,_drawable,_drawable.texture);
         }
     }
 }
 
--(void)destroyRM {
-    if( m_pSVE ){
-        m_pSVE->destroyRenderer();
+-(void)destroyMetal {
+    if( m_sve_obj ){
+        m_sve_obj->destroyEnv();
     }
 }
 
@@ -105,26 +110,35 @@ static CGInst *mInst;
  Renderer OpenGL
  */
 - (void)createGLWidth:(int)_w Height:(int)_h{
-    if( m_pSVE ) {
-        sv::SVRendererPtr t_re =m_pSVE->createRenderer(sv::E_R_GLES);
-        sv::SVRendererGLPtr t_re_gles = std::dynamic_pointer_cast<sv::SVRendererGL>(t_re);
-        if(t_re_gles) {
-            //渲染器初始化
-            t_re_gles->init(_w, _h);
-        }
-    }
+//    if( m_sve_obj ) {
+//        sv::SVRendererPtr t_re =m_sve_obj->createRenderer(sv::E_R_GLES);
+//        sv::SVRendererGLPtr t_re_gles = std::dynamic_pointer_cast<sv::SVRendererGL>(t_re);
+//        if(t_re_gles) {
+//            //渲染器初始化
+//            t_re_gles->init(_w, _h);
+//        }
+//    }
 }
 
 - (void)destroyGL{
-    if( m_pSVE ){
-        m_pSVE->destroyRenderer();
+//    if( m_sve_obj ){
+//        m_sve_obj->destroyEnv();
+//    }
+}
+
+-(void)resizeWidth:(int)_w Height:_h {
+    //重置宽高
+    if(m_sve_obj) {
+        //m_sve_obj->resize(_w,_h);
     }
 }
 
 -(void)render {
     SV_LOG_ERROR("sve render begin!");
-    m_pSVE->updateSVE(0.33f);
-    m_pSVE->renderSVE();
+    if(m_sve_obj) {
+        m_sve_obj->updateSVE(0.33f);
+        m_sve_obj->renderSVE();
+    }
     SV_LOG_ERROR("sve render end!");
 }
 

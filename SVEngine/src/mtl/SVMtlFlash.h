@@ -12,28 +12,26 @@
 
 namespace sv {
     
-    
+    class SVMtlFlash : public SVMtlADFilterBase {
+    public:
+        SVMtlFlash(SVInstPtr _app);
         
-        class SVMtlFlash : public SVMtlADFilterBase {
-        public:
-            SVMtlFlash(SVInstPtr _app);
-            
-            SVMtlFlash(SVMtlFlash *_mtl);
-            
-            ~SVMtlFlash();
-            
-            virtual void reset();
-            
-            virtual SVMtlCorePtr clone();
-            
-            void update(f32 dt);
-        protected:
-            virtual void _submitUniform(SVRendererPtr _render);
-            void _resetTime();
-            f32 m_accTime;
-            f32 m_time;//周期
-            f32 m_lerp;
-        };
+        SVMtlFlash(SVMtlFlash *_mtl);
+        
+        ~SVMtlFlash();
+        
+        virtual void reset();
+        
+        virtual SVMtlCorePtr clone();
+        
+        void update(f32 dt);
+    protected:
+        virtual void _submitUniform(SVRendererPtr _render);
+        void _resetTime();
+        f32 m_accTime;
+        f32 m_time;//周期
+        f32 m_lerp;
+    };
 
     
     

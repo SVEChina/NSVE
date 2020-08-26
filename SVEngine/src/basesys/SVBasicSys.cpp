@@ -20,15 +20,15 @@ SVBasicSys::SVBasicSys(SVInstPtr _app)
 :SVSysBase(_app) {
     m_subsysType = 2;
     m_pRecycleModule = nullptr;
-    m_pPickModule = nullptr;
-    m_pFontModule = nullptr;
-    m_pStreamIn = nullptr;
-    m_pStreamOut = nullptr;
+    m_picker = nullptr;
+    m_fonter = nullptr;
+    m_stream_in = nullptr;
+    m_stream_out = nullptr;
 }
 
 SVBasicSys::~SVBasicSys() {
-    m_pStreamIn = nullptr;
-    m_pStreamOut = nullptr;
+    m_stream_in = nullptr;
+    m_stream_out = nullptr;
 }
 
 void SVBasicSys::init() {
@@ -36,77 +36,77 @@ void SVBasicSys::init() {
     m_pRecycleModule = MakeSharedPtr<SVRecycleProcess>(mApp);
     m_pRecycleModule->startListen();
     //
-    m_pPickModule = MakeSharedPtr<SVPickProcess>(mApp);
-    m_pPickModule->disablePick();
-    m_pPickModule->startListen();
+    m_picker = MakeSharedPtr<SVPickProcess>(mApp);
+    m_picker->disablePick();
+    m_picker->startListen();
     //
-    m_pFontModule = MakeSharedPtr<SVFontProcess>(mApp);
+    m_fonter = MakeSharedPtr<SVFontProcess>(mApp);
     //
-    m_pStreamIn = MakeSharedPtr<SVStreamIn>(mApp);
+    m_stream_in = MakeSharedPtr<SVStreamIn>(mApp);
     //
-    m_pStreamOut = MakeSharedPtr<SVStreamOut>(mApp);
+    m_stream_out = MakeSharedPtr<SVStreamOut>(mApp);
     //
-    m_pPicProc = MakeSharedPtr<SVPictureProcess>(mApp);
-    m_pPicProc->init();
+    m_pic_proc = MakeSharedPtr<SVPictureProcess>(mApp);
+    m_pic_proc->init();
     //
-    m_pSensorModule = MakeSharedPtr<SVSensorProcess>(mApp);
-    m_pSensorModule->startListen();
+    m_sensor = MakeSharedPtr<SVSensorProcess>(mApp);
+    m_sensor->startListen();
 }
 
 void SVBasicSys::loadDefaultFMFont(){
-    if (m_pFontModule) {
-        m_pFontModule->loadDefBMFont();
+    if (m_fonter) {
+        m_fonter->loadDefBMFont();
     }
 }
 
 void SVBasicSys::destroy() {
     //
-    m_pFontModule = nullptr;
+    m_fonter = nullptr;
     //
-    m_pPickModule->stopListen();
-    m_pPickModule = nullptr;
+    m_picker->stopListen();
+    m_picker = nullptr;
     //
     m_pRecycleModule->stopListen();
     m_pRecycleModule = nullptr;
     //
-    m_pStreamIn = nullptr;
+    m_stream_in = nullptr;
     //
-    m_pStreamOut = nullptr;
+    m_stream_out = nullptr;
     //
-    if(m_pPicProc){
-        m_pPicProc->destroy();
-        m_pPicProc = nullptr;
+    if(m_pic_proc){
+        m_pic_proc->destroy();
+        m_pic_proc = nullptr;
     }
     
-    if (m_pSensorModule) {
-        m_pSensorModule->stopListen();
-        m_pSensorModule = nullptr;
+    if (m_sensor) {
+        m_sensor->stopListen();
+        m_sensor = nullptr;
     }
 }
 
 void SVBasicSys::update(f32 dt) {
     //输入流系统更新
-    if(m_pStreamIn){
-        m_pStreamIn->update(dt);
+    if(m_stream_in){
+        m_stream_in->update(dt);
     }
     //相片处理更新
-    if(m_pPicProc){
-        m_pPicProc->update(dt);
+    if(m_pic_proc){
+        m_pic_proc->update(dt);
     }
     //回收系统
     if (m_pRecycleModule) {
         m_pRecycleModule->update(dt);
     }
-    if (m_pSensorModule) {
-        m_pSensorModule->update(dt);
+    if (m_sensor) {
+        m_sensor->update(dt);
     }
 }
 
 //
 void SVBasicSys::output() {
     //输出流系统更新
-    if(m_pStreamOut){
-        m_pStreamOut->output();
+    if(m_stream_out){
+        m_stream_out->output();
     }
 }
 
@@ -115,25 +115,25 @@ SVRecycleProcessPtr SVBasicSys::getRecycleModule(){
 }
 
 SVPickProcessPtr SVBasicSys::getPickModule(){
-    return m_pPickModule;
+    return m_picker;
 }
 
 SVFontProcessPtr SVBasicSys::getFontModule(){
-    return m_pFontModule;
+    return m_fonter;
 }
 
 SVStreamInPtr SVBasicSys::getStreamIn(){
-    return m_pStreamIn;
+    return m_stream_in;
 }
 
 SVStreamOutPtr SVBasicSys::getStreamOut(){
-    return m_pStreamOut;
+    return m_stream_out;
 }
 
 SVPictureProcessPtr SVBasicSys::getPicProc() {
-    return m_pPicProc;
+    return m_pic_proc;
 }
 
 SVSensorProcessPtr SVBasicSys::getSensorModule(){
-    return m_pSensorModule;
+    return m_sensor;
 }

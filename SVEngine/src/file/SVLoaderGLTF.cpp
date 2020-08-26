@@ -24,7 +24,7 @@
 #include "../basesys/SVScene.h"
 #include "../basesys/SVSceneMgr.h"
 #include "../core/SVModel.h"
-#include "../core/SVMesh.h"
+#include "../core/SVMesh3d.h"
 #include "../core/SVModel.h"
 #include "../core/SVAnimateSkin.h"
 #include "../core/SVAnimateMorph.h"
@@ -642,7 +642,7 @@ SVModelPtr SVLoaderGLTF::_buildModel(s32 _index){
     //非权重方式
     for(s32 i=0;i<t_meshdata->primitives.size();i++) {
         Primitive* t_pri = &(t_meshdata->primitives[i]);
-        SVMeshPtr t_mesh = _buildMeshPri(t_pri);
+        SVMesh3dPtr t_mesh = _buildMeshPri(t_pri);
         if(t_mesh) {
             t_model->addMesh(t_mesh);
         }
@@ -673,7 +673,7 @@ s8* SVLoaderGLTF::_getAccDataPointer(Accessor* acc) {
     return nullptr;
 }
 
-SVMeshPtr SVLoaderGLTF::_buildMeshPri(Primitive* _prim) {
+SVMesh3dPtr SVLoaderGLTF::_buildMeshPri(Primitive* _prim) {
     //构建数据
     Accessor* accV3 = nullptr;
     Accessor* accNOR = nullptr;
@@ -690,47 +690,47 @@ SVMeshPtr SVLoaderGLTF::_buildMeshPri(Primitive* _prim) {
     s8* pAccB = nullptr;
     s8* pAccW = nullptr;
     //
-    s32 t_vtf = E_VF_BASE;
+    s32 t_vtf = E_VF_NULL;
     SVMap<SVString, s32>::Iterator it= _prim->attributes.begin();
     while( it!=_prim->attributes.end() ) {
         if(it->key == "POSITION" ) {
-            t_vtf |= SV_SMT_V3;
+            t_vtf |= E_VF_V3;
             s32 t_index = it->data;
             accV3 = &(m_gltf.accessors[t_index]);
             pAccV3 = _getAccDataPointer(accV3);
         }else if(it->key == "NORMAL" ) {
             //
-            t_vtf |= SV_SMT_NOR;
+            t_vtf |= E_VF_NOR;
             s32 t_index = it->data;
             accNOR = &(m_gltf.accessors[t_index]);
             pAccNOR = _getAccDataPointer(accNOR);
         }else if(it->key == "TANGENT" ) {
             //
-            t_vtf |= SV_SMT_TAG;
+            t_vtf |= E_VF_TAG;
             s32 t_index = it->data;
             accTAG = &(m_gltf.accessors[t_index]);
             pAccTAG = _getAccDataPointer(accTAG);
         }else if(it->key == "COLOR_0" ) {
             //
-            t_vtf |= SV_SMT_C0;
+            t_vtf |= E_VF_C0;
             s32 t_index = it->data;
             accC0 = &(m_gltf.accessors[t_index]);
             pAccC0 = _getAccDataPointer(accC0);
         }else if(it->key == "TEXCOORD_0" ) {
             //
-            t_vtf |= SV_SMT_T0;
+            t_vtf |= E_VF_T0;
             s32 t_index = it->data;
             accT0 = &(m_gltf.accessors[t_index]);
             pAccT0 = _getAccDataPointer(accT0);
         }else if(it->key == "JOINTS_0" ) {
             //
-            t_vtf |= SV_SMT_BONE;
+            t_vtf |= E_VF_BONE;
             s32 t_index = it->data;
             accB = &(m_gltf.accessors[t_index]);
             pAccB = _getAccDataPointer(accB);
         }else if(it->key == "WEIGHTS_0" ) {
             //
-            t_vtf |= SV_SMT_BONE_W;
+            t_vtf |= E_VF_BONE_W;
             s32 t_index = it->data;
             accW = &(m_gltf.accessors[t_index]);
             pAccW = _getAccDataPointer(accW);
@@ -743,8 +743,8 @@ SVMeshPtr SVLoaderGLTF::_buildMeshPri(Primitive* _prim) {
         //没有pos直接返回算了
         return nullptr;
     }
-    s32 t_verSize = SVRMeshRes::getVertexFormateSize(VFTYPE(t_vtf));
-    SVMeshPtr t_mesh = MakeSharedPtr<SVMesh>(mApp);
+    s32 t_verSize = sv_vert_size( VFTYPE(t_vtf) );
+    SVMesh3dPtr t_mesh = MakeSharedPtr<SVMesh3d>(mApp);
     //设置box
     s64 t_count = accV3->count;
     if(accV3->minValues.size() == 3  && accV3->maxValues.size()==3) {
@@ -756,19 +756,19 @@ SVMeshPtr SVLoaderGLTF::_buildMeshPri(Primitive* _prim) {
     //拼接数据,为了优化
     t_data->resize(t_verSize*t_count);
     for(s32 i=0;i<t_count;i++) {
-        if (t_vtf & SV_SMT_V3) {
+        if (t_vtf & E_VF_V3) {
             t_data->appendData(pAccV3, 3*sizeof(f32));
             pAccV3 += 3*sizeof(f32);
         }
-        if (t_vtf & SV_SMT_NOR) {
+        if (t_vtf & E_VF_NOR) {
             t_data->appendData(pAccNOR, 3*sizeof(f32));
             pAccNOR += 3*sizeof(f32);
         }
-        if (t_vtf & SV_SMT_TAG) {
+        if (t_vtf & E_VF_TAG) {
             t_data->appendData(pAccTAG, 3*sizeof(f32));
             pAccTAG += 3*sizeof(f32);
         }
-        if (t_vtf & SV_SMT_C0) {
+        if (t_vtf & E_VF_C0) {
             f32* t_p = (f32*)pAccC0;
             f32 t_r = *t_p;t_p++;
             f32 t_g = *t_p;t_p++;
@@ -784,15 +784,15 @@ SVMeshPtr SVLoaderGLTF::_buildMeshPri(Primitive* _prim) {
             t_data->appendData(&c_a, sizeof(u8));
             pAccC0 += 4*sizeof(f32);
         }
-        if (t_vtf & SV_SMT_T0) {
+        if (t_vtf & E_VF_T0) {
             t_data->appendData(pAccT0, 2*sizeof(f32));
             pAccT0 += 2*sizeof(f32);
         }
-        if (t_vtf & SV_SMT_BONE) {
+        if (t_vtf & E_VF_BONE) {
             t_data->appendData(pAccB, 4*sizeof(u16));
             pAccB += 4*sizeof(u16);
         }
-        if (t_vtf & SV_SMT_BONE_W) {
+        if (t_vtf & E_VF_BONE_W) {
             t_data->appendData(pAccW, 4*sizeof(f32));
             pAccW += 4*sizeof(f32);
         }
@@ -801,7 +801,7 @@ SVMeshPtr SVLoaderGLTF::_buildMeshPri(Primitive* _prim) {
     SVRenderMeshPtr t_rMesh;// = MakeSharedPtr<SVRenderMesh>(mApp);
 //    t_rMesh->setVertexType(VFTYPE(t_vtf));
 //    //t_rMesh->setSeqMode(1);
-//    t_rMesh->setVertNum(t_count);
+//    t_rMesh->setDrawVertNum(t_count);
 //    t_rMesh->setVertexData(t_data);
 //    //索引数据
 //    if( _prim->indices >=0) {
@@ -812,17 +812,17 @@ SVMeshPtr SVLoaderGLTF::_buildMeshPri(Primitive* _prim) {
 //    }
 //    //绘制模式
 //    if(_prim->mode == SVGLTF_MODE_POINTS) {
-//        t_rMesh->setDrawMethod(E_DM_POINTS);
+//        t_rMesh->setDrawMethod(E_DRAW_POINTS);
 //    }else if(_prim->mode == SVGLTF_MODE_LINE) {
-//        t_rMesh->setDrawMethod(E_DM_LINES);
+//        t_rMesh->setDrawMethod(E_DRAW_LINES);
 //    }else if(_prim->mode == SVGLTF_MODE_LINE_LOOP) {
-//        t_rMesh->setDrawMethod(E_DM_LINE_LOOP);
+//        t_rMesh->setDrawMethod(E_DRAW_LINE_LOOP);
 //    }else if(_prim->mode == SVGLTF_MODE_TRIANGLES) {
-//        t_rMesh->setDrawMethod(E_DM_TRIANGLES);
+//        t_rMesh->setDrawMethod(E_DRAW_TRIANGLES);
 //    }else if(_prim->mode == SVGLTF_MODE_TRIANGLE_STRIP) {
-//        t_rMesh->setDrawMethod(E_DM_TRIANGLE_STRIP);
+//        t_rMesh->setDrawMethod(E_DRAW_TRIANGLE_STRIP);
 //    }else if(_prim->mode == SVGLTF_MODE_TRIANGLE_FAN) {
-//        t_rMesh->setDrawMethod(E_DM_TRIANGLE_FAN);
+//        t_rMesh->setDrawMethod(E_DRAW_TRIANGLE_FAN);
 //    }
 //    t_rMesh->createMesh();
 //    t_mesh->setRenderMesh(t_rMesh);
@@ -844,7 +844,7 @@ SVMtlCorePtr SVLoaderGLTF::_buildMtl(Primitive* _prim,s32 _vtf) {
     s32 _index = _prim->material;
     Material* t_mtl = &(m_gltf.materials[_index]);
     SVMtlGLTFPtr tMtl = nullptr;
-    if (_vtf & SV_SMT_BONE) {
+    if (_vtf & E_VF_BONE) {
         tMtl = MakeSharedPtr<SVMtlGLTFSkin>(mApp);
     }else{
         tMtl = MakeSharedPtr<SVMtlGLTF>(mApp);

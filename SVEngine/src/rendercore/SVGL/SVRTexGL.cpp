@@ -28,7 +28,7 @@ SVRTexGL::SVRTexGL(SVInstPtr _app)
 }
 
 SVRTexGL::~SVRTexGL(){
-    SV_LOG_INFO("SVRTexGL destroy %d ",m_uid);
+    SV_LOG_INFO("SVRTexGL destroy %d ",m_res_id);
 }
 
 void SVRTexGL::create(SVRendererPtr _renderer) {
@@ -36,7 +36,7 @@ void SVRTexGL::create(SVRendererPtr _renderer) {
     SVRendererGLPtr t_rm = std::dynamic_pointer_cast<SVRendererGL>(_renderer);
     SVTexturePtr t_texture = std::dynamic_pointer_cast<SVTexture>(m_logic_obj);
     if(t_rm && t_texture) {
-        SV_LOG_INFO("SVRTexGL create %d ",m_uid);
+        SV_LOG_INFO("SVRTexGL create %d ",m_res_id);
         SVTextureDsp* t_dsp = t_texture->getTextureDsp();
         //数据格式
         s32 t_datafmt = GL_RGBA;
@@ -56,7 +56,7 @@ void SVRTexGL::create(SVRendererPtr _renderer) {
         }
         SVDataSwapPtr t_data = t_texture->getTextureData();
         //生成纹理
-        m_tex_kind = t_dsp->m_kind;
+        m_tex_kind = t_dsp->m_imgtype;
         m_width = t_dsp->m_width;
         m_height = t_dsp->m_height;
         m_depth = t_dsp->m_depth;
@@ -227,4 +227,13 @@ void SVRTexGL::commit() {
         }
     }
     m_texLock->unlock();
+}
+
+void SVRTexGL::swap(SVRTexGLPtr _rtex) {
+    SVRTexGLPtr tt = dynamic_pointer_cast<SVRTexGL>(_rtex);
+    if(tt) {
+        u32 t_res_id = tt->m_res_id;
+        tt->m_res_id = m_res_id;
+        m_res_id = t_res_id;
+    }
 }

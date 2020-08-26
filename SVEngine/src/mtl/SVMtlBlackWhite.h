@@ -11,30 +11,26 @@
 #include "SVMtlCore.h"
 
 namespace sv {
-    
-    
-        
-        class SVMtlBlackWhite : public SVMtlCore {
-        public:
-            SVMtlBlackWhite(SVInstPtr _app);
-            
-            SVMtlBlackWhite(SVMtlBlackWhite *_mtl);
-            
-            ~SVMtlBlackWhite();
-            
-            virtual void reset();
-            
-            virtual SVMtlCorePtr clone();
-            
-            void update(f32 dt);
-        protected:
-            virtual void _submitUniform(SVRendererPtr _render);
-            
-            f32 m_mode;
-        };
 
-    
-    
+    class SVMtlBlackWhite : public SVMtlCore {
+    public:
+        SVMtlBlackWhite(SVInstPtr _app);
+        
+        SVMtlBlackWhite(SVMtlBlackWhite *_mtl);
+        
+        ~SVMtlBlackWhite();
+        
+        virtual void reset();
+        
+        virtual SVMtlCorePtr clone();
+        
+        void update(f32 dt);
+    protected:
+        virtual void _submitUniform(SVRendererPtr _render);
+        
+        f32 m_mode;
+    };
+
 }//!namespace sv
 
 #endif //SV_MTLBLACKWHITE_H

@@ -21,7 +21,6 @@
 #include "../mtl/SVMtlCore.h"
 #include "../mtl/SVMtl2D.h"
 #include "../rendercore/SVRenderMgr.h"
-#include "../rendercore/SVRenderObject.h"
 #include "../rendercore/SVRenderMesh.h"
 
 using namespace sv;
@@ -40,7 +39,6 @@ SVBMFontNode::SVBMFontNode(SVInstPtr _app)
     m_alpha = 1.0f;
     m_fontSize = 1.0f;
     m_pRenderVertex = MakeSharedPtr<SVDataSwap>();
-    m_pRenderObj = MakeSharedPtr<SVRenderObject>();
     //m_pMesh = MakeSharedPtr<SVRenderMesh>(mApp);
     //m_pMesh->setVertexPoolType(GL_DYNAMIC_DRAW);
     m_spacing = 0.0f;
@@ -49,7 +47,6 @@ SVBMFontNode::SVBMFontNode(SVInstPtr _app)
 
 SVBMFontNode::~SVBMFontNode() {
     m_font = nullptr;
-    m_pRenderObj = nullptr;
     m_pMesh = nullptr;
     m_pRenderVertex = nullptr;
     m_texture = nullptr;
@@ -84,10 +81,10 @@ void SVBMFontNode::update(f32 dt) {
 
 void SVBMFontNode::render() {
     if (m_visible){
-        SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
-        if (m_pRenderObj && m_pMesh) {
-            m_pRenderObj->pushCmd(t_rs, m_rsType, "SVBMFontNode");
-        }
+//        SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
+//        if (m_pRenderObj && m_pMesh) {
+//            m_pRenderObj->pushCmd(t_rs, m_rsType, "SVBMFontNode");
+//        }
     }
     SVNode::render();
 }
@@ -297,7 +294,7 @@ void SVBMFontNode::_refresh(){
     }
     s32 t_len = i;
     m_pRenderVertex->writeData(&tVerts[0], sizeof(V2_C_T0) * t_len * 6);
-    m_pMesh->setVertNum(t_len * 6);
+    m_pMesh->setDrawVertNum(t_len * 6);
     m_pMesh->setVertexData(m_pRenderVertex);
 }
 
@@ -360,9 +357,9 @@ void SVBMFontNode::_genMesh(){
     }
     //
     m_pRenderVertex->writeData(&t_Verts[0], sizeof(V2_C_T0) * SV_BMFONT_MAX_NUM * 6);
-    m_pMesh->setVertNum(SV_BMFONT_MAX_NUM * 6);
+    m_pMesh->setDrawVertNum(SV_BMFONT_MAX_NUM * 6);
     m_pMesh->setVertexData(m_pRenderVertex);
-    m_pMesh->setDrawMethod(E_DM_TRIANGLES);
+    m_pMesh->setDrawMethod(E_DRAW_TRIANGLES);
     //m_pMesh->createMesh();
 }
 

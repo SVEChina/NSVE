@@ -8,9 +8,7 @@
 #include "../mtl/SVTexMgr.h"
 #include "../mtl/SVTexture.h"
 #include "../rendercore/SVRenderMgr.h"
-#include "../rendercore/SVRenderScene.h"
 #include "../rendercore/SVRenderMesh.h"
-#include "../rendercore/SVRenderObject.h"
 
 using namespace sv;
 
@@ -25,7 +23,7 @@ SVParticlesNode::SVParticlesNode(SVInstPtr _app)
 //    m_rsType = RST_SOLID_3D;
 //    m_pParticles = MakeSharedPtr<SVParticles>(mApp);
 //    m_pParticlesWorld = MakeSharedPtr<SVParticlesWorld>(mApp);
-//    m_pParticles->setSeed(mApp->m_pGlobalParam->getRandom());
+//    m_pParticles->setSeed(mApp->m_global_param.getRandom());
 //    m_pParticles->setWorld(m_pParticlesWorld);
 //    physical_mask = 1;
 //    emitter_sync = 1;
@@ -37,12 +35,11 @@ SVParticlesNode::SVParticlesNode(SVInstPtr _app)
 //    m_mtl_particle = MakeSharedPtr<SVMtlParticleAni>(mApp);
 //    m_pMesh = _app->getRenderMgr()->createMeshRObj();
 //    m_pMesh->createMesh();
-//    m_pMesh->setVertexType(E_VF_V3_PARTICLE);
-//    m_pMesh->setDrawMethod(E_DM_TRIANGLES);
+//    m_pMesh->setVertexType(E_VF_PARTICLE);
+//    m_pMesh->setDrawMethod(E_DRAW_TRIANGLES);
 //    //
 //    m_pVertData = MakeSharedPtr<SVDataSwap>( );
 //    m_pIndexData = MakeSharedPtr<SVDataSwap>();
-//    m_pRenderObj = MakeSharedPtr<SVRenderObject>();
 //    m_atten = mApp->getTexMgr()->getTexture("svres/textures/billboards_base_specular.png",true);
 //    m_diffuse = mApp->getTexMgr()->getTexture("svres/textures/a_xuehua_00.png",true);
 }
@@ -50,7 +47,6 @@ SVParticlesNode::SVParticlesNode(SVInstPtr _app)
 SVParticlesNode::~SVParticlesNode() {
     m_pParticlesWorld = nullptr;
     m_pParticles = nullptr;
-    m_pRenderObj = nullptr;
     m_pIndexData = nullptr;
     m_pVertData = nullptr;
     m_pMesh = nullptr;
@@ -260,7 +256,7 @@ void SVParticlesNode::render() {
 //        //更新顶点数据
 //        m_pVertData->writeData(m_pParticles->pVertex,
 //                               m_pParticles->m_vertexBufNum*sizeof(V3_PARTICLE));
-//        m_pMesh->setVertNum(m_pParticles->m_vertexBufNum);
+//        m_pMesh->setDrawVertNum(m_pParticles->m_vertexBufNum);
 //        m_pMesh->setVertexData(m_pVertData);
 //    }
 //    //
@@ -436,7 +432,7 @@ FMat4 SVParticlesNode::getDeflectorTransform(s32 num) const {
 s32 SVParticlesNode::getRandomPoint(FVec3 &ret_point,FVec3 &ret_normal,FVec3 &ret_velocity,s32 surface) {
     s32 num_particles = m_pParticles->getNumParticles();
     if(num_particles) {
-        s32 num = mApp->m_pGlobalParam->getRandomInt(0,num_particles);
+        s32 num = mApp->m_global_param.getRandomInt(0,num_particles);
         FMat4 transform;// = FMat4(getIWorldTransform() * translate(world_offset));
         mul(ret_point,transform,m_pParticles->getParticlePosition(num));
         ret_normal = Vec3_zero;

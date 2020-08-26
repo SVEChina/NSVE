@@ -35,8 +35,8 @@ SVMtlCorePtr SVMtlBeauty::clone() {
 
 void SVMtlBeauty::_submitMtl(SVRendererPtr _render) {
     SVMtlCore::_submitMtl(_render);
-    _render->submitUniformf("softenStrength", m_lSmoothSize);
-    _render->submitUniformf2("imageSize", m_lImgW,m_lImgH);
+//    _render->submitUniformf("softenStrength", m_lSmoothSize);
+//    _render->submitUniformf2("imageSize", m_lImgW,m_lImgH);
 }
 
 void SVMtlBeauty::setSmooth(f32 _smooth) {

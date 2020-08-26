@@ -13,11 +13,8 @@
 #include "../basesys/SVComData.h"
 #include "../app/SVInst.h"
 #include "../rendercore/SVRenderMgr.h"
-#include "../rendercore/SVRenderObject.h"
 #include "../rendercore/SVRenderCmd.h"
 #include "../rendercore/SVRenderer.h"
-#include "../rendercore/SVRenderScene.h"
-#include "../rendercore/SVRenderCmdOut.h"
 #include "../mtl/SVTexMgr.h"
 #include "../mtl/SVTexture.h"
 #include "../mtl/SVMtlCore.h"
@@ -37,7 +34,7 @@ SVFrameOutRead::SVFrameOutRead(SVInstPtr _app)
 
 SVFrameOutRead::~SVFrameOutRead(){
     m_pDataSwap = nullptr;
-    m_fbo = nullptr;
+    //m_fbo = nullptr;
     m_pMtl = nullptr;
 }
 
@@ -112,7 +109,7 @@ void SVFrameOutRead::update(f32 _dt){
     SVRendererPtr t_renderer = mApp->getRenderer();
     if(m_pMtl){
         //m_pMtl->setModelMatrix(m_absolutMat);
-        m_pMtl->setTexture(0,E_TEX_MAIN);    //那第一张纹理
+        m_pMtl->setTexture(0,1,E_TEX_MAIN);    //那第一张纹理
         m_pMtl->setBlendEnable(false);
         m_pMtl->update(_dt);
     }
@@ -126,7 +123,7 @@ void SVFrameOutRead::render(){
 //        SVRenderCmdStreamOutNorPtr t_cmd = MakeSharedPtr<SVRenderCmdStreamOutNor>(mApp);
 //        t_cmd->mTag = "SVFrameOutRead::render";
 //        t_cmd->setParam(m_fbo,t_out_tex,m_pDataSwap,nullptr);
-//        t_cmd->setMesh(mApp->getDataMgr()->m_screenMesh);
+//        t_cmd->setMesh(mApp->getComData()->m_screenMesh);
 //        t_cmd->setMaterial(m_pMtl->clone());
 //        t_rs->pushRenderCmd(RST_MAGIC_OUT, t_cmd);
 //    }

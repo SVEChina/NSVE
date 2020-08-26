@@ -28,7 +28,7 @@ namespace sv {
 
         virtual void destroy(SVRendererPtr _renderer);
         
-        virtual void resize(s32 _width,s32 _height);
+        virtual void resize(s32 _width,s32 _height,SVRendererPtr _renderer);
         
         virtual void bind(SVRendererPtr _renderer);
 
@@ -42,14 +42,15 @@ namespace sv {
         void _createStencilBuf(SVRendererMetalPtr _renderer) ;
         
     public:
-        id<MTLDrawable> m_pTarget;
-        id<MTLTexture> m_pTargetTex[MAX_SUPPORT_TEXTAREGT];
-        id<MTLTexture> m_pDepthTex;
-        id<MTLTexture> m_pStencilTex;
+        SVINTEX m_color_tex[SV_SUPPORT_MAX_TAREGT];
+        id<MTLTexture> m_depth_tex;
+        id<MTLTexture> m_stencil_tex;
         //
-        MTLRenderPassDescriptor* m_passDsp;
-        id<MTLCommandBuffer> m_cmdBuffer;
-        id<MTLRenderCommandEncoder> m_cmdEncoder;
+        MTLRenderPassDescriptor* m_pass;
+        //
+        id<MTLRenderCommandEncoder> m_render_encoder;
+        id<MTLBlitCommandEncoder> m_blit_encoder;
+        id<MTLComputeCommandEncoder> m_compute_encoder;
     };
 
     

@@ -12,26 +12,24 @@
 
 namespace sv {
     
-    
+    class SVMtlShinning : public SVMtlADFilterBase {
+    public:
+        SVMtlShinning(SVInstPtr _app);
         
-        class SVMtlShinning : public SVMtlADFilterBase {
-        public:
-            SVMtlShinning(SVInstPtr _app);
-            
-            SVMtlShinning(SVMtlShinning *_mtl);
-            
-            ~SVMtlShinning();
-            
-            virtual void reset();
-            
-            virtual SVMtlCorePtr clone();
-            
-            void update(f32 dt);
-        protected:
-            virtual void _submitUniform(SVRendererPtr _render);
-            void _resetTime();
-            f32 m_lerp;
-        };
+        SVMtlShinning(SVMtlShinning *_mtl);
+        
+        ~SVMtlShinning();
+        
+        virtual void reset();
+        
+        virtual SVMtlCorePtr clone();
+        
+        void update(f32 dt);
+    protected:
+        virtual void _submitUniform(SVRendererPtr _render);
+        void _resetTime();
+        f32 m_lerp;
+    };
 
     
     

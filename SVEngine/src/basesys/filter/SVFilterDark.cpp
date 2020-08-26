@@ -31,46 +31,42 @@ bool SVFilterDark::create(){
     SVRendererPtr t_renderer = mApp->getRenderer();
     if(!t_renderer)
         return false;
-    //SVTexturePtr t_tex = t_renderer->getSVTex(E_TEX_MAIN);
-//    s32 t_w = t_tex->m_width;
-//    s32 t_h = t_tex->m_height;
-//    t_renderer->createSVTex(E_TEX_FILTER_1, t_w, t_h, GL_RGBA);
-    //创建多passnode
-    m_pPassNode = MakeSharedPtr<SVMultPassNode>(mApp);
-    m_pPassNode->setname("SVFilterDarkNode");
-    m_pPassNode->setRSType(m_rstype);
-    //创建pass
-    SVPassPtr t_pass1 = MakeSharedPtr<SVPass>();
-    m_mtlDark = MakeSharedPtr<SVMtlDark>(mApp);
-    //t_pass1->setMtl(m_mtlDark);
-    t_pass1->setInTex(0,E_TEX_MAIN);
-    t_pass1->setOutTex(E_TEX_FILTER_1);
-    m_pPassNode->addPass(t_pass1);
-
-    SVPassPtr t_pass2 = MakeSharedPtr<SVPass>();
-    SVMtlCorePtr t_mtl_back= MakeSharedPtr<SVMtlCore>(mApp,"screennor");
-    //t_pass2->setMtl(t_mtl_back);
-    t_pass2->setInTex(0, E_TEX_FILTER_1);
-    t_pass2->setOutTex(E_TEX_MAIN);
-    m_pPassNode->addPass(t_pass2);
+//    //SVTexturePtr t_tex = t_renderer->getSVTex(E_TEX_MAIN);
+////    s32 t_w = t_tex->m_width;
+////    s32 t_h = t_tex->m_height;
+////    t_renderer->createSVTex(E_TEX_FILTER_1, t_w, t_h, GL_RGBA);
+//    //创建多passnode
+//    m_pPassNode = MakeSharedPtr<SVMultPassNode>(mApp);
+//    m_pPassNode->setname("SVFilterDarkNode");
+//    m_pPassNode->setRSType(m_rstype);
+//    //创建pass
+//    SVPassPtr t_pass1 = MakeSharedPtr<SVPass>();
+//    m_mtlDark = MakeSharedPtr<SVMtlDark>(mApp);
+//    //t_pass1->setMtl(m_mtlDark);
+////    t_pass1->setInTex(0,E_TEX_MAIN);
+////    t_pass1->setOutTex(E_TEX_FILTER_1);
+//    m_pPassNode->addPass(t_pass1);
+//
+//    SVPassPtr t_pass2 = MakeSharedPtr<SVPass>();
+//    SVMtlCorePtr t_mtl_back= MakeSharedPtr<SVMtlCore>(mApp,"screennor");
+//    //t_pass2->setMtl(t_mtl_back);
+////    t_pass2->setInTex(0, E_TEX_FILTER_1);
+////    t_pass2->setOutTex(E_TEX_MAIN);
+//    m_pPassNode->addPass(t_pass2);
     return true;
 }
 
 void SVFilterDark::destroy(){
-    if(m_pPassNode){
-        m_pPassNode = nullptr;
-    }
-    m_pPassNode = nullptr;
     m_mtlDark = nullptr;
 }
 
 void SVFilterDark::update(f32 dt){
-    //
-    if(m_pPassNode && m_mtlDark){
-        m_pPassNode->setvisible(true);
-        m_mtlDark->update(dt);
-        m_mtlDark->setDarkIntensity(m_intensity);
-    }
+//    //
+//    if(m_pPassNode && m_mtlDark){
+//        m_pPassNode->setvisible(true);
+//        m_mtlDark->update(dt);
+//        m_mtlDark->setDarkIntensity(m_intensity);
+//    }
 }
 
 void SVFilterDark::setDarkIntensity(f32 _intensity){

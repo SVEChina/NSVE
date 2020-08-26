@@ -30,7 +30,7 @@ namespace sv {
         
     public:
         /*基础模块*/
-        SVRenderMgrPtr m_pRenderMgr; //渲染部分
+        SVRenderMgrPtr m_render_mgr; //渲染部分
         /*可删减模块*/
         //事件部分
         SVEventMgrPtr m_pEventMgr;
@@ -39,27 +39,29 @@ namespace sv {
         //场景管理
         SVSceneMgrPtr m_pSceneMgr;
         //相机管理
-        SVCameraMgrPtr m_pCameraMgr;
+        SVCameraMgrPtr m_camera_mgr;
         //模块(插件)部分
         SVModuleSysPtr m_pModuleSys;
         //灯光部分
         SVLightSysPtr m_pLightSys;
         //shader部分
-        SVShaderMgrPtr m_pShaderMgr;
+        SVShaderMgrPtr m_shader_mgr;
         //纹理部分
-        SVTexMgrPtr m_pTexMgr;
+        SVTexMgrPtr m_tex_mgr;
         //材质库
-        SVMtlLibPtr m_pMtlLib;
+        SVMtlLibPtr m_mtlLib;
         //识别部分
-        SVDetectMgrPtr m_pDetectMgr;
+        SVDetectMgrPtr m_detect_mgr;
         //模型部分
         SVModelMgrPtr  m_pModelMgr;
         //静态数据
-        SVComDataPtr m_pComData;
-        //
+        SVComDataPtr m_commonData;
+        //python
         SVPythonSysPtr m_pPythonSys;
         //变形形同
         SVDeformMgrPtr m_pDeformSys;
+        //AR背景
+        SVARBackgroundMgrPtr m_arbg_mgr;
         //物理世界
         SVPhysicsWorldMgrPtr m_pPhysicSys;
         //时间标志

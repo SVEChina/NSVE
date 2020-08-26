@@ -9,7 +9,6 @@
 #include "../basesys/SVCameraNode.h"
 #include "../basesys/SVScene.h"
 #include "../app/SVInst.h"
-#include "../rendercore/SVRenderObject.h"
 #include "../rendercore/SVRenderMesh.h"
 #include "../rendercore/SVRenderMgr.h"
 #include "../core/SVGeoGen.h"
@@ -64,10 +63,10 @@ void SV3DBox::update(f32 dt) {
 }
 
 void SV3DBox::render() {
-    SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
-//    if (m_pRenderObj && t_rs) {
-//        m_pRenderObj->pushCmd(t_rs, m_rsType, "SV3DBox");
-//    }
+//    SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
+////    if (m_pRenderObj && t_rs) {
+////        m_pRenderObj->pushCmd(t_rs, m_rsType, "SV3DBox");
+////    }
     SVNode::render();
 }
 

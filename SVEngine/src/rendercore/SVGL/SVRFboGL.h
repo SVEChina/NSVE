@@ -27,13 +27,13 @@ namespace sv {
 
         virtual void destroy(SVRendererPtr _renderer);
         
-        virtual void resize(s32 _width,s32 _height);
+        virtual void resize(s32 _width,s32 _height,SVRendererPtr _renderer);
 
     protected:
         u32 m_fbo_id;
-        u32 m_pTargetTex[MAX_SUPPORT_TEXTAREGT];
-        u32 m_pDepthTex;
-        u32 m_pStencilTex;
+        u32 m_color_tex[SV_SUPPORT_MAX_TAREGT];
+        u32 m_depth_Tex;
+        u32 m_stencil_Tex;
         bool m_out_tex;
     };
 

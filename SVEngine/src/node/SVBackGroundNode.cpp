@@ -21,11 +21,8 @@
 #include "../basesys/SVComData.h"
 #include "../basesys/SVDeformMgr.h"
 #include "../rendercore/SVRenderMgr.h"
-#include "../rendercore/SVRenderObject.h"
 #include "../rendercore/SVRenderMesh.h"
-#include "../rendercore/SVRenderTexture.h"
 #include "../rendercore/SVRenderCmd.h"
-#include "../rendercore/SVRenderScene.h"
 #include "../rendercore/SVRenderer.h"
 #include "../mtl/SVMtlFaceShape.h"
 #include "../mtl/SVMtlShapeVaried.h"
@@ -96,15 +93,15 @@ void SVBackGroundNode::syncTexSize() {
 //屏幕空间下材质更新
 void SVBackGroundNode::setInScreen(bool _inscreen) {
     m_inScreen = _inscreen;
-    if(m_inScreen) {
-        m_pMtl = MakeSharedPtr<SVMtlCore>(mApp, "screennor");
-        m_pMtl->setBlendEnable(false);
-        m_pMtl->setDepthEnable(false);
-    }else{
-        m_pMtl = MakeSharedPtr<SVMtlCore>(mApp, "normal2d");
-        m_pMtl->setBlendEnable(false);
-        m_pMtl->setDepthEnable(false);
-    }
+//    if(m_inScreen) {
+//        m_pMtl = MakeSharedPtr<SVMtlCore>(mApp, "screennor");
+//        m_pMtl->setBlendEnable(false);
+//        m_pMtl->setDepthEnable(false);
+//    }else{
+//        m_pMtl = MakeSharedPtr<SVMtlCore>(mApp, "normal2d");
+//        m_pMtl->setBlendEnable(false);
+//        m_pMtl->setDepthEnable(false);
+//    }
 }
 
 void SVBackGroundNode::setTexture(cptr8 _path) {
@@ -128,7 +125,7 @@ void SVBackGroundNode::setTexture(SVTexturePtr _tex) {
     m_useTexType = E_TEX_END;
 }
 
-void SVBackGroundNode:: setTexture(SVTEXINID _textype) {
+void SVBackGroundNode:: setTexture(SVINTEX _textype) {
     m_useTexType = _textype;
     m_pTex = nullptr;
     if(m_isSyncTex){
@@ -166,7 +163,7 @@ void SVBackGroundNode::update(f32 _dt){
 //    
 //    if(m_inScreen) {
 //        //屏幕空间下更新
-//            m_pRenderObj->setMesh(mApp->getDataMgr()->m_screenMesh);
+//            m_pRenderObj->setMesh(mApp->getComData()->m_screenMesh);
 //            if(m_pMtl){
 //                m_pMtl->setTexcoordFlip(m_texcoordX, m_texcoordY);
 //                if(m_useTexType!=E_TEX_END){
@@ -235,13 +232,13 @@ void SVBackGroundNode::fromJSON(RAPIDJSON_NAMESPACE::Value &item){
         m_height = item["height"].GetInt();
     }
     if (item.HasMember("textype") && item["textype"].IsInt()) {
-       // m_inTexType = SVTEXINID(item["textype"].GetInt());
+       // m_inTexType = SVINTEX(item["textype"].GetInt());
     }
     if (item.HasMember("texname") && item["texname"].IsString()) {
         m_pTexName = item["texname"].GetString();
     }
     if (item.HasMember("useTextype") && item["useTextype"].IsInt()) {
-        m_useTexType = SVTEXINID(item["useTextype"].GetInt());
+        m_useTexType = SVINTEX(item["useTextype"].GetInt());
     }
     //
     bool t_hasDeform = false;

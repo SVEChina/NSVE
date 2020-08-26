@@ -40,7 +40,7 @@ SVOpParse::SVOpParse(SVInstPtr _app, s32 _resid,  cptr8 _path,s32 _restype)
 
 
 void SVOpParse::_process(f32 dt) {
-//    mApp->getConfig()->loadEffectIsScreen=false;
+//    mApp->m_config.loadEffectIsScreen=false;
 //    //清理特效
 //    SVOpFilterEftPtr t_op = MakeSharedPtr<SVOpFilterEft>(mApp, restype, resid);
 //    mApp->m_pTPool->getMainThread()->pushThreadOp(t_op);

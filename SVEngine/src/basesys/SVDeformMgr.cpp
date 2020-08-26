@@ -22,17 +22,15 @@ SVDeformMgr::SVDeformMgr(SVInstPtr _app)
 }
 
 SVDeformMgr::~SVDeformMgr() {
+    m_defromLock = nullptr;
 }
 
 void SVDeformMgr::init() {
-
+    
 }
 
 void SVDeformMgr::destroy(){
     clear();
-    if(m_defromLock){
-       m_defromLock = nullptr;
-    }
 }
 
 void SVDeformMgr::update(f32 _dt){

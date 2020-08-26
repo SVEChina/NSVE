@@ -12,32 +12,28 @@
 
 namespace sv {
     
-    
+    class SVMtlBeauty : public SVMtlCore  {
+    public:
+        SVMtlBeauty(SVInstPtr _app);
         
-        class SVMtlBeauty : public SVMtlCore  {
-        public:
-            SVMtlBeauty(SVInstPtr _app);
-            
-            SVMtlBeauty(SVMtlBeauty* _mtl);
-            
-            ~SVMtlBeauty();
-            
-            virtual SVMtlCorePtr clone();
-            
-            void setSmooth(f32 _smooth);
-            
-            void setBGSize(s32 _width, s32 _height);
+        SVMtlBeauty(SVMtlBeauty* _mtl);
+        
+        ~SVMtlBeauty();
+        
+        virtual SVMtlCorePtr clone();
+        
+        void setSmooth(f32 _smooth);
+        
+        void setBGSize(s32 _width, s32 _height);
 
-        protected:
-            virtual void _submitMtl(SVRendererPtr _render);
-            //
-            f32 m_lSmoothSize;
-            f32 m_lImgW;
-            f32 m_lImgH;
-        };
+    protected:
+        virtual void _submitMtl(SVRendererPtr _render);
+        //
+        f32 m_lSmoothSize;
+        f32 m_lImgW;
+        f32 m_lImgH;
+    };
         
-    
-    
 }//!namespace sv
 
 

@@ -40,6 +40,6 @@ SVTexturePtr SVMtlFace2D::getMaskTexture(){
 
 void SVMtlFace2D::update(float dt) {
     if (m_pMaskTexture) {
-        setTexture(0,m_pMaskTexture);
+        setTexture(0,1,m_pMaskTexture);
     }
 }

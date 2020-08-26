@@ -41,13 +41,13 @@ f32 SVPersonTracker::getEyeDis() {
 }
 
 f32 SVPersonTracker::getEyeStdScale(){
-    f32 t_adapt_scale = mApp->getConfig()->getDesignAdaptScale();
+    f32 t_adapt_scale = mApp->m_config.getDesignAdaptScale();
     f32 t_scale = m_eyeDistance/ t_adapt_scale / STANDARD_EYE_STD;
     return t_scale;
 }
 
 f32 SVPersonTracker::getNoiseStdScale(){
-    f32 t_adapt_scale = mApp->getConfig()->getDesignAdaptScale();
+    f32 t_adapt_scale = mApp->m_config.getDesignAdaptScale();
     f32 t_scale = m_noiseDistance/ t_adapt_scale / STANDARD_NOISE_STD;
     return t_scale;
 }
@@ -58,8 +58,8 @@ void SVPersonTracker::track_st(void *_data, s32 _ptnum, SVRect &_rect, f32 yaw, 
     m_yaw = yaw;
     m_roll = roll;
     m_pitch = pitch;
-    m_img_w = mApp->m_pGlobalParam->m_inner_width;
-    m_img_h = mApp->m_pGlobalParam->m_inner_height;
+    m_img_w = mApp->m_global_param.m_sv_width;
+    m_img_h = mApp->m_global_param.m_sv_height;
     //面部区域
     m_faceRect = _rect;
     {

@@ -16,7 +16,7 @@ SVTransCPU::SVTransCPU(SVInstPtr _app)
 SVTransCPU::~SVTransCPU() {
 }
 
-void SVTransCPU::init(s32 _w, s32 _h,f32 _angle,PICFORMATE _picformate,SVTEXINID _tt){
+void SVTransCPU::init(s32 _w, s32 _h,f32 _angle,PICFORMATE _picformate,SVINTEX _tt){
     SVTrans::init(_w, _h, _angle, _picformate,_tt);
 }
 

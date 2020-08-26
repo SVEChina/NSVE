@@ -13,34 +13,30 @@
 
 namespace sv {
 
-    
+    class SVMtlBillboard : public SVMtlCore {
+    public:
+        SVMtlBillboard(SVInstPtr _app);
         
-        class SVMtlBillboard : public SVMtlCore {
-        public:
-            SVMtlBillboard(SVInstPtr _app);
-            
-            SVMtlBillboard(SVMtlBillboard *_mtl);
-            
-            ~SVMtlBillboard();
-            
-            virtual void reset();
-            
-            virtual SVMtlCorePtr clone();
-            
-            void setObjectPos(FVec3 &_pos);//物体世界位置
-            
-            void setViewPos(FVec3 &_viewPos);
-            
-            void setUp(FVec3 &_up);
-        protected:
-            virtual void _submitUniform(SVRendererPtr _render);
-            FVec3 m_objPos;
-            FVec3 m_viewPos;
-            FVec3 m_up;
-        };
+        SVMtlBillboard(SVMtlBillboard *_mtl);
+        
+        ~SVMtlBillboard();
+        
+        virtual void reset();
+        
+        virtual SVMtlCorePtr clone();
+        
+        void setObjectPos(FVec3 &_pos);//物体世界位置
+        
+        void setViewPos(FVec3 &_viewPos);
+        
+        void setUp(FVec3 &_up);
+    protected:
+        virtual void _submitUniform(SVRendererPtr _render);
+        FVec3 m_objPos;
+        FVec3 m_viewPos;
+        FVec3 m_up;
+    };
 
-    
-    
 }//!namespace sv
 
 

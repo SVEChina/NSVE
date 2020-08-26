@@ -19,7 +19,7 @@ namespace sv {
         
         void create(s32 _w,s32 _h);
         
-        void setFbo(SVRenderTexturePtr _fbo);
+//        void setFbo(SVRenderTexturePtr _fbo);
         
         void destroy();
         
@@ -37,7 +37,7 @@ namespace sv {
         typedef SVArray<SVPassPtr> PASSPOOL;
         PASSPOOL m_passPool;
         //
-        SVRenderTexturePtr m_fbo;
+        //SVRenderTexturePtr m_fbo;
     };
 
 }//!namespace sv

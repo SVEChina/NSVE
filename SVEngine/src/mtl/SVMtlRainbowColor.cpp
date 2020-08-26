@@ -52,7 +52,7 @@ void SVMtlRainbowColor::update(f32 dt) {
 
 void SVMtlRainbowColor::_submitUniform(SVRendererPtr _render) {
     SVMtlADFilterBase::_submitUniform(_render);
-    _render->submitUniformf("lerp", m_lerp);
+    //_render->submitUniformf("lerp", m_lerp);
 }
 
 void SVMtlRainbowColor::_resetTime(){

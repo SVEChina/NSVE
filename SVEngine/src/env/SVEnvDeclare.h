@@ -12,9 +12,10 @@
 #include "../base/SVPreDeclare.h"
 
 namespace sv {
-    
+
     //环境
     DECLARE_SHAREPTR(SVCtxBase);
+
 #ifdef SV_IOS
     DECLARE_SHAREPTR(SVCtxIOS);
     DECLARE_SHAREPTR(SVCtxIOSMetal);
@@ -27,8 +28,8 @@ namespace sv {
         
 #ifdef SV_OSX
     DECLARE_SHAREPTR(SVCtxOSXGL);
+    DECLARE_SHAREPTR(SVCtxOSXMetal);
 #endif
-
 
 }//!namespace sv
 

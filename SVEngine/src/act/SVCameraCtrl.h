@@ -153,7 +153,7 @@ namespace sv {
         //目标，方向，向上 计算姿态
         FVec3 m_targetEx;
         FVec3 m_upEx;
-        FVec3 m_direction;
+        FVec3 m_target;
         bool m_dirty;
     };
     

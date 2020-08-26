@@ -26,13 +26,11 @@ namespace sv {
     //MainApp
     DECLARE_SHAREPTR(SVInst);
     DECLARE_SHAREPTR(SVGlobalMgr);
-    DECLARE_SHAREPTR(SVGlobalParam);
     
     //模块module
     DECLARE_SHAREPTR(SVFileMgr);
     DECLARE_SHAREPTR(SVConfig);
-    DECLARE_SHAREPTR(SVComData
-);
+    DECLARE_SHAREPTR(SVComData);
     DECLARE_SHAREPTR(SVFaceDataMesh);
     
     //渲染路径
@@ -61,6 +59,7 @@ namespace sv {
     DECLARE_SHAREPTR(SVShader);
     DECLARE_SHAREPTR(SVShaderMgr);
     DECLARE_SHAREPTR(SVSceneMgr);
+    DECLARE_SHAREPTR(SVARBackgroundMgr);
     DECLARE_SHAREPTR(SVDeformMgr);
     DECLARE_SHAREPTR(SVCameraMgr);
     DECLARE_SHAREPTR(SVTexMgr);
@@ -176,7 +175,7 @@ namespace sv {
     DECLARE_SHAREPTR(SVParticles);
     DECLARE_SHAREPTR(SVImageUsingMove);
     //
-    DECLARE_SHAREPTR(SVMesh);
+    DECLARE_SHAREPTR(SVMesh3d);
     DECLARE_SHAREPTR(SVModel);
     //
     DECLARE_SHAREPTR(SVPass);

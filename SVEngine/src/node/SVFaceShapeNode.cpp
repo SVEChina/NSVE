@@ -13,11 +13,8 @@
 #include "../basesys/SVSceneMgr.h"
 #include "../basesys/SVComData.h"
 #include "../rendercore/SVRenderMgr.h"
-#include "../rendercore/SVRenderObject.h"
 #include "../rendercore/SVRenderMesh.h"
-#include "../rendercore/SVRenderTexture.h"
 #include "../rendercore/SVRenderCmd.h"
-#include "../rendercore/SVRenderScene.h"
 #include "../rendercore/SVRenderer.h"
 #include "../core/SVGeoGen.h"
 #include "../core/SVPass.h"
@@ -32,13 +29,11 @@ using namespace sv;
 SVFaceShapeNode::SVFaceShapeNode(SVInstPtr _app)
 :SVNode(_app){
     ntype = "SVFaceShapeNode";
-    m_pRenderObj = MakeSharedPtr<SVRenderObject>();
     m_pMtl = MakeSharedPtr<SVMtlFaceShape>(mApp);
     m_pMesh = SVGeoGen::createRectMesh(mApp,1.0, 1.0, 36, 64);
 }
 
 SVFaceShapeNode::~SVFaceShapeNode(){
-    
 }
 
 void SVFaceShapeNode::init(){
@@ -46,7 +41,7 @@ void SVFaceShapeNode::init(){
 //    SVRendererPtr t_renderer = mApp->getRenderer();
 //    if(!t_renderer)
 //        return ;
-//    SVTexturePtr t_tex = mApp->getTexMgr()->createUnctrlTexture(mApp->m_pGlobalParam->m_inner_width, mApp->m_pGlobalParam->m_inner_height,GL_RGBA, GL_RGBA);
+//    SVTexturePtr t_tex = mApp->getTexMgr()->createUnctrlTexture(mApp->m_global_param.m_sv_width, mApp->m_global_param.m_sv_height,GL_RGBA, GL_RGBA);
 //    m_fbo = MakeSharedPtr<SVRenderTexture>(mApp,
 //                                           t_tex,
 //                                           false,
@@ -67,7 +62,7 @@ void SVFaceShapeNode::init(){
 //    SVPassPtr t_pass2 = MakeSharedPtr<SVPass>();
 //    t_pass2->setMtl(t_mtl);
 //    t_pass2->setInTex(0, t_tex);
-//    t_pass2->setMesh(mApp->getDataMgr()->m_screenMesh);
+//    t_pass2->setMesh(mApp->getComData()->m_screenMesh);
 //    t_pass2->setOutTex(t_texmain);
 //    addPass(t_pass2);
 }
@@ -89,11 +84,11 @@ void SVFaceShapeNode::destroy(){
 
 void SVFaceShapeNode::update(f32 _dt){
     SVNode::update(_dt);
-    for(s32 i=0;i<m_passPool.size();i++){
-        if(m_passPool[i]->m_pMtl){
-            m_passPool[i]->m_pMtl->update(_dt);
-        }
-    }
+//    for(s32 i=0;i<m_passPool.size();i++){
+//        if(m_passPool[i]->m_pMtl){
+//            m_passPool[i]->m_pMtl->update(_dt);
+//        }
+//    }
 }
 
 void SVFaceShapeNode::render(){

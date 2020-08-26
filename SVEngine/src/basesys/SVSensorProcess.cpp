@@ -18,7 +18,6 @@
 #include "../basesys/SVCameraNode.h"
 #include "../mtl/SVTexMgr.h"
 #include "../mtl/SVTexture.h"
-#include "../rendercore/SVRenderScene.h"
 #include "../rendercore/SVRenderCmd.h"
 #include "../rendercore/SVRenderMgr.h"
 #include "../act/SVCameraCtrl.h"
@@ -29,8 +28,8 @@ using namespace sv;
 //
 SVSensorProcess::SVSensorProcess(SVInstPtr _app)
 :SVProcess(_app) {
-//    s32 m_sw = mApp->m_pGlobalParam->m_inner_width;
-//    s32 m_sh = mApp->m_pGlobalParam->m_inner_height;
+//    s32 m_sw = mApp->m_global_param.m_sv_width;
+//    s32 m_sh = mApp->m_global_param.m_sv_height;
 //    //
 //    m_pARCtrl =  MakeSharedPtr<SVCtrlCamereAR>(mApp);
 //    //

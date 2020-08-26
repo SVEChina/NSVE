@@ -64,8 +64,8 @@ f32 percentages[14] ={
 SVMtlFaceShapeVaried::SVMtlFaceShapeVaried(SVInstPtr _app)
 :SVMtlCore(_app,"faceShapeVaried"){
     memcpy( m_g_intensity   ,   percentages , sizeof( f32 ) * 14);
-    m_surfaceWidth      =   mApp->m_pGlobalParam->m_inner_width;
-    m_surfaceHeight     =   mApp->m_pGlobalParam->m_inner_height;
+    m_surfaceWidth      =   mApp->m_global_param.m_sv_width;
+    m_surfaceHeight     =   mApp->m_global_param.m_sv_height;
     m_inv_surfaceWidth  =   1.0/m_surfaceWidth;
     m_inv_surfaceHeight =   1.0/m_surfaceHeight;
 }
@@ -104,7 +104,7 @@ void SVMtlFaceShapeVaried::update(f32 dt){
         V2 *t_data = (V2*)t_person->getFaceDataOriginal();
         for(s32 i  = 0 ; i < 106 ; i++){
             m_outlinePoints[i*2]   = t_data[i].x;
-            m_outlinePoints[i*2+1] = mApp->m_pGlobalParam->m_inner_height-t_data[i].y;
+            m_outlinePoints[i*2+1] = mApp->m_global_param.m_sv_height-t_data[i].y;
         }
         t_data = (V2*)m_outlinePoints;
         FVec2 t_77 = FVec2(t_data[77].x,t_data[77].y);
@@ -145,19 +145,19 @@ void SVMtlFaceShapeVaried::update(f32 dt){
 }
 
 void SVMtlFaceShapeVaried::_submitMtl(SVRendererPtr _render){
-    _render->submitUniformf2v("startPoint", m_startPoint,24);
-    _render->submitUniformf2v("endPoint", m_endPoint,24);
-    _render->submitUniformf1v("actionType", m_actionType,24);
-    _render->submitUniformf1v("intensity", m_intensity,24);
-    _render->submitUniformf1v("radius", m_radius,24);
-    _render->submitUniformi1v("RealStep", m_RealStep,1);
-    _render->submitUniformf2v("outlinePoints", m_outlinePoints,106);
-    _render->submitUniformf1v("eyesDistance", percentages,14);
-    //
-    _render->submitUniformf("inversedEyesDistance", m_eyesDistance);
-    _render->submitUniformf("g_intensity", m_inversedEyesDistance);
-    _render->submitUniformf("surfaceWidth", m_surfaceWidth);
-    _render->submitUniformf("surfaceHeight", m_surfaceHeight);
-    _render->submitUniformf("inv_surfaceWidth", m_inv_surfaceWidth);
-    _render->submitUniformf("inv_surfaceHeight", m_inv_surfaceHeight);
+//    _render->submitUniformf2v("startPoint", m_startPoint,24);
+//    _render->submitUniformf2v("endPoint", m_endPoint,24);
+//    _render->submitUniformf1v("actionType", m_actionType,24);
+//    _render->submitUniformf1v("intensity", m_intensity,24);
+//    _render->submitUniformf1v("radius", m_radius,24);
+//    _render->submitUniformi1v("RealStep", m_RealStep,1);
+//    _render->submitUniformf2v("outlinePoints", m_outlinePoints,106);
+//    _render->submitUniformf1v("eyesDistance", percentages,14);
+//    //
+//    _render->submitUniformf("inversedEyesDistance", m_eyesDistance);
+//    _render->submitUniformf("g_intensity", m_inversedEyesDistance);
+//    _render->submitUniformf("surfaceWidth", m_surfaceWidth);
+//    _render->submitUniformf("surfaceHeight", m_surfaceHeight);
+//    _render->submitUniformf("inv_surfaceWidth", m_inv_surfaceWidth);
+//    _render->submitUniformf("inv_surfaceHeight", m_inv_surfaceHeight);
 }

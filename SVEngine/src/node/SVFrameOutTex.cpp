@@ -12,10 +12,8 @@
 #include "../basesys/SVComData.h"
 #include "../app/SVInst.h"
 #include "../rendercore/SVRenderMgr.h"
-#include "../rendercore/SVRenderObject.h"
 #include "../rendercore/SVRenderCmd.h"
 #include "../rendercore/SVRenderer.h"
-#include "../rendercore/SVRenderScene.h"
 #include "../mtl/SVTexMgr.h"
 #include "../mtl/SVTexture.h"
 #include "../mtl/SVMtlCore.h"
@@ -27,20 +25,20 @@ SVFrameOutTex::SVFrameOutTex(SVInstPtr _app)
 :SVFrameOutNode(_app){
     ntype = "SVFrameOutTex";
     m_pMtl = MakeSharedPtr<SVMtlCore>(mApp,"rgba");
-    m_pMesh = mApp->getDataMgr()->m_screenMesh;
+    m_pMesh = mApp->getComData()->screenMesh();
     SVRendererPtr t_renderer = mApp->getRenderer();
     if( t_renderer ) {
 //#if defined (SV_IOS)
 //        SVTexturePtr t_tex = t_renderer->createSVTexIOS(E_TEX_OUTSTREAM,
-//                                                     mApp->m_pGlobalParam->m_inner_width,
-//                                                     mApp->m_pGlobalParam->m_inner_height,
+//                                                     mApp->m_global_param.m_sv_width,
+//                                                     mApp->m_global_param.m_sv_height,
 //                                                     GL_RGBA); //GL_RGBA
 //        m_fbo = MakeSharedPtr<SVRenderTexture>(mApp,t_tex,false,false);
 //        mApp->getRenderMgr()->pushRCmdCreate(m_fbo);
 //#else
 //        SVTexturePtr t_tex = t_renderer->createSVTex(E_TEX_OUTSTREAM,
-//                                                     mApp->m_pGlobalParam->m_inner_width,
-//                                                     mApp->m_pGlobalParam->m_inner_height,
+//                                                     mApp->m_global_param.m_sv_width,
+//                                                     mApp->m_global_param.m_sv_height,
 //                                                     GL_RGBA); //GL_RGBA
 //        m_fbo = MakeSharedPtr<SVRenderTexture>(mApp,t_tex,false,false);
 //        mApp->getRenderMgr()->pushRCmdCreate(m_fbo);
@@ -49,7 +47,6 @@ SVFrameOutTex::SVFrameOutTex(SVInstPtr _app)
 }
 
 SVFrameOutTex::~SVFrameOutTex(){
-    m_fbo = nullptr;
     m_pMtl = nullptr;
     m_pMesh= nullptr;
 }
@@ -78,7 +75,7 @@ void SVFrameOutTex::render(){
 //                t_cmd->mTag = "SVFrameOutTex";
 //                t_cmd->setFbo(m_fbo);
 //                t_cmd->setTexture(t_out_tex);
-//                t_cmd->setMesh(mApp->getDataMgr()->m_screenMesh);
+//                t_cmd->setMesh(mApp->getComData()->m_screenMesh);
 //                t_cmd->setMaterial(m_pMtl);
 //                t_rs->pushRenderCmd(RST_DATATRANS, t_cmd);
 //    }

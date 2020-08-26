@@ -125,8 +125,8 @@ SVMtlCorePtr SVMtlFaceShape::clone() {
 }
 
 void SVMtlFaceShape::update(f32 dt){
-    f32 fWidth =  mApp->m_pGlobalParam->m_inner_width;
-    f32 fHeight =  mApp->m_pGlobalParam->m_inner_height;
+    f32 fWidth =  mApp->m_global_param.m_sv_width;
+    f32 fHeight =  mApp->m_global_param.m_sv_height;
     SVPersonPtr t_person = mApp->getDetectMgr()->getPersonModule()->getPerson(1);
     if(t_person){
         ST_PT *faceData = (ST_PT*)t_person->getFaceDataOriginal();
@@ -169,20 +169,20 @@ void SVMtlFaceShape::update(f32 dt){
 }
 
 void SVMtlFaceShape::_submitMtl(SVRendererPtr _render){
-    _render->submitUniformf2v("location0", m_location0);
-    _render->submitUniformf2v("location1", m_location1);
-    _render->submitUniformf2v("location2", m_location2);
-    _render->submitUniformf2v("location3", m_location3);
-    _render->submitUniformf2v("location4", m_location4);
-    _render->submitUniformf2v("location5", m_location5);
-    _render->submitUniformf2v("location6", m_location6);
-    _render->submitUniformf2v("location7", m_location7);
-    _render->submitUniformf2v("location8", m_location8);
-    _render->submitUniformf2v("location9", m_location9);
-    _render->submitUniformf2v("location10", m_location10);
-    _render->submitUniformf2v("location11", m_location11);
-    _render->submitUniformf2v("eyelarge", m_eyeLarge);
-    _render->submitUniformf4v("faceslim", m_faceSlim);
+//    _render->submitUniformf2v("location0", m_location0);
+//    _render->submitUniformf2v("location1", m_location1);
+//    _render->submitUniformf2v("location2", m_location2);
+//    _render->submitUniformf2v("location3", m_location3);
+//    _render->submitUniformf2v("location4", m_location4);
+//    _render->submitUniformf2v("location5", m_location5);
+//    _render->submitUniformf2v("location6", m_location6);
+//    _render->submitUniformf2v("location7", m_location7);
+//    _render->submitUniformf2v("location8", m_location8);
+//    _render->submitUniformf2v("location9", m_location9);
+//    _render->submitUniformf2v("location10", m_location10);
+//    _render->submitUniformf2v("location11", m_location11);
+//    _render->submitUniformf2v("eyelarge", m_eyeLarge);
+//    _render->submitUniformf4v("faceslim", m_faceSlim);
 }
 
 void SVMtlFaceShape::setEyeLarge(f32 fLeftLarge , f32 fRightLarge){

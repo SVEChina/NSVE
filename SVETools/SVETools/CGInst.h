@@ -22,12 +22,16 @@
 
 -(void)cgDestroy;
 //
+-(void)resizeWidth:(int)_w Height:_h;
+//
 -(void*)getSVE;
-//renderer metal
--(void)createRM:(id<MTLDevice>)_device drawable:(id<CAMetalDrawable>)_drawable;
--(void)destroyRM;
-//renderer gles
+//
+-(void)createMetal:(id<MTLDevice>)_device drawable:(id<CAMetalDrawable>)_drawable;
+//
+-(void)destroyMetal;
+//
 - (void)createGLWidth:(int)_w Height:(int)_h;
+//
 - (void)destroyGL;
 //
 -(void)render;

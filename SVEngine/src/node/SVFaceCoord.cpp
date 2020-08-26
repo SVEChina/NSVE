@@ -9,7 +9,6 @@
 #include "../basesys/SVCameraNode.h"
 #include "../basesys/SVScene.h"
 #include "../app/SVInst.h"
-#include "../rendercore/SVRenderObject.h"
 #include "../rendercore/SVRenderMesh.h"
 #include "../rendercore/SVRenderMgr.h"
 #include "../core/SVGeoGen.h"
@@ -33,16 +32,12 @@ SVFaceCoord::SVFaceCoord(SVInstPtr _app)
     m_aabbBox.clear();
     //m_pMesh = MakeSharedPtr<SVRenderMesh>(mApp);
     //m_pMeshAct = MakeSharedPtr<SVRenderMesh>(mApp);
-    m_pRObjNor = MakeSharedPtr<SVRenderObject>();
-    m_pRObjAct = MakeSharedPtr<SVRenderObject>();
 }
 
 SVFaceCoord::~SVFaceCoord() {
     m_meshLock = nullptr;
     m_pMesh = nullptr;
     m_pMeshAct = nullptr;
-    m_pRObjNor = nullptr;
-    m_pRObjAct = nullptr;
 }
 
 //加载点位文件
@@ -186,15 +181,15 @@ void SVFaceCoord::refresh() {
     }
 //    //普通
 //    m_pMesh->setVertexType(E_VF_V3_T0);
-//    m_pMesh->setVertNum(t_count*6);
+//    m_pMesh->setDrawVertNum(t_count*6);
 //    m_pMesh->setVertexData(t_dataswap);
-//    m_pMesh->setDrawMethod(E_DM_TRIANGLES);
+//    m_pMesh->setDrawMethod(E_DRAW_TRIANGLES);
 //    //m_pMesh->createMesh();
 //    //act
 //    m_pMeshAct->setVertexType(E_VF_V3_T0);
-//    m_pMeshAct->setVertNum(t_count_act*6);
+//    m_pMeshAct->setDrawVertNum(t_count_act*6);
 //    m_pMeshAct->setVertexData(t_dataswap_act);
-//    m_pMeshAct->setDrawMethod(E_DM_TRIANGLES);
+//    m_pMeshAct->setDrawMethod(E_DRAW_TRIANGLES);
 //    //m_pMeshAct->createMesh();
 }
 
@@ -229,7 +224,7 @@ void SVFaceCoord::update(f32 dt) {
 }
 
 void SVFaceCoord::render() {
-//    if (mApp->m_pGlobalParam->m_curScene && m_visible ){
+//    if (mApp->m_global_param.m_curScene && m_visible ){
 //        SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
 //        if (m_pRObjNor) {
 //            m_pRObjNor->pushCmd(t_rs, m_rsType, "SVFaceCoord-nor");

@@ -33,8 +33,8 @@ bool SVRGBToneCurveFilter::create() {
 //    SVRendererPtr t_renderer = mApp->getRenderer();
 //    if(!t_renderer)
 //        return false;
-//    s32 t_w =  mApp->m_pGlobalParam->m_inner_width;
-//    s32 t_h =  mApp->m_pGlobalParam->m_inner_height;
+//    s32 t_w =  mApp->m_global_param.m_sv_width;
+//    s32 t_h =  mApp->m_global_param.m_sv_height;
 //    //增加pass
 //    m_pPassNode = MakeSharedPtr<SVMultPassNode>(mApp);
 //    m_pPassNode->create(t_w, t_h);
@@ -70,9 +70,6 @@ void SVRGBToneCurveFilter::destroy() {
     m_mtl_rgba = nullptr;
     m_mtl_back = nullptr;
     texrgb = nullptr;
-    if(m_pPassNode) {
-        m_pPassNode = nullptr;
-    }
 }
 
 void SVRGBToneCurveFilter::update(f32 dt){

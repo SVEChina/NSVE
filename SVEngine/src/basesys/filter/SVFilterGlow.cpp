@@ -22,13 +22,12 @@ SVFilterGlow::SVFilterGlow(SVInstPtr _app)
     m_type=SV_FUNC_GLOW;
     m_name="SVFilterGlow";
     m_smooth=0.0f;
-    m_pPassNode = nullptr;
 }
 
 SVFilterGlow::~SVFilterGlow(){
 }
 
-bool SVFilterGlow::create(SVTEXINID _inType,SVTEXINID _outType){
+bool SVFilterGlow::create(SVINTEX _inType,SVINTEX _outType){
 //    SVRendererPtr t_renderer = mApp->getRenderer();
 //    if(!t_renderer)
 //        return false;
@@ -92,12 +91,7 @@ bool SVFilterGlow::create(SVTEXINID _inType,SVTEXINID _outType){
 }
 
 void SVFilterGlow::destroy(){
-    if(m_pPassNode){
-        m_pPassNode = nullptr;
-    }
-    m_pPassNode = nullptr;
 }
-
 
 void SVFilterGlow::update(f32 dt){
    // m_mtl_smooth->setSmooth(1.0);

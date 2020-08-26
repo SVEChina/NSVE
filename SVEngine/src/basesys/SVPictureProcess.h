@@ -15,7 +15,7 @@
 
 namespace sv {
 
-    //图片处理
+    //
     class SVPictureProcess : public SVProcess {
     public:
         SVPictureProcess(SVInstPtr _app);
@@ -43,12 +43,12 @@ namespace sv {
         f32  getFilterParam(SVFILTERITEMTYPE _type);
         
         SVFilterBasePtr getFilter(SVString t_name);
+        
     protected:
         typedef SVArray<SVFilterBasePtr> FilterArray;
         FilterArray m_filterArray;
     };
-        
-    
+
 
 }//!namespace sv
 

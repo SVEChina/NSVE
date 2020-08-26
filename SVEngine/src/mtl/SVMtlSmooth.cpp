@@ -35,7 +35,7 @@ SVMtlCorePtr SVMtlSmooth::clone(){
 
 void SVMtlSmooth::_submitMtl(SVRendererPtr _render){
     SVMtlCore::_submitMtl(_render);
-    _render->submitUniformf("m_smooth", m_smooth);
-    _render->submitUniformf("m_width", m_w);
-    _render->submitUniformf("m_height", m_h);
+//    _render->submitUniformf("m_smooth", m_smooth);
+//    _render->submitUniformf("m_width", m_w);
+//    _render->submitUniformf("m_height", m_h);
 }

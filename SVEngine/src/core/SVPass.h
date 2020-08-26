@@ -8,44 +8,43 @@
 #ifndef SV_PASS_H
 #define SV_PASS_H
 
-#include "../base/SVObject.h"
+#include "../base/SVGBase.h"
 #include "../rendercore/SVRenderDeclare.h"
 #include "../mtl/SVMtlDeclare.h"
+#include <vector>
+#include <string>
 
 namespace sv {
     
-    
+    //屏幕空间处理
+    class SVPass :public SVGBaseEx {
+    public:
+        SVPass(SVInstPtr _inst);
+
+        ~SVPass();
         
-        //指定了输出纹理，输入纹理和材质的 一个pass
+        void bindTarget(SVRTargetPtr _target);
         
-        class SVPass :public SVObject {
-        public:
-            SVPass();
+        void unbindTarget();
 
-            ~SVPass();
+        SVSurfacePtr getSurface() {
+            return m_surface;
+        }
+        
+        void setMtl(cptr8 _name) {
+            m_mtl_name = _name;
+        }
+        
+        void update(f32 _dt);
 
-            bool setInTex(s32 _index,SVTexturePtr _tex);
-            
-            bool setInTex(s32 _index,SVTEXINID _tt);
+    protected:
+        SVSurfacePtr m_surface;
+        //材质名称
+        std::string m_mtl_name;
+        //目标target
+        SVRTargetPtr m_target;
+    };
 
-            bool setOutTex(SVTexturePtr _tex);
-            
-            bool setOutTex(SVTEXINID _tt);
-            
-            void setMesh( SVRenderMeshPtr _pMesh);
-
-            SVMtlCorePtr m_pMtl;
-
-            SVTexturePtr m_outTex;
-            
-            SVRenderMeshPtr m_pMesh;
-            
-            SVTEXINID m_outTexType;
-            
-            SVString mTag;
-        };
-
-
-};
+};//!namespace sv
 
 #endif /* SV_PASS_H */

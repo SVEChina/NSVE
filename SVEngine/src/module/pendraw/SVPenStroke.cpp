@@ -15,7 +15,6 @@
 #include "../../core/SVPass.h"
 #include "../../base/SVVec3.h"
 #include "../../base/SVDataSwap.h"
-#include "../../rendercore/SVRenderObject.h"
 #include "../../rendercore/SVRenderMesh.h"
 #include "../../rendercore/SVRenderMgr.h"
 #include "../../rendercore/SVRenderer.h"
@@ -47,7 +46,6 @@ SVPenStroke::SVPenStroke(SVInstPtr _app, SVPENMODE _mode, f32 _strokeWidth, FVec
     m_ptCachePool.clear();
     m_localMat.setIdentity();
     m_lock = MakeSharedPtr<SVLock>();
-    m_pRenderObj = MakeSharedPtr<SVRenderObject>();
     m_pInstanceOffsetData = MakeSharedPtr<SVDataSwap>();
     m_pTex = mApp->getTexMgr()->getTexture("svres/textures/a_point50.png",true);
     //
@@ -88,7 +86,6 @@ SVPenStroke::~SVPenStroke() {
     m_pInstanceOffsetData = nullptr;
     m_pGlowInstanceOffsetData->reback();
     m_pGlowInstanceOffsetData = nullptr;
-    m_pRenderObj = nullptr;
     //m_pStrokeMesh = nullptr;
     m_pMtl = nullptr;
     m_pTex = nullptr;
@@ -196,7 +193,7 @@ void SVPenStroke::_createStrokeMesh(f32 _strokeWidth, FVec4 &_strokeColor){
 //    m_pStrokeMesh = MakeSharedPtr<SVRenderMeshDvid>(mApp);
 //    m_pStrokeMesh->createMesh();
 //    m_pStrokeMesh->setVertexType(E_VF_V3_C);
-//    m_pStrokeMesh->setDrawMethod(E_DM_TRIANGLES);
+//    m_pStrokeMesh->setDrawMethod(E_DRAW_TRIANGLES);
 //    V3 t_ver[vn_stroke];
 //    V2 t_texcoord[vn_stroke];
 //    C t_color[vn_stroke];
@@ -556,7 +553,7 @@ void SVPenStroke::_createStrokeMesh(f32 _strokeWidth, FVec4 &_strokeColor){
 //    t_pVertexData->resize(vn_stroke*sizeof(V3));
 //    t_pVertexData->writeData(t_ver, vn_stroke*sizeof(V3));
 //    m_pStrokeMesh->setVertex3Data(t_pVertexData);
-//    m_pStrokeMesh->setVertNum(vn_stroke);
+//    m_pStrokeMesh->setDrawVertNum(vn_stroke);
 //    SVDataSwapPtr t_pColorData = MakeSharedPtr<SVDataSwap>();
 //    t_pColorData->resize(vn_stroke*sizeof(C));
 //    t_pColorData->writeData(t_color, vn_stroke*sizeof(C));
@@ -577,7 +574,7 @@ void SVPenStroke::_createGlowMesh(f32 _glowWidth, FVec4 &_glowColor){
 //    m_pGlowMesh = MakeSharedPtr<SVRenderMeshDvid>(mApp);
 //    m_pGlowMesh->createMesh();
 //    m_pGlowMesh->setVertexType(E_VF_V3_C_T0);
-//    m_pGlowMesh->setDrawMethod(E_DM_TRIANGLES);
+//    m_pGlowMesh->setDrawMethod(E_DRAW_TRIANGLES);
 //    V3 t_ver[vn_glow];
 //    V2 t_texcoord[vn_glow];
 //    C t_color[vn_glow];
@@ -777,7 +774,7 @@ void SVPenStroke::_createGlowMesh(f32 _glowWidth, FVec4 &_glowColor){
 //    t_pVertexData->resize(vn_glow*sizeof(V3));
 //    t_pVertexData->writeData(t_ver, vn_glow*sizeof(V3));
 //    m_pGlowMesh->setVertex3Data(t_pVertexData);
-//    m_pGlowMesh->setVertNum(vn_glow);
+//    m_pGlowMesh->setDrawVertNum(vn_glow);
 //    SVDataSwapPtr t_pColorData = MakeSharedPtr<SVDataSwap>();
 //    t_pColorData->resize(vn_glow*sizeof(C));
 //    t_pColorData->writeData(t_color, vn_glow*sizeof(C));
@@ -958,12 +955,12 @@ void SVPenStroke::renderGlow(){
 
 void SVPenStroke::_renderBoundingBox(){
     if (m_drawBox) {
-        SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
-        SVMtlGeo3dPtr t_mtl_geo3d = MakeSharedPtr<SVMtlGeo3d>(mApp);
-        t_mtl_geo3d->setColor(1.0f, 0.0f, 0.0f, 1.0f);
-        FMat4 m_mat_unit = FMat4_identity;
-        //t_mtl_geo3d->setParam("mmat", m_mat_unit);
-        SVRenderObjInst::pushAABBCmd(t_rs,RST_AR_END,m_aabbBox,t_mtl_geo3d,"SV3DBOX_aabb");
+//        SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
+//        SVMtlGeo3dPtr t_mtl_geo3d = MakeSharedPtr<SVMtlGeo3d>(mApp);
+//        t_mtl_geo3d->setColor(1.0f, 0.0f, 0.0f, 1.0f);
+//        FMat4 m_mat_unit = FMat4_identity;
+//        //t_mtl_geo3d->setParam("mmat", m_mat_unit);
+//        //SVRenderObjInst::pushAABBCmd(t_rs,RST_AR_END,m_aabbBox,t_mtl_geo3d,"SV3DBOX_aabb");
     }
 }
 
@@ -972,7 +969,7 @@ void SVPenStroke::_screenPointToWorld(FVec2 &_point, SVStrokePoint &_worldPoint)
     SVCameraNodePtr t_arCam = t_sensor->getARCamera();
     if(!t_arCam)
         return;
-    FMat4 t_cameraMatrix = t_arCam->getViewMatObj();
+    FMat4 t_cameraMatrix = t_arCam->viewMat();
     FVec3 t_cameraEye = t_arCam->getPosition();
     //构建虚拟平面
     FVec3 t_cameraDir = FVec3(-t_cameraMatrix[2],

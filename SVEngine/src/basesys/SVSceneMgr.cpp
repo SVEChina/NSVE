@@ -55,7 +55,7 @@ SVScenePtr SVSceneMgr::getScene(){
 //反适配
 void SVSceneMgr::uiToScene(f32& _x,f32& _y) {
     //invert Y
-    //_y = mApp->m_pGlobalParam->m_inner_height - _y;
+    //_y = mApp->m_global_param.m_sv_height - _y;
 }
 
 //更新

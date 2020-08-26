@@ -141,7 +141,7 @@ void SVActFollowPerson::run(SVNodePtr _nodePtr, f32 dt){
 //    if (_nodePtr) {
 //        SVPersonPtr t_person = mApp->getDetectMgr()->getPersonModule()->getPerson(m_personID);
 //        if (t_person && t_person->getExist()) {
-//            f32 t_adapt_scale = mApp->getConfig()->getDesignAdaptScale();
+//            f32 t_adapt_scale = mApp->m_config.getDesignAdaptScale();
 //            _nodePtr->setvisible(true);
 //            SVPersonTrackerPtr t_personTracker = t_person->getTracker();
 //            f32 t_pt_x = t_person->getFaceDataX(m_bindIndex)/t_adapt_scale;

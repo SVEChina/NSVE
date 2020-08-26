@@ -58,41 +58,25 @@ namespace sv {
         
         FMat4& getIAbsoluteMat();
         
-        virtual void setPosition(f32 x, f32 y, f32 z);
-        
-        virtual void setOffset(f32 _x, f32 _y, f32 _z);
-        
-        virtual void setRotation(f32 x, f32 y, f32 z);
-        
-        virtual void setQuat(SVQuat& _quat);
-        
-        virtual void setScale(f32 x, f32 y, f32 z);
-        
-        virtual void setPosition(FVec3& _pos);
-        
-        virtual void setOffset(FVec3& _pos);
-        
-        virtual void setRotation(FVec3& _rot);
-        
-        virtual void setScale(FVec3& _scale);
+        void setPosition(f32 x, f32 y, f32 z);
+
+        void setPosition(FVec3& _pos);
+
+        void setRotation(f32 x, f32 y, f32 z);
+
+        void setRotation(FVec3& _rot);
+
+        void setQuat(SVQuat& _quat);
+
+        void setScale(f32 x, f32 y, f32 z);
+
+        void setScale(FVec3& _scale);
         
         virtual void setAlpha(f32 _alpha);
-        
-        virtual void setBindOffset(FVec3& _offset);
-        
-        virtual void setBindOffset(f32 _offsetX, f32 _offsetY, f32 _offsetZ);
-        
-        void setAutoAdaptDesign(bool _adapt);
         
         void setbeSelect(bool _select);
         
         void setcanSelect(bool _select);
-        
-        void setBindIndex(s32 _index);
-        
-        s32  getBindIndex();
-        
-        FVec3& getBindOffset();
         
         void setRSType(RENDERSTREAMTYPE _retype);
         
@@ -103,9 +87,7 @@ namespace sv {
         bool getDrawAABB();
         
         FVec3& getPosition();
-        
-        FVec3& getOffset();
-        
+
         FVec3& getRotation();
         
         FVec3& getScale();
@@ -120,8 +102,6 @@ namespace sv {
         //设置z顺序
         void setZOrder(s32 _zorder);
         
-        void setLocalMatrix(FMat4 &_mat);
-        
         inline cptr8 getType(){ return ntype.c_str(); }
         
         inline cptr8 getname(){return m_name.c_str();}
@@ -135,18 +115,10 @@ namespace sv {
         inline bool getcanProcEvent(){ return m_canProcEvent; }
         
         inline bool getvisible(){ return m_visible; }
-        
-        inline bool getIsAutoAdaptDesign(){ return m_adaptDesign; }
-        
+    
         inline void setname(const char* _name){ m_name = _name; }
         
         inline void setvisible(bool _visible){ m_visible = _visible; }
-        
-        //渲染属性
-        SVRenderProp m_render_prop;
-        
-        //位置属性
-        SVTransProp m_trans_prop;
         
     protected:
         //更新
@@ -165,32 +137,30 @@ namespace sv {
         bool m_drawBox;         //是否渲染包围盒
         //
         RENDERSTREAMTYPE m_rsType;      //渲染流类型
-        FVec3 m_postion;        //位置
-        FVec3 m_rotation;       //旋转
-        FVec3 m_scale;          //缩放
-        FVec3 m_offpos;         //偏移
-        s32 m_bindIndex;        //绑定索引
-        FVec3 m_bindOffset;
         f32 m_alpha;
         bool m_dirty;
         bool m_beSelect;        //是否被选择
-        bool m_adaptDesign;
+        //
         SVBoundBox m_aabbBox;   //AABB包围盒
         SVBoundBox m_aabbBox_sw;//AABB世界包围盒
+        //
         FMat4 m_localMat;       //本地矩阵
         FMat4 m_absolutMat;     //绝对世界矩阵
         FMat4 m_iabsolutMat;    //逆绝对世界矩阵
         
+        //位置属性
+        SVAttriPos m_attri_pos;
+        //渲染属性
+        SVAttriRender m_attri_render;
         //材质表面
         SVSurfacePtr m_surface;
         //
-        SVMtlCorePtr m_pMtl;    //材质
-
-    protected:
+        SVNodePtr m_parent;
+        //
         bool m_needsort;
-        
-        //序列化接口
+
     public:
+        //序列化接口
         SVString m_rootPath;
         virtual void toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator,
                             RAPIDJSON_NAMESPACE::Value &_objValue);

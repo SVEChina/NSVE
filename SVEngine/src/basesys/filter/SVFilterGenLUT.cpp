@@ -23,7 +23,7 @@ SVFilterGenLUT::SVFilterGenLUT(SVInstPtr _app)
 :SVFilterBase(_app){
     m_type=SV_FUNC_BRIGHTNESSCONTRAST;
     m_name="SVFilterGenLUT";
-    m_BCMtl=nullptr;//brightness contrast
+    m_BCMtl = nullptr;//brightness contrast
     m_SaturationMtl=nullptr;
     m_colorBalanceMtl=nullptr;
     m_VibranceMtl=nullptr;
@@ -52,141 +52,141 @@ bool SVFilterGenLUT::create(){
     //
     s32 t_w = 0;// inTex->m_width;
     s32 t_h = 0;//inTex->m_height;
+    
 //    t_renderer->createSVTex(E_TEX_FILTER_GENLUT_OUT, t_w, t_h, GL_RGBA);
 //    t_renderer->createSVTex(E_TEX_FILTER_GENLUT_H1, t_w, t_h, GL_RGBA);
 //    t_renderer->createSVTex(E_TEX_FILTER_GENLUT_H2, t_w, t_h, GL_RGBA);
 //    t_renderer->createSVTex(E_TEX_FILTER_GENLUT_H3, 256, 1, GL_RGBA);
 //    t_renderer->createSVTex(E_TEX_FILTER_GENLUT_H4, 256, 1, GL_RGBA);
     
-    //增加pass
-    m_pPassNode = MakeSharedPtr<SVMultPassNode>(mApp);
-    m_pPassNode->create(t_w,t_h);
-    m_pPassNode->setRSType(RST_IMGFILTER);
-    m_pPassNode->setname("SVFilterGenLUT");
+//    //增加pass
+//    m_pPassNode = MakeSharedPtr<SVMultPassNode>(mApp);
+//    m_pPassNode->create(t_w,t_h);
+//    m_pPassNode->setRSType(RST_IMGFILTER);
+//    m_pPassNode->setname("SVFilterGenLUT");
     
-    //创建材质
-    m_BCMtl=MakeSharedPtr<SVMtlBrightnessContrast>(mApp);
-    //m_BCMtl->setTexcoordFlip(1.0f, 1.0f);
-    
-    SVMtlCorePtr t_mtl_back=MakeSharedPtr<SVMtlCore>(mApp,"screennor");
-    //t_mtl_back->setTexcoordFlip(1.0f, 1.0f);
-    
-    m_SaturationMtl=MakeSharedPtr<SVMtlSaturation>(mApp);
-    //m_SaturationMtl->setTexcoordFlip(1.0f, 1.0f);
-    
-    m_VibranceMtl=MakeSharedPtr<SVMtlVibrance>(mApp);
-    //m_VibranceMtl->setTexcoordFlip(1.0f, 1.0f);
-    
-    m_colorBalanceMtl=MakeSharedPtr<SVMtlColorBalance>(mApp);
-    //m_colorBalanceMtl->setTexcoordFlip(1.0f, 1.0f);
-    
-    m_hslMtl=MakeSharedPtr<SVMtlHSL>(mApp);
-    //m_hslMtl->setTexcoordFlip(1.0, 1.0);
-    
-    m_shadowHighlightMtl=MakeSharedPtr<SVMtlShadowHighlight>(mApp);
-    //m_shadowHighlightMtl->setTexcoordFlip(1.0, 1.0);
-    
-    m_whiteBalckLeveMtl=MakeSharedPtr<SVMtlWhiteBlackLevel>(mApp);
-    //m_whiteBalckLeveMtl->setTexcoordFlip(1.0, 1.0);
-    
-    m_whiteBalanceMtl = MakeSharedPtr<SVMtlWhiteBalance>(mApp);
-    //m_whiteBalanceMtl->setTexcoordFlip(1.0, 1.0);
-    
-    m_gammaMtl = MakeSharedPtr<SVMtlGamma>(mApp);
-    //m_gammaMtl->setTexcoordFlip(1.0, 1.0);
-    
-    m_exposureMtl = MakeSharedPtr<SVMtlExposure>(mApp);
-    //m_exposureMtl->setTexcoordFlip(1.0, 1.0);
-    
-    SVMtlCorePtr t_curveMtl = MakeSharedPtr<SVMtlCore>(mApp,"curveRgba");
-    //t_curveMtl->setTexcoordFlip(1.0, 1.0);
-   
-    SVPassPtr m_pass = MakeSharedPtr<SVPass>();
-    //m_pass->setMtl(m_BCMtl);
-    m_pass->setInTex(0,inTex);
-    m_pass->setOutTex(E_TEX_FILTER_GENLUT_H1);
-    m_pPassNode->addPass(m_pass);
-    
-    m_pass=MakeSharedPtr<SVPass>();
-    //m_pass->setMtl(m_SaturationMtl);
-    m_pass->setInTex(0,E_TEX_FILTER_GENLUT_H1);
-    m_pass->setOutTex(E_TEX_FILTER_GENLUT_H2);
-    m_pPassNode->addPass(m_pass);
-   
-    m_pass=MakeSharedPtr<SVPass>();
-    //m_pass->setMtl(m_VibranceMtl);
-    m_pass->setInTex(0,E_TEX_FILTER_GENLUT_H2);
-    m_pass->setOutTex(E_TEX_FILTER_GENLUT_H1);
-    m_pPassNode->addPass(m_pass);
-    
-    m_pass=MakeSharedPtr<SVPass>();
-    //m_pass->setMtl(m_hslMtl);
-    m_pass->setInTex(0, E_TEX_FILTER_GENLUT_H1);
-    m_pass->setOutTex(E_TEX_FILTER_GENLUT_H2);
-    m_pPassNode->addPass(m_pass);
-    
-    m_pass=MakeSharedPtr<SVPass>();
-    //m_pass->setMtl(m_colorBalanceMtl);
-    m_pass->setInTex(0, E_TEX_FILTER_GENLUT_H2);
-    m_pass->setOutTex(E_TEX_FILTER_GENLUT_H1);
-    m_pPassNode->addPass(m_pass);
-    
-    m_pass=MakeSharedPtr<SVPass>();
-    //m_pass->setMtl(m_shadowHighlightMtl);
-    m_pass->setInTex(0, E_TEX_FILTER_GENLUT_H1);
-    m_pass->setOutTex(E_TEX_FILTER_GENLUT_H2);
-    m_pPassNode->addPass(m_pass);
-    
-    m_pass=MakeSharedPtr<SVPass>();
-    //m_pass->setMtl(m_whiteBalckLeveMtl);
-    m_pass->setInTex(0, E_TEX_FILTER_GENLUT_H2);
-    m_pass->setOutTex(E_TEX_FILTER_GENLUT_H1);
-    m_pPassNode->addPass(m_pass);
-    
-    m_pass=MakeSharedPtr<SVPass>();
-    //m_pass->setMtl(m_whiteBalanceMtl);
-    m_pass->setInTex(0, E_TEX_FILTER_GENLUT_H1);
-    m_pass->setOutTex(E_TEX_FILTER_GENLUT_H2);
-    m_pPassNode->addPass(m_pass);
-    
-    m_pass=MakeSharedPtr<SVPass>();
-    //m_pass->setMtl(m_gammaMtl);
-    m_pass->setInTex(0, E_TEX_FILTER_GENLUT_H2);
-    m_pass->setOutTex(E_TEX_FILTER_GENLUT_H1);
-    m_pPassNode->addPass(m_pass);
-    
-    m_pass=MakeSharedPtr<SVPass>();
-    //m_pass->setMtl(m_exposureMtl);
-    m_pass->setInTex(0, E_TEX_FILTER_GENLUT_H1);
-    m_pass->setOutTex(E_TEX_FILTER_GENLUT_H2);
-    m_pPassNode->addPass(m_pass);
-    
-    m_pass=MakeSharedPtr<SVPass>();
-    //m_pass->setMtl(t_curveMtl);
-    m_pass->setInTex(0, E_TEX_FILTER_GENLUT_H2);
-    m_pass->setInTex(1 ,E_TEX_FILTER_GENLUT_H3);
-    m_pass->setOutTex(E_TEX_FILTER_GENLUT_H1);
-    m_pPassNode->addPass(m_pass);
-    
-    SVMtlCorePtr t_mtl_rgba=MakeSharedPtr<SVMtlCore>(mApp,"screennor");
-    m_GradientMapPass=MakeSharedPtr<SVPass>();
-    //m_GradientMapPass->setMtl(t_mtl_rgba);
-    m_GradientMapPass->setInTex(0,E_TEX_FILTER_GENLUT_H1);
-    m_GradientMapPass->setInTex(1,E_TEX_FILTER_GENLUT_H4);
-    m_GradientMapPass->setOutTex(E_TEX_FILTER_GENLUT_H2);
-    m_pPassNode->addPass(m_GradientMapPass);
-
-    m_pass=MakeSharedPtr<SVPass>();
-    //m_pass->setMtl(t_mtl_back);
-    m_pass->setInTex(0,E_TEX_FILTER_GENLUT_H2);
-    m_pass->setOutTex(E_TEX_FILTER_GENLUT_OUT);
-    m_pPassNode->addPass(m_pass);
+//    //创建材质
+//    m_BCMtl=MakeSharedPtr<SVMtlBrightnessContrast>(mApp);
+//    //m_BCMtl->setTexcoordFlip(1.0f, 1.0f);
+//    
+//    SVMtlCorePtr t_mtl_back=MakeSharedPtr<SVMtlCore>(mApp,"screennor");
+//    //t_mtl_back->setTexcoordFlip(1.0f, 1.0f);
+//    
+//    m_SaturationMtl=MakeSharedPtr<SVMtlSaturation>(mApp);
+//    //m_SaturationMtl->setTexcoordFlip(1.0f, 1.0f);
+//    
+//    m_VibranceMtl=MakeSharedPtr<SVMtlVibrance>(mApp);
+//    //m_VibranceMtl->setTexcoordFlip(1.0f, 1.0f);
+//    
+//    m_colorBalanceMtl=MakeSharedPtr<SVMtlColorBalance>(mApp);
+//    //m_colorBalanceMtl->setTexcoordFlip(1.0f, 1.0f);
+//    
+//    m_hslMtl=MakeSharedPtr<SVMtlHSL>(mApp);
+//    //m_hslMtl->setTexcoordFlip(1.0, 1.0);
+//    
+//    m_shadowHighlightMtl=MakeSharedPtr<SVMtlShadowHighlight>(mApp);
+//    //m_shadowHighlightMtl->setTexcoordFlip(1.0, 1.0);
+//    
+//    m_whiteBalckLeveMtl=MakeSharedPtr<SVMtlWhiteBlackLevel>(mApp);
+//    //m_whiteBalckLeveMtl->setTexcoordFlip(1.0, 1.0);
+//    
+//    m_whiteBalanceMtl = MakeSharedPtr<SVMtlWhiteBalance>(mApp);
+//    //m_whiteBalanceMtl->setTexcoordFlip(1.0, 1.0);
+//    
+//    m_gammaMtl = MakeSharedPtr<SVMtlGamma>(mApp);
+//    //m_gammaMtl->setTexcoordFlip(1.0, 1.0);
+//    
+//    m_exposureMtl = MakeSharedPtr<SVMtlExposure>(mApp);
+//    //m_exposureMtl->setTexcoordFlip(1.0, 1.0);
+//    
+//    SVMtlCorePtr t_curveMtl = MakeSharedPtr<SVMtlCore>(mApp,"curveRgba");
+//    //t_curveMtl->setTexcoordFlip(1.0, 1.0);
+//   
+//    SVPassPtr m_pass = MakeSharedPtr<SVPass>();
+//    //m_pass->setMtl(m_BCMtl);
+////    m_pass->setInTex(0,inTex);
+////    m_pass->setOutTex(E_TEX_FILTER_GENLUT_H1);
+//    m_pPassNode->addPass(m_pass);
+//    
+//    m_pass=MakeSharedPtr<SVPass>();
+//    //m_pass->setMtl(m_SaturationMtl);
+////    m_pass->setInTex(0,E_TEX_FILTER_GENLUT_H1);
+////    m_pass->setOutTex(E_TEX_FILTER_GENLUT_H2);
+//    m_pPassNode->addPass(m_pass);
+//   
+//    m_pass=MakeSharedPtr<SVPass>();
+//    //m_pass->setMtl(m_VibranceMtl);
+////    m_pass->setInTex(0,E_TEX_FILTER_GENLUT_H2);
+////    m_pass->setOutTex(E_TEX_FILTER_GENLUT_H1);
+//    m_pPassNode->addPass(m_pass);
+//    
+//    m_pass=MakeSharedPtr<SVPass>();
+//    //m_pass->setMtl(m_hslMtl);
+////    m_pass->setInTex(0, E_TEX_FILTER_GENLUT_H1);
+////    m_pass->setOutTex(E_TEX_FILTER_GENLUT_H2);
+//    m_pPassNode->addPass(m_pass);
+//    
+//    m_pass=MakeSharedPtr<SVPass>();
+//    //m_pass->setMtl(m_colorBalanceMtl);
+////    m_pass->setInTex(0, E_TEX_FILTER_GENLUT_H2);
+////    m_pass->setOutTex(E_TEX_FILTER_GENLUT_H1);
+//    m_pPassNode->addPass(m_pass);
+//    
+//    m_pass=MakeSharedPtr<SVPass>();
+//    //m_pass->setMtl(m_shadowHighlightMtl);
+////    m_pass->setInTex(0, E_TEX_FILTER_GENLUT_H1);
+////    m_pass->setOutTex(E_TEX_FILTER_GENLUT_H2);
+//    m_pPassNode->addPass(m_pass);
+//    
+//    m_pass=MakeSharedPtr<SVPass>();
+//    //m_pass->setMtl(m_whiteBalckLeveMtl);
+////    m_pass->setInTex(0, E_TEX_FILTER_GENLUT_H2);
+////    m_pass->setOutTex(E_TEX_FILTER_GENLUT_H1);
+//    m_pPassNode->addPass(m_pass);
+//    
+//    m_pass=MakeSharedPtr<SVPass>();
+//    //m_pass->setMtl(m_whiteBalanceMtl);
+////    m_pass->setInTex(0, E_TEX_FILTER_GENLUT_H1);
+////    m_pass->setOutTex(E_TEX_FILTER_GENLUT_H2);
+//    m_pPassNode->addPass(m_pass);
+//    
+//    m_pass=MakeSharedPtr<SVPass>();
+//    //m_pass->setMtl(m_gammaMtl);
+////    m_pass->setInTex(0, E_TEX_FILTER_GENLUT_H2);
+////    m_pass->setOutTex(E_TEX_FILTER_GENLUT_H1);
+//    m_pPassNode->addPass(m_pass);
+//    
+//    m_pass=MakeSharedPtr<SVPass>();
+//    //m_pass->setMtl(m_exposureMtl);
+////    m_pass->setInTex(0, E_TEX_FILTER_GENLUT_H1);
+////    m_pass->setOutTex(E_TEX_FILTER_GENLUT_H2);
+//    m_pPassNode->addPass(m_pass);
+//    
+//    m_pass=MakeSharedPtr<SVPass>();
+//    //m_pass->setMtl(t_curveMtl);
+////    m_pass->setInTex(0, E_TEX_FILTER_GENLUT_H2);
+////    m_pass->setInTex(1 ,E_TEX_FILTER_GENLUT_H3);
+////    m_pass->setOutTex(E_TEX_FILTER_GENLUT_H1);
+//    m_pPassNode->addPass(m_pass);
+//    
+//    SVMtlCorePtr t_mtl_rgba=MakeSharedPtr<SVMtlCore>(mApp,"screennor");
+//    m_GradientMapPass=MakeSharedPtr<SVPass>();
+//    //m_GradientMapPass->setMtl(t_mtl_rgba);
+////    m_GradientMapPass->setInTex(0,E_TEX_FILTER_GENLUT_H1);
+////    m_GradientMapPass->setInTex(1,E_TEX_FILTER_GENLUT_H4);
+////    m_GradientMapPass->setOutTex(E_TEX_FILTER_GENLUT_H2);
+//    m_pPassNode->addPass(m_GradientMapPass);
+//
+//    m_pass=MakeSharedPtr<SVPass>();
+//    //m_pass->setMtl(t_mtl_back);
+////    m_pass->setInTex(0,E_TEX_FILTER_GENLUT_H2);
+////    m_pass->setOutTex(E_TEX_FILTER_GENLUT_OUT);
+//    m_pPassNode->addPass(m_pass);
 
     return true;
 }
 
 void SVFilterGenLUT::destroy(){
-    //
     m_BCMtl=nullptr;//brightness contrast
     m_SaturationMtl=nullptr;
     m_colorBalanceMtl=nullptr;
@@ -223,6 +223,7 @@ void SVFilterGenLUT::setGradientMap(ptr8  data,u32 size){
 }
 
 void SVFilterGenLUT::update(f32 dt){
+    
     m_BCMtl->setBrightness(m_genParam->m_brightness);
     m_BCMtl->setContrast(m_genParam->m_contrast);
     m_SaturationMtl->setSaturation(m_genParam->m_saturation);

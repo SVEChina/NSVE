@@ -41,7 +41,7 @@ void SVDivisonFilter::open() {
         SVScenePtr t_sc = mApp->getSceneMgr()->getScene();
         if(t_sc && m_backgroundNode){
             t_sc->addNode(m_backgroundNode);
-            //m_backgroundNode->setMesh(mApp->getDataMgr()->m_screenMesh);
+            //m_backgroundNode->setMesh(mApp->getComData()->m_screenMesh);
             m_backgroundNode->setTexture(E_TEX_INSTREAM);
         }
     }
@@ -59,8 +59,8 @@ bool SVDivisonFilter::isOpen(){
 
 //void SVDivisonFilter::setDivisionFilterType(SVComData::EFFICACYMESHTYPE _type){
 //    if (_type == SVComData::EFFICACY_MESH_TYPE_NONE) {
-//        m_backgroundNode->setMesh(mApp->getDataMgr()->m_screenMesh);
+//        m_backgroundNode->setMesh(mApp->getComData()->m_screenMesh);
 //    }else{
-//        m_backgroundNode->setMesh(mApp->getDataMgr()->m_screenTwoDivisionMesh);
+//        m_backgroundNode->setMesh(mApp->getComData()->m_screenTwoDivisionMesh);
 //    }
 //}

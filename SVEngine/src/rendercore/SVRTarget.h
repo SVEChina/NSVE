@@ -9,7 +9,10 @@
 #define SV_RENDER_TARGET_H
 
 #include "../base/SVGBase.h"
+#include "../base/SVMat4.h"
+#include "../base/SVColor.h"
 #include "SVRenderDeclare.h"
+#include "SVNodeDeclare.h"
 #include <vector>
 
 namespace sv {
@@ -18,55 +21,68 @@ namespace sv {
     渲染目标（主目标，其他目标，都包含在内）
     */
 
-    //
+    //目标描述
     struct SVTargetDsp {
+        //
         SVTargetDsp() {
             m_width = 512;
             m_height = 512;
             m_target_num = 1;
+            memset(m_color_texid,0,sizeof(s32)*SV_SUPPORT_MAX_TAREGT);
             m_use_depth = true;
             m_use_stencil = true;
-            m_gl_tex = 0;
-            m_oc_target = nullptr;
-            m_oc_texture = nullptr;
         }
-        //
         s32 m_width;
         s32 m_height;
         s32 m_target_num;
+        s32 m_color_texid[SV_SUPPORT_MAX_TAREGT];
         bool m_use_depth;
         bool m_use_stencil;
-        //gl
-        u32 m_gl_tex;
-        //metal专用参数
-        void* m_oc_target;
-        void* m_oc_texture;
     };
 
     //
     class SVRTarget : public SVGBaseEx {
     public:
-        SVRTarget(SVInstPtr _app);
+        SVRTarget(SVInstPtr _app,s32 _id);
 
         ~SVRTarget();
         
         SVRTargetPtr share();
         
-        void setRenderPath();
+        //
+        void setClearColor(f32 _r,f32 _g,f32 _b,f32 _a);
         
+        //
+        void setDepth(f32 _value) ;
+        
+        //
+        void setStencil(s32 _value) ;
+        
+        //
         void resize(s32 _width,s32 _height);
         
+        //正常渲染
         void render(SVRendererPtr _renderer);
         
-        void pushRenderCommand(SVRenderCmdPtr _rcmd,SV_RSTREAM_TYPE _rstype);
+        //推送流序
+        void pushStreamQuene(SV_RSTREAM _rstream);
         
-        void clearRenderCommand();
+        //清理流序
+        void clearStreamQuene();
+        
+        //推送命令
+        void pushCommandPre(SVRenderCmdPtr _rcmd);
+        
+        void pushCommandAfter(SVRenderCmdPtr _rcmd);
+    
+        void pushCommand(SVRenderCmdPtr _rcmd,SV_RSTREAM _rstype);
+        
+        void clearCommand();
+        
+        //绑定相机
+        void bindCamera(SVCameraNodePtr _camera);
 
-    protected:
-        std::vector<SV_RSTREAM_TYPE> m_stream_quene;    //流序，流顺的设定就是渲染路径的设定
-        std::vector<SVRenderStreamPtr> m_stream_pool;
-        
-    public:
+        //绑定资源
         void bindRes(SVRFboPtr _res);
 
         void unbindRes();
@@ -74,14 +90,73 @@ namespace sv {
         SVRFboPtr getResFbo();
         
         SVTargetDsp* getTargetDsp() { return &m_target_dsp; }
+        
+        void setFixSize() {
+            m_auto = false;
+        }
+        
+        void setAutoSize() {
+            m_auto = true;
+        }
+
+        void setVPMat(FMat4& _mat) {
+            m_vp_mat = _mat;
+        }
+        
+        void setVMat(FMat4& _mat) {
+            m_v_mat = _mat;
+        }
+        
+        void setPMat(FMat4& _mat) {
+            m_p_mat = _mat;
+        }
 
     protected:
+        //
+        s32 m_targetID;
+        
+        //
+        s32 m_cmdNum;
+        
+        //颜色
+        SVColor m_color;
+        
+        //深度值
+        f32 m_depth_value;
+        
+        //模版值
+        s32 m_stencil_value;
+        
+        //绑定的相机
+        SVCameraNodePtr m_camera;
+        
+        //
+        SVTargetDsp m_target_dsp;
+        
+        //同步大小
+        bool m_auto;
+        
+        //是否开启输出
+        bool m_output;
+        
         SVRFboPtr m_fbo;
         
-        SVTargetDsp m_target_dsp;
+        SVRenderStreamPtr m_stream_pre;
+         
+        SVRenderStreamPtr m_stream_after;
+        
+        //
+        std::vector<SV_RSTREAM> m_stream_quene;    //流序，流顺的设定就是渲染路径的设定
+        
+        //
+        std::vector<SVRenderStreamPtr> m_stream_pool;
+        
+    public:
+        FMat4 m_v_mat;
+        FMat4 m_p_mat;
+        FMat4 m_vp_mat;
     };
 
-    
 }//!namespace sv
 
 

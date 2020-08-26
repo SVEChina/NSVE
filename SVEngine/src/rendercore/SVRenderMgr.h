@@ -9,11 +9,11 @@
 #define SV_RENDERMGR_H
 
 #include "SVRenderDeclare.h"
+#include "../base/SVPreDeclare.h"
+#include "../work/SVWorkDeclare.h"
 #include "../base/SVGBase.h"
 #include "../base/SVMap.h"
-#include "../base/SVPreDeclare.h"
-#include "../base/SVMat4d.h"
-#include "../base/SVStack.h"
+#include "../base/SVMat4.h"
 
 namespace sv {
     
@@ -33,7 +33,11 @@ namespace sv {
         
         void destroy();
         
+        void resize(s32 _w,s32 _h);
+        
         void setMainRT(SVRTargetPtr _rt);
+        
+        SVRTargetPtr getMainRT();
         
         void clear();
         
@@ -45,32 +49,32 @@ namespace sv {
         
         void pushRCmdDestory(SVRenderCmdPtr _rcmd);
         
-        void pushRCmd(SVRenderCmdPtr _rcmd,SV_RSTREAM_TYPE _rstype);
+        void pushRCmd(SVRenderCmdPtr _rcmd,SV_RSTREAM _rstype);
         
         void addRTarget(SVRTargetPtr _rt,bool _pre);
         
-        SVRTargetPtr getRTarget(cptr8 _name);
+        void removeRTarget(SVRTargetPtr _rt);
 
-    
     protected:
         void _sort();
+        
         void _adapt();
+        
         s32 m_adaptMode;
         
         //资源创建流
         SVRenderStreamPtr m_stream_create;
         //资源销毁流
         SVRenderStreamPtr m_stream_destroy;
-        
-        SVLockPtr m_renderLock;
-        SVLockPtr m_logicLock;
+        //
+        SVLockSpinPtr m_renderLock;
+        SVLockSpinPtr m_logicLock;
+        //
+        SVREnvPtr m_renderEnv;  //渲染环境 用于外面对接的渲染目标
         //
         SVArray<SVRTargetPtr> m_preRT; //前向RT
         SVArray<SVRTargetPtr> m_afterRT; //后向RT
         SVRTargetPtr m_mainRT; //主RT
-        
-    public:
-        SVRenderScenePtr getRenderScene();
     };
 
 

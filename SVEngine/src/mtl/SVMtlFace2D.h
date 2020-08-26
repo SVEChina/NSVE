@@ -14,30 +14,26 @@
 //2D面具材质
 namespace sv {
     
-    
+    class SVMtlFace2D : public SVMtlCore {
+    public:
+        SVMtlFace2D(SVInstPtr _app);
         
-        class SVMtlFace2D : public SVMtlCore {
-        public:
-            SVMtlFace2D(SVInstPtr _app);
-            
-            SVMtlFace2D(SVMtlFace2D *_mtl);
-            
-            ~SVMtlFace2D();
-            
-            virtual SVMtlCorePtr clone();
-            
-            void setMaskTexture(SVTexturePtr texture);
-            
-            SVTexturePtr getMaskTexture();
-            
-            void update(f32 dt);
-            
-        protected:
-            SVTexturePtr m_pMaskTexture;
-        };
+        SVMtlFace2D(SVMtlFace2D *_mtl);
+        
+        ~SVMtlFace2D();
+        
+        virtual SVMtlCorePtr clone();
+        
+        void setMaskTexture(SVTexturePtr texture);
+        
+        SVTexturePtr getMaskTexture();
+        
+        void update(f32 dt);
+        
+    protected:
+        SVTexturePtr m_pMaskTexture;
+    };
 
-    
-    
 }//!namespace sv
 
 

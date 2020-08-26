@@ -102,7 +102,6 @@ namespace sv{
         s32 m_pt_count;
         //画笔相关
         SVDataSwapPtr m_pInstanceOffsetData;
-        SVRenderObjectPtr m_pRenderObj;
         //SVRenderMeshDvidPtr m_pStrokeMesh;
         SVMtlStrokeBasePtr m_pMtl;
         SVTexturePtr m_pTex;

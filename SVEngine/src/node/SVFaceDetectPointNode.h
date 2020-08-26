@@ -45,7 +45,6 @@ namespace sv {
             f32 m_inw;
             f32 m_inh;
             SVRenderMeshPtr m_pMesh;
-            SVRenderObjectPtr m_pRenderObj;
             SVTexturePtr m_pTex;
         };
         

@@ -14,11 +14,10 @@
 //#include "../basesys/SVSceneMgr.h"
 //#include "../basesys/SVComData.h"
 //#include "../rendercore/SVRenderMgr.h"
-//#include "../rendercore/SVRenderObject.h"
+//
 //#include "../rendercore/SVRenderMesh.h"
-//#include "../rendercore/SVRenderTexture.h"
 //#include "../rendercore/SVRenderCmd.h"
-//#include "../rendercore/SVRenderScene.h"
+//
 //#include "../rendercore/SVRenderer.h"
 //#include "../core/SVGeoGen.h"
 //#include "../core/SVPass.h"
@@ -34,9 +33,8 @@ using namespace sv;
 SVShapeVariedNode::SVShapeVariedNode(SVInstPtr _app)
 :SVNode(_app){
     ntype = "SVFaceShapeVariedNode";
-//    m_pRenderObj = MakeSharedPtr<SVRenderObject>();
 //    m_pMtl = MakeSharedPtr<SVMtlFaceShapeVaried>(mApp);
-//    m_pMesh =  mApp->getDataMgr()->m_screenMesh;
+//    m_pMesh =  mApp->getComData()->m_screenMesh;
 }
 
 SVShapeVariedNode::~SVShapeVariedNode(){
@@ -57,7 +55,7 @@ void SVShapeVariedNode::init(){
 //    SVRendererPtr t_renderer = mApp->getRenderer();
 //    if(!t_renderer)
 //        return ;
-//    SVTexturePtr t_tex = mApp->getTexMgr()->createUnctrlTexture(mApp->m_pGlobalParam->m_inner_width, mApp->m_pGlobalParam->m_inner_height,GL_RGBA, GL_RGBA);
+//    SVTexturePtr t_tex = mApp->getTexMgr()->createUnctrlTexture(mApp->m_global_param.m_sv_width, mApp->m_global_param.m_sv_height,GL_RGBA, GL_RGBA);
 //    SVTexturePtr teximg = mApp->getTexMgr()->getTexture("svres/filterimg/mask", true);
 //    m_fbo = MakeSharedPtr<SVRenderTexture>(mApp,
 //                                           t_tex,
@@ -79,7 +77,7 @@ void SVShapeVariedNode::init(){
 //    SVPassPtr t_pass2 = MakeSharedPtr<SVPass>();
 //    t_pass2->setMtl(t_mtl);
 //    t_pass2->setInTex(0, t_tex);
-//    t_pass2->setMesh(mApp->getDataMgr()->m_screenMesh);
+//    t_pass2->setMesh(mApp->getComData()->screenMesh();
 //    t_pass2->setOutTex(t_renderer->getSVTex(E_TEX_MAIN));
 //    addPass(t_pass2);
 }

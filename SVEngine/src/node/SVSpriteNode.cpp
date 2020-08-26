@@ -8,20 +8,16 @@
 
 #include "SVSpriteNode.h"
 #include "../app/SVDispatch.h"
-#include "../basesys/SVScene.h"
+#include "../app/SVInst.h"
 #include "../basesys/SVCameraNode.h"
+#include "../basesys/SVComData.h"
+#include "../core/SVGeoGen.h"
 #include "../mtl/SVMtlLib.h"
 #include "../mtl/SVMtlCore.h"
-#include "../core/SVGeoGen.h"
-#include "../basesys/SVConfig.h"
+#include "../mtl/SVSurface.h"
 #include "../mtl/SVTexture.h"
 #include "../mtl/SVTexMgr.h"
-#include "../app/SVInst.h"
-#include "../rendercore/SVRenderObject.h"
-#include "../rendercore/SVRenderMgr.h"
-#include "../rendercore/SVRenderer.h"
 #include "../rendercore/SVRenderMesh.h"
-#include "../basesys/SVComData.h"
 
 using namespace sv;
 
@@ -34,7 +30,15 @@ SVSpriteNode::SVSpriteNode(SVInstPtr _app)
     m_canSelect = false;
     m_pTex = nullptr;
     m_pMesh = nullptr;
-    setSize(1.9f,1.9f);
+    setSize(400.0f,400.0f);
+    //
+    if(m_surface) {
+        FMat4 t_mat;
+        t_mat.setIdentity();
+        m_surface->m_tbl->addParam("matw",t_mat);
+        m_surface->m_tbl->addParam("matv",t_mat);
+        m_surface->m_tbl->addParam("matp",t_mat);
+    }
 }
 
 SVSpriteNode::SVSpriteNode(SVInstPtr _app,f32 _w,f32 _h)
@@ -50,7 +54,6 @@ SVSpriteNode::SVSpriteNode(SVInstPtr _app,f32 _w,f32 _h)
 
 SVSpriteNode::~SVSpriteNode() {
     m_pMesh = nullptr;
-    m_pMtl = nullptr;
     m_pTex = nullptr;
 }
 
@@ -58,7 +61,7 @@ SVSpriteNode::~SVSpriteNode() {
 void SVSpriteNode::setSize(f32 _w,f32 _h) {
     m_width = _w;
     m_height = _h;
-    f32 t_texcoord_size = 4;
+    f32 t_texcoord_size = 1.0f;
     if( m_pMesh ){
         //更新数据
         V3_T0 t_verts[4];
@@ -103,7 +106,7 @@ void SVSpriteNode::setTexture(cptr8 _path){
     m_pTex = mApp->getTexMgr()->getTexture(_path,true);
 }
 
-void SVSpriteNode::setTexture(SVTEXINID _textype){
+void SVSpriteNode::setTexture(SVINTEX _textype){
     //m_inTexType = _textype;
 }
 
@@ -132,11 +135,21 @@ void SVSpriteNode::update(f32 _dt) {
     if(t_mtl) {
         t_mtl->update(_dt);
     }
+    if(m_surface) {
+        m_surface->setTexture(0,m_pTex,1);
+        if( mApp->m_rcore == E_R_METAL_OSX || mApp->m_rcore == E_R_METAL_IOS ) {
+            //metal需要转至一下矩阵
+            FMat4 tt = transpose(m_localMat);
+            m_surface->setParam("matw",tt);
+        }else{
+            m_surface->setParam("matw",m_localMat);
+        }
+    }
 }
 
 void SVSpriteNode::render() {
     if ( m_visible && m_pMesh){
-        SVDispatch::dispatchMeshDraw(mApp, m_pMesh, m_mtl_name.c_str(),m_surface);
+        SVDispatch::dispatchMeshDraw(mApp, m_pMesh, m_mtl_name.c_str(),m_surface,E_RSM_SOLID);
     }
     SVNode::render();
 }
@@ -150,20 +163,5 @@ void SVSpriteNode::toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocat
 
 void SVSpriteNode::fromJSON(RAPIDJSON_NAMESPACE::Value &item){
     _fromJsonData(item);
-//    if (item.HasMember("spriteW") && item["spriteW"].IsFloat()) {
-//        m_width = item["spriteW"].GetFloat();
-//    }
-//    if (item.HasMember("spriteH") && item["spriteH"].IsFloat()) {
-//        m_height = item["spriteH"].GetFloat();
-//    }
-//    setSize(m_width, m_height);
-//    if (item.HasMember("texture") && item["texture"].IsString()) {
-//        SVString t_textureName = item["texture"].GetString();
-//        SVString t_texturePath = m_rootPath + t_textureName;
-//        setTexture(t_texturePath.c_str(), m_enableMipMap);
-//    }
-//    if (item.HasMember("textype") && item["textype"].IsInt()) {
-//        m_inTexType = SVTEXINID(item["textype"].GetInt());
-//    }
     m_dirty = true;
 }

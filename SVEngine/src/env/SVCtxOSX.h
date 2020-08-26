@@ -21,16 +21,17 @@ namespace sv {
 
     class SVCtxOSXGL: public SVCtxBase {
     public:
-        SVCtxOSXGL(void* _context);
+        SVCtxOSXGL();
         
         ~SVCtxOSXGL();
         
-        virtual SVRendererPtr createRenderer(SVInstPtr _handle);
+        void init(void* _context);
         
-        virtual bool activeContext();
+        bool activeContext(SVRendererPtr _renderer);
+
+        bool swap(SVRendererPtr _renderer);
         
-        virtual bool swap();
-        
+    protected:
         NSOpenGLContext* m_pGLContext;
     };
 
@@ -40,10 +41,17 @@ namespace sv {
         SVCtxOSXMetal();
         
         ~SVCtxOSXMetal();
-
-        virtual bool activeContext();
         
-        virtual bool swap();
+        void init(SVInstPtr _handle,id<MTLDevice> _device,id<MTLDrawable> _target,id<MTLTexture> _targetTex);
+
+        bool activeContext(SVRendererPtr _renderer);
+
+        bool swap(SVRendererPtr _renderer);
+        
+    protected:
+        id<MTLDrawable> m_target;
+        id<MTLTexture> m_texture;
+        MTLRenderPassDescriptor* m_pass;
     };
     
 }//!namespace sv

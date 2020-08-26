@@ -75,8 +75,11 @@ namespace sv {
             void setBindOffset(f32 _offsetX, f32 _offsetY, f32 _offsetZ);//设置跟随点偏移
             
             void setScale(f32 _scaleX, f32 _scaleY, f32 _scaleZ);
+            
             void setRotation(f32 _rotX, f32 _rotY, f32 _rotZ);
+        
         protected:
+            s32 m_bindIndex;
             f32 m_offsetX;
             f32 m_offsetY;
             f32 m_offsetZ;
@@ -86,7 +89,6 @@ namespace sv {
             f32 m_rotX;
             f32 m_rotY;
             f32 m_rotZ;
-            s32 m_bindIndex;
             s32 m_personID;
         };
         

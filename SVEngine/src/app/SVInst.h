@@ -12,6 +12,7 @@
 #include "../rendercore/SVRenderDeclare.h"
 #include "../env/SVEnvDeclare.h"
 #include "../mtl/SVMtlDeclare.h"
+#include "../basesys/SVConfig.h"
 #include "SVGlobalMgr.h"
 #include "SVGlobalParam.h"
 
@@ -29,23 +30,30 @@ namespace sv {
         SVInst();
         //
         virtual ~SVInst();
-        
+        //
         SVInstPtr share();
-        
         //初始化SV
-        virtual void init();
+        void init();
         //销毁SV
-        virtual void destroy();
-        //创建渲染器
-        SVRendererPtr createRenderer(SV_R_TYPE _type);
+        void destroy();
+        //重置大小
+        void resize(s32 _w,s32 _h);
+        //创建环境
+        SVCtxBasePtr createEnv(SV_R_ENV _type);
         //销毁渲染器
-        void destroyRenderer();
+        void destroyEnv();
+        //设置渲染器
+        void setRenderer(SVRendererPtr _renderer);
+        //设置渲染路径
+        void setRenderPath(s32 _rpath);
         //开始SV
-        virtual void start();
+        void start();
         //停止SV
-        virtual void stop();
+        void stop();
         //增加资源路径
         void addRespath(cptr8 _path);
+        //清理资源路径
+        void clearRespath();
         //更新引擎
         void updateSVE(f32 _dt);
         //渲染引擎
@@ -69,24 +77,25 @@ namespace sv {
         //文件部分
         SVFileMgrPtr m_pFileMgr;
         //配置部分
-        SVConfigPtr m_pConfig;
+        SVConfig m_config;
         //全局对象
         SVGlobalMgrPtr m_pGlobalMgr;
         //全局参数
-        SVGlobalParamPtr m_pGlobalParam;
+        SVGlobalParam m_global_param;
         //渲染器 renderer
-        SVRendererPtr m_pRE;
+        SVRendererPtr m_renderer;
         //渲染环境
         SVCtxBasePtr m_ctx;
         //
         SV_STATE m_svst;
+        //渲染器内核
+        SV_R_ENV m_rcore;
         //
         SV_ENG_TIMESTATE m_engTimeState;
         
     public:
         //获取各种模块，管理类
         SVFileMgrPtr getFileMgr();
-        SVConfigPtr getConfig();
         SVEventMgrPtr getEventMgr();
         SVBasicSysPtr getBasicSys();
         SVCameraMgrPtr getCameraMgr();
@@ -99,7 +108,7 @@ namespace sv {
         SVRenderMgrPtr getRenderMgr();
         SVDetectMgrPtr getDetectMgr();
         SVDeformMgrPtr getDeformMgr();
-        SVComDataPtr getDataMgr();
+        SVComDataPtr getComData();
         SVModelMgrPtr getModelMgr();
         SVPhysicsWorldMgrPtr getPhysicsWorldMgr();
         SVRendererPtr getRenderer();

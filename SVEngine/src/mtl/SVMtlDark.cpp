@@ -49,5 +49,5 @@ void SVMtlDark::setDarkIntensity(f32 _intensity){
 
 void SVMtlDark::_submitUniform(SVRendererPtr _render) {
     SVMtlCore::_submitUniform(_render);
-    _render->submitUniformf("intensity", m_intensity);
+    //_render->submitUniformf("intensity", m_intensity);
 }

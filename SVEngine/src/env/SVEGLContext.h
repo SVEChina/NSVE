@@ -25,15 +25,15 @@ namespace sv {
 
         ~SVEGLContext();
 
-        virtual bool activeContext();
+        virtual bool activeContext(SVRendererPtr _renderer);
         
-        virtual bool swap();
+        virtual bool swap(SVRendererPtr _renderer);
 
         virtual void* getContext();
 
     protected:
         EGLDisplay m_Display;
-        EGLConfig *m_pConfigsList;
+        EGLConfig *m_configsList;
         EGLConfig m_GLConfigOff;
         EGLContext m_pGLContext;
         EGLContext m_pGLContextShare;

@@ -10,15 +10,18 @@
 
 #include "SVRenderDeclare.h"
 #include "../mtl/SVMtlDeclare.h"
+#include "../work/SVWorkDeclare.h"
 #include "../base/SVGBase.h"
 #include "../base/SVMat4.h"
 #include "../base/SVArray.h"
 #include "../base/SVStack.h"
 #include "../core/SVVertDef.h"
 
-//渲染器封装的是算法
+#include <list>
+#include <vector>
+#include <map>
 
-//渲染内核跨平台
+//渲染器封装的是算法
 
 namespace sv {
 
@@ -44,6 +47,7 @@ namespace sv {
         SVRenderer(SVInstPtr _app);
         
         ~SVRenderer();
+        
         //初始化
         virtual void init(s32 _w,s32 _h);
         
@@ -53,34 +57,45 @@ namespace sv {
         //重置大小
         virtual void resize(s32 _w,s32 _h);
         
-    public:
-        //创建资源接口
-        //纹理
+        //创建纹理资源
         virtual SVRTexPtr createResTexture() { return nullptr; }
         
-        //shader
+        //创建shader资源
         virtual SVRShaderPtr createResShader() { return nullptr; }
         
-        //buf-vbo 等
+        //创建buf资源
         virtual SVRMeshResPtr createResBuf() { return nullptr; }
         
-        //fbo
+        //创建fbo资源
         virtual SVRFboPtr createResFbo() { return nullptr; }
         
-    public:
+        //创建target资源
+        virtual SVRTargetPtr createTarget(SVINTEX _texid,bool _depth,bool _stencil){ return nullptr; }
+        
+        //创建target资源,自定义大小
+        virtual SVRTargetPtr createTarget(SVINTEX _texid,s32 _w,s32 _h,bool _depth,bool _stencil){ return nullptr; }
+        
+        //获取target
+        virtual SVRTargetPtr getTarget(SVINTEX _texid);
+        
+        //销毁Target
+        virtual void destroyTarget(SVINTEX _texid);
+        
+        //交换纹理
+        virtual void swapInTexture(SVINTEX _tex1,SVINTEX _tex2);
+        
         //增加渲染内核资源
-        void addRes(SVRResPtr _res);
+        virtual void addRes(SVRResPtr _res);
         
         //移除渲染内核资源
-        void removeRes(SVRResPtr _res);
+        virtual void removeRes(SVRResPtr _res);
         
         //清理渲染内核资源
-        void clearRes();
+        virtual void clearRes();
         
+        //设置当前target
         virtual void setCurTarget(SVRTargetPtr _target);
-        
-        SVRTargetPtr curTarget(){ return m_cur_target; }
-        
+    
         //处理材质
         virtual bool processMtl(SVMtlCorePtr _mtl,SVSurfacePtr _surface){ return false; }
         
@@ -93,125 +108,30 @@ namespace sv {
         //绘制mesh
         virtual void drawMesh(SVRenderMeshPtr _mesh){ }
         
+        //绘制屏幕
+        virtual void drawScreen(SVINTEX _texid) { }
+        
         //自动回收
         virtual void removeUnuseRes();
-        
+
     protected:
-        SVRTargetPtr m_cur_target;      //当前的target
         
-    public:
-        //是否存在内置纹理
-        bool hasSVTex(SVTEXINID _type);
-        //获取渲染状态
-        SVRenderStatePtr getState();
-        //重置状态
-        void resetState();
-        //投影矩阵
-        void pushProjMat(FMat4 _mat);
-        FMat4 getProjMat();
-        void popProjMat();
-        //视矩阵
-        void pushViewMat(FMat4 _mat);
-        FMat4 getViewMat();
-        void popViewMat();
-        //vp矩阵
-        void pushVPMat(FMat4 _mat);
-        FMat4 getVPMat();
-        void popVPMat();
-        //
-        void clearMatStack();
+        //增加target
+        void _addTarget(SVINTEX _texid,SVRTargetPtr _target);
         
-    protected:
-        //资源创建，销毁pipline
-        SVRenderPiplinePtr m_resPipline; //写管线
-        //渲染pipline
-        SVRenderPiplinePtr m_readPipline;  //读管线
-        //各种内置纹理
-        SVTexturePtr m_svTex[E_TEX_END];
-        
-        //渲染内核资源,起到资源统计和管理的作用
-        typedef SVArray<SVRResPtr> ROBJLIST;
-        ROBJLIST m_robjList;
+        //当前的target
+        SVRTargetPtr m_cur_target;
         
         //资源锁
-        SVLockPtr m_resLock;
-        //渲染状态
-        SVRenderStatePtr m_pRState;
-        //渲染VP
-        SVStack<VPParam,10> m_vpStack;  //viewport堆栈
-        //
-        typedef SVStack<FMat4,10> MAT4STACK;//注意：栈最大支持的矩阵个数为10个
-        MAT4STACK m_stack_proj;
-        MAT4STACK m_stack_view;
-        MAT4STACK m_stack_vp;
-
-        //inner size
-        s32 m_inWidth;
-        s32 m_inHeight;
-        s32 m_outWidth;
-        s32 m_outHeight;
+        SVLockSpinPtr m_resLock;
         
-    public:
-        //提交unifrom matrix
-        virtual void submitUniformMatrix(cptr8 _name,f32* _data){}
-        //提交unifrom matrix array
-        virtual void submitUniformMatrixArray(cptr8 _name,f32* _data,s32 _size){}
-        //提交unifrom i1
-        virtual void submitUniformi(cptr8 _name,s32 _data){}
-        //提交unifrom i2
-        virtual void submitUniformi2(cptr8 _name,s32 _data1,s32 _data2){}
-        //提交unifrom i3
-        virtual void submitUniformi3(cptr8 _name,s32 _data1,s32 _data2,s32 _data3){}
-        //提交unifrom i4
-        virtual void submitUniformi4(cptr8 _name,s32 _data1,s32 _data2,s32 _data3,s32 _data4){}
-        //提交unifrom f1
-        virtual void submitUniformf(cptr8 _name,f32 _data){}
-        //提交unifrom f2
-        virtual void submitUniformf2(cptr8 _name,f32 _data1,f32 _data2){}
-        //提交unifrom f3
-        virtual void submitUniformf3(cptr8 _name,f32 _data1,f32 _data2,f32 _data3){}
-        //提交unifrom f4
-        virtual void submitUniformf4(cptr8 _name,f32 _data1,f32 _data2,f32 _data3,f32 _data4){}
-        //提交unifrom s32 v1
-        virtual void submitUniformi1v(cptr8 _name,s32* _data,s32 _size = 1){}
-        //提交unifrom s32 v2
-        virtual void submitUniformi2v(cptr8 _name,s32* _data,s32 _size = 1){}
-        //提交unifrom s32 v3
-        virtual void submitUniformi3v(cptr8 _name,s32* _data,s32 _size = 1){}
-        //提交unifrom s32 v4
-        virtual void submitUniformi4v(cptr8 _name,s32* _data,s32 _size = 1){}
-        //提交unifrom f32 v1
-        virtual void submitUniformf1v(cptr8 _name,f32* _data,s32 _size = 1){}
-        //提交unifrom f32 v2
-        virtual void submitUniformf2v(cptr8 _name,f32* _data,s32 _size = 1){}
-        //提交unifrom f32 v3
-        virtual void submitUniformf3v(cptr8 _name,f32* _data,s32 _size = 1){}
-        //提交unifrom f32 v4
-        virtual void submitUniformf4v(cptr8 _name,f32* _data,s32 _size = 1){}
-        //提交线宽
-        virtual void submitLineWidth(f32 _width){}
-        //提交点大小
-        virtual void submitPointSize(f32 _size){}
-        //绑定FBO
-        virtual void svBindFrameBuffer(u32 _id){}
-        //清理颜色
-        virtual void svBindClearColor(u32 _id){}
-        //颜色缓存
-        virtual void svBindColorBuffer(u32 _id){}
-        //顶点缓存
-        virtual void svBindVertexBuffer(u32 _id){}
-        //索引缓存
-        virtual void svBindIndexBuffer(u32 _id){}
-        //顶点格式更新
-        virtual void svUpdateVertexFormate(VFTYPE _vf,s32 _count = 0,s32 _mode = 1){}
-        //视口
-        virtual void svPushViewPort(u32 _x,u32 _y,u32 _w,u32 _h);
-        //退出视口
-        virtual void svPopViewPort();
-        //设置清理颜色
-        virtual void svClearColor(f32 _r,f32 _g,f32 _b,f32 _a){}
-        //设置清理掩码
-        virtual void svClear(s32 _mask){}
+        //渲染内核资源,起到资源统计和管理的作用
+        typedef std::list<SVRResPtr> ROBJLIST;
+        ROBJLIST m_robjList;
+        
+        //目标池
+        typedef std::map<SVINTEX,SVRTargetPtr> TARGETPOOL;
+        TARGETPOOL m_target_pool;
     };
     
 }//!namespace sv

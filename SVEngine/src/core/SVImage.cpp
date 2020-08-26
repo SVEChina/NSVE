@@ -78,7 +78,7 @@ s32 SVImage::load(cptr8 _filename){
 SVTexturePtr SVImage::toTexture() {
     SVTexturePtr t_tex = MakeSharedPtr<SVTexture>(mApp);
     SVTextureDsp t_dsp;
-    t_dsp.m_kind = m_type;
+    t_dsp.m_imgtype = m_type;
     t_dsp.m_width = m_width;
     t_dsp.m_height = m_height;
     t_dsp.m_depth = m_depth;

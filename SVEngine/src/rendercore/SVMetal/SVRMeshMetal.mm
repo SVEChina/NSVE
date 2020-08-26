@@ -21,6 +21,8 @@ SVRMeshMetal::SVRMeshMetal(SVInstPtr _app)
     for(s32 i=0;i<SV_MAX_STREAM_NUM;i++) {
         m_dbufs[i] = nullptr;
     }
+    m_ibuf = nullptr;
+    m_instance_buf = nullptr;
     //
     m_ibuf = nullptr;
     m_vertStart = 0;
@@ -32,7 +34,6 @@ SVRMeshMetal::SVRMeshMetal(SVInstPtr _app)
 }
 
 SVRMeshMetal::~SVRMeshMetal() {
-    //destroy(nullptr);
 }
 
 void SVRMeshMetal::create(SVRendererPtr _renderer) {
@@ -42,7 +43,7 @@ void SVRMeshMetal::create(SVRendererPtr _renderer) {
         //索引
         BufferDspPtr t_index_dsp = t_rendermesh->getIndexDsp();
         if(t_index_dsp && t_index_dsp->getVertType() == E_VF_INDEX) {
-            m_iCnt = t_index_dsp->_vertCnt;
+            m_draw_num = t_index_dsp->_vertCnt;
             if(t_index_dsp->_bufData) {
                 void* t_p = t_index_dsp->_bufData->getData();
                 s32 t_len = t_index_dsp->_bufData->getSize();
@@ -80,7 +81,7 @@ void SVRMeshMetal::create(SVRendererPtr _renderer) {
             //多流
             m_streanNum = s32(t_buf_dsp->m_streamDsp.size());
             for(s32 i=0;i<m_streanNum;i++) {
-                s32 t_smt = t_buf_dsp->m_streamDsp[i];
+                VFTYPE t_smt = t_buf_dsp->m_streamDsp[i];
                 SVDataSwapPtr t_data = t_buf_dsp->m_streamData[t_smt];
                 if(t_data) {
                     void* t_point = t_data->getData();
@@ -106,37 +107,69 @@ void SVRMeshMetal::destroy(SVRendererPtr _renderer) {
     m_dbufs.clear();
 }
 
+//处理
 s32 SVRMeshMetal::process(SVRendererPtr _renderer) {
     SVRendererMetalPtr t_rm = std::dynamic_pointer_cast<SVRendererMetal>(_renderer);
-    if(t_rm && t_rm->m_pCurEncoder) {
-        for(s32 i=0;i<SV_MAX_STREAM_NUM;i++) {
-            if(m_dbufs[i]) {
-                [t_rm->m_pCurEncoder setVertexBuffer:m_dbufs[i] offset:0 atIndex:i];    //i表示的buf和索引的对应
+    if(t_rm && t_rm->m_curEncoder) {
+        //数据更新
+        m_data_lock->lock();
+        if(m_index && m_ibuf) {
+            void* t_pointer = m_index->getData();
+            s32 t_len = m_index->getSize();
+            memcpy( m_ibuf.contents , t_pointer ,t_len);
+        }
+        if(m_inst && m_instance_buf) {
+            void* t_pointer = m_inst->getData();
+            s32 t_len = m_inst->getSize();
+            memcpy( m_instance_buf.contents , t_pointer ,t_len);
+        }
+        for(s32 i=0;i<m_verts.size();i++) {
+            s32 t_chn = m_verts[i]._chn;
+            SVDataSwapPtr t_data = m_verts[i]._data;
+            if( t_data && t_chn<m_dbufs.size() && m_dbufs[i]  ) {
+                void* t_pointer = t_data->getData();
+                s32 t_len = t_data->getSize();
+                memcpy( m_dbufs[i].contents , t_pointer ,t_len);
             }
         }
+        //
+        for(s32 i=0;i<SV_MAX_STREAM_NUM;i++) {
+            if(m_dbufs[i]) {
+                [t_rm->m_curEncoder setVertexBuffer:m_dbufs[i] offset:0 atIndex:i];
+            }
+        }
+        m_data_lock->unlock();
     }
     return 0;
 }
 
-void SVRMeshMetal::submit(SVDataSwapPtr _data,s32 _offset,s32 _size,s32 _bufid,s32 _buftype) {
-    //提交数据
-    
-}
-
-////替换uniform
-//for(s32 i=0;i<t_shader->m_paramtbl.size();i++) {
-//    void* t_pointer = t_shader->m_paramtbl[i].m_tbl->getDataPointer();
-//    s32 t_len = t_shader->m_paramtbl[i].m_tbl->getDataSize();
-//    memcpy( m_ubuf_pool[i].m_ubuf.contents , t_pointer ,t_len);
-//}
-
+//绘制
 void SVRMeshMetal::draw(SVRendererPtr _renderer) {
     SVRendererMetalPtr t_rm = std::dynamic_pointer_cast<SVRendererMetal>(_renderer);
-    if(t_rm && t_rm->m_pCurEncoder) {
+    if(t_rm && t_rm->m_curEncoder) {
+        //
+        MTLPrimitiveType t_method = MTLPrimitiveTypeTriangle;
+        if(m_draw_method == E_DRAW_POINTS) {
+            t_method = MTLPrimitiveTypePoint;
+        }else if(m_draw_method == E_DRAW_LINES) {
+            t_method = MTLPrimitiveTypeLine;
+        }else if(m_draw_method == E_DRAW_LINE_LOOP) {
+            //不支持
+        }else if(m_draw_method == E_DRAW_LINE_STRIP) {
+            t_method = MTLPrimitiveTypeLineStrip;
+        }else if(m_draw_method == E_DRAW_TRIANGLES) {
+            t_method = MTLPrimitiveTypeTriangle;
+        }else if(m_draw_method == E_DRAW_TRIANGLE_STRIP) {
+            t_method = MTLPrimitiveTypeTriangleStrip;
+        }else if(m_draw_method == E_DRAW_TRIANGLE_FAN) {
+            //不支持
+        }
+        //
         if( m_ibuf ) {
+            m_iCnt = m_draw_num;
             if(m_instance_buf) {
                 //多实体
-                [t_rm->m_pCurEncoder drawIndexedPrimitives:MTLPrimitiveTypeTriangle
+                [t_rm->m_curEncoder drawIndexedPrimitives:t_method
                                                 indexCount:m_iCnt
                                                  indexType:MTLIndexTypeUInt16
                                                indexBuffer:m_ibuf
@@ -144,22 +177,22 @@ void SVRMeshMetal::draw(SVRendererPtr _renderer) {
                                          instanceCount:m_instCnt];
             }else{
                 //非多实例，索引绘制
-                [t_rm->m_pCurEncoder drawIndexedPrimitives:MTLPrimitiveTypeTriangle
+                [t_rm->m_curEncoder drawIndexedPrimitives:t_method
                                                 indexCount:m_iCnt
                                                  indexType:MTLIndexTypeUInt16
                                                indexBuffer:m_ibuf
                                          indexBufferOffset:m_ibufOff];
             }
         }else{
+            m_vertCnt = m_draw_num;
             //正常顶点绘制
             if(m_instance_buf) {
                 //多实体
-                [t_rm->m_pCurEncoder drawPrimitives:MTLPrimitiveTypeTriangle vertexStart:m_vertStart vertexCount:m_vertCnt instanceCount:m_instCnt baseInstance:0];
+                [t_rm->m_curEncoder drawPrimitives:t_method vertexStart:m_vertStart vertexCount:m_vertCnt instanceCount:m_instCnt baseInstance:0];
             }else{
                 //非多实例，顶点绘制
-                [t_rm->m_pCurEncoder drawPrimitives:MTLPrimitiveTypeTriangle vertexStart:m_vertStart vertexCount:m_vertCnt];
+                [t_rm->m_curEncoder drawPrimitives:t_method vertexStart:m_vertStart vertexCount:m_vertCnt];
             }
         }
-        //; // 结束
     }
 }

@@ -433,15 +433,15 @@ void SVActPosition::_randomPosition(SVNodePtr _nodePtr){
         bool t_dirty = false;
         if (m_maxPos.x > m_minPos.x) {
             t_dirty = true;
-            t_n_pos.x = mApp->m_pGlobalParam->getRandomFloat(m_minPos.x,m_maxPos.x);
+            t_n_pos.x = mApp->m_global_param.getRandomFloat(m_minPos.x,m_maxPos.x);
         }
         if (m_maxPos.y > m_minPos.y) {
             t_dirty = true;
-            t_n_pos.y = mApp->m_pGlobalParam->getRandomFloat(m_minPos.y,m_maxPos.y);
+            t_n_pos.y = mApp->m_global_param.getRandomFloat(m_minPos.y,m_maxPos.y);
         }
         if (m_maxPos.y > m_minPos.y) {
             t_dirty = true;
-            t_n_pos.z = mApp->m_pGlobalParam->getRandomFloat(m_minPos.z,m_maxPos.z);
+            t_n_pos.z = mApp->m_global_param.getRandomFloat(m_minPos.z,m_maxPos.z);
         }
         if (t_dirty) {
             _nodePtr->setPosition(t_n_pos);

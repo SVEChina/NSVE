@@ -8,6 +8,7 @@
 #include "SVSpine.h"
 #include "SVVertDef.h"
 #include "../app/SVGlobalMgr.h"
+#include "../file/SVFileMgr.h"
 #include "../rendercore/SVRenderMgr.h"
 #include "../rendercore/SVRenderCmd.h"
 #include "../rendercore/SVRenderMesh.h"
@@ -24,7 +25,7 @@
 #include <spine/Bone.h>
 #include <spine/Slot.h>
 #include <spine/Attachment.h>
-#include "SVSpineObjc.h"
+#include "SVSpineImp.h"
 
 using namespace sv;
 
@@ -58,18 +59,26 @@ SpineMeshData::~SpineMeshData(){
 //
 SVSpinePtr
 SVSpine::createSpine(SVInstPtr _app, cptr8 skefname, cptr8 atlasfname,f32 scale, bool enableMipMap) {
-    spAtlas *_atlas = spAtlas_createFromFile(_app.get(), atlasfname, 0, enableMipMap);
-    if (!_atlas)
+    //
+    SVString t_atlas_fullname = _app->getFileMgr()->getFileFullName(atlasfname);
+    SVSpineImp* t_imp = new SVSpineImp(_app);
+    spAtlas *_atlas = spAtlas_createFromFile(t_atlas_fullname,t_imp);
+    if (!_atlas) {
+        delete t_imp;   //这个对象在spine内部是不会释放的
         return nullptr;
+    }
     //骨架json
     spSkeletonJson *json = spSkeletonJson_create(_atlas);
     json->scale = scale;
+    //
+    SVString t_ske_fullname = _app->getFileMgr()->getFileFullName(skefname);
     //动画数据
-    spSkeletonData *skeletonData = spSkeletonJson_readSkeletonDataFile(_app.get(), json, skefname);
+    spSkeletonData *skeletonData = spSkeletonJson_readSkeletonDataFile(json, t_ske_fullname.c_str());
     spSkeletonJson_dispose(json);
-    if (!skeletonData)
+    if (!skeletonData) {
         return nullptr;
-    SVSpinePtr t_spine = MakeSharedPtr<SVSpine>(_app);//new SVSpine(_app);
+    }
+    SVSpinePtr t_spine = MakeSharedPtr<SVSpine>(_app);
     t_spine->init(skeletonData, _atlas);
     SVString t_json_file = skefname;
     s32 t_pos = t_json_file.rfind('/');
@@ -106,6 +115,10 @@ SVSpine::~SVSpine() {
     m_spineDataPool.destroy();
     //
     if (m_pAtlas) {
+        if(m_pAtlas->rendererObject) {
+            delete m_pAtlas->rendererObject;
+            m_pAtlas->rendererObject = nullptr;
+        }
         spAtlas_dispose(m_pAtlas);
         m_pAtlas = nullptr;
     }
@@ -305,7 +318,7 @@ void SVSpine::update(f32 deltaTime) {
                                                   t_len);
             pMeshData->m_pRenderIndex->writeData(pMeshData->m_aRenderIndexData.get(),
                                                  pMeshData->m_indexCount *sizeof(u16));
-            pMeshData->m_pRenderMesh->setVertNum(pMeshData->m_vertexCount);
+            pMeshData->m_pRenderMesh->setDrawVertNum(pMeshData->m_vertexCount);
             pMeshData->m_pRenderMesh->setVertexData(pMeshData->m_pRenderVertex);
             pMeshData->m_pRenderMesh->setIndexData(pMeshData->m_pRenderIndex,
                                                    pMeshData->m_indexCount);
@@ -387,15 +400,23 @@ spTrackEntry *SVSpine::getCurrentForTrack(s32 trackIndex) {
     return spAnimationState_getCurrent(m_pSpineAniState, trackIndex);
 }
 
-//////
+//
 SVTexturePtr SVSpine::_getTextureForRegion(spRegionAttachment *_attachment) {
-    
-    return ((SVSpineObjc *)((spAtlasRegion *) _attachment->rendererObject)->page->pRenderObj)->m_texture;
+    spAtlasRegion* t_region = ((spAtlasRegion *) _attachment->rendererObject);
+    SVSpinePageImp* t_page_imp = (SVSpinePageImp*)(t_region->page->rendererObject);
+    if(t_page_imp) {
+        return t_page_imp->m_tex;
+    }
+    return nullptr;
 }
 
 SVTexturePtr SVSpine::_getTextureForMesh(spMeshAttachment *_attachment) {
-   
-    return ((SVSpineObjc *)((spAtlasRegion *) _attachment->rendererObject)->page->pRenderObj)->m_texture;
+    spAtlasRegion* t_region = ((spAtlasRegion *) _attachment->rendererObject);
+    SVSpinePageImp* t_page_imp = (SVSpinePageImp*)(t_region->page->rendererObject);
+    if(t_page_imp) {
+        return t_page_imp->m_tex;
+    }
+    return nullptr;
 }
 
 //render spine

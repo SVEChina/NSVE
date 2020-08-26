@@ -17,7 +17,6 @@
 #include "../mtl/SVTexture.h"
 #include "../mtl/SVTexMgr.h"
 #include "../app/SVInst.h"
-#include "../rendercore/SVRenderObject.h"
 #include "../rendercore/SVRenderMgr.h"
 #include "../rendercore/SVRenderer.h"
 #include "../basesys/SVComData.h"
@@ -31,7 +30,6 @@ SVBillboardNode::SVBillboardNode(SVInstPtr _app)
     m_inTexType = E_TEX_END;
     m_pTexPath = "default";
     m_rsType = RST_SOLID_3D;
-    m_pRenderObj = MakeSharedPtr<SVRenderObject>();
     m_canSelect = false;
     m_pTex = nullptr;
     m_pMesh = nullptr;
@@ -39,10 +37,10 @@ SVBillboardNode::SVBillboardNode(SVInstPtr _app)
     m_up.set(0.0f, 0.0f, 0.0f);
     setTexcoord(1.0,-1.0);
 //    setSize(100,100);
-    m_pMtl = MakeSharedPtr<SVMtlBillboard>(_app);
-    m_pMtl->setDepthEnable(false);
-    m_pMtl->setBlendEnable(true);
-    m_pMtl->setBlendState(MTL_BLEND_ONE, MTL_BLEND_ONE_MINUS_SRC_ALPHA);
+//    m_pMtl = MakeSharedPtr<SVMtlBillboard>(_app);
+//    m_pMtl->setDepthEnable(false);
+//    m_pMtl->setBlendEnable(true);
+//    m_pMtl->setBlendState(MTL_BLEND_ONE, MTL_BLEND_ONE_MINUS_SRC_ALPHA);
 }
 
 SVBillboardNode::SVBillboardNode(SVInstPtr _app,f32 _w,f32 _h)
@@ -50,19 +48,15 @@ SVBillboardNode::SVBillboardNode(SVInstPtr _app,f32 _w,f32 _h)
     ntype = "SVBillboardNode";
     m_inTexType = E_TEX_END;
     m_rsType = RST_SOLID_3D;
-    m_pRenderObj = MakeSharedPtr<SVRenderObject>();
     m_canSelect = false;
     m_pTex = nullptr;
     m_pMesh = nullptr;
     setTexcoord(1.0,-1.0);
     setSize(_w,_h);
-    m_pMtl = MakeSharedPtr<SVMtlBillboard>(_app);
 }
 
 SVBillboardNode::~SVBillboardNode() {
     m_pMesh = nullptr;
-    m_pRenderObj = nullptr;
-    m_pMtl = nullptr;
     m_pTex = nullptr;
 }
 
@@ -113,7 +107,7 @@ cptr8 SVBillboardNode::getTexturePath(){
     return m_pTexPath.c_str();
 }
 
-void SVBillboardNode::setTexture(SVTEXINID _textype){
+void SVBillboardNode::setTexture(SVINTEX _textype){
     m_inTexType = _textype;
 }
 
@@ -173,10 +167,10 @@ void SVBillboardNode::update(f32 dt) {
 
 void SVBillboardNode::render() {
     if (m_visible){
-        SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
-        if (m_pRenderObj) {
-            m_pRenderObj->pushCmd(t_rs, m_rsType, "SVBillboardNode");
-        }
+//        SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
+//        if (m_pRenderObj) {
+//            m_pRenderObj->pushCmd(t_rs, m_rsType, "SVBillboardNode");
+//        }
     }
     SVNode::render();
 }
@@ -209,7 +203,7 @@ void SVBillboardNode::fromJSON(RAPIDJSON_NAMESPACE::Value &item){
         //setTexture(t_texturePath.c_str(), m_enableMipMap);
     }
     if (item.HasMember("textype") && item["textype"].IsInt()) {
-        m_inTexType = SVTEXINID(item["textype"].GetInt());
+        m_inTexType = SVINTEX(item["textype"].GetInt());
     }
     m_dirty = true;
 }

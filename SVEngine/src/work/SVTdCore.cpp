@@ -30,7 +30,6 @@ SVLock::~SVLock(){
 }
 
 void SVLock::lock() {
-    //SV_LOG_INFO("SVLock lock \n!");
     pthread_mutex_lock(&mutex);
 }
 

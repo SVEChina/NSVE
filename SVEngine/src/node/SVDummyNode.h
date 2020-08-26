@@ -12,15 +12,11 @@
 
 namespace sv {
     
-    
-        
-        //虚拟节点 主要用于 人脸坐标系统
-        class SVDummyNode: public SVNode{
-        public:
-            SVDummyNode(SVInstPtr _app);
-        };
-        
-    
+    //虚拟节点 主要用于 人脸坐标系统
+    class SVDummyNode: public SVNode{
+    public:
+        SVDummyNode(SVInstPtr _app);
+    };
     
 }//!namespace sv
 

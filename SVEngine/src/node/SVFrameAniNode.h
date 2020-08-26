@@ -105,7 +105,6 @@ namespace sv {
             
             SVTexturePtr m_pActTex;
             SVRenderMeshPtr m_pMesh;
-            SVRenderObjectPtr m_pRenderObj;
             
             void* m_p_cb_obj;
             

@@ -10,34 +10,29 @@
 #include "SVNode.h"
 
 namespace sv {
-    
-    
+
+    class SVSkyDomeNode : public SVNode {
+    public:
+        SVSkyDomeNode(SVInstPtr _app);
         
-        class SVSkyDomeNode : public SVNode {
-        public:
-            SVSkyDomeNode(SVInstPtr _app);
-            
-            virtual ~SVSkyDomeNode();
-            
-            void generateSkyDome(SVTexturePtr _tex , s32 _horiRes , s32 _vertRes , f32 _texCent , f32 _sphCent , f32 _radius);
-            
-            void update(f32 _dt);
-            
-            void render();
-            
-        private:
-            void _generateMesh();
-            
-            s32         mHorizontalResolution;
-            s32         mVerticalResoulution;
-            f32         mTexturePercent,mSpherePercent,mRadius;
-            SVTexturePtr      mDomeTex;
-            SVRenderMeshPtr   mMesh;
-            SVRenderObjectPtr m_renderObject;
-        };
+        virtual ~SVSkyDomeNode();
         
-    
-    
+        void generateSkyDome(SVTexturePtr _tex , s32 _horiRes , s32 _vertRes , f32 _texCent , f32 _sphCent , f32 _radius);
+        
+        void update(f32 _dt);
+        
+        void render();
+        
+    private:
+        void _generateMesh();
+        
+        s32         mHorizontalResolution;
+        s32         mVerticalResoulution;
+        f32         mTexturePercent,mSpherePercent,mRadius;
+        SVTexturePtr      mDomeTex;
+        SVRenderMeshPtr   mMesh;
+    };
+
 }//!namespace sv
 
 

@@ -16,7 +16,6 @@
 #include "../basesys/SVFaceDataMesh.h"
 #include "../rendercore/SVRenderMesh.h"
 #include "../rendercore/SVRenderMgr.h"
-#include "../rendercore/SVRenderObject.h"
 #include "../detect/SVDetectMgr.h"
 #include "../basesys/SVScene.h"
 
@@ -32,8 +31,8 @@ using namespace sv;
 ////    memset(m_newmesh, 0, sizeof(m_newmesh));
 ////    FaceMesh* facemesh = nullptr;
 ////    StanderFace *standerface = nullptr;
-////    facemesh = mApp->getDataMgr()->getFaceDataMesh()->getFaceMesh("facemesh_st_simplify");
-////    standerface = mApp->getDataMgr()->getFaceDataMesh()->getStanderFace("standerface_st_simplify");
+////    facemesh = mApp->getComData()->getFaceDataMesh()->getFaceMesh("facemesh_st_simplify");
+////    standerface = mApp->getComData()->getFaceDataMesh()->getStanderFace("standerface_st_simplify");
 ////    
 ////    if (facemesh == nullptr || standerface == nullptr) {
 ////        return;
@@ -64,7 +63,7 @@ using namespace sv;
 ////        m_pFaceMesh->setIndexPoolType(GL_STATIC_DRAW);
 ////        m_pFaceMesh->setIndexData(m_pIndexs, m_meshsize*3);
 ////        m_pFaceMesh->setTexcoord0Data(m_pT0);
-////        m_pFaceMesh->setDrawMethod(E_DM_TRIANGLES);
+////        m_pFaceMesh->setDrawMethod(E_DRAW_TRIANGLES);
 ////        m_pFaceMesh->createMesh();
 ////    }
 //}
@@ -98,8 +97,8 @@ using namespace sv;
 ////        s32 t_singleface_ptnum = 106;
 ////        memset(m_faceDateExt, 0, sizeof(f32) * MAX_FACEPOINTS_NUM);
 ////        memcpy(m_faceDateExt, t_person->getFaceData(), 2 * t_singleface_ptnum * sizeof(f32));
-////        s32 t_camera_w = mApp->getConfig()->getCameraWidth();
-////        s32 t_camera_h = mApp->getConfig()->getCameraHeight();
+////        s32 t_camera_w = mApp->m_config.getCameraWidth();
+////        s32 t_camera_h = mApp->m_config.getCameraHeight();
 ////        //补点
 ////        SVSTPointExt::st_foreHeadPointExtWithFaceLandMark(m_faceDateExt, t_singleface_ptnum);
 //////        SVSTPointExt::st_lipsPointExtWithFaceLandMark(m_faceDateExt, t_singleface_ptnum);

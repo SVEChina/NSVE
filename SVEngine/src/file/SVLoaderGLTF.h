@@ -555,7 +555,8 @@ namespace sv {
         //构建材质
         SVMtlCorePtr _buildMtl(Primitive* _prim,s32 _vtf);
         //构建mesh
-        SVMeshPtr _buildMeshPri(Primitive* _prim);
+        SVMesh3dPtr _buildMeshPri(Primitive* _prim);
+        //
         s8* _getAccDataPointer(Accessor* acc);
         //抓模型数据
         void _fetchDataFromAcc(SVDataSwapPtr _data,Accessor *_accessor);
