@@ -27,7 +27,6 @@
 #include "../operate/SVOpThread.h"
 //
 #include "../rendercore/SVRenderMgr.h"
-#include "../rendercore/SVRenderState.h"
 #include "../rendercore/SVRenderer.h"
 #include "../rendercore/SVMetal/SVRendererMetal.h"
 #include "../rendercore/SVGL/SVRendererGL.h"

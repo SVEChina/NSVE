@@ -44,8 +44,6 @@ namespace sv {
         bool m_valid;
     };
 
-    
-    
 }//!namespace sv
 
 

@@ -6,15 +6,14 @@
 //
 
 #include "SVRenderer.h"
+#include "SVRenderMgr.h"
+#include "SVRTarget.h"
+#include "SVRRes.h"
 #include "../app/SVInst.h"
 #include "../work/SVTdCore.h"
 #include "../mtl/SVTexMgr.h"
 #include "../mtl/SVTexture.h"
 #include "../mtl/SVTextureIOS.h"
-#include "SVRenderMgr.h"
-#include "SVRTarget.h"
-#include "SVRRes.h"
-#include "SVRenderState.h"
 
 using namespace sv;
 

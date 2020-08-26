@@ -6,8 +6,6 @@
 //
 
 #include "SVGlobalParam.h"
-#include "../rendercore/SVRenderState.h"
-#include "../rendercore/SVGL/SVRenderStateGL.h"
 
 using namespace sv;
 

@@ -6,7 +6,6 @@
 //
 
 #include "SVRendererGL.h"
-#include "SVRenderStateGL.h"
 #include "SVRTexGL.h"
 #include "SVRTechGL.h"
 #include "SVRFboGL.h"

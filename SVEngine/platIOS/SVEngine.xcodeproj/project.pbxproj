@@ -4344,10 +4344,6 @@
 		5F7D6551215F407800803BCF /* SVRTex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F7D5ECC215F407700803BCF /* SVRTex.cpp */; };
 		5F7D6552215F407800803BCF /* SVRTex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F7D5ECC215F407700803BCF /* SVRTex.cpp */; };
 		5F7D6553215F407800803BCF /* SVRTex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F7D5ECC215F407700803BCF /* SVRTex.cpp */; };
-		5F7D6554215F407800803BCF /* SVRenderStateGL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F7D5ECE215F407700803BCF /* SVRenderStateGL.cpp */; };
-		5F7D6555215F407800803BCF /* SVRenderStateGL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F7D5ECE215F407700803BCF /* SVRenderStateGL.cpp */; };
-		5F7D6556215F407800803BCF /* SVRenderStateGL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F7D5ECE215F407700803BCF /* SVRenderStateGL.cpp */; };
-		5F7D6557215F407800803BCF /* SVRenderStateGL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F7D5ECE215F407700803BCF /* SVRenderStateGL.cpp */; };
 		5F7D6558215F407800803BCF /* SVRTexGL.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F7D5ECF215F407700803BCF /* SVRTexGL.h */; };
 		5F7D6559215F407800803BCF /* SVRTexGL.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F7D5ECF215F407700803BCF /* SVRTexGL.h */; };
 		5F7D655A215F407800803BCF /* SVRTexGL.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F7D5ECF215F407700803BCF /* SVRTexGL.h */; };
@@ -4356,10 +4352,6 @@
 		5F7D655D215F407800803BCF /* SVRendererGL.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F7D5ED0215F407700803BCF /* SVRendererGL.h */; };
 		5F7D655E215F407800803BCF /* SVRendererGL.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F7D5ED0215F407700803BCF /* SVRendererGL.h */; };
 		5F7D655F215F407800803BCF /* SVRendererGL.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F7D5ED0215F407700803BCF /* SVRendererGL.h */; };
-		5F7D6560215F407800803BCF /* SVRenderStateGL.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F7D5ED1215F407700803BCF /* SVRenderStateGL.h */; };
-		5F7D6561215F407800803BCF /* SVRenderStateGL.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F7D5ED1215F407700803BCF /* SVRenderStateGL.h */; };
-		5F7D6562215F407800803BCF /* SVRenderStateGL.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F7D5ED1215F407700803BCF /* SVRenderStateGL.h */; };
-		5F7D6563215F407800803BCF /* SVRenderStateGL.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F7D5ED1215F407700803BCF /* SVRenderStateGL.h */; };
 		5F7D6564215F407800803BCF /* SVRendererGL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F7D5ED2215F407700803BCF /* SVRendererGL.cpp */; };
 		5F7D6565215F407800803BCF /* SVRendererGL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F7D5ED2215F407700803BCF /* SVRendererGL.cpp */; };
 		5F7D6566215F407800803BCF /* SVRendererGL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F7D5ED2215F407700803BCF /* SVRendererGL.cpp */; };
@@ -4396,10 +4388,6 @@
 		5F7D658D215F407800803BCF /* SVCtxOSX.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5F7D5EDD215F407700803BCF /* SVCtxOSX.mm */; };
 		5F7D658E215F407800803BCF /* SVCtxOSX.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5F7D5EDD215F407700803BCF /* SVCtxOSX.mm */; };
 		5F7D658F215F407800803BCF /* SVCtxOSX.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5F7D5EDD215F407700803BCF /* SVCtxOSX.mm */; };
-		5F7D6590215F407800803BCF /* SVRenderState.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F7D5EDE215F407700803BCF /* SVRenderState.h */; };
-		5F7D6591215F407800803BCF /* SVRenderState.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F7D5EDE215F407700803BCF /* SVRenderState.h */; };
-		5F7D6592215F407800803BCF /* SVRenderState.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F7D5EDE215F407700803BCF /* SVRenderState.h */; };
-		5F7D6593215F407800803BCF /* SVRenderState.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F7D5EDE215F407700803BCF /* SVRenderState.h */; };
 		5F7D6594215F407800803BCF /* SVRenderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F7D5EDF215F407700803BCF /* SVRenderer.h */; };
 		5F7D6595215F407800803BCF /* SVRenderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F7D5EDF215F407700803BCF /* SVRenderer.h */; };
 		5F7D6596215F407800803BCF /* SVRenderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F7D5EDF215F407700803BCF /* SVRenderer.h */; };
@@ -4416,10 +4404,6 @@
 		5F7D65A1215F407800803BCF /* SVCtxOSX.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F7D5EE2215F407700803BCF /* SVCtxOSX.h */; };
 		5F7D65A2215F407800803BCF /* SVCtxOSX.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F7D5EE2215F407700803BCF /* SVCtxOSX.h */; };
 		5F7D65A3215F407800803BCF /* SVCtxOSX.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F7D5EE2215F407700803BCF /* SVCtxOSX.h */; };
-		5F7D65A4215F407800803BCF /* SVRenderState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F7D5EE3215F407700803BCF /* SVRenderState.cpp */; };
-		5F7D65A5215F407800803BCF /* SVRenderState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F7D5EE3215F407700803BCF /* SVRenderState.cpp */; };
-		5F7D65A6215F407800803BCF /* SVRenderState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F7D5EE3215F407700803BCF /* SVRenderState.cpp */; };
-		5F7D65A7215F407800803BCF /* SVRenderState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F7D5EE3215F407700803BCF /* SVRenderState.cpp */; };
 		5F7D65A8215F407800803BCF /* SVEGLContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F7D5EE4215F407700803BCF /* SVEGLContext.h */; };
 		5F7D65A9215F407800803BCF /* SVEGLContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F7D5EE4215F407700803BCF /* SVEGLContext.h */; };
 		5F7D65AA215F407800803BCF /* SVEGLContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F7D5EE4215F407700803BCF /* SVEGLContext.h */; };
@@ -5401,30 +5385,6 @@
 		5FF2B81424C166DA00FC0BC9 /* SVRenderCmdRes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FF2B80E24C166D900FC0BC9 /* SVRenderCmdRes.cpp */; };
 		5FF2B81524C166DA00FC0BC9 /* SVRenderCmdRes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FF2B80E24C166D900FC0BC9 /* SVRenderCmdRes.cpp */; };
 		5FF2B81624C166DA00FC0BC9 /* SVRenderCmdRes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FF2B80E24C166D900FC0BC9 /* SVRenderCmdRes.cpp */; };
-		5FF2B81B24C6D10800FC0BC9 /* SVRDPState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FF2B81924C6D10800FC0BC9 /* SVRDPState.cpp */; };
-		5FF2B81C24C6D10800FC0BC9 /* SVRDPState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FF2B81924C6D10800FC0BC9 /* SVRDPState.cpp */; };
-		5FF2B81D24C6D10800FC0BC9 /* SVRDPState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FF2B81924C6D10800FC0BC9 /* SVRDPState.cpp */; };
-		5FF2B81E24C6D10800FC0BC9 /* SVRDPState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FF2B81924C6D10800FC0BC9 /* SVRDPState.cpp */; };
-		5FF2B81F24C6D10800FC0BC9 /* SVRDPState.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FF2B81A24C6D10800FC0BC9 /* SVRDPState.h */; };
-		5FF2B82024C6D10800FC0BC9 /* SVRDPState.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FF2B81A24C6D10800FC0BC9 /* SVRDPState.h */; };
-		5FF2B82124C6D10800FC0BC9 /* SVRDPState.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FF2B81A24C6D10800FC0BC9 /* SVRDPState.h */; };
-		5FF2B82224C6D10800FC0BC9 /* SVRDPState.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FF2B81A24C6D10800FC0BC9 /* SVRDPState.h */; };
-		5FF2B82524C6D41000FC0BC9 /* SVRDPStateMetal.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5FF2B82324C6D40F00FC0BC9 /* SVRDPStateMetal.mm */; };
-		5FF2B82624C6D41000FC0BC9 /* SVRDPStateMetal.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5FF2B82324C6D40F00FC0BC9 /* SVRDPStateMetal.mm */; };
-		5FF2B82724C6D41000FC0BC9 /* SVRDPStateMetal.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5FF2B82324C6D40F00FC0BC9 /* SVRDPStateMetal.mm */; };
-		5FF2B82824C6D41000FC0BC9 /* SVRDPStateMetal.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5FF2B82324C6D40F00FC0BC9 /* SVRDPStateMetal.mm */; };
-		5FF2B82924C6D41000FC0BC9 /* SVRDPStateMetal.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FF2B82424C6D41000FC0BC9 /* SVRDPStateMetal.h */; };
-		5FF2B82A24C6D41000FC0BC9 /* SVRDPStateMetal.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FF2B82424C6D41000FC0BC9 /* SVRDPStateMetal.h */; };
-		5FF2B82B24C6D41000FC0BC9 /* SVRDPStateMetal.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FF2B82424C6D41000FC0BC9 /* SVRDPStateMetal.h */; };
-		5FF2B82C24C6D41000FC0BC9 /* SVRDPStateMetal.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FF2B82424C6D41000FC0BC9 /* SVRDPStateMetal.h */; };
-		5FF2B82F24C6D51C00FC0BC9 /* SVRDPStateGL.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FF2B82D24C6D51B00FC0BC9 /* SVRDPStateGL.h */; };
-		5FF2B83024C6D51C00FC0BC9 /* SVRDPStateGL.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FF2B82D24C6D51B00FC0BC9 /* SVRDPStateGL.h */; };
-		5FF2B83124C6D51C00FC0BC9 /* SVRDPStateGL.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FF2B82D24C6D51B00FC0BC9 /* SVRDPStateGL.h */; };
-		5FF2B83224C6D51C00FC0BC9 /* SVRDPStateGL.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FF2B82D24C6D51B00FC0BC9 /* SVRDPStateGL.h */; };
-		5FF2B83324C6D51C00FC0BC9 /* SVRDPStateGL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FF2B82E24C6D51C00FC0BC9 /* SVRDPStateGL.cpp */; };
-		5FF2B83424C6D51C00FC0BC9 /* SVRDPStateGL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FF2B82E24C6D51C00FC0BC9 /* SVRDPStateGL.cpp */; };
-		5FF2B83524C6D51C00FC0BC9 /* SVRDPStateGL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FF2B82E24C6D51C00FC0BC9 /* SVRDPStateGL.cpp */; };
-		5FF2B83624C6D51C00FC0BC9 /* SVRDPStateGL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FF2B82E24C6D51C00FC0BC9 /* SVRDPStateGL.cpp */; };
 		5FF2B83924CBC1C700FC0BC9 /* SVMetalDef.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FF2B83824CBC1C600FC0BC9 /* SVMetalDef.h */; };
 		5FF2B83A24CBC1C700FC0BC9 /* SVMetalDef.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FF2B83824CBC1C600FC0BC9 /* SVMetalDef.h */; };
 		5FF2B83B24CBC1C700FC0BC9 /* SVMetalDef.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FF2B83824CBC1C600FC0BC9 /* SVMetalDef.h */; };
@@ -6549,10 +6509,8 @@
 		5F7D5EC8215F407700803BCF /* SVOpLoadBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVOpLoadBase.h; sourceTree = "<group>"; };
 		5F7D5EC9215F407700803BCF /* SVOpDestroy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVOpDestroy.h; sourceTree = "<group>"; };
 		5F7D5ECC215F407700803BCF /* SVRTex.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVRTex.cpp; sourceTree = "<group>"; };
-		5F7D5ECE215F407700803BCF /* SVRenderStateGL.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVRenderStateGL.cpp; sourceTree = "<group>"; };
 		5F7D5ECF215F407700803BCF /* SVRTexGL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVRTexGL.h; sourceTree = "<group>"; };
 		5F7D5ED0215F407700803BCF /* SVRendererGL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVRendererGL.h; sourceTree = "<group>"; };
-		5F7D5ED1215F407700803BCF /* SVRenderStateGL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVRenderStateGL.h; sourceTree = "<group>"; };
 		5F7D5ED2215F407700803BCF /* SVRendererGL.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVRendererGL.cpp; sourceTree = "<group>"; };
 		5F7D5ED3215F407700803BCF /* SVRTexGL.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVRTexGL.cpp; sourceTree = "<group>"; };
 		5F7D5ED4215F407700803BCF /* SVRenderCmdGeo.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVRenderCmdGeo.cpp; sourceTree = "<group>"; };
@@ -6562,12 +6520,10 @@
 		5F7D5EDB215F407700803BCF /* SVCtxBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVCtxBase.h; sourceTree = "<group>"; };
 		5F7D5EDC215F407700803BCF /* SVCtxIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVCtxIOS.h; sourceTree = "<group>"; };
 		5F7D5EDD215F407700803BCF /* SVCtxOSX.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVCtxOSX.mm; sourceTree = "<group>"; };
-		5F7D5EDE215F407700803BCF /* SVRenderState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVRenderState.h; sourceTree = "<group>"; };
 		5F7D5EDF215F407700803BCF /* SVRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVRenderer.h; sourceTree = "<group>"; };
 		5F7D5EE0215F407700803BCF /* SVRenderer.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVRenderer.cpp; sourceTree = "<group>"; };
 		5F7D5EE1215F407700803BCF /* SVCtxBase.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVCtxBase.cpp; sourceTree = "<group>"; };
 		5F7D5EE2215F407700803BCF /* SVCtxOSX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVCtxOSX.h; sourceTree = "<group>"; };
-		5F7D5EE3215F407700803BCF /* SVRenderState.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVRenderState.cpp; sourceTree = "<group>"; };
 		5F7D5EE4215F407700803BCF /* SVEGLContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVEGLContext.h; sourceTree = "<group>"; };
 		5F7D5EE5215F407700803BCF /* SVRTex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVRTex.h; sourceTree = "<group>"; };
 		5F7D5EE6215F407700803BCF /* SVRenderDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVRenderDef.h; sourceTree = "<group>"; };
@@ -6816,12 +6772,6 @@
 		5FD9B05C2265F5A600522317 /* SVRShaderGL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVRShaderGL.h; sourceTree = "<group>"; };
 		5FF2B80D24C166D900FC0BC9 /* SVRenderCmdRes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVRenderCmdRes.h; sourceTree = "<group>"; };
 		5FF2B80E24C166D900FC0BC9 /* SVRenderCmdRes.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVRenderCmdRes.cpp; sourceTree = "<group>"; };
-		5FF2B81924C6D10800FC0BC9 /* SVRDPState.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVRDPState.cpp; sourceTree = "<group>"; };
-		5FF2B81A24C6D10800FC0BC9 /* SVRDPState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVRDPState.h; sourceTree = "<group>"; };
-		5FF2B82324C6D40F00FC0BC9 /* SVRDPStateMetal.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVRDPStateMetal.mm; sourceTree = "<group>"; };
-		5FF2B82424C6D41000FC0BC9 /* SVRDPStateMetal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVRDPStateMetal.h; sourceTree = "<group>"; };
-		5FF2B82D24C6D51B00FC0BC9 /* SVRDPStateGL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVRDPStateGL.h; sourceTree = "<group>"; };
-		5FF2B82E24C6D51C00FC0BC9 /* SVRDPStateGL.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVRDPStateGL.cpp; sourceTree = "<group>"; };
 		5FF2B83824CBC1C600FC0BC9 /* SVMetalDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVMetalDef.h; sourceTree = "<group>"; };
 		5FF2B83D24CBC21300FC0BC9 /* SVGLDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVGLDef.h; sourceTree = "<group>"; };
 		5FF2B84424D123C700FC0BC9 /* SVScene.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVScene.cpp; sourceTree = "<group>"; };
@@ -8422,8 +8372,6 @@
 			children = (
 				5F7D5ECD215F407700803BCF /* SVGL */,
 				5F7D5EE8215F407700803BCF /* SVMetal */,
-				5FF2B81924C6D10800FC0BC9 /* SVRDPState.cpp */,
-				5FF2B81A24C6D10800FC0BC9 /* SVRDPState.h */,
 				5F7D5F05215F407700803BCF /* SVRenderCmd.cpp */,
 				5F7D5ED7215F407700803BCF /* SVRenderCmd.h */,
 				5F7D5ED4215F407700803BCF /* SVRenderCmdGeo.cpp */,
@@ -8438,8 +8386,6 @@
 				5F7D5F01215F407700803BCF /* SVRenderMesh.h */,
 				5F7D5EF5215F407700803BCF /* SVRenderMgr.cpp */,
 				5F7D5EFE215F407700803BCF /* SVRenderMgr.h */,
-				5F7D5EE3215F407700803BCF /* SVRenderState.cpp */,
-				5F7D5EDE215F407700803BCF /* SVRenderState.h */,
 				5F7D5F04215F407700803BCF /* SVRenderStream.cpp */,
 				5F7D5EEE215F407700803BCF /* SVRenderStream.h */,
 				5F3AC24724E15211000D4019 /* SVREnv.cpp */,
@@ -8469,12 +8415,8 @@
 				5FF2B83D24CBC21300FC0BC9 /* SVGLDef.h */,
 				5F64D5E7248502220005CF47 /* SVRMeshGL.cpp */,
 				5F64D5E6248502220005CF47 /* SVRMeshGL.h */,
-				5FF2B82E24C6D51C00FC0BC9 /* SVRDPStateGL.cpp */,
-				5FF2B82D24C6D51B00FC0BC9 /* SVRDPStateGL.h */,
 				5F7D5ED2215F407700803BCF /* SVRendererGL.cpp */,
 				5F7D5ED0215F407700803BCF /* SVRendererGL.h */,
-				5F7D5ECE215F407700803BCF /* SVRenderStateGL.cpp */,
-				5F7D5ED1215F407700803BCF /* SVRenderStateGL.h */,
 				5F64D5AB2483AC530005CF47 /* SVRFboGL.cpp */,
 				5F64D5AA2483AC530005CF47 /* SVRFboGL.h */,
 				5FD9B05B2265F5A600522317 /* SVRShaderGL.cpp */,
@@ -8493,8 +8435,6 @@
 				5FF2B83824CBC1C600FC0BC9 /* SVMetalDef.h */,
 				5F64D5DD248501360005CF47 /* SVRMeshMetal.h */,
 				5F64D5DC248501360005CF47 /* SVRMeshMetal.mm */,
-				5FF2B82424C6D41000FC0BC9 /* SVRDPStateMetal.h */,
-				5FF2B82324C6D40F00FC0BC9 /* SVRDPStateMetal.mm */,
 				5F7D5EEA215F407700803BCF /* SVRendererMetal.h */,
 				5F7D5EE9215F407700803BCF /* SVRendererMetal.mm */,
 				5F64D5B52483ACEE0005CF47 /* SVRFboMetal.h */,
@@ -8934,7 +8874,6 @@
 				5C0586A1226DDC0B005C3CAF /* SVFilterGlow.h in Headers */,
 				020C461D22DC5DCD00201753 /* gim_clip_polygon.h in Headers */,
 				020C48D122DC5DCF00201753 /* btMultiBodySolverConstraint.h in Headers */,
-				5FF2B83224C6D51C00FC0BC9 /* SVRDPStateGL.h in Headers */,
 				5F7D64D5215F407800803BCF /* SVActFollow.h in Headers */,
 				5F7D6139215F407700803BCF /* SVDeformImageMove.h in Headers */,
 				5F7D600D215F407700803BCF /* SVPersonModule.h in Headers */,
@@ -9131,7 +9070,6 @@
 				020C46D722DC5DCE00201753 /* btTriangleShape.h in Headers */,
 				5F7D63ED215F407800803BCF /* pow10.h in Headers */,
 				5FF2B85324D4278E00FC0BC9 /* SVParamTbl.h in Headers */,
-				5F7D6593215F407800803BCF /* SVRenderState.h in Headers */,
 				5F7D63E5215F407800803BCF /* dtoa.h in Headers */,
 				020D1F34228BF30700AEAF73 /* SVPenPackData.h in Headers */,
 				5F7D684B215F407900803BCF /* aMath.h in Headers */,
@@ -9151,7 +9089,6 @@
 				5F7D6011215F407700803BCF /* SVDetectST.h in Headers */,
 				5F7D603D215F407700803BCF /* SVSceneMgr.h in Headers */,
 				020C4D6322DC5DD300201753 /* b3Contact4.h in Headers */,
-				5FF2B82224C6D10800FC0BC9 /* SVRDPState.h in Headers */,
 				020C486122DC5DCF00201753 /* btKinematicCharacterController.h in Headers */,
 				020C4C7922DC5DD200201753 /* btGeometryUtil.h in Headers */,
 				020C4C2922DC5DD200201753 /* btRandom.h in Headers */,
@@ -9377,7 +9314,6 @@
 				020C483B22DC5DCE00201753 /* btSimpleDynamicsWorld.h in Headers */,
 				020C3DC222D0DCA200201753 /* SVFilterDark.h in Headers */,
 				5F0E62CD24F3B97B002620DC /* VertexAttachment.h in Headers */,
-				5FF2B82C24C6D41000FC0BC9 /* SVRDPStateMetal.h in Headers */,
 				025BE8AA234F0FFE004AB609 /* SVActPhysics.h in Headers */,
 				020C4CBF22DC5DD200201753 /* btHashMap.h in Headers */,
 				020C438722DC5DCC00201753 /* btSoftBodyRigidBodyCollisionConfiguration.h in Headers */,
@@ -9398,7 +9334,6 @@
 				5F7D63FD215F407800803BCF /* filewritestream.h in Headers */,
 				020C48E122DC5DCF00201753 /* btSolveProjectedGaussSeidel.h in Headers */,
 				020C464D22DC5DCD00201753 /* btContactProcessing.h in Headers */,
-				5F7D6563215F407800803BCF /* SVRenderStateGL.h in Headers */,
 				020C4D2722DC5DD200201753 /* b3QuantizedBvhNodeData.h in Headers */,
 				020C4C5D22DC5DD200201753 /* btAabbUtil2.h in Headers */,
 				5F7D6179215F407700803BCF /* SVLoaderObj.h in Headers */,
@@ -9804,7 +9739,6 @@
 				5F7D6003215F407700803BCF /* SVPersonTracker.h in Headers */,
 				02381F302247AF8800584EEF /* SVMtlDistorted.h in Headers */,
 				5F7D690D215F407900803BCF /* SVStack.h in Headers */,
-				5FF2B83024C6D51C00FC0BC9 /* SVRDPStateGL.h in Headers */,
 				5F7D689D215F407900803BCF /* SVModify.h in Headers */,
 				020C495922DC5DCF00201753 /* btContactSolverInfo.h in Headers */,
 				5F7D6403215F407800803BCF /* document.h in Headers */,
@@ -9923,7 +9857,6 @@
 				020C4BC722DC5DD100201753 /* b3Int2.h in Headers */,
 				020C46D522DC5DCE00201753 /* btTriangleShape.h in Headers */,
 				5F7D63EB215F407800803BCF /* pow10.h in Headers */,
-				5F7D6591215F407800803BCF /* SVRenderState.h in Headers */,
 				5F7D63E3215F407800803BCF /* dtoa.h in Headers */,
 				020D1F32228BF30700AEAF73 /* SVPenPackData.h in Headers */,
 				5F7D6849215F407900803BCF /* aMath.h in Headers */,
@@ -10108,7 +10041,6 @@
 				020C4D4122DC5DD200201753 /* b3FindSeparatingAxis.h in Headers */,
 				5F0E62CB24F3B97B002620DC /* VertexAttachment.h in Headers */,
 				020C447D22DC5DCC00201753 /* btAxisSweep3.h in Headers */,
-				5FF2B82A24C6D41000FC0BC9 /* SVRDPStateMetal.h in Headers */,
 				020C460722DC5DCD00201753 /* gim_radixsort.h in Headers */,
 				020C452B22DC5DCD00201753 /* btUnionFind.h in Headers */,
 				5F7D6811215F407900803BCF /* SVEventVideo.h in Headers */,
@@ -10183,7 +10115,6 @@
 				5F0E630B24F3B97B002620DC /* SkeletonBinary.h in Headers */,
 				020C48DF22DC5DCF00201753 /* btSolveProjectedGaussSeidel.h in Headers */,
 				020C464B22DC5DCD00201753 /* btContactProcessing.h in Headers */,
-				5F7D6561215F407800803BCF /* SVRenderStateGL.h in Headers */,
 				020C4D2522DC5DD200201753 /* b3QuantizedBvhNodeData.h in Headers */,
 				020C4C5B22DC5DD200201753 /* btAabbUtil2.h in Headers */,
 				5F7D6177215F407700803BCF /* SVLoaderObj.h in Headers */,
@@ -10257,7 +10188,6 @@
 				5FD9AFF82256096500522317 /* SVPenDraw.h in Headers */,
 				020C457722DC5DCD00201753 /* btBox2dBox2dCollisionAlgorithm.h in Headers */,
 				5F7D63DB215F407800803BCF /* itoa.h in Headers */,
-				5FF2B82024C6D10800FC0BC9 /* SVRDPState.h in Headers */,
 				020C4CC722DC5DD200201753 /* b3ConvexHullComputer.h in Headers */,
 				5F7D68DD215F407900803BCF /* SVMat3.h in Headers */,
 				5F7D65B1215F407800803BCF /* SVRenderDef.h in Headers */,
@@ -10586,7 +10516,6 @@
 				020C4C7622DC5DD200201753 /* btGeometryUtil.h in Headers */,
 				5F7D6894215F407900803BCF /* SVHash.h in Headers */,
 				020C3DF522D49F4800201753 /* SVMtlShake.h in Headers */,
-				5FF2B82F24C6D51C00FC0BC9 /* SVRDPStateGL.h in Headers */,
 				020C490C22DC5DCF00201753 /* btTypedConstraint.h in Headers */,
 				5F7D6814215F407900803BCF /* SVEvent.h in Headers */,
 				5F7D6066215F407700803BCF /* SVCameraMgr.h in Headers */,
@@ -10680,7 +10609,6 @@
 				5F7D609A215F407700803BCF /* SVFilterLUT.h in Headers */,
 				5F7D66D8215F407900803BCF /* SVMtlCore.h in Headers */,
 				020C3DE722D49ECF00201753 /* SVFilterShake.h in Headers */,
-				5FF2B81F24C6D10800FC0BC9 /* SVRDPState.h in Headers */,
 				5F7D6146215F407700803BCF /* SVVertDef.h in Headers */,
 				020C458E22DC5DCD00201753 /* SphereTriangleDetector.h in Headers */,
 				5C05869E226DDC0B005C3CAF /* SVFilterGlow.h in Headers */,
@@ -10889,7 +10817,6 @@
 				020C46CC22DC5DCE00201753 /* btStaticPlaneShape.h in Headers */,
 				5F7D690C215F407900803BCF /* SVStack.h in Headers */,
 				5F7D63C2215F407800803BCF /* strtod.h in Headers */,
-				5F7D6590215F407800803BCF /* SVRenderState.h in Headers */,
 				5FD9B03122644E9400522317 /* SVRTexMetal.h in Headers */,
 				5F7D63AA215F407800803BCF /* ostreamwrapper.h in Headers */,
 				5F7D6032215F407700803BCF /* SVProcess.h in Headers */,
@@ -10975,7 +10902,6 @@
 				020C49A422DC5DD000201753 /* btUniversalConstraint.h in Headers */,
 				5F1475E122E86549000D140E /* SVMtlLib.h in Headers */,
 				020C474422DC5DCE00201753 /* btHeightfieldTerrainShape.h in Headers */,
-				5FF2B82924C6D41000FC0BC9 /* SVRDPStateMetal.h in Headers */,
 				020C445822DC5DCC00201753 /* btAxisSweep3Internal.h in Headers */,
 				5F82682A2282FECB003D4476 /* SVMtlGLTF.h in Headers */,
 				020C48FE22DC5DCF00201753 /* btPATHSolver.h in Headers */,
@@ -11278,7 +11204,6 @@
 				5F7D6142215F407700803BCF /* SVImageUsingMove.h in Headers */,
 				020C4BCA22DC5DD100201753 /* b3Quat.h in Headers */,
 				5F7D6820215F407900803BCF /* SVEventMgr.h in Headers */,
-				5F7D6560215F407800803BCF /* SVRenderStateGL.h in Headers */,
 				5F7D6704215F407900803BCF /* SVThreadWorkCallback.h in Headers */,
 				5F6D899E24751A9100D33318 /* SVThreadGroup.h in Headers */,
 				020C4C3E22DC5DD200201753 /* btTransform.h in Headers */,
@@ -11392,7 +11317,6 @@
 				5F7D6004215F407700803BCF /* SVPersonTracker.h in Headers */,
 				02381F312247AF8800584EEF /* SVMtlDistorted.h in Headers */,
 				5F7D690E215F407900803BCF /* SVStack.h in Headers */,
-				5FF2B83124C6D51C00FC0BC9 /* SVRDPStateGL.h in Headers */,
 				5F7D689E215F407900803BCF /* SVModify.h in Headers */,
 				020C495A22DC5DCF00201753 /* btContactSolverInfo.h in Headers */,
 				5F7D6404215F407800803BCF /* document.h in Headers */,
@@ -11511,7 +11435,6 @@
 				020C4BC822DC5DD100201753 /* b3Int2.h in Headers */,
 				020C46D622DC5DCE00201753 /* btTriangleShape.h in Headers */,
 				5F7D63EC215F407800803BCF /* pow10.h in Headers */,
-				5F7D6592215F407800803BCF /* SVRenderState.h in Headers */,
 				5F7D63E4215F407800803BCF /* dtoa.h in Headers */,
 				020D1F33228BF30700AEAF73 /* SVPenPackData.h in Headers */,
 				5F7D684A215F407900803BCF /* aMath.h in Headers */,
@@ -11696,7 +11619,6 @@
 				020C4D4222DC5DD200201753 /* b3FindSeparatingAxis.h in Headers */,
 				5F0E62CC24F3B97B002620DC /* VertexAttachment.h in Headers */,
 				020C447E22DC5DCC00201753 /* btAxisSweep3.h in Headers */,
-				5FF2B82B24C6D41000FC0BC9 /* SVRDPStateMetal.h in Headers */,
 				020C460822DC5DCD00201753 /* gim_radixsort.h in Headers */,
 				020C452C22DC5DCD00201753 /* btUnionFind.h in Headers */,
 				5F7D6812215F407900803BCF /* SVEventVideo.h in Headers */,
@@ -11771,7 +11693,6 @@
 				5F0E630C24F3B97B002620DC /* SkeletonBinary.h in Headers */,
 				020C48E022DC5DCF00201753 /* btSolveProjectedGaussSeidel.h in Headers */,
 				020C464C22DC5DCD00201753 /* btContactProcessing.h in Headers */,
-				5F7D6562215F407800803BCF /* SVRenderStateGL.h in Headers */,
 				020C4D2622DC5DD200201753 /* b3QuantizedBvhNodeData.h in Headers */,
 				020C4C5C22DC5DD200201753 /* btAabbUtil2.h in Headers */,
 				5F7D6178215F407700803BCF /* SVLoaderObj.h in Headers */,
@@ -11845,7 +11766,6 @@
 				5FD9AFF92256096500522317 /* SVPenDraw.h in Headers */,
 				020C457822DC5DCD00201753 /* btBox2dBox2dCollisionAlgorithm.h in Headers */,
 				5F7D63DC215F407800803BCF /* itoa.h in Headers */,
-				5FF2B82124C6D10800FC0BC9 /* SVRDPState.h in Headers */,
 				020C4CC822DC5DD200201753 /* b3ConvexHullComputer.h in Headers */,
 				5F7D68DE215F407900803BCF /* SVMat3.h in Headers */,
 				5F7D65B2215F407800803BCF /* SVRenderDef.h in Headers */,
@@ -12395,7 +12315,6 @@
 				5F1475E022E86549000D140E /* SVMtlLib.cpp in Sources */,
 				5F7D60B1215F407700803BCF /* SVRGBToneCurveFilter.cpp in Sources */,
 				5F7D66B7215F407900803BCF /* SVTextureIOS.cpp in Sources */,
-				5FF2B83624C6D51C00FC0BC9 /* SVRDPStateGL.cpp in Sources */,
 				5F7D6937215F407900803BCF /* SVSimdLib.cpp in Sources */,
 				02EA54BD22E83EE800F5701D /* SVPhysicsShapeBox.cpp in Sources */,
 				0279A4142261E68A00308871 /* SVPenCurve.cpp in Sources */,
@@ -12418,7 +12337,6 @@
 				5F7D64E7215F407800803BCF /* SVTimeLineDeform.cpp in Sources */,
 				5F7D6225215F407800803BCF /* pngwutil.c in Sources */,
 				5F7D6109215F407700803BCF /* SVMesh3d.cpp in Sources */,
-				5F7D6557215F407800803BCF /* SVRenderStateGL.cpp in Sources */,
 				5F7D669F215F407800803BCF /* SVTexture.cpp in Sources */,
 				020C489D22DC5DCF00201753 /* btMultiBodyConstraintSolver.cpp in Sources */,
 				5C0C606B219BFF790052A826 /* BPMDetect.cpp in Sources */,
@@ -12466,7 +12384,6 @@
 				020C448322DC5DCC00201753 /* btCollisionAlgorithm.cpp in Sources */,
 				0279A4202264A5B100308871 /* SVMtlStrokeBase.cpp in Sources */,
 				020C490522DC5DCF00201753 /* btDantzigLCP.cpp in Sources */,
-				5FF2B82824C6D41000FC0BC9 /* SVRDPStateMetal.mm in Sources */,
 				5C56B6A5224B931D007D7DC8 /* SVFilterGof.cpp in Sources */,
 				5C0C603B219BFF790052A826 /* sse_optimized.cpp in Sources */,
 				5C291FC122745C4000F8D7CD /* SVFilterBlur.cpp in Sources */,
@@ -12689,7 +12606,6 @@
 				020C455522DC5DCD00201753 /* btSimulationIslandManager.cpp in Sources */,
 				020C470722DC5DCE00201753 /* btCollisionShape.cpp in Sources */,
 				5F7D60B9215F407700803BCF /* SVFilterBase.cpp in Sources */,
-				5F7D65A7215F407800803BCF /* SVRenderState.cpp in Sources */,
 				5F0E639D24F3B97C002620DC /* SlotData.c in Sources */,
 				5F0E635124F3B97B002620DC /* Skeleton.c in Sources */,
 				5C0C6047219BFF790052A826 /* PeakFinder.cpp in Sources */,
@@ -12734,7 +12650,6 @@
 				5F0E639924F3B97C002620DC /* EventData.c in Sources */,
 				5F7D6777215F407900803BCF /* SVFaceShapeNode.cpp in Sources */,
 				5F7D6637215F407800803BCF /* SVRFbo.cpp in Sources */,
-				5FF2B81E24C6D10800FC0BC9 /* SVRDPState.cpp in Sources */,
 				020C46BF22DC5DCE00201753 /* btSdfCollisionShape.cpp in Sources */,
 				020C46CB22DC5DCE00201753 /* btConvexShape.cpp in Sources */,
 				020C4C7D22DC5DD200201753 /* btSerializer.cpp in Sources */,
@@ -12955,8 +12870,6 @@
 				5C0C601C219BFF790052A826 /* AAFilter.cpp in Sources */,
 				020C47B422DC5DCE00201753 /* btTriangleIndexVertexMaterialArray.cpp in Sources */,
 				020C483022DC5DCE00201753 /* btDiscreteDynamicsWorld.cpp in Sources */,
-				5FF2B83324C6D51C00FC0BC9 /* SVRDPStateGL.cpp in Sources */,
-				5FF2B81B24C6D10800FC0BC9 /* SVRDPState.cpp in Sources */,
 				5F7D67A4215F407900803BCF /* SVNodeVisit.cpp in Sources */,
 				5F7D64B2215F407800803BCF /* SVActBase.cpp in Sources */,
 				5CE09B7E2179E04600C8DF25 /* SVFaceBeautyFilter.cpp in Sources */,
@@ -13048,9 +12961,7 @@
 				5F7D659C215F407800803BCF /* SVCtxBase.cpp in Sources */,
 				5F0E63CE24F3B97C002620DC /* IkConstraintData.c in Sources */,
 				020C472C22DC5DCE00201753 /* btConvexInternalShape.cpp in Sources */,
-				5FF2B82524C6D41000FC0BC9 /* SVRDPStateMetal.mm in Sources */,
 				5F7D646E215F407800803BCF /* SVGamePart.cpp in Sources */,
-				5F7D6554215F407800803BCF /* SVRenderStateGL.cpp in Sources */,
 				020C436422DC5DCC00201753 /* btSoftBody.cpp in Sources */,
 				5F7D6534215F407800803BCF /* SVOpRender.cpp in Sources */,
 				5F574D4924B85AF10035AB08 /* SVShader.cpp in Sources */,
@@ -13312,7 +13223,6 @@
 				5F7D60EA215F407700803BCF /* SVSpineImp.cpp in Sources */,
 				0288FA0D217B04090089E61C /* SVParseBMFont.cpp in Sources */,
 				5F7D68E0215F407900803BCF /* SVVec2.cpp in Sources */,
-				5F7D65A4215F407800803BCF /* SVRenderState.cpp in Sources */,
 				020C4C4A22DC5DD200201753 /* btConvexHullComputer.cpp in Sources */,
 				020C4C1422DC5DD200201753 /* btQuickprof.cpp in Sources */,
 				5C0C6088219BFF790052A826 /* mmx_optimized.cpp in Sources */,
@@ -13564,7 +13474,6 @@
 				5F8268302282FECB003D4476 /* SVMtlGLTF.cpp in Sources */,
 				020C444222DC5DCC00201753 /* btDbvt.cpp in Sources */,
 				5F7D697A215F407900803BCF /* SVMat3.cpp in Sources */,
-				5FF2B81D24C6D10800FC0BC9 /* SVRDPState.cpp in Sources */,
 				02F27E59218EF216007E85C3 /* SVModelNode.cpp in Sources */,
 				5F7D60DC215F407700803BCF /* SVSpineListen.cpp in Sources */,
 				5F6598DE23C45AAF0075A17C /* SVTable.cpp in Sources */,
@@ -13572,7 +13481,6 @@
 				5F7D64E6215F407800803BCF /* SVTimeLineDeform.cpp in Sources */,
 				5F7D6224215F407800803BCF /* pngwutil.c in Sources */,
 				5F7D6108215F407700803BCF /* SVMesh3d.cpp in Sources */,
-				5F7D6556215F407800803BCF /* SVRenderStateGL.cpp in Sources */,
 				5F3AC24C24E15297000D4019 /* SVREnv.cpp in Sources */,
 				5F7D669E215F407800803BCF /* SVTexture.cpp in Sources */,
 				020C489C22DC5DCF00201753 /* btMultiBodyConstraintSolver.cpp in Sources */,
@@ -13821,7 +13729,6 @@
 				020C457422DC5DCD00201753 /* btCollisionWorldImporter.cpp in Sources */,
 				025BE8A5234F0FFE004AB609 /* SVActPhysics.cpp in Sources */,
 				020C479A22DC5DCE00201753 /* btMiniSDF.cpp in Sources */,
-				5FF2B83524C6D51C00FC0BC9 /* SVRDPStateGL.cpp in Sources */,
 				020C44EE22DC5DCC00201753 /* btGjkEpaPenetrationDepthSolver.cpp in Sources */,
 				5F7D6174215F407700803BCF /* SVLoaderObj.cpp in Sources */,
 				5F7D67C6215F407900803BCF /* SVCameraNode.cpp in Sources */,
@@ -13842,7 +13749,6 @@
 				020C455422DC5DCD00201753 /* btSimulationIslandManager.cpp in Sources */,
 				020C470622DC5DCE00201753 /* btCollisionShape.cpp in Sources */,
 				5F7D60B8215F407700803BCF /* SVFilterBase.cpp in Sources */,
-				5F7D65A6215F407800803BCF /* SVRenderState.cpp in Sources */,
 				5C0C6046219BFF790052A826 /* PeakFinder.cpp in Sources */,
 				5F7D6806215F407900803BCF /* SVFaceDetectPointNode.cpp in Sources */,
 				5F7D624C215F407800803BCF /* pngrtran.c in Sources */,
@@ -13908,7 +13814,6 @@
 				020C43EC22DC5DCC00201753 /* b3Generic6DofConstraint.cpp in Sources */,
 				5F3AC24024DBFE00000D4019 /* SVSurface.cpp in Sources */,
 				5F0E63B024F3B97C002620DC /* Bone.c in Sources */,
-				5FF2B82724C6D41000FC0BC9 /* SVRDPStateMetal.mm in Sources */,
 				020C46EE22DC5DCE00201753 /* btBox2dShape.cpp in Sources */,
 				020C494E22DC5DCF00201753 /* btHingeConstraint.cpp in Sources */,
 				5F7D67D6215F407900803BCF /* SVParticlesWorld.cpp in Sources */,
@@ -14143,7 +14048,6 @@
 				5F82682F2282FECB003D4476 /* SVMtlGLTF.cpp in Sources */,
 				020C444122DC5DCC00201753 /* btDbvt.cpp in Sources */,
 				5F7D6979215F407900803BCF /* SVMat3.cpp in Sources */,
-				5FF2B81C24C6D10800FC0BC9 /* SVRDPState.cpp in Sources */,
 				02F27E58218EF216007E85C3 /* SVModelNode.cpp in Sources */,
 				5F7D60DB215F407700803BCF /* SVSpineListen.cpp in Sources */,
 				5F6598DD23C45AAF0075A17C /* SVTable.cpp in Sources */,
@@ -14151,7 +14055,6 @@
 				5F7D64E5215F407800803BCF /* SVTimeLineDeform.cpp in Sources */,
 				5F7D6223215F407800803BCF /* pngwutil.c in Sources */,
 				5F7D6107215F407700803BCF /* SVMesh3d.cpp in Sources */,
-				5F7D6555215F407800803BCF /* SVRenderStateGL.cpp in Sources */,
 				5F3AC24B24E15297000D4019 /* SVREnv.cpp in Sources */,
 				5F7D669D215F407800803BCF /* SVTexture.cpp in Sources */,
 				020C489B22DC5DCF00201753 /* btMultiBodyConstraintSolver.cpp in Sources */,
@@ -14400,7 +14303,6 @@
 				020C457322DC5DCD00201753 /* btCollisionWorldImporter.cpp in Sources */,
 				025BE8A4234F0FFE004AB609 /* SVActPhysics.cpp in Sources */,
 				020C479922DC5DCE00201753 /* btMiniSDF.cpp in Sources */,
-				5FF2B83424C6D51C00FC0BC9 /* SVRDPStateGL.cpp in Sources */,
 				020C44ED22DC5DCC00201753 /* btGjkEpaPenetrationDepthSolver.cpp in Sources */,
 				5F7D6173215F407700803BCF /* SVLoaderObj.cpp in Sources */,
 				5F7D67C5215F407900803BCF /* SVCameraNode.cpp in Sources */,
@@ -14421,7 +14323,6 @@
 				020C455322DC5DCD00201753 /* btSimulationIslandManager.cpp in Sources */,
 				020C470522DC5DCE00201753 /* btCollisionShape.cpp in Sources */,
 				5F7D60B7215F407700803BCF /* SVFilterBase.cpp in Sources */,
-				5F7D65A5215F407800803BCF /* SVRenderState.cpp in Sources */,
 				5C0C6045219BFF790052A826 /* PeakFinder.cpp in Sources */,
 				5F7D6805215F407900803BCF /* SVFaceDetectPointNode.cpp in Sources */,
 				5F7D624B215F407800803BCF /* pngrtran.c in Sources */,
@@ -14487,7 +14388,6 @@
 				020C43EB22DC5DCC00201753 /* b3Generic6DofConstraint.cpp in Sources */,
 				5F3AC23F24DBFE00000D4019 /* SVSurface.cpp in Sources */,
 				5F0E63AF24F3B97C002620DC /* Bone.c in Sources */,
-				5FF2B82624C6D41000FC0BC9 /* SVRDPStateMetal.mm in Sources */,
 				020C46ED22DC5DCE00201753 /* btBox2dShape.cpp in Sources */,
 				020C494D22DC5DCF00201753 /* btHingeConstraint.cpp in Sources */,
 				5F7D67D5215F407900803BCF /* SVParticlesWorld.cpp in Sources */,
