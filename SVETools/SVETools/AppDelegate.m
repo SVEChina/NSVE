@@ -10,6 +10,7 @@
 #import "CMetalView.h"
 #import "CGLESView.h"
 #import "CGInst.h"
+#import "CGDef.h"
 @interface AppDelegate () {
     
 }
@@ -24,7 +25,7 @@
     //
     [[CGInst getInst] cgInit];
     // Insert code here to initialize your application
-    NSView *renderV = [[CMetalView alloc] initWithFrame:self.window.contentView.bounds];
+    NSView *renderV = nil;
     #if SVE_TOOL_USE_METAL
         renderV = [[CMetalView alloc] initWithFrame:self.window.contentView.bounds];
     #elif SVE_TOOL_USE_GLES
