@@ -176,6 +176,7 @@ namespace sv {
         E_TEX_VIDEO1,
         E_TEX_VIDEO2,
         E_TEX_VIDEO3,
+        E_TEX_FLITER,
         E_TEX_FLITER_GUASS,
         E_TEX_FLITER_GUASS01,
         E_TEX_FILTER_DEFORM01,

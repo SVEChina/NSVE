@@ -81,6 +81,9 @@ namespace sv {
         //销毁Target
         virtual void destroyTarget(SVINTEX _texid);
         
+        //交换纹理
+        virtual void swapInTexture(SVINTEX _tex1,SVINTEX _tex2);
+        
         //增加渲染内核资源
         virtual void addRes(SVRResPtr _res);
         
@@ -111,8 +114,8 @@ namespace sv {
         //自动回收
         virtual void removeUnuseRes();
 
-        
     protected:
+        
         //增加target
         void _addTarget(SVINTEX _texid,SVRTargetPtr _target);
         

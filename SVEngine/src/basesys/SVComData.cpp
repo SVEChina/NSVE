@@ -29,7 +29,6 @@ SVComData::SVComData
 (SVInstPtr _app)
 :SVGBaseEx(_app) {
     m_screenMesh = nullptr;
-    m_faceDataMesh = nullptr;
 }
 
 SVComData::~SVComData() {
@@ -132,7 +131,12 @@ SVRenderMeshPtr SVComData::generatePatchMesh(FVec3 &_corner00, FVec3 &_corner10,
 
 void SVComData::destroy() {
     m_screenMesh = nullptr;
-    m_faceDataMesh = nullptr;
+}
+
+SVFaceDataMeshPtr SVComData::faceMesh(s32 _type) {
+    //根据不同算法，获取不同算法的标准脸
+    
+    return nullptr;
 }
 
 //void SVComData::_initTwoDivisionMesh(){

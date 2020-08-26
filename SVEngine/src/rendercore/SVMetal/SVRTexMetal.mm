@@ -151,6 +151,18 @@ void SVRTexMetal::commit() {
     m_texLock->unlock();
 }
 
+void SVRTexMetal::swap(SVRTexPtr _rtex) {
+    SVRTexMetalPtr tt = dynamic_pointer_cast<SVRTexMetal>(_rtex);
+    if(tt) {
+        id<MTLTexture> t_src_tex = tt->m_src_tex;
+        id<MTLTexture> t_src_tex_msaa = tt->m_src_tex_msaa;
+        tt->m_src_tex = m_src_tex;
+        tt->m_src_tex_msaa = m_src_tex_msaa;
+        m_src_tex = t_src_tex;
+        m_src_tex_msaa = t_src_tex_msaa;
+    }
+}
+
 void SVRTexMetal::setTexData(SVDataSwapPtr _data){
     m_texLock->lock();
     m_data = _data;

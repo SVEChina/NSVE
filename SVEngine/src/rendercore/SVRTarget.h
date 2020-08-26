@@ -157,7 +157,6 @@ namespace sv {
         FMat4 m_vp_mat;
     };
 
-
 }//!namespace sv
 
 

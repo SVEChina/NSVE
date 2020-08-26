@@ -15,7 +15,7 @@
 
 namespace sv {
 
-    //图片处理
+    //
     class SVPictureProcess : public SVProcess {
     public:
         SVPictureProcess(SVInstPtr _app);
@@ -48,6 +48,7 @@ namespace sv {
         typedef SVArray<SVFilterBasePtr> FilterArray;
         FilterArray m_filterArray;
     };
+
 
 }//!namespace sv
 

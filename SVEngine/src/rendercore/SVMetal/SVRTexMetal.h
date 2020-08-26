@@ -47,6 +47,8 @@ namespace sv {
         
         virtual void commit();  //数据提交到显卡
         
+        virtual void swap(SVRTexPtr _rtex);    //交换纹理
+        
         id<MTLTexture> getInner();
         
     protected:

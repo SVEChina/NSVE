@@ -11,6 +11,7 @@
 #include "../basesys/SVSysBase.h"
 #include "../rendercore/SVRenderDeclare.h"
 #include "../mtl/SVMtlDeclare.h"
+#include <vector>
 
 namespace sv {
 
@@ -53,16 +54,21 @@ namespace sv {
         
         void _renderCameraImg(f32 _dt);
         
+        //开启相机纹理
         bool m_enable;
         
-        s32 m_method;   //相机纹理输入方式
+        //相机格式转换的纹理和方式
+        s32 m_method;
         
+        //AR目标
         SVRTargetPtr m_ar_target;
         
+        //用于格式转换的备用纹理
         SVTexturePtr m_tex0;
         SVTexturePtr m_tex1;
         SVTexturePtr m_tex2;
     };
+
 
 }//!namespace
 

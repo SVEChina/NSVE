@@ -78,7 +78,7 @@ void SVARBackgroundMgr::disable() {
 
 //
 void SVARBackgroundMgr::update(f32 _dt) {
-    if(m_ar_target) {
+    if(m_ar_target && m_enable) {
         //将AR-相机图片渲染到主目标上
         if(m_method == 1 ) {
             SVMtlCorePtr t_mtl = mApp->getMtlLib()->getMtl("screenCamera");
@@ -109,6 +109,7 @@ void SVARBackgroundMgr::update(f32 _dt) {
 }
 
 void SVARBackgroundMgr::_renderCameraPass(f32 _dt) {
+    //
     
 }
 

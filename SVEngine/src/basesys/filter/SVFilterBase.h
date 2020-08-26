@@ -18,13 +18,14 @@
 
 namespace sv {
     
-    //滤镜
+    //滤镜的基类
+    //产生pass 投递到不同地方
 
     class SVFilterBase : public SVGBaseEx {
     public:
         SVFilterBase(SVInstPtr _app);
 
-        ~SVFilterBase();
+        virtual ~SVFilterBase();
 
         virtual bool create();
 

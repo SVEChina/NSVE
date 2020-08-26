@@ -17,7 +17,6 @@
 namespace sv {
     
     //屏幕空间处理
-
     class SVPass :public SVGBaseEx {
     public:
         SVPass(SVInstPtr _inst);

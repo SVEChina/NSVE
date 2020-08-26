@@ -60,11 +60,13 @@ namespace sv {
 
         void render(SVRendererPtr _renderer,SVRTargetPtr _target);
         
-        void setTarget(SVRTargetPtr _target);
+        //设置目标
+        void setTarget(SVINTEX _aim);
         
     protected:
-        SVRTargetPtr m_target;
+        SVINTEX m_aim;
     };
+
     
     //FBO绑定(推送FBO)
     class SVRCmdTargetResize : public SVRenderCmd {

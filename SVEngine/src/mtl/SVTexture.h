@@ -79,9 +79,10 @@ namespace sv {
         
         SVDataSwapPtr getTextureCubeData(s32 _index);
         
-    protected:
-        void _updateData();
+        //
+        void swap(SVTexturePtr _tex);
         
+    protected:
         SVRTexPtr m_restex;
         
         SVLockSpinPtr m_lock;

@@ -118,3 +118,12 @@ void SVRenderer::_addTarget(SVINTEX _texid,SVRTargetPtr _target) {
         m_target_pool.insert(std::make_pair(_texid, _target));
     }
 }
+
+void SVRenderer::swapInTexture(SVINTEX _tex1,SVINTEX _tex2) {
+    //交换纹理
+    SVTexturePtr tex1 = mApp->getTexMgr()->getInTexture(_tex1);
+    SVTexturePtr tex2 = mApp->getTexMgr()->getInTexture(_tex2);
+    if(tex1!=tex2) {
+        tex1->swap(tex2);
+    }
+}

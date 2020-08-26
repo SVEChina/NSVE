@@ -92,14 +92,6 @@ bool SVTexture::getbLoad(){
     return 0;
 }
 
-void SVTexture::_updateData(){
-//    if (m_restex && m_bData) {
-//        m_restex->setTexData(m_pData->getData(), m_pData->getSize());
-//        m_pData->reback();
-//        m_bData = false;
-//    }
-}
-
 void SVTexture::bindRes(SVRTexPtr _res) {
     m_restex = _res;
 }
@@ -110,4 +102,10 @@ void SVTexture::unbindRes() {
 
 SVRTexPtr SVTexture::getResTex(){
     return m_restex;
+}
+
+void SVTexture::swap(SVTexturePtr _tex) {
+    if(_tex && m_restex) {
+        m_restex->swap(_tex->getResTex());
+    }
 }

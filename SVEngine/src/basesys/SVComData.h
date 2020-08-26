@@ -30,8 +30,10 @@ namespace sv {
         
         void destroy();
         
-        SVFaceDataMeshPtr faceDataMesh() { return m_faceDataMesh; }
+        //动态初始化
+        SVFaceDataMeshPtr faceMesh(s32 _type);
         
+        //引擎创建初始化
         SVRenderMeshPtr screenMesh() { return m_screenMesh; }
         
         SVRenderMeshPtr generatePatchMesh(FVec3 &_corner00,
@@ -49,8 +51,6 @@ namespace sv {
         void _initFourDivisionMesh_X();
         
         SVRenderMeshPtr m_screenMesh;
-        
-        SVFaceDataMeshPtr m_faceDataMesh;
     };
     
 }//!namespace

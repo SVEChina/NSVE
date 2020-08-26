@@ -31,9 +31,11 @@ SVRTex:: ~SVRTex(){
 }
 
 void SVRTex::create(SVRendererPtr _renderer){
+    
 }
 
 void SVRTex::destroy(SVRendererPtr _renderer){
+    
 }
 
 void SVRTex::setTexData(SVDataSwapPtr _data){
@@ -47,4 +49,9 @@ void SVRTex::setTexCubeData(SVDataSwapPtr _data,s32 _index) {
 }
 
 void SVRTex::commit(){
+    
+}
+
+void SVRTex::swap(SVRTexPtr _rtex) {
+    
 }

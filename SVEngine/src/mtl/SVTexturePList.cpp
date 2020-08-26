@@ -80,14 +80,12 @@ void SVTexturePList::refreshParam(){
 
 void SVTexturePList::apply(){
     m_bApply = true;
-    _updateData();
 }
 
 void SVTexturePList::apply(void *data){
 //    m_pApplyData->writeData(data, m_srcw*m_srch*4);
 //    m_bApplyData = true;
     m_bApply = true;
-    _updateData();
 }
 
 void SVTexturePList::commit(){
@@ -117,7 +115,6 @@ void SVTexturePList::bindTexset(SVTextureSetPtr _texset){
     if (_texset) {
         m_btexSet = true;
         m_texset = _texset;
-        _updateData();
     }
     
 }
@@ -144,34 +141,6 @@ void SVTexturePList::setSrcw(bool _srcw){
 
 void SVTexturePList::setSrch(bool _srch){
     m_srch = _srch;
-}
-
-void SVTexturePList::_updateData(){
-    SVTexture::_updateData();
-//    SVRTexGLPlistPtr t_tmp = std::dynamic_pointer_cast<SVRTexGLPlist>(m_restex);
-//    if (t_tmp) {
-//        t_tmp->rot = m_rot;
-//        t_tmp->trim = m_trim;
-//        t_tmp->srcw = m_srcw;
-//        t_tmp->srch = m_srch;
-//        if (m_bApply) {
-////            t_tmp->apply(m_pApplyData->getData());
-//            m_bApply = false;
-//        }
-//        if (m_bApplyData) {
-//            m_bApplyData = false;
-//            t_tmp->apply();
-//        }
-//        if (m_btexSet) {
-//            m_btexSet = false;
-//            SVRResPtr t_tmp_tex = m_texset->getResTex();
-//            SVRTexGLSetPtr t_tmp_texset = std::dynamic_pointer_cast<SVRTexGLSet>(m_restex);
-//            if (t_tmp && t_tmp_texset) {
-//                t_tmp->bindTexset(t_tmp_texset);
-//            }
-//        }
-//
-//    }
 }
 
 

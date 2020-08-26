@@ -8,6 +8,7 @@
 
 #include "SVFilterBase.h"
 #include "../../node/SVMultPassNode.h"
+#include "../../rendercore/SVRenderCmd.h"
 
 using namespace sv;
 
@@ -20,36 +21,41 @@ SVFilterBase::SVFilterBase(SVInstPtr _app)
 }
 
 SVFilterBase::~SVFilterBase(){
+     m_mtl = nullptr;
 }
 
 bool SVFilterBase::create(){
     return false;
 }
 
-void SVFilterBase::destroy(){
+void SVFilterBase::destroy() {
     m_mtl = nullptr;
 }
 
-void SVFilterBase::update(f32 dt){
+void SVFilterBase::update(f32 dt) {
+    //使用辅助的的target
     
+    //产生pass 投递到不同的对方
+    SVRCmdPassPtr t_pass = MakeSharedPtr<SVRCmdPass>();
+    //t_pass->setTarget
 }
 
-void SVFilterBase::setFilterParam(f32 _smooth,SVFILTERITEMTYPE _type){
+void SVFilterBase::setFilterParam(f32 _smooth,SVFILTERITEMTYPE _type) {
 }
 
-f32 SVFilterBase::getFilterParam(SVFILTERITEMTYPE _type){
+f32 SVFilterBase::getFilterParam(SVFILTERITEMTYPE _type) {
     return 0;
 }
 
-void SVFilterBase::setVisible(bool _visible){
+void SVFilterBase::setVisible(bool _visible) {
 }
 
 //序列化
 void SVFilterBase::toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator,
-                    RAPIDJSON_NAMESPACE::Value &_objValue){
+                    RAPIDJSON_NAMESPACE::Value &_objValue) {
     
 }
 
-void SVFilterBase::fromJSON(RAPIDJSON_NAMESPACE::Value &item){
+void SVFilterBase::fromJSON(RAPIDJSON_NAMESPACE::Value &item) {
     
 }

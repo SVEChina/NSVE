@@ -49,7 +49,6 @@ void SVTextureIOS::create(SVRendererPtr _renderer){
 //            m_restex->setheight(m_height);
 //            m_restex->setinformate(m_informate);
 //            m_restex->setdataformate(m_dataformate);
-//            _updateData();
 //            m_restex->create(_renderer);
 //        }
 //    }
@@ -78,8 +77,4 @@ void SVTextureIOS::fetchData(u8* _dstPtr,s32 _w,s32 _h) {
 //        t_tmp->fetchData(_dstPtr, _w, _h);
 //    }
 #endif
-}
-
-void SVTextureIOS::_updateData(){
-    SVTexture::_updateData();
 }

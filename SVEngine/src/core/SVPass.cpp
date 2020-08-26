@@ -45,6 +45,6 @@ void SVPass::update(f32 _dt) {
         t_r_pass->setMesh( mApp->getComData()->screenMesh() );
         t_r_pass->setMaterial(t_mtl);
         t_r_pass->setSurface( m_surface );
-        t_r_pass->setTarget(m_target);
+        //t_r_pass->setTarget(m_target);
     }
 }
