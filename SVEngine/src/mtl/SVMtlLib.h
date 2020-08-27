@@ -59,8 +59,6 @@ namespace sv {
         
         void clear();
         
-        SVMtlCorePtr getMtl(s32 _mtlID);
-        
         SVMtlCorePtr getMtl(cptr8 _mtlname);
         
         SVMtlCorePtr createMtl(cptr8 _mtlname);

@@ -63,25 +63,10 @@ void SVMtlLib::loadMtlPack(cptr8 _pack) {
 }
 
 void SVMtlLib::clear() {
-    //    //运行时的材质库
-    //   typedef std::vector<SVMtlCorePtr> MTLPOOLRUN;
-    //   MTLPOOL m_mtlPool_run;
-    //
-    //   //空闲的材质
-    //   typedef std::vector<s32> EMPTYMTLPOOL;
-    //   EMPTYMTLPOOL m_empty_mtl_ool;
     MTLPOOL::iterator it = m_mtlPool.begin();
     while ( it!=m_mtlPool.end() ) {
         it++;
     }
-}
-
-SVMtlCorePtr SVMtlLib::getMtl(s32 _mtlID) {
-//    if(m_mtlpool_run.size()>_mtlID && m_mtlpool_run[_mtlID]) {
-//        return m_mtlpool_run[_mtlID];
-//    }
-//    return nullptr;
-    return nullptr;
 }
 
 SVMtlCorePtr SVMtlLib::getMtl(cptr8 _mtlname) {
