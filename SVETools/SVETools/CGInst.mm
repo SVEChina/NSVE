@@ -45,6 +45,13 @@ static CGInst *mInst;
     [self initSVE];
     //创建UI系统
     [[CGUI getInst] cgInit:0];
+    ////////监听窗口变化
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(windowDidResize:)name:NSWindowDidResizeNotification object:nil];
+}
+
+-(void)windowDidResize:(NSNotification *)notification{
+    NSWindow *window = notification.object;
+    NSLog(@"window resize:%f %f",window.frame.size.width, window.frame.size.height);
 }
 
 -(void)cgDestroy {
