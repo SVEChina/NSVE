@@ -13,10 +13,10 @@
 
 namespace sv {
     
-        class SVParseLUTFilter : public SVParseData {
-        public:
-            static SVFilterBasePtr parseLUT(SVInstPtr _app,cptr8 _path, s32 resid);
-        };
+    class SVParseLUTFilter : public SVParseData {
+    public:
+        static SVFilterBasePtr parseLUT(SVInstPtr _app,cptr8 _path, s32 resid);
+    };
 
 }//!namespace sv
 

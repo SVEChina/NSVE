@@ -5,7 +5,7 @@
     "formate" : ["E_V3","E_T0"],
     "pass" : "nor",
     "vs": {
-        "entry": "vertexShader",
+        "entry": "vsMain",
         "uniform": [
             {
                 "bufID" : 1,
@@ -18,9 +18,7 @@
         ]
     },
     "fs":{
-        "entry": "fragmentShader",
-        "sampler": [
-            {   "chn" : 0 }
-        ]
+        "entry": "fsMain",
+        "sampler": [ { "chn" : 0 } ]
     }
 }

@@ -12,37 +12,33 @@
 #include "SVFilterBase.h"
 
 namespace sv {
-    
-    
+
+    class SVSharpFilter : public SVFilterBase {
+    public:
+        SVSharpFilter(SVInstPtr _app);
         
-        class SVSharpFilter : public SVFilterBase {
-        public:
-            SVSharpFilter(SVInstPtr _app);
-            
-            ~SVSharpFilter();
-            
-            virtual bool create();
-            
-            virtual void destroy();
-            
-            virtual void update(f32 dt);
-            
-            inline void setSmooth(f32 smooth){
-                m_smooth = smooth;
-            }
-            
-            void toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator,
-                        RAPIDJSON_NAMESPACE::Value &_objValue);
-            
-            void fromJSON(RAPIDJSON_NAMESPACE::Value &item);
-            
-        protected:
-            f32 m_smooth;
-            SVMtlSmoothPtr m_mtl_smooth;
-        };
+        ~SVSharpFilter();
         
-    
-    
+        virtual bool create();
+        
+        virtual void destroy();
+        
+        virtual void update(f32 dt);
+        
+        inline void setSmooth(f32 smooth){
+            m_smooth = smooth;
+        }
+        
+        void toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator,
+                    RAPIDJSON_NAMESPACE::Value &_objValue);
+        
+        void fromJSON(RAPIDJSON_NAMESPACE::Value &item);
+        
+    protected:
+        f32 m_smooth;
+        SVMtlSmoothPtr m_mtl_smooth;
+    };
+
 }//!namespace sv
 
 #endif /* SV_SHARP_FILTER_H */

@@ -20,7 +20,6 @@ namespace sv {
     
     //滤镜的基类
     //产生pass 投递到不同地方
-
     class SVFilterBase : public SVGBaseEx {
     public:
         SVFilterBase(SVInstPtr _app);
@@ -31,37 +30,54 @@ namespace sv {
 
         virtual void destroy();
 
-        virtual void update(f32 dt);
+        virtual void update(f32 _dt);
 
         virtual void setFilterParam(f32 _smooth,SVFILTERITEMTYPE _type);
 
         virtual f32 getFilterParam(SVFILTERITEMTYPE _type);
 
+        //
         virtual void setVisible(bool _visible);
         
+        //设置材质
+        sv_inline void setMtl(cptr8 _name) { m_mtl_name = _name; }
+        
+        //设置目标Target
+        sv_inline void setTarget(SVINTEX _intex){ m_target_tex = _intex; }
+        
+        //设置预处理
+        sv_inline void setPreProcess() { m_is_pre = true; }
+        
+        //设置后处理
+        sv_inline void setPostProcess() { m_is_pre = false; }
+
+        sv_inline SVString getName(){
+            return m_name;
+        }
+
+        sv_inline SVFILTERFUNCTYPE getType(){
+            return m_type;
+        }
+        
+        //获取surface，设置参数
+        SVSurfacePtr getSurface() { return m_surface; }
+
+    protected:
+        SVString m_name;
+        SVString m_mtl_name;
+        bool m_is_pre;
+        SVINTEX m_target_tex;
+        SVSurfacePtr m_surface;
+        //
+        SVMtlCorePtr m_mtl;
+        SVFILTERFUNCTYPE m_type;
+        
+    public:
         //序列化
         virtual void toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator,
                             RAPIDJSON_NAMESPACE::Value &_objValue);
 
         virtual void fromJSON(RAPIDJSON_NAMESPACE::Value &item);
-
-        void setRSType(RENDERSTREAMTYPE _rstype){
-                m_rstype=_rstype;
-        }
-
-        inline SVString getName(){
-            return m_name;
-        }
-
-        inline SVFILTERFUNCTYPE getType(){
-            return m_type;
-        }
-
-    protected:
-        SVMtlCorePtr m_mtl;
-        SVString m_name;
-        SVFILTERFUNCTYPE m_type;
-        RENDERSTREAMTYPE m_rstype;
     };
     
 }//!namespace sv

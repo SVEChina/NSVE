@@ -42,8 +42,8 @@ bool SVFilterLUT::create(){
 //    m_pPassNode->setname("SVLookUpTableNode");
 //    //m_pPassNode->create(t_w, t_h);
 //    m_pPassNode->setRSType(RST_IMGFILTER);
-    //创建pass
-    SVPassPtr t_pass1 = MakeSharedPtr<SVPass>(mApp);
+//    //创建pass
+//    SVPassPtr t_pass1 = MakeSharedPtr<SVPass>(mApp);
     //SVMtlCorePtr t_lkMtl=MakeSharedPtr<SVMtlCore>(mApp,"lookup");
     //t_lkMtl->setTexcoordFlip(1.0f, 1.0f);
     //t_pass1->setMtl(t_lkMtl);
@@ -51,7 +51,6 @@ bool SVFilterLUT::create(){
 //    t_pass1->setInTex(1,m_texLUT);
 //    t_pass1->setOutTex(E_TEX_FILTER_LUT_OUT);
 //    m_pPassNode->addPass(t_pass1);
-    //
 //    SVSpriteNodePtr node=MakeSharedPtr<SVSpriteNode>(mApp,512,512);
 //    node->setTexture(E_TEX_FILTER_LUT);
 //
@@ -61,9 +60,9 @@ bool SVFilterLUT::create(){
 //            t_sc->addNode(node);
 //        }
 //    }
-    SVPassPtr t_pass2 = MakeSharedPtr<SVPass>(mApp);
-    SVMtlCorePtr t_mtl_back=MakeSharedPtr<SVMtlCore>(mApp,"screennor");
-    //t_mtl_back->setTexcoordFlip(1.0f, 1.0f);
+//    SVPassPtr t_pass2 = MakeSharedPtr<SVPass>(mApp);
+//    SVMtlCorePtr t_mtl_back=MakeSharedPtr<SVMtlCore>(mApp,"screennor");
+//  t_mtl_back->setTexcoordFlip(1.0f, 1.0f);
     //t_pass2->setMtl(t_mtl_back);
 //    t_pass2->setInTex(0, E_TEX_FILTER_LUT_OUT);
 //    t_pass2->setOutTex(E_TEX_MAIN);
@@ -86,7 +85,9 @@ SVTexturePtr SVFilterLUT::getLUTTex() {
     return m_texLUT;
 }
 
-void SVFilterLUT::update(f32 dt){
+void SVFilterLUT::update(f32 _dt){
+    //传递surface
+    SVFilterBase::update(_dt);
 //    if(m_dirtyLUT){
 //        m_dirtyLUT = false;
 //        if(m_pPassNode && m_pPassNode->getPass(0) ){

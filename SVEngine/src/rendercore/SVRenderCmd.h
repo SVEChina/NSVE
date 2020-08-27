@@ -63,8 +63,12 @@ namespace sv {
         //设置目标
         void setTarget(SVINTEX _aim);
         
+        //设置辅助目标
+        void setHelpTarget(SVINTEX _aim);
+        
     protected:
         SVINTEX m_aim;
+        SVINTEX m_aim_help;
     };
 
     

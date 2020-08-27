@@ -23,23 +23,33 @@ struct VertexOut {
 };
 
 //
-struct FSOutput{
-    float4 frag_data0 [[color(0)]];
+struct FSInput{
+    sampler sam0 [[sampler(0)]];
+    texture2d<float> tex0 [[texture(0)]];
 };
 
 //
-vertex VertexOut vertexShader( Vertex input [[stage_in]] ) {
+struct FSOutput{
+    float4 frag0 [[color(0)]];
+};
+
+//
+vertex VertexOut vsMain(Vertex input [[stage_in]] ) {
     VertexOut vert;
     vert.position = float4(input.position,0.0,1.0);
     vert.texcoord0 = input.texcoord0;
     return vert;
 }
 
-fragment FSOutput fragmentShader( VertexOut input [[stage_in]],
-                                  sampler sam [[sampler(0)]],
-                                  texture2d<float> tex0 [[texture(0)]] ) {
+//fragment FSOutput fsMain(VertexOut input [[stage_in]],
+//                         sampler sam0 [[sampler(0)]],
+//                         texture2d<float> tex0 [[texture(0)]] ) {
+//    FSOutput out;
+//    out.frag0 = tex0.sample(sam0, input.texcoord0);
+//    return out;
+//}
+fragment FSOutput fsMain(VertexOut input [[stage_in]],FSInput fsin ) {
     FSOutput out;
-    float4 tex_clr0 = tex0.sample(sam, input.texcoord0);
-    out.frag_data0 = tex_clr0;
+    out.frag0 = fsin.tex0.sample(fsin.sam0, input.texcoord0);
     return out;
 }

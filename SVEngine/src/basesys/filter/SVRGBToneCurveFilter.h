@@ -13,29 +13,25 @@
 
 namespace sv {
 
-    
+    class SVRGBToneCurveFilter : public SVFilterBase {
+    public:
+        SVRGBToneCurveFilter(SVInstPtr _app);
+
+        ~SVRGBToneCurveFilter();
+
+        virtual bool create();
+
+        virtual void destroy();
+
+        virtual void update(f32 dt);
+
+        SVMtlCorePtr m_mtl_rgba;
+
+        SVMtlCorePtr m_mtl_back;
+
+        SVTexturePtr texrgb;
+    };
         
-        class SVRGBToneCurveFilter : public SVFilterBase {
-        public:
-            SVRGBToneCurveFilter(SVInstPtr _app);
-
-            ~SVRGBToneCurveFilter();
-
-            virtual bool create();
-
-            virtual void destroy();
-
-            virtual void update(f32 dt);
-
-            SVMtlCorePtr m_mtl_rgba;
-
-            SVMtlCorePtr m_mtl_back;
-
-            SVTexturePtr texrgb;
-        };
-        
-    
-    
 }//!namespace sv
 
 #endif /* SV_RGBTONECURVEFILTER_H */

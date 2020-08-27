@@ -12,8 +12,7 @@
 #include "SVFilterBase.h"
 
 namespace sv {
-    
-    
+
     class SVGenLUTParam :public SVObject {
     public:
         SVGenLUTParam(){
@@ -406,6 +405,7 @@ namespace sv {
         SVMtlHSLPtr m_hslMtl;
         SVGenLUTParamPtr m_genParam;
         SVMtlGradientMapPtr m_gradientMapMtl;
+        //
         SVPassPtr m_GradientMapPass;
         
     public:

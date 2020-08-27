@@ -24,7 +24,7 @@ struct VertexOut {
     float2 texcoord0;
 };
 
-struct FSIn{
+struct FSInput{
     sampler sam0 [[sampler(0)]];
     sampler sam1 [[sampler(1)]];
     texture2d<float> tex0 [[texture(0)]];
@@ -32,11 +32,11 @@ struct FSIn{
 };
 
 struct FSOut{
-    float4 frag_data0 [[color(0)]];
+    float4 frag0 [[color(0)]];
 };
 
 //
-vertex VertexOut vertexShader( Vertex input [[stage_in]] ) {
+vertex VertexOut vsMain( Vertex input [[stage_in]] ) {
     VertexOut vert;
     vert.position = float4(input.position,0.0,1.0);
     vert.texcoord0 = input.texcoord0;
@@ -44,7 +44,7 @@ vertex VertexOut vertexShader( Vertex input [[stage_in]] ) {
 }
 
 //
-fragment FSOut fragmentShader( VertexOut input [[stage_in]],FSIn fsin) {
+fragment FSOut fsMain( VertexOut input [[stage_in]],FSInput fsin) {
     //
     const float pa = 0.125;         // 1.0/8.0
     const float pb = 0.00195312;    // 1.0/512.0
@@ -74,6 +74,6 @@ fragment FSOut fragmentShader( VertexOut input [[stage_in]],FSIn fsin) {
     float4 newColor2 = fsin.tex1.sample(fsin.sam1, texPos2);
     //
     float4 newColor = mix(newColor1, newColor2, fract(blueColor));
-    out.frag_data0 = mix(textureColor, vec4(newColor.rgb, textureColor.w),1.0);
+    out.frag0 = mix(textureColor, float4(newColor.rgb, textureColor.w),1.0);
     return out;
 }

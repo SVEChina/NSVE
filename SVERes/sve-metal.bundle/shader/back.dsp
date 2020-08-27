@@ -4,13 +4,9 @@
     "file": "shader/back.metal",
     "formate" : ["E_V2","E_T0"],
     "pass" : "direct",
-    "vs": {
-        "entry": "vertexShader"
-    },
+    "vs": { "entry": "vsMain" },
     "fs":{
-        "entry": "fragmentShader",
-        "sampler": [
-            {   "chn" : 0 }
-        ]
+        "entry": "fsMain",
+        "sampler": [ { "chn" : 0 } ]
     }
 }

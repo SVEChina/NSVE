@@ -7,21 +7,29 @@
 //
 
 #include "SVFilterBase.h"
+#include "../../basesys/SVComData.h"
 #include "../../node/SVMultPassNode.h"
+#include "../../mtl/SVMtlLib.h"
+#include "../../mtl/SVMtlCore.h"
+#include "../../mtl/SVSurface.h"
 #include "../../rendercore/SVRenderCmd.h"
+#include "../../rendercore/SVRenderer.h"
+#include "../../rendercore/SVRTarget.h"
 
 using namespace sv;
 
 SVFilterBase::SVFilterBase(SVInstPtr _app)
 :SVGBaseEx(_app){
     m_name = "SVFilterBase";
-    m_mtl = nullptr;
+    m_mtl_name = "";
+    m_surface = MakeSharedPtr<SVSurface>();
+    m_target_tex = E_TEX_END;
+    m_is_pre = false;
     m_type = SV_FUNC_NONE;
-    m_rstype = RST_IMGFILTER;
 }
 
 SVFilterBase::~SVFilterBase(){
-     m_mtl = nullptr;
+    m_surface = nullptr;
 }
 
 bool SVFilterBase::create(){
@@ -29,15 +37,30 @@ bool SVFilterBase::create(){
 }
 
 void SVFilterBase::destroy() {
-    m_mtl = nullptr;
 }
 
-void SVFilterBase::update(f32 dt) {
-    //使用辅助的的target
-    
-    //产生pass 投递到不同的对方
-    SVRCmdPassPtr t_pass = MakeSharedPtr<SVRCmdPass>();
-    //t_pass->setTarget
+void SVFilterBase::update(f32 _dt) {
+    SVRTargetPtr t_target = mApp->getRenderer()->getTarget(m_target_tex);
+    if(t_target) {
+        //
+        SVMtlCorePtr t_mtl = mApp->getMtlLib()->getMtl(m_mtl_name.c_str());
+        if(t_mtl) {
+            t_mtl->update(_dt);
+        }
+        //产生pass 投递到不同的对方
+        SVRCmdPassPtr t_pass = MakeSharedPtr<SVRCmdPass>();
+        t_pass->setTarget(m_target_tex);    //目标纹理
+        t_pass->setMesh(mApp->getComData()->screenMesh());
+        t_pass->setSurface(m_surface);
+        t_pass->setMaterial(t_mtl);
+        if(m_is_pre) {
+            //预处理
+            t_target->pushCommandPre(t_pass);
+        }else{
+            //后处理
+            t_target->pushCommandAfter(t_pass);
+        }
+    }
 }
 
 void SVFilterBase::setFilterParam(f32 _smooth,SVFILTERITEMTYPE _type) {

@@ -20,7 +20,7 @@
 #include "../rendercore/SVRenderer.h"
 #include "filter/SVRGBToneCurveFilter.h"
 #include "filter/SVRGBToneCurveCore.h"
-#include "filter/SVBasedonFilter.h"
+#include "filter/SVFilterPicmodify.h"
 #include "../core/SVPass.h"
 #include "filter/SVFilterBase.h"
 
@@ -131,13 +131,3 @@ void SVPictureProcess::clearFilter(SVFILTERFUNCTYPE t_type){
         }
     }
 }
-
-//更新曲线数据
-//void SVPictureProcess::setFilterBSplineData(ptru8 _data){
-//    if(m_toneCurverFilter){
-//        m_toneCurverFilter->texrgb->setTexData(_data, 256*4);
-//        m_toneCurverFilter->texrgb->getbLoad();
-//    } else {
-//        SV_LOG_ERROR("please call function openToneCurverRGB!\n");
-//    }
-//}

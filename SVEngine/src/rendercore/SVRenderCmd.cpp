@@ -76,21 +76,25 @@ void SVRCmdNor::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
 //自动拿辅助纹理
 //渲染命令批次
 SVRCmdPass::SVRCmdPass() {
-    //m_aim = E_TEX_BEGIN;
+    m_aim = E_TEX_END;
+    m_aim_help = E_TEX_END;
 }
 
 SVRCmdPass::~SVRCmdPass(){
-    //m_aim = E_TEX_BEGIN;
 }
 
 void SVRCmdPass::setTarget(SVINTEX _aim) {
     m_aim = _aim;
 }
 
+void SVRCmdPass::setHelpTarget(SVINTEX _aim) {
+    m_aim_help = _aim;
+}
+
 void SVRCmdPass::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
     //获取辅助纹理
-    SVINTEX t_help = E_TEX_FLITER;
-    SVRTargetPtr t_target = _renderer->getTarget(t_help);
+    //SVINTEX t_help = E_TEX_FLITER;
+    SVRTargetPtr t_target = _renderer->getTarget(m_aim_help);
     if(t_target && t_target->getResFbo()) {
         //绑定
         t_target->getResFbo()->bind(_renderer);
@@ -98,8 +102,8 @@ void SVRCmdPass::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
         SVRCmdNor::render(_renderer, t_target);
         //解绑定
         t_target->getResFbo()->unbind(_renderer);
-        //交换纹理
-        _renderer->swapInTexture(m_aim,t_help);
+        //交换纹理....
+        _renderer->swapInTexture(m_aim,m_aim_help);
     }
 }
 

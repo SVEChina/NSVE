@@ -12,28 +12,28 @@
 
 namespace sv {
     
+    
+    class SVADFilterBase : public SVFilterBase {
+    public:
+        SVADFilterBase(SVInstPtr _app, SVMtlCorePtr _mtl);
         
-        class SVADFilterBase : public SVFilterBase {
-        public:
-            SVADFilterBase(SVInstPtr _app, SVMtlCorePtr _mtl);
-            
-            ~SVADFilterBase();
-            
-            virtual bool create();
-            
-            virtual void destroy();
-            
-            virtual void update(f32 dt);
-            
-            void setFilterMtl(SVMtlADFilterBasePtr _mtl);
-            
-            void toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator,
-                        RAPIDJSON_NAMESPACE::Value &_objValue);
-            
-            void fromJSON(RAPIDJSON_NAMESPACE::Value &item);
-        protected:
-            SVMtlCorePtr m_mtl;
-        };
+        ~SVADFilterBase();
+        
+        virtual bool create();
+        
+        virtual void destroy();
+        
+        virtual void update(f32 dt);
+        
+        void setFilterMtl(SVMtlADFilterBasePtr _mtl);
+        
+        void toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator,
+                    RAPIDJSON_NAMESPACE::Value &_objValue);
+        
+        void fromJSON(RAPIDJSON_NAMESPACE::Value &item);
+    protected:
+        SVMtlCorePtr m_mtl;
+    };
         
     
 }//!namespace sv

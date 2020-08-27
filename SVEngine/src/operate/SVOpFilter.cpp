@@ -10,7 +10,7 @@
 #include "../app/SVGlobalMgr.h"
 #include "../basesys/SVSceneMgr.h"
 #include "../basesys/filter/SVFilterBase.h"
-#include "../basesys/filter/SVBasedonFilter.h"
+#include "../basesys/filter/SVFilterPicmodify.h"
 #include "../basesys/filter/SVFilterDef.h"
 #include "../event/SVEventMgr.h"
 #include "../event/SVEvent.h"
@@ -34,7 +34,7 @@ SVOpSetBeautyFilter::SVOpSetBeautyFilter(SVInstPtr _app,cptr8 _scenename,cptr8 _
 void SVOpSetBeautyFilter::_process(f32 _dt) {
     SVPictureProcessPtr t_picproc = mApp->getBasicSys()->getPicProc();
     if( t_picproc ) {
-//        SVBasedonFilterPtr t_baseOn=MakeSharedPtr<SVBasedonFilter>(mApp);
+//        SVFilterPicmodifyPtr t_baseOn=MakeSharedPtr<SVFilterPicmodify>(mApp);
 //        t_baseOn->create();
 //        t_picproc->addFilter(t_baseOn);
 //        t_picproc->openFilter(t_baseOn);

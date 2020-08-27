@@ -12,26 +12,25 @@
 
 namespace sv {
     
+    class SVFilterShinning : public SVFilterBase {
+    public:
+        SVFilterShinning(SVInstPtr _app);
         
-        class SVFilterShinning : public SVFilterBase {
-        public:
-            SVFilterShinning(SVInstPtr _app);
-            
-            ~SVFilterShinning();
-            
-            virtual bool create();
-            
-            virtual void destroy();
-            
-            virtual void update(f32 dt);
-            
-            void toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator,
-                        RAPIDJSON_NAMESPACE::Value &_objValue);
-            
-            void fromJSON(RAPIDJSON_NAMESPACE::Value &item);
-        protected:
-            SVMtlShinningPtr m_mtlShinning;
-        };
+        ~SVFilterShinning();
+        
+        virtual bool create();
+        
+        virtual void destroy();
+        
+        virtual void update(f32 dt);
+        
+        void toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator,
+                    RAPIDJSON_NAMESPACE::Value &_objValue);
+        
+        void fromJSON(RAPIDJSON_NAMESPACE::Value &item);
+    protected:
+        SVMtlShinningPtr m_mtlShinning;
+    };
         
     
 }//!namespace sv

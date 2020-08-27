@@ -239,14 +239,11 @@ namespace sv {
     DECLARE_SHAREPTR(SVFilterGlow);
     DECLARE_SHAREPTR(SVFilterBlur);
     DECLARE_SHAREPTR(SVRGBToneCurveFilter);
-    DECLARE_SHAREPTR(SVBasedonFilter);
+    DECLARE_SHAREPTR(SVFilterPicmodify);
     DECLARE_SHAREPTR(SVAni2DStickersMgr);
     DECLARE_SHAREPTR(SVAni2DBase);
     DECLARE_SHAREPTR(SVAni2DScreen);
     DECLARE_SHAREPTR(SVFilterShinning);
-    DECLARE_SHAREPTR(SVFilterDark);
-    DECLARE_SHAREPTR(SVFilterShake);
-    DECLARE_SHAREPTR(SVFilterFlashWhite);
     DECLARE_SHAREPTR(SVADFilterBase);
 
     //物理部分

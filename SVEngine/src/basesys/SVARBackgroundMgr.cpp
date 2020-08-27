@@ -9,6 +9,7 @@
 #include "../app/SVInst.h"
 #include "../app/SVDispatch.h"
 #include "../basesys/SVComData.h"
+#include "../basesys/filter/SVFilterBase.h"
 #include "../work/SVTdCore.h"
 #include "../rendercore/SVRenderMgr.h"
 #include "../rendercore/SVRenderer.h"
@@ -25,6 +26,7 @@ using namespace sv;
 
 SVARBackgroundMgr::SVARBackgroundMgr(SVInstPtr _app)
 :SVSysBase(_app) {
+    m_filter_lock = MakeSharedPtr<SVLockSpin>();
     m_enable = false;
     m_method = 0;
     m_subsysType = 0;
@@ -35,6 +37,7 @@ SVARBackgroundMgr::SVARBackgroundMgr(SVInstPtr _app)
 }
 
 SVARBackgroundMgr::~SVARBackgroundMgr() {
+    m_filter_lock = nullptr;
     m_ar_target = nullptr;
     m_tex0 = nullptr;
     m_tex1 = nullptr;
@@ -47,6 +50,7 @@ void SVARBackgroundMgr::init() {
 
 //
 void SVARBackgroundMgr::destroy() {
+    clearFilter();
 }
 
 //
@@ -109,8 +113,11 @@ void SVARBackgroundMgr::update(f32 _dt) {
 }
 
 void SVARBackgroundMgr::_renderCameraPass(f32 _dt) {
-    //
-    
+    m_filter_lock->lock();
+    for(s32 i=0;i<m_filter_pool.size();i++) {
+        m_filter_pool[i]->update(_dt);
+    }
+    m_filter_lock->unlock();
 }
 
 void SVARBackgroundMgr::_renderCameraImg(f32 _dt) {
@@ -147,4 +154,21 @@ void SVARBackgroundMgr::setInputCameraTex(SVDataSwapPtr _data,s32 _formate) {
 //其他方式，例如共享纹理方式
 void SVARBackgroundMgr::setInputCameraTex(s32 _texid) {
     m_method = 3;
+}
+
+//推送滤镜
+void SVARBackgroundMgr::pushFilter(SVFilterBasePtr _filter) {
+    m_filter_lock->lock();
+    if(_filter) {
+        //_filter->set
+        m_filter_pool.push_back(_filter);
+    }
+    m_filter_lock->unlock();
+}
+
+//清理滤镜
+void SVARBackgroundMgr::clearFilter() {
+    m_filter_lock->lock();
+    m_filter_pool.clear();
+    m_filter_lock->unlock();
 }
