@@ -186,10 +186,6 @@ void SVRendererGL::drawScreen(SVINTEX _texid) {
 //    if (!t_aimTex) {
 //        return ;
 //    }
-//    bool t_load = t_aimTex->getbLoad();
-//    if (!t_load){
-//        return ;
-//    }
 //    //渲染器主动提交纹理
 //    t_aimTex->lockData();
 //    if( t_aimTex->getTextureData() ) {

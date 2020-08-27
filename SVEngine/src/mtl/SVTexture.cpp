@@ -23,15 +23,18 @@ SVTexture::SVTexture(SVInstPtr _app)
 : SVGBaseEx(_app) {
     m_lock = MakeSharedPtr<SVLockSpin>();
     m_name = "";
-    m_bEnableMipMap = false;
     m_restex = nullptr;
-    m_pData = nullptr;
+    for(s32 i=0;i<6;i++) {
+        m_pData[i] = nullptr;
+    }
 }
 
 SVTexture::~SVTexture() {
     m_lock = nullptr;
-    m_pData = nullptr;
     m_restex = nullptr;
+    for(s32 i=0;i<6;i++) {
+        m_pData[i] = nullptr;
+    }
 }
 
 void SVTexture::init(SVTextureDsp& _param) {
@@ -46,9 +49,20 @@ void SVTexture::init(SVTextureDsp& _param,SVDataSwapPtr _data) {
 
 //
 void SVTexture::destroy(){
-//    if (m_restex) {
-//        m_restex->destroy(_renderer);
-//    }
+    for(s32 i=0;i<6;i++) {
+        m_pData[i] = nullptr;
+    }
+}
+
+//
+void SVTexture::resize(s32 _w,s32 _h) {
+    if(m_texture_dsp.m_width == _w && m_texture_dsp.m_height == _h) {
+        return ;
+    }
+    //
+    m_texture_dsp.m_width = _w;
+    m_texture_dsp.m_height = _h;
+    
 }
 
 SVTextureDsp* SVTexture::getTextureDsp() {
@@ -56,12 +70,12 @@ SVTextureDsp* SVTexture::getTextureDsp() {
 }
 
 SVDataSwapPtr SVTexture::getTextureData() {
-    return m_pData;
+    return m_pData[0];
 }
 
 SVDataSwapPtr SVTexture::getTextureCubeData(s32 _index) {
     if(_index>=0 && _index<6) {
-        return m_cubData[_index];
+        return m_pData[_index];
     }
     return nullptr;
 }
@@ -81,15 +95,17 @@ void SVTexture::unlockData() {
 void SVTexture::setTexData(SVDataSwapPtr _data){
     //更新纹理数据
     lockData();
-    m_pData = _data;
+    m_pData[0] = _data;
     unlockData();
 }
 
-bool SVTexture::getbLoad(){
-//    if (m_restex) {
-//        return m_restex->getbLoad();
-//    }
-    return 0;
+void SVTexture::setTexCubeData(SVDataSwapPtr _data,s32 _index){
+    //更新纹理数据
+    lockData();
+    if(_index>=0 && _index<6) {
+        m_pData[_index] = _data;
+    }
+    unlockData();
 }
 
 void SVTexture::bindRes(SVRTexPtr _res) {

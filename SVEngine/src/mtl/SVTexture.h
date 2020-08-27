@@ -57,6 +57,9 @@ namespace sv {
 
         void destroy();
         
+        //
+        void resize(s32 _w,s32 _h);
+        
         //数据操作的锁
         void lockData();
         
@@ -64,8 +67,8 @@ namespace sv {
         
         void setTexData(SVDataSwapPtr _data);
         
-        virtual bool getbLoad();
-        
+        void setTexCubeData(SVDataSwapPtr _data,s32 _index);
+
         //渲染内核
         void bindRes(SVRTexPtr _res);
         
@@ -83,16 +86,20 @@ namespace sv {
         void swap(SVTexturePtr _tex);
         
     protected:
+        //内挂的渲染纹理
         SVRTexPtr m_restex;
         
         SVLockSpinPtr m_lock;
         
     public:
+        //纹理名称
         SVString m_name;
+        
+        //纹理描述
         SVTextureDsp m_texture_dsp;
-        bool m_bEnableMipMap;
-        SVDataSwapPtr m_pData;
-        SVDataSwapPtr m_cubData[6];
+        
+        //数据
+        SVDataSwapPtr m_pData[6];
         
         virtual void pushData(u8* _srcPtr,s32 _w,s32 _h,s32 _pixelformate){}
         

@@ -135,7 +135,22 @@ void SVRFboMetal::resize(s32 _width,s32 _height,SVRendererPtr _renderer) {
     if(m_width!=_width || m_height!=_height) {
         m_width = _width;
         m_height = _height;
-    }//width height
+        //重新改大小
+        if(m_use_depth && m_use_stencil) {
+            //_createCommonBuf(t_rm);
+        }else if(m_use_depth) {
+            //_createDepthBuf(t_rm);
+        }else if(m_use_stencil) {
+            //_createStencilBuf(t_rm);
+        }
+        //颜色纹理重制大小
+        for(s32 i=0;i<SV_SUPPORT_MAX_TAREGT;i++) {
+            SVTexturePtr t_tex = mApp->getTexMgr()->getInTexture(m_color_tex[i]);
+            if(t_tex && t_tex->getResTex() ) {
+                t_tex->resize(_width,_height);
+            }
+        }
+    }
 }
 
 void SVRFboMetal::bind(SVRendererPtr _renderer) {

@@ -43,11 +43,25 @@
     [super resizeSubviewsWithOldSize:oldSize];
 }
 
+- (void)setFrameSize:(NSSize)newSize {
+    [super setFrameSize:newSize];
+    //
+    if(metalLayer) {
+//        id<CAMetalDrawable> drawable = [metalLayer nextDrawable];
+//        if(drawable.texture) {
+//            NSLog(@"main tex %d resize:%d %d",drawable.texture,drawable.texture.width, drawable.texture.height);
+//        }
+    }
+}
+
 -(void)buildMetal {
     //创建渲染器,Metal渲染器。
     id<CAMetalDrawable> drawable = [metalLayer nextDrawable];
     if(drawable) {
         [[CGInst getInst] createMetal:self.mDevice drawable:drawable];
+//        if(drawable.texture) {
+//             NSLog(@"main tex %d resize:%d %d",drawable.texture,drawable.texture.width, drawable.texture.height);
+//        }
     }
     [self setWantsLayer:true];
     [self setLayer:metalLayer];
@@ -106,8 +120,6 @@ static CVReturn renderCallback(CVDisplayLinkRef displayLink,
 }
 
 - (void)mouseUp:(NSEvent *)theEvent {
-   
-    
 }
 
 - (void)mouseMoved:(NSEvent *)theEvent {
@@ -121,8 +133,6 @@ static CVReturn renderCallback(CVDisplayLinkRef displayLink,
 }
 
 - (void)rightMouseDown:(NSEvent *)theEvent {
-    
-    
 }
 
 - (void)otherMouseDown:(NSEvent *)theEvent {

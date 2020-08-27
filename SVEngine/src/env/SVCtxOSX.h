@@ -27,6 +27,8 @@ namespace sv {
         
         void init(void* _context);
         
+        void resize(s32 _w,s32 _h){}
+        
         bool activeContext(SVRendererPtr _renderer);
 
         bool swap(SVRendererPtr _renderer);
@@ -43,6 +45,8 @@ namespace sv {
         ~SVCtxOSXMetal();
         
         void init(SVInstPtr _handle,id<MTLDevice> _device,id<MTLDrawable> _target,id<MTLTexture> _targetTex);
+        
+        void resize(s32 _w,s32 _h);
 
         bool activeContext(SVRendererPtr _renderer);
 

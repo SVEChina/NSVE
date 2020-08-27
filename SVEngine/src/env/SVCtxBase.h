@@ -24,6 +24,8 @@ namespace sv {
         
         ~SVCtxBase();
         
+        virtual void resize(s32 _w,s32 _h){}
+        
         virtual bool activeContext(SVRendererPtr _renderer);
         
         virtual bool swap(SVRendererPtr _renderer);

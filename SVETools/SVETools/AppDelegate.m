@@ -30,15 +30,10 @@
     [self.window setReleasedWhenClosed: NO];
     [self.window makeKeyAndOrderFront:self]; // shows and focuses the window
     [self.window center];
-    
     //
-    self.window.delegate = [[WinDelegate alloc] init];
-    
-    //
-    [[NSNotificationCenter defaultCenter] addObserver:self.window
-                                             selector:@selector(windowDidResize:)
-                                                 name:NSWindowDidResizeNotification
-                                               object:self];
+    //self.window.delegate = [[WinDelegate alloc] init];
+    //监听窗口变化
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowDidResize:) name:NSWindowDidResizeNotification object:nil];
     //
     [[CGInst getInst] cgInit];
     // Insert code here to initialize your application
@@ -52,8 +47,16 @@
 
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
-    // Insert code here to tear down your application
-    int a = 0;
+    
+}
+
+-(void)windowDidResize:(NSNotification *)notification{
+    NSWindow *window = notification.object;
+    NSLog(@"window resize:%f %f",window.frame.size.width, window.frame.size.height);
+    NSSize t_size = window.frame.size;
+    [renderView setFrameSize:t_size];
+    //
+    [[CGInst getInst] resizeWidth:t_size.width Height:t_size.height];
 }
 
 

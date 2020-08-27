@@ -42,8 +42,6 @@ namespace sv {
             
             void bindTexset(SVTextureSetPtr _texset);
             
-            bool getbLoad();
-            
             void setRot(bool _rot);
             
             void setTrim(bool _trim);

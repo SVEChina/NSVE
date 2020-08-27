@@ -29,6 +29,7 @@ SVRenderer::~SVRenderer(){
 }
 
 void SVRenderer::init(s32 _w,s32 _h){
+    
 }
 
 void SVRenderer::destroy(){
@@ -36,7 +37,15 @@ void SVRenderer::destroy(){
     m_resLock = nullptr;
 }
 
-void SVRenderer::resize(s32 _w,s32 _) {
+void SVRenderer::resize(s32 _w,s32 _h) {
+    //target 重制大小
+    m_resLock->lock();
+    TARGETPOOL::iterator it = m_target_pool.begin();
+    while (it!=m_target_pool.end()) {
+        it->second->resize(_w, _h);
+        it++;
+    }
+    m_resLock->unlock();
 }
 
 void SVRenderer::clearRes() {
@@ -103,6 +112,7 @@ SVRTargetPtr SVRenderer::getTarget(SVINTEX _texid) {
 
 //销毁Target
 void SVRenderer::destroyTarget(SVINTEX _texid) {
+    m_resLock->lock();
     TARGETPOOL::iterator it = m_target_pool.find(_texid);
     if( it!=m_target_pool.end() ) {
         SVRTargetPtr t_target = it->second;
@@ -110,12 +120,15 @@ void SVRenderer::destroyTarget(SVINTEX _texid) {
         //析构target
         t_target = nullptr;
     }
+    m_resLock->unlock();
 }
 
 void SVRenderer::_addTarget(SVINTEX _texid,SVRTargetPtr _target) {
+    m_resLock->lock();
     if(_target) {
         m_target_pool.insert(std::make_pair(_texid, _target));
     }
+    m_resLock->unlock();
 }
 
 void SVRenderer::swapInTexture(SVINTEX _tex1,SVINTEX _tex2) {

@@ -28,7 +28,6 @@ SVTexturePList::SVTexturePList(SVInstPtr _app)
 }
 
 SVTexturePList::~SVTexturePList() {
-    m_pData = nullptr;
     m_restex = nullptr;
     m_texset = nullptr;
 }
@@ -117,14 +116,6 @@ void SVTexturePList::bindTexset(SVTextureSetPtr _texset){
         m_texset = _texset;
     }
     
-}
-
-bool SVTexturePList::getbLoad(){
-//    SVRTexGLPlistPtr t_tmp = std::dynamic_pointer_cast<SVRTexGLPlist>(m_restex);
-//    if (t_tmp) {
-//        return t_tmp->getbLoad();
-//    }
-    return SVTexture::getbLoad();
 }
 
 void SVTexturePList::setRot(bool _rot){

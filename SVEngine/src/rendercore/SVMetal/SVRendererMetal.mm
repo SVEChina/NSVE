@@ -72,8 +72,6 @@ void SVRendererMetal::init(id<MTLDevice> _device,s32 _w,s32 _h) {
     t_target->pushStreamQuene(E_RSM_SKY );
     t_target->pushStreamQuene(E_RSM_SOLID);
     mApp->getRenderMgr()->setMainRT(t_target);
-    //重置大小
-    //mApp->resize(t_dsp->m_width,t_dsp->m_height);
 }
 
 //销毁

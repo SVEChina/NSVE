@@ -55,7 +55,8 @@ void SVRenderMgr::destroy() {
 
 void SVRenderMgr::resize(s32 _w,s32 _h) {
     m_renderLock->lock();
-    //
+    //自动的target需要resize
+    
     //
     m_renderLock->unlock();
 }

@@ -30,13 +30,15 @@ SVRTex:: ~SVRTex(){
     m_texLock = nullptr;
 }
 
-void SVRTex::create(SVRendererPtr _renderer){
-    
-}
+void SVRTex::create(SVRendererPtr _renderer) {}
 
-void SVRTex::destroy(SVRendererPtr _renderer){
-    
-}
+void SVRTex::destroy(SVRendererPtr _renderer) {}
+
+void SVRTex::resize(s32 _w,s32 _h) {}
+
+void SVRTex::commit() {}
+
+void SVRTex::swap(SVRTexPtr _rtex) {}
 
 void SVRTex::setTexData(SVDataSwapPtr _data){
     m_data = _data;
@@ -46,12 +48,4 @@ void SVRTex::setTexCubeData(SVDataSwapPtr _data,s32 _index) {
     if(_index>=0 && _index<6) {
         m_cube_data[_index] = _data;
     }
-}
-
-void SVRTex::commit(){
-    
-}
-
-void SVRTex::swap(SVRTexPtr _rtex) {
-    
 }

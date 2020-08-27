@@ -64,6 +64,10 @@ void SVCtxOSXMetal::init(SVInstPtr _handle,id<MTLDevice> _device,id<MTLDrawable>
     }
 }
 
+void SVCtxOSXMetal::resize(s32 _w,s32 _h){
+    
+}
+
 bool SVCtxOSXMetal::activeContext(SVRendererPtr _renderer){
     SVRendererMetalPtr t_rm = dynamic_pointer_cast<SVRendererMetal>(_renderer);
     if(t_rm ){

@@ -86,9 +86,10 @@ void SVInst::resize(s32 _w,s32 _h) {
     if(m_pGlobalMgr && m_pGlobalMgr->m_camera_mgr ) {
         m_pGlobalMgr->m_camera_mgr->resize(_w, _h);
     }
+    //
     //所有target重置大小
-    if(m_pGlobalMgr && m_pGlobalMgr->m_render_mgr ) {
-        m_pGlobalMgr->m_render_mgr->resize(_w, _h);
+    if(m_renderer) {
+        m_renderer->resize(_w, _h);
     }
 }
 

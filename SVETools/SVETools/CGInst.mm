@@ -45,13 +45,6 @@ static CGInst *mInst;
     [self initSVE];
     //创建UI系统
     [[CGUI getInst] cgInit:0];
-    ////////监听窗口变化
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(windowDidResize:)name:NSWindowDidResizeNotification object:nil];
-}
-
--(void)windowDidResize:(NSNotification *)notification{
-    NSWindow *window = notification.object;
-    NSLog(@"window resize:%f %f",window.frame.size.width, window.frame.size.height);
 }
 
 -(void)cgDestroy {
@@ -126,10 +119,10 @@ static CGInst *mInst;
 //    }
 }
 
--(void)resizeWidth:(int)_w Height:_h {
-    //重置宽高
+-(void)resizeWidth:(int)_w Height:(int)_h {
+    //sve引擎重设大小
     if(m_sve_obj) {
-        //m_sve_obj->resize(_w,_h);
+        m_sve_obj->resize(_w,_h);
     }
 }
 

@@ -72,12 +72,7 @@ void SVRTarget::setStencil(s32 _value) {
     m_stencil_value = _value;
 }
 
-//void SVRTarget::setRenderPath() {
-//    //设置渲染路径的代替接口
-//    m_stream_quene.push_back(E_RSM_SOLID);
-//    m_stream_pool[E_RSM_SOLID]->setValid();
-//}
-
+//
 void SVRTarget::resize(s32 _width,s32 _height) {
     if(m_auto) {
         if( m_target_dsp.m_width!=_width ||

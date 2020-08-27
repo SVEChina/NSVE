@@ -93,7 +93,6 @@ void SVRCmdPass::setHelpTarget(SVINTEX _aim) {
 
 void SVRCmdPass::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
     //获取辅助纹理
-    //SVINTEX t_help = E_TEX_FLITER;
     SVRTargetPtr t_target = _renderer->getTarget(m_aim_help);
     if(t_target && t_target->getResFbo()) {
         //绑定

@@ -22,7 +22,7 @@
 
 -(void)cgDestroy;
 //
--(void)resizeWidth:(int)_w Height:_h;
+-(void)resizeWidth:(int)_w Height:(int)_h;
 //
 -(void*)getSVE;
 //

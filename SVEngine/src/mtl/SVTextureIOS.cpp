@@ -17,7 +17,6 @@ SVTextureIOS::SVTextureIOS(SVInstPtr _app)
 }
 
 SVTextureIOS::~SVTextureIOS() {
-    m_pData = nullptr;
     m_restex = nullptr;
 }
 

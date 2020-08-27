@@ -43,6 +43,8 @@ namespace sv {
         
         virtual void destroy(SVRendererPtr _renderer);
         
+        virtual void resize(s32 _w,s32 _h);
+        
         virtual void setTexData(SVDataSwapPtr _data);
         
         virtual void commit();  //数据提交到显卡
