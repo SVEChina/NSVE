@@ -62,7 +62,7 @@ namespace sv {
     DECLARE_SHAREPTR(SVCameraMgr);
     DECLARE_SHAREPTR(SVTexMgr);
     DECLARE_SHAREPTR(SVLightSys);
-    DECLARE_SHAREPTR(SVPythonSys);
+    DECLARE_SHAREPTR(SVLuaSys);
     DECLARE_SHAREPTR(SVModelMgr);
     DECLARE_SHAREPTR(SVPhysicsWorldMgr);
     //模块

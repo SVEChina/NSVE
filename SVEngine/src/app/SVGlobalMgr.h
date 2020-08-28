@@ -57,7 +57,7 @@ namespace sv {
         //静态数据
         SVComDataPtr m_commonData;
         //python
-        SVPythonSysPtr m_pPythonSys;
+        SVLuaSysPtr m_lua_sys;
         //变形形同
         SVDeformMgrPtr m_pDeformSys;
         //AR背景

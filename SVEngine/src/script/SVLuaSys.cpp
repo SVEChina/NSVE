@@ -1,30 +1,29 @@
 //
-//  SVPythonSys.cpp
+//  SVLuaSys.cpp
 //  SVEngine
 //
 //  Created by 付一洲 on 2019/2/28.
 //  Copyright © 2019 李晓帆. All rights reserved.
 //
 
-#include "SVPythonSys.h"
+#include "SVLuaSys.h"
 
 using namespace sv;
 
-SVPythonSys::SVPythonSys(SVInstPtr _app)
+SVLuaSys::SVLuaSys(SVInstPtr _app)
 :SVSysBase(_app) {
     m_subsysType = 1;
 }
 
-SVPythonSys::~SVPythonSys() {
+SVLuaSys::~SVLuaSys() {
 }
 
-void SVPythonSys::init() {
-    //
+void SVLuaSys::init() {
     //Py_Initialize();    // 初始化
 }
 
-void SVPythonSys::destroy() {
+void SVLuaSys::destroy() {
 }
 
-void SVPythonSys::update(f32 dt) {
+void SVLuaSys::update(f32 dt) {
 }

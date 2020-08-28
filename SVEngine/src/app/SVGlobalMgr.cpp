@@ -8,7 +8,6 @@
 #include "SVGlobalMgr.h"
 #include "SVInst.h"
 #include "../basesys/SVBasicSys.h"
-#include "../basesys/script/SVPythonSys.h"
 #include "../basesys/SVFontProcess.h"
 #include "../basesys/SVSceneMgr.h"
 #include "../basesys/SVCameraMgr.h"
@@ -17,6 +16,7 @@
 #include "../basesys/SVModelMgr.h"
 #include "../basesys/SVPhysicsWorldMgr.h"
 #include "../basesys/SVARBackgroundMgr.h"
+#include "../script/SVLuaSys.h"
 #include "../module/SVModuleSys.h"
 #include "../light/SVLightSys.h"
 #include "../event/SVEventMgr.h"
@@ -73,6 +73,9 @@ SVGlobalMgr::~SVGlobalMgr() {
 }
 
 void SVGlobalMgr::init() {
+    //
+    m_lua_sys = MakeSharedPtr<SVLuaSys>(mApp));
+    m_lua_sys->init();
     //渲染管理
     m_render_mgr = MakeSharedPtr<SVRenderMgr>(mApp);
     m_render_mgr->init();
@@ -90,9 +93,6 @@ void SVGlobalMgr::init() {
 //    //基础系统
 //    m_pBasicSys = MakeSharedPtr<SVBasicSys>(mApp));
 //    m_pBasicSys->init();
-//    //
-//    m_pPythonSys = MakeSharedPtr<SVPythonSys>(mApp));
-//    m_pPythonSys->init();
     //相机系统
     m_camera_mgr = MakeSharedPtr<SVCameraMgr>(mApp);
     m_camera_mgr->init();
@@ -210,6 +210,10 @@ void SVGlobalMgr::destroy() {
 //        m_pLightSys->destroy();
 //        SV_LOG_ERROR("m_pLightSys:destroy sucess");
 //    }
+    if(m_lua_sys) {
+        m_lua_sys->destroy();
+        SV_LOG_ERROR("m_lua_sys:destroy sucess");
+    }
 }
 
 void SVGlobalMgr::update(f32 dt) {
@@ -227,6 +231,10 @@ void SVGlobalMgr::update(f32 dt) {
 //    timeTag(false,"model cost");
 //    m_pPhysicSys->update(dt);             //物理更新
 //    timeTag(false,"physics cost");
+    if(m_lua_sys) {
+        m_lua_sys->update(dt);
+        timeTag(false,"lua cost");
+    }
     if(m_camera_mgr) {
         //相机更新
         m_camera_mgr->update(dt);

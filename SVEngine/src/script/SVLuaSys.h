@@ -6,33 +6,26 @@
 //  Copyright © 2019 李晓帆. All rights reserved.
 //
 
-#ifndef SV_PYTHONSYS_H
-#define SV_PYTHONSYS_H
+#ifndef SV_LUASYS_H
+#define SV_LUASYS_H
 
-#include "../SVSysBase.h"
-//#include "python/Python.h"
+#include "../basesys/SVSysBase.h"
 
 namespace sv{
     
-    class SVPythonSys : public SVSysBase {
+    class SVLuaSys : public SVSysBase {
     public:
-        SVPythonSys(SVInstPtr _app);
+        SVLuaSys(SVInstPtr _app);
         
-        ~SVPythonSys();
+        ~SVLuaSys();
         
         void init();
         
         void destroy();
         
         void update(f32 dt);
-        
-        void output();
-        
-    protected:
-        
     };
-
 
 }//!namespace sv
 
-#endif /* SV_PYTHONSYS_H */
+#endif /* SV_LUASYS_H */
