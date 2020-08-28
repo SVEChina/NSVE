@@ -6,8 +6,8 @@
 //
 
 #include "SVParseFilter.h"
-#include "../basesys/filter/SVFilterShinning.h"
-#include "../basesys/filter/SVADFilterBase.h"
+#include "../mtl/SVFilterShinning.h"
+#include "../mtl/SVADFilterBase.h"
 #include "../mtl/SVMtlShinning.h"
 #include "../mtl/SVMtlBlackWhite.h"
 #include "../mtl/SVMtlStreak.h"

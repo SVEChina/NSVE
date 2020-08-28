@@ -7,14 +7,11 @@
 //
 
 #include "SVFilterGenLUT.h"
-#include "../../core/SVPass.h"
-#include "../../mtl/SVTexMgr.h"
-#include "../../mtl/SVTexture.h"
-#include "../../mtl/SVMtlBasedOn.h"
-#include "../../rendercore/SVRenderer.h"
-#include "../../mtl/SVMtlFilterEx.h"
-#include "../../mtl/SVMtlGradientMap.h"
-#include "../../rendercore/SVRenderMgr.h"
+#include "SVMtlBasedOn.h"
+#include "SVMtlFilterEx.h"
+#include "SVMtlGradientMap.h"
+#include "../rendercore/SVRenderer.h"
+#include "../rendercore/SVRenderMgr.h"
 
 using namespace sv;
 

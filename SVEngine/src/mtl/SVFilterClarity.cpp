@@ -7,12 +7,9 @@
 //
 
 #include "SVFilterClarity.h"
-#include "../../core/SVPass.h"
-#include "../../mtl/SVTexMgr.h"
-#include "../../mtl/SVTexture.h"
-#include "../../mtl/SVMtlSmooth.h"
-#include "../../rendercore/SVRenderer.h"
-#include "../../rendercore/SVRenderMgr.h"
+#include "SVMtlSmooth.h"
+#include "../rendercore/SVRenderer.h"
+#include "../rendercore/SVRenderMgr.h"
 
 using namespace sv;
 

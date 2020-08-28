@@ -6,16 +6,10 @@
 //
 
 #include "SVFilterPicmodify.h"
-#include "../../core/SVPass.h"
-#include "../../base/SVParamTbl.h"
-#include "../../mtl/SVTexMgr.h"
-#include "../../mtl/SVTexture.h"
-#include "../../mtl/SVShader.h"
-#include "../../mtl/SVMtlCore.h"
-#include "../../mtl/SVSurface.h"
-#include "../../rendercore/SVRenderer.h"
-#include "../../rendercore/SVRenderMgr.h"
-#include "../../rendercore/SVRShader.h"
+#include "../base/SVParamTbl.h"
+#include "../rendercore/SVRShader.h"
+#include "../rendercore/SVRenderer.h"
+#include "../rendercore/SVRenderMgr.h"
 
 using namespace sv;
 

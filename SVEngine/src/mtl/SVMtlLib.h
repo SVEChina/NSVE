@@ -12,8 +12,6 @@
 #include "SVMtlDef.h"
 #include "SVMtlDeclare.h"
 #include "../base/SVObject.h"
-#include "../third/rapidjson/rapidjson.h"
-#include "../third/rapidjson/document.h"
 
 #include <map>
 #include <vector>

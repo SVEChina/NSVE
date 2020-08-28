@@ -7,13 +7,10 @@
 //
 
 #include "SVFilterCommon.h"
-#include "../../basesys/SVComData.h"
-#include "../../mtl/SVMtlLib.h"
-#include "../../mtl/SVMtlCore.h"
-#include "../../mtl/SVSurface.h"
-#include "../../rendercore/SVRenderCmd.h"
-#include "../../rendercore/SVRenderer.h"
-#include "../../rendercore/SVRTarget.h"
+#include "../basesys/SVComData.h"
+#include "../rendercore/SVRenderCmd.h"
+#include "../rendercore/SVRenderer.h"
+#include "../rendercore/SVRTarget.h"
 
 using namespace sv;
 

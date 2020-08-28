@@ -9,8 +9,6 @@
 #define SV_BASEDONFILTER_H
 
 #include "SVFilterBase.h"
-#include "../../mtl/SVMtlDeclare.h"
-#include "../../node/SVNodeDeclare.h"
 
 namespace sv {
     

@@ -9,12 +9,15 @@
 #ifndef SV_FILTER_BASE_H
 #define SV_FILTER_BASE_H
 
-#include "SVFilterDef.h"
-#include "../../base/SVGBase.h"
-#include "../../mtl/SVMtlDeclare.h"
-#include "../../node/SVNodeDeclare.h"
-#include "../../third/rapidjson/rapidjson.h"
-#include "../../rendercore/SVRenderDef.h"
+#include "../base/SVGBase.h"
+#include "SVMtlDef.h"
+#include "SVMtlDeclare.h"
+#include "SVMtlLib.h"
+#include "SVMtlCore.h"
+#include "SVSurface.h"
+#include "SVTexMgr.h"
+#include "../node/SVNodeDeclare.h"
+#include "../rendercore/SVRenderDef.h"
 
 namespace sv {
     

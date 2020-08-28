@@ -7,14 +7,8 @@
 //
 
 #include "SVFilterLUT.h"
-#include "../../core/SVPass.h"
-#include "../../mtl/SVTexMgr.h"
-#include "../../mtl/SVTexture.h"
-#include "../../mtl/SVMtlLib.h"
-#include "../../mtl/SVMtlCore.h"
-#include "../../mtl/SVSurface.h"
-#include "../../rendercore/SVRenderer.h"
-#include "../../rendercore/SVRenderMgr.h"
+#include "../rendercore/SVRenderer.h"
+#include "../rendercore/SVRenderMgr.h"
 
 using namespace sv;
 

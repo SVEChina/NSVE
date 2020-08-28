@@ -9,16 +9,15 @@
 #include "../app/SVInst.h"
 #include "../app/SVGlobalMgr.h"
 #include "../basesys/SVSceneMgr.h"
-#include "../basesys/filter/SVFilterBase.h"
-#include "../basesys/filter/SVFilterPicmodify.h"
-#include "../basesys/filter/SVFilterDef.h"
+#include "../basesys/SVBasicSys.h"
+#include "../mtl/SVFilterBase.h"
+#include "../mtl/SVFilterPicmodify.h"
+#include "../mtl/SVParseLUTFilter.h"
+#include "../mtl/SVFilterLUT.h"
 #include "../event/SVEventMgr.h"
 #include "../event/SVEvent.h"
 #include "../event/SVOpEvent.h"
 #include "../base/SVDataSwap.h"
-#include "../basesys/filter/SVParseLUTFilter.h"
-#include "../basesys/SVBasicSys.h"
-#include "../basesys/filter/SVFilterLUT.h"
 
 using namespace sv;
 

@@ -9,7 +9,7 @@
 #include "../app/SVInst.h"
 #include "../app/SVDispatch.h"
 #include "../basesys/SVComData.h"
-#include "../basesys/filter/SVFilterBase.h"
+#include "../mtl/SVFilterBase.h"
 #include "../work/SVTdCore.h"
 #include "../rendercore/SVRenderMgr.h"
 #include "../rendercore/SVRenderer.h"

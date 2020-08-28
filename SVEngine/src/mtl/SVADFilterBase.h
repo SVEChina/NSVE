@@ -11,8 +11,7 @@
 #include "SVFilterBase.h"
 
 namespace sv {
-    
-    
+
     class SVADFilterBase : public SVFilterBase {
     public:
         SVADFilterBase(SVInstPtr _app, SVMtlCorePtr _mtl);
@@ -31,8 +30,7 @@ namespace sv {
                     RAPIDJSON_NAMESPACE::Value &_objValue);
         
         void fromJSON(RAPIDJSON_NAMESPACE::Value &item);
-    protected:
-        SVMtlCorePtr m_mtl;
+
     };
         
     

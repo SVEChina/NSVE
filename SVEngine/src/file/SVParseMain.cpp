@@ -27,7 +27,7 @@
 #include "SVParseMusic.h"
 #include "SVParseFilter.h"
 #include "../module/SVEffectPackage.h"
-#include "../basesys/filter/SVParseLUTFilter.h"
+#include "../mtl/SVParseLUTFilter.h"
 
 using namespace sv;
 

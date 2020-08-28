@@ -12,7 +12,6 @@
 #include <stdio.h>
 
 #include "../base/SVGBase.h"
-#include "../third/rapidjson/rapidjson.h"
 #include "SVActDeclare.h"
 #include "../base/SVVec3.h"
 #include "../mtl/SVMtlCore.h"

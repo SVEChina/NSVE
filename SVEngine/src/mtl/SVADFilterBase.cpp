@@ -6,13 +6,12 @@
 //
 
 #include "SVADFilterBase.h"
-#include "../../core/SVPass.h"
-#include "../../mtl/SVTexMgr.h"
-#include "../../mtl/SVTexture.h"
-#include "../../mtl/SVMtlBasedOn.h"
-#include "../../rendercore/SVRenderer.h"
-#include "../../mtl/SVMtlShinning.h"
-#include "../../rendercore/SVRenderMgr.h"
+#include "SVTexMgr.h"
+#include "SVTexture.h"
+#include "SVMtlBasedOn.h"
+#include "SVMtlShinning.h"
+#include "../rendercore/SVRenderer.h"
+#include "../rendercore/SVRenderMgr.h"
 
 using namespace sv;
 

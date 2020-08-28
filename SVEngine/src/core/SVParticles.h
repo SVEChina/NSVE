@@ -16,8 +16,6 @@
 #include "../base/SVRandom.h"
 #include "../base/SVBounds.h"
 #include "../core/SVVertDef.h"
-#include "../third/rapidjson/rapidjson.h"
-#include "../third/rapidjson/document.h"
 
 namespace sv {
     
