@@ -17,6 +17,7 @@
 #include "../mtl/SVMtlCore.h"
 #include "../basesys/SVConfig.h"
 #include "../basesys/SVComData.h"
+#include "../basesys/SVCameraMgr.h"
 
 using namespace sv;
 
@@ -62,7 +63,11 @@ void SVRenderMgr::resize(s32 _w,s32 _h) {
 }
 
 void SVRenderMgr::setMainRT(SVRTargetPtr _rt) {
+    //设置主RT,绑定主相机
     m_mainRT = _rt;
+    if(m_mainRT) {
+        m_mainRT->bindCamera(mApp->getCameraMgr()->getMainCamera());
+    }
 }
 
 SVRTargetPtr SVRenderMgr::getMainRT() {

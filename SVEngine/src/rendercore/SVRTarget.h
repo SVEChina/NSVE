@@ -98,19 +98,13 @@ namespace sv {
         void setAutoSize() {
             m_auto = true;
         }
-
-        void setVPMat(FMat4& _mat) {
-            m_vp_mat = _mat;
-        }
         
-        void setVMat(FMat4& _mat) {
-            m_v_mat = _mat;
-        }
+        FMat4 viewMat();
         
-        void setPMat(FMat4& _mat) {
-            m_p_mat = _mat;
-        }
-
+        FMat4 projMat();
+        
+        FMat4 vpMat();
+        
         sv_inline SVINTEX getTargetID() { return m_target_id; }
         
     protected:
@@ -156,10 +150,10 @@ namespace sv {
         //
         std::vector<SVRenderStreamPtr> m_stream_pool;
         
-    public:
-        FMat4 m_v_mat;
-        FMat4 m_p_mat;
-        FMat4 m_vp_mat;
+//    public:
+//        FMat4 m_v_mat;
+//        FMat4 m_p_mat;
+//        FMat4 m_vp_mat;
     };
 
 }//!namespace sv

@@ -40,7 +40,7 @@ namespace sv {
         //解开相机绑定
         void unbindCamera(SVINTEX _targetID);
         
-        //
+        //获取主相机
         SVCameraNodePtr getMainCamera();
         
     protected:

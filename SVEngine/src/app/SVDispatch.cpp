@@ -78,9 +78,12 @@ void SVDispatch::dispatchMeshDraw(SVInstPtr _app,
     if(t_renderer && t_target) {
         //投递到主目标，在这里更新VP矩阵
         if(_surface) {
-            _surface->setParam("matvp", t_target->m_vp_mat);
-            _surface->setParam("matv", t_target->m_v_mat);
-            _surface->setParam("matp", t_target->m_p_mat);
+            FMat4 t_mat_v = t_target->viewMat();
+            FMat4 t_mat_p = t_target->projMat();
+            FMat4 t_mat_vp = t_target->vpMat();
+            _surface->setParam("matvp", t_mat_vp);
+            _surface->setParam("matv", t_mat_v);
+            _surface->setParam("matp", t_mat_p);
         }
         //投递命令
         SVMtlCorePtr t_mtl = _app->getMtlLib()->getMtl(_mtlname);
@@ -106,9 +109,12 @@ void SVDispatch::dispatchMeshDraw(SVInstPtr _app,
     if(t_renderer && _target) {
         //投递到Target，在这里更新VP矩阵
         if(_surface) {
-            _surface->setParam("matvp", _target->m_vp_mat);
-            _surface->setParam("matv", _target->m_v_mat);
-            _surface->setParam("matp", _target->m_p_mat);
+            FMat4 t_mat_v = _target->viewMat();
+            FMat4 t_mat_p = _target->projMat();
+            FMat4 t_mat_vp = _target->vpMat();
+            _surface->setParam("matvp", t_mat_vp);
+            _surface->setParam("matv", t_mat_v);
+            _surface->setParam("matp", t_mat_p);
         }
         SVMtlCorePtr t_mtl = _app->getMtlLib()->getMtl(_mtlname);
         if(t_mtl) {
@@ -131,9 +137,12 @@ void SVDispatch::dispatchMeshDrawPre(SVInstPtr _app,
     if(t_renderer && t_target ) {
         //投递到Target，在这里更新VP矩阵
         if(_surface) {
-            _surface->setParam("matvp", t_target->m_vp_mat);
-            _surface->setParam("matv", t_target->m_v_mat);
-            _surface->setParam("matp", t_target->m_p_mat);
+            FMat4 t_mat_v = t_target->viewMat();
+            FMat4 t_mat_p = t_target->projMat();
+            FMat4 t_mat_vp = t_target->vpMat();
+            _surface->setParam("matvp", t_mat_vp);
+            _surface->setParam("matv", t_mat_v);
+            _surface->setParam("matp", t_mat_p);
         }
         SVMtlCorePtr t_mtl = _app->getMtlLib()->getMtl(_mtlname);
         if(t_mtl) {
@@ -156,9 +165,12 @@ void SVDispatch::dispatchMeshDrawPre(SVInstPtr _app,
     if(t_renderer && _target) {
         //投递到Target，在这里更新VP矩阵
         if(_surface) {
-            _surface->setParam("matvp", _target->m_vp_mat);
-            _surface->setParam("matv", _target->m_v_mat);
-            _surface->setParam("matp", _target->m_p_mat);
+            FMat4 t_mat_v = _target->viewMat();
+            FMat4 t_mat_p = _target->projMat();
+            FMat4 t_mat_vp = _target->vpMat();
+            _surface->setParam("matvp", t_mat_vp);
+            _surface->setParam("matv", t_mat_v);
+            _surface->setParam("matp", t_mat_p);
         }
         SVMtlCorePtr t_mtl = _app->getMtlLib()->getMtl(_mtlname);
         if(t_mtl) {
@@ -181,9 +193,12 @@ void SVDispatch::dispatchMeshDrawAfter(SVInstPtr _app,
     if(t_renderer && t_target ) {
         //投递到Target，在这里更新VP矩阵
         if(_surface) {
-            _surface->setParam("matvp", t_target->m_vp_mat);
-            _surface->setParam("matv", t_target->m_v_mat);
-            _surface->setParam("matp", t_target->m_p_mat);
+            FMat4 t_mat_v = t_target->viewMat();
+            FMat4 t_mat_p = t_target->projMat();
+            FMat4 t_mat_vp = t_target->vpMat();
+            _surface->setParam("matvp", t_mat_vp);
+            _surface->setParam("matv", t_mat_v);
+            _surface->setParam("matp", t_mat_p);
         }
         SVMtlCorePtr t_mtl = _app->getMtlLib()->getMtl(_mtlname);
         if(t_mtl) {
@@ -206,9 +221,12 @@ void SVDispatch::dispatchMeshDrawAfter(SVInstPtr _app,
     if(t_renderer && _target) {
         //投递到Target，在这里更新VP矩阵
         if(_surface) {
-            _surface->setParam("matvp", _target->m_vp_mat);
-            _surface->setParam("matv", _target->m_v_mat);
-            _surface->setParam("matp", _target->m_p_mat);
+            FMat4 t_mat_v = _target->viewMat();
+            FMat4 t_mat_p = _target->projMat();
+            FMat4 t_mat_vp = _target->vpMat();
+            _surface->setParam("matvp", t_mat_vp);
+            _surface->setParam("matv", t_mat_v);
+            _surface->setParam("matp", t_mat_p);
         }
         SVMtlCorePtr t_mtl = _app->getMtlLib()->getMtl(_mtlname);
         if(t_mtl) {

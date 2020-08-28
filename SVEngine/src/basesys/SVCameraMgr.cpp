@@ -49,12 +49,12 @@ void SVCameraMgr::update(f32 _dt) {
         m_main_camera->update(_dt);
         SVRTargetPtr t_main_rt = mApp->getRenderMgr()->getMainRT();
         if( t_main_rt ) {
-            FMat4 t_mat = m_main_camera->viewMat();
-            t_main_rt->setVMat(t_mat);
-            t_mat = m_main_camera->projectMat();
-            t_main_rt->setPMat(t_mat);
-            t_mat = m_main_camera->vpMat();
-            t_main_rt->setVPMat(t_mat);
+//            FMat4 t_mat = m_main_camera->viewMat();
+//            t_main_rt->setVMat(t_mat);
+//            t_mat = m_main_camera->projectMat();
+//            t_main_rt->setPMat(t_mat);
+//            t_mat = m_main_camera->vpMat();
+//            t_main_rt->setVPMat(t_mat);
         }
     }
     //其他相机更新
