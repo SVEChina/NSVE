@@ -18,7 +18,6 @@ using namespace sv;
 SVRGBToneCurveFilter::SVRGBToneCurveFilter(SVInstPtr _app)
 :SVFilterBase(_app){
     m_name="SVRGBToneCurveFilter";
-    m_type=SV_FUNC_BSPLINE;
     m_mtl_rgba = nullptr;
     m_mtl_back = nullptr;
     texrgb = nullptr;

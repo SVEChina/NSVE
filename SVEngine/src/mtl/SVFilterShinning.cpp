@@ -13,7 +13,6 @@ using namespace sv;
 
 SVFilterShinning::SVFilterShinning(SVInstPtr _app)
 :SVFilterBase(_app){
-    m_type=SV_FUNC_ADBASE;
     m_name="SVFilterShinning";
 }
 

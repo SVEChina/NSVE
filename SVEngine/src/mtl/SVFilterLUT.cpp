@@ -14,7 +14,6 @@ using namespace sv;
 
 SVFilterLUT::SVFilterLUT(SVInstPtr _app)
 :SVFilterBase(_app){
-    m_type = SV_FUNC_LOOKUP;
     m_name = "SVFilterLUT";
     m_texLUT = nullptr;
     m_dirtyLUT = false;

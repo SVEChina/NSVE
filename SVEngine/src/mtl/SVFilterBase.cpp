@@ -22,7 +22,6 @@ SVFilterBase::SVFilterBase(SVInstPtr _app)
     m_target_tex = E_TEX_END;
     m_target_tex_help = E_TEX_END;
     m_is_pre = false;
-    m_type = SV_FUNC_NONE;
 }
 
 SVFilterBase::~SVFilterBase(){

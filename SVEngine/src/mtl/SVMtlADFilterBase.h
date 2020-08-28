@@ -30,9 +30,13 @@ namespace sv {
         virtual SVMtlCorePtr clone();
         
         void update(f32 dt);
+        
     protected:
+        
         virtual void _submitUniform(SVRendererPtr _render);
+        
         void _resetTime();
+        
         MTLADFILTERSTATE m_state;
         f32 m_time;
         f32 m_accTime;

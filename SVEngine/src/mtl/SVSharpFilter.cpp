@@ -18,7 +18,6 @@ using namespace sv;
 
 SVSharpFilter::SVSharpFilter(SVInstPtr _app)
 :SVFilterBase(_app){
-    m_type=SV_FUNC_SHARP;
     m_name="SVFilterSharp";
     m_smooth=0.0f;
 }

@@ -47,10 +47,6 @@ namespace sv {
         sv_inline SVString getName(){
             return m_name;
         }
-
-        sv_inline SVFILTERFUNCTYPE getType(){
-            return m_type;
-        }
         
         //获取surface，设置参数
         SVSurfacePtr getSurface() { return m_surface; }
@@ -62,7 +58,6 @@ namespace sv {
         SVINTEX m_target_tex_help;
         SVSurfacePtr m_surface;
         SVMtlCorePtr m_mtl;
-        SVFILTERFUNCTYPE m_type;
         
     public:
         //序列化

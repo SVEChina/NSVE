@@ -17,7 +17,6 @@ using namespace sv;
 
 SVADFilterBase::SVADFilterBase(SVInstPtr _app, SVMtlCorePtr _mtl)
 :SVFilterBase(_app){
-    m_type = SV_FUNC_ADBASE;
     m_name = "SVADFilterBase";
     m_mtl = _mtl;
 }

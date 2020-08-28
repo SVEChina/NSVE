@@ -14,7 +14,6 @@ using namespace sv;
 
 SVFilterGof::SVFilterGof(SVInstPtr _app)
 :SVFilterBase(_app){
-    m_type=SV_FUNC_GOF;
     m_name="SVFilterGof";
     m_smooth=0.0f;
 }

@@ -25,6 +25,7 @@ namespace sv {
         virtual SVMtlCorePtr clone();
         
         void update(f32 dt);
+        
     protected:
         virtual void _submitUniform(SVRendererPtr _render);
         void _resetTime();

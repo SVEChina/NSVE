@@ -17,7 +17,6 @@ using namespace sv;
 
 SVFilterGenLUT::SVFilterGenLUT(SVInstPtr _app)
 :SVFilterBase(_app){
-    m_type=SV_FUNC_BRIGHTNESSCONTRAST;
     m_name="SVFilterGenLUT";
     m_BCMtl = nullptr;//brightness contrast
     m_SaturationMtl=nullptr;

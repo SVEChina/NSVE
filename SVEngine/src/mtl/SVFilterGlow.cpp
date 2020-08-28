@@ -14,7 +14,6 @@ using namespace sv;
 
 SVFilterGlow::SVFilterGlow(SVInstPtr _app)
 :SVFilterBase(_app){
-    m_type=SV_FUNC_GLOW;
     m_name="SVFilterGlow";
     m_smooth=0.0f;
 }

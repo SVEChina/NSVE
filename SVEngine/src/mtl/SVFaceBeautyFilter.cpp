@@ -40,14 +40,6 @@ void SVFaceBeautyBase::update(f32 dt) {
 
 }
 
-void SVFaceBeautyBase::setFilterParam(f32 _smooth, SVFILTERITEMTYPE _type) {
-
-}
-
-f32 SVFaceBeautyBase::getFilterParam(SVFILTERITEMTYPE _type) {
-    return 0.0f;
-}
-
 void SVFaceBeautyBase::refreshData(SVGenFBParamPtr _param) {
     if (m_pParam && _param) {
         m_pParam->copy(_param);
@@ -92,8 +84,7 @@ void SVFaceBeautyBase::fromJSON(RAPIDJSON_NAMESPACE::Value &item) {
 
 //
 SVFairDataBlur::SVFairDataBlur(SVInstPtr _app)
-        : SVFaceBeautyBase(_app) {
-    m_type = SV_FUNC_BEAUTY;
+: SVFaceBeautyBase(_app) {
 //    m_name = "SVFairDataBlur";
 //    m_mtl_a = nullptr;
 //    m_mtl_b = nullptr;
@@ -225,20 +216,9 @@ void SVFairDataBlur::destroy() {
     m_mtl_c = nullptr;
     m_mtl_d = nullptr;
     m_mtl_e = nullptr;
-    m_mtl_back = nullptr;}
-
-void SVFairDataBlur::setFilterParam(f32 _smooth, SVFILTERITEMTYPE _type) {
-    if (_type == E_BEATY_FILTER) {
-        m_pParam->m_smooth = _smooth / 100.0f;
-    }
+    m_mtl_back = nullptr;
 }
 
-f32 SVFairDataBlur::getFilterParam(SVFILTERITEMTYPE _type) {
-    if (_type == E_BEATY_FILTER) {
-        return m_pParam->m_smooth;
-    }
-    return 0;
-}
 
 void SVFairDataBlur::update(f32 dt) {
     s32 t_w = mApp->m_global_param.m_sv_width;
@@ -322,8 +302,7 @@ void SVFairDataBlur::fromJSON(RAPIDJSON_NAMESPACE::Value &item) {
 }
 
 SVFairLtraLow::SVFairLtraLow(SVInstPtr _app)
-        : SVFilterBase(_app) {
-    m_type = SV_FUNC_BEAUTY;
+: SVFilterBase(_app) {
     m_name = "SVFairLtraLow";
     m_mtl_a = nullptr;
     m_mtl_back = nullptr;
@@ -371,19 +350,6 @@ bool SVFairLtraLow::create() {
 void SVFairLtraLow::destroy() {
     m_mtl_a = nullptr;
     m_mtl_back = nullptr;
-}
-
-void SVFairLtraLow::setFilterParam(f32 _smooth, SVFILTERITEMTYPE _type) {
-    if (_type == E_BEATY_FILTER) {
-        setSmooth(_smooth);
-    }
-}
-
-f32 SVFairLtraLow::getFilterParam(SVFILTERITEMTYPE _type) {
-    if (_type == E_BEATY_FILTER) {
-        return getSmooth();
-    }
-    return 0;
 }
 
 void SVFairLtraLow::update(f32 dt) {
