@@ -16,19 +16,19 @@ using namespace sv;
 SVSceneMgr::SVSceneMgr(SVInstPtr _app)
 :SVSysBase(_app) {
     m_subsysType = 6;
-    m_pMainScene = nullptr;
-    m_sceneLock = MakeSharedPtr<SVLockSpin>();
+    m_main_scene = nullptr;
+    m_scene_lock = MakeSharedPtr<SVLockSpin>();
 }
 
 SVSceneMgr::~SVSceneMgr() {
-    m_pMainScene = nullptr;
-    m_sceneLock = nullptr;
+    m_main_scene = nullptr;
+    m_scene_lock = nullptr;
 }
 
 void SVSceneMgr::init() {
-    m_pMainScene = MakeSharedPtr<SVScene>(mApp,"testScene");
-    m_pMainScene->create();
-    m_pMainScene->test();
+    m_main_scene = MakeSharedPtr<SVScene>(mApp,"testScene");
+    m_main_scene->create();
+    m_main_scene->test();
 }
 
 void SVSceneMgr::destroy() {
@@ -43,13 +43,13 @@ void SVSceneMgr::changeScene(cptr8 _name) {
 }
 
 void SVSceneMgr::setScene(SVScenePtr _scene){
-    m_sceneLock->lock();
-    m_pMainScene = _scene;
-    m_sceneLock->unlock();
+    m_scene_lock->lock();
+    m_main_scene = _scene;
+    m_scene_lock->unlock();
 }
 
 SVScenePtr SVSceneMgr::getScene(){
-    return m_pMainScene;
+    return m_main_scene;
 }
 
 //反适配
@@ -60,10 +60,10 @@ void SVSceneMgr::uiToScene(f32& _x,f32& _y) {
 
 //更新
 void SVSceneMgr::update(f32 _dt) {
-    m_sceneLock->lock();
-    if(m_pMainScene){
-        m_pMainScene->update(_dt);
+    m_scene_lock->lock();
+    if(m_main_scene){
+        m_main_scene->update(_dt);
     }
-    m_sceneLock->unlock();
+    m_scene_lock->unlock();
 }
 

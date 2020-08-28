@@ -23,13 +23,11 @@ SVTexturePList::SVTexturePList(SVInstPtr _app)
     m_srch = 1;
     m_bApply = false;
     m_bApplyData = false;
-    m_texset = nullptr;
     m_btexSet = false;
 }
 
 SVTexturePList::~SVTexturePList() {
     m_restex = nullptr;
-    m_texset = nullptr;
 }
 
 void SVTexturePList::init(cptr8 _name, s32 _type, s32 _width, s32 _height, s32 _informate, s32 _dateformate){
@@ -110,14 +108,6 @@ SVRect *SVTexturePList::getDstRect() {
     return nullptr;
 }
 
-void SVTexturePList::bindTexset(SVTextureSetPtr _texset){
-    if (_texset) {
-        m_btexSet = true;
-        m_texset = _texset;
-    }
-    
-}
-
 void SVTexturePList::setRot(bool _rot){
     m_rot = _rot;
 }
@@ -133,42 +123,3 @@ void SVTexturePList::setSrcw(bool _srcw){
 void SVTexturePList::setSrch(bool _srch){
     m_srch = _srch;
 }
-
-
-//
-SVTextureSet::SVTextureSet(SVInstPtr _app)
-: SVTexture(_app) {
-    
-    
-}
-
-SVTextureSet::~SVTextureSet() {
-    
-}
-
-void SVTextureSet::init(cptr8 _name, s32 _type, s32 _width, s32 _height, s32 _informate, s32 _dateformate){
-    m_name = _name;
-//    m_width = _width;
-//    m_height = _height;
-//    m_type = _type;
-//    m_informate = _informate;
-//    m_dataformate = _dateformate;
-}
-
-void SVTextureSet::create(SVRendererPtr _renderer){
-    SVRendererPtr t_renderBasePtr = mApp->getRenderer();
-}
-
-void SVTextureSet::destroy(SVRendererPtr _renderer){
-   // SVRRes::destroy(_renderer);
-}
-
-
-
-
-
-
-
-
-
-

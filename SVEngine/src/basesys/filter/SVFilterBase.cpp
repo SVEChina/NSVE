@@ -24,11 +24,14 @@ SVFilterBase::SVFilterBase(SVInstPtr _app)
     m_mtl_name = "";
     m_surface = MakeSharedPtr<SVSurface>();
     m_target_tex = E_TEX_END;
+    m_target_tex_help = E_TEX_END;
     m_is_pre = false;
     m_type = SV_FUNC_NONE;
 }
 
 SVFilterBase::~SVFilterBase(){
+    m_target_tex = E_TEX_END;
+    m_target_tex_help = E_TEX_END;
     m_surface = nullptr;
 }
 
@@ -40,16 +43,27 @@ void SVFilterBase::destroy() {
 }
 
 void SVFilterBase::update(f32 _dt) {
+    //
+    SVMtlCorePtr t_mtl = mApp->getMtlLib()->getMtl(m_mtl_name.c_str());
+    if(t_mtl) {
+        t_mtl->update(_dt);
+    }
     SVRTargetPtr t_target = mApp->getRenderer()->getTarget(m_target_tex);
     if(t_target) {
-        //
-        SVMtlCorePtr t_mtl = mApp->getMtlLib()->getMtl(m_mtl_name.c_str());
-        if(t_mtl) {
-            t_mtl->update(_dt);
+        //辅助目标
+        SVRTargetPtr t_help = mApp->getRenderer()->getTarget(m_target_tex_help);
+        if(!t_help && m_target_tex_help<E_TEX_END) {
+            s32 t_w = t_target->getTargetDsp()->m_width;
+            s32 t_h = t_target->getTargetDsp()->m_height;
+            t_help = mApp->getRenderer()->createTarget(m_target_tex_help, t_w, t_h, false, false);
         }
-        //产生pass 投递到不同的对方
+        if(!t_help) {
+            return;
+        }
+        //产生pass 投递到不同的目标
         SVRCmdPassPtr t_pass = MakeSharedPtr<SVRCmdPass>();
-        t_pass->setTarget(m_target_tex);    //目标纹理
+        t_pass->setTarget(m_target_tex);
+        t_pass->setHelpTarget(m_target_tex_help);
         t_pass->setMesh(mApp->getComData()->screenMesh());
         t_pass->setSurface(m_surface);
         t_pass->setMaterial(t_mtl);
@@ -64,6 +78,7 @@ void SVFilterBase::update(f32 _dt) {
 }
 
 void SVFilterBase::setFilterParam(f32 _smooth,SVFILTERITEMTYPE _type) {
+    
 }
 
 f32 SVFilterBase::getFilterParam(SVFILTERITEMTYPE _type) {

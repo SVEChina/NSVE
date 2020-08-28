@@ -7,7 +7,6 @@
 
 #include "SVAniTexAttachment.h"
 #include "../mtl/SVMtlCore.h"
-#include "../mtl/SVMtl2D.h"
 #include "../node/SVSpineNode.h"
 #include "../node/SVSpriteNode.h"
 #include "../basesys/SVSceneMgr.h"

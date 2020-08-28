@@ -13,8 +13,6 @@
 
 namespace sv {
     
-    
-    
     class SVMtlBrightnessContrast : public SVMtlCore  {
     public:
         SVMtlBrightnessContrast(SVInstPtr _app);
@@ -121,7 +119,6 @@ namespace sv {
         //
         f32 m_shadow;
         f32 m_HighLight;
-        
     };
     
     class SVMtlColorBalance: public SVMtlCore  {
@@ -174,7 +171,6 @@ namespace sv {
         f32 m_hhgreenShift;
         f32 m_hhblueShift;
     };
-    
     
     class SVMtlHSL : public SVMtlCore  {
     public:
@@ -289,7 +285,6 @@ namespace sv {
     
     class SVMtlWhiteBalance : public SVMtlCore  {
     public:
-        
         SVMtlWhiteBalance(SVInstPtr _app);
         
         SVMtlWhiteBalance(SVMtlWhiteBalance* _mtl);
@@ -329,7 +324,6 @@ namespace sv {
     
     class SVMtlExposure : public SVMtlCore  {
     public:
-        
         SVMtlExposure(SVInstPtr _app);
         
         SVMtlExposure(SVMtlExposure* _mtl);

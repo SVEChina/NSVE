@@ -7,7 +7,6 @@
 
 #include "SVOpBase.h"
 #include "../app/SVInst.h"
-#include "../callback/SVOpCallback.h"
 
 using namespace sv;
 

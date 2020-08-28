@@ -43,7 +43,7 @@ namespace sv {
         
         virtual void destroy(SVRendererPtr _renderer);
         
-        virtual void resize(s32 _w,s32 _h);
+        virtual void resize();
         
         virtual void setTexData(SVDataSwapPtr _data);
         
@@ -63,8 +63,6 @@ namespace sv {
         s32 m_width;
         s32 m_height;
         s32 m_depth;
-        //
-        
     };
         
     

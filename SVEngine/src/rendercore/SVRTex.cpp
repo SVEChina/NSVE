@@ -34,7 +34,7 @@ void SVRTex::create(SVRendererPtr _renderer) {}
 
 void SVRTex::destroy(SVRendererPtr _renderer) {}
 
-void SVRTex::resize(s32 _w,s32 _h) {}
+void SVRTex::resize() {}
 
 void SVRTex::commit() {}
 

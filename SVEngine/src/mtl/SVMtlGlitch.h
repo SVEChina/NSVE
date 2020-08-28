@@ -12,36 +12,32 @@
 
 namespace sv {
     
-    
+    class SVMtlGlitch : public SVMtlADFilterBase {
+    public:
         
-        class SVMtlGlitch : public SVMtlADFilterBase {
-        public:
-            
-            SVMtlGlitch(SVInstPtr _app);
-            
-            SVMtlGlitch(SVMtlGlitch *_mtl);
-            
-            ~SVMtlGlitch();
-            
-            virtual void reset();
-            
-            virtual SVMtlCorePtr clone();
-            
-            void update(f32 dt);
-        protected:
-            virtual void _submitUniform(SVRendererPtr _render);
-            void _initializeParameter();
-            void _destroyParameter();
-            void _resetTime();
-            s32 m_maxFrame;
-            s32 m_curFrame;
-            f32 *m_drift;
-            f32 *m_jitter;
-            f32 *m_threshHold;
-        };
+        SVMtlGlitch(SVInstPtr _app);
+        
+        SVMtlGlitch(SVMtlGlitch *_mtl);
+        
+        ~SVMtlGlitch();
+        
+        virtual void reset();
+        
+        virtual SVMtlCorePtr clone();
+        
+        void update(f32 dt);
+    protected:
+        virtual void _submitUniform(SVRendererPtr _render);
+        void _initializeParameter();
+        void _destroyParameter();
+        void _resetTime();
+        s32 m_maxFrame;
+        s32 m_curFrame;
+        f32 *m_drift;
+        f32 *m_jitter;
+        f32 *m_threshHold;
+    };
 
-    
-    
 }//!namespace sv
 
 #endif //SV_MTLGLITCH_H

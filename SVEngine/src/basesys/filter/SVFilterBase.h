@@ -18,8 +18,8 @@
 
 namespace sv {
     
-    //滤镜的基类
-    //产生pass 投递到不同地方
+    //基础滤镜
+
     class SVFilterBase : public SVGBaseEx {
     public:
         SVFilterBase(SVInstPtr _app);
@@ -67,6 +67,7 @@ namespace sv {
         SVString m_mtl_name;
         bool m_is_pre;
         SVINTEX m_target_tex;
+        SVINTEX m_target_tex_help;
         SVSurfacePtr m_surface;
         //
         SVMtlCorePtr m_mtl;

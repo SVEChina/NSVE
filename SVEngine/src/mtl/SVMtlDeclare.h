@@ -14,7 +14,6 @@ namespace sv {
 
     DECLARE_SHAREPTR(SVMtlCore);
     DECLARE_SHAREPTR(SVSurface);
-    DECLARE_SHAREPTR(SVMtlProcess);
     DECLARE_SHAREPTR(SVMtlPack);
     DECLARE_SHAREPTR(SVMtlLib);
 
@@ -42,7 +41,6 @@ namespace sv {
     DECLARE_SHAREPTR(SVMtlFace2D);
     DECLARE_SHAREPTR(SVMtlAni2D);
     DECLARE_SHAREPTR(SVMtl3D);
-    DECLARE_SHAREPTR(SVMtl2D);
     DECLARE_SHAREPTR(SVMtlBillboard);
     DECLARE_SHAREPTR(SVMtlPenStrokeGlow);
     DECLARE_SHAREPTR(SVMtlStrokeBase);
@@ -73,13 +71,10 @@ namespace sv {
     DECLARE_SHAREPTR(SVMtlGlitch);
     DECLARE_SHAREPTR(SVMtlDistorted);
     DECLARE_SHAREPTR(SVMtlDark);
-    DECLARE_SHAREPTR(SVMtlShake);
-    DECLARE_SHAREPTR(SVMtlFlashWhite);
     DECLARE_SHAREPTR(SVMtlADFilterBase);
 
     //texture
     DECLARE_SHAREPTR(SVTexture);
-    DECLARE_SHAREPTR(SVTextureSet);
     DECLARE_SHAREPTR(SVTexturePList);
     DECLARE_SHAREPTR(SVTextureIOS);
 

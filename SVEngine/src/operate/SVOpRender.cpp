@@ -7,7 +7,6 @@
 
 #include "SVOpRender.h"
 #include "../app/SVInst.h"
-#include "../callback/SVOpCallback.h"
 #include "../basesys/SVSceneMgr.h"
 #include "../basesys/SVCameraMgr.h"
 #include "../basesys/SVConfig.h"

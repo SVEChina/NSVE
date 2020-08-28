@@ -41,7 +41,6 @@ SVParseFilter::parseFilter(SVInstPtr _app, RAPIDJSON_NAMESPACE::Value &item, s32
     }else if (mtlName == "filterdistorted"){
         t_mtl = MakeSharedPtr<SVMtlDistorted>(_app);//老电视滤镜
     }
-    
     SVADFilterBasePtr t_filter = MakeSharedPtr<SVADFilterBase>(_app, t_mtl);
     return t_filter;
 }

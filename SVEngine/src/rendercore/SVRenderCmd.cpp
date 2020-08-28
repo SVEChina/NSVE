@@ -83,16 +83,18 @@ SVRCmdPass::SVRCmdPass() {
 SVRCmdPass::~SVRCmdPass(){
 }
 
+//设置目标target
 void SVRCmdPass::setTarget(SVINTEX _aim) {
     m_aim = _aim;
 }
 
+//设置辅助target
 void SVRCmdPass::setHelpTarget(SVINTEX _aim) {
     m_aim_help = _aim;
 }
 
 void SVRCmdPass::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
-    //获取辅助纹理
+    //获取辅助target
     SVRTargetPtr t_target = _renderer->getTarget(m_aim_help);
     if(t_target && t_target->getResFbo()) {
         //绑定

@@ -17,9 +17,9 @@
 using namespace sv;
 
 //
-SVRTarget::SVRTarget(SVInstPtr _app,s32 _id)
+SVRTarget::SVRTarget(SVInstPtr _app,SVINTEX _id)
 :SVGBaseEx(_app)
-,m_targetID(_id)
+,m_target_id(_id)
 ,m_fbo(nullptr)
 ,m_camera(nullptr){
     m_auto = true;

@@ -46,8 +46,6 @@ namespace sv {
 
     //回调
     DECLARE_SHAREPTR(SVCallbackBase);
-    DECLARE_SHAREPTR(SVOpCallback);
-    //DECLARE_SHAREPTR(SVThreadCallback);
     
     //sysbase - event
     DECLARE_SHAREPTR(SVEventProc);

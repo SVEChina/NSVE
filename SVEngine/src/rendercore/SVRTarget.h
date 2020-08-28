@@ -43,7 +43,7 @@ namespace sv {
     //
     class SVRTarget : public SVGBaseEx {
     public:
-        SVRTarget(SVInstPtr _app,s32 _id);
+        SVRTarget(SVInstPtr _app,SVINTEX _id);
 
         ~SVRTarget();
         
@@ -111,12 +111,11 @@ namespace sv {
             m_p_mat = _mat;
         }
 
-    protected:
-        //
-        s32 m_targetID;
+        sv_inline SVINTEX getTargetID() { return m_target_id; }
         
-        //
-        s32 m_cmdNum;
+    protected:
+        //目标ID
+        SVINTEX m_target_id;
         
         //颜色
         SVColor m_color;
@@ -126,6 +125,9 @@ namespace sv {
         
         //模版值
         s32 m_stencil_value;
+        
+        //命令数目
+        s32 m_cmdNum;
         
         //绑定的相机
         SVCameraNodePtr m_camera;
@@ -139,10 +141,13 @@ namespace sv {
         //是否开启输出
         bool m_output;
         
+        //
         SVRFboPtr m_fbo;
         
+        //
         SVRenderStreamPtr m_stream_pre;
          
+        //
         SVRenderStreamPtr m_stream_after;
         
         //

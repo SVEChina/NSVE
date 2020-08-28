@@ -16,6 +16,8 @@
 #include "../basesys/SVComData.h"
 namespace sv{
     
+    //分屏滤镜
+
     class SVDivisonFilter : public SVModuleBase {
     public:
         SVDivisonFilter(SVInstPtr _app);
@@ -33,6 +35,7 @@ namespace sv{
         virtual void close();
         
         virtual bool isOpen();
+        
     protected:
         SVSpriteNodePtr m_backgroundNode;
     };

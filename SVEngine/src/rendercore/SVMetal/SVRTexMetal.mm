@@ -7,16 +7,10 @@
 
 #include "SVRTexMetal.h"
 #include "SVRendererMetal.h"
-#include "../../work/SVTdCore.h"
-#include "../../mtl/SVTexture.h"
 #include "../../app/SVInst.h"
 #include "../../base/SVDataSwap.h"
-
-//#include "../../mtl/SVMtlDef.h"
-//#include "../../base/SVDataChunk.h"
-//#include "../../file/SVFileMgr.h"
-//#include "../../rendercore/SVRenderMgr.h"
-//#include "../SVRenderer.h"
+#include "../../work/SVTdCore.h"
+#include "../../mtl/SVTexture.h"
 
 using namespace sv;
 
@@ -32,11 +26,12 @@ SVRTexMetal::SVRTexMetal(SVInstPtr _app)
     m_depth = 1;
 }
 
-
 SVRTexMetal::~SVRTexMetal(){
     if(m_src_tex_msaa) {
+        m_src_tex_msaa = nullptr;
     }
     if(m_src_tex) {
+        m_src_tex = nullptr;
     }
     m_data = nullptr;
     m_dirty = false;
@@ -132,15 +127,19 @@ void SVRTexMetal::destroy(SVRendererPtr _renderer) {
     SVRTex::destroy(_renderer);
 }
 
-void SVRTexMetal::resize(s32 _w,s32 _h) {
-    if(_w == m_width && _h == m_height) {
-        return ;
+void SVRTexMetal::resize() {
+    //销毁纹理
+    if(m_src_tex) {
+        m_src_tex = nullptr;
     }
+    if(m_src_tex_msaa) {
+        m_src_tex_msaa = nullptr;
+    }
+    //创建纹理
 //    //
 //    SVRendererMetalPtr t_rm = std::dynamic_pointer_cast<SVRendererMetal>(_renderer);
 //    SVTexturePtr t_texture = std::dynamic_pointer_cast<SVTexture>(m_logic_obj);
 //    if(t_rm && t_texture) {
-//        //
 //        SVTextureDsp* t_dsp = t_texture->getTextureDsp();
 //        m_width = t_dsp->m_width;
 //        m_height = t_dsp->m_height;

@@ -62,7 +62,9 @@ void SVTexture::resize(s32 _w,s32 _h) {
     //
     m_texture_dsp.m_width = _w;
     m_texture_dsp.m_height = _h;
-    
+    if(m_restex) {
+        m_restex->resize();
+    }
 }
 
 SVTextureDsp* SVTexture::getTextureDsp() {

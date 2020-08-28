@@ -41,9 +41,9 @@ namespace sv {
         void update(f32 dt);
         
     protected:
-        SVScenePtr m_pMainScene;    //主场景
+        SVScenePtr m_main_scene;    //主场景
         
-        SVLockSpinPtr m_sceneLock;
+        SVLockSpinPtr m_scene_lock;
     };
     
 }//!namespace sv

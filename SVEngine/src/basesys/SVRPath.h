@@ -63,9 +63,6 @@ namespace sv {
         void render(f32 _dt);
     };
 
-    
-
-    
 }//!namespace sv
 
 

@@ -160,7 +160,8 @@ void SVARBackgroundMgr::setInputCameraTex(s32 _texid) {
 void SVARBackgroundMgr::pushFilter(SVFilterBasePtr _filter) {
     m_filter_lock->lock();
     if(_filter) {
-        //_filter->set
+        //m_ar_target
+        //_filter->setTarget();
         m_filter_pool.push_back(_filter);
     }
     m_filter_lock->unlock();
