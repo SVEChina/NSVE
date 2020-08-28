@@ -12,7 +12,6 @@
 #include "../work/SVTdCore.h"
 #include "../base/SVPreDeclare.h"
 #include "../node/SVNode.h"
-#include "../basesys/SVScene.h"
 #include "../node/SVSpineNode.h"
 #include "../node/SVSpriteNode.h"
 #include "../node/SVBitFontNode.h"
@@ -26,10 +25,10 @@
 #include "../basesys/SVSceneMgr.h"
 #include "../basesys/filter/SVParseLUTFilter.h"
 #include "../basesys/SVBasicSys.h"
-#include "../basesys/SVPictureProcess.h"
 #include "../basesys/filter/SVFilterLUT.h"
 #include "../basesys/SVDeformMgr.h"
 #include "../basesys/SVConfig.h"
+#include "../basesys/SVScene.h"
 #include "SVEffectMusic.h"
 
 using namespace sv;
@@ -166,15 +165,15 @@ void SVEffectPackage::destroy(){
         t_unit->destroy();
     }
     m_effectUnitPool.destroy();
-    //
-    for (s32 i = 0; i<m_filterBasePool.size(); i++) {
-        SVFilterBasePtr t_filterBase = m_filterBasePool[i];
-        SVPictureProcessPtr t_picproc = mApp->getBasicSys()->getPicProc();
-        if( t_picproc) {
-            t_picproc->clearFilter(t_filterBase);
-        }
-    }
-    m_filterBasePool.destroy();
+//    //
+//    for (s32 i = 0; i<m_filterBasePool.size(); i++) {
+//        SVFilterBasePtr t_filterBase = m_filterBasePool[i];
+//        SVPictureProcessPtr t_picproc = mApp->getBasicSys()->getPicProc();
+//        if( t_picproc) {
+//            t_picproc->clearFilter(t_filterBase);
+//        }
+//    }
+//    m_filterBasePool.destroy();
     //
     for (s32 i = 0; i<m_deformPool.size(); i++) {
         SVDeformImageMovePtr t_deform = m_deformPool[i];
@@ -327,13 +326,13 @@ void SVEffectPackage::addTrigger(SVAniTriggerPtr _trigger){
 }
 
 void SVEffectPackage::addFilter(SVFilterBasePtr _filter){
-    SVPictureProcessPtr t_picproc = mApp->getBasicSys()->getPicProc();
-    if(_filter && t_picproc){
-        _filter->create();
-        t_picproc->addFilter(_filter);
-        t_picproc->openFilter(_filter);
-        m_filterBasePool.append(_filter);
-    }
+//    SVPictureProcessPtr t_picproc = mApp->getBasicSys()->getPicProc();
+//    if(_filter && t_picproc){
+//        _filter->create();
+//        t_picproc->addFilter(_filter);
+//        t_picproc->openFilter(_filter);
+//        m_filterBasePool.append(_filter);
+//    }
 }
 
 void SVEffectPackage::addDefrom(SVDeformImageMovePtr _deform){

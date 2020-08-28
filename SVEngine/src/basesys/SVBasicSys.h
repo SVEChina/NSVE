@@ -43,9 +43,6 @@ namespace sv{
         //流出
         SVStreamOutPtr getStreamOut();
         
-        //图片处理
-        SVPictureProcessPtr getPicProc();
-        
         //传感器数据处理 
         SVSensorProcessPtr getSensorModule();
 
@@ -53,8 +50,6 @@ namespace sv{
         SVStreamInPtr m_stream_in;
         
         SVStreamOutPtr m_stream_out;
-        
-        SVPictureProcessPtr m_pic_proc;
 
         SVRecycleProcessPtr m_pRecycleModule;
         
@@ -66,9 +61,6 @@ namespace sv{
     };
 
 }//!namespace sv
-
-
-
 
 
 #endif //SV_BASICSYS_H

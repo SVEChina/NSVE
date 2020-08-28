@@ -8,7 +8,6 @@
 
 #include "SVFilterBase.h"
 #include "../../basesys/SVComData.h"
-#include "../../node/SVMultPassNode.h"
 #include "../../mtl/SVMtlLib.h"
 #include "../../mtl/SVMtlCore.h"
 #include "../../mtl/SVSurface.h"
@@ -21,7 +20,7 @@ using namespace sv;
 SVFilterBase::SVFilterBase(SVInstPtr _app)
 :SVGBaseEx(_app){
     m_name = "SVFilterBase";
-    m_mtl_name = "";
+    m_mtl = nullptr;
     m_surface = MakeSharedPtr<SVSurface>();
     m_target_tex = E_TEX_END;
     m_target_tex_help = E_TEX_END;
@@ -32,6 +31,7 @@ SVFilterBase::SVFilterBase(SVInstPtr _app)
 SVFilterBase::~SVFilterBase(){
     m_target_tex = E_TEX_END;
     m_target_tex_help = E_TEX_END;
+    m_mtl = nullptr;
     m_surface = nullptr;
 }
 
@@ -43,13 +43,8 @@ void SVFilterBase::destroy() {
 }
 
 void SVFilterBase::update(f32 _dt) {
-    //
-    SVMtlCorePtr t_mtl = mApp->getMtlLib()->getMtl(m_mtl_name.c_str());
-    if(t_mtl) {
-        t_mtl->update(_dt);
-    }
     SVRTargetPtr t_target = mApp->getRenderer()->getTarget(m_target_tex);
-    if(t_target) {
+    if(t_target && m_mtl) {
         //辅助目标
         SVRTargetPtr t_help = mApp->getRenderer()->getTarget(m_target_tex_help);
         if(!t_help && m_target_tex_help<E_TEX_END) {
@@ -66,7 +61,7 @@ void SVFilterBase::update(f32 _dt) {
         t_pass->setHelpTarget(m_target_tex_help);
         t_pass->setMesh(mApp->getComData()->screenMesh());
         t_pass->setSurface(m_surface);
-        t_pass->setMaterial(t_mtl);
+        t_pass->setMaterial(m_mtl);
         if(m_is_pre) {
             //预处理
             t_target->pushCommandPre(t_pass);
@@ -75,17 +70,6 @@ void SVFilterBase::update(f32 _dt) {
             t_target->pushCommandAfter(t_pass);
         }
     }
-}
-
-void SVFilterBase::setFilterParam(f32 _smooth,SVFILTERITEMTYPE _type) {
-    
-}
-
-f32 SVFilterBase::getFilterParam(SVFILTERITEMTYPE _type) {
-    return 0;
-}
-
-void SVFilterBase::setVisible(bool _visible) {
 }
 
 //序列化

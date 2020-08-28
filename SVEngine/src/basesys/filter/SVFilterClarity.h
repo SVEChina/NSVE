@@ -38,7 +38,7 @@ namespace sv {
         f32 m_smooth;
         SVMtlSmoothPtr m_mtl_smooth;
     };
-        
+
 }//!namespace sv
 
 

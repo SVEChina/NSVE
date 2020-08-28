@@ -207,7 +207,6 @@ namespace sv {
     DECLARE_SHAREPTR(SVAni2DStickersMgr);
     DECLARE_SHAREPTR(SVStreamIn);
     DECLARE_SHAREPTR(SVStreamOut);
-    DECLARE_SHAREPTR(SVPictureProcess);
     //parse部分
     DECLARE_SHAREPTR(SVParse);
     DECLARE_SHAREPTR(SVParse2DAni);

@@ -8,7 +8,6 @@
 #include "SVTransGPU.h"
 #include "../basesys/SVCameraNode.h"
 #include "../basesys/SVScene.h"
-#include "../node/SVMultPassNode.h"
 #include "../core/SVPass.h"
 #include "../basesys/SVSceneMgr.h"
 #include "../basesys/SVComData.h"
@@ -32,8 +31,8 @@ SVTransGPU::SVTransGPU(SVInstPtr _app,
 ,m_tex1(_t1)
 ,m_tex2(_t2)
 ,m_texOut(_tOut){
-    m_passNode = MakeSharedPtr<SVMultPassNode>(mApp);
-    m_passNode->setRSType(RST_SKY);
+//    m_passNode = MakeSharedPtr<SVMultPassNode>(mApp);
+//    m_passNode->setRSType(RST_SKY);
     m_pMtl = nullptr;
     //m_pMesh = nullptr;
 }
@@ -88,7 +87,6 @@ void SVTransGPU::destroy() {
     m_tex1 = nullptr;
     m_tex2 = nullptr;
     m_texOut = nullptr;
-    m_passNode = nullptr;
 }
 
 void SVTransGPU::update(f32 dt) {
@@ -145,9 +143,9 @@ void SVTransGPU::update(f32 dt) {
 }
 
 void SVTransGPU::render(){
-    if (m_passNode) {
-        m_passNode->render();
-    }
+//    if (m_passNode) {
+//        m_passNode->render();
+//    }
 }
 
 void SVTransGPU::setAngle(f32 _angle){

@@ -28,10 +28,8 @@ namespace sv {
                     RAPIDJSON_NAMESPACE::Value &_objValue);
         
         void fromJSON(RAPIDJSON_NAMESPACE::Value &item);
-    protected:
-        SVMtlShinningPtr m_mtlShinning;
+
     };
-        
     
 }//!namespace sv
 

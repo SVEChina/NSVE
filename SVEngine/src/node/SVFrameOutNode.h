@@ -16,35 +16,31 @@
 //所谓的数据输出 其实就是 fbo
 
 namespace sv {
-    
-    
+
+    class SVFrameOutNode : public SVNode {
+    public:
+        SVFrameOutNode(SVInstPtr _app);
         
-        class SVFrameOutNode : public SVNode {
-        public:
-            SVFrameOutNode(SVInstPtr _app);
-            
-            virtual ~SVFrameOutNode();
-            
-            virtual void create(s32 _width,s32 _height);
-            
-            virtual void destroy();
-            
-            virtual void update(f32 _dt);
-            
-            virtual void render();
-            
-            virtual void lockData();
-            
-            virtual void unlockData();
-            
-            virtual void* getData();
-            
-        protected:
-            void* m_pData;
-        };
+        virtual ~SVFrameOutNode();
         
-    
-    
+        virtual void create(s32 _width,s32 _height);
+        
+        virtual void destroy();
+        
+        virtual void update(f32 _dt);
+        
+        virtual void render();
+        
+        virtual void lockData();
+        
+        virtual void unlockData();
+        
+        virtual void* getData();
+        
+    protected:
+        void* m_pData;
+    };
+
 }//!namespace sv
 
 

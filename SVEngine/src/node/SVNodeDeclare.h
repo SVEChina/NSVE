@@ -41,14 +41,12 @@ namespace sv {
 
     //node
     DECLARE_SHAREPTR(SVNode);
-    DECLARE_SHAREPTR(SVFaceCoord);
     DECLARE_SHAREPTR(SV3DBox);
     DECLARE_SHAREPTR(SVBitFontNode);
     DECLARE_SHAREPTR(SVBMFontNode);
     DECLARE_SHAREPTR(SVCameraNode);
     DECLARE_SHAREPTR(SVCoordGridNode);
     DECLARE_SHAREPTR(SVDummyNode);
-    DECLARE_SHAREPTR(SVMultPassNode);
     DECLARE_SHAREPTR(SVFrameOutNode);
     DECLARE_SHAREPTR(SVFreeTypeNode);
     DECLARE_SHAREPTR(SVGameWrapNode);
@@ -64,10 +62,8 @@ namespace sv {
     DECLARE_SHAREPTR(SVSpriteNode);
     DECLARE_SHAREPTR(SVBillboardNode);
     DECLARE_SHAREPTR(SVBackGroundNode);
-    DECLARE_SHAREPTR(SVFacePointNode);
     DECLARE_SHAREPTR(SVMesh2DNode);
     DECLARE_SHAREPTR(SVPatchNode);
-    DECLARE_SHAREPTR(SVFaceDetectPointNode);
     DECLARE_SHAREPTR(SVFaceShapeNode);
     DECLARE_SHAREPTR(SVDeformNode);
     DECLARE_SHAREPTR(SVSkinNode);

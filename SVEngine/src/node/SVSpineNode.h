@@ -73,8 +73,8 @@ namespace sv {
         f32 getSlotAlpha(cptr8 bonename);
         
         void setAABBBoxScale(f32 _scale);
-    protected:
         
+    protected:
         void _computeAABBBox();
         
         void _spine_start();
@@ -108,7 +108,6 @@ namespace sv {
         
         void fromJSON(RAPIDJSON_NAMESPACE::Value &item);
     };
-
 
 
 }//!namespace sv

@@ -10,7 +10,6 @@
 #include "../../core/SVPass.h"
 #include "../../mtl/SVTexMgr.h"
 #include "../../mtl/SVTexture.h"
-#include "../../node/SVMultPassNode.h"
 #include "../../mtl/SVMtlBasedOn.h"
 #include "../../rendercore/SVRenderer.h"
 #include "../../mtl/SVMtlFilterEx.h"
@@ -49,7 +48,6 @@ bool SVFilterGenLUT::create(){
     if(!t_renderer)
         return false;
     SVTexturePtr inTex= mApp->getTexMgr()->getTexture("svres/lookup.png", true);
-    //
     s32 t_w = 0;// inTex->m_width;
     s32 t_h = 0;//inTex->m_height;
     
@@ -223,7 +221,6 @@ void SVFilterGenLUT::setGradientMap(ptr8  data,u32 size){
 }
 
 void SVFilterGenLUT::update(f32 dt){
-    
     m_BCMtl->setBrightness(m_genParam->m_brightness);
     m_BCMtl->setContrast(m_genParam->m_contrast);
     m_SaturationMtl->setSaturation(m_genParam->m_saturation);

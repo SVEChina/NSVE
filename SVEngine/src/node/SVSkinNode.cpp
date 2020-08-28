@@ -67,8 +67,6 @@ void SVSkinNode::pause() {
 void SVSkinNode::stop() {
 }
 
-//
-
 SVModelPtr SVSkinNode::getModel() {
     return m_pModel;
 }

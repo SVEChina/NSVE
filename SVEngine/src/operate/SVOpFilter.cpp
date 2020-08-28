@@ -18,7 +18,6 @@
 #include "../base/SVDataSwap.h"
 #include "../basesys/filter/SVParseLUTFilter.h"
 #include "../basesys/SVBasicSys.h"
-#include "../basesys/SVPictureProcess.h"
 #include "../basesys/filter/SVFilterLUT.h"
 
 using namespace sv;
@@ -32,29 +31,29 @@ SVOpSetBeautyFilter::SVOpSetBeautyFilter(SVInstPtr _app,cptr8 _scenename,cptr8 _
 }
 
 void SVOpSetBeautyFilter::_process(f32 _dt) {
-    SVPictureProcessPtr t_picproc = mApp->getBasicSys()->getPicProc();
-    if( t_picproc ) {
-//        SVFilterPicmodifyPtr t_baseOn=MakeSharedPtr<SVFilterPicmodify>(mApp);
-//        t_baseOn->create();
-//        t_picproc->addFilter(t_baseOn);
-//        t_picproc->openFilter(t_baseOn);
-//        if(m_lows==0){
-//            SVFairDataPtr t_fair=MakeSharedPtr<SVFairData>(mApp);
-//            t_fair->create();
-//            t_picproc->addFilter(t_fair);
-//            t_picproc->openFilter(t_fair);
-//        }else if(m_lows==1){
-//            SVFairDataBlurPtr t_fair=MakeSharedPtr<SVFairDataBlur>(mApp);
-//            t_fair->create();
-//            t_picproc->addFilter(t_fair);
-//            t_picproc->openFilter(t_fair);
-//        }else if(m_lows==2){
-//            SVFairLtraLowPtr t_fair=MakeSharedPtr<SVFairLtraLow>(mApp);
-//            t_fair->create();
-//            t_picproc->addFilter(t_fair);
-//            t_picproc->openFilter(t_fair);
-//        }
-    }
+//    SVPictureProcessPtr t_picproc = mApp->getBasicSys()->getPicProc();
+//    if( t_picproc ) {
+////        SVFilterPicmodifyPtr t_baseOn=MakeSharedPtr<SVFilterPicmodify>(mApp);
+////        t_baseOn->create();
+////        t_picproc->addFilter(t_baseOn);
+////        t_picproc->openFilter(t_baseOn);
+////        if(m_lows==0){
+////            SVFairDataPtr t_fair=MakeSharedPtr<SVFairData>(mApp);
+////            t_fair->create();
+////            t_picproc->addFilter(t_fair);
+////            t_picproc->openFilter(t_fair);
+////        }else if(m_lows==1){
+////            SVFairDataBlurPtr t_fair=MakeSharedPtr<SVFairDataBlur>(mApp);
+////            t_fair->create();
+////            t_picproc->addFilter(t_fair);
+////            t_picproc->openFilter(t_fair);
+////        }else if(m_lows==2){
+////            SVFairLtraLowPtr t_fair=MakeSharedPtr<SVFairLtraLow>(mApp);
+////            t_fair->create();
+////            t_picproc->addFilter(t_fair);
+////            t_picproc->openFilter(t_fair);
+////        }
+//    }
 }
 
 //设置美颜滤镜
@@ -65,10 +64,10 @@ SVOpUpdateFilterSmooth::SVOpUpdateFilterSmooth(SVInstPtr _app,f32 _smooth,u32 _t
 }
 
 void SVOpUpdateFilterSmooth::_process(f32 _dt) {
-    SVPictureProcessPtr t_picproc = mApp->getBasicSys()->getPicProc();
-    if( t_picproc ) {
-        t_picproc->setFilterParam(m_smooth,(SVFILTERITEMTYPE)m_type);
-    }
+//    SVPictureProcessPtr t_picproc = mApp->getBasicSys()->getPicProc();
+//    if( t_picproc ) {
+//        t_picproc->setFilterParam(m_smooth,(SVFILTERITEMTYPE)m_type);
+//    }
 }
 
 //设置美颜滤镜
@@ -91,10 +90,10 @@ SVOpCloseBeautyFilter::SVOpCloseBeautyFilter(SVInstPtr _app)
 }
 
 void SVOpCloseBeautyFilter::_process(f32 _dt) {
-    SVPictureProcessPtr t_picproc = mApp->getBasicSys()->getPicProc();
-    if( t_picproc ) {
-        t_picproc->clearFilter(SV_FUNC_BEAUTY);
-    }
+//    SVPictureProcessPtr t_picproc = mApp->getBasicSys()->getPicProc();
+//    if( t_picproc ) {
+//        t_picproc->clearFilter(SV_FUNC_BEAUTY);
+//    }
 }
 
 //
@@ -118,13 +117,13 @@ SVOpLUTFilterCreate::SVOpLUTFilterCreate(SVInstPtr _app,cptr8 _scenename,cptr8 _
 }
 
 void SVOpLUTFilterCreate::_process(f32 _dt){
-    SVFilterBasePtr t_lutFilter = SVParseLUTFilter::parseLUT(mApp,m_path, m_resid);
-    SVPictureProcessPtr t_picproc = mApp->getBasicSys()->getPicProc();
-    if( t_picproc&&t_lutFilter) {
-        t_lutFilter->create();
-        t_picproc->addFilter(t_lutFilter);
-        t_picproc->openFilter(t_lutFilter);
-    }
+//    SVFilterBasePtr t_lutFilter = SVParseLUTFilter::parseLUT(mApp,m_path, m_resid);
+//    SVPictureProcessPtr t_picproc = mApp->getBasicSys()->getPicProc();
+//    if( t_picproc&&t_lutFilter) {
+//        t_lutFilter->create();
+//        t_picproc->addFilter(t_lutFilter);
+//        t_picproc->openFilter(t_lutFilter);
+//    }
 }
 
 SVOpLUTFilterDestory::SVOpLUTFilterDestory(SVInstPtr _app,cptr8 _scenename,s32 resid)

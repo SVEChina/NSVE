@@ -18,7 +18,7 @@
 
 namespace sv {
     
-    //基础滤镜
+    //滤镜基类
 
     class SVFilterBase : public SVGBaseEx {
     public:
@@ -31,16 +31,6 @@ namespace sv {
         virtual void destroy();
 
         virtual void update(f32 _dt);
-
-        virtual void setFilterParam(f32 _smooth,SVFILTERITEMTYPE _type);
-
-        virtual f32 getFilterParam(SVFILTERITEMTYPE _type);
-
-        //
-        virtual void setVisible(bool _visible);
-        
-        //设置材质
-        sv_inline void setMtl(cptr8 _name) { m_mtl_name = _name; }
         
         //设置目标Target
         sv_inline void setTarget(SVINTEX _intex){ m_target_tex = _intex; }
@@ -64,12 +54,10 @@ namespace sv {
 
     protected:
         SVString m_name;
-        SVString m_mtl_name;
         bool m_is_pre;
         SVINTEX m_target_tex;
         SVINTEX m_target_tex_help;
         SVSurfacePtr m_surface;
-        //
         SVMtlCorePtr m_mtl;
         SVFILTERFUNCTYPE m_type;
         

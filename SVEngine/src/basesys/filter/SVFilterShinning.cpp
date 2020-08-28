@@ -9,7 +9,6 @@
 #include "../../core/SVPass.h"
 #include "../../mtl/SVTexMgr.h"
 #include "../../mtl/SVTexture.h"
-#include "../../node/SVMultPassNode.h"
 #include "../../mtl/SVMtlBasedOn.h"
 #include "../../rendercore/SVRenderer.h"
 #include "../../mtl/SVMtlShinning.h"
@@ -21,11 +20,9 @@ SVFilterShinning::SVFilterShinning(SVInstPtr _app)
 :SVFilterBase(_app){
     m_type=SV_FUNC_ADBASE;
     m_name="SVFilterShinning";
-
 }
 
 SVFilterShinning::~SVFilterShinning(){
-    
 }
 
 bool SVFilterShinning::create(){
@@ -59,7 +56,6 @@ bool SVFilterShinning::create(){
 }
 
 void SVFilterShinning::destroy(){
-    m_mtlShinning = nullptr;
 }
 
 void SVFilterShinning::update(f32 dt){

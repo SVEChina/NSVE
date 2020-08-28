@@ -8,20 +8,19 @@
 #ifndef SV_2DFACEMASK_ST_NODE_H
 #define SV_2DFACEMASK_ST_NODE_H
 
-#include "SV2DFaceMaskNode.h"
-
+#include "../base/SVObject.h"
 
 namespace sv {
     
-        //sensetime
-        class SVSTPointExt {
-        public:
-            static void st_foreHeadPointExtWithFaceLandMark(f32 *faceLandMark, s32 &markIndex);
-            
-            static void st_lipsPointExtWithFaceLandMark(f32 *faceLandMark, s32 &markIndex);
-            
-            static void st_faceOutlinePointExtWithFaceLandMark(f32 *faceLandMark, s32 &markIndex);
-        };
+    //sensetime
+    class SVSTPointExt {
+    public:
+        static void st_foreHeadPointExtWithFaceLandMark(f32 *faceLandMark, s32 &markIndex);
+        
+        static void st_lipsPointExtWithFaceLandMark(f32 *faceLandMark, s32 &markIndex);
+        
+        static void st_faceOutlinePointExtWithFaceLandMark(f32 *faceLandMark, s32 &markIndex);
+    };
         
 //        class SV2DFaceMaskSTNode : public SV2DFaceMaskNode {
 //        public:

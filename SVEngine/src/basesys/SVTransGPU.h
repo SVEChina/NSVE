@@ -40,8 +40,6 @@ namespace sv {
         SVTexturePtr m_tex2;
         SVTexturePtr m_texOut;
         f32 m_angle;
-        SVMultPassNodePtr m_passNode;
-//        SVRenderMeshPtr m_pMesh;
         SVMtlCorePtr m_pMtl;
 
         void createPass(s32 _w, s32 _h, f32 _angle, SVINTEX _tt);

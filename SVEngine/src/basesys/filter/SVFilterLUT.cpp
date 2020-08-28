@@ -10,8 +10,9 @@
 #include "../../core/SVPass.h"
 #include "../../mtl/SVTexMgr.h"
 #include "../../mtl/SVTexture.h"
-#include "../../node/SVMultPassNode.h"
-#include "../../mtl/SVMtlBasedOn.h"
+#include "../../mtl/SVMtlLib.h"
+#include "../../mtl/SVMtlCore.h"
+#include "../../mtl/SVSurface.h"
 #include "../../rendercore/SVRenderer.h"
 #include "../../rendercore/SVRenderMgr.h"
 
@@ -26,13 +27,10 @@ SVFilterLUT::SVFilterLUT(SVInstPtr _app)
 }
 
 SVFilterLUT::~SVFilterLUT(){
-    m_texLUT=nullptr;
+    m_texLUT = nullptr;
 }
 
 bool SVFilterLUT::create(){
-    SVRendererPtr t_renderer = mApp->getRenderer();
-    if(!t_renderer)
-        return false;
 //    SVTexturePtr t_tex = t_renderer->getSVTex(E_TEX_MAIN);
 //    s32 t_w = 0;//t_tex->m_width;
 //    s32 t_h = 0;//t_tex->m_height;
@@ -86,23 +84,14 @@ SVTexturePtr SVFilterLUT::getLUTTex() {
 }
 
 void SVFilterLUT::update(f32 _dt){
-    //传递surface
+    m_mtl = mApp->getMtlLib()->getMtl("filter-lut");
+    if(m_mtl) {
+        m_mtl->update(_dt);
+    }
+    if(m_surface) {
+        m_surface->setTexture(1, m_texLUT, 1);
+    }
     SVFilterBase::update(_dt);
-//    if(m_dirtyLUT){
-//        m_dirtyLUT = false;
-//        if(m_pPassNode && m_pPassNode->getPass(0) ){
-//            SVPassPtr t_pass = m_pPassNode->getPass(0);
-//            t_pass->setInTex(1,m_texLUT);
-//        }
-//    }
-//    //
-//    if(m_pPassNode){
-//        if(m_texLUT){
-//            m_pPassNode->setvisible(true);
-//        }else{
-//            m_pPassNode->setvisible(false);
-//        }
-//    }
 }
 
 void SVFilterLUT::toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator,
@@ -110,14 +99,7 @@ void SVFilterLUT::toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocato
 }
 
 void SVFilterLUT::fromJSON(RAPIDJSON_NAMESPACE::Value &item) {
-    if (item.HasMember("data") && item["data"].IsString()) {
-        SVRendererPtr t_renderer = mApp->getRenderer();
-//        if(t_renderer){
-//            t_renderer->createSVTex(E_TEX_FILTER_LUT, 512, 512, GL_RGBA,GL_RGBA);
-//            SVTexturePtr t_tex=t_renderer->getSVTex(E_TEX_FILTER_LUT);
-//            t_tex->setTexData((void*)item["data"].GetString(), item["data"].GetStringLength());
-//            setLUTTex(t_tex);
-//        }
-    }
+//    if (item.HasMember("data") && item["data"].IsString()) {
+//    }
 }
 

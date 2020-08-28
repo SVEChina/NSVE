@@ -35,7 +35,6 @@
 #include "../node/SVParticlesNode.h"
 #include "../node/SVFreeTypeNode.h"
 #include "../node/SVBMFontNode.h"
-#include "../node/SVFacePointNode.h"
 #include "../node/SVSkinNode.h"
 #include "../node/SVMesh2DNode.h"
 #include "../node/SVPatchNode.h"
@@ -301,14 +300,7 @@ SVOpCreateDebugFacePt::~SVOpCreateDebugFacePt(){
     
 }
 
-void SVOpCreateDebugFacePt::_process(f32 dt) {
-    //创建逻辑场景
-    SVScenePtr t_pScene = mApp->getSceneMgr()->getScene();
-    if (t_pScene) {
-        SVFacePointNodePtr t_facePtNode = MakeSharedPtr<SVFacePointNode>(mApp);
-        t_pScene->addNode(t_facePtNode);
-    }
-    
+void SVOpCreateDebugFacePt::_process(f32 dt) {    
 }
 
 

@@ -12,6 +12,7 @@
 #include "../../app/SVInst.h"
 #include "../../app/SVGlobalMgr.h"
 #include "../../base/SVDataSwap.h"
+#include "../../base/SVStringHelper.h"
 #include "../../mtl/SVMtlCore.h"
 #include "../../mtl/SVTexMgr.h"
 #include "../../mtl/SVTexture.h"
@@ -26,11 +27,10 @@
 #include "../../basesys/SVComData.h"
 #include "../../basesys/SVConfig.h"
 #include "../../basesys/SVSensorProcess.h"
-#include "../../node/SVMultPassNode.h"
 #include "../../detect/SVDetectMgr.h"
 #include "../../detect/SVPersonTracker.h"
 #include "../../file/SVFileMgr.h"
-#include "../../base/SVStringHelper.h"
+
 #include "SVPenPackData.h"
 
 using namespace sv;
@@ -317,19 +317,19 @@ bool SVPenDraw::procEvent(SVEventPtr _event){
 }
 
 void SVPenDraw::_updateFaceParam(){
-    SVPersonPtr t_person = mApp->getDetectMgr()->getPersonModule()->getPerson(1);
-    if (t_person && t_person->getExist()) {
-        SVPersonTrackerPtr t_personTracker = t_person->getTracker();
-        f32 m_screenH = mApp->m_global_param.m_sv_height;
-        f32 t_pt_x = t_person->getFaceDataOriginalX(46);
-        f32 t_pt_y = m_screenH - t_person->getFaceDataOriginalY(46);
-        f32 t_yaw = t_person->getFaceRot().y;
-        f32 t_roll = t_person->getFaceRot().z;
-        f32 t_pitch = t_person->getFaceRot().x;
-        m_noseCenter.set(t_pt_x, t_pt_y, 0.0f);
-        m_faceEyeDis = t_personTracker->m_eyeDistance;
-        m_faceRot.set(t_pitch, -t_yaw, t_roll);
-    }
+//    SVPersonPtr t_person = mApp->getDetectMgr()->getPersonModule()->getPerson(1);
+//    if (t_person && t_person->getExist()) {
+//        SVPersonTrackerPtr t_personTracker = t_person->getTracker();
+//        f32 m_screenH = mApp->m_global_param.m_sv_height;
+//        f32 t_pt_x = t_person->getFaceDataOriginalX(46);
+//        f32 t_pt_y = m_screenH - t_person->getFaceDataOriginalY(46);
+//        f32 t_yaw = t_person->getFaceRot().y;
+//        f32 t_roll = t_person->getFaceRot().z;
+//        f32 t_pitch = t_person->getFaceRot().x;
+//        m_noseCenter.set(t_pt_x, t_pt_y, 0.0f);
+//        m_faceEyeDis = t_personTracker->m_eyeDistance;
+//        m_faceRot.set(t_pitch, -t_yaw, t_roll);
+//    }
 }
 
 bool SVPenDraw::save(cptr8 _path){
@@ -427,5 +427,4 @@ void SVPenDraw::fromJSON(RAPIDJSON_NAMESPACE::Value &_item, cptr8 _path){
     }else if (_item.IsObject()){
         _fromJSONBase(_item);
     }
-    
 }

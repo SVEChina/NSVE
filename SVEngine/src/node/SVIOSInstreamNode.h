@@ -12,7 +12,6 @@
 
 namespace sv {
     
-    
     class SVIOSInstreamNode : public SVNode {
     public:
         SVIOSInstreamNode(SVInstPtr _app);

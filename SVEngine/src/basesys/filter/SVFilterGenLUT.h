@@ -13,6 +13,10 @@
 
 namespace sv {
 
+    /*
+     生成LUT
+     */
+
     class SVGenLUTParam :public SVObject {
     public:
         SVGenLUTParam(){

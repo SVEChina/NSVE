@@ -9,35 +9,32 @@
 #define SV_NODE_PATCHNODE_H
 
 #include "SVNode.h"
+
 namespace sv {
     
-    
+    class SVPatchNode : public SVNode {
+    public:
+        SVPatchNode(SVInstPtr _app);
         
-        class SVPatchNode : public SVNode {
-        public:
-            SVPatchNode(SVInstPtr _app);
-            
-            virtual ~SVPatchNode();
-            
-            virtual void update(f32 _dt);
-            
-            virtual void render();
-            
-            void setPatchVertexData(SVDataSwapPtr _vertexData, s32 _vertexCount);
-            
-            void setPatchIndexData(SVDataSwapPtr _indicesData, s32 _indicesCount);
-            
-        public:
-            
-            SVRenderMeshPtr m_pMesh;
-            
-            SVMtlGeo3dPtr m_patchMtl;
-            
-            SVColor m_color;
-        };
+        virtual ~SVPatchNode();
         
-    
-    
+        virtual void update(f32 _dt);
+        
+        virtual void render();
+        
+        void setPatchVertexData(SVDataSwapPtr _vertexData, s32 _vertexCount);
+        
+        void setPatchIndexData(SVDataSwapPtr _indicesData, s32 _indicesCount);
+        
+    public:
+        
+        SVRenderMeshPtr m_pMesh;
+        
+        SVMtlGeo3dPtr m_patchMtl;
+        
+        SVColor m_color;
+    };
+
 }//!namespace sv
 
 #endif //SV_NODE_PATCHNODE_H

@@ -6,8 +6,6 @@
 //
 
 #include "SVParseMask.h"
-#include "../node/SV2DFaceMaskSTNode.h"
-#include "../node/SV2DFaceMaskNode.h"
 
 using namespace sv;
 

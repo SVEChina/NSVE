@@ -52,11 +52,11 @@ namespace sv {
         //选择访问 用于子访问
         void select_visit(SVVisitorBasePtr _visit);
         
-        FMat4& getLocalMat();
+        FMat4 getLocalMat();
         
-        FMat4& getAbsoluteMat();
+        FMat4 getAbsoluteMat();
         
-        FMat4& getIAbsoluteMat();
+        FMat4 getIAbsoluteMat();
         
         void setPosition(f32 x, f32 y, f32 z);
 
@@ -86,19 +86,19 @@ namespace sv {
         
         bool getDrawAABB();
         
-        FVec3& getPosition();
+        FVec3 getPosition();
 
-        FVec3& getRotation();
+        FVec3 getRotation();
         
-        FVec3& getScale();
+        FVec3 getScale();
 
         SVQuat getQuat();
         
         void setAABB(SVBoundBox& _aabb);
         
-        SVBoundBox& getAABB();
+        SVBoundBox getAABB();
         
-        SVBoundBox& getAABBSW();
+        SVBoundBox getAABBSW();
         //设置z顺序
         void setZOrder(s32 _zorder);
         

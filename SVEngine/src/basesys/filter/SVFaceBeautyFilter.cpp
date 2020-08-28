@@ -12,7 +12,6 @@
 #include "../../core/SVPass.h"
 #include "../../mtl/SVTexMgr.h"
 #include "../../mtl/SVTexture.h"
-#include "../../node/SVMultPassNode.h"
 #include "../../mtl/SVMtlBasedOn.h"
 #include "../../rendercore/SVRenderer.h"
 #include "../../rendercore/SVRenderMgr.h"

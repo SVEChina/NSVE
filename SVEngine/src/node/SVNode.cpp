@@ -115,15 +115,15 @@ void SVNode::render() {
 }
 
 //获取本地空间矩阵
-FMat4& SVNode::getLocalMat() {
+FMat4 SVNode::getLocalMat() {
     return m_localMat;
 }
 
-FMat4& SVNode::getAbsoluteMat() {
+FMat4 SVNode::getAbsoluteMat() {
     return m_absolutMat;
 }
 
-FMat4& SVNode::getIAbsoluteMat() {
+FMat4 SVNode::getIAbsoluteMat() {
     return m_iabsolutMat;
 }
 
@@ -164,11 +164,11 @@ void SVNode::setScale(FVec3& _scale) {
     m_dirty = true;
 }
 
-FVec3& SVNode::getPosition() {
+FVec3 SVNode::getPosition() {
     return m_attri_pos.m_pos;
 }
 
-FVec3& SVNode::getRotation() {
+FVec3 SVNode::getRotation() {
     return m_attri_pos.m_rot;
 }
 
@@ -177,7 +177,7 @@ SVQuat SVNode::getQuat() {
     return t_quat;
 }
 
-FVec3& SVNode::getScale() {
+FVec3 SVNode::getScale() {
     return m_attri_pos.m_scale;
 }
 
@@ -209,11 +209,11 @@ void SVNode::setAABB(SVBoundBox& _aabb){
     m_aabbBox = _aabb;
 }
 
-SVBoundBox& SVNode::getAABB(){
+SVBoundBox SVNode::getAABB(){
     return m_aabbBox;
 }
 
-SVBoundBox& SVNode::getAABBSW(){
+SVBoundBox SVNode::getAABBSW(){
     return m_aabbBox_sw;
 }
 
