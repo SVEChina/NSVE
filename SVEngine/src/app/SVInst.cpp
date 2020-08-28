@@ -31,6 +31,8 @@
 #include "../rendercore/SVMetal/SVRendererMetal.h"
 #include "../rendercore/SVGL/SVRendererGL.h"
 
+#include "../mtl/SVMtlLib.h"
+#include "../mtl/SVMtlCore.h"
 
 using namespace sv;
 
@@ -38,32 +40,28 @@ SVInst::SVInst() {
     m_svst = SV_ST_NULL;
     m_engTimeState = ENG_TS_NOR;
     m_ctx = nullptr;
-    m_pFileMgr = nullptr;
+    m_file_sys = nullptr;
 }
 
 SVInst::~SVInst() {
     m_ctx = nullptr;
-    m_pFileMgr = nullptr;
+    m_file_sys = nullptr;
 }
 
 SVInstPtr SVInst::makeCreate() {
-    SVInstPtr t_inst = MakeSharedPtr<SVInst>();
-    return t_inst;
+    return MakeSharedPtr<SVInst>();
 }
 
 SVInstPtr SVInst::share() {
     return std::dynamic_pointer_cast<SVInst>(shareObject()) ;
 }
 
-#include "../mtl/SVMtlLib.h"
-#include "../mtl/SVMtlCore.h"
-
 //构建各个模块的逻辑部分，引擎可以运行的最简模式
 void SVInst::init() {
     m_renderer = nullptr;
     //
-    if(!m_pFileMgr) {
-        m_pFileMgr = MakeSharedPtr<SVFileMgr>(share());
+    if(!m_file_sys) {
+        m_file_sys = MakeSharedPtr<SVFileMgr>(share());
     }
     //加载配置
     m_config.init();
@@ -77,7 +75,7 @@ void SVInst::init() {
 
 void SVInst::destroy() {
     m_pGlobalMgr = nullptr;
-    m_pFileMgr = nullptr;
+    m_file_sys = nullptr;
     m_svst = SV_ST_NULL;
 }
 
@@ -191,14 +189,17 @@ void SVInst::clearCache(){
 
 //
 void SVInst::addRespath(cptr8 path) {
-    if(!m_pFileMgr) {
-         m_pFileMgr = MakeSharedPtr<SVFileMgr>(share());
+    if(!m_file_sys) {
+         m_file_sys = MakeSharedPtr<SVFileMgr>(share());
     }
-    m_pFileMgr->addRespath(path);
+    m_file_sys->addRespath(path);
 }
 
 void SVInst::clearRespath() {
-    
+    if(m_file_sys) {
+        m_file_sys->clearRespath();
+        m_file_sys->addRespath("./");
+    }
 }
 
 void SVInst::setTimeState(SV_ENG_TIMESTATE _mode){
@@ -209,15 +210,10 @@ SV_ENG_TIMESTATE SVInst::getTimeState(){
     return m_engTimeState;
 }
 
-//
-SVFileMgrPtr SVInst::getFileMgr(){
-    return m_pFileMgr;
-}
-
 SVEventMgrPtr SVInst::getEventMgr(){
     if(!m_pGlobalMgr)
         return nullptr;
-    return m_pGlobalMgr->m_pEventMgr;
+    return m_pGlobalMgr->m_event_sys;
 }
 
 SVBasicSysPtr SVInst::getBasicSys(){

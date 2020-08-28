@@ -46,7 +46,7 @@ SVMark::~SVMark(){
 
 void SVMark::init(){
     SVModuleBase::init();
-    SVString t_filePath = mApp->getFileMgr()->getFileFullName("svres/fontsan.fnt");
+    SVString t_filePath = mApp->m_file_sys->getFileFullName("svres/fontsan.fnt");
     SVBMFontPtr t_font = SVBMFont::creatFnt(t_filePath.c_str(), mApp);
     m_bmFontNode = MakeSharedPtr<SVBMFontNode>(mApp);
     m_bmFontNode->setFont(t_font);

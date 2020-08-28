@@ -44,7 +44,7 @@ void SVRShaderMetal::create(SVRendererPtr _renderer) {
     }
     //同步创建
     SVDataChunk _datachunk;
-    bool t_ret = mApp->m_pFileMgr->loadFileContentStr(&_datachunk, t_shader->m_shader_dsp.m_programme_fname.c_str());
+    bool t_ret = mApp->m_file_sys->loadFileContentStr(&_datachunk, t_shader->m_shader_dsp.m_programme_fname.c_str());
     if(!t_ret){
         return ; // error
     }

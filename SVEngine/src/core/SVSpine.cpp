@@ -60,7 +60,7 @@ SpineMeshData::~SpineMeshData(){
 SVSpinePtr
 SVSpine::createSpine(SVInstPtr _app, cptr8 skefname, cptr8 atlasfname,f32 scale, bool enableMipMap) {
     //
-    SVString t_atlas_fullname = _app->getFileMgr()->getFileFullName(atlasfname);
+    SVString t_atlas_fullname = _app->m_file_sys->getFileFullName(atlasfname);
     SVSpineImp* t_imp = new SVSpineImp(_app);
     spAtlas *_atlas = spAtlas_createFromFile(t_atlas_fullname,t_imp);
     if (!_atlas) {
@@ -71,7 +71,7 @@ SVSpine::createSpine(SVInstPtr _app, cptr8 skefname, cptr8 atlasfname,f32 scale,
     spSkeletonJson *json = spSkeletonJson_create(_atlas);
     json->scale = scale;
     //
-    SVString t_ske_fullname = _app->getFileMgr()->getFileFullName(skefname);
+    SVString t_ske_fullname = _app->m_file_sys->getFileFullName(skefname);
     //动画数据
     spSkeletonData *skeletonData = spSkeletonJson_readSkeletonDataFile(json, t_ske_fullname.c_str());
     spSkeletonJson_dispose(json);

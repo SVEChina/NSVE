@@ -33,7 +33,7 @@ namespace sv {
         SVRenderMgrPtr m_render_mgr; //渲染部分
         /*可删减模块*/
         //事件部分
-        SVEventMgrPtr m_pEventMgr;
+        SVEventMgrPtr m_event_sys;
         //基础系统
         SVBasicSysPtr m_pBasicSys;
         //场景管理

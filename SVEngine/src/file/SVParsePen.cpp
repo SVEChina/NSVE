@@ -33,7 +33,7 @@ SVModuleBasePtr SVParsePen::parse(cptr8 _path, s32 _resid){
     SVString config_name = t_path + "config.json";
     SVDataChunk tDataStream;
     SV_LOG_ERROR("SVParsePen::parse begin config name %s\n", config_name.get());
-    bool tflag = mApp->m_pFileMgr->loadFileContentStr(&tDataStream, config_name.get());
+    bool tflag = mApp->m_file_sys->loadFileContentStr(&tDataStream, config_name.get());
     if (!tflag)
         return nullptr;
     SV_LOG_ERROR("SVParsePen::load effect sucess\n");

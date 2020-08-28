@@ -47,7 +47,7 @@ SVLoaderPng::~SVLoaderPng() {
 
 bool SVLoaderPng::loadData(cptr8 name, u8 **data) {
     SVDataChunk tSVDataChunk;
-    bool t_flag = mApp->m_pFileMgr->loadFileContent(&tSVDataChunk, name);
+    bool t_flag = mApp->m_file_sys->loadFileContent(&tSVDataChunk, name);
     if (t_flag) {
         return _readPngFromStream(tSVDataChunk.getPointer(), tSVDataChunk.getRealSize(), name, data);
     }

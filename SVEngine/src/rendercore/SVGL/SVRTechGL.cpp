@@ -122,7 +122,7 @@ void SVRTechGL::build(SVRendererPtr _renderer) {
 //s32 SVRTechGL::_complie_shader(s32 _shadertype,cptr8 _fname) {
 //    SVDataChunk tDataStream;
 //    u32 t_id = 0;
-//    bool t_flag = mApp->getFileMgr()->loadFileContentStr(&tDataStream, _fname);
+//    bool t_flag = mApp->m_file_sys->loadFileContentStr(&tDataStream, _fname);
 //    if(!t_flag){
 //        return t_id;
 //    }

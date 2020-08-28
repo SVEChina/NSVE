@@ -19,7 +19,7 @@ SVFilterBasePtr SVParseLUTFilter::parseLUT(SVInstPtr _app,cptr8 _path, s32 resid
     RAPIDJSON_NAMESPACE::Document t_doc;
     //解析滤镜包
     SVDataChunk tDataStream;
-    bool tflag = _app->m_pFileMgr->loadFileContentStr(&tDataStream, _path);
+    bool tflag = _app->m_file_sys->loadFileContentStr(&tDataStream, _path);
     if (!tflag) {
         return nullptr;
     }

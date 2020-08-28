@@ -10,6 +10,7 @@
 #define SV_LUASYS_H
 
 #include "../basesys/SVSysBase.h"
+#include "../third/lua-5.4.0/src/lua.hpp"
 
 namespace sv{
     
@@ -24,6 +25,9 @@ namespace sv{
         void destroy();
         
         void update(f32 dt);
+        
+    protected:
+        lua_State* L_S;
     };
 
 }//!namespace sv

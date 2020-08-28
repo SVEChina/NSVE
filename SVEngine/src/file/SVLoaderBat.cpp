@@ -19,7 +19,7 @@ SVLoaderBat::SVLoaderBat(SVInstPtr _app)
 
 bool SVLoaderBat::loadFromFile(cptr8 _filename,SVTable& _tbl) {
     SVDataChunk tSVDataChunk;
-    bool t_flag = mApp->getFileMgr()->loadFileContent(&tSVDataChunk, _filename);
+    bool t_flag = mApp->m_file_sys->loadFileContent(&tSVDataChunk, _filename);
     if (t_flag) {
         SVStringArray t_str_array;
         t_str_array.setData(tSVDataChunk.getPointerChar(),'&');

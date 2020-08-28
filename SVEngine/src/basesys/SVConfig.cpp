@@ -107,7 +107,7 @@ s32 SVConfig::getRealCameraHeight() {
 void SVConfig::loadConfig() {
 //    //加载配置文件
 //    SVDataChunk tDataStream;
-//    bool tflag = mApp->getFileMgr()->loadFileContentStr(&tDataStream, "svres/fmcfg.json");
+//    bool tflag = mApp->m_file_sys->loadFileContentStr(&tDataStream, "svres/fmcfg.json");
 //    if (!tflag)
 //        return ;
 //    if (!tDataStream.getPointer()) {

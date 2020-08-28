@@ -25,7 +25,7 @@ void SVMtlLib::init() {
     //加载默认的材质包
     SVDataChunk tDataStream;
     SV_LOG_ERROR("load mtlpack begin\n");
-    bool tflag = mApp->getFileMgr()->loadFileContentStr(&tDataStream, "base.pack");
+    bool tflag = mApp->m_file_sys->loadFileContentStr(&tDataStream, "base.pack");
     if (!tflag) {
        SV_LOG_INFO("not find base.pack! please check pack!\n");
        return;
@@ -79,7 +79,7 @@ SVMtlCorePtr SVMtlLib::getMtl(cptr8 _mtlname) {
 
 SVMtlCorePtr SVMtlLib::createMtl(cptr8 _mtlname) {
     SVDataChunk t_data;
-    bool t_ret = mApp->m_pFileMgr->loadFileContentStr(&t_data, _mtlname);   //解析JSON一定要用这个函数
+    bool t_ret = mApp->m_file_sys->loadFileContentStr(&t_data, _mtlname);   //解析JSON一定要用这个函数
     if(!t_ret) {
         return nullptr;
     }

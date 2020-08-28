@@ -39,7 +39,7 @@ void SVShaderMgr::_loadAllShader() {
     //
     SVDataChunk tDataStream;
     SV_LOG_ERROR("load shadercfg.json begin\n");
-    bool tflag = mApp->getFileMgr()->loadFileContentStr(&tDataStream, "shader/shadercfg.json");
+    bool tflag = mApp->m_file_sys->loadFileContentStr(&tDataStream, "shader/shadercfg.json");
     if (!tflag) {
         SV_LOG_INFO("not find shadercfg.json!please check shader file path!\n");
         return;
@@ -69,7 +69,7 @@ void SVShaderMgr::_loadAllShader() {
 
 void SVShaderMgr::loadSDSP(cptr8 _sdsp) {
     SVDataChunk tDataStream;
-    bool tflag = mApp->getFileMgr()->loadFileContentStr(&tDataStream, _sdsp);
+    bool tflag = mApp->m_file_sys->loadFileContentStr(&tDataStream, _sdsp);
     if (!tflag) {
         SV_LOG_INFO("not find _sdsp file!please check shader file path!\n");
         return ;

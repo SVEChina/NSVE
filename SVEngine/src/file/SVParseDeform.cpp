@@ -40,7 +40,7 @@ void SVParseDeform::parse(SVInstPtr app,cptr8 path, s32 resid,SVDeformImageMoveP
     SVString config_name = t_path + "config.json";
     SVDataChunk tDataStream;
     SV_LOG_ERROR("SVParseMain::parse begin config name %s\n", config_name.get());
-    bool tflag = app->m_pFileMgr->loadFileContentStr(&tDataStream, config_name.get());
+    bool tflag = app->m_file_sys->loadFileContentStr(&tDataStream, config_name.get());
     if (!tflag)
         return ;
     SV_LOG_ERROR("SVParseMain::load effect sucess\n");

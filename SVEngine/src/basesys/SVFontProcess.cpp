@@ -33,7 +33,7 @@ SVFontProcess::SVFontProcess(SVInstPtr _app)
     m_fontCharSize = 16;
     //
     do {
-        SVString t_fullname = mApp->getFileMgr()->getFileFullName(mApp->m_global_param.m_fontFileName.c_str());
+        SVString t_fullname = mApp->m_file_sys->getFileFullName(mApp->m_global_param.m_fontFileName.c_str());
         // 1. 初始化freetype2库
         FT_Error t_error = FT_Init_FreeType(&m_fontLib);
         if (FT_Err_Ok != t_error) {

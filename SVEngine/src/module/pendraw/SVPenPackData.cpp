@@ -22,7 +22,7 @@ SVPenPackData::~SVPenPackData() {
 bool SVPenPackData::loadPenData(SVInstPtr _app, SVDataSwapPtr _data, cptr8 _path, s32 _offset, s32 _length){
 //    if (_data && _length) {
 //        SVDataChunk dataChunk;
-//        bool t_flag = _app->getFileMgr()->loadFileData(&dataChunk, _path, _offset, _length);
+//        bool t_flag = _app->m_file_sys->loadFileData(&dataChunk, _path, _offset, _length);
 //        if (!t_flag) {
 //            SV_LOG_ERROR("SVPenPackData::Load Stroke Data Error %s\n", _path);
 //            return false;
@@ -37,7 +37,7 @@ bool SVPenPackData::writePenData(SVInstPtr _app, SVDataSwapPtr _data, cptr8 _pat
 //    if (_data && _data->getSize()) {
 //        SVDataChunk dataChunk;
 //        dataChunk.push(_data->getData(), _data->getSize());
-//        bool t_flag = _app->getFileMgr()->writeFileData(&dataChunk, _path, dataChunk.getRealSize(), _clearData);
+//        bool t_flag = _app->m_file_sys->writeFileData(&dataChunk, _path, dataChunk.getRealSize(), _clearData);
 //        if (!t_flag) {
 //            SV_LOG_ERROR("SVPenPackData::Save Stroke Data Error %s\n", _path);
 //            return false;
@@ -47,6 +47,6 @@ bool SVPenPackData::writePenData(SVInstPtr _app, SVDataSwapPtr _data, cptr8 _pat
 }
 
 u64 SVPenPackData::checkPenStrokeDataLength(SVInstPtr _app, cptr8 _path){
-    return _app->getFileMgr()->checkFileDataLength(_path);
+    return _app->m_file_sys->checkFileDataLength(_path);
     
 }

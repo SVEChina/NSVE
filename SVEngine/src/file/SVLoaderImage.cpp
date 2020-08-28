@@ -183,7 +183,7 @@ s32 SVLoaderImagePNG::_get_info(png_structp _png_ptr, png_infop _png_info_ptr, c
 s32 SVLoaderImagePNG::info(SVImage &_image, cptr8 _name) {
     
     SVDataChunk t_dataChunk;
-    bool t_flag = mApp->m_pFileMgr->loadFileContent(&t_dataChunk, _name);
+    bool t_flag = mApp->m_file_sys->loadFileContent(&t_dataChunk, _name);
     if (!t_flag) {
         return 0;
     }
@@ -239,7 +239,7 @@ s32 SVLoaderImagePNG::info(SVImage &_image, cptr8 _name) {
 s32 SVLoaderImagePNG::load(SVImage &_image, cptr8 _name) {
     
     SVDataChunk t_dataChunk;
-    bool t_flag = mApp->m_pFileMgr->loadFileContent(&t_dataChunk, _name);
+    bool t_flag = mApp->m_file_sys->loadFileContent(&t_dataChunk, _name);
     if (!t_flag) {
         return 0;
     }

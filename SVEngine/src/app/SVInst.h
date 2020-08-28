@@ -75,7 +75,7 @@ namespace sv {
         //唯一ID池
         SVIDPool m_IDPool;
         //文件部分
-        SVFileMgrPtr m_pFileMgr;
+        SVFileMgrPtr m_file_sys;
         //配置部分
         SVConfig m_config;
         //全局对象
@@ -94,8 +94,6 @@ namespace sv {
         SV_ENG_TIMESTATE m_engTimeState;
         
     public:
-        //获取各种模块，管理类
-        SVFileMgrPtr getFileMgr();
         SVEventMgrPtr getEventMgr();
         SVBasicSysPtr getBasicSys();
         SVCameraMgrPtr getCameraMgr();

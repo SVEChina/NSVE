@@ -105,7 +105,7 @@ u32 SVRShaderGL::_loadShader(SVInstPtr _app,cptr8 _filename,s32 _shaderType){
     u32 t_id = 0;
     bool t_flag=false;
     if(!t_id){
-        t_flag = _app->getFileMgr()->loadFileContentStr(&tDataStream, _filename);
+        t_flag = _app->m_file_sys->loadFileContentStr(&tDataStream, _filename);
     }else{
         return t_id;
     }

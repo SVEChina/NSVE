@@ -54,7 +54,7 @@ void SVFaceDataMesh::destory(){
 void SVFaceDataMesh::_loadFaceMeshData(cptr8 _name){
     SVDataChunk tDataStream;
     SVString filename = SVString("svres/mesh/") + SVString(_name) + SVString(".json");
-    bool tflag = mApp->getFileMgr()->loadFileContentStr(&tDataStream, filename.c_str());
+    bool tflag = mApp->m_file_sys->loadFileContentStr(&tDataStream, filename.c_str());
     if (!tflag) {
         SVString info = SVString("not find ") + filename + SVString(" please check mesh file path!\n");
        // MA_LOG_INFO(info.c_str());
@@ -101,7 +101,7 @@ void SVFaceDataMesh::_loadStanderFaceData(cptr8 _name){
     SVDataChunk tDataStream;
     SV_LOG_DEBUG("load standerfacedata begin\n");
     SVString filename = SVString("svres/mesh/") + SVString(_name) + SVString(".json");
-    bool tflag = mApp->getFileMgr()->loadFileContentStr(&tDataStream, filename.c_str());
+    bool tflag = mApp->m_file_sys->loadFileContentStr(&tDataStream, filename.c_str());
     if (!tflag) {
         SVString info = SVString("not find ") + filename + SVString(" please check shader file path!\n");
         //MA_LOG_INFO(info.c_str());

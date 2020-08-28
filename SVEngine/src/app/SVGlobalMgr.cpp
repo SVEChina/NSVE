@@ -37,7 +37,7 @@ using namespace sv;
 SVGlobalMgr::SVGlobalMgr(SVInstPtr _app)
 :SVGBaseEx(_app) {
     //引擎系统和操作指令系统要先建立起来
-    m_pEventMgr = nullptr;
+    m_event_sys = nullptr;
     m_pBasicSys = nullptr;
     m_pSceneMgr = nullptr;
     m_camera_mgr = nullptr;
@@ -55,7 +55,7 @@ SVGlobalMgr::SVGlobalMgr(SVInstPtr _app)
 }
 
 SVGlobalMgr::~SVGlobalMgr() {
-    m_pEventMgr = nullptr;
+    m_event_sys = nullptr;
     m_pBasicSys = nullptr;
     m_pSceneMgr = nullptr;
     m_camera_mgr = nullptr;
@@ -73,9 +73,14 @@ SVGlobalMgr::~SVGlobalMgr() {
 }
 
 void SVGlobalMgr::init() {
-    //
-    m_lua_sys = MakeSharedPtr<SVLuaSys>(mApp));
+    //消息系统建立起来
+    m_event_sys = MakeSharedPtr<SVEventMgr>(mApp);
+    m_event_sys->init();
+    SV_LOG_ERROR("sve init m_event_sys end!\n");
+    //lua脚本系统
+    m_lua_sys = MakeSharedPtr<SVLuaSys>(mApp);
     m_lua_sys->init();
+    SV_LOG_ERROR("sve init m_lua_sys end!\n");
     //渲染管理
     m_render_mgr = MakeSharedPtr<SVRenderMgr>(mApp);
     m_render_mgr->init();
@@ -84,12 +89,10 @@ void SVGlobalMgr::init() {
     m_commonData = MakeSharedPtr<SVComData>(mApp);
     m_commonData->init();
     SV_LOG_ERROR("sve init m_commonData end!\n");
+    //AR背景，AR引擎特有的系统
     m_arbg_mgr = MakeSharedPtr<SVARBackgroundMgr>(mApp);
     m_arbg_mgr->init();
     SV_LOG_ERROR("sve init m_arbg_mgr end!\n");
-//    //消息系统建立起来
-//    m_pEventMgr = MakeSharedPtr<SVEventMgr>(mApp);
-//    m_pEventMgr->init();
 //    //基础系统
 //    m_pBasicSys = MakeSharedPtr<SVBasicSys>(mApp));
 //    m_pBasicSys->init();
@@ -189,11 +192,6 @@ void SVGlobalMgr::destroy() {
 //        m_pBasicSys->destroy();
 //        SV_LOG_ERROR("SVBasicSys:destroy sucess");
 //    }
-//    if (m_pEventMgr) {
-//        //事件系统最后析够,因为很多其他模块 会注册监听事件
-//        m_pEventMgr->destroy();
-//        SV_LOG_ERROR("SVEventMgr:destroy sucess");
-//    }
 //    if(m_pDeformSys){
 //        //
 //        m_pDeformSys->destroy();
@@ -214,6 +212,11 @@ void SVGlobalMgr::destroy() {
         m_lua_sys->destroy();
         SV_LOG_ERROR("m_lua_sys:destroy sucess");
     }
+    if (m_event_sys) {
+        //事件系统最后析够,因为很多其他模块 会注册监听事件
+        m_event_sys->destroy();
+        SV_LOG_ERROR("SVEventMgr:destroy sucess");
+    }
 }
 
 void SVGlobalMgr::update(f32 dt) {
@@ -225,7 +228,7 @@ void SVGlobalMgr::update(f32 dt) {
 //    timeTag(false,"module cost");
 //    m_pBasicSys->update(dt);            //基础系统更新
 //    timeTag(false,"basesys cost");
-//    m_pEventMgr->update(dt);            //事件处理系统更新
+//    m_event_sys->update(dt);            //事件处理系统更新
 //    timeTag(false,"event cost");
 //    m_pModelMgr->update(dt);            //模型管理
 //    timeTag(false,"model cost");

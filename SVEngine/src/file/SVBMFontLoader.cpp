@@ -32,7 +32,7 @@ bool SVBMFontLoader::loadData(cptr8 _fontFilePath, SVBMFontPtr _font) {
     _font->m_fntFileName = SVString::substr(_font->m_fntFilePath.c_str(), pos+1, _font->m_fntFilePath.size()-pos-1);
     // Load the font
     SVDataChunk tSVDataChunk;
-    bool t_flag = mApp->getFileMgr()->loadFileContentStr(&tSVDataChunk, _fontFilePath);
+    bool t_flag = mApp->m_file_sys->loadFileContentStr(&tSVDataChunk, _fontFilePath);
     if (!t_flag) {
         return false;
     }
