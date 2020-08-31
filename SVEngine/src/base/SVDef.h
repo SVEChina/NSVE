@@ -278,22 +278,27 @@ namespace sv {
 
     class SVInst;
     class SVThread;
+
+    //回调函数
+    typedef void (*ThreadCallback)(sv::SVInstPtr _app,sv::SVThread* _thread,sv::SV_THREAD_STAGE _stage);
+    //百分比回调
+    typedef void (*cb_func_percent)(f32 percent);
+    //百分比回调
+    typedef void (*cb_func_record)(s32 _frames);
+    //操作回调
+    typedef void (*cb_func_op)(cptr8 _info, void *obj);
+    //游戏信息回调
+    typedef void (*cb_func_game)(s32 _type,cptr8 _info);
+    //输出回调
+    typedef void (*cb_out_stream)(s32 _w,s32 _h,s32 _formate,void* _pdata,long _timtap);
+    //输出状态
+    typedef void (*cb_outstream_state)(s32 _state);
+    //
+    typedef void (*lua_regist)(void* _ls);
+    //
 }
 
-//回调函数
-typedef void (*ThreadCallback)(sv::SVInstPtr _app,sv::SVThread* _thread,sv::SV_THREAD_STAGE _stage);
-//百分比回调
-typedef void (*cb_func_percent)(f32 percent);
-//百分比回调
-typedef void (*cb_func_record)(s32 _frames);
-//操作回调
-typedef void (*cb_func_op)(cptr8 _info, void *obj);
-//游戏信息回调
-typedef void (*cb_func_game)(s32 _type,cptr8 _info);
-//输出回调
-typedef void (*cb_out_stream)(s32 _w,s32 _h,s32 _formate,void* _pdata,long _timtap);
-//输出状态
-typedef void (*cb_outstream_state)(s32 _state);
+
 
 //最大同时支持的视频解析线程数目
 #define SV_MAX_VIDEOLOAD_NUM 6

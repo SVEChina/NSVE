@@ -12,7 +12,6 @@
 #include "../node/SVFrameOutIOS.h"
 #include "../basesys/SVScene.h"
 #include "../node/SVFrameOutTex.h"
-#include "../node/SVFrameOutRead.h"
 #include "../basesys/SVSceneMgr.h"
 #include "../rendercore/SVRenderMgr.h"
 

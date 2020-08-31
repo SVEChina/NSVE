@@ -21,13 +21,9 @@ SVBasicSys::SVBasicSys(SVInstPtr _app)
     m_pRecycleModule = nullptr;
     m_picker = nullptr;
     m_fonter = nullptr;
-    m_stream_in = nullptr;
-    m_stream_out = nullptr;
 }
 
 SVBasicSys::~SVBasicSys() {
-    m_stream_in = nullptr;
-    m_stream_out = nullptr;
 }
 
 void SVBasicSys::init() {
@@ -40,10 +36,6 @@ void SVBasicSys::init() {
     m_picker->startListen();
     //
     m_fonter = MakeSharedPtr<SVFontProcess>(mApp);
-    //
-    m_stream_in = MakeSharedPtr<SVStreamIn>(mApp);
-    //
-    m_stream_out = MakeSharedPtr<SVStreamOut>(mApp);
     //
     m_sensor = MakeSharedPtr<SVSensorProcess>(mApp);
     m_sensor->startListen();
@@ -65,10 +57,6 @@ void SVBasicSys::destroy() {
     m_pRecycleModule->stopListen();
     m_pRecycleModule = nullptr;
     //
-    m_stream_in = nullptr;
-    //
-    m_stream_out = nullptr;
-    
     if (m_sensor) {
         m_sensor->stopListen();
         m_sensor = nullptr;
@@ -76,10 +64,6 @@ void SVBasicSys::destroy() {
 }
 
 void SVBasicSys::update(f32 dt) {
-    //输入流系统更新
-    if(m_stream_in){
-        m_stream_in->update(dt);
-    }
     //回收系统
     if (m_pRecycleModule) {
         m_pRecycleModule->update(dt);
@@ -91,10 +75,6 @@ void SVBasicSys::update(f32 dt) {
 
 //
 void SVBasicSys::output() {
-    //输出流系统更新
-    if(m_stream_out){
-        m_stream_out->output();
-    }
 }
 
 SVRecycleProcessPtr SVBasicSys::getRecycleModule(){
@@ -107,14 +87,6 @@ SVPickProcessPtr SVBasicSys::getPickModule(){
 
 SVFontProcessPtr SVBasicSys::getFontModule(){
     return m_fonter;
-}
-
-SVStreamInPtr SVBasicSys::getStreamIn(){
-    return m_stream_in;
-}
-
-SVStreamOutPtr SVBasicSys::getStreamOut(){
-    return m_stream_out;
 }
 
 SVSensorProcessPtr SVBasicSys::getSensorModule(){

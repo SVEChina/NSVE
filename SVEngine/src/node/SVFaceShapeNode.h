@@ -40,6 +40,6 @@ namespace sv {
         PASSPOOL m_passPool;
     };
 
-}
+}//!namespace sv
 
 #endif /* SV_FACESHAPENODE_H */

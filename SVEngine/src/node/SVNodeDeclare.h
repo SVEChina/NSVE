@@ -54,15 +54,11 @@ namespace sv {
 #ifdef SV_IOS
     DECLARE_SHAREPTR(SVFrameOutIOS);
 #endif
-    DECLARE_SHAREPTR(SVFrameOutTex);
-    DECLARE_SHAREPTR(SVFrameOutRead);
     DECLARE_SHAREPTR(SVSkinNode);
     DECLARE_SHAREPTR(SVSkyDomeNode);
     DECLARE_SHAREPTR(SVSpineNode);
     DECLARE_SHAREPTR(SVSpriteNode);
     DECLARE_SHAREPTR(SVBillboardNode);
-    DECLARE_SHAREPTR(SVBackGroundNode);
-    DECLARE_SHAREPTR(SVMesh2DNode);
     DECLARE_SHAREPTR(SVPatchNode);
     DECLARE_SHAREPTR(SVFaceShapeNode);
     DECLARE_SHAREPTR(SVDeformNode);
@@ -73,8 +69,6 @@ namespace sv {
     DECLARE_SHAREPTR(SVParticlesWorld);
     DECLARE_SHAREPTR(SVParticlesNode);
     DECLARE_SHAREPTR(SVFrameAniNode);
-
-
     //
     DECLARE_SHAREPTR(SVUIBase);
     DECLARE_SHAREPTR(SVUIPanel);

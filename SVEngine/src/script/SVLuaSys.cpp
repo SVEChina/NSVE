@@ -27,11 +27,15 @@ void SVLuaSys::init() {
     luaL_openlibs(L_S);
     //加载默认的主脚本
     //SVString t_main_lua = mApp->m_file_sys->;
-    //加载lua文件
-    s32 bRet = luaL_loadfile(L_S, "main.lua");
-    if (bRet){
-        //cout << "load test.lua file failed" << endl;
-        return;
+//    //加载lua文件
+//    s32 bRet = luaL_loadfile(L_S, "main.lua");
+//    if (bRet){
+//        //cout << "load test.lua file failed" << endl;
+//        return;
+//    }
+    //调用注册函数
+    for(s32 i=0;i<gLuaRegistPool.size();i++) {
+        gLuaRegistPool[i]((void*)L_S);
     }
 }
 
@@ -42,8 +46,8 @@ void SVLuaSys::destroy() {
 
 void SVLuaSys::update(f32 dt) {
     //执行lua文件
-    s32 t_ret = lua_pcall(L_S, 0, 0, 0);
-    if (t_ret){
-        //cout << "call test.lua file failed" << endl;
-    }
+//    s32 t_ret = lua_pcall(L_S, 0, 0, 0);
+//    if (t_ret){
+//        //cout << "call test.lua file failed" << endl;
+//    }
 }

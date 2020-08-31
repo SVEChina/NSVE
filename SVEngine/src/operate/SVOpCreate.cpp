@@ -36,7 +36,6 @@
 #include "../node/SVFreeTypeNode.h"
 #include "../node/SVBMFontNode.h"
 #include "../node/SVSkinNode.h"
-#include "../node/SVMesh2DNode.h"
 #include "../node/SVPatchNode.h"
 #include "../node/SVModelNode.h"
 #include "../node/SVFrameAniNode.h"

@@ -28,14 +28,14 @@ SVOpCreateIOSInstream::SVOpCreateIOSInstream(SVInstPtr _app, cptr8 _name, PICFOR
 }
 
 void SVOpCreateIOSInstream::_process(f32 _dt) {
-#ifdef SV_IOS
-    //创建一个ios相机节点 挂在场景中
-    SVStreamInPtr t_cam_stream = mApp->getBasicSys()->getStreamIn();
-    if(t_cam_stream){
-        t_cam_stream->createInStream(m_name.c_str(),0,m_formate,m_width,m_height,m_angle, m_show);
-        t_cam_stream->active(m_name.c_str());
-    }
-#endif
+//#ifdef SV_IOS
+//    //创建一个ios相机节点 挂在场景中
+//    SVStreamInPtr t_cam_stream = mApp->getBasicSys()->getStreamIn();
+//    if(t_cam_stream){
+//        t_cam_stream->createInStream(m_name.c_str(),0,m_formate,m_width,m_height,m_angle, m_show);
+//        t_cam_stream->active(m_name.c_str());
+//    }
+//#endif
 }
 
 //设置ios相机
@@ -53,14 +53,14 @@ SVOpCreateIOSTexIDInstream::SVOpCreateIOSTexIDInstream(SVInstPtr _app, cptr8 _na
 }
 
 void SVOpCreateIOSTexIDInstream::_process(f32 _dt) {
-#ifdef SV_IOS
-    //创建一个ios相机节点 挂在场景中
-    SVStreamInPtr t_cam_stream = mApp->getBasicSys()->getStreamIn();
-    if(t_cam_stream){
-        t_cam_stream->createInTextureStream(m_name.c_str(), m_tex0ID, m_tex1ID, m_tex2ID, 0, m_formate, m_width, m_height, m_angle, m_show);
-        t_cam_stream->active(m_name.c_str());
-    }
-#endif
+//#ifdef SV_IOS
+//    //创建一个ios相机节点 挂在场景中
+//    SVStreamInPtr t_cam_stream = mApp->getBasicSys()->getStreamIn();
+//    if(t_cam_stream){
+//        t_cam_stream->createInTextureStream(m_name.c_str(), m_tex0ID, m_tex1ID, m_tex2ID, 0, m_formate, m_width, m_height, m_angle, m_show);
+//        t_cam_stream->active(m_name.c_str());
+//    }
+//#endif
 }
 
 //删除ios相机
@@ -70,13 +70,13 @@ SVOpDestroyIOSInstream::SVOpDestroyIOSInstream(SVInstPtr _app, cptr8 _name)
 }
 
 void SVOpDestroyIOSInstream::_process(f32 _dt) {
-#ifdef SV_IOS
-    SVStreamInPtr t_cam_stream = mApp->getBasicSys()->getStreamIn();
-    if(t_cam_stream){
-        t_cam_stream->unactive(m_name.c_str());
-        t_cam_stream->destroyInStream(m_name.c_str());
-    }
-#endif
+//#ifdef SV_IOS
+//    SVStreamInPtr t_cam_stream = mApp->getBasicSys()->getStreamIn();
+//    if(t_cam_stream){
+//        t_cam_stream->unactive(m_name.c_str());
+//        t_cam_stream->destroyInStream(m_name.c_str());
+//    }
+//#endif
 }
 
 
@@ -90,12 +90,12 @@ SVOpCreateIOSOutstream::SVOpCreateIOSOutstream(SVInstPtr _app, cptr8 _name, s32 
 }
 
 void SVOpCreateIOSOutstream::_process(f32 _dt) {
-#ifdef SV_IOS
-    SVStreamOutPtr t_streamout = mApp->getBasicSys()->getStreamOut();
-    if( t_streamout ) {
-        t_streamout->createOutStream(m_name.c_str(), 0, m_formate, m_width, m_height, RENDERSTREAMTYPE(m_streamType));
-    }
-#endif
+//#ifdef SV_IOS
+//    SVStreamOutPtr t_streamout = mApp->getBasicSys()->getStreamOut();
+//    if( t_streamout ) {
+//        t_streamout->createOutStream(m_name.c_str(), 0, m_formate, m_width, m_height, RENDERSTREAMTYPE(m_streamType));
+//    }
+//#endif
 }
 
 
@@ -105,13 +105,13 @@ SVOpDestroyIOSOutstream::SVOpDestroyIOSOutstream(SVInstPtr _app, cptr8 _name)
 }
 
 void SVOpDestroyIOSOutstream::_process(f32 _dt) {
-#ifdef SV_IOS
-    SVStreamOutPtr t_streamout = mApp->getBasicSys()->getStreamOut();
-    if( t_streamout ) {
-        t_streamout->unactive();
-        t_streamout->destroyOutStream();
-    }
-#endif
+//#ifdef SV_IOS
+//    SVStreamOutPtr t_streamout = mApp->getBasicSys()->getStreamOut();
+//    if( t_streamout ) {
+//        t_streamout->unactive();
+//        t_streamout->destroyOutStream();
+//    }
+//#endif
 }
 
 
@@ -121,13 +121,13 @@ SVOpOpenIOSOutstream::SVOpOpenIOSOutstream(SVInstPtr _app, cb_out_stream _cb)
 }
 
 void SVOpOpenIOSOutstream::_process(f32 _dt) {
-#ifdef SV_IOS
-    SVStreamOutPtr t_streamout = mApp->getBasicSys()->getStreamOut();
-    if( t_streamout ) {
-        t_streamout->setStreamOutCB(m_cb);
-        t_streamout->active();
-    }
-#endif
+//#ifdef SV_IOS
+//    SVStreamOutPtr t_streamout = mApp->getBasicSys()->getStreamOut();
+//    if( t_streamout ) {
+//        t_streamout->setStreamOutCB(m_cb);
+//        t_streamout->active();
+//    }
+//#endif
 }
 
 SVOpCloseIOSOutstream::SVOpCloseIOSOutstream(SVInstPtr _app)
@@ -135,12 +135,12 @@ SVOpCloseIOSOutstream::SVOpCloseIOSOutstream(SVInstPtr _app)
 }
 
 void SVOpCloseIOSOutstream::_process(f32 _dt) {
-#ifdef SV_IOS
-    SVStreamOutPtr t_streamout = mApp->getBasicSys()->getStreamOut();
-    if( t_streamout ) {
-        t_streamout->unactive();
-    }
-#endif
+//#ifdef SV_IOS
+//    SVStreamOutPtr t_streamout = mApp->getBasicSys()->getStreamOut();
+//    if( t_streamout ) {
+//        t_streamout->unactive();
+//    }
+//#endif
 }
 
 //创建安卓相机
@@ -179,11 +179,11 @@ SVOpCreateTextureCamera::SVOpCreateTextureCamera(SVInstPtr _app, s32 _format, s3
 }
 
 void SVOpCreateTextureCamera::_process(f32 _dt) {
-    SVStreamOutPtr t_streamout = mApp->getBasicSys()->getStreamOut();
-    if( t_streamout ) {
-        t_streamout->createOutStream(nullptr,1,GL_RGBA, m_width, m_height);
-        t_streamout->active();
-    }
+//    SVStreamOutPtr t_streamout = mApp->getBasicSys()->getStreamOut();
+//    if( t_streamout ) {
+//        t_streamout->createOutStream(nullptr,1,GL_RGBA, m_width, m_height);
+//        t_streamout->active();
+//    }
 }
 
 
@@ -192,11 +192,11 @@ SVOpDestroyTextureOutstream::SVOpDestroyTextureOutstream(SVInstPtr _app, cptr8 _
 }
 
 void SVOpDestroyTextureOutstream::_process(f32 _dt) {
-    SVStreamOutPtr t_streamout = mApp->getBasicSys()->getStreamOut();
-    if( t_streamout ) {
-        t_streamout->unactive();
-        t_streamout->destroyOutStream();
-    }
+//    SVStreamOutPtr t_streamout = mApp->getBasicSys()->getStreamOut();
+//    if( t_streamout ) {
+//        t_streamout->unactive();
+//        t_streamout->destroyOutStream();
+//    }
 }
 
 
@@ -212,11 +212,11 @@ SVOpCreateStreamCamera::SVOpCreateStreamCamera(SVInstPtr _app, cptr8 _name,s32 _
 }
 
 void SVOpCreateStreamCamera::_process(f32 _dt) {
-    SVStreamInPtr t_cam_stream = mApp->getBasicSys()->getStreamIn();
-    if (t_cam_stream) {
-        t_cam_stream->createInStream(m_name.c_str(), 1,(PICFORMATE)m_formate, m_width, m_height, m_angle,true);
-        t_cam_stream->active(m_name.c_str());
-    }
+//    SVStreamInPtr t_cam_stream = mApp->getBasicSys()->getStreamIn();
+//    if (t_cam_stream) {
+//        t_cam_stream->createInStream(m_name.c_str(), 1,(PICFORMATE)m_formate, m_width, m_height, m_angle,true);
+//        t_cam_stream->active(m_name.c_str());
+//    }
 }
 
 SVOpDestroyStreamCamera::SVOpDestroyStreamCamera(SVInstPtr _app, cptr8 _name)
@@ -225,11 +225,11 @@ SVOpDestroyStreamCamera::SVOpDestroyStreamCamera(SVInstPtr _app, cptr8 _name)
 }
 
 void SVOpDestroyStreamCamera::_process(f32 _dt) {
-    SVStreamInPtr t_cam_stream = mApp->getBasicSys()->getStreamIn();
-    if (t_cam_stream) {
-        t_cam_stream->unactive(m_name.c_str());
-        t_cam_stream->destroyInStream(m_name.c_str());
-    }
+//    SVStreamInPtr t_cam_stream = mApp->getBasicSys()->getStreamIn();
+//    if (t_cam_stream) {
+//        t_cam_stream->unactive(m_name.c_str());
+//        t_cam_stream->destroyInStream(m_name.c_str());
+//    }
 }
 
 

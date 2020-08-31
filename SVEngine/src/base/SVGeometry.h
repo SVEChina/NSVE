@@ -9,8 +9,7 @@
 
 namespace sv {
     
-    //******************************** Angle normalization **********************************************\
-    //
+    //******************************** Angle normalization **********************************************
     sv_inline f32 normalizeAngle(f32 angle) {
         if(angle >= 180.0f) {
             angle = Math::mod(angle + 180.0f,360.0f) - 180.0f;
@@ -20,7 +19,7 @@ namespace sv {
         return angle;
     }
 
-    //*********************************** Orthonormal basis *******************************************\
+    //*********************************** Orthonormal basis *******************************************
     //
     sv_inline void orthoBasis(const FVec3 &v,FVec3 &tangent,FVec3 &binormal) {
         if(Math::abs(v.z) > 0.7f) {

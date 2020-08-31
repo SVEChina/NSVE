@@ -221,6 +221,7 @@ namespace sv {
 
     //filter 部分
     DECLARE_SHAREPTR(SVFilterBase);
+    DECLARE_SHAREPTR(SVFilterCommon);
     DECLARE_SHAREPTR(SVFilterLUT);
     DECLARE_SHAREPTR(SVFairDataBlur);
     DECLARE_SHAREPTR(SVFaceBeautyBase);

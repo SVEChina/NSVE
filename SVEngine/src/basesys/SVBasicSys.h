@@ -37,20 +37,10 @@ namespace sv{
         //字体模块
         SVFontProcessPtr getFontModule();
         
-        //流入
-        SVStreamInPtr getStreamIn();
-        
-        //流出
-        SVStreamOutPtr getStreamOut();
-        
         //传感器数据处理 
         SVSensorProcessPtr getSensorModule();
 
     protected:
-        SVStreamInPtr m_stream_in;
-        
-        SVStreamOutPtr m_stream_out;
-
         SVRecycleProcessPtr m_pRecycleModule;
         
         SVPickProcessPtr m_picker;

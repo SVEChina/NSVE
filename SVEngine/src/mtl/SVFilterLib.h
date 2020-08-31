@@ -9,9 +9,9 @@
 #define SV_FILTERLIB_H
 
 #include "../base/SVGBase.h"
+#include "SVMtlDef.h"
 
 namespace sv {
-
     
     /*引擎提供的默认滤镜库*/
 
@@ -20,7 +20,7 @@ namespace sv {
     
     class SVFilterLib : public SVGBaseEx {
     public:
-        static SVFilterBasePtr createFilter(s32 _type);
+        static SVFilterBasePtr createFilter(SVInstPtr _app,FTTYPE _type);
         
     };
 
