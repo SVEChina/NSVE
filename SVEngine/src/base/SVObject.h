@@ -23,20 +23,7 @@
  * 创建 make_shared 而不是new
  */
 
-
 namespace sv {
-
-    //脚本注册池
-    static std::vector<lua_regist> gLuaRegistPool;
-//
-//    //注册静态类
-//    class SVObjectLua {
-//    public:
-//        SVObjectLua() {
-//            //gLuaRegistPool.push_back(SVObject::regist_SVObjectLua);
-//        }
-//    };
-//    static SVObjectLua m_SVObject_lua;
 
     //对象
     class SVObject : public std::enable_shared_from_this<SVObject> {
@@ -57,6 +44,14 @@ namespace sv {
     
     //数据监听函数指针
     typedef void (SVObject::*dataListenFunc)(SVObjectPtr datagen);
+
+//    //注册静态类
+//    class SVObjectLua {
+//    public:
+//        SVObjectLua() {
+//            gLuaRegistPool.push_back(SVObject::regist_SVObjectLua);
+//        }
+//    };
         
 }//!namespace sv
 

@@ -10,6 +10,7 @@
 #define SV_LUASYS_H
 
 #include "../basesys/SVSysBase.h"
+#include "../base/SVLuaBase.h"
 #include "../third/lua-5.4.0/src/lua.hpp"
 
 namespace sv{

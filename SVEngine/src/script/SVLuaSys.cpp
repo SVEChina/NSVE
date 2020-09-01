@@ -9,6 +9,7 @@
 #include "SVLuaSys.h"
 #include "../file/SVFileMgr.h"
 
+
 using namespace sv;
 
 SVLuaSys::SVLuaSys(SVInstPtr _app)
@@ -34,8 +35,8 @@ void SVLuaSys::init() {
 //        return;
 //    }
     //调用注册函数
-    for(s32 i=0;i<gLuaRegistPool.size();i++) {
-        gLuaRegistPool[i]((void*)L_S);
+    for(s32 i=0;i<SVLuaBase::gLuaRegistPool.size();i++) {
+        SVLuaBase::gLuaRegistPool[i]((void*)L_S);
     }
 }
 
