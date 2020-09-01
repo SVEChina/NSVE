@@ -30,7 +30,6 @@ namespace sv {
         
     public:
         /*基础模块*/
-        SVRenderMgrPtr m_render_mgr; //渲染部分
         /*可删减模块*/
         //事件部分
         SVEventMgrPtr m_event_sys;

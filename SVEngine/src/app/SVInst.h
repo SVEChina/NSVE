@@ -78,6 +78,8 @@ namespace sv {
         SVFileMgrPtr m_file_sys;
         //材质库
         SVMtlLibPtr m_mtl_lib;
+        //渲染部分
+        SVRenderMgrPtr m_render_mgr;
         //配置部分
         SVConfig m_config;
         //全局对象

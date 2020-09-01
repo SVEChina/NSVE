@@ -41,12 +41,14 @@ SVInst::SVInst() {
     m_engTimeState = ENG_TS_NOR;
     m_ctx = nullptr;
     m_file_sys = nullptr;
+    m_render_mgr = nullptr;
 }
 
 SVInst::~SVInst() {
     m_ctx = nullptr;
     m_file_sys = nullptr;
     m_mtl_lib = nullptr;
+    m_render_mgr = nullptr;
 }
 
 SVInstPtr SVInst::makeCreate() {
@@ -59,17 +61,21 @@ SVInstPtr SVInst::share() {
 
 //构建各个模块的逻辑部分，引擎可以运行的最简模式
 void SVInst::init() {
+    //
     m_renderer = nullptr;
     //
     if(!m_file_sys) {
-        m_file_sys = MakeSharedPtr<SVFileMgr>(share());
+        m_file_sys = MakeSharedPtr<SVFileMgr>( share() );
     }
     //加载配置
     m_config.init();
     m_config.loadConfig();
     //材质库（只有在创建完渲染器的环境下，才会真正加载材质）
-    m_mtl_lib = MakeSharedPtr<SVMtlLib>(share());
+    m_mtl_lib = MakeSharedPtr<SVMtlLib>( share() );
     m_mtl_lib->init();
+    //渲染管理
+    m_render_mgr = MakeSharedPtr<SVRenderMgr>( share() );
+    m_render_mgr->init();
     //全局
     m_pGlobalMgr = MakeSharedPtr<SVGlobalMgr>( share() );
     m_pGlobalMgr->init();
@@ -79,10 +85,16 @@ void SVInst::init() {
 
 void SVInst::destroy() {
     m_pGlobalMgr = nullptr;
+    //
+    if(m_render_mgr) {
+        m_render_mgr->destroy();
+    }
+    //
     if(m_mtl_lib) {
         m_mtl_lib->destroy();
         m_mtl_lib = nullptr;
     }
+    //
     m_file_sys = nullptr;
     m_svst = SV_ST_NULL;
 }
@@ -124,7 +136,7 @@ SVCtxBasePtr SVInst::createEnv(SV_R_ENV _type) {
     return m_ctx;
 }
 
-//销毁渲染器
+//销毁渲染环境，包括渲染器
 void SVInst::destroyEnv() {
     if(m_renderer){
         m_renderer->clearRes();
@@ -186,8 +198,8 @@ void SVInst::updateSVE(f32 _dt) {
 }
 
 void SVInst::renderSVE() {
-    if( m_pGlobalMgr->m_render_mgr ) {
-        m_pGlobalMgr->m_render_mgr->render();
+    if(m_render_mgr ) {
+        m_render_mgr->render();
     }
 }
 
@@ -276,9 +288,7 @@ SVMtlLibPtr SVInst::getMtlLib() {
 }
 
 SVRenderMgrPtr SVInst::getRenderMgr(){
-    if(!m_pGlobalMgr)
-        return nullptr;
-    return m_pGlobalMgr->m_render_mgr;
+    return m_render_mgr;
 }
 
 SVDetectMgrPtr SVInst::getDetectMgr(){

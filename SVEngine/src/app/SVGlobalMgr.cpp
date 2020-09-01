@@ -43,7 +43,6 @@ SVGlobalMgr::SVGlobalMgr(SVInstPtr _app)
     m_camera_mgr = nullptr;
     m_shader_mgr = nullptr;
     m_tex_mgr = nullptr;
-    m_render_mgr = nullptr;
     m_detect_mgr = nullptr;
     m_commonData = nullptr;
     m_pModelMgr = nullptr;
@@ -60,7 +59,6 @@ SVGlobalMgr::~SVGlobalMgr() {
     m_camera_mgr = nullptr;
     m_shader_mgr = nullptr;
     m_tex_mgr = nullptr;
-    m_render_mgr = nullptr;
     m_detect_mgr = nullptr;
     m_commonData = nullptr;
     m_pModelMgr = nullptr;
@@ -79,10 +77,6 @@ void SVGlobalMgr::init() {
     m_lua_sys = MakeSharedPtr<SVLuaSys>(mApp);
     m_lua_sys->init();
     SV_LOG_ERROR("sve init m_lua_sys end!\n");
-    //渲染管理
-    m_render_mgr = MakeSharedPtr<SVRenderMgr>(mApp);
-    m_render_mgr->init();
-    SV_LOG_ERROR("sve init m_render_mgr end!\n");
     //构建静态数据
     m_commonData = MakeSharedPtr<SVComData>(mApp);
     m_commonData->init();
@@ -162,7 +156,6 @@ void SVGlobalMgr::destroy() {
     }
     //shader析构
     if (m_shader_mgr) {
-        //shader 析构都要用到渲染模块
         m_shader_mgr->destroy();
         SV_LOG_ERROR("SVShaderMgr:destroy sucess");
     }
@@ -176,11 +169,6 @@ void SVGlobalMgr::destroy() {
 //        m_pModuleSys->destroy();
 //        SV_LOG_ERROR("m_pModuleSys:destroy sucess");
 //    }
-    if (m_render_mgr) {
-        //渲染析够
-        m_render_mgr->destroy();
-        SV_LOG_ERROR("SVRenderMgr:destroy sucess");
-    }
 //    if(m_pBasicSys){
 //        //基础系统
 //        m_pBasicSys->destroy();
