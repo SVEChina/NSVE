@@ -10,6 +10,8 @@
 
 #include "../base/SVCompileConfig.h"
 
+#include "../base/SVDef.h"
+
 //定义了Metal
 #define SV_METAL
 
@@ -38,6 +40,8 @@
 ////MAC平台 或 IPHONE平台
 //#if defined(SV_IOS)
 //#endif  //__MACOSX__ || __APPLE__
+
+namespace sv {
 
 enum RENDERSTREAMTYPE {
     RST_BEGIN = 0,
@@ -169,6 +173,42 @@ enum {
     FILL_WIREFRAME,
     NUM_FILL_MODES,
 };
+
+
+
+/*
+ 逻辑层面的纹理
+ */
+struct SVTextureDsp {
+    SVTextureDsp() {
+        m_imgtype = SV_IMAGE_2D;
+        m_dataFormate = SV_FORMAT_RGBA8;    //数据格式
+        m_warp_s = E_TEX_CLAMP;             //S方向环绕
+        m_warp_t = E_TEX_CLAMP;             //T方向环绕
+        m_width = 1;                    //宽
+        m_height = 1;                   //高
+        m_depth = 1;                    //深度    //3d纹理使用
+        m_minmap = true;                //是否开启mipmap
+        m_computeWrite = false;         //metal
+        m_renderTarget = false;         //是否renderTarget
+        m_srgb = false;                 //metal
+    };
+    
+    s32 m_imgtype;
+    s32 m_dataFormate;      //数据格式
+    SVTEXWRAP m_warp_s;
+    SVTEXWRAP m_warp_t;
+    s32 m_width;            //宽
+    s32 m_height;           //高
+    s32 m_depth;            //深度    //3d纹理使用
+    bool m_minmap;          //是否开启mipmap
+    bool m_computeWrite;    //metal 是否可以
+    bool m_renderTarget;    //metal 是否是renderTarget
+    bool m_srgb;
+};
+
+
+}//!namespace sv
 
 
 #endif //SV_RENDERDEF_H

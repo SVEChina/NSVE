@@ -120,7 +120,7 @@ SVRTargetPtr SVRendererMetal::createTarget(SVINTEX _texid,bool _depth,bool _sten
     t_tex_dsp.m_minmap = false;         //是否开启mipmap
     t_tex_dsp.m_computeWrite = true;    //metal 是否可以
     t_tex_dsp.m_renderTarget = true;    //metal 是否是renderTarget
-    SVTexturePtr t_target_tex = mApp->getTexMgr()->createInTexture(_texid,t_tex_dsp);
+    SVTexturePtr t_target_tex = createInTexture(_texid,t_tex_dsp);
     if(!t_target_tex) {
         return nullptr;
     }
@@ -155,7 +155,7 @@ SVRTargetPtr SVRendererMetal::createTarget(SVINTEX _texid,s32 _w,s32 _h,bool _de
     t_tex_dsp.m_minmap = false;         //是否开启mipmap
     t_tex_dsp.m_computeWrite = true;    //metal 是否可以
     t_tex_dsp.m_renderTarget = true;    //metal 是否是renderTarget
-    SVTexturePtr t_target_tex = mApp->getTexMgr()->createInTexture(_texid,t_tex_dsp);
+    SVTexturePtr t_target_tex = createInTexture(_texid,t_tex_dsp);
     if(!t_target_tex) {
         return nullptr;
     }
@@ -257,8 +257,7 @@ void SVRendererMetal::drawBox() {
 
 //屏幕空间绘制
 void SVRendererMetal::drawScreen(SVINTEX _texid) {
-    //
-    SVTexturePtr t_tex = mApp->getTexMgr()->getInTexture(_texid);
+    SVTexturePtr t_tex = getInTexture(_texid);
     if(!t_tex){
         return ;
     }

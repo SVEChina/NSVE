@@ -145,7 +145,7 @@ void SVRFboMetal::resize(s32 _width,s32 _height,SVRendererPtr _renderer) {
         }
         //颜色纹理重制大小
         for(s32 i=0;i<SV_SUPPORT_MAX_TAREGT;i++) {
-            SVTexturePtr t_tex = mApp->getTexMgr()->getInTexture(m_color_tex[i]);
+            SVTexturePtr t_tex = _renderer->getInTexture(m_color_tex[i]);
             if(t_tex && t_tex->getResTex() ) {
                 t_tex->resize(_width,_height);
             }
@@ -158,7 +158,7 @@ void SVRFboMetal::bind(SVRendererPtr _renderer) {
     if(t_rm) {
         //支持多目标
         for(s32 i=0;i<SV_SUPPORT_MAX_TAREGT;i++) {
-            SVTexturePtr t_tex = mApp->getTexMgr()->getInTexture(m_color_tex[i]);
+            SVTexturePtr t_tex = _renderer->getInTexture(m_color_tex[i]);
             if(t_tex && t_tex->getResTex() ) {
                 SVRTexPtr t_res_tex = t_tex->getResTex();
                 SVRTexMetalPtr t_metal_tex = std::dynamic_pointer_cast<SVRTexMetal>(t_res_tex);

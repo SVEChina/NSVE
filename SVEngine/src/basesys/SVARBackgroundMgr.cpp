@@ -122,7 +122,7 @@ void SVARBackgroundMgr::_renderCameraPass(f32 _dt) {
 
 void SVARBackgroundMgr::_renderCameraImg(f32 _dt) {
     //直接绘制图片
-    SVTexturePtr t_cam_tex = mApp->getTexMgr()->getInTexture(E_TEX_CAMERA);
+    SVTexturePtr t_cam_tex = mApp->getRenderer()->getInTexture(E_TEX_CAMERA);
     if(t_cam_tex) {
         SVMtlCorePtr t_mtl = mApp->getMtlLib()->getMtl("skycamera");
         if(t_mtl) {

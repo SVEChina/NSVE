@@ -33,16 +33,10 @@ namespace sv {
         //从文件加载纹理
         SVTexturePtr getTexture(cptr8 _name,bool _sync = true);
         
+        //
         bool hasTexture(cptr8 _name);
         
-        //获取内部纹理
-        SVTexturePtr getInTexture(SVINTEX _texname);
-        
-        //创建内部纹理
-        SVTexturePtr createInTexture(SVINTEX _texname,SVTextureDsp _dsp);
-        
-        bool hasInTexture(SVINTEX _texid);
-        
+        //
         void clear();
         
         //
@@ -60,9 +54,6 @@ namespace sv {
         //文件纹理池
         typedef std::map<SVString, SVTexturePtr> FTEXPOOL;
         FTEXPOOL m_ftex_pool;
-        //内置纹理池
-        typedef std::vector<SVTexturePtr> INTEXPOOL;
-        INTEXPOOL m_intex_pool;
         //
         SVLockPtr m_texLock;
         //

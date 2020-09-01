@@ -10,6 +10,7 @@
 #include "SVRTarget.h"
 #include "SVRRes.h"
 #include "../app/SVInst.h"
+#include "../app/SVDispatch.h"
 #include "../work/SVTdCore.h"
 #include "../mtl/SVTexMgr.h"
 #include "../mtl/SVTexture.h"
@@ -20,14 +21,23 @@ using namespace sv;
 SVRenderer::SVRenderer(SVInstPtr _app)
 :SVGBaseEx(_app)
 ,m_cur_target(nullptr){
+    //内置Target
     m_target_pool.resize(E_TEX_END);
     for(s32 i=0;i<E_TEX_END;i++) {
         m_target_pool[i] = nullptr;
+    }
+    //内置纹理
+    m_intex_pool.resize(E_TEX_END);
+    for(s32 i=0;i<E_TEX_END;i++) {
+        m_intex_pool[i] = nullptr;
     }
     m_res_lock = MakeSharedPtr<SVLockSpin>();
 }
 
 SVRenderer::~SVRenderer(){
+    for(s32 i=0;i<E_TEX_END;i++) {
+        m_intex_pool[i] = nullptr;
+    }
     m_res_lock = nullptr;
     m_cur_target = nullptr;
 }
@@ -53,23 +63,14 @@ void SVRenderer::resize(s32 _w,s32 _h) {
     m_res_lock->unlock();
 }
 
-void SVRenderer::clearRes() {
-    m_res_lock->lock();
-    ROBJLIST::iterator it = m_robjList.begin();
-    while(it!=m_robjList.end()) {
-        SVRResPtr t_robj = (*it);
-        t_robj->destroy( std::dynamic_pointer_cast<SVRenderer>(shareObject())  );
-        it = m_robjList.erase(it);
-    }
-    m_res_lock->unlock();
-}
-
+//增加资源
 void SVRenderer::addRes(SVRResPtr _res) {
     m_res_lock->lock();
     m_robjList.push_back(_res);
     m_res_lock->unlock();
 }
 
+//移除资源
 void SVRenderer::removeRes(SVRResPtr _res) {
     m_res_lock->lock();
     ROBJLIST::iterator it = m_robjList.begin();
@@ -101,6 +102,19 @@ void SVRenderer::removeUnuseRes() {
     m_res_lock->unlock();
 }
 
+//清理资源
+void SVRenderer::clearRes() {
+    m_res_lock->lock();
+    ROBJLIST::iterator it = m_robjList.begin();
+    while(it!=m_robjList.end()) {
+        SVRResPtr t_robj = (*it);
+        t_robj->destroy( std::dynamic_pointer_cast<SVRenderer>(shareObject())  );
+        it = m_robjList.erase(it);
+    }
+    m_res_lock->unlock();
+}
+
+
 //需要控制当前的fbo
 void SVRenderer::setCurTarget(SVRTargetPtr _target) {
     m_cur_target = _target;
@@ -126,10 +140,42 @@ void SVRenderer::_addTarget(SVINTEX _texid,SVRTargetPtr _target) {
     m_res_lock->unlock();
 }
 
+
+SVTexturePtr SVRenderer::getInTexture(SVINTEX _texid) {
+    if(_texid>E_TEX_BEGIN && _texid<E_TEX_END){
+        if(m_intex_pool[_texid] ) {
+            return m_intex_pool[_texid];
+        }
+    }
+    return nullptr;
+}
+
+SVTexturePtr SVRenderer::createInTexture(SVINTEX _texname,SVTextureDsp _dsp) {
+    if(_texname>E_TEX_BEGIN && _texname<E_TEX_END){
+        if(m_intex_pool[_texname]) {
+            return m_intex_pool[_texname];
+        }
+        m_intex_pool[_texname] = MakeSharedPtr<SVTexture>(mApp);
+        m_intex_pool[_texname] ->init(_dsp);
+        SVDispatch::dispatchTextureCreate(mApp, m_intex_pool[_texname]);
+        return m_intex_pool[_texname];
+    }
+    return nullptr;
+}
+
+bool SVRenderer::hasInTexture(SVINTEX _texid) {
+    if(_texid>E_TEX_BEGIN && _texid<E_TEX_END){
+        if(m_intex_pool[_texid] ) {
+            return true;
+        }
+    }
+    return false;
+}
+
+//交换纹理
 void SVRenderer::swapInTexture(SVINTEX _tex1,SVINTEX _tex2) {
-    //交换纹理
-    SVTexturePtr tex1 = mApp->getTexMgr()->getInTexture(_tex1);
-    SVTexturePtr tex2 = mApp->getTexMgr()->getInTexture(_tex2);
+    SVTexturePtr tex1 = getInTexture(_tex1);
+    SVTexturePtr tex2 = getInTexture(_tex2);
     if(tex1!=tex2) {
         tex1->swap(tex2);
     }

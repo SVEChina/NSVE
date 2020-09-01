@@ -24,10 +24,6 @@ SVTexMgr::SVTexMgr(SVInstPtr _app)
     mAsync = false;
     m_sve_tex = nullptr;
     m_texLock = MakeSharedPtr<SVLock>();
-    m_intex_pool.resize(E_TEX_END);
-    for(s32 i=0;i<E_TEX_END;i++) {
-        m_intex_pool[i] = nullptr;
-    }
 //    //主纹理
 //    m_main_tex = nullptr;
 //    //阴影纹理
@@ -46,9 +42,6 @@ SVTexMgr::SVTexMgr(SVInstPtr _app)
 SVTexMgr::~SVTexMgr() {
     m_texLock = nullptr;
     m_sve_tex = nullptr;
-    for(s32 i=0;i<E_TEX_END;i++) {
-        m_intex_pool[i] = nullptr;
-    }
 }
 
 void SVTexMgr::init() {
@@ -99,37 +92,6 @@ SVTexturePtr SVTexMgr::_createTexture(cptr8 _name, bool _sync, bool _enableMipMa
     t_img = nullptr;
     m_texLock->unlock();
     return tTexture;
-}
-
-SVTexturePtr SVTexMgr::getInTexture(SVINTEX _texid) {
-    if(_texid>E_TEX_BEGIN && _texid<E_TEX_END){
-        if(m_intex_pool[_texid] ) {
-            return m_intex_pool[_texid];
-        }
-    }
-    return nullptr;
-}
-
-SVTexturePtr SVTexMgr::createInTexture(SVINTEX _texname,SVTextureDsp _dsp) {
-    if(_texname>E_TEX_BEGIN && _texname<E_TEX_END){
-        if(m_intex_pool[_texname]) {
-            return m_intex_pool[_texname];
-        }
-        m_intex_pool[_texname] = MakeSharedPtr<SVTexture>(mApp);
-        m_intex_pool[_texname] ->init(_dsp);
-        SVDispatch::dispatchTextureCreate(mApp, m_intex_pool[_texname]);
-        return m_intex_pool[_texname];
-    }
-    return nullptr;
-}
-
-bool SVTexMgr::hasInTexture(SVINTEX _texid) {
-    if(_texid>E_TEX_BEGIN && _texid<E_TEX_END){
-        if(m_intex_pool[_texid] ) {
-            return true;
-        }
-    }
-    return false;
 }
 
 SVTexturePtr SVTexMgr::getSVETexture(){

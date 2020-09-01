@@ -81,6 +81,15 @@ namespace sv {
         //销毁Target
         virtual void destroyTarget(SVINTEX _texid);
         
+        //获取内部纹理
+        virtual SVTexturePtr getInTexture(SVINTEX _texname);
+        
+        //创建内部纹理
+        virtual SVTexturePtr createInTexture(SVINTEX _texname,SVTextureDsp _dsp);
+        
+        //内置纹理是否存在
+        virtual bool hasInTexture(SVINTEX _texid);
+        
         //交换纹理
         virtual void swapInTexture(SVINTEX _tex1,SVINTEX _tex2);
         
@@ -115,8 +124,6 @@ namespace sv {
         virtual void removeUnuseRes();
 
     protected:
-        
-        //增加target
         void _addTarget(SVINTEX _texid,SVRTargetPtr _target);
         
         //当前的target
@@ -132,6 +139,10 @@ namespace sv {
         //目标池
         typedef std::vector<SVRTargetPtr> TARGETPOOL;
         TARGETPOOL m_target_pool;
+        
+        //内置纹理池
+        typedef std::vector<SVTexturePtr> INTEXPOOL;
+        INTEXPOOL m_intex_pool;
     };
     
 }//!namespace sv
