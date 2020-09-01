@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "WinDelegate.h"
 #import "CMetalView.h"
 #import "CGLESView.h"
 #import "CGInst.h"
@@ -31,17 +30,16 @@
     [self.window makeKeyAndOrderFront:self]; // shows and focuses the window
     [self.window center];
     //
-    //self.window.delegate = [[WinDelegate alloc] init];
     //监听窗口变化
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowDidResize:) name:NSWindowDidResizeNotification object:nil];
     //
     [[CGInst getInst] cgInit];
     // Insert code here to initialize your application
-#ifdef SVE_TOOL_USE_METAL
-    renderView = [[CMetalView alloc] initWithFrame:self.window.contentView.bounds];
-#elif SVE_TOOL_USE_GLES
-    renderView = [[CGLESView alloc] initWithFrame:self.window.contentView.bounds];
-#endif
+    if(SVE_CORE == SVE_METAL) {
+        renderView = [[CMetalView alloc] initWithFrame:self.window.contentView.bounds];
+    }else if(SVE_CORE == SVE_GLES) {
+        renderView = [[CGLESView alloc] initWithFrame:self.window.contentView.bounds];
+    }
     [self.window.contentView addSubview:renderView];
 }
 

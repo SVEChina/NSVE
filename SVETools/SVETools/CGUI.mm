@@ -40,7 +40,6 @@ static CGUI *mInst;
 }
 
 -(void)cgInit:(int)_mode {
-    //pview = [[CMetalView alloc] initWithFrame: ];
 }
 
 -(void)cgDestroy {

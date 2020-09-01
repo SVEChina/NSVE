@@ -111,7 +111,7 @@ SVCtxBasePtr SVInst::createEnv(SV_R_ENV _type) {
         m_ctx = MakeSharedPtr<SVCtxOSXMetal>();
     }else if(_type == E_R_GLES_IOS) {
         m_rcore = E_R_GLES_IOS;
-        //m_ctx = MakeSharedPtr<SVCtxIOSGLES>();
+        m_ctx = MakeSharedPtr<SVCtxOSXGL>();
     }
     return m_ctx;
 }

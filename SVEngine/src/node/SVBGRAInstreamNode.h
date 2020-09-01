@@ -39,9 +39,7 @@ namespace sv {
         SVRenderMeshPtr m_pMesh;
         SVTexturePtr m_pTex;
     };
-        
-    
-    
+
 }//!namespace sv
 
 

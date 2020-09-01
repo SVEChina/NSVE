@@ -13,8 +13,6 @@
 #include "../app/SVInst.h"
 #include "../rendercore/SVRenderDeclare.h"
 #include "SVShaderMgr.h"
-
-//
 #include <vector>
 #include <string>
 
@@ -123,7 +121,6 @@ namespace sv {
         TexUnit m_fs_texUnit[MAX_TEXUNIT];
         //
         SVShaderPtr m_shader_obj;   //pointer
-        //
     public:
         void swap();
         
@@ -170,6 +167,7 @@ namespace sv {
         
         virtual void _submitMtl(SVRendererPtr _render);
     };
+
 
 }//!namespace sv
 

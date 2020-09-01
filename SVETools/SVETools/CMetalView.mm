@@ -58,10 +58,7 @@
     //创建渲染器,Metal渲染器。
     id<CAMetalDrawable> drawable = [metalLayer nextDrawable];
     if(drawable) {
-        [[CGInst getInst] createMetal:self.mDevice drawable:drawable];
-//        if(drawable.texture) {
-//             NSLog(@"main tex %d resize:%d %d",drawable.texture,drawable.texture.width, drawable.texture.height);
-//        }
+        [[CGInst getInst] create_OSX_Metal:self.mDevice drawable:drawable];
     }
     [self setWantsLayer:true];
     [self setLayer:metalLayer];

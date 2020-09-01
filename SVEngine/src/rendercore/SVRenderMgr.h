@@ -70,9 +70,6 @@ namespace sv {
         SVLockSpinPtr m_renderLock;
         SVLockSpinPtr m_logicLock;
         
-        //
-        SVREnvPtr m_renderEnv;  //渲染环境 用于外面对接的渲染目标
-        
         //渲染的RT，不负责生命周期管理
         //前向RT
         SVArray<SVRTargetPtr> m_preRT;

@@ -9,7 +9,6 @@
 #include "../mtl/SVFilterShinning.h"
 #include "../mtl/SVADFilterBase.h"
 #include "../mtl/SVMtlShinning.h"
-#include "../mtl/SVMtlBlackWhite.h"
 #include "../mtl/SVMtlStreak.h"
 #include "../mtl/SVMtlRainbowColor.h"
 #include "../mtl/SVMtlFlash.h"
@@ -29,7 +28,7 @@ SVParseFilter::parseFilter(SVInstPtr _app, RAPIDJSON_NAMESPACE::Value &item, s32
     if (mtlName == "filtershinning") {
         t_mtl = MakeSharedPtr<SVMtlShinning>(_app);//闪光滤镜
     }else if (mtlName == "filterblackwhite"){
-        t_mtl = MakeSharedPtr<SVMtlBlackWhite>(_app);//黑白滤镜
+        //t_mtl = MakeSharedPtr<SVMtlBlackWhite>(_app);//黑白滤镜
     }else if (mtlName == "filterstreak"){
         t_mtl = MakeSharedPtr<SVMtlStreak>(_app);//斑马纹滤镜
     }else if (mtlName == "filterrainbowcolor"){

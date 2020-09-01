@@ -54,15 +54,12 @@ namespace sv {
     DECLARE_SHAREPTR(SVMtlFaceShape);
     DECLARE_SHAREPTR(SVMtlFaceShapeVaried);
     DECLARE_SHAREPTR(SVMtlBlur);
-
-    //
     DECLARE_SHAREPTR(SVMtlParticleAni);
 
     //滤镜
     DECLARE_SHAREPTR(SVMtlBasedOn);
     DECLARE_SHAREPTR(SVMtlAcutance);
     DECLARE_SHAREPTR(SVMtlShinning);
-    DECLARE_SHAREPTR(SVMtlBlackWhite);
     DECLARE_SHAREPTR(SVMtlStreak);
     DECLARE_SHAREPTR(SVMtlRainbowColor);
     DECLARE_SHAREPTR(SVMtlFlash);
@@ -76,7 +73,6 @@ namespace sv {
     DECLARE_SHAREPTR(SVTexturePList);
     DECLARE_SHAREPTR(SVTextureIOS);
 
-    
 }//!namespace sv
 
 

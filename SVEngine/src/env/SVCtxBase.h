@@ -5,8 +5,8 @@
 // yizhou Fu,long Yin,longfei Lin,ziyu Xu,xiaofan Li,daming Li
 //
 
-#ifndef SV_CONTEXTBASE_H
-#define SV_CONTEXTBASE_H
+#ifndef SV_CONTEXT_BASE_H
+#define SV_CONTEXT_BASE_H
 
 #include "../base/SVObject.h"
 #include "../rendercore/SVRenderDeclare.h"
@@ -34,4 +34,4 @@ namespace sv {
 }//!namespace sv
 
 
-#endif //SV_CONTEXTBASE_H
+#endif //SV_CONTEXT_BASE_H

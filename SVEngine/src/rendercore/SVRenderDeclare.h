@@ -20,7 +20,6 @@ namespace sv {
     DECLARE_SHAREPTR(SVRFbo);
     DECLARE_SHAREPTR(SVRMeshRes);
     DECLARE_SHAREPTR(SVRShader);
-    DECLARE_SHAREPTR(SVREnv);
     
     //渲染框架
     DECLARE_SHAREPTR(SVRenderer);

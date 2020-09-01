@@ -44,15 +44,13 @@
         [self buildOpenGL];
     }
     return self;
-    
 }
-
 
 - (void)buildOpenGL{
     int t_w = self.frame.size.width;
     int t_h = self.frame.size.height;
     //创建渲染器,OPENGL渲染器
-    [[CGInst getInst] createGLWidth:t_w Height:t_h];
+    [[CGInst getInst] create_OSX_GL_Width:t_w Height:t_h];
     [self creatTimer];
 }
 
@@ -96,15 +94,10 @@ static CVReturn renderCallback(CVDisplayLinkRef displayLink,
 -(void)renderGL {
     [m_context makeCurrentContext];
     [[CGInst getInst] render];
-    
 }
 
 - (void)drawRect:(NSRect)dirtyRect {
-    //NSLog(@"sve drawRect!");
-    //
     [super drawRect:dirtyRect];
-    //[self render];
-    // Drawing code here.
 }
 
 

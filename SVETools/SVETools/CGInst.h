@@ -25,12 +25,16 @@
 -(void)resizeWidth:(int)_w Height:(int)_h;
 //
 -(void*)getSVE;
-//
--(void)createMetal:(id<MTLDevice>)_device drawable:(id<CAMetalDrawable>)_drawable;
+//Metal-OSX
+-(void)create_OSX_Metal:(id<MTLDevice>)_device drawable:(id<CAMetalDrawable>)_drawable;
+//Metal-OSX
+-(void)create_IOS_Metal:(id<MTLDevice>)_device drawable:(id<CAMetalDrawable>)_drawable;
 //
 -(void)destroyMetal;
-//
-- (void)createGLWidth:(int)_w Height:(int)_h;
+//GL-OSX
+- (void)create_OSX_GL_Width:(int)_w Height:(int)_h;
+//GL-IOS
+- (void)create_IOS_GL_Width:(int)_w Height:(int)_h;
 //
 - (void)destroyGL;
 //

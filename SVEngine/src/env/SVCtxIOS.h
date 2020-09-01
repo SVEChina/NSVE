@@ -5,8 +5,9 @@
 // yizhou Fu,long Yin,longfei Lin,ziyu Xu,xiaofan Li,daming Li
 //
 
-#ifndef SV_CONTEXTIOS_H
-#define SV_CONTEXTIOS_H
+#ifndef SV_CONTEXT_IOS_H
+#define SV_CONTEXT_IOS_H
+
 #include "SVCtxBase.h"
 
 #ifdef SV_IOS
@@ -51,7 +52,6 @@ namespace sv {
 }//!namespace sv
 
 
-
 #endif  //SV_IOS
 
-#endif  //SV_CONTEXTIOS_H
+#endif  //SV_CONTEXT_IOS_H

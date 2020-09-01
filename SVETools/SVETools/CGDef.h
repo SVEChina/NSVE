@@ -7,5 +7,7 @@
 //
 
 //renderer
-#define SVE_TOOL_USE_METAL 1
-#define SVE_TOOL_USE_GLES 0
+#define SVE_METAL 1
+#define SVE_GLES 2
+
+#define SVE_CORE SVE_GLES

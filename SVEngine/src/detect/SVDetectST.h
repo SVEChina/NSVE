@@ -43,18 +43,17 @@ namespace sv {
         PERSON_STDATA *getData(s32 _personid);
         
         PERSON_STDATA *getDataOriginal(s32 _personid);
+
+        PERSON_STDATA stData[SUPPORT_MAX_PERSON_NUM];
+
+        PERSON_STDATA stDataOriginal[SUPPORT_MAX_PERSON_NUM];
         
-    public:
-         PERSON_STDATA stData[SUPPORT_MAX_PERSON_NUM];
-         PERSON_STDATA stDataOriginal[SUPPORT_MAX_PERSON_NUM];
     protected:
         //修正到以屏幕中心为原点的坐标系。
         void _transformFaceDataToCenter(PERSON_STDATA *_stData);
         void _parseData(void *data);
     };
 
-    
-    
 }//!namespace sv
 
 

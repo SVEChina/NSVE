@@ -79,11 +79,9 @@ static CGInst *mInst;
     return m_sve_obj.get();
 }
 
-/*
-  Renderer Metal
- */
-
--(void)createMetal:(id<MTLDevice>)_device drawable:(id<CAMetalDrawable>)_drawable {
+//创建OSX-Metal
+-(void)create_OSX_Metal:(id<MTLDevice>)_device drawable:(id<CAMetalDrawable>)_drawable {
+#ifdef SV_OSX
     if( m_sve_obj ) {
         sv::SVCtxBasePtr t_ctx =m_sve_obj->createEnv(sv::E_R_METAL_OSX);
         sv::SVCtxOSXMetalPtr t_ctx_metal = std::dynamic_pointer_cast<sv::SVCtxOSXMetal>(t_ctx);
@@ -91,26 +89,55 @@ static CGInst *mInst;
             t_ctx_metal->init(m_sve_obj,_device,_drawable,_drawable.texture);
         }
     }
+#endif
+}
+
+//创建IOS-Metal
+-(void)create_IOS_Metal:(id<MTLDevice>)_device drawable:(id<CAMetalDrawable>)_drawable {
+#ifdef SV_IOS
+    if( m_sve_obj ) {
+        sv::SVCtxBasePtr t_ctx = m_sve_obj->createEnv(sv::E_R_METAL_OSX);
+        sv::SVCtxOSXMetalPtr t_ctx_metal_osx = std::dynamic_pointer_cast<sv::SVCtxOSXMetal>(t_ctx);
+        if(t_ctx_metal_osx) {
+            t_ctx_metal_osx->init(m_sve_obj,_device,_drawable,_drawable.texture);
+        }
+    }
+#endif
 }
 
 -(void)destroyMetal {
     if( m_sve_obj ){
-        m_sve_obj->destroyEnv();
+        //m_sve_obj->destroyEnv();
     }
 }
 
 /*
  Renderer OpenGL
  */
-- (void)createGLWidth:(int)_w Height:(int)_h{
-//    if( m_sve_obj ) {
-//        sv::SVRendererPtr t_re =m_sve_obj->createRenderer(sv::E_R_GLES);
-//        sv::SVRendererGLPtr t_re_gles = std::dynamic_pointer_cast<sv::SVRendererGL>(t_re);
-//        if(t_re_gles) {
-//            //渲染器初始化
-//            t_re_gles->init(_w, _h);
-//        }
-//    }
+//创建OSX-GL环境
+- (void)create_OSX_GL_Width:(int)_w Height:(int)_h {
+#ifdef SV_OSX
+    if( m_sve_obj ) {
+        sv::SVCtxBasePtr t_ctx = m_sve_obj->createEnv(sv::E_R_GL_OSX);
+        sv::SVCtxOSXGLPtr t_ctx_gl_osx = std::dynamic_pointer_cast<sv::SVCtxOSXGL>(t_ctx);
+        if(t_ctx_gl_osx) {
+            
+        }
+    }
+#endif
+}
+
+//创建IOS-GL环境
+- (void)create_IOS_GL_Width:(int)_w Height:(int)_h {
+#ifdef SV_IOS
+    if( m_sve_obj ) {
+        sv::SVCtxBasePtr t_ctx = m_sve_obj->createEnv(sv::E_R_GLES_IOS);
+        sv::SVCtxIOSGLESPtr t_ctx_gles_ios = std::dynamic_pointer_cast<sv::SVCtxIOSGLES>(t_ctx);
+        if(t_ctx_gles_ios) {
+            
+        }
+    }
+#endif
 }
 
 - (void)destroyGL{

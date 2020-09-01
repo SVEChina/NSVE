@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		024E0DBA24D6BA58006B15E3 /* CGLESView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 024E0DB824D6BA58006B15E3 /* CGLESView.mm */; };
-		5F3AC26324EA6135000D4019 /* WinDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5F3AC25C24EA6134000D4019 /* WinDelegate.mm */; };
 		5F64D59A2480F0D40005CF47 /* CMetalView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5F64D5992480F0D40005CF47 /* CMetalView.mm */; };
 		5FD7F1F0247D064F00A53A1D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FD7F1EF247D064F00A53A1D /* AppDelegate.m */; };
 		5FD7F1F2247D065000A53A1D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5FD7F1F1247D065000A53A1D /* Assets.xcassets */; };
@@ -59,8 +58,6 @@
 		024E0DB224D6B534006B15E3 /* CGDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGDef.h; sourceTree = "<group>"; };
 		024E0DB824D6BA58006B15E3 /* CGLESView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CGLESView.mm; sourceTree = "<group>"; };
 		024E0DB924D6BA58006B15E3 /* CGLESView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGLESView.h; sourceTree = "<group>"; };
-		5F3AC25C24EA6134000D4019 /* WinDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WinDelegate.mm; sourceTree = "<group>"; };
-		5F3AC26224EA6135000D4019 /* WinDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WinDelegate.h; sourceTree = "<group>"; };
 		5F64D5982480F0D40005CF47 /* CMetalView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CMetalView.h; sourceTree = "<group>"; };
 		5F64D5992480F0D40005CF47 /* CMetalView.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = CMetalView.mm; sourceTree = "<group>"; };
 		5FD7F1EB247D064F00A53A1D /* SVETools.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SVETools.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -138,8 +135,6 @@
 				5FD7F1F7247D065000A53A1D /* main.m */,
 				5FD7F1F3247D065000A53A1D /* MainMenu.xib */,
 				5FD7F1F9247D065000A53A1D /* SVETools.entitlements */,
-				5F3AC26224EA6135000D4019 /* WinDelegate.h */,
-				5F3AC25C24EA6134000D4019 /* WinDelegate.mm */,
 			);
 			path = SVETools;
 			sourceTree = "<group>";
@@ -289,7 +284,6 @@
 				5FD7F1F0247D064F00A53A1D /* AppDelegate.m in Sources */,
 				024E0DBA24D6BA58006B15E3 /* CGLESView.mm in Sources */,
 				5FD7F21E247D294F00A53A1D /* CGState.mm in Sources */,
-				5F3AC26324EA6135000D4019 /* WinDelegate.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

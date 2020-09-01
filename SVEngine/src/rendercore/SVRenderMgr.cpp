@@ -23,7 +23,6 @@ using namespace sv;
 
 SVRenderMgr::SVRenderMgr(SVInstPtr _app)
 :SVGBaseEx(_app) {
-    m_renderEnv = nullptr;
     m_mainRT = nullptr;
     m_preRT.clear();
     m_afterRT.clear();
@@ -37,7 +36,6 @@ SVRenderMgr::SVRenderMgr(SVInstPtr _app)
 SVRenderMgr::~SVRenderMgr() {
     m_logicLock = nullptr;
     m_renderLock = nullptr;
-    m_renderEnv = nullptr;
     m_mainRT = nullptr;
     m_stream_create = nullptr;
     m_stream_destroy = nullptr;
