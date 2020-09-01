@@ -17,8 +17,7 @@
     CVDisplayLinkRef displayLink;
 }
 
-@property (nonatomic, strong) id<MTLDevice>  mDevice;
-@property (nonatomic, strong) id<MTLCommandQueue>   mCommandQueue;
+@property (nonatomic, strong) id<MTLDevice> mDevice;
 
 @end
 
@@ -28,7 +27,7 @@
     self = [super initWithFrame:frameRect];
     if( self ) {
         self.mDevice = MTLCreateSystemDefaultDevice();
-        self.mCommandQueue = [self.mDevice newCommandQueue];
+        //self.mCommandQueue = [self.mDevice newCommandQueue];
         //创建metal环境
         metalLayer = [CAMetalLayer layer];
         metalLayer.device = self.mDevice;

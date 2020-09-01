@@ -121,7 +121,7 @@ static CGInst *mInst;
         sv::SVCtxBasePtr t_ctx = m_sve_obj->createEnv(sv::E_R_GL_OSX);
         sv::SVCtxOSXGLPtr t_ctx_gl_osx = std::dynamic_pointer_cast<sv::SVCtxOSXGL>(t_ctx);
         if(t_ctx_gl_osx) {
-            
+            t_ctx_gl_osx->init(nullptr);
         }
     }
 #endif

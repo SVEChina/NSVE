@@ -9,8 +9,7 @@ uniform sampler2D aTexture0;
 uniform lowp float acutance;
 uniform vec2 tex0size;
 
-void main()
-{
+void main(){
     if(acutance==0.0){
         gl_FragColor=texture2D(aTexture0, v_texcoord0);
         return;

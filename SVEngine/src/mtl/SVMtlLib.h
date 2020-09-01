@@ -19,28 +19,23 @@
 
 namespace sv {
     
-    /*材质包*/
+    /*材质包内的材质不可更改*/
+    //同步材质是同步参数，还是同步对象？
 
     class SVMtlPack : public SVGBaseEx {
     public:
-        SVMtlPack(SVInstPtr _app):SVGBaseEx(_app) {
-        }
-    
-        ~SVMtlPack() {
-            
-        }
+        SVMtlPack(SVInstPtr _app);
         
-        bool hasMtl(cptr8 _mtlname) {
-            return false;
-        }
+        virtual ~SVMtlPack();
         
-    protected:
-        SVString m_pack_name;    //材质包名
-        //
+        bool hasMtl(cptr8 _name);
+        
+        //材质包名
+        SVString m_pack_name;
+        //材质对象
         typedef std::vector<SVMtlCorePtr> MTLVEC;
         MTLVEC m_mtl_vec;
     };
-
     
     /*引擎提供的默认材质库*/
     class SVMtlLib : public SVGBaseEx {
@@ -53,16 +48,25 @@ namespace sv {
         
         void destroy();
         
-        void loadMtlPack(cptr8 _pack);
+        //加载默认材质包
+        void loadDefaultPack();
         
+        //加载材质包
+        void loadMtlPack(cptr8 _pack);
+
+        //获取材质包
+        SVMtlPackPtr getPack(cptr8 _name);
+        
+        //清理材质
         void clear();
         
+        //获取材质
         SVMtlCorePtr getMtl(cptr8 _mtlname);
         
+        //创建材质
         SVMtlCorePtr createMtl(cptr8 _mtlname);
         
     protected:
-        
         static bool parseMtl1(SVMtlCorePtr _mtl,RAPIDJSON_NAMESPACE::Document& _doc);
         
         //材质库(静态，模版)
@@ -72,14 +76,6 @@ namespace sv {
         //材质包
         typedef std::vector<SVMtlPackPtr> PACKPOOL;
         PACKPOOL m_pack_pool;
-        
-        //运行时的材质库
-        typedef std::vector<SVMtlCorePtr> MTLPOOLRUN;
-        MTLPOOLRUN m_mtlpool_run;
-        
-        //空闲的材质
-        typedef std::vector<s32> EMPTYMTLPOOL;
-        EMPTYMTLPOOL m_empty_mtl_ool;
     };
 
 }//!namespace sv

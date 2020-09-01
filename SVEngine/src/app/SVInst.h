@@ -76,6 +76,8 @@ namespace sv {
         SVIDPool m_IDPool;
         //文件部分
         SVFileMgrPtr m_file_sys;
+        //材质库
+        SVMtlLibPtr m_mtl_lib;
         //配置部分
         SVConfig m_config;
         //全局对象

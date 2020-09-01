@@ -14,6 +14,21 @@
 
 using namespace sv;
 
+//材质包
+
+SVMtlPack::SVMtlPack(SVInstPtr _app)
+:SVGBaseEx(_app) {
+}
+
+SVMtlPack::~SVMtlPack() {
+}
+
+bool SVMtlPack::hasMtl(cptr8 _name) {
+    return false;
+}
+
+//材质库
+
 SVMtlLib::SVMtlLib(SVInstPtr _app)
 :SVGBaseEx(_app){
 }
@@ -22,15 +37,32 @@ SVMtlLib::~SVMtlLib() {
 }
 
 void SVMtlLib::init() {
-    //加载默认的材质包
+    for(s32 i=0;i<m_pack_pool.size();i++) {
+        m_pack_pool.clear();
+    }
+}
+
+void SVMtlLib::destroy() {
+    for(s32 i=0;i<m_pack_pool.size();i++) {
+        m_pack_pool.clear();
+    }
+}
+
+//加载默认的材质包
+void SVMtlLib::loadDefaultPack() {
+    loadMtlPack("base.pack");
+}
+
+//加载材质库
+void SVMtlLib::loadMtlPack(cptr8 _pack) {
+    //材质库其实可以异步加载，可以根据渲染引擎进行异步，加载
     SVDataChunk tDataStream;
-    SV_LOG_ERROR("load mtlpack begin\n");
-    bool tflag = mApp->m_file_sys->loadFileContentStr(&tDataStream, "base.pack");
+    SV_LOG_ERROR("load mtl-pack begin\n");
+    bool tflag = mApp->m_file_sys->loadFileContentStr(&tDataStream, _pack);//"base.pack"
     if (!tflag) {
        SV_LOG_INFO("not find base.pack! please check pack!\n");
        return;
     }
-    SV_LOG_ERROR("file context %s \n", tDataStream.getPointerChar());
     RAPIDJSON_NAMESPACE::Document doc;
     doc.Parse<0>(tDataStream.getPointerChar());
     if (doc.HasParseError()) {
@@ -52,14 +84,8 @@ void SVMtlLib::init() {
             createMtl(t_filename.c_str());
         }
     }
-    SV_LOG_DEBUG("load mtlpack end\n");
-}
-
-void SVMtlLib::destroy() {
-}
-
-//加载材质库
-void SVMtlLib::loadMtlPack(cptr8 _pack) {
+    //
+    SV_LOG_DEBUG("load mtl-pack end\n");
 }
 
 void SVMtlLib::clear() {
@@ -110,30 +136,3 @@ bool SVMtlLib::parseMtl1(SVMtlCorePtr _mtl,RAPIDJSON_NAMESPACE::Document& _doc) 
         return false;
     return true;
 }
-
-//SVMtlCorePtr SVMtlLib::getSkinMtl(SVInstPtr _app) {
-////    if(!m_pSkinMtl) {
-////         m_pSkinMtl = MakeSharedPtr<SVMtlGLTF>(_app);
-////    }
-////    //
-////    FMat4 tMat_rotx;
-////    tMat_rotx.setIdentity();
-////    tMat_rotx.setRotateX(45.0f);
-////
-////    FMat4 tMat_roty;
-////    tMat_roty.setIdentity();
-////    tMat_roty.setRotateY(45.0f);
-////
-////    FMat4 tMat_sc;
-////    tMat_sc.setIdentity();
-////    tMat_sc.setScale(FVec3(200.0f,200.0f,200.0f));
-////    //
-////    FMat4 tMat = tMat_sc * tMat_roty * tMat_rotx;
-////    m_pSkinMtl->setModelMatrix(tMat.get());
-////    m_pSkinMtl->setBlendEnable(false);
-////    m_pSkinMtl->setDepthEnable(true);
-////    m_pSkinMtl->update(0.03f);
-////    //
-////    return m_pSkinMtl;
-//    return nullptr;
-//}

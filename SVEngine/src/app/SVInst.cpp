@@ -46,6 +46,7 @@ SVInst::SVInst() {
 SVInst::~SVInst() {
     m_ctx = nullptr;
     m_file_sys = nullptr;
+    m_mtl_lib = nullptr;
 }
 
 SVInstPtr SVInst::makeCreate() {
@@ -66,7 +67,10 @@ void SVInst::init() {
     //加载配置
     m_config.init();
     m_config.loadConfig();
-    //
+    //材质库（只有在创建完渲染器的环境下，才会真正加载材质）
+    m_mtl_lib = MakeSharedPtr<SVMtlLib>(share());
+    m_mtl_lib->init();
+    //全局
     m_pGlobalMgr = MakeSharedPtr<SVGlobalMgr>( share() );
     m_pGlobalMgr->init();
     //
@@ -75,6 +79,10 @@ void SVInst::init() {
 
 void SVInst::destroy() {
     m_pGlobalMgr = nullptr;
+    if(m_mtl_lib) {
+        m_mtl_lib->destroy();
+        m_mtl_lib = nullptr;
+    }
     m_file_sys = nullptr;
     m_svst = SV_ST_NULL;
 }
@@ -91,7 +99,7 @@ void SVInst::resize(s32 _w,s32 _h) {
     }
 }
 
-//创建渲染器
+//创建渲染器环境
 SVCtxBasePtr SVInst::createEnv(SV_R_ENV _type) {
     SVCtxBasePtr t_ctx = nullptr;
     if(_type == E_R_GLES_ANDORID) {
@@ -127,8 +135,11 @@ void SVInst::destroyEnv() {
 
 //设置渲染器
 void SVInst::setRenderer(SVRendererPtr _renderer) {
+    //设置渲染器
     m_renderer = _renderer;
-    //设置渲染路径-0
+    //加载默认的材质库
+    getMtlLib()->loadDefaultPack();
+    //设置渲染路径
     setRenderPath(0);
 }
 
@@ -259,9 +270,7 @@ SVTexMgrPtr SVInst::getTexMgr(){
 }
 
 SVMtlLibPtr SVInst::getMtlLib() {
-    if(!m_pGlobalMgr)
-        return nullptr;
-    return m_pGlobalMgr->m_mtlLib;
+    return m_mtl_lib;
 }
 
 SVRenderMgrPtr SVInst::getRenderMgr(){

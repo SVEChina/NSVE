@@ -50,7 +50,6 @@ SVGlobalMgr::SVGlobalMgr(SVInstPtr _app)
     m_pDeformSys = nullptr;
     m_pPhysicSys =nullptr;
     m_pLightSys = nullptr;
-    m_mtlLib = nullptr;
     m_arbg_mgr = nullptr;
 }
 
@@ -68,7 +67,6 @@ SVGlobalMgr::~SVGlobalMgr() {
     m_pDeformSys = nullptr;
     m_pPhysicSys =nullptr;
     m_pLightSys = nullptr;
-    m_mtlLib = nullptr;
     m_arbg_mgr = nullptr;
 }
 
@@ -117,10 +115,6 @@ void SVGlobalMgr::init() {
     m_pSceneMgr = MakeSharedPtr<SVSceneMgr>(mApp);
     m_pSceneMgr->init();
     SV_LOG_ERROR("sve init SVSceneMgr end!\n");
-    //材质库
-    m_mtlLib = MakeSharedPtr<SVMtlLib>(mApp);
-    m_mtlLib->init();
-    SV_LOG_ERROR("sve init SVMtlLib end! \n");
 //    //模型管理部分
 //    m_pModelMgr = MakeSharedPtr<SVModelMgr>(mApp.get());
 //    m_pModelMgr->init();

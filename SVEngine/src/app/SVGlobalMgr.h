@@ -48,8 +48,7 @@ namespace sv {
         SVShaderMgrPtr m_shader_mgr;
         //纹理部分
         SVTexMgrPtr m_tex_mgr;
-        //材质库
-        SVMtlLibPtr m_mtlLib;
+
         //识别部分
         SVDetectMgrPtr m_detect_mgr;
         //模型部分
