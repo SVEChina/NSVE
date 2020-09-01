@@ -89,7 +89,7 @@ namespace sv {
         FMat4 m_mat_p;      //投影矩阵
         FMat4 m_mat_vp;
         //
-        SVLockSpinPtr m_resLock;
+        SVLockSpinPtr m_res_lock;
         //
         bool m_dirty;
         bool m_is_ortho;

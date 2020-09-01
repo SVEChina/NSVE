@@ -46,7 +46,7 @@ namespace sv {
     public:
         SVRenderer(SVInstPtr _app);
         
-        ~SVRenderer();
+        virtual ~SVRenderer();
         
         //初始化
         virtual void init(s32 _w,s32 _h);
@@ -123,14 +123,14 @@ namespace sv {
         SVRTargetPtr m_cur_target;
         
         //资源锁
-        SVLockSpinPtr m_resLock;
+        SVLockSpinPtr m_res_lock;
         
         //渲染内核资源,起到资源统计和管理的作用
         typedef std::list<SVRResPtr> ROBJLIST;
         ROBJLIST m_robjList;
         
         //目标池
-        typedef std::map<SVINTEX,SVRTargetPtr> TARGETPOOL;
+        typedef std::vector<SVRTargetPtr> TARGETPOOL;
         TARGETPOOL m_target_pool;
     };
     

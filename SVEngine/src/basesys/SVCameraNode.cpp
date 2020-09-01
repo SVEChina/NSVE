@@ -18,7 +18,7 @@ SVCameraNode::SVCameraNode(SVInstPtr _app)
     m_active = false;
     m_dirty = true;
     m_is_ortho = false;
-    m_resLock = MakeSharedPtr<SVLockSpin>();
+    m_res_lock = MakeSharedPtr<SVLockSpin>();
     //
     m_mat_v.setIdentity();
     m_mat_p.setIdentity();
@@ -37,7 +37,7 @@ SVCameraNode::SVCameraNode(SVInstPtr _app)
 }
 
 SVCameraNode::~SVCameraNode() {
-    m_resLock = nullptr;
+    m_res_lock = nullptr;
 }
 
 void SVCameraNode::init() {
@@ -57,7 +57,7 @@ void SVCameraNode::update(f32 _dt) {
         return ;
     }
     //移除关联fbo
-    m_resLock->lock();
+    m_res_lock->lock();
     m_dirty = true;
     if (m_dirty) {
         m_dirty = false;
@@ -69,11 +69,11 @@ void SVCameraNode::update(f32 _dt) {
         //
         m_mat_vp = m_mat_v*m_mat_p;
     }
-    m_resLock->unlock();
+    m_res_lock->unlock();
 }
 
 void SVCameraNode::updateForce() {
-    m_resLock->lock();
+    m_res_lock->lock();
     //更新相机矩阵
     m_mat_v = lookAt(m_pos,m_target,m_up);
     if(mApp->m_rcore == E_R_METAL_OSX || mApp->m_rcore == E_R_METAL_IOS) {
@@ -81,7 +81,7 @@ void SVCameraNode::updateForce() {
     }
     _updateProj();
     m_mat_vp =m_mat_p*m_mat_v;
-    m_resLock->unlock();
+    m_res_lock->unlock();
 }
 
 void SVCameraNode::_updateProj() {
@@ -104,45 +104,45 @@ void SVCameraNode::_updateProj() {
 }
 
 void SVCameraNode::setProject() {
-    m_resLock->lock();
+    m_res_lock->lock();
     m_is_ortho = false;
     _updateProj();
-    m_resLock->unlock();
+    m_res_lock->unlock();
 }
 
 void SVCameraNode::setOrtho() {
-    m_resLock->lock();
+    m_res_lock->lock();
     m_is_ortho = true;
     _updateProj();
-    m_resLock->unlock();
+    m_res_lock->unlock();
 }
 
 void SVCameraNode::resetDefault() {
-    m_resLock->lock();
+    m_res_lock->lock();
     m_width = 720.0f;
     m_height = 1280.0f;
     _updateProj();
-    m_resLock->unlock();
+    m_res_lock->unlock();
 }
 
 //设置宽高
 void SVCameraNode::setSize(f32 _w, f32 _h) {
-    m_resLock->lock();
+    m_res_lock->lock();
     m_width = _w;
     m_height = _h;
     _updateProj();
     m_dirty = true;
-    m_resLock->unlock();
+    m_res_lock->unlock();
 }
 
 //设置远进裁
 void SVCameraNode::setZ(f32 _near, f32 _far) {
-    m_resLock->lock();
+    m_res_lock->lock();
     m_znear = _near;
     m_zfar = _far;
     _updateProj();
     m_dirty = true;
-    m_resLock->unlock();
+    m_res_lock->unlock();
 }
 
 FVec3 SVCameraNode::getPosition() {

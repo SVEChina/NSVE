@@ -20,53 +20,58 @@ using namespace sv;
 SVRenderer::SVRenderer(SVInstPtr _app)
 :SVGBaseEx(_app)
 ,m_cur_target(nullptr){
-    m_resLock = MakeSharedPtr<SVLockSpin>();
+    m_target_pool.resize(E_TEX_END);
+    for(s32 i=0;i<E_TEX_END;i++) {
+        m_target_pool[i] = nullptr;
+    }
+    m_res_lock = MakeSharedPtr<SVLockSpin>();
 }
 
 SVRenderer::~SVRenderer(){
-    m_resLock = nullptr;
+    m_res_lock = nullptr;
     m_cur_target = nullptr;
 }
 
 void SVRenderer::init(s32 _w,s32 _h){
-    
+    m_cur_target = nullptr;
 }
 
 void SVRenderer::destroy(){
     clearRes();
-    m_resLock = nullptr;
+    m_cur_target = nullptr;
+    m_res_lock = nullptr;
 }
 
+//重置大小
 void SVRenderer::resize(s32 _w,s32 _h) {
-    //target 重制大小
-    m_resLock->lock();
-    TARGETPOOL::iterator it = m_target_pool.begin();
-    while (it!=m_target_pool.end()) {
-        it->second->resize(_w, _h);
-        it++;
+    m_res_lock->lock();
+    for(s32 i=0;i<E_TEX_END;i++) {
+        if( m_target_pool[i] ) {
+            m_target_pool[i]->resize(_w, _h);
+        }
     }
-    m_resLock->unlock();
+    m_res_lock->unlock();
 }
 
 void SVRenderer::clearRes() {
-    m_resLock->lock();
+    m_res_lock->lock();
     ROBJLIST::iterator it = m_robjList.begin();
     while(it!=m_robjList.end()) {
         SVRResPtr t_robj = (*it);
         t_robj->destroy( std::dynamic_pointer_cast<SVRenderer>(shareObject())  );
         it = m_robjList.erase(it);
     }
-    m_resLock->unlock();
+    m_res_lock->unlock();
 }
 
 void SVRenderer::addRes(SVRResPtr _res) {
-    m_resLock->lock();
+    m_res_lock->lock();
     m_robjList.push_back(_res);
-    m_resLock->unlock();
+    m_res_lock->unlock();
 }
 
 void SVRenderer::removeRes(SVRResPtr _res) {
-    m_resLock->lock();
+    m_res_lock->lock();
     ROBJLIST::iterator it = m_robjList.begin();
     while(it!=m_robjList.end()) {
         SVRResPtr t_robj = (*it) ;
@@ -77,12 +82,12 @@ void SVRenderer::removeRes(SVRResPtr _res) {
         }
         it++;
     }
-    m_resLock->unlock();
+    m_res_lock->unlock();
 }
 
 //移除不使用的资源
 void SVRenderer::removeUnuseRes() {
-    m_resLock->lock();
+    m_res_lock->lock();
     ROBJLIST::iterator it = m_robjList.begin();
     while(it!=m_robjList.end()) {
         SVRResPtr t_robj = (*it) ;
@@ -93,7 +98,7 @@ void SVRenderer::removeUnuseRes() {
             it++;
         }
     }
-    m_resLock->unlock();
+    m_res_lock->unlock();
 }
 
 //需要控制当前的fbo
@@ -103,32 +108,22 @@ void SVRenderer::setCurTarget(SVRTargetPtr _target) {
 
 //获取target
 SVRTargetPtr SVRenderer::getTarget(SVINTEX _texid) {
-    TARGETPOOL::iterator it = m_target_pool.find(_texid);
-    if( it!=m_target_pool.end() ) {
-        return it->second;
-    }
-    return nullptr;
+    return m_target_pool[_texid];
 }
 
 //销毁Target
 void SVRenderer::destroyTarget(SVINTEX _texid) {
-    m_resLock->lock();
-    TARGETPOOL::iterator it = m_target_pool.find(_texid);
-    if( it!=m_target_pool.end() ) {
-        SVRTargetPtr t_target = it->second;
-        m_target_pool.erase(it);
-        //析构target
-        t_target = nullptr;
+    m_res_lock->lock();
+    if(m_target_pool[_texid]) {
+        m_target_pool[_texid] = nullptr;
     }
-    m_resLock->unlock();
+    m_res_lock->unlock();
 }
 
 void SVRenderer::_addTarget(SVINTEX _texid,SVRTargetPtr _target) {
-    m_resLock->lock();
-    if(_target) {
-        m_target_pool.insert(std::make_pair(_texid, _target));
-    }
-    m_resLock->unlock();
+    m_res_lock->lock();
+    m_target_pool[_texid] = _target;
+    m_res_lock->unlock();
 }
 
 void SVRenderer::swapInTexture(SVINTEX _tex1,SVINTEX _tex2) {
