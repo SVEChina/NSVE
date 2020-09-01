@@ -10,7 +10,7 @@
 
 #include "SVDef.h"
 #include "SVPreDeclare.h"
-#include <vector>
+#include "SVLuaBase.h"
 
 /* c++ 11 标准 sharepter
  * share_ptr是一个模版类
@@ -25,34 +25,29 @@
 
 namespace sv {
 
-    //对象
-    class SVObject : public std::enable_shared_from_this<SVObject> {
-    public:
-        SVObject();
-        
-        virtual ~SVObject();
-        
-        std::shared_ptr<SVObject> shareObject() {
-            return shared_from_this();
-        }
-        
-        virtual void listenData(SVObjectPtr datagen) {};
-        
-        //
-        static void regist_SVObjectLua(void* ls);
-    };
+//对象
+class SVObject : public std::enable_shared_from_this<SVObject> {
+public:
+    SVObject();
     
-    //数据监听函数指针
-    typedef void (SVObject::*dataListenFunc)(SVObjectPtr datagen);
+    virtual ~SVObject();
+    
+    std::shared_ptr<SVObject> shareObject() {
+        return shared_from_this();
+    }
+    
+    virtual void listenData(SVObjectPtr datagen) {};
+    
+    //
+    static void lua_regist_SVObject(void* ls);
+};
 
-//    //注册静态类
-//    class SVObjectLua {
-//    public:
-//        SVObjectLua() {
-//            gLuaRegistPool.push_back(SVObject::regist_SVObjectLua);
-//        }
-//    };
-        
+//lua_regist tt  = SVObject::lua_regist_SVObject;
+//数据监听函数指针
+typedef void (SVObject::*dataListenFunc)(SVObjectPtr datagen);
+
+LUA_REG_DECLARE(SVObject);
+
 }//!namespace sv
 
 
