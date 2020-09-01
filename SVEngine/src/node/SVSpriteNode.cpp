@@ -106,7 +106,7 @@ void SVSpriteNode::setTexture(cptr8 _path){
     m_pTex = mApp->getTexMgr()->getTexture(_path,true);
 }
 
-void SVSpriteNode::setTexture(SVINTEX _textype){
+void SVSpriteNode::setTexture(SV_TEXIN _textype){
     //m_inTexType = _textype;
 }
 
@@ -123,8 +123,8 @@ SVTexturePtr SVSpriteNode::getTexture() {
 
 void SVSpriteNode::syncTexSize() {
     if(m_pTex) {
-        s32 t_w = m_pTex->getTextureDsp()->m_width;
-        s32 t_h = m_pTex->getTextureDsp()->m_height;
+        s32 t_w = m_pTex->m_texture_dsp.m_width;
+        s32 t_h = m_pTex->m_texture_dsp.m_height;
         setSize(t_w,t_h);
     }
 }

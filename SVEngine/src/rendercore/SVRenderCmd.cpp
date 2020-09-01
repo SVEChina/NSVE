@@ -84,12 +84,12 @@ SVRCmdPass::~SVRCmdPass(){
 }
 
 //设置目标target
-void SVRCmdPass::setTarget(SVINTEX _aim) {
+void SVRCmdPass::setTarget(SV_TEXIN _aim) {
     m_aim = _aim;
 }
 
 //设置辅助target
-void SVRCmdPass::setHelpTarget(SVINTEX _aim) {
+void SVRCmdPass::setHelpTarget(SV_TEXIN _aim) {
     m_aim_help = _aim;
 }
 

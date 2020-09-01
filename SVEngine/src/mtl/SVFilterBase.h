@@ -36,7 +36,7 @@ namespace sv {
         virtual void update(f32 _dt);
         
         //设置目标Target
-        sv_inline void setTarget(SVINTEX _intex){ m_target_tex = _intex; }
+        sv_inline void setTarget(SV_TEXIN _intex){ m_target_tex = _intex; }
         
         //设置预处理
         sv_inline void setPreProcess() { m_is_pre = true; }
@@ -54,8 +54,8 @@ namespace sv {
     protected:
         SVString m_name;
         bool m_is_pre;
-        SVINTEX m_target_tex;
-        SVINTEX m_target_tex_help;
+        SV_TEXIN m_target_tex;
+        SV_TEXIN m_target_tex_help;
         SVSurfacePtr m_surface;
         SVMtlCorePtr m_mtl;
         

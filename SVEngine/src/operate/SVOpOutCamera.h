@@ -15,13 +15,13 @@ namespace sv {
     //创建ios相机
     class SVOpCreateIOSInstream : public SVOpBase {
     public:
-        SVOpCreateIOSInstream(SVInstPtr _app,cptr8 _name,PICFORMATE _format,s32 _w,s32 _h,f32 _angle, bool _show = false);
+        SVOpCreateIOSInstream(SVInstPtr _app,cptr8 _name,SV_PIC_FORMATE _format,s32 _w,s32 _h,f32 _angle, bool _show = false);
         
         void _process(f32 _dt);
         
     protected:
         SVString m_name;
-        PICFORMATE m_formate;
+        SV_PIC_FORMATE m_formate;
         s32 m_width;
         s32 m_height;
         f32 m_angle;
@@ -31,13 +31,13 @@ namespace sv {
     //创建ios相机
     class SVOpCreateIOSTexIDInstream : public SVOpBase {
     public:
-        SVOpCreateIOSTexIDInstream(SVInstPtr _app,cptr8 _name, u32 _tex0ID, u32 _tex1ID, u32 _tex2ID, PICFORMATE _format,s32 _w,s32 _h,f32 _angle, bool _show = false);
+        SVOpCreateIOSTexIDInstream(SVInstPtr _app,cptr8 _name, u32 _tex0ID, u32 _tex1ID, u32 _tex2ID, SV_PIC_FORMATE _format,s32 _w,s32 _h,f32 _angle, bool _show = false);
         
         void _process(f32 _dt);
         
     protected:
         SVString m_name;
-        PICFORMATE m_formate;
+        SV_PIC_FORMATE m_formate;
         s32 m_width;
         s32 m_height;
         f32 m_angle;

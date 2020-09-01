@@ -33,7 +33,7 @@ namespace sv {
         
         s32 m_chn;          //纹理使用的通道
         
-        SVINTEX m_texForm;  //纹理来源
+        SV_TEXIN m_texForm;  //纹理来源
         
         SVString m_fname;
         
@@ -70,13 +70,13 @@ namespace sv {
         
         virtual s32 submitMtl();
         
-        void setTexture(s32 _chn,s32 _stage,SVINTEX _from,cptr8 _name);
+        void setTexture(s32 _chn,s32 _stage,SV_TEXIN _from,cptr8 _name);
 
         void setTexture(s32 _chn,s32 _stage,cptr8 _fname);
         
         void setTexture(s32 _chn,s32 _stage,SVTexturePtr _texture);
                
-        void setTexture(s32 _chn,s32 _stage,sv::SVINTEX _from);
+        void setTexture(s32 _chn,s32 _stage,sv::SV_TEXIN _from);
         
         SVShaderPtr getShader() { return m_shader_obj; }
         

@@ -93,7 +93,7 @@ SVCameraNodePtr SVCameraMgr::getCamera(s32 _cameraID) {
 }
 
 //设置相机绑定
-void SVCameraMgr::bindCamera(SVINTEX _targetID,s32 _cameraID) {
+void SVCameraMgr::bindCamera(SV_TEXIN _targetID,s32 _cameraID) {
     if(mApp->getRenderer()) {
         SVRTargetPtr t_target = mApp->getRenderer()->getTarget(_targetID);
         SVCameraNodePtr t_camera = getCamera(_cameraID);
@@ -104,7 +104,7 @@ void SVCameraMgr::bindCamera(SVINTEX _targetID,s32 _cameraID) {
 }
 
 //解开相机绑定
-void SVCameraMgr::unbindCamera(SVINTEX _targetID) {
+void SVCameraMgr::unbindCamera(SV_TEXIN _targetID) {
     if(mApp->getRenderer()) {
         SVRTargetPtr t_target = mApp->getRenderer()->getTarget(_targetID);
         if(t_target) {

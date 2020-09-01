@@ -18,22 +18,17 @@ namespace sv {
     public:
         SVTexture(SVInstPtr _app);
         
-        ~SVTexture();
+        virtual ~SVTexture();
         
-        void init(SVTextureDsp& _param);
+        void init(SVTextureDsp& _dsp);
         
-        void init(SVTextureDsp& _param,SVDataSwapPtr _data);
+        void init(SVTextureDsp& _dsp,SVDataSwapPtr _data);
 
         void destroy();
         
-        //
         void resize(s32 _w,s32 _h);
         
-        //数据操作的锁
-        void lockData();
-        
-        void unlockData();
-        
+        //
         void setTexData(SVDataSwapPtr _data);
         
         void setTexCubeData(SVDataSwapPtr _data,s32 _index);
@@ -43,12 +38,13 @@ namespace sv {
         
         void unbindRes();
         
+        //
         SVRTexPtr getResTex();
         
-        SVTextureDsp* getTextureDsp();
-        
+        //
         SVDataSwapPtr getTextureData();
         
+        //
         SVDataSwapPtr getTextureCubeData(s32 _index);
         
         //

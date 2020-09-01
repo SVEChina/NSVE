@@ -17,7 +17,7 @@
 using namespace sv;
 
 //设置ios相机
-SVOpCreateIOSInstream::SVOpCreateIOSInstream(SVInstPtr _app, cptr8 _name, PICFORMATE _format, s32 _w, s32 _h,f32 _angle, bool _show)
+SVOpCreateIOSInstream::SVOpCreateIOSInstream(SVInstPtr _app, cptr8 _name, SV_PIC_FORMATE _format, s32 _w, s32 _h,f32 _angle, bool _show)
         : SVOpBase(_app) {
     m_name = _name;
     m_formate = _format;
@@ -39,7 +39,7 @@ void SVOpCreateIOSInstream::_process(f32 _dt) {
 }
 
 //设置ios相机
-SVOpCreateIOSTexIDInstream::SVOpCreateIOSTexIDInstream(SVInstPtr _app, cptr8 _name, u32 _tex0ID, u32 _tex1ID, u32 _tex2ID, PICFORMATE _format, s32 _w, s32 _h,f32 _angle, bool _show)
+SVOpCreateIOSTexIDInstream::SVOpCreateIOSTexIDInstream(SVInstPtr _app, cptr8 _name, u32 _tex0ID, u32 _tex1ID, u32 _tex2ID, SV_PIC_FORMATE _format, s32 _w, s32 _h,f32 _angle, bool _show)
 : SVOpBase(_app) {
     m_name = _name;
     m_formate = _format;
@@ -214,7 +214,7 @@ SVOpCreateStreamCamera::SVOpCreateStreamCamera(SVInstPtr _app, cptr8 _name,s32 _
 void SVOpCreateStreamCamera::_process(f32 _dt) {
 //    SVStreamInPtr t_cam_stream = mApp->getBasicSys()->getStreamIn();
 //    if (t_cam_stream) {
-//        t_cam_stream->createInStream(m_name.c_str(), 1,(PICFORMATE)m_formate, m_width, m_height, m_angle,true);
+//        t_cam_stream->createInStream(m_name.c_str(), 1,(SV_PIC_FORMATE)m_formate, m_width, m_height, m_angle,true);
 //        t_cam_stream->active(m_name.c_str());
 //    }
 }

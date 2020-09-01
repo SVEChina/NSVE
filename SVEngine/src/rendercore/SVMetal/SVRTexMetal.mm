@@ -44,27 +44,26 @@ void SVRTexMetal:: create(SVRendererPtr _renderer) {
     SVTexturePtr t_texture = std::dynamic_pointer_cast<SVTexture>(m_logic_obj);
     if(t_rm && t_texture) {
         //
-        SVTextureDsp* t_dsp = t_texture->getTextureDsp();
-        m_width = t_dsp->m_width;
-        m_height = t_dsp->m_height;
-        m_depth = t_dsp->m_depth;
+        m_width = t_texture->m_texture_dsp.m_width;
+        m_height = t_texture->m_texture_dsp.m_height;
+        m_depth = t_texture->m_texture_dsp.m_depth;
         //
         MTLTextureDescriptor* t_descriptor = [[MTLTextureDescriptor alloc] init];
         t_descriptor.pixelFormat = MTLPixelFormatInvalid;//MTLPixelFormatRGBA8Unorm;
         s32 t_bytesPerRow = 0;
-        if( t_dsp->m_dataFormate == SV_FORMAT_RGBA8 ) {
+        if( t_texture->m_texture_dsp.m_data_formate == SV_FORMAT_RGBA8 ) {
             t_bytesPerRow = m_width*4;
             t_descriptor.pixelFormat = MTLPixelFormatRGBA8Uint;
-        }else if( t_dsp->m_dataFormate == SV_FORMAT_R8 ) {
+        }else if( t_texture->m_texture_dsp.m_data_formate == SV_FORMAT_R8 ) {
             t_bytesPerRow = m_width;
             t_descriptor.pixelFormat = MTLPixelFormatA8Unorm;
-        }else if( t_dsp->m_dataFormate == SV_FORMAT_RG8 ) {
+        }else if( t_texture->m_texture_dsp.m_data_formate == SV_FORMAT_RG8 ) {
             t_bytesPerRow = m_width*2;
             t_descriptor.pixelFormat = MTLPixelFormatRG8Unorm;
         }
-        t_descriptor.width = t_dsp->m_width;
-        t_descriptor.height = t_dsp->m_height;
-        t_descriptor.depth = t_dsp->m_depth;
+        t_descriptor.width = m_width;
+        t_descriptor.height = m_height;
+        t_descriptor.depth = m_depth;
         t_descriptor.mipmapLevelCount = 1;
         t_descriptor.sampleCount      = t_rm->m_samplenum;  //跟msaa相关
         t_descriptor.arrayLength      = 1;
@@ -72,27 +71,27 @@ void SVRTexMetal:: create(SVRendererPtr _renderer) {
             t_descriptor.cpuCacheMode = MTLCPUCacheModeDefaultCache;
             t_descriptor.storageMode = MTLStorageModeManaged;   //存储方式 MTLStorageModeShared/MTLStorageModeManaged/MTLStorageModePrivate/MTLStorageModeMemoryless
             t_descriptor.usage = MTLTextureUsageShaderRead;
-            if (t_dsp->m_computeWrite){
+            if (t_texture->m_texture_dsp.m_computeWrite){
                 t_descriptor.usage |= MTLTextureUsageShaderWrite;
             }
-            if (t_dsp->m_renderTarget){
+            if (t_texture->m_texture_dsp.m_renderTarget){
                 t_descriptor.usage |= MTLTextureUsageRenderTarget;
             }
         }
         //设置类型，创建纹理
-        if(t_dsp->m_imgtype == SV_IMAGE_1D) {
+        if(t_texture->m_texture_dsp.m_image_type == SV_IMAGE_1D) {
             t_descriptor.pixelFormat = MTLPixelFormatRGBA8Unorm;
             t_descriptor.textureType = MTLTextureType1D;
             m_src_tex =  [t_rm->m_pDevice newTextureWithDescriptor:t_descriptor];
-        }else if(t_dsp->m_imgtype == SV_IMAGE_2D) {
+        }else if(t_texture->m_texture_dsp.m_image_type == SV_IMAGE_2D) {
             t_descriptor.pixelFormat = MTLPixelFormatRGBA8Unorm;
             t_descriptor.textureType = MTLTextureType2D;
             m_src_tex =  [t_rm->m_pDevice newTextureWithDescriptor:t_descriptor];
-        }else if(t_dsp->m_imgtype == SV_IMAGE_2D) {
+        }else if(t_texture->m_texture_dsp.m_image_type == SV_IMAGE_2D) {
             t_descriptor.pixelFormat = MTLPixelFormatRGBA8Unorm;
             t_descriptor.textureType = MTLTextureType3D;
             m_src_tex =  [t_rm->m_pDevice newTextureWithDescriptor:t_descriptor];
-        }else if(t_dsp->m_imgtype == SV_IMAGE_CUBE) {
+        }else if(t_texture->m_texture_dsp.m_image_type == SV_IMAGE_CUBE) {
             t_descriptor.pixelFormat = MTLPixelFormatRGBA8Unorm;
             t_descriptor.textureType = MTLTextureTypeCube;
             m_src_tex =  [t_rm->m_pDevice newTextureWithDescriptor:t_descriptor];
@@ -148,13 +147,13 @@ void SVRTexMetal::resize() {
 //        MTLTextureDescriptor* t_descriptor = [[MTLTextureDescriptor alloc] init];
 //        t_descriptor.pixelFormat = MTLPixelFormatInvalid;//MTLPixelFormatRGBA8Unorm;
 //        s32 t_bytesPerRow = 0;
-//        if( t_dsp->m_dataFormate == SV_FORMAT_RGBA8 ) {
+//        if( t_dsp->m_data_formate == SV_FORMAT_RGBA8 ) {
 //            t_bytesPerRow = m_width*4;
 //            t_descriptor.pixelFormat = MTLPixelFormatRGBA8Uint;
-//        }else if( t_dsp->m_dataFormate == SV_FORMAT_R8 ) {
+//        }else if( t_dsp->m_data_formate == SV_FORMAT_R8 ) {
 //            t_bytesPerRow = m_width;
 //            t_descriptor.pixelFormat = MTLPixelFormatA8Unorm;
-//        }else if( t_dsp->m_dataFormate == SV_FORMAT_RG8 ) {
+//        }else if( t_dsp->m_data_formate == SV_FORMAT_RG8 ) {
 //            t_bytesPerRow = m_width*2;
 //            t_descriptor.pixelFormat = MTLPixelFormatRG8Unorm;
 //        }
@@ -176,19 +175,19 @@ void SVRTexMetal::resize() {
 //            }
 //        }
 //        //设置类型，创建纹理
-//        if(t_dsp->m_imgtype == SV_IMAGE_1D) {
+//        if(t_dsp->m_image_type == SV_IMAGE_1D) {
 //            t_descriptor.pixelFormat = MTLPixelFormatRGBA8Unorm;
 //            t_descriptor.textureType = MTLTextureType1D;
 //            m_src_tex =  [t_rm->m_pDevice newTextureWithDescriptor:t_descriptor];
-//        }else if(t_dsp->m_imgtype == SV_IMAGE_2D) {
+//        }else if(t_dsp->m_image_type == SV_IMAGE_2D) {
 //            t_descriptor.pixelFormat = MTLPixelFormatRGBA8Unorm;
 //            t_descriptor.textureType = MTLTextureType2D;
 //            m_src_tex =  [t_rm->m_pDevice newTextureWithDescriptor:t_descriptor];
-//        }else if(t_dsp->m_imgtype == SV_IMAGE_2D) {
+//        }else if(t_dsp->m_image_type == SV_IMAGE_2D) {
 //            t_descriptor.pixelFormat = MTLPixelFormatRGBA8Unorm;
 //            t_descriptor.textureType = MTLTextureType3D;
 //            m_src_tex =  [t_rm->m_pDevice newTextureWithDescriptor:t_descriptor];
-//        }else if(t_dsp->m_imgtype == SV_IMAGE_CUBE) {
+//        }else if(t_dsp->m_image_type == SV_IMAGE_CUBE) {
 //            t_descriptor.pixelFormat = MTLPixelFormatRGBA8Unorm;
 //            t_descriptor.textureType = MTLTextureTypeCube;
 //            m_src_tex =  [t_rm->m_pDevice newTextureWithDescriptor:t_descriptor];

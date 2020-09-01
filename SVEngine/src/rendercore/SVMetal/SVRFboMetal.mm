@@ -51,7 +51,7 @@ void SVRFboMetal::create(SVRendererPtr _renderer) {
         MTLTextureDescriptor* t_descriptor = [MTLTextureDescriptor texture2DDescriptorWithPixelFormat:t_pfmt width:m_width height:m_height mipmapped:false];
         t_descriptor.usage |= MTLTextureUsageRenderTarget;
         for(s32 i=0;i<m_target_num;i++) {
-            m_color_tex[i]= SVINTEX(t_dsp->m_color_texid[i]);
+            m_color_tex[i]= SV_TEXIN(t_dsp->m_color_texid[i]);
         }
         //
         if(m_use_depth && m_use_stencil) {

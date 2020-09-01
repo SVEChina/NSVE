@@ -63,6 +63,7 @@ SVImage::~SVImage() {
 s32 SVImage::load(cptr8 _filename){
     SV_LOG_INFO("load image: %s \n",_filename );
     m_img_name = _filename;
+    //更具加载器类型，来加载不同的纹理
     SVLoaderPng pngLoad(mApp);
     u8 *pTexData = nullptr;
     pngLoad.loadData(_filename, &pTexData);
@@ -78,7 +79,7 @@ s32 SVImage::load(cptr8 _filename){
 SVTexturePtr SVImage::toTexture() {
     SVTexturePtr t_tex = MakeSharedPtr<SVTexture>(mApp);
     SVTextureDsp t_dsp;
-    t_dsp.m_imgtype = m_type;
+    t_dsp.m_image_type = SV_TEXTYPE(m_type);
     t_dsp.m_width = m_width;
     t_dsp.m_height = m_height;
     t_dsp.m_depth = m_depth;
@@ -86,7 +87,7 @@ SVTexturePtr SVImage::toTexture() {
     t_dsp.m_computeWrite = false;
     t_dsp.m_renderTarget = false;
     t_dsp.m_srgb = false;
-    t_dsp.m_dataFormate = m_format;
+    t_dsp.m_data_formate = SV_TEXFORMATE(m_format);
     t_tex->init(t_dsp,m_pData);
     t_tex->m_name = m_img_name.c_str();
     return t_tex;

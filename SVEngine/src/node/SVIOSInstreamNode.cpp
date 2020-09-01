@@ -33,7 +33,7 @@ SVIOSInstreamNode::~SVIOSInstreamNode() {
     m_pMtl = nullptr;
 }
 
-void SVIOSInstreamNode::init(SVINTEX _tt){
+void SVIOSInstreamNode::init(SV_TEXIN _tt){
     m_tt = _tt;
 }
 

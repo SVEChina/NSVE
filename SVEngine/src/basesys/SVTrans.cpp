@@ -20,7 +20,7 @@ SVTrans::SVTrans(SVInstPtr _app)
 SVTrans::~SVTrans() {
 }
 
-void SVTrans::init(s32 _w, s32 _h,f32 _angle,PICFORMATE _picformate,SVINTEX _tt){
+void SVTrans::init(s32 _w, s32 _h,f32 _angle,SV_PIC_FORMATE _picformate,SV_TEXIN _tt){
     m_width = _w;
     m_height = _h;
     m_picformate = _picformate;

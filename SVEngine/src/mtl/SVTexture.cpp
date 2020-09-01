@@ -4,23 +4,17 @@
 // Copyright 2017-2020
 // yizhou Fu,long Yin,longfei Lin,ziyu Xu,xiaofan Li,daming Li
 //
-
 #include "SVTexture.h"
 #include "../work/SVTdCore.h"
 #include "../app/SVDispatch.h"
 #include "../app/SVInst.h"
-#include "../basesys/SVConfig.h"
-#include "../rendercore/SVRenderMgr.h"
 #include "../work/SVTdCore.h"
 #include "../base/SVDataSwap.h"
-//#include "../rendercore/SVGL/SVRTexGL.h"
-//#include "../rendercore/SVGL/SVRendererGL.h"
-//#include "../rendercore/SVVulkan/SVRendererVK.h"
 
 using namespace sv;
 
 SVTexture::SVTexture(SVInstPtr _app)
-: SVGBaseEx(_app) {
+:SVGBaseEx(_app) {
     m_lock = MakeSharedPtr<SVLockSpin>();
     m_name = "";
     m_restex = nullptr;
@@ -37,13 +31,13 @@ SVTexture::~SVTexture() {
     }
 }
 
-void SVTexture::init(SVTextureDsp& _param) {
-    m_texture_dsp = _param;
+void SVTexture::init(SVTextureDsp& _dsp) {
+    m_texture_dsp = _dsp;
     setTexData(nullptr);
 }
 
-void SVTexture::init(SVTextureDsp& _param,SVDataSwapPtr _data) {
-    m_texture_dsp = _param;
+void SVTexture::init(SVTextureDsp& _dsp,SVDataSwapPtr _data) {
+    m_texture_dsp = _dsp;
     setTexData(_data);
 }
 
@@ -67,10 +61,6 @@ void SVTexture::resize(s32 _w,s32 _h) {
     }
 }
 
-SVTextureDsp* SVTexture::getTextureDsp() {
-    return &m_texture_dsp;
-}
-
 SVDataSwapPtr SVTexture::getTextureData() {
     return m_pData[0];
 }
@@ -82,32 +72,20 @@ SVDataSwapPtr SVTexture::getTextureCubeData(s32 _index) {
     return nullptr;
 }
 
-void SVTexture::lockData() {
-    if(m_lock) {
-        m_lock->lock();
-    }
-}
-
-void SVTexture::unlockData() {
-    if(m_lock) {
-        m_lock->unlock();
-    }
-}
-
 void SVTexture::setTexData(SVDataSwapPtr _data){
     //更新纹理数据
-    lockData();
+    m_lock->lock();
     m_pData[0] = _data;
-    unlockData();
+    m_lock->unlock();
 }
 
 void SVTexture::setTexCubeData(SVDataSwapPtr _data,s32 _index){
     //更新纹理数据
-    lockData();
+    m_lock->lock();
     if(_index>=0 && _index<6) {
         m_pData[_index] = _data;
     }
-    unlockData();
+    m_lock->unlock();
 }
 
 void SVTexture::bindRes(SVRTexPtr _res) {

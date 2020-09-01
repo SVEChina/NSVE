@@ -116,12 +116,27 @@ namespace sv {
         SV_E_TECH_CS = 0x00100000,
     };
 
-#define SV_STAGE_VS     0
-#define SV_STAGE_FS     1
-#define SV_STAGE_GS     2
-#define SV_STAGE_TSC    3
-#define SV_STAGE_TSE    4
-#define SV_STAGE_CS     5
+    #define SV_STAGE_VS     0
+    #define SV_STAGE_FS     1
+    #define SV_STAGE_GS     2
+    #define SV_STAGE_TSC    3
+    #define SV_STAGE_TSE    4
+    #define SV_STAGE_CS     5
+
+    
+    //相机图片格式
+    enum SV_PIC_FORMATE {
+        SV_PF_GRAY8 = 0,
+        SV_PF_YV12,
+        SV_PF_I420,
+        SV_PF_NV12,
+        SV_PF_NV21,
+        SV_PF_BGRA,
+        SV_PF_RGBA,
+        SV_PF_RGB,
+        SV_PF_NULL
+    };
+
 
     //输出纹理格式
     enum SV_OUTSTEAMFORMATE {
@@ -148,7 +163,7 @@ namespace sv {
     };
 
     //纹理环绕方式
-    enum SVTEXWRAP {
+    enum SV_TEXWRAP {
         E_TEX_CLAMP,
         E_TEX_MIRROR,
         E_TEX_REPEAT,
@@ -156,7 +171,7 @@ namespace sv {
     };
 
     //SV 支持的内置纹理种类
-    enum SVINTEX {
+    enum SV_TEXIN {
         E_TEX_BEGIN = 0,
         E_TEX_MAIN,
         E_TEX_SHADOW,
@@ -211,28 +226,17 @@ namespace sv {
         E_TEX_END = 64
     };
 
-    //相机图片格式
-    enum PICFORMATE {
-        SV_PF_GRAY8 = 0,
-        SV_PF_YV12,
-        SV_PF_I420,
-        SV_PF_NV12,
-        SV_PF_NV21,
-        SV_PF_BGRA,
-        SV_PF_RGBA,
-        SV_PF_RGB,
-        SV_PF_NULL
-    };
-
-    enum {
+    //纹理类型
+    enum SV_TEXTYPE {
         SV_IMAGE_1D = 0,
-        SV_IMAGE_2D,        // 2D image
+        SV_IMAGE_2D,            // 2D image
         SV_IMAGE_3D,            // 3D image
         SV_IMAGE_CUBE,          // Cube image
         SV_IMAGE_2D_ARRAY,      // 2D array image
     };
 
-    enum {
+    //纹理格式
+    enum SV_TEXFORMATE{
         SV_FORMAT_R8 = 0,        // 8-bits per channel unsigned formats
         SV_FORMAT_RG8,
         SV_FORMAT_RGB8,
@@ -277,6 +281,7 @@ namespace sv {
     };
 
     class SVInst;
+
     class SVThread;
 
     //回调函数

@@ -23,7 +23,7 @@ SVFilterBlur::SVFilterBlur(SVInstPtr _app)
 SVFilterBlur::~SVFilterBlur(){
 }
 
-bool SVFilterBlur::create(SVINTEX _inType,SVINTEX _outType){
+bool SVFilterBlur::create(SV_TEXIN _inType,SV_TEXIN _outType){
 //    SVRendererPtr t_renderer = mApp->getRenderer();
 //    if(!t_renderer)
 //        return false;

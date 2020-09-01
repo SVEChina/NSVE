@@ -43,7 +43,7 @@ namespace sv {
     //
     class SVRTarget : public SVGBaseEx {
     public:
-        SVRTarget(SVInstPtr _app,SVINTEX _id);
+        SVRTarget(SVInstPtr _app,SV_TEXIN _id);
 
         ~SVRTarget();
         
@@ -105,11 +105,11 @@ namespace sv {
         
         FMat4 vpMat();
         
-        sv_inline SVINTEX getTargetID() { return m_target_id; }
+        sv_inline SV_TEXIN getTargetID() { return m_target_id; }
         
     protected:
         //目标ID
-        SVINTEX m_target_id;
+        SV_TEXIN m_target_id;
         
         //颜色
         SVColor m_color;

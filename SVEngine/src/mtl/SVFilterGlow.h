@@ -19,7 +19,7 @@ namespace sv {
         
         ~SVFilterGlow();
         
-        virtual bool create(SVINTEX _inType,SVINTEX _outType);
+        virtual bool create(SV_TEXIN _inType,SV_TEXIN _outType);
         
         virtual void destroy();
         

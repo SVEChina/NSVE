@@ -42,16 +42,16 @@ namespace sv {
         virtual SVRFboPtr createResFbo() { return nullptr; }
         
         //创建target资源
-        virtual SVRTargetPtr createTarget(SVINTEX _texid,bool _depth,bool _stencil){ return nullptr; }
+        virtual SVRTargetPtr createTarget(SV_TEXIN _texid,bool _depth,bool _stencil){ return nullptr; }
         
         //创建target资源,自定义大小
-        virtual SVRTargetPtr createTarget(SVINTEX _texid,s32 _w,s32 _h,bool _depth,bool _stencil){ return nullptr; }
+        virtual SVRTargetPtr createTarget(SV_TEXIN _texid,s32 _w,s32 _h,bool _depth,bool _stencil){ return nullptr; }
         
         //获取target
-        virtual SVRTargetPtr getTarget(SVINTEX _texid){ return nullptr; }
+        virtual SVRTargetPtr getTarget(SV_TEXIN _texid){ return nullptr; }
         
         //销毁Target
-        virtual void destroyTarget(SVINTEX _texid) {}
+        virtual void destroyTarget(SV_TEXIN _texid) {}
         
         //处理材质
         virtual bool processMtl(SVMtlCorePtr _mtl,SVSurfacePtr _surface){ return false; }
@@ -66,7 +66,7 @@ namespace sv {
         virtual void drawMesh(SVRenderMeshPtr _mesh){ }
         
         //绘制屏幕
-        virtual void drawScreen(SVINTEX _texid) { }
+        virtual void drawScreen(SV_TEXIN _texid) { }
         
     };
     

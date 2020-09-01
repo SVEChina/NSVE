@@ -32,16 +32,16 @@ StreamInCore::~StreamInCore() {
 //    m_tex2 = nullptr;
 }
 
-void StreamInCore::init(s32 _w,s32 _h,PICFORMATE _fromate,f32 _angle,bool _show) {
+void StreamInCore::init(s32 _w,s32 _h,SV_PIC_FORMATE _fromate,f32 _angle,bool _show) {
 //    for(s32 t_tt = E_TEX_INSTREAM ;t_tt<E_TEX_OUTSTREAM; t_tt++ ) {
-//        if(!mApp->getRenderer()->getSVTex( SVINTEX(t_tt) ) ){
-//            init(_w,_h,_fromate,_angle,_show,SVINTEX(t_tt) );
+//        if(!mApp->getRenderer()->getSVTex( SV_TEXIN(t_tt) ) ){
+//            init(_w,_h,_fromate,_angle,_show,SV_TEXIN(t_tt) );
 //            return ;
 //        }
 //    }
 }
 
-void StreamInCore::init(s32 _w,s32 _h,PICFORMATE _fromate,f32 _angle,bool _show,SVINTEX _tex){
+void StreamInCore::init(s32 _w,s32 _h,SV_PIC_FORMATE _fromate,f32 _angle,bool _show,SV_TEXIN _tex){
 //    m_tt = _tex;
 //    //创建稳定的合成后的流
 //    m_formate = _fromate;
@@ -104,16 +104,16 @@ void StreamInCore::init(s32 _w,s32 _h,PICFORMATE _fromate,f32 _angle,bool _show,
 }
 
 //
-void StreamInCore::init(u32 _tex0ID, u32 _tex1ID, u32 _tex2ID, s32 _w,s32 _h,PICFORMATE _fromate,f32 _angle,bool _show) {
+void StreamInCore::init(u32 _tex0ID, u32 _tex1ID, u32 _tex2ID, s32 _w,s32 _h,SV_PIC_FORMATE _fromate,f32 _angle,bool _show) {
 //    for(s32 t_tt = E_TEX_INSTREAM ;t_tt<E_TEX_OUTSTREAM; t_tt++ ) {
-//        if(!mApp->getRenderer()->getSVTex( SVINTEX(t_tt) ) ){
-//            init(_tex0ID, _tex1ID, _tex2ID,  _w,_h,_fromate,_angle,_show,SVINTEX(t_tt) );
+//        if(!mApp->getRenderer()->getSVTex( SV_TEXIN(t_tt) ) ){
+//            init(_tex0ID, _tex1ID, _tex2ID,  _w,_h,_fromate,_angle,_show,SV_TEXIN(t_tt) );
 //            return ;
 //        }
 //    }
 }
 
-void StreamInCore::init(u32 _tex0ID, u32 _tex1ID, u32 _tex2ID, s32 _w,s32 _h,PICFORMATE _fromate,f32 _angle,bool _show,SVINTEX _tex){
+void StreamInCore::init(u32 _tex0ID, u32 _tex1ID, u32 _tex2ID, s32 _w,s32 _h,SV_PIC_FORMATE _fromate,f32 _angle,bool _show,SV_TEXIN _tex){
 //    m_tt = _tex;
 //    //创建稳定的合成后的流
 //    m_formate = _fromate;
@@ -320,39 +320,39 @@ SVStreamIn::~SVStreamIn() {
 //    m_streamLock = nullptr;
 }
 
-void SVStreamIn::createInStream(cptr8 _name,s32 _type,PICFORMATE _formate,s32 _w,s32 _h,f32 _angle, bool _show) {
+void SVStreamIn::createInStream(cptr8 _name,s32 _type,SV_PIC_FORMATE _formate,s32 _w,s32 _h,f32 _angle, bool _show) {
 //    if(!mApp->getRenderer()) {
 //        return ;
 //    }
 //    //默认要摘掉
 //    m_streamLock->lock();
-//    //PICFORMATE
+//    //SV_PIC_FORMATE
 //    StreamInCorePtr t_incore =MakeSharedPtr<StreamInCore>(mApp);
 //    t_incore->init(_w,_h,_formate,_angle,_show);
 //    m_TexMap.append(_name,t_incore);
 //    m_streamLock->unlock();
 }
 
-void SVStreamIn::createInStream(cptr8 _name,s32 _type,PICFORMATE _formate,s32 _w,s32 _h,f32 _angle,SVINTEX _tex, bool _show){
+void SVStreamIn::createInStream(cptr8 _name,s32 _type,SV_PIC_FORMATE _formate,s32 _w,s32 _h,f32 _angle,SV_TEXIN _tex, bool _show){
 //    if(!mApp->getRenderer()) {
 //        return ;
 //    }
 //    //默认要摘掉
 //    m_streamLock->lock();
-//    //PICFORMATE
+//    //SV_PIC_FORMATE
 //    StreamInCorePtr t_incore =MakeSharedPtr<StreamInCore>(mApp);
 //    t_incore->init(_w,_h,_formate,_angle,_show,_tex);
 //    m_TexMap.append(_name,t_incore);
 //    m_streamLock->unlock();
 }
 
-void SVStreamIn::createInTextureStream(cptr8 _name, u32 _tex0ID, u32 _tex1ID, u32 _tex2ID, s32 _type,PICFORMATE _formate,s32 _w,s32 _h,f32 _angle, bool _show) {
+void SVStreamIn::createInTextureStream(cptr8 _name, u32 _tex0ID, u32 _tex1ID, u32 _tex2ID, s32 _type,SV_PIC_FORMATE _formate,s32 _w,s32 _h,f32 _angle, bool _show) {
 //    if(!mApp->getRenderer()) {
 //        return ;
 //    }
 //    //默认要摘掉
 //    m_streamLock->lock();
-//    //PICFORMATE
+//    //SV_PIC_FORMATE
 //    StreamInCorePtr t_incore =MakeSharedPtr<StreamInCore>(mApp);
 //    t_incore->init(_tex0ID, _tex1ID, _tex2ID, _w,_h,_formate,_angle,_show);
 //    m_TexMap.append(_name,t_incore);

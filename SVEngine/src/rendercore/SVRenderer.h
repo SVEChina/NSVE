@@ -70,28 +70,28 @@ namespace sv {
         virtual SVRFboPtr createResFbo() { return nullptr; }
         
         //创建target资源
-        virtual SVRTargetPtr createTarget(SVINTEX _texid,bool _depth,bool _stencil){ return nullptr; }
+        virtual SVRTargetPtr createTarget(SV_TEXIN _texid,bool _depth,bool _stencil){ return nullptr; }
         
         //创建target资源,自定义大小
-        virtual SVRTargetPtr createTarget(SVINTEX _texid,s32 _w,s32 _h,bool _depth,bool _stencil){ return nullptr; }
+        virtual SVRTargetPtr createTarget(SV_TEXIN _texid,s32 _w,s32 _h,bool _depth,bool _stencil){ return nullptr; }
         
         //获取target
-        virtual SVRTargetPtr getTarget(SVINTEX _texid);
+        virtual SVRTargetPtr getTarget(SV_TEXIN _texid);
         
         //销毁Target
-        virtual void destroyTarget(SVINTEX _texid);
+        virtual void destroyTarget(SV_TEXIN _texid);
         
         //获取内部纹理
-        virtual SVTexturePtr getInTexture(SVINTEX _texname);
+        virtual SVTexturePtr getInTexture(SV_TEXIN _texname);
         
         //创建内部纹理
-        virtual SVTexturePtr createInTexture(SVINTEX _texname,SVTextureDsp _dsp);
+        virtual SVTexturePtr createInTexture(SV_TEXIN _texname,SVTextureDsp _dsp);
         
         //内置纹理是否存在
-        virtual bool hasInTexture(SVINTEX _texid);
+        virtual bool hasInTexture(SV_TEXIN _texid);
         
         //交换纹理
-        virtual void swapInTexture(SVINTEX _tex1,SVINTEX _tex2);
+        virtual void swapInTexture(SV_TEXIN _tex1,SV_TEXIN _tex2);
         
         //增加渲染内核资源
         virtual void addRes(SVRResPtr _res);
@@ -118,13 +118,13 @@ namespace sv {
         virtual void drawMesh(SVRenderMeshPtr _mesh){ }
         
         //绘制屏幕
-        virtual void drawScreen(SVINTEX _texid) { }
+        virtual void drawScreen(SV_TEXIN _texid) { }
         
         //自动回收
         virtual void removeUnuseRes();
 
     protected:
-        void _addTarget(SVINTEX _texid,SVRTargetPtr _target);
+        void _addTarget(SV_TEXIN _texid,SVRTargetPtr _target);
         
         //当前的target
         SVRTargetPtr m_cur_target;

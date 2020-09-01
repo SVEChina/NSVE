@@ -35,10 +35,10 @@ namespace sv {
         SVCameraNodePtr getCamera(s32 _cameraID);
         
         //设置相机绑定
-        void bindCamera(SVINTEX _targetID,s32 _cameraID);
+        void bindCamera(SV_TEXIN _targetID,s32 _cameraID);
         
         //解开相机绑定
-        void unbindCamera(SVINTEX _targetID);
+        void unbindCamera(SV_TEXIN _targetID);
         
         //获取主相机
         SVCameraNodePtr getMainCamera();

@@ -24,7 +24,7 @@ namespace sv {
         
         virtual ~SVTransGPU();
         
-        void init(s32 _w, s32 _h,f32 _angle,PICFORMATE _formate,SVINTEX _tt);
+        void init(s32 _w, s32 _h,f32 _angle,SV_PIC_FORMATE _formate,SV_TEXIN _tt);
         
         void destroy();
         
@@ -42,7 +42,7 @@ namespace sv {
         f32 m_angle;
         SVMtlCorePtr m_pMtl;
 
-        void createPass(s32 _w, s32 _h, f32 _angle, SVINTEX _tt);
+        void createPass(s32 _w, s32 _h, f32 _angle, SV_TEXIN _tt);
     };
         
 }//!namespace sv

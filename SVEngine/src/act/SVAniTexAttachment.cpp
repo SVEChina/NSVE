@@ -159,7 +159,7 @@ cptr8 SVAniTexAttachment::getMataData(){
 void SVAniTexAttachment::_genTexture(){
     if (m_texInfo.dataSwap) {
         SVRendererPtr t_renderer = mApp->getRenderer();
-//        SVINTEX t_texType = SVINTEX(E_TEX_AVATAR_0 + m_param.channel);
+//        SV_TEXIN t_texType = SV_TEXIN(E_TEX_AVATAR_0 + m_param.channel);
 //        if (t_renderer->hasSVTex(t_texType)) {
 //            m_texture = t_renderer->getSVTex(t_texType);
 //        }else{

@@ -121,12 +121,12 @@ void SVRenderer::setCurTarget(SVRTargetPtr _target) {
 }
 
 //获取target
-SVRTargetPtr SVRenderer::getTarget(SVINTEX _texid) {
+SVRTargetPtr SVRenderer::getTarget(SV_TEXIN _texid) {
     return m_target_pool[_texid];
 }
 
 //销毁Target
-void SVRenderer::destroyTarget(SVINTEX _texid) {
+void SVRenderer::destroyTarget(SV_TEXIN _texid) {
     m_res_lock->lock();
     if(m_target_pool[_texid]) {
         m_target_pool[_texid] = nullptr;
@@ -134,14 +134,14 @@ void SVRenderer::destroyTarget(SVINTEX _texid) {
     m_res_lock->unlock();
 }
 
-void SVRenderer::_addTarget(SVINTEX _texid,SVRTargetPtr _target) {
+void SVRenderer::_addTarget(SV_TEXIN _texid,SVRTargetPtr _target) {
     m_res_lock->lock();
     m_target_pool[_texid] = _target;
     m_res_lock->unlock();
 }
 
 
-SVTexturePtr SVRenderer::getInTexture(SVINTEX _texid) {
+SVTexturePtr SVRenderer::getInTexture(SV_TEXIN _texid) {
     if(_texid>E_TEX_BEGIN && _texid<E_TEX_END){
         if(m_intex_pool[_texid] ) {
             return m_intex_pool[_texid];
@@ -150,7 +150,7 @@ SVTexturePtr SVRenderer::getInTexture(SVINTEX _texid) {
     return nullptr;
 }
 
-SVTexturePtr SVRenderer::createInTexture(SVINTEX _texname,SVTextureDsp _dsp) {
+SVTexturePtr SVRenderer::createInTexture(SV_TEXIN _texname,SVTextureDsp _dsp) {
     if(_texname>E_TEX_BEGIN && _texname<E_TEX_END){
         if(m_intex_pool[_texname]) {
             return m_intex_pool[_texname];
@@ -163,7 +163,7 @@ SVTexturePtr SVRenderer::createInTexture(SVINTEX _texname,SVTextureDsp _dsp) {
     return nullptr;
 }
 
-bool SVRenderer::hasInTexture(SVINTEX _texid) {
+bool SVRenderer::hasInTexture(SV_TEXIN _texid) {
     if(_texid>E_TEX_BEGIN && _texid<E_TEX_END){
         if(m_intex_pool[_texid] ) {
             return true;
@@ -173,7 +173,7 @@ bool SVRenderer::hasInTexture(SVINTEX _texid) {
 }
 
 //交换纹理
-void SVRenderer::swapInTexture(SVINTEX _tex1,SVINTEX _tex2) {
+void SVRenderer::swapInTexture(SV_TEXIN _tex1,SV_TEXIN _tex2) {
     SVTexturePtr tex1 = getInTexture(_tex1);
     SVTexturePtr tex2 = getInTexture(_tex2);
     if(tex1!=tex2) {

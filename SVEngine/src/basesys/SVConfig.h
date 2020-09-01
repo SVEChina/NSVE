@@ -108,7 +108,7 @@ namespace sv {
         s32 cameraWidth;
         s32 cameraHeight;
         s32 cameraAngle;        //相机转角度
-        PICFORMATE cameraFormate;       //相机输出格式
+        SV_PIC_FORMATE cameraFormate;       //相机输出格式
         SV_OUTSTEAMFORMATE dataoutFormate;            //数据输出格式
         
         //画笔参数相关

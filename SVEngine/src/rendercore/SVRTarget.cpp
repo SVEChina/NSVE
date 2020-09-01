@@ -17,7 +17,7 @@
 using namespace sv;
 
 //
-SVRTarget::SVRTarget(SVInstPtr _app,SVINTEX _id)
+SVRTarget::SVRTarget(SVInstPtr _app,SV_TEXIN _id)
 :SVGBaseEx(_app)
 ,m_target_id(_id)
 ,m_fbo(nullptr)

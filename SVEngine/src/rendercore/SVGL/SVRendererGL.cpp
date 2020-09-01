@@ -83,15 +83,15 @@ SVRFboPtr SVRendererGL::createResFbo() {
     return MakeSharedPtr<SVRFboGL>(mApp);
 }
 
-SVRTargetPtr SVRendererGL::createTarget(SVINTEX _texid,bool _depth,bool _stencil) {
+SVRTargetPtr SVRendererGL::createTarget(SV_TEXIN _texid,bool _depth,bool _stencil) {
     SVRTargetPtr t_target = getTarget(_texid);
     if(t_target) {
         return t_target;
     }
     //创建主纹理
     SVTextureDsp t_tex_dsp;
-    t_tex_dsp.m_imgtype = SV_IMAGE_2D;
-    t_tex_dsp.m_dataFormate = SV_FORMAT_RGBA8;
+    t_tex_dsp.m_image_type = SV_IMAGE_2D;
+    t_tex_dsp.m_data_formate = SV_FORMAT_RGBA8;
     t_tex_dsp.m_width = mApp->m_global_param.m_sv_width;    //宽
     t_tex_dsp.m_height = mApp->m_global_param.m_sv_height;  //高
     t_tex_dsp.m_depth = 1;                                  //深度
@@ -115,7 +115,7 @@ SVRTargetPtr SVRendererGL::createTarget(SVINTEX _texid,bool _depth,bool _stencil
     return t_target;
 }
 
-SVRTargetPtr SVRendererGL::createTarget(SVINTEX _texid,s32 _w,s32 _h,bool _depth,bool _stencil) {
+SVRTargetPtr SVRendererGL::createTarget(SV_TEXIN _texid,s32 _w,s32 _h,bool _depth,bool _stencil) {
     return nullptr;
 }
 
@@ -166,6 +166,6 @@ void SVRendererGL::drawMesh(SVRenderMeshPtr _mesh ) {
 }
 
 //屏幕空间绘制
-void SVRendererGL::drawScreen(SVINTEX _texid) {
+void SVRendererGL::drawScreen(SV_TEXIN _texid) {
     
 }

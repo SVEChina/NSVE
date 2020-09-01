@@ -121,10 +121,10 @@ namespace sv {
         
         c8 m_type;                  // image type
         c8 m_format;                // image format
-        
         s32 m_width;                // image size
         s32 m_height;
         s32 m_depth;
+        //
         SVDataSwapPtr m_pData;
     };
     

@@ -37,29 +37,28 @@ void SVRTexGL::create(SVRendererPtr _renderer) {
     SVTexturePtr t_texture = std::dynamic_pointer_cast<SVTexture>(m_logic_obj);
     if(t_rm && t_texture) {
         SV_LOG_INFO("SVRTexGL create %d ",m_res_id);
-        SVTextureDsp* t_dsp = t_texture->getTextureDsp();
         //数据格式
         s32 t_datafmt = GL_RGBA;
         m_informate = GL_RGBA;
-        if(t_dsp->m_dataFormate == SV_FORMAT_RGBA8) {
+        if(t_texture->m_texture_dsp.m_data_formate == SV_FORMAT_RGBA8) {
             t_datafmt = GL_RGBA;
             m_informate = GL_RGBA;
-        }else if(t_dsp->m_dataFormate == SV_FORMAT_RGBA8) {
+        }else if(t_texture->m_texture_dsp.m_data_formate == SV_FORMAT_RGBA8) {
             t_datafmt = GL_RGBA;
             m_informate = GL_RGBA;
-        }else if(t_dsp->m_dataFormate == SV_FORMAT_R8) {
+        }else if(t_texture->m_texture_dsp.m_data_formate == SV_FORMAT_R8) {
             t_datafmt = GL_RGBA;
             m_informate = GL_RGBA;
-        }else if(t_dsp->m_dataFormate == SV_FORMAT_RG8) {
+        }else if(t_texture->m_texture_dsp.m_data_formate == SV_FORMAT_RG8) {
             t_datafmt = GL_RGBA;
             m_informate = GL_RGBA;
         }
         SVDataSwapPtr t_data = t_texture->getTextureData();
         //生成纹理
-        m_tex_kind = t_dsp->m_imgtype;
-        m_width = t_dsp->m_width;
-        m_height = t_dsp->m_height;
-        m_depth = t_dsp->m_depth;
+        m_tex_kind = t_texture->m_texture_dsp.m_image_type;
+        m_width = t_texture->m_texture_dsp.m_width;
+        m_height = t_texture->m_texture_dsp.m_height;
+        m_depth = t_texture->m_texture_dsp.m_depth;
         s32 t_tex_kind = GL_TEXTURE_2D;
         glGenTextures(1, &m_res_id);
         if(m_tex_kind == SV_IMAGE_1D) {
@@ -152,7 +151,7 @@ void SVRTexGL::create(SVRendererPtr _renderer) {
             }
         }
         //
-        if (t_dsp->m_minmap) {
+        if (t_texture->m_texture_dsp.m_minmap) {
             glGenerateMipmap(t_tex_kind);
             glTexParameteri(t_tex_kind, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
         }else{
