@@ -26,16 +26,16 @@ SVRenderMgr::SVRenderMgr(SVInstPtr _app)
     m_mainRT = nullptr;
     m_preRT.clear();
     m_afterRT.clear();
-    m_renderLock = MakeSharedPtr<SVLockSpin>();
-    m_logicLock = MakeSharedPtr<SVLockSpin>();
+    m_render_lock = MakeSharedPtr<SVLockSpin>();
+    m_logic_lock = MakeSharedPtr<SVLockSpin>();
     m_adaptMode = 0;
     m_stream_create = nullptr;
     m_stream_destroy = nullptr;
 }
 
 SVRenderMgr::~SVRenderMgr() {
-    m_logicLock = nullptr;
-    m_renderLock = nullptr;
+    m_logic_lock = nullptr;
+    m_render_lock = nullptr;
     m_mainRT = nullptr;
     m_stream_create = nullptr;
     m_stream_destroy = nullptr;
@@ -49,15 +49,13 @@ void SVRenderMgr::init() {
 void SVRenderMgr::destroy() {
     m_stream_create = nullptr;
     m_stream_destroy = nullptr;
-    clear();
 }
 
 void SVRenderMgr::resize(s32 _w,s32 _h) {
-    m_renderLock->lock();
+    m_render_lock->lock();
     //自动的target需要resize
-    
     //
-    m_renderLock->unlock();
+    m_render_lock->unlock();
 }
 
 void SVRenderMgr::setMainRT(SVRTargetPtr _rt) {
@@ -92,7 +90,7 @@ void SVRenderMgr::render(){
     if(!t_renderer){
         return;
     }
-    m_renderLock->lock();
+    m_render_lock->lock();
     if( mApp->m_ctx && mApp->m_ctx->activeContext(t_renderer) ) {
         //cmd-创建流
         if(m_stream_create) {
@@ -117,7 +115,7 @@ void SVRenderMgr::render(){
         //交换
         mApp->m_ctx->swap(t_renderer);
     }
-    m_renderLock->unlock();
+    m_render_lock->unlock();
 }
 
 void SVRenderMgr::_sort() {
@@ -127,27 +125,20 @@ void SVRenderMgr::_sort() {
 void SVRenderMgr::_adapt() {
 }
 
-void SVRenderMgr::clear() {
-}
-
-//这里相当于准备数据
-void SVRenderMgr::swapData(){
-}
-
 void SVRenderMgr::pushRCmdCreate(SVRenderCmdPtr _rcmd){
-    m_logicLock->lock();
+    m_logic_lock->lock();
     if(_rcmd && m_stream_create){
         m_stream_create->addRenderCmd(_rcmd);
     }
-    m_logicLock->unlock();
+    m_logic_lock->unlock();
 }
 
 void SVRenderMgr::pushRCmdDestory(SVRenderCmdPtr _rcmd){
-    m_logicLock->lock();
+    m_logic_lock->lock();
     if(_rcmd && m_stream_destroy){
         m_stream_destroy->addRenderCmd(_rcmd);
     }
-    m_logicLock->unlock();
+    m_logic_lock->unlock();
 }
 
 void SVRenderMgr::pushRCmd(SVRenderCmdPtr _rcmd,SV_RSTREAM _rstype) {

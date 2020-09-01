@@ -26,6 +26,7 @@
 - (instancetype)initWithFrame:(NSRect)frameRect {
     self = [super initWithFrame:frameRect];
     if( self ) {
+        //外部构建的GL环境
         static const NSOpenGLPixelFormatAttribute attr[] = {
             NSOpenGLPFAColorSize, 24,
             NSOpenGLPFADepthSize, 24,
@@ -50,13 +51,13 @@
     int t_w = self.frame.size.width;
     int t_h = self.frame.size.height;
     //创建渲染器,OPENGL渲染器
-    [[CGInst getInst] create_OSX_GL_Width:t_w Height:t_h];
+    [[CGInst getInst] create_OSX_GL:(void*)m_context Width:t_w Height:t_h];
     [self creatTimer];
 }
 
 -(void)creatTimer {
-    CGDirectDisplayID   displayID = CGMainDisplayID();
-    CVReturn            error = kCVReturnSuccess;
+    CGDirectDisplayID displayID = CGMainDisplayID();
+    CVReturn error = kCVReturnSuccess;
     error = CVDisplayLinkCreateWithCGDisplay(displayID, &displayLink);
     if (error){
         NSLog(@"DisplayLink created with error:%d", error);
@@ -73,7 +74,6 @@
 
 - (void)dealloc{
     [self clearGLContext];
-    
     [self destroyTimer];
 }
 
@@ -83,16 +83,19 @@ static CVReturn renderCallback(CVDisplayLinkRef displayLink,
                                CVOptionFlags flagsIn,
                                CVOptionFlags *flagsOut,
                                void *displayLinkContext){
-    //NSLog(@"sve timers \n ");
-    dispatch_sync(dispatch_get_main_queue(), ^{
-        //NSLog(@"sve timers \n ");
+    NSLog(@"renderCallback \n ");
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSLog(@"sve timers \n ");
         [(__bridge CGLESView*)displayLinkContext renderGL];
     });
     return kCVReturnSuccess;
 }
 
 -(void)renderGL {
-    [m_context makeCurrentContext];
+//    [m_context makeCurrentContext];
+//    glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
+//    glClear(GL_COLOR_BUFFER_BIT);
+//    [m_context flushBuffer];
     [[CGInst getInst] render];
 }
 

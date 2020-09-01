@@ -138,7 +138,9 @@ void SVInst::setRenderer(SVRendererPtr _renderer) {
     //设置渲染器
     m_renderer = _renderer;
     //加载默认的材质库
-    getMtlLib()->loadDefaultPack();
+    if(m_mtl_lib) {
+        m_mtl_lib->loadDefaultPack();
+    }
     //设置渲染路径
     setRenderPath(0);
 }

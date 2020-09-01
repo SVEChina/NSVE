@@ -35,8 +35,8 @@ namespace sv {
         EGLDisplay m_Display;
         EGLConfig *m_configsList;
         EGLConfig m_GLConfigOff;
-        EGLContext m_pGLContext;
-        EGLContext m_pGLContextShare;
+        EGLContext m_gl_context;
+        EGLContext m_gl_contextShare;
         EGLSurface m_pGLSurface;
         u32 m_color_size_;
         u32 m_depth_size_;

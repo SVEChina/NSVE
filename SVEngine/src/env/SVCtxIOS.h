@@ -31,7 +31,7 @@ namespace sv {
         
     protected:
         s32 m_glversion;
-        EAGLContext* m_pGLContext;
+        EAGLContext* m_gl_context;
     };
 
     //Metal渲染器

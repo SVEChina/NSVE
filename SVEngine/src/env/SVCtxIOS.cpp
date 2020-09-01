@@ -18,16 +18,16 @@ SVCtxIOSGLES::SVCtxIOSGLES(void* _context,s32 _glversion)
     m_glversion = _glversion;
     if(_context){
         EAGLContext* t_context = (__bridge EAGLContext*)_context;
-        m_pGLContext = [[EAGLContext alloc] initWithAPI:[t_context API] sharegroup:[t_context sharegroup]];
+        m_gl_context = [[EAGLContext alloc] initWithAPI:[t_context API] sharegroup:[t_context sharegroup]];
         SV_LOG_INFO("create context ios new\n");
     }else{
         //创建新的GLEnv
         if (_glversion == 3) {
-            m_pGLContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES3];
+            m_gl_context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES3];
         }else if(_glversion == 2) {
-            m_pGLContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
+            m_gl_context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
         }else {
-            m_pGLContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
+            m_gl_context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
         }
         SV_LOG_INFO("create context ios share\n");
     }
@@ -36,13 +36,13 @@ SVCtxIOSGLES::SVCtxIOSGLES(void* _context,s32 _glversion)
 
 SVCtxIOSGLES::~SVCtxIOSGLES() {
     [EAGLContext setCurrentContext:nil];
-    m_pGLContext = nil;
+    m_gl_context = nil;
     SV_LOG_INFO("destroy context ios\n");
 }
 
 bool SVCtxIOSGLES::activeContext(SVRendererPtr _renderer){
-    if(m_pGLContext){
-        return [EAGLContext setCurrentContext:m_pGLContext];
+    if(m_gl_context){
+        return [EAGLContext setCurrentContext:m_gl_context];
     }
     NSLog(@"activeContext error!");
     return false;
@@ -50,8 +50,8 @@ bool SVCtxIOSGLES::activeContext(SVRendererPtr _renderer){
 
 //交换场景
 bool SVCtxIOSGLES::swap(SVRendererPtr _renderer){
-    if(m_pGLContext){
-        bool t_flag = [m_pGLContext presentRenderbuffer:GL_RENDERBUFFER];
+    if(m_gl_context){
+        bool t_flag = [m_gl_context presentRenderbuffer:GL_RENDERBUFFER];
         if(!t_flag){
             NSLog(@"presentRenderbuffer error!");
             return false;

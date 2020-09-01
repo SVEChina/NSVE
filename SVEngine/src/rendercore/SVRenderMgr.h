@@ -35,16 +35,12 @@ namespace sv {
         
         void resize(s32 _w,s32 _h);
         
+        void render();
+        
         void setMainRT(SVRTargetPtr _rt);
         
         SVRTargetPtr getMainRT();
         
-        void clear();
-        
-        void render();
-
-        void swapData();
-
         void pushRCmdCreate(SVRenderCmdPtr _rcmd);
         
         void pushRCmdDestory(SVRenderCmdPtr _rcmd);
@@ -67,9 +63,9 @@ namespace sv {
         //资源销毁流
         SVRenderStreamPtr m_stream_destroy;
         //
-        SVLockSpinPtr m_renderLock;
-        SVLockSpinPtr m_logicLock;
-        
+        SVLockSpinPtr m_render_lock;
+        //
+        SVLockSpinPtr m_logic_lock;
         //渲染的RT，不负责生命周期管理
         //前向RT
         SVArray<SVRTargetPtr> m_preRT;

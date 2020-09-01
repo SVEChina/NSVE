@@ -8,6 +8,7 @@
 
 #include "SVCtxOSX.h"
 #include "../app/SVInst.h"
+#include "../rendercore/SVRenderMgr.h"
 #include "../rendercore/SVMetal/SVRendererMetal.h"
 #include "../rendercore/SVGL/SVRendererGL.h"
 
@@ -18,29 +19,53 @@ using namespace sv;
 //设备上下文 真的不能随意切换啊 否则这这个设备上下文中创建的所有GL资源全部都失效
 SVCtxOSXGL::SVCtxOSXGL()
 :SVCtxBase() {
+    m_gl_context = nullptr;
+    m_gl_context_out = nullptr;
 }
 
 SVCtxOSXGL::~SVCtxOSXGL() {
-    m_pGLContext = nullptr;
+    m_gl_context = nullptr;
+    m_gl_context_out = nullptr;
 }
 
-void SVCtxOSXGL::init(void* _context) {
-    m_pGLContext = (__bridge NSOpenGLContext*)_context;
+void SVCtxOSXGL::init(SVInstPtr _handle,void* _context,s32 _w,s32 _h) {
+    m_gl_context_out = (__bridge NSOpenGLContext*)_context;
+    if(m_gl_context_out) {
+        SVRendererGLPtr t_renderer = MakeSharedPtr<SVRendererGL>(_handle);
+        t_renderer->init(_w,_h);
+        _handle->setRenderer(t_renderer);
+    }
 }
 
 bool SVCtxOSXGL::activeContext(SVRendererPtr _renderer){
-    if( m_pGLContext ) {
-        [m_pGLContext makeCurrentContext];
+    if( m_gl_context_out ) {
+        [m_gl_context_out makeCurrentContext];
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        glClearColor(0.0f, 1.0f, 0.0f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
         return true;
     }
+//    else {
+//        m_gl_context = [[NSOpenGLContext alloc] initWithFormat:m_gl_context_out.pixelFormat shareContext:m_gl_context_out];
+//        if(m_gl_context) {
+//            [m_gl_context makeCurrentContext];
+//            glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
+//            glClear(GL_COLOR_BUFFER_BIT);
+//            return true;
+//        }
+//    }
     return false;
 }
 
 bool SVCtxOSXGL::swap(SVRendererPtr _renderer){
-    if( m_pGLContext ) {
-        [m_pGLContext flushBuffer];
+    if( m_gl_context_out ) {
+        [m_gl_context_out flushBuffer];
         return true;
     }
+//    if( m_gl_context ) {
+//        [m_gl_context flushBuffer];
+//        return true;
+//    }
     return false;
 }
 

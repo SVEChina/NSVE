@@ -9,6 +9,7 @@
 #define SV_CONTEXT_OSX_H
 
 #include "SVCtxBase.h"
+#include "../rendercore/SVRenderCmd.h"
 
 #ifdef SV_OSX
 
@@ -16,7 +17,7 @@
 #import <AppKit/NSOpenGL.h>
 
 namespace sv {
-
+    
     //mac上跑的 只有gl20,gl30,metle的渲染器
     class SVCtxOSXGL: public SVCtxBase {
     public:
@@ -24,7 +25,7 @@ namespace sv {
         
         ~SVCtxOSXGL();
         
-        void init(void* _context);
+        void init(SVInstPtr _handle,void* _context,s32 _w,s32 _h);
         
         void resize(s32 _w,s32 _h){}
         
@@ -33,7 +34,8 @@ namespace sv {
         bool swap(SVRendererPtr _renderer);
         
     protected:
-        NSOpenGLContext* m_pGLContext;
+        NSOpenGLContext* m_gl_context_out;
+        NSOpenGLContext* m_gl_context;
     };
 
     //osx metal环境

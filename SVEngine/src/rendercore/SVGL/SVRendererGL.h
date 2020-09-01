@@ -16,7 +16,6 @@ namespace sv {
     /*
      GL渲染器
      */
-    
     class SVRendererGL : public SVRenderer {
     public:
         SVRendererGL(SVInstPtr _app);

@@ -115,26 +115,26 @@ static CGInst *mInst;
  Renderer OpenGL
  */
 //创建OSX-GL环境
-- (void)create_OSX_GL_Width:(int)_w Height:(int)_h {
+- (void)create_OSX_GL:(void*)_ctx Width:(int)_w Height:(int)_h {
 #ifdef SV_OSX
     if( m_sve_obj ) {
-        sv::SVCtxBasePtr t_ctx = m_sve_obj->createEnv(sv::E_R_GL_OSX);
-        sv::SVCtxOSXGLPtr t_ctx_gl_osx = std::dynamic_pointer_cast<sv::SVCtxOSXGL>(t_ctx);
+        sv::SVCtxBasePtr t_ctx_base = m_sve_obj->createEnv(sv::E_R_GL_OSX);
+        sv::SVCtxOSXGLPtr t_ctx_gl_osx = std::dynamic_pointer_cast<sv::SVCtxOSXGL>(t_ctx_base);
         if(t_ctx_gl_osx) {
-            t_ctx_gl_osx->init(nullptr);
+            t_ctx_gl_osx->init(m_sve_obj,_ctx,_w,_h);
         }
     }
 #endif
 }
 
 //创建IOS-GL环境
-- (void)create_IOS_GL_Width:(int)_w Height:(int)_h {
+- (void)create_IOS_GL:(void*)_ctx Width:(int)_w Height:(int)_h {
 #ifdef SV_IOS
     if( m_sve_obj ) {
         sv::SVCtxBasePtr t_ctx = m_sve_obj->createEnv(sv::E_R_GLES_IOS);
         sv::SVCtxIOSGLESPtr t_ctx_gles_ios = std::dynamic_pointer_cast<sv::SVCtxIOSGLES>(t_ctx);
         if(t_ctx_gles_ios) {
-            
+            //t_ctx_gles_ios->init(m_sve_obj,_ctx,_w,_h);
         }
     }
 #endif

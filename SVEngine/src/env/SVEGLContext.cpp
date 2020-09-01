@@ -15,10 +15,10 @@ SVEGLContext::SVEGLContext(void* _window,void* _context,s32 _glversion)
     m_Display = nullptr;
     m_configsList = nullptr;
     //离线环境
-    m_pGLContext = nullptr;
+    m_gl_context = nullptr;
     m_pGLSurface = nullptr;
     m_GLConfigOff = nullptr;
-    m_pGLContextShare=_context;
+    m_gl_contextShare=_context;
     m_egl_context_initialized_=false;
     m_context_valid_=false;
     init(static_cast<ANativeWindow *>(_window));
@@ -131,9 +131,9 @@ bool SVEGLContext::initEGLContext() {
     const EGLint context_attribs[] = {EGL_CONTEXT_CLIENT_VERSION,
                                       2,  // Request opengl ES2.0
                                       EGL_NONE};
-    m_pGLContext = eglCreateContext(m_Display, m_GLConfigOff, m_pGLContextShare, context_attribs);
+    m_gl_context = eglCreateContext(m_Display, m_GLConfigOff, m_gl_contextShare, context_attribs);
 
-    if (eglMakeCurrent(m_Display, m_pGLSurface, m_pGLSurface, m_pGLContext) == EGL_FALSE) {
+    if (eglMakeCurrent(m_Display, m_pGLSurface, m_pGLSurface, m_gl_context) == EGL_FALSE) {
         SV_LOG_ERROR("Unable to eglMakeCurrent EGL_ERROR");
         return false;
     }
@@ -143,8 +143,8 @@ bool SVEGLContext::initEGLContext() {
 bool SVEGLContext::active() {
 
     SV_LOG_ERROR("SVEContext::active!");
-    if (m_Display && m_pGLContext && m_pGLSurface) {
-        bool tFlag = eglMakeCurrent(m_Display, m_pGLSurface, m_pGLSurface, m_pGLContext);
+    if (m_Display && m_gl_context && m_pGLSurface) {
+        bool tFlag = eglMakeCurrent(m_Display, m_pGLSurface, m_pGLSurface, m_gl_context);
         if (tFlag == false) {
 //            int t_error = eglGetError();
 //            SV_LOG_DEBUG("EGL_ERROR %x", t_error);
@@ -177,7 +177,7 @@ void SVEGLContext::destroyContext(){
         if (m_Display != EGL_NO_DISPLAY) {
             eglMakeCurrent(m_Display, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
             if (m_Display != EGL_NO_CONTEXT) {
-                eglDestroyContext(m_Display, m_pGLContext);
+                eglDestroyContext(m_Display, m_gl_context);
             }
 
             if (m_pGLSurface != EGL_NO_SURFACE) {
@@ -187,7 +187,7 @@ void SVEGLContext::destroyContext(){
         }
 
     m_Display = EGL_NO_DISPLAY;
-    m_pGLContext = EGL_NO_CONTEXT;
+    m_gl_context = EGL_NO_CONTEXT;
     m_pGLSurface = EGL_NO_SURFACE;
     m_pwindow = nullptr;
     m_context_valid_ = false;
@@ -214,7 +214,7 @@ EGLint SVEGLContext::resume(ANativeWindow* window) {
         SV_LOG_INFO("Screen resized");
     }
 
-    if (eglMakeCurrent(m_Display, m_pGLSurface, m_pGLSurface, m_pGLContext) == EGL_TRUE)
+    if (eglMakeCurrent(m_Display, m_pGLSurface, m_pGLSurface, m_gl_context) == EGL_TRUE)
         return EGL_SUCCESS;
 
     EGLint err = eglGetError();
@@ -244,7 +244,7 @@ bool SVEGLContext::activeContext(SVRendererPtr _renderer){
 }
 
 void* SVEGLContext::getContext(){
-    return m_pGLContext;
+    return m_gl_context;
 }
 
 

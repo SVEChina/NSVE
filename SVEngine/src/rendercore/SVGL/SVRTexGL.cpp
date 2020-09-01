@@ -89,24 +89,25 @@ void SVRTexGL::create(SVRendererPtr _renderer) {
             glBindTexture(GL_TEXTURE_2D, m_res_id);
             if(t_data) {
                 glTexImage2D(GL_TEXTURE_2D,
-                    0,
-                    m_informate,
-                    m_width,
-                    m_height,
-                    0,
-                    t_datafmt,
-                    GL_UNSIGNED_BYTE,
-                    0);
+                             0,
+                             m_informate,
+                             m_width,
+                             m_height,
+                             0,
+                             t_datafmt,
+                             GL_UNSIGNED_BYTE,
+                             t_data->getData() );
+                
             } else {
                 glTexImage2D(GL_TEXTURE_2D,
-                    0,
-                    m_informate,
-                    m_width,
-                    m_height,
-                    0,
-                    t_datafmt,
-                    GL_UNSIGNED_BYTE,
-                    t_data->getData() );
+                             0,
+                             m_informate,
+                             m_width,
+                             m_height,
+                             0,
+                             t_datafmt,
+                             GL_UNSIGNED_BYTE,
+                             0);
             }
         }else if(m_tex_kind == SV_IMAGE_3D) {
             t_tex_kind = GL_TEXTURE_3D;

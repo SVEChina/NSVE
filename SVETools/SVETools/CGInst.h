@@ -32,9 +32,9 @@
 //
 -(void)destroyMetal;
 //GL-OSX
-- (void)create_OSX_GL_Width:(int)_w Height:(int)_h;
+- (void)create_OSX_GL:(void*)ctx Width:(int)_w Height:(int)_h;
 //GL-IOS
-- (void)create_IOS_GL_Width:(int)_w Height:(int)_h;
+- (void)create_IOS_GL:(void*)ctx Width:(int)_w Height:(int)_h;
 //
 - (void)destroyGL;
 //
