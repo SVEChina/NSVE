@@ -27,7 +27,6 @@ SVDetectMgr::~SVDetectMgr() {
 
 //初始化识别数据类型
 void SVDetectMgr::init(DETECTTYPE type) {
-    mApp->m_config.detectType = type;
     if (m_detectType != type) {
         m_detectType = type;
         m_pDetectBase = MakeSharedPtr<SVDetectST>(mApp);
@@ -39,7 +38,6 @@ void SVDetectMgr::init(DETECTTYPE type) {
 //析够
 void SVDetectMgr::destroy() {
     m_detectType = DETECT_T_NULL;
-    mApp->m_config.detectType = m_detectType;
     m_pDetectBase=nullptr;
 }
 

@@ -47,7 +47,6 @@ namespace sv {
         SVShaderMgrPtr m_shader_mgr;
         //纹理部分
         SVTexMgrPtr m_tex_mgr;
-
         //识别部分
         SVDetectMgrPtr m_detect_mgr;
         //模型部分

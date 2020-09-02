@@ -37,12 +37,8 @@ public:
     }
     
     virtual void listenData(SVObjectPtr datagen) {};
-    
-    //
-    static void lua_regist_SVObject(void* ls);
 };
 
-//lua_regist tt  = SVObject::lua_regist_SVObject;
 //数据监听函数指针
 typedef void (SVObject::*dataListenFunc)(SVObjectPtr datagen);
 

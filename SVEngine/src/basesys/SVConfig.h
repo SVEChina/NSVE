@@ -85,16 +85,12 @@ namespace sv {
         
         inline SV_DESIGN_ADAPT_MODE getDesignAdaptMode() { return m_designAdaptmode; }
         
-        inline s32 getDetectType() { return detectType; }
-        
         inline f32 getDesignAdaptScale() { return m_designAdaptScale; }
         
         s32 getRealCameraWidth();
         
         s32 getRealCameraHeight();
         
-        //识别库类型
-        DETECTTYPE detectType;
         //主屏幕宽高
         s32 width;
         s32 height;
@@ -117,10 +113,10 @@ namespace sv {
         f32 m_strokeGlowWidth;
         FVec4 m_strokeGlowColor;
         
-        s32 glVersion;
         bool cameraMirror;      //相机输入数据是否镜像
         bool mirror; //是否镜像显示,即进来什么样就是什么样，不进行翻转
         SVString m_tag;
+        //
         CfgFilter m_cfgFilter;
         
     private:

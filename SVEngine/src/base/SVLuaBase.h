@@ -11,6 +11,7 @@
 #include "SVDef.h"
 #include "SVPreDeclare.h"
 #include <vector>
+#include "../third/lua-5.4.0/src/lua.hpp"
 
 namespace sv {
 

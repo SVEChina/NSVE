@@ -29,8 +29,6 @@ SVConfig::SVConfig(){
     cameraFormate = SV_PF_NULL;
     dataoutFormate = SV_OUT_STEAM_NULL;
     m_designAdaptmode = E_APT_M_FULL;
-    glVersion = 0x00020000;
-    detectType = DETECT_T_NULL;
     m_tag = "svengine";
 }
 
@@ -39,7 +37,6 @@ SVConfig::~SVConfig() {
 }
 
 void SVConfig::init() {
-    detectType = DETECT_T_NULL;
     //加载系统的配置文件
     width = 720;
     height = 1280;
@@ -77,7 +74,6 @@ void SVConfig::destroy() {
     cameraFormate = SV_PF_NULL;
     dataoutFormate = SV_OUT_STEAM_NULL;
     m_designAdaptmode = E_APT_M_FULL;
-    glVersion = 0x00020000;
 }
 
 s32 SVConfig::getRealCameraWidth() {

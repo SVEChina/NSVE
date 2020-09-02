@@ -8,14 +8,14 @@
 #ifndef SV_FILEMGR_H
 #define SV_FILEMGR_H
 
-#include "../basesys/SVSysBase.h"
+#include "../base/SVGBase.h"
 #include "../base/SVDataChunk.h"
 #include <vector>
 
 //文件路径管理器 增加搜索路径相关
 namespace sv {
     
-    class SVFileMgr : public SVSysBase {
+    class SVFileMgr : public SVGBaseEx {
     public:
         SVFileMgr(SVInstPtr _app);
         
@@ -44,7 +44,7 @@ namespace sv {
         typedef std::vector<SVString> SEARCHPATHPOOL;
         SEARCHPATHPOOL m_searchPathPool;
         
-        SVLockPtr m_fileLock;
+        SVLockPtr m_file_lock;
         
         bool _hasRespath(cptr8 _path);
         

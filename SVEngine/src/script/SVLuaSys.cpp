@@ -41,8 +41,7 @@ void SVLuaSys::init() {
 }
 
 void SVLuaSys::destroy() {
-    //关闭
-    lua_close(L_S);
+    lua_close(L_S); //关闭
 }
 
 void SVLuaSys::update(f32 dt) {

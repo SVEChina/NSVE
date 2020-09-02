@@ -22,6 +22,8 @@ namespace sv {
      不用单例的原因，是有些需求，需要启动两个引擎
      */
 
+    LUA_REG_DECLARE(SVInst);
+
     class SVInst : public SVObject {
     public:
         //

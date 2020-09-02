@@ -12,14 +12,14 @@
 using namespace sv;
 
 SVFileMgr::SVFileMgr(SVInstPtr _app)
-:SVSysBase(_app) {
-    m_fileLock = MakeSharedPtr<SVLock>();
+:SVGBaseEx(_app) {
+    m_file_lock = MakeSharedPtr<SVLock>();
     m_searchPathPool.push_back("");
 }
 
 SVFileMgr::~SVFileMgr() {
     clearRespath();
-    m_fileLock = nullptr;
+    m_file_lock = nullptr;
 }
 
 //获取搜索路径数目
@@ -36,16 +36,16 @@ bool SVFileMgr::_hasRespath(cptr8 _path) {
 }
 
 void SVFileMgr::addRespath(cptr8 _path) {
-    m_fileLock->lock();
+    m_file_lock->lock();
     if (!_hasRespath(_path)) {
         m_searchPathPool.push_back(_path);
     }
-    m_fileLock->unlock();
+    m_file_lock->unlock();
 }
 
 bool SVFileMgr::delRespath(cptr8 _path) {
     bool t_ret = false;
-    m_fileLock->lock();
+    m_file_lock->lock();
     SEARCHPATHPOOL::iterator it = m_searchPathPool.begin();
     while (it!=m_searchPathPool.end()) {
         if( (*it) == _path ) {
@@ -55,7 +55,7 @@ bool SVFileMgr::delRespath(cptr8 _path) {
         }
         it++;
     }
-    m_fileLock->unlock();
+    m_file_lock->unlock();
     return t_ret;
 }
 
@@ -151,7 +151,7 @@ bool SVFileMgr::loadFileContentStr(SVDataChunk *_datachunk,cptr8 _fname) {
 SVString SVFileMgr::getFileFullName(cptr8 _fname) {
     //返回为"" 证明不在SD卡里面
     SVString tFileName = "";
-    m_fileLock->lock();
+    m_file_lock->lock();
     for (s32 i = 0; i < m_searchPathPool.size(); i++) {
         SVString t_fullpath = m_searchPathPool[i] + _fname;
         FILE *fp = fopen(t_fullpath.c_str(), "r");
@@ -161,7 +161,7 @@ SVString SVFileMgr::getFileFullName(cptr8 _fname) {
             break;
         }
     }
-    m_fileLock->unlock();
+    m_file_lock->unlock();
     return tFileName;
 }
 
