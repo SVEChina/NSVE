@@ -4,7 +4,6 @@
 #include "../base/SVDataSwap.h"
 #include "../core/SVParticles.h"
 #include "../basesys/SVCameraMgr.h"
-#include "../mtl/SVMtlNocolor.h"
 #include "../mtl/SVTexMgr.h"
 #include "../mtl/SVTexture.h"
 #include "../rendercore/SVRenderMgr.h"

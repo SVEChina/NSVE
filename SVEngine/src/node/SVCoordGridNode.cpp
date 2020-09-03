@@ -7,7 +7,6 @@
 
 #include "SVCoordGridNode.h"
 #include "../core/SVGeoGen.h"
-#include "../mtl/SVMtlNocolor.h"
 #include "../mtl/SVTexMgr.h"
 #include "../basesys/SVScene.h"
 #include "../rendercore/SVRenderMgr.h"

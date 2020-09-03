@@ -8,12 +8,9 @@
 
 #include "SVMtlCore.h"
 #include "SVSurface.h"
+#include "SVTexMgr.h"
+#include "SVTexture.h"
 #include "../base/SVDataChunk.h"
-#include "../operate/SVOpCreate.h"
-#include "../mtl/SVTexMgr.h"
-#include "../mtl/SVTexture.h"
-
-#include "../rendercore/SVGL/SVRTexGL.h"
 #include "../rendercore/SVRenderMgr.h"
 #include "../rendercore/SVRenderer.h"
 #include "../rendercore/SVRShader.h"
@@ -23,11 +20,29 @@ using namespace sv;
 /*
  纹理单元
  */
+
+static void lua_regist_TexUnit(void* ls) {
+    lua_State* L = (lua_State*)ls;
+    if(L) {
+        
+    }
+}
+
+static void lua_regist_SVMtlCore(void* ls) {
+    lua_State* L = (lua_State*)ls;
+    if(L) {
+        
+    }
+}
+
+LUA_REG_IMP(TexUnit,lua_regist_TexUnit);
+LUA_REG_IMP(SVMtlCore,lua_regist_SVMtlCore);
+
 TexUnit::TexUnit(){
     m_texForm = E_TEX_END;
     m_pTex = nullptr;
     m_stage_type = 0;   //纹理使用阶段类型，0:fs 1:vs
-    m_chn = -1;          //纹理使用的通道
+    m_chn = -1;         //纹理使用的通道
 };
 
 TexUnit::~TexUnit(){
@@ -36,11 +51,6 @@ TexUnit::~TexUnit(){
 
 void TexUnit::reset(){
     m_pTex = nullptr;
-}
-
-void TexUnit::copy(TexUnit& _texunit){
-    m_pTex = _texunit.m_pTex;
-    m_texForm = _texunit.m_texForm;
 }
 
 //
@@ -94,13 +104,13 @@ void SVMtlCore::reset() {
 //    m_depth_clear;
 //    m_depth_enable;        //开启深度测试
 //    //深度测试方法(GL_NEVER,GL_ALWAYS,GL_LESS,GL_LEQUAL,GL_GREATER,GL_GEQUAL,GL_NOTEQUAL)
-//    m_depthtest_method;
+//    m_depth_method;
 //    //模板参数
 //    m_stencil_clear;         //
 //    m_stencil_enable;        //开启模板测试
 //    m_stencil_passMethod;     //通过模板测试的规则(GL_NEVER,GL_LESS < ,GL_LEQUAL <= ,GL_GREATER > ,GL_GEEQUAL >= ,GL_EQUAL == ,GL_ALWAYS)
-//    m_stencil_refValue;       //通过模板测试的参考值(0-255)
-//    m_stencil_maskValue;      //掩码( 模板值&掩码 * 参考值&掩码 )
+//    m_stencil_ref;       //通过模板测试的参考值(0-255)
+//    m_stencil_mask;      //掩码( 模板值&掩码 * 参考值&掩码 )
 //    m_stencil_sfail;          //模板测试失败     (GL_KEEP,GL_ZERO,GL_REPLACE(参考值代替写入),GL_INCR,GL_DECR,GL_INVERT(按位取反))
 //    m_stencil_zfail;          //模板通过 深度失败 (GL_KEEP,GL_ZERO,GL_REPLACE(参考值代替写入),GL_INCR,GL_DECR,GL_INVERT(按位取反))
 //    m_stencil_zpass;          //模板通过 深度通过 (GL_KEEP,GL_ZERO,GL_REPLACE(参考值代替写≤
@@ -110,7 +120,7 @@ void SVMtlCore::reset() {
 //    m_zoff_unit;
 //    //alpha参数
 //    m_alpha_enable;         //开启alpha测试
-//    m_alpha_testMethod;     //alpha测试方法(GL_NEVER,GL_ALWAYS,GL_LESS,GL_LEQUAL,GL_GREATER,GL_GEQUAL,GL_NOTEQUAL)
+//    m_alpha_method;     //alpha测试方法(GL_NEVER,GL_ALWAYS,GL_LESS,GL_LEQUAL,GL_GREATER,GL_GEQUAL,GL_NOTEQUAL)
 }
 
 void SVMtlCore::setTexture(s32 _chn,s32 _stage,SV_TEXIN _from,cptr8 _fname) {
@@ -228,7 +238,7 @@ void SVMtlCore::setBlendState(s32 _src , s32 _dst){
 
 void SVMtlCore::setBlendEnable(bool _bBlendEnable){
     //m_LogicParamBlend.enable = _bBlendEnable;
-    m_LogicMtlFlag0 |= MTL_F0_BLEND;
+    //m_LogicMtlFlag0 |= MTL_F0_BLEND;
 }
 
 void SVMtlCore::setCullEnable(bool _bCullEnable){
@@ -243,12 +253,12 @@ void SVMtlCore::setCullFace(s32 _frontFace, s32 _cullFace){
 
 void SVMtlCore::setDepthEnable(bool _bDepthEnable){
     //m_LogicParamDepth.enable = _bDepthEnable;
-    m_LogicMtlFlag0 |= MTL_F0_DEPTH;
+    //m_LogicMtlFlag0 |= MTL_F0_DEPTH;
 }
 
 void SVMtlCore::setZOffEnable(bool _enable) {
     //m_LogicParamZOff.enable = _enable;
-    m_LogicMtlFlag0 |= MTL_F0_ZOFF;
+    //m_LogicMtlFlag0 |= MTL_F0_ZOFF;
 }
 
 void SVMtlCore::setZOffParam(f32 _factor,f32 _unit) {
@@ -259,42 +269,42 @@ void SVMtlCore::setZOffParam(f32 _factor,f32 _unit) {
 //设置模版测试
 void SVMtlCore::setStencilEnable(bool _bStencilEnable) {
     //m_LogicParamStencil.enable = _bStencilEnable;
-    m_LogicMtlFlag0 |= MTL_F0_STENCIL;
+    //m_LogicMtlFlag0 |= MTL_F0_STENCIL;
 }
 
 void SVMtlCore::setStencilClear(bool _clear) {
     //m_LogicParamStencil.clear = _clear;
-    m_LogicMtlFlag0 |= MTL_F0_STENCIL;
+    //m_LogicMtlFlag0 |= MTL_F0_STENCIL;
 }
 
 void SVMtlCore::setStencilPass(s32 _pass) {
     //m_LogicParamStencil.passMethod = _pass;
-    m_LogicMtlFlag0 |= MTL_F0_STENCIL;
+    //m_LogicMtlFlag0 |= MTL_F0_STENCIL;
 }
 
 void SVMtlCore::setStencilRef(s32 _ref) {
     //m_LogicParamStencil.refValue = _ref;
-    m_LogicMtlFlag0 |= MTL_F0_STENCIL;
+    //m_LogicMtlFlag0 |= MTL_F0_STENCIL;
 }
 
 void SVMtlCore::setStencilMask(s32 _mask) {
     //m_LogicParamStencil.maskValue = _mask;
-    m_LogicMtlFlag0 |= MTL_F0_STENCIL;
+    //m_LogicMtlFlag0 |= MTL_F0_STENCIL;
 }
 
 void SVMtlCore::setStencilZPass(s32 _method) {
     //m_LogicParamStencil.zpass = _method;
-    m_LogicMtlFlag0 |= MTL_F0_STENCIL;
+    //m_LogicMtlFlag0 |= MTL_F0_STENCIL;
 }
 
 void SVMtlCore::setStencilZfail(s32 _method) {
     //m_LogicParamStencil.zfail = _method;
-    m_LogicMtlFlag0 |= MTL_F0_STENCIL;
+    //m_LogicMtlFlag0 |= MTL_F0_STENCIL;
 }
 
 void SVMtlCore::setStencilSfail(s32 _method) {
     //m_LogicParamStencil.sfail = _method;
-    m_LogicMtlFlag0 |= MTL_F0_STENCIL;
+    //m_LogicMtlFlag0 |= MTL_F0_STENCIL;
 }
 
 void SVMtlCore::fromJSON1(RAPIDJSON_NAMESPACE::Value &_item){
@@ -357,8 +367,8 @@ void SVMtlCore::fromJSON1(RAPIDJSON_NAMESPACE::Value &_item){
         m_stencil_enable = 0;
         m_stencil_clear = 0;
         m_stencil_passMethod = 0;
-        m_stencil_refValue = 0;
-        m_stencil_maskValue = 0;
+        m_stencil_ref = 0;
+        m_stencil_mask = 0;
         m_stencil_sfail = 0;
         m_stencil_zfail = 0;
         m_stencil_zpass = 0;
@@ -370,7 +380,7 @@ void SVMtlCore::fromJSON1(RAPIDJSON_NAMESPACE::Value &_item){
     }else{
         //默认alpha
         m_alpha_enable = 0;
-        m_alpha_testMethod = 0;
+        m_alpha_method = 0;
     }
 }
 

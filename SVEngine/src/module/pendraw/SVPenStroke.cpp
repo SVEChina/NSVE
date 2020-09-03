@@ -23,7 +23,6 @@
 #include "../../mtl/SVTexture.h"
 #include "../../mtl/SVMtlPenStrokeGlow.h"
 #include "../../mtl/SVMtlStrokeBase.h"
-#include "../../mtl/SVMtlNocolor.h"
 #include "../../basesys/SVCameraMgr.h"
 #include "../../basesys/SVBasicSys.h"
 #include "../../basesys/SVPickProcess.h"

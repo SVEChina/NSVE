@@ -19,30 +19,31 @@
 namespace sv {
 
     //
+    LUA_REG_DECLARE(TexUnit);
+    //
     struct TexUnit {
     public:
         TexUnit();
         
         ~TexUnit();
-        
-        void copy(TexUnit& _texunit);
-        
+        //重置
         void reset();
-        
-        s32 m_stage_type;   //纹理使用阶段类型，0:fs 1:vs
-        
-        s32 m_chn;          //纹理使用的通道
-        
-        SV_TEXIN m_texForm;  //纹理来源
-        
+        //纹理使用阶段类型，0:fs 1:vs
+        s32 m_stage_type;
+        //纹理使用的通道
+        s32 m_chn;
+        //纹理来源
+        SV_TEXIN m_texForm;
+        //纹理名称
         SVString m_fname;
-        
+        //纹理指针
         SVTexturePtr m_pTex;
     };
 
     //
+    LUA_REG_DECLARE(SVMtlCore);
+    //
     class SVMtlCore : public SVGBaseEx {
-        //
         friend class SVMtlLib;
         friend class SVRenderer;
         friend class SVRendererMetal;
@@ -50,7 +51,6 @@ namespace sv {
         friend class std::shared_ptr<SVRenderer> ;
         friend class std::shared_ptr<SVRendererMetal> ;
         friend class std::shared_ptr<SVRendererGL> ;
-        //
     public:
         SVMtlCore(SVInstPtr _app);
         
@@ -60,7 +60,7 @@ namespace sv {
         
         SVMtlCore(SVMtlCore* _mtl);
         
-        ~SVMtlCore();
+        virtual ~SVMtlCore();
         
         virtual SVMtlCorePtr clone();
         
@@ -85,6 +85,8 @@ namespace sv {
         SVString m_mtl_name;
         //shader名称
         SVString m_shader_name;
+        //绑定脚本
+        SVString m_script;
         //MTLFLAG0;
         s32 m_LogicMtlFlag0;
         //融合参数
@@ -97,30 +99,40 @@ namespace sv {
         s32 m_cullFace;
         //深度参数
         s32 m_depth_clear;
-        s32 m_depth_enable;        //开启深度测试
+        //开启深度测试
+        s32 m_depth_enable;
         //深度测试方法(GL_NEVER,GL_ALWAYS,GL_LESS,GL_LEQUAL,GL_GREATER,GL_GEQUAL,GL_NOTEQUAL)
-        s32 m_depthtest_method;
+        s32 m_depth_method;
         //模板参数
-        s32 m_stencil_clear;         //
-        s32 m_stencil_enable;        //开启模板测试
-        s32 m_stencil_passMethod;     //通过模板测试的规则(GL_NEVER,GL_LESS < ,GL_LEQUAL <= ,GL_GREATER > ,GL_GEEQUAL >= ,GL_EQUAL == ,GL_ALWAYS)
-        s32 m_stencil_refValue;       //通过模板测试的参考值(0-255)
-        s32 m_stencil_maskValue;      //掩码( 模板值&掩码 * 参考值&掩码 )
-        s32 m_stencil_sfail;          //模板测试失败     (GL_KEEP,GL_ZERO,GL_REPLACE(参考值代替写入),GL_INCR,GL_DECR,GL_INVERT(按位取反))
-        s32 m_stencil_zfail;          //模板通过 深度失败 (GL_KEEP,GL_ZERO,GL_REPLACE(参考值代替写入),GL_INCR,GL_DECR,GL_INVERT(按位取反))
-        s32 m_stencil_zpass;          //模板通过 深度通过 (GL_KEEP,GL_ZERO,GL_REPLACE(参考值代替写≤
+        s32 m_stencil_clear;
+        //开启模板测试
+        s32 m_stencil_enable;
+        //通过模板测试的规则(GL_NEVER,GL_LESS < ,GL_LEQUAL <= ,GL_GREATER > ,GL_GEEQUAL >= ,GL_EQUAL == ,GL_ALWAYS)
+        s32 m_stencil_passMethod;
+        //通过模板测试的参考值(0-255)
+        s32 m_stencil_ref;
+        //掩码( 模板值&掩码 * 参考值&掩码 )
+        s32 m_stencil_mask;
+        //模板测试失败(GL_KEEP,GL_ZERO,GL_REPLACE(参考值代替写入),GL_INCR,GL_DECR,GL_INVERT(按位取反))
+        s32 m_stencil_sfail;
+        //模板通过，深度失败(GL_KEEP,GL_ZERO,GL_REPLACE(参考值代替写入),GL_INCR,GL_DECR,GL_INVERT(按位取反))
+        s32 m_stencil_zfail;
+        //模板通过 深度通过 (GL_KEEP,GL_ZERO,GL_REPLACE(参考值代替写≤
+        s32 m_stencil_zpass;
         //Z偏移参数
         s32 m_zoff_enable;
         f32 m_zoff_factor;
         f32 m_zoff_unit;
-         //alpha参数
-        s32 m_alpha_enable;         //开启alpha测试
-        s32 m_alpha_testMethod;     //alpha测试方法(GL_NEVER,GL_ALWAYS,GL_LESS,GL_LEQUAL,GL_GREATER,GL_GEQUAL,GL_NOTEQUAL)
+        //开启alpha测试
+        s32 m_alpha_enable;
+        //alpha测试方法(GL_NEVER,GL_ALWAYS,GL_LESS,GL_LEQUAL,GL_GREATER,GL_GEQUAL,GL_NOTEQUAL)
+        s32 m_alpha_method;
         //纹理参数
         TexUnit m_vs_texUnit[MAX_TEXUNIT];
         TexUnit m_fs_texUnit[MAX_TEXUNIT];
         //
-        SVShaderPtr m_shader_obj;   //pointer
+        SVShaderPtr m_shader_obj;
+        
     public:
         void swap();
         

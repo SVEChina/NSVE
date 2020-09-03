@@ -10,16 +10,16 @@
 #include "../basesys/SVScene.h"
 #include "../app/SVInst.h"
 #include "../basesys/SVComData.h"
-#include "../mtl/SVMtlNocolor.h"
 #include "../rendercore/SVRenderMesh.h"
 #include "../rendercore/SVRenderMgr.h"
+#include "../mtl/SVMtl3D.h"
 
 using namespace sv;
 
 SVPatchNode::SVPatchNode(SVInstPtr _app)
 : SVNode(_app) {
     ntype = "SVPatchNode";
-    m_patchMtl = MakeSharedPtr<SVMtlGeo3d>(mApp);
+    //m_patchMtl = MakeSharedPtr<SVMtlGeo3d>(mApp);
     FVec3 t_corner00 = FVec3(-100.0, 0.0f, 0.0f);
     FVec3 t_corner10 = FVec3(100.0, 0.0f, 0.0f);
     FVec3 t_corner01 = FVec3(-100.0, 100.0f, 0.0f);
@@ -31,20 +31,20 @@ SVPatchNode::SVPatchNode(SVInstPtr _app)
 
 SVPatchNode::~SVPatchNode() {
     m_pMesh = nullptr;
-    m_patchMtl = nullptr;
+    //m_patchMtl = nullptr;
 }
 
 void SVPatchNode::setPatchVertexData(SVDataSwapPtr _vertexData, s32 _vertexCount){
-    if (m_patchMtl && m_pMesh && _vertexData) {
-        m_pMesh->setDrawVertNum(_vertexCount);
-        m_pMesh->setVertexData(_vertexData);
-    }
+//    if (m_patchMtl && m_pMesh && _vertexData) {
+//        m_pMesh->setDrawVertNum(_vertexCount);
+//        m_pMesh->setVertexData(_vertexData);
+//    }
 }
 
 void SVPatchNode::setPatchIndexData(SVDataSwapPtr _indicesData, s32 _indicesCount){
-    if (m_patchMtl && m_pMesh && _indicesData) {
-        m_pMesh->setIndexData(_indicesData, _indicesCount);
-    }
+//    if (m_patchMtl && m_pMesh && _indicesData) {
+//        m_pMesh->setIndexData(_indicesData, _indicesCount);
+//    }
 }
 
 void SVPatchNode::update(f32 _dt) {

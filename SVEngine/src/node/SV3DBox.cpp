@@ -12,7 +12,6 @@
 #include "../rendercore/SVRenderMesh.h"
 #include "../rendercore/SVRenderMgr.h"
 #include "../core/SVGeoGen.h"
-#include "../mtl/SVMtlNocolor.h"
 
 using namespace sv;
 

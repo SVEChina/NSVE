@@ -39,8 +39,8 @@ using namespace sv;
 static void lua_regist_SVInst(void* ls) {
     lua_State* L = (lua_State*)ls;
     if(L) {
-       //lua_pushcfunction(L, &SVObject::SVObject);
-//       lua_pushglobal(L, "SVObject");
+       //lua_pushcfunction(L, &SVInst::SVInst);
+       //lua_pushglobal(L, "SVInst");
 //       // 创建userdata要用的元表(其名为Foo), 起码要定义__gc方法, 以便回收内存
 //       luaL_newmetatable(L, "SVObject");
 //       lua_pushstring(L, "__gc");

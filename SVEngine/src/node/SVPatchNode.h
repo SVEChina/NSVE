@@ -30,8 +30,6 @@ namespace sv {
         
         SVRenderMeshPtr m_pMesh;
         
-        SVMtlGeo3dPtr m_patchMtl;
-        
         SVColor m_color;
     };
 

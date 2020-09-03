@@ -18,6 +18,8 @@ namespace sv {
     //特定滤镜，不允许更换材质
     //公共滤镜，可以替换材质
     
+    LUA_REG_DECLARE(SVFilterLib);
+
     class SVFilterLib : public SVGBaseEx {
     public:
         static SVFilterBasePtr createFilter(SVInstPtr _app,FTTYPE _type);

@@ -14,6 +14,8 @@
 
 namespace sv {
     
+    LUA_REG_DECLARE(SVGlobalMgr);
+
     class SVGlobalMgr : public SVGBaseEx {
     public:
         SVGlobalMgr(SVInstPtr _app);

@@ -55,13 +55,13 @@ static CGInst *mInst;
 -(void)initSVE{
     SV_LOG_INFO("sve init begin!");
     m_sve_obj = sv::SVInst::makeCreate();
-    NSString *t_sveResource = @"sve-metal";
-#if SVE_TOOL_USE_METAL
-    t_sveResource = @"sve-metal";
-#elif SVE_TOOL_USE_GLES
-    t_sveResource = @"sve-gles";
-#endif
-    NSString* t_sve_path = [[NSBundle mainBundle] pathForResource:t_sveResource ofType:@"bundle"];
+    NSString *t_sve_res = @"sve-metal";
+    if(SVE_CORE == SVE_GLES ) {
+        t_sve_res = @"sve-gles";
+    }else if( SVE_CORE == SVE_METAL ) {
+        t_sve_res = @"sve-metal";
+    }
+    NSString* t_sve_path = [[NSBundle mainBundle] pathForResource:t_sve_res ofType:@"bundle"];
     t_sve_path = [t_sve_path stringByAppendingString:@"/"];
     m_sve_obj->addRespath([t_sve_path UTF8String]);
     m_sve_obj->init();
