@@ -114,6 +114,8 @@ bool SVShader::toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator,
 
 bool SVShader::fromJSON(RAPIDJSON_NAMESPACE::Value &item) {
     assert(item.IsObject());
+    //language = 1
+    //
     if (item.HasMember("file") && item["file"].IsString()) {
         m_shader_dsp.m_programme_fname = item["file"].GetString();
     }else{

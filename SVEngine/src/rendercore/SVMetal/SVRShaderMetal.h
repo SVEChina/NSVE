@@ -51,21 +51,21 @@ namespace sv {
         id<MTLFunction> m_tsdf;
         id<MTLFunction> m_fsf;
         id<MTLFunction> m_csf;
-        //
+        //采样器
         struct INSAMPLE {
             id<MTLSamplerState> m_st;   //采样
             s32 m_stage;                //0:vs 1:fs 2:gs
             s32 m_chn;                  //通道
         };
         std::vector<INSAMPLE> m_sampler_st;
-        //
+        //buf
         struct UBUF {
             id<MTLBuffer> m_ubuf;   //对应buf
             s32 m_stage;            //0:vs 1:fs 2:gs
             s32 m_bufid;            //buf-id
         };
         std::vector<UBUF> m_ubuf_pool;
-        //
+        //状态
         id<MTLRenderPipelineState> m_pl_state;
     };
 
