@@ -30,7 +30,7 @@ namespace sv {
 
         SVShaderPtr getShader(cptr8 _name);
         
-        void loadSDSP(cptr8 _sdsp);
+        void loadSDSP(cptr8 _sdsp,cptr8 _language);
         
     private:
         void _loadAllShader();

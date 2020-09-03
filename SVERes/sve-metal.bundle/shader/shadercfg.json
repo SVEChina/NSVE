@@ -1,4 +1,5 @@
 {
+    "language" : "metal",
     "dspfiles": [
         "shader/nor.dsp",
         "shader/back.dsp",

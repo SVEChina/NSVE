@@ -52,19 +52,25 @@ void SVShaderMgr::_loadAllShader() {
         SV_LOG_ERROR("rapidjson error code:%d \n", code);
         return;
     }
+    //
+    SVString t_language = "";
+    RAPIDJSON_NAMESPACE::Value &language = doc["language"];
+    if( language.IsString() ) {
+        t_language = language.GetString();
+    }
     //获取文件列表
     RAPIDJSON_NAMESPACE::Value &dspfiles = doc["dspfiles"];
     if( dspfiles.IsArray() ) {
         RAPIDJSON_NAMESPACE::Document::Array t_files = dspfiles.GetArray();
         for(s32 i=0;i<t_files.Size();i++) {
             SVString t_filename = t_files[i].GetString();
-            loadSDSP(t_filename.c_str());
+            loadSDSP(t_filename.c_str(),t_language.c_str());
         }
     }
     SV_LOG_DEBUG("load shader end\n");
 }
 
-void SVShaderMgr::loadSDSP(cptr8 _sdsp) {
+void SVShaderMgr::loadSDSP(cptr8 _sdsp,cptr8 _language) {
     SVDataChunk tDataStream;
     bool tflag = mApp->m_file_sys->loadFileContentStr(&tDataStream, _sdsp);
     if (!tflag) {
@@ -83,7 +89,7 @@ void SVShaderMgr::loadSDSP(cptr8 _sdsp) {
     if ( doc.HasMember("name") && doc["name"].IsString() ) {
         RAPIDJSON_NAMESPACE::Value &shadername = doc["name"];
         SVShaderPtr t_shader = MakeSharedPtr<SVShader>(mApp);
-        if( t_shader->fromJSON( doc ) ) {
+        if( t_shader->fromJSON( doc ,_language) ) {
             m_shaderMap.insert(std::make_pair(shadername.GetString(), t_shader));
             SVDispatch::dispatchShaderCreate(mApp,t_shader);
         }

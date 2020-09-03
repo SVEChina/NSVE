@@ -112,7 +112,7 @@ bool SVShader::toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator,
     return true;
 }
 
-bool SVShader::fromJSON(RAPIDJSON_NAMESPACE::Value &item) {
+bool SVShader::fromJSON(RAPIDJSON_NAMESPACE::Value &item,cptr8 _language) {
     assert(item.IsObject());
     //language = 1
     //

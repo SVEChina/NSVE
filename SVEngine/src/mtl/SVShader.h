@@ -91,7 +91,7 @@ namespace sv {
         bool toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator,
                         RAPIDJSON_NAMESPACE::Value &_objValue);
 
-        bool fromJSON(RAPIDJSON_NAMESPACE::Value &item);
+        bool fromJSON(RAPIDJSON_NAMESPACE::Value &item,cptr8 _language);
 
     public:
         ShaderDsp m_shader_dsp;
