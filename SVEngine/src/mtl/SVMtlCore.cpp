@@ -133,21 +133,15 @@ void SVMtlCore::setTexture(s32 _chn,s32 _stage,SV_TEXIN _from,cptr8 _fname) {
         m_vs_texUnit[_chn].m_fname = _fname;
         m_vs_texUnit[_chn].m_pTex = nullptr;
         if(E_TEX_FILE == _from) {
-            //从文件加载纹理
             m_vs_texUnit[_chn].m_pTex = mApp->getTexMgr()->getTexture(_fname);
-        }else{
-            
         }
-    }else if(_stage == 1) {
+    } else if(_stage == 1) {
         m_fs_texUnit[_chn].m_stage_type = _stage;
         m_fs_texUnit[_chn].m_texForm = _from;
         m_fs_texUnit[_chn].m_fname = _fname;
         m_fs_texUnit[_chn].m_pTex = nullptr;
         if(E_TEX_FILE == _from) {
-            //从文件加载纹理
             m_fs_texUnit[_chn].m_pTex = mApp->getTexMgr()->getTexture(_fname);
-        }else{
-            
         }
     }
 }

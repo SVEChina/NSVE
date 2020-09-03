@@ -58,26 +58,22 @@ void SVRShaderMetal::create(SVRendererPtr _renderer) {
         }
     }
     //函数入口
-    if( t_shader->m_shader_dsp.m_dsp &SV_E_TECH_VS ) {
-        NSString* t_str = [NSString stringWithFormat:@"%s",t_shader->m_shader_dsp.m_vs_fname.c_str()];
-        m_vsf = [t_lib newFunctionWithName:t_str];
+    if( t_shader->m_shader_dsp.m_dsp & SV_E_TECH_VS ) {
+        m_vsf = [t_lib newFunctionWithName:@"vsMain"];
     }
-    if( t_shader->m_shader_dsp.m_dsp&SV_E_TECH_FS ) {
-        NSString* t_str = [NSString stringWithFormat:@"%s",t_shader->m_shader_dsp.m_fs_fname.c_str()];
-        m_fsf = [t_lib newFunctionWithName:t_str];
+    if( t_shader->m_shader_dsp.m_dsp & SV_E_TECH_FS ) {
+        m_fsf = [t_lib newFunctionWithName:@"fsMain"];
     }
-    if( t_shader->m_shader_dsp.m_dsp&SV_E_TECH_GS ) {
-        NSString* t_str = [NSString stringWithFormat:@"%s",t_shader->m_shader_dsp.m_gs_fname.c_str()];
-        m_gsf = [t_lib newFunctionWithName:t_str];
+    if( t_shader->m_shader_dsp.m_dsp & SV_E_TECH_GS ) {
+        m_gsf = [t_lib newFunctionWithName:@"gsMain"];
     }
-    if( t_shader->m_shader_dsp.m_dsp&SV_E_TECH_TSE ) {
-        NSString* t_str = [NSString stringWithFormat:@"%s",t_shader->m_shader_dsp.m_tsc_fname.c_str()];
-        m_tscf = [t_rm->m_pLibrary newFunctionWithName:t_str];
+    if( t_shader->m_shader_dsp.m_dsp & SV_E_TECH_TSE ) {
+        m_tscf = [t_rm->m_pLibrary newFunctionWithName:@"tseMain"];
     }
-    if( t_shader->m_shader_dsp.m_dsp&SV_E_TECH_TSD ) {
-        NSString* t_str = [NSString stringWithFormat:@"%s",t_shader->m_shader_dsp.m_tse_fname.c_str()];
-        m_tsdf = [t_rm->m_pLibrary newFunctionWithName:t_str];
+    if( t_shader->m_shader_dsp.m_dsp & SV_E_TECH_TSD ) {
+        m_tsdf = [t_rm->m_pLibrary newFunctionWithName:@"tsdMain"];
     }
+    
     //生成vs采样器(都在一起)
     for(s32 i=0;i<t_shader->m_samplers.size();i++) {
         INSAMPLE t_sampler;

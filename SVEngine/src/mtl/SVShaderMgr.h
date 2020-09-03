@@ -22,7 +22,7 @@ namespace sv {
     public:
         SVShaderMgr(SVInstPtr _app);
         
-        ~SVShaderMgr();
+        virtual ~SVShaderMgr();
         
         void init();
         

@@ -134,98 +134,39 @@ bool SVShader::fromJSON(RAPIDJSON_NAMESPACE::Value &item) {
     if( item.HasMember("pass")  && item["pass"].IsString() ) {
         m_shader_dsp.m_pass = item["pass"].GetString();
     }
-    //解析vs
-    if (item.HasMember("vs") && item["vs"].IsObject() ) {
+    //shader函数入口
+    if (item.HasMember("vs") && item["vs"].IsInt() ) {
         m_shader_dsp.m_dsp |= SV_E_TECH_VS;
-        //函数入口
-        RAPIDJSON_NAMESPACE::Document::Object vs_obj = item["vs"].GetObject();
-        m_shader_dsp.m_vs_fname = vs_obj["entry"].GetString();
-        //采样器
-        if( vs_obj.HasMember("sampler")  && vs_obj["sampler"].IsArray() ) {
-            RAPIDJSON_NAMESPACE::Document::Array t_sampler = vs_obj["sampler"].GetArray();
-            for(s32 i=0;i<t_sampler.Size();i++) {
-                SamplerDsp t_sampler_dsp;
-                t_sampler_dsp.m_stage = SV_STAGE_VS;
-                SamplerDspFromJson(t_sampler[i],t_sampler_dsp);
-                m_samplers.push_back(t_sampler_dsp);
-            }
-        }
-        //uniform参数
-        if( vs_obj.HasMember("uniform") && vs_obj["uniform"].IsArray() ) {
-            RAPIDJSON_NAMESPACE::Document::Array t_uniform = vs_obj["uniform"].GetArray();
-            for(s32 i=0;i<t_uniform.Size();i++) {
-                ParamTblDsp _dsp;
-                _dsp.m_stage = SV_STAGE_VS;
-                ParamTblFromJson(t_uniform[i],_dsp);
-                m_paramtbl.push_back(_dsp);
-            }
-        }
     }
-    //解析fs
-    if (item.HasMember("fs") && item["fs"].IsObject()) {
+    if (item.HasMember("fs") && item["fs"].IsInt() ) {
         m_shader_dsp.m_dsp |= SV_E_TECH_FS;
-        //函数入口
-        RAPIDJSON_NAMESPACE::Document::Object fs_obj = item["fs"].GetObject();
-        m_shader_dsp.m_fs_fname = fs_obj["entry"].GetString();
-        //采样器
-        if( fs_obj.HasMember("sampler")  && fs_obj["sampler"].IsArray() ) {
-            RAPIDJSON_NAMESPACE::Document::Array t_sampler = fs_obj["sampler"].GetArray();
-            for(s32 i=0;i<t_sampler.Size();i++) {
-                SamplerDsp t_sampler_dsp;
-                t_sampler_dsp.m_stage = SV_STAGE_FS;
-                SamplerDspFromJson(t_sampler[i],t_sampler_dsp);
-                m_samplers.push_back(t_sampler_dsp);
-            }
-        }
-        //uniform参数
-        if( fs_obj.HasMember("uniform")  && fs_obj["uniform"].IsArray() ) {
-            RAPIDJSON_NAMESPACE::Document::Array t_uniform = fs_obj["uniform"].GetArray();
-            for(s32 i=0;i<t_uniform.Size();i++) {
-                ParamTblDsp _dsp;
-                _dsp.m_stage = SV_STAGE_FS;
-                ParamTblFromJson(t_uniform[i],_dsp);
-                m_paramtbl.push_back(_dsp);
-            }
-        }
     }
-    //解析gs
-    if (item.HasMember("gs") && item["gs"].IsObject()) {
+    if (item.HasMember("gs") && item["gs"].IsInt() ) {
         m_shader_dsp.m_dsp |= SV_E_TECH_GS;
-        //函数入口
-        RAPIDJSON_NAMESPACE::Document::Object gs_obj = item["gs"].GetObject();
-        m_shader_dsp.m_gs_fname = gs_obj["entry"].GetString();
-        //采样器
-        if( gs_obj.HasMember("sampler")  && gs_obj["sampler"].IsArray() ) {
-            RAPIDJSON_NAMESPACE::Document::Array t_sampler = gs_obj["sampler"].GetArray();
-            for(s32 i=0;i<t_sampler.Size();i++) {
-                SamplerDsp t_sampler_dsp;
-                t_sampler_dsp.m_stage = SV_STAGE_GS;
-                SamplerDspFromJson(t_sampler[i],t_sampler_dsp);
-                m_samplers.push_back(t_sampler_dsp);
-            }
-        }
-        //uniform参数
-        if( gs_obj.HasMember("uniform") && gs_obj["uniform"].IsArray() ) {
-            RAPIDJSON_NAMESPACE::Document::Array t_uniform = gs_obj["uniform"].GetArray();
-            for(s32 i=0;i<t_uniform.Size();i++) {
-                ParamTblDsp _dsp;
-                _dsp.m_stage = SV_STAGE_GS;
-                ParamTblFromJson(t_uniform[i],_dsp);
-                m_paramtbl.push_back(_dsp);
-            }
-        }
     }
-    //
-    if (item.HasMember("tsd") && item["tsd"].IsObject()) {
-        m_shader_dsp.m_dsp |= SV_E_TECH_TSD;
-        RAPIDJSON_NAMESPACE::Document::Object tsd_obj = item["tsd"].GetObject();
-        m_shader_dsp.m_tsc_fname = tsd_obj["entry"].GetString();
-    }
-    //
-    if (item.HasMember("tse") && item["tse"].IsObject()) {
+    if (item.HasMember("tse") && item["tse"].IsInt() ) {
         m_shader_dsp.m_dsp |= SV_E_TECH_TSE;
-        RAPIDJSON_NAMESPACE::Document::Object tse_obj = item["tse"].GetObject();
-        m_shader_dsp.m_tse_fname = tse_obj["entry"].GetString();
+    }
+    if (item.HasMember("tsd") && item["tsd"].IsInt() ) {
+        m_shader_dsp.m_dsp |= SV_E_TECH_TSD;
+    }
+    //采样器
+    if( item.HasMember("sampler")  && item["sampler"].IsArray() ) {
+        RAPIDJSON_NAMESPACE::Document::Array t_sampler = item["sampler"].GetArray();
+        for(s32 i=0;i<t_sampler.Size();i++) {
+            SamplerDsp t_sampler_dsp;
+            SamplerDspFromJson(t_sampler[i],t_sampler_dsp);
+            m_samplers.push_back(t_sampler_dsp);
+        }
+    }
+    //uniform参数
+    if( item.HasMember("uniform") && item["uniform"].IsArray() ) {
+        RAPIDJSON_NAMESPACE::Document::Array t_uniform = item["uniform"].GetArray();
+        for(s32 i=0;i<t_uniform.Size();i++) {
+            ParamTblDsp _dsp;
+            ParamTblFromJson(t_uniform[i],_dsp);
+            m_paramtbl.push_back(_dsp);
+        }
     }
     return true;
 }
@@ -236,6 +177,10 @@ bool SVShader::fromJSON(RAPIDJSON_NAMESPACE::Value &item) {
 
 void SVShader::SamplerDspFromJson(RAPIDJSON_NAMESPACE::Value &item,SamplerDsp& _dsp) {
     if( item.IsObject() ) {
+        //buf-stage
+        if( item.HasMember("stage") && item["stage"].IsInt() ) {
+            _dsp.m_stage = item["stage"].GetInt();
+        }
         if( item.HasMember("chn") && item["chn"].IsInt() ) {
             _dsp.m_chn = item["chn"].GetInt();
         }
@@ -268,6 +213,10 @@ void SVShader::SamplerDspFromJson(RAPIDJSON_NAMESPACE::Value &item,SamplerDsp& _
 void SVShader::ParamTblFromJson(RAPIDJSON_NAMESPACE::Value &item,ParamTblDsp& _dsp) {
     if( !item.IsObject() ) {
         return;
+    }
+    //buf-stage
+    if( item.HasMember("stage") && item["stage"].IsInt() ) {
+        _dsp.m_stage = item["stage"].GetInt();
     }
     //buf-id
     if( item.HasMember("bufID") && item["bufID"].IsInt() ) {

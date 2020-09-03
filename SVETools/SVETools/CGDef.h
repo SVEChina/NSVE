@@ -10,4 +10,4 @@
 #define SVE_METAL 1
 #define SVE_GLES 2
 
-#define SVE_CORE SVE_GLES
+#define SVE_CORE SVE_METAL//SVE_GLES

@@ -103,7 +103,8 @@ namespace sv{
         //画笔相关
         SVDataSwapPtr m_pInstanceOffsetData;
         //SVRenderMeshDvidPtr m_pStrokeMesh;
-        SVMtlStrokeBasePtr m_pMtl;
+//        SVMtlStrokeBasePtr m_pMtl;
+//        SVMtlStrokeBasePtr m_pGlowMtl;
         SVTexturePtr m_pTex;
         s32 m_instanceCount;
         s32 m_lastInstanceIndex;
@@ -113,7 +114,6 @@ namespace sv{
         SVDataSwapPtr m_pGlowInstanceOffsetData;  //mesh
         SVTexturePtr m_pGlowTex;
         //SVRenderMeshDvidPtr m_pGlowMesh;
-        SVMtlStrokeBasePtr m_pGlowMtl;
         s32 m_lastGlowInstanceIndex;
         s32 m_glowInstanceCount;
         f32 m_glow_width;

@@ -23,7 +23,7 @@ namespace sv {
         ShaderDsp() {
             m_dsp = 0;
             m_programme_fname = "null";
-            m_pass = "null",
+            m_pass = "null";
             m_vs_fname = "null";
             m_fs_fname = "null";
             m_gs_fname = "null";
@@ -34,6 +34,7 @@ namespace sv {
         };
         //
         s32 m_dsp;
+        //顶点描述
         std::vector<s32> m_vft;
         SVString m_programme_fname;
         SVString m_vs_fname;
@@ -42,11 +43,12 @@ namespace sv {
         SVString m_cs_fname;
         SVString m_tsc_fname;
         SVString m_tse_fname;
+        //使用的pass
         SVString m_pass;
     };
 
     /*
-     * 采样描述
+     * 采样器描述
      */
     struct SamplerDsp {
         s32 m_chn;

@@ -70,30 +70,11 @@ void SVRShaderGL::create(SVRendererPtr _renderer) {
     }
     m_programm = _createProgram();
     //创建采样器
-    
     //生成uniform-buf
     for(s32 i=0;i<t_shader->m_paramtbl.size();i++) {
         //合并参数表
         SVParamTblPtr t_p_tbl = t_shader->m_paramtbl[i].m_tbl;
-//        s32 t_len = t_shader->m_paramtbl[i].m_tbl->getDataSize();
-        //m_tbl->setParam(<#cptr8 _name#>, <#s32 _value#>)
-        //UBUF t_ubuf;
-//        t_ubuf.m_bufid = t_shader->m_paramtbl[i].m_id;
-//        t_ubuf.m_type = t_shader->m_paramtbl[i].m_type;
-//        t_ubuf.m_ubuf = [t_rm->m_pDevice newBufferWithBytes:t_pointer length: t_len options: MTLResourceStorageModeShared ];
-//        m_ubuf_pool.push_back(t_ubuf);
     }
-//    for(s32 i=0;i<m_paramtbl.size();i++) {
-//        if(m_block) {
-//            //创建参数block
-//        }else{
-//
-//        }
-//    }
-//    //采样器
-//    std::vector<SamplerDsp> m_samplers;
-//    //参数表
-//    std::vector<ParamTblDsp> m_paramtbl;
     //生产program后就删除shader资源
     _clearShaderRes();
     //创建完毕，资源释放

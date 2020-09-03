@@ -18,11 +18,6 @@
 #include "../../rendercore/SVRenderMesh.h"
 #include "../../rendercore/SVRenderMgr.h"
 #include "../../rendercore/SVRenderer.h"
-#include "../../mtl/SVMtlCore.h"
-#include "../../mtl/SVTexMgr.h"
-#include "../../mtl/SVTexture.h"
-#include "../../mtl/SVMtlPenStrokeGlow.h"
-#include "../../mtl/SVMtlStrokeBase.h"
 #include "../../basesys/SVCameraMgr.h"
 #include "../../basesys/SVBasicSys.h"
 #include "../../basesys/SVPickProcess.h"
@@ -32,6 +27,10 @@
 #include "../../basesys/SVScene.h"
 #include "../../node/SVBillboardNode.h"
 #include "../../node/SVSpriteNode.h"
+#include "../../mtl/SVMtlCore.h"
+#include "../../mtl/SVTexMgr.h"
+#include "../../mtl/SVTexture.h"
+#include "../../mtl/SVMtlPenStrokeGlow.h"
 #include "SVPenPackData.h"
 
 using namespace sv;
@@ -86,12 +85,12 @@ SVPenStroke::~SVPenStroke() {
     m_pGlowInstanceOffsetData->reback();
     m_pGlowInstanceOffsetData = nullptr;
     //m_pStrokeMesh = nullptr;
-    m_pMtl = nullptr;
+    //m_pMtl = nullptr;
     m_pTex = nullptr;
     m_pGlowTex = nullptr;
     m_lock = nullptr;
     //m_pGlowMesh = nullptr;
-    m_pGlowMtl = nullptr;
+    //m_pGlowMtl = nullptr;
     m_ptStrokePool.destroy();
     m_ptGlowPool.destroy();
     m_ptCachePool.destroy();

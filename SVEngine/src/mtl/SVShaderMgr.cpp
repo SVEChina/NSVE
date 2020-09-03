@@ -52,9 +52,6 @@ void SVShaderMgr::_loadAllShader() {
         SV_LOG_ERROR("rapidjson error code:%d \n", code);
         return;
     }
-    
-    //name
-    
     //获取文件列表
     RAPIDJSON_NAMESPACE::Value &dspfiles = doc["dspfiles"];
     if( dspfiles.IsArray() ) {
@@ -81,15 +78,6 @@ void SVShaderMgr::loadSDSP(cptr8 _sdsp) {
         RAPIDJSON_NAMESPACE::ParseErrorCode code = doc.GetParseError();
         SV_LOG_ERROR("rapidjson error code:%d \n", code);
         return ;
-    }
-    //
-    s32 t_shader_language = 1;
-    if ( doc.HasMember("shadertype") && doc["shadertype"].IsString() ) {
-        RAPIDJSON_NAMESPACE::Value &shadertype = doc["shadertype"];
-        SVString t_shadertype_str = shadertype.GetString();
-        if(t_shadertype_str == "metal") {
-            t_shader_language = 2;
-        }
     }
     //
     if ( doc.HasMember("name") && doc["name"].IsString() ) {
