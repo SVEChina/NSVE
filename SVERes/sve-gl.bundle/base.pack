@@ -1,0 +1,10 @@
+{
+    "name" : "base",
+    "files": [
+        "back.mtl",
+        "screen.mtl",
+        "screenCamera.mtl",
+        "skycamera.mtl",
+        "sprite.mtl"
+    ]
+}

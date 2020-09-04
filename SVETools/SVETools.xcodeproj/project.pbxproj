@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		024E0DBA24D6BA58006B15E3 /* CGLESView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 024E0DB824D6BA58006B15E3 /* CGLESView.mm */; };
 		5F64D59A2480F0D40005CF47 /* CMetalView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5F64D5992480F0D40005CF47 /* CMetalView.mm */; };
+		5F96BDEC2501EBAB0020F7C4 /* sve-gl.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5F96BDEB2501EBAB0020F7C4 /* sve-gl.bundle */; };
 		5FD7F1F0247D064F00A53A1D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FD7F1EF247D064F00A53A1D /* AppDelegate.m */; };
 		5FD7F1F2247D065000A53A1D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5FD7F1F1247D065000A53A1D /* Assets.xcassets */; };
 		5FD7F1F5247D065000A53A1D /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FD7F1F3247D065000A53A1D /* MainMenu.xib */; };
@@ -60,6 +61,7 @@
 		024E0DB924D6BA58006B15E3 /* CGLESView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGLESView.h; sourceTree = "<group>"; };
 		5F64D5982480F0D40005CF47 /* CMetalView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CMetalView.h; sourceTree = "<group>"; };
 		5F64D5992480F0D40005CF47 /* CMetalView.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = CMetalView.mm; sourceTree = "<group>"; };
+		5F96BDEB2501EBAB0020F7C4 /* sve-gl.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "sve-gl.bundle"; sourceTree = "<group>"; };
 		5FD7F1EB247D064F00A53A1D /* SVETools.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SVETools.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5FD7F1EE247D064F00A53A1D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		5FD7F1EF247D064F00A53A1D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 		5FF2B80324C1509200FC0BC9 /* SVERes */ = {
 			isa = PBXGroup;
 			children = (
+				5F96BDEB2501EBAB0020F7C4 /* sve-gl.bundle */,
 				5FF2B80424C1509200FC0BC9 /* sve-metal.bundle */,
 				5FF2B80524C1509200FC0BC9 /* sve-gles.bundle */,
 			);
@@ -265,6 +268,7 @@
 			files = (
 				5FF2B80C24C1509300FC0BC9 /* sve-gles.bundle in Resources */,
 				5FD7F1F2247D065000A53A1D /* Assets.xcassets in Resources */,
+				5F96BDEC2501EBAB0020F7C4 /* sve-gl.bundle in Resources */,
 				5FD7F1F5247D065000A53A1D /* MainMenu.xib in Resources */,
 				5FF2B80B24C1509300FC0BC9 /* sve-metal.bundle in Resources */,
 			);

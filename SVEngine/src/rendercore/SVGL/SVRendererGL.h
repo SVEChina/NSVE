@@ -24,9 +24,9 @@ namespace sv {
         
         SVRendererGLPtr share();
         
-        void init(s32 _w,s32 _h);
+        void init(s32 _w,s32 _h,s32 _version);
 
-        void init(s32 _w,s32 _h,bool _offline);
+        void init(s32 _w,s32 _h,s32 _version,bool _offline);
 
         void resize(s32 _w,s32 _);
     
@@ -64,6 +64,7 @@ namespace sv {
         
     public:
         u32 m_cur_program;  //当前的program
+        s32 m_gl_version;
     };
 
 

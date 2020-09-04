@@ -28,11 +28,11 @@ SVCtxOSXGL::~SVCtxOSXGL() {
     m_gl_context_out = nullptr;
 }
 
-void SVCtxOSXGL::init(SVInstPtr _handle,void* _context,s32 _w,s32 _h) {
+void SVCtxOSXGL::init(SVInstPtr _handle,void* _context,s32 _w,s32 _h,s32 _version) {
     m_gl_context_out = (__bridge NSOpenGLContext*)_context;
     if(m_gl_context_out) {
         SVRendererGLPtr t_renderer = MakeSharedPtr<SVRendererGL>(_handle);
-        t_renderer->init(_w,_h);
+        t_renderer->init(_w,_h,_version);
         _handle->setRenderer(t_renderer);
     }
 }

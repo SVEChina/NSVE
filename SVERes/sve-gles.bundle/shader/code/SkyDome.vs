@@ -10,8 +10,7 @@ varying vec2 v_texcoord0;
 uniform mat4 aMatrixM;
 uniform mat4 aMatrixVP;
 
-void main()
-{
-     gl_Position  = aMatrixVP * aMatrixM * vec4(aPosition , 1.0);
-     v_texcoord0    = aTexcoord0;
+void main(){
+    gl_Position  = aMatrixVP * aMatrixM * vec4(aPosition , 1.0);
+    v_texcoord0    = aTexcoord0;
 }

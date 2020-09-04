@@ -1,4 +1,4 @@
-//#version 150
+
 varying vec4 v_color;
 varying vec3 v_Normal;
 varying vec3 v_FragPos;

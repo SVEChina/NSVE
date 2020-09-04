@@ -51,7 +51,7 @@
     int t_w = self.frame.size.width;
     int t_h = self.frame.size.height;
     //创建渲染器,OPENGL渲染器
-    [[CGInst getInst] create_OSX_GL:(void*)m_context Width:t_w Height:t_h];
+    [[CGInst getInst] create_OSX_GL:(void*)m_context Width:t_w Height:t_h Version:150];
     [self creatTimer];
 }
 

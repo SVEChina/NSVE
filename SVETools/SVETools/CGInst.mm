@@ -60,6 +60,8 @@ static CGInst *mInst;
         t_sve_res = @"sve-gles";
     }else if( SVE_CORE == SVE_METAL ) {
         t_sve_res = @"sve-metal";
+    }else if( SVE_CORE == SVE_GL ) {
+        t_sve_res = @"sve-gl";
     }
     NSString* t_sve_path = [[NSBundle mainBundle] pathForResource:t_sve_res ofType:@"bundle"];
     t_sve_path = [t_sve_path stringByAppendingString:@"/"];
@@ -115,20 +117,20 @@ static CGInst *mInst;
  Renderer OpenGL
  */
 //创建OSX-GL环境
-- (void)create_OSX_GL:(void*)_ctx Width:(int)_w Height:(int)_h {
+- (void)create_OSX_GL:(void*)_ctx Width:(int)_w Height:(int)_h Version:(int)_version {
 #ifdef SV_OSX
     if( m_sve_obj ) {
         sv::SVCtxBasePtr t_ctx_base = m_sve_obj->createEnv(sv::E_R_GL_OSX);
         sv::SVCtxOSXGLPtr t_ctx_gl_osx = std::dynamic_pointer_cast<sv::SVCtxOSXGL>(t_ctx_base);
         if(t_ctx_gl_osx) {
-            t_ctx_gl_osx->init(m_sve_obj,_ctx,_w,_h);
+            t_ctx_gl_osx->init(m_sve_obj,_ctx,_w,_h,_version);
         }
     }
 #endif
 }
 
 //创建IOS-GL环境
-- (void)create_IOS_GL:(void*)_ctx Width:(int)_w Height:(int)_h {
+- (void)create_IOS_GL:(void*)_ctx Width:(int)_w Height:(int)_h Version:(int)_version {
 #ifdef SV_IOS
     if( m_sve_obj ) {
         sv::SVCtxBasePtr t_ctx = m_sve_obj->createEnv(sv::E_R_GLES_IOS);

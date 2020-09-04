@@ -92,7 +92,6 @@ namespace sv {
         u64 getRealSize() { return m_realsize; }
         
     protected:
-
         u64 m_size;
         
         u64 m_realsize;

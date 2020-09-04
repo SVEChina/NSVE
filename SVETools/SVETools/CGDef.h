@@ -9,5 +9,6 @@
 //renderer
 #define SVE_METAL 1
 #define SVE_GLES 2
+#define SVE_GL 3
 
-#define SVE_CORE SVE_GLES//SVE_METAL
+#define SVE_CORE SVE_GL//SVE_METAL

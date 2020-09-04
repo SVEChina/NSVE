@@ -37,8 +37,10 @@
     // Insert code here to initialize your application
     if(SVE_CORE == SVE_METAL) {
         renderView = [[CMetalView alloc] initWithFrame:self.window.contentView.bounds];
-    }else if(SVE_CORE == SVE_GLES) {
+    }else if(SVE_CORE == SVE_GL) {
         renderView = [[CGLESView alloc] initWithFrame:self.window.contentView.bounds];
+    }else if(SVE_CORE == SVE_GLES) {
+        //renderView = [[CGLESView alloc] initWithFrame:self.window.contentView.bounds];
     }
     [self.window.contentView addSubview:renderView];
 }

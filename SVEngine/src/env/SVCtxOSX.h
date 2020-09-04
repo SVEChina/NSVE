@@ -25,7 +25,7 @@ namespace sv {
         
         ~SVCtxOSXGL();
         
-        void init(SVInstPtr _handle,void* _context,s32 _w,s32 _h);
+        void init(SVInstPtr _handle,void* _context,s32 _w,s32 _h,s32 _version);
         
         void resize(s32 _w,s32 _h){}
         

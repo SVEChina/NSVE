@@ -28,8 +28,8 @@ namespace sv {
             m_fs_fname = "null";
             m_gs_fname = "null";
             m_cs_fname = "null";
-            m_tsc_fname = "null";
             m_tse_fname = "null";
+            m_tsd_fname = "null";
             m_vft.clear();
         };
         //
@@ -41,7 +41,7 @@ namespace sv {
         SVString m_fs_fname;
         SVString m_gs_fname;
         SVString m_cs_fname;
-        SVString m_tsc_fname;
+        SVString m_tsd_fname;
         SVString m_tse_fname;
         //使用的pass
         SVString m_pass;

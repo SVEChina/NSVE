@@ -40,8 +40,9 @@ SVRendererGLPtr SVRendererGL::share() {
     return std::dynamic_pointer_cast<SVRendererGL>(shareObject());
 }
 
-void SVRendererGL::init(s32 _w,s32 _h){
+void SVRendererGL::init(s32 _w,s32 _h,s32 _version){
     SVRenderer::init(_w,_h);
+    m_gl_version = _version;
     mApp->m_global_param.m_sv_width = _w;
     mApp->m_global_param.m_sv_height = _h;
     //创建主纹理
@@ -51,7 +52,15 @@ void SVRendererGL::init(s32 _w,s32 _h){
     }
 }
 
-void SVRendererGL::init(s32 _w,s32 _h,bool _offline) {
+void SVRendererGL::init(s32 _w,s32 _h,s32 _version,bool _offline) {
+    m_gl_version = _version;
+    mApp->m_global_param.m_sv_width = _w;
+    mApp->m_global_param.m_sv_height = _h;
+    //创建主纹理
+    SVRTargetPtr t_target = createTarget(E_TEX_MAIN,true,true);
+    if(t_target) {
+        mApp->getRenderMgr()->setMainRT(t_target);
+    }
 }
 
 void SVRendererGL::resize(s32 _w,s32 _h) {

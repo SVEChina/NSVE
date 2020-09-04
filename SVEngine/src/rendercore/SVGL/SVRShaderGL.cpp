@@ -49,24 +49,35 @@ void SVRShaderGL::create(SVRendererPtr _renderer) {
     if(!t_shader){
         return ;
     }
-    //
     if( t_shader->m_shader_dsp.m_dsp &SV_E_TECH_VS ) {
-         m_vs = _loadShader(mApp,t_shader->m_shader_dsp.m_vs_fname.c_str(),SV_E_TECH_VS);
+         m_vs = _loadShader(mApp,
+                            _renderer,
+                            t_shader->m_shader_dsp.m_vs_fname.c_str(),
+                            SV_E_TECH_VS);
     }
     if( t_shader->m_shader_dsp.m_dsp&SV_E_TECH_FS ) {
-        m_fs = _loadShader(mApp,t_shader->m_shader_dsp.m_fs_fname.c_str(),SV_E_TECH_FS);
+        m_fs = _loadShader(mApp,
+                           _renderer,
+                           t_shader->m_shader_dsp.m_fs_fname.c_str(),
+                           SV_E_TECH_FS);
     }
     if( t_shader->m_shader_dsp.m_dsp&SV_E_TECH_GS ) {
-       m_gs = _loadShader(mApp,t_shader->m_shader_dsp.m_gs_fname.c_str(),SV_E_TECH_GS);
+       m_gs = _loadShader(mApp,
+                          _renderer,
+                          t_shader->m_shader_dsp.m_gs_fname.c_str(),
+                          SV_E_TECH_GS);
     }
-//    if( m_shader_dsp&SV_E_TECH_CS ) {
-//     m_cs = _loadShader(mApp,t_shader->m_dsp.m_gs_fname.c_str(),SV_E_TECH_GS);
-//    }
     if( t_shader->m_shader_dsp.m_dsp&SV_E_TECH_TSE ) {
-        m_tsc = _loadShader(mApp,t_shader->m_shader_dsp.m_tsc_fname.c_str(),SV_E_TECH_TSE);
+        m_tsc = _loadShader(mApp,
+                            _renderer,
+                            t_shader->m_shader_dsp.m_tse_fname.c_str(),
+                            SV_E_TECH_TSE);
     }
     if( t_shader->m_shader_dsp.m_dsp&SV_E_TECH_TSD ) {
-        m_tse = _loadShader(mApp,t_shader->m_shader_dsp.m_tse_fname.c_str(),SV_E_TECH_TSD);
+        m_tse = _loadShader(mApp,
+                            _renderer,
+                            t_shader->m_shader_dsp.m_tsd_fname.c_str(),
+                            SV_E_TECH_TSD);
     }
     m_programm = _createProgram();
     //创建采样器
@@ -81,7 +92,12 @@ void SVRShaderGL::create(SVRendererPtr _renderer) {
     m_logic_obj = nullptr;
 }
 
-u32 SVRShaderGL::_loadShader(SVInstPtr _app,cptr8 _filename,s32 _shaderType){
+u32 SVRShaderGL::_loadShader(SVInstPtr _app,SVRendererPtr _renderer,cptr8 _filename,s32 _shaderType){
+    SVRendererGLPtr t_renderGL = std::dynamic_pointer_cast<SVRendererGL>(_renderer);
+    if(!t_renderGL) {
+        return 0;
+    }
+    //
     SVDataChunk tDataStream;
     u32 t_id = 0;
     bool t_flag=false;
@@ -108,6 +124,46 @@ u32 SVRShaderGL::_loadShader(SVInstPtr _app,cptr8 _filename,s32 _shaderType){
         t_shader_type = GL_TESS_CONTROL_SHADER;
     }else if(_shaderType == 6) {
     }
+    //自动补充版本号
+    SVString version_str = "";
+    if( t_renderGL->m_gl_version == 110 ) {
+        //2.0
+        version_str = "#version 110 \n";
+    }else if( t_renderGL->m_gl_version == 120 ) {
+        //2.1
+        version_str = "#version 120 \n";
+    }else if( t_renderGL->m_gl_version == 130 ) {
+        //3.0
+        version_str = "#version 130 \n";
+    }else if( t_renderGL->m_gl_version == 140 ) {
+        //3.1
+        version_str = "#version 140 \n";
+    }else if( t_renderGL->m_gl_version == 150 ) {
+        //3.2
+        version_str = "#version 150 \n";
+    }else if( t_renderGL->m_gl_version == 330 ) {
+        //3.3
+        version_str = "#version 330 \n";
+    }else if( t_renderGL->m_gl_version == 400 ) {
+        //4.0
+        version_str = "#version 400 \n";
+    }else if( t_renderGL->m_gl_version == 410 ) {
+        //4.1
+        version_str = "#version 410 \n";
+    }else if( t_renderGL->m_gl_version == 420 ) {
+        //4.2
+        version_str = "#version 420 \n";
+    }else if( t_renderGL->m_gl_version == 430 ) {
+        //4.3
+        version_str = "#version 430 \n";
+    }
+    
+    //
+    SVDataChunk tNewStream;
+    tNewStream.push( (void*)(version_str.c_str()), version_str.size());
+    tNewStream.push( (void*)t_shader_res, (s32)(tDataStream.getRealSize()) );
+    t_shader_res = tNewStream.getPointerChar();
+    //自动补充精度
     u32 t_shader_id = glCreateShader(t_shader_type);
     glShaderSource(t_shader_id, 1, &t_shader_res, 0);
     glCompileShader(t_shader_id);
@@ -120,8 +176,7 @@ u32 SVRShaderGL::_loadShader(SVInstPtr _app,cptr8 _filename,s32 _shaderType){
             c8 *log = (c8 *) malloc(logLen);
             GLsizei written;
             glGetShaderInfoLog(t_shader_id, logLen, &written, log);
-            SV_LOG_DEBUG("vs shader compile error log : \n %s fname:%s \n", log,
-                         _filename/*[filename UTF8String]*/);
+            SV_LOG_DEBUG("vs shader compile error log : \n %s fname:%s \n", log, _filename);
             free(log);
         }
         t_shader_id = 0;

@@ -181,7 +181,7 @@ u64 SVDataChunk::push(void* _value,s32 _size) {
         m_size = t_newsize;
         //新地址,并拷贝数据
         c8* t_newdata = (c8*)(malloc(t_newsize));
-        if(!m_data && m_realsize>0) {
+        if(m_data && m_realsize>0) {
             memcpy(t_newdata, m_data, m_realsize);
             free(m_data);
         }

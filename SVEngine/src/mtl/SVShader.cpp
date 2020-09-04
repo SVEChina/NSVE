@@ -116,12 +116,57 @@ bool SVShader::fromJSON(RAPIDJSON_NAMESPACE::Value &item,cptr8 _language) {
     assert(item.IsObject());
     //language = 1
     //
-    if (item.HasMember("file") && item["file"].IsString()) {
-        m_shader_dsp.m_programme_fname = item["file"].GetString();
-    }else{
-        return false;
+    if( strcmp(_language, "gl") == 0 ) {
+        //shader函数入口还有各个文件名称
+        if (item.HasMember("vs") && item["vs"].IsString() ) {
+            m_shader_dsp.m_dsp |= SV_E_TECH_VS;
+            m_shader_dsp.m_vs_fname = item["vs"].GetString();
+        }
+        if (item.HasMember("fs") && item["fs"].IsString() ) {
+            m_shader_dsp.m_dsp |= SV_E_TECH_FS;
+            m_shader_dsp.m_fs_fname = item["fs"].GetString();
+        }
+        if (item.HasMember("gs") && item["gs"].IsString() ) {
+            m_shader_dsp.m_dsp |= SV_E_TECH_GS;
+            m_shader_dsp.m_gs_fname = item["gs"].GetString();
+        }
+        if (item.HasMember("tse") && item["tse"].IsString() ) {
+            m_shader_dsp.m_dsp |= SV_E_TECH_TSE;
+            m_shader_dsp.m_tse_fname = item["tse"].GetString();
+        }
+        if (item.HasMember("tsd") && item["tsd"].IsString() ) {
+            m_shader_dsp.m_dsp |= SV_E_TECH_TSD;
+            m_shader_dsp.m_tsd_fname = item["tsd"].GetString();
+        }
+        //
+    }else if(strcmp(_language, "metal") == 0) {
+        if (item.HasMember("file") && item["file"].IsString()) {
+            m_shader_dsp.m_programme_fname = item["file"].GetString();
+        }else{
+            return false;
+        }
+        //shader函数入口
+        if (item.HasMember("vs") && item["vs"].IsInt() ) {
+            m_shader_dsp.m_dsp |= SV_E_TECH_VS;
+        }
+        if (item.HasMember("fs") && item["fs"].IsInt() ) {
+            m_shader_dsp.m_dsp |= SV_E_TECH_FS;
+        }
+        if (item.HasMember("gs") && item["gs"].IsInt() ) {
+            m_shader_dsp.m_dsp |= SV_E_TECH_GS;
+        }
+        if (item.HasMember("tse") && item["tse"].IsInt() ) {
+            m_shader_dsp.m_dsp |= SV_E_TECH_TSE;
+        }
+        if (item.HasMember("tsd") && item["tsd"].IsInt() ) {
+            m_shader_dsp.m_dsp |= SV_E_TECH_TSD;
+        }
     }
-    //
+    //pass序列
+    if( item.HasMember("pass")  && item["pass"].IsString() ) {
+        m_shader_dsp.m_pass = item["pass"].GetString();
+    }
+    //数据格式
     if( item.HasMember("formate")  && item["formate"].IsArray() ) {
         RAPIDJSON_NAMESPACE::Document::Array t_formate = item["formate"].GetArray();
         for(s32 i=0;i<t_formate.Size();i++) {
@@ -131,26 +176,6 @@ bool SVShader::fromJSON(RAPIDJSON_NAMESPACE::Value &item,cptr8 _language) {
                 m_shader_dsp.m_vft.push_back(it->second);
             }
         }
-    }
-    //
-    if( item.HasMember("pass")  && item["pass"].IsString() ) {
-        m_shader_dsp.m_pass = item["pass"].GetString();
-    }
-    //shader函数入口
-    if (item.HasMember("vs") && item["vs"].IsInt() ) {
-        m_shader_dsp.m_dsp |= SV_E_TECH_VS;
-    }
-    if (item.HasMember("fs") && item["fs"].IsInt() ) {
-        m_shader_dsp.m_dsp |= SV_E_TECH_FS;
-    }
-    if (item.HasMember("gs") && item["gs"].IsInt() ) {
-        m_shader_dsp.m_dsp |= SV_E_TECH_GS;
-    }
-    if (item.HasMember("tse") && item["tse"].IsInt() ) {
-        m_shader_dsp.m_dsp |= SV_E_TECH_TSE;
-    }
-    if (item.HasMember("tsd") && item["tsd"].IsInt() ) {
-        m_shader_dsp.m_dsp |= SV_E_TECH_TSD;
     }
     //采样器
     if( item.HasMember("sampler")  && item["sampler"].IsArray() ) {

@@ -33,7 +33,7 @@ namespace sv {
         void submitParamTbl();
 
     private:
-        static u32 _loadShader(SVInstPtr _app,cptr8 _filename,s32 _shaderType);
+        static u32 _loadShader(SVInstPtr _app,SVRendererPtr _renderer,cptr8 _filename,s32 _shaderType);
 
         u32 _createProgram();
 
