@@ -200,6 +200,10 @@ void SVMtlCore::setTexture(s32 _chn,s32 _stage,SVTexturePtr _texture) {
 //逻辑更新
 void SVMtlCore::update(f32 dt) {
     reloadShader();
+    //
+    if(m_script!="") {
+        //mApp->
+    }
 }
 
 void SVMtlCore::reloadShader(){

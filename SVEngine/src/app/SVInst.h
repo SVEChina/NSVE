@@ -84,6 +84,8 @@ namespace sv {
         SVRenderMgrPtr m_render_mgr;
         //配置部分
         SVConfig m_config;
+        //脚本系统-lua
+        SVLuaSysPtr m_lua_sys;
         //全局对象
         SVGlobalMgrPtr m_pGlobalMgr;
         //全局参数

@@ -26,6 +26,9 @@ namespace sv{
         
         void update(f32 dt);
         
+        //运行目标脚本
+        void runLua(cptr8 _script);
+        
     protected:
         lua_State* L_S;
     };

@@ -14,7 +14,8 @@
 #include "../env/SVCtxOSX.h"
 #include "../env/SVEGLContext.h"
 //
-#include "../basesys/SVRPath.h"
+#include "../script/SVLuaSys.h"
+
 #include "../work/SVTdCore.h"
 #include "../work/SVThreadPool.h"
 #include "../file/SVFileMgr.h"
@@ -79,6 +80,13 @@ void SVInst::init() {
     //
     m_renderer = nullptr;
     //
+    //lua脚本系统
+    if(!m_lua_sys) {
+        m_lua_sys = MakeSharedPtr<SVLuaSys>( share() );
+        m_lua_sys->init();
+        SV_LOG_ERROR("sve init m_lua_sys end!\n");
+    }
+    //
     if(!m_file_sys) {
         m_file_sys = MakeSharedPtr<SVFileMgr>( share() );
     }
@@ -111,6 +119,11 @@ void SVInst::destroy() {
     }
     //
     m_file_sys = nullptr;
+    //去掉脚本系统
+    if(m_lua_sys) {
+        m_lua_sys->destroy();
+        m_lua_sys = nullptr;
+    }
     m_svst = SV_ST_NULL;
 }
 
@@ -209,6 +222,12 @@ void SVInst::stop() {
 
 void SVInst::updateSVE(f32 _dt) {
     //处理一般逻辑，例如运动，消息处理等等
+    //先跑脚本系统
+    if(m_lua_sys) {
+        m_lua_sys->update(_dt);
+        //timeTag(false,"lua cost");
+    }
+    //
     m_pGlobalMgr->update(_dt);
 }
 

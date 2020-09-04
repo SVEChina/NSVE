@@ -16,7 +16,6 @@
 #include "../basesys/SVModelMgr.h"
 #include "../basesys/SVPhysicsWorldMgr.h"
 #include "../basesys/SVARBackgroundMgr.h"
-#include "../script/SVLuaSys.h"
 #include "../module/SVModuleSys.h"
 #include "../light/SVLightSys.h"
 #include "../event/SVEventMgr.h"
@@ -73,10 +72,6 @@ void SVGlobalMgr::init() {
     m_event_sys = MakeSharedPtr<SVEventMgr>(mApp);
     m_event_sys->init();
     SV_LOG_ERROR("sve init m_event_sys end!\n");
-    //lua脚本系统
-    m_lua_sys = MakeSharedPtr<SVLuaSys>(mApp);
-    m_lua_sys->init();
-    SV_LOG_ERROR("sve init m_lua_sys end!\n");
     //构建静态数据
     m_commonData = MakeSharedPtr<SVComData>(mApp);
     m_commonData->init();
@@ -190,10 +185,6 @@ void SVGlobalMgr::destroy() {
 //        m_pLightSys->destroy();
 //        SV_LOG_ERROR("m_pLightSys:destroy sucess");
 //    }
-    if(m_lua_sys) {
-        m_lua_sys->destroy();
-        SV_LOG_ERROR("m_lua_sys:destroy sucess");
-    }
     if (m_event_sys) {
         //事件系统最后析够,因为很多其他模块 会注册监听事件
         m_event_sys->destroy();
@@ -216,10 +207,6 @@ void SVGlobalMgr::update(f32 dt) {
 //    timeTag(false,"model cost");
 //    m_pPhysicSys->update(dt);             //物理更新
 //    timeTag(false,"physics cost");
-    if(m_lua_sys) {
-        m_lua_sys->update(dt);
-        timeTag(false,"lua cost");
-    }
     if(m_camera_mgr) {
         //相机更新
         m_camera_mgr->update(dt);

@@ -51,3 +51,8 @@ void SVLuaSys::update(f32 dt) {
 //        //cout << "call test.lua file failed" << endl;
 //    }
 }
+
+//
+void SVLuaSys::runLua(cptr8 _script) {
+    
+}

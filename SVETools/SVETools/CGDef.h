@@ -11,4 +11,4 @@
 #define SVE_GLES 2
 #define SVE_GL 3
 
-#define SVE_CORE SVE_GL//SVE_METAL
+#define SVE_CORE SVE_METAL//SVE_METAL
