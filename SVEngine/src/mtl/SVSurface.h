@@ -19,7 +19,8 @@
 
 namespace sv {
 
-    //
+    //表示材质需要更新的数据
+
     class SVSurface : public SVObject {
     public:
         SVSurface();
@@ -42,15 +43,13 @@ namespace sv {
         void setParam(cptr8 _name,FMat3& _value);
 
         void setParam(cptr8 _name,FMat4& _value);
-        
         //参数表
         SVParamTblPtr m_tbl;
-        
         //纹理表
         void setTexture(s32 _chn,SVTexturePtr _tex,s32 _stage);
-        
         //
         std::vector<SVTexturePtr> m_vs_texs;
+        //
         std::vector<SVTexturePtr> m_fs_texs;
     };
 

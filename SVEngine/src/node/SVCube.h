@@ -1,12 +1,12 @@
 //
-// SV3DBox.h
+// SVCube.h
 // SVEngine
 // Copyright 2017-2020
 // yizhou Fu,long Yin,longfei Lin,ziyu Xu,xiaofan Li,daming Li
 //
 
-#ifndef SV_3DBOX_H
-#define SV_3DBOX_H
+#ifndef SV_CUBE_H
+#define SV_CUBE_H
 
 #include "SVNode.h"
 #include "../base/SVBounds.h"
@@ -14,29 +14,29 @@
 
 namespace sv {
     
-    class SV3DBox : public SVNode {
+    class SVCube : public SVNode {
     public:
-        SV3DBox(SVInstPtr _app);
+        SVCube(SVInstPtr _app);
         
-        virtual ~SV3DBox();
+        virtual ~SVCube();
         
         virtual void update(f32 dt);
         
         virtual void render();
         
-        void setSize(FVec3 _size);
+        void setMtl(cptr8 _name);
         
-        SVMtlCorePtr getMtl();
+        void setSize(FVec3& _size);
         
-        SVMtlGeo3dPtr m_mtl_box;
-
-        SVRenderMeshPtr m_pMesh;
+        void setColor(SVColor& _color);
+        
+        FVec3 getSize() { return m_size; }
+        
+    private:
+        SVRenderMeshPtr m_cube_mesh;
         
         SVColor m_color;
         
-        FVec3& getSize() { return m_size; }
-        
-    private:
         FVec3 m_size;
     };
     
@@ -44,4 +44,4 @@ namespace sv {
 
 
 
-#endif //SV_3DBOX_H
+#endif //SV_CUBE_H

@@ -28,7 +28,7 @@ SVVisitRayPick::~SVVisitRayPick() {
 }
 
 bool SVVisitRayPick::visit(SVNodePtr _node) {
-    if(_node->getvisible() && _node->getcanSelect() ){
+    if(_node->visible() && _node->canSelect() ){
         SVBoundBox t_box_sw = _node->getAABBSW();
         if( t_box_sw.getIntersectionValid(m_rayStart, m_rayEnd) ){
             m_nodearray.append(_node);
@@ -41,7 +41,7 @@ SVNodePtr SVVisitRayPick::getCrossNode(FVec3& _campos){
     SVNodePtr t_node = nullptr;
     f32 t_dis = 1000000;
     for(s32 i=0;i<m_nodearray.size();i++){
-        if (m_nodearray[i]->getcanSelect() == false) {
+        if (m_nodearray[i]->canSelect() == false) {
             continue;
         }
         FVec3 tt = _campos - m_nodearray[i]->getPosition();
@@ -67,7 +67,7 @@ SVVisitRayPickUI::~SVVisitRayPickUI() {
 }
 
 bool SVVisitRayPickUI::visit(SVNodePtr _node) {
-    if(_node->getvisible() && _node->getcanSelect() ){
+    if(_node->visible() && _node->canSelect() ){
         SVBoundBox t_box_sw = _node->getAABBSW();
         if( t_box_sw.getIntersectionValid(m_rayStart, m_rayEnd)){
             m_pNode = _node;
@@ -320,7 +320,7 @@ void SVPickProcess::_pickUI(SVNodePtr _node){
 }
 
 bool SVPickProcess::procEvent(SVEventPtr _event){
-    SVCameraNodePtr t_camera = mApp->m_pGlobalMgr->m_camera_mgr->getMainCamera();
+    SVCameraNodePtr t_camera = mApp->m_global_mgr->m_camera_mgr->getMainCamera();
     if(_event->eventType == EVN_T_TOUCH_BEGIN){
         SVTouchEventPtr t_touch = DYN_TO_SHAREPTR(SVTouchEvent,_event);
         f32 t_mod_x = t_touch->x;

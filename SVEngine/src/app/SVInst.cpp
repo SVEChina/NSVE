@@ -100,14 +100,14 @@ void SVInst::init() {
     m_render_mgr = MakeSharedPtr<SVRenderMgr>( share() );
     m_render_mgr->init();
     //全局
-    m_pGlobalMgr = MakeSharedPtr<SVGlobalMgr>( share() );
-    m_pGlobalMgr->init();
+    m_global_mgr = MakeSharedPtr<SVGlobalMgr>( share() );
+    m_global_mgr->init();
     //
     m_svst = SV_ST_WAIT;
 }
 
 void SVInst::destroy() {
-    m_pGlobalMgr = nullptr;
+    m_global_mgr = nullptr;
     //
     if(m_render_mgr) {
         m_render_mgr->destroy();
@@ -129,8 +129,8 @@ void SVInst::destroy() {
 
 void SVInst::resize(s32 _w,s32 _h) {
     //相机重置size
-    if(m_pGlobalMgr && m_pGlobalMgr->m_camera_mgr ) {
-        m_pGlobalMgr->m_camera_mgr->resize(_w, _h);
+    if(m_global_mgr && m_global_mgr->m_camera_mgr ) {
+        m_global_mgr->m_camera_mgr->resize(_w, _h);
     }
     //
     //所有target重置大小
@@ -190,9 +190,9 @@ void SVInst::setRenderPath(s32 _rpath) {
         return;
     }
     //常见AR阶段
-    if(m_pGlobalMgr->m_arbg_mgr) {
-        m_pGlobalMgr->m_arbg_mgr->enable();
-        m_pGlobalMgr->m_arbg_mgr->setInputCameraTex("svres/sve.png");
+    if(m_global_mgr->m_arbg_mgr) {
+        m_global_mgr->m_arbg_mgr->enable();
+        m_global_mgr->m_arbg_mgr->setInputCameraTex("svres/sve.png");
     }
 
     //创建正常的阶段
@@ -228,7 +228,7 @@ void SVInst::updateSVE(f32 _dt) {
         //timeTag(false,"lua cost");
     }
     //
-    m_pGlobalMgr->update(_dt);
+    m_global_mgr->update(_dt);
 }
 
 void SVInst::renderSVE() {
@@ -270,51 +270,51 @@ SV_ENG_TIMESTATE SVInst::getTimeState(){
 }
 
 SVEventMgrPtr SVInst::getEventMgr(){
-    if(!m_pGlobalMgr)
+    if(!m_global_mgr)
         return nullptr;
-    return m_pGlobalMgr->m_event_sys;
+    return m_global_mgr->m_event_sys;
 }
 
 SVBasicSysPtr SVInst::getBasicSys(){
-    if(!m_pGlobalMgr)
+    if(!m_global_mgr)
         return nullptr;
-    return m_pGlobalMgr->m_pBasicSys;
+    return m_global_mgr->m_pBasicSys;
 }
 
 SVCameraMgrPtr SVInst::getCameraMgr(){
-    if(!m_pGlobalMgr)
+    if(!m_global_mgr)
         return nullptr;
-    return m_pGlobalMgr->m_camera_mgr;
+    return m_global_mgr->m_camera_mgr;
 }
 
 SVSceneMgrPtr SVInst::getSceneMgr(){
-    if(!m_pGlobalMgr)
+    if(!m_global_mgr)
         return nullptr;
-    return m_pGlobalMgr->m_pSceneMgr;
+    return m_global_mgr->m_pSceneMgr;
 }
 
 SVLightSysPtr SVInst::getLightSys() {
-    if(!m_pGlobalMgr)
+    if(!m_global_mgr)
         return nullptr;
-    return m_pGlobalMgr->m_pLightSys;
+    return m_global_mgr->m_pLightSys;
 }
 
 SVModuleSysPtr SVInst::getModuleSys(){
-    if(!m_pGlobalMgr)
+    if(!m_global_mgr)
         return nullptr;
-    return m_pGlobalMgr->m_pModuleSys;
+    return m_global_mgr->m_pModuleSys;
 }
 
 SVShaderMgrPtr SVInst::getShaderMgr(){
-    if(!m_pGlobalMgr)
+    if(!m_global_mgr)
         return nullptr;
-    return m_pGlobalMgr->m_shader_mgr;
+    return m_global_mgr->m_shader_mgr;
 }
 
 SVTexMgrPtr SVInst::getTexMgr(){
-    if(!m_pGlobalMgr)
+    if(!m_global_mgr)
         return nullptr;
-    return m_pGlobalMgr->m_tex_mgr;
+    return m_global_mgr->m_tex_mgr;
 }
 
 SVMtlLibPtr SVInst::getMtlLib() {
@@ -326,33 +326,33 @@ SVRenderMgrPtr SVInst::getRenderMgr(){
 }
 
 SVDetectMgrPtr SVInst::getDetectMgr(){
-    if(!m_pGlobalMgr)
+    if(!m_global_mgr)
         return nullptr;
-    return m_pGlobalMgr->m_detect_mgr;
+    return m_global_mgr->m_detect_mgr;
 }
 
 SVDeformMgrPtr SVInst::getDeformMgr(){
-    if(!m_pGlobalMgr)
+    if(!m_global_mgr)
         return nullptr;
-    return m_pGlobalMgr->m_pDeformSys;
+    return m_global_mgr->m_pDeformSys;
 }
 
 SVComDataPtr SVInst::getComData(){
-    if(!m_pGlobalMgr)
+    if(!m_global_mgr)
         return nullptr;
-    return m_pGlobalMgr->m_commonData;
+    return m_global_mgr->m_commonData;
 }
 
 SVModelMgrPtr SVInst::getModelMgr(){
-    if(!m_pGlobalMgr)
+    if(!m_global_mgr)
         return nullptr;
-    return m_pGlobalMgr->m_pModelMgr;
+    return m_global_mgr->m_pModelMgr;
 }
 
 SVPhysicsWorldMgrPtr SVInst::getPhysicsWorldMgr(){
-    if(!m_pGlobalMgr)
+    if(!m_global_mgr)
         return nullptr;
-    return m_pGlobalMgr->m_pPhysicSys;
+    return m_global_mgr->m_pPhysicSys;
 }
 
 SVRendererPtr SVInst::getRenderer() {

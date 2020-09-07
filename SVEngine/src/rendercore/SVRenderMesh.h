@@ -32,6 +32,7 @@ namespace sv {
             _bufMode = _mode;           //E_BFM_AOS;
             _bufType = E_BFT_STATIC_DRAW;
             _vertCnt = 0;
+            _indexCnt = 0;
             _bufSize = 0;
             reset();
         };
@@ -40,6 +41,7 @@ namespace sv {
             _bufMode = E_BFM_AOS;
             _bufType = E_BFT_STATIC_DRAW;
             _vertCnt = 0;
+            _indexCnt = 0;
             _bufSize = 0;
             reset();
         };
@@ -63,9 +65,19 @@ namespace sv {
             _vertCnt = _cnt;
         }
         
-        void build(BUFFERTYPE _btype,s32 _cnt) {
+        //设置索引个数
+        void setIndexCnt(s32 _cnt) {
+            _indexCnt = _cnt;
+        }
+        
+        void buildWithVert(BUFFERTYPE _btype,s32 _cnt) {
             setBufType(_btype);
             setVertCnt(_cnt);
+        }
+        
+        void buildWithIndex(BUFFERTYPE _btype,s32 _cnt) {
+            setBufType(_btype);
+            setIndexCnt(_cnt);
         }
         
         //重置
@@ -165,8 +177,10 @@ namespace sv {
         BUFFERMODE _bufMode;    //E_BFM_AOS 混合流，E_BFM_SOA 单一流
         //数据类型
         BUFFERTYPE _bufType;    //BUFFER类型
-        //数据个数
+        //顶点个数
         s32 _vertCnt;           //顶点数目
+        //索引个数
+        s32 _indexCnt;          //索引数目
         //数据尺寸
         s32 _bufSize;           //buf 尺寸
         //流描述

@@ -41,7 +41,7 @@ namespace sv {
 
     //node
     DECLARE_SHAREPTR(SVNode);
-    DECLARE_SHAREPTR(SV3DBox);
+    DECLARE_SHAREPTR(SVCube);
     DECLARE_SHAREPTR(SVBitFontNode);
     DECLARE_SHAREPTR(SVBMFontNode);
     DECLARE_SHAREPTR(SVCameraNode);

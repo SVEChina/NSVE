@@ -29,7 +29,6 @@
 #include "../node/SVFrameOutNode.h"
 #include "../node/SVNodeVisit.h"
 #include "../node/SVSkyDomeNode.h"
-#include "../node/SV3DBox.h"
 #include "../node/SVSpriteNode.h"
 #include "../node/SVBillboardNode.h"
 #include "../node/SVParticlesNode.h"
@@ -104,12 +103,12 @@ SVOpCameraControl::~SVOpCameraControl() {
 
 void SVOpCameraControl::_process(f32 dt) {
     if (m_bOpen == true) {
-//        SVNode *pCam = mApp->m_pGlobalMgr->m_pNodeMgr->getNode(CAMERACONTROL);
+//        SVNode *pCam = mApp->m_global_mgr->m_pNodeMgr->getNode(CAMERACONTROL);
 //        if (pCam != NULL)
 //            return;
-//        pCam = mApp->m_pGlobalMgr->m_pNodeMgr->pCreator->createNode(E_NT_CAMERACONTROLFP, "cameraControl");
+//        pCam = mApp->m_global_mgr->m_pNodeMgr->pCreator->createNode(E_NT_CAMERACONTROLFP, "cameraControl");
 //        pCam->setname(CAMERACONTROL);
-//        mApp->m_pGlobalMgr->m_pNodeMgr->addNode(pCam);
+//        mApp->m_global_mgr->m_pNodeMgr->addNode(pCam);
     }
 }
 

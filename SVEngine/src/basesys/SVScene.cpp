@@ -12,7 +12,7 @@
 #include "../work/SVTdCore.h"
 #include "../node/SVNodeVisit.h"
 #include "../node/SVNode.h"
-#include "../node/SV3DBox.h"
+#include "../node/SVCube.h"
 #include "../node/SVSpriteNode.h"
 #include "../app/SVGlobalMgr.h"
 #include "../app/SVGlobalParam.h"
@@ -147,7 +147,6 @@ void SVSceneTree::visit(SVVisitorBasePtr _visitor){
 
 bool SVSceneTree::addNode(SVNodePtr _node, s32 iZOrder){
     if (_node){
-        _node->setZOrder(iZOrder);
         return addNode(_node);
     }
     return false;
@@ -242,7 +241,6 @@ void SVScene::addNode(SVNodePtr _node){
 
 void SVScene::addNode(SVNodePtr _node,s32 _zorder){
     if(_node && m_pSceneTree){
-        _node->setZOrder(_zorder);
         addNode(_node);
     }
 }
@@ -314,6 +312,6 @@ void SVScene::test() {
     //t_sp_node->setPosition(0.1f, 0.3f, 0.0f);
     addNode(t_sp_node);
     //
-    SV3DBoxPtr t_box_node = MakeSharedPtr<SV3DBox>(mApp);
+    SVCubePtr t_box_node = MakeSharedPtr<SVCube>(mApp);
     addNode(t_box_node);
 }

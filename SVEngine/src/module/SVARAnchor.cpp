@@ -22,7 +22,7 @@
 #include "../basesys/SVCameraNode.h"
 #include "../basesys/SVScene.h"
 #include "../node/SVNode.h"
-#include "../node/SV3DBox.h"
+#include "../node/SVCube.h"
 #include "../event/SVOpEvent.h"
 
 using namespace sv;
@@ -138,7 +138,7 @@ void SVARAnchor::_generateBox(SVAnchorPoint &_worldPoint){
     SVScenePtr t_pScene = mApp->getSceneMgr()->getScene();
     if (t_pScene) {
         t_testNode = nullptr;
-        t_testNode = MakeSharedPtr<SV3DBox>(mApp);
+        t_testNode = MakeSharedPtr<SVCube>(mApp);
         t_testNode->setRSType(RST_AR);
         t_testNode->setdrawAABB(true);
         t_testNode->setScale(0.001, 0.001, 0.001);

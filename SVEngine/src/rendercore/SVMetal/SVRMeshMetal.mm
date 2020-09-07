@@ -43,7 +43,7 @@ void SVRMeshMetal::create(SVRendererPtr _renderer) {
         //索引
         BufferDspPtr t_index_dsp = t_rendermesh->getIndexDsp();
         if(t_index_dsp && t_index_dsp->getVertType() == E_VF_INDEX) {
-            m_draw_num = t_index_dsp->_vertCnt;
+            m_draw_num = t_index_dsp->_indexCnt;
             if(t_index_dsp->_bufData) {
                 void* t_p = t_index_dsp->_bufData->getData();
                 s32 t_len = t_index_dsp->_bufData->getSize();

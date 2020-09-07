@@ -92,8 +92,8 @@ SVOpFilterEft::SVOpFilterEft(SVInstPtr _app, s32 _resType, s32 _resId)
 
 void SVOpFilterEft::_process(f32 dt) {
 //    //清理等待挂在到主线程中的任务
-//    if (mApp->m_pGlobalMgr->m_pDiySys->detectResType(resType)) {
-//        int t_oldresid = mApp->m_pGlobalMgr->m_pDiySys->setResType(resType, resId);
+//    if (mApp->m_global_mgr->m_pDiySys->detectResType(resType)) {
+//        int t_oldresid = mApp->m_global_mgr->m_pDiySys->setResType(resType, resId);
 //        if (t_oldresid != -1) {
 //            SVScene* t_scene = mApp->getSceneMgr()->getScene();
 //            if(t_scene){

@@ -24,21 +24,14 @@
 namespace sv {
     
     /*
-     entity 概念
+     node 概念
      */
 
     class SVNode : public SVEventProc {
     public:
         SVNode(SVInstPtr _app);
         
-        ~SVNode();
-        
-        bool operator <(const SVNode& rhs) const{
-            return m_iZOrder < rhs.m_iZOrder;
-        }
-        bool operator >(const SVNode& rhs) const{
-            return m_iZOrder > rhs.m_iZOrder;
-        }
+        virtual ~SVNode();
 
         virtual void enter();
         
@@ -99,22 +92,18 @@ namespace sv {
         SVBoundBox getAABB();
         
         SVBoundBox getAABBSW();
-        //设置z顺序
-        void setZOrder(s32 _zorder);
         
         inline cptr8 getType(){ return ntype.c_str(); }
         
         inline cptr8 getname(){return m_name.c_str();}
         
-        inline s32 getZOrder(){ return m_iZOrder;}
+        inline bool canSelect(){ return m_canSelect; }
         
-        inline bool getcanSelect(){ return m_canSelect; }
+        inline bool beSelect(){ return m_beSelect; }
         
-        inline bool getbeSelect(){ return m_beSelect; }
+        inline bool canProcEvent(){ return m_canProcEvent; }
         
-        inline bool getcanProcEvent(){ return m_canProcEvent; }
-        
-        inline bool getvisible(){ return m_visible; }
+        inline bool visible(){ return m_visible; }
     
         inline void setname(const char* _name){ m_name = _name; }
         
@@ -130,16 +119,15 @@ namespace sv {
         //
         SVString ntype;         //节点类型
         SVString m_name;        //唯一名称
-        s32 m_iZOrder;          //Z值
         bool m_canSelect;       //是否可以选择
         bool m_canProcEvent;    //是否能处理事件
         bool m_visible;         //是否可见
         bool m_drawBox;         //是否渲染包围盒
+        bool m_dirty;
+        bool m_beSelect;        //是否被选择
         //
         RENDERSTREAMTYPE m_rsType;      //渲染流类型
         f32 m_alpha;
-        bool m_dirty;
-        bool m_beSelect;        //是否被选择
         //
         SVBoundBox m_aabbBox;   //AABB包围盒
         SVBoundBox m_aabbBox_sw;//AABB世界包围盒
@@ -147,17 +135,14 @@ namespace sv {
         FMat4 m_localMat;       //本地矩阵
         FMat4 m_absolutMat;     //绝对世界矩阵
         FMat4 m_iabsolutMat;    //逆绝对世界矩阵
-        
         //位置属性
         SVAttriPos m_attri_pos;
         //渲染属性
         SVAttriRender m_attri_render;
         //材质表面
         SVSurfacePtr m_surface;
-        //
+        //父节点
         SVNodePtr m_parent;
-        //
-        bool m_needsort;
 
     public:
         //序列化接口

@@ -31,7 +31,6 @@ SVNode::SVNode(SVInstPtr _app)
     m_canProcEvent = false;
     m_visible = true;
     m_dirty = false;
-    m_iZOrder = 0;
     m_alpha = 1.0f;
     //基础属性
     m_localMat.setIdentity();
@@ -216,10 +215,6 @@ SVBoundBox SVNode::getAABBSW(){
     return m_aabbBox_sw;
 }
 
-void SVNode::setZOrder(s32 _zorder){
-    m_iZOrder = _zorder;
-}
-
 void SVNode::setAlpha(f32 _alpha){
     m_alpha = _alpha;
 }
@@ -239,7 +234,6 @@ void SVNode::fromJSON(RAPIDJSON_NAMESPACE::Value &item){
 void SVNode::_toJsonData(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator,
                              RAPIDJSON_NAMESPACE::Value &locationObj){
     locationObj.AddMember("name",  RAPIDJSON_NAMESPACE::StringRef(m_name.c_str()), _allocator);
-    locationObj.AddMember("zorder", m_iZOrder, _allocator);
     locationObj.AddMember("renderstream", (s32)m_rsType, _allocator);
     //
     locationObj.AddMember("canselect", m_canSelect, _allocator);
@@ -283,10 +277,6 @@ void SVNode::_fromJsonData(RAPIDJSON_NAMESPACE::Value &item){
 //        t_scale.z = item["scaleZ"].GetFloat();
 //    }
 //    setScale(t_scale);
-    //
-    if (item.HasMember("zorder") && item["zorder"].IsInt()) {
-        m_iZOrder = item["zorder"].GetInt();
-    }
     if (item.HasMember("renderstream") && item["renderstream"].IsInt()) {
         m_rsType = (RENDERSTREAMTYPE)item["renderstream"].GetInt();
     }

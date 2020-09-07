@@ -50,13 +50,12 @@ namespace sv {
 
     //位置属性
     struct SVAttriPos {
-        
         SVAttriPos() {
             m_pos.set(0.0f);
             m_rot.set(0.0f);
             m_scale.set(1.0f);
         };
-        
+        //
         FMat4 getMatrix() {
             FMat4 t_mat;
             FMat4 t_mat_pos,t_mat_rot_x,t_mat_rot_y,t_mat_rot_z,t_mat_scale;

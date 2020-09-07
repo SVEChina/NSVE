@@ -41,14 +41,14 @@ void SVComData::init() {
     //索引描述
     BufferDspPtr t_index_dsp = MakeSharedPtr<BufferDsp>(E_BFM_AOS);
     t_index_dsp->push(E_VF_INDEX);
-    t_index_dsp->build(E_BFT_STATIC_DRAW,6);
+    t_index_dsp->buildWithIndex(E_BFT_STATIC_DRAW,6);
     t_index_dsp->setStreamData(E_VF_NULL, m_rect_index, 6*sizeof(u16));
     m_screenMesh->setIndexDsp(t_index_dsp);
     //顶点描述
     BufferDspPtr t_vert_dsp= MakeSharedPtr<BufferDsp>(E_BFM_AOS);
     t_vert_dsp->push(E_VF_V2);
     t_vert_dsp->push(E_VF_T0);
-    t_vert_dsp->build(E_BFT_STATIC_DRAW,4);
+    t_vert_dsp->buildWithVert(E_BFT_STATIC_DRAW,4);
     t_vert_dsp->setStreamData(E_VF_NULL, m_screen_rect_v2_t0, 16*sizeof(f32));
     m_screenMesh->setVertDsp(t_vert_dsp);
     //这个必须有渲染器才可以执行

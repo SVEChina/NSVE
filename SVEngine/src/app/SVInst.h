@@ -87,7 +87,7 @@ namespace sv {
         //脚本系统-lua
         SVLuaSysPtr m_lua_sys;
         //全局对象
-        SVGlobalMgrPtr m_pGlobalMgr;
+        SVGlobalMgrPtr m_global_mgr;
         //全局参数
         SVGlobalParam m_global_param;
         //渲染器 renderer
