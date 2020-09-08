@@ -64,7 +64,6 @@ bool SVCtxIOSGLES::swap(SVRendererPtr _renderer){
 //
 SVCtxIOSMetal::SVCtxIOSMetal()
 :SVCtxBase() {
-    activeContext();
 }
 
 SVCtxIOSMetal::~SVCtxIOSMetal() {

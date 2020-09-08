@@ -9,13 +9,14 @@
 #import <Foundation/Foundation.h>
 #import <Metal/Metal.h>
 #import <QuartzCore/CAMetalLayer.h>
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CGInst : NSObject
 + (instancetype) getInst;
-
+//
 -(void)cgInit;
-
+//
 -(void)cgDestroy;
 //
 -(void*)getSVE;
@@ -25,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)destroyRM;
 //
 -(void)render;
+//
 @end
 
 NS_ASSUME_NONNULL_END

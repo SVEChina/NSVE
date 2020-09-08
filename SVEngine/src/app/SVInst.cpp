@@ -144,22 +144,28 @@ SVCtxBasePtr SVInst::createEnv(SV_R_ENV _type) {
     SVCtxBasePtr t_ctx = nullptr;
     if(_type == E_R_GLES_ANDORID) {
         m_rcore = E_R_GLES_ANDORID;
-        //m_ctx = MakeSharedPtr<SVCtxOSXMetal>();
     }else if(_type == E_R_VULKAN_ANDORID) {
         m_rcore = E_R_VULKAN_ANDORID;
-        //m_ctx = MakeSharedPtr<SVCtxOSXMetal>();
     }else if(_type == E_R_METAL_OSX) {
         m_rcore = E_R_METAL_OSX;
+#ifdef SV_OSX
         m_ctx = MakeSharedPtr<SVCtxOSXMetal>();
+#endif
     }else if(_type == E_R_GL_OSX) {
         m_rcore = E_R_GL_OSX;
+#ifdef SV_OSX
         m_ctx = MakeSharedPtr<SVCtxOSXGL>();
+#endif
     }else if(_type == E_R_METAL_IOS) {
         m_rcore = E_R_METAL_IOS;
+#ifdef SV_OSX
         m_ctx = MakeSharedPtr<SVCtxOSXMetal>();
+#endif
     }else if(_type == E_R_GLES_IOS) {
         m_rcore = E_R_GLES_IOS;
+#ifdef SV_OSX
         m_ctx = MakeSharedPtr<SVCtxOSXGL>();
+#endif
     }
     return m_ctx;
 }

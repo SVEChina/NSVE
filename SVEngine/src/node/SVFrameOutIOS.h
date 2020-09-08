@@ -38,12 +38,6 @@ namespace sv {
         virtual void unlockData();
         
         virtual void* getData();
-        
-    protected:
-        //SVRenderTexturePtr m_outStreamFbo;
-        SVDataSwapPtr m_dataswap;
-        SVRenderMeshPtr m_mesh;
-        cb_out_stream m_pOutStreamCB;
     };
         
 }//!namespace sv

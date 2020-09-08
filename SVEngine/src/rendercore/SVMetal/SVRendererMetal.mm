@@ -23,7 +23,12 @@
 #include "../../mtl/SVMtlCore.h"
 #include "../../mtl/SVShader.h"
 
+#ifdef SV_OSX
+
 #include <Cocoa/Cocoa.h>
+
+#endif
+
 #import <Foundation/Foundation.h>
 
 using namespace sv;

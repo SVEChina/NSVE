@@ -140,7 +140,9 @@ MTLSamplerDescriptor* SVRShaderMetal::_genSampler(SamplerDsp& _dsp) {
     if(t_warp_s == SV_V_WRAP_CLAMP) {
       samplerDsp.sAddressMode = MTLSamplerAddressModeClampToEdge;
     }else if(t_warp_s == SV_V_WRAP_BORDER) {
+#ifdef SV_OSX
       samplerDsp.sAddressMode = MTLSamplerAddressModeClampToBorderColor;
+#endif
     }else if(t_warp_s == SV_V_WRAP_REPEAT) {
       samplerDsp.sAddressMode = MTLSamplerAddressModeRepeat;
     }else if(t_warp_s == SV_V_WRAP_MIRROR) {
@@ -148,7 +150,9 @@ MTLSamplerDescriptor* SVRShaderMetal::_genSampler(SamplerDsp& _dsp) {
     }else if(t_warp_s == SV_V_WRAP_BLACK) {
       samplerDsp.sAddressMode = MTLSamplerAddressModeClampToZero;
     }else if(t_warp_s == SV_V_WRAP_WHITE) {
+#ifdef SV_OSX
       samplerDsp.sAddressMode = MTLSamplerAddressModeMirrorClampToEdge;
+#endif
     }
     //warp-t
     s32 t_warp_t = SV_V_WRAP_CLAMP; //default
@@ -161,7 +165,9 @@ MTLSamplerDescriptor* SVRShaderMetal::_genSampler(SamplerDsp& _dsp) {
     if(t_warp_t == SV_V_WRAP_CLAMP) {
       samplerDsp.tAddressMode = MTLSamplerAddressModeClampToEdge;
     }else if(t_warp_t == SV_V_WRAP_BORDER) {
+#ifdef SV_OSX
       samplerDsp.tAddressMode = MTLSamplerAddressModeClampToBorderColor;
+#endif
     }else if(t_warp_t == SV_V_WRAP_REPEAT) {
       samplerDsp.tAddressMode = MTLSamplerAddressModeRepeat;
     }else if(t_warp_t == SV_V_WRAP_MIRROR) {
@@ -169,7 +175,9 @@ MTLSamplerDescriptor* SVRShaderMetal::_genSampler(SamplerDsp& _dsp) {
     }else if(t_warp_t == SV_V_WRAP_BLACK) {
       samplerDsp.tAddressMode = MTLSamplerAddressModeClampToZero;
     }else if(t_warp_t == SV_V_WRAP_WHITE) {
+#ifdef SV_OSX
       samplerDsp.tAddressMode = MTLSamplerAddressModeMirrorClampToEdge;
+#endif
     }
     //min-filter
     s32 t_min_filter = SV_V_FILTER_LINEAR;

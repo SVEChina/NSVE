@@ -62,6 +62,7 @@ void SVRTexGL::create(SVRendererPtr _renderer) {
         s32 t_tex_kind = GL_TEXTURE_2D;
         glGenTextures(1, &m_res_id);
         if(m_tex_kind == SV_IMAGE_1D) {
+#ifdef SV_OSX
             t_tex_kind = GL_TEXTURE_1D;
             glBindTexture(GL_TEXTURE_1D, m_res_id);
             if(t_data) {
@@ -83,6 +84,7 @@ void SVRTexGL::create(SVRendererPtr _renderer) {
                              GL_UNSIGNED_BYTE,
                              0);
             }
+#endif
         }else if(m_tex_kind == SV_IMAGE_2D) {
             t_tex_kind = GL_TEXTURE_2D;
             glBindTexture(GL_TEXTURE_2D, m_res_id);
@@ -177,6 +179,7 @@ void SVRTexGL::commit() {
     m_texLock->lock();
     if(m_tex_kind == SV_IMAGE_1D) {
         if(m_data) {
+#ifdef SV_OSX
             glBindTexture(GL_TEXTURE_1D, m_res_id);
             glTexSubImage1D(GL_TEXTURE_1D,
                             0,
@@ -185,6 +188,7 @@ void SVRTexGL::commit() {
                             GL_UNSIGNED_BYTE,
                             m_data->getData());
             m_data = nullptr;
+#endif
         }
     }else if(m_tex_kind == SV_IMAGE_2D) {
         if(m_data) {

@@ -24,18 +24,10 @@ using namespace sv;
 SVFrameOutIOS::SVFrameOutIOS(SVInstPtr _app)
 :SVFrameOutNode(_app){
     ntype = "SVFrameOutIOS";
-    m_dataswap = nullptr;
-    m_outStreamFbo = nullptr;
-    m_pMtl = nullptr;
-    m_mesh = nullptr;
     m_rsType = RST_DATATRANS;
 }
 
 SVFrameOutIOS::~SVFrameOutIOS() {
-    m_dataswap = nullptr;
-    m_outStreamFbo = nullptr;
-    m_pMtl = nullptr;
-    m_mesh = nullptr;
 }
 
 void SVFrameOutIOS::init(SV_OUTSTEAMFORMATE _outformate,s32 _w,s32 _h) {
@@ -69,28 +61,25 @@ void SVFrameOutIOS::init(SV_OUTSTEAMFORMATE _outformate,s32 _w,s32 _h) {
 }
 
 void SVFrameOutIOS::destroy(){
-    m_outStreamFbo = nullptr;
-    m_pMtl = nullptr;
 }
 
 void SVFrameOutIOS::setCallback(cb_out_stream _cb) {
-    m_pOutStreamCB = _cb;
 }
 
 void SVFrameOutIOS::update(f32 _dt) {
-    SVNode::update(_dt);
-     SVRendererPtr t_renderer = mApp->getRenderer();
-    if(m_pMtl && t_renderer){
-        m_pMtl->update(_dt);
-        m_pMtl->setTexture(0,t_renderer->getSVTex(E_TEX_MAIN));    //那第一张纹理
-        m_pMtl->setBlendEnable(false);
-        bool t_mirror = mApp->m_config.mirror;
-        if (t_mirror) {
-            m_pMtl->setTexcoordFlip(1.0f, -1.0f);
-        }else{
-            m_pMtl->setTexcoordFlip(-1.0f, -1.0f);
-        }
-    }
+//    SVNode::update(_dt);
+//    SVRendererPtr t_renderer = mApp->getRenderer();
+//    if(m_pMtl && t_renderer){
+//    m_pMtl->update(_dt);
+//    m_pMtl->setTexture(0,t_renderer->getSVTex(E_TEX_MAIN));    //那第一张纹理
+//    m_pMtl->setBlendEnable(false);
+//    bool t_mirror = mApp->m_config.mirror;
+//    if (t_mirror) {
+//        m_pMtl->setTexcoordFlip(1.0f, -1.0f);
+//    }else{
+//        m_pMtl->setTexcoordFlip(-1.0f, -1.0f);
+//    }
+//    }
 }
 
 void SVFrameOutIOS::render() {

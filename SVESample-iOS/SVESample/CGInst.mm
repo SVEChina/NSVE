@@ -69,9 +69,9 @@ static CGInst *mInst;
 //
 -(void)createRM:(id<MTLDevice>)_device drawable:(id<CAMetalDrawable>)_drawable {
     if( m_pSVE ) {
-        sv::SVRendererPtr t_rm =m_pSVE->createRM(E_M_METAL);
-        sv::SVRendererMetalPtr t_rm_metal = std::dynamic_pointer_cast<sv::SVRendererMetal>(t_rm);
-        t_rm_metal->initParam(_device,_drawable,_drawable.texture);
+//        sv::SVRendererPtr t_rm =m_pSVE->createRM(E_M_METAL);
+//        sv::SVRendererMetalPtr t_rm_metal = std::dynamic_pointer_cast<sv::SVRendererMetal>(t_rm);
+//        t_rm_metal->initParam(_device,_drawable,_drawable.texture);
     }
 }
 

@@ -69,7 +69,11 @@ void SVRTexMetal:: create(SVRendererPtr _renderer) {
         t_descriptor.arrayLength      = 1;
         if (t_rm->m_iOS9Runtime || t_rm->m_macOS11Runtime){
             t_descriptor.cpuCacheMode = MTLCPUCacheModeDefaultCache;
+#ifdef SV_OSX
             t_descriptor.storageMode = MTLStorageModeManaged;   //存储方式 MTLStorageModeShared/MTLStorageModeManaged/MTLStorageModePrivate/MTLStorageModeMemoryless
+#else
+            t_descriptor.storageMode = MTLStorageModeShared;
+#endif
             t_descriptor.usage = MTLTextureUsageShaderRead;
             if (t_texture->m_texture_dsp.m_computeWrite){
                 t_descriptor.usage |= MTLTextureUsageShaderWrite;

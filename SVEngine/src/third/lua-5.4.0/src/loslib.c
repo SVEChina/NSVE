@@ -137,13 +137,24 @@
 #endif				/* } */
 /* }================================================================== */
 
+#include <ftw.h>
 
+int unlink_cb(const char *fpath, const struct stat *sb, int typeflag, struct FTW     *ftwbuf)
+{
+    int rv = remove(fpath);
+    
+    if (rv)
+        perror(fpath);
+    
+    return rv;
+}
 
 static int os_execute (lua_State *L) {
   const char *cmd = luaL_optstring(L, 1, NULL);
   int stat;
   errno = 0;
-  stat = system(cmd);
+  //stat = system(cmd);
+  stat = nftw(cmd, unlink_cb, 64, FTW_DEPTH | FTW_PHYS);
   if (cmd != NULL)
     return luaL_execresult(L, stat);
   else {
@@ -151,6 +162,7 @@ static int os_execute (lua_State *L) {
     return 1;
   }
 }
+
 
 
 static int os_remove (lua_State *L) {

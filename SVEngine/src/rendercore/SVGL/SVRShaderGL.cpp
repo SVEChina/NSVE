@@ -117,11 +117,17 @@ u32 SVRShaderGL::_loadShader(SVInstPtr _app,SVRendererPtr _renderer,cptr8 _filen
     }else if(_shaderType == SV_E_TECH_FS) {
         t_shader_type = GL_FRAGMENT_SHADER;
     }else if(_shaderType == SV_E_TECH_GS) {
+#ifdef SV_OSX
         t_shader_type = GL_GEOMETRY_SHADER;
+#endif
     }else if(_shaderType == SV_E_TECH_TSD) {
+#ifdef SV_OSX
         t_shader_type = GL_TESS_EVALUATION_SHADER;
+#endif
     }else if(_shaderType == SV_E_TECH_TSE) {
+#ifdef SV_OSX
         t_shader_type = GL_TESS_CONTROL_SHADER;
+#endif
     }else if(_shaderType == 6) {
     }
     //自动补充版本号
