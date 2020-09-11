@@ -1,0 +1,19 @@
+{
+    "name" : "sprite",
+    "formate" : ["E_V3","E_T0"],
+    "pass" : "nor",
+    "vs" : "shader/code/screennor.vs",
+    "fs" : "shader/code/screennor.fs",
+    "sampler": [ { "chn" : 0 ,"stage" : 1 } ],
+    "uniform": [
+        {
+            "stage" : 0,
+            "bufID" : 1,
+            "tbl" : [
+                        { "name" : "matw", "type" : "fmat4", "value" : "null" },
+                        { "name" : "matv", "type" : "fmat4", "value" : "null" },
+                        { "name" : "matp", "type" : "fmat4", "value" : "null" }
+                    ]
+        }
+    ]
+}
