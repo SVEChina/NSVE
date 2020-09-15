@@ -86,11 +86,25 @@ void SVShaderMgr::loadSDSP(cptr8 _sdsp,cptr8 _language) {
         return ;
     }
     //
-    if ( doc.HasMember("name") && doc["name"].IsString() ) {
-        RAPIDJSON_NAMESPACE::Value &shadername = doc["name"];
+    SVString t_s_name = _sdsp;
+    s32 t_pos = t_s_name.rfind('.');
+    if(t_pos>0) {
+        t_s_name = SVString::substr(t_s_name.c_str(), 0, t_pos);
+    }
+    t_pos = t_s_name.rfind('\\');
+    if(t_pos>0) {
+       t_s_name = SVString::substr(t_s_name.c_str(), t_pos+1);
+    }
+    t_pos = t_s_name.rfind('/');
+    if(t_pos>0) {
+       t_s_name = SVString::substr(t_s_name.c_str(), t_pos+1);
+    }
+    //防止重名的shader
+    SHADERPOOL::iterator it = m_shaderMap.find(t_s_name);
+    if( it == m_shaderMap.end() ) {
         SVShaderPtr t_shader = MakeSharedPtr<SVShader>(mApp);
         if( t_shader->fromJSON( doc ,_language) ) {
-            m_shaderMap.insert(std::make_pair(shadername.GetString(), t_shader));
+            m_shaderMap.insert(std::make_pair(t_s_name, t_shader));
             SVDispatch::dispatchShaderCreate(mApp,t_shader);
         }
     }

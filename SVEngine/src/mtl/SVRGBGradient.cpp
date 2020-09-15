@@ -8,7 +8,7 @@
 
 #include "SVRGBGradient.h"
 
-using namespace sv;
+//using namespace sv;
 
 //void createRgbGradient(SVArray<FVec3> _colors , ptr8 outRgba){
 //    s32 t_size = 256/(_colors.size()-1);

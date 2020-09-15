@@ -1,5 +1,4 @@
 {
-    "name" : "filter-pm",
     "file": "shader/filter-pm.metal",
     "vdsp" : ["E_V2","E_T0"],
     "pass" : "nor",

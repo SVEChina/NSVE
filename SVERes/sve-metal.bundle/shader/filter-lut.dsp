@@ -1,5 +1,4 @@
 {
-    "name" : "filter-lut",
     "file": "shader/filter-lut.metal",
     "vdsp" : ["E_V2","E_T0"],
     "pass" : "direct",

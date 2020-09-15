@@ -1,5 +1,4 @@
 {
-    "name" : "sprite",
     "file": "shader/sprite.metal",
     "vdsp" : ["E_V3","E_T0"],
     "pass" : "nor",

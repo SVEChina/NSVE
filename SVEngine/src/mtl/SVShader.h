@@ -23,13 +23,13 @@ namespace sv {
         ShaderDsp() {
             m_dsp = 0;
             m_programme_fname = "null";
-            m_pass = "null";
             m_vs_fname = "null";
             m_fs_fname = "null";
             m_gs_fname = "null";
             m_cs_fname = "null";
             m_tse_fname = "null";
             m_tsd_fname = "null";
+            m_pass = "null";
             m_vft.clear();
         };
         //
