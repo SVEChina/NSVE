@@ -28,7 +28,7 @@
 #include "../basesys/SVCameraNode.h"
 #include "../node/SVFrameOutNode.h"
 #include "../node/SVNodeVisit.h"
-#include "../node/SVSkyDomeNode.h"
+#include "../node/SVSkyNode.h"
 #include "../node/SVSpriteNode.h"
 #include "../node/SVBillboardNode.h"
 #include "../node/SVParticlesNode.h"

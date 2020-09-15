@@ -28,16 +28,14 @@ namespace sv {
         
         void setSize(FVec3& _size);
         
-        void setColor(SVColor& _color);
-        
         FVec3 getSize() { return m_size; }
         
     private:
         SVRenderMeshPtr m_cube_mesh;
         
-        SVColor m_color;
-        
         FVec3 m_size;
+        
+        SVString m_mtl_name;
     };
     
 }//!namespace sv

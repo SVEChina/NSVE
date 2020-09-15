@@ -50,12 +50,8 @@ namespace sv {
     DECLARE_SHAREPTR(SVFrameOutNode);
     DECLARE_SHAREPTR(SVFreeTypeNode);
     DECLARE_SHAREPTR(SVGameWrapNode);
-    DECLARE_SHAREPTR(SVIOSInstreamNode);
-#ifdef SV_IOS
-    DECLARE_SHAREPTR(SVFrameOutIOS);
-#endif
     DECLARE_SHAREPTR(SVSkinNode);
-    DECLARE_SHAREPTR(SVSkyDomeNode);
+    DECLARE_SHAREPTR(SVSkyNode);
     DECLARE_SHAREPTR(SVSpineNode);
     DECLARE_SHAREPTR(SVSpriteNode);
     DECLARE_SHAREPTR(SVBillboardNode);

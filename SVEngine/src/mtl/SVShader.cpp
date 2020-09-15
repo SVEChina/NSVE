@@ -6,6 +6,7 @@
 //
 
 #include "SVShader.h"
+#include "SVSurface.h"
 #include "../rendercore/SVRShader.h"
 #include "../app/SVInst.h"
 #include "../base/SVParamTbl.h"
@@ -39,6 +40,19 @@ void SVShader::unbindRes() {
 
 SVRShaderPtr SVShader::getResShader() {
     return m_res_shader;
+}
+
+//创建一个surface
+SVSurfacePtr SVShader::createSurface() {
+    SVSurfacePtr t_surface = MakeSharedPtr<SVSurface>();
+//    if(t_surface) {
+//        FMat4 t_mat;
+//        t_mat.setIdentity();
+//        m_surface->m_tbl->addParam("matw",t_mat);
+//        m_surface->m_tbl->addParam("matv",t_mat);
+//        m_surface->m_tbl->addParam("matp",t_mat);
+//    }
+    return t_surface;
 }
 
 bool SVShader::active() {

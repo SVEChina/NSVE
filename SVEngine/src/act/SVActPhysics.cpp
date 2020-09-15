@@ -97,7 +97,6 @@ void SVActBodyCloth::run(SVNodePtr _nodePtr, f32 dt) {
             u32 t_size = t_bodyCloth->getFaceVertexDataSize();
             u32 t_count = t_bodyCloth->getFaceVertexCount();
             if (t_data && t_size > 0) {
-                int a = 0;
                 //测试面纱就一个mesh
                 SVModelPtr t_model = t_modelNode->getModel();
                 SVMesh3dPtr t_mesh = t_model->getMesh(0);

@@ -8,6 +8,7 @@
 #ifndef SV_SHADER_H
 #define SV_SHADER_H
 
+#include "SVMtlDeclare.h"
 #include "../base/SVGBase.h"
 #include "../rendercore/SVRenderDeclare.h"
 #include "../core/SVVertDef.h"
@@ -64,7 +65,7 @@ namespace sv {
      */
     struct ParamTblDsp {
         s32 m_id;               //传递的bufid
-        s32 m_stage;            // 0:vs, 1:fs
+        s32 m_stage;            //0:vs, 1:fs
         SVParamTblPtr m_tbl;    //表
     };
 
@@ -92,6 +93,8 @@ namespace sv {
                         RAPIDJSON_NAMESPACE::Value &_objValue);
 
         bool fromJSON(RAPIDJSON_NAMESPACE::Value &item,cptr8 _language);
+        
+        SVSurfacePtr createSurface();
 
     public:
         ShaderDsp m_shader_dsp;

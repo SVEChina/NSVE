@@ -45,7 +45,6 @@ SVNode::SVNode(SVInstPtr _app)
 }
 
 SVNode::~SVNode() {
-    //m_parent = nullptr;
     m_surface = nullptr;
 }
 

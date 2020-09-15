@@ -1,11 +1,11 @@
 //
-// SVSkyDomeNode.cpp
+// SVSkyNode.cpp
 // SVEngine
 // Copyright 2017-2020
 // yizhou Fu,long Yin,longfei Lin,ziyu Xu,xiaofan Li,daming Li
 //
 
-#include "SVSkyDomeNode.h"
+#include "SVSkyNode.h"
 #include "../basesys/SVScene.h"
 #include "../basesys/SVCameraNode.h"
 #include "../mtl/SVTexture.h"
@@ -16,20 +16,18 @@
 
 using namespace sv;
 
-SVSkyDomeNode::SVSkyDomeNode(SVInstPtr _app)
+SVSkyNode::SVSkyNode(SVInstPtr _app)
 :SVNode(_app)
 ,mDomeTex(nullptr){
-    ntype = "SVSkyDomeNode";
-    //mMesh = MakeSharedPtr<SVRenderMesh>(mApp);
-    //mMesh->createMesh();
+    ntype = "SVSkyNode";
 }
 
-SVSkyDomeNode::~SVSkyDomeNode(){
+SVSkyNode::~SVSkyNode(){
     mDomeTex = nullptr;
     mMesh = nullptr;
 }
 
-void SVSkyDomeNode::generateSkyDome(SVTexturePtr _tex ,
+void SVSkyNode::generateSkyDome(SVTexturePtr _tex ,
                                     s32 _horiRes ,
                                     s32 _vertRes ,
                                     f32 _texCent ,
@@ -44,7 +42,7 @@ void SVSkyDomeNode::generateSkyDome(SVTexturePtr _tex ,
     _generateMesh();
 }
 
-void SVSkyDomeNode::update(f32 _dt){
+void SVSkyNode::update(f32 _dt){
     SVNode::update(_dt);
 //    //mMatSkydome->enableCullFace(false);
 //    static f32 t_rot1 = 0.0f;
@@ -58,7 +56,7 @@ void SVSkyDomeNode::update(f32 _dt){
 //    m_renderObject->setMtl(t_mtl_sky);
 }
 
-void SVSkyDomeNode::render(){
+void SVSkyNode::render(){
     if (!m_visible)
         return;
 //    SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
@@ -67,7 +65,7 @@ void SVSkyDomeNode::render(){
 //    }
 }
 
-void SVSkyDomeNode::_generateMesh(){
+void SVSkyNode::_generateMesh(){
 //    //水平上的step
 //    f32 fHoriStep = SV_PI * 2.0 / mHorizontalResolution;
 //

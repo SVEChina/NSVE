@@ -1,5 +1,5 @@
 //
-// SVSkyDomeNode.h
+// SVSkyNode.h
 // SVEngine
 // Copyright 2017-2020
 // yizhou Fu,long Yin,longfei Lin,ziyu Xu,xiaofan Li,daming Li
@@ -11,11 +11,11 @@
 
 namespace sv {
 
-    class SVSkyDomeNode : public SVNode {
+    class SVSkyNode : public SVNode {
     public:
-        SVSkyDomeNode(SVInstPtr _app);
+        SVSkyNode(SVInstPtr _app);
         
-        virtual ~SVSkyDomeNode();
+        virtual ~SVSkyNode();
         
         void generateSkyDome(SVTexturePtr _tex , s32 _horiRes , s32 _vertRes , f32 _texCent , f32 _sphCent , f32 _radius);
         

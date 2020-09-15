@@ -9,7 +9,6 @@
 #include "../app/SVInst.h"
 #include "../app/SVGlobalMgr.h"
 #include "../work/SVTdCore.h"
-#include "../node/SVFrameOutIOS.h"
 #include "../basesys/SVScene.h"
 #include "../node/SVFrameOutTex.h"
 #include "../basesys/SVSceneMgr.h"

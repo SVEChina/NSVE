@@ -43,8 +43,10 @@ namespace sv {
         void setParam(cptr8 _name,FMat3& _value);
 
         void setParam(cptr8 _name,FMat4& _value);
-        //参数表
+        
+        //参数表，一个就够用了啊
         SVParamTblPtr m_tbl;
+        
         //纹理表
         void setTexture(s32 _chn,SVTexturePtr _tex,s32 _stage);
         //

@@ -112,6 +112,7 @@ namespace sv {
         SVTexturePtr m_atten;
         SVString m_texturePath;
         SVString m_textureName;
+        
     public:
         //序列化接口
         virtual void toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator,

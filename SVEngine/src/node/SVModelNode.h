@@ -5,8 +5,8 @@
 // yizhou Fu,long Yin,longfei Lin,ziyu Xu,xiaofan Li,daming Li
 //
 
-#ifndef SV_MODELNODE_H
-#define SV_MODELNODE_H
+#ifndef SV_MODEL_NODE_H
+#define SV_MODEL_NODE_H
 
 #include "SVNode.h"
 
@@ -15,34 +15,23 @@ namespace sv {
     /*
      normal 3d node
      */
+
     class SVModelNode : public SVNode {
     public:
         SVModelNode(SVInstPtr _app);
         
         ~SVModelNode();
+        
+        void update(f32 dt);
 
-        //更新
-        virtual void update(f32 dt);
-
-        //渲染
-        virtual void render();
-        
-        virtual void createShadow();
-        
-        void enableDebugNormal(bool _enable);
-        
-        bool getDebugNormalEnable();
+        void render();
         
         void setModel(SVModelPtr _model);
         
         SVModelPtr getModel();
         
     protected:
-        void _showDebugNormalLines();
-        
-        bool m_enableDebugNormal;
-        
-        SVModelPtr m_pModel;
+        SVModelPtr m_model;
     };
 
 }//!namespace sv
@@ -50,6 +39,6 @@ namespace sv {
 
 
 //
-#endif //SV_MODELNODE_H
+#endif //SV_MODEL_NODE_H
 
 

@@ -16,6 +16,7 @@
 namespace sv {
     
     /* 模型 由多个mesh构成 */
+
     class SVModel : public SVGBaseEx {
     public:
         SVModel(SVInstPtr _app);
@@ -51,6 +52,7 @@ namespace sv {
     protected:
         SVString m_name;
         SVBoundBox m_box;
+        
         //一个模型包含多个mesh
         typedef SVArray<SVMesh3dPtr> MESHPOOL;
         MESHPOOL m_meshPool;
