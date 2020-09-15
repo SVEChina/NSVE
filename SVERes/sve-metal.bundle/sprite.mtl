@@ -1,6 +1,5 @@
 {
     "version" : "1.0",
-    "name" : "sprite",
     "shader" : "sprite",
     "textures" :[
         { "chn": 0 , "from" : "file", "path" : "svres/sve.png", "stage": "fs" }

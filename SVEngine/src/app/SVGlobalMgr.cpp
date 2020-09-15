@@ -43,7 +43,7 @@ SVGlobalMgr::SVGlobalMgr(SVInstPtr _app)
     m_shader_mgr = nullptr;
     m_tex_mgr = nullptr;
     m_detect_mgr = nullptr;
-    m_commonData = nullptr;
+    m_common_data = nullptr;
     m_pModelMgr = nullptr;
     m_pDeformSys = nullptr;
     m_pPhysicSys =nullptr;
@@ -59,7 +59,7 @@ SVGlobalMgr::~SVGlobalMgr() {
     m_shader_mgr = nullptr;
     m_tex_mgr = nullptr;
     m_detect_mgr = nullptr;
-    m_commonData = nullptr;
+    m_common_data = nullptr;
     m_pModelMgr = nullptr;
     m_pDeformSys = nullptr;
     m_pPhysicSys =nullptr;
@@ -73,9 +73,9 @@ void SVGlobalMgr::init() {
     m_event_sys->init();
     SV_LOG_ERROR("sve init m_event_sys end!\n");
     //构建静态数据
-    m_commonData = MakeSharedPtr<SVComData>(mApp);
-    m_commonData->init();
-    SV_LOG_ERROR("sve init m_commonData end!\n");
+    m_common_data = MakeSharedPtr<SVComData>(mApp);
+    m_common_data->init();
+    SV_LOG_ERROR("sve init m_common_data end!\n");
     //AR背景，AR引擎特有的系统
     m_arbg_mgr = MakeSharedPtr<SVARBackgroundMgr>(mApp);
     m_arbg_mgr->init();

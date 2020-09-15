@@ -346,7 +346,7 @@ SVDeformMgrPtr SVInst::getDeformMgr(){
 SVComDataPtr SVInst::getComData(){
     if(!m_global_mgr)
         return nullptr;
-    return m_global_mgr->m_commonData;
+    return m_global_mgr->m_common_data;
 }
 
 SVModelMgrPtr SVInst::getModelMgr(){

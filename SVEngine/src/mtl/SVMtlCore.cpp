@@ -306,13 +306,6 @@ void SVMtlCore::setStencilSfail(s32 _method) {
 }
 
 void SVMtlCore::fromJSON1(RAPIDJSON_NAMESPACE::Value &_item){
-    //材质名称
-    if (_item.HasMember("name") && _item["name"].IsString()) {
-        RAPIDJSON_NAMESPACE::Value &t_value = _item["name"];
-        m_mtl_name = t_value.GetString();
-    }else{
-        return ;
-    }
     //对应的shader
     if (_item.HasMember("shader") && _item["shader"].IsString()) {
         RAPIDJSON_NAMESPACE::Value &t_value = _item["shader"];
@@ -385,5 +378,4 @@ void SVMtlCore::fromJSON1(RAPIDJSON_NAMESPACE::Value &_item){
 //
 void SVMtlCore::toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator,
                        RAPIDJSON_NAMESPACE::Value &_objValue) {
-    
 }

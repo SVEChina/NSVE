@@ -166,9 +166,9 @@ bool SVShader::fromJSON(RAPIDJSON_NAMESPACE::Value &item,cptr8 _language) {
     if( item.HasMember("pass")  && item["pass"].IsString() ) {
         m_shader_dsp.m_pass = item["pass"].GetString();
     }
-    //数据格式
-    if( item.HasMember("formate")  && item["formate"].IsArray() ) {
-        RAPIDJSON_NAMESPACE::Document::Array t_formate = item["formate"].GetArray();
+    //顶点格式描述
+    if( item.HasMember("vdsp")  && item["vdsp"].IsArray() ) {
+        RAPIDJSON_NAMESPACE::Document::Array t_formate = item["vdsp"].GetArray();
         for(s32 i=0;i<t_formate.Size();i++) {
             SVString t_str = t_formate[i].GetString();
             std::map<std::string,s32>::iterator it = SVJsonDef::g_vf_name.find( t_str.c_str() );

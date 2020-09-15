@@ -1,11 +1,11 @@
 {
     "name" : "filter-pm",
     "file": "shader/filter-pm.metal",
-    "formate" : ["E_V2","E_T0"],
+    "vdsp" : ["E_V2","E_T0"],
     "pass" : "nor",
     "vs" : 1,
     "fs" : 1,
-    "sampler": [ { "chn" : 0 ,"stage" : 1 } ],
+    "sampler": [ { "stage" : 1, "chn" : 0 } ],
     "uniform": [
         {
             "stage" : 1,

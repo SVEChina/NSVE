@@ -54,7 +54,7 @@ namespace sv {
         //模型部分
         SVModelMgrPtr  m_pModelMgr;
         //静态数据
-        SVComDataPtr m_commonData;
+        SVComDataPtr m_common_data;
         //变形形同
         SVDeformMgrPtr m_pDeformSys;
         //AR背景

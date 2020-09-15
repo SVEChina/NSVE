@@ -41,13 +41,6 @@ vertex VertexOut vsMain(Vertex input [[stage_in]] ) {
     return vert;
 }
 
-//fragment FSOutput fsMain(VertexOut input [[stage_in]],
-//                         sampler sam0 [[sampler(0)]],
-//                         texture2d<float> tex0 [[texture(0)]] ) {
-//    FSOutput out;
-//    out.frag0 = tex0.sample(sam0, input.texcoord0);
-//    return out;
-//}
 fragment FSOutput fsMain(VertexOut input [[stage_in]],FSInput fsin ) {
     FSOutput out;
     out.frag0 = fsin.tex0.sample(fsin.sam0, input.texcoord0);

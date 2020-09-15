@@ -121,11 +121,24 @@ SVMtlCorePtr SVMtlLib::createMtl(cptr8 _mtlname) {
     if (doc.HasMember("version")) {
         t_version = doc["version"].GetString();
     }
+    //获取材质名称
+    SVString t_mtl_name = _mtlname;
+    s32 t_pos = t_mtl_name.rfind('.');
+    t_mtl_name = SVString::substr(t_mtl_name.c_str(), 0,t_mtl_name.size() - t_pos);
+    t_pos = t_mtl_name.rfind('\\');
+    if(t_pos>0) {
+       t_mtl_name = SVString::substr(t_mtl_name.c_str(), t_pos);
+    }
+    t_pos = t_mtl_name.rfind('/');
+    if(t_pos>0) {
+       t_mtl_name = SVString::substr(t_mtl_name.c_str(), t_pos);
+    }
+    //
     if(t_version == "1.0") {
         SVMtlCorePtr t_mtl = MakeSharedPtr<SVMtlCore>(mApp);
+        t_mtl->m_mtl_name = t_mtl_name;
         t_mtl->fromJSON1(doc);
-        //
-        m_mtlPool.insert(std::make_pair(t_mtl->m_mtl_name, t_mtl));
+        m_mtlPool.insert(std::make_pair(t_mtl_name, t_mtl));
         return t_mtl;
     }
     return nullptr;
