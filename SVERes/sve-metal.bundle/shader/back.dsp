@@ -1,5 +1,5 @@
 {
-    "file": "shader/back.metal",
+    "file": "shader/src/back.metal",
     "vdsp" : ["E_V2","E_T0"],
     "pass" : "direct",
     "vs" : 1,
