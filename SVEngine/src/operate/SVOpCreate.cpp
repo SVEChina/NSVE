@@ -48,7 +48,6 @@
 #include "../module/SVARAnchor.h"
 #include "../module/SVEffectPackage.h"
 #include "../module/pendraw/SVPenDraw.h"
-#include "../act/SVAniTexAttachment.h"
 #include "../detect/SVDetectMgr.h"
 #include "../detect/SVDetectBase.h"
 #include "../physics/SVPhysicsWorld.h"
@@ -58,10 +57,6 @@
 #include "../physics/SVPhysicsSoftRigidWorld.h"
 #include "../physics/bodies/SVPhysicsBodyRope.h"
 #include "../physics/bodies/SVPhysicsBodyCloth.h"
-#include "../act/SVActionMgr.h"
-#include "../act/SVActionUnit.h"
-#include "../act/SVActFollow.h"
-#include "../act/SVActPhysics.h"
 
 using namespace sv;
 
@@ -165,16 +160,16 @@ void SVOpCreateEffcet::_process(f32 dt) {
             }
             SVEffectPackagePtr t_effectPackage = DYN_TO_SHAREPTR(SVEffectPackage, t_modulePtr);
             if (t_effectPackage) {
-                for (s32 i = 0; i<10; i++) {
-                    SVAniTexAttachmentPtr t_texAtt = t_effectPackage->getTexAttachment(i);
-                    if (t_texAtt) {
-                        SVAniTexAttachment::TEXATTACHSPARAM t_param = t_texAtt->getParam();
-                        if (m_pCB) {
-                            SVString msg = SVString::format("effectpackagetexattachment_%s_channel:%d_metadata:%s",t_moduleName.c_str(), i, t_param.matadata.c_str());
-                            (*m_pCB)(msg.c_str(), m_obj);
-                        }
-                    }
-                }
+//                for (s32 i = 0; i<10; i++) {
+//                    SVAniTexAttachmentPtr t_texAtt = t_effectPackage->getTexAttachment(i);
+//                    if (t_texAtt) {
+//                        SVAniTexAttachment::TEXATTACHSPARAM t_param = t_texAtt->getParam();
+//                        if (m_pCB) {
+//                            SVString msg = SVString::format("effectpackagetexattachment_%s_channel:%d_metadata:%s",t_moduleName.c_str(), i, t_param.matadata.c_str());
+//                            (*m_pCB)(msg.c_str(), m_obj);
+//                        }
+//                    }
+//                }
             }
             
         }else{
@@ -211,12 +206,12 @@ void SVOpTexAttachment::_process(f32 dt) {
     SVModuleBasePtr t_module = mApp->getModuleSys()->getModule(t_moduleName.c_str());
     if (t_module) {
         SVEffectPackagePtr t_effect = std::dynamic_pointer_cast<SVEffectPackage>(t_module);
-        if (t_effect) {
-            SVAniTexAttachmentPtr t_attachment = t_effect->getTexAttachment(m_channel);
-            if (t_attachment) {
-                t_attachment->setAttachmentTex(m_data, m_width, m_height);
-            }
-        }
+//        if (t_effect) {
+//            SVAniTexAttachmentPtr t_attachment = t_effect->getTexAttachment(m_channel);
+//            if (t_attachment) {
+//                t_attachment->setAttachmentTex(m_data, m_width, m_height);
+//            }
+//        }
     }
 }
 
@@ -272,8 +267,6 @@ SVOpCreateTest::SVOpCreateTest(SVInstPtr _app)
 SVOpCreateTest::~SVOpCreateTest(){
     
 }
-
-#include "../act/SVActFollow.h"
 
 void SVOpCreateTest::_process(f32 dt) {
     SVString t_name = "sv_aranchor_module";
@@ -335,11 +328,6 @@ SVOpCreateTestPatch::SVOpCreateTestPatch(SVInstPtr _app)
 }
 
 SVOpCreateTestPatch::~SVOpCreateTestPatch(){
-//    if (m_actUnit) {
-//        m_actUnit->stop();
-//        m_actUnit->removeFromActionMgr();
-//        m_actUnit = nullptr;
-//    }
 }
 
 void SVOpCreateTestPatch::_process(f32 dt) {
@@ -358,105 +346,37 @@ void SVOpCreateTestPatch::_process(f32 dt) {
         SVPhysicsBodyClothPtr t_bodyPatch = MakeSharedPtr<SVPhysicsBodyCloth>(mApp, t_softWorld->getWorldInfo(), t_corner00, t_corner10, t_corner01, t_corner11, 20, 20);
         t_bodyPatch->setTimeScale(3);
         t_softWorld->addSoftBody(t_bodyPatch);
-//        
-//        SVActBodyClothPtr t_actCloth = MakeSharedPtr<SVActBodyCloth>(mApp, t_bodyPatch);
-//        SVActionMgrPtr t_actSys = mApp->getActionMgr();
-//        m_actUnit = t_actSys->addAction(t_actCloth, t_patchNode);
-//        m_actUnit->play();
-    }
 }
 
-//测试操作
-SVOpCreateTestMianSha::SVOpCreateTestMianSha(SVInstPtr _app)
-: SVOpBase(_app){
-    
-}
+////测试操作
+//SVOpCreateTestMianSha::SVOpCreateTestMianSha(SVInstPtr _app)
+//: SVOpBase(_app){
+//
+//}
+//
+//SVOpCreateTestMianSha::~SVOpCreateTestMianSha(){
+//}
+//
+//void SVOpCreateTestMianSha::_process(f32 dt) {
+//}
 
-SVOpCreateTestMianSha::~SVOpCreateTestMianSha(){
-
-}
-
-void SVOpCreateTestMianSha::_process(f32 dt) {
-//    SVLoaderGLTF t_load(mApp);
-//    t_load.loadFromFile("svres/gltf/MianSha/MianSha.gltf");
-//    t_load.building();
-//    SVNodePtr t_node = t_load.getNode("MianSha");
-//    SVModelNodePtr t_modelNode = DYN_TO_SHAREPTR(SVModelNode, t_node);
-//    if(t_modelNode) {
-//        SVScenePtr t_pScene = mApp->getSceneMgr()->getScene();
-//        if (t_pScene) {
-//            t_modelNode->setScale(1.0f,1.0f,1.0f);
-//            t_modelNode->setPosition(0.0f, 0.0f, 0.0f);
-//            t_modelNode->setRotation(0.0f, 0.0f, 0.0f);
-////            t_pScene->addNode(t_modelNode);
-//            //
-//            SVPatchNodePtr t_patchNode = MakeSharedPtr<SVPatchNode>(mApp);
-//            t_pScene->addNode(t_patchNode);
-//            
-//            //物理部分
-//             SVPhysicsSoftRigidWorldPtr t_softWorld = mApp->getPhysicsWorldMgr()->getSoftWorld();
-//            SVModelPtr t_model = t_modelNode->getModel();
-//            for (s32 i = 0; i<t_model->getMeshNum(); i++) {
-//                SVMesh3dPtr t_mesh = t_model->getMesh(i);
-//                SVRenderMeshPtr t_renderMesh = t_mesh->getRenderMesh();
-//                SVDataSwapPtr t_indcesData = MakeSharedPtr<SVDataSwap>();
-//                s32 t_indcesNum = 0;
-//                t_renderMesh->getIndexData(t_indcesData, t_indcesNum);
-//                SVDataSwapPtr t_vertexData = MakeSharedPtr<SVDataSwap>();
-//                s32 t_vertexNum = 0;
-//                t_renderMesh->getVertexData(t_vertexData);
-//                t_renderMesh->getVertexNum(t_vertexNum);
-//                
-//                s32 t_32Indces[t_indcesNum];
-//                for (s32 j = 0; j<t_indcesNum; j++) {
-//                    u16 *t_indces = (u16 *)t_indcesData->getData();
-//                    t_32Indces[j] = (s32)t_indces[j];
-//                }
-//                
-//                SVPhysicsBodyClothPtr t_bodyPatch = MakeSharedPtr<SVPhysicsBodyCloth>(mApp, t_softWorld->getWorldInfo(), (f32 *)t_vertexData->getData(), (s32 *)t_32Indces, t_indcesNum/3);
-//                //        t_bodyPatch->setTimeScale(3);
-//                t_softWorld->addSoftBody(t_bodyPatch);
-//                
-//                //
-//                t_patchNode->setPatchIndexData(t_indcesData, t_indcesNum);
-//                t_patchNode->setPatchVertexData(t_vertexData, t_vertexNum);
-//                //
-////                
-////                SVActBodyClothPtr t_actCloth = MakeSharedPtr<SVActBodyCloth>(mApp, t_bodyPatch);
-////                SVActionMgrPtr t_actSys = mApp->getActionMgr();
-////                SVActionUnitPtr t_actUnit = t_actSys->addAction(t_actCloth, t_patchNode);
-////                t_actUnit->play();
-////                
-//                //跟人
-////                SVActFollowPerson3dPtr t_fllowPerson = MakeSharedPtr<SVActFollowPerson3d>(mApp, 1);
-////                t_fllowPerson->setFllowIndex(46);//43
-////                t_fllowPerson->setBindOffset(0.0f,0.0f,0.0f);
-////                t_fllowPerson->setScale(1.0f,1.0f,1.0f);
-////                t_fllowPerson->setEyeDis(9.5f);//9.5设置模型的瞳距
-////                SVActionUnitPtr t_personAct = mApp->getActionMgr()->addAction(t_fllowPerson, t_patchNode);
-////                t_personAct->play();
-//            }
-//        }
+//SVOpCreateDivision::SVOpCreateDivision(SVInstPtr _app) :  SVOpBase(_app){
+//    
+//}
+//
+//SVOpCreateDivision::~SVOpCreateDivision(){
+//    
+//}
+//
+//void SVOpCreateDivision::_process(f32 dt) {
+//    SVString t_name = "sv_filter_division";
+//    SVModuleBasePtr t_modulePtr = mApp->getModuleSys()->getModule(t_name.c_str());
+//    if (t_modulePtr == nullptr) {
+//        t_modulePtr = MakeSharedPtr<SVDivisonFilter>(mApp);
+//        t_modulePtr->init();
+//        t_modulePtr->open();
+//        mApp->getModuleSys()->regist(t_modulePtr, t_name.c_str());
 //    }
-}
-
-SVOpCreateDivision::SVOpCreateDivision(SVInstPtr _app) :  SVOpBase(_app){
-    
-}
-
-SVOpCreateDivision::~SVOpCreateDivision(){
-    
-}
-
-void SVOpCreateDivision::_process(f32 dt) {
-    SVString t_name = "sv_filter_division";
-    SVModuleBasePtr t_modulePtr = mApp->getModuleSys()->getModule(t_name.c_str());
-    if (t_modulePtr == nullptr) {
-        t_modulePtr = MakeSharedPtr<SVDivisonFilter>(mApp);
-        t_modulePtr->init();
-        t_modulePtr->open();
-        mApp->getModuleSys()->regist(t_modulePtr, t_name.c_str());
-    }
 }
 //about mark
 SVOpCreateMark::SVOpCreateMark(SVInstPtr _app) :  SVOpBase(_app){

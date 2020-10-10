@@ -16,11 +16,6 @@
 #include "../node/SVSpriteNode.h"
 #include "../node/SVBitFontNode.h"
 #include "../node/SVFrameAniNode.h"
-#include "../act/SVAniTexAttachment.h"
-#include "../act/SVAniTrigger.h"
-#include "../act/SVActFollow.h"
-#include "../act/SVActionMgr.h"
-#include "../act/SVActionUnit.h"
 #include "../event/SVEvent.h"
 #include "../basesys/SVSceneMgr.h"
 #include "../mtl/SVParseLUTFilter.h"
@@ -52,14 +47,13 @@ void frameani_callback(SVFrameAniNodePtr _node,void* _obj,s32 _status){
     }
 }
 
-SVEffectUnit::SVEffectUnit(SVInstPtr _app):SVGBaseEx(_app){
+SVEffectUnit::SVEffectUnit(SVInstPtr _app)
+:SVGBaseEx(_app){
     m_end = true;
-    m_personAct = nullptr;
 }
 
 SVEffectUnit::~SVEffectUnit(){
     m_node = nullptr;
-    m_personAct = nullptr;
 }
 
 void SVEffectUnit::init(SVNodePtr _node){
@@ -92,14 +86,7 @@ void SVEffectUnit::init(SVNodePtr _node){
 }
 
 void SVEffectUnit::_attachToPeople(SVNodePtr _node){
-//    //跟随人脸
-//    SVActFollowPersonPtr t_fllowPerson = MakeSharedPtr<SVActFollowPerson>(mApp, _node->getPersonID());
-//    t_fllowPerson->setFllowIndex(_node->getBindIndex());
-//    t_fllowPerson->setBindOffset(_node->getBindOffset().x, _node->getBindOffset().y, _node->getBindOffset().z);
-//    t_fllowPerson->setScale(_node->getScale().x, _node->getScale().y, _node->getScale().z);
-//    t_fllowPerson->setRotation(_node->getRotation().x, _node->getRotation().y, _node->getRotation().z);
-//    m_personAct = mApp->getActionMgr()->addAction(t_fllowPerson, _node);
-//    m_personAct->play();
+    
 }
 
 void SVEffectUnit::destroy(){
@@ -108,10 +95,6 @@ void SVEffectUnit::destroy(){
         if (t_spineNode) {
             t_spineNode->stop();
         }
-    }
-    if (m_personAct) {
-        m_personAct->stop();
-        m_personAct->removeFromActionMgr();
     }
 }
 
@@ -147,18 +130,18 @@ void SVEffectPackage::destroy(){
     m_lock->lock();
     SVModuleBase::destroy();
     stopListen();
-    for (s32 i = 0; i<m_attachmentPool.size(); i++) {
-        SVAniTexAttachmentPtr t_attachment = m_attachmentPool[i];
-        t_attachment->removeFromActionMgr();
-        t_attachment->destroy();
-    }
-    m_attachmentPool.destroy();
+//    for (s32 i = 0; i<m_attachmentPool.size(); i++) {
+//        SVAniTexAttachmentPtr t_attachment = m_attachmentPool[i];
+//        t_attachment->removeFromActionMgr();
+//        t_attachment->destroy();
+//    }
+//    m_attachmentPool.destroy();
     //
-    for (s32 i = 0; i<m_triggerPool.size(); i++) {
-        SVAniTriggerPtr t_trigger = m_triggerPool[i];
-        t_trigger->destroy();
-    }
-    m_triggerPool.destroy();
+//    for (s32 i = 0; i<m_triggerPool.size(); i++) {
+//        SVAniTriggerPtr t_trigger = m_triggerPool[i];
+//        t_trigger->destroy();
+//    }
+//    m_triggerPool.destroy();
     //
     for (s32 i = 0; i<m_effectUnitPool.size(); i++) {
         SVEffectUnitPtr t_unit = m_effectUnitPool[i];
@@ -226,12 +209,13 @@ void SVEffectPackage::update(f32 _dt) {
     }
 }
 
-void SVEffectPackage::_updateTriggers(f32 _dt){
-    for (s32 i = 0; i < m_triggerPool.size(); i++) {
-        SVAniTriggerPtr t_trigger = m_triggerPool[i];
-        t_trigger->update(_dt);
-    }
-}
+//void SVEffectPackage::_updateTriggers(f32 _dt){
+//    for (s32 i = 0; i < m_triggerPool.size(); i++) {
+//        SVAniTriggerPtr t_trigger = m_triggerPool[i];
+//        t_trigger->update(_dt);
+//    }
+//}
+
 void SVEffectPackage::_updateEffectUnits(f32 _dt){
     bool end = true;
     for (s32 i = 0; i < m_effectUnitPool.size(); i++) {
@@ -269,13 +253,13 @@ bool SVEffectPackage::procEvent(SVEventPtr _event) {
             }
         }
     }else if(_event->eventType == EVN_T_ANIMATE){
-        SVAnimateEventPtr t_event = DYN_TO_SHAREPTR(SVAnimateEvent, _event);
-        if (t_event) {
-            for (s32 i = 0; i<m_triggerPool.size(); i++) {
-                SVAniTriggerPtr t_trigger = m_triggerPool[i];
-                t_trigger->noticeTriggerCondition(t_event->eventName);
-            }
-        }
+//        SVAnimateEventPtr t_event = DYN_TO_SHAREPTR(SVAnimateEvent, _event);
+//        if (t_event) {
+//            for (s32 i = 0; i<m_triggerPool.size(); i++) {
+//                SVAniTriggerPtr t_trigger = m_triggerPool[i];
+//                t_trigger->noticeTriggerCondition(t_event->eventName);
+//            }
+//        }
     }
     return  true;
 }
@@ -288,42 +272,42 @@ void SVEffectPackage::addEffectUnit(SVNodePtr _nodePtr){
     }
 }
 
-bool SVEffectPackage::_hasAttachment(SVAniTexAttachmentPtr _attachment){
-    for (s32 i = 0; i<m_attachmentPool.size(); i++) {
-        SVAniTexAttachmentPtr t_attachment = m_attachmentPool[i];
-        if (t_attachment == _attachment) {
-            return true;
-        }
-    }
-    return false;
-}
-
-void SVEffectPackage::addAttachment(SVAniTexAttachmentPtr _attachment){
-    m_lock->lock();
-//    if (_attachment && !_hasAttachment(_attachment)) {
-//        mApp->getActionMgr()->addAni(_attachment);
-//        m_attachmentPool.append(_attachment);
+//bool SVEffectPackage::_hasAttachment(SVAniTexAttachmentPtr _attachment){
+//    for (s32 i = 0; i<m_attachmentPool.size(); i++) {
+//        SVAniTexAttachmentPtr t_attachment = m_attachmentPool[i];
+//        if (t_attachment == _attachment) {
+//            return true;
+//        }
 //    }
-    m_lock->unlock();
-}
-
-bool SVEffectPackage::_hasTrigger(SVAniTriggerPtr _trigger){
-    for (s32 i = 0; i<m_triggerPool.size(); i++) {
-        SVAniTriggerPtr t_trigger = m_triggerPool[i];
-        if (t_trigger == _trigger) {
-            return true;
-        }
-    }
-    return false;
-}
-
-void SVEffectPackage::addTrigger(SVAniTriggerPtr _trigger){
-    m_lock->lock();
-    if (_trigger && !_hasTrigger(_trigger)) {
-        m_triggerPool.append(_trigger);
-    }
-    m_lock->unlock();
-}
+//    return false;
+//}
+//
+//void SVEffectPackage::addAttachment(SVAniTexAttachmentPtr _attachment){
+//    m_lock->lock();
+////    if (_attachment && !_hasAttachment(_attachment)) {
+////        mApp->getActionMgr()->addAni(_attachment);
+////        m_attachmentPool.append(_attachment);
+////    }
+//    m_lock->unlock();
+//}
+//
+//bool SVEffectPackage::_hasTrigger(SVAniTriggerPtr _trigger){
+//    for (s32 i = 0; i<m_triggerPool.size(); i++) {
+//        SVAniTriggerPtr t_trigger = m_triggerPool[i];
+//        if (t_trigger == _trigger) {
+//            return true;
+//        }
+//    }
+//    return false;
+//}
+//
+//void SVEffectPackage::addTrigger(SVAniTriggerPtr _trigger){
+//    m_lock->lock();
+//    if (_trigger && !_hasTrigger(_trigger)) {
+//        m_triggerPool.append(_trigger);
+//    }
+//    m_lock->unlock();
+//}
 
 void SVEffectPackage::addFilter(SVFilterBasePtr _filter){
 //    SVPictureProcessPtr t_picproc = mApp->getBasicSys()->getPicProc();
@@ -343,16 +327,16 @@ void SVEffectPackage::addDefrom(SVDeformImageMovePtr _deform){
     }
 }
 
-SVAniTexAttachmentPtr SVEffectPackage::getTexAttachment(s32 _channel){
-    for (s32 i = 0; i < m_attachmentPool.size(); i++) {
-        SVAniTexAttachmentPtr t_attachment = m_attachmentPool[i];
-        SVAniTexAttachment::TEXATTACHSPARAM t_param = t_attachment->getParam();
-        if (t_param.channel == _channel) {
-            return t_attachment;
-        }
-    }
-    return nullptr;
-}
+//SVAniTexAttachmentPtr SVEffectPackage::getTexAttachment(s32 _channel){
+//    for (s32 i = 0; i < m_attachmentPool.size(); i++) {
+//        SVAniTexAttachmentPtr t_attachment = m_attachmentPool[i];
+//        SVAniTexAttachment::TEXATTACHSPARAM t_param = t_attachment->getParam();
+//        if (t_param.channel == _channel) {
+//            return t_attachment;
+//        }
+//    }
+//    return nullptr;
+//}
 
 void SVEffectPackage::setEffectMusic(SVEffectMusicPtr _music){
     if (_music) {

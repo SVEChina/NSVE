@@ -15,10 +15,7 @@
 #include "../core/SVBMFont.h"
 #include "../node/SVBMFontNode.h"
 #include "../base/SVPreDeclare.h"
-#include "../act/SVActDeform.h"
-#include "../act/SVActionMgr.h"
 #include "../app/SVGlobalMgr.h"
-#include "../act/SVActionUnit.h"
 #include "../file/SVFileMgr.h"
 
 using namespace sv;
@@ -26,8 +23,6 @@ using namespace sv;
 SVMark::SVMark(SVInstPtr _app)
 :SVModuleBase(_app){
     m_bmFontNode = nullptr;
-    m_actAlphaUnit= nullptr;
-    m_actPositionUnit = nullptr;
     m_alpha = 1.0f;
     m_scale = 1.0f;
     m_rotation = 0.0f;
@@ -40,8 +35,6 @@ SVMark::SVMark(SVInstPtr _app)
 
 SVMark::~SVMark(){
     m_bmFontNode = nullptr;
-    m_actAlphaUnit= nullptr;
-    m_actPositionUnit = nullptr;
 }
 
 void SVMark::init(){
@@ -85,14 +78,14 @@ void SVMark::open(){
 
 void SVMark::close() {
     SVModuleBase::close();
-    if (m_actAlphaUnit) {
-        m_actAlphaUnit->stop();
-        m_actAlphaUnit->removeFromActionMgr();
-    }
-    if (m_actPositionUnit) {
-        m_actPositionUnit->stop();
-        m_actPositionUnit->removeFromActionMgr();
-    }
+//    if (m_actAlphaUnit) {
+//        m_actAlphaUnit->stop();
+//        m_actAlphaUnit->removeFromActionMgr();
+//    }
+//    if (m_actPositionUnit) {
+//        m_actPositionUnit->stop();
+//        m_actPositionUnit->removeFromActionMgr();
+//    }
 }
 
 bool SVMark::isOpen(){
@@ -101,12 +94,12 @@ bool SVMark::isOpen(){
 
 void SVMark::update(f32 _dt) {
     SVModuleBase::update(_dt);
-    SVActAlphaPtr t_actAlpha = DYN_TO_SHAREPTR(SVActAlpha, m_actAlphaUnit->getAct());
-    SVActPositionPtr t_actPos = DYN_TO_SHAREPTR(SVActPosition, m_actPositionUnit->getAct());
-    if (t_actAlpha && t_actPos && t_actPos->isEnd()) {
-        t_actAlpha->reset();
-        t_actPos->reset();
-    }
+//    SVActAlphaPtr t_actAlpha = DYN_TO_SHAREPTR(SVActAlpha, m_actAlphaUnit->getAct());
+//    SVActPositionPtr t_actPos = DYN_TO_SHAREPTR(SVActPosition, m_actPositionUnit->getAct());
+//    if (t_actAlpha && t_actPos && t_actPos->isEnd()) {
+//        t_actAlpha->reset();
+//        t_actPos->reset();
+//    }
 }
 
 void SVMark::setContent(SVString _content){
@@ -119,15 +112,15 @@ void SVMark::setContent(SVString _content){
 }
 
 void SVMark::setAlphaTime(f32 _time){
-    if (m_alphaTime != _time) {
-        m_alphaTime = _time;
-        if (m_actAlphaUnit) {
-            SVActAlphaPtr t_actAlpha = DYN_TO_SHAREPTR(SVActAlpha, m_actAlphaUnit->getAct());
-            if (t_actAlpha) {
-                t_actAlpha->setTime(m_alphaTime);
-            }
-        }
-    }
+//    if (m_alphaTime != _time) {
+//        m_alphaTime = _time;
+//        if (m_actAlphaUnit) {
+//            SVActAlphaPtr t_actAlpha = DYN_TO_SHAREPTR(SVActAlpha, m_actAlphaUnit->getAct());
+//            if (t_actAlpha) {
+//                t_actAlpha->setTime(m_alphaTime);
+//            }
+//        }
+//    }
 }
 
 void SVMark::setScale(f32 _scale){
@@ -164,43 +157,43 @@ void SVMark::setPosition(f32 _posX, f32 _posY, f32 _posZ){
 }
 
 void SVMark::setEnableRandomPosition(bool _enable){
-    if (m_actPositionUnit) {
-        SVActPositionPtr t_actPos = DYN_TO_SHAREPTR(SVActPosition, m_actPositionUnit->getAct());
-        if (t_actPos) {
-            t_actPos->setEnableRandom(_enable);
-        }
-    }
+//    if (m_actPositionUnit) {
+//        SVActPositionPtr t_actPos = DYN_TO_SHAREPTR(SVActPosition, m_actPositionUnit->getAct());
+//        if (t_actPos) {
+//            t_actPos->setEnableRandom(_enable);
+//        }
+//    }
 }
 
 void SVMark::setAppearRate(f32 _time){
-    if (m_appearTime != _time) {
-        m_appearTime = _time;
-        if (m_actPositionUnit) {
-            SVActPositionPtr t_actPos = DYN_TO_SHAREPTR(SVActPosition, m_actPositionUnit->getAct());
-            if (t_actPos) {
-                t_actPos->setTime(m_appearTime);
-            }
-        }
-    }
+//    if (m_appearTime != _time) {
+//        m_appearTime = _time;
+//        if (m_actPositionUnit) {
+//            SVActPositionPtr t_actPos = DYN_TO_SHAREPTR(SVActPosition, m_actPositionUnit->getAct());
+//            if (t_actPos) {
+//                t_actPos->setTime(m_appearTime);
+//            }
+//        }
+//    }
 }
 
 void SVMark::setAlphaRange(f32 _src, f32 _tar){
-    SVActAlphaPtr t_actAlpha = nullptr;
-    if (m_actAlphaUnit) {
-        t_actAlpha = DYN_TO_SHAREPTR(SVActAlpha, m_actAlphaUnit->getAct());
-    }
-    if (m_srcAlpha != _src) {
-        m_srcAlpha = _src;
-        if (t_actAlpha) {
-            t_actAlpha->setSrcAlpha(m_srcAlpha);
-        }
-    }
-    if (m_tarAlpha != _tar) {
-        m_tarAlpha = _tar;
-        if (t_actAlpha) {
-            t_actAlpha->setTarAlpha(m_tarAlpha);
-        }
-    }
+//    SVActAlphaPtr t_actAlpha = nullptr;
+//    if (m_actAlphaUnit) {
+//        t_actAlpha = DYN_TO_SHAREPTR(SVActAlpha, m_actAlphaUnit->getAct());
+//    }
+//    if (m_srcAlpha != _src) {
+//        m_srcAlpha = _src;
+//        if (t_actAlpha) {
+//            t_actAlpha->setSrcAlpha(m_srcAlpha);
+//        }
+//    }
+//    if (m_tarAlpha != _tar) {
+//        m_tarAlpha = _tar;
+//        if (t_actAlpha) {
+//            t_actAlpha->setTarAlpha(m_tarAlpha);
+//        }
+//    }
 }
 
 bool SVMark::procEvent(SVEventPtr _event) {

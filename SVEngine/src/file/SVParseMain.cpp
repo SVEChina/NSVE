@@ -36,12 +36,10 @@ SVParseMain::SVParseMain(SVInstPtr _app)
     m_app = _app;
     _registDictionary("SVSpineNode", SVParseAnimate::parseAnim);
     _registDictionary("SVFrameAniNode", SVParseFrameAni::parseFrameAni);
-//    _registDictionary("SV2DFaceMaskSTNode", SVParseMask::parseMask);
     _registDictionary("SVSpriteNode", SVParseSprite::parseSprite);
     _registDictionary("SVBitFontNode", SVParseBitfont::parseBitfont);
     _registDictionary("SVBMFontNode", SVParseBMFont::parseBMFont);
     _registDictionary("SVParticlesNode", SVParseParticles::parseParticles);
-    //////////////!!!!!!!!!!!!!!!!!!
 }
 
 SVParseMain::~SVParseMain(){
@@ -121,22 +119,22 @@ SVModuleBasePtr SVParseMain::parse(cptr8 path, s32 resid) {
 
     //parse tex attachment
     if (doc.HasMember("TexAttachment") && doc["TexAttachment"].IsArray()) {
-        RAPIDJSON_NAMESPACE::Value &attachments = doc["TexAttachment"];
-        for (s32 i = 0; i<attachments.Size(); i++) {
-            RAPIDJSON_NAMESPACE::Value &attachment = attachments[i];
-            SVAniTexAttachmentPtr t_texAttachment = SVParseTexAttachment::parseTexAttachmet(mApp, attachment, 102, t_path.get());
-            t_bundle->addAttachment(t_texAttachment);
-        }
+//        RAPIDJSON_NAMESPACE::Value &attachments = doc["TexAttachment"];
+//        for (s32 i = 0; i<attachments.Size(); i++) {
+//            RAPIDJSON_NAMESPACE::Value &attachment = attachments[i];
+//            SVAniTexAttachmentPtr t_texAttachment = SVParseTexAttachment::parseTexAttachmet(mApp, attachment, 102, t_path.get());
+//            t_bundle->addAttachment(t_texAttachment);
+//        }
     }
     
     //parse trigger
     if (doc.HasMember("triggerarray") && doc["triggerarray"].IsArray()) {
-        RAPIDJSON_NAMESPACE::Value &triggers = doc["triggerarray"];
-        for (s32 i = 0; i<triggers.Size(); i++) {
-            RAPIDJSON_NAMESPACE::Value &trigger = triggers[i];
-            SVAniTriggerPtr t_trigger = SVParseAniTrigger::parseAniTrigger(mApp, trigger, 102, t_path.get());
-            t_bundle->addTrigger(t_trigger);
-        }
+//        RAPIDJSON_NAMESPACE::Value &triggers = doc["triggerarray"];
+//        for (s32 i = 0; i<triggers.Size(); i++) {
+//            RAPIDJSON_NAMESPACE::Value &trigger = triggers[i];
+//            SVAniTriggerPtr t_trigger = SVParseAniTrigger::parseAniTrigger(mApp, trigger, 102, t_path.get());
+//            t_bundle->addTrigger(t_trigger);
+//        }
     }
     
     if (doc.HasMember("SVLutFlter") && doc["SVLutFlter"].IsObject()) {

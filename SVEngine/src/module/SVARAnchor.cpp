@@ -6,7 +6,6 @@
 //
 
 #include "SVARAnchor.h"
-#include "../act/SVCameraCtrl.h"
 #include "../base/SVPreDeclare.h"
 #include "../basesys/SVSceneMgr.h"
 #include "../basesys/SVBasicSys.h"

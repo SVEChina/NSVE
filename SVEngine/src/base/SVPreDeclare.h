@@ -44,9 +44,6 @@ namespace sv {
     DECLARE_SHAREPTR(SVModify);
     DECLARE_SHAREPTR(SVLock);
 
-    //回调
-    DECLARE_SHAREPTR(SVCallbackBase);
-    
     //sysbase - event
     DECLARE_SHAREPTR(SVEventProc);
     DECLARE_SHAREPTR(SVSysBase);
@@ -76,7 +73,7 @@ namespace sv {
     DECLARE_SHAREPTR(SVOpCreateScene);
     DECLARE_SHAREPTR(SVOpEngineResume);
     DECLARE_SHAREPTR(SVOpEngineSuspend);
-    DECLARE_SHAREPTR(SVOpCreateDivision);
+    //DECLARE_SHAREPTR(SVOpCreateDivision);
     DECLARE_SHAREPTR(SVOpCreateMark);
     DECLARE_SHAREPTR(SVOpMarkContent);
     DECLARE_SHAREPTR(SVOpMarkAlpha);

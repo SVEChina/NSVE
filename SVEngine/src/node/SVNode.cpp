@@ -11,7 +11,6 @@
 #include "../basesys/SVCameraNode.h"
 #include "../mtl/SVMtlCore.h"
 #include "../mtl/SVSurface.h"
-#include "../act/SVActBase.h"
 #include "../event/SVEventMgr.h"
 #include "../basesys/SVSceneMgr.h"
 #include "../basesys/SVConfig.h"

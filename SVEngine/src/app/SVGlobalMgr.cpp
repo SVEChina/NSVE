@@ -17,14 +17,13 @@
 #include "../basesys/SVPhysicsWorldMgr.h"
 #include "../basesys/SVARBackgroundMgr.h"
 #include "../module/SVModuleSys.h"
-#include "../light/SVLightSys.h"
+#include "../basesys/SVLightSys.h"
 #include "../event/SVEventMgr.h"
 #include "../mtl/SVTexMgr.h"
 #include "../mtl/SVShaderMgr.h"
 #include "../mtl/SVMtlLib.h"
 #include "../detect/SVDetectMgr.h"
 #include "../rendercore/SVRenderMgr.h"
-#include "../act/SVActionMgr.h"
 #include "../base/svstr.h"
 
 #include <sys/time.h>

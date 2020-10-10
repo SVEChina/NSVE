@@ -185,31 +185,31 @@ namespace sv {
         
     protected:
         void _process(f32 dt);
-        
-        SVActionUnitPtr m_actUnit;
+
     };
 
-    //测试面纱
-    class SVOpCreateTestMianSha : public SVOpBase {
-    public:
-        SVOpCreateTestMianSha(SVInstPtr _app);
-        
-        ~SVOpCreateTestMianSha();
-        
-    protected:
-        void _process(f32 dt);
-    };
+//    //测试面纱
+//    class SVOpCreateTestMianSha : public SVOpBase {
+//    public:
+//        SVOpCreateTestMianSha(SVInstPtr _app);
+//        
+//        ~SVOpCreateTestMianSha();
+//        
+//    protected:
+//        void _process(f32 dt);
+//    };
 
-    //分屏
-    class SVOpCreateDivision : public SVOpBase {
-    public:
-        SVOpCreateDivision(SVInstPtr _app);
-        
-        ~SVOpCreateDivision();
-        
-    protected:
-        void _process(f32 dt);
-    };
+//    //分屏
+//    class SVOpCreateDivision : public SVOpBase {
+//    public:
+//        SVOpCreateDivision(SVInstPtr _app);
+//        
+//        ~SVOpCreateDivision();
+//        
+//    protected:
+//        void _process(f32 dt);
+//    };
+
     //mark
     class SVOpCreateMark : public SVOpBase {
     public:

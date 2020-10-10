@@ -16,7 +16,6 @@ namespace sv {
     DECLARE_SHAREPTR(SVOrtho);
     DECLARE_SHAREPTR(SVARProj);
     //
-    DECLARE_SHAREPTR(SVCameraCtrl);
     DECLARE_SHAREPTR(SVCamCtrlProj);
     DECLARE_SHAREPTR(SVCamCtrlAttr);
     DECLARE_SHAREPTR(SVCamCtrlOrtho);

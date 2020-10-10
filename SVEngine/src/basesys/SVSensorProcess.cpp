@@ -20,7 +20,7 @@
 #include "../mtl/SVTexture.h"
 #include "../rendercore/SVRenderCmd.h"
 #include "../rendercore/SVRenderMgr.h"
-#include "../act/SVCameraCtrl.h"
+
 #include <sys/time.h>
 
 using namespace sv;

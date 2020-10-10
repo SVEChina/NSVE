@@ -9,7 +9,6 @@
 #define SV_GLOBALMGR_H
 
 #include "../base/SVGBase.h"
-#include "../act/SVActDeclare.h"
 #include "../mtl/SVMtlDeclare.h"
 
 namespace sv {

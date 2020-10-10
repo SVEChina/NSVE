@@ -8,10 +8,10 @@
 #ifndef SV_MARK_H
 #define SV_MARK_H
 
-
 #include "SVModuleBase.h"
-#include "../act/SVActDeclare.h"
+
 namespace sv{
+
     class SVMark : public SVModuleBase {
     public:
         SVMark(SVInstPtr _app);
@@ -51,8 +51,6 @@ namespace sv{
         void setAppearRate(f32 _time);
     protected:
         SVBMFontNodePtr m_bmFontNode;
-        SVActionUnitPtr m_actAlphaUnit;
-        SVActionUnitPtr m_actPositionUnit;
         SVString m_content;
         f32 m_alphaTime;
         f32 m_appearTime;

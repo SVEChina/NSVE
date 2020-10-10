@@ -8,7 +8,6 @@
 #include "../basesys/SVCameraNode.h"
 #include "../basesys/SVConfig.h"
 #include "../work/SVTdCore.h"
-#include "../act/SVCameraCtrl.h"
 
 using namespace sv;
 
