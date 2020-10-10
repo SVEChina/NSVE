@@ -127,7 +127,9 @@
     * associated assembler code, pass --enable-arm-neon=no to configure
     * or put -DPNG_ARM_NEON_OPT=0 in CPPFLAGS.
     */
-#  if (defined(__ARM_NEON__) || defined(__ARM_NEON)) && \
+/*fix by fyz*/
+// #  if (defined(__ARM_NEON__) || defined(__ARM_NEON)) &&
+# if defined(PNG_ARM_NEON) && (defined(ARM_NEON) || defined(__ARM_NEON)) && \
    defined(PNG_ALIGNED_MEMORY_SUPPORTED)
 #     define PNG_ARM_NEON_OPT 2
 #  else
