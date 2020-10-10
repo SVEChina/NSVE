@@ -34,42 +34,58 @@ namespace sv {
         virtual ~SVInst();
         //
         SVInstPtr share();
-        //初始化SV
+        
+        //初始化SV(与渲染器无关)
         void init();
-        //销毁SV
+        
+        //销毁SV(与渲染器无关)
         void destroy();
-        //重置大小
-        void resize(s32 _w,s32 _h);
+        
         //创建环境
         SVCtxBasePtr createEnv(SV_R_ENV _type);
-        //销毁渲染器
+        
+        //销毁环境
         void destroyEnv();
-        //设置渲染器
-        void setRenderer(SVRendererPtr _renderer);
+        
+        //重置大小
+        void resize(s32 _w,s32 _h);
+
         //设置渲染路径
         void setRenderPath(s32 _rpath);
-        //开始SV
-        void start();
-        //停止SV
-        void stop();
+        
         //增加资源路径
         void addRespath(cptr8 _path);
+        
         //清理资源路径
         void clearRespath();
+        
         //更新引擎
         void updateSVE(f32 _dt);
+        
         //渲染引擎
         void renderSVE();
+        
         //清楚缓存
         void clearCache();
+        
+        //开始SV
+        void start();
+        
+        //停止SV
+        void stop();
+        
         //挂起SV
-        void svSuspend();
+        void suspend();
+        
         //唤醒SV
-        void svResume();
+        void resume();
+        
         //设置时间状态
         void setTimeState(SV_ENG_TIMESTATE _mode);
+        
         //获取时间状态
         SV_ENG_TIMESTATE getTimeState();
+        
         //获取引擎状态
         inline SV_STATE getState() { return m_svst; }
         

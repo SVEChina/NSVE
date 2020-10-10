@@ -33,7 +33,7 @@ void SVCtxOSXGL::init(SVInstPtr _handle,void* _context,s32 _w,s32 _h,s32 _versio
     if(m_gl_context_out) {
         SVRendererGLPtr t_renderer = MakeSharedPtr<SVRendererGL>(_handle);
         t_renderer->init(_w,_h,_version);
-        _handle->setRenderer(t_renderer);
+        //_handle->setRenderer(t_renderer);
     }
 }
 
@@ -46,7 +46,7 @@ bool SVCtxOSXGL::activeContext(SVRendererPtr _renderer){
         return true;
     }
 //    else {
-//        m_gl_context = [[NSOpenGLContext alloc] initWithFormat:m_gl_context_out.pixelFormat shareContext:m_gl_context_out];
+//  m_gl_context = [[NSOpenGLContext alloc] initWithFormat:m_gl_context_out.pixelFormat shareContext:m_gl_context_out];
 //        if(m_gl_context) {
 //            [m_gl_context makeCurrentContext];
 //            glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
@@ -82,7 +82,7 @@ void SVCtxOSXMetal::init(SVInstPtr _handle,id<MTLDevice> _device,id<MTLDrawable>
     if(_handle && _target && _tex) {
         SVRendererMetalPtr t_renderer = MakeSharedPtr<SVRendererMetal>(_handle);
         t_renderer->init(_device,s32(_tex.width),s32(_tex.height));
-        _handle->setRenderer(t_renderer);
+        //_handle->setRenderer(t_renderer);
         m_target = _target;
         m_texture = _tex;
         m_pass = [MTLRenderPassDescriptor renderPassDescriptor];
@@ -90,7 +90,6 @@ void SVCtxOSXMetal::init(SVInstPtr _handle,id<MTLDevice> _device,id<MTLDrawable>
 }
 
 void SVCtxOSXMetal::resize(s32 _w,s32 _h){
-    
 }
 
 bool SVCtxOSXMetal::activeContext(SVRendererPtr _renderer){

@@ -75,11 +75,10 @@ SVInstPtr SVInst::share() {
     return std::dynamic_pointer_cast<SVInst>(shareObject()) ;
 }
 
-//构建各个模块的逻辑部分，引擎可以运行的最简模式
+//构建引擎的整个逻辑系统，唯独与渲染器无关
 void SVInst::init() {
     //
     m_renderer = nullptr;
-    //
     //lua脚本系统
     if(!m_lua_sys) {
         m_lua_sys = MakeSharedPtr<SVLuaSys>( share() );
@@ -179,18 +178,19 @@ void SVInst::destroyEnv() {
     }
 }
 
-//设置渲染器
-void SVInst::setRenderer(SVRendererPtr _renderer) {
-    //设置渲染器
-    m_renderer = _renderer;
-    //加载默认的材质库
-    if(m_mtl_lib) {
-        m_mtl_lib->loadDefaultPack();
-    }
-    //设置渲染路径
-    setRenderPath(0);
-}
+////设置渲染器
+//void SVInst::setRenderer(SVRendererPtr _renderer) {
+//    //设置渲染器
+//    m_renderer = _renderer;
+//    //加载默认的材质库
+//    if(m_mtl_lib) {
+//        m_mtl_lib->loadDefaultPack();
+//    }
+//    //设置渲染路径
+//    setRenderPath(0);
+//}
 
+//设置渲染路径
 void SVInst::setRenderPath(s32 _rpath) {
     if(!m_renderer){
         return;
@@ -200,7 +200,6 @@ void SVInst::setRenderPath(s32 _rpath) {
         m_global_mgr->m_arbg_mgr->enable();
         m_global_mgr->m_arbg_mgr->setInputCameraTex("svres/sve.png");
     }
-
     //创建正常的阶段
     //创建一堆东西
     if(_rpath == 0) {
@@ -211,7 +210,6 @@ void SVInst::setRenderPath(s32 _rpath) {
         
     }else if(_rpath == 2) {
         //
-        
     }
 }
 
@@ -243,10 +241,10 @@ void SVInst::renderSVE() {
     }
 }
 
-void SVInst::svSuspend(){
+void SVInst::suspend(){
 }
 
-void SVInst::svResume(){
+void SVInst::resume(){
 }
 
 void SVInst::clearCache(){

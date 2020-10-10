@@ -8,11 +8,13 @@
 
 #import "CGInst.h"
 #include "src/app/SVInst.h"
+#include "src/env/SVCtxIOS.h"
 #include "src/rendercore/SVMetal/SVRendererMetal.h"
+
 static CGInst *mInst;
 
 @interface CGInst() {
-    sv::SVInstPtr m_pSVE;
+    sv::SVInstPtr m_p_sve;
 }
 @end
 
@@ -25,11 +27,10 @@ static CGInst *mInst;
     return mInst;
 }
 
-
 - (instancetype)init{
     self = [super init];
     if (self) {
-        m_pSVE = nullptr;
+        m_p_sve = nullptr;
     }
     return self;
 }
@@ -38,40 +39,44 @@ static CGInst *mInst;
 }
 
 -(void)cgInit{
-//    //创建SVE引擎
-    [self initSVE];
+    //创建SVE引擎
+    m_p_sve = sv::SVInst::makeCreate();
+    m_p_sve->init();
     //创建UI系统
-//    [[CGUI getInst] cgInit:0];
+    //[[CGUI getInst] cgInit:0];
 }
 
 -(void)cgDestroy {
     //开始SVE
-//    [[CGUI getInst] cgDestroy];
-    [self destroySVE];
-}
-
--(void)initSVE{
-    m_pSVE = sv::SVInst::makeCreate();
-    m_pSVE->init();
-}
-
--(void)destroySVE{
-    if(m_pSVE) {
-        m_pSVE->destroy();
-        m_pSVE = nullptr;
+    //[[CGUI getInst] cgDestroy];
+    if(m_p_sve) {
+        m_p_sve->destroy();
+        m_p_sve = nullptr;
     }
 }
 
 -(void*)getSVE {
-    return m_pSVE.get();
+    return m_p_sve.get();
 }
 
 //
 -(void)createRM:(id<MTLDevice>)_device drawable:(id<CAMetalDrawable>)_drawable {
-    if( m_pSVE ) {
-//        sv::SVRendererPtr t_rm =m_pSVE->createRM(E_M_METAL);
-//        sv::SVRendererMetalPtr t_rm_metal = std::dynamic_pointer_cast<sv::SVRendererMetal>(t_rm);
-//        t_rm_metal->initParam(_device,_drawable,_drawable.texture);
+    if( m_p_sve ) {
+        //创建OpenGLES
+        sv::SVCtxBasePtr t_ctx = m_p_sve->createEnv(sv::E_R_GLES_IOS);
+        sv::SVCtxIOSGLESPtr t_ctx_gles = std::dynamic_pointer_cast<sv::SVCtxIOSGLES>(t_ctx);
+        if(t_ctx_gles) {
+            
+        }
+        //创建Metal
+        if(false) {
+            
+            sv::SVCtxBasePtr t_ctx = m_p_sve->createEnv(sv::E_R_METAL_IOS);
+            sv::SVCtxIOSMetalPtr t_ctx_metal = std::dynamic_pointer_cast<sv::SVCtxIOSMetal>(t_ctx);
+            if(t_ctx_metal) {
+                
+            }
+        }
     }
 }
 
@@ -81,7 +86,8 @@ static CGInst *mInst;
 }
 
 -(void)render {
-    //
-    m_pSVE->renderSVE();
+    if(m_p_sve) {
+        m_p_sve->renderSVE();
+    }
 }
 @end

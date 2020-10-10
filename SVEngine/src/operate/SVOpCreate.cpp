@@ -225,7 +225,7 @@ SVOpEngineResume::~SVOpEngineResume(){
 }
 
 void SVOpEngineResume::_process(f32 dt){
-    mApp->svResume();
+    mApp->resume();
 }
 
 SVOpEngineSuspend::SVOpEngineSuspend(SVInstPtr _app) : SVOpBase(_app){
@@ -237,7 +237,7 @@ SVOpEngineSuspend::~SVOpEngineSuspend(){
 }
 
 void SVOpEngineSuspend::_process(f32 dt){
-    mApp->svSuspend();
+    mApp->suspend();
 }
 
 SVOpPushFaceData::SVOpPushFaceData(SVInstPtr _app, void *_data)

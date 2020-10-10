@@ -177,6 +177,7 @@ void SVPenDraw::_drawStroke(){
 //        t_rs->pushRenderCmd(RST_AR, t_fbo_unbind);
 //    }
 }
+
 void SVPenDraw::_drawGlow(){
 //    SVRendererPtr t_renderer = mApp->getRenderer();
 //    SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
@@ -213,6 +214,7 @@ void SVPenDraw::_drawGlow(){
 //        t_rs->pushRenderCmd(RST_AR, t_fbo_unbind);
 //    }
 }
+
 void SVPenDraw::_drawReback(){
 //    //再画回主纹理
 //    SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
