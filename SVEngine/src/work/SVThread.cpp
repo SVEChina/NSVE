@@ -49,11 +49,6 @@ bool SVThread::start(bool _once){
         return true;
     }
     return false;
-//    if(m_svTState == TS_FREE) {
-//        m_cond->notice();
-//        return true;
-//    }
-//    return false;
 }
 
 bool SVThread::notice(){

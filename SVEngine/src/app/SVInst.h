@@ -36,7 +36,7 @@ namespace sv {
         SVInstPtr share();
         
         //初始化SV(与渲染器无关)
-        void init();
+        void init(bool async = false);
         
         //销毁SV(与渲染器无关)
         void destroy();
@@ -80,14 +80,8 @@ namespace sv {
         //唤醒SV
         void resume();
         
-        //设置时间状态
-        void setTimeState(SV_ENG_TIMESTATE _mode);
-        
-        //获取时间状态
-        SV_ENG_TIMESTATE getTimeState();
-        
         //获取引擎状态
-        inline SV_STATE getState() { return m_svst; }
+        inline SV_STATE getState() { return m_sv_st; }
         
     public:
         //唯一ID池
@@ -111,11 +105,11 @@ namespace sv {
         //渲染环境
         SVCtxBasePtr m_ctx;
         //
-        SV_STATE m_svst;
+        SV_STATE m_sv_st;
         //渲染器内核
         SV_R_ENV m_rcore;
         //
-        SV_ENG_TIMESTATE m_engTimeState;
+        bool m_async;
         
     public:
         SVEventMgrPtr getEventMgr();

@@ -53,8 +53,8 @@ static void lua_regist_SVInst(void* ls) {
 LUA_REG_IMP(SVInst,lua_regist_SVInst);
 
 SVInst::SVInst() {
-    m_svst = SV_ST_NULL;
-    m_engTimeState = ENG_TS_NOR;
+    m_sv_st = SV_ST_NULL;
+    m_async = false;
     m_ctx = nullptr;
     m_file_sys = nullptr;
     m_render_mgr = nullptr;
@@ -76,7 +76,8 @@ SVInstPtr SVInst::share() {
 }
 
 //构建引擎的整个逻辑系统，唯独与渲染器无关
-void SVInst::init() {
+void SVInst::init(bool async) {
+    m_async = async;
     //
     m_renderer = nullptr;
     //lua脚本系统
@@ -85,14 +86,15 @@ void SVInst::init() {
         m_lua_sys->init();
         SV_LOG_ERROR("sve init m_lua_sys end!\n");
     }
-    //
+    //文件系统
     if(!m_file_sys) {
         m_file_sys = MakeSharedPtr<SVFileMgr>( share() );
     }
     //加载配置
     m_config.init();
     m_config.loadConfig();
-    //材质库（只有在创建完渲染器的环境下，才会真正加载材质）
+    //材质库
+    //（只有在创建完渲染器的环境下，才会真正加载材质）
     m_mtl_lib = MakeSharedPtr<SVMtlLib>( share() );
     m_mtl_lib->init();
     //渲染管理
@@ -102,7 +104,11 @@ void SVInst::init() {
     m_global_mgr = MakeSharedPtr<SVGlobalMgr>( share() );
     m_global_mgr->init();
     //
-    m_svst = SV_ST_WAIT;
+    if(async) {
+        //异步 需要自己开一个线程，同步，不需要
+        
+    }
+    m_sv_st = SV_ST_WAIT;
 }
 
 void SVInst::destroy() {
@@ -123,7 +129,7 @@ void SVInst::destroy() {
         m_lua_sys->destroy();
         m_lua_sys = nullptr;
     }
-    m_svst = SV_ST_NULL;
+    m_sv_st = SV_ST_NULL;
 }
 
 void SVInst::resize(s32 _w,s32 _h) {
@@ -226,13 +232,13 @@ void SVInst::setRenderPath(s32 _rpath) {
 
 //跑线程模型 就是引擎运行
 void SVInst::start() {
-    m_svst = SV_ST_RUN;
+    m_sv_st = SV_ST_RUN;
 }
 
 //引擎的线程模型，停止运行
 //开启一个线程，销毁引擎，引擎销毁完毕以后，调用返回
 void SVInst::stop() {
-    m_svst = SV_ST_WAIT;
+    m_sv_st = SV_ST_WAIT;
 }
 
 void SVInst::updateSVE(f32 _dt) {
@@ -274,14 +280,6 @@ void SVInst::clearRespath() {
         m_file_sys->clearRespath();
         m_file_sys->addRespath("./");
     }
-}
-
-void SVInst::setTimeState(SV_ENG_TIMESTATE _mode){
-    m_engTimeState = _mode;
-}
-
-SV_ENG_TIMESTATE SVInst::getTimeState(){
-    return m_engTimeState;
 }
 
 SVEventMgrPtr SVInst::getEventMgr(){
