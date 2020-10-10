@@ -9,7 +9,8 @@
 
 using namespace sv;
 
-SVCtxBase::SVCtxBase(){
+SVCtxBase::SVCtxBase(SVInstPtr _app)
+:SVGBaseEx(_app){
 }
 
 SVCtxBase::~SVCtxBase() {

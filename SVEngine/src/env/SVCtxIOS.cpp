@@ -13,31 +13,38 @@ using namespace sv;
 #ifdef SV_IOS
 
 //设备上下文 真的不能随意切换啊 否则这这个设备上下文中创建的所有GL资源全部都失效
-SVCtxIOSGLES::SVCtxIOSGLES(void* _context,s32 _glversion)
-:SVCtxBase() {
-    m_glversion = _glversion;
-    if(_context){
-        EAGLContext* t_context = (__bridge EAGLContext*)_context;
-        m_gl_context = [[EAGLContext alloc] initWithAPI:[t_context API] sharegroup:[t_context sharegroup]];
-        SV_LOG_INFO("create context ios new\n");
-    }else{
-        //创建新的GLEnv
-        if (_glversion == 3) {
-            m_gl_context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES3];
-        }else if(_glversion == 2) {
-            m_gl_context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
-        }else {
-            m_gl_context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
-        }
-        SV_LOG_INFO("create context ios share\n");
-    }
-    //activeContext();
+SVCtxIOSGLES::SVCtxIOSGLES(SVInstPtr _app)
+:SVCtxBase(_app) {
 }
 
 SVCtxIOSGLES::~SVCtxIOSGLES() {
     [EAGLContext setCurrentContext:nil];
     m_gl_context = nil;
     SV_LOG_INFO("destroy context ios\n");
+}
+
+//同步初始化
+void SVCtxIOSGLES::init(void* _shareContext,s32 _version) {
+    m_glversion = _version;
+    if(_shareContext){
+        EAGLContext* t_context = (__bridge EAGLContext*)_shareContext;
+        m_gl_context = [[EAGLContext alloc] initWithAPI:[t_context API] sharegroup:[t_context sharegroup]];
+        SV_LOG_INFO("create context ios new\n");
+    }else{
+        if (_version == 3) {
+            m_gl_context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES3];
+        }else if(_version == 2) {
+            m_gl_context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
+        }else {
+            m_gl_context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
+        }
+        SV_LOG_INFO("create context ios share\n");
+    }
+}
+
+//异步初始化
+void SVCtxIOSGLES::initASync(void* _shareContext,s32 _version) {
+    
 }
 
 bool SVCtxIOSGLES::activeContext(SVRendererPtr _renderer){
@@ -62,11 +69,20 @@ bool SVCtxIOSGLES::swap(SVRendererPtr _renderer){
 }
 
 //
-SVCtxIOSMetal::SVCtxIOSMetal()
-:SVCtxBase() {
+SVCtxIOSMetal::SVCtxIOSMetal(SVInstPtr _app)
+:SVCtxBase(_app) {
 }
 
 SVCtxIOSMetal::~SVCtxIOSMetal() {
+}
+
+void SVCtxIOSMetal::init(id<MTLDevice> _device,id<MTLDrawable> _target,id<MTLTexture> _targetTex) {
+//    m_gl_context_out = (__bridge NSOpenGLContext*)_context;
+//    if(m_gl_context_out) {
+//        SVRendererGLPtr t_renderer = MakeSharedPtr<SVRendererGL>(_handle);
+//        t_renderer->init(_w,_h,_version);
+//        //_handle->setRenderer(t_renderer);
+//    }
 }
 
 bool SVCtxIOSMetal::activeContext(SVRendererPtr _renderer){

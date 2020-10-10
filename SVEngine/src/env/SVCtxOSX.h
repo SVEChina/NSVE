@@ -21,11 +21,11 @@ namespace sv {
     //mac上跑的 只有gl20,gl30,metle的渲染器
     class SVCtxOSXGL: public SVCtxBase {
     public:
-        SVCtxOSXGL();
+        SVCtxOSXGL(SVInstPtr _app);
         
         ~SVCtxOSXGL();
         
-        void init(SVInstPtr _handle,void* _context,s32 _w,s32 _h,s32 _version);
+        void init(void* _context,s32 _w,s32 _h,s32 _version);
         
         void resize(s32 _w,s32 _h){}
         
@@ -41,7 +41,7 @@ namespace sv {
     //osx metal环境
     class SVCtxOSXMetal: public SVCtxBase {
     public:
-        SVCtxOSXMetal();
+        SVCtxOSXMetal(SVInstPtr _app);
         
         ~SVCtxOSXMetal();
         

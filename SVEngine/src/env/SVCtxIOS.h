@@ -18,12 +18,17 @@
 namespace sv {
     
     //苹果手机上跑的 只有gles20,gles30,metle的渲染器
-
     class SVCtxIOSGLES: public SVCtxBase {
     public:
-        SVCtxIOSGLES(void* _context,s32 _glversion);
+        SVCtxIOSGLES(SVInstPtr _app);
         
         ~SVCtxIOSGLES();
+        
+        //同步调用 确保在一个线程
+        void init(void* _shareContext,s32 _version);
+        
+        //异步调用，在callback中处理
+        void initASync(void* _shareContext,s32 _version);
 
         bool activeContext(SVRendererPtr _renderer);
 
@@ -37,9 +42,11 @@ namespace sv {
     //Metal渲染器
     class SVCtxIOSMetal: public SVCtxBase {
     public:
-        SVCtxIOSMetal();
+        SVCtxIOSMetal(SVInstPtr _app);
         
         ~SVCtxIOSMetal();
+        
+        void init(id<MTLDevice> _device,id<MTLDrawable> _target,id<MTLTexture> _targetTex);
 
         bool activeContext(SVRendererPtr _renderer);
 

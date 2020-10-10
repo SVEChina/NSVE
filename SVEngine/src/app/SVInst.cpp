@@ -141,32 +141,43 @@ void SVInst::resize(s32 _w,s32 _h) {
 //创建渲染器环境
 SVCtxBasePtr SVInst::createEnv(SV_R_ENV _type) {
     SVCtxBasePtr t_ctx = nullptr;
+#ifdef SV_ANDROID
     if(_type == E_R_GLES_ANDORID) {
         m_rcore = E_R_GLES_ANDORID;
-    }else if(_type == E_R_VULKAN_ANDORID) {
-        m_rcore = E_R_VULKAN_ANDORID;
-    }else if(_type == E_R_METAL_OSX) {
-        m_rcore = E_R_METAL_OSX;
-#ifdef SV_OSX
-        m_ctx = MakeSharedPtr<SVCtxOSXMetal>();
-#endif
-    }else if(_type == E_R_GL_OSX) {
-        m_rcore = E_R_GL_OSX;
-#ifdef SV_OSX
-        m_ctx = MakeSharedPtr<SVCtxOSXGL>();
-#endif
-    }else if(_type == E_R_METAL_IOS) {
-        m_rcore = E_R_METAL_IOS;
-#ifdef SV_OSX
-        m_ctx = MakeSharedPtr<SVCtxOSXMetal>();
-#endif
-    }else if(_type == E_R_GLES_IOS) {
-        m_rcore = E_R_GLES_IOS;
-#ifdef SV_OSX
-        m_ctx = MakeSharedPtr<SVCtxOSXGL>();
-#endif
+        return m_ctx;
     }
-    return m_ctx;
+    if(_type == E_R_VULKAN_ANDORID) {
+        m_rcore = E_R_VULKAN_ANDORID;
+        return m_ctx;
+    }
+#endif
+    
+#ifdef SV_OSX
+    if(_type == E_R_METAL_OSX) {
+        m_rcore = E_R_METAL_OSX;
+        m_ctx = MakeSharedPtr<SVCtxOSXMetal>( share() );
+        return m_ctx;
+    }
+    if(_type == E_R_GL_OSX) {
+        m_rcore = E_R_GL_OSX;
+        m_ctx = MakeSharedPtr<SVCtxOSXGL>( share() );
+        return m_ctx;
+    }
+#endif
+        
+#ifdef SV_IOS
+    if(_type == E_R_METAL_IOS) {
+        m_rcore = E_R_METAL_IOS;
+        m_ctx = MakeSharedPtr<SVCtxIOSMetal>( share() );
+        return m_ctx;
+    }
+    if(_type == E_R_GLES_IOS) {
+        m_rcore = E_R_GLES_IOS;
+        m_ctx = MakeSharedPtr<SVCtxIOSGLES>( share() );
+        return m_ctx;
+    }
+#endif
+    return nullptr;
 }
 
 //销毁渲染环境，包括渲染器

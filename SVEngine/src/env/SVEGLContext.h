@@ -21,9 +21,11 @@ namespace sv {
     class SVEGLContext : public SVCtxBase {
 
     public:
-        SVEGLContext(void* _window, void *_context, s32 _glversion);
+        SVEGLContext(SVInstPtr _app);
 
         ~SVEGLContext();
+        
+        void init(void* _window, void *_context, s32 _glversion);
 
         virtual bool activeContext(SVRendererPtr _renderer);
         

@@ -17,8 +17,8 @@ using namespace sv;
 #ifdef SV_OSX
 
 //设备上下文 真的不能随意切换啊 否则这这个设备上下文中创建的所有GL资源全部都失效
-SVCtxOSXGL::SVCtxOSXGL()
-:SVCtxBase() {
+SVCtxOSXGL::SVCtxOSXGL(SVInstPtr _app)
+:SVCtxBase(_app) {
     m_gl_context = nullptr;
     m_gl_context_out = nullptr;
 }
@@ -28,7 +28,7 @@ SVCtxOSXGL::~SVCtxOSXGL() {
     m_gl_context_out = nullptr;
 }
 
-void SVCtxOSXGL::init(SVInstPtr _handle,void* _context,s32 _w,s32 _h,s32 _version) {
+void SVCtxOSXGL::init(void* _context,s32 _w,s32 _h,s32 _version) {
     m_gl_context_out = (__bridge NSOpenGLContext*)_context;
     if(m_gl_context_out) {
         SVRendererGLPtr t_renderer = MakeSharedPtr<SVRendererGL>(_handle);
@@ -71,14 +71,14 @@ bool SVCtxOSXGL::swap(SVRendererPtr _renderer){
 
 //
 //设备上下文 真的不能随意切换啊 否则这这个设备上下文中创建的所有GL资源全部都失效
-SVCtxOSXMetal::SVCtxOSXMetal()
-:SVCtxBase() {
+SVCtxOSXMetal::SVCtxOSXMetal(SVInstPtr _app)
+:SVCtxBase(_app) {
 }
 
 SVCtxOSXMetal::~SVCtxOSXMetal() {
 }
 
-void SVCtxOSXMetal::init(SVInstPtr _handle,id<MTLDevice> _device,id<MTLDrawable> _target,id<MTLTexture> _tex) {
+void SVCtxOSXMetal::init(id<MTLDevice> _device,id<MTLDrawable> _target,id<MTLTexture> _tex) {
     if(_handle && _target && _tex) {
         SVRendererMetalPtr t_renderer = MakeSharedPtr<SVRendererMetal>(_handle);
         t_renderer->init(_device,s32(_tex.width),s32(_tex.height));

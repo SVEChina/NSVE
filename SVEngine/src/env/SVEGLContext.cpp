@@ -10,7 +10,8 @@ using namespace sv;
 
 
 #ifdef SV_ANDROID
-SVEGLContext::SVEGLContext(void* _window,void* _context,s32 _glversion)
+
+SVEGLContext::SVEGLContext(SVInstPtr _app)
 : SVCtxBase(_app) {
     m_Display = nullptr;
     m_configsList = nullptr;
@@ -30,6 +31,10 @@ SVEGLContext::~SVEGLContext() {
     }
     destroyContext();
     m_configsList = nullptr;
+}
+
+void SVEGLContext::init(void* _window,void* _context,s32 _glversion) {
+    
 }
 
 void SVEGLContext::initGLES() {
