@@ -14,6 +14,11 @@ SVEvent::SVEvent() {
     eventName = "";
 }
 
+SVEvent::SVEvent(SV_EVENT_TYPE _type) {
+    eventType = _type;
+    eventName = "";
+}
+
 SVEvent::~SVEvent() {
 }
 

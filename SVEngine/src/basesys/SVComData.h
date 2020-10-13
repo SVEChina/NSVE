@@ -12,7 +12,7 @@
 //基础渲染数据接口 包含很多 基本的数据
 
 #include "../rendercore/SVRenderDeclare.h"
-#include "../base/SVGBase.h"
+#include "../event/SVEventProc.h"
 #include "../base/SVPreDeclare.h"
 #include "../base/SVMap.h"
 #include "../base/SVVec3.h"
@@ -20,7 +20,7 @@
 
 namespace sv {
 
-    class SVComData: public SVGBaseEx {
+    class SVComData: public SVEventProc {
     public:
         SVComData(SVInstPtr _app);
         
@@ -29,6 +29,8 @@ namespace sv {
         void init();
         
         void destroy();
+        
+        bool procEvent(SVEventPtr _event);
         
         //动态初始化
         SVFaceDataMeshPtr faceMesh(s32 _type);

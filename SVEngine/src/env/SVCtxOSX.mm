@@ -31,7 +31,7 @@ SVCtxOSXGL::~SVCtxOSXGL() {
 void SVCtxOSXGL::init(void* _context,s32 _w,s32 _h,s32 _version) {
     m_gl_context_out = (__bridge NSOpenGLContext*)_context;
     if(m_gl_context_out) {
-        SVRendererGLPtr t_renderer = MakeSharedPtr<SVRendererGL>(_handle);
+        SVRendererGLPtr t_renderer = MakeSharedPtr<SVRendererGL>(mApp);
         t_renderer->init(_w,_h,_version);
         //_handle->setRenderer(t_renderer);
     }
@@ -79,10 +79,13 @@ SVCtxOSXMetal::~SVCtxOSXMetal() {
 }
 
 void SVCtxOSXMetal::init(id<MTLDevice> _device,id<MTLDrawable> _target,id<MTLTexture> _tex) {
-    if(_handle && _target && _tex) {
-        SVRendererMetalPtr t_renderer = MakeSharedPtr<SVRendererMetal>(_handle);
+    if( _target && _tex) {
+        //创建渲染器
+        SVRendererMetalPtr t_renderer = MakeSharedPtr<SVRendererMetal>(mApp);
         t_renderer->init(_device,s32(_tex.width),s32(_tex.height));
-        //_handle->setRenderer(t_renderer);
+        //
+        mApp->_initRenderer(t_renderer);
+        //
         m_target = _target;
         m_texture = _tex;
         m_pass = [MTLRenderPassDescriptor renderPassDescriptor];

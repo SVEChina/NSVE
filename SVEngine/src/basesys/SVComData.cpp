@@ -9,6 +9,7 @@
 #include "SVFaceDataMesh.h"
 #include "../app/SVInst.h"
 #include "../app/SVDispatch.h"
+#include "../event/SVEvent.h"
 #include "../base/SVDataSwap.h"
 #include "../rendercore/SVRenderMesh.h"
 #include "../rendercore/SVRenderCmd.h"
@@ -25,9 +26,8 @@ static f32 m_screen_rect_v2_t0[] = {
     1.0f,1.0f, 1.0f,1.0f
 };
 
-SVComData::SVComData
-(SVInstPtr _app)
-:SVGBaseEx(_app) {
+SVComData::SVComData(SVInstPtr _app)
+:SVEventProc(_app) {
     m_screenMesh = nullptr;
 }
 
@@ -36,7 +36,6 @@ SVComData::~SVComData() {
 }
 
 void SVComData::init() {
-    //
     m_screenMesh = MakeSharedPtr<SVRenderMesh>(mApp);
     //索引描述
     BufferDspPtr t_index_dsp = MakeSharedPtr<BufferDsp>(E_BFM_AOS);
@@ -51,8 +50,6 @@ void SVComData::init() {
     t_vert_dsp->buildWithVert(E_BFT_STATIC_DRAW,4);
     t_vert_dsp->setStreamData(E_VF_NULL, m_screen_rect_v2_t0, 16*sizeof(f32));
     m_screenMesh->setVertDsp(t_vert_dsp);
-    //这个必须有渲染器才可以执行
-    SVDispatch::dispatchMeshCreate(mApp, m_screenMesh);
 }
 
 #define IDX(_x_, _y_) ((_y_)*rx + (_x_))
@@ -132,6 +129,19 @@ SVRenderMeshPtr SVComData::generatePatchMesh(FVec3 &_corner00, FVec3 &_corner10,
 void SVComData::destroy() {
     m_screenMesh = nullptr;
 }
+
+//处理消息
+bool SVComData::procEvent(SVEventPtr _event) {
+    if(_event && _event->eventType>EVN_T_SYS_BEGIN && _event->eventType<EVN_T_SYS_END ) {
+        if(_event->eventType == EVN_T_SYS_INIT_RENDERER) {
+            //渲染器初始化消息
+            SVDispatch::dispatchMeshCreate(mApp, m_screenMesh);
+        }
+    }
+    return true;
+}
+
+
 
 SVFaceDataMeshPtr SVComData::faceMesh(s32 _type) {
     //根据不同算法，获取不同算法的标准脸

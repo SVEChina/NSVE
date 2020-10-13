@@ -10,7 +10,7 @@
 #import "CMetalView.h"
 #import "CGInst.h"
 @interface ViewController () {
-    CMetalView* metalview;
+    //CMetalView* metalview;
 }
 @end
 
@@ -20,9 +20,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [[CGInst getInst] cgInit];
-    //
-    metalview = [[CMetalView alloc] initWithFrame:self.view.bounds];
-    [self.view addSubview:metalview];
+//    //
+//    metalview = [[CMetalView alloc] initWithFrame:self.view.bounds];
+//    [self.view addSubview:metalview];
 }
 
 

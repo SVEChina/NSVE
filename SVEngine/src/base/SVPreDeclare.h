@@ -53,6 +53,7 @@ namespace sv {
     DECLARE_SHAREPTR(SVRenderMgr);
     DECLARE_SHAREPTR(SVShader);
     DECLARE_SHAREPTR(SVShaderMgr);
+    DECLARE_SHAREPTR(SVResMgr);
     DECLARE_SHAREPTR(SVSceneMgr);
     DECLARE_SHAREPTR(SVARBackgroundMgr);
     DECLARE_SHAREPTR(SVDeformMgr);

@@ -18,7 +18,7 @@ namespace sv {
      尽量采用数组的方式
      */
 
-    class SVShaderMgr : public SVSysBase {
+    class SVShaderMgr : public SVGBaseEx {
     public:
         SVShaderMgr(SVInstPtr _app);
         
@@ -27,6 +27,8 @@ namespace sv {
         void init();
         
         void destroy();
+        
+        void loadDefault();
 
         SVShaderPtr getShader(cptr8 _name);
         

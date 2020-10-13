@@ -18,6 +18,8 @@ namespace sv {
     public:
         SVEvent();
         
+        SVEvent(SV_EVENT_TYPE _type);
+        
         ~SVEvent();
         
         virtual bool isEqual(SVEventPtr _event);
@@ -34,6 +36,7 @@ namespace sv {
         SVObjectPtr m_obj;
     };
     
+    //
     class SVPersonEvent : public SVEvent {
     public:
         SVPersonEvent();
@@ -45,6 +48,7 @@ namespace sv {
         s32 personID;         //关联人物
     };
     
+    //
     class SVFaceShapeEvent : public SVEvent {
     public:
         SVFaceShapeEvent();

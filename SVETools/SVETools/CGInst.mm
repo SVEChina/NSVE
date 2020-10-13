@@ -88,20 +88,7 @@ static CGInst *mInst;
         sv::SVCtxBasePtr t_ctx =m_sve_obj->createEnv(sv::E_R_METAL_OSX);
         sv::SVCtxOSXMetalPtr t_ctx_metal = std::dynamic_pointer_cast<sv::SVCtxOSXMetal>(t_ctx);
         if(t_ctx_metal) {
-            t_ctx_metal->init(m_sve_obj,_device,_drawable,_drawable.texture);
-        }
-    }
-#endif
-}
-
-//创建IOS-Metal
--(void)create_IOS_Metal:(id<MTLDevice>)_device drawable:(id<CAMetalDrawable>)_drawable {
-#ifdef SV_IOS
-    if( m_sve_obj ) {
-        sv::SVCtxBasePtr t_ctx = m_sve_obj->createEnv(sv::E_R_METAL_OSX);
-        sv::SVCtxOSXMetalPtr t_ctx_metal_osx = std::dynamic_pointer_cast<sv::SVCtxOSXMetal>(t_ctx);
-        if(t_ctx_metal_osx) {
-            t_ctx_metal_osx->init(m_sve_obj,_device,_drawable,_drawable.texture);
+            t_ctx_metal->init(_device,_drawable,_drawable.texture);
         }
     }
 #endif
@@ -123,20 +110,7 @@ static CGInst *mInst;
         sv::SVCtxBasePtr t_ctx_base = m_sve_obj->createEnv(sv::E_R_GL_OSX);
         sv::SVCtxOSXGLPtr t_ctx_gl_osx = std::dynamic_pointer_cast<sv::SVCtxOSXGL>(t_ctx_base);
         if(t_ctx_gl_osx) {
-            t_ctx_gl_osx->init(m_sve_obj,_ctx,_w,_h,_version);
-        }
-    }
-#endif
-}
-
-//创建IOS-GL环境
-- (void)create_IOS_GL:(void*)_ctx Width:(int)_w Height:(int)_h Version:(int)_version {
-#ifdef SV_IOS
-    if( m_sve_obj ) {
-        sv::SVCtxBasePtr t_ctx = m_sve_obj->createEnv(sv::E_R_GLES_IOS);
-        sv::SVCtxIOSGLESPtr t_ctx_gles_ios = std::dynamic_pointer_cast<sv::SVCtxIOSGLES>(t_ctx);
-        if(t_ctx_gles_ios) {
-            //t_ctx_gles_ios->init(m_sve_obj,_ctx,_w,_h);
+            //t_ctx_gl_osx->init(_ctx,_w,_h,_version);
         }
     }
 #endif

@@ -19,10 +19,18 @@
 #include "../work/SVTdCore.h"
 #include "../work/SVThreadPool.h"
 #include "../file/SVFileMgr.h"
+
 #include "../basesys/SVBasicSys.h"
 #include "../basesys/SVConfig.h"
 #include "../basesys/SVCameraMgr.h"
 #include "../basesys/SVARBackgroundMgr.h"
+#include "../basesys/SVComData.h"
+
+#include "../event/SVEventMgr.h"
+#include "../event/SVEvent.h"
+
+#include "../mtl/SVResMgr.h"
+
 #include "../operate/SVOpBase.h"
 #include "../operate/SVOpCreate.h"
 #include "../operate/SVOpThread.h"
@@ -58,6 +66,9 @@ SVInst::SVInst() {
     m_ctx = nullptr;
     m_file_sys = nullptr;
     m_render_mgr = nullptr;
+    m_event_sys = nullptr;
+    m_res_mgr = nullptr;
+    m_common_data = nullptr;
 }
 
 SVInst::~SVInst() {
@@ -65,6 +76,9 @@ SVInst::~SVInst() {
     m_file_sys = nullptr;
     m_mtl_lib = nullptr;
     m_render_mgr = nullptr;
+    m_event_sys = nullptr;
+    m_common_data = nullptr;
+    m_res_mgr = nullptr;
 }
 
 SVInstPtr SVInst::makeCreate() {
@@ -93,20 +107,30 @@ void SVInst::init(bool async) {
     //加载配置
     m_config.init();
     m_config.loadConfig();
+    //消息系统
+    m_event_sys = MakeSharedPtr<SVEventMgr>( share() );
+    m_event_sys->init();
     //材质库
-    //（只有在创建完渲染器的环境下，才会真正加载材质）
     m_mtl_lib = MakeSharedPtr<SVMtlLib>( share() );
     m_mtl_lib->init();
+    m_event_sys->registProcer(m_mtl_lib);
     //渲染管理
     m_render_mgr = MakeSharedPtr<SVRenderMgr>( share() );
     m_render_mgr->init();
+    //引擎需要的静态数据
+    m_common_data = MakeSharedPtr<SVComData>(  share() );
+    m_common_data->init();
+    m_event_sys->registProcer(m_common_data);
+    //资源管理加载
+    m_res_mgr = MakeSharedPtr<SVResMgr>( share() );
+    m_res_mgr->init();
+    m_event_sys->registProcer(m_res_mgr);
     //全局
     m_global_mgr = MakeSharedPtr<SVGlobalMgr>( share() );
     m_global_mgr->init();
     //
     if(async) {
         //异步 需要自己开一个线程，同步，不需要
-        
     }
     m_sv_st = SV_ST_WAIT;
 }
@@ -128,6 +152,11 @@ void SVInst::destroy() {
     if(m_lua_sys) {
         m_lua_sys->destroy();
         m_lua_sys = nullptr;
+    }
+    //
+    if (m_event_sys) {
+        //事件系统最后析够,因为很多其他模块 会注册监听事件
+        m_event_sys->destroy();
     }
     m_sv_st = SV_ST_NULL;
 }
@@ -195,18 +224,6 @@ void SVInst::destroyEnv() {
     }
 }
 
-////设置渲染器
-//void SVInst::setRenderer(SVRendererPtr _renderer) {
-//    //设置渲染器
-//    m_renderer = _renderer;
-//    //加载默认的材质库
-//    if(m_mtl_lib) {
-//        m_mtl_lib->loadDefaultPack();
-//    }
-//    //设置渲染路径
-//    setRenderPath(0);
-//}
-
 //设置渲染路径
 void SVInst::setRenderPath(s32 _rpath) {
     if(!m_renderer){
@@ -248,6 +265,10 @@ void SVInst::updateSVE(f32 _dt) {
         m_lua_sys->update(_dt);
         //timeTag(false,"lua cost");
     }
+    //事件处理系统更新
+    if(m_event_sys) {
+        m_event_sys->update(_dt);
+    }
     //
     m_global_mgr->update(_dt);
 }
@@ -283,9 +304,7 @@ void SVInst::clearRespath() {
 }
 
 SVEventMgrPtr SVInst::getEventMgr(){
-    if(!m_global_mgr)
-        return nullptr;
-    return m_global_mgr->m_event_sys;
+    return m_event_sys;
 }
 
 SVBasicSysPtr SVInst::getBasicSys(){
@@ -319,15 +338,15 @@ SVModuleSysPtr SVInst::getModuleSys(){
 }
 
 SVShaderMgrPtr SVInst::getShaderMgr(){
-    if(!m_global_mgr)
+    if(!m_res_mgr)
         return nullptr;
-    return m_global_mgr->m_shader_mgr;
+    return m_res_mgr->m_shader_mgr;
 }
 
 SVTexMgrPtr SVInst::getTexMgr(){
-    if(!m_global_mgr)
+    if(!m_res_mgr)
         return nullptr;
-    return m_global_mgr->m_tex_mgr;
+    return m_res_mgr->m_tex_mgr;
 }
 
 SVMtlLibPtr SVInst::getMtlLib() {
@@ -351,9 +370,7 @@ SVDeformMgrPtr SVInst::getDeformMgr(){
 }
 
 SVComDataPtr SVInst::getComData(){
-    if(!m_global_mgr)
-        return nullptr;
-    return m_global_mgr->m_common_data;
+    return m_common_data;
 }
 
 SVModelMgrPtr SVInst::getModelMgr(){
@@ -370,4 +387,15 @@ SVPhysicsWorldMgrPtr SVInst::getPhysicsWorldMgr(){
 
 SVRendererPtr SVInst::getRenderer() {
     return m_renderer;
+}
+
+//设置渲染器
+void SVInst::_initRenderer(SVRendererPtr _renderer) {
+    //设置渲染器
+    m_renderer = _renderer;
+    //发送一个有INIT_RENDER的消息
+    if(m_event_sys) {
+        SVEventPtr _event = MakeSharedPtr<SVEvent>(EVN_T_SYS_INIT_RENDERER);
+        m_event_sys->pushEvent(_event);
+    }
 }

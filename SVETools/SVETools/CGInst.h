@@ -27,14 +27,10 @@
 -(void*)getSVE;
 //Metal-OSX
 -(void)create_OSX_Metal:(id<MTLDevice>)_device drawable:(id<CAMetalDrawable>)_drawable;
-//Metal-OSX
--(void)create_IOS_Metal:(id<MTLDevice>)_device drawable:(id<CAMetalDrawable>)_drawable;
 //
 -(void)destroyMetal;
 //GL-OSX
 - (void)create_OSX_GL:(void*)ctx Width:(int)_w Height:(int)_h Version:(int)_version;
-//GL-IOS
-- (void)create_IOS_GL:(void*)ctx Width:(int)_w Height:(int)_h Version:(int)_version;
 //
 - (void)destroyGL;
 //

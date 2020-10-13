@@ -15,6 +15,9 @@ namespace sv {
     //
     enum SV_EVENT_TYPE {
         EVN_T_NONE,
+        EVN_T_SYS_BEGIN,
+        EVN_T_SYS_INIT_RENDERER,
+        EVN_T_SYS_END,
         EVN_T_TOUCH_BEGIN,//1
         EVN_T_TOUCH_MOVE, //2
         EVN_T_TOUCH_LONGPRESS,//3

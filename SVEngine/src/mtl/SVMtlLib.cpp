@@ -11,6 +11,7 @@
 #include "../app/SVInst.h"
 #include "../file/SVFileMgr.h"
 #include "../base/SVDataChunk.h"
+#include "../event/SVEvent.h"
 
 using namespace sv;
 
@@ -30,7 +31,7 @@ bool SVMtlPack::hasMtl(cptr8 _name) {
 //材质库
 
 SVMtlLib::SVMtlLib(SVInstPtr _app)
-:SVGBaseEx(_app){
+:SVEventProc(_app){
 }
 
 SVMtlLib::~SVMtlLib() {
@@ -46,6 +47,16 @@ void SVMtlLib::destroy() {
     for(s32 i=0;i<m_pack_pool.size();i++) {
         m_pack_pool.clear();
     }
+}
+
+bool SVMtlLib::procEvent(SVEventPtr _event) {
+    if(_event && _event->eventType>EVN_T_SYS_BEGIN && _event->eventType<EVN_T_SYS_END ) {
+        if(_event->eventType == EVN_T_SYS_INIT_RENDERER) {
+            //渲染器初始化
+            loadDefaultPack();
+        }
+    }
+    return true;
 }
 
 //加载默认的材质包

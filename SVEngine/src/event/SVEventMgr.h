@@ -30,9 +30,7 @@ namespace sv {
         void reset();
         
         //推送事件
-        void pushEvent(SVEventPtr _event);
-        
-        void pushEventToSecondPool(SVEventPtr _event);
+        void pushEvent(SVEventPtr _event,bool _cache = false);
         
         //注册事件处理器
         bool hasRegist(SVEventProcPtr _procer);
@@ -53,12 +51,12 @@ namespace sv {
         EVENTPOOL m_exe_eventList0;     //事件队列0
         EVENTPOOL m_exe_eventList1;     //事件队列1
         
-        EVENTPOOL *mActiveEventPool;    //当前执行的消息池
-        EVENTPOOL *mWaitEventPool;      //等待消息池
-        EVENTPOOL mSecendEventPool;     //第二执行队列
+        EVENTPOOL *m_active_pool;       //当前执行的消息池
+        EVENTPOOL *m_waitevent_pool;    //等待消息池
+        EVENTPOOL m_cachevent_pool;     //第二执行队列
         
         typedef SVArray<SVEventProcPtr> PROCERPOOL;
-        PROCERPOOL m_procerArray;
+        PROCERPOOL m_event_procers;
         
         SVLock m_waitlock;
     };

@@ -45,7 +45,7 @@ namespace sv {
         
         ~SVCtxOSXMetal();
         
-        void init(SVInstPtr _handle,id<MTLDevice> _device,id<MTLDrawable> _target,id<MTLTexture> _targetTex);
+        void init(id<MTLDevice> _device,id<MTLDrawable> _target,id<MTLTexture> _targetTex);
         
         void resize(s32 _w,s32 _h);
 

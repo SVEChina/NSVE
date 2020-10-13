@@ -25,28 +25,19 @@ namespace sv {
         ~SVTexMgr();
         
         void init();
-        
+        //
         void destroy();
-        
-        void update(f32 _dt);
-        
+        //
+        void loadDefault();
         //从文件加载纹理
         SVTexturePtr getTexture(cptr8 _name,bool _sync = true);
-        
         //
         bool hasTexture(cptr8 _name);
-        
         //
         void clear();
-        
         //
         SVTexturePtr getSVETexture();
-        
-        //
-        SVTexturePtr loadImgPList(cptr8 _plistname, cptr8 _path);
-        
     protected:
-        
         SVTexturePtr _createTexture(cptr8 _name, bool _sync = true, bool _enableMipMap = false);
         
         void _removeUnuseTexture();

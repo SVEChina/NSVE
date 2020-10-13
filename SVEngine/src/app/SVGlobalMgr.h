@@ -32,8 +32,6 @@ namespace sv {
     public:
         /*基础模块*/
         /*可删减模块*/
-        //事件部分
-        SVEventMgrPtr m_event_sys;
         //基础系统
         SVBasicSysPtr m_pBasicSys;
         //场景管理
@@ -44,16 +42,10 @@ namespace sv {
         SVModuleSysPtr m_pModuleSys;
         //灯光部分
         SVLightSysPtr m_pLightSys;
-        //shader部分
-        SVShaderMgrPtr m_shader_mgr;
-        //纹理部分
-        SVTexMgrPtr m_tex_mgr;
         //识别部分
         SVDetectMgrPtr m_detect_mgr;
         //模型部分
         SVModelMgrPtr  m_pModelMgr;
-        //静态数据
-        SVComDataPtr m_common_data;
         //变形形同
         SVDeformMgrPtr m_pDeformSys;
         //AR背景

@@ -10,6 +10,7 @@
 #import <QuartzCore/CAMetalLayer.h>
 #import "CGInst.h"
 #include "src/app/SVInst.h"
+
 @interface CMetalView () {
     CAMetalLayer* metalLayer;
     CADisplayLink* displayLink;
@@ -42,6 +43,7 @@
     id<MTLTexture> texture = drawable.texture;
     //创建渲染器
     [[CGInst getInst] createRM:self.mDevice drawable:drawable];
+    //
     [self creatTimer];
 }
 

@@ -21,18 +21,21 @@
 using namespace sv;
 
 SVShaderMgr::SVShaderMgr(SVInstPtr _app)
-:SVSysBase(_app) {
+:SVGBaseEx(_app) {
 }
 
 SVShaderMgr::~SVShaderMgr() {
 }
 
 void SVShaderMgr::init() {
-    _loadAllShader();    //加载表
 }
 
 void SVShaderMgr::destroy() {
     _clearAllShader();
+}
+
+void SVShaderMgr::loadDefault() {
+    _loadAllShader();    //加载表
 }
 
 void SVShaderMgr::_loadAllShader() {

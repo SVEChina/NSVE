@@ -26,6 +26,24 @@ namespace sv {
 
     class SVInst : public SVObject {
     public:
+        friend class SVCtxBase;
+        friend class std::shared_ptr<SVCtxBase> ;
+#ifdef SV_IOS
+        friend class SVCtxIOSGLES;
+        friend class std::shared_ptr<SVCtxIOSGLES> ;
+        friend class SVCtxIOSMetal;
+        friend class std::shared_ptr<SVCtxIOSMetal> ;
+#endif
+
+#ifdef SV_OSX
+        friend class SVCtxOSXGL;
+        friend class std::shared_ptr<SVCtxOSXGL> ;
+        friend class SVCtxOSXMetal;
+        friend class std::shared_ptr<SVCtxOSXMetal> ;
+#endif
+        
+#ifdef SV_ANDRIOD
+#endif
         //
         static SVInstPtr makeCreate();
         //
@@ -96,6 +114,12 @@ namespace sv {
         SVConfig m_config;
         //脚本系统-lua
         SVLuaSysPtr m_lua_sys;
+        //事件系统
+        SVEventMgrPtr m_event_sys;
+        //静态数据
+        SVComDataPtr m_common_data;
+        //资源管理
+        SVResMgrPtr m_res_mgr;
         //全局对象
         SVGlobalMgrPtr m_global_mgr;
         //全局参数
@@ -128,6 +152,10 @@ namespace sv {
         SVModelMgrPtr getModelMgr();
         SVPhysicsWorldMgrPtr getPhysicsWorldMgr();
         SVRendererPtr getRenderer();
+        
+    protected:
+        
+        void _initRenderer(SVRendererPtr _renderer);
     };
     
 }//!namespace sv

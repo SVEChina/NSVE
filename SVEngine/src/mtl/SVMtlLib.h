@@ -8,7 +8,7 @@
 #ifndef SV_MTLLIB_H
 #define SV_MTLLIB_H
 
-#include "../base/SVGBase.h"
+#include "../event/SVEventProc.h"
 #include "SVMtlDef.h"
 #include "SVMtlDeclare.h"
 #include "../base/SVObject.h"
@@ -38,7 +38,7 @@ namespace sv {
     };
     
     /*引擎提供的默认材质库*/
-    class SVMtlLib : public SVGBaseEx {
+    class SVMtlLib : public SVEventProc {
     public:
         SVMtlLib(SVInstPtr _app);
         
@@ -65,6 +65,9 @@ namespace sv {
         
         //创建材质
         SVMtlCorePtr createMtl(cptr8 _mtlname);
+        
+        //处理消息
+        bool procEvent(SVEventPtr _event);
         
     protected:
         static bool parseMtl1(SVMtlCorePtr _mtl,RAPIDJSON_NAMESPACE::Document& _doc);

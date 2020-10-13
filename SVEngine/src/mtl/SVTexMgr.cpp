@@ -24,19 +24,6 @@ SVTexMgr::SVTexMgr(SVInstPtr _app)
     mAsync = false;
     m_sve_tex = nullptr;
     m_texLock = MakeSharedPtr<SVLock>();
-//    //主纹理
-//    m_main_tex = nullptr;
-//    //阴影纹理
-//    m_shadow_tex = nullptr;
-//    //G-BUFFER
-//    m_gbuf_postex = nullptr;
-//    m_gbuf_nortex = nullptr;
-//    m_gbuf_colortex = nullptr;
-//    //后处理纹理
-//    m_post_tex0 = nullptr;
-//    m_post_tex1 = nullptr;
-//    m_post_tex2 = nullptr;
-//    m_post_tex3 = nullptr;
 }
 
 SVTexMgr::~SVTexMgr() {
@@ -45,7 +32,6 @@ SVTexMgr::~SVTexMgr() {
 }
 
 void SVTexMgr::init() {
-    m_sve_tex = getTexture("svres/sve.png",true);
 }
 
 void SVTexMgr::destroy() {
@@ -53,8 +39,8 @@ void SVTexMgr::destroy() {
     m_sve_tex = nullptr;
 }
 
-void SVTexMgr::update(f32 _dt){
-    //_removeUnuseTexture();
+void SVTexMgr::loadDefault() {
+    m_sve_tex = getTexture("svres/sve.png",true);
 }
 
 void SVTexMgr::clear() {
@@ -120,9 +106,4 @@ bool SVTexMgr::hasTexture(cptr8 _name) {
     }
     //内置纹理中寻找
     return false;
-}
-
-//加载纹理
-SVTexturePtr SVTexMgr::loadImgPList(cptr8 _plistname,cptr8 _path) {
-    return nullptr;
 }
