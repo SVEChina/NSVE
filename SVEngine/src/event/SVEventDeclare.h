@@ -13,6 +13,9 @@
 namespace sv {
     
     DECLARE_SHAREPTR(SVEvent);
+    //
+    DECLARE_SHAREPTR(SVEvtRenderInit);
+    //
     DECLARE_SHAREPTR(SVEvtRecycle);
     DECLARE_SHAREPTR(SVPersonEvent);
     DECLARE_SHAREPTR(SVFaceShapeEvent);

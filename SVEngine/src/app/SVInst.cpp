@@ -68,7 +68,6 @@ SVInst::SVInst() {
     m_render_mgr = nullptr;
     m_event_sys = nullptr;
     m_res_mgr = nullptr;
-    m_common_data = nullptr;
 }
 
 SVInst::~SVInst() {
@@ -77,7 +76,6 @@ SVInst::~SVInst() {
     m_mtl_lib = nullptr;
     m_render_mgr = nullptr;
     m_event_sys = nullptr;
-    m_common_data = nullptr;
     m_res_mgr = nullptr;
 }
 
@@ -113,18 +111,14 @@ void SVInst::init(bool async) {
     //材质库
     m_mtl_lib = MakeSharedPtr<SVMtlLib>( share() );
     m_mtl_lib->init();
-    m_event_sys->registProcer(m_mtl_lib);
+    m_event_sys->listenSysEvent(m_mtl_lib,SVMtlLib::procSysEvent);
     //渲染管理
     m_render_mgr = MakeSharedPtr<SVRenderMgr>( share() );
     m_render_mgr->init();
-    //引擎需要的静态数据
-    m_common_data = MakeSharedPtr<SVComData>(  share() );
-    m_common_data->init();
-    m_event_sys->registProcer(m_common_data);
     //资源管理加载
     m_res_mgr = MakeSharedPtr<SVResMgr>( share() );
     m_res_mgr->init();
-    m_event_sys->registProcer(m_res_mgr);
+    m_event_sys->listenSysEvent(m_res_mgr,SVResMgr::procSysEvent);
     //全局
     m_global_mgr = MakeSharedPtr<SVGlobalMgr>( share() );
     m_global_mgr->init();
@@ -370,7 +364,9 @@ SVDeformMgrPtr SVInst::getDeformMgr(){
 }
 
 SVComDataPtr SVInst::getComData(){
-    return m_common_data;
+    if(!m_res_mgr)
+        return nullptr;
+    return m_res_mgr->m_common_data;
 }
 
 SVModelMgrPtr SVInst::getModelMgr(){
@@ -393,9 +389,9 @@ SVRendererPtr SVInst::getRenderer() {
 void SVInst::_initRenderer(SVRendererPtr _renderer) {
     //设置渲染器
     m_renderer = _renderer;
-    //发送一个有INIT_RENDER的消息
+    //发送一个系统级别的消息
     if(m_event_sys) {
-        SVEventPtr _event = MakeSharedPtr<SVEvent>(EVN_T_SYS_INIT_RENDERER);
+        SVEvtRenderInitPtr _event = MakeSharedPtr<SVEvtRenderInit>(m_renderer);
         m_event_sys->pushEvent(_event);
     }
 }

@@ -30,7 +30,7 @@ namespace sv {
         
         void destroy();
         
-        bool procEvent(SVEventPtr _event);
+        void loadDefault();
         
         //动态初始化
         SVFaceDataMeshPtr faceMesh(s32 _type);
@@ -53,6 +53,10 @@ namespace sv {
         void _initFourDivisionMesh_X();
         
         SVRenderMeshPtr m_screenMesh;
+        
+    public:
+        //处理消息
+        static void procSysEvent(SVObjectPtr _caller,SVEventPtr _event);
     };
     
 }//!namespace

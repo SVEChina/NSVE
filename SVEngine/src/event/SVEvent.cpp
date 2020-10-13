@@ -6,6 +6,7 @@
 //
 
 #include "SVEvent.h"
+#include "../rendercore/SVRenderer.h"
 
 using namespace sv;
 
@@ -26,12 +27,28 @@ bool SVEvent::isEqual(SVEventPtr _event) {
     return strcmp(eventName.c_str(), _event->eventName.c_str()) == 0;
 }
 
-//
+/*
+ 渲染器初始化消息
+ */
+SVEvtRenderInit::SVEvtRenderInit(SVRendererPtr _renderer)
+:m_renderer(_renderer){
+    eventType = EVN_T_SYS_INIT_RENDERER;
+}
+
+SVEvtRenderInit::~SVEvtRenderInit() {
+    m_renderer = nullptr;
+}
+
+/*
+ 垃圾回收消息
+ */
 SVEvtRecycle::SVEvtRecycle(){
     m_obj = nullptr;
 }
 
-//
+/*
+ 人物消息
+ */
 SVPersonEvent::SVPersonEvent() {
     personID = -1;
 }

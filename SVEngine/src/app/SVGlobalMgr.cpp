@@ -34,7 +34,6 @@ using namespace sv;
 SVGlobalMgr::SVGlobalMgr(SVInstPtr _app)
 :SVGBaseEx(_app) {
     //引擎系统和操作指令系统要先建立起来
-    
     m_pBasicSys = nullptr;
     m_pSceneMgr = nullptr;
     m_camera_mgr = nullptr;

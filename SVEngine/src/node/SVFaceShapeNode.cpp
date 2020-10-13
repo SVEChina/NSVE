@@ -11,7 +11,6 @@
 #include "../event/SVEvent.h"
 #include "../event/SVOpEvent.h"
 #include "../basesys/SVSceneMgr.h"
-#include "../basesys/SVComData.h"
 #include "../rendercore/SVRenderMgr.h"
 #include "../rendercore/SVRenderMesh.h"
 #include "../rendercore/SVRenderCmd.h"

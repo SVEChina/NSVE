@@ -116,8 +116,6 @@ namespace sv {
         SVLuaSysPtr m_lua_sys;
         //事件系统
         SVEventMgrPtr m_event_sys;
-        //静态数据
-        SVComDataPtr m_common_data;
         //资源管理
         SVResMgrPtr m_res_mgr;
         //全局对象
@@ -128,7 +126,7 @@ namespace sv {
         SVRendererPtr m_renderer;
         //渲染环境
         SVCtxBasePtr m_ctx;
-        //
+        //状态
         SV_STATE m_sv_st;
         //渲染器内核
         SV_R_ENV m_rcore;

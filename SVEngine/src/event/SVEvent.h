@@ -11,21 +11,40 @@
 #include "../base/SVObject.h"
 #include "SVEventDef.h"
 #include "../node/SVNodeDeclare.h"
+#include "../rendercore/SVRenderDeclare.h"
 
 namespace sv {
-    
+
     class SVEvent : public SVObject {
     public:
         SVEvent();
         
         SVEvent(SV_EVENT_TYPE _type);
         
-        ~SVEvent();
+        virtual ~SVEvent();
         
         virtual bool isEqual(SVEventPtr _event);
         
+        //是否为系统消息
+        bool isSys() {
+            if( (eventType>=EVN_T_SYS_BEGIN) && (eventType<=EVN_T_SYS_END)) {
+                return true;
+            }
+            return false;
+        }
+        
         SV_EVENT_TYPE eventType;      //消息类型
         SVString eventName;          //消息名称
+    };
+
+    //渲染器初始化消息
+    class SVEvtRenderInit : public SVEvent {
+    public:
+        SVEvtRenderInit(SVRendererPtr _obj);
+        
+        ~SVEvtRenderInit();
+        
+        SVRendererPtr m_renderer;
     };
     
     //回收事件

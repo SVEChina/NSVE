@@ -28,14 +28,18 @@ namespace sv {
         
         void destroy();
         
+        //公共数据部分
+        SVComDataPtr m_common_data;
+        
         //shader部分
         SVShaderMgrPtr m_shader_mgr;
         
         //纹理部分
         SVTexMgrPtr m_tex_mgr;
         
+    public:
         //处理消息
-        bool procEvent(SVEventPtr _event);
+        static void procSysEvent(SVObjectPtr _caller,SVEventPtr _event);
         
     };
     

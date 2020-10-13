@@ -9,8 +9,6 @@
 #ifndef SV_DEFORM_MGR_H
 #define SV_DEFORM_MGR_H
 
-
-
 #include "../basesys/SVSysBase.h"
 
 namespace sv {

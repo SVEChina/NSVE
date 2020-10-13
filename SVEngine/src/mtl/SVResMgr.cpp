@@ -8,6 +8,7 @@
 #include "SVResMgr.h"
 #include "SVShaderMgr.h"
 #include "SVTexMgr.h"
+#include "../basesys/SVComData.h"
 #include "../event/SVEvent.h"
 
 using namespace sv;
@@ -16,14 +17,19 @@ SVResMgr::SVResMgr(SVInstPtr _app)
 :SVSysBase(_app) {
     m_shader_mgr = nullptr;
     m_tex_mgr = nullptr;
+    m_common_data = nullptr;
 }
 
 SVResMgr::~SVResMgr() {
     m_shader_mgr = nullptr;
     m_tex_mgr = nullptr;
+    m_common_data = nullptr;
 }
 
 void SVResMgr::init() {
+    //引擎需要的静态数据
+    m_common_data = MakeSharedPtr<SVComData>(mApp);
+    m_common_data->init();
     //纹理管理器初始化
     m_tex_mgr = MakeSharedPtr<SVTexMgr>(mApp);
     m_tex_mgr->init();
@@ -43,17 +49,16 @@ void SVResMgr::destroy() {
     }
 }
 
-bool SVResMgr::procEvent(SVEventPtr _event) {
-    if(_event && _event->eventType>EVN_T_SYS_BEGIN && _event->eventType<EVN_T_SYS_END ) {
-        if(_event->eventType == EVN_T_SYS_INIT_RENDERER) {
-            //加载默认的资源
-            if(m_tex_mgr) {
-                m_tex_mgr->loadDefault();
-            }
-            if(m_shader_mgr) {
-                m_shader_mgr->loadDefault();
-            }
+//
+void SVResMgr::procSysEvent(SVObjectPtr _caller,SVEventPtr _event) {
+    if(_event->eventType == EVN_T_SYS_INIT_RENDERER) {
+        //渲染器初始化
+        SVResMgrPtr t_sender = dynamic_pointer_cast<SVResMgr>(_caller);
+        if(t_sender->m_tex_mgr) {
+            //t_sender->loadDefaultPack();
+        }
+        if(t_sender->m_shader_mgr) {
+            //t_sender->loadDefaultPack();
         }
     }
-    return true;
 }

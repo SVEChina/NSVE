@@ -14,7 +14,7 @@
 //消息处理器
 
 namespace sv {
-    
+
     class SVEventProc : public SVGBaseEx {
     public:
         SVEventProc(SVInstPtr _app);

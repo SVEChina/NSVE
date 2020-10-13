@@ -11,7 +11,10 @@
 #include "SVEventDeclare.h"
 
 namespace sv {
-    
+
+    //
+    typedef void (*proc_sys_event)(SVObjectPtr sender,SVEventPtr _event);
+
     //
     enum SV_EVENT_TYPE {
         EVN_T_NONE,

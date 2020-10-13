@@ -49,14 +49,15 @@ void SVMtlLib::destroy() {
     }
 }
 
-bool SVMtlLib::procEvent(SVEventPtr _event) {
-    if(_event && _event->eventType>EVN_T_SYS_BEGIN && _event->eventType<EVN_T_SYS_END ) {
-        if(_event->eventType == EVN_T_SYS_INIT_RENDERER) {
-            //渲染器初始化
-            loadDefaultPack();
+//
+void SVMtlLib::procSysEvent(SVObjectPtr _caller,SVEventPtr _event) {
+    if(_event->eventType == EVN_T_SYS_INIT_RENDERER) {
+        //渲染器初始化
+        SVMtlLibPtr t_sender = dynamic_pointer_cast<SVMtlLib>(_caller);
+        if(t_sender) {
+            t_sender->loadDefaultPack();
         }
     }
-    return true;
 }
 
 //加载默认的材质包

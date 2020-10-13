@@ -29,6 +29,7 @@ namespace sv {
         void destroy();
         //
         void loadDefault();
+        //
         //从文件加载纹理
         SVTexturePtr getTexture(cptr8 _name,bool _sync = true);
         //

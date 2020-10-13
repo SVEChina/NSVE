@@ -117,7 +117,7 @@ SVRenderMeshPtr SVComData::generatePatchMesh(FVec3 &_corner00, FVec3 &_corner10,
     SVDataSwapPtr t_pVertexData = MakeSharedPtr<SVDataSwap>();
     t_pVertexData->writeData(&vertexData[0], sizeof(V3)*t_vertexCount);
     
-    SVRenderMeshPtr patchMesh =nullptr;// MakeSharedPtr<SVRenderMesh>(mApp);
+    SVRenderMeshPtr patchMesh = nullptr;// MakeSharedPtr<SVRenderMesh>(mApp);
 //    patchMesh->setVertexType(E_VF_V3);
 //    patchMesh->setDrawVertNum(t_vertexCount);
 //    patchMesh->setVertexData(t_pVertexData);
@@ -130,18 +130,19 @@ void SVComData::destroy() {
     m_screenMesh = nullptr;
 }
 
-//处理消息
-bool SVComData::procEvent(SVEventPtr _event) {
-    if(_event && _event->eventType>EVN_T_SYS_BEGIN && _event->eventType<EVN_T_SYS_END ) {
-        if(_event->eventType == EVN_T_SYS_INIT_RENDERER) {
-            //渲染器初始化消息
-            SVDispatch::dispatchMeshCreate(mApp, m_screenMesh);
-        }
+void SVComData::loadDefault() {
+    if(m_screenMesh) {
+        SVDispatch::dispatchMeshCreate(mApp, m_screenMesh);
     }
-    return true;
 }
 
-
+void SVComData::procSysEvent(SVObjectPtr _caller,SVEventPtr _event) {
+    if(_event->eventType == EVN_T_SYS_INIT_RENDERER) {
+        //渲染器初始化
+        SVComDataPtr t_sender = dynamic_pointer_cast<SVComData>(_caller);
+        t_sender->loadDefault();
+    }
+}
 
 SVFaceDataMeshPtr SVComData::faceMesh(s32 _type) {
     //根据不同算法，获取不同算法的标准脸

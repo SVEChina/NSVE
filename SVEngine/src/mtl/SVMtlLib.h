@@ -67,7 +67,7 @@ namespace sv {
         SVMtlCorePtr createMtl(cptr8 _mtlname);
         
         //处理消息
-        bool procEvent(SVEventPtr _event);
+        static void procSysEvent(SVObjectPtr _caller,SVEventPtr _event);
         
     protected:
         static bool parseMtl1(SVMtlCorePtr _mtl,RAPIDJSON_NAMESPACE::Document& _doc);
