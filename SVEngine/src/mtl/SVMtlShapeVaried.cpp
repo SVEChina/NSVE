@@ -64,8 +64,8 @@ f32 percentages[14] ={
 SVMtlFaceShapeVaried::SVMtlFaceShapeVaried(SVInstPtr _app)
 :SVMtlCore(_app,"faceShapeVaried"){
     memcpy( m_g_intensity   ,   percentages , sizeof( f32 ) * 14);
-    m_surfaceWidth      =   mApp->m_global_param.m_sv_width;
-    m_surfaceHeight     =   mApp->m_global_param.m_sv_height;
+    m_surfaceWidth      =   mApp->m_global_param.sv_width;
+    m_surfaceHeight     =   mApp->m_global_param.sv_height;
     m_inv_surfaceWidth  =   1.0/m_surfaceWidth;
     m_inv_surfaceHeight =   1.0/m_surfaceHeight;
 }
@@ -104,7 +104,7 @@ void SVMtlFaceShapeVaried::update(f32 dt){
         V2 *t_data = (V2*)t_person->getFaceDataOriginal();
         for(s32 i  = 0 ; i < 106 ; i++){
             m_outlinePoints[i*2]   = t_data[i].x;
-            m_outlinePoints[i*2+1] = mApp->m_global_param.m_sv_height-t_data[i].y;
+            m_outlinePoints[i*2+1] = mApp->m_global_param.sv_height-t_data[i].y;
         }
         t_data = (V2*)m_outlinePoints;
         FVec2 t_77 = FVec2(t_data[77].x,t_data[77].y);

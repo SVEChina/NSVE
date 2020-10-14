@@ -13,24 +13,24 @@
 namespace sv {
     
         
-        class SVMtlRGB2YUV : public SVMtlCore {
-        public:
-            SVMtlRGB2YUV(SVInstPtr _app, SV_OUTSTEAMFORMATE formate);
-            
-            SVMtlRGB2YUV(SVMtlRGB2YUV* _mtl);
-            
-            ~SVMtlRGB2YUV();
-            
-            virtual SVMtlCorePtr clone();
-            
-            void setTex(f32 _w, f32 _h);
-            
-            void _submitMtl(SVRendererPtr _render); 
-            
-        private:
-            s32 m_tex_w;
-            s32 m_tex_h;
-        };
+    class SVMtlRGB2YUV : public SVMtlCore {
+    public:
+        SVMtlRGB2YUV(SVInstPtr _app, SV_OUTSTEAMFORMATE formate);
+        
+        SVMtlRGB2YUV(SVMtlRGB2YUV* _mtl);
+        
+        ~SVMtlRGB2YUV();
+        
+        virtual SVMtlCorePtr clone();
+        
+        void setTex(f32 _w, f32 _h);
+        
+        void _submitMtl(SVRendererPtr _render); 
+        
+    private:
+        s32 m_tex_w;
+        s32 m_tex_h;
+    };
         
     
 }//!namespace sv

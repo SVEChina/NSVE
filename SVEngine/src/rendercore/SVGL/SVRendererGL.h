@@ -24,9 +24,9 @@ namespace sv {
         
         SVRendererGLPtr share();
         
-        void init(s32 _w,s32 _h,s32 _version);
+        void init(s32 _version);
 
-        void init(s32 _w,s32 _h,s32 _version,bool _offline);
+        void init(s32 _version,bool _offline);
 
         void resize(s32 _w,s32 _);
     

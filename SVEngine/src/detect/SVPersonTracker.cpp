@@ -58,8 +58,8 @@ void SVPersonTracker::track_st(void *_data, s32 _ptnum, SVRect &_rect, f32 yaw, 
     m_yaw = yaw;
     m_roll = roll;
     m_pitch = pitch;
-    m_img_w = mApp->m_global_param.m_sv_width;
-    m_img_h = mApp->m_global_param.m_sv_height;
+    m_img_w = mApp->m_global_param.sv_width;
+    m_img_h = mApp->m_global_param.sv_height;
     //面部区域
     m_faceRect = _rect;
     {

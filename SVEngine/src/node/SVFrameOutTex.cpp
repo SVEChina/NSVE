@@ -30,15 +30,15 @@ SVFrameOutTex::SVFrameOutTex(SVInstPtr _app)
     if( t_renderer ) {
 //#if defined (SV_IOS)
 //        SVTexturePtr t_tex = t_renderer->createSVTexIOS(E_TEX_OUTSTREAM,
-//                                                     mApp->m_global_param.m_sv_width,
-//                                                     mApp->m_global_param.m_sv_height,
+//                                                     mApp->m_global_param.sv_width,
+//                                                     mApp->m_global_param.sv_height,
 //                                                     GL_RGBA); //GL_RGBA
 //        m_fbo = MakeSharedPtr<SVRenderTexture>(mApp,t_tex,false,false);
 //        mApp->getRenderMgr()->pushRCmdCreate(m_fbo);
 //#else
 //        SVTexturePtr t_tex = t_renderer->createSVTex(E_TEX_OUTSTREAM,
-//                                                     mApp->m_global_param.m_sv_width,
-//                                                     mApp->m_global_param.m_sv_height,
+//                                                     mApp->m_global_param.sv_width,
+//                                                     mApp->m_global_param.sv_height,
 //                                                     GL_RGBA); //GL_RGBA
 //        m_fbo = MakeSharedPtr<SVRenderTexture>(mApp,t_tex,false,false);
 //        mApp->getRenderMgr()->pushRCmdCreate(m_fbo);

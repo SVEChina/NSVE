@@ -22,8 +22,8 @@ SVFilterPicmodify::~SVFilterPicmodify(){
 
 //创建
 bool SVFilterPicmodify::create() {
-//    s32 t_w =  mApp->m_global_param.m_sv_width;
-//    s32 t_h =  mApp->m_global_param.m_sv_height;
+//    s32 t_w =  mApp->m_global_param.sv_width;
+//    s32 t_h =  mApp->m_global_param.sv_height;
 //    //创建材质
 //    m_acutancemtl=MakeSharedPtr<SVMtlAcutance>(mApp);
 ////    //m_acutancemtl->setTexcoordFlip(1.0f, 1.0f);

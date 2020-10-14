@@ -10,8 +10,8 @@
 using namespace sv;
 
 SVGlobalParam::SVGlobalParam(){
-    m_sv_width = 720;
-    m_sv_height = 1280;
+    sv_width = 720;
+    sv_height = 1280;
     setSeed(0);
 }
 
@@ -20,8 +20,8 @@ SVGlobalParam::~SVGlobalParam() {
 }
 
 void SVGlobalParam::clear() {
-    m_sv_width = 720;
-    m_sv_height = 1280;
+    sv_width = 720;
+    sv_height = 1280;
 }
 
 void SVGlobalParam::setSeed(u32 seed) {

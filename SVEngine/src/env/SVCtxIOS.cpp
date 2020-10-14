@@ -30,9 +30,11 @@ void SVCtxIOSGLES::init(void* _shareContext,s32 _version,s32 _w,s32 _h) {
     m_glversion = _version;
     m_gl_context_share = (__bridge EAGLContext*)_shareContext;
     //
+    mApp->m_global_param.sv_width = _w;
+    mApp->m_global_param.sv_height = _h;
     //创建渲染器
     SVRendererGLPtr t_renderer = MakeSharedPtr<SVRendererGL>(mApp);
-    t_renderer->init(_w,_h,_version);
+    t_renderer->init(_version);
     //
     mApp->_initRenderer(t_renderer);
 }
@@ -40,7 +42,7 @@ void SVCtxIOSGLES::init(void* _shareContext,s32 _version,s32 _w,s32 _h) {
 bool SVCtxIOSGLES::activeContext(SVRendererPtr _renderer){
     if(m_gl_context){
         return [EAGLContext setCurrentContext:m_gl_context];
-    }else{
+    } else {
         //因为是OpenGL 所以需要跟render绑定在一起才对
         if(m_gl_context_share){
             m_gl_context = [[EAGLContext alloc] initWithAPI:[m_gl_context_share API] sharegroup:[m_gl_context_share sharegroup]];

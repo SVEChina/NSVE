@@ -46,10 +46,10 @@ bool SVStreamOut::openOutStream() {
 //        return false;
 //    }
 //    if(m_outWidth == 0) {
-//        m_outWidth = mApp->m_global_param.m_sv_width;
+//        m_outWidth = mApp->m_global_param.sv_width;
 //    }
 //    if(m_outHeight == 0) {
-//        m_outHeight = mApp->m_global_param.m_sv_height;
+//        m_outHeight = mApp->m_global_param.sv_height;
 //    }
 //    //根据当前类型 打开输出流
 //    if( m_outMethod == E_OUT_M_NULL) {
@@ -164,8 +164,8 @@ void SVStreamOut::createOutStream(cptr8 _name, s32 _type, s32 _format, s32 _widt
 //        m_pFrameOut = MakeSharedPtr<SVFrameOutIOS>(mApp);
 //        SVFrameOutIOSPtr t_streamNode = std::dynamic_pointer_cast<SVFrameOutIOS>(m_pFrameOut);
 //        if( t_streamNode ) {
-//            s32 _w = mApp->m_global_param.m_sv_width;
-//            s32 _h = mApp->m_global_param.m_sv_height;
+//            s32 _w = mApp->m_global_param.sv_width;
+//            s32 _h = mApp->m_global_param.sv_height;
 //            if (_width !=0 && _height != 0) {
 //                _w = _width;
 //                _h = _height;

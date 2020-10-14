@@ -31,8 +31,8 @@ bool SVRGBToneCurveFilter::create() {
 //    SVRendererPtr t_renderer = mApp->getRenderer();
 //    if(!t_renderer)
 //        return false;
-//    s32 t_w =  mApp->m_global_param.m_sv_width;
-//    s32 t_h =  mApp->m_global_param.m_sv_height;
+//    s32 t_w =  mApp->m_global_param.sv_width;
+//    s32 t_h =  mApp->m_global_param.sv_height;
 //    //增加pass
 //    m_pPassNode = MakeSharedPtr<SVMultPassNode>(mApp);
 //    m_pPassNode->create(t_w, t_h);

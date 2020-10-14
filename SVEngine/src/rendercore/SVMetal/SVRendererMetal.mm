@@ -54,11 +54,11 @@ SVRendererMetalPtr SVRendererMetal::share() {
     return std::dynamic_pointer_cast<SVRendererMetal>(shareObject());
 }
 
-void SVRendererMetal::init(s32 _w,s32 _h) {
-    init( MTLCreateSystemDefaultDevice(),_w,_h );
+void SVRendererMetal::init() {
+    init( MTLCreateSystemDefaultDevice() );
 }
 
-void SVRendererMetal::init(id<MTLDevice> _device,s32 _w,s32 _h) {
+void SVRendererMetal::init(id<MTLDevice> _device) {
     m_pDevice = _device;
     if (m_pDevice == nil) {
         m_pDevice = MTLCreateSystemDefaultDevice();
@@ -69,19 +69,10 @@ void SVRendererMetal::init(id<MTLDevice> _device,s32 _w,s32 _h) {
     }
     m_cmdQuene = m_pDevice.newCommandQueue;
     m_pLibrary = [m_pDevice newDefaultLibrary];
-    //创建主纹理
-    mApp->m_global_param.m_sv_width = _w;
-    mApp->m_global_param.m_sv_height = _h;
-    //创建主target,设置主RT
-    SVRTargetPtr t_target = createTarget(E_TEX_MAIN,true,true);
-    t_target->pushStreamQuene(E_RSM_SKY );
-    t_target->pushStreamQuene(E_RSM_SOLID);
-    mApp->getRenderMgr()->setMainRT(t_target);
 }
 
 //销毁
 void SVRendererMetal::destroy(){
-    
 }
 
 //重置大小
@@ -119,8 +110,8 @@ SVRTargetPtr SVRendererMetal::createTarget(SV_TEXIN _texid,bool _depth,bool _ste
     SVTextureDsp t_tex_dsp;
     t_tex_dsp.m_image_type = SV_IMAGE_2D;
     t_tex_dsp.m_data_formate = SV_FORMAT_RGBA8;
-    t_tex_dsp.m_width = mApp->m_global_param.m_sv_width;    //宽
-    t_tex_dsp.m_height = mApp->m_global_param.m_sv_height;  //高
+    t_tex_dsp.m_width = mApp->m_global_param.sv_width;    //宽
+    t_tex_dsp.m_height = mApp->m_global_param.sv_height;  //高
     t_tex_dsp.m_depth = 1;                                  //深度
     t_tex_dsp.m_minmap = false;         //是否开启mipmap
     t_tex_dsp.m_computeWrite = true;    //metal 是否可以
@@ -134,8 +125,8 @@ SVRTargetPtr SVRendererMetal::createTarget(SV_TEXIN _texid,bool _depth,bool _ste
     SVTargetDsp* t_dsp = t_target->getTargetDsp();
     t_dsp->m_color_texid[0] = _texid;
     t_dsp->m_target_num = 1;
-    t_dsp->m_width = mApp->m_global_param.m_sv_width;
-    t_dsp->m_height = mApp->m_global_param.m_sv_height;
+    t_dsp->m_width = mApp->m_global_param.sv_width;
+    t_dsp->m_height = mApp->m_global_param.sv_height;
     t_dsp->m_use_depth = _depth;
     t_dsp->m_use_stencil = _stencil;
     //创建RT

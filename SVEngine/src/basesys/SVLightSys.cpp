@@ -25,8 +25,8 @@ void SVLightSys::init() {
     m_g_specular = FVec3(1.0f,1.0f,1.0f);
     m_g_direction = FVec3(1.0f,1.0f,0.0f);
     m_g_diffuse_sc = 1.0f;
-    s32 m_sw = mApp->m_global_param.m_sv_width;
-    s32 m_sh = mApp->m_global_param.m_sv_height;
+    s32 m_sw = mApp->m_global_param.sv_width;
+    s32 m_sh = mApp->m_global_param.sv_height;
     m_pLightCamera = MakeSharedPtr<SVCameraNode>(mApp);
     //m_pLightCamera->resetSize(m_sw,m_sh);
 //    m_uiLock = MakeSharedPtr<SVLock>();

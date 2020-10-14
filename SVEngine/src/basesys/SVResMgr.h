@@ -10,7 +10,7 @@
 
 #include "../base/SVDef.h"
 #include "SVSysBase.h"
-#include <map>
+#include "../rendercore/SVRenderDeclare.h"
 
 namespace sv {
     
@@ -36,6 +36,8 @@ namespace sv {
         
         //纹理部分
         SVTexMgrPtr m_tex_mgr;
+        
+        SVRTargetMgrPtr m_target_mgr;
         
     public:
         //处理消息

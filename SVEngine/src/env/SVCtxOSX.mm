@@ -80,9 +80,12 @@ SVCtxOSXMetal::~SVCtxOSXMetal() {
 
 void SVCtxOSXMetal::init(id<MTLDevice> _device,id<MTLDrawable> _target,id<MTLTexture> _tex) {
     if( _target && _tex) {
+        //设置主Target大小
+        mApp->m_global_param.sv_width = s32(_tex.width);
+        mApp->m_global_param.sv_height = s32(_tex.height);
         //创建渲染器
         SVRendererMetalPtr t_renderer = MakeSharedPtr<SVRendererMetal>(mApp);
-        t_renderer->init(_device,s32(_tex.width),s32(_tex.height));
+        t_renderer->init(_device);
         //
         mApp->_initRenderer(t_renderer);
         //

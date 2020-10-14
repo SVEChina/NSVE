@@ -40,13 +40,10 @@ SVRendererGLPtr SVRendererGL::share() {
     return std::dynamic_pointer_cast<SVRendererGL>(shareObject());
 }
 
-void SVRendererGL::init(s32 _w,s32 _h,s32 _version){
-    SVRenderer::init(_w,_h);
+void SVRendererGL::init(s32 _version){
+    SVRenderer::init();
     //构建一个主RT的业务
-    //
     m_gl_version = _version;
-    mApp->m_global_param.m_sv_width = _w;
-    mApp->m_global_param.m_sv_height = _h;
     //创建主纹理
     SVRTargetPtr t_target = createTarget(E_TEX_MAIN,true,true);
     if(t_target) {
@@ -54,10 +51,8 @@ void SVRendererGL::init(s32 _w,s32 _h,s32 _version){
     }
 }
 
-void SVRendererGL::init(s32 _w,s32 _h,s32 _version,bool _offline) {
+void SVRendererGL::init(s32 _version,bool _offline) {
     m_gl_version = _version;
-    mApp->m_global_param.m_sv_width = _w;
-    mApp->m_global_param.m_sv_height = _h;
     //创建主纹理
     SVRTargetPtr t_target = createTarget(E_TEX_MAIN,true,true);
     if(t_target) {
@@ -69,8 +64,8 @@ void SVRendererGL::resize(s32 _w,s32 _h) {
 //    m_inWidth = _w;
 //    m_inHeight = _h;
 //    //重置size
-//    mApp->m_global_param.m_sv_width = _w;
-//    mApp->m_global_param.m_sv_height = _h;
+//    mApp->m_global_param.sv_width = _w;
+//    mApp->m_global_param.sv_height = _h;
 //    //重新创建主纹理
 //    SVTexturePtr t_tex = createSVTex(E_TEX_MAIN,_w,_h,GL_RGBA);
 }
@@ -103,8 +98,8 @@ SVRTargetPtr SVRendererGL::createTarget(SV_TEXIN _texid,bool _depth,bool _stenci
     SVTextureDsp t_tex_dsp;
     t_tex_dsp.m_image_type = SV_IMAGE_2D;
     t_tex_dsp.m_data_formate = SV_FORMAT_RGBA8;
-    t_tex_dsp.m_width = mApp->m_global_param.m_sv_width;    //宽
-    t_tex_dsp.m_height = mApp->m_global_param.m_sv_height;  //高
+    t_tex_dsp.m_width = mApp->m_global_param.sv_width;    //宽
+    t_tex_dsp.m_height = mApp->m_global_param.sv_height;  //高
     t_tex_dsp.m_depth = 1;                                  //深度
     t_tex_dsp.m_minmap = false;         //是否开启mipmap
     t_tex_dsp.m_computeWrite = true;    //metal 是否可以
@@ -115,8 +110,8 @@ SVRTargetPtr SVRendererGL::createTarget(SV_TEXIN _texid,bool _depth,bool _stenci
     SVTargetDsp* t_dsp = t_target->getTargetDsp();
     t_dsp->m_color_texid[0] = _texid;
     t_dsp->m_target_num = 1;
-    t_dsp->m_width = mApp->m_global_param.m_sv_width;
-    t_dsp->m_height = mApp->m_global_param.m_sv_height;
+    t_dsp->m_width = mApp->m_global_param.sv_width;
+    t_dsp->m_height = mApp->m_global_param.sv_height;
     t_dsp->m_use_depth = true;
     t_dsp->m_use_stencil = true;
     //创建RT

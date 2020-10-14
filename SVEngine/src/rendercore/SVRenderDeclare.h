@@ -14,6 +14,8 @@
 
 namespace sv {
     
+    DECLARE_SHAREPTR(SVRTargetMgr);
+
     //渲染资源
     DECLARE_SHAREPTR(SVRRes);
     DECLARE_SHAREPTR(SVRTex);

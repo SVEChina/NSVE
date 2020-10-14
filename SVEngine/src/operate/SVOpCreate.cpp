@@ -533,8 +533,8 @@ void SVOpMarkPosition::_process(f32 dt) {
     if (t_mark) {
         f32 t_x = m_pos.x;
         f32 t_y = m_pos.y;
-        s32 t_camera_w = mApp->m_global_param.m_sv_width;
-        s32 t_camera_h = mApp->m_global_param.m_sv_height;
+        s32 t_camera_w = mApp->m_global_param.sv_width;
+        s32 t_camera_h = mApp->m_global_param.sv_height;
         f32 t_mod_x = t_x;
         f32 t_mod_y = t_camera_h - t_y;
         f32 t_n_targetX = t_mod_x - t_camera_w*0.5;

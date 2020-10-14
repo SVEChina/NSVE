@@ -125,8 +125,8 @@ SVMtlCorePtr SVMtlFaceShape::clone() {
 }
 
 void SVMtlFaceShape::update(f32 dt){
-    f32 fWidth =  mApp->m_global_param.m_sv_width;
-    f32 fHeight =  mApp->m_global_param.m_sv_height;
+    f32 fWidth =  mApp->m_global_param.sv_width;
+    f32 fHeight =  mApp->m_global_param.sv_height;
     SVPersonPtr t_person = mApp->getDetectMgr()->getPersonModule()->getPerson(1);
     if(t_person){
         ST_PT *faceData = (ST_PT*)t_person->getFaceDataOriginal();

@@ -149,11 +149,6 @@ namespace sv {
         
         //
         std::vector<SVRenderStreamPtr> m_stream_pool;
-        
-//    public:
-//        FMat4 m_v_mat;
-//        FMat4 m_p_mat;
-//        FMat4 m_vp_mat;
     };
 
 }//!namespace sv

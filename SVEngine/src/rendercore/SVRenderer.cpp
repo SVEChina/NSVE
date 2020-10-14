@@ -42,7 +42,7 @@ SVRenderer::~SVRenderer(){
     m_cur_target = nullptr;
 }
 
-void SVRenderer::init(s32 _w,s32 _h){
+void SVRenderer::init(){
     m_cur_target = nullptr;
 }
 

@@ -33,9 +33,9 @@ namespace sv {
         
         SVRendererMetalPtr share();
         
-        void init(s32 _w,s32 _h);
+        void init();
 
-        void init(id<MTLDevice> _device,s32 _w,s32 _h);
+        void init(id<MTLDevice> _device);
         
         //销毁
         void destroy();

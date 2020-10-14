@@ -38,9 +38,9 @@ namespace sv {
         f64 getRandomDouble(f64 from,f64 to) ;
         
         //内部宽高
-        s32 m_sv_width;
+        s32 sv_width;
         
-        s32 m_sv_height;
+        s32 sv_height;
         
         //UI矩阵
         SVRandom m_random;

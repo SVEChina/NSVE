@@ -49,7 +49,7 @@ namespace sv {
         virtual ~SVRenderer();
         
         //初始化
-        virtual void init(s32 _w,s32 _h);
+        virtual void init();
         
         //销毁
         virtual void destroy();
