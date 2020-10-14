@@ -7,6 +7,7 @@
 
 #include "SVCtxIOS.h"
 #include "../app/SVInst.h"
+#include "../rendercore/SVGL/SVRendererGL.h"
 
 using namespace sv;
 
@@ -20,38 +21,46 @@ SVCtxIOSGLES::SVCtxIOSGLES(SVInstPtr _app)
 SVCtxIOSGLES::~SVCtxIOSGLES() {
     [EAGLContext setCurrentContext:nil];
     m_gl_context = nil;
+    m_gl_context_share = nil;
     SV_LOG_INFO("destroy context ios\n");
 }
 
 //同步初始化
-void SVCtxIOSGLES::init(void* _shareContext,s32 _version) {
+void SVCtxIOSGLES::init(void* _shareContext,s32 _version,s32 _w,s32 _h) {
     m_glversion = _version;
-    if(_shareContext){
-        EAGLContext* t_context = (__bridge EAGLContext*)_shareContext;
-        m_gl_context = [[EAGLContext alloc] initWithAPI:[t_context API] sharegroup:[t_context sharegroup]];
-        SV_LOG_INFO("create context ios new\n");
-    }else{
-        if (_version == 3) {
-            m_gl_context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES3];
-        }else if(_version == 2) {
-            m_gl_context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
-        }else {
-            m_gl_context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
-        }
-        SV_LOG_INFO("create context ios share\n");
-    }
-}
-
-//异步初始化
-void SVCtxIOSGLES::initASync(void* _shareContext,s32 _version) {
-    
+    m_gl_context_share = (__bridge EAGLContext*)_shareContext;
+    //
+    //创建渲染器
+    SVRendererGLPtr t_renderer = MakeSharedPtr<SVRendererGL>(mApp);
+    t_renderer->init(_w,_h,_version);
+    //
+    mApp->_initRenderer(t_renderer);
 }
 
 bool SVCtxIOSGLES::activeContext(SVRendererPtr _renderer){
     if(m_gl_context){
         return [EAGLContext setCurrentContext:m_gl_context];
+    }else{
+        //因为是OpenGL 所以需要跟render绑定在一起才对
+        if(m_gl_context_share){
+            m_gl_context = [[EAGLContext alloc] initWithAPI:[m_gl_context_share API] sharegroup:[m_gl_context_share sharegroup]];
+            SV_LOG_INFO("create context ios new\n");
+        } else {
+            if (m_glversion == 3) {
+                m_gl_context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES3];
+            }else if(m_glversion == 2) {
+                m_gl_context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
+            }else {
+                m_gl_context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
+            }
+            SV_LOG_INFO("create context ios share\n");
+        }
+        if(m_gl_context) {
+            return [EAGLContext setCurrentContext:m_gl_context];
+        } else {
+            NSLog(@"activeContext error!");
+        }
     }
-    NSLog(@"activeContext error!");
     return false;
 }
 

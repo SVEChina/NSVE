@@ -8,9 +8,12 @@
 
 #import "ViewController.h"
 #import "CMetalView.h"
+#import "CGLView.h"
 #import "CGInst.h"
+
 @interface ViewController () {
-    //CMetalView* metalview;
+    CMetalView* metalview;
+    CGLView* glview;
 }
 @end
 
@@ -20,9 +23,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [[CGInst getInst] cgInit];
-//    //
-//    metalview = [[CMetalView alloc] initWithFrame:self.view.bounds];
-//    [self.view addSubview:metalview];
+    //
+    if(false) {
+        metalview = [[CMetalView alloc] initWithFrame:self.view.bounds];
+        [self.view addSubview:metalview];
+    }else{
+        glview = [[CGLView alloc] initWithFrame:self.view.bounds];
+        [self.view addSubview:glview];
+    }
 }
 
 

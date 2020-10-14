@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <Metal/Metal.h>
 #import <QuartzCore/CAMetalLayer.h>
+#import <GLKit/GLKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -24,6 +25,10 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)createRM:(id<MTLDevice>)_device drawable:(id<CAMetalDrawable>)_drawable;
 //
 -(void)destroyRM;
+//
+-(void)createGLES:(EAGLContext*)_ctx version:(int)_ver width:(int)_w height:(int)_h;
+//
+-(void)destroyGLES;
 //
 -(void)render;
 //
