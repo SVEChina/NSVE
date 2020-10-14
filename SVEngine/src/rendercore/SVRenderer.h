@@ -21,7 +21,7 @@
 #include <vector>
 #include <map>
 
-//渲染器封装的是算法
+//渲染器封装的是算法，不应该带有数据，带有对象是合理的
 
 namespace sv {
 
@@ -41,7 +41,7 @@ namespace sv {
      4.渲染状态管理
      5.渲染
      */
-    
+
     class SVRenderer: public SVGBaseEx {
     public:
         SVRenderer(SVInstPtr _app);

@@ -42,6 +42,8 @@ SVRendererGLPtr SVRendererGL::share() {
 
 void SVRendererGL::init(s32 _w,s32 _h,s32 _version){
     SVRenderer::init(_w,_h);
+    //构建一个主RT的业务
+    //
     m_gl_version = _version;
     mApp->m_global_param.m_sv_width = _w;
     mApp->m_global_param.m_sv_height = _h;

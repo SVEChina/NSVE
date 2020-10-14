@@ -6,9 +6,9 @@
 //
 
 #include "SVResMgr.h"
-#include "SVShaderMgr.h"
-#include "SVTexMgr.h"
-#include "../basesys/SVComData.h"
+#include "SVComData.h"
+#include "../mtl/SVShaderMgr.h"
+#include "../mtl/SVTexMgr.h"
 #include "../event/SVEvent.h"
 
 using namespace sv;

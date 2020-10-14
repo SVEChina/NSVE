@@ -9,7 +9,7 @@
 #define SV_RESMGR_H
 
 #include "../base/SVDef.h"
-#include "../basesys/SVSysBase.h"
+#include "SVSysBase.h"
 #include <map>
 
 namespace sv {

@@ -25,11 +25,10 @@
 #include "../basesys/SVCameraMgr.h"
 #include "../basesys/SVARBackgroundMgr.h"
 #include "../basesys/SVComData.h"
+#include "../basesys/SVResMgr.h"
 
 #include "../event/SVEventMgr.h"
 #include "../event/SVEvent.h"
-
-#include "../mtl/SVResMgr.h"
 
 #include "../operate/SVOpBase.h"
 #include "../operate/SVOpCreate.h"
