@@ -51,6 +51,32 @@ void SVRenderMgr::destroy() {
     m_stream_destroy = nullptr;
 }
 
+void SVRenderMgr::registRenderHelper(SVSysBasePtr _sys) {
+    RENDERHELPPOOL::iterator it = m_render_help_pool.begin();
+    while (it!=m_render_help_pool.end()) {
+        if( (*it) == _sys) {
+            return ;
+        }
+        it++;
+    }
+    m_render_help_pool.push_back(_sys);
+}
+
+void SVRenderMgr::unRegistRenderHelper(SVSysBasePtr _sys) {
+    RENDERHELPPOOL::iterator it = m_render_help_pool.begin();
+    while (it!=m_render_help_pool.end()) {
+        if( (*it) == _sys) {
+            m_render_help_pool.erase(it);
+            return ;
+        }
+        it++;
+    }
+}
+
+void SVRenderMgr::clearRenderHelper() {
+    m_render_help_pool.clear();
+}
+
 void SVRenderMgr::resize(s32 _w,s32 _h) {
     m_render_lock->lock();
     //自动的target需要resize
@@ -92,6 +118,8 @@ void SVRenderMgr::render(){
     }
     m_render_lock->lock();
     if( mApp->m_ctx && mApp->m_ctx->activeContext(t_renderer) ) {
+        //渲染cache部分
+        _renderCache();
         //cmd-创建流
         if(m_stream_create) {
             m_stream_create->render(t_renderer,m_mainRT);
@@ -116,6 +144,13 @@ void SVRenderMgr::render(){
         mApp->m_ctx->swap(t_renderer);
     }
     m_render_lock->unlock();
+}
+
+void SVRenderMgr::_renderCache() {
+    //渲染cache部分，这里最好走回调
+    for(s32 i=0;i<m_render_help_pool.size();i++) {
+        m_render_help_pool[i]->renderCache();
+    }
 }
 
 void SVRenderMgr::_sort() {

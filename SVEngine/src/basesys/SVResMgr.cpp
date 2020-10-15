@@ -58,17 +58,21 @@ void SVResMgr::destroy() {
     }
 }
 
+void SVResMgr::renderCache() {
+    
+}
+
 //
 void SVResMgr::procSysEvent(SVObjectPtr _caller,SVEventPtr _event) {
     if(_event->eventType == EVN_T_SYS_INIT_RENDERER) {
         //渲染器初始化
         SVResMgrPtr t_sender = dynamic_pointer_cast<SVResMgr>(_caller);
         if(t_sender) {
-            if(t_sender->m_tex_mgr) {
-                //t_sender->loadDefaultPack();
-            }
             if(t_sender->m_shader_mgr) {
-                //t_sender->loadDefaultPack();
+                t_sender->m_shader_mgr->loadDefault();
+            }
+            if(t_sender->m_tex_mgr) {
+                t_sender->m_tex_mgr->loadDefault();
             }
             if(t_sender->m_target_mgr) {
                 t_sender->m_target_mgr->loadDefault();

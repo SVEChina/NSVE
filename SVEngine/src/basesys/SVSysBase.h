@@ -19,6 +19,8 @@ namespace sv {
         
         ~SVSysBase();
         
+        virtual void renderCache() {}
+        
     protected:
         s32 m_subsysType;
     };

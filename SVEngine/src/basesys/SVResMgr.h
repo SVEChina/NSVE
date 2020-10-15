@@ -28,6 +28,8 @@ namespace sv {
         
         void destroy();
         
+        void renderCache();
+        
         //公共数据部分
         SVComDataPtr m_common_data;
         

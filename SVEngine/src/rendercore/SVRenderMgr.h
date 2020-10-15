@@ -14,6 +14,7 @@
 #include "../base/SVGBase.h"
 #include "../base/SVMap.h"
 #include "../base/SVMat4.h"
+#include <vector>
 
 namespace sv {
     
@@ -32,6 +33,12 @@ namespace sv {
         void init();
         
         void destroy();
+        
+        void registRenderHelper(SVSysBasePtr _sys);
+        
+        void unRegistRenderHelper(SVSysBasePtr _sys);
+        
+        void clearRenderHelper();
         
         void resize(s32 _w,s32 _h);
         
@@ -52,11 +59,17 @@ namespace sv {
         void removeRTarget(SVRTargetPtr _rt);
 
     protected:
+        void _renderCache();
+        
         void _sort();
         
         void _adapt();
         
         s32 m_adaptMode;
+        
+        //
+        typedef std::vector<SVSysBasePtr> RENDERHELPPOOL;
+        RENDERHELPPOOL m_render_help_pool;
         
         //资源创建流
         SVRenderStreamPtr m_stream_create;

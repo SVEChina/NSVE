@@ -109,17 +109,20 @@ void SVInst::init(bool async) {
     //消息系统
     m_event_sys = MakeSharedPtr<SVEventMgr>( share() );
     m_event_sys->init();
-    //材质库
-    m_mtl_lib = MakeSharedPtr<SVMtlLib>( share() );
-    m_mtl_lib->init();
-    m_event_sys->listenSysEvent(m_mtl_lib,SVMtlLib::procSysEvent);
     //渲染管理
     m_render_mgr = MakeSharedPtr<SVRenderMgr>( share() );
     m_render_mgr->init();
     //资源管理加载
     m_res_mgr = MakeSharedPtr<SVResMgr>( share() );
     m_res_mgr->init();
+    //注册
+    m_render_mgr->registRenderHelper(m_res_mgr);
+    //监听
     m_event_sys->listenSysEvent(m_res_mgr,SVResMgr::procSysEvent);
+    //材质库
+    m_mtl_lib = MakeSharedPtr<SVMtlLib>( share() );
+    m_mtl_lib->init();
+    m_event_sys->listenSysEvent(m_mtl_lib,SVMtlLib::procSysEvent);
     //全局
     m_global_mgr = MakeSharedPtr<SVGlobalMgr>( share() );
     m_global_mgr->init();

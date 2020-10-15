@@ -13,6 +13,7 @@ SVSysBase::SVSysBase(SVInstPtr _app)
 :SVEventProc(_app) {
     m_subsysType = 0;
 }
+
 SVSysBase::~SVSysBase() {
 }
 
