@@ -27,11 +27,16 @@ namespace sv {
         
         virtual void destroy(SVRendererPtr _renderer) {}
         
+        virtual void load() {}
+        
+        virtual void unload() {}
+        
         virtual s32 process(SVRendererPtr _renderer) { return -1; }
         
         //
         SVObjectPtr m_logic_obj;
         bool m_exist;
+        s32 m_pool_id;
     };
         
 }//!namespace sv

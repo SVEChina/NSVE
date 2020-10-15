@@ -32,9 +32,19 @@ SVTexMgr::~SVTexMgr() {
 }
 
 void SVTexMgr::init() {
+    //内置纹理
+    m_intex_pool.resize(E_TEX_END);
+    for(s32 i=0;i<E_TEX_END;i++) {
+        m_intex_pool[i] = nullptr;
+    }
 }
 
 void SVTexMgr::destroy() {
+    //
+    for(s32 i=0;i<E_TEX_END;i++) {
+        m_intex_pool[i] = nullptr;
+    }
+    //
     m_ftex_pool.clear();
     m_sve_tex = nullptr;
 }
@@ -106,4 +116,33 @@ bool SVTexMgr::hasTexture(cptr8 _name) {
     }
     //内置纹理中寻找
     return false;
+}
+
+SVTexturePtr SVTexMgr::createInTexture(SV_TEXIN _texname,SVTextureDsp _dsp) {
+    if(_texname>E_TEX_BEGIN && _texname<E_TEX_END){
+        if(m_intex_pool[_texname]) {
+            return m_intex_pool[_texname];
+        }
+        m_intex_pool[_texname] = MakeSharedPtr<SVTexture>(mApp);
+        m_intex_pool[_texname] ->init(_dsp);
+        SVDispatch::dispatchTextureCreate(mApp, m_intex_pool[_texname]);
+        return m_intex_pool[_texname];
+    }
+    return nullptr;
+}
+
+bool SVTexMgr::hasInTexture(SV_TEXIN _texid) {
+    if(_texid>E_TEX_BEGIN && _texid<E_TEX_END){
+        if(m_intex_pool[_texid] ) {
+            return true;
+        }
+    }
+    return false;
+}
+
+SVTexturePtr SVTexMgr::getInTexture(SV_TEXIN _texid) {
+    if(_texid>E_TEX_BEGIN && _texid<E_TEX_END) {
+        return m_intex_pool[_texid];
+    }
+    return nullptr;
 }

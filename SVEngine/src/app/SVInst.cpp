@@ -18,6 +18,7 @@
 
 #include "../work/SVTdCore.h"
 #include "../work/SVThreadPool.h"
+
 #include "../file/SVFileMgr.h"
 
 #include "../basesys/SVBasicSys.h"
@@ -34,13 +35,14 @@
 #include "../operate/SVOpCreate.h"
 #include "../operate/SVOpThread.h"
 //
-#include "../rendercore/SVRenderMgr.h"
+#include "../rendercore/SVRTargetMgr.h"
 #include "../rendercore/SVRenderer.h"
+#include "../rendercore/SVRenderMgr.h"
 #include "../rendercore/SVMetal/SVRendererMetal.h"
 #include "../rendercore/SVGL/SVRendererGL.h"
 
 #include "../mtl/SVMtlLib.h"
-#include "../mtl/SVMtlCore.h"
+//#include "../mtl/SVMtlCore.h"
 
 using namespace sv;
 
@@ -342,6 +344,18 @@ SVTexMgrPtr SVInst::getTexMgr(){
     return m_res_mgr->m_tex_mgr;
 }
 
+SVRTargetMgrPtr SVInst::getTargetMgr() {
+    if(!m_res_mgr)
+        return nullptr;
+    return m_res_mgr->m_target_mgr;
+}
+
+SVComDataPtr SVInst::getComData(){
+    if(!m_res_mgr)
+        return nullptr;
+    return m_res_mgr->m_common_data;
+}
+
 SVMtlLibPtr SVInst::getMtlLib() {
     return m_mtl_lib;
 }
@@ -360,12 +374,6 @@ SVDeformMgrPtr SVInst::getDeformMgr(){
     if(!m_global_mgr)
         return nullptr;
     return m_global_mgr->m_pDeformSys;
-}
-
-SVComDataPtr SVInst::getComData(){
-    if(!m_res_mgr)
-        return nullptr;
-    return m_res_mgr->m_common_data;
 }
 
 SVModelMgrPtr SVInst::getModelMgr(){

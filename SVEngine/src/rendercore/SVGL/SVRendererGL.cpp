@@ -29,11 +29,20 @@ using namespace sv;
 
 SVRendererGL::SVRendererGL(SVInstPtr _app)
 :SVRenderer(_app)
-,m_cur_program(0){
+,m_cur_program(0) {
+    //构建对象池
+    m_rfbo_pool = MakeSharedPtr<PoolFboGL>(_app);
+    m_rmesh_pool = MakeSharedPtr<PoolMeshGL>(_app);
+    m_rshader_pool = MakeSharedPtr<PoolShaderGL>(_app);
+    m_rtex_pool = MakeSharedPtr<PoolTexGL>(_app);
 }
 
 SVRendererGL::~SVRendererGL(){
     m_cur_program = 0;
+    m_rfbo_pool = nullptr;
+    m_rmesh_pool = nullptr;
+    m_rshader_pool = nullptr;
+    m_rtex_pool = nullptr;
 }
 
 SVRendererGLPtr SVRendererGL::share() {
@@ -42,86 +51,104 @@ SVRendererGLPtr SVRendererGL::share() {
 
 void SVRendererGL::init(s32 _version){
     SVRenderer::init();
-    //构建一个主RT的业务
     m_gl_version = _version;
-    //创建主纹理
-    SVRTargetPtr t_target = createTarget(E_TEX_MAIN,true,true);
-    if(t_target) {
-        mApp->getRenderMgr()->setMainRT(t_target);
-    }
 }
 
 void SVRendererGL::init(s32 _version,bool _offline) {
     m_gl_version = _version;
-    //创建主纹理
-    SVRTargetPtr t_target = createTarget(E_TEX_MAIN,true,true);
-    if(t_target) {
-        mApp->getRenderMgr()->setMainRT(t_target);
-    }
 }
 
 void SVRendererGL::resize(s32 _w,s32 _h) {
-//    m_inWidth = _w;
-//    m_inHeight = _h;
-//    //重置size
-//    mApp->m_global_param.sv_width = _w;
-//    mApp->m_global_param.sv_height = _h;
-//    //重新创建主纹理
-//    SVTexturePtr t_tex = createSVTex(E_TEX_MAIN,_w,_h,GL_RGBA);
 }
 
 SVRTexPtr SVRendererGL::createResTexture() {
-    return MakeSharedPtr<SVRTexGL>(mApp);
+    if(m_rtex_pool) {
+        return m_rtex_pool->applyObject();
+    }
+    return nullptr;
 }
 
 //shader
 SVRShaderPtr SVRendererGL::createResShader() {
-    return MakeSharedPtr<SVRShaderGL>(mApp);
+    if(m_rshader_pool) {
+        return m_rshader_pool->applyObject();
+    }
+    return nullptr;
 }
 
 //buf-vbo 等
 SVRMeshResPtr SVRendererGL::createResBuf() {
-    return MakeSharedPtr<SVRMeshGL>(mApp);
+    if(m_rmesh_pool) {
+        return m_rmesh_pool->applyObject();
+    }
+    return nullptr;
 }
 
 //fbo
 SVRFboPtr SVRendererGL::createResFbo() {
-    return MakeSharedPtr<SVRFboGL>(mApp);
-}
-
-SVRTargetPtr SVRendererGL::createTarget(SV_TEXIN _texid,bool _depth,bool _stencil) {
-    SVRTargetPtr t_target = getTarget(_texid);
-    if(t_target) {
-        return t_target;
+    if(m_rfbo_pool) {
+        return m_rfbo_pool->applyObject();
     }
-    //创建主纹理
-    SVTextureDsp t_tex_dsp;
-    t_tex_dsp.m_image_type = SV_IMAGE_2D;
-    t_tex_dsp.m_data_formate = SV_FORMAT_RGBA8;
-    t_tex_dsp.m_width = mApp->m_global_param.sv_width;    //宽
-    t_tex_dsp.m_height = mApp->m_global_param.sv_height;  //高
-    t_tex_dsp.m_depth = 1;                                  //深度
-    t_tex_dsp.m_minmap = false;         //是否开启mipmap
-    t_tex_dsp.m_computeWrite = true;    //metal 是否可以
-    t_tex_dsp.m_renderTarget = true;    //metal 是否是renderTarget
-    SVTexturePtr t_main_tex = createInTexture(_texid,t_tex_dsp);
-    //创建主target
-    t_target = MakeSharedPtr<SVRTarget>(mApp,_texid);
-    SVTargetDsp* t_dsp = t_target->getTargetDsp();
-    t_dsp->m_color_texid[0] = _texid;
-    t_dsp->m_target_num = 1;
-    t_dsp->m_width = mApp->m_global_param.sv_width;
-    t_dsp->m_height = mApp->m_global_param.sv_height;
-    t_dsp->m_use_depth = true;
-    t_dsp->m_use_stencil = true;
-    //创建RT
-    SVDispatch::dispatchTargetCreate(mApp,t_target);
-    //增加target
-    _addTarget(_texid,t_target);
-    return t_target;
+    return nullptr;
 }
 
-SVRTargetPtr SVRendererGL::createTarget(SV_TEXIN _texid,s32 _w,s32 _h,bool _depth,bool _stencil) {
+//销毁纹理资源
+void SVRendererGL::destroyResTexture(s32 _uid){
+    if(m_rtex_pool) {
+        m_rtex_pool->removeObject(_uid);
+    }
+}
+
+//销毁shader资源
+void SVRendererGL::destroyResShader(s32 _uid)  {
+    if(m_rshader_pool) {
+        m_rshader_pool->removeObject(_uid);
+    }
+}
+
+//销毁buf资源
+void SVRendererGL::destroyResBuf(s32 _uid) {
+    if(m_rmesh_pool) {
+        m_rmesh_pool->removeObject(_uid);
+    }
+}
+
+//销毁fbo资源
+void SVRendererGL::destroyResFbo(s32 _uid) {
+    if(m_rfbo_pool) {
+        m_rfbo_pool->removeObject(_uid);
+    }
+}
+
+//获取纹理资源
+SVRTexPtr SVRendererGL::getResTexture(s32 _uid) const {
+    if(m_rtex_pool) {
+        return m_rtex_pool->getObject(_uid);
+    }
+    return nullptr;
+}
+
+//获取shader资源
+SVRShaderPtr SVRendererGL::getResShader(s32 _uid) const{
+    if(m_rshader_pool) {
+        return m_rshader_pool->getObject(_uid);
+    }
+    return nullptr;
+}
+
+//获取buf资源
+SVRMeshResPtr SVRendererGL::getResBuf(s32 _uid) const{
+    if(m_rmesh_pool) {
+        return m_rmesh_pool->getObject(_uid);
+    }
+    return nullptr;
+}
+
+//获取fbo资源
+SVRFboPtr SVRendererGL::getResFbo(s32 _uid) const {
+    if(m_rfbo_pool) {
+        return m_rfbo_pool->getObject(_uid);
+    }
     return nullptr;
 }
 

@@ -12,7 +12,6 @@
 #include "../../core/SVVertDef.h"
 
 namespace sv {
-        
     /*
      GL渲染器
      */
@@ -42,10 +41,29 @@ namespace sv {
         //create-fbo
         SVRFboPtr createResFbo() ;
         
-        //create-target
-        SVRTargetPtr createTarget(SV_TEXIN _texid,bool _depth,bool _stencil);
+        //销毁纹理资源
+        void destroyResTexture(s32 _uid);
+
+        //销毁shader资源
+        void destroyResShader(s32 _uid) ;
+
+        //销毁buf资源
+        void destroyResBuf(s32 _uid);
+
+        //销毁fbo资源
+        void destroyResFbo(s32 _uid) ;
         
-        SVRTargetPtr createTarget(SV_TEXIN _texid,s32 _w,s32 _h,bool _depth,bool _stencil);
+        //获取纹理资源
+        SVRTexPtr getResTexture(s32 _uid) const;
+
+        //获取shader资源
+        SVRShaderPtr getResShader(s32 _uid) const;
+
+        //获取buf资源
+        SVRMeshResPtr getResBuf(s32 _uid) const;
+
+        //获取fbo资源
+        SVRFboPtr getResFbo(s32 _uid) const;
         
         //处理材质
         bool processMtl(SVMtlCorePtr _mtl,SVSurfacePtr _surface);
@@ -65,8 +83,21 @@ namespace sv {
     public:
         u32 m_cur_program;  //当前的program
         s32 m_gl_version;
+        //
+        typedef SVObjectPool<SVRFboGLPtr,SVRFboGL> PoolFboGL;
+        typedef SVObjectPool<SVRMeshGLPtr,SVRMeshGL> PoolMeshGL;
+        typedef SVObjectPool<SVRShaderGLPtr,SVRShaderGL> PoolShaderGL;
+        typedef SVObjectPool<SVRTexGLPtr,SVRTexGL> PoolTexGL;
+        typedef std::shared_ptr<PoolFboGL> RFboPoolPtr;
+        typedef std::shared_ptr<PoolMeshGL> RMeshPoolPtr;
+        typedef std::shared_ptr<PoolShaderGL> RShaderPoolPtr;
+        typedef std::shared_ptr<PoolTexGL> RTexPoolPtr;
+        //对象池
+        RFboPoolPtr m_rfbo_pool;
+        RMeshPoolPtr m_rmesh_pool;
+        RShaderPoolPtr m_rshader_pool;
+        RTexPoolPtr m_rtex_pool;
     };
-
 
 }//!namespace sv
 

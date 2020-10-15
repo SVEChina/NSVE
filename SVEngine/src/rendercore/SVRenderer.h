@@ -15,6 +15,7 @@
 #include "../base/SVMat4.h"
 #include "../base/SVArray.h"
 #include "../base/SVStack.h"
+#include "../base/SVObjectPool.h"
 #include "../core/SVVertDef.h"
 
 #include <list>
@@ -69,29 +70,38 @@ namespace sv {
         //创建fbo资源
         virtual SVRFboPtr createResFbo() { return nullptr; }
         
-        //创建target资源
-        virtual SVRTargetPtr createTarget(SV_TEXIN _texid,bool _depth,bool _stencil){ return nullptr; }
+        //获取纹理资源
+        virtual SVRTexPtr getResTexture(s32 _uid) const { return nullptr; }
         
-        //创建target资源,自定义大小
-        virtual SVRTargetPtr createTarget(SV_TEXIN _texid,s32 _w,s32 _h,bool _depth,bool _stencil){ return nullptr; }
+        //获取shader资源
+        virtual SVRShaderPtr getResShader(s32 _uid) const { return nullptr; }
         
-        //获取target
+        //获取buf资源
+        virtual SVRMeshResPtr getResBuf(s32 _uid) const { return nullptr; }
+        
+        //获取fbo资源
+        virtual SVRFboPtr getResFbo(s32 _uid) const { return nullptr; }
+        
+        //获取纹理资源
+        virtual void destroyResTexture(s32 _uid) {}
+        
+        //获取shader资源
+        virtual void destroyResShader(s32 _uid) {}
+        
+        //获取buf资源
+        virtual void destroyResBuf(s32 _uid) {}
+        
+        //获取fbo资源
+        virtual void destroyResFbo(s32 _uid) {}
+        
+        //获取内置Taget
         virtual SVRTargetPtr getTarget(SV_TEXIN _texid);
         
-        //销毁Target
-        virtual void destroyTarget(SV_TEXIN _texid);
-        
         //获取内部纹理
-        virtual SVTexturePtr getInTexture(SV_TEXIN _texname);
-        
-        //创建内部纹理
-        virtual SVTexturePtr createInTexture(SV_TEXIN _texname,SVTextureDsp _dsp);
-        
-        //内置纹理是否存在
-        virtual bool hasInTexture(SV_TEXIN _texid);
+        virtual SVTexturePtr getInTexture(SV_TEXIN _texid);
         
         //交换纹理
-        virtual void swapInTexture(SV_TEXIN _tex1,SV_TEXIN _tex2);
+        void swapInTexture(SV_TEXIN _tex1,SV_TEXIN _tex2);
         
         //增加渲染内核资源
         virtual void addRes(SVRResPtr _res);
@@ -124,25 +134,16 @@ namespace sv {
         virtual void removeUnuseRes();
 
     protected:
-        void _addTarget(SV_TEXIN _texid,SVRTargetPtr _target);
-        
+        //状态
         //当前的target
         SVRTargetPtr m_cur_target;
         
         //资源锁
         SVLockSpinPtr m_res_lock;
         
-        //渲染内核资源,起到资源统计和管理的作用
+        //起到资源统计和管理的作用
         typedef std::list<SVRResPtr> ROBJLIST;
         ROBJLIST m_robjList;
-        
-        //目标池
-        typedef std::vector<SVRTargetPtr> TARGETPOOL;
-        TARGETPOOL m_target_pool;
-        
-        //内置纹理池
-        typedef std::vector<SVTexturePtr> INTEXPOOL;
-        INTEXPOOL m_intex_pool;
     };
     
 }//!namespace sv

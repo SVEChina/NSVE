@@ -7,8 +7,14 @@
 
 #include "SVRenderer.h"
 #include "SVRenderMgr.h"
+#include "SVRTargetMgr.h"
 #include "SVRTarget.h"
 #include "SVRRes.h"
+#include "SVRFbo.h"
+#include "SVRTex.h"
+#include "SVRMeshRes.h"
+#include "SVRShader.h"
+#include "../base/SVObjectPool.h"
 #include "../app/SVInst.h"
 #include "../app/SVDispatch.h"
 #include "../work/SVTdCore.h"
@@ -21,23 +27,10 @@ using namespace sv;
 SVRenderer::SVRenderer(SVInstPtr _app)
 :SVGBaseEx(_app)
 ,m_cur_target(nullptr){
-    //内置Target
-    m_target_pool.resize(E_TEX_END);
-    for(s32 i=0;i<E_TEX_END;i++) {
-        m_target_pool[i] = nullptr;
-    }
-    //内置纹理
-    m_intex_pool.resize(E_TEX_END);
-    for(s32 i=0;i<E_TEX_END;i++) {
-        m_intex_pool[i] = nullptr;
-    }
     m_res_lock = MakeSharedPtr<SVLockSpin>();
 }
 
 SVRenderer::~SVRenderer(){
-    for(s32 i=0;i<E_TEX_END;i++) {
-        m_intex_pool[i] = nullptr;
-    }
     m_res_lock = nullptr;
     m_cur_target = nullptr;
 }
@@ -55,11 +48,6 @@ void SVRenderer::destroy(){
 //重置大小
 void SVRenderer::resize(s32 _w,s32 _h) {
     m_res_lock->lock();
-    for(s32 i=0;i<E_TEX_END;i++) {
-        if( m_target_pool[i] ) {
-            m_target_pool[i]->resize(_w, _h);
-        }
-    }
     m_res_lock->unlock();
 }
 
@@ -120,63 +108,25 @@ void SVRenderer::setCurTarget(SVRTargetPtr _target) {
     m_cur_target = _target;
 }
 
-//获取target
 SVRTargetPtr SVRenderer::getTarget(SV_TEXIN _texid) {
-    return m_target_pool[_texid];
-}
-
-//销毁Target
-void SVRenderer::destroyTarget(SV_TEXIN _texid) {
-    m_res_lock->lock();
-    if(m_target_pool[_texid]) {
-        m_target_pool[_texid] = nullptr;
+    if(mApp->getTargetMgr()) {
+        return mApp->getTargetMgr()->getTarget(_texid);
     }
-    m_res_lock->unlock();
+    return nullptr;
 }
-
-void SVRenderer::_addTarget(SV_TEXIN _texid,SVRTargetPtr _target) {
-    m_res_lock->lock();
-    m_target_pool[_texid] = _target;
-    m_res_lock->unlock();
-}
-
 
 SVTexturePtr SVRenderer::getInTexture(SV_TEXIN _texid) {
-    if(_texid>E_TEX_BEGIN && _texid<E_TEX_END){
-        if(m_intex_pool[_texid] ) {
-            return m_intex_pool[_texid];
-        }
+    if(mApp->getTexMgr()) {
+        return mApp->getTexMgr()->getInTexture(_texid);
     }
     return nullptr;
-}
-
-SVTexturePtr SVRenderer::createInTexture(SV_TEXIN _texname,SVTextureDsp _dsp) {
-    if(_texname>E_TEX_BEGIN && _texname<E_TEX_END){
-        if(m_intex_pool[_texname]) {
-            return m_intex_pool[_texname];
-        }
-        m_intex_pool[_texname] = MakeSharedPtr<SVTexture>(mApp);
-        m_intex_pool[_texname] ->init(_dsp);
-        SVDispatch::dispatchTextureCreate(mApp, m_intex_pool[_texname]);
-        return m_intex_pool[_texname];
-    }
-    return nullptr;
-}
-
-bool SVRenderer::hasInTexture(SV_TEXIN _texid) {
-    if(_texid>E_TEX_BEGIN && _texid<E_TEX_END){
-        if(m_intex_pool[_texid] ) {
-            return true;
-        }
-    }
-    return false;
 }
 
 //交换纹理
 void SVRenderer::swapInTexture(SV_TEXIN _tex1,SV_TEXIN _tex2) {
     SVTexturePtr tex1 = getInTexture(_tex1);
     SVTexturePtr tex2 = getInTexture(_tex2);
-    if(tex1!=tex2) {
+    if( tex1 != tex2) {
         tex1->swap(tex2);
     }
 }

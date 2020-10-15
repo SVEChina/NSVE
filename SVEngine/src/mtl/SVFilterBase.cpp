@@ -11,6 +11,7 @@
 #include "../rendercore/SVRenderCmd.h"
 #include "../rendercore/SVRenderer.h"
 #include "../rendercore/SVRTarget.h"
+#include "../rendercore/SVRTargetMgr.h"
 
 using namespace sv;
 
@@ -39,14 +40,14 @@ void SVFilterBase::destroy() {
 }
 
 void SVFilterBase::update(f32 _dt) {
-    SVRTargetPtr t_target = mApp->getRenderer()->getTarget(m_target_tex);
+    SVRTargetPtr t_target = mApp->getTargetMgr()->getTarget(m_target_tex);
     if(t_target && m_mtl) {
         //辅助目标
-        SVRTargetPtr t_help = mApp->getRenderer()->getTarget(m_target_tex_help);
+        SVRTargetPtr t_help = mApp->getTargetMgr()->getTarget(m_target_tex_help);
         if(!t_help && m_target_tex_help<E_TEX_END) {
             s32 t_w = t_target->getTargetDsp()->m_width;
             s32 t_h = t_target->getTargetDsp()->m_height;
-            t_help = mApp->getRenderer()->createTarget(m_target_tex_help, t_w, t_h, false, false);
+            t_help = mApp->getTargetMgr()->createTarget(m_target_tex_help, t_w, t_h, false, false);
         }
         if(!t_help) {
             return;

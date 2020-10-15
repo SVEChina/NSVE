@@ -13,6 +13,7 @@
 #include "../work/SVTdCore.h"
 #include "../rendercore/SVRenderMgr.h"
 #include "../rendercore/SVRenderer.h"
+#include "../rendercore/SVRTargetMgr.h"
 #include "../rendercore/SVRTarget.h"
 #include "../rendercore/SVRenderMesh.h"
 #include "../rendercore/SVRenderCmd.h"
@@ -58,7 +59,7 @@ bool SVARBackgroundMgr::enable() {
     SVRendererPtr t_renderer = mApp->getRenderer();
     if(t_renderer) {
         if(!m_enable) {
-            m_ar_target = t_renderer->createTarget(E_TEX_CAMERA,false,false);
+            m_ar_target = mApp->getTargetMgr()->createTarget(E_TEX_CAMERA,false,false);
             m_ar_target->pushStreamQuene(E_RSM_NOR);    //推送NOR流
             //推送到前向渲染
             mApp->getRenderMgr()->addRTarget(m_ar_target,true);

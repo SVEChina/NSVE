@@ -45,6 +45,11 @@ SVRendererMetal::SVRendererMetal(SVInstPtr _app)
     //
     m_hasPixelFormatDepth32Float_Stencil8 = true;
     m_samplenum = 1;    //msaa采样数
+    //
+    m_rfbo_pool = MakeSharedPtr<PoolFboMetal>(_app);
+    m_rmesh_pool = MakeSharedPtr<PoolMeshMetal>(_app);
+    m_rshader_pool = MakeSharedPtr<PoolShaderMetal>(_app);
+    m_rtex_pool = MakeSharedPtr<PoolTexMetal>(_app);
 }
 
 SVRendererMetal::~SVRendererMetal(){
@@ -100,75 +105,64 @@ SVRFboPtr SVRendererMetal::createResFbo()  {
     return MakeSharedPtr<SVRFboMetal>(mApp);
 }
 
-//创建target资源
-SVRTargetPtr SVRendererMetal::createTarget(SV_TEXIN _texid,bool _depth,bool _stencil) {
-    SVRTargetPtr t_target = getTarget(_texid);
-    if(t_target) {
-        return t_target;
+//销毁纹理资源
+void SVRendererMetal::destroyResTexture(s32 _uid){
+    if(m_rtex_pool) {
+        m_rtex_pool->removeObject(_uid);
     }
-    //创建主纹理
-    SVTextureDsp t_tex_dsp;
-    t_tex_dsp.m_image_type = SV_IMAGE_2D;
-    t_tex_dsp.m_data_formate = SV_FORMAT_RGBA8;
-    t_tex_dsp.m_width = mApp->m_global_param.sv_width;    //宽
-    t_tex_dsp.m_height = mApp->m_global_param.sv_height;  //高
-    t_tex_dsp.m_depth = 1;                                  //深度
-    t_tex_dsp.m_minmap = false;         //是否开启mipmap
-    t_tex_dsp.m_computeWrite = true;    //metal 是否可以
-    t_tex_dsp.m_renderTarget = true;    //metal 是否是renderTarget
-    SVTexturePtr t_target_tex = createInTexture(_texid,t_tex_dsp);
-    if(!t_target_tex) {
-        return nullptr;
-    }
-    //创建主target
-    t_target = MakeSharedPtr<SVRTarget>(mApp,_texid);
-    SVTargetDsp* t_dsp = t_target->getTargetDsp();
-    t_dsp->m_color_texid[0] = _texid;
-    t_dsp->m_target_num = 1;
-    t_dsp->m_width = mApp->m_global_param.sv_width;
-    t_dsp->m_height = mApp->m_global_param.sv_height;
-    t_dsp->m_use_depth = _depth;
-    t_dsp->m_use_stencil = _stencil;
-    //创建RT
-    SVDispatch::dispatchTargetCreate(mApp,t_target);
-    //增加target
-    _addTarget(_texid,t_target);
-    return t_target;
 }
 
-SVRTargetPtr SVRendererMetal::createTarget(SV_TEXIN _texid,s32 _w,s32 _h,bool _depth,bool _stencil){
-    SVRTargetPtr t_target = getTarget(_texid);
-    if(t_target) {
-        return t_target;
+//销毁shader资源
+void SVRendererMetal::destroyResShader(s32 _uid)  {
+    if(m_rshader_pool) {
+        m_rshader_pool->removeObject(_uid);
     }
-    //创建主纹理
-    SVTextureDsp t_tex_dsp;
-    t_tex_dsp.m_image_type = SV_IMAGE_2D;
-    t_tex_dsp.m_data_formate = SV_FORMAT_RGBA8;
-    t_tex_dsp.m_width = _w;    //宽
-    t_tex_dsp.m_height = _h;  //高
-    t_tex_dsp.m_depth = 1;                                  //深度
-    t_tex_dsp.m_minmap = false;         //是否开启mipmap
-    t_tex_dsp.m_computeWrite = true;    //metal 是否可以
-    t_tex_dsp.m_renderTarget = true;    //metal 是否是renderTarget
-    SVTexturePtr t_target_tex = createInTexture(_texid,t_tex_dsp);
-    if(!t_target_tex) {
-        return nullptr;
+}
+
+//销毁buf资源
+void SVRendererMetal::destroyResBuf(s32 _uid) {
+    if(m_rmesh_pool) {
+        m_rmesh_pool->removeObject(_uid);
     }
-    //创建主target
-    t_target = MakeSharedPtr<SVRTarget>(mApp,_texid);
-    SVTargetDsp* t_dsp = t_target->getTargetDsp();
-    t_dsp->m_color_texid[0] = _texid;
-    t_dsp->m_target_num = 1;
-    t_dsp->m_width = _w;
-    t_dsp->m_height = _h;
-    t_dsp->m_use_depth = _depth;
-    t_dsp->m_use_stencil = _stencil;
-    //创建RT
-    SVDispatch::dispatchTargetCreate(mApp,t_target);
-    //增加target
-    _addTarget(_texid,t_target);
-    return t_target;
+}
+
+//销毁fbo资源
+void SVRendererMetal::destroyResFbo(s32 _uid) {
+    if(m_rfbo_pool) {
+        m_rfbo_pool->removeObject(_uid);
+    }
+}
+
+//获取纹理资源
+SVRTexPtr SVRendererMetal::getResTexture(s32 _uid) const {
+    if(m_rtex_pool) {
+        return m_rtex_pool->getObject(_uid);
+    }
+    return nullptr;
+}
+
+//获取shader资源
+SVRShaderPtr SVRendererMetal::getResShader(s32 _uid) const{
+    if(m_rshader_pool) {
+        return m_rshader_pool->getObject(_uid);
+    }
+    return nullptr;
+}
+
+//获取buf资源
+SVRMeshResPtr SVRendererMetal::getResBuf(s32 _uid) const{
+    if(m_rmesh_pool) {
+        return m_rmesh_pool->getObject(_uid);
+    }
+    return nullptr;
+}
+
+//获取fbo资源
+SVRFboPtr SVRendererMetal::getResFbo(s32 _uid) const {
+    if(m_rfbo_pool) {
+        return m_rfbo_pool->getObject(_uid);
+    }
+    return nullptr;
 }
 
 //

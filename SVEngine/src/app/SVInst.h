@@ -142,6 +142,7 @@ namespace sv {
         SVModuleSysPtr getModuleSys();
         SVShaderMgrPtr getShaderMgr();
         SVTexMgrPtr getTexMgr();
+        SVRTargetMgrPtr getTargetMgr();
         SVMtlLibPtr getMtlLib();
         SVRenderMgrPtr getRenderMgr();
         SVDetectMgrPtr getDetectMgr();

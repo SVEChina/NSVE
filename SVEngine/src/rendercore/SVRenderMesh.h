@@ -257,6 +257,8 @@ namespace sv {
         
     protected:
         SVRMeshResPtr m_res_buffer;      //最主要的是它
+        //
+        s32 m_rmesh_id;
     };
     
 

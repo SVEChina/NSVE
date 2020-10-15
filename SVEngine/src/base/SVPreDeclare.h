@@ -12,9 +12,14 @@
 #include <memory>
 
 //定义shareptr宏
+
 #define DECLARE_SHAREPTR(classname) \
 class classname;\
 typedef std::shared_ptr<classname> classname##Ptr;\
+
+//#define DECLARE_SHAREPTR_TEMP(classname,T1,T2) \
+//class classname<T1,T2>;\
+//typedef std::shared_ptr<classname<T1,T2>> classname##TempPtr;\
 
 namespace sv {
 
