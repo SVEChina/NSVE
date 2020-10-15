@@ -79,55 +79,6 @@ u64  SVFileMgr::checkFileDataLength(cptr8 _fpath){
     return 0;
 }
 
-//bool SVFileMgr::loadFileData(SVDataChunk *_datachunk, cptr8 _fpath, s32 _offset, s32 _length){
-//    if (!_datachunk)
-//        return false;
-//    SVString t_fullname = _fpath;
-//    if ( !t_fullname.empty() ) {
-//        FILE *fp = fopen(t_fullname.c_str(), "r");
-//        if (fp) {
-//            s32 t_length = _length;
-//            if (t_length < 0) {
-//                fseek(fp, 0, SEEK_END);
-//                s64 t_file_len = ftell(fp);
-//                t_length = (s32)t_file_len;
-//            }
-//            fseek(fp, _offset, SEEK_SET);
-//            //
-//            void* t_buf = malloc(t_length);
-//            fread(t_buf, t_length, 1, fp);
-//            _datachunk->push(t_buf, t_length);
-//            free(t_buf);
-//            //
-//            fclose(fp);
-//            return true;
-//        }
-//    }
-//    return false;
-//}
-//
-//bool SVFileMgr::writeFileData(SVDataChunk *_datachunk, cptr8 _fpath, u32 _size, bool _clearData){
-//    if (!_datachunk || _size == 0)
-//        return false;
-//    SVString t_fullname = _fpath;
-//    if ( !t_fullname.empty() ) {
-//        FILE *fp = NULL;
-//        if (_clearData) {
-//            fp = fopen(t_fullname.c_str(), "w");
-//            fseek(fp, 0, SEEK_SET);
-//        }else{
-//            fp = fopen(t_fullname.c_str(), "a");
-//            fseek(fp, 0, SEEK_END);
-//        }
-//        if (fp) {
-//            fwrite((_datachunk->getPointer() ), sizeof(c8), _size, fp);
-//            fclose(fp);
-//            return true;
-//        }
-//    }
-//    return false;
-//}
-
 bool SVFileMgr::loadFileContent(SVDataChunk *_datachunk,cptr8 _fname) {    if (!_datachunk)
         return false;
     SVString t_fullname = getFileFullName(_fname);
@@ -164,6 +115,19 @@ SVString SVFileMgr::getFileFullName(cptr8 _fname) {
     m_file_lock->unlock();
     return tFileName;
 }
+
+SVString SVFileMgr::getPath(cptr8 _fname) {
+//    //返回为"" 证明不在SD卡里面
+    SVString tFileName = "";
+    SVString tmp = _fname;
+    s32 t_pos = tmp.rfind('/');
+    if(t_pos>0) {
+        tFileName = SVString::substr(tmp.c_str(), 0 , t_pos+1);
+    }
+    return tFileName;
+}
+
+
 
 bool SVFileMgr::s_loadFileContent(SVDataChunk *_datachunk, cptr8 _fullname) {
     FILE *fp = fopen(_fullname, "r");

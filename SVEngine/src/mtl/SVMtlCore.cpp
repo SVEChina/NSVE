@@ -305,7 +305,7 @@ void SVMtlCore::setStencilSfail(s32 _method) {
     //m_LogicMtlFlag0 |= MTL_F0_STENCIL;
 }
 
-void SVMtlCore::fromJSON1(RAPIDJSON_NAMESPACE::Value &_item){
+void SVMtlCore::fromJSON1(RAPIDJSON_NAMESPACE::Value& _item){
     //对应的shader
     if (_item.HasMember("shader") && _item["shader"].IsString()) {
         RAPIDJSON_NAMESPACE::Value &t_value = _item["shader"];

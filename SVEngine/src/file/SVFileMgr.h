@@ -34,6 +34,8 @@ namespace sv {
         //获取文件全名 包含路径
         SVString getFileFullName(cptr8 _fname);
         
+        SVString getPath(cptr8 _fname);
+        
         bool loadFileContent(SVDataChunk *_datachunk, cptr8 _fname);
         
         bool loadFileContentStr(SVDataChunk *_datachunk, cptr8 _fname);

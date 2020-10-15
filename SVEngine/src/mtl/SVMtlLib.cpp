@@ -62,19 +62,26 @@ void SVMtlLib::procSysEvent(SVObjectPtr _caller,SVEventPtr _event) {
 
 //加载默认的材质包
 void SVMtlLib::loadDefaultPack() {
-    loadMtlPack("base.pack");
+    loadMtlPack("sve-pack-base");
 }
 
 //加载材质库
 void SVMtlLib::loadMtlPack(cptr8 _pack) {
+    //加载材质包，先做文件拼接
+    SVString pack_cfg = _pack;
+    pack_cfg += "/info.json";
     //材质库其实可以异步加载，可以根据渲染引擎进行异步，加载
     SVDataChunk tDataStream;
     SV_LOG_ERROR("load mtl-pack begin\n");
-    bool tflag = mApp->m_file_sys->loadFileContentStr(&tDataStream, _pack);//"base.pack"
+    bool tflag = mApp->m_file_sys->loadFileContentStr(&tDataStream, pack_cfg);
     if (!tflag) {
        SV_LOG_INFO("not find base.pack! please check pack!\n");
        return;
     }
+    SVString t_pack_fullname = mApp->m_file_sys->getFileFullName(pack_cfg);
+    SVString t_pack_path = mApp->m_file_sys->getPath(t_pack_fullname);
+    mApp->m_file_sys->addRespath(t_pack_path.c_str());
+    //
     RAPIDJSON_NAMESPACE::Document doc;
     doc.Parse<0>(tDataStream.getPointerChar());
     if (doc.HasParseError()) {
@@ -83,17 +90,27 @@ void SVMtlLib::loadMtlPack(cptr8 _pack) {
        return;
     }
     //包名
-    if ( doc.HasMember("name") && doc["name"].IsString() ) {
-        RAPIDJSON_NAMESPACE::Value &t_name = doc["name"];
+    if ( doc.HasMember("pack-name") && doc["pack-name"].IsString() ) {
+        RAPIDJSON_NAMESPACE::Value &t_name = doc["pack-name"];
         SVString t_packname = t_name.GetString();
     }
-    //文件列表
-    if ( doc.HasMember("files") && doc["files"].IsArray() ) {
-        RAPIDJSON_NAMESPACE::Value &t_mtlfiles = doc["files"];
+    //文件链接方式
+    if ( doc.HasMember("pack-files") && doc["pack-files"].IsArray() ) {
+        RAPIDJSON_NAMESPACE::Value &t_mtlfiles = doc["pack-files"];
         RAPIDJSON_NAMESPACE::Document::Array t_files = t_mtlfiles.GetArray();
         for(s32 i=0;i<t_files.Size();i++) {
             SVString t_filename = t_files[i].GetString();
-            createMtl(t_filename.c_str());
+            createMtlFromFile(t_filename.c_str());
+        }
+    }
+    //直接打到包内的方式
+    if ( doc.HasMember("pack-mtls") && doc["pack-mtls"].IsArray() ) {
+        RAPIDJSON_NAMESPACE::Value &t_mtls = doc["pack-mtls"];
+        RAPIDJSON_NAMESPACE::Document::Array t_mtl_array = t_mtls.GetArray();
+        for(s32 i=0;i<t_mtl_array.Size();i++) {
+            RAPIDJSON_NAMESPACE::Document::Object t_jsonstr = t_mtl_array[i].GetObject();
+            SVString t_name = t_jsonstr["name"].GetString();
+            createMtlFromJson(t_mtl_array[i],t_name.c_str());
         }
     }
     //
@@ -115,9 +132,9 @@ SVMtlCorePtr SVMtlLib::getMtl(cptr8 _mtlname) {
     return nullptr;
 }
 
-SVMtlCorePtr SVMtlLib::createMtl(cptr8 _mtlname) {
+SVMtlCorePtr SVMtlLib::createMtlFromFile(cptr8 _fname) {
     SVDataChunk t_data;
-    bool t_ret = mApp->m_file_sys->loadFileContentStr(&t_data, _mtlname);   //解析JSON一定要用这个函数
+    bool t_ret = mApp->m_file_sys->loadFileContentStr(&t_data, _fname);   //解析JSON一定要用这个函数
     if(!t_ret) {
         return nullptr;
     }
@@ -126,12 +143,47 @@ SVMtlCorePtr SVMtlLib::createMtl(cptr8 _mtlname) {
     doc.Parse(t_data.getPointerChar());
     if (doc.HasParseError()) {
         RAPIDJSON_NAMESPACE::ParseErrorCode code = doc.GetParseError();
-        SV_LOG_ERROR("rapidjson error code:%d - %s\n", code,_mtlname);
+        SV_LOG_ERROR("rapidjson error code:%d - %s\n", code,_fname);
         return nullptr;
     }
+    return createMtlFromJson( doc, _fname);
+//    //
+//    SVString t_version = "1.0";
+//    if (doc.HasMember("version")) {
+//        t_version = doc["version"].GetString();
+//    }
+//    //获取材质名称
+//    SVString t_mtl_name = _fname;
+//    s32 t_pos = t_mtl_name.rfind('.');
+//    if(t_pos>0) {
+//        t_mtl_name = SVString::substr(t_mtl_name.c_str(), 0, t_pos);
+//    }
+//    t_pos = t_mtl_name.rfind('\\');
+//    if(t_pos>0) {
+//       t_mtl_name = SVString::substr(t_mtl_name.c_str(), t_pos+1);
+//    }
+//    t_pos = t_mtl_name.rfind('/');
+//    if(t_pos>0) {
+//       t_mtl_name = SVString::substr(t_mtl_name.c_str(), t_pos+1);
+//    }
+//    //
+//    MTLPOOL::iterator it = m_mtlPool.find(t_mtl_name);
+//    if( it == m_mtlPool.end() ) {
+//        if(t_version == "1.0") {
+//            SVMtlCorePtr t_mtl = MakeSharedPtr<SVMtlCore>(mApp);
+//            t_mtl->m_mtl_name = t_mtl_name;
+//            t_mtl->fromJSON1(doc);
+//            m_mtlPool.insert(std::make_pair(t_mtl_name, t_mtl));
+//            return t_mtl;
+//        }
+//    }
+    return nullptr;
+}
+
+SVMtlCorePtr SVMtlLib::createMtlFromJson(RAPIDJSON_NAMESPACE::Value& _obj,cptr8 _mtlname) {
     SVString t_version = "1.0";
-    if (doc.HasMember("version")) {
-        t_version = doc["version"].GetString();
+    if (_obj.HasMember("version")) {
+        t_version = _obj["version"].GetString();
     }
     //获取材质名称
     SVString t_mtl_name = _mtlname;
@@ -147,22 +199,15 @@ SVMtlCorePtr SVMtlLib::createMtl(cptr8 _mtlname) {
     if(t_pos>0) {
        t_mtl_name = SVString::substr(t_mtl_name.c_str(), t_pos+1);
     }
-    //
     MTLPOOL::iterator it = m_mtlPool.find(t_mtl_name);
     if( it == m_mtlPool.end() ) {
         if(t_version == "1.0") {
             SVMtlCorePtr t_mtl = MakeSharedPtr<SVMtlCore>(mApp);
             t_mtl->m_mtl_name = t_mtl_name;
-            t_mtl->fromJSON1(doc);
+            t_mtl->fromJSON1(_obj);
             m_mtlPool.insert(std::make_pair(t_mtl_name, t_mtl));
             return t_mtl;
         }
     }
     return nullptr;
-}
-
-bool SVMtlLib::parseMtl1(SVMtlCorePtr _mtl,RAPIDJSON_NAMESPACE::Document& _doc) {
-    if(!_mtl)
-        return false;
-    return true;
 }

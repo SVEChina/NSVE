@@ -11,6 +11,11 @@
 #include "src/env/SVCtxIOS.h"
 #include "src/rendercore/SVMetal/SVRendererMetal.h"
 
+#define SVE_METAL 1
+#define SVE_GLES 2
+
+#define SVE_CORE SVE_GLES//SVE_METAL
+
 static CGInst *mInst;
 
 @interface CGInst() {
@@ -41,7 +46,18 @@ static CGInst *mInst;
 -(void)cgInit{
     //创建SVE引擎
     m_p_sve = sv::SVInst::makeCreate();
+    //设置资源文件
+    NSString *t_sve_res = @"SVERes/sve-metal";
+    if(SVE_CORE == SVE_GLES ) {
+        t_sve_res = @"SVERes/sve-gles";
+    }else if( SVE_CORE == SVE_METAL ) {
+        t_sve_res = @"SVERes/sve-metal";
+    }
+    NSString* t_sve_path = [[NSBundle mainBundle] pathForResource:t_sve_res ofType:@"bundle"];
+    t_sve_path = [t_sve_path stringByAppendingString:@"/"];
+    m_p_sve->addRespath([t_sve_path UTF8String]);
     m_p_sve->init();
+    SV_LOG_INFO("sve init end!");
     //创建UI系统
     //[[CGUI getInst] cgInit:0];
 }
@@ -95,6 +111,7 @@ static CGInst *mInst;
 
 -(void)render {
     if(m_p_sve) {
+        m_p_sve->updateSVE(0.033f);
         m_p_sve->renderSVE();
     }
 }

@@ -64,13 +64,15 @@ namespace sv {
         SVMtlCorePtr getMtl(cptr8 _mtlname);
         
         //创建材质
-        SVMtlCorePtr createMtl(cptr8 _mtlname);
+        SVMtlCorePtr createMtlFromFile(cptr8 _fname);
+        
+        //
+        SVMtlCorePtr createMtlFromJson(RAPIDJSON_NAMESPACE::Value& _obj,cptr8 _mtlname);
         
         //处理消息
         static void procSysEvent(SVObjectPtr _caller,SVEventPtr _event);
         
     protected:
-        static bool parseMtl1(SVMtlCorePtr _mtl,RAPIDJSON_NAMESPACE::Document& _doc);
         
         //材质库(静态，模版)
         typedef std::map<SVString,SVMtlCorePtr> MTLPOOL;

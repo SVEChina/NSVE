@@ -172,7 +172,7 @@ namespace sv {
         virtual void toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator,
                             RAPIDJSON_NAMESPACE::Value &_objValue);
         
-        virtual void fromJSON1(RAPIDJSON_NAMESPACE::Value &item);
+        virtual void fromJSON1(RAPIDJSON_NAMESPACE::Value& item);
         
     protected:
         virtual void _submitUniform(SVRendererPtr _render);
