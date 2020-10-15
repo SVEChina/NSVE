@@ -1,0 +1,7 @@
+{
+    "version" : "1.0",
+    "shader" : "beauty",
+    "textures" :[
+        { "chn": 0 , "from" : "file", "path" : "svres/sve.png", "stage": "fs" }
+    ]
+}
