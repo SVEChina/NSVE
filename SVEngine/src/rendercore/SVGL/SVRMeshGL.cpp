@@ -25,10 +25,11 @@ SVRMeshGL::~SVRMeshGL() {
 }
 
 void SVRMeshGL::create(SVRendererPtr _renderer,
-                       BufferDspPtr _indexdsp,
-                       BufferDspPtr _streamdsp,
-                       BufferDspPtr _instdsp) {
-    SVRMeshRes::create(_renderer, _indexdsp, _streamdsp, _instdsp);
+                       SVBufferDspPtr _indexdsp,
+                       SVBufferDspPtr _streamdsp,
+                       SVBufferDspPtr _instdsp,
+                       SVRMeshDsp* _SVRMeshDsp) {
+    SVRMeshRes::create(_renderer, _indexdsp, _streamdsp, _instdsp,_SVRMeshDsp);
     SVRendererGLPtr t_rm = std::dynamic_pointer_cast<SVRendererGL>(_renderer);
     if(t_rm) {
         //索引
@@ -115,7 +116,7 @@ void SVRMeshGL::create(SVRendererPtr _renderer,
                     if(t_data) {
                         glBufferData(GL_ARRAY_BUFFER,t_data->getSize(),t_data->getData(),t_pool_type);
                     }else{
-                        s32 t_size = m_vert_dsp->_vertCnt * BufferDsp::getVertSize(VFTYPE(t_stream_type));  //顶点数*类型
+                        s32 t_size = m_vert_dsp->_vertCnt * SVBufferDsp::getVertSize(VFTYPE(t_stream_type));  //顶点数*类型
                         glBufferData(GL_ARRAY_BUFFER,t_size,0,t_pool_type);
                     }
                 }
@@ -243,37 +244,39 @@ s32 SVRMeshGL::process(SVRendererPtr _renderer){
 }
 
 void SVRMeshGL::draw(SVRendererPtr _renderer) {
+    if(!m_rmesh_dsp)
+        return ;
     //绘制
     s32 t_method = GL_TRIANGLES;
-    if(m_draw_method == E_DRAW_POINTS) {
+    if(m_rmesh_dsp->m_draw_method == E_DRAW_POINTS) {
         t_method = GL_POINTS;
-    }else if(m_draw_method == E_DRAW_LINES) {
+    }else if(m_rmesh_dsp->m_draw_method == E_DRAW_LINES) {
         t_method = GL_LINES;
-    }else if(m_draw_method == E_DRAW_LINE_LOOP) {
+    }else if(m_rmesh_dsp->m_draw_method == E_DRAW_LINE_LOOP) {
         t_method = GL_LINE_LOOP;
-    }else if(m_draw_method == E_DRAW_LINE_STRIP) {
+    }else if(m_rmesh_dsp->m_draw_method == E_DRAW_LINE_STRIP) {
         t_method = GL_LINE_STRIP;
-    }else if(m_draw_method == E_DRAW_TRIANGLES) {
+    }else if(m_rmesh_dsp->m_draw_method == E_DRAW_TRIANGLES) {
         t_method = GL_TRIANGLES;
-    }else if(m_draw_method == E_DRAW_TRIANGLE_STRIP) {
+    }else if(m_rmesh_dsp->m_draw_method == E_DRAW_TRIANGLE_STRIP) {
         t_method = GL_TRIANGLE_STRIP;
-    }else if(m_draw_method == E_DRAW_TRIANGLE_FAN) {
+    }else if(m_rmesh_dsp->m_draw_method == E_DRAW_TRIANGLE_FAN) {
         t_method = GL_TRIANGLE_FAN;
     }
     //draw
     if(m_instanceID>0) {
         if(m_indexID>0) {
             glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexID);
-            glDrawElementsInstanced(t_method, m_draw_num, GL_UNSIGNED_SHORT, 0, m_instacne_count);
+            glDrawElementsInstanced(t_method, m_rmesh_dsp->m_draw_num, GL_UNSIGNED_SHORT, 0, m_instacne_count);
        }else{
-           glDrawArraysInstanced(t_method, 0, m_draw_num, m_instacne_count);
+           glDrawArraysInstanced(t_method, 0, m_rmesh_dsp->m_draw_num, m_instacne_count);
        }
     }else{
         if(m_indexID>0) {
             glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexID);
-            glDrawElements(t_method, m_draw_num, GL_UNSIGNED_SHORT, 0);
+            glDrawElements(t_method, m_rmesh_dsp->m_draw_num, GL_UNSIGNED_SHORT, 0);
         }else{
-            glDrawArrays(t_method, 0, m_draw_num);
+            glDrawArrays(t_method, 0, m_rmesh_dsp->m_draw_num);
         }
     }
 }

@@ -67,27 +67,27 @@ void SVRShaderMetal::create(SVRendererPtr _renderer,ShaderDsp* _shader_dsp) {
     if( m_shader_dsp->m_dsp & SV_E_TECH_TSD ) {
         m_tsdf = [t_rm->m_pLibrary newFunctionWithName:@"tsdMain"];
     }
-//    //生成vs采样器(都在一起)
-//    for(s32 i=0;i<t_shader->m_samplers.size();i++) {
-//        INSAMPLE t_sampler;
-//        //生成sampler-dsp
-//        MTLSamplerDescriptor *samplerDsp = _genSampler(t_shader->m_samplers[i]);
-//        //生成sampler-state
-//        t_sampler.m_st = [t_rm->m_pDevice newSamplerStateWithDescriptor:samplerDsp];
-//        t_sampler.m_chn = t_shader->m_samplers[i].m_chn;
-//        t_sampler.m_stage = t_shader->m_samplers[i].m_stage;
-//        m_sampler_st.push_back(t_sampler);
-//    }
-//    //生成uniform-buf
-//    for(s32 i=0;i<t_shader->m_paramtbl.size();i++) {
-//        void* t_pointer = t_shader->m_paramtbl[i].m_tbl->getDataPointer();
-//        s32 t_len = t_shader->m_paramtbl[i].m_tbl->getDataSize();
-//        UBUF t_ubuf;
-//        t_ubuf.m_bufid = t_shader->m_paramtbl[i].m_id;
-//        t_ubuf.m_stage = t_shader->m_paramtbl[i].m_stage;
-//        t_ubuf.m_ubuf = [t_rm->m_pDevice newBufferWithBytes:t_pointer length: t_len options: MTLResourceStorageModeShared ];
-//        m_ubuf_pool.push_back(t_ubuf);
-//    }
+    //生成vs采样器(都在一起)
+    for(s32 i=0;i<m_shader_dsp->m_samplers.size();i++) {
+        INSAMPLE t_sampler;
+        //生成sampler-dsp
+        MTLSamplerDescriptor *samplerDsp = _genSampler(m_shader_dsp->m_samplers[i]);
+        //生成sampler-state
+        t_sampler.m_st = [t_rm->m_pDevice newSamplerStateWithDescriptor:samplerDsp];
+        t_sampler.m_chn = m_shader_dsp->m_samplers[i].m_chn;
+        t_sampler.m_stage = m_shader_dsp->m_samplers[i].m_stage;
+        m_sampler_st.push_back(t_sampler);
+    }
+    //生成uniform-buf
+    for(s32 i=0;i<m_shader_dsp->m_paramtbl.size();i++) {
+        void* t_pointer = m_shader_dsp->m_paramtbl[i].m_tbl->getDataPointer();
+        s32 t_len = m_shader_dsp->m_paramtbl[i].m_tbl->getDataSize();
+        UBUF t_ubuf;
+        t_ubuf.m_bufid = m_shader_dsp->m_paramtbl[i].m_id;
+        t_ubuf.m_stage = m_shader_dsp->m_paramtbl[i].m_stage;
+        t_ubuf.m_ubuf = [t_rm->m_pDevice newBufferWithBytes:t_pointer length: t_len options: MTLResourceStorageModeShared ];
+        m_ubuf_pool.push_back(t_ubuf);
+    }
     //创建渲染描述
     MTLRenderPipelineDescriptor *t_pl_dsp = [[MTLRenderPipelineDescriptor alloc] init];
     t_pl_dsp.label = @"Simple Pipeline";
@@ -304,7 +304,7 @@ void SVRShaderMetal::destroy(SVRendererPtr _renderer) {
     //uniform-buf销毁
 }
 
-bool SVRShaderMetal::active(SVRendererPtr _renderer,SVShaderPtr _shader) {
+bool SVRShaderMetal::active(SVRendererPtr _renderer) {
     if(!m_exist) {
         return false;
     }
@@ -312,7 +312,7 @@ bool SVRShaderMetal::active(SVRendererPtr _renderer,SVShaderPtr _shader) {
     if(!t_rm) {
         return false;
     }
-    if(!_shader){
+    if(!m_shader_dsp){
         return false;
     }
     if(!m_pl_state) {
@@ -327,9 +327,9 @@ bool SVRShaderMetal::active(SVRendererPtr _renderer,SVShaderPtr _shader) {
         }
     }
     //替换uniform
-    for(s32 i=0;i<_shader->m_paramtbl.size();i++) {
-        void* t_pointer = _shader->m_paramtbl[i].m_tbl->getDataPointer();
-        s32 t_len = _shader->m_paramtbl[i].m_tbl->getDataSize();
+    for(s32 i=0;i<m_shader_dsp->m_paramtbl.size();i++) {
+        void* t_pointer = m_shader_dsp->m_paramtbl[i].m_tbl->getDataPointer();
+        s32 t_len = m_shader_dsp->m_paramtbl[i].m_tbl->getDataSize();
         memcpy( m_ubuf_pool[i].m_ubuf.contents , t_pointer ,t_len);
     }
     //上传uniform
@@ -349,7 +349,7 @@ bool SVRShaderMetal::active(SVRendererPtr _renderer,SVShaderPtr _shader) {
     return true;
 }
 
-void SVRShaderMetal::submitSurface(SVSurfacePtr _surface,SVShaderPtr _shader) {
+void SVRShaderMetal::submitSurface(SVSurfacePtr _surface) {
     if(!_surface) {
         return ;
     }

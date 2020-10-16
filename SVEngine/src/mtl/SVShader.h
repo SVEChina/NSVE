@@ -10,64 +10,13 @@
 
 #include "SVMtlDeclare.h"
 #include "../base/SVGBase.h"
+#include "../base/SVResDsp.h"
 #include "../rendercore/SVRenderDeclare.h"
 #include "../core/SVVertDef.h"
 #include <string>
 #include <vector>
 
 namespace sv {
-
-    /*
-     * shader描述
-    */
-    struct ShaderDsp {
-        ShaderDsp() {
-            m_dsp = 0;
-            m_programme_fname = "null";
-            m_vs_fname = "null";
-            m_fs_fname = "null";
-            m_gs_fname = "null";
-            m_cs_fname = "null";
-            m_tse_fname = "null";
-            m_tsd_fname = "null";
-            m_pass = "null";
-            m_vft.clear();
-        };
-        //
-        s32 m_dsp;
-        //顶点描述
-        std::vector<s32> m_vft;
-        SVString m_programme_fname;
-        SVString m_vs_fname;
-        SVString m_fs_fname;
-        SVString m_gs_fname;
-        SVString m_cs_fname;
-        SVString m_tsd_fname;
-        SVString m_tse_fname;
-        //使用的pass
-        SVString m_pass;
-    };
-
-    /*
-     * 采样器描述
-     */
-    struct SamplerDsp {
-        s32 m_chn;
-        s32 m_stage; //0:vs 1:fs 2:gs
-        SVString m_warps;
-        SVString m_warpt;
-        SVString m_min;
-        SVString m_mag;
-    };
-
-    /*
-     * 参数表描述
-     */
-    struct ParamTblDsp {
-        s32 m_id;               //传递的bufid
-        s32 m_stage;            //0:vs, 1:fs
-        SVParamTblPtr m_tbl;    //表
-    };
 
     /*
      * 包含文件和采样器
@@ -81,7 +30,7 @@ namespace sv {
         SVShaderPtr share();
         
         //渲染内核
-        void bindRes(s32 _poolid);
+        void bindRes(s32 _instid);
         
         void unbindRes();
         
@@ -100,12 +49,6 @@ namespace sv {
         
         ShaderDsp* getShaderDsp() { return &m_shader_dsp; }
 
-    public:
-        //采样器
-        std::vector<SamplerDsp> m_samplers;
-        //参数表
-        std::vector<ParamTblDsp> m_paramtbl;
-        
     protected:
         //描述
         ShaderDsp m_shader_dsp;

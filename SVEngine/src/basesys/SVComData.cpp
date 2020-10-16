@@ -38,13 +38,13 @@ SVComData::~SVComData() {
 void SVComData::init() {
     m_screenMesh = MakeSharedPtr<SVRenderMesh>(mApp);
     //索引描述
-    BufferDspPtr t_index_dsp = MakeSharedPtr<BufferDsp>(E_BFM_AOS);
+    SVBufferDspPtr t_index_dsp = MakeSharedPtr<SVBufferDsp>(E_BFM_AOS);
     t_index_dsp->push(E_VF_INDEX);
     t_index_dsp->buildWithIndex(E_BFT_STATIC_DRAW,6);
     t_index_dsp->setStreamData(E_VF_NULL, m_rect_index, 6*sizeof(u16));
     m_screenMesh->setIndexDsp(t_index_dsp);
     //顶点描述
-    BufferDspPtr t_vert_dsp= MakeSharedPtr<BufferDsp>(E_BFM_AOS);
+    SVBufferDspPtr t_vert_dsp= MakeSharedPtr<SVBufferDsp>(E_BFM_AOS);
     t_vert_dsp->push(E_VF_V2);
     t_vert_dsp->push(E_VF_T0);
     t_vert_dsp->buildWithVert(E_BFT_STATIC_DRAW,4);

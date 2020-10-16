@@ -35,6 +35,7 @@ namespace sv {
         virtual void swap(SVRTexGLPtr _rtex);
         
         u32 m_res_id;
+        
         s32 m_informate;
     };
 

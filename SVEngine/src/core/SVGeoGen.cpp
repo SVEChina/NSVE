@@ -61,13 +61,13 @@ SVRenderMeshPtr SVGeoGen::genRect(SVInstPtr _app,f32 _w,f32 _h,SVBoundBox& _aabb
     //
     SVRenderMeshPtr t_mesh = MakeSharedPtr<SVRenderMesh>(_app);
     //
-    BufferDspPtr t_index_dsp = MakeSharedPtr<BufferDsp>(E_BFM_AOS);
+    SVBufferDspPtr t_index_dsp = MakeSharedPtr<SVBufferDsp>(E_BFM_AOS);
     t_index_dsp->push(E_VF_INDEX);
     t_index_dsp->buildWithIndex(E_BFT_STATIC_DRAW,6);
     t_index_dsp->setStreamData(E_VF_INDEX, t_index_data, 6*sizeof(u16));
     t_mesh->setIndexDsp(t_index_dsp);
     //
-    BufferDspPtr t_vert_dsp = MakeSharedPtr<BufferDsp>(E_BFM_AOS);
+    SVBufferDspPtr t_vert_dsp = MakeSharedPtr<SVBufferDsp>(E_BFM_AOS);
     t_vert_dsp->push(E_VF_V3);
     t_vert_dsp->push(E_VF_T0);
     t_vert_dsp->buildWithVert(E_BFT_STATIC_DRAW,4);
@@ -83,12 +83,12 @@ SVRenderMeshPtr SVGeoGen::genRectARCHO(SVInstPtr _app,f32 _w,f32 _h,EUIARCHO _ar
 //    V3_T0 t_verts[4];
 //    //
 //    SVRenderMeshPtr t_mesh = MakeSharedPtr<SVRenderMesh>(_app);
-//    BufferDspPtr t_index_dsp= MakeSharedPtr<BufferDsp>(E_BFM_AOS);
-//    SVRenderMesh::buildBufferDsp(E_BFT_STATIC_DRAW,6,6*sizeof(u16),t_index_data,t_index_dsp);
+//    SVBufferDspPtr t_index_dsp= MakeSharedPtr<SVBufferDsp>(E_BFM_AOS);
+//    SVRenderMesh::buildSVBufferDsp(E_BFT_STATIC_DRAW,6,6*sizeof(u16),t_index_data,t_index_dsp);
 //    t_mesh->setIndexDsp(t_index_dsp);
 //    //
-//    BufferDspPtr t_vert_dsp= MakeSharedPtr<BufferDsp>(E_BFM_AOS);
-//    SVRenderMesh::buildBufferDsp(E_BFT_STATIC_DRAW,4,6*sizeof(u16),t_verts,t_vert_dsp);
+//    SVBufferDspPtr t_vert_dsp= MakeSharedPtr<SVBufferDsp>(E_BFM_AOS);
+//    SVRenderMesh::buildSVBufferDsp(E_BFT_STATIC_DRAW,4,6*sizeof(u16),t_verts,t_vert_dsp);
 //    t_mesh->setVertDsp(t_vert_dsp);
 //
 //    //这个必须有渲染器才可以执行
@@ -379,13 +379,13 @@ SVRenderMeshPtr SVGeoGen::genAABB(SVInstPtr _app,SVBoundBox& _aabb){
     //
     SVRenderMeshPtr t_mesh = MakeSharedPtr<SVRenderMesh>(_app);
     //设置索引描述
-    BufferDspPtr t_index_dsp = MakeSharedPtr<BufferDsp>(E_BFM_AOS);
+    SVBufferDspPtr t_index_dsp = MakeSharedPtr<SVBufferDsp>(E_BFM_AOS);
     t_index_dsp->push(E_VF_INDEX);
     t_index_dsp->buildWithIndex(E_BFT_STATIC_DRAW,36);
     t_index_dsp->setStreamData(E_VF_INDEX, m_index, 36*sizeof(u16));
     t_mesh->setIndexDsp(t_index_dsp);
     //设置顶点描述
-    BufferDspPtr t_vert_dsp = MakeSharedPtr<BufferDsp>(E_BFM_AOS);
+    SVBufferDspPtr t_vert_dsp = MakeSharedPtr<SVBufferDsp>(E_BFM_AOS);
     t_vert_dsp->push(E_VF_V3);
     t_vert_dsp->push(E_VF_NOR);
     t_vert_dsp->push(E_VF_T0);

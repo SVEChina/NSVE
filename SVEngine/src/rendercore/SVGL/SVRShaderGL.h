@@ -26,11 +26,11 @@ namespace sv {
         
         void destroy(SVRendererPtr _renderer);
 
-        bool active(SVRendererPtr _renderer,SVShaderPtr _shader);
+        bool active(SVRendererPtr _renderer);
 
-        void submitSurface(SVSurfacePtr _surface,SVShaderPtr _shader);
+        void submitSurface(SVSurfacePtr _surface);
         
-        void submitParamTbl(SVShaderPtr _shader);
+        void submitParamTbl();
 
     private:
         static u32 _loadShader(SVInstPtr _app,SVRendererPtr _renderer,cptr8 _filename,s32 _shaderType);

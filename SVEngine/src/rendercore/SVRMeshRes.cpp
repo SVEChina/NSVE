@@ -9,17 +9,19 @@
 #include "../app/SVInst.h"
 #include "../work/SVTdCore.h"
 #include "SVRenderer.h"
+#include "SVRenderMesh.h"
 
 using namespace sv;
 
 SVRMeshRes::SVRMeshRes(SVInstPtr _app)
 :SVRRes(_app){
     m_data_lock = MakeSharedPtr<SVLockSpin>();
-    m_draw_method = E_DRAW_TRIANGLES;
-    m_draw_num = 0;
+//    m_draw_method = E_DRAW_TRIANGLES;
+//    m_draw_num = 0;
     m_index_dsp = nullptr;
     m_vert_dsp = nullptr;
     m_instance_dsp = nullptr;
+    m_rmesh_dsp = nullptr;
 }
 
 SVRMeshRes::~SVRMeshRes(){
@@ -27,15 +29,18 @@ SVRMeshRes::~SVRMeshRes(){
     m_index_dsp = nullptr;
     m_vert_dsp = nullptr;
     m_instance_dsp = nullptr;
+    m_rmesh_dsp = nullptr;
 }
 
 void SVRMeshRes::create(SVRendererPtr _renderer,
-                        BufferDspPtr _indexdsp,
-                        BufferDspPtr _streamdsp,
-                        BufferDspPtr _instdsp) {
+                        SVBufferDspPtr _indexdsp,
+                        SVBufferDspPtr _streamdsp,
+                        SVBufferDspPtr _instdsp,
+                        SVRMeshDsp* _SVRMeshDsp) {
     m_index_dsp = _indexdsp;
     m_vert_dsp = _streamdsp;
     m_instance_dsp = _instdsp;
+    m_rmesh_dsp = _SVRMeshDsp;
 }
 
 void SVRMeshRes::destroy(SVRendererPtr _renderer) {
@@ -47,16 +52,6 @@ s32 SVRMeshRes::process(SVRendererPtr _renderer) {
 
 void SVRMeshRes::draw(SVRendererPtr _renderer) {
     return ;
-}
-
-//
-void SVRMeshRes::setDrawMethod(s32 _dm) {
-    m_draw_method = _dm;
-}
-
-//
-void SVRMeshRes::setDrawNum(s32 _num) {
-    m_draw_num = _num;
 }
 
 //

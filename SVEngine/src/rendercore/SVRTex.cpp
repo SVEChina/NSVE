@@ -8,6 +8,7 @@
 #include "SVRTex.h"
 #include "../app/SVInst.h"
 #include "../work/SVTdCore.h"
+#include "../base/SVResDsp.h"
 #include "SVRenderer.h"
 
 using namespace sv;

@@ -10,6 +10,7 @@
 #include "../app/SVGlobalMgr.h"
 #include "../base/SVDataSwap.h"
 #include "SVRenderMgr.h"
+#include "SVRenderer.h"
 
 using namespace sv;
 
@@ -18,104 +19,102 @@ SVRenderMesh::SVRenderMesh(SVInstPtr _app)
     m_index_dsp = nullptr;
     m_vert_dsp = nullptr;
     m_instance_dsp = nullptr;
-    m_res_buffer = nullptr;
-    m_use_index = false;
-    m_use_instance = false;
+    m_rmesh_id = -1;
 }
 
 SVRenderMesh::~SVRenderMesh() {
     m_index_dsp = nullptr;
     m_vert_dsp = nullptr;
     m_instance_dsp = nullptr;
-    m_res_buffer = nullptr;
-    m_use_index = false;
-    m_use_instance = false;
+    m_rmesh_id = -1;
 }
 
-void SVRenderMesh::bindRes(SVRMeshResPtr _res) {
-    m_res_buffer = _res;
+void SVRenderMesh::bindRes(s32 _instid) {
+    m_rmesh_id = _instid;
 }
 
 void SVRenderMesh::unbindRes() {
-    m_res_buffer = nullptr;
+    m_rmesh_id = -1;
 }
 
 SVRMeshResPtr SVRenderMesh::getResBuffer() {
-    return m_res_buffer;
+    if(mApp->getRenderer()) {
+        return mApp->getRenderer()->getResBuf(m_rmesh_id);
+    }
+    return nullptr;
 }
 
-//
-void SVRenderMesh::setIndexDsp(BufferDspPtr _dsp) {
-    m_use_index = true;
+void SVRenderMesh::setIndexDsp(SVBufferDspPtr _dsp) {
     m_index_dsp = _dsp;
 }
 
-//
-void SVRenderMesh::setVertDsp(BufferDspPtr _dsp) {
+void SVRenderMesh::setVertDsp(SVBufferDspPtr _dsp) {
     m_vert_dsp = _dsp;
 }
 
-//
-void SVRenderMesh::setInstanceDsp(BufferDspPtr _dsp) {
-    m_use_instance = true;
+void SVRenderMesh::setInstanceDsp(SVBufferDspPtr _dsp) {
     m_instance_dsp = _dsp;
 }
 
 bool SVRenderMesh::useIndex() {
-    return m_use_index;
-}
-
-BufferDspPtr SVRenderMesh::getIndexDsp() {
-    return m_index_dsp;
-}
-
-s32 SVRenderMesh::getStreamNum() {
-    return 0;
-}
-
-BufferDspPtr SVRenderMesh::getStreamDsp() {
-    return m_vert_dsp;
+    if(m_index_dsp) {
+        return true;
+    }
+    return false;
 }
 
 bool SVRenderMesh::useInstance() {
-    return m_use_instance;
+    if(m_instance_dsp) {
+        return true;
+    }
+    return false;
 }
 
-BufferDspPtr SVRenderMesh::getInstanceDsp() {
+SVBufferDspPtr SVRenderMesh::getIndexDsp() {
+    return m_index_dsp;
+}
+
+SVBufferDspPtr SVRenderMesh::getStreamDsp() {
+    return m_vert_dsp;
+}
+
+SVBufferDspPtr SVRenderMesh::getInstanceDsp() {
     return m_instance_dsp;
 }
 
+SVRMeshDsp* SVRenderMesh::getRMeshDsp() {
+    return &m_rmesh_dsp;
+}
+
 void SVRenderMesh::setDrawMethod(s32 _method) {
-    if(m_res_buffer) {
-        m_res_buffer->setDrawMethod(_method);
-    }
+    m_rmesh_dsp.m_draw_method = _method;
 }
 
 void SVRenderMesh::setDrawVertNum(s32 _vertexNum){
-    if(m_res_buffer) {
-        m_res_buffer->setDrawNum(_vertexNum);
-    }
+    m_rmesh_dsp.m_draw_num = _vertexNum;
 }
 
 void SVRenderMesh::setIndexData(SVDataSwapPtr _data,s32 _num){
-    if(m_res_buffer) {
-        m_res_buffer->setInstData(_data);
-        m_res_buffer->setDrawNum(_num);
+    if(m_index_dsp) {
+        //m_index_dsp->setInstData(_data);
+        setDrawVertNum(_num);
     }
 }
 
 void SVRenderMesh::setInstanceData(SVDataSwapPtr _pdata, u32 _instanceCount){
-    if(m_res_buffer) {
-        m_res_buffer->setInstData(_pdata);
+    if(m_instance_dsp) {
+        //m_instance_dsp->setInstData(_pdata);
     }
 }
 
 void SVRenderMesh::setVertexData(SVDataSwapPtr _data){
-    setVertexData(_data,0);
+    if(m_vert_dsp) {
+        //m_vert_dsp->setInstData(_pdata);
+    }
 }
 
 void SVRenderMesh::setVertexData(SVDataSwapPtr _data,s32 _streamnum) {
-    if(m_res_buffer) {
-        m_res_buffer->setVertData(_data, _streamnum);
+    if(m_vert_dsp) {
+        //m_vert_dsp->setVertData(_data, _streamnum);
     }
 }

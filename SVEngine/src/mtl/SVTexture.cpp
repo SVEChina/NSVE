@@ -84,10 +84,8 @@ void SVTexture::setTexCubeData(SVDataSwapPtr _data,s32 _index){
     m_lock->unlock();
 }
 
-void SVTexture::bindRes(SVRTexPtr _res) {
-    if(_res) {
-        m_tex_pool_id = _res->m_pool_id;
-    }
+void SVTexture::bindRes(s32 _instid) {
+    m_tex_pool_id = _instid;
 }
 
 void SVTexture::unbindRes() {

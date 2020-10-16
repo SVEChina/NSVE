@@ -200,12 +200,12 @@ FMat4 SVRTarget::vpMat(){
     return t_mat;
 }
 
-void SVRTarget::bindRes(SVRFboPtr _res) {
-    m_rfbo_id = _res->m_pool_id;
+void SVRTarget::bindRes(s32 _instid) {
+    m_rfbo_id = _instid;
 }
 
 void SVRTarget::unbindRes() {
-    //m_fbo = nullptr;
+    m_rfbo_id = -1;
 }
 
 SVRFboPtr SVRTarget::getResFbo() {

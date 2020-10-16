@@ -46,42 +46,27 @@ void SVRShaderGL::create(SVRendererPtr _renderer,ShaderDsp* _shader_dsp) {
     if(!m_shader_dsp) {
         return ;
     }
-    if( m_shader_dsp->m_dsp &SV_E_TECH_VS ) {
-         m_vs = _loadShader(mApp,
-                            _renderer,
-                            m_shader_dsp->m_vs_fname.c_str(),
-                            SV_E_TECH_VS);
+    if( m_shader_dsp->m_dsp & SV_E_TECH_VS ) {
+         m_vs = _loadShader(mApp,_renderer,m_shader_dsp->m_vs_fname.c_str(),SV_E_TECH_VS);
     }
-    if( m_shader_dsp->m_dsp&SV_E_TECH_FS ) {
-        m_fs = _loadShader(mApp,
-                           _renderer,
-                           m_shader_dsp->m_fs_fname.c_str(),
-                           SV_E_TECH_FS);
+    if( m_shader_dsp->m_dsp & SV_E_TECH_FS ) {
+        m_fs = _loadShader(mApp,_renderer,m_shader_dsp->m_fs_fname.c_str(),SV_E_TECH_FS);
     }
-    if( m_shader_dsp->m_dsp&SV_E_TECH_GS ) {
-       m_gs = _loadShader(mApp,
-                          _renderer,
-                          m_shader_dsp->m_gs_fname.c_str(),
-                          SV_E_TECH_GS);
+    if( m_shader_dsp->m_dsp & SV_E_TECH_GS ) {
+       m_gs = _loadShader(mApp,_renderer,m_shader_dsp->m_gs_fname.c_str(),SV_E_TECH_GS);
     }
-    if( m_shader_dsp->m_dsp&SV_E_TECH_TSE ) {
-        m_tsc = _loadShader(mApp,
-                            _renderer,
-                            m_shader_dsp->m_tse_fname.c_str(),
-                            SV_E_TECH_TSE);
+    if( m_shader_dsp->m_dsp & SV_E_TECH_TSE ) {
+        m_tsc = _loadShader(mApp,_renderer,m_shader_dsp->m_tse_fname.c_str(),SV_E_TECH_TSE);
     }
-    if( m_shader_dsp->m_dsp&SV_E_TECH_TSD ) {
-        m_tse = _loadShader(mApp,
-                            _renderer,
-                            m_shader_dsp->m_tsd_fname.c_str(),
-                            SV_E_TECH_TSD);
+    if( m_shader_dsp->m_dsp & SV_E_TECH_TSD ) {
+        m_tse = _loadShader(mApp,_renderer,m_shader_dsp->m_tsd_fname.c_str(),SV_E_TECH_TSD);
     }
     m_programm = _createProgram();
     //创建采样器
-//    //生成uniform-buf
-//    for(s32 i=0;i<t_shader->m_paramtbl.size();i++) {
+    //生成uniform-buf
+//    for(s32 i=0;i<m_shader_dsp->m_paramtbl.size();i++) {
 //        //合并参数表
-//        SVParamTblPtr t_p_tbl = t_shader->m_paramtbl[i].m_tbl;
+//        SVParamTblPtr t_p_tbl = m_shader_dsp->m_paramtbl[i].m_tbl;
 //    }
     //生产program后就删除shader资源
     _clearShaderRes();
@@ -92,7 +77,6 @@ u32 SVRShaderGL::_loadShader(SVInstPtr _app,SVRendererPtr _renderer,cptr8 _filen
     if(!t_renderGL) {
         return 0;
     }
-    //
     SVDataChunk tDataStream;
     u32 t_id = 0;
     bool t_flag=false;
@@ -289,34 +273,31 @@ void SVRShaderGL::destroy(SVRendererPtr _renderer) {
     }
 }
 
-bool SVRShaderGL::active(SVRendererPtr _renderer,SVShaderPtr _shader) {
+bool SVRShaderGL::active(SVRendererPtr _renderer) {
     SVRendererGLPtr t_rm = std::dynamic_pointer_cast<SVRendererGL>(_renderer);
     if(t_rm && m_programm>0) {
         glUseProgram(m_programm);
         t_rm->m_cur_program = m_programm;
         //提交参数
-        submitParamTbl(_shader);
+        submitParamTbl();
         //提交纹理
-        
         //设置各种属性
-        
         return true;
     }
     return false;
 }
 
-void SVRShaderGL::submitParamTbl(SVShaderPtr _shader) {
-    if(!_shader){
+void SVRShaderGL::submitParamTbl() {
+    if(!m_shader_dsp){
         return ;
     }
-    for(s32 i=0;i<_shader->m_paramtbl.size();i++) {
-        SVParamTblPtr t_tbl = _shader->m_paramtbl[i].m_tbl;
+    for(s32 i=0;i<m_shader_dsp->m_paramtbl.size();i++) {
+        SVParamTblPtr t_tbl = m_shader_dsp->m_paramtbl[i].m_tbl;
         for(s32 i=0;i<t_tbl->m_param_dsps.size();i++) {
             u32 t_locate = glGetUniformLocation(m_programm, t_tbl->m_param_dsps[i].m_name.c_str());
             if(t_locate<=0) {
                 continue;
             }
-            //
             if( t_tbl->m_param_dsps[i].m_type == SV_INT) {
                 s32 t_cnt = t_tbl->m_param_dsps[i].m_size/sizeof(s32);
                 s32* t_p = (s32*)(t_tbl->m_param_values->getPointer( t_tbl->m_param_dsps[i].m_off));
@@ -389,7 +370,7 @@ void SVRShaderGL::submitParamTbl(SVShaderPtr _shader) {
     }
 }
 
-void SVRShaderGL::submitSurface(SVSurfacePtr _surface,SVShaderPtr _shader) {
+void SVRShaderGL::submitSurface(SVSurfacePtr _surface) {
     if(!_surface) {
         return ;
     }

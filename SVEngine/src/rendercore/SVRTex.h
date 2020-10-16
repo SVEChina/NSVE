@@ -12,6 +12,7 @@
 
 namespace sv {
     
+    struct SVTextureDsp;
     class SVRTex: public SVRRes{
     public:
         SVRTex(SVInstPtr _app);

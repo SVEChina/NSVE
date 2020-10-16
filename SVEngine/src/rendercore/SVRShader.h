@@ -103,9 +103,9 @@ namespace sv {
 
         virtual void destroy(SVRendererPtr _renderer){}
 
-        virtual bool active(SVRendererPtr _render,SVShaderPtr _shader){ return false; }
+        virtual bool active(SVRendererPtr _render){ return false; }
         
-        virtual void submitSurface(SVSurfacePtr _surface,SVShaderPtr _shader){}
+        virtual void submitSurface(SVSurfacePtr _surface){}
         
     protected:
         ShaderDsp* m_shader_dsp;

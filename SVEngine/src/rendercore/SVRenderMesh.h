@@ -10,6 +10,7 @@
 
 #include "SVRMeshRes.h"
 #include "SVRenderDef.h"
+#include "../base/SVResDsp.h"
 #include "../core/SVVertDef.h"
 #include "../mtl/SVShaderMgr.h"
 #include "../base/SVPreDeclare.h"
@@ -25,9 +26,9 @@ namespace sv {
     //1.AOS模式  混合流
     //2.SOA模式  拆分流
     //
-    class BufferDsp :public SVObject {
+    class SVBufferDsp :public SVObject {
     public:
-        BufferDsp(BUFFERMODE _mode) {
+        SVBufferDsp(BUFFERMODE _mode) {
             _bufMode = _mode;           //E_BFM_AOS;
             _bufType = E_BFT_STATIC_DRAW;
             _vertCnt = 0;
@@ -36,7 +37,7 @@ namespace sv {
             reset();
         };
         
-        ~BufferDsp() {
+        ~SVBufferDsp() {
             _bufMode = E_BFM_AOS;
             _bufType = E_BFT_STATIC_DRAW;
             _vertCnt = 0;
@@ -199,31 +200,36 @@ namespace sv {
         
         ~SVRenderMesh();
         
-        //设置各种描述
-        void setIndexDsp(BufferDspPtr _dsp);
+        /*
+         设置描述
+         */
+        void setIndexDsp(SVBufferDspPtr _dsp);
         
-        void setVertDsp(BufferDspPtr _dsp);
+        void setVertDsp(SVBufferDspPtr _dsp);
         
-        void setInstanceDsp(BufferDspPtr _dsp);
+        void setInstanceDsp(SVBufferDspPtr _dsp);
         
-        //是否使用索引
+        /*
+         是否使用索引
+         */
         bool useIndex();
         
         bool useInstance();
         
-        //获取索引数据描述
-        BufferDspPtr getIndexDsp();
+        /*
+          获取各种描述
+         */
+        SVBufferDspPtr getIndexDsp();
         
-        //获取流数据描述
-        BufferDspPtr getStreamDsp();
+        SVBufferDspPtr getStreamDsp();
     
-        //获取多实例描述
-        BufferDspPtr getInstanceDsp();
-
-        //获取流数目
-        s32 getStreamNum();
+        SVBufferDspPtr getInstanceDsp();
         
-        //设置数据
+        SVRMeshDsp* getRMeshDsp();
+
+        /*
+         设置数据
+         */
         void setIndexData(SVDataSwapPtr _data,s32 _num);
         
         void setVertexData(SVDataSwapPtr _data);
@@ -231,31 +237,30 @@ namespace sv {
         void setVertexData(SVDataSwapPtr _data,s32 _streamnum);
         
         void setInstanceData(SVDataSwapPtr _pdata, u32 _instanceCount);
+        
+        /*
+         //设置渲染模式
+         */
 
-        //设置其他属性
         void setDrawMethod(s32 _method);
         
-        //设置绘制顶点数目
         void setDrawVertNum(s32 _vertexNum);
         
-    public:
-        bool m_use_index;
-        bool m_use_instance;
-        //BUF描述
-        BufferDspPtr m_index_dsp;
-        BufferDspPtr m_vert_dsp;
-        BufferDspPtr m_instance_dsp;
-        //
-        s32 m_draw_method;
-        //
-        void bindRes(SVRMeshResPtr _res);
-        //
+        /*
+         内核资源相关
+         */
+        void bindRes(s32 _instid);
+        
         void unbindRes();
-        //
+        
         SVRMeshResPtr getResBuffer();
         
     protected:
-        SVRMeshResPtr m_res_buffer;      //最主要的是它
+        //BUF描述
+        SVBufferDspPtr m_index_dsp;
+        SVBufferDspPtr m_vert_dsp;
+        SVBufferDspPtr m_instance_dsp;
+        SVRMeshDsp m_rmesh_dsp;
         //
         s32 m_rmesh_id;
     };

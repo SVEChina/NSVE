@@ -40,15 +40,16 @@ SVRMeshMetal::~SVRMeshMetal() {
 }
 
 void SVRMeshMetal::create(SVRendererPtr _renderer,
-                          BufferDspPtr _indexdsp,
-                          BufferDspPtr _streamdsp,
-                          BufferDspPtr _instdsp) {
-    SVRMeshRes::create(_renderer, _indexdsp, _streamdsp, _instdsp);
+                          SVBufferDspPtr _indexdsp,
+                          SVBufferDspPtr _streamdsp,
+                          SVBufferDspPtr _instdsp,
+                          SVRMeshDsp* _SVRMeshDsp) {
+    SVRMeshRes::create(_renderer, _indexdsp, _streamdsp, _instdsp,_SVRMeshDsp);
     SVRendererMetalPtr t_rm = std::dynamic_pointer_cast<SVRendererMetal>(_renderer);
     if(t_rm ) {
         //索引
         if(m_index_dsp && m_index_dsp->getVertType() == E_VF_INDEX) {
-            m_draw_num = m_index_dsp->_indexCnt;
+            m_rmesh_dsp->m_draw_num = m_index_dsp->_indexCnt;
             if(m_index_dsp->_bufData) {
                 void* t_p = m_index_dsp->_bufData->getData();
                 s32 t_len = m_index_dsp->_bufData->getSize();
@@ -91,7 +92,7 @@ void SVRMeshMetal::create(SVRendererPtr _renderer,
                     s32 t_len = t_data->getSize();
                     m_dbufs[i] = [t_rm->m_pDevice newBufferWithBytes:t_point length:t_len options:MTLResourceStorageModeShared];
                 }else{
-                    s32 t_len = m_vert_dsp->_vertCnt*BufferDsp::getVertSize(m_vert_dsp->getVertType());
+                    s32 t_len = m_vert_dsp->_vertCnt*SVBufferDsp::getVertSize(m_vert_dsp->getVertType());
                     m_dbufs[i] = [t_rm->m_pDevice newBufferWithLength:t_len options:MTLResourceStorageModeShared];
                 }
             }
@@ -152,24 +153,24 @@ void SVRMeshMetal::draw(SVRendererPtr _renderer) {
     if(t_rm && t_rm->m_curEncoder) {
         //
         MTLPrimitiveType t_method = MTLPrimitiveTypeTriangle;
-        if(m_draw_method == E_DRAW_POINTS) {
+        if(m_rmesh_dsp->m_draw_method == E_DRAW_POINTS) {
             t_method = MTLPrimitiveTypePoint;
-        }else if(m_draw_method == E_DRAW_LINES) {
+        }else if(m_rmesh_dsp->m_draw_method == E_DRAW_LINES) {
             t_method = MTLPrimitiveTypeLine;
-        }else if(m_draw_method == E_DRAW_LINE_LOOP) {
+        }else if(m_rmesh_dsp->m_draw_method == E_DRAW_LINE_LOOP) {
             //不支持
-        }else if(m_draw_method == E_DRAW_LINE_STRIP) {
+        }else if(m_rmesh_dsp->m_draw_method == E_DRAW_LINE_STRIP) {
             t_method = MTLPrimitiveTypeLineStrip;
-        }else if(m_draw_method == E_DRAW_TRIANGLES) {
+        }else if(m_rmesh_dsp->m_draw_method == E_DRAW_TRIANGLES) {
             t_method = MTLPrimitiveTypeTriangle;
-        }else if(m_draw_method == E_DRAW_TRIANGLE_STRIP) {
+        }else if(m_rmesh_dsp->m_draw_method == E_DRAW_TRIANGLE_STRIP) {
             t_method = MTLPrimitiveTypeTriangleStrip;
-        }else if(m_draw_method == E_DRAW_TRIANGLE_FAN) {
+        }else if(m_rmesh_dsp->m_draw_method == E_DRAW_TRIANGLE_FAN) {
             //不支持
         }
         //
         if( m_ibuf ) {
-            m_iCnt = m_draw_num;
+            m_iCnt = m_rmesh_dsp->m_draw_num;
             if(m_instance_buf) {
                 //多实体
                 [t_rm->m_curEncoder drawIndexedPrimitives:t_method
@@ -187,7 +188,7 @@ void SVRMeshMetal::draw(SVRendererPtr _renderer) {
                                          indexBufferOffset:m_ibufOff];
             }
         }else{
-            m_vertCnt = m_draw_num;
+            m_vertCnt = m_rmesh_dsp->m_draw_num;
             //正常顶点绘制
             if(m_instance_buf) {
                 //多实体

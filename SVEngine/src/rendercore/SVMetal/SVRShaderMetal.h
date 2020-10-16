@@ -36,9 +36,9 @@ namespace sv {
                
         void destroy(SVRendererPtr _renderer);
 
-        bool active(SVRendererPtr _renderer,SVShaderPtr _shader);
+        bool active(SVRendererPtr _renderer);
         
-        void submitSurface(SVSurfacePtr _surface,SVShaderPtr _shader);
+        void submitSurface(SVSurfacePtr _surface);
         
     protected:
         MTLSamplerDescriptor* _genSampler(SamplerDsp& _dsp);

@@ -49,6 +49,12 @@ namespace sv {
     DECLARE_SHAREPTR(SVModify);
     DECLARE_SHAREPTR(SVLock);
 
+    //
+    DECLARE_SHAREPTR(SVBufferDsp);
+    DECLARE_SHAREPTR(SVVertStreamDsp);
+    DECLARE_SHAREPTR(SVIndexStreamDsp);
+    DECLARE_SHAREPTR(SVInstStreamDsp);
+
     //sysbase - event
     DECLARE_SHAREPTR(SVEventProc);
     DECLARE_SHAREPTR(SVSysBase);

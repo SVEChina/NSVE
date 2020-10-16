@@ -22,12 +22,12 @@ SVShader::SVShader(SVInstPtr _app)
 }
 
 SVShader::~SVShader() {
-    m_samplers.clear();
     m_res_shader_id = -1;
-    for(s32 i=0;i<m_paramtbl.size();i++) {
-        m_paramtbl[i].m_tbl = nullptr;
+    m_shader_dsp.m_samplers.clear();
+    for(s32 i=0;i<m_shader_dsp.m_paramtbl.size();i++) {
+        m_shader_dsp.m_paramtbl[i].m_tbl = nullptr;
     }
-    m_paramtbl.clear();
+    m_shader_dsp.m_paramtbl.clear();
 }
 
 SVShaderPtr SVShader::share() {
@@ -35,8 +35,8 @@ SVShaderPtr SVShader::share() {
 }
 
 //渲染内核
-void SVShader::bindRes(s32 _poolid) {
-    m_res_shader_id = _poolid;
+void SVShader::bindRes(s32 _instid) {
+    m_res_shader_id = _instid;
 }
 
 void SVShader::unbindRes() {
@@ -66,7 +66,7 @@ SVSurfacePtr SVShader::createSurface() {
 bool SVShader::active() {
     SVRShaderPtr t_res_shader = getResShader();
     if(t_res_shader && mApp->getRenderer() ) {
-        return t_res_shader->active( mApp->getRenderer() ,share() );
+        return t_res_shader->active( mApp->getRenderer());
     }
     return false;
 }
@@ -81,50 +81,50 @@ void SVShader::submitParam(SVParamTblPtr _param) {
         if(t_dsp->m_type == SV_INT) {
             s32 t_value = 0;
             _param->m_param_values->get(t_dsp->m_off, t_value);
-            for(s32 j=0;j<m_paramtbl.size();j++) {
-                m_paramtbl[j].m_tbl->setParam(t_dsp->m_name.c_str(), t_value);
+            for(s32 j=0;j<m_shader_dsp.m_paramtbl.size();j++) {
+                m_shader_dsp.m_paramtbl[j].m_tbl->setParam(t_dsp->m_name.c_str(), t_value);
             }
         }else if(t_dsp->m_type == SV_FLOAT) {
             f32 t_value = 0;
             _param->m_param_values->get(t_dsp->m_off, t_value);
-            for(s32 j=0;j<m_paramtbl.size();j++) {
-                m_paramtbl[j].m_tbl->setParam(t_dsp->m_name.c_str(), t_value);
+            for(s32 j=0;j<m_shader_dsp.m_paramtbl.size();j++) {
+                m_shader_dsp.m_paramtbl[j].m_tbl->setParam(t_dsp->m_name.c_str(), t_value);
             }
         }else if(t_dsp->m_type == SV_FVEC2) {
             FVec2 t_value;
             _param->m_param_values->get(t_dsp->m_off, t_value);
-            for(s32 j=0;j<m_paramtbl.size();j++) {
-                m_paramtbl[j].m_tbl->setParam(t_dsp->m_name.c_str(), t_value);
+            for(s32 j=0;j<m_shader_dsp.m_paramtbl.size();j++) {
+                m_shader_dsp.m_paramtbl[j].m_tbl->setParam(t_dsp->m_name.c_str(), t_value);
             }
         }else if(t_dsp->m_type == SV_FVEC3) {
             FVec3 t_value;
             _param->m_param_values->get(t_dsp->m_off, t_value);
-            for(s32 j=0;j<m_paramtbl.size();j++) {
-                m_paramtbl[j].m_tbl->setParam(t_dsp->m_name.c_str(), t_value);
+            for(s32 j=0;j<m_shader_dsp.m_paramtbl.size();j++) {
+                m_shader_dsp.m_paramtbl[j].m_tbl->setParam(t_dsp->m_name.c_str(), t_value);
             }
         }else if(t_dsp->m_type == SV_FVEC4) {
             FVec4 t_value;
             _param->m_param_values->get(t_dsp->m_off, t_value);
-            for(s32 j=0;j<m_paramtbl.size();j++) {
-                m_paramtbl[j].m_tbl->setParam(t_dsp->m_name.c_str(), t_value);
+            for(s32 j=0;j<m_shader_dsp.m_paramtbl.size();j++) {
+                m_shader_dsp.m_paramtbl[j].m_tbl->setParam(t_dsp->m_name.c_str(), t_value);
             }
         }else if(t_dsp->m_type == SV_FMAT2) {
             FMat2 t_value;
             _param->m_param_values->get(t_dsp->m_off, t_value);
-            for(s32 j=0;j<m_paramtbl.size();j++) {
-                m_paramtbl[j].m_tbl->setParam(t_dsp->m_name.c_str(), t_value);
+            for(s32 j=0;j<m_shader_dsp.m_paramtbl.size();j++) {
+                m_shader_dsp.m_paramtbl[j].m_tbl->setParam(t_dsp->m_name.c_str(), t_value);
             }
         }else if(t_dsp->m_type == SV_FMAT3) {
             FMat3 t_value;
             _param->m_param_values->get(t_dsp->m_off, t_value);
-            for(s32 j=0;j<m_paramtbl.size();j++) {
-                m_paramtbl[j].m_tbl->setParam(t_dsp->m_name.c_str(), t_value);
+            for(s32 j=0;j<m_shader_dsp.m_paramtbl.size();j++) {
+                m_shader_dsp.m_paramtbl[j].m_tbl->setParam(t_dsp->m_name.c_str(), t_value);
             }
         }else if(t_dsp->m_type == SV_FMAT4) {
             FMat4 t_value;
             _param->m_param_values->get(t_dsp->m_off, t_value);
-            for(s32 j=0;j<m_paramtbl.size();j++) {
-                m_paramtbl[j].m_tbl->setParam(t_dsp->m_name.c_str(), t_value);
+            for(s32 j=0;j<m_shader_dsp.m_paramtbl.size();j++) {
+                m_shader_dsp.m_paramtbl[j].m_tbl->setParam(t_dsp->m_name.c_str(), t_value);
             }
         }
     }
@@ -206,7 +206,7 @@ bool SVShader::fromJSON(RAPIDJSON_NAMESPACE::Value &item,cptr8 _language) {
         for(s32 i=0;i<t_sampler.Size();i++) {
             SamplerDsp t_sampler_dsp;
             SamplerDspFromJson(t_sampler[i],t_sampler_dsp);
-            m_samplers.push_back(t_sampler_dsp);
+            m_shader_dsp.m_samplers.push_back(t_sampler_dsp);
         }
     }
     //uniform参数
@@ -215,7 +215,7 @@ bool SVShader::fromJSON(RAPIDJSON_NAMESPACE::Value &item,cptr8 _language) {
         for(s32 i=0;i<t_uniform.Size();i++) {
             ParamTblDsp _dsp;
             ParamTblFromJson(t_uniform[i],_dsp);
-            m_paramtbl.push_back(_dsp);
+            m_shader_dsp.m_paramtbl.push_back(_dsp);
         }
     }
     return true;

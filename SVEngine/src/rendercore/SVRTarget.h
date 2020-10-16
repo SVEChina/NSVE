@@ -11,6 +11,7 @@
 #include "../base/SVGBase.h"
 #include "../base/SVMat4.h"
 #include "../base/SVColor.h"
+#include "../base/SVResDsp.h"
 #include "SVRenderDeclare.h"
 #include "SVNodeDeclare.h"
 #include <vector>
@@ -20,37 +21,6 @@ namespace sv {
     /*
     渲染目标（主目标，其他目标，都包含在内）
     */
-
-    //目标描述
-    struct SVTargetDsp {
-        //
-        SVTargetDsp() {
-            m_width = 512;
-            m_height = 512;
-            m_target_num = 1;
-            memset(m_color_texid,0,sizeof(s32)*SV_SUPPORT_MAX_TAREGT);
-            m_use_depth = true;
-            m_use_stencil = true;
-            m_color_r = 0.0f;
-            m_color_g = 0.0f;
-            m_color_b = 0.0f;
-            m_color_a = 1.0f;
-            m_depth_value = 1.0f;
-            m_stencil_value = 0;
-        }
-        s32 m_width;
-        s32 m_height;
-        s32 m_target_num;
-        s32 m_color_texid[SV_SUPPORT_MAX_TAREGT];
-        bool m_use_depth;
-        bool m_use_stencil;
-        f32 m_color_r;
-        f32 m_color_g;
-        f32 m_color_b;
-        f32 m_color_a;
-        f32 m_depth_value;
-        s32 m_stencil_value;
-    };
 
     //
     class SVRTarget : public SVGBaseEx {
@@ -95,7 +65,7 @@ namespace sv {
         void bindCamera(SVCameraNodePtr _camera);
 
         //绑定资源
-        void bindRes(SVRFboPtr _res);
+        void bindRes(s32 _instid);
 
         void unbindRes();
 

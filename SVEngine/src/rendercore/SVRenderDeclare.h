@@ -28,7 +28,6 @@ namespace sv {
     DECLARE_SHAREPTR(SVRTech);
     DECLARE_SHAREPTR(SVRTarget);
     DECLARE_SHAREPTR(SVRenderStream);
-    DECLARE_SHAREPTR(BufferDsp);
     DECLARE_SHAREPTR(SVRenderMesh);
 
     //GL

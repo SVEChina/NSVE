@@ -9,6 +9,7 @@
 #define SV_TEXTURE_H
 
 #include "SVMtlDef.h"
+#include "../base/SVResDsp.h"
 #include "../rendercore/SVRTex.h"
 #include "../rendercore/SVRenderDef.h"
 
@@ -32,7 +33,7 @@ namespace sv {
         
         void setTexCubeData(SVDataSwapPtr _data,s32 _index);
 
-        void bindRes(SVRTexPtr _res);
+        void bindRes(s32 _instid);
         
         void unbindRes();
         

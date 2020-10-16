@@ -14,9 +14,9 @@ using namespace sv;
 
 SVRFbo::SVRFbo(SVInstPtr _app)
 :SVRRes(_app)
-,m_logic_dsp(nullptr) {
+,m_logic_fbo_dsp(nullptr) {
 }
 
 SVRFbo:: ~SVRFbo(){
-    m_logic_dsp = nullptr;
+    m_logic_fbo_dsp = nullptr;
 }

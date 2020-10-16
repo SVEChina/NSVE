@@ -169,46 +169,6 @@ namespace sv {
     };
 
 
-
-    /*
-     逻辑层面的纹理
-     */
-
-    struct SVTextureDsp {
-        SVTextureDsp() {
-            m_image_type = SV_IMAGE_2D;
-            m_data_formate = SV_FORMAT_RGBA8;    // 数据格式
-            m_warp_s = E_TEX_CLAMP;             // S方向环绕
-            m_warp_t = E_TEX_CLAMP;             // T方向环绕
-            m_width = 1;                        // 宽
-            m_height = 1;                       // 高
-            m_depth = 1;                        // 深度    //3d纹理使用
-            m_minmap = true;                    // 是否开启mipmap
-            m_computeWrite = false;             // metal
-            m_renderTarget = false;             // 是否renderTarget
-            m_srgb = false;                     // metal
-            //
-            for(s32 i=0;i<6;i++) {
-                m_pData[i] = nullptr;
-            }
-        };
-        
-        SV_TEXTYPE m_image_type;
-        SV_TEXFORMATE m_data_formate;      //数据格式
-        SV_TEXWRAP m_warp_s;
-        SV_TEXWRAP m_warp_t;
-        s32 m_width;            //宽
-        s32 m_height;           //高
-        s32 m_depth;            //深度    //3d纹理使用
-        bool m_minmap;          //是否开启mipmap
-        bool m_computeWrite;    //metal 是否可以
-        bool m_renderTarget;    //metal 是否是renderTarget
-        bool m_srgb;
-        //数据
-        SVDataSwapPtr m_pData[6];
-    };
-
-
 }//!namespace sv
 
 
