@@ -27,6 +27,10 @@ namespace sv {
 
         virtual void destroy(SVRendererPtr _renderer);
         
+        virtual void load();
+        
+        virtual void unload();
+        
         virtual void resize(s32 _width,s32 _height,SVRendererPtr _renderer);
         
         virtual void bind(SVRendererPtr _renderer);
@@ -41,7 +45,6 @@ namespace sv {
         bool m_out_tex;
     };
 
-    
 }//!namespace sv
 
 

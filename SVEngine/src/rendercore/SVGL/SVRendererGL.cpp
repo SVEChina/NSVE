@@ -7,7 +7,6 @@
 
 #include "SVRendererGL.h"
 #include "SVRTexGL.h"
-#include "SVRTechGL.h"
 #include "SVRFboGL.h"
 #include "SVRShaderGL.h"
 #include "SVRMeshGL.h"
@@ -150,6 +149,20 @@ SVRFboPtr SVRendererGL::getResFbo(s32 _uid) const {
         return m_rfbo_pool->getObject(_uid);
     }
     return nullptr;
+}
+
+void SVRendererGL::bindTarget(s32 _poolid) {
+    SVRFboPtr t_fbo = getResFbo(_poolid);
+    if(t_fbo) {
+        t_fbo->bind(share());
+    }
+}
+
+void SVRendererGL::unbindTarget(s32 _poolid) {
+    SVRFboPtr t_fbo = getResFbo(_poolid);
+    if(t_fbo) {
+        t_fbo->unbind(share());
+    }
 }
 
 //处理材质

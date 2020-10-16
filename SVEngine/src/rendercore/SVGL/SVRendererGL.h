@@ -65,6 +65,10 @@ namespace sv {
         //获取fbo资源
         SVRFboPtr getResFbo(s32 _uid) const;
         
+        void bindTarget(s32 _poolid);
+
+        void unbindTarget(s32 _poolid);
+        
         //处理材质
         bool processMtl(SVMtlCorePtr _mtl,SVSurfacePtr _surface);
         

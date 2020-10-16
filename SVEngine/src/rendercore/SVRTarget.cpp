@@ -20,7 +20,7 @@ using namespace sv;
 SVRTarget::SVRTarget(SVInstPtr _app,SV_TEXIN _id)
 :SVGBaseEx(_app)
 ,m_target_id(_id)
-,m_fbo(nullptr)
+,m_rfbo_id(-1)
 ,m_camera(nullptr){
     m_auto = true;
     m_cmdNum = 0;
@@ -33,22 +33,19 @@ SVRTarget::SVRTarget(SVInstPtr _app,SV_TEXIN _id)
         m_stream_pool[i] = MakeSharedPtr<SVRenderStream>();
         m_stream_pool[i]->setValid(false);
     }
-    //
     m_stream_pre = MakeSharedPtr<SVRenderStream>();
     m_stream_after = MakeSharedPtr<SVRenderStream>();
 }
 
 SVRTarget::~SVRTarget() {
-    //
     m_stream_pre = nullptr;
     m_stream_after = nullptr;
-    //
     for(s32 i=0;i<E_RSM_MAX;i++) {
         m_stream_pool[i] = nullptr;
     }
     m_stream_pool.clear();
     m_camera = nullptr;
-    m_fbo = nullptr;
+    m_rfbo_id = -1;
 }
 
 SVRTargetPtr SVRTarget::share() {
@@ -82,25 +79,29 @@ void SVRTarget::resize(s32 _width,s32 _height) {
 }
 
 void SVRTarget::render(SVRendererPtr _renderer) {
-    if(m_fbo) {
+    if( m_rfbo_id>=0 ) {
         _renderer->setCurTarget( share() );
         //
         if(m_stream_pre) {
            m_stream_pre->render(_renderer,share());
         }
         if(m_cmdNum>0) {
-            m_fbo->bind(_renderer);
+            _renderer->bindTarget(m_rfbo_id);
+            //m_fbo->bind(_renderer);
             for(s32 i=0;i<m_stream_quene.size();i++) {
                 s32 t_s_id = m_stream_quene[i];
                 if(m_stream_pool[t_s_id]) {
                      m_stream_pool[t_s_id]->render(_renderer,share() );
                 }
             }
-            m_fbo->unbind(_renderer);
+            _renderer->unbindTarget(m_rfbo_id);
+            //m_fbo->unbind(_renderer);
             m_cmdNum = 0;
         }else{
-            m_fbo->bind(_renderer);
-            m_fbo->unbind(_renderer);
+            _renderer->bindTarget(m_rfbo_id);
+            _renderer->unbindTarget(m_rfbo_id);
+//            m_fbo->bind(_renderer);
+//            m_fbo->unbind(_renderer);
         }
         //
         if(m_stream_after) {
@@ -200,13 +201,16 @@ FMat4 SVRTarget::vpMat(){
 }
 
 void SVRTarget::bindRes(SVRFboPtr _res) {
-    m_fbo = _res;
+    m_rfbo_id = _res->m_pool_id;
 }
 
 void SVRTarget::unbindRes() {
-    m_fbo = nullptr;
+    //m_fbo = nullptr;
 }
 
 SVRFboPtr SVRTarget::getResFbo() {
-    return m_fbo;
+    if( mApp->getRenderer() ) {
+        return mApp->getRenderer()->getResFbo(m_rfbo_id);
+    }
+    return nullptr;
 }

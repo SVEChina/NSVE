@@ -72,22 +72,18 @@ bool SVCtxIOSGLES::activeContext(SVRendererPtr _renderer){
             glBindRenderbuffer(GL_RENDERBUFFER, m_colorBuf);
             glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, m_colorBuf);
             [m_gl_context renderbufferStorage:GL_RENDERBUFFER fromDrawable:m_gl_layer];
-    //        glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_WIDTH, &_width);
-    //        glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_HEIGHT, &_height);
             //check success
             if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
                 NSLog(@"Failed to make complete framebuffer object: %i", glCheckFramebufferStatus(GL_FRAMEBUFFER));
             }
         }
     }
-    
     if( m_gl_layer ) {
         glBindFramebuffer(GL_FRAMEBUFFER, m_frameBuf);
-        glClearColor(1.0, 0.0, 0.0, 0.0);
+        glClearColor(0.0, 0.0, 0.0, 1.0);
         glClear(GL_COLOR_BUFFER_BIT);
         glViewport(0, 0, mApp->m_global_param.sv_width, mApp->m_global_param.sv_height);
     }
-    
     return ret;
 }
 

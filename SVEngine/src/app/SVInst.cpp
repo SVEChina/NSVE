@@ -156,6 +156,10 @@ void SVInst::destroy() {
         //事件系统最后析够,因为很多其他模块 会注册监听事件
         m_event_sys->destroy();
     }
+    //
+    if(m_ctx) {
+        m_ctx = nullptr;
+    }
     m_sv_st = SV_ST_NULL;
 }
 
@@ -215,9 +219,12 @@ SVCtxBasePtr SVInst::createEnv(SV_R_ENV _type) {
 
 //销毁渲染环境，包括渲染器
 void SVInst::destroyEnv() {
-    if(m_renderer){
-        m_renderer->destroy();
-        m_renderer = nullptr;
+//    if(m_renderer){
+//        m_renderer->destroy();
+//        m_renderer = nullptr;
+//    }
+    if(m_ctx) {
+        m_ctx->destroy();
     }
 }
 

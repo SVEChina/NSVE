@@ -105,6 +105,10 @@ namespace sv {
         
         //设置当前target
         virtual void setCurTarget(SVRTargetPtr _target);
+        
+        virtual void bindTarget(s32 _poolid) {}
+        
+        virtual void unbindTarget(s32 _poolid) {}
     
         //处理材质
         virtual bool processMtl(SVMtlCorePtr _mtl,SVSurfacePtr _surface){ return false; }

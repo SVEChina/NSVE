@@ -175,6 +175,20 @@ void SVRendererMetal::popEncoder() {
     m_curEncoder = nullptr;
 }
 
+void SVRendererMetal::bindTarget(s32 _poolid) {
+    SVRFboPtr t_fbo = getResFbo(_poolid);
+    if(t_fbo) {
+        t_fbo->bind(share());
+    }
+}
+
+void SVRendererMetal::unbindTarget(s32 _poolid) {
+    SVRFboPtr t_fbo = getResFbo(_poolid);
+    if(t_fbo) {
+        t_fbo->unbind(share());
+    }
+}
+
 //处理材质
 bool SVRendererMetal::processMtl(SVMtlCorePtr _mtl,SVSurfacePtr _surface) {
     if(!m_curEncoder)

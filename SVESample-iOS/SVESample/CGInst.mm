@@ -75,28 +75,26 @@ static CGInst *mInst;
     return m_p_sve.get();
 }
 
-//
 -(void)createRM:(id<MTLDevice>)_device drawable:(id<CAMetalDrawable>)_drawable {
     if( m_p_sve ) {
         //创建Metal
         sv::SVCtxBasePtr t_ctx = m_p_sve->createEnv(sv::E_R_METAL_IOS);
         sv::SVCtxIOSMetalPtr t_ctx_metal = std::dynamic_pointer_cast<sv::SVCtxIOSMetal>(t_ctx);
         if(t_ctx_metal) {
-            //
-            
         }
     }
 }
 
 //
 -(void)destroyRM {
-    
+    if(m_p_sve) {
+        m_p_sve->destroyEnv();
+    }
 }
 
 //
 -(void)createGLES:(EAGLContext*)_ctx version:(int)_ver drawable:(CAEAGLLayer *)_layer {
     if( m_p_sve ) {
-        //创建OpenGLES
         sv::SVCtxBasePtr t_ctx = m_p_sve->createEnv(sv::E_R_GLES_IOS);
         sv::SVCtxIOSGLESPtr t_ctx_gles = std::dynamic_pointer_cast<sv::SVCtxIOSGLES>(t_ctx);
         if(t_ctx_gles) {
@@ -106,7 +104,9 @@ static CGInst *mInst;
 }
 
 -(void)destroyGLES {
-    
+    if(m_p_sve) {
+        m_p_sve->destroyEnv();
+    }
 }
 
 -(void)render {

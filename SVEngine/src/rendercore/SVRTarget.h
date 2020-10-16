@@ -135,10 +135,10 @@ namespace sv {
         //是否开启输出
         bool m_output;
         
-        //
-        SVRFboPtr m_fbo;
+        //关联的FBO-ID
+        s32 m_rfbo_id;
         
-        //
+        //渲染相关
         SVRenderStreamPtr m_stream_pre;
          
         //

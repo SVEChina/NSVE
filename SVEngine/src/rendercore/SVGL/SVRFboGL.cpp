@@ -31,15 +31,6 @@ void SVRFboGL::create(SVRendererPtr _renderer) {
         m_width = t_dsp->m_width;
         m_height = t_dsp->m_height;
         m_target_num = t_dsp->m_target_num>SV_SUPPORT_MAX_TAREGT ? SV_SUPPORT_MAX_TAREGT : t_dsp->m_target_num;
-//        //color
-//        if(t_dsp->m_gl_tex>0) {
-//            m_out_tex = true;
-//            m_color_tex[0] = t_dsp->m_gl_tex;
-//        }else{
-//            //需要自己创建
-//            m_out_tex = false;
-//            glGenTextures(m_target_num, m_color_tex);
-//        }
         for(s32 i=0;i<m_target_num;i++) {
             glBindTexture(GL_TEXTURE_2D, m_color_tex[i]);
             glTexImage2D(GL_TEXTURE_2D,
@@ -104,12 +95,21 @@ void SVRFboGL::destroy(SVRendererPtr _renderer) {
     SVRFbo::destroy(_renderer);
 }
 
+void SVRFboGL::load() {
+    SVRFbo::load();
+    
+}
+
+void SVRFboGL::unload() {
+    SVRFbo::unload();
+    
+}
+
 void SVRFboGL::resize(s32 _width,s32 _height,SVRendererPtr _renderer) {
     if(m_width!=_width || m_height!=_height ) {
         m_width = _width;
         m_height = _height;
         //颜色重新
-        
         //删除，重新创建
         if(m_depth_Tex == m_stencil_Tex) {
             if(m_depth_Tex!=0) {
@@ -141,12 +141,6 @@ void SVRFboGL::resize(s32 _width,s32 _height,SVRendererPtr _renderer) {
 }
 
 void SVRFboGL::bind(SVRendererPtr _renderer) {
-    //
-    if(m_target_num == 1) {
-        
-    }else{
-        
-    }
     glBindFramebuffer(GL_FRAMEBUFFER, m_fbo_id);
     glViewport(0, 0, m_width, m_height);
     glClearColor(1.0f,m_color_value.g,m_color_value.b,m_color_value.a);

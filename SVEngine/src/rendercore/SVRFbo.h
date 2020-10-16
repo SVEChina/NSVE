@@ -13,7 +13,7 @@
 
 namespace sv {
     
-    class SVRFbo: public SVRRes{
+    class SVRFbo: public SVRRes {
     public:
         SVRFbo(SVInstPtr _app);
 
@@ -22,6 +22,10 @@ namespace sv {
         virtual void create(SVRendererPtr _renderer) {}
 
         virtual void destroy(SVRendererPtr _renderer) {}
+        
+        virtual void load() {}
+        
+        virtual void unload() {}
         
         virtual void resize(s32 _width,s32 _height,SVRendererPtr _renderer) {}
 

@@ -45,15 +45,6 @@ bool SVCtxOSXGL::activeContext(SVRendererPtr _renderer){
         glClear(GL_COLOR_BUFFER_BIT);
         return true;
     }
-//    else {
-//  m_gl_context = [[NSOpenGLContext alloc] initWithFormat:m_gl_context_out.pixelFormat shareContext:m_gl_context_out];
-//        if(m_gl_context) {
-//            [m_gl_context makeCurrentContext];
-//            glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
-//            glClear(GL_COLOR_BUFFER_BIT);
-//            return true;
-//        }
-//    }
     return false;
 }
 
