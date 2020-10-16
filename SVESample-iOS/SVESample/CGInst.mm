@@ -94,13 +94,13 @@ static CGInst *mInst;
 }
 
 //
--(void)createGLES:(EAGLContext*)_ctx version:(int)_ver width:(int)_w height:(int)_h {
+-(void)createGLES:(EAGLContext*)_ctx version:(int)_ver drawable:(CAEAGLLayer *)_layer {
     if( m_p_sve ) {
         //创建OpenGLES
         sv::SVCtxBasePtr t_ctx = m_p_sve->createEnv(sv::E_R_GLES_IOS);
         sv::SVCtxIOSGLESPtr t_ctx_gles = std::dynamic_pointer_cast<sv::SVCtxIOSGLES>(t_ctx);
         if(t_ctx_gles) {
-            t_ctx_gles->init( (__bridge void*)_ctx, _ver, _w, _h);
+            t_ctx_gles->init( (__bridge void*)_ctx, _ver, (__bridge void*)_layer);
         }
     }
 }

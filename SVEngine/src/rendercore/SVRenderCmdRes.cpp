@@ -32,7 +32,6 @@ void SVRCmdCreateMesh::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
         t_rbuffer->m_logic_obj = m_rendermesh;
         m_rendermesh->bindRes(t_rbuffer);
         t_rbuffer->create(_renderer);
-        _renderer->addRes(t_rbuffer);
     }
 }
 
@@ -50,9 +49,8 @@ void SVRCmdCreateShader::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
     if(m_shader && _renderer) {
         SVRShaderPtr t_rshader = _renderer->createResShader() ;
         t_rshader->m_logic_obj = m_shader;
-        m_shader->bindRes(t_rshader);
+        m_shader->bindRes(t_rshader->m_pool_id);
         t_rshader->create(_renderer);
-        _renderer->addRes(t_rshader);
     }
 }
 
@@ -72,7 +70,6 @@ void SVRCmdCreateTex::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
         t_rtex->m_logic_obj = m_texture;
         m_texture->bindRes(t_rtex);
         t_rtex->create(_renderer);
-        _renderer->addRes(t_rtex);
     }
 }
 
@@ -93,7 +90,6 @@ void SVRCmdCreateTarget::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
             t_rfbo->m_logic_obj = m_rtarget;
             m_rtarget->bindRes(t_rfbo);
             t_rfbo->create(_renderer);
-            _renderer->addRes(t_rfbo);
         }
     }
 }

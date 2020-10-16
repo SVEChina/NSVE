@@ -59,7 +59,13 @@ void SVResMgr::destroy() {
 }
 
 void SVResMgr::renderCache() {
-    
+    //shader析构
+    if (m_shader_mgr) {
+        //m_shader_mgr->();
+    }
+    if(m_target_mgr) {
+        //m_target_mgr->();
+    }
 }
 
 //

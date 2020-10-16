@@ -17,7 +17,7 @@ namespace sv {
      渲染目标（主目标，其他目标，都包含在内）
      */
 
-    class SVRFboGL  : public SVRFbo {
+    class SVRFboGL : public SVRFbo {
     public:
         SVRFboGL(SVInstPtr _app);
         
@@ -28,6 +28,10 @@ namespace sv {
         virtual void destroy(SVRendererPtr _renderer);
         
         virtual void resize(s32 _width,s32 _height,SVRendererPtr _renderer);
+        
+        virtual void bind(SVRendererPtr _renderer);
+
+        virtual void unbind(SVRendererPtr _renderer);
 
     protected:
         u32 m_fbo_id;

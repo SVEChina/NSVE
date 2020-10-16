@@ -7,6 +7,7 @@
 
 #include "SVShader.h"
 #include "SVSurface.h"
+#include "../rendercore/SVRenderer.h"
 #include "../rendercore/SVRShader.h"
 #include "../app/SVInst.h"
 #include "../base/SVParamTbl.h"
@@ -17,12 +18,12 @@ using namespace sv;
 
 SVShader::SVShader(SVInstPtr _app)
 :SVGBaseEx(_app)
-,m_res_shader(nullptr){
+,m_res_shader_id(-1){
 }
 
 SVShader::~SVShader() {
     m_samplers.clear();
-    m_res_shader = nullptr;
+    m_res_shader_id = -1;
     for(s32 i=0;i<m_paramtbl.size();i++) {
         m_paramtbl[i].m_tbl = nullptr;
     }
@@ -30,16 +31,19 @@ SVShader::~SVShader() {
 }
 
 //渲染内核
-void SVShader::bindRes(SVRShaderPtr _res) {
-    m_res_shader = _res;
+void SVShader::bindRes(s32 _poolid) {
+    m_res_shader_id = _poolid;
 }
 
 void SVShader::unbindRes() {
-    m_res_shader = nullptr;
+    m_res_shader_id = -1;
 }
 
 SVRShaderPtr SVShader::getResShader() {
-    return m_res_shader;
+    if(mApp->getRenderer()) {
+        return mApp->getRenderer()->getResShader(m_res_shader_id);
+    }
+    return nullptr;
 }
 
 //创建一个surface
@@ -56,8 +60,9 @@ SVSurfacePtr SVShader::createSurface() {
 }
 
 bool SVShader::active() {
-    if(m_res_shader && mApp->getRenderer() ) {
-        return m_res_shader->active( mApp->getRenderer() );
+    SVRShaderPtr t_res_shader = getResShader();
+    if(t_res_shader && mApp->getRenderer() ) {
+        return t_res_shader->active( mApp->getRenderer() );
     }
     return false;
 }

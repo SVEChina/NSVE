@@ -216,7 +216,6 @@ SVCtxBasePtr SVInst::createEnv(SV_R_ENV _type) {
 //销毁渲染环境，包括渲染器
 void SVInst::destroyEnv() {
     if(m_renderer){
-        m_renderer->clearRes();
         m_renderer->destroy();
         m_renderer = nullptr;
     }

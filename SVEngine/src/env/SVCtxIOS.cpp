@@ -26,12 +26,13 @@ SVCtxIOSGLES::~SVCtxIOSGLES() {
 }
 
 //同步初始化
-void SVCtxIOSGLES::init(void* _shareContext,s32 _version,s32 _w,s32 _h) {
+void SVCtxIOSGLES::init(void* _shareContext,s32 _version,void* _layer) {
     m_glversion = _version;
     m_gl_context_share = (__bridge EAGLContext*)_shareContext;
+    m_gl_layer = (__bridge CAEAGLLayer*)_layer;
     //
-    mApp->m_global_param.sv_width = _w;
-    mApp->m_global_param.sv_height = _h;
+    mApp->m_global_param.sv_width = m_gl_layer.frame.size.width;
+    mApp->m_global_param.sv_height = m_gl_layer.frame.size.height;
     //创建渲染器
     SVRendererGLPtr t_renderer = MakeSharedPtr<SVRendererGL>(mApp);
     t_renderer->init(_version);
@@ -40,9 +41,11 @@ void SVCtxIOSGLES::init(void* _shareContext,s32 _version,s32 _w,s32 _h) {
 }
 
 bool SVCtxIOSGLES::activeContext(SVRendererPtr _renderer){
+    bool ret = false;
     if(m_gl_context){
-        return [EAGLContext setCurrentContext:m_gl_context];
+        ret = [EAGLContext setCurrentContext:m_gl_context];
     } else {
+        //创建阶段
         //因为是OpenGL 所以需要跟render绑定在一起才对
         if(m_gl_context_share){
             m_gl_context = [[EAGLContext alloc] initWithAPI:[m_gl_context_share API] sharegroup:[m_gl_context_share sharegroup]];
@@ -58,12 +61,34 @@ bool SVCtxIOSGLES::activeContext(SVRendererPtr _renderer){
             SV_LOG_INFO("create context ios share\n");
         }
         if(m_gl_context) {
-            return [EAGLContext setCurrentContext:m_gl_context];
-        } else {
-            NSLog(@"activeContext error!");
+            ret = [EAGLContext setCurrentContext:m_gl_context];
+        }
+        if( m_gl_layer ) {
+            //set up frame buffer
+            glGenFramebuffers(1, &m_frameBuf);
+            glBindFramebuffer(GL_FRAMEBUFFER, m_frameBuf);
+            //set up color render buffer
+            glGenRenderbuffers(1, &m_colorBuf);
+            glBindRenderbuffer(GL_RENDERBUFFER, m_colorBuf);
+            glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, m_colorBuf);
+            [m_gl_context renderbufferStorage:GL_RENDERBUFFER fromDrawable:m_gl_layer];
+    //        glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_WIDTH, &_width);
+    //        glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_HEIGHT, &_height);
+            //check success
+            if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
+                NSLog(@"Failed to make complete framebuffer object: %i", glCheckFramebufferStatus(GL_FRAMEBUFFER));
+            }
         }
     }
-    return false;
+    
+    if( m_gl_layer ) {
+        glBindFramebuffer(GL_FRAMEBUFFER, m_frameBuf);
+        glClearColor(1.0, 0.0, 0.0, 0.0);
+        glClear(GL_COLOR_BUFFER_BIT);
+        glViewport(0, 0, mApp->m_global_param.sv_width, mApp->m_global_param.sv_height);
+    }
+    
+    return ret;
 }
 
 //交换场景

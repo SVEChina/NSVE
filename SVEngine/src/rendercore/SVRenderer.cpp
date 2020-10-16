@@ -40,7 +40,6 @@ void SVRenderer::init(){
 }
 
 void SVRenderer::destroy(){
-    clearRes();
     m_cur_target = nullptr;
     m_res_lock = nullptr;
 }
@@ -50,58 +49,6 @@ void SVRenderer::resize(s32 _w,s32 _h) {
     m_res_lock->lock();
     m_res_lock->unlock();
 }
-
-//增加资源
-void SVRenderer::addRes(SVRResPtr _res) {
-    m_res_lock->lock();
-    m_robjList.push_back(_res);
-    m_res_lock->unlock();
-}
-
-//移除资源
-void SVRenderer::removeRes(SVRResPtr _res) {
-    m_res_lock->lock();
-    ROBJLIST::iterator it = m_robjList.begin();
-    while(it!=m_robjList.end()) {
-        SVRResPtr t_robj = (*it) ;
-        if(_res == t_robj) {
-            t_robj->destroy( std::dynamic_pointer_cast<SVRenderer>(shareObject())  );
-            m_robjList.erase(it);
-            break;
-        }
-        it++;
-    }
-    m_res_lock->unlock();
-}
-
-//移除不使用的资源
-void SVRenderer::removeUnuseRes() {
-    m_res_lock->lock();
-    ROBJLIST::iterator it = m_robjList.begin();
-    while(it!=m_robjList.end()) {
-        SVRResPtr t_robj = (*it) ;
-        if(t_robj.use_count() == 1) {
-            t_robj->destroy( std::dynamic_pointer_cast<SVRenderer>(shareObject())  );
-            it = m_robjList.erase(it);
-        }else{
-            it++;
-        }
-    }
-    m_res_lock->unlock();
-}
-
-//清理资源
-void SVRenderer::clearRes() {
-    m_res_lock->lock();
-    ROBJLIST::iterator it = m_robjList.begin();
-    while(it!=m_robjList.end()) {
-        SVRResPtr t_robj = (*it);
-        t_robj->destroy( std::dynamic_pointer_cast<SVRenderer>(shareObject())  );
-        it = m_robjList.erase(it);
-    }
-    m_res_lock->unlock();
-}
-
 
 //需要控制当前的fbo
 void SVRenderer::setCurTarget(SVRTargetPtr _target) {

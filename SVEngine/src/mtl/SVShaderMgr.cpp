@@ -44,7 +44,7 @@ void SVShaderMgr::_loadAllShader() {
     SV_LOG_ERROR("load shadercfg.json begin\n");
     bool tflag = mApp->m_file_sys->loadFileContentStr(&tDataStream, "shader/shadercfg.json");
     if (!tflag) {
-        SV_LOG_INFO("not find shadercfg.json!please check shader file path!\n");
+        SV_LOG_INFO("error not find shadercfg.json!n");
         return;
     }
     SV_LOG_ERROR("file context %s \n", tDataStream.getPointerChar());
@@ -80,7 +80,6 @@ void SVShaderMgr::loadSDSP(cptr8 _sdsp,cptr8 _language) {
         SV_LOG_INFO("not find _sdsp file!please check shader file path!\n");
         return ;
     }
-    SV_LOG_ERROR("file context %s \n", tDataStream.getPointerChar());
     RAPIDJSON_NAMESPACE::Document doc;
     doc.Parse<0>(tDataStream.getPointerChar());
     if (doc.HasParseError()) {

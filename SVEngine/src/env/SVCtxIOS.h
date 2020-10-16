@@ -25,7 +25,7 @@ namespace sv {
         ~SVCtxIOSGLES();
         
         //同步调用 确保在一个线程
-        void init(void* _shareContext,s32 _version,s32 _w,s32 _h);
+        void init(void* _shareContext,s32 _version,void* _layer);
 
         bool activeContext(SVRendererPtr _renderer);
 
@@ -33,8 +33,11 @@ namespace sv {
         
     protected:
         s32 m_glversion;
+        u32 m_frameBuf;
+        u32 m_colorBuf;
         EAGLContext* m_gl_context;
         EAGLContext* m_gl_context_share;
+        CAEAGLLayer* m_gl_layer;
     };
 
     //Metal渲染器

@@ -79,7 +79,7 @@ namespace sv {
         ~SVShader();
         
         //渲染内核
-        void bindRes(SVRShaderPtr _res);
+        void bindRes(s32 _poolid);
         
         void unbindRes();
         
@@ -104,7 +104,7 @@ namespace sv {
         std::vector<ParamTblDsp> m_paramtbl;
         
     protected:
-        SVRShaderPtr m_res_shader;
+        s32 m_res_shader_id;
         
     public:
         //创建采样器描述

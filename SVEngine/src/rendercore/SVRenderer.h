@@ -103,15 +103,6 @@ namespace sv {
         //交换纹理
         void swapInTexture(SV_TEXIN _tex1,SV_TEXIN _tex2);
         
-        //增加渲染内核资源
-        virtual void addRes(SVRResPtr _res);
-        
-        //移除渲染内核资源
-        virtual void removeRes(SVRResPtr _res);
-        
-        //清理渲染内核资源
-        virtual void clearRes();
-        
         //设置当前target
         virtual void setCurTarget(SVRTargetPtr _target);
     
@@ -129,9 +120,6 @@ namespace sv {
         
         //绘制屏幕
         virtual void drawScreen(SV_TEXIN _texid) { }
-        
-        //自动回收
-        virtual void removeUnuseRes();
 
     protected:
         //状态
@@ -140,10 +128,6 @@ namespace sv {
         
         //资源锁
         SVLockSpinPtr m_res_lock;
-        
-        //起到资源统计和管理的作用
-        typedef std::list<SVRResPtr> ROBJLIST;
-        ROBJLIST m_robjList;
     };
     
 }//!namespace sv

@@ -97,8 +97,11 @@ void SVRTarget::render(SVRendererPtr _renderer) {
                 }
             }
             m_fbo->unbind(_renderer);
+            m_cmdNum = 0;
+        }else{
+            m_fbo->bind(_renderer);
+            m_fbo->unbind(_renderer);
         }
-        m_cmdNum = 0;
         //
         if(m_stream_after) {
            m_stream_after->render(_renderer,share());

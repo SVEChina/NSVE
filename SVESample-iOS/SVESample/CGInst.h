@@ -26,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 //
 -(void)destroyRM;
 //
--(void)createGLES:(EAGLContext*)_ctx version:(int)_ver width:(int)_w height:(int)_h;
+-(void)createGLES:(EAGLContext*)_ctx version:(int)_ver drawable:(CAEAGLLayer *)_layer;
 //
 -(void)destroyGLES;
 //

@@ -19,6 +19,8 @@
     CADisplayLink* displayLink;
     int _width;
     int _height;
+    GLuint _framebuffer;
+    GLuint _colorRenderbuffer;
 }
 
 @property (nonatomic , strong) EAGLContext* mContext;
@@ -36,15 +38,12 @@
         _eaglLayer.opaque = YES; //CALayer默认是透明的
         _width = frameRect.size.width;
         _height = frameRect.size.height;
+        _eaglLayer.drawableProperties = @{
+            kEAGLDrawablePropertyRetainedBacking :[NSNumber numberWithBool:NO],
+            kEAGLDrawablePropertyColorFormat : kEAGLColorFormatRGBA8 };
         //
-        _eaglLayer.drawableProperties = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool: NO],
-                                         kEAGLDrawablePropertyRetainedBacking,
-                                         kEAGLColorFormatRGBA8,
-                                         kEAGLDrawablePropertyColorFormat,
-                                         nil];
-        //[self.layer addSublayer:_eaglLayer];
-        [self.layer insertSublayer:_eaglLayer atIndex:0];
-        //
+        [self.layer addSublayer:_eaglLayer];
+        //[self.layer insertSublayer:_eaglLayer atIndex:0];
         [self buildGL];
     }
     return self;
@@ -55,7 +54,7 @@
     //初始化渲染上下文，管理所有绘制的状态，命令及资源信息。
     _eaglContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES3];
     //创建渲染器
-    [[CGInst getInst] createGLES:_eaglContext version:3 width:_width height:_height];
+    [[CGInst getInst] createGLES:_eaglContext version:3 drawable:_eaglLayer];
     //
     [self creatTimer];
 }
