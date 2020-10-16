@@ -60,13 +60,11 @@ SVRenderMeshPtr SVGeoGen::genRect(SVInstPtr _app,f32 _w,f32 _h,SVBoundBox& _aabb
     }
     //
     SVRenderMeshPtr t_mesh = MakeSharedPtr<SVRenderMesh>(_app);
-    //
     SVIndexStreamDspPtr t_index_dsp = MakeSharedPtr<SVIndexStreamDsp>();
     t_index_dsp->setBufType(E_BFT_STATIC_DRAW);
     t_index_dsp->setIndexCnt(6);
     t_index_dsp->setStreamData(t_index_data, 6*sizeof(u16));
     t_mesh->setIndexDsp(t_index_dsp);
-    //
     SVVertStreamDspPtr t_vert_dsp = MakeSharedPtr<SVVertStreamDsp>(E_BFM_AOS);
     t_vert_dsp->push(E_VF_V3);
     t_vert_dsp->push(E_VF_T0);

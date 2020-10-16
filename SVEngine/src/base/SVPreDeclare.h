@@ -50,7 +50,6 @@ namespace sv {
     DECLARE_SHAREPTR(SVLock);
 
     //
-    DECLARE_SHAREPTR(SVBufferDsp);
     DECLARE_SHAREPTR(SVVertStreamDsp);
     DECLARE_SHAREPTR(SVIndexStreamDsp);
     DECLARE_SHAREPTR(SVInstStreamDsp);
