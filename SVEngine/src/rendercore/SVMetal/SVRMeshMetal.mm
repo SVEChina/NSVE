@@ -40,15 +40,15 @@ SVRMeshMetal::~SVRMeshMetal() {
 }
 
 void SVRMeshMetal::create(SVRendererPtr _renderer,
-                          SVBufferDspPtr _indexdsp,
-                          SVBufferDspPtr _streamdsp,
-                          SVBufferDspPtr _instdsp,
+                          SVIndexStreamDspPtr _indexdsp,
+                          SVVertStreamDspPtr _streamdsp,
+                          SVInstStreamDspPtr _instdsp,
                           SVRMeshDsp* _SVRMeshDsp) {
     SVRMeshRes::create(_renderer, _indexdsp, _streamdsp, _instdsp,_SVRMeshDsp);
     SVRendererMetalPtr t_rm = std::dynamic_pointer_cast<SVRendererMetal>(_renderer);
     if(t_rm ) {
         //索引
-        if(m_index_dsp && m_index_dsp->getVertType() == E_VF_INDEX) {
+        if(m_index_dsp) {
             m_rmesh_dsp->m_draw_num = m_index_dsp->_indexCnt;
             if(m_index_dsp->_bufData) {
                 void* t_p = m_index_dsp->_bufData->getData();
@@ -92,7 +92,7 @@ void SVRMeshMetal::create(SVRendererPtr _renderer,
                     s32 t_len = t_data->getSize();
                     m_dbufs[i] = [t_rm->m_pDevice newBufferWithBytes:t_point length:t_len options:MTLResourceStorageModeShared];
                 }else{
-                    s32 t_len = m_vert_dsp->_vertCnt*SVBufferDsp::getVertSize(m_vert_dsp->getVertType());
+                    s32 t_len = m_vert_dsp->_vertCnt*SVVertStreamDsp::getVertSize(m_vert_dsp->getVertType());
                     m_dbufs[i] = [t_rm->m_pDevice newBufferWithLength:t_len options:MTLResourceStorageModeShared];
                 }
             }

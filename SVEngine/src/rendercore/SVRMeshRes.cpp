@@ -16,8 +16,6 @@ using namespace sv;
 SVRMeshRes::SVRMeshRes(SVInstPtr _app)
 :SVRRes(_app){
     m_data_lock = MakeSharedPtr<SVLockSpin>();
-//    m_draw_method = E_DRAW_TRIANGLES;
-//    m_draw_num = 0;
     m_index_dsp = nullptr;
     m_vert_dsp = nullptr;
     m_instance_dsp = nullptr;
@@ -33,9 +31,9 @@ SVRMeshRes::~SVRMeshRes(){
 }
 
 void SVRMeshRes::create(SVRendererPtr _renderer,
-                        SVBufferDspPtr _indexdsp,
-                        SVBufferDspPtr _streamdsp,
-                        SVBufferDspPtr _instdsp,
+                        SVIndexStreamDspPtr _indexdsp,
+                        SVVertStreamDspPtr _streamdsp,
+                        SVInstStreamDspPtr _instdsp,
                         SVRMeshDsp* _SVRMeshDsp) {
     m_index_dsp = _indexdsp;
     m_vert_dsp = _streamdsp;

@@ -26,9 +26,9 @@ namespace sv {
         virtual ~SVRMeshRes();
         
         virtual void create(SVRendererPtr _renderer,
-                            SVBufferDspPtr _indexdsp,
-                            SVBufferDspPtr _streamdsp,
-                            SVBufferDspPtr _instdsp,
+                            SVIndexStreamDspPtr _indexdsp,
+                            SVVertStreamDspPtr _streamdsp,
+                            SVInstStreamDspPtr _instdsp,
                             SVRMeshDsp* _SVRMeshDsp);
         
         virtual void destroy(SVRendererPtr _renderer);
@@ -45,9 +45,9 @@ namespace sv {
         
     protected:
         //同步描述
-        SVBufferDspPtr m_index_dsp;
-        SVBufferDspPtr m_vert_dsp;
-        SVBufferDspPtr m_instance_dsp;
+        SVIndexStreamDspPtr m_index_dsp;
+        SVVertStreamDspPtr m_vert_dsp;
+        SVInstStreamDspPtr m_instance_dsp;
         SVRMeshDsp* m_rmesh_dsp;
         
         SVLockSpinPtr m_data_lock;

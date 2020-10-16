@@ -67,7 +67,6 @@ namespace sv {
         
         s32 m_adaptMode;
         
-        //
         typedef std::vector<SVSysBasePtr> RENDERHELPPOOL;
         RENDERHELPPOOL m_render_help_pool;
         

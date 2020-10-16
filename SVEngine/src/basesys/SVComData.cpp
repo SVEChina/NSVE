@@ -38,16 +38,17 @@ SVComData::~SVComData() {
 void SVComData::init() {
     m_screenMesh = MakeSharedPtr<SVRenderMesh>(mApp);
     //索引描述
-    SVBufferDspPtr t_index_dsp = MakeSharedPtr<SVBufferDsp>(E_BFM_AOS);
-    t_index_dsp->push(E_VF_INDEX);
-    t_index_dsp->buildWithIndex(E_BFT_STATIC_DRAW,6);
-    t_index_dsp->setStreamData(E_VF_NULL, m_rect_index, 6*sizeof(u16));
+    SVIndexStreamDspPtr t_index_dsp = MakeSharedPtr<SVIndexStreamDsp>();
+    t_index_dsp->setIndexCnt(6);
+    t_index_dsp->setBufType(E_BFT_STATIC_DRAW);
+    t_index_dsp->setStreamData(m_rect_index, 6*sizeof(u16));
     m_screenMesh->setIndexDsp(t_index_dsp);
     //顶点描述
-    SVBufferDspPtr t_vert_dsp= MakeSharedPtr<SVBufferDsp>(E_BFM_AOS);
+    SVVertStreamDspPtr t_vert_dsp= MakeSharedPtr<SVVertStreamDsp>(E_BFM_AOS);
     t_vert_dsp->push(E_VF_V2);
     t_vert_dsp->push(E_VF_T0);
-    t_vert_dsp->buildWithVert(E_BFT_STATIC_DRAW,4);
+    t_vert_dsp->setBufType(E_BFT_STATIC_DRAW);
+    t_vert_dsp->setVertCnt(4);
     t_vert_dsp->setStreamData(E_VF_NULL, m_screen_rect_v2_t0, 16*sizeof(f32));
     m_screenMesh->setVertDsp(t_vert_dsp);
 }

@@ -35,7 +35,6 @@ public:
         _bufMode = _mode;           //E_BFM_AOS;
         _bufType = E_BFT_STATIC_DRAW;
         _vertCnt = 0;
-        _indexCnt = 0;
         _bufSize = 0;
         reset();
     };
@@ -44,7 +43,6 @@ public:
         _bufMode = E_BFM_AOS;
         _bufType = E_BFT_STATIC_DRAW;
         _vertCnt = 0;
-        _indexCnt = 0;
         _bufSize = 0;
         reset();
     };
@@ -68,21 +66,6 @@ public:
         _vertCnt = _cnt;
     }
     
-    //设置索引个数
-    void setIndexCnt(s32 _cnt) {
-        _indexCnt = _cnt;
-    }
-    
-    void buildWithVert(BUFFERTYPE _btype,s32 _cnt) {
-        setBufType(_btype);
-        setVertCnt(_cnt);
-    }
-    
-    void buildWithIndex(BUFFERTYPE _btype,s32 _cnt) {
-        setBufType(_btype);
-        setIndexCnt(_cnt);
-    }
-    
     //重置
     void reset() {
         _bufData = nullptr;
@@ -101,9 +84,6 @@ public:
     
     static s32 getVertSize(VFTYPE _vf) {
         s32 t_size = 0;
-        if (_vf & E_VF_INDEX) {
-            t_size += sizeof(u16);
-        }
         if (_vf & E_VF_V2) {
             t_size += 2 * sizeof(f32);
         }
@@ -155,26 +135,26 @@ public:
     }
     
     bool setStreamData(VFTYPE _stype,void* _data,s32 _len) {
-           if(_bufMode == E_BFM_AOS) {
-               //混合流模式，设定给单一目标就好
-               if(!_bufData) {
-                   _bufData = MakeSharedPtr<SVDataSwap>();
-               }
-               _bufData->appendData(_data,_len);
-               return true;
-           } else {
-               //单一流模式，需要按流分开存储
-               std::map<VFTYPE,SVDataSwapPtr>::iterator it = m_streamData.find(_stype);
-               if( it == m_streamData.end() ) {
-                   return false;
-               }
-               if( !m_streamData[_stype] ) {
-                   m_streamData[_stype] = MakeSharedPtr<SVDataSwap>();
-               }
-               m_streamData[_stype]->appendData(_data,_len);
-               return true;
+        if(_bufMode == E_BFM_AOS) {
+            //混合流模式，设定给单一目标就好
+           if(!_bufData) {
+               _bufData = MakeSharedPtr<SVDataSwap>();
            }
-       }
+           _bufData->appendData(_data,_len);
+           return true;
+        } else {
+           //单一流模式，需要按流分开存储
+           std::map<VFTYPE,SVDataSwapPtr>::iterator it = m_streamData.find(_stype);
+           if( it == m_streamData.end() ) {
+               return false;
+           }
+           if( !m_streamData[_stype] ) {
+               m_streamData[_stype] = MakeSharedPtr<SVDataSwap>();
+           }
+           m_streamData[_stype]->appendData(_data,_len);
+           return true;
+        }
+    }
     
     //
     BUFFERMODE _bufMode;    //E_BFM_AOS 混合流，E_BFM_SOA 单一流
@@ -182,8 +162,6 @@ public:
     BUFFERTYPE _bufType;    //BUFFER类型
     //顶点个数
     s32 _vertCnt;           //顶点数目
-    //索引个数
-    s32 _indexCnt;          //索引数目
     //数据尺寸
     s32 _bufSize;           //buf 尺寸
     //流描述
@@ -197,13 +175,17 @@ public:
 class SVIndexStreamDsp :public SVObject {
 public:
     SVIndexStreamDsp() {
-        _indexCnt = 0;
+        _bufSize = 0;
         _bufData = nullptr;
     };
     
     ~SVIndexStreamDsp() {
         _bufData = nullptr;
     };
+    
+    void setBufType(BUFFERTYPE _type) {
+        _bufType = _type;
+    }
     
     //设置索引个数
     void setIndexCnt(s32 _cnt) {
@@ -216,25 +198,38 @@ public:
         return true;
     }
     
-protected:
+    bool setStreamData(void* _data,s32 _len) {
+        if(!_bufData) {
+            _bufData = MakeSharedPtr<SVDataSwap>();
+        }
+        _bufData->appendData(_data,_len);
+        return true;
+    }
     //索引个数
-    s32 _indexCnt;          //索引数目
+    s32 _indexCnt;
+    //buf 尺寸
+    s32 _bufSize;
+    //BUFFER类型
+    BUFFERTYPE _bufType;
     //数据
     SVDataSwapPtr _bufData;
-    //数据类型
-    BUFFERTYPE _bufType;    //BUFFER类型
 };
 
 class SVInstStreamDsp :public SVObject {
 public:
     SVInstStreamDsp() {
         _instCnt = 0;
+        _bufSize = 0;
         _bufData = nullptr;
     };
     
     ~SVInstStreamDsp() {
         _bufData = nullptr;
     };
+    
+    void setBufType(BUFFERTYPE _type) {
+        _bufType = _type;
+    }
     
     //设置索引个数
     void setInstCnt(s32 _cnt) {
@@ -247,13 +242,22 @@ public:
         return true;
     }
     
-protected:
+    bool setStreamData(void* _data,s32 _len) {
+        if(!_bufData) {
+            _bufData = MakeSharedPtr<SVDataSwap>();
+        }
+        _bufData->appendData(_data,_len);
+        return true;
+    }
+
     //实例个数
     s32 _instCnt;
+    //buf 尺寸
+    s32 _bufSize;
+    //BUFFER类型
+    BUFFERTYPE _bufType;
     //数据
     SVDataSwapPtr _bufData;
-    //数据类型
-    BUFFERTYPE _bufType;    //BUFFER类型
 };
 
 struct SVRMeshDsp {

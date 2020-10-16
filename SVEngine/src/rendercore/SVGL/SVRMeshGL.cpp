@@ -25,9 +25,9 @@ SVRMeshGL::~SVRMeshGL() {
 }
 
 void SVRMeshGL::create(SVRendererPtr _renderer,
-                       SVBufferDspPtr _indexdsp,
-                       SVBufferDspPtr _streamdsp,
-                       SVBufferDspPtr _instdsp,
+                       SVIndexStreamDspPtr _indexdsp,
+                       SVVertStreamDspPtr _streamdsp,
+                       SVInstStreamDspPtr _instdsp,
                        SVRMeshDsp* _SVRMeshDsp) {
     SVRMeshRes::create(_renderer, _indexdsp, _streamdsp, _instdsp,_SVRMeshDsp);
     SVRendererGLPtr t_rm = std::dynamic_pointer_cast<SVRendererGL>(_renderer);
@@ -59,7 +59,6 @@ void SVRMeshGL::create(SVRendererPtr _renderer,
         //多实例
         if(m_instance_dsp ){
             glGenBuffers(1, &m_instanceID);
-            //m_instacne_count = t_dsp->_bufSize;
             glBindBuffer(GL_ARRAY_BUFFER, m_instanceID);
             s32 t_pool_type = GL_STATIC_DRAW;
             if(m_instance_dsp->_bufType == E_BFT_STATIC_DRAW) {
@@ -116,7 +115,7 @@ void SVRMeshGL::create(SVRendererPtr _renderer,
                     if(t_data) {
                         glBufferData(GL_ARRAY_BUFFER,t_data->getSize(),t_data->getData(),t_pool_type);
                     }else{
-                        s32 t_size = m_vert_dsp->_vertCnt * SVBufferDsp::getVertSize(VFTYPE(t_stream_type));  //顶点数*类型
+                        s32 t_size = m_vert_dsp->_vertCnt * SVVertStreamDsp::getVertSize(VFTYPE(t_stream_type));  //顶点数*类型
                         glBufferData(GL_ARRAY_BUFFER,t_size,0,t_pool_type);
                     }
                 }

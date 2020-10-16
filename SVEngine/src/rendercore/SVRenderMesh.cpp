@@ -44,15 +44,15 @@ SVRMeshResPtr SVRenderMesh::getResBuffer() {
     return nullptr;
 }
 
-void SVRenderMesh::setIndexDsp(SVBufferDspPtr _dsp) {
+void SVRenderMesh::setIndexDsp(SVIndexStreamDspPtr _dsp) {
     m_index_dsp = _dsp;
 }
 
-void SVRenderMesh::setVertDsp(SVBufferDspPtr _dsp) {
+void SVRenderMesh::setVertDsp(SVVertStreamDspPtr _dsp) {
     m_vert_dsp = _dsp;
 }
 
-void SVRenderMesh::setInstanceDsp(SVBufferDspPtr _dsp) {
+void SVRenderMesh::setInstanceDsp(SVInstStreamDspPtr _dsp) {
     m_instance_dsp = _dsp;
 }
 
@@ -70,15 +70,15 @@ bool SVRenderMesh::useInstance() {
     return false;
 }
 
-SVBufferDspPtr SVRenderMesh::getIndexDsp() {
+SVIndexStreamDspPtr SVRenderMesh::getIndexDsp() {
     return m_index_dsp;
 }
 
-SVBufferDspPtr SVRenderMesh::getStreamDsp() {
+SVVertStreamDspPtr SVRenderMesh::getStreamDsp() {
     return m_vert_dsp;
 }
 
-SVBufferDspPtr SVRenderMesh::getInstanceDsp() {
+SVInstStreamDspPtr SVRenderMesh::getInstanceDsp() {
     return m_instance_dsp;
 }
 
