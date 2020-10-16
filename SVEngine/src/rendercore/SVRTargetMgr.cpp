@@ -39,9 +39,11 @@ void SVRTargetMgr::destroy() {
 void SVRTargetMgr::loadDefault() {
     //创建主target,设置主RT
     SVRTargetPtr t_target = createTarget(E_TEX_MAIN,true,true);
-    t_target->pushStreamQuene(E_RSM_SKY );
-    t_target->pushStreamQuene(E_RSM_SOLID);
-    mApp->getRenderMgr()->setMainRT(t_target);
+    if(t_target) {
+        t_target->pushStreamQuene(E_RSM_SKY );
+        t_target->pushStreamQuene(E_RSM_SOLID);
+        mApp->getRenderMgr()->setMainRT(t_target);
+    }
 }
 
 //重置大小
@@ -58,7 +60,6 @@ void SVRTargetMgr::resize(s32 _w,s32 _h) {
 //创建target资源
 SVRTargetPtr SVRTargetMgr::createTarget(SV_TEXIN _texid,bool _depth,bool _stencil) {
     SVTexMgrPtr t_tex_mgr = mApp->getTexMgr();
-    //
     SVRTargetPtr t_target = getTarget(_texid);
     if(t_target) {
         return t_target;
@@ -94,6 +95,7 @@ SVRTargetPtr SVRTargetMgr::createTarget(SV_TEXIN _texid,bool _depth,bool _stenci
 }
 
 SVRTargetPtr SVRTargetMgr::createTarget(SV_TEXIN _texid,s32 _w,s32 _h,bool _depth,bool _stencil){
+    SVTexMgrPtr t_tex_mgr = mApp->getTexMgr();
     SVRTargetPtr t_target = getTarget(_texid);
     if(t_target) {
         return t_target;
@@ -108,10 +110,10 @@ SVRTargetPtr SVRTargetMgr::createTarget(SV_TEXIN _texid,s32 _w,s32 _h,bool _dept
     t_tex_dsp.m_minmap = false;         //是否开启mipmap
     t_tex_dsp.m_computeWrite = true;    //metal 是否可以
     t_tex_dsp.m_renderTarget = true;    //metal 是否是renderTarget
-//    SVTexturePtr t_target_tex = createInTexture(_texid,t_tex_dsp);
-//    if(!t_target_tex) {
-//        return nullptr;
-//    }
+    SVTexturePtr t_target_tex = t_tex_mgr->createInTexture(_texid,t_tex_dsp);
+    if(!t_target_tex) {
+        return nullptr;
+    }
     //创建主target
     t_target = MakeSharedPtr<SVRTarget>(mApp,_texid);
     SVTargetDsp* t_dsp = t_target->getTargetDsp();

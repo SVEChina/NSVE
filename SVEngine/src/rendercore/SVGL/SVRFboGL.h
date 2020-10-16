@@ -34,8 +34,9 @@ namespace sv {
         virtual void unbind(SVRendererPtr _renderer);
 
     protected:
+        s32 m_fbo_last_id;
         u32 m_fbo_id;
-        u32 m_color_tex[SV_SUPPORT_MAX_TAREGT];
+        //深度这块用纹理？还是用BUF？
         u32 m_depth_Tex;
         u32 m_stencil_Tex;
         bool m_out_tex;

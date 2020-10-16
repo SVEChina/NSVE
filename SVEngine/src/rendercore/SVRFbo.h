@@ -21,7 +21,7 @@ namespace sv {
         virtual ~SVRFbo();
 
         virtual void load(SVRendererPtr _renderer,SVTargetDsp* _logic_dsp) {
-            m_logic_fbo_dsp = _logic_dsp;
+            m_fbo_dsp = _logic_dsp;
         }
 
         virtual void unload() {}
@@ -34,7 +34,7 @@ namespace sv {
 
     protected:
         SVLockPtr m_texLock;
-        SVTargetDsp* m_logic_fbo_dsp;     //逻辑对象的dsp
+        SVTargetDsp* m_fbo_dsp;     //逻辑对象的dsp
     };
         
 }//!namespace sv

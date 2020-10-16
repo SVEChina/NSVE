@@ -25,7 +25,6 @@ namespace sv {
         
         void destroy();
         
-        //创建默认的target
         void loadDefault();
         
         void resize(s32 _w,s32 _h);

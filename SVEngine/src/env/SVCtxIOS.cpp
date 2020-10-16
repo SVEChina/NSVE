@@ -90,6 +90,10 @@ bool SVCtxIOSGLES::activeContext(SVRendererPtr _renderer){
 //交换场景
 bool SVCtxIOSGLES::swap(SVRendererPtr _renderer){
     if(m_gl_context){
+        if( m_gl_layer ) {
+            _renderer->drawScreen(E_TEX_MAIN);
+        }
+        //
         bool t_flag = [m_gl_context presentRenderbuffer:GL_RENDERBUFFER];
         if(!t_flag){
             NSLog(@"presentRenderbuffer error!");

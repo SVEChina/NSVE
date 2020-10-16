@@ -395,7 +395,7 @@ struct SVTargetDsp {
     s32 m_width;
     s32 m_height;
     s32 m_target_num;
-    s32 m_color_texid[SV_SUPPORT_MAX_TAREGT];
+    SV_TEXIN m_color_texid[SV_SUPPORT_MAX_TAREGT];
     bool m_use_depth;
     bool m_use_stencil;
     f32 m_color_r;

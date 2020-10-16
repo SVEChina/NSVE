@@ -45,7 +45,6 @@ namespace sv {
         
         SVTextureDsp* getTextureDsp() { return &m_texture_dsp;}
 
-        //
         void swap(SVTexturePtr _tex);
         
     protected:

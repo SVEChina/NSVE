@@ -18,8 +18,10 @@
 #include "../../app/SVGlobalParam.h"
 #include "../../app/SVDispatch.h"
 #include "../../base/SVCompileConfig.h"
+#include "../../basesys/SVComData.h"
 #include "../../mtl/SVTexMgr.h"
 #include "../../mtl/SVTexture.h"
+#include "../../mtl/SVMtlLib.h"
 #include "../../mtl/SVMtlCore.h"
 #include "../../mtl/SVShader.h"
 #include "../../mtl/SVSurface.h"
@@ -172,7 +174,6 @@ bool SVRendererGL::processMtl(SVMtlCorePtr _mtl,SVSurfacePtr _surface) {
             //更新uniform
             _mtl->getShader()->submitParam(_surface->m_tbl);
             //更新纹理
-            
         }
         //
         bool t_ret = _mtl->getShader()->active();
@@ -212,5 +213,26 @@ void SVRendererGL::drawMesh(SVRenderMeshPtr _mesh ) {
 
 //屏幕空间绘制
 void SVRendererGL::drawScreen(SV_TEXIN _texid) {
-    
+    SVTexturePtr t_tex = getInTexture(_texid);
+    if(!t_tex){
+        return ;
+    }
+    SVSurfacePtr t_surface = MakeSharedPtr<SVSurface>();
+    t_surface->setTexture(0,t_tex,1);
+    //
+    SVRenderMeshPtr t_mesh = mApp->getComData()->screenMesh();
+    bool t_ret = processMesh(t_mesh);
+    if(!t_ret){
+        return ;
+    }
+    //激活材质
+    SVMtlCorePtr t_mtl = mApp->getMtlLib()->getMtl("back");
+    if(t_mtl) {
+        t_mtl->reloadShader();
+        t_ret = processMtl(t_mtl,t_surface);
+        if(t_ret){
+            drawMesh(t_mesh);
+        }
+    }
+    t_surface = nullptr;
 }

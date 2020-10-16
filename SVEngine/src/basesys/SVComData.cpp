@@ -51,6 +51,9 @@ void SVComData::init() {
     t_vert_dsp->setVertCnt(4);
     t_vert_dsp->setStreamData(E_VF_NULL, m_screen_rect_v2_t0, 16*sizeof(f32));
     m_screenMesh->setVertDsp(t_vert_dsp);
+    //设置绘制方法
+    m_screenMesh->setDrawMethod(E_DRAW_TRIANGLES);
+    m_screenMesh->setDrawVertNum(6);
 }
 
 #define IDX(_x_, _y_) ((_y_)*rx + (_x_))
