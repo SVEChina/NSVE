@@ -27,7 +27,10 @@ namespace sv {
         
         ~SVRMeshGL();
         
-        void create(SVRendererPtr _renderer);
+        void create(SVRendererPtr _renderer,
+                    BufferDspPtr _indexdsp,
+                    BufferDspPtr _streamdsp,
+                    BufferDspPtr _instdsp);
 
         void destroy(SVRendererPtr _renderer);
 

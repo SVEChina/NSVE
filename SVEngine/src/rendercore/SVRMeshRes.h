@@ -18,14 +18,16 @@ namespace sv {
         
     //1.AOS模式  混合流
     //2.SOA模式  拆分流
-
     class SVRMeshRes: public SVRRes{
     public:
         SVRMeshRes(SVInstPtr _app);
         
         virtual ~SVRMeshRes();
         
-        virtual void create(SVRendererPtr _renderer);
+        virtual void create(SVRendererPtr _renderer,
+                            BufferDspPtr _indexdsp,
+                            BufferDspPtr _streamdsp,
+                            BufferDspPtr _instdsp);
         
         virtual void destroy(SVRendererPtr _renderer);
         
@@ -39,16 +41,18 @@ namespace sv {
         //设置绘制的数目
         void setDrawNum(s32 _num);
         
-        //
         void setInstData(SVDataSwapPtr _data);
         
-        //
         void setIndexData(SVDataSwapPtr _data);
         
-        //
         void setVertData(SVDataSwapPtr _data,s32 _chn);
         
     protected:
+        //同步描述
+        BufferDspPtr m_index_dsp;
+        BufferDspPtr m_vert_dsp;
+        BufferDspPtr m_instance_dsp;
+        
         //绘制方法
         s32 m_draw_method;
         

@@ -10,6 +10,7 @@
 #include "../app/SVInst.h"
 #include "../work/SVTdCore.h"
 #include "../base/SVDataSwap.h"
+#include "../rendercore/SVRenderer.h"
 
 using namespace sv;
 
@@ -17,17 +18,17 @@ SVTexture::SVTexture(SVInstPtr _app)
 :SVGBaseEx(_app) {
     m_lock = MakeSharedPtr<SVLockSpin>();
     m_name = "";
-    m_restex = nullptr;
+    m_tex_pool_id = -1;
     for(s32 i=0;i<6;i++) {
-        m_pData[i] = nullptr;
+        m_texture_dsp.m_pData[i] = nullptr;
     }
 }
 
 SVTexture::~SVTexture() {
     m_lock = nullptr;
-    m_restex = nullptr;
+    m_tex_pool_id = -1;
     for(s32 i=0;i<6;i++) {
-        m_pData[i] = nullptr;
+        m_texture_dsp.m_pData[i] = nullptr;
     }
 }
 
@@ -41,67 +42,68 @@ void SVTexture::init(SVTextureDsp& _dsp,SVDataSwapPtr _data) {
     setTexData(_data);
 }
 
-//
 void SVTexture::destroy(){
     for(s32 i=0;i<6;i++) {
-        m_pData[i] = nullptr;
+        m_texture_dsp.m_pData[i] = nullptr;
     }
 }
 
-//
 void SVTexture::resize(s32 _w,s32 _h) {
     if(m_texture_dsp.m_width == _w && m_texture_dsp.m_height == _h) {
         return ;
     }
-    //
     m_texture_dsp.m_width = _w;
     m_texture_dsp.m_height = _h;
-    if(m_restex) {
-        m_restex->resize();
-    }
+//    if(m_restex) {
+//        m_restex->resize();
+//    }
 }
 
 SVDataSwapPtr SVTexture::getTextureData() {
-    return m_pData[0];
+    return m_texture_dsp.m_pData[0];
 }
 
 SVDataSwapPtr SVTexture::getTextureCubeData(s32 _index) {
     if(_index>=0 && _index<6) {
-        return m_pData[_index];
+        return m_texture_dsp.m_pData[_index];
     }
     return nullptr;
 }
 
 void SVTexture::setTexData(SVDataSwapPtr _data){
-    //更新纹理数据
     m_lock->lock();
-    m_pData[0] = _data;
+    m_texture_dsp.m_pData[0] = _data;
     m_lock->unlock();
 }
 
 void SVTexture::setTexCubeData(SVDataSwapPtr _data,s32 _index){
-    //更新纹理数据
     m_lock->lock();
     if(_index>=0 && _index<6) {
-        m_pData[_index] = _data;
+        m_texture_dsp.m_pData[_index] = _data;
     }
     m_lock->unlock();
 }
 
 void SVTexture::bindRes(SVRTexPtr _res) {
-    m_restex = _res;
+    if(_res) {
+        m_tex_pool_id = _res->m_pool_id;
+    }
 }
 
 void SVTexture::unbindRes() {
-    m_restex = nullptr;
+    m_tex_pool_id = -1;
 }
 
 SVRTexPtr SVTexture::getResTex(){
-    return m_restex;
+    if(mApp->getRenderer() ) {
+        return mApp->getRenderer()->getResTexture( m_tex_pool_id );
+    }
+    return nullptr;
 }
 
 void SVTexture::swap(SVTexturePtr _tex) {
-    if(_tex && m_restex) {
-        m_restex->swap(_tex->getResTex());
+    SVRTexPtr t_res_tex = getResTex();
+    if(_tex && t_res_tex) {
+        t_res_tex->swap(_tex->getResTex());
     }
 }

@@ -25,7 +25,6 @@ namespace sv {
     //1.AOS模式  混合流
     //2.SOA模式  拆分流
     //
-    DECLARE_SHAREPTR(BufferDsp);
     class BufferDsp :public SVObject {
     public:
         BufferDsp(BUFFERMODE _mode) {

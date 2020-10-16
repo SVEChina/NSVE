@@ -87,22 +87,34 @@ void SVRendererMetal::resize(s32 _w,s32 _h) {
 
 //创建texture资源
 SVRTexPtr SVRendererMetal::createResTexture()  {
-    return MakeSharedPtr<SVRTexMetal>(mApp);
+    if(m_rtex_pool) {
+        return m_rtex_pool->applyObject();
+    }
+    return nullptr;
 }
 
 //创建shader资源
 SVRShaderPtr SVRendererMetal::createResShader() {
-    return MakeSharedPtr<SVRShaderMetal>(mApp);
+    if(m_rshader_pool) {
+        return m_rshader_pool->applyObject();
+    }
+    return nullptr;
 }
 
 //创建buf资源
 SVRMeshResPtr SVRendererMetal::createResBuf()  {
-    return MakeSharedPtr<SVRMeshMetal>(mApp);
+    if(m_rmesh_pool) {
+        return m_rmesh_pool->applyObject();
+    }
+    return nullptr;
 }
 
 //创建fbo资源
 SVRFboPtr SVRendererMetal::createResFbo()  {
-    return MakeSharedPtr<SVRFboMetal>(mApp);
+    if(m_rfbo_pool) {
+        return m_rfbo_pool->applyObject();
+    }
+    return nullptr;
 }
 
 //销毁纹理资源

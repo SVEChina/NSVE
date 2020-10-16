@@ -32,13 +32,13 @@ namespace sv {
         
         ~SVRShaderMetal();
         
-        void create(SVRendererPtr _renderer);
+        void create(SVRendererPtr _renderer,ShaderDsp* _shader_dsp);
                
         void destroy(SVRendererPtr _renderer);
 
-        bool active(SVRendererPtr _renderer);
+        bool active(SVRendererPtr _renderer,SVShaderPtr _shader);
         
-        void submitSurface(SVSurfacePtr _surface);
+        void submitSurface(SVSurfacePtr _surface,SVShaderPtr _shader);
         
     protected:
         MTLSamplerDescriptor* _genSampler(SamplerDsp& _dsp);

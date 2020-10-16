@@ -11,10 +11,3 @@
 #include "SVRenderer.h"
 
 using namespace sv;
-
-SVRShader::SVRShader(SVInstPtr _app)
-:SVRRes(_app){
-}
-
-SVRShader::~SVRShader(){
-}

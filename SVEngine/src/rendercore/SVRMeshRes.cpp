@@ -17,13 +17,25 @@ SVRMeshRes::SVRMeshRes(SVInstPtr _app)
     m_data_lock = MakeSharedPtr<SVLockSpin>();
     m_draw_method = E_DRAW_TRIANGLES;
     m_draw_num = 0;
+    m_index_dsp = nullptr;
+    m_vert_dsp = nullptr;
+    m_instance_dsp = nullptr;
 }
 
 SVRMeshRes::~SVRMeshRes(){
     m_data_lock = nullptr;
+    m_index_dsp = nullptr;
+    m_vert_dsp = nullptr;
+    m_instance_dsp = nullptr;
 }
 
-void SVRMeshRes::create(SVRendererPtr _renderer) {
+void SVRMeshRes::create(SVRendererPtr _renderer,
+                        BufferDspPtr _indexdsp,
+                        BufferDspPtr _streamdsp,
+                        BufferDspPtr _instdsp) {
+    m_index_dsp = _indexdsp;
+    m_vert_dsp = _streamdsp;
+    m_instance_dsp = _instdsp;
 }
 
 void SVRMeshRes::destroy(SVRendererPtr _renderer) {

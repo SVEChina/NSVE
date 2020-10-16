@@ -123,9 +123,9 @@ SVTexturePtr SVSpriteNode::getTexture() {
 
 void SVSpriteNode::syncTexSize() {
     if(m_pTex) {
-        s32 t_w = m_pTex->m_texture_dsp.m_width;
-        s32 t_h = m_pTex->m_texture_dsp.m_height;
-        setSize(t_w,t_h);
+//        s32 t_w = m_pTex->m_texture_dsp.m_width;
+//        s32 t_h = m_pTex->m_texture_dsp.m_height;
+//        setSize(t_w,t_h);
     }
 }
 

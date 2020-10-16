@@ -178,7 +178,6 @@ bool SVRendererGL::processMtl(SVMtlCorePtr _mtl,SVSurfacePtr _surface) {
         bool t_ret = _mtl->getShader()->active();
         if(t_ret) {
             //提交纹理
-            
             //设置状态
             //blend
             //stencil

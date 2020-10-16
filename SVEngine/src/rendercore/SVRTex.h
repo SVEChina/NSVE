@@ -18,7 +18,7 @@ namespace sv {
         
         virtual ~SVRTex();
         
-        virtual void create(SVRendererPtr _renderer);
+        virtual void create(SVRendererPtr _renderer,SVTextureDsp* _tex_dsp);
         
         virtual void destroy(SVRendererPtr _renderer);
         
@@ -36,9 +36,8 @@ namespace sv {
         
     protected:
         SVLockSpinPtr m_texLock;
-        SVDataSwapPtr m_data;
-        SVDataSwapPtr m_cube_data[6];
         s32 m_msaa;
+        SVTextureDsp* m_texture_dsp;
     };
         
 }//!namespace sv

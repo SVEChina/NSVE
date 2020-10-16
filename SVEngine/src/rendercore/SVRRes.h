@@ -33,8 +33,6 @@ namespace sv {
         
         virtual s32 process(SVRendererPtr _renderer) { return -1; }
         
-        //
-        SVObjectPtr m_logic_obj;
         bool m_exist;
         s32 m_pool_id;
     };

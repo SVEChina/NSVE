@@ -128,10 +128,10 @@ void SVRenderMgr::render(){
         for(s32 i=0;i<m_preRT.size();i++) {
             m_preRT[i]->render( t_renderer);
         }
-//        //主RT
-//        if( m_mainRT ) {
-//            m_mainRT->render( t_renderer);
-//        }
+        //主RT
+        if( m_mainRT ) {
+            m_mainRT->render( t_renderer);
+        }
         //后向RT
         for(s32 i=0;i<m_afterRT.size();i++) {
             m_afterRT[i]->render(  t_renderer);

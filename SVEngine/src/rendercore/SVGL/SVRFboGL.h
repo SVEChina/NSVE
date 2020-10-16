@@ -23,7 +23,7 @@ namespace sv {
         
         ~SVRFboGL();
         
-        virtual void create(SVRendererPtr _renderer);
+        virtual void create(SVRendererPtr _renderer,SVTargetDsp* _logic_dsp);
 
         virtual void destroy(SVRendererPtr _renderer);
         

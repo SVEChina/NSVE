@@ -41,55 +41,50 @@ SVRShaderGL::~SVRShaderGL(){
     m_cs = 0;
 }
 
-void SVRShaderGL::create(SVRendererPtr _renderer) {
-    if(!m_logic_obj) {
+void SVRShaderGL::create(SVRendererPtr _renderer,ShaderDsp* _shader_dsp) {
+    SVRShader::create(_renderer, _shader_dsp);
+    if(!m_shader_dsp) {
         return ;
     }
-    SVShaderPtr t_shader = std::dynamic_pointer_cast<SVShader>(m_logic_obj);
-    if(!t_shader){
-        return ;
-    }
-    if( t_shader->m_shader_dsp.m_dsp &SV_E_TECH_VS ) {
+    if( m_shader_dsp->m_dsp &SV_E_TECH_VS ) {
          m_vs = _loadShader(mApp,
                             _renderer,
-                            t_shader->m_shader_dsp.m_vs_fname.c_str(),
+                            m_shader_dsp->m_vs_fname.c_str(),
                             SV_E_TECH_VS);
     }
-    if( t_shader->m_shader_dsp.m_dsp&SV_E_TECH_FS ) {
+    if( m_shader_dsp->m_dsp&SV_E_TECH_FS ) {
         m_fs = _loadShader(mApp,
                            _renderer,
-                           t_shader->m_shader_dsp.m_fs_fname.c_str(),
+                           m_shader_dsp->m_fs_fname.c_str(),
                            SV_E_TECH_FS);
     }
-    if( t_shader->m_shader_dsp.m_dsp&SV_E_TECH_GS ) {
+    if( m_shader_dsp->m_dsp&SV_E_TECH_GS ) {
        m_gs = _loadShader(mApp,
                           _renderer,
-                          t_shader->m_shader_dsp.m_gs_fname.c_str(),
+                          m_shader_dsp->m_gs_fname.c_str(),
                           SV_E_TECH_GS);
     }
-    if( t_shader->m_shader_dsp.m_dsp&SV_E_TECH_TSE ) {
+    if( m_shader_dsp->m_dsp&SV_E_TECH_TSE ) {
         m_tsc = _loadShader(mApp,
                             _renderer,
-                            t_shader->m_shader_dsp.m_tse_fname.c_str(),
+                            m_shader_dsp->m_tse_fname.c_str(),
                             SV_E_TECH_TSE);
     }
-    if( t_shader->m_shader_dsp.m_dsp&SV_E_TECH_TSD ) {
+    if( m_shader_dsp->m_dsp&SV_E_TECH_TSD ) {
         m_tse = _loadShader(mApp,
                             _renderer,
-                            t_shader->m_shader_dsp.m_tsd_fname.c_str(),
+                            m_shader_dsp->m_tsd_fname.c_str(),
                             SV_E_TECH_TSD);
     }
     m_programm = _createProgram();
     //创建采样器
-    //生成uniform-buf
-    for(s32 i=0;i<t_shader->m_paramtbl.size();i++) {
-        //合并参数表
-        SVParamTblPtr t_p_tbl = t_shader->m_paramtbl[i].m_tbl;
-    }
+//    //生成uniform-buf
+//    for(s32 i=0;i<t_shader->m_paramtbl.size();i++) {
+//        //合并参数表
+//        SVParamTblPtr t_p_tbl = t_shader->m_paramtbl[i].m_tbl;
+//    }
     //生产program后就删除shader资源
     _clearShaderRes();
-    //创建完毕，资源释放
-    m_logic_obj = nullptr;
 }
 
 u32 SVRShaderGL::_loadShader(SVInstPtr _app,SVRendererPtr _renderer,cptr8 _filename,s32 _shaderType){
@@ -217,10 +212,9 @@ u32 SVRShaderGL::_createProgram(){
         glAttachShader(t_program_id, m_cs);
     }
     //
-    SVShaderPtr t_shader = std::dynamic_pointer_cast<SVShader>(m_logic_obj);
-    for(s32 i=0;i<t_shader->m_shader_dsp.m_vft.size();i++) {
+    for(s32 i=0;i<m_shader_dsp->m_vft.size();i++) {
         //单一混合流
-        s32 t_vf = t_shader->m_shader_dsp.m_vft[i];
+        s32 t_vf = m_shader_dsp->m_vft[i];
         if (t_vf & E_VF_V2) {
             glBindAttribLocation(t_program_id, CHANNEL_POSITION, NAME_POSITION);
         }else if (t_vf & E_VF_V3) {
@@ -295,13 +289,13 @@ void SVRShaderGL::destroy(SVRendererPtr _renderer) {
     }
 }
 
-bool SVRShaderGL::active(SVRendererPtr _renderer) {
+bool SVRShaderGL::active(SVRendererPtr _renderer,SVShaderPtr _shader) {
     SVRendererGLPtr t_rm = std::dynamic_pointer_cast<SVRendererGL>(_renderer);
     if(t_rm && m_programm>0) {
         glUseProgram(m_programm);
         t_rm->m_cur_program = m_programm;
         //提交参数
-        submitParamTbl();
+        submitParamTbl(_shader);
         //提交纹理
         
         //设置各种属性
@@ -311,14 +305,12 @@ bool SVRShaderGL::active(SVRendererPtr _renderer) {
     return false;
 }
 
-void SVRShaderGL::submitParamTbl() {
-    SVShaderPtr t_shader = std::dynamic_pointer_cast<SVShader>(m_logic_obj);
-    if(!t_shader){
+void SVRShaderGL::submitParamTbl(SVShaderPtr _shader) {
+    if(!_shader){
         return ;
     }
-    for(s32 i=0;i<t_shader->m_paramtbl.size();i++) {
-        ParamTblDsp* t_dsp = &(t_shader->m_paramtbl[i]);
-        SVParamTblPtr t_tbl = t_dsp->m_tbl;
+    for(s32 i=0;i<_shader->m_paramtbl.size();i++) {
+        SVParamTblPtr t_tbl = _shader->m_paramtbl[i].m_tbl;
         for(s32 i=0;i<t_tbl->m_param_dsps.size();i++) {
             u32 t_locate = glGetUniformLocation(m_programm, t_tbl->m_param_dsps[i].m_name.c_str());
             if(t_locate<=0) {
@@ -397,12 +389,8 @@ void SVRShaderGL::submitParamTbl() {
     }
 }
 
-void SVRShaderGL::submitSurface(SVSurfacePtr _surface) {
+void SVRShaderGL::submitSurface(SVSurfacePtr _surface,SVShaderPtr _shader) {
     if(!_surface) {
-        return ;
-    }
-    SVShaderPtr t_shader = std::dynamic_pointer_cast<SVShader>(m_logic_obj);
-    if(!t_shader){
         return ;
     }
 }

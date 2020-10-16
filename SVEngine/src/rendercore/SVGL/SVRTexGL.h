@@ -26,7 +26,7 @@ namespace sv {
 
         virtual ~SVRTexGL();
 
-        virtual void create(SVRendererPtr _renderer);
+        virtual void create(SVRendererPtr _renderer,SVTextureDsp* _tex_dsp);
 
         virtual void destroy(SVRendererPtr _renderer);
 
@@ -35,10 +35,6 @@ namespace sv {
         virtual void swap(SVRTexGLPtr _rtex);
         
         u32 m_res_id;
-        u32 m_tex_kind;
-        s32 m_width;
-        s32 m_height;
-        s32 m_depth;
         s32 m_informate;
     };
 

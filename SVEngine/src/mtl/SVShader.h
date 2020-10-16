@@ -78,6 +78,8 @@ namespace sv {
         
         ~SVShader();
         
+        SVShaderPtr share();
+        
         //渲染内核
         void bindRes(s32 _poolid);
         
@@ -95,15 +97,20 @@ namespace sv {
         bool fromJSON(RAPIDJSON_NAMESPACE::Value &item,cptr8 _language);
         
         SVSurfacePtr createSurface();
+        
+        ShaderDsp* getShaderDsp() { return &m_shader_dsp; }
 
     public:
-        ShaderDsp m_shader_dsp;
         //采样器
         std::vector<SamplerDsp> m_samplers;
         //参数表
         std::vector<ParamTblDsp> m_paramtbl;
         
     protected:
+        //描述
+        ShaderDsp m_shader_dsp;
+        
+        //对应的资源ID
         s32 m_res_shader_id;
         
     public:

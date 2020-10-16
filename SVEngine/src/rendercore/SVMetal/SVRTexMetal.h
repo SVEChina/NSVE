@@ -17,19 +17,6 @@
 
 namespace sv {
 
-    //纹理描述
-    struct SVTexDsp {
-        s32 m_width;
-        s32 m_height;
-        s32 m_dfmt;     //data-formate
-        bool m_mipmap;
-        bool m_cube;
-    };
-
-    /*
-    纹理资源
-     */
-    
     //1.扩充压缩纹理
     //2.扩充部分更新机制
 
@@ -39,13 +26,11 @@ namespace sv {
         
         virtual ~SVRTexMetal();
         
-        virtual void create(SVRendererPtr _renderer);
+        virtual void create(SVRendererPtr _renderer,SVTextureDsp* _tex_dsp);
         
         virtual void destroy(SVRendererPtr _renderer);
         
         virtual void resize();
-        
-        virtual void setTexData(SVDataSwapPtr _data);
         
         virtual void commit();  //数据提交到显卡
         
@@ -57,15 +42,8 @@ namespace sv {
         //
         id<MTLTexture> m_src_tex;
         id<MTLTexture> m_src_tex_msaa;
-        //
-        SVDataSwapPtr m_data;
         bool m_dirty;
-        s32 m_width;
-        s32 m_height;
-        s32 m_depth;
     };
-        
-    
 
 }//!namespace sv
 

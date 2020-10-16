@@ -31,6 +31,12 @@ namespace sv {
             memset(m_color_texid,0,sizeof(s32)*SV_SUPPORT_MAX_TAREGT);
             m_use_depth = true;
             m_use_stencil = true;
+            m_color_r = 0.0f;
+            m_color_g = 0.0f;
+            m_color_b = 0.0f;
+            m_color_a = 1.0f;
+            m_depth_value = 1.0f;
+            m_stencil_value = 0;
         }
         s32 m_width;
         s32 m_height;
@@ -38,6 +44,12 @@ namespace sv {
         s32 m_color_texid[SV_SUPPORT_MAX_TAREGT];
         bool m_use_depth;
         bool m_use_stencil;
+        f32 m_color_r;
+        f32 m_color_g;
+        f32 m_color_b;
+        f32 m_color_a;
+        f32 m_depth_value;
+        s32 m_stencil_value;
     };
 
     //

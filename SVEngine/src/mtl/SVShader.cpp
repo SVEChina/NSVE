@@ -30,6 +30,10 @@ SVShader::~SVShader() {
     m_paramtbl.clear();
 }
 
+SVShaderPtr SVShader::share() {
+    return std::dynamic_pointer_cast<SVShader>(shareObject()) ;
+}
+
 //渲染内核
 void SVShader::bindRes(s32 _poolid) {
     m_res_shader_id = _poolid;
@@ -62,7 +66,7 @@ SVSurfacePtr SVShader::createSurface() {
 bool SVShader::active() {
     SVRShaderPtr t_res_shader = getResShader();
     if(t_res_shader && mApp->getRenderer() ) {
-        return t_res_shader->active( mApp->getRenderer() );
+        return t_res_shader->active( mApp->getRenderer() ,share() );
     }
     return false;
 }

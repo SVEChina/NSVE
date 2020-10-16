@@ -22,15 +22,15 @@ namespace sv {
 
         ~SVRShaderGL();
 
-        void create(SVRendererPtr _renderer);
+        void create(SVRendererPtr _renderer,ShaderDsp* _shader_dsp);
         
         void destroy(SVRendererPtr _renderer);
 
-        bool active(SVRendererPtr _renderer);
+        bool active(SVRendererPtr _renderer,SVShaderPtr _shader);
 
-        void submitSurface(SVSurfacePtr _surface);
+        void submitSurface(SVSurfacePtr _surface,SVShaderPtr _shader);
         
-        void submitParamTbl();
+        void submitParamTbl(SVShaderPtr _shader);
 
     private:
         static u32 _loadShader(SVInstPtr _app,SVRendererPtr _renderer,cptr8 _filename,s32 _shaderType);

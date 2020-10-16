@@ -29,9 +29,11 @@ SVRCmdCreateMesh::~SVRCmdCreateMesh() {
 void SVRCmdCreateMesh::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
     if(m_rendermesh && _renderer) {
         SVRMeshResPtr t_rbuffer = _renderer->createResBuf() ;
-        t_rbuffer->m_logic_obj = m_rendermesh;
         m_rendermesh->bindRes(t_rbuffer);
-        t_rbuffer->create(_renderer);
+        t_rbuffer->create(_renderer,
+                          m_rendermesh->getIndexDsp(),
+                          m_rendermesh->getStreamDsp(),
+                          m_rendermesh->getInstanceDsp());
     }
 }
 
@@ -48,9 +50,8 @@ SVRCmdCreateShader::~SVRCmdCreateShader() {
 void SVRCmdCreateShader::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
     if(m_shader && _renderer) {
         SVRShaderPtr t_rshader = _renderer->createResShader() ;
-        t_rshader->m_logic_obj = m_shader;
         m_shader->bindRes(t_rshader->m_pool_id);
-        t_rshader->create(_renderer);
+        t_rshader->create( _renderer,m_shader->getShaderDsp() );
     }
 }
 
@@ -67,9 +68,8 @@ SVRCmdCreateTex::~SVRCmdCreateTex(){
 void SVRCmdCreateTex::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
     if(m_texture && _renderer) {
         SVRTexPtr t_rtex = _renderer->createResTexture() ;
-        t_rtex->m_logic_obj = m_texture;
         m_texture->bindRes(t_rtex);
-        t_rtex->create(_renderer);
+        t_rtex->create( _renderer,m_texture->getTextureDsp() );
     }
 }
 
@@ -87,9 +87,8 @@ void SVRCmdCreateTarget::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
     if(m_rtarget && _renderer) {
         SVRFboPtr t_rfbo = _renderer->createResFbo() ;
         if(t_rfbo) {
-            t_rfbo->m_logic_obj = m_rtarget;
             m_rtarget->bindRes(t_rfbo);
-            t_rfbo->create(_renderer);
+            t_rfbo->create(_renderer,m_rtarget->getTargetDsp());
         }
     }
 }

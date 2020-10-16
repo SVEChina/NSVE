@@ -28,43 +28,35 @@ namespace sv {
         
         void resize(s32 _w,s32 _h);
         
-        //
         void setTexData(SVDataSwapPtr _data);
         
         void setTexCubeData(SVDataSwapPtr _data,s32 _index);
 
-        //渲染内核
         void bindRes(SVRTexPtr _res);
         
         void unbindRes();
         
-        //
         SVRTexPtr getResTex();
         
-        //
         SVDataSwapPtr getTextureData();
         
-        //
         SVDataSwapPtr getTextureCubeData(s32 _index);
         
+        SVTextureDsp* getTextureDsp() { return &m_texture_dsp;}
+
         //
         void swap(SVTexturePtr _tex);
         
     protected:
-        //内挂的渲染纹理
-        SVRTexPtr m_restex;
+        s32 m_tex_pool_id;
         
         SVLockSpinPtr m_lock;
+        
+        SVTextureDsp m_texture_dsp;
         
     public:
         //纹理名称
         SVString m_name;
-        
-        //纹理描述
-        SVTextureDsp m_texture_dsp;
-        
-        //数据
-        SVDataSwapPtr m_pData[6];
         
         virtual void pushData(u8* _srcPtr,s32 _w,s32 _h,s32 _pixelformate){}
         
