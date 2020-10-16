@@ -34,8 +34,8 @@ SVRFboMetal::~SVRFboMetal() {
     }
 }
 
-void SVRFboMetal::create(SVRendererPtr _renderer,SVTargetDsp* _logic_dsp) {
-    SVRFbo::create(_renderer,_logic_dsp);
+void SVRFboMetal::load(SVRendererPtr _renderer,SVTargetDsp* _logic_dsp) {
+    SVRFbo::load(_renderer,_logic_dsp);
     SVRendererMetalPtr t_rm = std::dynamic_pointer_cast<SVRendererMetal>(_renderer);
     if(t_rm && m_logic_fbo_dsp) {
         m_pass = [MTLRenderPassDescriptor renderPassDescriptor];
@@ -122,11 +122,11 @@ void SVRFboMetal::_createStencilBuf(SVRendererMetalPtr _renderer) {
     m_stencil_tex = [_renderer->m_pDevice newTextureWithDescriptor:t_dsp ];
 }
 
-void SVRFboMetal::destroy(SVRendererPtr _renderer) {
+void SVRFboMetal::unload() {
     //颜色重置
     //深度重置
     //模版重置
-    SVRFbo::destroy(_renderer);
+    SVRFbo::unload();
 }
 
 void SVRFboMetal::resize(s32 _width,s32 _height,SVRendererPtr _renderer) {

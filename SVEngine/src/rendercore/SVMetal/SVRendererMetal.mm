@@ -78,6 +78,7 @@ void SVRendererMetal::init(id<MTLDevice> _device) {
 
 //销毁
 void SVRendererMetal::destroy(){
+    
 }
 
 //重置大小

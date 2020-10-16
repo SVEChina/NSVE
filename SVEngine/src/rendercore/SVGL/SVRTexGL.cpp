@@ -31,8 +31,8 @@ SVRTexGL::~SVRTexGL(){
     SV_LOG_INFO("SVRTexGL destroy %d ",m_res_id);
 }
 
-void SVRTexGL::create(SVRendererPtr _renderer,SVTextureDsp* _tex_dsp) {
-    SVRTex::create(_renderer,_tex_dsp);
+void SVRTexGL::load(SVRendererPtr _renderer,SVTextureDsp* _tex_dsp) {
+    SVRTex::load(_renderer,_tex_dsp);
     SVRendererGLPtr t_rm = std::dynamic_pointer_cast<SVRendererGL>(_renderer);
     if(t_rm && m_texture_dsp) {
         SV_LOG_INFO("SVRTexGL create %d ",m_res_id);
@@ -145,8 +145,8 @@ void SVRTexGL::create(SVRendererPtr _renderer,SVTextureDsp* _tex_dsp) {
     }
 }
 
-void SVRTexGL::destroy(SVRendererPtr _renderer) {
-    SVRRes::destroy(_renderer);
+void SVRTexGL::unload() {
+    SVRRes::unload();
     if(m_res_id>0){
         glDeleteTextures(1, &m_res_id);
         m_res_id = 0;

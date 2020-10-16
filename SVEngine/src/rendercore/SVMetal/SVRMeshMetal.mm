@@ -39,12 +39,12 @@ SVRMeshMetal::SVRMeshMetal(SVInstPtr _app)
 SVRMeshMetal::~SVRMeshMetal() {
 }
 
-void SVRMeshMetal::create(SVRendererPtr _renderer,
-                          SVIndexStreamDspPtr _indexdsp,
-                          SVVertStreamDspPtr _streamdsp,
-                          SVInstStreamDspPtr _instdsp,
-                          SVRMeshDsp* _SVRMeshDsp) {
-    SVRMeshRes::create(_renderer, _indexdsp, _streamdsp, _instdsp,_SVRMeshDsp);
+void SVRMeshMetal::load(SVRendererPtr _renderer,
+                        SVIndexStreamDspPtr _indexdsp,
+                        SVVertStreamDspPtr _streamdsp,
+                        SVInstStreamDspPtr _instdsp,
+                        SVRMeshDsp* _SVRMeshDsp) {
+    SVRMeshRes::load(_renderer, _indexdsp, _streamdsp, _instdsp,_SVRMeshDsp);
     SVRendererMetalPtr t_rm = std::dynamic_pointer_cast<SVRendererMetal>(_renderer);
     if(t_rm ) {
         //索引
@@ -101,7 +101,7 @@ void SVRMeshMetal::create(SVRendererPtr _renderer,
     m_exist = true;
 }
 
-void SVRMeshMetal::destroy(SVRendererPtr _renderer) {
+void SVRMeshMetal::unload() {
     if(m_ibuf) {
         m_ibuf = nullptr;
     }
@@ -117,23 +117,37 @@ s32 SVRMeshMetal::process(SVRendererPtr _renderer) {
     if(t_rm && t_rm->m_curEncoder) {
         //数据更新
         m_data_lock->lock();
-        if(m_index && m_ibuf) {
-            void* t_pointer = m_index->getData();
-            s32 t_len = m_index->getSize();
+        if(m_index_dsp &&  m_index_dsp->_bufData && m_ibuf) {
+            void* t_pointer = m_index_dsp->_bufData->getData();
+            s32 t_len = m_index_dsp->_bufData->getSize();
             memcpy( m_ibuf.contents , t_pointer ,t_len);
         }
-        if(m_inst && m_instance_buf) {
-            void* t_pointer = m_inst->getData();
-            s32 t_len = m_inst->getSize();
+        if(m_instance_dsp && m_instance_dsp->_bufData) {
+            void* t_pointer = m_instance_dsp->_bufData->getData();
+            s32 t_len = m_instance_dsp->_bufData->getSize();
             memcpy( m_instance_buf.contents , t_pointer ,t_len);
         }
-        for(s32 i=0;i<m_verts.size();i++) {
-            s32 t_chn = m_verts[i]._chn;
-            SVDataSwapPtr t_data = m_verts[i]._data;
-            if( t_data && t_chn<m_dbufs.size() && m_dbufs[i]  ) {
-                void* t_pointer = t_data->getData();
-                s32 t_len = t_data->getSize();
-                memcpy( m_dbufs[i].contents , t_pointer ,t_len);
+        if(m_vert_dsp) {
+            if( m_vert_dsp->_bufMode == E_BFM_AOS ) {
+                //混合流模式
+                VFTYPE t_vf_type = m_vert_dsp->m_streamDsp[0];  //流描述
+                SVDataSwapPtr t_data = m_vert_dsp->m_streamData[t_vf_type];
+                if(t_data) {
+                    void* t_pointer = t_data->getData();
+                    s32 t_len = t_data->getSize();
+                    memcpy( m_dbufs[0].contents , t_pointer ,t_len);
+                }
+            } else {
+                //单一流模式
+                for(s32 i=0;i<m_vert_dsp->m_streamDsp.size();i++) {
+                    VFTYPE t_vf_type = m_vert_dsp->m_streamDsp[i];  //流描述
+                    SVDataSwapPtr t_data = m_vert_dsp->m_streamData[t_vf_type];
+                    if(t_data) {
+                        void* t_pointer = t_data->getData();
+                        s32 t_len = t_data->getSize();
+                        memcpy( m_dbufs[i].contents , t_pointer ,t_len);
+                    }
+                }
             }
         }
         //

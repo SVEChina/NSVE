@@ -22,9 +22,9 @@ namespace sv {
 
         ~SVRShaderGL();
 
-        void create(SVRendererPtr _renderer,ShaderDsp* _shader_dsp);
+        void load(SVRendererPtr _renderer,ShaderDsp* _shader_dsp);
         
-        void destroy(SVRendererPtr _renderer);
+        void unload();
 
         bool active(SVRendererPtr _renderer);
 

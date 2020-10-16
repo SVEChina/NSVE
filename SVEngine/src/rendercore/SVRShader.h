@@ -86,7 +86,7 @@
 namespace sv {
 
     struct ShaderDsp;
-    class SVRShader: public SVRRes{
+    class SVRShader: public SVRRes {
     public:
         SVRShader(SVInstPtr _app)
         :SVRRes(_app)
@@ -97,11 +97,13 @@ namespace sv {
             m_shader_dsp = nullptr;
         }
 
-        virtual void create(SVRendererPtr _renderer,ShaderDsp* _shader_dsp){
+        virtual void load(SVRendererPtr _renderer,ShaderDsp* _shader_dsp){
             m_shader_dsp = _shader_dsp;
         }
 
-        virtual void destroy(SVRendererPtr _renderer){}
+        virtual void unload(){
+            
+        }
 
         virtual bool active(SVRendererPtr _render){ return false; }
         

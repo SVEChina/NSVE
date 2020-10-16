@@ -25,24 +25,34 @@ SVRTex:: ~SVRTex(){
     m_texLock = nullptr;
 }
 
-void SVRTex::create(SVRendererPtr _renderer,SVTextureDsp* _tex_dsp) {
+void SVRTex::load(SVRendererPtr _renderer,SVTextureDsp* _tex_dsp) {
     m_texture_dsp = _tex_dsp;
 }
 
-void SVRTex::destroy(SVRendererPtr _renderer) {}
+void SVRTex::unload() {
+    
+}
 
-void SVRTex::resize() {}
+void SVRTex::resize() {
+    
+}
 
-void SVRTex::commit() {}
+void SVRTex::commit() {
+    
+}
 
-void SVRTex::swap(SVRTexPtr _rtex) {}
+void SVRTex::swap(SVRTexPtr _rtex) {
+    
+}
 
 void SVRTex::setTexData(SVDataSwapPtr _data){
-    //m_data = _data;
+    if(m_texture_dsp) {
+        m_texture_dsp->m_pData[0] = _data;
+    }
 }
 
 void SVRTex::setTexCubeData(SVDataSwapPtr _data,s32 _index) {
-//    if(_index>=0 && _index<6) {
-//        m_cube_data[_index] = _data;
-//    }
+    if(m_texture_dsp && _index>=0 && _index<6 ) {
+        m_texture_dsp->m_pData[_index] = _data;
+    }
 }

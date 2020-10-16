@@ -41,8 +41,8 @@ SVRShaderGL::~SVRShaderGL(){
     m_cs = 0;
 }
 
-void SVRShaderGL::create(SVRendererPtr _renderer,ShaderDsp* _shader_dsp) {
-    SVRShader::create(_renderer, _shader_dsp);
+void SVRShaderGL::load(SVRendererPtr _renderer,ShaderDsp* _shader_dsp) {
+    SVRShader::load(_renderer, _shader_dsp);
     if(!m_shader_dsp) {
         return ;
     }
@@ -267,7 +267,7 @@ void SVRShaderGL::_clearShaderRes(){
     }
 }
 
-void SVRShaderGL::destroy(SVRendererPtr _renderer) {
+void SVRShaderGL::unload() {
     if(m_programm != 0){
         glDeleteProgram(m_programm);
     }

@@ -25,13 +25,13 @@ namespace sv {
         
         virtual ~SVRMeshRes();
         
-        virtual void create(SVRendererPtr _renderer,
-                            SVIndexStreamDspPtr _indexdsp,
-                            SVVertStreamDspPtr _streamdsp,
-                            SVInstStreamDspPtr _instdsp,
-                            SVRMeshDsp* _SVRMeshDsp);
+        virtual void load(SVRendererPtr _renderer,
+                          SVIndexStreamDspPtr _indexdsp,
+                          SVVertStreamDspPtr _streamdsp,
+                          SVInstStreamDspPtr _instdsp,
+                          SVRMeshDsp* _SVRMeshDsp);
         
-        virtual void destroy(SVRendererPtr _renderer);
+        virtual void unload();
         
         virtual s32 process(SVRendererPtr _renderer);
         
@@ -49,18 +49,7 @@ namespace sv {
         SVVertStreamDspPtr m_vert_dsp;
         SVInstStreamDspPtr m_instance_dsp;
         SVRMeshDsp* m_rmesh_dsp;
-        
         SVLockSpinPtr m_data_lock;
-        
-        SVDataSwapPtr m_index;
-        
-        SVDataSwapPtr m_inst;
-        //
-        struct InVertDataUp {
-            s32 _chn;
-            SVDataSwapPtr _data;
-        };
-        std::vector<InVertDataUp> m_verts;
     };
         
 }//!namespace sv

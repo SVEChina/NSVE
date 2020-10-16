@@ -30,18 +30,18 @@ SVRMeshRes::~SVRMeshRes(){
     m_rmesh_dsp = nullptr;
 }
 
-void SVRMeshRes::create(SVRendererPtr _renderer,
-                        SVIndexStreamDspPtr _indexdsp,
-                        SVVertStreamDspPtr _streamdsp,
-                        SVInstStreamDspPtr _instdsp,
-                        SVRMeshDsp* _SVRMeshDsp) {
+void SVRMeshRes::load(SVRendererPtr _renderer,
+                      SVIndexStreamDspPtr _indexdsp,
+                      SVVertStreamDspPtr _streamdsp,
+                      SVInstStreamDspPtr _instdsp,
+                      SVRMeshDsp* _SVRMeshDsp) {
     m_index_dsp = _indexdsp;
     m_vert_dsp = _streamdsp;
     m_instance_dsp = _instdsp;
     m_rmesh_dsp = _SVRMeshDsp;
 }
 
-void SVRMeshRes::destroy(SVRendererPtr _renderer) {
+void SVRMeshRes::unload() {
 }
 
 s32 SVRMeshRes::process(SVRendererPtr _renderer) {
@@ -55,23 +55,26 @@ void SVRMeshRes::draw(SVRendererPtr _renderer) {
 //
 void SVRMeshRes::setInstData(SVDataSwapPtr _data) {
     m_data_lock->lock();
-    m_inst = _data;
+    if(m_instance_dsp) {
+        m_instance_dsp->setStreamData(_data);
+    }
     m_data_lock->unlock();
 }
 
 //
 void SVRMeshRes::setIndexData(SVDataSwapPtr _data) {
     m_data_lock->lock();
-    m_index = _data;
+    if(m_index_dsp) {
+        m_index_dsp->setStreamData(_data);
+    }
     m_data_lock->unlock();
 }
 
 //
 void SVRMeshRes::setVertData(SVDataSwapPtr _data,s32 _chn) {
     m_data_lock->lock();
-    InVertDataUp t_up;
-    t_up._chn = _chn;
-    t_up._data = _data;
-    m_verts.push_back(t_up);
+    if(m_vert_dsp) {
+        //m_vert_dsp->setStreamData(<#VFTYPE _stype#>, <#SVDataSwapPtr _data#>)
+    }
     m_data_lock->unlock();
 }

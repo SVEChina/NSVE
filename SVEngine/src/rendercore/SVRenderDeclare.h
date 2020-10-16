@@ -25,7 +25,6 @@ namespace sv {
     
     //渲染框架
     DECLARE_SHAREPTR(SVRenderer);
-    DECLARE_SHAREPTR(SVRTech);
     DECLARE_SHAREPTR(SVRTarget);
     DECLARE_SHAREPTR(SVRenderStream);
     DECLARE_SHAREPTR(SVRenderMesh);

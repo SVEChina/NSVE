@@ -26,9 +26,9 @@ namespace sv {
 
         virtual ~SVRTexGL();
 
-        virtual void create(SVRendererPtr _renderer,SVTextureDsp* _tex_dsp);
+        virtual void load(SVRendererPtr _renderer,SVTextureDsp* _tex_dsp);
 
-        virtual void destroy(SVRendererPtr _renderer);
+        virtual void unload();
 
         virtual void commit();  //数据提交到显卡
         

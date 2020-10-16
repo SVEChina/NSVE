@@ -30,8 +30,8 @@ SVRShaderMetal::SVRShaderMetal(SVInstPtr _app)
 SVRShaderMetal::~SVRShaderMetal() {
 }
 
-void SVRShaderMetal::create(SVRendererPtr _renderer,ShaderDsp* _shader_dsp) {
-    SVRShader::create(_renderer, _shader_dsp);
+void SVRShaderMetal::load(SVRendererPtr _renderer,ShaderDsp* _shader_dsp) {
+    SVRShader::load(_renderer, _shader_dsp);
     SVRendererMetalPtr t_rm = std::dynamic_pointer_cast<SVRendererMetal>(_renderer);
     if(!t_rm) {
         return;
@@ -293,7 +293,7 @@ MTLVertexDescriptor* SVRShaderMetal::_genVertexDsp(BUFFERMODE _mode) {
     return t_vert_dsp;
 }
 
-void SVRShaderMetal::destroy(SVRendererPtr _renderer) {
+void SVRShaderMetal::unload() {
     //in-sampler销毁
     for(s32 i=0;i<m_sampler_st.size();i++) {
     }

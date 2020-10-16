@@ -7,7 +7,6 @@
 
 #include "SVRenderStream.h"
 #include "SVRenderCmd.h"
-#include "SVRTech.h"
 #include "../work/SVTdCore.h"
 
 using namespace sv;

@@ -27,31 +27,26 @@ namespace sv {
         
         ~SVRMeshGL();
         
-        void create(SVRendererPtr _renderer,
+        void load(SVRendererPtr _renderer,
                     SVIndexStreamDspPtr _indexdsp,
                     SVVertStreamDspPtr _streamdsp,
                     SVInstStreamDspPtr _instdsp,
                     SVRMeshDsp* _SVRMeshDsp);
 
-        void destroy(SVRendererPtr _renderer);
+        void unload();
 
         s32 process(SVRendererPtr _renderer);
 
         void draw(SVRendererPtr _renderer);
         
     protected:
-        //
-        BUFFERMODE m_mode;
         //数据属性
         u32 m_indexID;
         //vbo
         u32 m_bufID[MAX_VERTEX_STEAM_NUM];
-        s32 m_bufnum;
         //instance
         u32 m_instanceID;
         s32 m_instacne_count;
-        //
-        std::vector<VFTYPE> m_ver_dsp;
     };
     
 

@@ -26,13 +26,13 @@ namespace sv {
         
         ~SVRMeshMetal();
         
-        void create(SVRendererPtr _renderer,
-                    SVIndexStreamDspPtr _indexdsp,
-                    SVVertStreamDspPtr _streamdsp,
-                    SVInstStreamDspPtr _instdsp,
-                    SVRMeshDsp* _SVRMeshDsp);
+        void load(SVRendererPtr _renderer,
+                  SVIndexStreamDspPtr _indexdsp,
+                  SVVertStreamDspPtr _streamdsp,
+                  SVInstStreamDspPtr _instdsp,
+                  SVRMeshDsp* _SVRMeshDsp);
 
-        void destroy(SVRendererPtr _renderer);
+        void unload();
 
         s32 process(SVRendererPtr _renderer);
 

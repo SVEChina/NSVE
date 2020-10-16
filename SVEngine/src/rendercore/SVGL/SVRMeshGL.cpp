@@ -16,20 +16,18 @@ using namespace sv;
 SVRMeshGL::SVRMeshGL(SVInstPtr _app)
 :SVRMeshRes(_app)
 ,m_indexID(0)
-,m_bufnum(0)
 ,m_instanceID(0){
-    m_mode = E_BFM_AOS;
 }
 
 SVRMeshGL::~SVRMeshGL() {
 }
 
-void SVRMeshGL::create(SVRendererPtr _renderer,
-                       SVIndexStreamDspPtr _indexdsp,
-                       SVVertStreamDspPtr _streamdsp,
-                       SVInstStreamDspPtr _instdsp,
-                       SVRMeshDsp* _SVRMeshDsp) {
-    SVRMeshRes::create(_renderer, _indexdsp, _streamdsp, _instdsp,_SVRMeshDsp);
+void SVRMeshGL::load(SVRendererPtr _renderer,
+                     SVIndexStreamDspPtr _indexdsp,
+                     SVVertStreamDspPtr _streamdsp,
+                     SVInstStreamDspPtr _instdsp,
+                     SVRMeshDsp* _SVRMeshDsp) {
+    SVRMeshRes::load(_renderer, _indexdsp, _streamdsp, _instdsp,_SVRMeshDsp);
     SVRendererGLPtr t_rm = std::dynamic_pointer_cast<SVRendererGL>(_renderer);
     if(t_rm) {
         //索引
@@ -83,7 +81,6 @@ void SVRMeshGL::create(SVRendererPtr _renderer,
         
         //顶点数据
         if(m_vert_dsp) {
-            m_mode = m_vert_dsp->_bufMode;
             s32 t_pool_type = GL_STATIC_DRAW;
             if(m_vert_dsp->_bufType == E_BFT_STATIC_DRAW) {
                t_pool_type = GL_STATIC_DRAW;
@@ -92,7 +89,7 @@ void SVRMeshGL::create(SVRendererPtr _renderer,
             }else if(m_vert_dsp->_bufType == E_BFT_STREAM_DRAW) {
                t_pool_type = GL_STREAM_DRAW;
             }
-            if(m_mode == E_BFM_AOS) {
+            if(m_vert_dsp->_bufMode == E_BFM_AOS) {
                 //单一混合流
                 s32 t_stream_num = 1;
                 glGenBuffers(t_stream_num, m_bufID);
@@ -110,7 +107,6 @@ void SVRMeshGL::create(SVRendererPtr _renderer,
                 glGenBuffers(t_stream_num, m_bufID);
                 for(s32 i=0;i<t_stream_num;i++) {
                     VFTYPE t_stream_type = VFTYPE(m_vert_dsp->m_streamDsp[i]);
-                    m_ver_dsp.push_back(t_stream_type);
                     SVDataSwapPtr t_data = m_vert_dsp->m_streamData[t_stream_type];
                     if(t_data) {
                         glBufferData(GL_ARRAY_BUFFER,t_data->getSize(),t_data->getData(),t_pool_type);
@@ -125,7 +121,7 @@ void SVRMeshGL::create(SVRendererPtr _renderer,
     }
 }
 
-void SVRMeshGL::destroy(SVRendererPtr _renderer) {
+void SVRMeshGL::unload() {
     if(m_exist) {
         m_exist = false;
         if(m_indexID>0) {
@@ -134,7 +130,10 @@ void SVRMeshGL::destroy(SVRendererPtr _renderer) {
         if(m_instanceID>0) {
             glDeleteBuffers(1, &m_instanceID);
         }
-        glDeleteBuffers(m_bufnum, m_bufID);
+        if(m_vert_dsp) {
+            s32 t_bufnum = m_vert_dsp->m_streamDsp.size();
+            glDeleteBuffers(t_bufnum, m_bufID);
+        }
     }
 }
 
@@ -142,38 +141,55 @@ s32 SVRMeshGL::process(SVRendererPtr _renderer){
     SVRRes::process(_renderer);
     SVRendererGLPtr t_rm = std::dynamic_pointer_cast<SVRendererGL>(_renderer);
     //数据更新
-    m_data_lock->lock();    
+    m_data_lock->lock();
     //index
-    if(m_index && m_indexID>0) {
+    if(m_index_dsp && m_index_dsp->_bufData && m_indexID>0) {
+        void* t_pointer =  m_index_dsp->_bufData->getData();
+        s32 t_len =  m_index_dsp->_bufData->getSize();
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexID);
-        glBufferSubData(GL_ARRAY_BUFFER,0,m_index->getSize(),m_index->getData());
+        glBufferSubData(GL_ARRAY_BUFFER,0,t_len,t_pointer);
     }
     
     //inst
-    if(m_inst && m_instanceID>0) {
+    if(m_instance_dsp && m_instance_dsp->_bufData && m_instanceID>0) {
+        void* t_pointer = m_instance_dsp->_bufData->getData();
+        s32 t_len = m_instance_dsp->_bufData->getSize();
         glBindBuffer(GL_ARRAY_BUFFER,m_instanceID);
-        glBufferSubData(GL_ARRAY_BUFFER,0,m_inst->getSize(),m_inst->getData());
+        glBufferSubData(GL_ARRAY_BUFFER,0,t_len,t_pointer);
     }
     
-    //vert
-    if(m_mode == E_BFM_AOS) {
-        //单一数据，混合流
-        
-    }else{
-        //多流方式
+    if( m_vert_dsp ) {
+        if( m_vert_dsp->_bufMode == E_BFM_AOS ) {
+            //混合流模式
+            VFTYPE t_vf_type = m_vert_dsp->m_streamDsp[0];  //流描述
+            SVDataSwapPtr t_data = m_vert_dsp->m_streamData[t_vf_type];
+            if(t_data) {
+                void* t_pointer = t_data->getData();
+                s32 t_len = t_data->getSize();
+                glBindBuffer(GL_ARRAY_BUFFER, m_bufID[0]);
+                glBufferSubData(GL_ARRAY_BUFFER,0,t_len,t_pointer);
+            }
+        } else {
+            //单一流模式
+            for(s32 i=0;i<m_vert_dsp->m_streamDsp.size();i++) {
+                VFTYPE t_vf_type = m_vert_dsp->m_streamDsp[i];  //流描述
+                SVDataSwapPtr t_data = m_vert_dsp->m_streamData[t_vf_type];
+                if(t_data) {
+                    void* t_pointer = t_data->getData();
+                    s32 t_len = t_data->getSize();
+                    glBindBuffer(GL_ARRAY_BUFFER, m_bufID[i]);
+                    glBufferSubData(GL_ARRAY_BUFFER,0,t_len,t_pointer);
+                }
+            }
+        }
     }
     m_data_lock->unlock();
     //
-    if(m_ver_dsp.size()>0) {
+    if(m_vert_dsp->m_streamDsp.size()>0) {
         u32 t_program = t_rm->m_cur_program;
-        if(m_ver_dsp.size()!=m_bufnum) {
-            return -1;  //流的数目和buf数目不相等，就错误的
-        }
-        for(s32 i=0;i<m_ver_dsp.size();i++) {
-            //绑定buf
+        for(s32 i=0;i<m_vert_dsp->m_streamDsp.size();i++) {
             glBindBuffer(GL_ARRAY_BUFFER, m_bufID[i]);
-            //设置顶点描述
-            VFTYPE _vf = m_ver_dsp[i];
+            VFTYPE _vf = m_vert_dsp->m_streamDsp[i];
             s8* t_off = 0;
             if (_vf & E_VF_V2) {
                 s32 t_attr = glGetAttribLocation(t_program,NAME_POSITION);

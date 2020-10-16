@@ -33,8 +33,8 @@ SVRTexMetal::~SVRTexMetal(){
 }
 
 //需要支持压缩纹理格式
-void SVRTexMetal:: create(SVRendererPtr _renderer,SVTextureDsp* _tex_dsp) {
-    SVRTex::create(_renderer,_tex_dsp);
+void SVRTexMetal:: load(SVRendererPtr _renderer,SVTextureDsp* _tex_dsp) {
+    SVRTex::load(_renderer,_tex_dsp);
     SVRendererMetalPtr t_rm = std::dynamic_pointer_cast<SVRendererMetal>(_renderer);
     if(t_rm && m_texture_dsp) {
         MTLTextureDescriptor* t_descriptor = [[MTLTextureDescriptor alloc] init];
@@ -120,8 +120,8 @@ void SVRTexMetal:: create(SVRendererPtr _renderer,SVTextureDsp* _tex_dsp) {
     }
 }
 
-void SVRTexMetal::destroy(SVRendererPtr _renderer) {
-    SVRTex::destroy(_renderer);
+void SVRTexMetal::unload() {
+    SVRTex::unload();
 }
 
 void SVRTexMetal::resize() {

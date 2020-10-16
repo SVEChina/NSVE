@@ -20,8 +20,8 @@ SVRFboGL::SVRFboGL(SVInstPtr _app)
 SVRFboGL::~SVRFboGL() {
 }
 
-void SVRFboGL::create(SVRendererPtr _renderer,SVTargetDsp* _logic_dsp) {
-    SVRFbo::create(_renderer,_logic_dsp);
+void SVRFboGL::load(SVRendererPtr _renderer,SVTargetDsp* _logic_dsp) {
+    SVRFbo::load(_renderer,_logic_dsp);
     SVRendererGLPtr t_rm = std::dynamic_pointer_cast<SVRendererGL>(_renderer);
     if(t_rm && m_logic_fbo_dsp) {
         glGenFramebuffers(1, &m_fbo_id);
@@ -72,8 +72,7 @@ void SVRFboGL::create(SVRendererPtr _renderer,SVTargetDsp* _logic_dsp) {
     }
 }
 
-void SVRFboGL::destroy(SVRendererPtr _renderer) {
-    //
+void SVRFboGL::unload() {
     if(m_depth_Tex == m_stencil_Tex) {
         if(m_depth_Tex!=0) {
             glDeleteBuffers(1, &m_depth_Tex);
@@ -90,17 +89,7 @@ void SVRFboGL::destroy(SVRendererPtr _renderer) {
         glDeleteBuffers(1, &m_stencil_Tex);
         m_stencil_Tex = 0;
     }
-    SVRFbo::destroy(_renderer);
-}
-
-void SVRFboGL::load() {
-    SVRFbo::load();
-    
-}
-
-void SVRFboGL::unload() {
     SVRFbo::unload();
-    
 }
 
 void SVRFboGL::resize(s32 _width,s32 _height,SVRendererPtr _renderer) {

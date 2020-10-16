@@ -23,12 +23,8 @@ namespace sv {
         
         virtual ~SVRRes();
         
-        virtual void create(SVRendererPtr _renderer) {}
-        
-        virtual void destroy(SVRendererPtr _renderer) {}
-        
-        virtual void load() {}
-        
+        virtual void load(SVRendererPtr _renderer) {}
+
         virtual void unload() {}
         
         virtual s32 process(SVRendererPtr _renderer) { return -1; }

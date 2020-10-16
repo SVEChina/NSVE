@@ -51,8 +51,8 @@ public:
     void push(VFTYPE _stype) {
         std::map<VFTYPE,SVDataSwapPtr>::iterator it = m_streamData.find(_stype);
         if( it == m_streamData.end() ) {
-            m_streamDsp.push_back(_stype);
             m_streamData.insert(std::make_pair(_stype,nullptr));
+            m_streamDsp.push_back(_stype);
         }
     }
     
