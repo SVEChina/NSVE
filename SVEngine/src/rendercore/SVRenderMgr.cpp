@@ -126,19 +126,19 @@ void SVRenderMgr::render(){
         }
         //前向RT
         for(s32 i=0;i<m_preRT.size();i++) {
-            m_preRT[i]->render( t_renderer);
+            m_preRT[i]->render(t_renderer);
         }
         //主RT
         if( m_mainRT ) {
-            m_mainRT->render( t_renderer);
+            m_mainRT->render(t_renderer);
         }
         //后向RT
         for(s32 i=0;i<m_afterRT.size();i++) {
-            m_afterRT[i]->render(  t_renderer);
+            m_afterRT[i]->render(t_renderer);
         }
         //cmd-销毁流
         if(m_stream_destroy) {
-            m_stream_destroy->render( t_renderer,m_mainRT);
+            m_stream_destroy->render(t_renderer,m_mainRT);
         }
         //交换
         mApp->m_ctx->swap(t_renderer);
