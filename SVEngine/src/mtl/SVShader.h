@@ -50,6 +50,8 @@ namespace sv {
         SVSurfacePtr createSurface();
         
         ShaderDsp* getShaderDsp() { return &m_shader_dsp; }
+        
+        SVString getSamplerName(s32 stage,s32 _chn);
 
     protected:
         //描述

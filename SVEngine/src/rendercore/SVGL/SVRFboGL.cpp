@@ -52,6 +52,8 @@ void SVRFboGL::load(SVRendererPtr _renderer,SVTargetDsp* _logic_dsp) {
                 }
             }
             if(t_tex_gl_handler<=0) {
+                //fyz error
+                //glBindFramebuffer(GL_FRAMEBUFFER, m_fbo_last_id);
                 return ;
             }
             glBindTexture(GL_TEXTURE_2D,t_tex_gl_handler);

@@ -64,10 +64,8 @@ bool SVCtxIOSGLES::activeContext(SVRendererPtr _renderer){
             ret = [EAGLContext setCurrentContext:m_gl_context];
         }
         if( m_gl_layer ) {
-            //set up frame buffer
             glGenFramebuffers(1, &m_frameBuf);
             glBindFramebuffer(GL_FRAMEBUFFER, m_frameBuf);
-            //set up color render buffer
             glGenRenderbuffers(1, &m_colorBuf);
             glBindRenderbuffer(GL_RENDERBUFFER, m_colorBuf);
             glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, m_colorBuf);
@@ -80,7 +78,7 @@ bool SVCtxIOSGLES::activeContext(SVRendererPtr _renderer){
     }
     if( m_gl_layer ) {
         glBindFramebuffer(GL_FRAMEBUFFER, m_frameBuf);
-        glClearColor(0.0, 0.0, 0.0, 1.0);
+        glClearColor(0.0, 0.0, 1.0, 1.0);
         glClear(GL_COLOR_BUFFER_BIT);
         glViewport(0, 0, mApp->m_global_param.sv_width, mApp->m_global_param.sv_height);
     }
@@ -91,13 +89,11 @@ bool SVCtxIOSGLES::activeContext(SVRendererPtr _renderer){
 bool SVCtxIOSGLES::swap(SVRendererPtr _renderer){
     if(m_gl_context){
         if( m_gl_layer ) {
-//            glBindFramebuffer(GL_FRAMEBUFFER, m_frameBuf);
-//            glClearColor(0.0, 0.0, 1.0, 1.0);
-//            glClear(GL_COLOR_BUFFER_BIT);
             glViewport(0, 0, mApp->m_global_param.sv_width, mApp->m_global_param.sv_height);
             _renderer->drawScreen(E_TEX_MAIN);
         }
         //
+        glBindRenderbuffer(GL_RENDERBUFFER, m_colorBuf);
         bool t_flag = [m_gl_context presentRenderbuffer:GL_RENDERBUFFER];
         if(!t_flag){
             NSLog(@"presentRenderbuffer error!");

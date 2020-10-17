@@ -55,6 +55,17 @@ SVRShaderPtr SVShader::getResShader() {
     return nullptr;
 }
 
+SVString SVShader::getSamplerName(s32 stage,s32 _chn) {
+    SVString t_name = "";
+    for(s32 i = 0; i<m_shader_dsp.m_samplers.size(); i++ ) {
+        if( (m_shader_dsp.m_samplers[i].m_stage == stage) && (m_shader_dsp.m_samplers[i].m_chn == _chn) ) {
+            t_name = m_shader_dsp.m_samplers[i].m_name;
+            break;
+        }
+    }
+    return t_name;
+}
+
 //创建一个surface
 SVSurfacePtr SVShader::createSurface() {
     SVSurfacePtr t_surface = MakeSharedPtr<SVSurface>();
@@ -238,6 +249,11 @@ void SVShader::SamplerDspFromJson(RAPIDJSON_NAMESPACE::Value &item,SamplerDsp& _
         }
         if( item.HasMember("chn") && item["chn"].IsInt() ) {
             _dsp.m_chn = item["chn"].GetInt();
+        }
+        if( item.HasMember("name") && item["name"].GetString() ) {
+            _dsp.m_name = item["name"].GetString();
+        }else{
+            _dsp.m_name = "";
         }
         if( item.HasMember("warp-s") && item["warp-s"].GetString() ) {
             _dsp.m_warps = item["warp-s"].GetString();

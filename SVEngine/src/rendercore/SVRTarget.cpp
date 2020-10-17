@@ -91,7 +91,6 @@ void SVRTarget::render(SVRendererPtr _renderer) {
         }
         if(m_cmdNum>0) {
             _renderer->bindTarget(m_rfbo_id);
-            //m_fbo->bind(_renderer);
             for(s32 i=0;i<m_stream_quene.size();i++) {
                 s32 t_s_id = m_stream_quene[i];
                 if(m_stream_pool[t_s_id]) {

@@ -285,8 +285,18 @@ struct SVRMeshDsp {
  * 采样器描述
  */
 struct SamplerDsp {
+    SamplerDsp() {
+        m_chn = -1;
+        m_stage = -1; //0:vs 1:fs 2:gs
+        m_name = "";
+        m_warps = "";
+        m_warpt = "";
+        m_min = "";
+        m_mag = "";
+    };
     s32 m_chn;
     s32 m_stage; //0:vs 1:fs 2:gs
+    SVString m_name;
     SVString m_warps;
     SVString m_warpt;
     SVString m_min;

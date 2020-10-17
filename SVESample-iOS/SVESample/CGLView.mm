@@ -39,7 +39,7 @@
         _width = frameRect.size.width;
         _height = frameRect.size.height;
         _eaglLayer.drawableProperties = @{
-            kEAGLDrawablePropertyRetainedBacking :[NSNumber numberWithBool:NO],
+            kEAGLDrawablePropertyRetainedBacking :[NSNumber numberWithBool:YES],
             kEAGLDrawablePropertyColorFormat : kEAGLColorFormatRGBA8 };
         //
         [self.layer addSublayer:_eaglLayer];
@@ -52,9 +52,10 @@
 
 - (void)buildGL {
     //初始化渲染上下文，管理所有绘制的状态，命令及资源信息。
-    _eaglContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES3];
+    //kEAGLRenderingAPIOpenGLES3
+    _eaglContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
     //创建渲染器
-    [[CGInst getInst] createGLES:_eaglContext version:3 drawable:_eaglLayer];
+    [[CGInst getInst] createGLES:_eaglContext version:2 drawable:_eaglLayer];
     //
     [self creatTimer];
 }

@@ -73,7 +73,7 @@ namespace sv {
         bool processMtl(SVMtlCorePtr _mtl,SVSurfacePtr _surface);
         
         //处理纹理
-        bool processTexture(SVRTexPtr _tex,s32 _chn,s32 _type);
+        bool processTexture(SVRTexPtr _tex,s32 _index,cptr8 _samplename);
        
         //处理mesh
         bool processMesh(SVRenderMeshPtr _mesh);

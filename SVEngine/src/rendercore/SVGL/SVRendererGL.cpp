@@ -173,25 +173,29 @@ bool SVRendererGL::processMtl(SVMtlCorePtr _mtl,SVSurfacePtr _surface) {
         if(_surface ) {
             //更新uniform
             _mtl->getShader()->submitParam(_surface->m_tbl);
-//            //vs纹理
-//            for(s32 i=0;i<_surface->m_vs_texs.size();i++) {
-//                if( _surface->m_vs_texs[i] ) {
-//                    //processTexture( _surface->m_vs_texs[i]->getResTex() , i , 0);
-//                }
-//            }
-//            //fs纹理
-//            for(s32 i=0;i<_surface->m_fs_texs.size();i++) {
-//                if( _surface->m_fs_texs[i] ) {
-//                    //processTexture( _surface->m_fs_texs[i]->getResTex() , i , 1);
-//                }
-//            }
         }
         bool t_ret = _mtl->getShader()->active();
         if(t_ret) {
             //提交uniform
             
-            //提交纹理
-            
+            //提交sampler
+            //根据shader中的描述来添加纹理
+            ShaderDsp* t_shader_dsp = _mtl->getShader()->getShaderDsp();
+            if(t_shader_dsp) {
+                s32 t_sampler_index = 0;
+                for(s32 i = 0; i<t_shader_dsp->m_samplers.size(); i++ ) {
+                    SVString t_name = t_shader_dsp->m_samplers[i].m_name;
+                    if(t_name!="") {
+                        s32 t_stage = t_shader_dsp->m_samplers[i].m_stage;
+                        s32 t_chn = t_shader_dsp->m_samplers[i].m_chn;
+                        //向surface上找目标纹理
+                        SVTexturePtr t_tex = _surface->getTexture(t_stage,t_chn);
+                        if(t_tex) {
+                            processTexture( t_tex->getResTex() , t_sampler_index++ , t_name.c_str() );
+                        }
+                    }
+                }
+            }
             //设置状态
             //blend
             //stencil
@@ -213,7 +217,16 @@ bool SVRendererGL::processMesh(SVRenderMeshPtr _mesh) {
     return false;
 }
 
-bool SVRendererGL::processTexture(SVRTexPtr _tex,s32 _chn,s32 _type) {
+bool SVRendererGL::processTexture(SVRTexPtr _tex,s32 _index,cptr8 _samplename) {
+    SVRTexGLPtr t_r_gl_tex = std::dynamic_pointer_cast<SVRTexGL>(_tex);
+    if(t_r_gl_tex) {
+        s32 t_tex_handle = glGetUniformLocation(m_cur_program, _samplename);
+        if(t_tex_handle>=0) {
+            glActiveTexture(GL_TEXTURE0 + _index);
+            glBindTexture(GL_TEXTURE_2D, t_r_gl_tex->m_res_id );
+            glUniform1i(t_tex_handle, _index);
+        }
+    }
     return true;
 }
 

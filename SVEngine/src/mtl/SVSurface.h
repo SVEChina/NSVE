@@ -49,9 +49,12 @@ namespace sv {
         
         //纹理表
         void setTexture(s32 _chn,SVTexturePtr _tex,s32 _stage);
+        
         //
+        SVTexturePtr getTexture(s32 _stage,s32 _chn);
+        
+        //按通道顺序设置了纹理
         std::vector<SVTexturePtr> m_vs_texs;
-        //
         std::vector<SVTexturePtr> m_fs_texs;
     };
 

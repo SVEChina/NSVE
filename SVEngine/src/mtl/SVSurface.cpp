@@ -83,3 +83,16 @@ void SVSurface::setTexture(s32 _chn,SVTexturePtr _tex,s32 _stage) {
         }
     }
 }
+
+SVTexturePtr SVSurface::getTexture(s32 _stage,s32 _chn) {
+    if(_stage == 0) {
+        if(_chn<m_vs_texs.size() ) {
+            return m_vs_texs[_chn];
+        }
+    }else if(_stage == 1) {
+        if(_chn<m_fs_texs.size() ) {
+            return m_fs_texs[_chn];
+        }
+    }
+    return nullptr;
+}
