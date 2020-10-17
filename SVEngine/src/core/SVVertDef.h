@@ -327,29 +327,6 @@ enum VFTYPE {
     E_VF_BONE_W = 0x00020000,
     E_VF_PARTICLE = 0x00100000,
     E_VF_INSOFFSET = 0x00200000,
-    //混合顶点
-    E_VF_V2_T0 = E_VF_V2 | E_VF_T0,
-    E_VF_V2_T0_T1 = E_VF_V2 | E_VF_T0 | E_VF_T1,
-    E_VF_V2_T0_T1_T2 = E_VF_V2 | E_VF_T0 | E_VF_T1 | E_VF_T2,
-    E_VF_V2_C = E_VF_V2 | E_VF_C0,
-    E_VF_V2_C_T0 = E_VF_V2 | E_VF_C0 | E_VF_T0,
-    E_VF_V2_C_T0_T1 = E_VF_V2 | E_VF_C0 | E_VF_T0 | E_VF_T1,
-    E_VF_V3_T0 = E_VF_V3 | E_VF_T0,
-    E_VF_V3_T0_T1 = E_VF_V3 | E_VF_T0 | E_VF_T1,
-    E_VF_V3_N = E_VF_V3 | E_VF_NOR,
-    E_VF_V3_N_T0 = E_VF_V3 | E_VF_NOR | E_VF_T0,
-    E_VF_V3_N_T0_T1 = E_VF_V3 | E_VF_NOR | E_VF_T0 | E_VF_T1,
-    E_VF_V3_C = E_VF_V3 | E_VF_C0,
-    E_VF_V3_C_T0 = E_VF_V3 | E_VF_C0 | E_VF_T0,
-    E_VF_V3_C_T0_T1 = E_VF_V3 | E_VF_C0 | E_VF_T0 | E_VF_T1,
-    E_VF_V3_N_C = E_VF_V3 | E_VF_NOR | E_VF_C0,
-    E_VF_V3_N_C_T0 = E_VF_V3 | E_VF_NOR | E_VF_C0 | E_VF_T0,
-    E_VF_V3_N_C_T0_T1 = E_VF_V3 | E_VF_NOR | E_VF_C0 | E_VF_T0 | E_VF_T1,
-    E_VF_V3_N_T0_BONE_W = E_VF_V3 | E_VF_NOR | E_VF_T0 | E_VF_BONE |E_VF_BONE_W,
-    E_VF_V3_N_C_T0_BONE_W = E_VF_V3 | E_VF_NOR | E_VF_C0 | E_VF_T0 | E_VF_BONE | E_VF_BONE_W,
-    E_VF_V3_C_BTAG = E_VF_V3 | E_VF_C0 | E_VF_BTAG,
-    E_VF_V3_N_T_T0 = E_VF_V3 | E_VF_NOR | E_VF_TAG | E_VF_T0,
-    //
     E_VF_END = 0xffffffff
 };
 
@@ -407,90 +384,6 @@ static s32 sv_vert_size(VFTYPE _vt) {
         }
         case E_VF_INSOFFSET:{
             t_size = 0;//sizeof(f32)*2;
-            break;
-        }
-        case E_VF_V2_T0:{
-            t_size = sizeof(V2_T0);
-            break;
-        }
-        case E_VF_V2_T0_T1:{
-            t_size = sizeof(V2_T0_T1);
-            break;
-        }
-        case E_VF_V2_T0_T1_T2:{
-            t_size = sizeof(V2_T0_T1);
-            break;
-        }
-        case E_VF_V2_C:{
-            t_size = sizeof(V2_C);
-            break;
-        }
-        case E_VF_V2_C_T0:{
-            t_size = sizeof(V2_C_T0);
-            break;
-        }
-        case E_VF_V2_C_T0_T1:{
-            t_size = sizeof(V2_C_T0_T1);
-            break;
-        }
-        case E_VF_V3_T0:{
-            t_size = sizeof(V3_T0);
-            break;
-        }
-        case E_VF_V3_T0_T1:{
-            t_size = sizeof(V3_T0_T1);
-            break;
-        }
-        case E_VF_V3_N:{
-            t_size = sizeof(V3_N);
-            break;
-        }
-        case E_VF_V3_N_T0:{
-            t_size = sizeof(V3_N_T0);
-            break;
-        }
-        case E_VF_V3_N_T0_T1:{
-            t_size = sizeof(V3_N_T0_T1);
-            break;
-        }
-        case E_VF_V3_C:{
-            t_size = sizeof(V3_C);
-            break;
-        }
-        case E_VF_V3_C_T0:{
-            t_size = sizeof(V3_C_T0);
-            break;
-        }
-        case E_VF_V3_C_T0_T1:{
-            t_size = sizeof(V3_C_T0_T1);
-            break;
-        }
-        case E_VF_V3_N_C:{
-            t_size = sizeof(V3_N_C);
-            break;
-        }
-        case E_VF_V3_N_C_T0:{
-            t_size = sizeof(V3_N_C_T0);
-            break;
-        }
-        case E_VF_V3_N_C_T0_T1:{
-            t_size = sizeof(V3_N_C_T0_T1);
-            break;
-        }
-        case E_VF_V3_N_T0_BONE_W:{
-            t_size = sizeof(V3_N_T0_BONE4);
-            break;
-        }
-        case E_VF_V3_N_C_T0_BONE_W:{
-            t_size = 0;//sizeof(V3_N_C_T0_B_W);
-            break;
-        }
-        case E_VF_V3_C_BTAG:{
-            t_size = 0;//sizeof(V2_T0);
-            break;
-        }
-        case E_VF_V3_N_T_T0:{
-            t_size = sizeof(V3_N_T_T0);
             break;
         }
     }
