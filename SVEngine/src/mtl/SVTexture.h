@@ -21,6 +21,10 @@ namespace sv {
         
         virtual ~SVTexture();
         
+        SVTexturePtr share();
+
+        void dispatch();
+
         void init(SVTextureDsp& _dsp);
         
         void init(SVTextureDsp& _dsp,SVDataSwapPtr _data);

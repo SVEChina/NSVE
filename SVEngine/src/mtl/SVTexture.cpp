@@ -32,6 +32,14 @@ SVTexture::~SVTexture() {
     }
 }
 
+SVTexturePtr SVTexture::share() {
+    return std::dynamic_pointer_cast<SVTexture>(shareObject()) ;
+}
+
+void SVTexture::dispatch() {
+    SVDispatch::dispatchTextureCreate(mApp, share());
+}
+
 void SVTexture::init(SVTextureDsp& _dsp) {
     m_texture_dsp = _dsp;
     setTexData(nullptr);

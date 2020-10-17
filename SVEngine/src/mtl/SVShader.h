@@ -28,6 +28,8 @@ namespace sv {
         ~SVShader();
         
         SVShaderPtr share();
+
+        void dispatch();
         
         //渲染内核
         void bindRes(s32 _instid);

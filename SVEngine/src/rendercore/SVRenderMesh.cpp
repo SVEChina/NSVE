@@ -7,6 +7,7 @@
 
 #include "SVRenderMesh.h"
 #include "../app/SVInst.h"
+#include "../app/SVDispatch.h"
 #include "../app/SVGlobalMgr.h"
 #include "../base/SVDataSwap.h"
 #include "SVRenderMgr.h"
@@ -27,6 +28,14 @@ SVRenderMesh::~SVRenderMesh() {
     m_vert_dsp = nullptr;
     m_instance_dsp = nullptr;
     m_rmesh_id = -1;
+}
+
+SVRenderMeshPtr SVRenderMesh::share() {
+    return std::dynamic_pointer_cast<SVRenderMesh>(shareObject()) ;
+}
+
+void SVRenderMesh::dispatch() {
+    SVDispatch::dispatchMeshCreate(mApp, share());
 }
 
 void SVRenderMesh::bindRes(s32 _instid) {

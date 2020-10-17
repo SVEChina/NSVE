@@ -17,6 +17,9 @@ SVRMeshGL::SVRMeshGL(SVInstPtr _app)
 :SVRMeshRes(_app)
 ,m_indexID(0)
 ,m_instanceID(0){
+    for(s32 i=0;i<MAX_VERTEX_STEAM_NUM;i++) {
+        m_bufID[i] = 0;
+    }
 }
 
 SVRMeshGL::~SVRMeshGL() {
@@ -93,12 +96,14 @@ void SVRMeshGL::load(SVRendererPtr _renderer,
                 //单一混合流
                 s32 t_stream_num = 1;
                 glGenBuffers(t_stream_num, m_bufID);
-                if(m_vert_dsp->_bufData) {
+                if(m_vert_dsp->m_mixStreamData) {
+                    glBindBuffer(GL_ARRAY_BUFFER, m_bufID[0]);
                     glBufferData(GL_ARRAY_BUFFER,
-                                 m_vert_dsp->_bufData->getSize(),
-                                 m_vert_dsp->_bufData->getData(),
+                                 m_vert_dsp->m_mixStreamData->getSize(),
+                                 m_vert_dsp->m_mixStreamData->getData(),
                                  t_pool_type);
                 }else{
+                    glBindBuffer(GL_ARRAY_BUFFER, m_bufID[0]);
                     glBufferData(GL_ARRAY_BUFFER,m_vert_dsp->_bufSize,0,t_pool_type);
                 }
             }else{
@@ -109,8 +114,10 @@ void SVRMeshGL::load(SVRendererPtr _renderer,
                     VFTYPE t_stream_type = VFTYPE(m_vert_dsp->m_streamDsp[i]);
                     SVDataSwapPtr t_data = m_vert_dsp->m_streamData[t_stream_type];
                     if(t_data) {
+                        glBindBuffer(GL_ARRAY_BUFFER, m_bufID[i]);
                         glBufferData(GL_ARRAY_BUFFER,t_data->getSize(),t_data->getData(),t_pool_type);
                     }else{
+                        glBindBuffer(GL_ARRAY_BUFFER, m_bufID[i]);
                         s32 t_size = m_vert_dsp->_vertCnt * SVVertStreamDsp::getVertSize(VFTYPE(t_stream_type));  //顶点数*类型
                         glBufferData(GL_ARRAY_BUFFER,t_size,0,t_pool_type);
                     }
@@ -161,11 +168,9 @@ s32 SVRMeshGL::process(SVRendererPtr _renderer){
     if( m_vert_dsp ) {
         if( m_vert_dsp->_bufMode == E_BFM_AOS ) {
             //混合流模式
-            VFTYPE t_vf_type = m_vert_dsp->m_streamDsp[0];  //流描述
-            SVDataSwapPtr t_data = m_vert_dsp->m_streamData[t_vf_type];
-            if(t_data) {
-                void* t_pointer = t_data->getData();
-                s32 t_len = t_data->getSize();
+            if(m_vert_dsp->m_mixStreamData) {
+                void* t_pointer = m_vert_dsp->m_mixStreamData->getData();
+                s32 t_len = m_vert_dsp->m_mixStreamData->getSize();
                 glBindBuffer(GL_ARRAY_BUFFER, m_bufID[0]);
                 glBufferSubData(GL_ARRAY_BUFFER,0,t_len,t_pointer);
             }
@@ -278,19 +283,32 @@ void SVRMeshGL::draw(SVRendererPtr _renderer) {
     }else if(m_rmesh_dsp->m_draw_method == E_DRAW_TRIANGLE_FAN) {
         t_method = GL_TRIANGLE_FAN;
     }
+//    if(m_vert_dsp->_bufMode == E_BFM_AOS) {
+//        //单一混合流
+//        glBindBuffer(GL_ARRAY_BUFFER, m_bufID[0]);
+//    }else{
+//    }
     //draw
-    if(m_instanceID>0) {
-        if(m_indexID>0) {
-            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexID);
-            glDrawElementsInstanced(t_method, m_rmesh_dsp->m_draw_num, GL_UNSIGNED_SHORT, 0, m_instacne_count);
-       }else{
-           glDrawArraysInstanced(t_method, 0, m_rmesh_dsp->m_draw_num, m_instacne_count);
-       }
-    }else{
-        if(m_indexID>0) {
-            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexID);
-            glDrawElements(t_method, m_rmesh_dsp->m_draw_num, GL_UNSIGNED_SHORT, 0);
-        }else{
+    if(m_instance_dsp ) { //多实例
+        if(m_instance_dsp->_instCnt>0) {
+            if( m_index_dsp ) {
+                //索引方式
+                glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexID);
+                glDrawElementsInstanced(t_method, m_rmesh_dsp->m_draw_num, GL_UNSIGNED_SHORT, 0, m_instance_dsp->_instCnt);
+            }else{
+                //非索引方式
+                glDrawArraysInstanced(t_method, 0, m_rmesh_dsp->m_draw_num, m_instance_dsp->_instCnt);
+            }
+        }
+    } else {
+        if( m_index_dsp ) {
+            if( m_indexID>0) {
+                glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexID);
+                glDrawElements(t_method, m_rmesh_dsp->m_draw_num, GL_UNSIGNED_SHORT, 0);
+                return ;
+            }
+        }
+        if(m_vert_dsp) {
             glDrawArrays(t_method, 0, m_rmesh_dsp->m_draw_num);
         }
     }

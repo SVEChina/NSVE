@@ -36,6 +36,13 @@ SVComData::~SVComData() {
 }
 
 void SVComData::init() {
+}
+
+void SVComData::destroy() {
+    m_screenMesh = nullptr;
+}
+
+void SVComData::loadDefault() {
     m_screenMesh = MakeSharedPtr<SVRenderMesh>(mApp);
     //索引描述
     SVIndexStreamDspPtr t_index_dsp = MakeSharedPtr<SVIndexStreamDsp>();
@@ -49,11 +56,18 @@ void SVComData::init() {
     t_vert_dsp->push(E_VF_T0);
     t_vert_dsp->setBufType(E_BFT_STATIC_DRAW);
     t_vert_dsp->setVertCnt(4);
-    t_vert_dsp->setStreamData(E_VF_NULL, m_screen_rect_v2_t0, 16*sizeof(f32));
+    t_vert_dsp->setMixStreamData(m_screen_rect_v2_t0, 16*sizeof(f32));
     m_screenMesh->setVertDsp(t_vert_dsp);
     //设置绘制方法
     m_screenMesh->setDrawMethod(E_DRAW_TRIANGLES);
     m_screenMesh->setDrawVertNum(6);
+    m_screenMesh->dispatch();
+}
+
+SVFaceDataMeshPtr SVComData::faceMesh(s32 _type) {
+    //根据不同算法，获取不同算法的标准脸
+    
+    return nullptr;
 }
 
 #define IDX(_x_, _y_) ((_y_)*rx + (_x_))
@@ -128,30 +142,6 @@ SVRenderMeshPtr SVComData::generatePatchMesh(FVec3 &_corner00, FVec3 &_corner10,
 //    patchMesh->setDrawMethod(E_DRAW_LINES);
 //    patchMesh->createMesh();
     return patchMesh;
-}
-
-void SVComData::destroy() {
-    m_screenMesh = nullptr;
-}
-
-void SVComData::loadDefault() {
-    if(m_screenMesh) {
-        SVDispatch::dispatchMeshCreate(mApp, m_screenMesh);
-    }
-}
-
-void SVComData::procSysEvent(SVObjectPtr _caller,SVEventPtr _event) {
-    if(_event->eventType == EVN_T_SYS_INIT_RENDERER) {
-        //渲染器初始化
-        SVComDataPtr t_sender = dynamic_pointer_cast<SVComData>(_caller);
-        t_sender->loadDefault();
-    }
-}
-
-SVFaceDataMeshPtr SVComData::faceMesh(s32 _type) {
-    //根据不同算法，获取不同算法的标准脸
-    
-    return nullptr;
 }
 
 //void SVComData::_initTwoDivisionMesh(){

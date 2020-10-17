@@ -88,7 +88,7 @@ SVRTargetPtr SVRTargetMgr::createTarget(SV_TEXIN _texid,bool _depth,bool _stenci
     t_dsp->m_use_depth = _depth;
     t_dsp->m_use_stencil = _stencil;
     //创建RT
-    SVDispatch::dispatchTargetCreate(mApp,t_target);
+    t_target->dispatch();
     //增加target
     _addTarget(_texid,t_target);
     return t_target;
@@ -124,7 +124,7 @@ SVRTargetPtr SVRTargetMgr::createTarget(SV_TEXIN _texid,s32 _w,s32 _h,bool _dept
     t_dsp->m_use_depth = _depth;
     t_dsp->m_use_stencil = _stencil;
     //创建RT
-    SVDispatch::dispatchTargetCreate(mApp,t_target);
+    t_target->dispatch();
     //增加target
     _addTarget(_texid,t_target);
     return t_target;

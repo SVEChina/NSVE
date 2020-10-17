@@ -70,10 +70,10 @@ SVRenderMeshPtr SVGeoGen::genRect(SVInstPtr _app,f32 _w,f32 _h,SVBoundBox& _aabb
     t_vert_dsp->push(E_VF_T0);
     t_vert_dsp->setBufType(E_BFT_STATIC_DRAW);
     t_vert_dsp->setVertCnt(4);
-    t_vert_dsp->setStreamData(E_VF_NULL, t_verts, 4*sizeof(V3_T0));
+    t_vert_dsp->setMixStreamData(t_verts, 4*sizeof(V3_T0));
     t_mesh->setVertDsp(t_vert_dsp);
     //这个必须有渲染器才可以执行
-    SVDispatch::dispatchMeshCreate(_app, t_mesh);
+    t_mesh->dispatch();
     return t_mesh;
 }
 
@@ -91,7 +91,6 @@ SVRenderMeshPtr SVGeoGen::genRectARCHO(SVInstPtr _app,f32 _w,f32 _h,EUIARCHO _ar
 //    t_mesh->setVertDsp(t_vert_dsp);
 //
 //    //这个必须有渲染器才可以执行
-//    SVDispatch::dispatchMeshCreate(_app, t_mesh);
 //    return t_mesh;
 //    //
 //    f32 t_off_x = 0.0f;
@@ -390,10 +389,10 @@ SVRenderMeshPtr SVGeoGen::genAABB(SVInstPtr _app,SVBoundBox& _aabb){
     t_vert_dsp->push(E_VF_T0);
     t_vert_dsp->setBufType(E_BFT_STATIC_DRAW);
     t_vert_dsp->setVertCnt(24);
-    t_vert_dsp->setStreamData(E_VF_NULL, m_verts, 24*sizeof(V3_N_T0));
+    t_vert_dsp->setMixStreamData(m_verts, 24*sizeof(V3_N_T0));
     t_mesh->setVertDsp(t_vert_dsp);
     //这个必须有渲染器才可以执行
-    SVDispatch::dispatchMeshCreate(_app, t_mesh);
+    t_mesh->dispatch();
     return t_mesh;
 }
 

@@ -52,6 +52,10 @@ SVRTargetPtr SVRTarget::share() {
     return std::dynamic_pointer_cast<SVRTarget>( shareObject() );
 }
 
+void SVRTarget::dispatch() {
+    SVDispatch::dispatchTargetCreate(mApp, share());
+}
+
 void SVRTarget::setClearColor(f32 _r,f32 _g,f32 _b,f32 _a) {
     m_color.setColor(_r, _g, _b, _a);
 }

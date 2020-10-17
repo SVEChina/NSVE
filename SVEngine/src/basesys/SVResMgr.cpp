@@ -74,6 +74,9 @@ void SVResMgr::procSysEvent(SVObjectPtr _caller,SVEventPtr _event) {
         //渲染器初始化
         SVResMgrPtr t_sender = dynamic_pointer_cast<SVResMgr>(_caller);
         if(t_sender) {
+            if(t_sender->m_common_data) {
+                t_sender->m_common_data->loadDefault();
+            }
             if(t_sender->m_shader_mgr) {
                 t_sender->m_shader_mgr->loadDefault();
             }

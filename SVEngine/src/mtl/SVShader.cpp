@@ -10,6 +10,7 @@
 #include "../rendercore/SVRenderer.h"
 #include "../rendercore/SVRShader.h"
 #include "../app/SVInst.h"
+#include "../app/SVDispatch.h"
 #include "../base/SVParamTbl.h"
 #include "../core/SVVertDef.h"
 #include "../base/SVDataChunk.h"
@@ -32,6 +33,10 @@ SVShader::~SVShader() {
 
 SVShaderPtr SVShader::share() {
     return std::dynamic_pointer_cast<SVShader>(shareObject()) ;
+}
+
+void SVShader::dispatch() {
+    SVDispatch::dispatchShaderCreate(mApp, share());
 }
 
 //渲染内核

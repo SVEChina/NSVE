@@ -53,10 +53,6 @@ namespace sv {
         void _initFourDivisionMesh_X();
         
         SVRenderMeshPtr m_screenMesh;
-        
-    public:
-        //处理消息
-        static void procSysEvent(SVObjectPtr _caller,SVEventPtr _event);
     };
     
 }//!namespace

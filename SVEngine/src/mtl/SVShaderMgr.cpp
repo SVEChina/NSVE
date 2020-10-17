@@ -107,7 +107,7 @@ void SVShaderMgr::loadSDSP(cptr8 _sdsp,cptr8 _language) {
         SVShaderPtr t_shader = MakeSharedPtr<SVShader>(mApp);
         if( t_shader->fromJSON( doc ,_language) ) {
             m_shaderMap.insert(std::make_pair(t_s_name, t_shader));
-            SVDispatch::dispatchShaderCreate(mApp,t_shader);
+            t_shader->dispatch();
         }
     }
 }

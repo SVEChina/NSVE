@@ -30,6 +30,8 @@ namespace sv {
         ~SVRTarget();
         
         SVRTargetPtr share();
+
+        void dispatch();
         
         //
         void setClearColor(f32 _r,f32 _g,f32 _b,f32 _a);

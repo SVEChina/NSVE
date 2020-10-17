@@ -32,7 +32,7 @@ namespace sv {
 class SVVertStreamDsp :public SVObject {
 public:
     SVVertStreamDsp(BUFFERMODE _mode) {
-        _bufMode = _mode;           //E_BFM_AOS;
+        _bufMode = _mode;
         _bufType = E_BFT_STATIC_DRAW;
         _vertCnt = 0;
         _bufSize = 0;
@@ -68,7 +68,7 @@ public:
     
     //重置
     void reset() {
-        _bufData = nullptr;
+        m_mixStreamData = nullptr;
         m_streamDsp.clear();
         m_streamData.clear();
     }
@@ -118,12 +118,8 @@ public:
     }
     
     //设置流数据
-    bool setStreamData(VFTYPE _stype,SVDataSwapPtr _data) {
-        if(_bufMode == E_BFM_AOS) {
-            //混合流模式，设定给单一目标就好
-            _bufData = _data;
-            return true;
-        } else {
+    bool setSigleStreamData(VFTYPE _stype,SVDataSwapPtr _data) {
+        if(_bufMode == E_BFM_SOA) {
             //单一流模式，需要按流分开存储
             std::map<VFTYPE,SVDataSwapPtr>::iterator it = m_streamData.find(_stype);
             if( it == m_streamData.end() ) {
@@ -132,28 +128,43 @@ public:
             m_streamData[_stype] = _data;
             return true;
         }
+        return false;
     }
     
-    bool setStreamData(VFTYPE _stype,void* _data,s32 _len) {
+    bool setSigleStreamData(VFTYPE _stype,void* _data,s32 _len) {
+        if(_bufMode == E_BFM_SOA) {
+            //单一流模式，需要按流分开存储
+            std::map<VFTYPE,SVDataSwapPtr>::iterator it = m_streamData.find(_stype);
+            if( it == m_streamData.end() ) {
+                return false;
+            }
+            if( !m_streamData[_stype] ) {
+                m_streamData[_stype] = MakeSharedPtr<SVDataSwap>();
+            }
+            m_streamData[_stype]->appendData(_data,_len);
+            return true;
+        }
+        return false;
+    }
+    
+    //设置流数据
+    bool setMixStreamData(VFTYPE _stype,SVDataSwapPtr _data) {
         if(_bufMode == E_BFM_AOS) {
             //混合流模式，设定给单一目标就好
-           if(!_bufData) {
-               _bufData = MakeSharedPtr<SVDataSwap>();
-           }
-           _bufData->appendData(_data,_len);
-           return true;
-        } else {
-           //单一流模式，需要按流分开存储
-           std::map<VFTYPE,SVDataSwapPtr>::iterator it = m_streamData.find(_stype);
-           if( it == m_streamData.end() ) {
-               return false;
-           }
-           if( !m_streamData[_stype] ) {
-               m_streamData[_stype] = MakeSharedPtr<SVDataSwap>();
-           }
-           m_streamData[_stype]->appendData(_data,_len);
+            m_mixStreamData = _data;
+            return true;
+        }
+        return false;
+    }
+    
+    bool setMixStreamData(void* _data,s32 _len) {
+        if(_bufMode == E_BFM_AOS) {
+            m_mixStreamData = nullptr;
+            m_mixStreamData = MakeSharedPtr<SVDataSwap>();
+            m_mixStreamData->writeData(_data,_len);
            return true;
         }
+        return false;
     }
     
     //
@@ -166,10 +177,10 @@ public:
     s32 _bufSize;           //buf 尺寸
     //流描述
     std::vector<VFTYPE> m_streamDsp;  //流描述
-    //流数据
+    //单一流数据
     std::map<VFTYPE,SVDataSwapPtr> m_streamData;
-    //数据
-    SVDataSwapPtr _bufData;
+    //混合流数据
+    SVDataSwapPtr m_mixStreamData;
 };
     
 class SVIndexStreamDsp :public SVObject {
@@ -199,11 +210,14 @@ public:
     }
     
     bool setStreamData(void* _data,s32 _len) {
-        if(!_bufData) {
+        if(_data) {
+            _bufData = nullptr;
             _bufData = MakeSharedPtr<SVDataSwap>();
+            _bufData->writeData(_data,_len);
+            _bufSize = _len;
+            return true;
         }
-        _bufData->appendData(_data,_len);
-        return true;
+        return false;
     }
     //索引个数
     s32 _indexCnt;
@@ -243,11 +257,14 @@ public:
     }
     
     bool setStreamData(void* _data,s32 _len) {
-        if(!_bufData) {
+        if(_data) {
+            _bufData = nullptr;
             _bufData = MakeSharedPtr<SVDataSwap>();
+            _bufData->writeData(_data,_len);
+            _bufSize = _len;
+            return true;
         }
-        _bufData->appendData(_data,_len);
-        return true;
+        return false;
     }
 
     //实例个数

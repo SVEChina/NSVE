@@ -74,7 +74,7 @@ SVTexturePtr SVTexMgr::_createTexture(cptr8 _name, bool _sync, bool _enableMipMa
     if (_sync) {
         if( t_img->load(_name) ) {
             tTexture = t_img->toTexture();
-            SVDispatch::dispatchTextureCreate(mApp, tTexture);
+            tTexture->dispatch();
         }
     } else {
         //异步创建需要等
@@ -125,7 +125,7 @@ SVTexturePtr SVTexMgr::createInTexture(SV_TEXIN _texname,SVTextureDsp _dsp) {
         }
         m_intex_pool[_texname] = MakeSharedPtr<SVTexture>(mApp);
         m_intex_pool[_texname] ->init(_dsp);
-        SVDispatch::dispatchTextureCreate(mApp, m_intex_pool[_texname]);
+        m_intex_pool[_texname]->dispatch();
         return m_intex_pool[_texname];
     }
     return nullptr;

@@ -29,6 +29,8 @@ namespace sv {
         
         ~SVRenderMesh();
         
+        SVRenderMeshPtr share();
+        
         /*
          设置描述
          */
@@ -37,6 +39,8 @@ namespace sv {
         void setVertDsp(SVVertStreamDspPtr _dsp);
         
         void setInstanceDsp(SVInstStreamDspPtr _dsp);
+        
+        void dispatch();
         
         /*
          是否使用索引

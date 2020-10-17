@@ -72,9 +72,9 @@ void SVRMeshMetal::load(SVRendererPtr _renderer,
         //顶点数据
         if( m_vert_dsp->_bufMode == E_BFM_AOS ) {
             //单流
-            if(m_vert_dsp->_bufData) {
-                void* t_p = m_vert_dsp->_bufData->getData();
-                s32 t_len = m_vert_dsp->_bufData->getSize();
+            if(m_vert_dsp->m_mixStreamData) {
+                void* t_p = m_vert_dsp->m_mixStreamData->getData();
+                s32 t_len = m_vert_dsp->m_mixStreamData->getSize();
                 m_dbufs[0] = [t_rm->m_pDevice newBufferWithBytes:t_p length: t_len options:MTLResourceStorageModeShared ];
             }else{
                 s32 t_len = m_vert_dsp->_bufSize;
@@ -130,11 +130,10 @@ s32 SVRMeshMetal::process(SVRendererPtr _renderer) {
         if(m_vert_dsp) {
             if( m_vert_dsp->_bufMode == E_BFM_AOS ) {
                 //混合流模式
-                VFTYPE t_vf_type = m_vert_dsp->m_streamDsp[0];  //流描述
-                SVDataSwapPtr t_data = m_vert_dsp->m_streamData[t_vf_type];
-                if(t_data) {
-                    void* t_pointer = t_data->getData();
-                    s32 t_len = t_data->getSize();
+                SVDataSwapPtr t_data = m_vert_dsp->m_mixStreamData;
+                if(m_vert_dsp->m_mixStreamData) {
+                    void* t_pointer = m_vert_dsp->m_mixStreamData->getData();
+                    s32 t_len = m_vert_dsp->m_mixStreamData->getSize();
                     memcpy( m_dbufs[0].contents , t_pointer ,t_len);
                 }
             } else {

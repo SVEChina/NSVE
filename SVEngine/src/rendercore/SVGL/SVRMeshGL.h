@@ -46,7 +46,6 @@ namespace sv {
         u32 m_bufID[MAX_VERTEX_STEAM_NUM];
         //instance
         u32 m_instanceID;
-        s32 m_instacne_count;
     };
     
 
