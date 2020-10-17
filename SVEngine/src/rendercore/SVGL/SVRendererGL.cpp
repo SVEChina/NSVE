@@ -219,20 +219,22 @@ void SVRendererGL::drawScreen(SV_TEXIN _texid) {
     }
     SVSurfacePtr t_surface = MakeSharedPtr<SVSurface>();
     t_surface->setTexture(0,t_tex,1);
-    //
-    SVRenderMeshPtr t_mesh = mApp->getComData()->screenMesh();
-    bool t_ret = processMesh(t_mesh);
-    if(!t_ret){
-        return ;
-    }
     //激活材质
     SVMtlCorePtr t_mtl = mApp->getMtlLib()->getMtl("back");
-    if(t_mtl) {
+    SVRenderMeshPtr t_mesh = mApp->getComData()->screenMesh();
+    if(t_mtl && t_mesh) {
         t_mtl->reloadShader();
-        t_ret = processMtl(t_mtl,t_surface);
-        if(t_ret){
-            drawMesh(t_mesh);
+        bool t_ret = processMtl(t_mtl,t_surface);
+        if(!t_ret) {
+            t_surface = nullptr;
+            return ;
         }
+        t_ret = processMesh(t_mesh);
+        if(t_ret) {
+            t_surface = nullptr;
+            return ;
+        }
+        drawMesh(t_mesh);
     }
     t_surface = nullptr;
 }
