@@ -60,12 +60,13 @@ void SVRCmdNor::setSurface(SVSurfacePtr _surface) {
 void SVRCmdNor::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
     if ( _renderer && _target && m_pMtl && m_pMesh ) {
         bool t_ret = false;
-        t_ret = _renderer->processMesh(m_pMesh);
+        //激活材质
+        t_ret =_renderer->processMtl(m_pMtl,m_pSurface);
         if(!t_ret){
             return ;
         }
-        //激活材质
-        t_ret =_renderer->processMtl(m_pMtl,m_pSurface);
+        //处理MESH
+        t_ret = _renderer->processMesh(m_pMesh);
         if(!t_ret){
             return ;
         }

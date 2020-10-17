@@ -24,10 +24,9 @@ SVRTarget::SVRTarget(SVInstPtr _app,SV_TEXIN _id)
 ,m_camera(nullptr){
     m_auto = true;
     m_cmdNum = 0;
-    m_color.setColorARGB(0xff000000);
-    m_depth_value = 1.0f;
-    m_stencil_value = 0;
-    //
+//    m_color.setColorARGB(0xff000000);
+//    m_depth_value = 1.0f;
+//    m_stencil_value = 0;
     m_stream_pool.resize(E_RSM_MAX);
     for(s32 i=0;i<E_RSM_MAX;i++) {
         m_stream_pool[i] = MakeSharedPtr<SVRenderStream>();
@@ -57,17 +56,18 @@ void SVRTarget::dispatch() {
 }
 
 void SVRTarget::setClearColor(f32 _r,f32 _g,f32 _b,f32 _a) {
-    m_color.setColor(_r, _g, _b, _a);
+    m_target_dsp.m_color_r = _r;
+    m_target_dsp.m_color_g = _g;
+    m_target_dsp.m_color_b = _b;
+    m_target_dsp.m_color_a = _a;
 }
 
-//
 void SVRTarget::setDepth(f32 _value) {
-    m_depth_value = _value;
+    m_target_dsp.m_depth_value = _value;
 }
 
-//
 void SVRTarget::setStencil(s32 _value) {
-    m_stencil_value = _value;
+    m_target_dsp.m_stencil_value = _value;
 }
 
 //

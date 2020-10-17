@@ -95,43 +95,25 @@ namespace sv {
         //目标ID
         SV_TEXIN m_target_id;
         
-        //颜色
-        SVColor m_color;
+        s32 m_cmdNum; //命令数目
         
-        //深度值
-        f32 m_depth_value;
+        SVCameraNodePtr m_camera; //绑定的相机
         
-        //模版值
-        s32 m_stencil_value;
-        
-        //命令数目
-        s32 m_cmdNum;
-        
-        //绑定的相机
-        SVCameraNodePtr m_camera;
-        
-        //
         SVTargetDsp m_target_dsp;
         
-        //同步大小
-        bool m_auto;
+        s32 m_rfbo_id; //关联的FBO-ID
         
-        //是否开启输出
-        bool m_output;
+        bool m_auto;  //同步大小
         
-        //关联的FBO-ID
-        s32 m_rfbo_id;
+        bool m_output; //是否开启输出
         
         //渲染相关
         SVRenderStreamPtr m_stream_pre;
          
-        //
         SVRenderStreamPtr m_stream_after;
         
-        //
         std::vector<SV_RSTREAM> m_stream_quene;    //流序，流顺的设定就是渲染路径的设定
         
-        //
         std::vector<SVRenderStreamPtr> m_stream_pool;
     };
 

@@ -196,30 +196,44 @@ u32 SVRShaderGL::_createProgram(){
         glAttachShader(t_program_id, m_cs);
     }
     //
+    //内置变量
+//    #define NAME_POSITION   "aPosition"
+//    #define NAME_NORMAL     "aNormal"
+//    #define NAME_TAGENT     "aTagent"
+//    #define NAME_BNOR       "aBNormal"
+//    #define NAME_COLOR      "aColor"
+//    #define NAME_TEXCOORD0  "aTexcoord0"
+//    #define NAME_TEXCOORD1  "aTexcoord1"
+//    #define NAME_INSOFFSET  "aInsOffset"
+//    //骨骼动画
+//    #define NAME_BONE_ID     "aBoneID"
+//    #define NAME_BONE_WEIGHT "aBoneWeight"
     for(s32 i=0;i<m_shader_dsp->m_vft.size();i++) {
-        //单一混合流
         s32 t_vf = m_shader_dsp->m_vft[i];
-        if (t_vf & E_VF_V2) {
+        if (t_vf == E_VF_V2) {
             glBindAttribLocation(t_program_id, CHANNEL_POSITION, NAME_POSITION);
-        }else if (t_vf & E_VF_V3) {
+        }else if (t_vf == E_VF_V3) {
             glBindAttribLocation(t_program_id, CHANNEL_POSITION, NAME_POSITION);
-        }else if (t_vf & E_VF_NOR) {
-            glBindAttribLocation(t_program_id, CHANNEL_POSITION, NAME_POSITION);
-        }else if (t_vf & E_VF_TAG) {
-            glBindAttribLocation(t_program_id, CHANNEL_POSITION, NAME_POSITION);
-        }else if (t_vf & E_VF_BTAG) {
-            glBindAttribLocation(t_program_id, CHANNEL_POSITION, NAME_POSITION);
-        }else if (t_vf & E_VF_C0) {
-            glBindAttribLocation(t_program_id, CHANNEL_POSITION, NAME_POSITION);
-        }else if (t_vf & E_VF_T0) {
-            glBindAttribLocation(t_program_id, CHANNEL_POSITION, NAME_POSITION);
-        }else if (t_vf & E_VF_T1) {
-            glBindAttribLocation(t_program_id, CHANNEL_POSITION, NAME_POSITION);
-        }else if (t_vf & E_VF_BONE) {
-            glBindAttribLocation(t_program_id, CHANNEL_POSITION, NAME_POSITION);
-        }else if (t_vf & E_VF_BONE_W) {
-            glBindAttribLocation(t_program_id, CHANNEL_POSITION, NAME_POSITION);
+        }else if (t_vf == E_VF_NOR) {
+            glBindAttribLocation(t_program_id, CHANNEL_NORMAL, NAME_NORMAL);
+        }else if (t_vf == E_VF_TAG) {
+            glBindAttribLocation(t_program_id, CHANNEL_TAGENT, NAME_TAGENT);
+        }else if (t_vf == E_VF_BTAG) {
+            glBindAttribLocation(t_program_id, CHANNEL_BTAGENT, NAME_BNOR);
+        }else if (t_vf == E_VF_C0) {
+            glBindAttribLocation(t_program_id, CHANNEL_COLOR0, NAME_COLOR);
+        }else if (t_vf == E_VF_T0) {
+            glBindAttribLocation(t_program_id, CHANNEL_TEXCOORD0, NAME_TEXCOORD0);
+        }else if (t_vf == E_VF_T1) {
+            glBindAttribLocation(t_program_id, CHANNEL_TEXCOORD1, NAME_TEXCOORD1);
+        }else if (t_vf == E_VF_BONE) {
+            glBindAttribLocation(t_program_id, CHANNEL_BONE_ID, NAME_BONE_ID);
+        }else if (t_vf == E_VF_BONE_W) {
+            glBindAttribLocation(t_program_id, CHANNEL_BONE_WEIGHT, NAME_BONE_WEIGHT);
+        }else if (t_vf == E_VF_INSOFFSET) {
+            glBindAttribLocation(t_program_id, CHANNEL_INSOFFSET, NAME_INSOFFSET);
         }
+        
     }
     glLinkProgram(t_program_id);
     GLint linkstatus;

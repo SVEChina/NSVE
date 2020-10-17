@@ -42,6 +42,7 @@ void SVRTargetMgr::loadDefault() {
     if(t_target) {
         t_target->pushStreamQuene(E_RSM_SKY );
         t_target->pushStreamQuene(E_RSM_SOLID);
+        t_target->setClearColor(1.0f, 1.0f, 0.0f, 1.0f);
         mApp->getRenderMgr()->setMainRT(t_target);
     }
 }

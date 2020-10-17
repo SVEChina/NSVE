@@ -186,7 +186,7 @@ bool SVRendererGL::processMtl(SVMtlCorePtr _mtl,SVSurfacePtr _surface) {
             //alpha
             //depth
         }
-        return true;
+        return t_ret;
     }
     return false;
 }
@@ -230,7 +230,7 @@ void SVRendererGL::drawScreen(SV_TEXIN _texid) {
             return ;
         }
         t_ret = processMesh(t_mesh);
-        if(t_ret) {
+        if(!t_ret) {
             t_surface = nullptr;
             return ;
         }

@@ -114,6 +114,9 @@ public:
         if (_vf & E_VF_BONE_W) {
             t_size += 4 * sizeof(f32);
         }
+//        if (_vf & E_VF_INSOFFSET) {
+//            t_size += 4 * sizeof(f32);
+//        }
         return t_size;
     }
     
