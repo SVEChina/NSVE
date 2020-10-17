@@ -54,6 +54,7 @@ void SVRMeshMetal::load(SVRendererPtr _renderer,
                 void* t_p = m_index_dsp->_bufData->getData();
                 s32 t_len = m_index_dsp->_bufData->getSize();
                 m_ibuf = [t_rm->m_pDevice newBufferWithBytes:t_p length:t_len options: MTLResourceStorageModeShared ];
+                m_index_dsp->_bufData = nullptr;
             }else{
                 s32 t_len = m_index_dsp->_bufSize;
                 m_ibuf = [t_rm->m_pDevice newBufferWithLength:t_len options: MTLResourceStorageModeShared ];
@@ -65,6 +66,7 @@ void SVRMeshMetal::load(SVRendererPtr _renderer,
                 void* t_p = m_instance_dsp->_bufData->getData();
                 s32 t_len = m_instance_dsp->_bufData->getSize();
                 m_instance_buf = [t_rm->m_pDevice newBufferWithBytes:t_p length:t_len options: MTLResourceStorageModeShared ];
+                m_instance_dsp->_bufData = nullptr;
             }else{
                 m_instance_buf = [t_rm->m_pDevice newBufferWithLength:m_instance_dsp->_bufSize options: MTLResourceStorageModeShared ];
             }
@@ -76,6 +78,7 @@ void SVRMeshMetal::load(SVRendererPtr _renderer,
                 void* t_p = m_vert_dsp->m_mixStreamData->getData();
                 s32 t_len = m_vert_dsp->m_mixStreamData->getSize();
                 m_dbufs[0] = [t_rm->m_pDevice newBufferWithBytes:t_p length: t_len options:MTLResourceStorageModeShared ];
+                m_vert_dsp->m_mixStreamData = nullptr;
             }else{
                 s32 t_len = m_vert_dsp->_bufSize;
                 m_dbufs[0] = [t_rm->m_pDevice newBufferWithLength:t_len options:MTLResourceStorageModeShared ];
@@ -91,8 +94,9 @@ void SVRMeshMetal::load(SVRendererPtr _renderer,
                     void* t_point = t_data->getData();
                     s32 t_len = t_data->getSize();
                     m_dbufs[i] = [t_rm->m_pDevice newBufferWithBytes:t_point length:t_len options:MTLResourceStorageModeShared];
+                    m_vert_dsp->m_streamData[t_smt] = nullptr;
                 }else{
-                    s32 t_len = m_vert_dsp->_vertCnt*SVVertStreamDsp::getVertSize(m_vert_dsp->getVertType());
+                    s32 t_len = m_vert_dsp->_vertCnt * m_vert_dsp->getVertSize(t_smt);
                     m_dbufs[i] = [t_rm->m_pDevice newBufferWithLength:t_len options:MTLResourceStorageModeShared];
                 }
             }
@@ -117,34 +121,38 @@ s32 SVRMeshMetal::process(SVRendererPtr _renderer) {
     if(t_rm && t_rm->m_curEncoder) {
         //数据更新
         m_data_lock->lock();
-        if(m_index_dsp &&  m_index_dsp->_bufData && m_ibuf) {
+        if(m_index_dsp && m_index_dsp->_bufData && m_ibuf) {
             void* t_pointer = m_index_dsp->_bufData->getData();
             s32 t_len = m_index_dsp->_bufData->getSize();
             memcpy( m_ibuf.contents , t_pointer ,t_len);
+            m_index_dsp->_bufData = nullptr;
         }
-        if(m_instance_dsp && m_instance_dsp->_bufData) {
+        if(m_instance_dsp && m_instance_dsp->_bufData && m_instance_buf) {
             void* t_pointer = m_instance_dsp->_bufData->getData();
             s32 t_len = m_instance_dsp->_bufData->getSize();
             memcpy( m_instance_buf.contents , t_pointer ,t_len);
+            m_instance_dsp->_bufData = nullptr;
         }
         if(m_vert_dsp) {
             if( m_vert_dsp->_bufMode == E_BFM_AOS ) {
                 //混合流模式
                 SVDataSwapPtr t_data = m_vert_dsp->m_mixStreamData;
-                if(m_vert_dsp->m_mixStreamData) {
+                if(m_vert_dsp->m_mixStreamData && m_dbufs[0]) {
                     void* t_pointer = m_vert_dsp->m_mixStreamData->getData();
                     s32 t_len = m_vert_dsp->m_mixStreamData->getSize();
                     memcpy( m_dbufs[0].contents , t_pointer ,t_len);
+                    m_vert_dsp->m_mixStreamData = nullptr;
                 }
             } else {
                 //单一流模式
                 for(s32 i=0;i<m_vert_dsp->m_streamDsp.size();i++) {
                     VFTYPE t_vf_type = m_vert_dsp->m_streamDsp[i];  //流描述
                     SVDataSwapPtr t_data = m_vert_dsp->m_streamData[t_vf_type];
-                    if(t_data) {
+                    if(t_data && m_dbufs[i]) {
                         void* t_pointer = t_data->getData();
                         s32 t_len = t_data->getSize();
                         memcpy( m_dbufs[i].contents , t_pointer ,t_len);
+                        m_vert_dsp->m_streamData[t_vf_type] = nullptr;
                     }
                 }
             }

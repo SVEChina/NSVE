@@ -50,6 +50,7 @@ void SVRMeshGL::load(SVRendererPtr _renderer,
                              m_index_dsp->_bufData->getSize(),
                              m_index_dsp->_bufData->getData(),
                              t_pool_type);
+                m_index_dsp->_bufData = nullptr;
             }else{
                 glBufferData(GL_ELEMENT_ARRAY_BUFFER,
                              m_index_dsp->_bufSize,
@@ -74,6 +75,7 @@ void SVRMeshGL::load(SVRendererPtr _renderer,
                              m_instance_dsp->_bufData->getSize(),
                              m_instance_dsp->_bufData->getData(),
                              t_pool_type);
+                m_instance_dsp->_bufData = nullptr;
             }else{
                 glBufferData(GL_ARRAY_BUFFER,
                              m_instance_dsp->_bufSize,
@@ -81,7 +83,7 @@ void SVRMeshGL::load(SVRendererPtr _renderer,
                              t_pool_type);
             }
         }
-        
+
         //顶点数据
         if(m_vert_dsp) {
             s32 t_pool_type = GL_STATIC_DRAW;
@@ -102,6 +104,7 @@ void SVRMeshGL::load(SVRendererPtr _renderer,
                                  m_vert_dsp->m_mixStreamData->getSize(),
                                  m_vert_dsp->m_mixStreamData->getData(),
                                  t_pool_type);
+                    m_vert_dsp->m_mixStreamData = nullptr;
                 }else{
                     glBindBuffer(GL_ARRAY_BUFFER, m_bufID[0]);
                     glBufferData(GL_ARRAY_BUFFER,m_vert_dsp->_bufSize,0,t_pool_type);
@@ -111,14 +114,15 @@ void SVRMeshGL::load(SVRendererPtr _renderer,
                 s32 t_stream_num = s32(m_vert_dsp->m_streamDsp.size());
                 glGenBuffers(t_stream_num, m_bufID);
                 for(s32 i=0;i<t_stream_num;i++) {
-                    VFTYPE t_stream_type = VFTYPE(m_vert_dsp->m_streamDsp[i]);
-                    SVDataSwapPtr t_data = m_vert_dsp->m_streamData[t_stream_type];
+                    VFTYPE t_vft = VFTYPE(m_vert_dsp->m_streamDsp[i]);
+                    SVDataSwapPtr t_data = m_vert_dsp->m_streamData[t_vft];
                     if(t_data) {
                         glBindBuffer(GL_ARRAY_BUFFER, m_bufID[i]);
                         glBufferData(GL_ARRAY_BUFFER,t_data->getSize(),t_data->getData(),t_pool_type);
+                        m_vert_dsp->m_streamData[t_vft] = nullptr;
                     }else{
                         glBindBuffer(GL_ARRAY_BUFFER, m_bufID[i]);
-                        s32 t_size = m_vert_dsp->_vertCnt * SVVertStreamDsp::getVertSize(VFTYPE(t_stream_type));  //顶点数*类型
+                        s32 t_size = m_vert_dsp->_vertCnt * m_vert_dsp->getVertSize(t_vft);
                         glBufferData(GL_ARRAY_BUFFER,t_size,0,t_pool_type);
                     }
                 }
@@ -196,64 +200,65 @@ s32 SVRMeshGL::process(SVRendererPtr _renderer){
         //混合流描述
         glBindBuffer(GL_ARRAY_BUFFER, m_bufID[0]);
         if(m_vert_dsp->m_streamDsp.size()>0) {
+            s8* t_off = 0;
             u32 t_program = t_rm->m_cur_program;
+            s32 t_vert_size = m_vert_dsp->getVertSize();
             for(s32 i=0;i<m_vert_dsp->m_streamDsp.size();i++) {
                 VFTYPE _vf = m_vert_dsp->m_streamDsp[i];
-                s8* t_off = 0;
                 if (_vf == E_VF_V2) {
                     s32 t_attr = glGetAttribLocation(t_program,NAME_POSITION);
                     if(t_attr>=0) {
                         glEnableVertexAttribArray(t_attr);
-                        glVertexAttribPointer(t_attr, 2, GL_FLOAT, GL_FALSE, 0,(void *)t_off);
+                        glVertexAttribPointer(t_attr, 2, GL_FLOAT, GL_FALSE, t_vert_size,(void *)t_off);
                     }
                     t_off += 2 * sizeof(f32);
                 } else if (_vf == E_VF_V3) {
                     s32 t_attr = glGetAttribLocation(t_program,NAME_POSITION);
                     if(t_attr>=0) {
                         glEnableVertexAttribArray(t_attr);
-                        glVertexAttribPointer(t_attr, 3, GL_FLOAT, GL_FALSE, 0,(void *)t_off);
+                        glVertexAttribPointer(t_attr, 3, GL_FLOAT, GL_FALSE, t_vert_size, (void *)t_off);
                     }
                     t_off += 3 * sizeof(f32);
                 } else if (_vf == E_VF_NOR) {
                     s32 t_attr = glGetAttribLocation(t_program,NAME_NORMAL);
                     if(t_attr>=0) {
                         glEnableVertexAttribArray(t_attr);
-                        glVertexAttribPointer(t_attr, 3, GL_FLOAT, GL_FALSE, 0,(void *)t_off);
+                        glVertexAttribPointer(t_attr, 3, GL_FLOAT, GL_FALSE, t_vert_size, (void *)t_off);
                     }
                     t_off += 3 * sizeof(f32);
                 } else if (_vf == E_VF_TAG) {
                     s32 t_attr = glGetAttribLocation(t_program,NAME_TAGENT);
                     if(t_attr>=0) {
                         glEnableVertexAttribArray(t_attr);
-                        glVertexAttribPointer(t_attr, 4, GL_FLOAT, GL_FALSE, 0,(void *)t_off);
+                        glVertexAttribPointer(t_attr, 4, GL_FLOAT, GL_FALSE, t_vert_size, (void *)t_off);
                     }
                     t_off += 4 * sizeof(f32);
                 } else if (_vf == E_VF_BTAG) {
                     s32 t_attr = glGetAttribLocation(t_program,NAME_BNOR);
                     if(t_attr>=0) {
                         glEnableVertexAttribArray(t_attr);
-                        glVertexAttribPointer(t_attr, 4, GL_FLOAT, GL_FALSE, 0,(void *)t_off);
+                        glVertexAttribPointer(t_attr, 4, GL_FLOAT, GL_FALSE, t_vert_size, (void *)t_off);
                     }
                     t_off += 4 * sizeof(f32);
                 } else if (_vf == E_VF_C0) {
                     s32 t_attr = glGetAttribLocation(t_program,NAME_COLOR);
                     if(t_attr>=0) {
                         glEnableVertexAttribArray(t_attr);
-                        glVertexAttribPointer(t_attr, 4, GL_UNSIGNED_BYTE, GL_TRUE, 0, (void *)t_off);
+                        glVertexAttribPointer(t_attr, 4, GL_UNSIGNED_BYTE, GL_TRUE, t_vert_size, (void *)t_off);
                     }
                     t_off += 4 * sizeof(u8);
                 } else if (_vf == E_VF_T0) {
                     s32 t_attr = glGetAttribLocation(t_program,NAME_TEXCOORD0);
                     if(t_attr>=0) {
                         glEnableVertexAttribArray(t_attr);
-                        glVertexAttribPointer(t_attr, 2, GL_FLOAT, GL_FALSE, 0,(void *)t_off);
+                        glVertexAttribPointer(t_attr, 2, GL_FLOAT, GL_FALSE, t_vert_size, (void *)t_off);
                     }
                     t_off += 2 * sizeof(f32);
                 } else if (_vf == E_VF_T1) {
                     s32 t_attr = glGetAttribLocation(t_program,NAME_TEXCOORD1);
                     if(t_attr>=0) {
                         glEnableVertexAttribArray(t_attr);
-                        glVertexAttribPointer(t_attr, 2, GL_FLOAT, GL_FALSE, 0,(void *)t_off);
+                        glVertexAttribPointer(t_attr, 2, GL_FLOAT, GL_FALSE, t_vert_size, (void *)t_off);
                     }
                     t_off += 2 * sizeof(f32);
                 } else if (_vf == E_VF_BONE) {
@@ -261,7 +266,7 @@ s32 SVRMeshGL::process(SVRendererPtr _renderer){
                     s32 t_attr = glGetAttribLocation(t_program,NAME_BONE_ID);
                     if(t_attr>=0) {
                         glEnableVertexAttribArray(t_attr);
-                        glVertexAttribPointer(t_attr, 4, GL_UNSIGNED_SHORT, GL_FALSE, 0,(void *)t_off);
+                        glVertexAttribPointer(t_attr, 4, GL_UNSIGNED_SHORT, GL_FALSE, t_vert_size, (void *)t_off);
                     }
                     t_off += 4 * sizeof(u16);
                 } else if (_vf == E_VF_BONE_W) {
@@ -269,7 +274,7 @@ s32 SVRMeshGL::process(SVRendererPtr _renderer){
                     s32 t_attr = glGetAttribLocation(t_program,NAME_BONE_WEIGHT);
                     if(t_attr>=0) {
                         glEnableVertexAttribArray(t_attr);
-                        glVertexAttribPointer(t_attr, 4, GL_FLOAT, GL_FALSE, 0,(void *)t_off);
+                        glVertexAttribPointer(t_attr, 4, GL_FLOAT, GL_FALSE, t_vert_size, (void *)t_off);
                     }
                     t_off += 4 * sizeof(f32);
                 }
@@ -390,8 +395,7 @@ void SVRMeshGL::draw(SVRendererPtr _renderer) {
                 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexID);
                 glDrawElements(t_method, m_rmesh_dsp->m_draw_num, GL_UNSIGNED_SHORT, 0);
             }
-        }
-        if(m_vert_dsp) {
+        }else {
             glDrawArrays(t_method, 0, m_rmesh_dsp->m_draw_num);
         }
     }

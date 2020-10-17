@@ -91,6 +91,10 @@ bool SVCtxIOSGLES::activeContext(SVRendererPtr _renderer){
 bool SVCtxIOSGLES::swap(SVRendererPtr _renderer){
     if(m_gl_context){
         if( m_gl_layer ) {
+//            glBindFramebuffer(GL_FRAMEBUFFER, m_frameBuf);
+//            glClearColor(0.0, 0.0, 1.0, 1.0);
+//            glClear(GL_COLOR_BUFFER_BIT);
+            glViewport(0, 0, mApp->m_global_param.sv_width, mApp->m_global_param.sv_height);
             _renderer->drawScreen(E_TEX_MAIN);
         }
         //

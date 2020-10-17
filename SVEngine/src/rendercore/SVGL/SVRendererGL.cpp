@@ -173,12 +173,25 @@ bool SVRendererGL::processMtl(SVMtlCorePtr _mtl,SVSurfacePtr _surface) {
         if(_surface ) {
             //更新uniform
             _mtl->getShader()->submitParam(_surface->m_tbl);
-            //更新纹理
+//            //vs纹理
+//            for(s32 i=0;i<_surface->m_vs_texs.size();i++) {
+//                if( _surface->m_vs_texs[i] ) {
+//                    //processTexture( _surface->m_vs_texs[i]->getResTex() , i , 0);
+//                }
+//            }
+//            //fs纹理
+//            for(s32 i=0;i<_surface->m_fs_texs.size();i++) {
+//                if( _surface->m_fs_texs[i] ) {
+//                    //processTexture( _surface->m_fs_texs[i]->getResTex() , i , 1);
+//                }
+//            }
         }
-        //
         bool t_ret = _mtl->getShader()->active();
         if(t_ret) {
+            //提交uniform
+            
             //提交纹理
+            
             //设置状态
             //blend
             //stencil

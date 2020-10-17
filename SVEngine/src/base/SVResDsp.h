@@ -73,50 +73,38 @@ public:
         m_streamData.clear();
     }
     
-    //数据顶点描述
-    VFTYPE getVertType() {
-        s32 t_vt = 0;
-        for(s32 i=0;i<m_streamDsp.size();i++) {
-            t_vt = t_vt | s32(m_streamDsp[i]);
+    //
+    s32 getVertSize(VFTYPE _vf) {
+        s32 t_size = 0;
+        if (_vf == E_VF_V2) {
+            return 2 * sizeof(f32);
+        } else if (_vf == E_VF_V3) {
+            return 3 * sizeof(f32);
+        } else if (_vf == E_VF_NOR) {
+            return 3 * sizeof(f32);
+        } else  if (_vf == E_VF_TAG) {
+            return 3 * sizeof(f32);
+        } else if (_vf == E_VF_BTAG) {
+            return 3 * sizeof(f32);
+        } else if (_vf == E_VF_C0) {
+            return 4 * sizeof(u8);
+        } else if (_vf == E_VF_T0) {
+            return 2 * sizeof(f32);
+        } else if (_vf == E_VF_T1) {
+            return 2 * sizeof(f32);
+        } else if (_vf == E_VF_BONE) {
+            return 4 * sizeof(u16);
+        } else if (_vf == E_VF_BONE_W) {
+            return 4 * sizeof(f32);
         }
-        return VFTYPE(t_vt);
+        return t_size;
     }
     
-    static s32 getVertSize(VFTYPE _vf) {
+    s32 getVertSize() {
         s32 t_size = 0;
-        if (_vf & E_VF_V2) {
-            t_size += 2 * sizeof(f32);
+        for(s32 i=0;i<m_streamDsp.size();i++) {
+            t_size += getVertSize( m_streamDsp[i] );
         }
-        if (_vf & E_VF_V3) {
-            t_size += 3 * sizeof(f32);
-        }
-        if (_vf & E_VF_NOR) {
-            t_size += 3 * sizeof(f32);
-        }
-        if (_vf & E_VF_TAG) {
-            t_size += 4 * sizeof(f32);
-        }
-        if (_vf & E_VF_BTAG) {
-            t_size += 4 * sizeof(f32);
-        }
-        if (_vf & E_VF_C0) {
-            t_size += 4 * sizeof(u8);
-        }
-        if (_vf & E_VF_T0) {
-            t_size += 2 * sizeof(f32);
-        }
-        if (_vf & E_VF_T1) {
-            t_size += 2 * sizeof(f32);
-        }
-        if (_vf & E_VF_BONE) {
-            t_size += 4 * sizeof(u16);
-        }
-        if (_vf & E_VF_BONE_W) {
-            t_size += 4 * sizeof(f32);
-        }
-//        if (_vf & E_VF_INSOFFSET) {
-//            t_size += 4 * sizeof(f32);
-//        }
         return t_size;
     }
     

@@ -1,6 +1,6 @@
 {
     "name" : "sprite",
-    "formate" : ["E_V3","E_T0"],
+    "vdsp" : ["E_V3","E_T0"],
     "pass" : "nor",
     "vs" : "shader/code/screennor.vs",
     "fs" : "shader/code/screennor.fs",
