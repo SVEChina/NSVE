@@ -25,26 +25,18 @@ using namespace sv;
 SVSpriteNode::SVSpriteNode(SVInstPtr _app)
 :SVNode(_app) {
     ntype = "SVSpriteNode";
-    m_mtl_name = "sprite";
+    m_mtl_name = "normal2d";
     m_rsType = RST_SOLID_3D;
     m_canSelect = false;
     m_pTex = nullptr;
     m_pMesh = nullptr;
     setSize(400.0f,400.0f);
-    //
-    if(m_surface) {
-        FMat4 t_mat;
-        t_mat.setIdentity();
-        m_surface->m_tbl->addParam("matw",t_mat);
-        m_surface->m_tbl->addParam("matv",t_mat);
-        m_surface->m_tbl->addParam("matp",t_mat);
-    }
 }
 
 SVSpriteNode::SVSpriteNode(SVInstPtr _app,f32 _w,f32 _h)
 :SVNode(_app) {
     ntype = "SVSpriteNode";
-    m_mtl_name = "sprite";
+    m_mtl_name = "normal2d";
     m_rsType = RST_SOLID_3D;
     m_canSelect = false;
     m_pTex = nullptr;
@@ -136,7 +128,9 @@ void SVSpriteNode::update(f32 _dt) {
         t_mtl->update(_dt);
     }
     if(m_surface) {
-        m_surface->setTexture(0,m_pTex,1);
+        FVec2 t_tex_clip = FVec2(-1.0f,1.0f);
+        m_surface->setParam("texcoordClip", t_tex_clip);
+        m_surface->setTexture(0,1,m_pTex);
         if( mApp->m_rcore == E_R_METAL_OSX || mApp->m_rcore == E_R_METAL_IOS ) {
             //metal需要转至一下矩阵
             FMat4 tt = transpose(m_localMat);

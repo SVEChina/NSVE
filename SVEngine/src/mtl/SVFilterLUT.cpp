@@ -82,7 +82,7 @@ void SVFilterLUT::update(f32 _dt){
         m_mtl->update(_dt);
     }
     if(m_surface) {
-        m_surface->setTexture(1, m_texLUT, 1);
+        m_surface->setTexture(1, 1 , m_texLUT);
     }
     SVFilterBase::update(_dt);
 }

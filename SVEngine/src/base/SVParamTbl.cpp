@@ -258,7 +258,7 @@ bool SVParamTbl::setParam(cptr8 _name,s32& _value) {
         m_param_values->set(m_param_dsps[t_index].m_off,_value);
         return true;
     }
-    return false;
+    return addParam(_name, _value);
 }
 
 bool SVParamTbl::setParam(cptr8 _name,f32& _value) {
@@ -267,7 +267,7 @@ bool SVParamTbl::setParam(cptr8 _name,f32& _value) {
         m_param_values->set(m_param_dsps[t_index].m_off,_value);
         return true;
     }
-    return false;
+    return addParam(_name, _value);
 }
 
 bool SVParamTbl::setParam(cptr8 _name,FVec2& _value) {
@@ -276,7 +276,7 @@ bool SVParamTbl::setParam(cptr8 _name,FVec2& _value) {
         m_param_values->set(m_param_dsps[t_index].m_off,_value);
         return true;
     }
-    return false;
+    return addParam(_name, _value);
 }
 
 bool SVParamTbl::setParam(cptr8 _name,FVec3& _value) {
@@ -285,7 +285,7 @@ bool SVParamTbl::setParam(cptr8 _name,FVec3& _value) {
         m_param_values->set(m_param_dsps[t_index].m_off,_value);
         return true;
     }
-    return false;
+    return addParam(_name, _value);
 }
 
 bool SVParamTbl::setParam(cptr8 _name,FVec4& _value) {
@@ -294,7 +294,7 @@ bool SVParamTbl::setParam(cptr8 _name,FVec4& _value) {
         m_param_values->set(m_param_dsps[t_index].m_off,_value);
         return true;
     }
-    return false;
+    return addParam(_name, _value);
 }
 
 bool SVParamTbl::setParam(cptr8 _name,FMat2& _value) {
@@ -303,7 +303,7 @@ bool SVParamTbl::setParam(cptr8 _name,FMat2& _value) {
         m_param_values->set(m_param_dsps[t_index].m_off,_value);
         return true;
     }
-    return false;
+    return addParam(_name, _value);
 }
 
 bool SVParamTbl::setParam(cptr8 _name,FMat3& _value) {
@@ -312,7 +312,7 @@ bool SVParamTbl::setParam(cptr8 _name,FMat3& _value) {
         m_param_values->set(m_param_dsps[t_index].m_off,_value);
         return true;
     }
-    return false;
+    return addParam(_name, _value);
 }
 
 bool SVParamTbl::setParam(cptr8 _name,FMat4& _value) {
@@ -321,7 +321,7 @@ bool SVParamTbl::setParam(cptr8 _name,FMat4& _value) {
         m_param_values->set(m_param_dsps[t_index].m_off,_value);
         return true;
     }
-    return false;
+    return addParam(_name, _value);
 }
 
 s32 SVParamTbl::_getParamIndex(cptr8 _name) {

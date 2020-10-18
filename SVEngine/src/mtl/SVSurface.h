@@ -48,7 +48,7 @@ namespace sv {
         SVParamTblPtr m_tbl;
         
         //纹理表
-        void setTexture(s32 _chn,SVTexturePtr _tex,s32 _stage);
+        void setTexture(s32 _chn,s32 _stage,SVTexturePtr _tex);
         
         //
         SVTexturePtr getTexture(s32 _stage,s32 _chn);

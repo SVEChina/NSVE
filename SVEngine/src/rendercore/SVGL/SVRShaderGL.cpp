@@ -298,8 +298,8 @@ void SVRShaderGL::submitParamTbl() {
         SVParamTblPtr t_tbl = m_shader_dsp->m_paramtbl[i].m_tbl;
         for(s32 i=0;i<t_tbl->m_param_names.size();i++) {
             SVString t_name = t_tbl->m_param_names[i].c_str();
-            u32 t_locate = glGetUniformLocation(m_programm, t_name.c_str());
-            if(t_locate<=0) {
+            s32 t_locate = glGetUniformLocation(m_programm, t_name.c_str());
+            if(t_locate<0) {
                 continue;
             }
             if( t_tbl->m_param_dsps[i].m_type == SV_INT) {

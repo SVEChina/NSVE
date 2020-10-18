@@ -74,7 +74,7 @@ void SVSurface::setParam(cptr8 _name,FMat4& _value) {
     }
 }
 
-void SVSurface::setTexture(s32 _chn,SVTexturePtr _tex,s32 _stage) {
+void SVSurface::setTexture(s32 _chn,s32 _stage,SVTexturePtr _tex) {
     if(_chn>=0 && _chn<MAX_TEXUNIT) {
         if(_stage == 0) {
             m_vs_texs[_chn] = _tex;

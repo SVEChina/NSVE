@@ -65,6 +65,7 @@ SVRenderMeshPtr SVGeoGen::genRect(SVInstPtr _app,f32 _w,f32 _h,SVBoundBox& _aabb
     t_index_dsp->setIndexCnt(6);
     t_index_dsp->setStreamData(t_index_data, 6*sizeof(u16));
     t_mesh->setIndexDsp(t_index_dsp);
+    //
     SVVertStreamDspPtr t_vert_dsp = MakeSharedPtr<SVVertStreamDsp>(E_BFM_AOS);
     t_vert_dsp->push(E_VF_V3);
     t_vert_dsp->push(E_VF_T0);
@@ -72,6 +73,10 @@ SVRenderMeshPtr SVGeoGen::genRect(SVInstPtr _app,f32 _w,f32 _h,SVBoundBox& _aabb
     t_vert_dsp->setVertCnt(4);
     t_vert_dsp->setMixStreamData(t_verts, 4*sizeof(V3_T0));
     t_mesh->setVertDsp(t_vert_dsp);
+    //
+    t_mesh->setDrawMethod(E_DRAW_TRIANGLES);
+    t_mesh->setDrawVertNum(6);
+    //
     t_mesh->dispatch();
     return t_mesh;
 }

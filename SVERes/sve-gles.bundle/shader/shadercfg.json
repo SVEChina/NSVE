@@ -2,10 +2,10 @@
     "language" : "gl",
     "dspfiles": [
         "shader/dsp/back.dsp",
+        "shader/dsp/normal2d.dsp",
         "shader/dsp/screen.dsp",
         "shader/dsp/screenCamera.dsp",
         "shader/dsp/skycamera.dsp",
-        "shader/dsp/sprite.dsp",
         "shader/dsp/filter-lut.dsp",
         "shader/dsp/filter-pm.dsp"
     ]

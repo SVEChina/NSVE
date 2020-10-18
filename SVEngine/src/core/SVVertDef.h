@@ -417,7 +417,7 @@ enum BUFFERTYPE {
 };
 
 //a
-enum {
+enum SVDrawMethod {
     E_DRAW_POINTS = 0x0000,
     E_DRAW_LINES = 0x0001,
     E_DRAW_LINE_LOOP = 0x0002,
