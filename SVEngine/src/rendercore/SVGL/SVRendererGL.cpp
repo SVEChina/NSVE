@@ -173,34 +173,35 @@ bool SVRendererGL::processMtl(SVMtlCorePtr _mtl,SVSurfacePtr _surface) {
         if(_surface ) {
             _mtl->getShader()->submitParam(_surface->m_tbl);
         }
-        bool t_ret = _mtl->getShader()->active();
+        bool t_ret = _mtl->getShader()->active();   //active的时候传递了uniform
         if(t_ret) {
-            //提交uniform
-            
             //提交sampler
             //根据shader中的描述来添加纹理
             ShaderDsp* t_shader_dsp = _mtl->getShader()->getShaderDsp();
-            if(t_shader_dsp) {
-                s32 t_sampler_index = 0;
-                for(s32 i = 0; i<t_shader_dsp->m_samplers.size(); i++ ) {
-                    SVString t_name = t_shader_dsp->m_samplers[i].m_name;
-                    if(t_name!="") {
-                        s32 t_stage = t_shader_dsp->m_samplers[i].m_stage;
-                        s32 t_chn = t_shader_dsp->m_samplers[i].m_chn;
-                        //向surface上找目标纹理
-                        SVTexturePtr t_tex = _surface->getTexture(t_stage,t_chn);
-                        if(t_tex) {
-                            processTexture( t_tex->getResTex() , t_sampler_index++ , t_name.c_str() );
-                        }
+            s32 t_sampler_index = 0;
+            for(s32 i = 0; i<t_shader_dsp->m_samplers.size(); i++ ) {
+                SVString t_name = t_shader_dsp->m_samplers[i].m_name;
+                if(t_name!="") {
+                    s32 t_stage = t_shader_dsp->m_samplers[i].m_stage;
+                    s32 t_chn = t_shader_dsp->m_samplers[i].m_chn;
+                    //向surface上找目标纹理
+                    SVTexturePtr t_tex = _surface->getTexture(t_stage,t_chn);
+                    if(t_tex) {
+                        processTexture( t_tex->getResTex() , t_sampler_index++ , t_name.c_str() );
                     }
                 }
             }
             //设置状态
             //blend
+            
             //stencil
+            
             //cull
+            
             //alpha
+            
             //depth
+            
         }
         return t_ret;
     }

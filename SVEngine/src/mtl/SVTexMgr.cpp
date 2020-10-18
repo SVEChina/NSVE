@@ -50,7 +50,7 @@ void SVTexMgr::destroy() {
 }
 
 void SVTexMgr::loadDefault() {
-    m_sve_tex = getTexture("svres/sve.png",true);
+    m_sve_tex = getTexture("res/sve.png",true);
 }
 
 void SVTexMgr::clear() {

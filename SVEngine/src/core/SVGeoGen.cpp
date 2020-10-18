@@ -72,7 +72,6 @@ SVRenderMeshPtr SVGeoGen::genRect(SVInstPtr _app,f32 _w,f32 _h,SVBoundBox& _aabb
     t_vert_dsp->setVertCnt(4);
     t_vert_dsp->setMixStreamData(t_verts, 4*sizeof(V3_T0));
     t_mesh->setVertDsp(t_vert_dsp);
-    //这个必须有渲染器才可以执行
     t_mesh->dispatch();
     return t_mesh;
 }

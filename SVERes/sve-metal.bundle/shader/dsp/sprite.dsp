@@ -1,10 +1,10 @@
 {
-    "name" : "sprite",
-    "formate" : ["E_V3","E_T0"],
+    "file": "shader/code/sprite.metal",
+    "vdsp" : ["E_V3","E_T0"],
     "pass" : "nor",
-    "vs" : "shader/code/screennor.vs",
-    "fs" : "shader/code/screennor.fs",
-    "sampler": [ { "chn" : 0 ,"stage" : 1 } ],
+    "vs" : 1,
+    "fs" : 1,
+    "sampler": [ { "stage" : 1, "chn" : 0 } ],
     "uniform": [
         {
             "stage" : 0,

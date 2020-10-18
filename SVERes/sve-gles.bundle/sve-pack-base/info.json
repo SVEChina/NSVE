@@ -1,15 +1,16 @@
 {
     "pack-name" : "base",
     "pack-files": [
-        "screen.mtl"
+        "screen.mtl",
+        "sprite.mtl"
     ],
     "pack-mtls" : [
         {
-            "name" : "back",
             "version" : "1.0",
+            "name" : "back",
             "shader" : "back",
             "textures" :[
-                { "chn": 0 , "from" : "file", "path" : "svres/sve.png", "stage": "fs" }
+                { "chn": 0 , "from" : "file", "path" : "res/sve.png", "stage": "fs" }
             ],
             "blend-param" : {
                 "enable" : 0

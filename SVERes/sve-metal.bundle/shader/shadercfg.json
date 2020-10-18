@@ -1,13 +1,13 @@
 {
     "language" : "metal",
     "dspfiles": [
-        "shader/nor.dsp",
-        "shader/back.dsp",
-        "shader/screen.dsp",
-        "shader/screenCamera.dsp",
-        "shader/skycamera.dsp",
-        "shader/sprite.dsp",
-        "shader/filter-lut.dsp",
-        "shader/filter-pm.dsp"
+        "shader/dsp/nor.dsp",
+        "shader/dsp/back.dsp",
+        "shader/dsp/screen.dsp",
+        "shader/dsp/screenCamera.dsp",
+        "shader/dsp/skycamera.dsp",
+        "shader/dsp/sprite.dsp",
+        "shader/dsp/filter-lut.dsp",
+        "shader/dsp/filter-pm.dsp"
     ]
 }
