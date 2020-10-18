@@ -92,7 +92,7 @@ void SVARBackgroundMgr::update(f32 _dt) {
             }
             //直接绘制图片
             SVSurfacePtr t_surface = MakeSharedPtr<SVSurface>();
-            t_surface->setTexture(0,1,m_tex0);
+            t_surface->setTexture(1,0,m_tex0);
             SVDispatch::dispatchMeshDraw(mApp,
                                          mApp->getComData()->screenMesh(),
                                          "screenCamera",
@@ -130,7 +130,7 @@ void SVARBackgroundMgr::_renderCameraImg(f32 _dt) {
             t_mtl->update(_dt);
         }
         SVSurfacePtr t_surface = MakeSharedPtr<SVSurface>();
-        t_surface->setTexture(0,1,t_cam_tex);
+        t_surface->setTexture(1,0,t_cam_tex);
         SVDispatch::dispatchMeshDraw(mApp,
                                      mApp->getComData()->screenMesh(),
                                      "skycamera",

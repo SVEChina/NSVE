@@ -281,7 +281,7 @@ void SVRendererMetal::drawScreen(SV_TEXIN _texid) {
         return ;
     }
     SVSurfacePtr t_surface = MakeSharedPtr<SVSurface>();
-    t_surface->setTexture(0,1,t_tex);
+    t_surface->setTexture(1,0,t_tex);
     //
     SVRenderMeshPtr t_mesh = mApp->getComData()->screenMesh();
     bool t_ret = processMesh(t_mesh);

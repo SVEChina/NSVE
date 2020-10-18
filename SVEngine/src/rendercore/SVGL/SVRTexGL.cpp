@@ -132,8 +132,16 @@ void SVRTexGL::load(SVRendererPtr _renderer,SVTextureDsp* _tex_dsp) {
         }
         //
         if (m_texture_dsp->m_minmap) {
-            glGenerateMipmap(t_tex_kind);
-            glTexParameteri(t_tex_kind, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+            if( (m_texture_dsp->m_width%2 == 0) && (m_texture_dsp->m_height%2 == 0) && false) {
+                glGenerateMipmap(t_tex_kind);
+//#define GL_NEAREST_MIPMAP_NEAREST                        0x2700
+//#define GL_LINEAR_MIPMAP_NEAREST                         0x2701
+//#define GL_NEAREST_MIPMAP_LINEAR                         0x2702
+//#define GL_LINEAR_MIPMAP_LINEAR                          0x2703
+                glTexParameteri(t_tex_kind, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+            }else{
+                glTexParameteri(t_tex_kind, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
+            }
         }else{
             glTexParameteri(t_tex_kind, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
         }
