@@ -333,6 +333,17 @@ bool SVRShaderMetal::active(SVRendererPtr _renderer) {
             [t_rm->m_curEncoder setFragmentSamplerState:m_sampler_st[i].m_st atIndex:m_sampler_st[i].m_chn];
         }
     }
+    //
+    submitParamTbl(_renderer);
+    //
+    [t_rm->m_curEncoder setRenderPipelineState:m_pl_state];
+    return true;
+}
+
+void SVRShaderMetal::submitParamTbl(SVRendererPtr _renderer) {
+    SVRendererMetalPtr t_rm = std::dynamic_pointer_cast<SVRendererMetal>(_renderer);
+    if(!t_rm)
+        return ;
     //替换uniform
     for(s32 i=0;i<m_shader_dsp->m_paramtbl.size();i++) {
         void* t_pointer = m_shader_dsp->m_paramtbl[i].m_tbl->getDataPointer();
@@ -351,13 +362,5 @@ bool SVRShaderMetal::active(SVRendererPtr _renderer) {
             //gs
             //[t_rm->m_curEncoder setFragmentBuffer:m_ubuf_pool[i].m_ubuf offset:0 atIndex:m_ubuf_pool[i].m_bufid];
         }
-    }
-    [t_rm->m_curEncoder setRenderPipelineState:m_pl_state];
-    return true;
-}
-
-void SVRShaderMetal::submitSurface(SVSurfacePtr _surface) {
-    if(!_surface) {
-        return ;
     }
 }

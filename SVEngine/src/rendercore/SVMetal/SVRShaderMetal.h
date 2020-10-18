@@ -38,7 +38,7 @@ namespace sv {
 
         bool active(SVRendererPtr _renderer);
         
-        void submitSurface(SVSurfacePtr _surface);
+        void submitParamTbl(SVRendererPtr _renderer);
         
     protected:
         MTLSamplerDescriptor* _genSampler(SamplerDsp& _dsp);

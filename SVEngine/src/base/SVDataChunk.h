@@ -25,7 +25,6 @@ namespace sv {
         
         virtual ~SVDataChunk();
         
-        //
         bool set(u64 _off,s32 _value);
         
         bool set(u64 _off,f32 _value);
@@ -77,6 +76,8 @@ namespace sv {
         u64 push(FMat4& _value);
         
         u64 push(void* _value,s32 _size);
+        
+        void remove(u64 _off,s32 _len);
         
         //
         void* getPointer() { return m_data; }

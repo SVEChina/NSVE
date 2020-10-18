@@ -194,3 +194,13 @@ u64 SVDataChunk::push(void* _value,s32 _size) {
     m_realsize += _size;
     return t_off;
 }
+
+void SVDataChunk::remove(u64 _off,s32 _len) {
+     u64 t_end = _off+_len;
+     if( t_end<=m_realsize ) {
+          m_realsize -= _len;
+          void* t_dst = (void*)(m_data + _off);
+          void* t_src = (void*)(m_data + t_end);
+          memmove(t_dst, t_src, _len);
+     }
+}

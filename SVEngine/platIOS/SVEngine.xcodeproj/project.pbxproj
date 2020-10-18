@@ -6470,7 +6470,7 @@
 		5F7D5F9E215F407700803BCF /* SVVec3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVVec3.h; sourceTree = "<group>"; };
 		5F7D5F9F215F407700803BCF /* SVListenBase.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVListenBase.cpp; sourceTree = "<group>"; };
 		5F7D5FA0215F407700803BCF /* SVBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVBase.h; sourceTree = "<group>"; };
-		5F7D5FA1215F407700803BCF /* SVDataChunk.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVDataChunk.cpp; sourceTree = "<group>"; };
+		5F7D5FA1215F407700803BCF /* SVDataChunk.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; indentWidth = 5; path = SVDataChunk.cpp; sourceTree = "<group>"; };
 		5F7D5FA2215F407700803BCF /* SVIDPool.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVIDPool.cpp; sourceTree = "<group>"; };
 		5F7D5FA3215F407700803BCF /* SVMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVMap.h; sourceTree = "<group>"; };
 		5F7D5FA4215F407700803BCF /* SVBase.spu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVBase.spu.h; sourceTree = "<group>"; };

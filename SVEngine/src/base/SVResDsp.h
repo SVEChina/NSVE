@@ -307,6 +307,11 @@ struct SamplerDsp {
  * 参数表描述
  */
 struct ParamTblDsp {
+    ParamTblDsp() {
+        m_id = -1;
+        m_stage = -1;
+        m_tbl = nullptr;
+    }
     s32 m_id;               //传递的bufid
     s32 m_stage;            //0:vs, 1:fs
     SVParamTblPtr m_tbl;    //表

@@ -4,5 +4,5 @@
     "pass" : "direct",
     "vs" : 1,
     "fs" : 1,
-    "sampler": [ { "stage" : 1, "chn" : 0 } ]
+    "sampler": [ { name: "tex0","stage" : 1, "chn" : 0 } ]
 }

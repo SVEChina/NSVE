@@ -87,60 +87,62 @@ bool SVShader::active() {
     return false;
 }
 
+//更新参数表
 void SVShader::submitParam(SVParamTblPtr _param) {
     if(!_param) {
         return;
     }
     //将参数表中所有数值都写入本身的参数表中
-    for(s32 i=0;i<_param->m_param_dsps.size();i++) {
+    for(s32 i=0;i<_param->m_param_names.size();i++) {
+        cptr8 t_param_name = _param->m_param_names[i].c_str();
         SVParamDsp* t_dsp = &(_param->m_param_dsps[i]);
         if(t_dsp->m_type == SV_INT) {
             s32 t_value = 0;
             _param->m_param_values->get(t_dsp->m_off, t_value);
             for(s32 j=0;j<m_shader_dsp.m_paramtbl.size();j++) {
-                m_shader_dsp.m_paramtbl[j].m_tbl->setParam(t_dsp->m_name.c_str(), t_value);
+                m_shader_dsp.m_paramtbl[j].m_tbl->setParam(t_param_name, t_value);
             }
         }else if(t_dsp->m_type == SV_FLOAT) {
             f32 t_value = 0;
             _param->m_param_values->get(t_dsp->m_off, t_value);
             for(s32 j=0;j<m_shader_dsp.m_paramtbl.size();j++) {
-                m_shader_dsp.m_paramtbl[j].m_tbl->setParam(t_dsp->m_name.c_str(), t_value);
+                m_shader_dsp.m_paramtbl[j].m_tbl->setParam(t_param_name, t_value);
             }
         }else if(t_dsp->m_type == SV_FVEC2) {
             FVec2 t_value;
             _param->m_param_values->get(t_dsp->m_off, t_value);
             for(s32 j=0;j<m_shader_dsp.m_paramtbl.size();j++) {
-                m_shader_dsp.m_paramtbl[j].m_tbl->setParam(t_dsp->m_name.c_str(), t_value);
+                m_shader_dsp.m_paramtbl[j].m_tbl->setParam(t_param_name, t_value);
             }
         }else if(t_dsp->m_type == SV_FVEC3) {
             FVec3 t_value;
             _param->m_param_values->get(t_dsp->m_off, t_value);
             for(s32 j=0;j<m_shader_dsp.m_paramtbl.size();j++) {
-                m_shader_dsp.m_paramtbl[j].m_tbl->setParam(t_dsp->m_name.c_str(), t_value);
+                m_shader_dsp.m_paramtbl[j].m_tbl->setParam(t_param_name, t_value);
             }
         }else if(t_dsp->m_type == SV_FVEC4) {
             FVec4 t_value;
             _param->m_param_values->get(t_dsp->m_off, t_value);
             for(s32 j=0;j<m_shader_dsp.m_paramtbl.size();j++) {
-                m_shader_dsp.m_paramtbl[j].m_tbl->setParam(t_dsp->m_name.c_str(), t_value);
+                m_shader_dsp.m_paramtbl[j].m_tbl->setParam(t_param_name, t_value);
             }
         }else if(t_dsp->m_type == SV_FMAT2) {
             FMat2 t_value;
             _param->m_param_values->get(t_dsp->m_off, t_value);
             for(s32 j=0;j<m_shader_dsp.m_paramtbl.size();j++) {
-                m_shader_dsp.m_paramtbl[j].m_tbl->setParam(t_dsp->m_name.c_str(), t_value);
+                m_shader_dsp.m_paramtbl[j].m_tbl->setParam(t_param_name, t_value);
             }
         }else if(t_dsp->m_type == SV_FMAT3) {
             FMat3 t_value;
             _param->m_param_values->get(t_dsp->m_off, t_value);
             for(s32 j=0;j<m_shader_dsp.m_paramtbl.size();j++) {
-                m_shader_dsp.m_paramtbl[j].m_tbl->setParam(t_dsp->m_name.c_str(), t_value);
+                m_shader_dsp.m_paramtbl[j].m_tbl->setParam(t_param_name, t_value);
             }
         }else if(t_dsp->m_type == SV_FMAT4) {
             FMat4 t_value;
             _param->m_param_values->get(t_dsp->m_off, t_value);
             for(s32 j=0;j<m_shader_dsp.m_paramtbl.size();j++) {
-                m_shader_dsp.m_paramtbl[j].m_tbl->setParam(t_dsp->m_name.c_str(), t_value);
+                m_shader_dsp.m_paramtbl[j].m_tbl->setParam(t_param_name, t_value);
             }
         }
     }

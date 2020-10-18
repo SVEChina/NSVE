@@ -25,9 +25,9 @@ namespace sv {
     
     //参数描述
     struct SVParamDsp {
-        std::string m_name; //参数名称
         s32 m_type;         //参数类型
         s32 m_size;         //参数数据一共的大小
+        s32 m_cnt;
         u64 m_off;          //参数在表中数据偏移
     };
 
@@ -37,24 +37,32 @@ namespace sv {
 
         virtual ~SVParamTbl();
         
+        void clear();
+        
         bool hasParam(cptr8 _name);
         
-        //增加 主要是针对uniform
-        void addParam(cptr8 _name,s32& _value);
-
-        void addParam(cptr8 _name,f32& _value);
-
-        void addParam(cptr8 _name,FVec2& _value);
-
-        void addParam(cptr8 _name,FVec3& _value);
-
-        void addParam(cptr8 _name,FVec4& _value);
+        //增加参数
+        bool addParam(cptr8 _name,cptr8 _type,cptr8 _value);
         
-        void addParam(cptr8 _name,FMat2& _value);
+        //删除一个参数
+        bool delParam(cptr8 _name);
+        
+        //增加 主要是针对uniform
+        bool addParam(cptr8 _name,s32& _value);
 
-        void addParam(cptr8 _name,FMat3& _value);
+        bool addParam(cptr8 _name,f32& _value);
 
-        void addParam(cptr8 _name,FMat4& _value);
+        bool addParam(cptr8 _name,FVec2& _value);
+
+        bool addParam(cptr8 _name,FVec3& _value);
+
+        bool addParam(cptr8 _name,FVec4& _value);
+        
+        bool addParam(cptr8 _name,FMat2& _value);
+
+        bool addParam(cptr8 _name,FMat3& _value);
+
+        bool addParam(cptr8 _name,FMat4& _value);
 
         //设置参数值 主要是针对uniform
         bool setParam(cptr8 _name,s32& _value);
@@ -89,9 +97,6 @@ namespace sv {
 
         void getParam(cptr8 _name,FMat4& _value);
         
-        //增加参数
-        void addParam(cptr8 _name,cptr8 _type,cptr8 _value);
-        
         void* getParamData(cptr8 _name);
         
         void* getDataPointer();
@@ -103,9 +108,12 @@ namespace sv {
         void toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator,RAPIDJSON_NAMESPACE::Value &_objValue);
 
     public:
+        //参数名称
+        std::vector<SVString> m_param_names;
         //参数表
-        std::vector<SVParamDsp> m_param_dsps;    //参数表
-        SVDataChunkPtr m_param_values;           //参数值
+        std::vector<SVParamDsp> m_param_dsps;
+        //数据区域
+        SVDataChunkPtr m_param_values;
         
     protected:
         s32 _getParamIndex(cptr8 _name);

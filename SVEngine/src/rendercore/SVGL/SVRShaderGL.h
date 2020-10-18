@@ -27,8 +27,6 @@ namespace sv {
         void unload();
 
         bool active(SVRendererPtr _renderer);
-
-        void submitSurface(SVSurfacePtr _surface);
         
         void submitParamTbl();
 

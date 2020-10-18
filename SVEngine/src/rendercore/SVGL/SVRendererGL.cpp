@@ -171,7 +171,6 @@ void SVRendererGL::unbindTarget(s32 _poolid) {
 bool SVRendererGL::processMtl(SVMtlCorePtr _mtl,SVSurfacePtr _surface) {
     if(_mtl && _mtl->getShader() ) {
         if(_surface ) {
-            //更新uniform
             _mtl->getShader()->submitParam(_surface->m_tbl);
         }
         bool t_ret = _mtl->getShader()->active();
