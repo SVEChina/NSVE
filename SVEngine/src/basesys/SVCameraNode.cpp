@@ -64,9 +64,10 @@ void SVCameraNode::update(f32 _dt) {
         m_mat_v = lookAt(m_pos,m_target,m_up);
         if(mApp->m_rcore == E_R_METAL_OSX || mApp->m_rcore == E_R_METAL_IOS) {
             m_mat_v = transpose(m_mat_v);
+            m_mat_vp = m_mat_v*m_mat_p;
+        }else {
+            m_mat_vp = m_mat_p*m_mat_v;
         }
-        //
-        m_mat_vp = m_mat_v*m_mat_p;
     }
     m_res_lock->unlock();
 }

@@ -99,7 +99,7 @@ void SVSpriteNode::setTexture(cptr8 _path){
 }
 
 void SVSpriteNode::setTexture(SV_TEXIN _textype){
-    //m_inTexType = _textype;
+    m_pTex = mApp->getTexMgr()->getInTexture(_textype);
 }
 
 void SVSpriteNode::setTexture(SVTexturePtr _tex){
@@ -128,9 +128,11 @@ void SVSpriteNode::update(f32 _dt) {
         t_mtl->update(_dt);
     }
     if(m_surface) {
+        //
+        m_surface->setTexture( 1,0 ,m_pTex);
+        //
         FVec2 t_tex_clip = FVec2(-1.0f,1.0f);
         m_surface->setParam("texcoordClip", t_tex_clip);
-        m_surface->setTexture(0,1,m_pTex);
         if( mApp->m_rcore == E_R_METAL_OSX || mApp->m_rcore == E_R_METAL_IOS ) {
             //metal需要转至一下矩阵
             FMat4 tt = transpose(m_localMat);

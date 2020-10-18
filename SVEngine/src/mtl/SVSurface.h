@@ -48,9 +48,8 @@ namespace sv {
         SVParamTblPtr m_tbl;
         
         //纹理表
-        void setTexture(s32 _chn,s32 _stage,SVTexturePtr _tex);
-        
-        //
+        void setTexture(s32 _stage,s32 _chn,SVTexturePtr _tex);
+
         SVTexturePtr getTexture(s32 _stage,s32 _chn);
         
         //按通道顺序设置了纹理
