@@ -77,7 +77,7 @@ namespace sv {
     //ani
     DECLARE_SHAREPTR(SVAniMgr);
     DECLARE_SHAREPTR(SVAniUnit);
-
+    DECLARE_SHAREPTR(SVAniUnitRot);
 
     //模块
     DECLARE_SHAREPTR(SVModuleBase);

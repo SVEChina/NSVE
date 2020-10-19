@@ -14,17 +14,11 @@ using namespace sv;
 
 SVAniMgr::SVAniMgr(SVInstPtr _app)
 :SVSysBase(_app) {
-//    m_filter_lock = MakeSharedPtr<SVLockSpin>();
-//    m_enable = false;
-//    m_method = 0;
-//    m_subsysType = 0;
-//    m_ar_target = nullptr;
-//    m_tex0 = nullptr;
-//    m_tex1 = nullptr;
-//    m_tex2 = nullptr;
+    m_ani_lock = MakeSharedPtr<SVLockSpin>(mApp);//SVLockSpinPtr;
 }
 
 SVAniMgr::~SVAniMgr() {
+    m_ani_lock = nullptr;
 }
 
 //
@@ -37,38 +31,46 @@ void SVAniMgr::destroy() {
 
 //
 void SVAniMgr::update(f32 _dt) {
+    m_ani_lock->lock();
     for(s32 i=0;i<m_ani_pool.size();i++) {
         if(m_ani_pool[i]._unit) {
             m_ani_pool[i]._unit->update(_dt, m_ani_pool[i]._node);
         }
     }
+    m_ani_lock->unlock();
 }
 
 void SVAniMgr::addAni(SVNodePtr _node,SVAniUnitPtr _unit) {
+    m_ani_lock->lock();
     if( !hasAni(_node) ) {
         SVAniMgr::ANICELL t_cell;
         t_cell._node = _node;
         t_cell._unit = _unit;
         m_ani_pool.push_back(t_cell);
     }
+    m_ani_lock->unlock();
 }
 
 void SVAniMgr::removeAni(SVNodePtr _node) {
+    m_ani_lock->lock();
     for(s32 i=0;i<m_ani_pool.size();i++) {
         if( m_ani_pool[i]._node == _node) {
             ANIPOOLS::iterator it = m_ani_pool.begin() + i;
             m_ani_pool[i].reset();
             m_ani_pool.erase(it);
-            return ;
+            break ;
         }
     }
+    m_ani_lock->unlock();
 }
 
 void SVAniMgr::clearAni() {
+    m_ani_lock->lock();
     for(s32 i=0;i<m_ani_pool.size();i++) {
         m_ani_pool[i].reset();
     }
     m_ani_pool.clear();
+    m_ani_lock->unlock();
 }
 
 bool SVAniMgr::hasAni(SVNodePtr _node) {

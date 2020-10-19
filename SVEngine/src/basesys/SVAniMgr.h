@@ -59,6 +59,8 @@ namespace sv {
         typedef std::vector<ANICELL> ANIPOOLS;
         ANIPOOLS m_ani_pool;
         
+        SVLockSpinPtr m_ani_lock;
+        
     public:
         //可以提供一些简单的运动的标准API
     };
