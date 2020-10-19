@@ -157,7 +157,6 @@ void SVEffectPackage::destroy(){
 //        }
 //    }
 //    m_filterBasePool.destroy();
-    //
     for (s32 i = 0; i<m_deformPool.size(); i++) {
         SVDeformImageMovePtr t_deform = m_deformPool[i];
         SVDeformMgrPtr t_deformMgr = mApp->getDeformMgr();

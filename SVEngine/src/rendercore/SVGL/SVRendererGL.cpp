@@ -201,7 +201,13 @@ bool SVRendererGL::processMtl(SVMtlCorePtr _mtl,SVSurfacePtr _surface) {
             //alpha
             
             //depth
+            glEnable(GL_DEPTH_TEST);
             
+            //设置环绕规则
+            glFrontFace(GL_CCW);
+            glEnable(GL_CULL_FACE);
+            //glDisable(GL_CULL_FACE);
+            //glCullFace(GL_BACK);
         }
         return t_ret;
     }

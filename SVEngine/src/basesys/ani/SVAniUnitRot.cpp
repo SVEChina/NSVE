@@ -12,7 +12,7 @@ using namespace sv;
 
 //
 SVAniUnitRot::SVAniUnitRot(SVInstPtr _app)
-: SVEventProc(_app) {
+:SVAniUnit(_app) {
     m_src_rot_x = 0.0f;
     m_src_rot_y = 0.0f;
     m_src_rot_z = 0.0f;
@@ -50,7 +50,8 @@ void SVAniUnitRot::bind(SVNodePtr _node) {
 void SVAniUnitRot::update(f32 _dt,SVNodePtr _node) {
     if(_node) {
         //
-        m_dst_rot_y = _dt*m_rot_y_sp;
+        m_dst_rot_y = m_dst_rot_y + _dt*m_rot_y_sp;
+        //
         s32 t_num = s32(m_dst_rot_y/360.0f);
         m_dst_rot_y -= 360.0f*t_num;
         //

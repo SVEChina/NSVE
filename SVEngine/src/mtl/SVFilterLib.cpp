@@ -13,16 +13,6 @@
 
 using namespace sv;
 
-////滤镜类型
-//enum FTTYPE {
-//    FILTER_COMMON = 0,
-//    FILTER_LUT,
-//    FILTER_BLUR,
-//    FILTER_SHARP,
-//    FILTER_HUE
-//};
-
-
 SVFilterBasePtr SVFilterLib::createFilter(SVInstPtr _app,FTTYPE _type) {
     if(_type == FILTER_COMMON) {
         return MakeSharedPtr<SVFilterCommon>(_app);

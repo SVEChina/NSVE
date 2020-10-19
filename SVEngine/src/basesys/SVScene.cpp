@@ -29,6 +29,10 @@
 #include "../mtl/SVTexture.h"
 #include "../mtl/SVSurface.h"
 
+//
+#include "../basesys/SVAniMgr.h"
+#include "../basesys/ani/SVAniUnitRot.h"
+
 using namespace sv;
 
 SVTreeLeaf::SVTreeLeaf(SVInstPtr _app)
@@ -321,4 +325,7 @@ void SVScene::test() {
         t_surface->setTexture(1, 0, t_tex);
     }
     addNode(t_box_node);
+    //
+    SVAniUnitRotPtr t_rot = MakeSharedPtr<SVAniUnitRot>(mApp);
+    mApp->getAniMgr()->addAni(t_box_node,t_rot);
 }

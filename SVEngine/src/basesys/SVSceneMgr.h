@@ -10,6 +10,7 @@
 
 #include "../basesys/SVSysBase.h"
 #include "../work/SVWorkDeclare.h"
+#include <vector>
 
 namespace sv {
     /*
@@ -29,16 +30,21 @@ namespace sv {
         
         SVScenePtr getScene();
         
-        //加载场景
-        void loadScene(cptr8 _fname);
+        void loadScene(cptr8 _fname);  //加载场景
         
-        //切换场景
-        void changeScene(cptr8 _name);
+        void changeScene(cptr8 _name); //切换场景
         
-        //ui变换到scene中
-        void uiToScene(f32& _w,f32& _h);
+        void uiToScene(f32& _w,f32& _h);    //ui变换到scene中
         
         void update(f32 dt);
+        
+        bool addFilter(cptr8 _name,SVFilterBasePtr _filter);
+        
+        void delFilter(cptr8 _name);
+        
+        void clearFilter();
+        
+        bool hasFilter(cptr8 _name);
         
         void test();
         
@@ -46,6 +52,19 @@ namespace sv {
         SVScenePtr m_main_scene;    //主场景
         
         SVLockSpinPtr m_scene_lock;
+        
+        SVLockSpinPtr m_filter_lock;
+        
+        struct FilterUnit {
+            FilterUnit() {
+                _name = "";
+                _filter = nullptr;
+            };
+            SVString _name;
+            SVFilterBasePtr _filter;
+            
+        };
+        std::vector<FilterUnit> m_filter_pool;
     };
     
 }//!namespace sv
