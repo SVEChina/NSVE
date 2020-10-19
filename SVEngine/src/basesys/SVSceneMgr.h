@@ -55,16 +55,7 @@ namespace sv {
         
         SVLockSpinPtr m_filter_lock;
         
-        struct FilterUnit {
-            FilterUnit() {
-                _name = "";
-                _filter = nullptr;
-            };
-            SVString _name;
-            SVFilterBasePtr _filter;
-            
-        };
-        std::vector<FilterUnit> m_filter_pool;
+        std::vector<SVFilterBasePtr> m_filter_pool;
     };
     
 }//!namespace sv

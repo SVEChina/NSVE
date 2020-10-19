@@ -43,9 +43,13 @@ namespace sv {
         
         //设置后处理
         sv_inline void setPostProcess() { m_is_pre = false; }
+        
+        sv_inline void setName(cptr8 _name) {
+            m_name = _name;
+        }
 
-        sv_inline SVString getName(){
-            return m_name;
+        sv_inline cptr8 getName(){
+            return m_name.c_str();
         }
         
         //获取surface，设置参数

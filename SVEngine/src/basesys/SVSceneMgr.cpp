@@ -65,9 +65,7 @@ void SVSceneMgr::update(f32 _dt) {
     //
     m_filter_lock->lock();
     for(s32 i=0;i<m_filter_pool.size();i++) {
-        if( m_filter_pool[i]._filter ) {
-            m_filter_pool[i]._filter->update(_dt);
-        }
+        m_filter_pool[i]->update(_dt);
     }
     m_filter_lock->unlock();
     //
@@ -83,10 +81,7 @@ bool SVSceneMgr::addFilter(cptr8 _name,SVFilterBasePtr _filter) {
         return false;
     }
     m_filter_lock->lock();
-    FilterUnit t_unit;
-    t_unit._name = _name;
-    t_unit._filter = _filter;
-    m_filter_pool.push_back(t_unit);
+    m_filter_pool.push_back(_filter);
     m_filter_lock->unlock();
     return true;
 }
@@ -94,8 +89,8 @@ bool SVSceneMgr::addFilter(cptr8 _name,SVFilterBasePtr _filter) {
 void SVSceneMgr::delFilter(cptr8 _name) {
     m_filter_lock->lock();
     for(s32 i=0;i<m_filter_pool.size();i++) {
-        if( m_filter_pool[i]._name == _name ) {
-            m_filter_pool[i]._filter = nullptr;
+        if( strcmp(m_filter_pool[i]->getName() ,_name) == 0 ) {
+            m_filter_pool[i]->destroy();
             m_filter_pool.erase(m_filter_pool.begin() + i);
             break;
         }
@@ -106,7 +101,7 @@ void SVSceneMgr::delFilter(cptr8 _name) {
 void SVSceneMgr::clearFilter() {
     m_filter_lock->lock();
     for(s32 i=0;i<m_filter_pool.size();i++) {
-        m_filter_pool[i]._filter = nullptr;
+        m_filter_pool[i]->destroy();
     }
     m_filter_pool.clear();
     m_filter_lock->unlock();
@@ -114,7 +109,7 @@ void SVSceneMgr::clearFilter() {
 
 bool SVSceneMgr::hasFilter(cptr8 _name) {
     for(s32 i=0;i<m_filter_pool.size();i++) {
-        if( m_filter_pool[i]._name == _name ) {
+        if( strcmp(m_filter_pool[i]->getName() ,_name) == 0  ) {
             return true;
         }
     }
