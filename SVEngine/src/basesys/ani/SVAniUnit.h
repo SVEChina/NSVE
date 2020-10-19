@@ -26,6 +26,8 @@ namespace sv {
         virtual void init();
 
         virtual void destroy();
+        
+        virtual void bind(SVNodePtr _node){}
 
         virtual void update(f32 _dt,SVNodePtr _node);
     };

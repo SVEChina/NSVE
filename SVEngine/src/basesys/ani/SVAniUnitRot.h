@@ -21,8 +21,22 @@ namespace sv {
         virtual void init();
 
         virtual void destroy();
+        
+        virtual void bind(SVNodePtr _node);
 
         virtual void update(f32 _dt,SVNodePtr _node);
+        
+    protected:
+        //
+        f32 m_src_rot_x;
+        f32 m_src_rot_y;
+        f32 m_src_rot_z;
+        //
+        f32 m_dst_rot_x;
+        f32 m_dst_rot_y;
+        f32 m_dst_rot_z;
+        //
+        f32 m_rot_y_sp;
     };
     
 }//!namespace sv

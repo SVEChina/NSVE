@@ -331,7 +331,13 @@ SVCameraMgrPtr SVInst::getCameraMgr(){
 SVSceneMgrPtr SVInst::getSceneMgr(){
     if(!m_global_mgr)
         return nullptr;
-    return m_global_mgr->m_pSceneMgr;
+    return m_global_mgr->m_scene_mgr;
+}
+
+SVAniMgrPtr SVInst::getAniMgr() {
+    if(!m_global_mgr)
+        return nullptr;
+    return m_global_mgr->m_ani_mgr;
 }
 
 SVLightSysPtr SVInst::getLightSys() {

@@ -35,7 +35,7 @@ namespace sv {
         //基础系统
         SVBasicSysPtr m_pBasicSys;
         //场景管理
-        SVSceneMgrPtr m_pSceneMgr;
+        SVSceneMgrPtr m_scene_mgr;
         //相机管理
         SVCameraMgrPtr m_camera_mgr;
         //动画系统

@@ -37,7 +37,7 @@ SVGlobalMgr::SVGlobalMgr(SVInstPtr _app)
 :SVGBaseEx(_app) {
     //引擎系统和操作指令系统要先建立起来
     m_pBasicSys = nullptr;
-    m_pSceneMgr = nullptr;
+    m_scene_mgr = nullptr;
     m_camera_mgr = nullptr;
     m_detect_mgr = nullptr;
     m_pModelMgr = nullptr;
@@ -49,7 +49,7 @@ SVGlobalMgr::SVGlobalMgr(SVInstPtr _app)
 
 SVGlobalMgr::~SVGlobalMgr() {
     m_pBasicSys = nullptr;
-    m_pSceneMgr = nullptr;
+    m_scene_mgr = nullptr;
     m_camera_mgr = nullptr;
     m_detect_mgr = nullptr;
     m_pModelMgr = nullptr;
@@ -69,8 +69,8 @@ void SVGlobalMgr::init() {
     m_camera_mgr = MakeSharedPtr<SVCameraMgr>(mApp);
     m_camera_mgr->init();
     //场景系统
-    m_pSceneMgr = MakeSharedPtr<SVSceneMgr>(mApp);
-    m_pSceneMgr->init();
+    m_scene_mgr = MakeSharedPtr<SVSceneMgr>(mApp);
+    m_scene_mgr->init();
     SV_LOG_ERROR("sve init SVSceneMgr end!\n");
     //动画系统
     m_ani_mgr = MakeSharedPtr<SVAniMgr>(mApp);
@@ -85,9 +85,9 @@ void SVGlobalMgr::destroy() {
         SV_LOG_ERROR("SVCameraMgr:destroy sucess");
     }
     //场景析构
-    if (m_pSceneMgr) {
+    if (m_scene_mgr) {
         //场景析够(场景虽然也是节点 但是需要单独管理,因为节点需要挂在场景上,所以在节点没析够前,场景不能析构掉)
-        m_pSceneMgr->destroy();
+        m_scene_mgr->destroy();
         SV_LOG_ERROR("SVSceneMgr:destroy sucess");
     }
     //AR 背景
@@ -112,9 +112,9 @@ void SVGlobalMgr::update(f32 dt) {
         m_camera_mgr->update(dt);
         timeTag(false,"camera cost");
     }
-    if(m_pSceneMgr) {
+    if(m_scene_mgr) {
         //场景更新(节点系统)
-        m_pSceneMgr->update(dt);
+        m_scene_mgr->update(dt);
         timeTag(false,"scene cost");
     }
     if(m_ar_mgr) {

@@ -140,6 +140,7 @@ namespace sv {
         SVBasicSysPtr getBasicSys();
         SVCameraMgrPtr getCameraMgr();
         SVSceneMgrPtr getSceneMgr();
+        SVAniMgrPtr getAniMgr();
         SVLightSysPtr getLightSys();
         SVModuleSysPtr getModuleSys();
         SVShaderMgrPtr getShaderMgr();

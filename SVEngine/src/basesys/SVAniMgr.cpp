@@ -8,13 +8,14 @@
 #include "SVAniMgr.h"
 #include "../app/SVInst.h"
 #include "../app/SVDispatch.h"
+#include "../work/SVTdCore.h"
 #include "ani/SVAniUnit.h"
 
 using namespace sv;
 
 SVAniMgr::SVAniMgr(SVInstPtr _app)
 :SVSysBase(_app) {
-    m_ani_lock = MakeSharedPtr<SVLockSpin>(mApp);//SVLockSpinPtr;
+    m_ani_lock = MakeSharedPtr<SVLockSpin>();;
 }
 
 SVAniMgr::~SVAniMgr() {
@@ -47,6 +48,8 @@ void SVAniMgr::addAni(SVNodePtr _node,SVAniUnitPtr _unit) {
         t_cell._node = _node;
         t_cell._unit = _unit;
         m_ani_pool.push_back(t_cell);
+        //
+        _unit->bind(_node);
     }
     m_ani_lock->unlock();
 }
