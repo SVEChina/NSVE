@@ -93,6 +93,12 @@ namespace sv {
         
         SVBoundBox getAABBSW();
         
+        SVMtlCorePtr setMtl(cptr8 _name);
+        
+        SVMtlCorePtr getMtl() { return m_mtl; } //材质
+        
+        SVSurfacePtr getSurface() { return m_surface; } //材质表面
+        
         inline cptr8 getType(){ return ntype.c_str(); }
         
         inline cptr8 getname(){return m_name.c_str();}
@@ -139,10 +145,12 @@ namespace sv {
         SVAttriPos m_attri_pos;
         //渲染属性
         SVAttriRender m_attri_render;
-        //材质表面
-        SVSurfacePtr m_surface;
         //父节点
         SVNodePtr m_parent;
+        //
+        SVMtlCorePtr m_mtl;
+        //材质表面
+        SVSurfacePtr m_surface;
 
     public:
         //序列化接口

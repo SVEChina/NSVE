@@ -27,6 +27,7 @@
 #include "../basesys/SVARBackgroundMgr.h"
 #include "../basesys/SVComData.h"
 #include "../basesys/SVResMgr.h"
+#include "../basesys/SVSceneMgr.h"
 
 #include "../event/SVEventMgr.h"
 #include "../event/SVEvent.h"
@@ -42,7 +43,6 @@
 #include "../rendercore/SVGL/SVRendererGL.h"
 
 #include "../mtl/SVMtlLib.h"
-//#include "../mtl/SVMtlCore.h"
 
 using namespace sv;
 
@@ -234,9 +234,9 @@ void SVInst::setRenderPath(s32 _rpath) {
         return;
     }
     //常见AR阶段
-    if(m_global_mgr->m_arbg_mgr) {
-        m_global_mgr->m_arbg_mgr->enable();
-        m_global_mgr->m_arbg_mgr->setInputCameraTex("res/sve.png");
+    if(m_global_mgr->m_ar_mgr) {
+        m_global_mgr->m_ar_mgr->enable();
+        m_global_mgr->m_ar_mgr->setInputCameraTex("res/sve.png");
     }
     //创建正常的阶段
     //创建一堆东西
@@ -292,7 +292,6 @@ void SVInst::resume(){
 void SVInst::clearCache(){
 }
 
-//
 void SVInst::addRespath(cptr8 path) {
     if(!m_file_sys) {
          m_file_sys = MakeSharedPtr<SVFileMgr>(share());
@@ -304,6 +303,12 @@ void SVInst::clearRespath() {
     if(m_file_sys) {
         m_file_sys->clearRespath();
         m_file_sys->addRespath("./");
+    }
+}
+
+void SVInst::test() {
+    if(getSceneMgr()) {
+        getSceneMgr()->test();
     }
 }
 
@@ -408,6 +413,6 @@ void SVInst::_initRenderer(SVRendererPtr _renderer) {
     //发送一个系统级别的消息
     if(m_event_sys) {
         SVEvtRenderInitPtr _event = MakeSharedPtr<SVEvtRenderInit>(m_renderer);
-        m_event_sys->pushEvent(_event);
+        m_event_sys->pushEvent(_event,true);
     }
 }

@@ -27,6 +27,7 @@
 
 #include "../mtl/SVTexMgr.h"
 #include "../mtl/SVTexture.h"
+#include "../mtl/SVSurface.h"
 
 using namespace sv;
 
@@ -306,11 +307,18 @@ void SVScene::fromJSON(RAPIDJSON_NAMESPACE::Value &item) {
 }
 
 void SVScene::test() {
+    SVTexturePtr t_tex = mApp->getTexMgr()->getTexture("res/test1.png");
     //创建一个测试场景
-    SVSpriteNodePtr t_sp_node = MakeSharedPtr<SVSpriteNode>(mApp);
-    t_sp_node->setTexture("res/test1.png");
-    addNode(t_sp_node);
-    //
+//    SVSpriteNodePtr t_sp_node = MakeSharedPtr<SVSpriteNode>(mApp);
+//    t_sp_node->setMtl("normal2d");
+//    t_sp_node->setTexture("res/test1.png");
+//    addNode(t_sp_node);
     SVCubePtr t_box_node = MakeSharedPtr<SVCube>(mApp);
+    t_box_node->setRotation(45.0f, 45.0f, 45.0f);
+    t_box_node->setMtl("normal3d");
+    SVSurfacePtr t_surface = t_box_node->getSurface();
+    if(t_surface) {
+        t_surface->setTexture(1, 0, t_tex);
+    }
     addNode(t_box_node);
 }

@@ -98,6 +98,8 @@ namespace sv {
         //唤醒SV
         void resume();
         
+        void test();
+        
         //获取引擎状态
         inline SV_STATE getState() { return m_sv_st; }
         

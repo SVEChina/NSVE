@@ -40,6 +40,8 @@ namespace sv {
         
         void update(f32 dt);
         
+        void test();
+        
     protected:
         SVScenePtr m_main_scene;    //主场景
         

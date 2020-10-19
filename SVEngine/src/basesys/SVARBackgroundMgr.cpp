@@ -95,7 +95,7 @@ void SVARBackgroundMgr::update(f32 _dt) {
             t_surface->setTexture(1,0,m_tex0);
             SVDispatch::dispatchMeshDraw(mApp,
                                          mApp->getComData()->screenMesh(),
-                                         "screenCamera",
+                                         nullptr,//"screenCamera"
                                          t_surface,
                                          m_ar_target,
                                          E_RSM_NOR);
@@ -133,7 +133,7 @@ void SVARBackgroundMgr::_renderCameraImg(f32 _dt) {
         t_surface->setTexture(1,0,t_cam_tex);
         SVDispatch::dispatchMeshDraw(mApp,
                                      mApp->getComData()->screenMesh(),
-                                     "skycamera",
+                                     nullptr,//"skycamera",
                                      t_surface,
                                      E_RSM_SKY);
     }

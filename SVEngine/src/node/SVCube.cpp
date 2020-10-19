@@ -52,12 +52,34 @@ void SVCube::update(f32 _dt) {
         }else{
             m_surface->setParam("matw",m_localMat);
         }
+//        //
+//        FVec2 t_tex_clip = FVec2(-1.0f,1.0f);
+//        m_surface->setParam("texcoordClip", t_tex_clip);
     }
+    
+//    SVMtlCorePtr t_mtl = mApp->getMtlLib()->getMtl(m_mtl_name.c_str());
+//    if(t_mtl) {
+//        t_mtl->update(_dt);
+//    }
+//    if(m_surface) {
+//        //
+//        m_surface->setTexture( 1,0 ,m_pTex);
+//        //
+//        FVec2 t_tex_clip = FVec2(-1.0f,1.0f);
+//        m_surface->setParam("texcoordClip", t_tex_clip);
+//        if( mApp->m_rcore == E_R_METAL_OSX || mApp->m_rcore == E_R_METAL_IOS ) {
+//            //metal需要转至一下矩阵
+//            FMat4 tt = transpose(m_localMat);
+//            m_surface->setParam("matw",tt);
+//        }else{
+//            m_surface->setParam("matw",m_localMat);
+//        }
+//    }
 }
 
 void SVCube::render() {
-    if ( m_visible && m_cube_mesh){
-        SVDispatch::dispatchMeshDraw(mApp, m_cube_mesh, m_mtl_name.c_str(),m_surface,E_RSM_SOLID);
+    if ( m_visible && m_cube_mesh && m_mtl){
+        SVDispatch::dispatchMeshDraw(mApp, m_cube_mesh, m_mtl ,m_surface,E_RSM_SOLID);
     }
     SVNode::render();
 }

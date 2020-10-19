@@ -13,7 +13,8 @@
 
 namespace sv {
         
-    //图片处理
+    //图片处理系统
+
     class SVDeformMgr : public SVSysBase {
     public:
         SVDeformMgr(SVInstPtr _app);
@@ -33,13 +34,11 @@ namespace sv {
         void clear();
         
     protected:
-        
         void removeEnd();
 
         SVLockPtr m_defromLock;
         SVArray<SVDeformImageMovePtr> m_deformArray;
         SVArray<SVDeformImageMovePtr> m_deformCir;
-        
     };
     
 }//!namespace sv

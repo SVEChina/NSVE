@@ -396,6 +396,9 @@ SVRenderMeshPtr SVGeoGen::genAABB(SVInstPtr _app,SVBoundBox& _aabb){
     t_vert_dsp->setMixStreamData(m_verts, 24*sizeof(V3_N_T0));
     t_mesh->setVertDsp(t_vert_dsp);
     //这个必须有渲染器才可以执行
+    t_mesh->setDrawMethod(E_DRAW_TRIANGLES);
+    t_mesh->setDrawVertNum(36);
+    //
     t_mesh->dispatch();
     return t_mesh;
 }

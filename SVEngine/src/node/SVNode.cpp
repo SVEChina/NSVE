@@ -7,8 +7,11 @@
 
 #include "SVNode.h"
 #include "SVNodeVisit.h"
+#include "../app/SVInst.h"
+#include "../app/SVDispatch.h"
 #include "../basesys/SVScene.h"
 #include "../basesys/SVCameraNode.h"
+#include "../mtl/SVMtlLib.h"
 #include "../mtl/SVMtlCore.h"
 #include "../mtl/SVSurface.h"
 #include "../event/SVEventMgr.h"
@@ -23,6 +26,7 @@ SVNode::SVNode(SVInstPtr _app)
 :SVEventProc(_app) {
     ntype = "SVNode";
     m_parent = nullptr;
+    m_mtl = nullptr;
     m_name = "";
     m_rsType = RST_DEBUG;
     m_canSelect = false;
@@ -76,7 +80,7 @@ void SVNode::deep_visit(SVVisitorBasePtr _visit) {
 void SVNode::select_visit(SVVisitorBasePtr _visit) {
 }
 
-void SVNode::update(f32 dt) {
+void SVNode::update(f32 _dt) {
     //计算相对矩阵(local)
     if (m_dirty) {
         m_localMat = m_attri_pos.getMatrix();
@@ -91,6 +95,10 @@ void SVNode::update(f32 dt) {
     //更新包围盒
     m_aabbBox_sw = m_aabbBox;
     m_aabbBox_sw.setTransform(m_absolutMat);
+    //
+    if(m_mtl) {
+        m_mtl->update(_dt);
+    }
 }
 
 bool SVNode::_clip() {
@@ -215,6 +223,11 @@ SVBoundBox SVNode::getAABBSW(){
 
 void SVNode::setAlpha(f32 _alpha){
     m_alpha = _alpha;
+}
+
+SVMtlCorePtr SVNode::setMtl(cptr8 _name) {
+    m_mtl = mApp->getMtlLib()->getMtl(_name);
+    return m_mtl;
 }
 
 //序列化接口

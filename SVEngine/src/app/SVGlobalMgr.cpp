@@ -15,6 +15,8 @@
 #include "../basesys/SVModelMgr.h"
 #include "../basesys/SVPhysicsWorldMgr.h"
 #include "../basesys/SVARBackgroundMgr.h"
+#include "../basesys/SVAniMgr.h"
+
 #include "../module/SVModuleSys.h"
 #include "../basesys/SVLightSys.h"
 #include "../event/SVEventMgr.h"
@@ -42,7 +44,7 @@ SVGlobalMgr::SVGlobalMgr(SVInstPtr _app)
     m_pDeformSys = nullptr;
     m_pPhysicSys =nullptr;
     m_pLightSys = nullptr;
-    m_arbg_mgr = nullptr;
+    m_ar_mgr = nullptr;
 }
 
 SVGlobalMgr::~SVGlobalMgr() {
@@ -54,14 +56,15 @@ SVGlobalMgr::~SVGlobalMgr() {
     m_pDeformSys = nullptr;
     m_pPhysicSys =nullptr;
     m_pLightSys = nullptr;
-    m_arbg_mgr = nullptr;
+    m_ar_mgr = nullptr;
+    m_ani_mgr = nullptr;
 }
 
 void SVGlobalMgr::init() {
     //AR背景，AR引擎特有的系统
-    m_arbg_mgr = MakeSharedPtr<SVARBackgroundMgr>(mApp);
-    m_arbg_mgr->init();
-    SV_LOG_ERROR("sve init m_arbg_mgr end!\n");
+    m_ar_mgr = MakeSharedPtr<SVARBackgroundMgr>(mApp);
+    m_ar_mgr->init();
+    SV_LOG_ERROR("sve init m_ar_mgr end!\n");
     //相机系统
     m_camera_mgr = MakeSharedPtr<SVCameraMgr>(mApp);
     m_camera_mgr->init();
@@ -69,6 +72,9 @@ void SVGlobalMgr::init() {
     m_pSceneMgr = MakeSharedPtr<SVSceneMgr>(mApp);
     m_pSceneMgr->init();
     SV_LOG_ERROR("sve init SVSceneMgr end!\n");
+    //动画系统
+    m_ani_mgr = MakeSharedPtr<SVAniMgr>(mApp);
+    m_ani_mgr->init();
 }
 
 void SVGlobalMgr::destroy() {
@@ -85,13 +91,22 @@ void SVGlobalMgr::destroy() {
         SV_LOG_ERROR("SVSceneMgr:destroy sucess");
     }
     //AR 背景
-    if(m_arbg_mgr) {
-        m_arbg_mgr->destroy();
+    if(m_ar_mgr) {
+        m_ar_mgr->destroy();
         SV_LOG_ERROR("SVARBackgroundMgr:destroy sucess");
+    }
+    //ANI
+    if(m_ani_mgr) {
+        m_ani_mgr->destroy();
+        SV_LOG_ERROR("SVAniMgr:destroy sucess");
     }
 }
 
 void SVGlobalMgr::update(f32 dt) {
+    if(m_ani_mgr) {
+        m_ani_mgr->update(dt);
+        timeTag(false,"ani cost");
+    }
     if(m_camera_mgr) {
         //相机更新
         m_camera_mgr->update(dt);
@@ -102,9 +117,9 @@ void SVGlobalMgr::update(f32 dt) {
         m_pSceneMgr->update(dt);
         timeTag(false,"scene cost");
     }
-    if(m_arbg_mgr) {
+    if(m_ar_mgr) {
         //AR背景
-        m_arbg_mgr->update(dt);
+        m_ar_mgr->update(dt);
         timeTag(false,"arbg cost");
     }
 }

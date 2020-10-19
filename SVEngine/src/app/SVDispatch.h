@@ -41,14 +41,14 @@ namespace sv {
         //投递rendermesh
         static void dispatchMeshDraw(SVInstPtr _app,
                                      SVRenderMeshPtr _mesh,
-                                     cptr8 _mtlname,
+                                     SVMtlCorePtr _mtl,
                                      SVSurfacePtr _surface,
                                      SV_RSTREAM _stype);
         
         //投递rendermesh
         static void dispatchMeshDraw(SVInstPtr _app,
                                      SVRenderMeshPtr _mesh,
-                                     cptr8 _mtlname,
+                                     SVMtlCorePtr _mtl,
                                      SVSurfacePtr _surface,
                                      SVRTargetPtr _target,
                                      SV_RSTREAM _stype);
@@ -56,26 +56,26 @@ namespace sv {
         //投递rendermesh-pre
         static void dispatchMeshDrawPre(SVInstPtr _app,
                                         SVRenderMeshPtr _mesh,
-                                        cptr8 _mtlname,
+                                        SVMtlCorePtr _mtl,
                                         SVSurfacePtr _surface);
         
         //投递rendermesh-pre
         static void dispatchMeshDrawPre(SVInstPtr _app,
                                         SVRenderMeshPtr _mesh,
-                                        cptr8 _mtlname,
+                                        SVMtlCorePtr _mtl,
                                         SVSurfacePtr _surface,
                                         SVRTargetPtr _target);
         
         //投递rendermesh-after
         static void dispatchMeshDrawAfter(SVInstPtr _app,
                                           SVRenderMeshPtr _mesh,
-                                          cptr8 _mtlname,
+                                          SVMtlCorePtr _mtl,
                                           SVSurfacePtr _surface);
         
         //投递rendermesh-after
         static void dispatchMeshDrawAfter(SVInstPtr _app,
                                           SVRenderMeshPtr _mesh,
-                                          cptr8 _mtlname,
+                                          SVMtlCorePtr _mtl,
                                           SVSurfacePtr _surface,
                                           SVRTargetPtr _target);
         

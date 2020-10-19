@@ -14,6 +14,8 @@
 
 namespace sv {
     
+    //绘制cube
+
     class SVCube : public SVNode {
     public:
         SVCube(SVInstPtr _app);
@@ -23,9 +25,7 @@ namespace sv {
         virtual void update(f32 dt);
         
         virtual void render();
-        
-        void setMtl(cptr8 _name);
-        
+
         void setSize(FVec3& _size);
         
         FVec3 getSize() { return m_size; }
@@ -34,8 +34,6 @@ namespace sv {
         SVRenderMeshPtr m_cube_mesh;
         
         FVec3 m_size;
-        
-        SVString m_mtl_name;
     };
     
 }//!namespace sv

@@ -21,6 +21,7 @@
     int _height;
     GLuint _framebuffer;
     GLuint _colorRenderbuffer;
+    bool _test;
 }
 
 @property (nonatomic , strong) EAGLContext* mContext;
@@ -32,6 +33,7 @@
 - (instancetype)initWithFrame:(CGRect)frameRect {
     self = [super initWithFrame:frameRect];
     if( self ) {
+        _test = true;
         //创建gl环境
         _eaglLayer = [CAEAGLLayer layer];
         _eaglLayer.frame = frameRect;
@@ -70,6 +72,11 @@
 
 -(void)renderMetal {
     [[CGInst getInst] render];
+    //
+    if(_test) {
+        _test = false;
+        [[CGInst getInst] test];
+    }
 }
 
 @end

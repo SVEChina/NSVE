@@ -27,6 +27,7 @@ namespace sv {
         void addModel(SVModelPtr _model);
         
         SVModelPtr getModel(SVString _name);
+        
     protected:
         bool _hasModel(SVModelPtr _model);
         void _recycleUnuseModel();

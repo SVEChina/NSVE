@@ -73,11 +73,19 @@ namespace sv {
     DECLARE_SHAREPTR(SVLuaSys);
     DECLARE_SHAREPTR(SVModelMgr);
     DECLARE_SHAREPTR(SVPhysicsWorldMgr);
+
+    //ani
+    DECLARE_SHAREPTR(SVAniMgr);
+    DECLARE_SHAREPTR(SVAniUnit);
+
+
     //模块
     DECLARE_SHAREPTR(SVModuleBase);
     DECLARE_SHAREPTR(SVModuleSys);
+
     //静态类......
     DECLARE_SHAREPTR(SVGeoGen);
+
     //操作Operate
     DECLARE_SHAREPTR(SVOpBase);
     DECLARE_SHAREPTR(SVOpPushFaceData);
@@ -95,10 +103,6 @@ namespace sv {
     DECLARE_SHAREPTR(SVOpMarkAppearTime);
     DECLARE_SHAREPTR(SVOpMarkPosition);
     DECLARE_SHAREPTR(SVOpMarkEnableRandom);
-    //
-//    DECLARE_SHAREPTR(SVOpCreateGameZCMgr);
-//    DECLARE_SHAREPTR(SVOpDestroyGameZCMgr);
-    
     //Test
     DECLARE_SHAREPTR(SVOpCreateTest);
     DECLARE_SHAREPTR(SVOpCreateDebugFacePt);

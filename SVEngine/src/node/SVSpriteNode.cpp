@@ -25,7 +25,6 @@ using namespace sv;
 SVSpriteNode::SVSpriteNode(SVInstPtr _app)
 :SVNode(_app) {
     ntype = "SVSpriteNode";
-    m_mtl_name = "normal2d";
     m_rsType = RST_SOLID_3D;
     m_canSelect = false;
     m_pTex = nullptr;
@@ -36,7 +35,6 @@ SVSpriteNode::SVSpriteNode(SVInstPtr _app)
 SVSpriteNode::SVSpriteNode(SVInstPtr _app,f32 _w,f32 _h)
 :SVNode(_app) {
     ntype = "SVSpriteNode";
-    m_mtl_name = "normal2d";
     m_rsType = RST_SOLID_3D;
     m_canSelect = false;
     m_pTex = nullptr;
@@ -123,14 +121,8 @@ void SVSpriteNode::syncTexSize() {
 
 void SVSpriteNode::update(f32 _dt) {
     SVNode::update(_dt);
-    SVMtlCorePtr t_mtl = mApp->getMtlLib()->getMtl(m_mtl_name.c_str());
-    if(t_mtl) {
-        t_mtl->update(_dt);
-    }
     if(m_surface) {
-        //
         m_surface->setTexture( 1,0 ,m_pTex);
-        //
         FVec2 t_tex_clip = FVec2(-1.0f,1.0f);
         m_surface->setParam("texcoordClip", t_tex_clip);
         if( mApp->m_rcore == E_R_METAL_OSX || mApp->m_rcore == E_R_METAL_IOS ) {
@@ -145,7 +137,7 @@ void SVSpriteNode::update(f32 _dt) {
 
 void SVSpriteNode::render() {
     if ( m_visible && m_pMesh){
-        SVDispatch::dispatchMeshDraw(mApp, m_pMesh, m_mtl_name.c_str(),m_surface,E_RSM_SOLID);
+        SVDispatch::dispatchMeshDraw(mApp, m_pMesh, m_mtl,m_surface,E_RSM_SOLID);
     }
     SVNode::render();
 }

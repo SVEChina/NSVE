@@ -28,7 +28,6 @@ SVSceneMgr::~SVSceneMgr() {
 void SVSceneMgr::init() {
     m_main_scene = MakeSharedPtr<SVScene>(mApp,"testScene");
     m_main_scene->create();
-    m_main_scene->test();
 }
 
 void SVSceneMgr::destroy() {
@@ -67,3 +66,8 @@ void SVSceneMgr::update(f32 _dt) {
     m_scene_lock->unlock();
 }
 
+void SVSceneMgr::test() {
+    if(m_main_scene) {
+        m_main_scene->test();
+    }
+}

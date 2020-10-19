@@ -38,6 +38,8 @@ namespace sv {
         SVSceneMgrPtr m_pSceneMgr;
         //相机管理
         SVCameraMgrPtr m_camera_mgr;
+        //动画系统
+        SVAniMgrPtr m_ani_mgr;
         //模块(插件)部分
         SVModuleSysPtr m_pModuleSys;
         //灯光部分
@@ -49,7 +51,7 @@ namespace sv {
         //变形形同
         SVDeformMgrPtr m_pDeformSys;
         //AR背景
-        SVARBackgroundMgrPtr m_arbg_mgr;
+        SVARBackgroundMgrPtr m_ar_mgr;
         //物理世界
         SVPhysicsWorldMgrPtr m_pPhysicSys;
         //时间标志

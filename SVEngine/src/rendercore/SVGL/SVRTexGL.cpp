@@ -22,6 +22,22 @@
 
 using namespace sv;
 
+//
+bool isPow2(s32 _value) {
+    s32 t_flag = 2;
+    while(1) {
+        if(t_flag == _value ) {
+            return true;
+        }
+        t_flag*=2;
+        if(t_flag>_value) {
+            break;
+        }
+        
+    }
+    return false;
+}
+
 SVRTexGL::SVRTexGL(SVInstPtr _app)
 :SVRTex(_app)
 ,m_res_id(0) {
@@ -132,7 +148,7 @@ void SVRTexGL::load(SVRendererPtr _renderer,SVTextureDsp* _tex_dsp) {
         }
         //
         if (m_texture_dsp->m_minmap) {
-            if( (m_texture_dsp->m_width%2 == 0) && (m_texture_dsp->m_height%2 == 0) && false) {
+            if( isPow2(m_texture_dsp->m_width) && isPow2(m_texture_dsp->m_height%2) ) {
                 glGenerateMipmap(t_tex_kind);
 //#define GL_NEAREST_MIPMAP_NEAREST                        0x2700
 //#define GL_LINEAR_MIPMAP_NEAREST                         0x2701

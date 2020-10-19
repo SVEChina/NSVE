@@ -69,7 +69,7 @@ void SVDispatch::dispatchTargetResize(SVInstPtr _app,SVRTargetPtr _target) {
 //投递rendermesh
 void SVDispatch::dispatchMeshDraw(SVInstPtr _app,
                                   SVRenderMeshPtr _mesh,
-                                  cptr8 _mtlname,
+                                  SVMtlCorePtr _mtl,
                                   SVSurfacePtr _surface,
                                   SV_RSTREAM _stype) {
     
@@ -86,11 +86,10 @@ void SVDispatch::dispatchMeshDraw(SVInstPtr _app,
             _surface->setParam("matp", t_mat_p);
         }
         //投递命令
-        SVMtlCorePtr t_mtl = _app->getMtlLib()->getMtl(_mtlname);
-        if(t_mtl) {
+        if(_mtl) {
             SVRCmdNorPtr t_cmd_nor = MakeSharedPtr<SVRCmdNor>();
             t_cmd_nor->setMesh(_mesh);
-            t_cmd_nor->setMaterial(t_mtl);
+            t_cmd_nor->setMaterial(_mtl);
             t_cmd_nor->setSurface(_surface);
             t_target->pushCommand(t_cmd_nor,_stype);
         }
@@ -100,7 +99,7 @@ void SVDispatch::dispatchMeshDraw(SVInstPtr _app,
 //投递rendermesh
 void SVDispatch::dispatchMeshDraw(SVInstPtr _app,
                                   SVRenderMeshPtr _mesh,
-                                  cptr8 _mtlname,
+                                  SVMtlCorePtr _mtl,
                                   SVSurfacePtr _surface,
                                   SVRTargetPtr _target,
                                   SV_RSTREAM _stype) {
@@ -116,11 +115,10 @@ void SVDispatch::dispatchMeshDraw(SVInstPtr _app,
             _surface->setParam("matv", t_mat_v);
             _surface->setParam("matp", t_mat_p);
         }
-        SVMtlCorePtr t_mtl = _app->getMtlLib()->getMtl(_mtlname);
-        if(t_mtl) {
+        if(_mtl) {
             SVRCmdNorPtr t_cmd_nor = MakeSharedPtr<SVRCmdNor>();
             t_cmd_nor->setMesh(_mesh);
-            t_cmd_nor->setMaterial(t_mtl);
+            t_cmd_nor->setMaterial(_mtl);
             t_cmd_nor->setSurface(_surface);
             _target->pushCommand(t_cmd_nor,_stype);
         }
@@ -130,7 +128,7 @@ void SVDispatch::dispatchMeshDraw(SVInstPtr _app,
 //投递rendermesh-pre
 void SVDispatch::dispatchMeshDrawPre(SVInstPtr _app,
                                      SVRenderMeshPtr _mesh,
-                                     cptr8 _mtlname,
+                                     SVMtlCorePtr _mtl,
                                      SVSurfacePtr _surface) {
     SVRendererPtr t_renderer = _app->getRenderer();
     SVRTargetPtr t_target = _app->getRenderMgr()->getMainRT();
@@ -144,11 +142,10 @@ void SVDispatch::dispatchMeshDrawPre(SVInstPtr _app,
             _surface->setParam("matv", t_mat_v);
             _surface->setParam("matp", t_mat_p);
         }
-        SVMtlCorePtr t_mtl = _app->getMtlLib()->getMtl(_mtlname);
-        if(t_mtl) {
+        if(_mtl) {
             SVRCmdNorPtr t_cmd_nor = MakeSharedPtr<SVRCmdNor>();
             t_cmd_nor->setMesh(_mesh);
-            t_cmd_nor->setMaterial(t_mtl);
+            t_cmd_nor->setMaterial(_mtl);
             t_cmd_nor->setSurface(_surface);
             t_target->pushCommandPre(t_cmd_nor);
         }
@@ -158,7 +155,7 @@ void SVDispatch::dispatchMeshDrawPre(SVInstPtr _app,
 //投递rendermesh-pre
 void SVDispatch::dispatchMeshDrawPre(SVInstPtr _app,
                                      SVRenderMeshPtr _mesh,
-                                     cptr8 _mtlname,
+                                     SVMtlCorePtr _mtl,
                                      SVSurfacePtr _surface,
                                      SVRTargetPtr _target) {
     SVRendererPtr t_renderer = _app->getRenderer();
@@ -172,11 +169,10 @@ void SVDispatch::dispatchMeshDrawPre(SVInstPtr _app,
             _surface->setParam("matv", t_mat_v);
             _surface->setParam("matp", t_mat_p);
         }
-        SVMtlCorePtr t_mtl = _app->getMtlLib()->getMtl(_mtlname);
-        if(t_mtl) {
+        if(_mtl) {
             SVRCmdNorPtr t_cmd_nor = MakeSharedPtr<SVRCmdNor>();
             t_cmd_nor->setMesh(_mesh);
-            t_cmd_nor->setMaterial(t_mtl);
+            t_cmd_nor->setMaterial(_mtl);
             t_cmd_nor->setSurface(_surface);
             _target->pushCommandPre(t_cmd_nor);
         }
@@ -186,7 +182,7 @@ void SVDispatch::dispatchMeshDrawPre(SVInstPtr _app,
 //投递rendermesh-pre
 void SVDispatch::dispatchMeshDrawAfter(SVInstPtr _app,
                                        SVRenderMeshPtr _mesh,
-                                       cptr8 _mtlname,
+                                       SVMtlCorePtr _mtl,
                                        SVSurfacePtr _surface) {
     SVRendererPtr t_renderer = _app->getRenderer();
     SVRTargetPtr t_target = _app->getRenderMgr()->getMainRT();
@@ -200,11 +196,10 @@ void SVDispatch::dispatchMeshDrawAfter(SVInstPtr _app,
             _surface->setParam("matv", t_mat_v);
             _surface->setParam("matp", t_mat_p);
         }
-        SVMtlCorePtr t_mtl = _app->getMtlLib()->getMtl(_mtlname);
-        if(t_mtl) {
+        if(_mtl) {
             SVRCmdNorPtr t_cmd_nor = MakeSharedPtr<SVRCmdNor>();
             t_cmd_nor->setMesh(_mesh);
-            t_cmd_nor->setMaterial(t_mtl);
+            t_cmd_nor->setMaterial(_mtl);
             t_cmd_nor->setSurface(_surface);
             t_target->pushCommandAfter(t_cmd_nor);
         }
@@ -214,7 +209,7 @@ void SVDispatch::dispatchMeshDrawAfter(SVInstPtr _app,
 //投递rendermesh-after
 void SVDispatch::dispatchMeshDrawAfter(SVInstPtr _app,
                                        SVRenderMeshPtr _mesh,
-                                       cptr8 _mtlname,
+                                       SVMtlCorePtr _mtl,
                                        SVSurfacePtr _surface,
                                        SVRTargetPtr _target) {
     SVRendererPtr t_renderer = _app->getRenderer();
@@ -228,11 +223,10 @@ void SVDispatch::dispatchMeshDrawAfter(SVInstPtr _app,
             _surface->setParam("matv", t_mat_v);
             _surface->setParam("matp", t_mat_p);
         }
-        SVMtlCorePtr t_mtl = _app->getMtlLib()->getMtl(_mtlname);
-        if(t_mtl) {
+        if(_mtl) {
             SVRCmdNorPtr t_cmd_nor = MakeSharedPtr<SVRCmdNor>();
             t_cmd_nor->setMesh(_mesh);
-            t_cmd_nor->setMaterial(t_mtl);
+            t_cmd_nor->setMaterial(_mtl);
             t_cmd_nor->setSurface(_surface);
             _target->pushCommandAfter(t_cmd_nor);
         }

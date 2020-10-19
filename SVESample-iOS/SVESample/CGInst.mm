@@ -115,4 +115,11 @@ static CGInst *mInst;
         m_p_sve->renderSVE();
     }
 }
+
+-(void)test {
+    if(m_p_sve) {
+        m_p_sve->test();
+    }
+}
+
 @end

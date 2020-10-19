@@ -2,7 +2,8 @@
     "pack-name" : "base",
     "pack-files": [
         "screen.mtl",
-        "normal2d.mtl"
+        "normal2d.mtl",
+        "normal3d.mtl"
     ],
     "pack-mtls" : [
         {

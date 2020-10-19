@@ -52,7 +52,6 @@ void SVMtlLib::destroy() {
 //
 void SVMtlLib::procSysEvent(SVObjectPtr _caller,SVEventPtr _event) {
     if(_event->eventType == EVN_T_SYS_INIT_RENDERER) {
-        //渲染器初始化
         SVMtlLibPtr t_sender = dynamic_pointer_cast<SVMtlLib>(_caller);
         if(t_sender) {
             t_sender->loadDefaultPack();
