@@ -42,7 +42,7 @@ SVParamDeform::~SVParamDeform(){
 
 SVDeformImageMove::SVDeformImageMove(SVInstPtr _app)
 :SVGBaseEx(_app){
-//    m_pMtlBg  = MakeSharedPtr<SVMtlCore>(mApp,"screennor");
+//    m_pMtlBg  = MakeSharedPtr<SVMtlCore>(mApp,"screen");
 //    m_pIUMP    = MakeSharedPtr<SVImageUsingMove>();
 //    m_deformScale = MakeSharedPtr<SVDeformScale>();
 //    m_pPointTex = mApp->getTexMgr()->getTexture("svres/point.png",true);
@@ -123,7 +123,7 @@ void SVDeformImageMove::init(SVTexturePtr _intex,SVTexturePtr _texout){
 //        m_passPoint->setInTex(0,m_pPointTex);
 //        m_passPoint->setOutTex(E_TEX_FILTER_DEFORM02);
 //        
-//        t_mtl = MakeSharedPtr<SVMtlCore>(mApp,"screennor");
+//        t_mtl = MakeSharedPtr<SVMtlCore>(mApp,"screen");
 //        t_mtl->setTexcoordFlip(1.0, -1.0);
 //        m_passBack = MakeSharedPtr<SVPass>();
 //        m_passBack->setMtl(t_mtl);

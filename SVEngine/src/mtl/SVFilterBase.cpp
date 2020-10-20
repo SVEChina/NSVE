@@ -39,9 +39,17 @@ bool SVFilterBase::create(){
 void SVFilterBase::destroy() {
 }
 
+void SVFilterBase::setMtl(cptr8 _name) {
+    if( mApp->getMtlLib() ) {
+        m_mtl = mApp->getMtlLib()->getMtl(_name);
+    }
+}
+
 void SVFilterBase::update(f32 _dt) {
     SVRTargetPtr t_target = mApp->getTargetMgr()->getTarget(m_target_tex);
     if(t_target && m_mtl) {
+        //
+        m_mtl->update(_dt);
         //辅助目标
         SVRTargetPtr t_help = mApp->getTargetMgr()->getTarget(m_target_tex_help);
         if(!t_help && m_target_tex_help<E_TEX_END) {
@@ -60,11 +68,9 @@ void SVFilterBase::update(f32 _dt) {
         t_pass->setSurface(m_surface);
         t_pass->setMaterial(m_mtl);
         if(m_is_pre) {
-            //预处理
-            t_target->pushCommandPre(t_pass);
+            t_target->pushCommandPre(t_pass); //预处理
         }else{
-            //后处理
-            t_target->pushCommandAfter(t_pass);
+            t_target->pushCommandAfter(t_pass); //后处理
         }
     }
 }

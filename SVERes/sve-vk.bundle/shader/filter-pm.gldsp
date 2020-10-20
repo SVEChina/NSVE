@@ -2,8 +2,8 @@
     "name" : "filter-pm",
     "formate" : ["E_V2","E_T0"],
     "pass" : "nor",
-    "vs" : "shader/code/screennor.vs",
-    "fs" : "shader/code/screennor.fs",
+    "vs" : "shader/code/screen.vs",
+    "fs" : "shader/code/screen.fs",
     "sampler": [ { "chn" : 0 ,"stage" : 1 } ],
     "uniform": [
         {

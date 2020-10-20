@@ -54,7 +54,7 @@ bool SVRGBToneCurveFilter::create() {
 //    t_pass->setOutTex(E_TEX_HELP0);
 //    m_pPassNode->addPass(t_pass);
 //    //写回
-//    m_mtl_back = MakeSharedPtr<SVMtlCore>(mApp,"screennor");
+//    m_mtl_back = MakeSharedPtr<SVMtlCore>(mApp,"screen");
 //    m_mtl_back->setTexcoordFlip(1.0f, 1.0f);
 //    t_pass = MakeSharedPtr<SVPass>();
 //    //t_pass->setMtl(m_mtl_back);

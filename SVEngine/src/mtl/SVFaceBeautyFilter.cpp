@@ -130,7 +130,7 @@ bool SVFairDataBlur::create() {
     m_mtl_d = MakeSharedPtr<SVMtlBlurFair>(mApp);
     //m_mtl_d->setTexcoordFlip(1.0f, 1.0f);
     //m_mtl_d->setTexSizeIndex(0, m_pParam->m_param06 / t_w, m_pParam->m_param06 / t_h);
-    m_mtl_back = MakeSharedPtr<SVMtlCore>(mApp, "screennor");
+    m_mtl_back = MakeSharedPtr<SVMtlCore>(mApp, "screen");
     //m_mtl_back->setTexcoordFlip(1.0f, 1.0f);
     
 //    m_pPassNode = MakeSharedPtr<SVMultPassNode>(mApp);
@@ -320,7 +320,7 @@ bool SVFairLtraLow::create() {
 //    s32 t_h = mApp->m_global_param.sv_height;
 //    m_mtl_a = MakeSharedPtr<SVMtlFairLtraLow>(mApp);
 //    m_mtl_a->setTexcoordFlip(1.0f, 1.0f);
-//    m_mtl_back = MakeSharedPtr<SVMtlCore>(mApp, "screennor");
+//    m_mtl_back = MakeSharedPtr<SVMtlCore>(mApp, "screen");
 //    m_mtl_back->setTexcoordFlip(1.0f, 1.0f);
 //
 //    if (!t_renderer->getSVTex(E_TEX_HELP0)) {

@@ -47,7 +47,7 @@ void SVFaceShapeNode::init(){
 //                                           false);
 //    SVTexturePtr t_texmain = t_renderer->getSVTex(E_TEX_MAIN);
 //    mApp->getRenderMgr()->pushRCmdCreate(m_fbo);
-//    SVMtlCorePtr t_mtl = MakeSharedPtr<SVMtlCore>(mApp,"screennor");
+//    SVMtlCorePtr t_mtl = MakeSharedPtr<SVMtlCore>(mApp,"screen");
 //    t_mtl->setTexcoordFlip(1.0f, 1.0f);
 //    
 //    SVPassPtr t_pass1 = MakeSharedPtr<SVPass>();

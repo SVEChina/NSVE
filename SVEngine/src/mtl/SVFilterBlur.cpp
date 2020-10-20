@@ -61,7 +61,7 @@ bool SVFilterBlur::create(SV_TEXIN _inType,SV_TEXIN _outType){
 //    t_pass1->setOutTex(E_TEX_FILTER_GLOW_3);
 //    m_pPassNode->addPass(t_pass1);
 //    
-//    SVMtlCorePtr t_lkMtl=MakeSharedPtr<SVMtlCore>(mApp,"screennor");
+//    SVMtlCorePtr t_lkMtl=MakeSharedPtr<SVMtlCore>(mApp,"screen");
 //    t_lkMtl->setTexcoordFlip(1.0f, 1.0f);
 //    t_pass1 = MakeSharedPtr<SVPass>();
 //    t_pass1->setMtl(t_lkMtl);

@@ -45,7 +45,7 @@ bool SVFilterGlow::create(SV_TEXIN _inType,SV_TEXIN _outType){
 //    m_pPassNode->setRSType(m_rstype);
 //    //创建pass
 //    SVPassPtr t_pass1 = MakeSharedPtr<SVPass>();
-//    SVMtlCorePtr t_lkMtl=MakeSharedPtr<SVMtlCore>(mApp,"screennor");
+//    SVMtlCorePtr t_lkMtl=MakeSharedPtr<SVMtlCore>(mApp,"screen");
 //    t_lkMtl->setTexcoordFlip(1.0f, 1.0f);
 //    t_pass1->setMtl(t_lkMtl);
 //    t_pass1->setInTex(0,_inType);

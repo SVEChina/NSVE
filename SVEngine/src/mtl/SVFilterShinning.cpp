@@ -40,7 +40,7 @@ bool SVFilterShinning::create(){
 //    m_pPassNode->addPass(t_pass1);
 //
 //    SVPassPtr t_pass2 = MakeSharedPtr<SVPass>();
-//    SVMtlCorePtr t_mtl_back= MakeSharedPtr<SVMtlCore>(mApp,"screennor");
+//    SVMtlCorePtr t_mtl_back= MakeSharedPtr<SVMtlCore>(mApp,"screen");
 //    //t_mtl_back->setTexcoordFlip(1.0f, 1.0f);
 //    //t_pass2->setMtl(t_mtl_back);
 //    t_pass2->setInTex(0, E_TEX_FILTER_1);

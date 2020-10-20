@@ -60,7 +60,7 @@ void SVARAnchor::init(){
 //    }
 //    m_fbo = MakeSharedPtr<SVRenderTexture>(mApp,m_pTex,true,true);
 //    //mApp->getRenderMgr()->pushRCmdCreate(m_fbo);
-//    m_mtl = MakeSharedPtr<SVMtlCore>(mApp,"screennor");
+//    m_mtl = MakeSharedPtr<SVMtlCore>(mApp,"screen");
 //    m_mtl->setTexcoordFlip(1.0f, 1.0f);
 //    m_mtl->setTexture(0, E_TEX_HELP7);
 //    m_mtl->setBlendEnable(true);

@@ -52,6 +52,12 @@ namespace sv {
             return m_name.c_str();
         }
         
+        void setMtl(cptr8 _name);
+        
+        SVMtlCorePtr getMtl() {
+            return m_mtl;
+        }
+        
         //获取surface，设置参数
         SVSurfacePtr getSurface() { return m_surface; }
 

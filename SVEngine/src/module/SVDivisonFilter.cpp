@@ -24,7 +24,7 @@ SVDivisonFilter::~SVDivisonFilter() {
 
 void SVDivisonFilter::init() {
 //    m_backgroundNode = MakeSharedPtr<SVSpriteNode>(mApp,100, 100);
-//    SVMtlCorePtr t_pMtl = MakeSharedPtr<SVMtlCore>(mApp,"screennorbgra");
+//    SVMtlCorePtr t_pMtl = MakeSharedPtr<SVMtlCore>(mApp,"screenbgra");
 //    m_backgroundNode->setMaterial(t_pMtl);
 }
 

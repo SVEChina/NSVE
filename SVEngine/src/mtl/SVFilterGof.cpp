@@ -45,7 +45,7 @@ bool SVFilterGof::create(){
 //    m_pPassNode->setRSType(RST_IMGFILTER);
 //    //创建pass
 //    SVPassPtr t_pass1 = MakeSharedPtr<SVPass>();
-//    SVMtlCorePtr t_lkMtl=MakeSharedPtr<SVMtlCore>(mApp,"screennor");
+//    SVMtlCorePtr t_lkMtl=MakeSharedPtr<SVMtlCore>(mApp,"screen");
 //    //t_pass1->setMtl(t_lkMtl);
 //    t_pass1->setInTex(0,E_TEX_MAIN);
 //    t_pass1->setOutTex(E_TEX_HELP0);

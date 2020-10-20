@@ -63,7 +63,7 @@ bool SVFilterGenLUT::create(){
 //    m_BCMtl=MakeSharedPtr<SVMtlBrightnessContrast>(mApp);
 //    //m_BCMtl->setTexcoordFlip(1.0f, 1.0f);
 //    
-//    SVMtlCorePtr t_mtl_back=MakeSharedPtr<SVMtlCore>(mApp,"screennor");
+//    SVMtlCorePtr t_mtl_back=MakeSharedPtr<SVMtlCore>(mApp,"screen");
 //    //t_mtl_back->setTexcoordFlip(1.0f, 1.0f);
 //    
 //    m_SaturationMtl=MakeSharedPtr<SVMtlSaturation>(mApp);
@@ -163,7 +163,7 @@ bool SVFilterGenLUT::create(){
 ////    m_pass->setOutTex(E_TEX_FILTER_GENLUT_H1);
 //    m_pPassNode->addPass(m_pass);
 //    
-//    SVMtlCorePtr t_mtl_rgba=MakeSharedPtr<SVMtlCore>(mApp,"screennor");
+//    SVMtlCorePtr t_mtl_rgba=MakeSharedPtr<SVMtlCore>(mApp,"screen");
 //    m_GradientMapPass=MakeSharedPtr<SVPass>();
 //    //m_GradientMapPass->setMtl(t_mtl_rgba);
 ////    m_GradientMapPass->setInTex(0,E_TEX_FILTER_GENLUT_H1);
@@ -284,7 +284,7 @@ void SVFilterGenLUT::openGradientMap(){
 }
 
 void SVFilterGenLUT::closeGradientMap(){
-//    SVMtlCorePtr t_mtl=MakeSharedPtr<SVMtlCore>(mApp,"screennor");
+//    SVMtlCorePtr t_mtl=MakeSharedPtr<SVMtlCore>(mApp,"screen");
 //    t_mtl->setTexcoordFlip(1.0f, 1.0f);
 //    m_GradientMapPass->setMtl(t_mtl);
 //    m_GradientMapPass->setInTex(0,E_TEX_FILTER_GENLUT_H2);

@@ -44,7 +44,7 @@ bool SVADFilterBase::create(){
 //    m_pPassNode->addPass(t_pass1);
 //
 //    SVPassPtr t_pass2 = MakeSharedPtr<SVPass>();
-//    SVMtlCorePtr t_mtl_back= MakeSharedPtr<SVMtlCore>(mApp,"screennor");
+//    SVMtlCorePtr t_mtl_back= MakeSharedPtr<SVMtlCore>(mApp,"screen");
 //    //t_pass2->setMtl(t_mtl_back);
 //    t_pass2->setInTex(0, E_TEX_FILTER_1);
 //    t_pass2->setOutTex(E_TEX_MAIN);

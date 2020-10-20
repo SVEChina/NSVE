@@ -36,12 +36,12 @@
      "programme": "lookup"
      },
      {
-     "vs": "screennor",
+     "vs": "screen",
      "fs": "gaussian",
      "programme": "gaussian"
      },
      {
-     "vs": "screennor",
+     "vs": "screen",
      "fs": "blur",
      "programme": "blur"
      },
@@ -92,48 +92,48 @@
       "programme": "faceShape"
     },
     {
-      "vs": "screennor",
-      "fs": "screennor",
-      "programme": "screennor"
+      "vs": "screen",
+      "fs": "screen",
+      "programme": "screen"
              },
              {
-             "vs": "screennor",
+             "vs": "screen",
              "fs": "debugFacePt",
              "programme": "ddddddddddd"
              
              },
     {
-      "vs": "screennor",
-      "fs": "screennorbgra",
-      "programme": "screennorbgra"
+      "vs": "screen",
+      "fs": "screenbgra",
+      "programme": "screenbgra"
     },
     {
-      "vs": "screennor",
+      "vs": "screen",
       "fs": "yuv2rgb12",
       "programme": "yuv2rgb12"
     },
     {
-      "vs": "screennor",
+      "vs": "screen",
       "fs": "yuv2rgb21",
       "programme": "yuv2rgb21"
     },
     {
-        "vs": "screennor",
+        "vs": "screen",
         "fs": "yuv2rgbi420",
         "programme": "yuv2rgbi420"
     },
     {
-        "vs": "screennor",
+        "vs": "screen",
         "fs": "yuv2rgbyv12",
         "programme": "yuv2rgbyv12"
     },
     {
-        "vs": "screennor",
+        "vs": "screen",
         "fs": "yuv2rgbbgra",
         "programme": "yuv2rgbbgra"
     },
     {
-        "vs": "screennor",
+        "vs": "screen",
         "fs": "yuv2rgbrgba",
         "programme": "yuv2rgbrgba"
     },
@@ -164,107 +164,107 @@
     },
 
     {
-      "vs": "screennor",
+      "vs": "screen",
       "fs": "bgra",
       "programme": "bgra"
     },
     {
-      "vs": "screennor",
+      "vs": "screen",
       "fs": "rgba",
       "programme": "rgba"
     },
     {
-       "vs": "screennor",
+       "vs": "screen",
        "fs": "baseFilterAdjustment",
        "programme": "baseFilterAdjustment"
     },
     {
-    "vs": "screennor",
+    "vs": "screen",
     "fs": "acutance",
     "programme": "acutance"
     },
     {
-      "vs": "screennor",
+      "vs": "screen",
       "fs": "rgbaFilter",
       "programme": "rgbaFilter"
     },
     {
-      "vs": "screennor",
+      "vs": "screen",
       "fs": "filterNineGrid",
       "programme": "filterNineGrid"
     },
     {
-      "vs": "screennor",
+      "vs": "screen",
       "fs": "filterEnlargeEye",
       "programme": "filterEnlargeEye"
     },
     {
-      "vs": "screennor",
+      "vs": "screen",
       "fs": "filterEnlarge2Eye",
       "programme": "filterEnlarge2Eye"
     },
     {
-      "vs": "screennor",
+      "vs": "screen",
       "fs": "filterEnlargeEllipse",
       "programme": "filterEnlargeEllipse"
     },
     {
-      "vs": "screennor",
+      "vs": "screen",
       "fs": "filterWhiteBalance",
       "programme": "filterWhiteBalance"
     },
     {
-      "vs": "screennor",
+      "vs": "screen",
       "fs": "filterWhiteBalanceOp",
       "programme": "filterWhiteBalanceOp"
     },
     {
-      "vs": "screennor",
+      "vs": "screen",
       "fs": "filterContrast",
       "programme": "filterContrast"
     },
     {
-      "vs": "screennor",
+      "vs": "screen",
       "fs": "filterHue",
       "programme": "filterHue"
     },
     {
-      "vs": "screennor",
+      "vs": "screen",
       "fs": "fmColorBalance",
       "programme": "fmColorBalance"
     },
     {
-      "vs": "screennor",
+      "vs": "screen",
       "fs": "filterSaturation",
       "programme": "filterSaturation"
     },
     {
-      "vs": "screennor",
+      "vs": "screen",
       "fs": "filterSaturationFast",
       "programme": "filterSaturationFast"
     },
     {
-      "vs": "screennor",
+      "vs": "screen",
       "fs": "filterSaturationHSV",
       "programme": "filterSaturationHSV"
     },
     {
-      "vs": "screennor",
+      "vs": "screen",
       "fs": "filterColorLevel",
       "programme": "filterColorLevel"
     },
     {
-      "vs": "screennor",
+      "vs": "screen",
       "fs": "filterHaze",
       "programme": "filterHaze"
     },
     {
-      "vs": "screennor",
+      "vs": "screen",
       "fs": "filterEmboss",
       "programme": "filterEmboss"
     },
     {
-      "vs": "screennor",
+      "vs": "screen",
       "fs": "filterMonochrome",
       "programme": "filterMonochrome"
     },
@@ -274,17 +274,17 @@
       "programme": "filterSketch"
     },
     {
-      "vs": "screennor",
+      "vs": "screen",
       "fs": "filterBrightness",
       "programme": "filterBrightness"
     },
     {
-      "vs": "screennor",
+      "vs": "screen",
       "fs": "filterBilateralBlur",
       "programme": "filterBilateralBlur"
     },
     {
-      "vs": "screennor",
+      "vs": "screen",
       "fs": "filterBilateralBlur2",
       "programme": "filterBilateralBlur2"
     },
@@ -294,7 +294,7 @@
       "programme": "filterBilateralBlurLei"
     },
     {
-      "vs": "screennor",
+      "vs": "screen",
       "fs": "filterCurveAdjustTex",
       "programme": "filterCurveAdjustTex"
     },
@@ -304,97 +304,97 @@
       "programme": "filterSharpen"
     },
     {
-      "vs": "screennor",
+      "vs": "screen",
       "fs": "filter/ftb_origin",
       "programme": "ftb_origin"
     },
     {
-      "vs": "screennor",
+      "vs": "screen",
       "fs": "filter/ftb_origin02",
       "programme": "ftb_origin02"
     },
     {
-      "vs": "screennor",
+      "vs": "screen",
       "fs": "filter/ftb_valencia",
       "programme": "ftb_valencia"
     },
     {
-      "vs": "screennor",
+      "vs": "screen",
       "fs": "filter/ftb_nashville",
       "programme": "ftb_nashville"
     },
     {
-      "vs": "screennor",
+      "vs": "screen",
       "fs": "filter/ftb_walden",
       "programme": "ftb_walden"
     },
     {
-    "vs": "screennor",
+    "vs": "screen",
     "fs": "filter/ftb_brannan",
     "programme": "ftb_brannan"
     },
     {
-    "vs": "screennor",
+    "vs": "screen",
     "fs": "filter/ftb_inkwell",
     "programme": "ftb_inkwell"
     },
     {
-    "vs": "screennor",
+    "vs": "screen",
     "fs": "filter/ftb_inkwell02",
     "programme": "ftb_inkwell02"
     },
     {
-    "vs": "screennor",
+    "vs": "screen",
     "fs": "filter/ftb_inkwell03",
     "programme": "ftb_inkwell03"
     },
     {
-    "vs": "screennor",
+    "vs": "screen",
     "fs": "filter/ftb_pink",
     "programme": "ftb_pink"
     },
     {
-    "vs": "screennor",
+    "vs": "screen",
     "fs": "filter/ftb_pink01",
     "programme": "ftb_pink01"
     },
     {
-    "vs": "screennor",
+    "vs": "screen",
     "fs": "filter/ftb_guass",
     "programme": "ftb_guass"
     },
     {
-    "vs": "screennor",
+    "vs": "screen",
     "fs": "filter/ftb_grass",
     "programme": "ftb_grass"
     },
     {
-    "vs": "screennor",
+    "vs": "screen",
     "fs": "filter/ftb_beach",
     "programme": "ftb_beach"
     } ,
     {
-      "vs": "screennor",
+      "vs": "screen",
       "fs": "filter/ftb_beach01",
       "programme": "ftb_beach01"
     } ,
     {
-      "vs": "screennor",
+      "vs": "screen",
       "fs": "filter/ftb_new3",
       "programme": "ftb_new3"
     },
     {
-      "vs": "screennor",
+      "vs": "screen",
       "fs": "filter/ftb_sweety",
       "programme": "ftb_sweety"
     },
     {
-      "vs": "screennor",
+      "vs": "screen",
       "fs": "filter/ftb_sweety02",
       "programme": "ftb_sweety02"
     },
     {
-      "vs": "screennor",
+      "vs": "screen",
       "fs": "beauty",
       "programme": "beauty"
     },
@@ -409,27 +409,27 @@
      "programme": "faceShapeVaried"
     },
     {
-      "vs": "screennor",
+      "vs": "screen",
       "fs": "filter/ftt_basic_deform",
       "programme": "ftt_basic_deform"
     },
     {
-      "vs": "screennor",
+      "vs": "screen",
       "fs": "filter/ftt_chromatic_aberration",
       "programme": "ftt_chromatic_aberration"
     },
     {
-      "vs": "screennor",
+      "vs": "screen",
       "fs": "filter/ftt_edge_detection",
       "programme": "ftt_edge_detection"
     },
     {
-      "vs": "screennor",
+      "vs": "screen",
       "fs": "filter/ftt_em_interference",
       "programme": "ftt_em_interference"
     },
     {
-      "vs": "screennor",
+      "vs": "screen",
       "fs": "filter/ftt_contrast",
       "programme": "ftt_contrast"
     },
