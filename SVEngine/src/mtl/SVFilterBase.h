@@ -35,6 +35,8 @@ namespace sv {
 
         virtual void update(f32 _dt);
         
+        sv_inline void setUseTarget(SV_TEXIN _intex){ m_target_use = _intex; }
+        
         //设置目标Target
         sv_inline void setTarget(SV_TEXIN _intex){ m_target_tex = _intex; }
         
@@ -65,7 +67,7 @@ namespace sv {
         SVString m_name;
         bool m_is_pre;
         SV_TEXIN m_target_tex;
-        SV_TEXIN m_target_tex_help;
+        SV_TEXIN m_target_use;
         SVSurfacePtr m_surface;
         SVMtlCorePtr m_mtl;
         

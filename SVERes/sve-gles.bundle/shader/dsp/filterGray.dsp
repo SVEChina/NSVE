@@ -3,5 +3,5 @@
     "pass" : "direct",
     "vs" : "shader/code/screen.vs",
     "fs" : "shader/code/filter/filterGray.fs",
-    "sampler": [ { "chn" : 0 ,"stage" : 1 } ]
+    "sampler": [ { "stage" : 1 , "chn" : 0 } ]
 }

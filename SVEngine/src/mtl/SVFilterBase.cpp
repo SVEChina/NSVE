@@ -8,6 +8,7 @@
 
 #include "SVFilterBase.h"
 #include "../basesys/SVComData.h"
+#include "../app/SVGlobalParam.h"
 #include "../rendercore/SVRenderCmd.h"
 #include "../rendercore/SVRenderer.h"
 #include "../rendercore/SVRTarget.h"
@@ -21,13 +22,13 @@ SVFilterBase::SVFilterBase(SVInstPtr _app)
     m_mtl = nullptr;
     m_surface = MakeSharedPtr<SVSurface>();
     m_target_tex = E_TEX_END;
-    m_target_tex_help = E_TEX_END;
+    m_target_use = E_TEX_END;
     m_is_pre = false;
 }
 
 SVFilterBase::~SVFilterBase(){
     m_target_tex = E_TEX_END;
-    m_target_tex_help = E_TEX_END;
+    m_target_use = E_TEX_END;
     m_mtl = nullptr;
     m_surface = nullptr;
 }
@@ -46,32 +47,33 @@ void SVFilterBase::setMtl(cptr8 _name) {
 }
 
 void SVFilterBase::update(f32 _dt) {
+    //构建use-target
+    SVRTargetPtr t_use = mApp->getTargetMgr()->getTarget(m_target_use);
+    if(!t_use && m_target_use<E_TEX_END) {
+        s32 t_w = mApp->m_global_param.sv_width;
+        s32 t_h = mApp->m_global_param.sv_height;
+        t_use = mApp->getTargetMgr()->createTarget(m_target_use, t_w, t_h, false, false);
+    }
+    if(!t_use) {
+        return;
+    }
     SVRTargetPtr t_target = mApp->getTargetMgr()->getTarget(m_target_tex);
     if(t_target && m_mtl) {
-        //
         m_mtl->update(_dt);
-        //辅助目标
-        SVRTargetPtr t_help = mApp->getTargetMgr()->getTarget(m_target_tex_help);
-        if(!t_help && m_target_tex_help<E_TEX_END) {
-            s32 t_w = t_target->getTargetDsp()->m_width;
-            s32 t_h = t_target->getTargetDsp()->m_height;
-            t_help = mApp->getTargetMgr()->createTarget(m_target_tex_help, t_w, t_h, false, false);
-        }
-        if(!t_help) {
-            return;
-        }
         //产生pass 投递到不同的目标
         SVRCmdPassPtr t_pass = MakeSharedPtr<SVRCmdPass>();
         t_pass->setTarget(m_target_tex);
-        t_pass->setHelpTarget(m_target_tex_help);
+        t_pass->setHelpTarget(m_target_use);
         t_pass->setMesh(mApp->getComData()->screenMesh());
         t_pass->setSurface(m_surface);
         t_pass->setMaterial(m_mtl);
+        //
         if(m_is_pre) {
             t_target->pushCommandPre(t_pass); //预处理
         }else{
             t_target->pushCommandAfter(t_pass); //后处理
         }
+        //
     }
 }
 

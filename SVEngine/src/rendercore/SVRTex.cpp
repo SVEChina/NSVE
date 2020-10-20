@@ -38,11 +38,6 @@ void SVRTex::resize() {
 }
 
 void SVRTex::commit() {
-    
-}
-
-void SVRTex::swap(SVRTexPtr _rtex) {
-    
 }
 
 void SVRTex::setTexData(SVDataSwapPtr _data){

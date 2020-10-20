@@ -29,11 +29,7 @@ namespace sv {
         
         virtual void setTexCubeData(SVDataSwapPtr _data,s32 _index);
         
-        //数据提交到显卡
-        virtual void commit();
-        
-        //交换纹理
-        virtual void swap(SVRTexPtr _rtex);
+        virtual void commit(); //数据提交到显卡
         
     protected:
         SVLockSpinPtr m_texLock;

@@ -7,7 +7,8 @@
         "shader/dsp/screen.dsp",
         "shader/dsp/screenCamera.dsp",
         "shader/dsp/skycamera.dsp",
-        "shader/dsp/filter-lut.dsp",
-        "shader/dsp/filter-pm.dsp"
+        "shader/dsp/filterLUT.dsp",
+        "shader/dsp/filterPM.dsp",
+        "shader/dsp/filterGray.dsp"
     ]
 }

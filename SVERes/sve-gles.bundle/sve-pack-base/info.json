@@ -4,7 +4,7 @@
         "screen.mtl",
         "normal2d.mtl",
         "normal3d.mtl",
-        "filter-gray.mtl"
+        "filterGray.mtl"
     ],
     "pack-mtls" : [
         {

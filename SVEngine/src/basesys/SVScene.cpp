@@ -28,6 +28,7 @@
 #include "../mtl/SVTexMgr.h"
 #include "../mtl/SVTexture.h"
 #include "../mtl/SVSurface.h"
+#include "../mtl/SVFilterBase.h"
 
 //
 #include "../basesys/SVAniMgr.h"
@@ -328,4 +329,11 @@ void SVScene::test() {
     //
     SVAniUnitRotPtr t_rot = MakeSharedPtr<SVAniUnitRot>(mApp);
     mApp->getAniMgr()->addAni(t_box_node,t_rot);
+    //推送一个滤镜
+    SVFilterBasePtr t_filter_gray = MakeSharedPtr<SVFilterBase>(mApp);
+    t_filter_gray->setMtl("filterGray");
+    t_filter_gray->setPostProcess();    //后处理
+    t_filter_gray->setTarget(E_TEX_MAIN);
+    t_filter_gray->setUseTarget(E_TEX_FLITER);
+    mApp->getSceneMgr()->addFilter("filter-gray", t_filter_gray);
 }

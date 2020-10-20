@@ -108,8 +108,21 @@ SVRTexPtr SVTexture::getResTex(){
 }
 
 void SVTexture::swap(SVTexturePtr _tex) {
-    SVRTexPtr t_res_tex = getResTex();
-    if(_tex && t_res_tex) {
-        t_res_tex->swap(_tex->getResTex());
+    //检测交换RES-ID的合理性
+    if(_canSwap(_tex)) {
+        s32 tmp = _tex->m_tex_pool_id;
+        _tex->m_tex_pool_id = m_tex_pool_id;
+        m_tex_pool_id = tmp;
     }
+}
+
+bool SVTexture::_canSwap(SVTexturePtr _tex) {
+    SVTextureDsp* t_dsp = _tex->getTextureDsp();
+    if( t_dsp->m_width == m_texture_dsp.m_width &&
+       t_dsp->m_height == m_texture_dsp.m_height &&
+       t_dsp->m_image_type == m_texture_dsp.m_image_type &&
+       t_dsp->m_data_formate == m_texture_dsp.m_data_formate) {
+        return true;
+    }
+    return false;
 }

@@ -52,6 +52,8 @@ namespace sv {
         void swap(SVTexturePtr _tex);
         
     protected:
+        bool _canSwap(SVTexturePtr _tex);
+        
         s32 m_tex_pool_id;
         
         SVLockSpinPtr m_lock;
