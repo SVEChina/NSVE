@@ -45,6 +45,13 @@ namespace sv {
 #define SV_INCR                           0x1E02
 #define SV_DECR                           0x1E03
 
+#define SV_CCW      1
+#define SV_CW       2
+
+#define SV_BACK     1
+#define SV_FRONT    2
+
+
 struct BlendParam{
     bool enable;
     s32 srcParam;

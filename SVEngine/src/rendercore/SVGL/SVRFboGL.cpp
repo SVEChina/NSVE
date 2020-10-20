@@ -149,6 +149,22 @@ void SVRFboGL::bind(SVRendererPtr _renderer) {
     if(m_fbo_dsp) {
         glGetIntegerv(GL_FRAMEBUFFER_BINDING,&m_fbo_last_id);
         glBindFramebuffer(GL_FRAMEBUFFER, m_fbo_id);
+        s32 t_target_num = m_fbo_dsp->m_target_num>SV_SUPPORT_MAX_TAREGT ? SV_SUPPORT_MAX_TAREGT : m_fbo_dsp->m_target_num;
+        for(s32 i=0;i<t_target_num;i++) {
+            SVTexturePtr t_inner_tex = _renderer->getInTexture( m_fbo_dsp->m_color_texid[0] );
+            if(t_inner_tex) {
+                u32 t_tex_gl_handler = 0;
+                SVRTexPtr t_r_tex = t_inner_tex->getResTex();
+                SVRTexGLPtr t_r_tex_gl = DYN_TO_SHAREPTR(SVRTexGL, t_r_tex);
+                if(t_r_tex_gl) {
+                    t_tex_gl_handler = t_r_tex_gl->m_res_id;
+                    glBindTexture(GL_TEXTURE_2D,t_tex_gl_handler);
+//                    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+//                    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+                    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i,GL_TEXTURE_2D,t_tex_gl_handler,0);
+                }
+            }
+        }
         glViewport(0, 0, m_fbo_dsp->m_width, m_fbo_dsp->m_height);
         glClearColor(m_fbo_dsp->m_color_r,
                      m_fbo_dsp->m_color_g,

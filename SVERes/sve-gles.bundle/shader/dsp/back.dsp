@@ -4,6 +4,6 @@
     "vs" : "shader/code/screen.vs",
     "fs" : "shader/code/screen.fs",
     "sampler": [
-        { "chn" : 0 ,"stage" : 1 ,"name" :"aTexture0" }
+        { "name" :"aTexture0" ,"stage" : 1, "chn" : 0 }
     ]
 }

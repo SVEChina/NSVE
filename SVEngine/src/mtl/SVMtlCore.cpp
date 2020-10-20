@@ -71,10 +71,12 @@ SVMtlCore::SVMtlCore(SVInstPtr _app, cptr8 _shader)
 SVMtlCore::SVMtlCore(SVInstPtr _app, SVShaderPtr _shader)
 :SVGBaseEx(_app)
 ,m_shader_obj(_shader){
+    reset();
 }
 
 SVMtlCore::SVMtlCore(SVMtlCore* _mtl)
 :SVGBaseEx(_mtl->mApp){
+    reset();
 }
 
 SVMtlCore::~SVMtlCore() {
@@ -96,10 +98,10 @@ void SVMtlCore::reset() {
     m_blend_enable = 0;
     m_blend_src_param = 0;
     m_blend_dst_param = 0;
-//    //裁剪面参数
-//    m_cull_enable;
-//    m_frontFace;
-//    m_cullFace;
+    //裁剪面参数
+    m_cull_enable = 0;
+    m_frontFace = SV_CCW;
+    m_cullFace = SV_BACK;
 //    //深度参数
 //    m_depth_clear;
 //    m_depth_enable;        //开启深度测试
@@ -230,43 +232,39 @@ void SVMtlCore::_submitMtl(SVRendererPtr _render) {
 }
 
 void SVMtlCore::setBlendState(s32 _src , s32 _dst){
-//    m_LogicParamBlend.srcParam = _src;
-//    m_LogicParamBlend.dstParam = _dst;
+    m_blend_src_param = _src;
+    m_blend_dst_param = _dst;
 }
 
-void SVMtlCore::setBlendEnable(bool _bBlendEnable){
-    //m_LogicParamBlend.enable = _bBlendEnable;
-    //m_LogicMtlFlag0 |= MTL_F0_BLEND;
+void SVMtlCore::setBlendEnable(bool _enable){
+     m_blend_enable = _enable;
 }
 
-void SVMtlCore::setCullEnable(bool _bCullEnable){
-//    m_LogicParamCull.enable = _bCullEnable;
-//    m_LogicMtlFlag0 |= MTL_F0_CULL;
+void SVMtlCore::setCullEnable(bool _enable){
+     m_cull_enable = _enable;
 }
 
 void SVMtlCore::setCullFace(s32 _frontFace, s32 _cullFace){
-//    m_LogicParamCull.frontFace = _frontFace;
-//    m_LogicParamCull.cullFace = _cullFace;
+    m_frontFace = _frontFace;
+    m_cullFace = _cullFace;
 }
 
-void SVMtlCore::setDepthEnable(bool _bDepthEnable){
-    //m_LogicParamDepth.enable = _bDepthEnable;
-    //m_LogicMtlFlag0 |= MTL_F0_DEPTH;
+void SVMtlCore::setDepthEnable(bool _enable){
+    m_depth_enable = _enable;
 }
 
 void SVMtlCore::setZOffEnable(bool _enable) {
-    //m_LogicParamZOff.enable = _enable;
-    //m_LogicMtlFlag0 |= MTL_F0_ZOFF;
+    m_zoff_enable = _enable;
 }
 
 void SVMtlCore::setZOffParam(f32 _factor,f32 _unit) {
-//    m_LogicParamZOff.m_factor = _factor;
-//    m_LogicParamZOff.m_unit = _unit;
+    m_zoff_factor = _factor;
+    m_zoff_unit = _unit;
 }
 
 //设置模版测试
-void SVMtlCore::setStencilEnable(bool _bStencilEnable) {
-    //m_LogicParamStencil.enable = _bStencilEnable;
+void SVMtlCore::setStencilEnable(bool _enable) {
+    m_stencil_enable = _enable;
     //m_LogicMtlFlag0 |= MTL_F0_STENCIL;
 }
 
@@ -306,6 +304,7 @@ void SVMtlCore::setStencilSfail(s32 _method) {
 }
 
 void SVMtlCore::fromJSON1(RAPIDJSON_NAMESPACE::Value& _item){
+    
     //对应的shader
     if (_item.HasMember("shader") && _item["shader"].IsString()) {
         RAPIDJSON_NAMESPACE::Value &t_value = _item["shader"];
@@ -313,6 +312,7 @@ void SVMtlCore::fromJSON1(RAPIDJSON_NAMESPACE::Value& _item){
     }else{
         return ;
     }
+    
     //texture参数
     if (_item.HasMember("textures") && _item["textures"].IsArray()) {
         RAPIDJSON_NAMESPACE::Document::Array t_texs = _item["textures"].GetArray();
@@ -338,10 +338,13 @@ void SVMtlCore::fromJSON1(RAPIDJSON_NAMESPACE::Value& _item){
             setTexture(t_param_chn, t_stage, t_from, t_param_path.c_str());
         }
     }
+    
     //blend param 融合
     if (_item.HasMember("blend-param") && _item["blend-param"].IsObject()) {
         RAPIDJSON_NAMESPACE::Document::Object t_value_obj = _item["blend-param"].GetObject();
         m_blend_enable = t_value_obj["enable"].GetInt();
+//        m_blend_src_param = 0;
+//        m_blend_dst_param = 0;
     }else{
         //默认blend
         m_blend_enable = 0;
@@ -349,7 +352,7 @@ void SVMtlCore::fromJSON1(RAPIDJSON_NAMESPACE::Value& _item){
         m_blend_dst_param = 0;
     }
     
-    //stencil param 融合
+    //stencil param
     if (_item.HasMember("stencil-param") && _item["stencil-param"].IsObject()) {
         RAPIDJSON_NAMESPACE::Document::Object t_value_obj = _item["stencil-param"].GetObject();
         m_stencil_enable = t_value_obj["enable"].GetInt();
@@ -364,6 +367,7 @@ void SVMtlCore::fromJSON1(RAPIDJSON_NAMESPACE::Value& _item){
         m_stencil_zfail = 0;
         m_stencil_zpass = 0;
     }
+    
     //alpha param 融合
     if (_item.HasMember("alpha-param") && _item["alpha-param"].IsObject()) {
         RAPIDJSON_NAMESPACE::Document::Object t_value_obj = _item["alpha-param"].GetObject();
@@ -372,6 +376,28 @@ void SVMtlCore::fromJSON1(RAPIDJSON_NAMESPACE::Value& _item){
         //默认alpha
         m_alpha_enable = 0;
         m_alpha_method = 0;
+    }
+    
+    //depth param
+    if (_item.HasMember("depth-param") && _item["depth-param"].IsObject()) {
+        RAPIDJSON_NAMESPACE::Document::Object t_value_obj = _item["depth-param"].GetObject();
+        m_depth_enable = t_value_obj["enable"].GetInt();
+    }else{
+        //默认depth
+        m_depth_enable = 0;
+    }
+    
+    //cull param
+    if (_item.HasMember("cull-param") && _item["cull-param"].IsObject()) {
+        RAPIDJSON_NAMESPACE::Document::Object t_value_obj = _item["cull-param"].GetObject();
+        m_cull_enable = t_value_obj["enable"].GetInt();
+//        m_frontFace = t_value_obj["enable"].GetInt();//SV_CCW;
+//        m_cullFace = t_value_obj["enable"].GetInt();//SV_BACK;
+    }else{
+        //默认cull
+        m_cull_enable = 0;
+        m_frontFace = SV_CCW;
+        m_cullFace = SV_BACK;
     }
 }
 

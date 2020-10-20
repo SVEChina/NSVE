@@ -193,21 +193,46 @@ bool SVRendererGL::processMtl(SVMtlCorePtr _mtl,SVSurfacePtr _surface) {
             }
             //设置状态
             //blend
-            
+            if( _mtl->m_blend_enable ) {
+                glEnable(GL_BLEND);
+            }else{
+                glDisable(GL_BLEND);
+            }
             //stencil
-            
+            if( _mtl->m_stencil_enable ) {
+                glEnable(GL_STENCIL);
+            }else{
+                glDisable(GL_STENCIL);
+            }
             //cull
-            
+            if( _mtl->m_cull_enable ) {
+                glEnable(GL_CULL_FACE);
+                if( _mtl->m_frontFace == SV_CCW) {
+                    glFrontFace(GL_CCW);
+                }else{
+                    glFrontFace(GL_CW);
+                }
+                if( _mtl->m_cullFace == SV_BACK) {
+                    glCullFace(GL_BACK);
+                }else{
+                    glCullFace(GL_FRONT);
+                }
+            }else{
+                glDisable(GL_CULL_FACE);
+            }
             //alpha
-            
+            if( _mtl->m_alpha_enable ) {
+                
+            }else{
+                
+            }
             //depth
-            glEnable(GL_DEPTH_TEST);
-            
-            //设置环绕规则
-            glFrontFace(GL_CCW);
-            glEnable(GL_CULL_FACE);
-            //glDisable(GL_CULL_FACE);
-            //glCullFace(GL_BACK);
+            if( _mtl->m_depth_enable ) {
+                glEnable(GL_DEPTH_TEST);
+                //m_depth_method
+            }else{
+                glDisable(GL_DEPTH_TEST);
+            }
         }
         return t_ret;
     }

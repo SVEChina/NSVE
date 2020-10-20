@@ -3,5 +3,5 @@
     "pass" : "direct",
     "vs" : "shader/code/screen.vs",
     "fs" : "shader/code/filter/filterGray.fs",
-    "sampler": [ { "stage" : 1 , "chn" : 0 } ]
+    "sampler": [ { "name" : "aTexture0", "stage" : 1 , "chn" : 0 } ]
 }

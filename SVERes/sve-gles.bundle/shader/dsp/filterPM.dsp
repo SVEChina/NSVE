@@ -3,7 +3,7 @@
     "pass" : "nor",
     "vs" : "shader/code/screen.vs",
     "fs" : "shader/code/screen.fs",
-    "sampler": [ { "chn" : 0 ,"stage" : 1 } ],
+    "sampler": [ { "name" : "aTexture0" ,"stage" : 1 , "chn" : 0 } ],
     "uniform": [
         {
             "stage" : 1,

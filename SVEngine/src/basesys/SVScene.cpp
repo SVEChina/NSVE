@@ -335,5 +335,10 @@ void SVScene::test() {
     t_filter_gray->setPostProcess();    //后处理
     t_filter_gray->setTarget(E_TEX_MAIN);
     t_filter_gray->setUseTarget(E_TEX_FLITER);
+    SVSurfacePtr t_filter_surface = t_filter_gray->getSurface();
+    if(t_filter_surface) {
+        SVTexturePtr _tex = mApp->getTexMgr()->getInTexture(E_TEX_MAIN);
+        t_filter_surface->setTexture(1, 0, _tex);
+    }
     mApp->getSceneMgr()->addFilter("filter-gray", t_filter_gray);
 }
