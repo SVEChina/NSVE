@@ -1,0 +1,8 @@
+{
+    "version" : "1.0",
+    "name" : "filter-gray",
+    "shader" : "filter-gray",
+    "textures" :[
+        { "chn": 0 , "from" : "file", "path" : "res/sve.png", "stage": "fs" }
+    ]
+}
