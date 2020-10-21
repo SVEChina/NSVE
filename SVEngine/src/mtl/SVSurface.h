@@ -28,9 +28,9 @@ namespace sv {
         ~SVSurface();
         
         //设置参数
-        void setParam(cptr8 _name,s32& _value);
+        void setParam(cptr8 _name,s32 _value);
 
-        void setParam(cptr8 _name,f32& _value);
+        void setParam(cptr8 _name,f32 _value);
 
         void setParam(cptr8 _name,FVec2& _value);
 

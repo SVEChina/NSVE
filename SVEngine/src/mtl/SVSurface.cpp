@@ -26,13 +26,13 @@ SVSurface::~SVSurface() {
 }
 
 //设置参数
-void SVSurface::setParam(cptr8 _name,s32& _value) {
+void SVSurface::setParam(cptr8 _name,s32 _value) {
     if(m_tbl) {
         m_tbl->setParam(_name, _value);
     }
 }
 
-void SVSurface::setParam(cptr8 _name,f32& _value) {
+void SVSurface::setParam(cptr8 _name,f32 _value) {
     if(m_tbl) {
         m_tbl->setParam(_name, _value);
     }
