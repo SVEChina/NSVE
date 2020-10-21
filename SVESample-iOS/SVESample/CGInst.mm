@@ -7,14 +7,14 @@
 //
 
 #import "CGInst.h"
+#import "CGDef.h"
 #include "src/app/SVInst.h"
 #include "src/env/SVCtxIOS.h"
 #include "src/rendercore/SVMetal/SVRendererMetal.h"
 
-#define SVE_METAL 1
-#define SVE_GLES 2
 
-#define SVE_CORE SVE_GLES//SVE_METAL
+
+//#define SVE_CORE SVE_GLES//SVE_METAL
 
 static CGInst *mInst;
 

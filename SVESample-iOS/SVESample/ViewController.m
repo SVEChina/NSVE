@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "CGDef.h"
 #import "CMetalView.h"
 #import "CGLView.h"
 #import "CGInst.h"
@@ -24,12 +25,12 @@
     // Do any additional setup after loading the view.
     [[CGInst getInst] cgInit];
     //
-    if(false) {
-        metalview = [[CMetalView alloc] initWithFrame:self.view.bounds];
-        [self.view addSubview:metalview];
-    }else{
+    if(SVE_CORE == SVE_GLES) {
         glview = [[CGLView alloc] initWithFrame:self.view.bounds];
         [self.view addSubview:glview];
+    }else if(SVE_CORE == SVE_METAL){
+        metalview = [[CMetalView alloc] initWithFrame:self.view.bounds];
+        [self.view addSubview:metalview];
     }
 }
 
