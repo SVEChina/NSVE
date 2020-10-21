@@ -4,7 +4,6 @@
         "shader/dsp/normal2d.dsp",
         "shader/dsp/normal3d.dsp",
         "shader/dsp/screen.dsp",
-        "shader/dsp/screenCamera.dsp",
         "shader/dsp/filterLUT.dsp",
         "shader/dsp/filterPM.dsp",
         "shader/dsp/filterGray.dsp",
@@ -15,6 +14,7 @@
         "shader/dsp/filterContrast.dsp",
         "shader/dsp/filterCurveAdjst.dsp",
         "shader/dsp/filterCurveAdjstTex.dsp",
-        "shader/dsp/filterGamma.dsp"
+        "shader/dsp/filterGamma.dsp",
+        "shader/dsp/filterHDR.dsp"
     ]
 }

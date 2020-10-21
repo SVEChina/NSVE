@@ -20,7 +20,6 @@
 #include "../basesys/SVSceneMgr.h"
 #include "../mtl/SVParseLUTFilter.h"
 #include "../basesys/SVBasicSys.h"
-#include "../mtl/SVFilterLUT.h"
 #include "../basesys/SVDeformMgr.h"
 #include "../basesys/SVConfig.h"
 #include "../basesys/SVScene.h"

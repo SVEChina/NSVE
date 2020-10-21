@@ -43,6 +43,8 @@
 #include "../rendercore/SVGL/SVRendererGL.h"
 
 #include "../mtl/SVMtlLib.h"
+#include "../mtl/SVFilterLib.h"
+#include "../mtl/SVFilterBase.h"
 
 using namespace sv;
 
@@ -324,8 +326,19 @@ void SVInst::test() {
     //常见AR阶段
     if(m_ar_mgr) {
         m_ar_mgr->enable();
-        m_ar_mgr->setInputCameraTex("res/sve.png");
+        m_ar_mgr->setInputCameraTex("res/bg2.png");
     }
+    //滤镜设置例子
+    SVFilterBasePtr t_filter = SVFilterLib::openFilter(share(),FILTER_LUT);
+    if(t_filter) {
+        SVSurfacePtr t_surface = t_filter->getSurface();
+        if(t_surface) {
+            SVTexturePtr _tex_img = getTexMgr()->getTexture("res/filterimg/sunset_20170620.png");
+            t_surface->setTexture(1, 1, _tex_img);
+        }
+    }
+    SVFilterLib::openFilter( share() ,FILTER_HDR);
+    //
 }
 
 SVEventMgrPtr SVInst::getEventMgr(){

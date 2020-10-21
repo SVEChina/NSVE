@@ -13,7 +13,8 @@
         "filterColorLevel.mtl",
         "filterConstrast.mtl",
         "filterCurveAdjst.mtl",
-        "filterGamma.mtl"
+        "filterGamma.mtl",
+        "filterHDR.mtl"
     ],
     "pack-mtls" : [
         {

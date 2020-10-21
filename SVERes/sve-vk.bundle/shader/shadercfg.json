@@ -3,7 +3,6 @@
     "dspfiles": [
         "shader/nor.gldsp",
         "shader/screen.gldsp",
-        "shader/screenCamera.gldsp",
         "shader/sprite.gldsp",
         "shader/filter-lut.gldsp",
         "shader/filter-pm.gldsp"

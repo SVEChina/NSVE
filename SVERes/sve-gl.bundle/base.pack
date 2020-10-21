@@ -1,9 +1,7 @@
 {
     "name" : "base",
     "files": [
-        "back.mtl",
         "screen.mtl",
-        "screenCamera.mtl",
         "sprite.mtl"
     ]
 }

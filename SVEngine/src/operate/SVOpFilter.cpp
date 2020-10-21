@@ -13,7 +13,6 @@
 #include "../mtl/SVFilterBase.h"
 #include "../mtl/SVFilterPicmodify.h"
 #include "../mtl/SVParseLUTFilter.h"
-#include "../mtl/SVFilterLUT.h"
 #include "../event/SVEventMgr.h"
 #include "../event/SVEvent.h"
 #include "../event/SVOpEvent.h"
