@@ -186,10 +186,10 @@ namespace sv {
         E_TEX_HELP1,
         E_TEX_HELP2,
         E_TEX_HELP3,
-        E_TEX_VIDEO0,
-        E_TEX_VIDEO1,
-        E_TEX_VIDEO2,
-        E_TEX_VIDEO3,
+        E_TEX_AR_BG0,
+        E_TEX_AR_BG1,
+        E_TEX_AR_BG2,
+        E_TEX_AR_BG3,
         E_TEX_FLITER,
         E_TEX_FLITER_GUASS,
         E_TEX_FLITER_GUASS01,
@@ -240,6 +240,7 @@ namespace sv {
         SV_FORMAT_RG8,
         SV_FORMAT_RGB8,
         SV_FORMAT_RGBA8,
+        SV_FORMAT_BGRA8,
         
         SV_FORMAT_R16,            // 16-bits per channel unsigned formats
         SV_FORMAT_RG16,

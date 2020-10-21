@@ -118,7 +118,7 @@ bool SVTexMgr::hasTexture(cptr8 _name) {
     return false;
 }
 
-SVTexturePtr SVTexMgr::createInTexture(SV_TEXIN _texname,SVTextureDsp _dsp) {
+SVTexturePtr SVTexMgr::createInTexture(SV_TEXIN _texname,SVTextureDsp& _dsp) {
     if(_texname>E_TEX_BEGIN && _texname<E_TEX_END){
         if(m_intex_pool[_texname]) {
             return m_intex_pool[_texname];

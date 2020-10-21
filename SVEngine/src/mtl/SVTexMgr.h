@@ -43,7 +43,7 @@ namespace sv {
         
         /*内部纹理*/
         //创建内置纹理
-        SVTexturePtr createInTexture(SV_TEXIN _texname,SVTextureDsp _dsp);
+        SVTexturePtr createInTexture(SV_TEXIN _texname,SVTextureDsp& _dsp);
         //内置纹理是否存在
         bool hasInTexture(SV_TEXIN _texid);
         //获取内置纹理

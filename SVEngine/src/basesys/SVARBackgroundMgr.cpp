@@ -158,19 +158,113 @@ void SVARBackgroundMgr::setInputCameraTex(SVDataSwapPtr _data,SV_PIC_FORMATE _fo
     if(_formate == SV_PF_GRAY8) {
         
     }else if(_formate == SV_PF_YV12) {
-
+        
     }else if(_formate == SV_PF_I420) {
-
+        SVTextureDsp t_dsp;
+        t_dsp.m_image_type = SV_IMAGE_2D;
+        t_dsp.m_data_formate = SV_FORMAT_R8;
+        t_dsp.m_width = m_width;    //宽
+        t_dsp.m_height = m_height;  //高
+        t_dsp.m_depth = 1; //深度
+        t_dsp.m_minmap = false;         //是否开启mipmap
+        t_dsp.m_computeWrite = true;    //metal 是否可以
+        t_dsp.m_renderTarget = false;    //metal 是否是renderTarget
+        m_tex0 = mApp->getTexMgr()->createInTexture(E_TEX_AR_BG0,t_dsp);    //y
+        m_tex1 = mApp->getTexMgr()->createInTexture(E_TEX_AR_BG1,t_dsp);    //u
+        m_tex2 = mApp->getTexMgr()->createInTexture(E_TEX_AR_BG2,t_dsp);    //v
+        //
+        m_mtl = mApp->getMtlLib()->getMtl("i420-rgba");
+        //
+        if(_data) {
+            
+        }
     }else if(_formate == SV_PF_NV12) {
-        
+        SVTextureDsp t_dsp;
+        t_dsp.m_image_type = SV_IMAGE_2D;
+        t_dsp.m_data_formate = SV_FORMAT_R8;
+        t_dsp.m_width = m_width;    //宽
+        t_dsp.m_height = m_height;  //高
+        t_dsp.m_depth = 1; //深度
+        t_dsp.m_minmap = false;         //是否开启mipmap
+        t_dsp.m_computeWrite = true;    //metal 是否可以
+        t_dsp.m_renderTarget = false;    //metal 是否是renderTarget
+        m_tex0 = mApp->getTexMgr()->createInTexture(E_TEX_AR_BG0,t_dsp);    //y
+        //
+        SVTextureDsp t_dsp1;
+        t_dsp1.m_image_type = SV_IMAGE_2D;
+        t_dsp1.m_data_formate = SV_FORMAT_RG8;
+        t_dsp1.m_width = m_width;    //宽
+        t_dsp1.m_height = m_height;  //高
+        t_dsp1.m_depth = 1; //深度
+        t_dsp1.m_minmap = false;         //是否开启mipmap
+        t_dsp1.m_computeWrite = true;    //metal 是否可以
+        t_dsp1.m_renderTarget = false;    //metal 是否是renderTarget
+        m_tex1 = mApp->getTexMgr()->createInTexture(E_TEX_AR_BG1,t_dsp1);    //uv
+        //
+        m_mtl = mApp->getMtlLib()->getMtl("nv12-rgba");
     }else if(_formate == SV_PF_NV21) {
-        
+        SVTextureDsp t_dsp;
+        t_dsp.m_image_type = SV_IMAGE_2D;
+        t_dsp.m_data_formate = SV_FORMAT_R8;
+        t_dsp.m_width = m_width;    //宽
+        t_dsp.m_height = m_height;  //高
+        t_dsp.m_depth = 1; //深度
+        t_dsp.m_minmap = false;         //是否开启mipmap
+        t_dsp.m_computeWrite = true;    //metal 是否可以
+        t_dsp.m_renderTarget = false;    //metal 是否是renderTarget
+        m_tex0 = mApp->getTexMgr()->createInTexture(E_TEX_AR_BG0,t_dsp);    //y
+        //
+        SVTextureDsp t_dsp1;
+        t_dsp1.m_image_type = SV_IMAGE_2D;
+        t_dsp1.m_data_formate = SV_FORMAT_RG8;
+        t_dsp1.m_width = m_width;    //宽
+        t_dsp1.m_height = m_height;  //高
+        t_dsp1.m_depth = 1; //深度
+        t_dsp1.m_minmap = false;         //是否开启mipmap
+        t_dsp1.m_computeWrite = true;    //metal 是否可以
+        t_dsp1.m_renderTarget = false;    //metal 是否是renderTarget
+        m_tex1 = mApp->getTexMgr()->createInTexture(E_TEX_AR_BG1,t_dsp1);    //uv
+        //
+        m_mtl = mApp->getMtlLib()->getMtl("nv21-rgba");
     }else if(_formate == SV_PF_BGRA) {
-        
+        SVTextureDsp t_dsp;
+        t_dsp.m_image_type = SV_IMAGE_2D;
+        t_dsp.m_data_formate = SV_FORMAT_BGRA8;
+        t_dsp.m_width = m_width;    //宽
+        t_dsp.m_height = m_height;  //高
+        t_dsp.m_depth = 1; //深度
+        t_dsp.m_minmap = false;         //是否开启mipmap
+        t_dsp.m_computeWrite = true;    //metal 是否可以
+        t_dsp.m_renderTarget = false;    //metal 是否是renderTarget
+        m_tex0 = mApp->getTexMgr()->createInTexture(E_TEX_AR_BG0,t_dsp);
+        //
+        m_mtl = mApp->getMtlLib()->getMtl("bgra-rgba");
     }else if(_formate == SV_PF_RGBA) {
-        
+        SVTextureDsp t_dsp;
+        t_dsp.m_image_type = SV_IMAGE_2D;
+        t_dsp.m_data_formate = SV_FORMAT_RGBA8;
+        t_dsp.m_width = m_width;    //宽
+        t_dsp.m_height = m_height;  //高
+        t_dsp.m_depth = 1; //深度
+        t_dsp.m_minmap = false;         //是否开启mipmap
+        t_dsp.m_computeWrite = true;    //metal 是否可以
+        t_dsp.m_renderTarget = false;    //metal 是否是renderTarget
+        m_tex0 = mApp->getTexMgr()->createInTexture(E_TEX_AR_BG0,t_dsp);
+        //
+        m_mtl = mApp->getMtlLib()->getMtl("rgba-rgba");
     }else if(_formate == SV_PF_RGB) {
-        
+        SVTextureDsp t_dsp;
+        t_dsp.m_image_type = SV_IMAGE_2D;
+        t_dsp.m_data_formate = SV_FORMAT_RGB8;
+        t_dsp.m_width = m_width;    //宽
+        t_dsp.m_height = m_height;  //高
+        t_dsp.m_depth = 1; //深度
+        t_dsp.m_minmap = false;         //是否开启mipmap
+        t_dsp.m_computeWrite = true;    //metal 是否可以
+        t_dsp.m_renderTarget = false;    //metal 是否是renderTarget
+        m_tex0 = mApp->getTexMgr()->createInTexture(E_TEX_AR_BG0,t_dsp);
+        //
+        m_mtl = mApp->getMtlLib()->getMtl("rgb-rgba");
     }
 }
 
