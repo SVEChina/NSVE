@@ -316,31 +316,20 @@ void SVScene::fromJSON(RAPIDJSON_NAMESPACE::Value &item) {
 
 void SVScene::test() {
     SVTexturePtr t_tex = mApp->getTexMgr()->getTexture("res/test1.png");
-    //创建一个测试场景
+//    //创建一个测试场景
 //    SVSpriteNodePtr t_sp_node = MakeSharedPtr<SVSpriteNode>(mApp);
 //    t_sp_node->setMtl("normal2d");
 //    t_sp_node->setTexture("res/test1.png");
 //    addNode(t_sp_node);
     
-//    SVCubePtr t_box_node = MakeSharedPtr<SVCube>(mApp);
-//    t_box_node->setRotation(45.0f, 45.0f, 45.0f);
-//    t_box_node->setMtl("normal3d");
-//    SVSurfacePtr t_surface = t_box_node->getSurface();
-//    if(t_surface) {
-//        t_surface->setTexture(1, 0, t_tex);
-//    }
-//    addNode(t_box_node);
-//    SVAniUnitRotPtr t_rot = MakeSharedPtr<SVAniUnitRot>(mApp);
-//    mApp->getAniMgr()->addAni(t_box_node,t_rot);
-    
-//    //
-//    SVFilterBasePtr t_filter = SVFilterLib::openFilter(mApp,FILTER_LUT);
-//    if(t_filter) {
-//        SVSurfacePtr t_surface = t_filter->getSurface();
-//        if(t_surface) {
-//            SVTexturePtr _tex_img = mApp->getTexMgr()->getTexture("res/filterimg/sunset_20170620.png");
-//            t_surface->setTexture(1, 1, _tex_img);
-//        }
-//    }
-    //SVFilterLib::openFilter(mApp,FILTER_HDR);
+    SVCubePtr t_box_node = MakeSharedPtr<SVCube>(mApp);
+    t_box_node->setRotation(45.0f, 45.0f, 45.0f);
+    t_box_node->setMtl("normal3d");
+    SVSurfacePtr t_surface = t_box_node->getSurface();
+    if(t_surface) {
+        t_surface->setTexture(1, 0, t_tex);
+    }
+    addNode(t_box_node);
+    SVAniUnitRotPtr t_rot = MakeSharedPtr<SVAniUnitRot>(mApp);
+    mApp->getAniMgr()->addAni(t_box_node,t_rot);
 }
