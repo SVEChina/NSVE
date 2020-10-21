@@ -17,7 +17,8 @@ void main(void){
     for (i = 0; i < 25; i++){
         off.x = float(i - 5*(i/5) - 2);
         off.y = float(i/5-2);
-        tc = (2.0 * gl_FragCoord.xy + 3.5 * off);
+        //tc = (2.0 * gl_FragCoord.xy + 3.5 * off);
+        tc = gl_FragCoord.xy + off;
         col = texture2D(hdr_img, tc * tex_scale).rgb;
         lum[i] = dot(col, vec3(0.3, 0.59, 0.11));
     }
