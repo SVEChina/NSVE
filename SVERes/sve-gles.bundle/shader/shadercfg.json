@@ -11,6 +11,12 @@
         "shader/dsp/filterPM.dsp",
         "shader/dsp/filterGray.dsp",
         "shader/dsp/filterHue.dsp",
-        "shader/dsp/filterHaze.dsp"
+        "shader/dsp/filterHaze.dsp",
+        "shader/dsp/filterBrightness.dsp",
+        "shader/dsp/filterColorLevel.dsp",
+        "shader/dsp/filterContrast.dsp",
+        "shader/dsp/filterCurveAdjst.dsp",
+        "shader/dsp/filterCurveAdjstTex.dsp",
+        "shader/dsp/filterGamma.dsp"
     ]
 }

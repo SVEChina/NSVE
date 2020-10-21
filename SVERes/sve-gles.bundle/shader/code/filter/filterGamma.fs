@@ -1,4 +1,10 @@
-uniform sampler2D srcTex;
+#ifdef GL_ES
+precision highp float;
+#endif
+
+varying vec2 v_texcoord0;
+
+uniform sampler2D aTexture0;
 uniform vec3 levels;
 
 vec3 gammaCorrect(vec3 color, float gamma){
@@ -14,8 +20,8 @@ vec3 finalLevels(vec3 color, float minInput, float gamma, float maxInput){
 }
 
 void main(){
-    vec2 uv = gl_FragCoord.xy / vec2(512., 512.);
-    vec4 texture = texture2D(srcTex, uv) ;
+    vec2 uv = v_texcoord0 / vec2(512., 512.);
+    vec4 texture = texture2D(aTexture0, uv) ;
     // 注意 minInput和maxInput的取值范围为[0, 255]
     vec3 adjustedLevels = finalLevels(texture.rgb, levels.x/255.0, levels.y, levels.z/255.0);
     gl_FragColor = vec4(adjustedLevels,1.0);

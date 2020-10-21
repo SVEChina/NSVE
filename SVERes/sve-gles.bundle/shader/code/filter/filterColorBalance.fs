@@ -5,20 +5,19 @@ precision mediump float;
 varying vec2 v_texcoord0;
 
 uniform sampler2D aTexture0;
+
 uniform float redShift;
 uniform float greenShift;
 uniform float blueShift;
 
-float RGBToL(vec3 color)
-{
+float RGBToL(vec3 color){
     float fmin = min(min(color.r, color.g), color.b);    //Min. value of RGB
     float fmax = max(max(color.r, color.g), color.b);    //Max. value of RGB
     
     return (fmax + fmin) / 2.0; // Luminance
 }
 
-vec3 RGBToHSL(vec3 color)
-{
+vec3 RGBToHSL(vec3 color){
     vec3 hsl; // init to 0 to avoid warnings ? (and reverse if + remove first part)
     
     float fmin = min(min(color.r, color.g), color.b);    //Min. value of RGB
@@ -59,8 +58,7 @@ vec3 RGBToHSL(vec3 color)
     return hsl;
 }
 
-float HueToRGB(float f1, float f2, float hue)
-{
+float HueToRGB(float f1, float f2, float hue){
     if (hue < 0.0)
         hue += 1.0;
     else if (hue > 1.0)
@@ -77,8 +75,7 @@ float HueToRGB(float f1, float f2, float hue)
     return res;
 }
 
-vec3 HSLToRGB(vec3 hsl)
-{
+vec3 HSLToRGB(vec3 hsl){
     vec3 rgb;
     
     if (hsl.y == 0.0)
@@ -102,8 +99,7 @@ vec3 HSLToRGB(vec3 hsl)
     return rgb;
 }
 
-void main()
-{
+void main(){
     vec4 textureColor = texture2D(aTexture0, v_texcoord0);
     
     // New way:

@@ -4,6 +4,7 @@ precision mediump float;
 
 varying vec2 v_texcoord0;
 uniform sampler2D aTexture0;
+
 uniform float curveArrayRGB[256]; // The array size is defined by "CURVE_PRECISION".
 
 const float curvePrecision = 256.0; //The same to above.

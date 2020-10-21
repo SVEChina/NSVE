@@ -6,7 +6,13 @@
         "normal3d.mtl",
         "filterGray.mtl",
         "filterHaze.mtl",
-        "filterHue.mtl"
+        "filterHue.mtl",
+        "filterBrightness.mtl",
+        "filterColorBalance.mtl",
+        "filterColorLevel.mtl",
+        "filterConstrast.mtl",
+        "filterCurveAdjst.mtl",
+        "filterGamma.mtl"
     ],
     "pack-mtls" : [
         {

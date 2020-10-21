@@ -6,6 +6,7 @@ varying vec2 v_texcoord0;
 uniform sampler2D aTexture0;
 uniform sampler2D aTexture1;
 const float resolution = 1024.0;
+
 uniform float radius;
 uniform float texelWidthOffset;//若为x模糊，可传入（1.0,0.0）  y模糊  （0.0,1.0）
 uniform float texelHeightOffset;
