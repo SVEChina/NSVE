@@ -50,7 +50,6 @@ bool SVFilterGof::create(){
 //    t_pass1->setInTex(0,E_TEX_MAIN);
 //    t_pass1->setOutTex(E_TEX_HELP0);
 //    m_pPassNode->addPass(t_pass1);
-//    
 //    t_pass1 = MakeSharedPtr<SVPass>();
 //    SVMtlSmoothPtr t_lkMtl02=MakeSharedPtr<SVMtlSmooth>(mApp,"blurtex");
 //    //t_lkMtl02->setImgWH(t_w/2,t_h/2);
