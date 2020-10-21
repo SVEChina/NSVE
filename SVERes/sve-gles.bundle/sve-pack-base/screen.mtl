@@ -4,5 +4,14 @@
     "shader" : "screen",
     "textures" :[
         { "chn": 0 , "from" : "file", "path" : "res/sve.png", "stage": "fs" }
-    ]
+    ],
+    "blend-param" : {
+        "enable" : 0
+    },
+    "stencil-param" : {
+        "enable" : 0
+    },
+    "alpha-param" : {
+        "enable" : 0
+    }
 }

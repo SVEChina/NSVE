@@ -277,7 +277,7 @@ void SVRendererGL::drawScreen(SV_TEXIN _texid) {
     SVSurfacePtr t_surface = MakeSharedPtr<SVSurface>();
     t_surface->setTexture(1,0,t_tex);
     //激活材质
-    SVMtlCorePtr t_mtl = mApp->getMtlLib()->getMtl("back");
+    SVMtlCorePtr t_mtl = mApp->getMtlLib()->getMtl("screen");
     SVRenderMeshPtr t_mesh = mApp->getComData()->screenMesh();
     if(t_mtl && t_mesh) {
         t_mtl->reloadShader();

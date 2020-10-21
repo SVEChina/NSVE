@@ -46,8 +46,22 @@ namespace sv {
         //1文件方式
         void setInputCameraTex(cptr8 _fname);
         
+//        //相机图片格式
+//        enum SV_PIC_FORMATE {
+//            SV_PF_GRAY8 = 0,
+//            SV_PF_YV12,
+//            SV_PF_I420,
+//            SV_PF_NV12,
+//            SV_PF_NV21,
+//            SV_PF_BGRA,
+//            SV_PF_RGBA,
+//            SV_PF_RGB,
+//            SV_PF_NULL
+//        };
+
+        
         //数据方式
-        void setInputCameraTex(SVDataSwapPtr _data,s32 _formate);
+        void setInputCameraTex(SVDataSwapPtr _data,SV_PIC_FORMATE _formate);
         
         //纹理id方式
         void setInputCameraTex(s32 _texid);
@@ -60,6 +74,8 @@ namespace sv {
         
         //相机格式转换的纹理和方式
         s32 m_method;
+        s32 m_width;
+        s32 m_height;
         
         //AR目标
         SVRTargetPtr m_ar_target;

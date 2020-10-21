@@ -137,7 +137,6 @@ namespace sv {
         SV_PF_NULL
     };
 
-
     //输出纹理格式
     enum SV_OUTSTEAMFORMATE {
         SV_OUT_STEAM_RGB2YUVNV12 = 0,

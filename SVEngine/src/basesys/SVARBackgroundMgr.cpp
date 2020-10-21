@@ -29,12 +29,15 @@ SVARBackgroundMgr::SVARBackgroundMgr(SVInstPtr _app)
 :SVSysBase(_app) {
     m_enable = false;
     m_method = 0;
+    m_width = 0;
+    m_height = 0;
     m_subsysType = 0;
     m_mtl = nullptr;
     m_ar_target = nullptr;
     m_tex0 = nullptr;
     m_tex1 = nullptr;
     m_tex2 = nullptr;
+    
 }
 
 SVARBackgroundMgr::~SVARBackgroundMgr() {
@@ -55,6 +58,8 @@ bool SVARBackgroundMgr::enable() {
     SVRendererPtr t_renderer = mApp->getRenderer();
     if(t_renderer) {
         if(!m_enable) {
+            m_width = mApp->m_global_param.sv_width;
+            m_height = mApp->m_global_param.sv_height;
             m_ar_target = mApp->getTargetMgr()->createTarget(E_TEX_CAMERA,false,false);
             m_ar_target->pushStreamQuene(E_RSM_NOR);    //推送NOR流
             mApp->getRenderMgr()->addRTarget(m_ar_target,true);
@@ -70,6 +75,8 @@ bool SVARBackgroundMgr::enable(s32 _w,s32 _h) {
     SVRendererPtr t_renderer = mApp->getRenderer();
     if(t_renderer) {
         if(!m_enable) {
+            m_width = _w;
+            m_height = _h;
             m_ar_target = mApp->getTargetMgr()->createTarget(E_TEX_CAMERA,_w,_h,false,false);
             m_ar_target->pushStreamQuene(E_RSM_NOR);    //推送NOR流
             mApp->getRenderMgr()->addRTarget(m_ar_target,true);
@@ -81,8 +88,6 @@ bool SVARBackgroundMgr::enable(s32 _w,s32 _h) {
     return false;
 }
 
-
-//
 void SVARBackgroundMgr::disable() {
     if(m_enable) {
         if(m_ar_target) {
@@ -92,7 +97,6 @@ void SVARBackgroundMgr::disable() {
     }
 }
 
-//
 void SVARBackgroundMgr::update(f32 _dt) {
     if(m_ar_target && m_enable) {
         //将AR-相机图片渲染到主目标上
@@ -124,20 +128,20 @@ void SVARBackgroundMgr::update(f32 _dt) {
 
 void SVARBackgroundMgr::_renderCameraImg(f32 _dt) {
     //将相机图片绘制到主纹理上
-//    SVTexturePtr t_cam_tex = mApp->getRenderer()->getInTexture(E_TEX_CAMERA);
-//    if(t_cam_tex) {
-//        SVMtlCorePtr t_mtl = mApp->getMtlLib()->getMtl("skycamera");
-//        if(t_mtl) {
-//            t_mtl->update(_dt);
-//        }
-//        SVSurfacePtr t_surface = MakeSharedPtr<SVSurface>();
-//        t_surface->setTexture(1,0,t_cam_tex);
-//        SVDispatch::dispatchMeshDraw(mApp,
-//                                     mApp->getComData()->screenMesh(),
-//                                     t_mtl,
-//                                     t_surface,
-//                                     E_RSM_SKY);
-//    }
+    SVTexturePtr t_cam_tex = mApp->getRenderer()->getInTexture(E_TEX_CAMERA);
+    if(t_cam_tex) {
+        SVMtlCorePtr t_mtl = mApp->getMtlLib()->getMtl("screen");
+        if(t_mtl) {
+            t_mtl->update(_dt);
+            SVSurfacePtr t_surface = MakeSharedPtr<SVSurface>();
+            t_surface->setTexture(1,0,t_cam_tex);
+            SVDispatch::dispatchMeshDraw(mApp,
+                                         mApp->getComData()->screenMesh(),
+                                         t_mtl,
+                                         t_surface,
+                                         E_RSM_SKY);
+        }
+    }
 }
 
 //设置输入文件方式纹理
@@ -148,16 +152,26 @@ void SVARBackgroundMgr::setInputCameraTex(cptr8 _fname) {
 }
 
 //数据纹理方式
-void SVARBackgroundMgr::setInputCameraTex(SVDataSwapPtr _data,s32 _formate) {
+void SVARBackgroundMgr::setInputCameraTex(SVDataSwapPtr _data,SV_PIC_FORMATE _formate) {
     m_method = 2;
-//    //这里有格式转换
-//    if(_formate == nv12) {
-//
-//    }else if(_formate == nv21) {
-//
-//    }else if(_formate == i420) {
-//
-//    }
+    //这里创建纹理，创建材质，更新数据
+    if(_formate == SV_PF_GRAY8) {
+        
+    }else if(_formate == SV_PF_YV12) {
+
+    }else if(_formate == SV_PF_I420) {
+
+    }else if(_formate == SV_PF_NV12) {
+        
+    }else if(_formate == SV_PF_NV21) {
+        
+    }else if(_formate == SV_PF_BGRA) {
+        
+    }else if(_formate == SV_PF_RGBA) {
+        
+    }else if(_formate == SV_PF_RGB) {
+        
+    }
 }
 
 //其他方式，例如共享纹理方式
