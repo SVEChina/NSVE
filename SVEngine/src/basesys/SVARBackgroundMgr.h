@@ -34,6 +34,8 @@ namespace sv {
         
         bool enable();
         
+        bool enable(s32 _w,s32 _h);
+        
         void disable();
         
         SVRTargetPtr getTarget() { return m_ar_target; }

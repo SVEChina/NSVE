@@ -66,6 +66,22 @@ bool SVARBackgroundMgr::enable() {
     return false;
 }
 
+bool SVARBackgroundMgr::enable(s32 _w,s32 _h) {
+    SVRendererPtr t_renderer = mApp->getRenderer();
+    if(t_renderer) {
+        if(!m_enable) {
+            m_ar_target = mApp->getTargetMgr()->createTarget(E_TEX_CAMERA,_w,_h,false,false);
+            m_ar_target->pushStreamQuene(E_RSM_NOR);    //推送NOR流
+            mApp->getRenderMgr()->addRTarget(m_ar_target,true);
+            m_enable = true;
+            return true;
+        }
+        return false;
+    }
+    return false;
+}
+
+
 //
 void SVARBackgroundMgr::disable() {
     if(m_enable) {

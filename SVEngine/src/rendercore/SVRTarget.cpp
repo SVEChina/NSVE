@@ -99,9 +99,6 @@ void SVRTarget::render(SVRendererPtr _renderer) {
             }
             _renderer->unbindTarget(m_rfbo_id);
             m_cmdNum = 0;
-        }else{
-            _renderer->bindTarget(m_rfbo_id);
-            _renderer->unbindTarget(m_rfbo_id);
         }
         //
         if(m_stream_after) {
