@@ -77,26 +77,26 @@ void SVRCmdNor::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
 //自动拿辅助纹理
 //渲染命令批次
 SVRCmdPass::SVRCmdPass() {
-    m_aim = E_TEX_END;
-    m_aim_help = E_TEX_END;
+    m_aim_swap = E_TEX_END;
+    m_aim_use = E_TEX_END;
 }
 
 SVRCmdPass::~SVRCmdPass(){
 }
 
 //设置目标target
-void SVRCmdPass::setTarget(SV_TEXIN _aim) {
-    m_aim = _aim;
+void SVRCmdPass::setSwapTarget(SV_TEXIN _aim) {
+    m_aim_swap = _aim;
 }
 
 //设置辅助target
-void SVRCmdPass::setHelpTarget(SV_TEXIN _aim) {
-    m_aim_help = _aim;
+void SVRCmdPass::setUseTarget(SV_TEXIN _aim) {
+    m_aim_use = _aim;
 }
 
 void SVRCmdPass::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
     //获取辅助target
-    SVRTargetPtr t_target = _renderer->getTarget(m_aim_help);
+    SVRTargetPtr t_target = _renderer->getTarget(m_aim_use);
     if(t_target && t_target->getResFbo()) {
         //绑定
         t_target->getResFbo()->bind(_renderer);
@@ -105,7 +105,9 @@ void SVRCmdPass::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
         //解绑定
         t_target->getResFbo()->unbind(_renderer);
         //交换纹理....
-        _renderer->swapInTexture(m_aim,m_aim_help);
+        if( m_aim_swap != E_TEX_END ) {
+            _renderer->swapInTexture(m_aim_swap,m_aim_use);
+        }
     }
 }
 

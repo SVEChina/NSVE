@@ -29,6 +29,7 @@ namespace sv {
             m_smooth = smooth;
         }
         
+        
         void toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator,
                     RAPIDJSON_NAMESPACE::Value &_objValue);
         

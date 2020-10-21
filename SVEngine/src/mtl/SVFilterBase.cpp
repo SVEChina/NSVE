@@ -21,13 +21,17 @@ SVFilterBase::SVFilterBase(SVInstPtr _app)
     m_name = "SVFilterBase";
     m_mtl = nullptr;
     m_surface = MakeSharedPtr<SVSurface>();
-    m_target_tex = E_TEX_END;
+    m_target_quene = E_TEX_END;
     m_target_use = E_TEX_END;
+    m_target_swap = E_TEX_END;
+//    SV_TEXIN m_target_quene;
+//    SV_TEXIN m_target_use;
+//    SV_TEXIN m_target_swap;
     m_is_pre = false;
 }
 
 SVFilterBase::~SVFilterBase(){
-    m_target_tex = E_TEX_END;
+    m_target_quene = E_TEX_END;
     m_target_use = E_TEX_END;
     m_mtl = nullptr;
     m_surface = nullptr;
@@ -57,13 +61,13 @@ void SVFilterBase::update(f32 _dt) {
     if(!t_use) {
         return;
     }
-    SVRTargetPtr t_target = mApp->getTargetMgr()->getTarget(m_target_tex);
+    SVRTargetPtr t_target = mApp->getTargetMgr()->getTarget(m_target_quene);
     if(t_target && m_mtl) {
         m_mtl->update(_dt);
         //产生pass 投递到不同的目标
         SVRCmdPassPtr t_pass = MakeSharedPtr<SVRCmdPass>();
-        t_pass->setTarget(m_target_tex);
-        t_pass->setHelpTarget(m_target_use);
+        t_pass->setSwapTarget(m_target_swap);
+        t_pass->setUseTarget(m_target_use);
         t_pass->setMesh(mApp->getComData()->screenMesh());
         t_pass->setSurface(m_surface);
         t_pass->setMaterial(m_mtl);
@@ -73,7 +77,6 @@ void SVFilterBase::update(f32 _dt) {
         }else{
             t_target->pushCommandAfter(t_pass); //后处理
         }
-        //
     }
 }
 

@@ -13,7 +13,6 @@
 
 namespace sv {
     
-    
     class SVMtlGradientMap : public SVMtlCore  {
     public:
         SVMtlGradientMap(SVInstPtr _app);
@@ -31,8 +30,6 @@ namespace sv {
         //
         f32 m_lSmoothSize;
     };
-    
-    
     
 }//!namespace sv
 

@@ -35,10 +35,14 @@ namespace sv {
 
         virtual void update(f32 _dt);
         
-        sv_inline void setUseTarget(SV_TEXIN _intex){ m_target_use = _intex; }
+        //设置使用的target
+        sv_inline void setTargetUse(SV_TEXIN _intex){ m_target_use = _intex; }
         
-        //设置目标Target
-        sv_inline void setTarget(SV_TEXIN _intex){ m_target_tex = _intex; }
+        //设置Target序列
+        sv_inline void setTargetQuene(SV_TEXIN _intex){ m_target_quene = _intex; }
+        
+        //设置交换Target
+        sv_inline void setTargetSwap(SV_TEXIN _intex){ m_target_swap = _intex; }
         
         //设置预处理
         sv_inline void setPreProcess() { m_is_pre = true; }
@@ -66,8 +70,9 @@ namespace sv {
     protected:
         SVString m_name;
         bool m_is_pre;
-        SV_TEXIN m_target_tex;
+        SV_TEXIN m_target_quene;
         SV_TEXIN m_target_use;
+        SV_TEXIN m_target_swap;
         SVSurfacePtr m_surface;
         SVMtlCorePtr m_mtl;
         

@@ -333,8 +333,9 @@ void SVScene::test() {
     SVFilterBasePtr t_filter_gray = MakeSharedPtr<SVFilterBase>(mApp);
     t_filter_gray->setMtl("filterGray");
     t_filter_gray->setPostProcess();    //后处理
-    t_filter_gray->setTarget(E_TEX_MAIN);
-    t_filter_gray->setUseTarget(E_TEX_FLITER);
+    t_filter_gray->setTargetQuene(E_TEX_MAIN);
+    t_filter_gray->setTargetUse(E_TEX_FLITER);
+    t_filter_gray->setTargetSwap(E_TEX_MAIN);
     SVSurfacePtr t_filter_surface = t_filter_gray->getSurface();
     if(t_filter_surface) {
         SVTexturePtr _tex = mApp->getTexMgr()->getInTexture(E_TEX_MAIN);

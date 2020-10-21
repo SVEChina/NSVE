@@ -61,14 +61,14 @@ namespace sv {
         void render(SVRendererPtr _renderer,SVRTargetPtr _target);
         
         //设置目标
-        void setTarget(SV_TEXIN _aim);
+        void setSwapTarget(SV_TEXIN _aim);
         
         //设置辅助目标
-        void setHelpTarget(SV_TEXIN _aim);
+        void setUseTarget(SV_TEXIN _aim);
         
     protected:
-        SV_TEXIN m_aim;
-        SV_TEXIN m_aim_help;
+        SV_TEXIN m_aim_swap;
+        SV_TEXIN m_aim_use;
     };
 
     
