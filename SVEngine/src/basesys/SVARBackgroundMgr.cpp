@@ -148,7 +148,7 @@ void SVARBackgroundMgr::_renderCameraImg(f32 _dt) {
 void SVARBackgroundMgr::setInputCameraTex(cptr8 _fname) {
     m_method = 1;
     m_tex0 = mApp->getTexMgr()->getTexture(_fname);
-    m_mtl = mApp->getMtlLib()->getMtl("screenCamera");
+    m_mtl = mApp->getMtlLib()->getMtl("screen");
 }
 
 //数据纹理方式
