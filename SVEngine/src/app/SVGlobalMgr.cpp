@@ -14,7 +14,6 @@
 #include "../basesys/SVDeformMgr.h"
 #include "../basesys/SVModelMgr.h"
 #include "../basesys/SVPhysicsWorldMgr.h"
-#include "../basesys/SVARBackgroundMgr.h"
 #include "../basesys/SVAniMgr.h"
 
 #include "../module/SVModuleSys.h"
@@ -44,7 +43,6 @@ SVGlobalMgr::SVGlobalMgr(SVInstPtr _app)
     m_pDeformSys = nullptr;
     m_pPhysicSys =nullptr;
     m_pLightSys = nullptr;
-    m_ar_mgr = nullptr;
 }
 
 SVGlobalMgr::~SVGlobalMgr() {
@@ -56,15 +54,10 @@ SVGlobalMgr::~SVGlobalMgr() {
     m_pDeformSys = nullptr;
     m_pPhysicSys =nullptr;
     m_pLightSys = nullptr;
-    m_ar_mgr = nullptr;
     m_ani_mgr = nullptr;
 }
 
 void SVGlobalMgr::init() {
-    //AR背景，AR引擎特有的系统
-    m_ar_mgr = MakeSharedPtr<SVARBackgroundMgr>(mApp);
-    m_ar_mgr->init();
-    SV_LOG_ERROR("sve init m_ar_mgr end!\n");
     //相机系统
     m_camera_mgr = MakeSharedPtr<SVCameraMgr>(mApp);
     m_camera_mgr->init();
@@ -90,11 +83,6 @@ void SVGlobalMgr::destroy() {
         m_scene_mgr->destroy();
         SV_LOG_ERROR("SVSceneMgr:destroy sucess");
     }
-    //AR 背景
-    if(m_ar_mgr) {
-        m_ar_mgr->destroy();
-        SV_LOG_ERROR("SVARBackgroundMgr:destroy sucess");
-    }
     //ANI
     if(m_ani_mgr) {
         m_ani_mgr->destroy();
@@ -116,11 +104,6 @@ void SVGlobalMgr::update(f32 dt) {
         //场景更新(节点系统)
         m_scene_mgr->update(dt);
         timeTag(false,"scene cost");
-    }
-    if(m_ar_mgr) {
-        //AR背景
-        m_ar_mgr->update(dt);
-        timeTag(false,"arbg cost");
     }
 }
 

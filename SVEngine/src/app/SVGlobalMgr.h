@@ -50,8 +50,6 @@ namespace sv {
         SVModelMgrPtr  m_pModelMgr;
         //变形形同
         SVDeformMgrPtr m_pDeformSys;
-        //AR背景
-        SVARBackgroundMgrPtr m_ar_mgr;
         //物理世界
         SVPhysicsWorldMgrPtr m_pPhysicSys;
         //时间标志

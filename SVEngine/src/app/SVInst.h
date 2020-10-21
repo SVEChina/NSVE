@@ -120,6 +120,8 @@ namespace sv {
         SVEventMgrPtr m_event_sys;
         //资源管理
         SVResMgrPtr m_res_mgr;
+        //AR背景
+        SVARBackgroundMgrPtr m_ar_mgr;
         //全局对象
         SVGlobalMgrPtr m_global_mgr;
         //全局参数
@@ -154,6 +156,7 @@ namespace sv {
         SVModelMgrPtr getModelMgr();
         SVPhysicsWorldMgrPtr getPhysicsWorldMgr();
         SVRendererPtr getRenderer();
+        SVARBackgroundMgrPtr getARBGMgr();
         
     protected:
         

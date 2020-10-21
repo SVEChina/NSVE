@@ -69,6 +69,7 @@ SVInst::SVInst() {
     m_render_mgr = nullptr;
     m_event_sys = nullptr;
     m_res_mgr = nullptr;
+    m_ar_mgr = nullptr;
 }
 
 SVInst::~SVInst() {
@@ -78,6 +79,7 @@ SVInst::~SVInst() {
     m_render_mgr = nullptr;
     m_event_sys = nullptr;
     m_res_mgr = nullptr;
+    m_ar_mgr = nullptr;
 }
 
 SVInstPtr SVInst::makeCreate() {
@@ -123,6 +125,9 @@ void SVInst::init(bool async) {
     m_mtl_lib = MakeSharedPtr<SVMtlLib>( share() );
     m_mtl_lib->init();
     m_event_sys->listenSysEvent(m_mtl_lib,SVMtlLib::procSysEvent);
+    //AR背景，AR引擎特有的系统
+    m_ar_mgr = MakeSharedPtr<SVARBackgroundMgr>( share() );
+    m_ar_mgr->init();
     //全局
     m_global_mgr = MakeSharedPtr<SVGlobalMgr>( share() );
     m_global_mgr->init();
@@ -135,9 +140,15 @@ void SVInst::init(bool async) {
 
 void SVInst::destroy() {
     m_global_mgr = nullptr;
+    //AR 背景
+    if(m_ar_mgr) {
+        m_ar_mgr->destroy();
+        m_ar_mgr = nullptr;
+    }
     //
     if(m_render_mgr) {
         m_render_mgr->destroy();
+        m_render_mgr = nullptr;
     }
     //
     if(m_mtl_lib) {
@@ -155,6 +166,7 @@ void SVInst::destroy() {
     if (m_event_sys) {
         //事件系统最后析够,因为很多其他模块 会注册监听事件
         m_event_sys->destroy();
+        m_event_sys = nullptr;
     }
     //
     if(m_ctx) {
@@ -233,11 +245,6 @@ void SVInst::setRenderPath(s32 _rpath) {
     if(!m_renderer){
         return;
     }
-    //常见AR阶段
-    if(m_global_mgr->m_ar_mgr) {
-        m_global_mgr->m_ar_mgr->enable();
-        m_global_mgr->m_ar_mgr->setInputCameraTex("res/sve.png");
-    }
     //创建正常的阶段
     //创建一堆东西
     if(_rpath == 0) {
@@ -275,6 +282,10 @@ void SVInst::updateSVE(f32 _dt) {
     }
     //
     m_global_mgr->update(_dt);
+    //
+    if(m_ar_mgr) {
+        m_ar_mgr->update(_dt);  //AR背景
+    }
 }
 
 void SVInst::renderSVE() {
@@ -309,6 +320,11 @@ void SVInst::clearRespath() {
 void SVInst::test() {
     if(getSceneMgr()) {
         getSceneMgr()->test();
+    }
+    //常见AR阶段
+    if(m_ar_mgr) {
+        m_ar_mgr->enable();
+        m_ar_mgr->setInputCameraTex("res/sve.png");
     }
 }
 
@@ -410,6 +426,10 @@ SVPhysicsWorldMgrPtr SVInst::getPhysicsWorldMgr(){
 
 SVRendererPtr SVInst::getRenderer() {
     return m_renderer;
+}
+
+SVARBackgroundMgrPtr SVInst::getARBGMgr() {
+    return m_ar_mgr;
 }
 
 //设置渲染器
