@@ -40,11 +40,13 @@ namespace sv {
         
         bool addFilter(cptr8 _name,SVFilterBasePtr _filter);
         
-        void delFilter(cptr8 _name);
+        bool delFilter(cptr8 _name);
         
         void clearFilter();
         
         bool hasFilter(cptr8 _name);
+        
+        SVFilterBasePtr getFilter(cptr8 _name);
         
         void test();
         

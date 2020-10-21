@@ -21,9 +21,12 @@ namespace sv {
     LUA_REG_DECLARE(SVFilterLib);
 
     class SVFilterLib : public SVGBaseEx {
-    public:
-        static SVFilterBasePtr createFilter(SVInstPtr _app,FTTYPE _type);
+    public:        
+        static SVFilterBasePtr openFilter(SVInstPtr _app,FTTYPE _name);
         
+        static bool closeFilter(SVInstPtr _app,FTTYPE _name);
+        
+        static SVFilterBasePtr getFilter(SVInstPtr _app,FTTYPE _name);
     };
 
 }//!namespace sv

@@ -16,11 +16,14 @@
 #include "../node/SVSpriteNode.h"
 #include "../app/SVGlobalMgr.h"
 #include "../app/SVGlobalParam.h"
+
 #include "../basesys/SVCameraNode.h"
 #include "../basesys/SVComData.h"
+
 #include "../rendercore/SVRenderMgr.h"
 #include "../rendercore/SVRenderer.h"
 #include "../rendercore/SVRenderCmd.h"
+
 #include "../event/SVEventMgr.h"
 #include "../event/SVEvent.h"
 #include "../event/SVOpEvent.h"
@@ -30,9 +33,10 @@
 #include "../mtl/SVSurface.h"
 #include "../mtl/SVFilterBase.h"
 
-//
 #include "../basesys/SVAniMgr.h"
 #include "../basesys/ani/SVAniUnitRot.h"
+
+#include "../mtl/SVFilterLib.h"
 
 using namespace sv;
 
@@ -329,37 +333,6 @@ void SVScene::test() {
     //
     SVAniUnitRotPtr t_rot = MakeSharedPtr<SVAniUnitRot>(mApp);
     mApp->getAniMgr()->addAni(t_box_node,t_rot);
-//    //推送一个滤镜
-//    SVFilterBasePtr t_filter_gray = MakeSharedPtr<SVFilterBase>(mApp);
-//    t_filter_gray->setMtl("filterGray"); //filterGray
-//    t_filter_gray->setPostProcess();
-//    t_filter_gray->setTargetQuene(E_TEX_MAIN);
-//    t_filter_gray->setTargetUse(E_TEX_FLITER);
-//    t_filter_gray->setTargetSwap(E_TEX_MAIN);
-//    SVSurfacePtr t_filter_surface = t_filter_gray->getSurface();
-//    if(t_filter_surface) {
-//        SVTexturePtr _tex = mApp->getTexMgr()->getInTexture(E_TEX_MAIN);
-//        t_filter_surface->setTexture(1, 0, _tex);
-//    }
-//    mApp->getSceneMgr()->addFilter("filter-gray", t_filter_gray);
     //
-    //推送一个滤镜
-    SVFilterBasePtr t_filter_haze = MakeSharedPtr<SVFilterBase>(mApp);
-    t_filter_haze->setMtl("filterHaze"); //filterGray
-    t_filter_haze->setPostProcess();
-    t_filter_haze->setTargetQuene(E_TEX_MAIN);
-    t_filter_haze->setTargetUse(E_TEX_FLITER);
-    t_filter_haze->setTargetSwap(E_TEX_MAIN);
-    SVSurfacePtr t_filter_surface = t_filter_haze->getSurface();
-    if(t_filter_surface) {
-        SVTexturePtr _tex = mApp->getTexMgr()->getInTexture(E_TEX_MAIN);
-        t_filter_surface->setTexture(1, 0, _tex);
-        //t_filter_surface->setParam("hueAdjust", 0.1f);
-        t_filter_surface->setParam("dis", 0.1f);
-        t_filter_surface->setParam("slope", 0.1f);
-        FVec3 t_haze_color = FVec3(1.0f,0.0f,1.0f);
-        t_filter_surface->setParam("hazeColor", t_haze_color);
-    }
-    mApp->getSceneMgr()->addFilter("filter-haze", t_filter_haze);
-    
+    SVFilterLib::openFilter(mApp,FILTER_HAZE);
 }

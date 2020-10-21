@@ -212,7 +212,9 @@ enum FTTYPE {
     FILTER_LUT,
     FILTER_BLUR,
     FILTER_SHARP,
-    FILTER_HUE
+    FILTER_HUE,
+    FILTER_HAZE,
+    FILTER_GRAY
 };
 
 

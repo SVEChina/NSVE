@@ -86,16 +86,19 @@ bool SVSceneMgr::addFilter(cptr8 _name,SVFilterBasePtr _filter) {
     return true;
 }
 
-void SVSceneMgr::delFilter(cptr8 _name) {
+bool SVSceneMgr::delFilter(cptr8 _name) {
+    bool t_flag = false;
     m_filter_lock->lock();
     for(s32 i=0;i<m_filter_pool.size();i++) {
         if( strcmp(m_filter_pool[i]->getName() ,_name) == 0 ) {
             m_filter_pool[i]->destroy();
             m_filter_pool.erase(m_filter_pool.begin() + i);
+            t_flag = true;
             break;
         }
     }
     m_filter_lock->unlock();
+    return t_flag;
 }
 
 void SVSceneMgr::clearFilter() {
@@ -114,6 +117,15 @@ bool SVSceneMgr::hasFilter(cptr8 _name) {
         }
     }
     return false;
+}
+
+SVFilterBasePtr SVSceneMgr::getFilter(cptr8 _name) {
+    for(s32 i=0;i<m_filter_pool.size();i++) {
+        if( strcmp(m_filter_pool[i]->getName() ,_name) == 0 ) {
+            return m_filter_pool[i];
+        }
+    }
+    return nullptr;
 }
 
 void SVSceneMgr::test() {
