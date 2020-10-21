@@ -3,7 +3,9 @@ precision mediump float;
 #endif
 uniform sampler2D aTexture0;
 uniform sampler2D aTexture1;
+
 varying vec2 v_texcoord0;
+
 uniform vec2 tex0size;
 
 void main(){

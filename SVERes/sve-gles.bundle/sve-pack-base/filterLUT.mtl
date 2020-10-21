@@ -1,0 +1,12 @@
+{
+    "version" : "1.0",
+    "name" : "filterLUT",
+    "shader" : "filterLUT",
+    "textures" :[
+        { "chn": 0 , "from" : "file", "path" : "res/sve.png", "stage": "fs" },
+        { "chn": 1 , "from" : "file", "path" : "res/filterimg/guass.png", "stage": "fs" }
+    ],
+    "depth-param": {
+        "enable" : 0
+    }
+}

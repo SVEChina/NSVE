@@ -2704,14 +2704,6 @@
 		5C56B693224A059A007D7DC8 /* SVMtlSmooth.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C56B68D224A059A007D7DC8 /* SVMtlSmooth.h */; };
 		5C56B694224A059A007D7DC8 /* SVMtlSmooth.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C56B68D224A059A007D7DC8 /* SVMtlSmooth.h */; };
 		5C56B695224A059A007D7DC8 /* SVMtlSmooth.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C56B68D224A059A007D7DC8 /* SVMtlSmooth.h */; };
-		5C56B698224A2B47007D7DC8 /* SVFilterHaze.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5C56B696224A2B47007D7DC8 /* SVFilterHaze.cpp */; };
-		5C56B699224A2B47007D7DC8 /* SVFilterHaze.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5C56B696224A2B47007D7DC8 /* SVFilterHaze.cpp */; };
-		5C56B69A224A2B47007D7DC8 /* SVFilterHaze.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5C56B696224A2B47007D7DC8 /* SVFilterHaze.cpp */; };
-		5C56B69B224A2B47007D7DC8 /* SVFilterHaze.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5C56B696224A2B47007D7DC8 /* SVFilterHaze.cpp */; };
-		5C56B69C224A2B47007D7DC8 /* SVFilterHaze.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C56B697224A2B47007D7DC8 /* SVFilterHaze.h */; };
-		5C56B69D224A2B47007D7DC8 /* SVFilterHaze.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C56B697224A2B47007D7DC8 /* SVFilterHaze.h */; };
-		5C56B69E224A2B47007D7DC8 /* SVFilterHaze.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C56B697224A2B47007D7DC8 /* SVFilterHaze.h */; };
-		5C56B69F224A2B47007D7DC8 /* SVFilterHaze.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C56B697224A2B47007D7DC8 /* SVFilterHaze.h */; };
 		5C56B6A2224B931D007D7DC8 /* SVFilterGof.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5C56B6A0224B931D007D7DC8 /* SVFilterGof.cpp */; };
 		5C56B6A3224B931D007D7DC8 /* SVFilterGof.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5C56B6A0224B931D007D7DC8 /* SVFilterGof.cpp */; };
 		5C56B6A4224B931D007D7DC8 /* SVFilterGof.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5C56B6A0224B931D007D7DC8 /* SVFilterGof.cpp */; };
@@ -9049,8 +9041,6 @@
 		5C56B6832248C66F007D7DC8 /* SVFilterClarity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SVFilterClarity.h; sourceTree = "<group>"; };
 		5C56B68C224A059A007D7DC8 /* SVMtlSmooth.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = SVMtlSmooth.cpp; sourceTree = "<group>"; };
 		5C56B68D224A059A007D7DC8 /* SVMtlSmooth.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SVMtlSmooth.h; sourceTree = "<group>"; };
-		5C56B696224A2B47007D7DC8 /* SVFilterHaze.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = SVFilterHaze.cpp; sourceTree = "<group>"; };
-		5C56B697224A2B47007D7DC8 /* SVFilterHaze.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SVFilterHaze.h; sourceTree = "<group>"; };
 		5C56B6A0224B931D007D7DC8 /* SVFilterGof.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = SVFilterGof.cpp; sourceTree = "<group>"; };
 		5C56B6A1224B931D007D7DC8 /* SVFilterGof.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SVFilterGof.h; sourceTree = "<group>"; };
 		5C721C042301144C00E1C3E7 /* SVPhysicsBodyRigid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPhysicsBodyRigid.h; sourceTree = "<group>"; };
@@ -13265,8 +13255,6 @@
 				5C058699226DDC0B005C3CAF /* SVFilterGlow.h */,
 				5C56B6A0224B931D007D7DC8 /* SVFilterGof.cpp */,
 				5C56B6A1224B931D007D7DC8 /* SVFilterGof.h */,
-				5C56B696224A2B47007D7DC8 /* SVFilterHaze.cpp */,
-				5C56B697224A2B47007D7DC8 /* SVFilterHaze.h */,
 				5F96BC6524F8E9F40020F7C4 /* SVFilterLib.cpp */,
 				5F96BC6424F8E9F30020F7C4 /* SVFilterLib.h */,
 				5F7D5D8E215F407700803BCF /* SVFilterLUT.cpp */,
@@ -14209,7 +14197,6 @@
 				020C43E522DC5DCC00201753 /* b3PgsJacobiSolver.h in Headers */,
 				5F566F01253FC83700670056 /* tiny_gltf.h in Headers */,
 				020791A52302AF2A0029B759 /* SVImage.h in Headers */,
-				5C56B69F224A2B47007D7DC8 /* SVFilterHaze.h in Headers */,
 				5F96BCE924F907C50020F7C4 /* lzio.h in Headers */,
 				5F7D6773215F407900803BCF /* SVCoordGridNode.h in Headers */,
 				5F7D660B215F407800803BCF /* SVRenderMgr.h in Headers */,
@@ -15448,7 +15435,6 @@
 				020C444922DC5DCC00201753 /* btBroadphaseProxy.h in Headers */,
 				020C43E322DC5DCC00201753 /* b3PgsJacobiSolver.h in Headers */,
 				5F56685B253FC80400670056 /* btCollisionDispatcher.h in Headers */,
-				5C56B69D224A2B47007D7DC8 /* SVFilterHaze.h in Headers */,
 				5F96BDB324F907C60020F7C4 /* lprefix.h in Headers */,
 				5F566EBB253FC80900670056 /* encodings.h in Headers */,
 				5F5667EB253FC80300670056 /* btPersistentManifold.h in Headers */,
@@ -16888,7 +16874,6 @@
 				020C4C0822DC5DD100201753 /* clew.h in Headers */,
 				5F566CFA253FC80700670056 /* b3FileUtils.h in Headers */,
 				5F566EB2253FC80900670056 /* meta.h in Headers */,
-				5C56B69C224A2B47007D7DC8 /* SVFilterHaze.h in Headers */,
 				5F566A5A253FC80500670056 /* btTetrahedronShape.h in Headers */,
 				020C476822DC5DCE00201753 /* btBox2dShape.h in Headers */,
 				020C4D5022DC5DD300201753 /* b3ReduceContacts.h in Headers */,
@@ -17922,7 +17907,6 @@
 				020C444A22DC5DCC00201753 /* btBroadphaseProxy.h in Headers */,
 				020C43E422DC5DCC00201753 /* b3PgsJacobiSolver.h in Headers */,
 				5F56685C253FC80400670056 /* btCollisionDispatcher.h in Headers */,
-				5C56B69E224A2B47007D7DC8 /* SVFilterHaze.h in Headers */,
 				5F96BDB424F907C60020F7C4 /* lprefix.h in Headers */,
 				5F566EBC253FC80900670056 /* encodings.h in Headers */,
 				5F5667EC253FC80300670056 /* btPersistentManifold.h in Headers */,
@@ -19010,7 +18994,6 @@
 				5F566851253FC80400670056 /* btSphereTriangleCollisionAlgorithm.cpp in Sources */,
 				5F5664AD253FC80100670056 /* lzio.c in Sources */,
 				020C45C522DC5DCD00201753 /* btHashedSimplePairCache.cpp in Sources */,
-				5C56B69B224A2B47007D7DC8 /* SVFilterHaze.cpp in Sources */,
 				020C486922DC5DCF00201753 /* btKinematicCharacterController.cpp in Sources */,
 				5F7D60C9215F407700803BCF /* SVComData.cpp in Sources */,
 				5F566AD5253FC80600670056 /* btPolyhedralConvexShape.cpp in Sources */,
@@ -20352,7 +20335,6 @@
 				5F5669FA253FC80500670056 /* btShapeHull.cpp in Sources */,
 				5F7D61A2215F407700803BCF /* SVParseBitfont.cpp in Sources */,
 				5F7D6252215F407800803BCF /* pngset.c in Sources */,
-				5C56B698224A2B47007D7DC8 /* SVFilterHaze.cpp in Sources */,
 				5F7D6116215F407700803BCF /* SVMathHelper.cpp in Sources */,
 				5F56689A253FC80400670056 /* btConvexConcaveCollisionAlgorithm.cpp in Sources */,
 				020C4BF822DC5DD100201753 /* b3Vector3.cpp in Sources */,
@@ -20734,7 +20716,6 @@
 				020C45C422DC5DCD00201753 /* btHashedSimplePairCache.cpp in Sources */,
 				5F56662C253FC80200670056 /* AnimationStateData.c in Sources */,
 				5F566BA8253FC80600670056 /* btMultiBodyJointMotor.cpp in Sources */,
-				5C56B69A224A2B47007D7DC8 /* SVFilterHaze.cpp in Sources */,
 				5F96BD0024F907C50020F7C4 /* lobject.c in Sources */,
 				5F566A9C253FC80500670056 /* btMiniSDF.cpp in Sources */,
 				5F0E636424F3B97B002620DC /* SkeletonBinary.c in Sources */,
@@ -21593,7 +21574,6 @@
 				020C45C322DC5DCD00201753 /* btHashedSimplePairCache.cpp in Sources */,
 				5F56662B253FC80200670056 /* AnimationStateData.c in Sources */,
 				5F566BA7253FC80600670056 /* btMultiBodyJointMotor.cpp in Sources */,
-				5C56B699224A2B47007D7DC8 /* SVFilterHaze.cpp in Sources */,
 				5F96BCFF24F907C50020F7C4 /* lobject.c in Sources */,
 				5F566A9B253FC80500670056 /* btMiniSDF.cpp in Sources */,
 				5F0E636324F3B97B002620DC /* SkeletonBinary.c in Sources */,
