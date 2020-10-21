@@ -334,5 +334,5 @@ void SVScene::test() {
     SVAniUnitRotPtr t_rot = MakeSharedPtr<SVAniUnitRot>(mApp);
     mApp->getAniMgr()->addAni(t_box_node,t_rot);
     //
-    SVFilterLib::openFilter(mApp,FILTER_HAZE);
+    SVFilterLib::openFilter(mApp,FILTER_LUT);
 }

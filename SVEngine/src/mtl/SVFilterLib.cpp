@@ -59,7 +59,16 @@ SVFilterBasePtr SVFilterLib::openFilter(SVInstPtr _app,FTTYPE _name) {
     }else if(_name == FILTER_SHARP) {
         t_filter->setMtl("filterSharp"); //filterGray
     }else if(_name == FILTER_LUT) {
-        t_filter->setMtl("filterLUT"); //filterGray
+        t_filter->setName("filterLUT");
+        t_filter->setMtl("filterLUT");
+        SVSurfacePtr t_surface = t_filter->getSurface();
+        if(t_surface) {
+            SVTexturePtr _tex = _app->getTexMgr()->getInTexture(E_TEX_MAIN);
+            SVTexturePtr _tex_img = _app->getTexMgr()->getTexture("res/filterimg/facewhitefilter.png");
+            t_surface->setTexture(1, 0, _tex);
+            t_surface->setTexture(1, 1, _tex_img);
+        }
+        _app->getSceneMgr()->addFilter("filterLUT", t_filter);
     }
     return t_filter;
 }

@@ -55,16 +55,16 @@ void SVRTexGL::load(SVRendererPtr _renderer,SVTextureDsp* _tex_dsp) {
         //数据格式
         s32 t_datafmt = GL_RGBA;
         m_informate = GL_RGBA;
-        if(_tex_dsp->m_data_formate == SV_FORMAT_RGBA8) {
-            t_datafmt = GL_RGBA;
-            m_informate = GL_RGBA;
+        if(_tex_dsp->m_data_formate == SV_FORMAT_R8 ) {
+            t_datafmt = GL_LUMINANCE;
+            m_informate = GL_LUMINANCE;
+        }else if(_tex_dsp->m_data_formate == SV_FORMAT_RG8 ) {
+            t_datafmt = GL_LUMINANCE_ALPHA;
+            m_informate = GL_LUMINANCE_ALPHA;
+        }else if(_tex_dsp->m_data_formate == SV_FORMAT_RGB8) {
+            t_datafmt = GL_RGB;
+            m_informate = GL_RGB;
         }else if(_tex_dsp->m_data_formate == SV_FORMAT_RGBA8) {
-            t_datafmt = GL_RGBA;
-            m_informate = GL_RGBA;
-        }else if(_tex_dsp->m_data_formate == SV_FORMAT_R8) {
-            t_datafmt = GL_RGBA;
-            m_informate = GL_RGBA;
-        }else if(_tex_dsp->m_data_formate == SV_FORMAT_RG8) {
             t_datafmt = GL_RGBA;
             m_informate = GL_RGBA;
         }

@@ -2,7 +2,7 @@
 precision mediump float;
 #endif
 uniform sampler2D aTexture0;
-uniform sampler2D aTexture1;
+uniform sampler2D aLut;
 
 varying vec2 v_texcoord0;
 
@@ -23,8 +23,8 @@ void main(){
     vec2 texPos2;
     texPos2.x = (quad2.x * 1.0/8.0)+ 0.5/512.0 + ((1.0/8.0 - 1.0/512.0) * textureColor.r);
     texPos2.y = (quad2.y * 1.0/8.0)+ 0.5/512.0 + ((1.0/8.0 - 1.0/512.0) * textureColor.g);
-    vec4 newColor1 = texture2D(aTexture1, texPos1);
-    vec4 newColor2 = texture2D(aTexture1, texPos2);
+    vec4 newColor1 = texture2D(aLut, texPos1);
+    vec4 newColor2 = texture2D(aLut, texPos2);
     vec4 newColor = mix(newColor1, newColor2, fract(blueColor));
     gl_FragColor=mix(textureColor, vec4(newColor.rgb, textureColor.w),1.0);
 }
