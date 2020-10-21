@@ -7,7 +7,6 @@
 //
 
 #include "SVParseLUTFilter.h"
-#include "SVFilterLUT.h"
 #include "../../app/SVGlobalMgr.h"
 #include "../../file/SVFileMgr.h"
 #include "../../base/SVDataChunk.h"
@@ -39,10 +38,11 @@ SVFilterBasePtr SVParseLUTFilter::parseLUT(SVInstPtr _app,cptr8 _path, s32 resid
         RAPIDJSON_NAMESPACE::Value &version = doc["version"];
     }
     if(doc.HasMember("filterLUT")&& doc["filterLUT"].IsObject()){
-        RAPIDJSON_NAMESPACE::Value &t_lut = doc["filterLUT"];
-        SVFilterLUTPtr t_filterLUT = MakeSharedPtr<SVFilterLUT>(_app);
-        t_filterLUT->fromJSON(t_lut);
-        return t_filterLUT;
+//        RAPIDJSON_NAMESPACE::Value &t_lut = doc["filterLUT"];
+//        SVFilterLUTPtr t_filterLUT = MakeSharedPtr<SVFilterLUT>(_app);
+//        t_filterLUT->fromJSON(t_lut);
+//        return t_filterLUT;
+        return nullptr;
     }
     return nullptr;
 }

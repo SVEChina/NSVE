@@ -333,13 +333,15 @@ void SVScene::test() {
     //
     SVAniUnitRotPtr t_rot = MakeSharedPtr<SVAniUnitRot>(mApp);
     mApp->getAniMgr()->addAni(t_box_node,t_rot);
+//    //
+//    SVFilterBasePtr t_filter = SVFilterLib::openFilter(mApp,FILTER_LUT);
+//    if(t_filter) {
+//        SVSurfacePtr t_surface = t_filter->getSurface();
+//        if(t_surface) {
+//            SVTexturePtr _tex_img = mApp->getTexMgr()->getTexture("res/filterimg/sunset_20170620.png");
+//            t_surface->setTexture(1, 1, _tex_img);
+//        }
+//    }
     //
-    SVFilterBasePtr t_filter = SVFilterLib::openFilter(mApp,FILTER_LUT);
-    if(t_filter) {
-        SVSurfacePtr t_surface = t_filter->getSurface();
-        if(t_surface) {
-            SVTexturePtr _tex_img = mApp->getTexMgr()->getTexture("res/filterimg/sunset_20170620.png");
-            t_surface->setTexture(1, 1, _tex_img);
-        }
-    }
+    SVFilterLib::openFilter(mApp,FILTER_HDR);
 }

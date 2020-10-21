@@ -324,7 +324,7 @@ void SVInst::test() {
     //常见AR阶段
     if(m_ar_mgr) {
         m_ar_mgr->enable();
-        m_ar_mgr->setInputCameraTex("res/sve.png");
+        m_ar_mgr->setInputCameraTex("res/bg1.png");
     }
 }
 

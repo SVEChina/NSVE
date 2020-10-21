@@ -21,7 +21,6 @@ SVFilterBasePtr SVFilterLib::openFilter(SVInstPtr _app,FTTYPE _name) {
     t_filter->setTargetQuene(E_TEX_MAIN);
     t_filter->setTargetUse(E_TEX_FLITER);
     t_filter->setTargetSwap(E_TEX_MAIN);
-    
     if(_name == FILTER_GRAY) {
         t_filter->setName("filterGray");
         t_filter->setMtl("filterGray");
@@ -56,8 +55,10 @@ SVFilterBasePtr SVFilterLib::openFilter(SVInstPtr _app,FTTYPE _name) {
         _app->getSceneMgr()->addFilter("filterHue", t_filter);
     }else if(_name == FILTER_BLUR) {
         t_filter->setMtl("filterBlur"); //filterGray
+        
     }else if(_name == FILTER_SHARP) {
         t_filter->setMtl("filterSharp"); //filterGray
+        
     }else if(_name == FILTER_LUT) {
         t_filter->setName("filterLUT");
         t_filter->setMtl("filterLUT");
@@ -69,6 +70,18 @@ SVFilterBasePtr SVFilterLib::openFilter(SVInstPtr _app,FTTYPE _name) {
             t_surface->setTexture(1, 1, _tex_img);
         }
         _app->getSceneMgr()->addFilter("filterLUT", t_filter);
+    }else if(_name == FILTER_HDR) {
+        t_filter->setName("filterHDR");
+        t_filter->setMtl("filterHDR");
+        SVSurfacePtr t_surface = t_filter->getSurface();
+        if(t_surface) {
+            SVTexturePtr _tex = _app->getTexMgr()->getInTexture(E_TEX_MAIN);
+            t_surface->setTexture(1, 0, _tex);
+            FVec2 t_size = FVec2(_tex->getTextureDsp()->m_width,
+                                 _tex->getTextureDsp()->m_height);
+            t_surface->setParam("hdr_size", t_size);
+        }
+        _app->getSceneMgr()->addFilter("filterHDR", t_filter);
     }
     return t_filter;
 }
