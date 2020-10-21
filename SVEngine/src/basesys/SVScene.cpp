@@ -214,7 +214,6 @@ FVec3 SVScene::getWorldSize() {
 
 void SVScene::create(){
     //scene tree 可以 resize
-    
 //    m_worldSize.x = _worldw;
 //    m_worldSize.y = _worldh;
 //    m_worldSize.z = _depth;
@@ -343,6 +342,5 @@ void SVScene::test() {
 //            t_surface->setTexture(1, 1, _tex_img);
 //        }
 //    }
-    //
-    SVFilterLib::openFilter(mApp,FILTER_HDR);
+    //SVFilterLib::openFilter(mApp,FILTER_HDR);
 }

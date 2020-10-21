@@ -28,6 +28,9 @@ SVFilterBasePtr SVFilterLib::openFilter(SVInstPtr _app,FTTYPE _name) {
         if(t_surface) {
             SVTexturePtr _tex = _app->getTexMgr()->getInTexture(E_TEX_MAIN);
             t_surface->setTexture(1, 0, _tex);
+            FVec2 t_invert = FVec2(1.0f,1.0f);
+            t_surface->setParam("u_invert", t_invert);
+            
         }
         _app->getSceneMgr()->addFilter("filterGray", t_filter);
     }else if(_name == FILTER_HAZE) {
@@ -39,6 +42,8 @@ SVFilterBasePtr SVFilterLib::openFilter(SVInstPtr _app,FTTYPE _name) {
             t_surface->setTexture(1, 0, _tex);
             t_surface->setParam("dis", 0.1f);
             t_surface->setParam("slope", 0.1f);
+            FVec2 t_invert = FVec2(1.0f,1.0f);
+            t_surface->setParam("u_invert", t_invert);
             FVec3 t_haze_color = FVec3(1.0f,0.0f,1.0f);
             t_surface->setParam("hazeColor", t_haze_color);
         }
@@ -50,6 +55,8 @@ SVFilterBasePtr SVFilterLib::openFilter(SVInstPtr _app,FTTYPE _name) {
         if(t_surface) {
             SVTexturePtr _tex = _app->getTexMgr()->getInTexture(E_TEX_MAIN);
             t_surface->setTexture(1, 0, _tex);
+            FVec2 t_invert = FVec2(1.0f,1.0f);
+            t_surface->setParam("u_invert", t_invert);
             t_surface->setParam("hueAdjust", 0.1f);
         }
         _app->getSceneMgr()->addFilter("filterHue", t_filter);
@@ -68,6 +75,8 @@ SVFilterBasePtr SVFilterLib::openFilter(SVInstPtr _app,FTTYPE _name) {
             SVTexturePtr _tex_img = _app->getTexMgr()->getTexture("res/filterimg/facewhitefilter.png");
             t_surface->setTexture(1, 0, _tex);
             t_surface->setTexture(1, 1, _tex_img);
+            FVec2 t_invert = FVec2(1.0f,1.0f);
+            t_surface->setParam("u_invert", t_invert);
         }
         _app->getSceneMgr()->addFilter("filterLUT", t_filter);
     }else if(_name == FILTER_HDR) {
@@ -77,6 +86,8 @@ SVFilterBasePtr SVFilterLib::openFilter(SVInstPtr _app,FTTYPE _name) {
         if(t_surface) {
             SVTexturePtr _tex = _app->getTexMgr()->getInTexture(E_TEX_MAIN);
             t_surface->setTexture(1, 0, _tex);
+            FVec2 t_invert = FVec2(1.0f,1.0f);
+            t_surface->setParam("u_invert", t_invert);
             FVec2 t_size = FVec2(_tex->getTextureDsp()->m_width,
                                  _tex->getTextureDsp()->m_height);
             t_surface->setParam("hdr_size", t_size);

@@ -4,7 +4,6 @@
         "shader/dsp/normal2d.dsp",
         "shader/dsp/normal3d.dsp",
         "shader/dsp/screen.dsp",
-        "shader/dsp/screenCamera.dsp",
         "shader/dsp/filterLUT.dsp",
         "shader/dsp/filterPM.dsp",
         "shader/dsp/filterGray.dsp",

@@ -9,6 +9,7 @@
             "stage" : 1,
             "bufID" : 1,
             "tbl" :[
+                { "name" : "u_invert", "type" : "fvec2", "value" : "1.0,1.0" },
                 { "name" : "levels", "type" : "fvec3", "value" : "1.0,1.0,1.0" }
             ]
         }

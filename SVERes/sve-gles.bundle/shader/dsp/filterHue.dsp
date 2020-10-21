@@ -9,6 +9,7 @@
             "stage" : 1,
             "bufID" : 1,
             "tbl" :[
+                { "name" : "u_invert", "type" : "fvec2", "value" : "1.0,1.0" },
                 { "name" : "hueAdjust", "type" : "f32", "value" : "0.0" }
             ]
         }

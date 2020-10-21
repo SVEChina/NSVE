@@ -276,6 +276,8 @@ void SVRendererGL::drawScreen(SV_TEXIN _texid) {
     }
     SVSurfacePtr t_surface = MakeSharedPtr<SVSurface>();
     t_surface->setTexture(1,0,t_tex);
+    FVec2 t_invert = FVec2(1.0f,1.0f);
+    t_surface->setParam("u_invert", t_invert);
     //激活材质
     SVMtlCorePtr t_mtl = mApp->getMtlLib()->getMtl("screen");
     SVRenderMeshPtr t_mesh = mApp->getComData()->screenMesh();

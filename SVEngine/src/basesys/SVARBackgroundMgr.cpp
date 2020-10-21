@@ -107,6 +107,8 @@ void SVARBackgroundMgr::update(f32 _dt) {
             //直接绘制图片
             SVSurfacePtr t_surface = MakeSharedPtr<SVSurface>();
             t_surface->setTexture(1,0,m_tex0);
+            FVec2 t_invert = FVec2(1.0f,1.0f);
+            t_surface->setParam("u_invert", t_invert);
             SVDispatch::dispatchMeshDraw(mApp,
                                          mApp->getComData()->screenMesh(),
                                          m_mtl,
@@ -135,6 +137,8 @@ void SVARBackgroundMgr::_renderCameraImg(f32 _dt) {
             t_mtl->update(_dt);
             SVSurfacePtr t_surface = MakeSharedPtr<SVSurface>();
             t_surface->setTexture(1,0,t_cam_tex);
+            FVec2 t_invert = FVec2(1.0f,1.0f);
+            t_surface->setParam("u_invert", t_invert);
             SVDispatch::dispatchMeshDraw(mApp,
                                          mApp->getComData()->screenMesh(),
                                          t_mtl,
