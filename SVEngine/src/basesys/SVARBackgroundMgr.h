@@ -50,16 +50,7 @@ namespace sv {
         //纹理id方式
         void setInputCameraTex(s32 _texid);
         
-        //filter设置各种路径
-        //推送滤镜
-        void pushFilter(SVFilterBasePtr _filter);
-        
-        //清理滤镜
-        void clearFilter();
-        
     protected:
-        void _renderCameraPass(f32 _dt);
-        
         void _renderCameraImg(f32 _dt);
         
         //开启相机纹理
@@ -77,9 +68,7 @@ namespace sv {
         SVTexturePtr m_tex2;
         
         //
-        SVLockSpinPtr m_filter_lock;
-        typedef std::vector<SVFilterBasePtr> FILTERPOOL;
-        FILTERPOOL m_filter_pool;
+        SVMtlCorePtr m_mtl;
     };
 
 }//!namespace
