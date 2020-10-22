@@ -36,7 +36,6 @@ namespace sv {
     DECLARE_SHAREPTR(SVFileMgr);
     DECLARE_SHAREPTR(SVConfig);
     DECLARE_SHAREPTR(SVComData);
-    DECLARE_SHAREPTR(SVFaceDataMesh);
     
     //渲染路径
     DECLARE_SHAREPTR(SVRPath);

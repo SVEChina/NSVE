@@ -132,7 +132,7 @@ public:
             if( !m_streamData[_stype] ) {
                 m_streamData[_stype] = MakeSharedPtr<SVDataSwap>();
             }
-            m_streamData[_stype]->appendData(_data,_len);
+            m_streamData[_stype]->writeData(_data,_len);
             return true;
         }
         return false;
@@ -158,7 +158,6 @@ public:
         return false;
     }
     
-    //
     BUFFERMODE _bufMode;    //E_BFM_AOS 混合流，E_BFM_SOA 单一流
     //数据类型
     BUFFERTYPE _bufType;    //BUFFER类型

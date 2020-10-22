@@ -33,7 +33,7 @@ namespace sv {
         void loadDefault();
         
         //动态初始化
-        SVFaceDataMeshPtr faceMesh(s32 _type);
+        SVRenderMeshPtr faceMesh() { return m_faceMesh; }
         
         //引擎创建初始化
         SVRenderMeshPtr screenMesh() { return m_screenMesh; }
@@ -53,6 +53,8 @@ namespace sv {
         void _initFourDivisionMesh_X();
         
         SVRenderMeshPtr m_screenMesh;
+        
+        SVRenderMeshPtr m_faceMesh;
     };
     
 }//!namespace

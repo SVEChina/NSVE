@@ -127,7 +127,21 @@ SVString SVFileMgr::getPath(cptr8 _fname) {
     return tFileName;
 }
 
-
+bool SVFileMgr::exist(cptr8 _fname) {
+    bool t_flag = false;
+    m_file_lock->lock();
+    for (s32 i = 0; i < m_searchPathPool.size(); i++) {
+        SVString t_fullpath = m_searchPathPool[i] + _fname;
+        FILE *fp = fopen(t_fullpath.c_str(), "r");
+        if (fp) {
+            fclose(fp);
+            t_flag = true;
+            break;
+        }
+    }
+    m_file_lock->unlock();
+    return t_flag;
+}
 
 bool SVFileMgr::s_loadFileContent(SVDataChunk *_datachunk, cptr8 _fullname) {
     FILE *fp = fopen(_fullname, "r");
