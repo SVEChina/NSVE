@@ -297,3 +297,26 @@ void SVRendererGL::drawScreen(SV_TEXIN _texid) {
     }
     t_surface = nullptr;
 }
+
+void SVRendererGL::debugMesh(SVRenderMeshPtr _mesh) {
+    SVSurfacePtr t_surface = MakeSharedPtr<SVSurface>();
+    //t_surface->setTexture(1,0,t_tex);
+//    FVec2 t_invert = FVec2(1.0f,1.0f);
+//    t_surface->setParam("u_invert", t_invert);
+    SVMtlCorePtr t_mtl = mApp->getMtlLib()->getMtl("debug2d");
+    if(t_mtl && _mesh) {
+        t_mtl->reloadShader();
+        bool t_ret = processMtl(t_mtl,t_surface);
+        if(!t_ret) {
+            t_surface = nullptr;
+            return ;
+        }
+        t_ret = processMesh(_mesh);
+        if(!t_ret) {
+            t_surface = nullptr;
+            return ;
+        }
+        drawMesh(_mesh);
+    }
+    t_surface = nullptr;
+}

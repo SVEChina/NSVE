@@ -37,7 +37,7 @@ namespace sv {
         
         SVDetectBasePtr m_pDetectBase;
         
-        SVPersonModulePtr m_pPersonModule;
+        SVPersonModulePtr m_pernson_sys;
     
     };
 

@@ -11,25 +11,21 @@
 #include "../event/SVEventProc.h"
 namespace sv {
     
-    
+    class SVPersonModule : public SVEventProc {
+    public:
+        SVPersonModule(SVInstPtr _app);
         
-        class SVPersonModule : public SVEventProc {
-        public:
-            SVPersonModule(SVInstPtr _app);
-            
-            ~SVPersonModule();
-            
-            void initModule();
-            
-            void destoryModule();
-            
-            SVPersonPtr getPerson(s32 _personId);
-        protected:
-            SVPersonPtr m_persons[SV_SUPPORT_MAX_PERSON_NUM];
-        };
+        ~SVPersonModule();
         
-    
-    
+        void initModule();
+        
+        void destoryModule();
+        
+        SVPersonPtr getPerson(s32 _personId);
+    protected:
+        SVPersonPtr m_persons[SV_SUPPORT_MAX_PERSON_NUM];
+    };
+
 }//!namespace sv
 
 

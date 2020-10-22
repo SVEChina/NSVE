@@ -4,6 +4,8 @@
         "screen.mtl",
         "normal2d.mtl",
         "normal3d.mtl",
+        "debug2d.mtl",
+        "debug3d.mtl",
         "filterGray.mtl",
         "filterHaze.mtl",
         "filterHue.mtl",

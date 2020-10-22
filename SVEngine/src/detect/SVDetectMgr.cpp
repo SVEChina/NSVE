@@ -19,7 +19,7 @@ SVDetectMgr::SVDetectMgr(SVInstPtr _app)
 : SVSysBase(_app) {
     m_detectType = DETECT_T_NULL;
     m_pDetectBase = nullptr;
-    m_pPersonModule = nullptr;
+    m_pernson_sys = nullptr;
 }
 
 SVDetectMgr::~SVDetectMgr() {
@@ -31,8 +31,8 @@ void SVDetectMgr::init(DETECTTYPE type) {
         m_detectType = type;
         m_pDetectBase = MakeSharedPtr<SVDetectST>(mApp);
     }
-    m_pPersonModule = MakeSharedPtr<SVPersonModule>(mApp);
-    m_pPersonModule->initModule();
+    m_pernson_sys = MakeSharedPtr<SVPersonModule>(mApp);
+    m_pernson_sys->initModule();
 }
 
 //析够
@@ -52,8 +52,8 @@ void SVDetectMgr::update(f32 _dt){
 }
 
 SVPersonModulePtr SVDetectMgr::getPersonModule(){
-    if (m_pPersonModule) {
-        return m_pPersonModule;
+    if (m_pernson_sys) {
+        return m_pernson_sys;
     }
     return nullptr;
 }
