@@ -8,6 +8,7 @@
 
 #import "CGInst.h"
 #import "CGDef.h"
+#import "CGBaseSys.h"
 #include "src/app/SVInst.h"
 #include "src/env/SVCtxIOS.h"
 #include "src/rendercore/SVMetal/SVRendererMetal.h"
@@ -109,8 +110,14 @@ static CGInst *mInst;
     }
 }
 
+//- (void)inputF
+
 -(void)render {
     if(m_p_sve) {
+        //
+        CGCamera *camera = [[CGBaseSys getInst] getCamera];
+        m_p_sve->inputFrame((unsigned char*)[camera getFrameData], [camera getFrameWidth], [camera getFrameHeight]);
+        //
         m_p_sve->updateSVE(0.033f);
         m_p_sve->renderSVE();
     }

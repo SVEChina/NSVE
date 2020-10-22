@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0263A6A4254051AC00AC8AC4 /* CGCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 0263A6A3254051AC00AC8AC4 /* CGCamera.m */; };
+		0263A6BD2541814000AC8AC4 /* CGBaseSys.m in Sources */ = {isa = PBXBuildFile; fileRef = 0263A6BC2541814000AC8AC4 /* CGBaseSys.m */; };
 		028B5C50248F62A1002E6A9D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 028B5C4F248F62A1002E6A9D /* AppDelegate.m */; };
 		028B5C53248F62A1002E6A9D /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 028B5C52248F62A1002E6A9D /* SceneDelegate.m */; };
 		028B5C56248F62A1002E6A9D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 028B5C55248F62A1002E6A9D /* ViewController.m */; };
@@ -58,6 +59,8 @@
 		0263A69E25403B0600AC8AC4 /* CGDef.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CGDef.h; sourceTree = "<group>"; };
 		0263A6A2254051AC00AC8AC4 /* CGCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGCamera.h; sourceTree = "<group>"; };
 		0263A6A3254051AC00AC8AC4 /* CGCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGCamera.m; sourceTree = "<group>"; };
+		0263A6BB2541814000AC8AC4 /* CGBaseSys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CGBaseSys.h; sourceTree = "<group>"; };
+		0263A6BC2541814000AC8AC4 /* CGBaseSys.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CGBaseSys.m; sourceTree = "<group>"; };
 		028B5C4B248F62A1002E6A9D /* SVESample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SVESample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		028B5C4E248F62A1002E6A9D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		028B5C4F248F62A1002E6A9D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -135,6 +138,8 @@
 				028B5C55248F62A1002E6A9D /* ViewController.m */,
 				0263A6A2254051AC00AC8AC4 /* CGCamera.h */,
 				0263A6A3254051AC00AC8AC4 /* CGCamera.m */,
+				0263A6BB2541814000AC8AC4 /* CGBaseSys.h */,
+				0263A6BC2541814000AC8AC4 /* CGBaseSys.m */,
 				0263A69E25403B0600AC8AC4 /* CGDef.h */,
 			);
 			path = SVESample;
@@ -267,6 +272,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0263A6BD2541814000AC8AC4 /* CGBaseSys.m in Sources */,
 				028B5C9C248F8C2F002E6A9D /* CMetalView.mm in Sources */,
 				028B5C56248F62A1002E6A9D /* ViewController.m in Sources */,
 				0263A6A4254051AC00AC8AC4 /* CGCamera.m in Sources */,
@@ -415,14 +421,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = K9H559M465;
+				DEVELOPMENT_TEAM = BW96G54658;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../SVEngine\"";
 				INFOPLIST_FILE = SVESample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.nsve.SVESample1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nsve.SVESample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -432,8 +438,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = K9H559M465;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../SVEngine\"";
 				INFOPLIST_FILE = SVESample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -442,6 +448,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nsve.SVESample1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

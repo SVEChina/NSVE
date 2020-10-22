@@ -319,15 +319,25 @@ void SVInst::clearRespath() {
     }
 }
 
+void SVInst::inputFrame(u8 *_frameData, s32 _width, s32 _height){
+    //先只支持RGBA
+    if(m_ar_mgr) {
+        m_ar_mgr->enable(_width, _height);
+        SVDataSwapPtr frameData = MakeSharedPtr<SVDataSwap>();
+        frameData->writeData(_frameData, _width*_height*4);
+        m_ar_mgr->setInputCameraTex(frameData, SV_PF_RGBA);
+    }
+}
+
 void SVInst::test() {
     if(getSceneMgr()) {
         getSceneMgr()->test();
     }
     //常见AR阶段
-    if(m_ar_mgr) {
-        m_ar_mgr->enable();
-        m_ar_mgr->setInputCameraTex("res/bg2.png");
-    }
+//    if(m_ar_mgr) {
+//        m_ar_mgr->enable();
+//        m_ar_mgr->setInputCameraTex("res/bg2.png");
+//    }
     //滤镜设置例子
     SVFilterBasePtr t_filter = SVFilterLib::openFilter(share(),FILTER_LUT);
     if(t_filter) {

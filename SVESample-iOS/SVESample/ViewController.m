@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "CGDef.h"
+#import "CGBaseSys.h"
 #import "CMetalView.h"
 #import "CGLView.h"
 #import "CGInst.h"
@@ -22,6 +23,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[CGBaseSys getInst] initSys];
     // Do any additional setup after loading the view.
     [[CGInst getInst] cgInit];
     //
