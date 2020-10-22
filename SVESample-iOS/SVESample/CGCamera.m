@@ -11,6 +11,7 @@
 #import <ImageIO/ImageIO.h>
 @interface CGCamera()<AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptureAudioDataOutputSampleBufferDelegate>{
     NSLock *m_lock;
+    char *m_frame_cpy;
     bool    m_pauseCamera;
     AVCaptureDevice *m_backCameraDevice;
     AVCaptureDevice *m_frontCameraDevcie;
@@ -34,6 +35,7 @@
         m_pauseCamera = false;
         m_width = 720;
         m_height = 1280;
+        m_frame_cpy = (char *)malloc(m_width*m_height*4);
         [self initializeCamera];
     }
     return self;
@@ -120,6 +122,10 @@
     return  m_height;
 }
 
+- (char *)getFrameData{
+    return m_frame_cpy;
+}
+
 -(AVCaptureWhiteBalanceGains)clampGains:(AVCaptureWhiteBalanceGains)gains toMinVal:(CGFloat)minVal andMaxVal:(CGFloat)maxVal {
     AVCaptureWhiteBalanceGains tmpGains = gains;
     tmpGains.blueGain = MAX(MIN(tmpGains.blueGain, maxVal), minVal);
@@ -155,8 +161,25 @@
 
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection{
     if (!m_pauseCamera) {
-        if ([self.delegate respondsToSelector:@selector(captureOutput:didOutputSampleBuffer:fromConnection:)]) {
-            [self.delegate captureOutput:captureOutput didOutputSampleBuffer:sampleBuffer fromConnection:connection];
+        CVPixelBufferRef pixelBuf = CMSampleBufferGetImageBuffer(sampleBuffer);
+        if(CVPixelBufferLockBaseAddress(pixelBuf, 0) == kCVReturnSuccess){
+            size_t width = CVPixelBufferGetWidth(pixelBuf);
+            size_t height = CVPixelBufferGetHeight(pixelBuf);
+            size_t bytesPerRow = CVPixelBufferGetBytesPerRowOfPlane(pixelBuf, 0);
+            OSType pixelFormat = CVPixelBufferGetPixelFormatType(pixelBuf);
+            if (pixelFormat == kCVPixelFormatType_32BGRA) {
+                GLubyte* bufferPtr = (GLubyte *)CVPixelBufferGetBaseAddress(pixelBuf);
+                memcpy(m_frame_cpy, bufferPtr, m_width*m_height*4);
+                
+            }else {
+                //YUV 数据要这么取！！！！！！！！！！！！！！！！！！！
+//                GLubyte* bufferPtr0 = (GLubyte  *)CVPixelBufferGetBaseAddressOfPlane(_pixelBuf, 0);
+//                SVStreamInPtr t_streamIn = t_app->getBasicSys()->getStreamIn();
+//                if(t_streamIn){
+//                    t_streamIn->pushStreamData([SCENENAME UTF8String], bufferPtr0, (s32)width, (s32)height, pixelFormat, 0);
+//                }
+            }
+            CVPixelBufferUnlockBaseAddress(pixelBuf, 0);
         }
     }
 }

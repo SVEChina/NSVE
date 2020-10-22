@@ -100,6 +100,8 @@ namespace sv {
         
         void test();
         
+        void inputFrame(u8 *_frameData, s32 _width, s32 _height);
+        
         //获取引擎状态
         inline SV_STATE getState() { return m_sv_st; }
         

@@ -26,6 +26,7 @@
 - (void)setFrameRate:(int)rate;
 - (int)getFrameWidth;
 - (int)getFrameHeight;
+- (char *)getFrameData;
 //
 - (void)openHDR;
 - (void)setWhiteTemperature:(CGFloat)current;

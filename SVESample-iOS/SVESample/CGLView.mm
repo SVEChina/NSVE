@@ -65,12 +65,12 @@
 
 -(void)creatTimer {
     // Call render 60 times a second.
-    displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(renderMetal)];
+    displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(renderGL)];
     displayLink.preferredFramesPerSecond = 60;
     [displayLink addToRunLoop:NSRunLoop.currentRunLoop forMode:NSDefaultRunLoopMode];
 }
 
--(void)renderMetal {
+-(void)renderGL {
     [[CGInst getInst] render];
     //
     if(_test) {
