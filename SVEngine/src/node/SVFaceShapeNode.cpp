@@ -5,8 +5,17 @@
 // yizhou Fu,long Yin,longfei Lin,ziyu Xu,xiaofan Li,daming Li
 //
 #include "SVFaceShapeNode.h"
+
 #include "../basesys/SVScene.h"
+#include "../basesys/SVComData.h"
+
+#include "../mtl/SVMtlFaceShape.h"
+#include "../mtl/SVTexMgr.h"
+#include "../mtl/SVMtlLib.h"
+#include "../mtl/SVSurface.h"
+
 #include "../app/SVInst.h"
+#include "../app/SVDispatch.h"
 #include "../event/SVEventMgr.h"
 #include "../event/SVEvent.h"
 #include "../event/SVOpEvent.h"
@@ -18,8 +27,6 @@
 #include "../core/SVGeoGen.h"
 #include "../core/SVPass.h"
 #include "../app/SVGlobalMgr.h"
-#include "../mtl/SVMtlFaceShape.h"
-#include "../mtl/SVTexMgr.h"
 #include "../detect/SVDetectMgr.h"
 #include "../detect/SVDetectST.h"
 
@@ -28,8 +35,8 @@ using namespace sv;
 SVFaceShapeNode::SVFaceShapeNode(SVInstPtr _app)
 :SVNode(_app){
     ntype = "SVFaceShapeNode";
-    m_pMtl = MakeSharedPtr<SVMtlFaceShape>(mApp);
-    m_pMesh = SVGeoGen::createRectMesh(mApp,1.0, 1.0, 36, 64);
+//    m_pMtl = MakeSharedPtr<SVMtlFaceShape>(mApp);
+//    m_pMesh = SVGeoGen::createRectMesh(mApp,1.0, 1.0, 36, 64);
 }
 
 SVFaceShapeNode::~SVFaceShapeNode(){
@@ -77,39 +84,34 @@ void SVFaceShapeNode::clearPass() {
 }
 
 void SVFaceShapeNode::destroy(){
-    stopListen();
-    clearPass();
+//    stopListen();
+//    clearPass();
 }
 
 void SVFaceShapeNode::update(f32 _dt){
     SVNode::update(_dt);
-//    for(s32 i=0;i<m_passPool.size();i++){
-//        if(m_passPool[i]->m_pMtl){
-//            m_passPool[i]->m_pMtl->update(_dt);
-//        }
-//    }
 }
 
 void SVFaceShapeNode::render(){
-//    SVPersonPtr t_person = mApp->getDetectMgr()->getPersonModule()->getPerson(1);
-//    if( t_person && t_person->getExist() ){
-//        t_person->getFaceData();
-//        //t_person->getFaceData()
-//        SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
-//        if (t_rs && false  == t_rs->isSuspend() ) {
-//            for(s32 i=0;i<m_passPool.size();i++){
-//                if(m_passPool[i]->m_pMtl){
-//                    SVRCmdPassPtr t_cmd = MakeSharedPtr<SVRCmdPass>();
-//                    t_cmd->mTag = "SVFaceShapeNode";
-//                    t_cmd->setFbo(m_fbo);
-//                    t_cmd->setTexture(m_passPool[i]->m_outTex);
-//                    t_cmd->setMesh(m_passPool[i]->m_pMesh);
-//                    t_cmd->setMaterial(m_passPool[i]->m_pMtl);
-//                    t_rs->pushRenderCmd(RST_FACEMORPH, t_cmd);
-//                }
-//            }
-//        }
-//    }
+    SVNode::render();
+    SVSurfacePtr t_surface = MakeSharedPtr<SVSurface>();
+    FVec2 t_scale = FVec2(1.0f/700.0f,1.0f/1004.0f);
+    t_surface->setParam("u_scale", t_scale);
+    FVec2 t_off = FVec2(-350.0f,-502.0f);
+    t_surface->setParam("u_off", t_off);
+    FVec3 t_color = FVec3(0.0f,1.0f,0.0f);
+    t_surface->setParam("u_color", t_color);
+    SVMtlCorePtr _mtl = mApp->getMtlLib()->getMtl("debug2d");
+    if(_mtl) {
+        _mtl->reloadShader();
+    }
+    //
+    mApp->getComData()->faceMesh()->setDrawMethod(E_DRAW_POINTS);
+    SVDispatch::dispatchMeshDraw(mApp,
+                                 mApp->getComData()->faceMesh(),
+                                 _mtl,
+                                 t_surface,
+                                 E_RSM_SOLID);
 }
 
 bool SVFaceShapeNode::procEvent(SVEventPtr _event){

@@ -9,11 +9,15 @@
 #include "SVSceneMgr.h"
 #include "SVCameraMgr.h"
 #include "SVConfig.h"
+
 #include "../work/SVTdCore.h"
+
 #include "../node/SVNodeVisit.h"
 #include "../node/SVNode.h"
 #include "../node/SVCube.h"
 #include "../node/SVSpriteNode.h"
+#include "../node/SVFaceShapeNode.h"
+
 #include "../app/SVGlobalMgr.h"
 #include "../app/SVGlobalParam.h"
 
@@ -300,7 +304,6 @@ void SVScene::toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator,
     //序列化树 ? 要做这么复杂吗
 //    if(m_pSceneTree){
 //    }
-    //
     _objValue.AddMember("SVScene", locationObj, _allocator);
 }
 
@@ -321,15 +324,16 @@ void SVScene::test() {
 //    t_sp_node->setMtl("normal2d");
 //    t_sp_node->setTexture("res/test1.png");
 //    addNode(t_sp_node);
-    
-    SVCubePtr t_box_node = MakeSharedPtr<SVCube>(mApp);
-    t_box_node->setRotation(45.0f, 45.0f, 45.0f);
-    t_box_node->setMtl("normal3d");
-    SVSurfacePtr t_surface = t_box_node->getSurface();
-    if(t_surface) {
-        t_surface->setTexture(1, 0, t_tex);
-    }
-    addNode(t_box_node);
-    SVAniUnitRotPtr t_rot = MakeSharedPtr<SVAniUnitRot>(mApp);
-    mApp->getAniMgr()->addAni(t_box_node,t_rot);
+    SVFaceShapeNodePtr t_faceshape_node = MakeSharedPtr<SVFaceShapeNode>(mApp);
+    addNode(t_faceshape_node);
+//    SVCubePtr t_box_node = MakeSharedPtr<SVCube>(mApp);
+//    t_box_node->setRotation(45.0f, 45.0f, 45.0f);
+//    t_box_node->setMtl("normal3d");
+//    SVSurfacePtr t_surface = t_box_node->getSurface();
+//    if(t_surface) {
+//        t_surface->setTexture(1, 0, t_tex);
+//    }
+//    addNode(t_box_node);
+//    SVAniUnitRotPtr t_rot = MakeSharedPtr<SVAniUnitRot>(mApp);
+//    mApp->getAniMgr()->addAni(t_box_node,t_rot);
 }

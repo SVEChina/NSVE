@@ -1,8 +1,8 @@
 {
     "vdsp" : ["E_V2","E_T0"],
     "pass" : "direct",
-    "vs" : "shader/code/debug/debug.vs",
-    "fs" : "shader/code/debug/debug3d.fs",
+    "vs" : "shader/code/debug/debug3d.vs",
+    "fs" : "shader/code/debug/debug.fs",
     "uniform": [
         {
             "stage" : 0,
