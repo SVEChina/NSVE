@@ -44,6 +44,7 @@ SVComData::~SVComData() {
 }
 
 void SVComData::init() {
+    
 }
 
 void SVComData::destroy() {
@@ -322,11 +323,6 @@ SVRenderMeshPtr SVComData::generatePatchMesh(FVec3 &_corner00, FVec3 &_corner10,
     t_pVertexData->writeData(&vertexData[0], sizeof(V3)*t_vertexCount);
     
     SVRenderMeshPtr patchMesh = nullptr;// MakeSharedPtr<SVRenderMesh>(mApp);
-//    patchMesh->setVertexType(E_VF_V3);
-//    patchMesh->setDrawVertNum(t_vertexCount);
-//    patchMesh->setVertexData(t_pVertexData);
-//    patchMesh->setDrawMethod(E_DRAW_LINES);
-//    patchMesh->createMesh();
     return patchMesh;
 }
 
