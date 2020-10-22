@@ -126,7 +126,9 @@ namespace sv {
         virtual void drawScreen(SV_TEXIN _texid) { }
         
         //绘制人脸
-        virtual void debugMesh(SVRenderMeshPtr _mesh) { }
+        virtual void debugMesh2d(SVRenderMeshPtr _mesh) { }
+        
+        virtual void debugMesh3d(SVRenderMeshPtr _mesh) {}
 
     protected:
         //状态

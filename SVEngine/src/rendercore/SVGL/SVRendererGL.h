@@ -84,7 +84,9 @@ namespace sv {
         //绘制屏幕
         void drawScreen(SV_TEXIN _texid);
         
-        void debugMesh(SVRenderMeshPtr _mesh);
+        void debugMesh2d(SVRenderMeshPtr _mesh);
+        
+        void debugMesh3d(SVRenderMeshPtr _mesh);
         
     public:
         u32 m_cur_program;  //当前的program
