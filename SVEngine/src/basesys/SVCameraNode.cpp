@@ -23,13 +23,13 @@ SVCameraNode::SVCameraNode(SVInstPtr _app)
     m_mat_p.setIdentity();
     m_mat_vp.setIdentity();
     //
-    m_znear = 1.0f;
-    m_zfar = 1000.0f;
+    m_znear = 10.0f;
+    m_zfar = 2000.0f;
     m_width = 720.0f;
     m_height = 1280.0f;
     m_fovy = 60.0f;
     //
-    m_pos.set(0.0f,0.0f,500.0f);
+    m_pos.set(0.0f,1000.0f,500.0f);
     m_up.set(0.0f, 1.0f, 0.0f);
     m_target.set(0.0f,0.0f,0.0f);    //m_target 就是target
     m_distance = 100.0f;

@@ -326,14 +326,15 @@ void SVScene::test() {
 //    addNode(t_sp_node);
     SVFaceShapeNodePtr t_faceshape_node = MakeSharedPtr<SVFaceShapeNode>(mApp);
     addNode(t_faceshape_node);
-//    SVCubePtr t_box_node = MakeSharedPtr<SVCube>(mApp);
-//    t_box_node->setRotation(45.0f, 45.0f, 45.0f);
-//    t_box_node->setMtl("normal3d");
-//    SVSurfacePtr t_surface = t_box_node->getSurface();
-//    if(t_surface) {
-//        t_surface->setTexture(1, 0, t_tex);
-//    }
-//    addNode(t_box_node);
-//    SVAniUnitRotPtr t_rot = MakeSharedPtr<SVAniUnitRot>(mApp);
-//    mApp->getAniMgr()->addAni(t_box_node,t_rot);
+    //
+    SVCubePtr t_box_node = MakeSharedPtr<SVCube>(mApp);
+    t_box_node->setRotation(45.0f, 45.0f, 45.0f);
+    t_box_node->setMtl("normal3d");
+    SVSurfacePtr t_surface = t_box_node->getSurface();
+    if(t_surface) {
+        t_surface->setTexture(1, 0, t_tex);
+    }
+    addNode(t_box_node);
+    SVAniUnitRotPtr t_rot = MakeSharedPtr<SVAniUnitRot>(mApp);
+    mApp->getAniMgr()->addAni(t_box_node,t_rot);
 }

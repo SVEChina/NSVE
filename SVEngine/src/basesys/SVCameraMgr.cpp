@@ -27,14 +27,12 @@ SVCameraMgr::~SVCameraMgr() {
 }
 
 void SVCameraMgr::init() {
-    //主相机
     m_main_camera = MakeSharedPtr<SVCameraNode>(mApp);
     m_main_camera->init();
     m_main_camera->setProject();
     m_main_camera->active();
 }
 
-//
 void SVCameraMgr::destroy() {
     if(m_main_camera) {
         m_main_camera->destroy();
@@ -42,20 +40,10 @@ void SVCameraMgr::destroy() {
     }
 }
 
-//更新
 void SVCameraMgr::update(f32 _dt) {
-     //主相机更新
+    //主相机更新
     if(m_main_camera){
         m_main_camera->update(_dt);
-        SVRTargetPtr t_main_rt = mApp->getRenderMgr()->getMainRT();
-        if( t_main_rt ) {
-//            FMat4 t_mat = m_main_camera->viewMat();
-//            t_main_rt->setVMat(t_mat);
-//            t_mat = m_main_camera->projectMat();
-//            t_main_rt->setPMat(t_mat);
-//            t_mat = m_main_camera->vpMat();
-//            t_main_rt->setVPMat(t_mat);
-        }
     }
     //其他相机更新
     CAMERAPOOL::iterator it = m_camera_pool.begin();

@@ -2,9 +2,6 @@
     "version" : "1.0",
     "name" : "screen",
     "shader" : "screen",
-    "textures" :[
-        { "chn": 0 , "from" : "file", "path" : "res/sve.png", "stage": "fs" }
-    ],
     "blend-param" : {
         "enable" : 0
     },
@@ -12,6 +9,9 @@
         "enable" : 0
     },
     "alpha-param" : {
+        "enable" : 0
+    },
+    "depth-param" : {
         "enable" : 0
     }
 }

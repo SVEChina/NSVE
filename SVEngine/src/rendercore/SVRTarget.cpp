@@ -24,9 +24,6 @@ SVRTarget::SVRTarget(SVInstPtr _app,SV_TEXIN _id)
 ,m_camera(nullptr){
     m_auto = true;
     m_cmdNum = 0;
-//    m_color.setColorARGB(0xff000000);
-//    m_depth_value = 1.0f;
-//    m_stencil_value = 0;
     m_stream_pool.resize(E_RSM_MAX);
     for(s32 i=0;i<E_RSM_MAX;i++) {
         m_stream_pool[i] = MakeSharedPtr<SVRenderStream>();
@@ -70,7 +67,6 @@ void SVRTarget::setStencil(s32 _value) {
     m_target_dsp.m_stencil_value = _value;
 }
 
-//
 void SVRTarget::resize(s32 _width,s32 _height) {
     if(m_auto) {
         if( m_target_dsp.m_width!=_width ||

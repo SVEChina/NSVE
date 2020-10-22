@@ -15,7 +15,6 @@
 namespace sv {
     
     //绘制cube
-
     class SVCube : public SVNode {
     public:
         SVCube(SVInstPtr _app);
