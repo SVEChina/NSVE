@@ -2470,14 +2470,14 @@
 		02D5628D2242482600684A9E /* SVMtlShinning.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02D562872242482600684A9E /* SVMtlShinning.cpp */; };
 		02D5628E2242482600684A9E /* SVMtlShinning.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02D562872242482600684A9E /* SVMtlShinning.cpp */; };
 		02D5628F2242482600684A9E /* SVMtlShinning.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02D562872242482600684A9E /* SVMtlShinning.cpp */; };
-		02EA54A222E6D93600F5701D /* SVFaceDataMesh.h in Headers */ = {isa = PBXBuildFile; fileRef = 02EA54A022E6D93500F5701D /* SVFaceDataMesh.h */; };
-		02EA54A322E6D93600F5701D /* SVFaceDataMesh.h in Headers */ = {isa = PBXBuildFile; fileRef = 02EA54A022E6D93500F5701D /* SVFaceDataMesh.h */; };
-		02EA54A422E6D93600F5701D /* SVFaceDataMesh.h in Headers */ = {isa = PBXBuildFile; fileRef = 02EA54A022E6D93500F5701D /* SVFaceDataMesh.h */; };
-		02EA54A522E6D93600F5701D /* SVFaceDataMesh.h in Headers */ = {isa = PBXBuildFile; fileRef = 02EA54A022E6D93500F5701D /* SVFaceDataMesh.h */; };
-		02EA54A622E6D93600F5701D /* SVFaceDataMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02EA54A122E6D93500F5701D /* SVFaceDataMesh.cpp */; };
-		02EA54A722E6D93600F5701D /* SVFaceDataMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02EA54A122E6D93500F5701D /* SVFaceDataMesh.cpp */; };
-		02EA54A822E6D93600F5701D /* SVFaceDataMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02EA54A122E6D93500F5701D /* SVFaceDataMesh.cpp */; };
-		02EA54A922E6D93600F5701D /* SVFaceDataMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02EA54A122E6D93500F5701D /* SVFaceDataMesh.cpp */; };
+		02EA54A222E6D93600F5701D /* SVFaceMesh.h in Headers */ = {isa = PBXBuildFile; fileRef = 02EA54A022E6D93500F5701D /* SVFaceMesh.h */; };
+		02EA54A322E6D93600F5701D /* SVFaceMesh.h in Headers */ = {isa = PBXBuildFile; fileRef = 02EA54A022E6D93500F5701D /* SVFaceMesh.h */; };
+		02EA54A422E6D93600F5701D /* SVFaceMesh.h in Headers */ = {isa = PBXBuildFile; fileRef = 02EA54A022E6D93500F5701D /* SVFaceMesh.h */; };
+		02EA54A522E6D93600F5701D /* SVFaceMesh.h in Headers */ = {isa = PBXBuildFile; fileRef = 02EA54A022E6D93500F5701D /* SVFaceMesh.h */; };
+		02EA54A622E6D93600F5701D /* SVFaceMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02EA54A122E6D93500F5701D /* SVFaceMesh.cpp */; };
+		02EA54A722E6D93600F5701D /* SVFaceMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02EA54A122E6D93500F5701D /* SVFaceMesh.cpp */; };
+		02EA54A822E6D93600F5701D /* SVFaceMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02EA54A122E6D93500F5701D /* SVFaceMesh.cpp */; };
+		02EA54A922E6D93600F5701D /* SVFaceMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02EA54A122E6D93500F5701D /* SVFaceMesh.cpp */; };
 		02EA54AC22E8359000F5701D /* SVPhysicsBodyRigid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02EA54AA22E8358F00F5701D /* SVPhysicsBodyRigid.cpp */; };
 		02EA54AD22E8359000F5701D /* SVPhysicsBodyRigid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02EA54AA22E8358F00F5701D /* SVPhysicsBodyRigid.cpp */; };
 		02EA54AE22E8359000F5701D /* SVPhysicsBodyRigid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02EA54AA22E8358F00F5701D /* SVPhysicsBodyRigid.cpp */; };
@@ -8965,8 +8965,8 @@
 		02C92B42224C99A70065216F /* SVMtlADFilterBase.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVMtlADFilterBase.cpp; sourceTree = "<group>"; };
 		02D562862242482500684A9E /* SVMtlShinning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVMtlShinning.h; sourceTree = "<group>"; };
 		02D562872242482600684A9E /* SVMtlShinning.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVMtlShinning.cpp; sourceTree = "<group>"; };
-		02EA54A022E6D93500F5701D /* SVFaceDataMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVFaceDataMesh.h; sourceTree = "<group>"; };
-		02EA54A122E6D93500F5701D /* SVFaceDataMesh.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVFaceDataMesh.cpp; sourceTree = "<group>"; };
+		02EA54A022E6D93500F5701D /* SVFaceMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVFaceMesh.h; sourceTree = "<group>"; };
+		02EA54A122E6D93500F5701D /* SVFaceMesh.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVFaceMesh.cpp; sourceTree = "<group>"; };
 		02EA54AA22E8358F00F5701D /* SVPhysicsBodyRigid.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVPhysicsBodyRigid.cpp; sourceTree = "<group>"; };
 		02EA54B422E83EE800F5701D /* SVPhysicsShapeBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPhysicsShapeBox.h; sourceTree = "<group>"; };
 		02EA54B522E83EE800F5701D /* SVPhysicsShapeBox.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVPhysicsShapeBox.cpp; sourceTree = "<group>"; };
@@ -12777,8 +12777,8 @@
 				5F7D5D79215F407700803BCF /* SVConfig.h */,
 				5CABE76A2261CD840037E8D2 /* SVDeformMgr.cpp */,
 				5CABE76B2261CD840037E8D2 /* SVDeformMgr.h */,
-				02EA54A122E6D93500F5701D /* SVFaceDataMesh.cpp */,
-				02EA54A022E6D93500F5701D /* SVFaceDataMesh.h */,
+				02EA54A122E6D93500F5701D /* SVFaceMesh.cpp */,
+				02EA54A022E6D93500F5701D /* SVFaceMesh.h */,
 				5F7D5D75215F407700803BCF /* SVFontProcess.cpp */,
 				5F7D5D76215F407700803BCF /* SVFontProcess.h */,
 				5F06308623223A4900A2BD73 /* SVLightSys.cpp */,
@@ -14497,7 +14497,7 @@
 				020C4C6522DC5DD200201753 /* btDefaultMotionState.h in Headers */,
 				0288FA14217B04090089E61C /* SVParseBMFont.h in Headers */,
 				5F56635F253FC80000670056 /* FIFOSamplePipe.h in Headers */,
-				02EA54A522E6D93600F5701D /* SVFaceDataMesh.h in Headers */,
+				02EA54A522E6D93600F5701D /* SVFaceMesh.h in Headers */,
 				5F566795253FC80300670056 /* btSimplexSolverInterface.h in Headers */,
 				5F5669BD253FC80500670056 /* btUniformScalingShape.h in Headers */,
 				5F566CE9253FC80700670056 /* b3Matrix3x3.h in Headers */,
@@ -15338,7 +15338,7 @@
 				5FD9B03222644E9400522317 /* SVRTexMetal.h in Headers */,
 				5F566703253FC80300670056 /* IDConfig.hpp in Headers */,
 				5F7D66C5215F407900803BCF /* SVMtlFaceShape.h in Headers */,
-				02EA54A322E6D93600F5701D /* SVFaceDataMesh.h in Headers */,
+				02EA54A322E6D93600F5701D /* SVFaceMesh.h in Headers */,
 				5F566ECF253FC80900670056 /* document.h in Headers */,
 				5F96BDCF24F907C60020F7C4 /* lundump.h in Headers */,
 				5F5668BB253FC80400670056 /* btSphereSphereCollisionAlgorithm.h in Headers */,
@@ -16448,7 +16448,7 @@
 				020C47AC22DC5DCE00201753 /* btPolyhedralConvexShape.h in Headers */,
 				02690F9A227073AF00EF1FFC /* SVMtlPenStrokeGlow.h in Headers */,
 				020C466622DC5DCD00201753 /* btGImpactQuantizedBvhStructs.h in Headers */,
-				02EA54A222E6D93600F5701D /* SVFaceDataMesh.h in Headers */,
+				02EA54A222E6D93600F5701D /* SVFaceMesh.h in Headers */,
 				5F566CCA253FC80700670056 /* b3Mat3x3.h in Headers */,
 				020C461E22DC5DCD00201753 /* btGenericPoolAllocator.h in Headers */,
 				5F566E7E253FC80800670056 /* filereadstream.h in Headers */,
@@ -17806,7 +17806,7 @@
 				5FD9B03322644E9400522317 /* SVRTexMetal.h in Headers */,
 				5F566704253FC80300670056 /* IDConfig.hpp in Headers */,
 				5F7D66C6215F407900803BCF /* SVMtlFaceShape.h in Headers */,
-				02EA54A422E6D93600F5701D /* SVFaceDataMesh.h in Headers */,
+				02EA54A422E6D93600F5701D /* SVFaceMesh.h in Headers */,
 				5F566ED0253FC80900670056 /* document.h in Headers */,
 				5F96BDD024F907C60020F7C4 /* lundump.h in Headers */,
 				5F5668BC253FC80400670056 /* btSphereSphereCollisionAlgorithm.h in Headers */,
@@ -19422,7 +19422,7 @@
 				5F7D6251215F407800803BCF /* pngrutil.c in Sources */,
 				5F7D658F215F407800803BCF /* SVCtxOSX.mm in Sources */,
 				5F5667D5253FC80300670056 /* btGjkEpa2.cpp in Sources */,
-				02EA54A922E6D93600F5701D /* SVFaceDataMesh.cpp in Sources */,
+				02EA54A922E6D93600F5701D /* SVFaceMesh.cpp in Sources */,
 				020C4C3922DC5DD200201753 /* btTaskScheduler.cpp in Sources */,
 				5F566725253FC80300670056 /* MultiBodyTreeImpl.cpp in Sources */,
 				020C455522DC5DCD00201753 /* btSimulationIslandManager.cpp in Sources */,
@@ -20090,7 +20090,7 @@
 				5F0E63C624F3B97C002620DC /* SkeletonJson.c in Sources */,
 				5CED28DB22840EF500A6817B /* SVDeformScale.cpp in Sources */,
 				02381F0B224399F400584EEF /* SVMtlStreak.cpp in Sources */,
-				02EA54A622E6D93600F5701D /* SVFaceDataMesh.cpp in Sources */,
+				02EA54A622E6D93600F5701D /* SVFaceMesh.cpp in Sources */,
 				5F96BD2A24F907C50020F7C4 /* linit.c in Sources */,
 				5C0C6070219BFF790052A826 /* TDStretch.cpp in Sources */,
 				020C473422DC5DCE00201753 /* btTriangleMesh.cpp in Sources */,
@@ -20572,7 +20572,7 @@
 				5F96BD8424F907C60020F7C4 /* lmem.c in Sources */,
 				020C476622DC5DCE00201753 /* btOptimizedBvh.cpp in Sources */,
 				5F5668B8253FC80400670056 /* btCompoundCollisionAlgorithm.cpp in Sources */,
-				02EA54A822E6D93600F5701D /* SVFaceDataMesh.cpp in Sources */,
+				02EA54A822E6D93600F5701D /* SVFaceMesh.cpp in Sources */,
 				020C439422DC5DCC00201753 /* btSoftBodyHelpers.cpp in Sources */,
 				5F7D611C215F407700803BCF /* SVGeoGen.cpp in Sources */,
 				5F566800253FC80300670056 /* btSubSimplexConvexCast.cpp in Sources */,
@@ -21428,7 +21428,7 @@
 				5F96BD8324F907C60020F7C4 /* lmem.c in Sources */,
 				020C476522DC5DCE00201753 /* btOptimizedBvh.cpp in Sources */,
 				5F5668B7253FC80400670056 /* btCompoundCollisionAlgorithm.cpp in Sources */,
-				02EA54A722E6D93600F5701D /* SVFaceDataMesh.cpp in Sources */,
+				02EA54A722E6D93600F5701D /* SVFaceMesh.cpp in Sources */,
 				020C439322DC5DCC00201753 /* btSoftBodyHelpers.cpp in Sources */,
 				5F7D611B215F407700803BCF /* SVGeoGen.cpp in Sources */,
 				5F5667FF253FC80300670056 /* btSubSimplexConvexCast.cpp in Sources */,

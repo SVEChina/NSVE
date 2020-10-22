@@ -6,7 +6,7 @@
 //
 
 #include "SVComData.h"
-#include "SVFaceDataMesh.h"
+#include "SVFaceMesh.h"
 #include "../app/SVInst.h"
 #include "../app/SVDispatch.h"
 #include "../event/SVEvent.h"
@@ -62,13 +62,37 @@ void SVComData::loadDefault() {
     m_screenMesh->setDrawMethod(E_DRAW_TRIANGLES);
     m_screenMesh->setDrawVertNum(6);
     m_screenMesh->dispatch();
+    //
+    m_faceMesh = SVFaceMesh::createFaceMeshSt(mApp,true);
 }
 
-SVFaceDataMeshPtr SVComData::faceMesh(s32 _type) {
-    //根据不同算法，获取不同算法的标准脸
-    
-    return nullptr;
-}
+//SVFaceMeshPtr SVComData::faceMesh(s32 _type) {
+//    //根据不同算法，获取不同算法的标准脸
+//    if(_type == 1) {
+//        m_faceMesh = MakeSharedPtr<SVRenderMesh>(mApp);
+//        //索引描述
+//        SVIndexStreamDspPtr t_index_dsp = MakeSharedPtr<SVIndexStreamDsp>();
+//        t_index_dsp->setIndexCnt(6);
+//        t_index_dsp->setBufType(E_BFT_STATIC_DRAW);
+//        t_index_dsp->setStreamData(m_rect_index, 6*sizeof(u16));
+//        m_screenMesh->setIndexDsp(t_index_dsp);
+//        //顶点描述
+//        SVVertStreamDspPtr t_vert_dsp= MakeSharedPtr<SVVertStreamDsp>(E_BFM_SOA);
+//        t_vert_dsp->push(E_VF_V2);
+//        t_vert_dsp->push(E_VF_T0);
+//        t_vert_dsp->setBufType(E_BFT_STATIC_DRAW);
+//        t_vert_dsp->setVertCnt(4);
+//        t_vert_dsp->setMixStreamData(m_screen_rect_v2_t0, 16*sizeof(f32));
+//        m_faceMesh->setVertDsp(t_vert_dsp);
+//        //设置绘制方法
+//        m_faceMesh->setDrawMethod(E_DRAW_TRIANGLES);
+//        m_faceMesh->setDrawVertNum(6);
+//        m_faceMesh->dispatch();
+//    } else {
+//        
+//    }
+//    return nullptr;
+//}
 
 #define IDX(_x_, _y_) ((_y_)*rx + (_x_))
 SVRenderMeshPtr SVComData::generatePatchMesh(FVec3 &_corner00, FVec3 &_corner10, FVec3 &_corner01, FVec3 &_corner11, s32 _rx, s32 _ry){

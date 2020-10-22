@@ -40,6 +40,8 @@ namespace sv {
         
         bool loadFileContentStr(SVDataChunk *_datachunk, cptr8 _fname);
         
+        bool exist(cptr8 _fname);
+        
         u64 checkFileDataLength(cptr8 _fpath);
         
     protected:

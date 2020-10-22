@@ -13,7 +13,6 @@
 #include "../core/SVMathHelper.h"
 #include "../basesys/SVConfig.h"
 #include "../basesys/SVComData.h"
-#include "../basesys/SVFaceDataMesh.h"
 #include "../rendercore/SVRenderMesh.h"
 #include "../rendercore/SVRenderMgr.h"
 #include "../detect/SVDetectMgr.h"
