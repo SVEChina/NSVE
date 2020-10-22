@@ -55,6 +55,27 @@ namespace sv {
         SVRenderMeshPtr m_screenMesh;
         
         SVRenderMeshPtr m_faceMesh;
+        
+    public:
+        //标准图片的宽高
+        static s32 m_standard_imgw_st;
+        static s32 m_standard_imgh_st;
+        static s32 m_standard_imgw_fp;
+        static s32 m_standard_imgh_fp;
+        static s32 m_standard_imgw_as;
+        static s32 m_standard_imgh_as;
+        
+        static SVRenderMeshPtr createFaceMeshSt(SVInstPtr _app,bool _simp = true);
+        
+        static SVRenderMeshPtr createFaceMeshFp(SVInstPtr _app,bool _simp = true);
+        
+        static SVRenderMeshPtr createFaceMeshAS(SVInstPtr _app,bool _simp = true);
+        
+    protected:
+        static SVRenderMeshPtr _loadFaceMesh(SVInstPtr _app,
+                                             cptr8 _indexfile,
+                                             cptr8 _datafile,
+                                             s32 _type);
     };
     
 }//!namespace
