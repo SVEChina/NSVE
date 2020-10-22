@@ -1,0 +1,3 @@
+include ':NSVEngine'
+include ':app'
+rootProject.name = "SVEAndroidSample"
