@@ -9,11 +9,15 @@
 #include "SVSceneMgr.h"
 #include "SVCameraMgr.h"
 #include "SVConfig.h"
+
 #include "../work/SVTdCore.h"
+
 #include "../node/SVNodeVisit.h"
 #include "../node/SVNode.h"
 #include "../node/SVCube.h"
 #include "../node/SVSpriteNode.h"
+#include "../node/SVFaceShapeNode.h"
+
 #include "../app/SVGlobalMgr.h"
 #include "../app/SVGlobalParam.h"
 
@@ -321,7 +325,10 @@ void SVScene::test() {
 //    t_sp_node->setMtl("normal2d");
 //    t_sp_node->setTexture("res/test1.png");
 //    addNode(t_sp_node);
-    
+    //
+    SVFaceShapeNodePtr t_faceshape_node = MakeSharedPtr<SVFaceShapeNode>(mApp);
+    addNode(t_faceshape_node);
+    //
     SVCubePtr t_box_node = MakeSharedPtr<SVCube>(mApp);
     t_box_node->setRotation(45.0f, 45.0f, 45.0f);
     t_box_node->setMtl("normal3d");

@@ -21,7 +21,6 @@
 #include "../core/SVGeoGen.h"
 #include "../core/SVPass.h"
 #include "../app/SVGlobalMgr.h"
-#include "../mtl/SVMtlFaceShape.h"
 #include "../mtl/SVMtlShapeVaried.h"
 #include "../mtl/SVTexMgr.h"
 #include "../base/SVVec2.h"

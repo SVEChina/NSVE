@@ -292,63 +292,63 @@ s32 SVRMeshGL::process(SVRendererPtr _renderer){
                     s32 t_attr = glGetAttribLocation(t_program,NAME_POSITION);
                     if(t_attr>=0) {
                         glEnableVertexAttribArray(t_attr);
-                        glVertexAttribPointer(t_attr, 2, GL_FLOAT, GL_FALSE, 0, 0);
+                        glVertexAttribPointer(t_attr, 2, GL_FLOAT, GL_FALSE, 2*sizeof(f32), 0);
                     }
                 } else if (_vf == E_VF_V3) {
                     s32 t_attr = glGetAttribLocation(t_program,NAME_POSITION);
                     if(t_attr>=0) {
                         glEnableVertexAttribArray(t_attr);
-                        glVertexAttribPointer(t_attr, 3, GL_FLOAT, GL_FALSE, 0, 0);
+                        glVertexAttribPointer(t_attr, 3, GL_FLOAT, GL_FALSE, 3*sizeof(f32), 0);
                     }
                 } else if (_vf == E_VF_NOR) {
                     s32 t_attr = glGetAttribLocation(t_program,NAME_NORMAL);
                     if(t_attr>=0) {
                         glEnableVertexAttribArray(t_attr);
-                        glVertexAttribPointer(t_attr, 3, GL_FLOAT, GL_FALSE, 0, 0);
+                        glVertexAttribPointer(t_attr, 3, GL_FLOAT, GL_FALSE, 3*sizeof(f32), 0);
                     }
                 } else if (_vf == E_VF_TAG) {
                     s32 t_attr = glGetAttribLocation(t_program,NAME_TAGENT);
                     if(t_attr>=0) {
                         glEnableVertexAttribArray(t_attr);
-                        glVertexAttribPointer(t_attr, 4, GL_FLOAT, GL_FALSE, 0, 0);
+                        glVertexAttribPointer(t_attr, 4, GL_FLOAT, GL_FALSE, 4*sizeof(f32), 0);
                     }
                 } else if (_vf == E_VF_BTAG) {
                     s32 t_attr = glGetAttribLocation(t_program,NAME_BNOR);
                     if(t_attr>=0) {
                         glEnableVertexAttribArray(t_attr);
-                        glVertexAttribPointer(t_attr, 4, GL_FLOAT, GL_FALSE, 0, 0);
+                        glVertexAttribPointer(t_attr, 4, GL_FLOAT, GL_FALSE, 4*sizeof(f32), 0);
                     }
                 } else if (_vf == E_VF_C0) {
                     s32 t_attr = glGetAttribLocation(t_program,NAME_COLOR);
                     if(t_attr>=0) {
                         glEnableVertexAttribArray(t_attr);
-                        glVertexAttribPointer(t_attr, 4, GL_UNSIGNED_BYTE, GL_TRUE, 0, 0);
+                        glVertexAttribPointer(t_attr, 4, GL_UNSIGNED_BYTE, GL_TRUE, 4*sizeof(s8), 0);
                     }
                 } else if (_vf == E_VF_T0) {
                     s32 t_attr = glGetAttribLocation(t_program,NAME_TEXCOORD0);
                     if(t_attr>=0) {
                         glEnableVertexAttribArray(t_attr);
-                        glVertexAttribPointer(t_attr, 2, GL_FLOAT, GL_FALSE, 0, 0);
+                        glVertexAttribPointer(t_attr, 2, GL_FLOAT, GL_FALSE, 2*sizeof(f32), 0);
                     }
                 } else if (_vf == E_VF_T1) {
                     s32 t_attr = glGetAttribLocation(t_program,NAME_TEXCOORD1);
                     if(t_attr>=0) {
                         glEnableVertexAttribArray(t_attr);
-                        glVertexAttribPointer(t_attr, 2, GL_FLOAT, GL_FALSE, 0, 0);
+                        glVertexAttribPointer(t_attr, 2, GL_FLOAT, GL_FALSE, 2*sizeof(f32), 0);
                     }
                 } else if (_vf == E_VF_BONE) {
                     //骨骼ID
                     s32 t_attr = glGetAttribLocation(t_program,NAME_BONE_ID);
                     if(t_attr>=0) {
                         glEnableVertexAttribArray(t_attr);
-                        glVertexAttribPointer(t_attr, 4, GL_UNSIGNED_SHORT, GL_FALSE, 0, 0);
+                        glVertexAttribPointer(t_attr, 4, GL_UNSIGNED_SHORT, GL_FALSE, 4*sizeof(s16), 0);
                     }
                 } else if (_vf & E_VF_BONE_W) {
                     //骨骼权重
                     s32 t_attr = glGetAttribLocation(t_program,NAME_BONE_WEIGHT);
                     if(t_attr>=0) {
                         glEnableVertexAttribArray(t_attr);
-                        glVertexAttribPointer(t_attr, 4, GL_FLOAT, GL_FALSE, 0, 0);
+                        glVertexAttribPointer(t_attr, 4, GL_FLOAT, GL_FALSE, 4*sizeof(f32), 0);
                     }
                 }
             }

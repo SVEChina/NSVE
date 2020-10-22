@@ -187,7 +187,9 @@ bool SVRendererGL::processMtl(SVMtlCorePtr _mtl,SVSurfacePtr _surface) {
                     //向surface上找目标纹理
                     SVTexturePtr t_tex = _surface->getTexture(t_stage,t_chn);
                     if(t_tex) {
-                        processTexture( t_tex->getResTex() , t_sampler_index++ , t_name.c_str() );
+                        processTexture(t_tex->getResTex(),
+                                       t_sampler_index++,
+                                       t_name.c_str() );
                     }
                 }
             }
@@ -302,6 +304,8 @@ void SVRendererGL::debugMesh2d(SVRenderMeshPtr _mesh) {
     SVSurfacePtr t_surface = MakeSharedPtr<SVSurface>();
     FVec2 t_scale = FVec2(1.0f,1.0f);
     t_surface->setParam("u_scale", t_scale);
+    FVec2 t_off = FVec2(0.0f,0.0f);
+    t_surface->setParam("u_off", t_off);
     FVec3 t_color = FVec3(0.0f,1.0f,0.0f);
     t_surface->setParam("u_color", t_color);
     SVMtlCorePtr t_mtl = mApp->getMtlLib()->getMtl("debug2d");
@@ -322,7 +326,6 @@ void SVRendererGL::debugMesh2d(SVRenderMeshPtr _mesh) {
     }
     t_surface = nullptr;
 }
-
 
 void SVRendererGL::debugMesh3d(SVRenderMeshPtr _mesh) {
     SVSurfacePtr t_surface = MakeSharedPtr<SVSurface>();
