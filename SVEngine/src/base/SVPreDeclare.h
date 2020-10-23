@@ -203,7 +203,7 @@ namespace sv {
     DECLARE_SHAREPTR(SVDetectST);
     DECLARE_SHAREPTR(SVPerson);
     DECLARE_SHAREPTR(SVPersonModule);
-    DECLARE_SHAREPTR(SVPersonTracker);
+    DECLARE_SHAREPTR(SVTrackerFace);
     DECLARE_SHAREPTR(SVPersonExpressionExt);
     
     //logic

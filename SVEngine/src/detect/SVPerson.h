@@ -14,10 +14,10 @@
 #include "../base/SVDatatDef.h"
 #include "../app/SVInst.h"
 #include "../work/SVTdCore.h"
-#include "SVPersonTracker.h"
+#include "SVTrackerFace.h"
 
-//最大支持面部400个点
-#define MAX_FACE_PT_NUM 200
+//最大支持面部2000个点
+#define MAX_FACE_PT_NUM 2000
 
 namespace sv {
     
@@ -27,7 +27,7 @@ namespace sv {
         
         ~SVPerson();
         
-        SVPersonTrackerPtr getTracker();
+        SVTrackerFacePtr getTracker();
         
         void setDetectType(DETECTTYPE type);
         
@@ -72,13 +72,13 @@ namespace sv {
     protected:
         void _listenData_ST(SVDetectSTPtr detect);
         bool m_dirty;
-        SVPersonTrackerPtr m_pTracker;
+        SVTrackerFacePtr m_pTracker;
         DETECTTYPE m_detectType;    //识别数据类型
         bool m_exist;
         bool m_personDirty;
-        s32 m_facePtNum;    //识别面部顶点数
-        f32 *m_pFaceData;   //识别数据
-        f32 *m_pFaceDataOriginal;
+        s32 m_facePtNum;                            //识别面部顶点数
+        f32 m_pFaceData[MAX_FACE_PT_NUM*2];         //识别数据
+        f32 m_pFaceDataOriginal[MAX_FACE_PT_NUM*2]; 
         s32 m_personID;
         FVec3 m_facerot;
         SVRect m_facerect;

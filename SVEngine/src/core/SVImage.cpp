@@ -7,7 +7,7 @@
 
 #include "SVImage.h"
 #include "../base/SVDataSwap.h"
-#include "../file/SVLoaderPng.h"
+#include "../file/SVLoaderImage.h"
 #include "../mtl/SVTexture.h"
 
 using namespace sv;
@@ -60,20 +60,82 @@ SVImage::~SVImage() {
     m_pData = nullptr;
 }
 
+SVImagePtr SVImage::share() {
+    return std::dynamic_pointer_cast<SVImage>(shareObject()) ;
+}
+
 s32 SVImage::load(cptr8 _filename){
-    SV_LOG_INFO("load image: %s \n",_filename );
     m_img_name = _filename;
-    //更具加载器类型，来加载不同的纹理
-    SVLoaderPng pngLoad(mApp);
-    u8 *pTexData = nullptr;
-    pngLoad.loadData(_filename, &pTexData);
-    if (pTexData) {
-        create2D(pngLoad.m_iWidth, pngLoad.m_iHeight, pngLoad.m_tex_format);
-        setPixels(pTexData, pngLoad.m_iDataLength);
-        free(pTexData);
-        return 1;
+    return SVLoaderImage::load(mApp,share(),_filename);
+}
+
+////纹理格式
+//enum SV_TEXFORMATE{
+//    SV_FORMAT_R8 = 0,        // 8-bits per channel unsigned formats
+//    SV_FORMAT_RG8,
+//    SV_FORMAT_RGB8,
+//    SV_FORMAT_RGBA8,
+//    SV_FORMAT_BGRA8,
+//
+//    SV_FORMAT_R16,            // 16-bits per channel unsigned formats
+//    SV_FORMAT_RG16,
+//    SV_FORMAT_RGB16,
+//    SV_FORMAT_RGBA16,
+//
+//    SV_FORMAT_R16F,        // 16-bits per channel float formats
+//    SV_FORMAT_RG16F,
+//    SV_FORMAT_RGB16F,
+//    SV_FORMAT_RGBA16F,
+//
+//    SV_FORMAT_R32F,        // 32-bits per channel float formats
+//    SV_FORMAT_RG32F,
+//    SV_FORMAT_RGB32F,
+//    SV_FORMAT_RGBA32F,
+//
+//    SV_FORMAT_R5G6B5,      // combined formats
+//    SV_FORMAT_RGBA4,
+//    SV_FORMAT_RGB5A1,
+//    SV_FORMAT_RGB10A2,
+//
+//    SV_FORMAT_DXT1,        // compressed formats
+//    SV_FORMAT_DXT3,
+//    SV_FORMAT_DXT5,
+//    SV_FORMAT_ATI1,
+//    SV_FORMAT_ATI2,
+//    SV_FORMAT_ETC1,
+//    SV_FORMAT_ETC2,
+//    SV_FORMAT_ETC5,
+//    SV_FORMAT_EAC1,
+//    SV_FORMAT_EAC2,
+//    SV_FORMAT_ATC1,
+//    SV_FORMAT_ATC3,
+//    SV_FORMAT_ATC5,
+//    SV_FORMAT_PVR4,
+//    SV_FORMAT_ZLC1,
+//    SV_FORMAT_ZLC2,
+//};
+
+void SVImage::fill(StbRef* _ref) {
+    m_width = _ref->width;
+    m_height = _ref->height;
+    m_depth = 0;//_ref->depth;
+    if(_ref->channels == 1) {
+        m_type = SV_IMAGE_2D;
+        m_format = SV_FORMAT_R8;
+    }else if(_ref->channels == 2) {
+        m_type = SV_IMAGE_2D;
+        m_format = SV_FORMAT_RG8;
+    }else if(_ref->channels == 3) {
+        m_type = SV_IMAGE_2D;
+        m_format = SV_FORMAT_RGB8;
+    }else if(_ref->channels == 4) {
+        m_type = SV_IMAGE_2D;
+        m_format = SV_FORMAT_RGBA8;
     }
-    return 0;
+    //
+    m_pData = nullptr;
+    m_pData = MakeSharedPtr<SVDataSwap>();
+    m_pData->writeData(_ref->data, _ref->dataLen);
 }
 
 SVTexturePtr SVImage::toTexture() {
