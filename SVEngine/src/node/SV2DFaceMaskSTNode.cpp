@@ -8,7 +8,6 @@
 #include "SV2DFaceMaskSTNode.h"
 
 #include "../mtl/SVTexture.h"
-#include "../mtl/SVMtlFace2D.h"
 #include "../mtl/SVTexMgr.h"
 #include "../core/SVMathHelper.h"
 #include "../basesys/SVConfig.h"
