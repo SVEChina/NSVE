@@ -6,7 +6,7 @@
 //
 
 #include "SVPerson.h"
-#include "SVPersonTracker.h"
+#include "SVTrackerFace.h"
 #include "SVDetectMgr.h"
 #include "SVDetectST.h"
 
@@ -19,43 +19,33 @@ SVPerson::SVPerson(SVInstPtr _app)
     m_personDirty = true;
     m_exist = false;
     m_detectType = DETECT_T_NULL;
-    m_pTracker = MakeSharedPtr<SVPersonTracker>(mApp);
-    m_pFaceData = new f32[MAX_FACE_PT_NUM * 2];
-    m_pFaceDataOriginal= new f32[MAX_FACE_PT_NUM * 2];
+    m_pTracker = MakeSharedPtr<SVTrackerFace>(mApp);
     memset(m_pFaceData, 0, sizeof(f32) * 2 * MAX_FACE_PT_NUM);
     memset(m_pFaceDataOriginal, 0, sizeof(f32) * 2 * MAX_FACE_PT_NUM);
 }
 
 SVPerson::~SVPerson() {
-    if (m_pFaceData) {
-        delete m_pFaceData;
-        m_pFaceData = nullptr;
-    }
-    if (m_pFaceDataOriginal) {
-        delete m_pFaceDataOriginal;
-        m_pFaceDataOriginal = nullptr;
-    }
     m_pTracker = nullptr;
 }
 
 void SVPerson::update(f32 _dt) {
+    if(!m_pTracker){
+        return;
+    }
     m_dataLock.lock();
-        if(!m_pTracker){
-            return;
-        }
-        if(m_detectType == DETECT_T_AS){
-            
-        }else if(m_detectType == DETECT_T_FP){
-     
-        }else if(m_detectType == DETECT_T_ST){
-            m_pTracker->track_st(m_pFaceData,
-                                 m_facePtNum,
-                                 m_facerect,
-                                 m_facerot.x,
-                                 m_facerot.y,
-                                 m_facerot.z,
-                                 m_personID);
-        }
+    if(m_detectType == DETECT_T_AS){
+        
+    }else if(m_detectType == DETECT_T_FP){
+        
+    }else if(m_detectType == DETECT_T_ST){
+        m_pTracker->track_st(m_pFaceData,
+                             m_facePtNum,
+                             m_facerect,
+                             m_facerot.x,
+                             m_facerot.y,
+                             m_facerot.z,
+                             m_personID);
+    }
     m_dataLock.unlock();
 }
 
@@ -79,15 +69,19 @@ void SVPerson::setDetectType(DETECTTYPE type) {
 }
 
 void SVPerson::setFaceData(void* _pdata,s32 _len) {
-    m_dataLock.lock();
-    memcpy(m_pFaceData, _pdata, _len);
-    m_dataLock.unlock();
+    if(_len>0 && _len<sizeof(f32)*2*MAX_FACE_PT_NUM) {
+        m_dataLock.lock();
+        memcpy(m_pFaceData, _pdata, _len);
+        m_dataLock.unlock();
+    }
 }
 
 void SVPerson::setFaceDataOriginal(void* _pdata,s32 _len){
-    m_dataLock.lock();
-    memcpy(m_pFaceDataOriginal, _pdata, _len);
-    m_dataLock.unlock();
+    if(_len>0 && _len<sizeof(f32)*2*MAX_FACE_PT_NUM) {
+        m_dataLock.lock();
+        memcpy(m_pFaceDataOriginal, _pdata, _len);
+        m_dataLock.unlock();
+    }
 }
 
 void SVPerson::setFaceRect(f32 _left,f32 _top,f32 _right,f32 _bottom){
@@ -155,7 +149,7 @@ f32 SVPerson::getFaceDataOriginalY(s32 _index){
     return 0.0f;
 }
 
-SVPersonTrackerPtr SVPerson::getTracker() {
+SVTrackerFacePtr SVPerson::getTracker() {
     return m_pTracker;
 }
 

@@ -318,7 +318,7 @@ void SVScene::fromJSON(RAPIDJSON_NAMESPACE::Value &item) {
 }
 
 void SVScene::test() {
-    SVTexturePtr t_tex = mApp->getTexMgr()->getTexture("res/test1.png");
+    SVTexturePtr t_tex = mApp->getTexMgr()->getTexture("res/test2.jpeg");
 //    //创建一个测试场景
 //    SVSpriteNodePtr t_sp_node = MakeSharedPtr<SVSpriteNode>(mApp);
 //    t_sp_node->setMtl("normal2d");

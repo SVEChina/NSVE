@@ -28,7 +28,7 @@
 #include "../../basesys/SVConfig.h"
 #include "../../basesys/SVSensorProcess.h"
 #include "../../detect/SVDetectMgr.h"
-#include "../../detect/SVPersonTracker.h"
+#include "../../detect/SVTrackerFace.h"
 #include "../../file/SVFileMgr.h"
 
 #include "SVPenPackData.h"
@@ -321,7 +321,7 @@ bool SVPenDraw::procEvent(SVEventPtr _event){
 void SVPenDraw::_updateFaceParam(){
 //    SVPersonPtr t_person = mApp->getDetectMgr()->getPersonModule()->getPerson(1);
 //    if (t_person && t_person->getExist()) {
-//        SVPersonTrackerPtr t_personTracker = t_person->getTracker();
+//        SVTrackerFacePtr t_personTracker = t_person->getTracker();
 //        f32 m_screenH = mApp->m_global_param.sv_height;
 //        f32 t_pt_x = t_person->getFaceDataOriginalX(46);
 //        f32 t_pt_y = m_screenH - t_person->getFaceDataOriginalY(46);

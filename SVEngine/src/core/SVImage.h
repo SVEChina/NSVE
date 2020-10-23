@@ -15,6 +15,15 @@
 
 namespace sv {
     
+    struct StbRef {
+        s32 width;
+        s32 height;
+        s32 bit;
+        s32 channels;
+        size_t dataLen;
+        void *data;
+    };
+
     class SVImage : public SVGBaseEx {
     public:
         struct Pixeli{
@@ -36,7 +45,11 @@ namespace sv {
         
         virtual ~SVImage();
         
+        SVImagePtr share();
+        
         s32 load(cptr8 _filename);
+        
+        void fill(StbRef* _ref);
         
         //clear image
         void clear();
@@ -124,7 +137,6 @@ namespace sv {
         s32 m_width;                // image size
         s32 m_height;
         s32 m_depth;
-        //
         SVDataSwapPtr m_pData;
     };
     
