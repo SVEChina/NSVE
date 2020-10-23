@@ -23,15 +23,7 @@
 - (instancetype)initWithFrame:(CGRect)frameRect {
     self = [super initWithFrame:frameRect];
     if( self ) {
-        self.mDevice = MTLCreateSystemDefaultDevice();
-        self.mCommandQueue = [self.mDevice newCommandQueue];
-        //创建metal环境
-        metalLayer = [CAMetalLayer layer];
-        metalLayer.device = self.mDevice;
-        metalLayer.pixelFormat = MTLPixelFormatBGRA8Unorm;
-        metalLayer.frame = frameRect;
-        [self.layer insertSublayer:metalLayer atIndex:0];
-        [self buildMetal];
+        
     }
     return self;
     
@@ -76,6 +68,29 @@
         [[CGInst getInst] render];
     }
     
+}
+
+- (void)createMetalLayerWithWidth:(int)width Height:(int)height{
+    if (!metalLayer) {
+        self.mDevice = MTLCreateSystemDefaultDevice();
+        self.mCommandQueue = [self.mDevice newCommandQueue];
+        //创建metal环境
+        metalLayer = [CAMetalLayer layer];
+        metalLayer.device = self.mDevice;
+        metalLayer.pixelFormat = MTLPixelFormatBGRA8Unorm;
+        metalLayer.frame = CGRectMake(0, 0, width, height);
+        [self.layer insertSublayer:metalLayer atIndex:0];
+        [self buildMetal];
+        //adapt layer
+        metalLayer.anchorPoint = CGPointMake(0.5, 0.5);
+        float t_layer_scale_x = self.bounds.size.width/width;
+        float t_layer_scale_y = self.bounds.size.height/height;
+        float t_scale = t_layer_scale_x > t_layer_scale_y ? t_layer_scale_x : t_layer_scale_y;
+        CATransform3D translate = CATransform3DMakeTranslation((self.bounds.size.width - width)*0.5, (self.bounds.size.height - height)*0.5, 0);
+        CATransform3D transform = CATransform3DScale(translate, t_scale, t_scale ,1.0);
+        metalLayer.transform = transform;
+        metalLayer.backgroundColor = [UIColor whiteColor].CGColor;
+    }
 }
 
 - (void)drawRect:(CGRect)rect {

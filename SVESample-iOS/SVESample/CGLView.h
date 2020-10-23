@@ -14,7 +14,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CGLView : UIView
-
+- (void)createGLLayerWithWidth:(int)width Height:(int)height;
 @end
 
 NS_ASSUME_NONNULL_END

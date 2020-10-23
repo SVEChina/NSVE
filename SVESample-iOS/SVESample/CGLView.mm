@@ -17,10 +17,6 @@
     EAGLContext *_eaglContext; // OpenGL context,管理使用opengl es进行绘制的状态,命令及资源
     CAEAGLLayer *_eaglLayer;
     CADisplayLink* displayLink;
-    int _width;
-    int _height;
-    GLuint _framebuffer;
-    GLuint _colorRenderbuffer;
     bool _test;
 }
 
@@ -33,20 +29,7 @@
 - (instancetype)initWithFrame:(CGRect)frameRect {
     self = [super initWithFrame:frameRect];
     if( self ) {
-        _test = true;
-        //创建gl环境
-        _eaglLayer = [CAEAGLLayer layer];
-        _eaglLayer.frame = frameRect;
-        _eaglLayer.opaque = YES; //CALayer默认是透明的
-        _width = frameRect.size.width;
-        _height = frameRect.size.height;
-        _eaglLayer.drawableProperties = @{
-            kEAGLDrawablePropertyRetainedBacking :[NSNumber numberWithBool:YES],
-            kEAGLDrawablePropertyColorFormat : kEAGLColorFormatRGBA8 };
-        //
-        [self.layer addSublayer:_eaglLayer];
-        //[self.layer insertSublayer:_eaglLayer atIndex:0];
-        [self buildGL];
+        
     }
     return self;
     
@@ -76,6 +59,32 @@
     if(_test) {
         _test = false;
         [[CGInst getInst] test];
+    }
+}
+
+- (void)createGLLayerWithWidth:(int)width Height:(int)height{
+    if (!_eaglLayer) {
+        _test = true;
+        //创建gl环境
+        _eaglLayer = [CAEAGLLayer layer];
+        _eaglLayer.frame = CGRectMake(0, 0, width, height);
+        _eaglLayer.opaque = YES; //CALayer默认是透明的
+        _eaglLayer.drawableProperties = @{
+            kEAGLDrawablePropertyRetainedBacking :[NSNumber numberWithBool:YES],
+            kEAGLDrawablePropertyColorFormat : kEAGLColorFormatRGBA8 };
+        //
+        [self.layer addSublayer:_eaglLayer];
+        [self buildGL];
+        //adapt layer
+        _eaglLayer.anchorPoint = CGPointMake(0.5, 0.5);
+        float t_layer_scale_x = self.bounds.size.width/width;
+        float t_layer_scale_y = self.bounds.size.height/height;
+        float t_scale = t_layer_scale_x > t_layer_scale_y ? t_layer_scale_x : t_layer_scale_y;
+        CATransform3D translate = CATransform3DMakeTranslation((self.bounds.size.width - width)*0.5, (self.bounds.size.height - height)*0.5, 0);
+        CATransform3D transform = CATransform3DScale(translate, t_scale, t_scale ,1.0);
+        _eaglLayer.transform = transform;
+        
+        _eaglLayer.backgroundColor = [UIColor whiteColor].CGColor;
     }
 }
 

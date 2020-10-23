@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CMetalView : UIView
-
+- (void)createMetalLayerWithWidth:(int)width Height:(int)height;
 @end
 
 NS_ASSUME_NONNULL_END
