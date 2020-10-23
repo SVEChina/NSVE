@@ -3886,7 +3886,6 @@
 		5F566648253FC80200670056 /* json.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 5F5660CE253FC7FF00670056 /* json.hpp */; };
 		5F566649253FC80200670056 /* json.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 5F5660CE253FC7FF00670056 /* json.hpp */; };
 		5F56664A253FC80200670056 /* tiny_gltf.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F5660CF253FC7FF00670056 /* tiny_gltf.h */; };
-		5F56664B253FC80200670056 /* tiny_gltf.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F5660CF253FC7FF00670056 /* tiny_gltf.h */; };
 		5F56664C253FC80200670056 /* tiny_gltf.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F5660CF253FC7FF00670056 /* tiny_gltf.h */; };
 		5F56664D253FC80200670056 /* tiny_gltf.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F5660CF253FC7FF00670056 /* tiny_gltf.h */; };
 		5F56664E253FC80200670056 /* btSoftSoftCollisionAlgorithm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F5660D3253FC7FF00670056 /* btSoftSoftCollisionAlgorithm.cpp */; };
@@ -6105,10 +6104,8 @@
 		5F566EFB253FC83700670056 /* json.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 5F566EF8253FC83700670056 /* json.hpp */; };
 		5F566EFC253FC83700670056 /* json.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 5F566EF8253FC83700670056 /* json.hpp */; };
 		5F566EFD253FC83700670056 /* json.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 5F566EF8253FC83700670056 /* json.hpp */; };
-		5F566EFE253FC83700670056 /* tiny_gltf.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F566EF9253FC83700670056 /* tiny_gltf.h */; };
 		5F566EFF253FC83700670056 /* tiny_gltf.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F566EF9253FC83700670056 /* tiny_gltf.h */; };
 		5F566F00253FC83700670056 /* tiny_gltf.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F566EF9253FC83700670056 /* tiny_gltf.h */; };
-		5F566F01253FC83700670056 /* tiny_gltf.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F566EF9253FC83700670056 /* tiny_gltf.h */; };
 		5F574D4824B85AF10035AB08 /* SVShader.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F574D4624B85AF10035AB08 /* SVShader.h */; };
 		5F574D4924B85AF10035AB08 /* SVShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F574D4724B85AF10035AB08 /* SVShader.cpp */; };
 		5F64D5AC2483AC530005CF47 /* SVRFboGL.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F64D5AA2483AC530005CF47 /* SVRFboGL.h */; };
@@ -13920,7 +13917,6 @@
 				5C4EA18E232BAD5B00DAC71F /* SVMtlShadowMapping.h in Headers */,
 				020C444B22DC5DCC00201753 /* btBroadphaseProxy.h in Headers */,
 				020C43E522DC5DCC00201753 /* b3PgsJacobiSolver.h in Headers */,
-				5F566F01253FC83700670056 /* tiny_gltf.h in Headers */,
 				020791A52302AF2A0029B759 /* SVImage.h in Headers */,
 				5F96BCE924F907C50020F7C4 /* lzio.h in Headers */,
 				5F7D6773215F407900803BCF /* SVCoordGridNode.h in Headers */,
@@ -15203,7 +15199,6 @@
 				020C475922DC5DCE00201753 /* btTetrahedronShape.h in Headers */,
 				5F566E23253FC80800670056 /* b3ClipFaces.h in Headers */,
 				5F7D683D215F407900803BCF /* SVOpEvent.h in Headers */,
-				5F56664B253FC80200670056 /* tiny_gltf.h in Headers */,
 				020C45B722DC5DCD00201753 /* btSphereSphereCollisionAlgorithm.h in Headers */,
 				5F566D63253FC80700670056 /* btAabbUtil2.h in Headers */,
 				020C472922DC5DCE00201753 /* btTriangleIndexVertexMaterialArray.h in Headers */,
@@ -16698,7 +16693,6 @@
 				020C434622DC5DCB00201753 /* btSoftRigidCollisionAlgorithm.h in Headers */,
 				020776D521BF993100B4A471 /* SVParseParticles.h in Headers */,
 				020C4BBE22DC5DD100201753 /* b3Mat3x3.h in Headers */,
-				5F566EFE253FC83700670056 /* tiny_gltf.h in Headers */,
 				5F56645A253FC80100670056 /* ldebug.h in Headers */,
 				5F7D61BE215F407700803BCF /* SVParseMask.h in Headers */,
 				5F56694E253FC80400670056 /* btContactProcessing.h in Headers */,

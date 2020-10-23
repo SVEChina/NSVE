@@ -20,13 +20,13 @@
 
 namespace sv {
     
-    class SVLoaderGLTF : public SVGBaseEx{
+    class SVLoaderGLTFEx : public SVGBaseEx{
     public:
-        SVLoaderGLTF(SVInstPtr _app);
+        SVLoaderGLTFEx(SVInstPtr _app);
         
-        ~SVLoaderGLTF();
+        ~SVLoaderGLTFEx();
         
-        bool loadFromFile(cptr8 _filename);
+        static bool loadFromFile(SVInstPtr _app,cptr8 _filename);
     };
     
 

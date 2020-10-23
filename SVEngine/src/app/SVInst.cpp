@@ -329,10 +329,13 @@ void SVInst::inputFrame(u8 *_frameData, s32 _width, s32 _height){
     }
 }
 
+#include "../file/SVLoaderGLTFEx.h"
+
 void SVInst::test() {
     if(getSceneMgr()) {
         getSceneMgr()->test();
     }
+    SVLoaderGLTFEx::loadFromFile(share(),"res/woniu_xiuxian/scene.gltf");
     //常见AR阶段
 //    if(m_ar_mgr) {
 //        m_ar_mgr->enable();
