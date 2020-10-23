@@ -37,6 +37,7 @@ namespace sv {
         u32 m_res_id;
         
         s32 m_informate;
+        s32 m_dataformate;
     };
 
 }//!namespace sv

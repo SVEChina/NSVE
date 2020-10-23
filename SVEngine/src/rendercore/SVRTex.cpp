@@ -30,11 +30,9 @@ void SVRTex::load(SVRendererPtr _renderer,SVTextureDsp* _tex_dsp) {
 }
 
 void SVRTex::unload() {
-    
 }
 
 void SVRTex::resize() {
-    
 }
 
 void SVRTex::commit() {

@@ -283,6 +283,7 @@ bool SVRShaderGL::active(SVRendererPtr _renderer) {
         //提交参数
         submitParamTbl();
         //提交纹理
+        
         //设置各种属性
         return true;
     }

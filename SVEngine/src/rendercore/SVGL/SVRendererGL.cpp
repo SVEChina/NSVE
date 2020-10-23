@@ -253,6 +253,7 @@ bool SVRendererGL::processMesh(SVRenderMeshPtr _mesh) {
 bool SVRendererGL::processTexture(SVRTexPtr _tex,s32 _index,cptr8 _samplename) {
     SVRTexGLPtr t_r_gl_tex = std::dynamic_pointer_cast<SVRTexGL>(_tex);
     if(t_r_gl_tex) {
+        t_r_gl_tex->commit();
         s32 t_tex_handle = glGetUniformLocation(m_cur_program, _samplename);
         if(t_tex_handle>=0) {
             glActiveTexture(GL_TEXTURE0 + _index);

@@ -41,8 +41,8 @@ void SVTexture::dispatch() {
 }
 
 void SVTexture::init(SVTextureDsp& _dsp) {
-    m_texture_dsp = _dsp;
     setTexData(nullptr);
+    m_texture_dsp = _dsp;
 }
 
 void SVTexture::init(SVTextureDsp& _dsp,SVDataSwapPtr _data) {

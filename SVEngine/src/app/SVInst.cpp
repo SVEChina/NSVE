@@ -325,7 +325,7 @@ void SVInst::inputFrame(u8 *_frameData, s32 _width, s32 _height){
         m_ar_mgr->enable(_width, _height);
         SVDataSwapPtr frameData = MakeSharedPtr<SVDataSwap>();
         frameData->writeData(_frameData, _width*_height*4);
-        m_ar_mgr->setInputCameraTex(frameData, SV_PF_RGBA);
+        m_ar_mgr->setInputCameraTex(frameData, SV_PF_BGRA);
     }
 }
 
@@ -463,5 +463,6 @@ void SVInst::_initRenderer(SVRendererPtr _renderer) {
     if(m_event_sys) {
         SVEvtRenderInitPtr _event = MakeSharedPtr<SVEvtRenderInit>(m_renderer);
         m_event_sys->pushEvent(_event,true);
+        m_event_sys->update(0.03f);
     }
 }

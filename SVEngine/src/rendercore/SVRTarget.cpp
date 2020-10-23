@@ -106,6 +106,11 @@ void SVRTarget::render(SVRendererPtr _renderer) {
 
 //推送流序
 void SVRTarget::pushStreamQuene(SV_RSTREAM _rstream) {
+    for(s32 i=0;i<m_stream_quene.size();i++) {
+        if(m_stream_quene[i] == _rstream) {
+            return ;    // 防止重复推入
+        }
+    }
     if(_rstream>=0 && _rstream<E_RSM_MAX) {
         m_stream_quene.push_back(_rstream);
         m_stream_pool[_rstream]->setValid(true);
