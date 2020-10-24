@@ -46,11 +46,10 @@ namespace sv {
         
     protected:
         SVString m_name;
-        SVLockSpinPtr m_lock;
         SVBoundBox m_box;
-        SVRenderMeshPtr m_pRenderMesh;
+        SVRenderMeshPtr m_rendermesh;
     };
-        
+
 }//!namespace sv
 
 #endif //SV_MESH3D_H

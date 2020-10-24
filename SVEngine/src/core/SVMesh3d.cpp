@@ -20,13 +20,15 @@ using namespace sv;
 
 SVMesh3d::SVMesh3d(SVInstPtr _app)
 :SVGBaseEx(_app){
-    m_pRenderMesh = nullptr;
-    m_lock = MakeSharedPtr<SVLockSpin>();
+    m_rendermesh = nullptr;
 }
 
 SVMesh3d::~SVMesh3d() {
-    m_pRenderMesh = nullptr;
-    m_lock = nullptr;
+    m_rendermesh = nullptr;
+}
+
+SVRenderMeshPtr SVMesh3d::getRenderMesh(){
+    return m_rendermesh;
 }
 
 void SVMesh3d::setName(cptr8 _name) {
@@ -47,7 +49,7 @@ SVBoundBox SVMesh3d::getBox() {
 
 //数据操作
 void SVMesh3d::setData(SVDataSwapPtr _data,VFTYPE _vtf,s32 _count,s32 _seqMode) {
-//    //m_pRenderMesh = MakeSharedPtr<SVRenderMesh>(mApp);
+//    //m_rendermesh = MakeSharedPtr<SVRenderMesh>(mApp);
 //    m_pRenderMesh->setVertexType(_vtf);
 //    //m_pRenderMesh->setSeqMode(_seqMode);
 //    m_pRenderMesh->setDrawVertNum(_count);
@@ -56,9 +58,6 @@ void SVMesh3d::setData(SVDataSwapPtr _data,VFTYPE _vtf,s32 _count,s32 _seqMode) 
 //    //m_pRenderMesh->createMesh();
 }
 
-SVRenderMeshPtr SVMesh3d::getRenderMesh(){
-    return m_pRenderMesh;
-}
 
 void SVMesh3d::update(f32 _dt,FMat4& _mat) {
 //    if(m_pMtl) {
