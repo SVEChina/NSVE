@@ -27,11 +27,14 @@
     // Do any additional setup after loading the view.
     [[CGInst getInst] cgInit];
     //
+    CGCamera *camera = [[CGBaseSys getInst] getCamera];
     if(SVE_CORE == SVE_GLES) {
         glview = [[CGLView alloc] initWithFrame:self.view.bounds];
+        [glview createGLLayerWithWidth:[camera getFrameWidth] Height:[camera getFrameHeight]];
         [self.view addSubview:glview];
     }else if(SVE_CORE == SVE_METAL){
         metalview = [[CMetalView alloc] initWithFrame:self.view.bounds];
+        [metalview createMetalLayerWithWidth:[camera getFrameWidth] Height:[camera getFrameHeight]];
         [self.view addSubview:metalview];
     }
 }

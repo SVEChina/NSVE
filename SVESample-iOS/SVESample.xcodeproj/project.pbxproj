@@ -421,14 +421,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = K9H559M465;
+				DEVELOPMENT_TEAM = BW96G54658;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../SVEngine\"";
 				INFOPLIST_FILE = SVESample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.nsve.SVESample1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nsve.SVESample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
