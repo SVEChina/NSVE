@@ -111,3 +111,7 @@ SVTexturePtr SVSurface::getTexture(cptr8 _name) {
     }
     return nullptr;
 }
+
+void SVSurface::setSamplerParam(cptr8 _name,s32 _type,s32 _param) {
+    
+}
