@@ -60,10 +60,6 @@ namespace sv {
                                          tinygltf::Model* _model,
                                          tinygltf::Primitive* _prim);
         
-        static SVMtlCorePtr _buildMtl(SVInstPtr _app,
-                                      tinygltf::Model* _model,
-                                      tinygltf::Primitive* _prim);
-        
         static s8* _getAccDataPointer(tinygltf::Model* _model,
                                       tinygltf::Accessor* acc);
     };

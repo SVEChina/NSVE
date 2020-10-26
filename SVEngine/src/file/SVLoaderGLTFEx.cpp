@@ -20,6 +20,8 @@
 #include "../mtl/SVTexture.h"
 #include "../mtl/SVMtl3D.h"
 #include "../mtl/SVMtlGLTF.h"
+#include "../mtl/SVSurface.h"
+
 #include "../rendercore/SVRenderMesh.h"
 #include "../node/SVSkinNode.h"
 #include "../node/SVModelNode.h"
@@ -63,44 +65,12 @@ bool SVLoaderGLTFEx::loadFromFile(SVInstPtr _app,cptr8 _filename){
     return t_ret;
 }
 
-//class Model {
-// public:
-//  Model() {}
-//
-//  Model(const Model &) = default;
-//  Model &operator=(const Model &) = default;
-//
-//  ~Model() {}
-//
-//  bool operator==(const Model &) const;
-//
-//  std::vector<Accessor> accessors;
-//  std::vector<Animation> animations;
-//  std::vector<Buffer> buffers;
-//  std::vector<BufferView> bufferViews;
-//  std::vector<Material> materials;
-//  std::vector<Mesh> meshes;
-//  std::vector<Node> nodes;
-//  std::vector<Texture> textures;
-//  std::vector<Image> images;
-//  std::vector<Skin> skins;
-//  std::vector<Sampler> samplers;
-//  std::vector<Camera> cameras;
-//  std::vector<Scene> scenes;
-//  std::vector<Light> lights;
-//  ExtensionMap extensions;
-//
-//  int defaultScene;
-//  std::vector<std::string> extensionsUsed;
-//  std::vector<std::string> extensionsRequired;
-//
-//  Asset asset;
-//
-//  Value extras;
-//};
-
 //
 void SVLoaderGLTFEx::building(SVInstPtr _app,tinygltf::Model* _model) {
+    //构建mtl
+    for(s32 i=0;i<_model->materials.size();i++) {
+        _genMtl(_app,_model,i);
+    }
     //构建MESH
     for(s32 i=0;i<_model->meshes.size();i++) {
         _genModel(_app,_model,i);
@@ -109,11 +79,6 @@ void SVLoaderGLTFEx::building(SVInstPtr _app,tinygltf::Model* _model) {
     for(s32 i=0;i<_model->skins.size();i++) {
         _genSkin(_app,_model,i);
     }
-    //构建mtl
-    for(s32 i=0;i<_model->materials.size();i++) {
-        _genMtl(_app,_model,i);
-    }
-    
 //    //构建节点
 //    for(s32 i=0;i<_model->scenes.size();i++) {
 //        tinygltf::Scene* t_scene = &(_model->scenes[i]);
@@ -181,20 +146,6 @@ SVModelPtr SVLoaderGLTFEx::_genModel(SVInstPtr _app,tinygltf::Model* _model,s32 
         t_modelMgr->addModel(t_model);
     }
     return t_model;
-}
-
-SVModelPtr SVLoaderGLTFEx::_genSkin(SVInstPtr _app,tinygltf::Model* _model,s32 _index){
-    if(_index<0)
-        return nullptr;
-    tinygltf::Skin* t_skindata = &(_model->skins[_index]);
-    return nullptr;
-}
-
-SVModelPtr SVLoaderGLTFEx::_genMtl(SVInstPtr _app,tinygltf::Model* _model,s32 _index){
-    if(_index<0)
-        return nullptr;
-    tinygltf::Material* t_mtldata = &(_model->materials[_index]);
-    return nullptr;
 }
 
 SVMesh3dPtr SVLoaderGLTFEx::_buildMeshPri(SVInstPtr _app,
@@ -348,31 +299,185 @@ SVMesh3dPtr SVLoaderGLTFEx::_buildMeshPri(SVInstPtr _app,
     /*
      构建材质
      */
-    SVMtlCorePtr t_mtl = _buildMtl(_app,_model,_prim);
-//    struct Material {
-//      std::string name;
-//
-//      ParameterMap values;            // PBR metal/roughness workflow
-//      ParameterMap additionalValues;  // normal/occlusion/emissive values
-//
-//      ExtensionMap extensions;
-//      Value extras;
-//
-//      bool operator==(const Material &) const;
-//    };
+    //SVMtlCorePtr t_mtl = _buildMtl(_app,_model,_prim);
     SVMesh3dPtr t_mesh = MakeSharedPtr<SVMesh3d>(_app);
     t_mesh->setRenderMesh(t_rMesh);
     //t_mesh->setMtl();
     return t_mesh;
 }
 
-SVMtlCorePtr SVLoaderGLTFEx::_buildMtl(SVInstPtr _app,
-                                       tinygltf::Model* _model,
-                                       tinygltf::Primitive* _prim) {
-    tinygltf::Material* _material = &(_model->materials[_prim->material]);
-    //解析材质各种参数
+SVModelPtr SVLoaderGLTFEx::_genSkin(SVInstPtr _app,tinygltf::Model* _model,s32 _index){
+    if(_index<0)
+        return nullptr;
+    tinygltf::Skin* t_skindata = &(_model->skins[_index]);
     return nullptr;
 }
+
+//    Material* t_mtl = &(m_gltf.materials[_index]);
+//    SVMtlGLTFPtr tMtl = nullptr;
+//    if (_vtf & E_VF_BONE) {
+//        tMtl = MakeSharedPtr<SVMtlGLTFSkin>(mApp);
+//    }else{
+//        tMtl = MakeSharedPtr<SVMtlGLTF>(mApp);
+//    }
+
+SVModelPtr SVLoaderGLTFEx::_genMtl(SVInstPtr _app,tinygltf::Model* _model,s32 _index){
+    if(_index<0)
+        return nullptr;
+    tinygltf::Material* _material = &(_model->materials[_index]);
+    SVSurfacePtr t_surface = MakeSharedPtr<SVSurface>();
+    tinygltf::ParameterMap::iterator it1 = _material->values.begin();
+    while (it1!=_material->values.end()) {
+        SVString t_key = it1->first.c_str();
+        if( t_key == "baseColorTexture") {
+            tinygltf::Parameter* t_param = &(it1->second);
+            if(t_param) {
+                s32 _texIndex = t_param->TextureIndex();
+                if(_texIndex>=0) {
+                    tinygltf::Texture* texture = &(_model->textures[_texIndex]);
+                    tinygltf::Image* image = &(_model->images[texture->source]);
+                    if(image->uri.empty() ) {
+                        //无url
+                    }else{
+                        
+                    }
+                    //tMtl->m_pBaseColorTex = image->texture;
+//                    Sampler* t_sampler = &( m_gltf.samplers[texture->sampler] );
+//                    //
+//                    if( t_sampler->minFilter == SVGLTF_TEXTURE_FILTER_NEAREST) {
+//
+//                    }else if( t_sampler->minFilter == SVGLTF_TEXTURE_FILTER_LINEAR) {
+//
+//                    }else if( t_sampler->minFilter == SVGLTF_TEXTURE_FILTER_NEAREST_MIPMAP_NEAREST) {
+//
+//                    }else if( t_sampler->minFilter == SVGLTF_TEXTURE_FILTER_LINEAR_MIPMAP_NEAREST) {
+//
+//                    }else if( t_sampler->minFilter == SVGLTF_TEXTURE_FILTER_NEAREST_MIPMAP_LINEAR) {
+//
+//                    }else if( t_sampler->minFilter == SVGLTF_TEXTURE_FILTER_LINEAR_MIPMAP_LINEAR) {
+//
+//                    }
+//                    //
+//                    if( t_sampler->magFilter == SVGLTF_TEXTURE_FILTER_NEAREST) {
+//
+//                    }else if( t_sampler->magFilter == SVGLTF_TEXTURE_FILTER_LINEAR) {
+//
+//                    }else if( t_sampler->magFilter == SVGLTF_TEXTURE_FILTER_NEAREST_MIPMAP_NEAREST) {
+//
+//                    }else if( t_sampler->magFilter == SVGLTF_TEXTURE_FILTER_LINEAR_MIPMAP_NEAREST) {
+//
+//                    }else if( t_sampler->magFilter == SVGLTF_TEXTURE_FILTER_NEAREST_MIPMAP_LINEAR) {
+//
+//                    }else if( t_sampler->magFilter == SVGLTF_TEXTURE_FILTER_LINEAR_MIPMAP_LINEAR) {
+//
+//                    }
+//                    //
+//                    if( t_sampler->wrapS == SVGLTF_TEXTURE_WRAP_REPEAT ) {
+//                        tMtl->setTextureParam(0, E_T_PARAM_WRAP_S, E_T_WRAP_REPEAT);
+//                    }else if( t_sampler->wrapS == SVGLTF_TEXTURE_WRAP_CLAMP_TO_EDGE ) {
+//                        tMtl->setTextureParam(0, E_T_PARAM_WRAP_S, E_T_WRAP_CLAMP_TO_EDAGE);
+//                    }else if( t_sampler->wrapS == SVGLTF_TEXTURE_WRAP_MIRRORED_REPEAT ) {
+//                        tMtl->setTextureParam(0, E_T_PARAM_WRAP_S, E_T_WRAP_MIRROR);
+//                    }
+//                    //
+//                    if( t_sampler->wrapT == SVGLTF_TEXTURE_WRAP_REPEAT ) {
+//                        tMtl->setTextureParam(0, E_T_PARAM_WRAP_T, E_T_WRAP_REPEAT);
+//                    }else if( t_sampler->wrapT == SVGLTF_TEXTURE_WRAP_CLAMP_TO_EDGE ) {
+//                        tMtl->setTextureParam(0, E_T_PARAM_WRAP_T, E_T_WRAP_CLAMP_TO_EDAGE);
+//                    }else if( t_sampler->wrapT == SVGLTF_TEXTURE_WRAP_MIRRORED_REPEAT ) {
+//                        tMtl->setTextureParam(0, E_T_PARAM_WRAP_T, E_T_WRAP_MIRROR);
+//                    }
+//                    //
+//                    if( t_sampler->wrapR == SVGLTF_TEXTURE_WRAP_REPEAT ) {
+//                        //tMtl->setTextureParam(0, E_T_PARAM_WRAP_T, E_T_WRAP_REPEAT);
+//                    }else if( t_sampler->wrapR == SVGLTF_TEXTURE_WRAP_CLAMP_TO_EDGE ) {
+//                        //tMtl->setTextureParam(0, E_T_PARAM_WRAP_T, E_T_WRAP_CLAMP_TO_EDAGE);
+//                    }else if( t_sampler->wrapR == SVGLTF_TEXTURE_WRAP_MIRRORED_REPEAT ) {
+//                        //tMtl->setTextureParam(0, E_T_PARAM_WRAP_T, E_T_WRAP_MIRROR);
+//                    }
+                }
+            }
+        }else if(t_key == "baseColorFactor") {
+            tinygltf::Parameter* t_param = &(it1->second);
+            if(t_param->number_array.size() == 3) {
+                FVec3 _v = FVec3(t_param->number_array[0],
+                                 t_param->number_array[1],
+                                 t_param->number_array[2]);
+                t_surface->setParam("baseColorFactor",_v );
+            }
+        }else if(t_key == "metallicRoughnessTexture") {
+            tinygltf::Parameter* t_param = &(it1->second);
+//            s32 textureIndex = t_param->TextureIndex();
+//            Texture* texture = &(m_gltf.textures[textureIndex]);
+//            Image* image = &(m_gltf.images[texture->source]);
+//            tMtl->m_pMetallicRoughnessTex = image->texture;
+        }else if(t_key == "metallicFactor") {
+            tinygltf::Parameter* t_param = &(it1->second);
+            t_surface->setParam("metallicFactor",(f32)(t_param->Factor()) );
+        }else if(t_key == "roughnessFactor") {
+            tinygltf::Parameter* t_param = &(it1->second);
+            t_surface->setParam("roughnessFactor",(f32)(t_param->Factor()) );
+        }
+        it1++;
+    }
+    
+    //
+    tinygltf::ParameterMap::iterator it2 = _material->additionalValues.begin();
+    while (it2!=_material->additionalValues.end()) {
+        SVString t_key = it2->first.c_str();
+        if(t_key == "normalTexture") {
+            tinygltf::Parameter* t_param = &(it2->second);
+            if(t_param) {
+                s32 textureIndex = t_param->TextureIndex();
+//                Texture* texture = &(m_gltf.textures[textureIndex]);
+//                Image* image = &(m_gltf.images[texture->source]);
+//                tMtl->m_pNormalTex = image->texture;
+//                tMtl->m_normalScale = t_param->ParamValue("scale");
+            }
+        }else if(t_key == "occlusionTexture") {
+            tinygltf::Parameter* t_param = &(it2->second);
+            if(t_param) {
+                s32 textureIndex = t_param->TextureIndex();
+//                Texture* texture = &(m_gltf.textures[textureIndex]);
+//                Image* image = &(m_gltf.images[texture->source]);
+//                tMtl->m_pOcclusionTex = image->texture;
+//                tMtl->m_occlusionStrength = t_param->ParamValue("strength");
+            }
+        }else if(t_key == "emissiveTexture") {
+            tinygltf::Parameter* t_param = &(it2->second);
+            if(t_param) {
+//                s32 textureIndex = t_param->TextureIndex();
+//                Texture* texture = &(m_gltf.textures[textureIndex]);
+//                Image* image = &(m_gltf.images[texture->source]);
+//                tMtl->m_pEmissiveTex = image->texture;
+            }
+        }else if(t_key == "emissiveFactor") {
+            tinygltf::Parameter* t_param = &(it2->second);
+//            if(t_param && t_param->number_array.size() ==3) {
+//                tMtl->m_emissiveFactor.set(t_param->number_array[0],
+//                                           t_param->number_array[1],
+//                                           t_param->number_array[2]);
+//            }
+        }else if(t_key == "alphaMode") {
+//            tinygltf::Parameter* t_param = &(it2->second);
+//            if(t_param ) {
+//                SVString t_str = t_param->string_value;
+//            }
+        }else if(t_key == "name") {
+            //材质名称
+//            tinygltf::Parameter* t_param = &(it2->second);
+//            if(t_param ) {
+//                SVString t_str = t_param->string_value;
+//            }
+        }
+        it2++;
+    }
+//    //
+//    tMtl->refresh();
+//    return tMtl;
+    return nullptr;
+}
+
 
 s8* SVLoaderGLTFEx::_getAccDataPointer(tinygltf::Model* _model,
                                      tinygltf::Accessor* acc) {
