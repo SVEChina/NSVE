@@ -36,32 +36,45 @@ namespace sv {
         
     protected:
         static void building(SVInstPtr _app,
-                             tinygltf::Model* _model);
+                             tinygltf::Model* _model,
+                             cptr8 _path);
         
         static void genNode(SVInstPtr _app,
-                            tinygltf::Model* _model,s32 _nodeid);
+                            tinygltf::Model* _model,
+                            s32 _nodeid,
+                            cptr8 _path);
         
         //生成rmesh
         static SVModelPtr _genModel(SVInstPtr _app,
                                     tinygltf::Model* _model,
-                                    s32 _index);
+                                    s32 _index,
+                                    cptr8 _path);
         
         //生成皮肤
         static SVModelPtr _genSkin(SVInstPtr _app,
                                    tinygltf::Model* _model,
-                                   s32 _index);
+                                   s32 _index,
+                                   cptr8 _path);
 
         //生成材质
-        static SVModelPtr _genMtl(SVInstPtr _app,
-                                  tinygltf::Model* _model,
-                                  s32 _index);
+        static SVSurfacePtr _genMtl(SVInstPtr _app,
+                                    tinygltf::Model* _model,
+                                    s32 _index,
+                                    cptr8 _path);
         
-        static SVMesh3dPtr _buildMeshPri(SVInstPtr _app,
-                                         tinygltf::Model* _model,
-                                         tinygltf::Primitive* _prim);
+        static SVTexturePtr _genTexture(SVInstPtr _app,
+                                        tinygltf::Model* _model,
+                                        s32 _index,
+                                        cptr8 _path);
+        
+        static SVMesh3dPtr _genMeshPri(SVInstPtr _app,
+                                       tinygltf::Model* _model,
+                                       tinygltf::Primitive* _prim,
+                                       cptr8 _path);
         
         static s8* _getAccDataPointer(tinygltf::Model* _model,
-                                      tinygltf::Accessor* acc);
+                                      tinygltf::Accessor* acc,
+                                      cptr8 _path);
     };
     
 
