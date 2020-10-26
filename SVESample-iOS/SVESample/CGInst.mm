@@ -9,6 +9,7 @@
 #import "CGInst.h"
 #import "CGDef.h"
 #import "CGBaseSys.h"
+#import "CGDetectMgr.h"
 #include "src/app/SVInst.h"
 #include "src/env/SVCtxIOS.h"
 #include "src/rendercore/SVMetal/SVRendererMetal.h"
@@ -48,11 +49,11 @@ static CGInst *mInst;
     //创建SVE引擎
     m_p_sve = sv::SVInst::makeCreate();
     //设置资源文件
-    NSString *t_sve_res = @"SVERes/sve-metal";
+    NSString *t_sve_res = @"sve-metal";
     if(SVE_CORE == SVE_GLES ) {
-        t_sve_res = @"SVERes/sve-gles";
+        t_sve_res = @"sve-gles";
     }else if( SVE_CORE == SVE_METAL ) {
-        t_sve_res = @"SVERes/sve-metal";
+        t_sve_res = @"sve-metal";
     }
     NSString* t_sve_path = [[NSBundle mainBundle] pathForResource:t_sve_res ofType:@"bundle"];
     t_sve_path = [t_sve_path stringByAppendingString:@"/"];
@@ -110,12 +111,13 @@ static CGInst *mInst;
     }
 }
 
-//- (void)inputF
-
 -(void)render {
     if(m_p_sve) {
         //
         CGCamera *camera = [[CGBaseSys getInst] getCamera];
+        //送入人脸识别
+        unsigned char *keyData = [[CGDetectMgr getInst] detectWithFormate:CG_PF_BGRA buffer:(unsigned char*)[camera getFrameData] width:[camera getFrameWidth] height:[camera getFrameHeight]];
+        //送入引擎当作背景渲染
         m_p_sve->inputFrame((unsigned char*)[camera getFrameData], [camera getFrameWidth], [camera getFrameHeight]);
         //
         m_p_sve->updateSVE(0.033f);
