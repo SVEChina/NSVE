@@ -29,7 +29,7 @@ void SVModel::setName(cptr8 _name){
 }
 
 void SVModel::addMesh(SVMesh3dPtr _mesh) {
-    m_meshPool.append(_mesh);
+    m_meshPool.push_back(_mesh);
     if(m_meshPool.size() == 1) {
         m_box = _mesh->getBox();
     }else{
@@ -48,7 +48,7 @@ s32  SVModel::getMeshNum(){
 }
 
 void SVModel::clearMesh() {
-    m_meshPool.destroy();
+    m_meshPool.clear();
 }
 
 SVBoundBox SVModel::getBox() {

@@ -139,7 +139,7 @@ public:
     }
     
     //设置流数据
-    bool setMixStreamData(VFTYPE _stype,SVDataSwapPtr _data) {
+    bool setMixStreamData(SVDataSwapPtr _data) {
         if(_bufMode == E_BFM_AOS) {
             //混合流模式，设定给单一目标就好
             m_mixStreamData = _data;

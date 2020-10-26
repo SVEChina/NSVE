@@ -31,8 +31,11 @@ SVModelNode::~SVModelNode() {
     m_model = nullptr;
 }
 
-void SVModelNode::update(f32 dt) {
-    SVNode::update(dt);
+void SVModelNode::update(f32 _dt) {
+    SVNode::update(_dt);
+    if(m_model) {
+        m_model->update(_dt,m_absolutMat);
+    }
 }
 
 void SVModelNode::render() {
