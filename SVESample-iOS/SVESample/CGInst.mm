@@ -117,6 +117,7 @@ static CGInst *mInst;
         CGCamera *camera = [[CGBaseSys getInst] getCamera];
         //送入人脸识别
         unsigned char *keyData = [[CGDetectMgr getInst] detectWithFormate:CG_PF_BGRA buffer:(unsigned char*)[camera getFrameData] width:[camera getFrameWidth] height:[camera getFrameHeight]];
+        m_p_sve->inputKeyData(keyData);
         //送入引擎当作背景渲染
         m_p_sve->inputFrame((unsigned char*)[camera getFrameData], [camera getFrameWidth], [camera getFrameHeight]);
         //

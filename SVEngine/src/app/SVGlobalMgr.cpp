@@ -65,6 +65,8 @@ void SVGlobalMgr::init() {
     m_scene_mgr = MakeSharedPtr<SVSceneMgr>(mApp);
     m_scene_mgr->init();
     SV_LOG_ERROR("sve init SVSceneMgr end!\n");
+    m_detect_mgr = MakeSharedPtr<SVDetectMgr>(mApp);
+    m_detect_mgr->init(DETECT_T_ST);
     //动画系统
     m_ani_mgr = MakeSharedPtr<SVAniMgr>(mApp);
     m_ani_mgr->init();
@@ -82,6 +84,10 @@ void SVGlobalMgr::destroy() {
         //场景析够(场景虽然也是节点 但是需要单独管理,因为节点需要挂在场景上,所以在节点没析够前,场景不能析构掉)
         m_scene_mgr->destroy();
         SV_LOG_ERROR("SVSceneMgr:destroy sucess");
+    }
+    if (m_detect_mgr) {
+        m_detect_mgr->destroy();
+        SV_LOG_ERROR("SVDetectMgr:destroy sucess");
     }
     //ANI
     if(m_ani_mgr) {
@@ -104,6 +110,10 @@ void SVGlobalMgr::update(f32 dt) {
         //场景更新(节点系统)
         m_scene_mgr->update(dt);
         timeTag(false,"scene cost");
+    }
+    if (m_detect_mgr) {
+        m_detect_mgr->update(dt);
+        timeTag(false,"detect cost");
     }
 }
 
