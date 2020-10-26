@@ -181,15 +181,22 @@ bool SVRendererGL::processMtl(SVMtlCorePtr _mtl,SVSurfacePtr _surface) {
             s32 t_sampler_index = 0;
             for(s32 i = 0; i<t_shader_dsp->m_samplers.size(); i++ ) {
                 SVString t_name = t_shader_dsp->m_samplers[i].m_name;
-                if(t_name!="") {
-                    s32 t_stage = t_shader_dsp->m_samplers[i].m_stage;
-                    s32 t_chn = t_shader_dsp->m_samplers[i].m_chn;
-                    //向surface上找目标纹理
-                    SVTexturePtr t_tex = _surface->getTexture(t_stage,t_chn);
+                if(t_name != "") {
+                    SVTexturePtr t_tex = _surface->getTexture(t_name.c_str());
                     if(t_tex) {
                         processTexture(t_tex->getResTex(),
                                        t_sampler_index++,
                                        t_name.c_str() );
+                    }else{
+                        s32 t_stage = t_shader_dsp->m_samplers[i].m_stage;
+                        s32 t_chn = t_shader_dsp->m_samplers[i].m_chn;
+                        //向surface上找目标纹理
+                        t_tex = _surface->getTexture(t_stage,t_chn);
+                        if(t_tex) {
+                            processTexture(t_tex->getResTex(),
+                                           t_sampler_index++,
+                                           t_name.c_str() );
+                        }
                     }
                 }
             }

@@ -23,6 +23,8 @@ s32 SVLoaderImage::check(cptr8 _name) {
         return 1;
     if(ext && (!strcmp(ext,".jpg") || !strcmp(ext,".JPG")))
         return 1;
+    if(ext && (!strcmp(ext,".jpeg") || !strcmp(ext,".JPEG")))
+        return 1;
     if(ext && (!strcmp(ext,".png") || !strcmp(ext,".PNG")))
         return 1;
     if(ext && (!strcmp(ext,".dds") || !strcmp(ext,".DDS")))

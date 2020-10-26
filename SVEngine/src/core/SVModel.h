@@ -11,7 +11,8 @@
 #include "../base/SVGBase.h"
 #include "../base/SVPreDeclare.h"
 #include "../base/SVBounds.h"
-#include "../base/SVArray.h"
+
+#include <vector>
 
 namespace sv {
     
@@ -21,7 +22,11 @@ namespace sv {
     public:
         SVModel(SVInstPtr _app);
         
-        ~SVModel();
+        virtual ~SVModel();
+        
+        cptr8 getName();
+        
+        void setName(cptr8 _name);
         
         void clear(){};
         
@@ -34,10 +39,6 @@ namespace sv {
         void clearMesh();
         
         SVBoundBox getBox();
-        
-        cptr8 getName();
-        
-        void setName(cptr8 _name);
         
         void update(f32 _dt,FMat4& _mat);
         
@@ -54,7 +55,7 @@ namespace sv {
         SVBoundBox m_box;
         
         //一个模型包含多个mesh
-        typedef SVArray<SVMesh3dPtr> MESHPOOL;
+        typedef std::vector<SVMesh3dPtr> MESHPOOL;
         MESHPOOL m_meshPool;
     };
         

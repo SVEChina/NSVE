@@ -32,10 +32,18 @@ namespace sv {
         
         cptr8 getName();
         
-        void setData(SVDataSwapPtr _data,VFTYPE _vtf,s32 _count,s32 _seqMode);
+        void setRenderMesh(SVRenderMeshPtr _mesh);
         
         SVRenderMeshPtr getRenderMesh();
         
+        void setMtl(SVMtlCorePtr _mtl);
+        
+        SVMtlCorePtr getMtl();
+        
+        SVSurfacePtr getSurface();
+        
+        void setData(SVDataSwapPtr _data,VFTYPE _vtf,s32 _count,s32 _seqMode);
+
         void update(f32 _dt,FMat4& _mat);
         
         void render();
@@ -44,10 +52,15 @@ namespace sv {
         
         SVBoundBox getBox();
         
+        void setMatrix(FMat4& _mat);
+        
     protected:
         SVString m_name;
         SVBoundBox m_box;
         SVRenderMeshPtr m_rendermesh;
+        SVMtlCorePtr m_mtl;
+        SVSurfacePtr m_surface;
+        FMat4 m_absoluteMat;    //渲染的绝对矩阵
     };
 
 }//!namespace sv

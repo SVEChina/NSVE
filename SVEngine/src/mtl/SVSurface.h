@@ -17,6 +17,8 @@
 #include "../base/SVMat3.h"
 #include "../base/SVMat4.h"
 
+#include <map>
+
 namespace sv {
 
     //表示材质需要更新的数据
@@ -52,9 +54,17 @@ namespace sv {
 
         SVTexturePtr getTexture(s32 _stage,s32 _chn);
         
+        void setTexture(cptr8 _name,SVTexturePtr _tex);
+        
+        SVTexturePtr getTexture(cptr8 _name);
+        
         //按通道顺序设置了纹理
         std::vector<SVTexturePtr> m_vs_texs;
         std::vector<SVTexturePtr> m_fs_texs;
+        
+        typedef std::map<SVString,SVTexturePtr> TEXPOOL;
+        TEXPOOL m_tex_pool;
+        
     };
 
 }//!namespace sv

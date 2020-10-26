@@ -22,13 +22,13 @@ namespace sv {
         
         ~SVModelNode();
         
-        void update(f32 dt);
-
-        void render();
-        
         void setModel(SVModelPtr _model);
         
         SVModelPtr getModel();
+        
+        void update(f32 _dt);
+
+        void render();
         
     protected:
         SVModelPtr m_model;

@@ -13,6 +13,7 @@ SVSurface::SVSurface() {
     m_tbl = MakeSharedPtr<SVParamTbl>();
     m_vs_texs.resize(MAX_TEXUNIT);
     m_fs_texs.resize(MAX_TEXUNIT);
+    m_tex_pool.clear();
 }
 
 SVSurface::~SVSurface() {
@@ -93,6 +94,20 @@ SVTexturePtr SVSurface::getTexture(s32 _stage,s32 _chn) {
         if(_chn<m_fs_texs.size() ) {
             return m_fs_texs[_chn];
         }
+    }
+    return nullptr;
+}
+
+void SVSurface::setTexture(cptr8 _name,SVTexturePtr _tex) {
+    if(_tex && _name) {
+        m_tex_pool[_name] = _tex;
+    }
+}
+
+SVTexturePtr SVSurface::getTexture(cptr8 _name) {
+    TEXPOOL::iterator it = m_tex_pool.find(_name);
+    if(it!=m_tex_pool.end()) {
+        return it->second;
     }
     return nullptr;
 }
