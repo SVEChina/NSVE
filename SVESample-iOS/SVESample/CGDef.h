@@ -18,4 +18,16 @@
 
 #define SVE_CORE SVE_GLES
 
+//相机图片格式
+enum CG_PIC_FORMATE {
+    CG_PF_GRAY8 = 0,
+    CG_PF_YV12,
+    CG_PF_I420,
+    CG_PF_NV12,
+    CG_PF_NV21,
+    CG_PF_BGRA,
+    CG_PF_RGBA,
+    CG_PF_RGB,
+    CG_PF_NULL
+};
 #endif /* CGDef_h */

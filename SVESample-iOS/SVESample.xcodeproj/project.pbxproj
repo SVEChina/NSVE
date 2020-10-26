@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		024428922546A81A000B59F5 /* sve-metal.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0244288E2546A81A000B59F5 /* sve-metal.bundle */; };
+		024428932546A81A000B59F5 /* sve-gles.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0244288F2546A81A000B59F5 /* sve-gles.bundle */; };
+		024428942546A81A000B59F5 /* sve-gl.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 024428902546A81A000B59F5 /* sve-gl.bundle */; };
+		024428952546A81A000B59F5 /* sve-vk.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 024428912546A81A000B59F5 /* sve-vk.bundle */; };
+		024428992546AA5A000B59F5 /* CGDetectMgr.mm in Sources */ = {isa = PBXBuildFile; fileRef = 024428972546AA5A000B59F5 /* CGDetectMgr.mm */; };
+		024428AD2546AAE7000B59F5 /* SENSEME.lic in Resources */ = {isa = PBXBuildFile; fileRef = 0244289E2546AAE7000B59F5 /* SENSEME.lic */; };
+		024428AE2546AAE7000B59F5 /* CGDetectSenstime.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0244289F2546AAE7000B59F5 /* CGDetectSenstime.cpp */; };
+		024428B32546AAEF000B59F5 /* senstime.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 024428B22546AAEF000B59F5 /* senstime.bundle */; };
+		024428D02546AF15000B59F5 /* libst_mobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 024428CF2546AF15000B59F5 /* libst_mobile.a */; };
 		0263A6A4254051AC00AC8AC4 /* CGCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 0263A6A3254051AC00AC8AC4 /* CGCamera.m */; };
 		0263A6BD2541814000AC8AC4 /* CGBaseSys.m in Sources */ = {isa = PBXBuildFile; fileRef = 0263A6BC2541814000AC8AC4 /* CGBaseSys.m */; };
 		028B5C50248F62A1002E6A9D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 028B5C4F248F62A1002E6A9D /* AppDelegate.m */; };
@@ -21,7 +30,6 @@
 		028B5C9C248F8C2F002E6A9D /* CMetalView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 028B5C9B248F8C2F002E6A9D /* CMetalView.mm */; };
 		028B5C9E248F8C6A002E6A9D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 028B5C9D248F8C6A002E6A9D /* QuartzCore.framework */; };
 		5FB87D23253687670041F69A /* CGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5FB87D22253687670041F69A /* CGLView.mm */; };
-		5FB87DA725384A6D0041F69A /* SVERes in Resources */ = {isa = PBXBuildFile; fileRef = 5FB87DA625384A6D0041F69A /* SVERes */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +64,24 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0244288E2546A81A000B59F5 /* sve-metal.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "sve-metal.bundle"; sourceTree = "<group>"; };
+		0244288F2546A81A000B59F5 /* sve-gles.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "sve-gles.bundle"; sourceTree = "<group>"; };
+		024428902546A81A000B59F5 /* sve-gl.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "sve-gl.bundle"; sourceTree = "<group>"; };
+		024428912546A81A000B59F5 /* sve-vk.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "sve-vk.bundle"; sourceTree = "<group>"; };
+		024428972546AA5A000B59F5 /* CGDetectMgr.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CGDetectMgr.mm; sourceTree = "<group>"; };
+		024428982546AA5A000B59F5 /* CGDetectMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGDetectMgr.h; sourceTree = "<group>"; };
+		0244289E2546AAE7000B59F5 /* SENSEME.lic */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SENSEME.lic; sourceTree = "<group>"; };
+		0244289F2546AAE7000B59F5 /* CGDetectSenstime.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CGDetectSenstime.cpp; sourceTree = "<group>"; };
+		024428AA2546AAE7000B59F5 /* CGDetectSenstime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGDetectSenstime.h; sourceTree = "<group>"; };
+		024428B22546AAEF000B59F5 /* senstime.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = senstime.bundle; path = ../../NSVERes/ios/res/senstime.bundle; sourceTree = "<group>"; };
+		024428C32546AEDA000B59F5 /* st_mobile_common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = st_mobile_common.h; sourceTree = "<group>"; };
+		024428C42546AEDA000B59F5 /* st_mobile_animal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = st_mobile_animal.h; sourceTree = "<group>"; };
+		024428C52546AEDA000B59F5 /* st_mobile_human_action.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = st_mobile_human_action.h; sourceTree = "<group>"; };
+		024428C62546AEDA000B59F5 /* st_mobile_face_attribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = st_mobile_face_attribute.h; sourceTree = "<group>"; };
+		024428C72546AEDA000B59F5 /* st_mobile_license.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = st_mobile_license.h; sourceTree = "<group>"; };
+		024428C82546AEDA000B59F5 /* st_mobile_verify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = st_mobile_verify.h; sourceTree = "<group>"; };
+		024428C92546AEDA000B59F5 /* st_mobile_classify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = st_mobile_classify.h; sourceTree = "<group>"; };
+		024428CF2546AF15000B59F5 /* libst_mobile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libst_mobile.a; sourceTree = "<group>"; };
 		0263A69E25403B0600AC8AC4 /* CGDef.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CGDef.h; sourceTree = "<group>"; };
 		0263A6A2254051AC00AC8AC4 /* CGCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGCamera.h; sourceTree = "<group>"; };
 		0263A6A3254051AC00AC8AC4 /* CGCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGCamera.m; sourceTree = "<group>"; };
@@ -81,7 +107,6 @@
 		028B5C9D248F8C6A002E6A9D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		5FB87D21253687670041F69A /* CGLView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CGLView.h; sourceTree = "<group>"; };
 		5FB87D22253687670041F69A /* CGLView.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = CGLView.mm; sourceTree = "<group>"; };
-		5FB87DA625384A6D0041F69A /* SVERes */ = {isa = PBXFileReference; lastKnownFileType = folder; name = SVERes; path = ../SVERes; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,16 +116,74 @@
 			files = (
 				028B5C9E248F8C6A002E6A9D /* QuartzCore.framework in Frameworks */,
 				028B5C99248F855B002E6A9D /* libSVEngine_Static.a in Frameworks */,
+				024428D02546AF15000B59F5 /* libst_mobile.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0244288D2546A81A000B59F5 /* SVERes */ = {
+			isa = PBXGroup;
+			children = (
+				0244288E2546A81A000B59F5 /* sve-metal.bundle */,
+				0244288F2546A81A000B59F5 /* sve-gles.bundle */,
+				024428902546A81A000B59F5 /* sve-gl.bundle */,
+				024428912546A81A000B59F5 /* sve-vk.bundle */,
+			);
+			name = SVERes;
+			path = ../SVERes;
+			sourceTree = "<group>";
+		};
+		0244289C2546AAE7000B59F5 /* st_mobile */ = {
+			isa = PBXGroup;
+			children = (
+				024428CE2546AF15000B59F5 /* ios_os */,
+				024428C22546AEDA000B59F5 /* include */,
+				0244289D2546AAE7000B59F5 /* license */,
+				0244289F2546AAE7000B59F5 /* CGDetectSenstime.cpp */,
+				024428AA2546AAE7000B59F5 /* CGDetectSenstime.h */,
+			);
+			name = st_mobile;
+			path = ../../NSVERes/ios/st_mobile;
+			sourceTree = "<group>";
+		};
+		0244289D2546AAE7000B59F5 /* license */ = {
+			isa = PBXGroup;
+			children = (
+				0244289E2546AAE7000B59F5 /* SENSEME.lic */,
+			);
+			path = license;
+			sourceTree = "<group>";
+		};
+		024428C22546AEDA000B59F5 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				024428C32546AEDA000B59F5 /* st_mobile_common.h */,
+				024428C42546AEDA000B59F5 /* st_mobile_animal.h */,
+				024428C52546AEDA000B59F5 /* st_mobile_human_action.h */,
+				024428C62546AEDA000B59F5 /* st_mobile_face_attribute.h */,
+				024428C72546AEDA000B59F5 /* st_mobile_license.h */,
+				024428C82546AEDA000B59F5 /* st_mobile_verify.h */,
+				024428C92546AEDA000B59F5 /* st_mobile_classify.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		024428CE2546AF15000B59F5 /* ios_os */ = {
+			isa = PBXGroup;
+			children = (
+				024428CF2546AF15000B59F5 /* libst_mobile.a */,
+			);
+			path = ios_os;
+			sourceTree = "<group>";
+		};
 		028B5C42248F62A1002E6A9D = {
 			isa = PBXGroup;
 			children = (
-				5FB87DA625384A6D0041F69A /* SVERes */,
+				024428B22546AAEF000B59F5 /* senstime.bundle */,
+				0244289C2546AAE7000B59F5 /* st_mobile */,
+				0244288D2546A81A000B59F5 /* SVERes */,
 				028B5C4D248F62A1002E6A9D /* SVESample */,
 				028B5C4C248F62A1002E6A9D /* Products */,
 				028B5C98248F855B002E6A9D /* Frameworks */,
@@ -140,6 +223,8 @@
 				0263A6A3254051AC00AC8AC4 /* CGCamera.m */,
 				0263A6BB2541814000AC8AC4 /* CGBaseSys.h */,
 				0263A6BC2541814000AC8AC4 /* CGBaseSys.m */,
+				024428982546AA5A000B59F5 /* CGDetectMgr.h */,
+				024428972546AA5A000B59F5 /* CGDetectMgr.mm */,
 				0263A69E25403B0600AC8AC4 /* CGDef.h */,
 			);
 			path = SVESample;
@@ -190,7 +275,7 @@
 		028B5C43248F62A1002E6A9D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1140;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "李晓帆";
 				TargetAttributes = {
 					028B5C4A248F62A1002E6A9D = {
@@ -258,10 +343,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5FB87DA725384A6D0041F69A /* SVERes in Resources */,
+				024428B32546AAEF000B59F5 /* senstime.bundle in Resources */,
 				028B5C5E248F62A4002E6A9D /* LaunchScreen.storyboard in Resources */,
+				024428AD2546AAE7000B59F5 /* SENSEME.lic in Resources */,
 				028B5C5B248F62A4002E6A9D /* Assets.xcassets in Resources */,
+				024428932546A81A000B59F5 /* sve-gles.bundle in Resources */,
+				024428952546A81A000B59F5 /* sve-vk.bundle in Resources */,
+				024428922546A81A000B59F5 /* sve-metal.bundle in Resources */,
 				028B5C59248F62A1002E6A9D /* Main.storyboard in Resources */,
+				024428942546A81A000B59F5 /* sve-gl.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,11 +362,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				024428AE2546AAE7000B59F5 /* CGDetectSenstime.cpp in Sources */,
 				0263A6BD2541814000AC8AC4 /* CGBaseSys.m in Sources */,
 				028B5C9C248F8C2F002E6A9D /* CMetalView.mm in Sources */,
 				028B5C56248F62A1002E6A9D /* ViewController.m in Sources */,
 				0263A6A4254051AC00AC8AC4 /* CGCamera.m in Sources */,
 				028B5C50248F62A1002E6A9D /* AppDelegate.m in Sources */,
+				024428992546AA5A000B59F5 /* CGDetectMgr.mm in Sources */,
 				028B5C61248F62A4002E6A9D /* main.m in Sources */,
 				028B5C97248F818A002E6A9D /* CGInst.mm in Sources */,
 				028B5C53248F62A1002E6A9D /* SceneDelegate.m in Sources */,
@@ -332,6 +424,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -390,6 +483,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -422,15 +516,17 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BW96G54658;
+				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../SVEngine\"";
 				INFOPLIST_FILE = SVESample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.nsve.SVESample;
+				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../../NSVERes/ios/st_mobile/ios_os\"";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sve.SVESample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -440,16 +536,18 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
+				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../SVEngine\"";
 				INFOPLIST_FILE = SVESample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.nsve.SVESample1;
+				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../../NSVERes/ios/st_mobile/ios_os\"";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sve.SVESample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
