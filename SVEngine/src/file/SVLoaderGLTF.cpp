@@ -512,7 +512,7 @@ bool SVLoaderGLTF::_buildBone(SVBonePtr _parent,Skin* _skinData,s32 _nodeIndex,S
         SVBonePtr t_bone = MakeSharedPtr<SVBone>();
         t_bone->m_pParent = _parent;
         _buildBone(t_bone,_skinData,t_nodeIndex,_ske);
-        _parent->m_children.append(t_bone);
+        _parent->m_children.push_back(t_bone);
     }
     return true;
 }

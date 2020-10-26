@@ -7,7 +7,9 @@
 
 #include "SVLoaderGLTFEx.h"
 #include "SVFileMgr.h"
+
 #include "../app/SVInst.h"
+
 #include "../base/SVResDsp.h"
 
 #include "../file/SVParseDef.h"
@@ -15,29 +17,31 @@
 
 #include "../base/SVDataChunk.h"
 #include "../base/SVDataSwap.h"
-#include "../base/SVQuat.h"
+#include "../base/SVMap.h"
+#include "../base/SVArray.h"
+#include "../base/svstr.h"
+
 #include "../mtl/SVTexMgr.h"
 #include "../mtl/SVTexture.h"
 #include "../mtl/SVMtl3D.h"
 #include "../mtl/SVMtlGLTF.h"
 #include "../mtl/SVSurface.h"
 
-#include "../rendercore/SVRenderMesh.h"
 #include "../node/SVSkinNode.h"
 #include "../node/SVModelNode.h"
 #include "../node/SVMorphNode.h"
+
 #include "../basesys/SVScene.h"
 #include "../basesys/SVSceneMgr.h"
+#include "../basesys/SVModelMgr.h"
+
 #include "../core/SVModel.h"
 #include "../core/SVMesh3d.h"
-#include "../core/SVModel.h"
 #include "../core/SVAnimateSkin.h"
 #include "../core/SVAnimateMorph.h"
-#include "../base/SVMap.h"
-#include "../base/SVArray.h"
-#include "../base/svstr.h"
-#include "../basesys/SVModelMgr.h"
+
 #include "../rendercore/SVRMeshRes.h"
+#include "../rendercore/SVRenderMesh.h"
 
 #include <map>
 #include <vector>
@@ -321,14 +325,76 @@ SVMesh3dPtr SVLoaderGLTFEx::_genMeshPri(SVInstPtr _app,
     return t_mesh;
 }
 
-SVModelPtr SVLoaderGLTFEx::_genSkin(SVInstPtr _app,
+SVSkeletonPtr SVLoaderGLTFEx::_genSkin(SVInstPtr _app,
                                     tinygltf::Model* _model,
                                     s32 _index,
                                     cptr8 _path){
     if(_index<0)
         return nullptr;
     tinygltf::Skin* t_skindata = &(_model->skins[_index]);
-    return nullptr;
+    SVSkeletonPtr t_ske = MakeSharedPtr<SVSkeleton>();
+    s32 t_node_index = t_skindata->skeleton;
+    //创建根骨骼,并构建骨架
+    SVBonePtr t_root = MakeSharedPtr<SVBone>();
+    _buildBone(_app,_model,t_root,t_skindata,t_node_index,t_ske);
+    t_ske->m_name = t_skindata->name.c_str();
+    t_ske->m_root = t_root;
+    //初始化骨架基本数据
+    tinygltf::Accessor* t_acc = &(_model->accessors[t_skindata->inverseBindMatrices]);
+    s8* t_imb_p = _getAccDataPointer(_model,t_acc,_path);
+    f32* t_imb_p_f = (f32*)t_imb_p;
+    for(s32 i=0;i<t_skindata->joints.size();i++) {
+        s32 t_nodeid = t_skindata->joints[i];
+        SVBonePtr t_bone = t_ske->getBoneByNodeID(t_nodeid);//获取对应的骨骼
+        if(t_bone) {
+            t_bone->m_id = i;
+            f32* t_imb_p_f_aim = t_imb_p_f+i*16;
+            t_bone->m_invertBindMat.set(t_imb_p_f_aim);
+        }
+    }
+    return t_ske;
+}
+
+bool SVLoaderGLTFEx::_buildBone(SVInstPtr _app,
+                                tinygltf::Model* _model,
+                                SVBonePtr _parent,
+                                tinygltf::Skin* _skinData,
+                                s32 _nodeIndex,
+                                SVSkeletonPtr _ske) {
+    if(_nodeIndex<0)
+        return false;
+    //填充数据
+    tinygltf::Node* t_node = &(_model->nodes[_nodeIndex]);
+    if(!t_node){
+        return false;
+    }
+    _ske->addBone(_parent);
+    for(s32 i=0;i<_skinData->joints.size();i++) {
+        if( _skinData->joints[i] == _nodeIndex) {
+            _parent->m_id = i;
+        }
+    }
+    _parent->m_nodeid = _nodeIndex;
+    _parent->m_name = t_node->name.c_str(); // 骨头名称
+    _parent->m_tran.x = t_node->translation[0];
+    _parent->m_tran.y = t_node->translation[1];
+    _parent->m_tran.z = t_node->translation[2];
+    _parent->m_scale.x = t_node->scale[0];
+    _parent->m_scale.y = t_node->scale[1];
+    _parent->m_scale.z = t_node->scale[2];
+    _parent->m_rot.x = t_node->rotation[0];
+    _parent->m_rot.y = t_node->rotation[1];
+    _parent->m_rot.z = t_node->rotation[2];
+    _parent->m_rot.w = t_node->rotation[3];
+    //构建子骨骼
+    for(s32 i=0;i<t_node->children.size();i++) {
+        s32 t_nodeIndex = t_node->children[i];
+        SVBonePtr t_bone = MakeSharedPtr<SVBone>();
+        t_bone->m_pParent = _parent;
+        _buildBone(_app,_model,t_bone,_skinData,t_nodeIndex,_ske);
+        _parent->m_children.push_back(t_bone);
+    }
+    return true;
 }
 //    Material* t_mtl = &(m_gltf.materials[_index]);
 //    SVMtlGLTFPtr tMtl = nullptr;
@@ -482,15 +548,6 @@ SVSurfacePtr SVLoaderGLTFEx::_genMtl(SVInstPtr _app,
         }else if(it3->second.IsObject() ) {
             
         }
-//        NULL_TYPE = 0,
-//        NUMBER_TYPE = 1,
-//        INT_TYPE = 2,
-//        BOOL_TYPE = 3,
-//        STRING_TYPE = 4,
-//        ARRAY_TYPE = 5,
-//        BINARY_TYPE = 6,
-//        OBJECT_TYPE = 7
-        
         it3++;
     }
     //ExtensionMap extensions;

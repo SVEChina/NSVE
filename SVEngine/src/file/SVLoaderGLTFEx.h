@@ -51,10 +51,17 @@ namespace sv {
                                     cptr8 _path);
         
         //生成皮肤
-        static SVModelPtr _genSkin(SVInstPtr _app,
+        static SVSkeletonPtr _genSkin(SVInstPtr _app,
                                    tinygltf::Model* _model,
                                    s32 _index,
                                    cptr8 _path);
+        
+        static bool _buildBone(SVInstPtr _app,
+                               tinygltf::Model* _model,
+                               SVBonePtr _parent,
+                               tinygltf::Skin* _skinData,
+                               s32 _nodeIndex,
+                               SVSkeletonPtr _ske);
 
         //生成材质
         static SVSurfacePtr _genMtl(SVInstPtr _app,

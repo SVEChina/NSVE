@@ -58,13 +58,17 @@ namespace sv {
         
         SVTexturePtr getTexture(cptr8 _name);
         
+        //设置目标纹理采样数据
+        void setSamplerParam(cptr8 _name,s32 _type,s32 _param);
+        
         //按通道顺序设置了纹理
         std::vector<SVTexturePtr> m_vs_texs;
         std::vector<SVTexturePtr> m_fs_texs;
         
         typedef std::map<SVString,SVTexturePtr> TEXPOOL;
         TEXPOOL m_tex_pool;
-        
+        //
+        //SamplerDsp
     };
 
 }//!namespace sv

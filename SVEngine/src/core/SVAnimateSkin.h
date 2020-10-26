@@ -16,10 +16,10 @@
 #include "../base/svstr.h"
 #include "../base/SVMap.h"
 
+#include <vector>
+
 namespace sv {
-    
-    
-        
+
         enum SVChanType {
             E_CN_T_TRANS = 0,
             E_CN_T_SCALE = 1,
@@ -37,26 +37,18 @@ namespace sv {
             FVec3 m_scale;
             FVec4 m_rot;
             SVBonePtr m_pParent;
-            //
             FMat4 m_absoluteMat;
-            //
             FMat4 m_relaMat;
-            //
             FMat4 m_invertBindMat;
-            //
             FMat4 m_resultMat;
-            //
             SVString m_name;
-            //
-            typedef SVArray<SVBonePtr> BONEPOOL;
+            typedef std::vector<SVBonePtr> BONEPOOL;
             BONEPOOL m_children;
-            //
         public:
             void clear();
             
             void update();
         };
-        
         
         //骨架
         class SVSkeleton :public SVObject {

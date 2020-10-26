@@ -18,7 +18,6 @@ SVBone::SVBone() {
     m_rot.set(0.0f, 0.0f, 0.0f,1.0f);
     m_pParent = nullptr;
     m_children.clear();
-    //
     m_absoluteMat.setIdentity();
 }
 
@@ -27,7 +26,7 @@ void SVBone::clear() {
     for(s32 i=0;i<m_children.size();i++) {
         m_children[i]->clear();
     }
-    m_children.destroy();
+    m_children.clear();
 }
 
 void SVBone::update() {
@@ -51,7 +50,6 @@ void SVBone::update() {
     }
     //计算父子关系的逆矩阵
     m_resultMat = m_absoluteMat*m_invertBindMat;
-    //
     for(s32 i=0;i<m_children.size();i++) {
         m_children[i]->update();
     }
