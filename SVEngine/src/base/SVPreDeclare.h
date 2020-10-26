@@ -105,9 +105,6 @@ namespace sv {
     //Test
     DECLARE_SHAREPTR(SVOpCreateTest);
     DECLARE_SHAREPTR(SVOpCreateDebugFacePt);
-    DECLARE_SHAREPTR(SVOpCreateTestLine);
-    DECLARE_SHAREPTR(SVOpCreateTestPatch);
-    DECLARE_SHAREPTR(SVOpCreateTestMianSha);
     //
     DECLARE_SHAREPTR(SVOpDestroyScene);
     DECLARE_SHAREPTR(SVOpCameraControl);
