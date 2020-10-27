@@ -75,6 +75,15 @@ bool SVLoaderGLTFEx::loadFromFile(SVInstPtr _app,
 void SVLoaderGLTFEx::building(SVInstPtr _app,
                               tinygltf::Model* _model,
                               cptr8 _path) {
+    //构建动画
+    for(s32 i=0;i<_model->animations.size();i++) {
+        SVAnimateSkinPtr t_ani = _genAnimate(_app,_model,i,_path);
+        int a = 0;
+    }
+    //构建skin
+    for(s32 i=0;i<_model->skins.size();i++) {
+        SVSkeletonPtr t_ske = _genSkin(_app,_model,i,_path);
+    }
     //构建mtl
     std::map<s32,SVSurfacePtr> _surface_pool;
     for(s32 i=0;i<_model->materials.size();i++) {
@@ -85,11 +94,7 @@ void SVLoaderGLTFEx::building(SVInstPtr _app,
     }
     //构建MESH
     for(s32 i=0;i<_model->meshes.size();i++) {
-        _genModel(_app,_model,i,_path);
-    }
-    //构建skin
-    for(s32 i=0;i<_model->skins.size();i++) {
-        _genSkin(_app,_model,i,_path);
+        SVModelPtr t_model = _genModel(_app,_model,i,_path);
     }
 //    //构建节点
 //    for(s32 i=0;i<_model->scenes.size();i++) {
@@ -329,17 +334,13 @@ SVSkeletonPtr SVLoaderGLTFEx::_genSkin(SVInstPtr _app,
                                     tinygltf::Model* _model,
                                     s32 _index,
                                     cptr8 _path){
-    return nullptr;
     if(_index<0)
         return nullptr;
     tinygltf::Skin* t_skindata = &(_model->skins[_index]);
     SVSkeletonPtr t_ske = MakeSharedPtr<SVSkeleton>();
     s32 t_node_index = t_skindata->skeleton;
     //创建根骨骼,并构建骨架
-    SVBonePtr t_root = MakeSharedPtr<SVBone>();
-    _buildBone(_app,_model,t_root,t_skindata,t_node_index,t_ske);
-    t_ske->m_name = t_skindata->name.c_str();
-    t_ske->m_root = t_root;
+    SVBonePtr t_root = _genBone(_app,_model,t_skindata,t_node_index,nullptr,t_ske);
     //初始化骨架基本数据
     tinygltf::Accessor* t_acc = &(_model->accessors[t_skindata->inverseBindMatrices]);
     s8* t_imb_p = _getAccDataPointer(_model,t_acc,_path);
@@ -356,47 +357,163 @@ SVSkeletonPtr SVLoaderGLTFEx::_genSkin(SVInstPtr _app,
     return t_ske;
 }
 
-bool SVLoaderGLTFEx::_buildBone(SVInstPtr _app,
-                                tinygltf::Model* _model,
-                                SVBonePtr _parent,
-                                tinygltf::Skin* _skinData,
-                                s32 _nodeIndex,
-                                SVSkeletonPtr _ske) {
+SVBonePtr SVLoaderGLTFEx::_genBone(SVInstPtr _app,
+                                   tinygltf::Model* _model,
+                                     tinygltf::Skin* _skinData,
+                                     s32 _nodeIndex,
+                                     SVBonePtr _parent,
+                                     SVSkeletonPtr _ske) {
     if(_nodeIndex<0)
-        return false;
+        return nullptr;
     //填充数据
     tinygltf::Node* t_node = &(_model->nodes[_nodeIndex]);
     if(!t_node){
-        return false;
+        return nullptr;
     }
-    _ske->addBone(_parent);
+    SVBonePtr t_bone = MakeSharedPtr<SVBone>();
     for(s32 i=0;i<_skinData->joints.size();i++) {
         if( _skinData->joints[i] == _nodeIndex) {
-            _parent->m_id = i;
+            t_bone->m_id = i;
+            break;
         }
     }
-    _parent->m_nodeid = _nodeIndex;
-    _parent->m_name = t_node->name.c_str(); // 骨头名称
-    _parent->m_tran.x = t_node->translation[0];
-    _parent->m_tran.y = t_node->translation[1];
-    _parent->m_tran.z = t_node->translation[2];
-    _parent->m_scale.x = t_node->scale[0];
-    _parent->m_scale.y = t_node->scale[1];
-    _parent->m_scale.z = t_node->scale[2];
-    _parent->m_rot.x = t_node->rotation[0];
-    _parent->m_rot.y = t_node->rotation[1];
-    _parent->m_rot.z = t_node->rotation[2];
-    _parent->m_rot.w = t_node->rotation[3];
+    t_bone->m_nodeid = _nodeIndex;
+    t_bone->m_pParent = _parent;
+    t_bone->m_name = t_node->name.c_str(); // 骨头名称
+    if(t_node->translation.size() == 3) {
+        t_bone->m_tran.x = t_node->translation[0];
+        t_bone->m_tran.y = t_node->translation[1];
+        t_bone->m_tran.z = t_node->translation[2];
+    }
+    if(t_node->scale.size() == 3) {
+        t_bone->m_scale.x = t_node->scale[0];
+        t_bone->m_scale.y = t_node->scale[1];
+        t_bone->m_scale.z = t_node->scale[2];
+    }
+    if(t_node->rotation.size() == 4) {
+        t_bone->m_rot.x = t_node->rotation[0];
+        t_bone->m_rot.y = t_node->rotation[1];
+        t_bone->m_rot.z = t_node->rotation[2];
+        t_bone->m_rot.w = t_node->rotation[3];
+    }
+    if(t_node->mesh>=0) {
+        int a = 0;
+    }
+    if(_parent == nullptr) {
+        //root
+        _ske->m_name = _skinData->name.c_str();
+        _ske->m_root = t_bone;
+    }else{
+        //child
+        _parent->m_children.push_back(t_bone);
+    }
+    _ske->addBone(t_bone);
     //构建子骨骼
     for(s32 i=0;i<t_node->children.size();i++) {
         s32 t_nodeIndex = t_node->children[i];
-        SVBonePtr t_bone = MakeSharedPtr<SVBone>();
-        t_bone->m_pParent = _parent;
-        _buildBone(_app,_model,t_bone,_skinData,t_nodeIndex,_ske);
-        _parent->m_children.push_back(t_bone);
+        _genBone(_app,_model,_skinData,t_nodeIndex,t_bone,_ske);
     }
-    return true;
+    return t_bone;
 }
+
+static sv_inline s32 _getInterpolationMode(SVString _interpolation){
+    if (_interpolation == "LINEAR") {
+        return 0;
+    }else if(_interpolation == "STEP"){
+        return 1;
+    }else if(_interpolation == "CUBICSPLINE"){
+        return 2;
+    }
+    return 3;
+}
+
+SVAnimateSkinPtr SVLoaderGLTFEx::_genAnimate(SVInstPtr _app,
+                                             tinygltf::Model* _model,
+                                             s32 _aniIndex,
+                                             cptr8 _path){
+    if(_aniIndex<0)
+        return nullptr;
+    tinygltf::Animation* _data = &(_model->animations[_aniIndex]);
+    SVAnimateSkinPtr t_ani = MakeSharedPtr<SVAnimateSkin>(_app,_data->name.c_str());
+    //构建轨道
+    for(s32 i=0;i<_data->channels.size();i++) {
+        tinygltf::AnimationChannel* t_chn = &(_data->channels[i]);
+        if(t_chn->sampler<0) {
+            continue;
+        }
+        SVChannelPtr chn_obj = MakeSharedPtr<SVChannel>();
+        chn_obj->m_target = t_chn->target_node;
+        t_ani->addChannel(chn_obj);
+        //输入和输出是一对
+        //构建通道和KEY
+        tinygltf::AnimationSampler* t_samp = &(_data->samplers[t_chn->sampler]);
+        tinygltf::Accessor* t_acc_in = &(_model->accessors[t_samp->input]);
+        tinygltf::Accessor* t_acc_out = &(_model->accessors[t_samp->output]);
+        if(t_acc_in->count!=t_acc_out->count){
+            continue;
+        }
+        chn_obj->m_maxTime = t_acc_in->maxValues[0];
+        chn_obj->m_minTime = t_acc_in->minValues[0];
+        chn_obj->m_intertype_trans = _getInterpolationMode(t_samp->interpolation.c_str());
+        s8* t_p_in = _getAccDataPointer(_model,t_acc_in,_path);
+        s8* t_p_out = _getAccDataPointer(_model,t_acc_out,_path);
+        if( t_chn->target_path == "translation") {
+            //构建trans
+            f32* t_p_tim = (f32*)t_p_in;
+            f32* t_p_pos = (f32*)t_p_out;
+            for(s32 i=0;i<t_acc_in->count;i++) {
+                SVASKeyPosPtr t_askey = MakeSharedPtr<SVASKeyPos>();
+                t_askey->m_time = *t_p_tim;
+                t_p_tim++;
+                t_askey->m_pos.x = *t_p_pos;
+                t_p_pos++;
+                t_askey->m_pos.y = *t_p_pos;
+                t_p_pos++;
+                t_askey->m_pos.z = *t_p_pos;
+                t_p_pos++;
+                chn_obj->m_keyPool.append(t_askey);
+            }
+        }else if( t_chn->target_path == "rotation") {
+            f32* t_p_tim = (f32*)t_p_in;
+            f32* t_p_rot = (f32*)t_p_out;
+            for(s32 i=0;i<t_acc_in->count;i++) {
+                SVASKeyRotPtr t_askey = MakeSharedPtr<SVASKeyRot>();
+                t_askey->m_time = *t_p_tim;
+                t_p_tim++;
+                t_askey->m_rot.x = *t_p_rot;
+                t_p_rot++;
+                t_askey->m_rot.y = *t_p_rot;
+                t_p_rot++;
+                t_askey->m_rot.z = *t_p_rot;
+                t_p_rot++;
+                t_askey->m_rot.w = *t_p_rot;
+                t_p_rot++;
+                chn_obj->m_keyPool.append(t_askey);
+            }
+        }else if( t_chn->target_path == "scale") {
+            //构建scale
+            f32* t_p_tim = (f32*)t_p_in;
+            f32* t_p_scale = (f32*)t_p_out;
+            for(s32 i=0;i<t_acc_in->count;i++) {
+                SVASKeyScalePtr t_askey = MakeSharedPtr<SVASKeyScale>();
+                t_askey->m_time = *t_p_tim;
+                t_p_tim++;
+                t_askey->m_scale.x = *t_p_scale;
+                t_p_scale++;
+                t_askey->m_scale.y = *t_p_scale;
+                t_p_scale++;
+                t_askey->m_scale.z = *t_p_scale;
+                t_p_scale++;
+                chn_obj->m_keyPool.append(t_askey);
+            }
+        }else if( t_chn->target_path == "weights") {
+            //构建weight
+            s32 a = 0;
+        }
+    }
+    return t_ani;
+}
+
 //    Material* t_mtl = &(m_gltf.materials[_index]);
 //    SVMtlGLTFPtr tMtl = nullptr;
 //    if (_vtf & E_VF_BONE) {

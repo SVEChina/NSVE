@@ -163,19 +163,17 @@ void SVChannel::update(f32 _dt,f32 _acct,s32 _rate,SVSkeletonPtr _ske) {
     SVASKeyPtr aKey = m_keyPool[t_aftKey];
     f32 t_pre_t = m_keyPool[t_preKey]->m_time;
     f32 t_aft_t = m_keyPool[t_aftKey]->m_time;
-    //
-    FVec3 t_pos = _lerp_trans(0,t_pre_t,t_aft_t,_acct,pKey->m_pos,aKey->m_pos);
-    //
-    FVec3 t_sc = _lerp_scale(0,t_pre_t,t_aft_t,_acct,pKey->m_scale,aKey->m_scale);
-    //
-    FVec4 t_rot = _lerp_rot(0,t_pre_t,t_aft_t,_acct,pKey->m_rot,aKey->m_rot);
-    //
-    t_bone->m_tran = t_pos;
-    t_bone->m_scale = t_sc;
-    t_bone->m_rot = t_rot;
-    if(m_target == 8) {
-        SV_LOG_INFO("aim 8 pos (%f,%f,%f) \n",t_pos.x,t_pos.y,t_pos.z);
-    }
+//    //
+//    FVec3 t_pos = _lerp_trans(0,t_pre_t,t_aft_t,_acct,pKey->m_pos,aKey->m_pos);
+//    FVec3 t_sc = _lerp_scale(0,t_pre_t,t_aft_t,_acct,pKey->m_scale,aKey->m_scale);
+//    FVec4 t_rot = _lerp_rot(0,t_pre_t,t_aft_t,_acct,pKey->m_rot,aKey->m_rot);
+//    //
+//    t_bone->m_tran = t_pos;
+//    t_bone->m_scale = t_sc;
+//    t_bone->m_rot = t_rot;
+//    if(m_target == 8) {
+//        SV_LOG_INFO("aim 8 pos (%f,%f,%f) \n",t_pos.x,t_pos.y,t_pos.z);
+//    }
 }
 
 //平移插值
@@ -269,70 +267,60 @@ SVAnimateSkin::SVAnimateSkin(SVInstPtr _app,cptr8 _name)
 ,m_name(_name){
     m_accTime = 0;
     m_totalTime = 0.0f;
-    m_pSke = nullptr;
+    clearSke();
+    clearChannel();
 }
 
 SVAnimateSkin::~SVAnimateSkin() {
-    m_pSke = nullptr;
+    clearSke();
+    clearChannel();
 }
 
-void SVAnimateSkin::bind(SVSkeletonPtr _ske){
-    m_pSke = _ske;
+cptr8 SVAnimateSkin::getName() {
+    return m_name.c_str();
 }
 
-void SVAnimateSkin::unbind(){
-    m_pSke = nullptr;
+void SVAnimateSkin::addChannel(SVChannelPtr _chan) {
+    if(_chan) {
+        m_totalTime = m_totalTime>_chan->m_maxTime?m_totalTime:_chan->m_maxTime;
+        m_chnPool.push_back(_chan);
+    }
+}
+
+void SVAnimateSkin::clearChannel() {
+    m_chnPool.clear();
+}
+
+void SVAnimateSkin::addSke(SVSkeletonPtr _ske){
+    if(_ske) {
+        m_skePool.push_back(_ske);
+    }
+}
+
+void SVAnimateSkin::clearSke(){
+    m_skePool.clear();
 }
 
 void SVAnimateSkin::update(f32 _dt) {
     //计算时间
     m_accTime += _dt;
-    //m_accTime = 0.0f;
-    //
     bool t_end = false;;
     if(m_accTime>m_totalTime) {
         m_accTime = m_totalTime;
         t_end = true;
     }
-    if(!m_pSke){
+    if(m_skePool.size() == 0){
         //没有骨架就不用跑动画了
         return ;
     }
     //每个轨道都走
     for(s32 i=0;i<m_chnPool.size();i++) {
         SVChannelPtr t_chan = m_chnPool[i];
-        t_chan->update(_dt,m_accTime,30,m_pSke);    //24帧率
+        //t_chan->update(_dt,m_accTime,30,m_pSke);    //24帧率
     }
     if(t_end) {
         m_accTime = 0;
     }
-}
-
-
-
-cptr8 SVAnimateSkin::getName() {
-    return m_name.c_str();
-}
-
-//
-SVChannelPtr SVAnimateSkin::getChannel(s32 _target){
-    for(s32 i=0;i<m_chnPool.size();i++) {
-        if( m_chnPool[i]->m_target == _target ) {
-            return m_chnPool[i];
-        }
-    }
-    return nullptr;
-}
-
-void SVAnimateSkin::addChannel(SVChannelPtr _chan) {
-    if(_chan) {
-        m_totalTime = m_totalTime>_chan->m_maxTime?m_totalTime:_chan->m_maxTime;
-        m_chnPool.append(_chan);
-    }
-}
-
-void SVAnimateSkin::clearChannel() {
-    m_chnPool.destroy();
 }
 
 //

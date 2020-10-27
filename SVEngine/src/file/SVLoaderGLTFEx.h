@@ -56,12 +56,17 @@ namespace sv {
                                    s32 _index,
                                    cptr8 _path);
         
-        static bool _buildBone(SVInstPtr _app,
-                               tinygltf::Model* _model,
-                               SVBonePtr _parent,
-                               tinygltf::Skin* _skinData,
-                               s32 _nodeIndex,
-                               SVSkeletonPtr _ske);
+        static SVBonePtr _genBone(SVInstPtr _app,
+                                    tinygltf::Model* _model,
+                                    tinygltf::Skin* _skinData,
+                                    s32 _nodeIndex,
+                                    SVBonePtr _parent,
+                                    SVSkeletonPtr _ske);
+        
+        static SVAnimateSkinPtr _genAnimate(SVInstPtr _app,
+                                            tinygltf::Model* _model,
+                                            s32 _aniIndex,
+                                            cptr8 _path);
 
         //生成材质
         static SVSurfacePtr _genMtl(SVInstPtr _app,

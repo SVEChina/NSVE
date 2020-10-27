@@ -89,11 +89,10 @@ void SVSkinNode::clearModel() {
 //
 void SVSkinNode::setSke(SVSkeletonPtr _ske) {
     m_pSke = _ske;
-    //
     ANIPOOL::Iterator it = m_aniPool.begin();
     while(it!=m_aniPool.end()) {
         SVAnimateSkinPtr t_ani = it->data;
-        t_ani->bind(_ske);
+        //t_ani->bind(_ske);
         it++;
     }
     if(m_pModel) {
@@ -102,11 +101,10 @@ void SVSkinNode::setSke(SVSkeletonPtr _ske) {
 }
 
 void SVSkinNode::clearSke() {
-    //
     ANIPOOL::Iterator it = m_aniPool.begin();
     while(it!=m_aniPool.end()) {
         SVAnimateSkinPtr t_ani = it->data;
-        t_ani->unbind();
+        //t_ani->unbind();
         it++;
     }
     //
@@ -121,7 +119,7 @@ void SVSkinNode::clearSke() {
 void SVSkinNode::addAni(SVAnimateSkinPtr _ani) {
     m_aniPool.append(_ani->getName(),_ani);
     if(m_pSke) {
-        _ani->bind(m_pSke);
+        //_ani->bind(m_pSke);
     }
     //test
     m_pActAni = _ani;
@@ -131,7 +129,7 @@ void SVSkinNode::delAni(cptr8 _name) {
     ANIPOOL::Iterator it = m_aniPool.find(_name);
     if(it!=m_aniPool.end()){
         SVAnimateSkinPtr t_ani = it->data;
-        t_ani->unbind();
+        //t_ani->unbind();
         m_aniPool.remove(it);
     }
 }
@@ -140,7 +138,7 @@ void SVSkinNode::clearAni() {
     ANIPOOL::Iterator it = m_aniPool.begin();
     while(it!=m_aniPool.end()) {
         SVAnimateSkinPtr t_ani = it->data;
-        t_ani->unbind();
+        //t_ani->unbind();
         it++;
     }
     m_aniPool.clear();
