@@ -52,13 +52,13 @@ public:
     static s32 analyseFace(SVInstPtr _inst,std::vector<FVec2>& points);
     
     //分析眼眉
-    static s32 analyseFaceEyebow(SVInstPtr _inst,std::vector<FVec2>& points);
+    static s32 analyseEyebow(SVInstPtr _inst,std::vector<FVec2>& points);
     
     //分析眼睛
-    static s32 analyseFaceEye(SVInstPtr _inst,std::vector<FVec2>& points);
+    static s32 analyseEye(SVInstPtr _inst,std::vector<FVec2>& points);
     
     //分析鼻子
-    static s32 analyseFaceNoise(SVInstPtr _inst,std::vector<FVec2>& points);
+    static s32 analyseNoise(SVInstPtr _inst,std::vector<FVec2>& points);
     
 };
     
