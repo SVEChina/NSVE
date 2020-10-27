@@ -38,9 +38,9 @@
 - (void)buildGL {
     //初始化渲染上下文，管理所有绘制的状态，命令及资源信息。
     //kEAGLRenderingAPIOpenGLES3
-    _eaglContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
+    _eaglContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES3];
     //创建渲染器
-    [[CGInst getInst] createGLES:_eaglContext version:2 drawable:_eaglLayer];
+    [[CGInst getInst] createGLES:_eaglContext version:3 drawable:_eaglLayer];
     //
     [self creatTimer];
 }

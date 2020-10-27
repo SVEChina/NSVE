@@ -1,3 +1,7 @@
+#version 310 es
+
+precision mediump float;
+
 attribute vec3 aPosition;
 attribute vec3 aNormal;
 attribute vec2 aTexcoord0;

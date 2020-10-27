@@ -77,11 +77,23 @@ u32 SVRShaderGL::_loadShader(SVInstPtr _app,SVRendererPtr _renderer,cptr8 _filen
     if(!t_renderGL) {
         return 0;
     }
+    //自动补充版本号
+    SVString _fname = _filename;
+    SVString _aim_str = "code";
+    SVString _new_str = "code31";
+    SVString version_str = "";
+    if( t_renderGL->m_gl_version == 2 ) {
+        
+    }else if( t_renderGL->m_gl_version == 3 ) {
+        // ios glse3.1
+        // andriod gles3.2
+        _fname = SVString::replace(_fname.c_str(),_aim_str.c_str(),_new_str.c_str());
+    }
     SVDataChunk tDataStream;
     u32 t_id = 0;
     bool t_flag=false;
     if(!t_id){
-        t_flag = _app->m_file_sys->loadFileContentStr(&tDataStream, _filename);
+        t_flag = _app->m_file_sys->loadFileContentStr(&tDataStream, _fname.c_str());
     }else{
         return t_id;
     }
@@ -109,40 +121,6 @@ u32 SVRShaderGL::_loadShader(SVInstPtr _app,SVRendererPtr _renderer,cptr8 _filen
 #endif
     }else if(_shaderType == 6) {
     }
-    //自动补充版本号
-    SVString version_str = "";
-    if( t_renderGL->m_gl_version == 110 ) {
-        //2.0
-        version_str = "#version 110 \n";
-    }else if( t_renderGL->m_gl_version == 120 ) {
-        //2.1
-        version_str = "#version 120 \n";
-    }else if( t_renderGL->m_gl_version == 130 ) {
-        //3.0
-        version_str = "#version 130 \n";
-    }else if( t_renderGL->m_gl_version == 140 ) {
-        //3.1
-        version_str = "#version 140 \n";
-    }else if( t_renderGL->m_gl_version == 150 ) {
-        //3.2
-        version_str = "#version 150 \n";
-    }else if( t_renderGL->m_gl_version == 330 ) {
-        //3.3
-        version_str = "#version 330 \n";
-    }else if( t_renderGL->m_gl_version == 400 ) {
-        //4.0
-        version_str = "#version 400 \n";
-    }else if( t_renderGL->m_gl_version == 410 ) {
-        //4.1
-        version_str = "#version 410 \n";
-    }else if( t_renderGL->m_gl_version == 420 ) {
-        //4.2
-        version_str = "#version 420 \n";
-    }else if( t_renderGL->m_gl_version == 430 ) {
-        //4.3
-        version_str = "#version 430 \n";
-    }
-    
     //
     SVDataChunk tNewStream;
     tNewStream.push( (void*)(version_str.c_str()), version_str.size());
