@@ -73,7 +73,7 @@ void SVComData::loadDefault() {
     m_screenMesh->setDrawVertNum(6);
     m_screenMesh->dispatch();
     //
-    m_faceMesh = SVComData::createFaceMeshSt(mApp,true);
+    m_faceMesh = SVComData::createFaceMeshSt(mApp,false);
 }
 
 SVRenderMeshPtr SVComData::createFaceMeshSt(SVInstPtr _app,bool _simp) {
@@ -84,8 +84,8 @@ SVRenderMeshPtr SVComData::createFaceMeshSt(SVInstPtr _app,bool _simp) {
                              2);
     }else{
         return _loadFaceMesh(_app,
-                             "facemesh_st.json",
-                             "standerface_st.json",
+                             "facemesh_st_normal.json",
+                             "standerface_st_normal.json",
                              2);
     }
 }

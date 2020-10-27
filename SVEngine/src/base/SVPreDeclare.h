@@ -197,7 +197,6 @@ namespace sv {
     DECLARE_SHAREPTR(SVRecycleProcess);
     DECLARE_SHAREPTR(SVPickProcess);
     DECLARE_SHAREPTR(SVFontProcess);
-    DECLARE_SHAREPTR(SVSensorProcess);
 
     //功能部分
     DECLARE_SHAREPTR(SVAni2DBase);

@@ -2455,14 +2455,6 @@
 		02F27E58218EF216007E85C3 /* SVModelNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02F27E52218EF215007E85C3 /* SVModelNode.cpp */; };
 		02F27E59218EF216007E85C3 /* SVModelNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02F27E52218EF215007E85C3 /* SVModelNode.cpp */; };
 		02F27E5A218EF216007E85C3 /* SVModelNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02F27E52218EF215007E85C3 /* SVModelNode.cpp */; };
-		02F27E7A21915B30007E85C3 /* SVSensorProcess.h in Headers */ = {isa = PBXBuildFile; fileRef = 02F27E7821915B2F007E85C3 /* SVSensorProcess.h */; };
-		02F27E7B21915B30007E85C3 /* SVSensorProcess.h in Headers */ = {isa = PBXBuildFile; fileRef = 02F27E7821915B2F007E85C3 /* SVSensorProcess.h */; };
-		02F27E7C21915B30007E85C3 /* SVSensorProcess.h in Headers */ = {isa = PBXBuildFile; fileRef = 02F27E7821915B2F007E85C3 /* SVSensorProcess.h */; };
-		02F27E7D21915B30007E85C3 /* SVSensorProcess.h in Headers */ = {isa = PBXBuildFile; fileRef = 02F27E7821915B2F007E85C3 /* SVSensorProcess.h */; };
-		02F27E7E21915B30007E85C3 /* SVSensorProcess.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02F27E7921915B2F007E85C3 /* SVSensorProcess.cpp */; };
-		02F27E7F21915B30007E85C3 /* SVSensorProcess.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02F27E7921915B2F007E85C3 /* SVSensorProcess.cpp */; };
-		02F27E8021915B30007E85C3 /* SVSensorProcess.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02F27E7921915B2F007E85C3 /* SVSensorProcess.cpp */; };
-		02F27E8121915B30007E85C3 /* SVSensorProcess.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02F27E7921915B2F007E85C3 /* SVSensorProcess.cpp */; };
 		02FAA945233227E70077A56F /* SVPhysicsBodyCloth.h in Headers */ = {isa = PBXBuildFile; fileRef = 02FAA943233227E60077A56F /* SVPhysicsBodyCloth.h */; };
 		02FAA946233227E70077A56F /* SVPhysicsBodyCloth.h in Headers */ = {isa = PBXBuildFile; fileRef = 02FAA943233227E60077A56F /* SVPhysicsBodyCloth.h */; };
 		02FAA947233227E70077A56F /* SVPhysicsBodyCloth.h in Headers */ = {isa = PBXBuildFile; fileRef = 02FAA943233227E60077A56F /* SVPhysicsBodyCloth.h */; };
@@ -8699,8 +8691,6 @@
 		02EA54BF22E842E600F5701D /* SVPhysicsShapeSphere.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPhysicsShapeSphere.h; sourceTree = "<group>"; };
 		02F27E51218EF215007E85C3 /* SVModelNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVModelNode.h; sourceTree = "<group>"; };
 		02F27E52218EF215007E85C3 /* SVModelNode.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVModelNode.cpp; sourceTree = "<group>"; };
-		02F27E7821915B2F007E85C3 /* SVSensorProcess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVSensorProcess.h; sourceTree = "<group>"; };
-		02F27E7921915B2F007E85C3 /* SVSensorProcess.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVSensorProcess.cpp; sourceTree = "<group>"; };
 		02FAA943233227E60077A56F /* SVPhysicsBodyCloth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPhysicsBodyCloth.h; sourceTree = "<group>"; };
 		02FAA944233227E70077A56F /* SVPhysicsBodyCloth.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVPhysicsBodyCloth.cpp; sourceTree = "<group>"; };
 		5C058698226DDC0B005C3CAF /* SVFilterGlow.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; path = SVFilterGlow.cpp; sourceTree = "<group>"; };
@@ -12515,8 +12505,6 @@
 				5FF2B84524D123C800FC0BC9 /* SVScene.h */,
 				5F7D5D83215F407700803BCF /* SVSceneMgr.cpp */,
 				5F7D5D72215F407700803BCF /* SVSceneMgr.h */,
-				02F27E7921915B2F007E85C3 /* SVSensorProcess.cpp */,
-				02F27E7821915B2F007E85C3 /* SVSensorProcess.h */,
 				5F7D5D82215F407700803BCF /* SVStreamIn.cpp */,
 				5F7D5D97215F407700803BCF /* SVStreamIn.h */,
 				5F7D5D74215F407700803BCF /* SVStreamOut.cpp */,
@@ -13556,7 +13544,6 @@
 				5F3BC1522547B5C800B74E35 /* SVFaceAnalyse.h in Headers */,
 				020C452922DC5DCD00201753 /* btBoxBoxCollisionAlgorithm.h in Headers */,
 				020C448B22DC5DCC00201753 /* btGjkEpaPenetrationDepthSolver.h in Headers */,
-				02F27E7D21915B30007E85C3 /* SVSensorProcess.h in Headers */,
 				5F566499253FC80100670056 /* lobject.h in Headers */,
 				5F7D60E1215F407700803BCF /* SVMathHelper.h in Headers */,
 				020C4C1B22DC5DD200201753 /* btMatrixX.h in Headers */,
@@ -14758,7 +14745,6 @@
 				020C473922DC5DCE00201753 /* btConvex2dShape.h in Headers */,
 				020C452722DC5DCD00201753 /* btBoxBoxCollisionAlgorithm.h in Headers */,
 				020C448922DC5DCC00201753 /* btGjkEpaPenetrationDepthSolver.h in Headers */,
-				02F27E7B21915B30007E85C3 /* SVSensorProcess.h in Headers */,
 				5F7D60DF215F407700803BCF /* SVMathHelper.h in Headers */,
 				5F566B23253FC80600670056 /* btDiscreteDynamicsWorld.h in Headers */,
 				020C4C1922DC5DD200201753 /* btMatrixX.h in Headers */,
@@ -16900,7 +16886,6 @@
 				020C436C22DC5DCC00201753 /* btSoftMultiBodyDynamicsWorld.h in Headers */,
 				020C477022DC5DCE00201753 /* btSphereShape.h in Headers */,
 				020C44E422DC5DCC00201753 /* btPersistentManifold.h in Headers */,
-				02F27E7A21915B30007E85C3 /* SVSensorProcess.h in Headers */,
 				5F566552253FC80200670056 /* IkConstraintData.h in Headers */,
 				020C45FA22DC5DCD00201753 /* gim_hash_table.h in Headers */,
 				5F566E3E253FC80800670056 /* b3UpdateAabbs.h in Headers */,
@@ -17180,7 +17165,6 @@
 				020C473A22DC5DCE00201753 /* btConvex2dShape.h in Headers */,
 				020C452822DC5DCD00201753 /* btBoxBoxCollisionAlgorithm.h in Headers */,
 				020C448A22DC5DCC00201753 /* btGjkEpaPenetrationDepthSolver.h in Headers */,
-				02F27E7C21915B30007E85C3 /* SVSensorProcess.h in Headers */,
 				5F7D60E0215F407700803BCF /* SVMathHelper.h in Headers */,
 				5F566B24253FC80600670056 /* btDiscreteDynamicsWorld.h in Headers */,
 				020C4C1A22DC5DD200201753 /* btMatrixX.h in Headers */,
@@ -18442,7 +18426,6 @@
 				5F7D5FE9215F407700803BCF /* SVDetectMgr.cpp in Sources */,
 				020C47ED22DC5DCE00201753 /* b3BulletFile.cpp in Sources */,
 				5F566D8D253FC80800670056 /* btGeometryUtil.cpp in Sources */,
-				02F27E8121915B30007E85C3 /* SVSensorProcess.cpp in Sources */,
 				5F566919253FC80400670056 /* gim_contact.cpp in Sources */,
 				5F566861253FC80400670056 /* btSphereBoxCollisionAlgorithm.cpp in Sources */,
 				020C4CD322DC5DD200201753 /* b3ConvexHullComputer.cpp in Sources */,
@@ -19540,7 +19523,6 @@
 				020C45B222DC5DCD00201753 /* btCompoundCollisionAlgorithm.cpp in Sources */,
 				5F96BD9E24F907C60020F7C4 /* lapi.c in Sources */,
 				5F5669A2253FC80500670056 /* btMultiSphereShape.cpp in Sources */,
-				02F27E7E21915B30007E85C3 /* SVSensorProcess.cpp in Sources */,
 				5F566C5A253FC80700670056 /* btGeneric6DofConstraint.cpp in Sources */,
 				5F56686E253FC80400670056 /* btManifoldResult.cpp in Sources */,
 				5F566A6E253FC80500670056 /* btCapsuleShape.cpp in Sources */,
@@ -20081,7 +20063,6 @@
 				5F7D5FE8215F407700803BCF /* SVDetectMgr.cpp in Sources */,
 				5F566A00253FC80500670056 /* btCompoundShape.cpp in Sources */,
 				020C47EC22DC5DCE00201753 /* b3BulletFile.cpp in Sources */,
-				02F27E8021915B30007E85C3 /* SVSensorProcess.cpp in Sources */,
 				5F566D38253FC80700670056 /* btThreadSupportPosix.cpp in Sources */,
 				020C4CD222DC5DD200201753 /* b3ConvexHullComputer.cpp in Sources */,
 				5F566934253FC80400670056 /* gim_box_set.cpp in Sources */,
@@ -20894,7 +20875,6 @@
 				5F7D5FE7215F407700803BCF /* SVDetectMgr.cpp in Sources */,
 				5F5669FF253FC80500670056 /* btCompoundShape.cpp in Sources */,
 				020C47EB22DC5DCE00201753 /* b3BulletFile.cpp in Sources */,
-				02F27E7F21915B30007E85C3 /* SVSensorProcess.cpp in Sources */,
 				5F566D37253FC80700670056 /* btThreadSupportPosix.cpp in Sources */,
 				020C4CD122DC5DD200201753 /* b3ConvexHullComputer.cpp in Sources */,
 				5F566933253FC80400670056 /* gim_box_set.cpp in Sources */,

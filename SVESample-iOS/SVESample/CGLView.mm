@@ -55,7 +55,7 @@
 
 -(void)renderGL {
     [[CGInst getInst] render];
-    
+    //
     if(_test) {
         _test = false;
         [[CGInst getInst] test];

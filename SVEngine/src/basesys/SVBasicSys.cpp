@@ -11,7 +11,6 @@
 #include "SVFontProcess.h"
 #include "SVStreamIn.h"
 #include "SVStreamOut.h"
-#include "SVSensorProcess.h"
 
 using namespace sv;
 
@@ -36,9 +35,6 @@ void SVBasicSys::init() {
     m_picker->startListen();
     //
     m_fonter = MakeSharedPtr<SVFontProcess>(mApp);
-    //
-    m_sensor = MakeSharedPtr<SVSensorProcess>(mApp);
-    m_sensor->startListen();
 }
 
 void SVBasicSys::loadDefaultFMFont(){
@@ -56,20 +52,12 @@ void SVBasicSys::destroy() {
     //
     m_pRecycleModule->stopListen();
     m_pRecycleModule = nullptr;
-    //
-    if (m_sensor) {
-        m_sensor->stopListen();
-        m_sensor = nullptr;
-    }
 }
 
 void SVBasicSys::update(f32 dt) {
     //回收系统
     if (m_pRecycleModule) {
         m_pRecycleModule->update(dt);
-    }
-    if (m_sensor) {
-        m_sensor->update(dt);
     }
 }
 
@@ -87,8 +75,4 @@ SVPickProcessPtr SVBasicSys::getPickModule(){
 
 SVFontProcessPtr SVBasicSys::getFontModule(){
     return m_fonter;
-}
-
-SVSensorProcessPtr SVBasicSys::getSensorModule(){
-    return m_sensor;
 }
