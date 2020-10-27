@@ -35,7 +35,6 @@
 #include "../node/SVFreeTypeNode.h"
 #include "../node/SVBMFontNode.h"
 #include "../node/SVSkinNode.h"
-#include "../node/SVPatchNode.h"
 #include "../node/SVModelNode.h"
 #include "../node/SVFrameAniNode.h"
 #include "../file/SVParseMain.h"
@@ -294,90 +293,6 @@ SVOpCreateDebugFacePt::~SVOpCreateDebugFacePt(){
 void SVOpCreateDebugFacePt::_process(f32 dt) {    
 }
 
-
-//测试操作
-SVOpCreateTestLine::SVOpCreateTestLine(SVInstPtr _app)
-: SVOpBase(_app){
-    
-}
-
-SVOpCreateTestLine::~SVOpCreateTestLine(){
-    
-}
-
-void SVOpCreateTestLine::_process(f32 dt) {
-//    SVScenePtr t_pScene = mApp->getSceneMgr()->getScene();
-//    if (t_pScene) {
-//        SVMesh2DNodePtr t_lineNode = MakeSharedPtr<SVMesh2DNode>(mApp);
-//        t_pScene->addNode(t_lineNode);
-//        
-//        f32 t_testLine[6] = {0, 300.0f, 0.0f, 200.0f, 300.0f, 0.0f};
-//        SVPhysicsSoftRigidWorldPtr t_softWorld = mApp->getPhysicsWorldMgr()->getSoftWorld();
-//        FVec3 t_from = FVec3(t_testLine[0], t_testLine[1], t_testLine[2]);
-//        FVec3 t_to = FVec3(t_testLine[3], t_testLine[4], t_testLine[5]);
-//        SVPhysicsBodyRopePtr t_bodyRope = MakeSharedPtr<SVPhysicsBodyRope>(mApp, t_softWorld->getWorldInfo(), t_from, t_to, 30, 1);
-//        t_bodyRope->setTimeScale(2);
-//        t_softWorld->addSoftBody(t_bodyRope);
-//    }
-}
-
-//测试操作
-SVOpCreateTestPatch::SVOpCreateTestPatch(SVInstPtr _app)
-: SVOpBase(_app){
-    
-}
-
-SVOpCreateTestPatch::~SVOpCreateTestPatch(){
-}
-
-void SVOpCreateTestPatch::_process(f32 dt) {
-    SVScenePtr t_pScene = mApp->getSceneMgr()->getScene();
-    if (t_pScene) {
-        SVPatchNodePtr t_patchNode = MakeSharedPtr<SVPatchNode>(mApp);
-        t_pScene->addNode(t_patchNode);
-        
-        //
-        SVPhysicsSoftRigidWorldPtr t_softWorld = mApp->getPhysicsWorldMgr()->getSoftWorld();
-        FVec3 t_corner00 = FVec3(-200.0, 60.0f, 0.0f);
-        FVec3 t_corner10 = FVec3(200.0, 60.0f, 0.0f);
-        FVec3 t_corner01 = FVec3(-200.0, 300.0f, 0.0f);
-        FVec3 t_corner11 = FVec3(200.0, 300.0f, 0.0f);
-        
-        SVPhysicsBodyClothPtr t_bodyPatch = MakeSharedPtr<SVPhysicsBodyCloth>(mApp, t_softWorld->getWorldInfo(), t_corner00, t_corner10, t_corner01, t_corner11, 20, 20);
-        t_bodyPatch->setTimeScale(3);
-        t_softWorld->addSoftBody(t_bodyPatch);
-}
-
-////测试操作
-//SVOpCreateTestMianSha::SVOpCreateTestMianSha(SVInstPtr _app)
-//: SVOpBase(_app){
-//
-//}
-//
-//SVOpCreateTestMianSha::~SVOpCreateTestMianSha(){
-//}
-//
-//void SVOpCreateTestMianSha::_process(f32 dt) {
-//}
-
-//SVOpCreateDivision::SVOpCreateDivision(SVInstPtr _app) :  SVOpBase(_app){
-//    
-//}
-//
-//SVOpCreateDivision::~SVOpCreateDivision(){
-//    
-//}
-//
-//void SVOpCreateDivision::_process(f32 dt) {
-//    SVString t_name = "sv_filter_division";
-//    SVModuleBasePtr t_modulePtr = mApp->getModuleSys()->getModule(t_name.c_str());
-//    if (t_modulePtr == nullptr) {
-//        t_modulePtr = MakeSharedPtr<SVDivisonFilter>(mApp);
-//        t_modulePtr->init();
-//        t_modulePtr->open();
-//        mApp->getModuleSys()->regist(t_modulePtr, t_name.c_str());
-//    }
-}
 //about mark
 SVOpCreateMark::SVOpCreateMark(SVInstPtr _app) :  SVOpBase(_app){
     

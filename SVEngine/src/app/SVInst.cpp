@@ -36,6 +36,9 @@
 #include "../operate/SVOpCreate.h"
 #include "../operate/SVOpThread.h"
 //
+#include "../detect/SVDetectBase.h"
+#include "../detect/SVDetectMgr.h"
+//
 #include "../rendercore/SVRTargetMgr.h"
 #include "../rendercore/SVRenderer.h"
 #include "../rendercore/SVRenderMgr.h"
@@ -326,6 +329,15 @@ void SVInst::inputFrame(u8 *_frameData, s32 _width, s32 _height){
         SVDataSwapPtr frameData = MakeSharedPtr<SVDataSwap>();
         frameData->writeData(_frameData, _width*_height*4);
         m_ar_mgr->setInputCameraTex(frameData, SV_PF_BGRA);
+    }
+}
+
+void SVInst::inputKeyData(u8 *_keyData){
+    if (_keyData && getDetectMgr()) {
+        SVDetectBasePtr t_detect = getDetectMgr()->getDetect();
+        if( t_detect ) {
+            t_detect->pushData(_keyData);
+        }
     }
 }
 
