@@ -25,6 +25,7 @@
 		028B5C99248F855B002E6A9D /* libSVEngine_Static.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 028B5C90248F8083002E6A9D /* libSVEngine_Static.a */; };
 		028B5C9C248F8C2F002E6A9D /* CMetalView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 028B5C9B248F8C2F002E6A9D /* CMetalView.mm */; };
 		028B5C9E248F8C6A002E6A9D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 028B5C9D248F8C6A002E6A9D /* QuartzCore.framework */; };
+		5F3BC1F92548275A00B74E35 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F3BC1F82548275A00B74E35 /* OpenGLES.framework */; };
 		5FB87D23253687670041F69A /* CGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5FB87D22253687670041F69A /* CGLView.mm */; };
 		A5FB383425483626003BCAB1 /* SENSEME.lic in Resources */ = {isa = PBXBuildFile; fileRef = A5FB382825483626003BCAB1 /* SENSEME.lic */; };
 		A5FB383525483626003BCAB1 /* libst_mobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A5FB383225483626003BCAB1 /* libst_mobile.a */; };
@@ -93,6 +94,7 @@
 		028B5C9A248F8C2F002E6A9D /* CMetalView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CMetalView.h; sourceTree = "<group>"; };
 		028B5C9B248F8C2F002E6A9D /* CMetalView.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = CMetalView.mm; sourceTree = "<group>"; };
 		028B5C9D248F8C6A002E6A9D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		5F3BC1F82548275A00B74E35 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		5FB87D21253687670041F69A /* CGLView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CGLView.h; sourceTree = "<group>"; };
 		5FB87D22253687670041F69A /* CGLView.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = CGLView.mm; sourceTree = "<group>"; };
 		A5FB382625483626003BCAB1 /* CGDetectSenstime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGDetectSenstime.h; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F3BC1F92548275A00B74E35 /* OpenGLES.framework in Frameworks */,
 				028B5C9E248F8C6A002E6A9D /* QuartzCore.framework in Frameworks */,
 				028B5C99248F855B002E6A9D /* libSVEngine_Static.a in Frameworks */,
 				A5FB383525483626003BCAB1 /* libst_mobile.a in Frameworks */,
@@ -201,6 +204,7 @@
 		028B5C98248F855B002E6A9D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5F3BC1F82548275A00B74E35 /* OpenGLES.framework */,
 				028B5C9D248F8C6A002E6A9D /* QuartzCore.framework */,
 			);
 			name = Frameworks;

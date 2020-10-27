@@ -1,5 +1,3 @@
-#version 310 es
-
 precision mediump float;
 
 in vec2 v_texcoord0;
