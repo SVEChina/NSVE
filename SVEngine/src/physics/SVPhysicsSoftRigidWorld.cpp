@@ -6,7 +6,7 @@
 //
 #include "SVPhysicsSoftRigidWorld.h"
 #include "bodies/SVPhysicsBodySoft.h"
-#include "../../work/SVTdCore.h"
+#include "../work/SVTdCore.h"
 
 using namespace sv;
 

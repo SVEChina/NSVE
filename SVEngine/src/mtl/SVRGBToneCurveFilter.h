@@ -7,8 +7,8 @@
 #ifndef SV_RGBTONECURVEFILTER_H
 #define SV_RGBTONECURVEFILTER_H
 
-#include "../../mtl/SVMtlDeclare.h"
-#include "../../node/SVNodeDeclare.h"
+#include "../mtl/SVMtlDeclare.h"
+#include "../node/SVNodeDeclare.h"
 #include "SVFilterBase.h"
 
 namespace sv {

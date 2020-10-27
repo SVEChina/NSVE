@@ -6,15 +6,15 @@
 //
 
 #include "SVFaceBeautyFilter.h"
-#include "../../mtl/SVMtlCore.h"
-#include "../../mtl/SVMtlFair1.h"
-#include "../../mtl/SVMtlBeauty.h"
-#include "../../core/SVPass.h"
-#include "../../mtl/SVTexMgr.h"
-#include "../../mtl/SVTexture.h"
-#include "../../mtl/SVMtlBasedOn.h"
-#include "../../rendercore/SVRenderer.h"
-#include "../../rendercore/SVRenderMgr.h"
+#include "../mtl/SVMtlCore.h"
+#include "../mtl/SVMtlFair1.h"
+#include "../mtl/SVMtlBeauty.h"
+#include "../core/SVPass.h"
+#include "../mtl/SVTexMgr.h"
+#include "../mtl/SVTexture.h"
+#include "../mtl/SVMtlBasedOn.h"
+#include "../rendercore/SVRenderer.h"
+#include "../rendercore/SVRenderMgr.h"
 
 using namespace sv;
 

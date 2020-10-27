@@ -8,10 +8,10 @@
 #ifndef SV_RGBTONECURVECORE_H
 #define SV_RGBTONECURVECORE_H
 
-#include "../../base/SVGBase.h"
-#include "../../mtl/SVMtlDeclare.h"
-#include "../../node/SVNodeDeclare.h"
-#include "../../core/SVVertDef.h"
+#include "../base/SVGBase.h"
+#include "../mtl/SVMtlDeclare.h"
+#include "../node/SVNodeDeclare.h"
+#include "../core/SVVertDef.h"
 
 namespace sv {
 

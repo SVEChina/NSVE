@@ -7,10 +7,10 @@
 //
 
 #include "SVParseLUTFilter.h"
-#include "../../app/SVGlobalMgr.h"
-#include "../../file/SVFileMgr.h"
-#include "../../base/SVDataChunk.h"
-#include "../../app/SVInst.h"
+#include "../app/SVGlobalMgr.h"
+#include "../file/SVFileMgr.h"
+#include "../base/SVDataChunk.h"
+#include "../app/SVInst.h"
 
 using namespace sv;
 
