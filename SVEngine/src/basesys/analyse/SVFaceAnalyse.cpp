@@ -20,3 +20,23 @@ SVFaceAnalyse::SVFaceAnalyse()
 
 SVFaceAnalyse::~SVFaceAnalyse() {
 }
+
+//分析人脸
+s32 SVFaceAnalyse::analyseFace(SVInstPtr _inst,std::vector<FVec2>& points) {
+    return 0;
+}
+
+//分析眼眉
+s32 SVFaceAnalyse::analyseFaceEyebow(SVInstPtr _inst,std::vector<FVec2>& points) {
+    return 0;
+}
+
+//分析眼睛
+s32 SVFaceAnalyse::analyseFaceEye(SVInstPtr _inst,std::vector<FVec2>& points) {
+    return 0;
+}
+
+//分析鼻子
+s32 SVFaceAnalyse::analyseFaceNoise(SVInstPtr _inst,std::vector<FVec2>& points) {
+    return 0;
+}

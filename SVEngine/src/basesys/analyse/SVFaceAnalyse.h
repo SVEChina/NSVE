@@ -17,6 +17,7 @@
 #include "../base/SVObject.h"
 #include "../base/SVMap.h"
 #include "../base/SVVec3.h"
+#include "../base/SVVec2.h"
 #include "../core/SVVertDef.h"
 
 namespace sv {
@@ -24,14 +25,42 @@ namespace sv {
     /*
         人脸分析
      */
+    
+enum  FACETYPE{
+    
+};
 
-    class SVFaceAnalyse: public SVObject {
-    public:
-        SVFaceAnalyse();
-        
-        ~SVFaceAnalyse();
-        
-    };
+enum  EYEBOWTYPE{
+    
+};
+
+enum  NOISETYPE{
+    
+};
+
+enum  MOUTHTYPE{
+    
+};
+
+class SVFaceAnalyse: public SVObject {
+public:
+    SVFaceAnalyse();
+    
+    ~SVFaceAnalyse();
+    
+    //分析人脸
+    static s32 analyseFace(SVInstPtr _inst,std::vector<FVec2>& points);
+    
+    //分析眼眉
+    static s32 analyseFaceEyebow(SVInstPtr _inst,std::vector<FVec2>& points);
+    
+    //分析眼睛
+    static s32 analyseFaceEye(SVInstPtr _inst,std::vector<FVec2>& points);
+    
+    //分析鼻子
+    static s32 analyseFaceNoise(SVInstPtr _inst,std::vector<FVec2>& points);
+    
+};
     
 }//!namespace
 
