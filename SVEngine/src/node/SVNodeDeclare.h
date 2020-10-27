@@ -55,6 +55,7 @@ namespace sv {
     DECLARE_SHAREPTR(SVSpriteNode);
     DECLARE_SHAREPTR(SVBillboardNode);
     DECLARE_SHAREPTR(SVFaceShapeNode);
+    DECLARE_SHAREPTR(SVFacePointNode);
     DECLARE_SHAREPTR(SVDeformNode);
     DECLARE_SHAREPTR(SVSkinNode);
     DECLARE_SHAREPTR(SVModelNode);

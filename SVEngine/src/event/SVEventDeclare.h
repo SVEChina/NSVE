@@ -42,15 +42,11 @@ namespace sv {
     DECLARE_SHAREPTR(SVTouchWorldEvent);
     DECLARE_SHAREPTR(SVPickEvent);
     DECLARE_SHAREPTR(SVCameraOrenEvent);
-    DECLARE_SHAREPTR(SVDeviceAccelerometerEvent);
     DECLARE_SHAREPTR(SVCameraMatrixEvent);
     DECLARE_SHAREPTR(SVProjectMatrixEvent);
     DECLARE_SHAREPTR(SVCameraPosEvent);
     DECLARE_SHAREPTR(SVCameraDirEvent);
     DECLARE_SHAREPTR(SVReactEvent);
-    DECLARE_SHAREPTR(SVARAnchorEvent);
-    DECLARE_SHAREPTR(SVARAnchorProjPosEvent);
-    DECLARE_SHAREPTR(SVEffectMusicEvent);
     //
     DECLARE_SHAREPTR(SVEventThread);
     //

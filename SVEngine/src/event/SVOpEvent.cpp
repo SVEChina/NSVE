@@ -21,15 +21,6 @@ SVTouchWorldEvent::SVTouchWorldEvent() {
     z = 0.0f;
 }
 
-SVARAnchorEvent::SVARAnchorEvent() {
-    m_matData = MakeSharedPtr<SVDataSwap>();
-}
-
-SVARAnchorProjPosEvent::SVARAnchorProjPosEvent() {
-    m_x = 0.0;
-    m_y = 0.0;
-}
-
 SVPickEvent::SVPickEvent() {
     colorid = 0;
 }
@@ -38,12 +29,6 @@ SVCameraOrenEvent::SVCameraOrenEvent() {
     yaw = 0;
     pitch = 0;
     roll = 0;
-}
-
-SVDeviceAccelerometerEvent::SVDeviceAccelerometerEvent() {
-    x = 0;
-    y = 0;
-    z = 0;
 }
 
 SVCameraMatrixEvent::SVCameraMatrixEvent() {

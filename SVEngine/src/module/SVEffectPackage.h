@@ -66,20 +66,9 @@ namespace sv{
         void addFilter(SVFilterBasePtr _filter);
         
         void addDefrom(SVDeformImageMovePtr _deform);
-        
-//        void addAttachment(SVAniTexAttachmentPtr _attachment);
-//
-//        SVAniTexAttachmentPtr getTexAttachment(s32 _channel);
-//
-//        void addTrigger(SVAniTriggerPtr _trigger);
-        
-        void setEffectMusic(SVEffectMusicPtr _music);
-        
     protected:
         void _updateTriggers(f32 _dt);
         void _updateEffectUnits(f32 _dt);
-        //bool _hasAttachment(SVAniTexAttachmentPtr _attachment);
-        //bool _hasTrigger(SVAniTriggerPtr _trigger);
         
         EFFECTANISTATE m_aniState;
         typedef SVArray<SVEffectUnitPtr> SVEFFECTUNITPOOL;
@@ -95,7 +84,6 @@ namespace sv{
         typedef SVArray<SVDeformImageMovePtr> SVDEFORMPOOL;
         SVDEFORMPOOL m_deformPool;
         SVLockPtr m_lock;
-        SVEffectMusicPtr m_music;
     };
     
     

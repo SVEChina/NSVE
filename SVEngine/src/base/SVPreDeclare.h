@@ -123,20 +123,6 @@ namespace sv {
     DECLARE_SHAREPTR(SVOpPick);
     DECLARE_SHAREPTR(SVOpRecycleNode);
     //
-    DECLARE_SHAREPTR(SVOpOpenPen);
-    DECLARE_SHAREPTR(SVOpClosePen);
-    DECLARE_SHAREPTR(SVOpSetPenEffcet);
-    DECLARE_SHAREPTR(SVOpSavePenEffcet);
-    DECLARE_SHAREPTR(SVOpClearPen);
-    DECLARE_SHAREPTR(SVOpPenUndo);
-    DECLARE_SHAREPTR(SVOpPenRedo);
-    DECLARE_SHAREPTR(SVOpPenUndoIsEnable);
-    DECLARE_SHAREPTR(SVOpPenRedoIsEnable);
-    DECLARE_SHAREPTR(SVOpPenMode);
-    //
-    DECLARE_SHAREPTR(SVOpEnableTouchAnchor);
-    DECLARE_SHAREPTR(SVOpDisableTouchAnchor);
-    //
     DECLARE_SHAREPTR(SVOpCreateIOSTexIDInstream);
     DECLARE_SHAREPTR(SVOpCreateIOSInstream);
     DECLARE_SHAREPTR(SVOpDestroyIOSInstream);

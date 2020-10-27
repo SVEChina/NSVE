@@ -24,7 +24,6 @@
 #include "SVParseBackground.h"
 #include "SVParseTexAttachment.h"
 #include "SVParseAniTrigger.h"
-#include "SVParseMusic.h"
 #include "SVParseFilter.h"
 #include "../module/SVEffectPackage.h"
 #include "../mtl/SVParseLUTFilter.h"
@@ -158,14 +157,6 @@ SVModuleBasePtr SVParseMain::parse(cptr8 path, s32 resid) {
         SVDeformImageMovePtr t_deform = SVParseDeform::parseDeform(mApp, deformObj, resid, t_path.get());
         if (t_deform) {
             t_bundle->addDefrom(t_deform);
-        }
-    }
-    
-    if (doc.HasMember("SVMusic") && doc["SVMusic"].IsObject()) {
-        RAPIDJSON_NAMESPACE::Value &musicObj = doc["SVMusic"];
-        SVEffectMusicPtr t_music = SVParseMusic::parseMusic(mApp, musicObj, resid, t_path.c_str());
-        if (t_music) {
-            t_bundle->setEffectMusic(t_music);
         }
     }
     

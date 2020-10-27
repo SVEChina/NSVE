@@ -27,20 +27,6 @@ namespace sv {
         f32 y;
         f32 z;
     };
-    
-    class SVARAnchorEvent : public SVEvent {
-    public:
-        SVARAnchorEvent();
-        SVDataSwapPtr m_matData;
-    };
-    
-    class SVARAnchorProjPosEvent : public SVEvent {
-    public:
-        SVARAnchorProjPosEvent();
-        f32 m_x;
-        f32 m_y;
-    };
-    
     //
     class SVPickEvent : public SVEvent {
     public:
@@ -55,14 +41,6 @@ namespace sv {
         f32 yaw;
         f32 pitch;
         f32 roll;
-    };
-    
-    class SVDeviceAccelerometerEvent : public SVEvent {
-    public:
-        SVDeviceAccelerometerEvent();
-        f32 x;
-        f32 y;
-        f32 z;
     };
     
     class SVCameraMatrixEvent : public SVEvent {
