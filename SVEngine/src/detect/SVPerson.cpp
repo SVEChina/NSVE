@@ -59,12 +59,12 @@ s32 SVPerson::getPersonID() {
 
 void SVPerson::setDetectType(DETECTTYPE type) {
     if (m_detectType != type) {
-//        //去掉原来的监听
-//        SVDetectBasePtr t_detect = mApp->getDetectMgr()->getDetect();
-//        t_detect->unregistListenFunc(this, &SVObject::listenData);
-//        //增加新的监听
-//        m_detectType = type;
-//        t_detect->registListenFunc(this, &SVObject::listenData);
+        //去掉原来的监听
+        SVDetectBasePtr t_detect = mApp->getDetectMgr()->getDetect();
+        t_detect->unregistListenFunc(this, &SVObject::listenData);
+        //增加新的监听
+        m_detectType = type;
+        t_detect->registListenFunc(this, &SVObject::listenData);
     }
 }
 
@@ -154,42 +154,42 @@ SVTrackerFacePtr SVPerson::getTracker() {
 }
 
 void SVPerson::listenData(SVObjectPtr datagen) {
-//    m_dirty = true;
-//    if (m_detectType == DETECT_T_AS) {
-//        m_facePtNum = 101;// + 8 + 32 + 48;    //ARCSOFT
-//    } else if (m_detectType == DETECT_T_ST) {
-//        m_facePtNum = 106;// + 8;          //ST
-//        SVDetectSTPtr t_detectST = std::dynamic_pointer_cast<SVDetectST>(datagen);
-//        if (t_detectST) {
-//            _listenData_ST(t_detectST);
-//        }
-//    } else if (m_detectType == DETECT_T_FP) {
-//        m_facePtNum = 106;// + 8;          //FACE++
-//    }
-//    m_dirty = false;
+    m_dirty = true;
+    if (m_detectType == DETECT_T_AS) {
+        m_facePtNum = 101;// + 8 + 32 + 48;    //ARCSOFT
+    } else if (m_detectType == DETECT_T_ST) {
+        m_facePtNum = 106;// + 8;          //ST
+        SVDetectSTPtr t_detectST = std::dynamic_pointer_cast<SVDetectST>(datagen);
+        if (t_detectST) {
+            _listenData_ST(t_detectST);
+        }
+    } else if (m_detectType == DETECT_T_FP) {
+        m_facePtNum = 106;// + 8;          //FACE++
+    }
+    m_dirty = false;
 }
 
 void SVPerson::_listenData_ST(SVDetectSTPtr detect) {
-//    PERSON_STDATA *personData = detect->getData(m_personID);
-//    PERSON_STDATA *personDataOriginal = detect->getDataOriginal(m_personID);
-//    if (!personData)
-//        return;
-//    if (!personData->has){
-//        //开始做数据更新
-//        setExist(false);
-//        setFaceRot(0, 0, 0);
-//        setFaceRect(0, 0, 0, 0);
-//    } else {
-//        //开始做数据更新
-//        setExist(true);
-//        setFaceRot(personData->yaw, personData->pitch, personData->roll);
-//        setFaceRect(personData->rectleft, personData->recttop, personData->rectright, personData->rectbottom);
-//        setFaceData(personData->pointdata, sizeof(f32) * 2 * ST_POINT_NUM);
-//        setFaceDataOriginal(personDataOriginal->pointdata, sizeof(f32) * 2 * ST_POINT_NUM);
-//        if (m_pTracker) {
-//            m_pTracker->track_st(m_pFaceData, m_facePtNum, m_facerect, m_facerot.y, m_facerot.x, m_facerot.z, m_personID);
-//        }
-//    }
-//    //通知其他监听者更新数据
-//    _notice(0);
+    PERSON_STDATA *personData = detect->getData(m_personID);
+    PERSON_STDATA *personDataOriginal = detect->getDataOriginal(m_personID);
+    if (!personData)
+        return;
+    if (!personData->has){
+        //开始做数据更新
+        setExist(false);
+        setFaceRot(0, 0, 0);
+        setFaceRect(0, 0, 0, 0);
+    } else {
+        //开始做数据更新
+        setExist(true);
+        setFaceRot(personData->yaw, personData->pitch, personData->roll);
+        setFaceRect(personData->rectleft, personData->recttop, personData->rectright, personData->rectbottom);
+        setFaceData(personData->pointdata, sizeof(f32) * 2 * ST_POINT_NUM);
+        setFaceDataOriginal(personDataOriginal->pointdata, sizeof(f32) * 2 * ST_POINT_NUM);
+        if (m_pTracker) {
+            m_pTracker->track_st(m_pFaceData, m_facePtNum, m_facerect, m_facerot.y, m_facerot.x, m_facerot.z, m_personID);
+        }
+    }
+    //通知其他监听者更新数据
+    _notice(0);
 }

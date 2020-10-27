@@ -37,17 +37,12 @@ namespace sv{
         //字体模块
         SVFontProcessPtr getFontModule();
         
-        //传感器数据处理 
-        SVSensorProcessPtr getSensorModule();
-
     protected:
         SVRecycleProcessPtr m_pRecycleModule;
         
         SVPickProcessPtr m_picker;
 
         SVFontProcessPtr m_fonter;
-
-        SVSensorProcessPtr m_sensor;
     };
 
 }//!namespace sv

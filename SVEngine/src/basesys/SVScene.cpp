@@ -17,6 +17,7 @@
 #include "../node/SVCube.h"
 #include "../node/SVSpriteNode.h"
 #include "../node/SVFaceShapeNode.h"
+#include "../node/SVFacePointNode.h"
 
 #include "../app/SVGlobalMgr.h"
 #include "../app/SVGlobalParam.h"
@@ -319,13 +320,10 @@ void SVScene::fromJSON(RAPIDJSON_NAMESPACE::Value &item) {
 
 void SVScene::test() {
     SVTexturePtr t_tex = mApp->getTexMgr()->getTexture("res/test2.jpeg");
-//    //创建一个测试场景
-//    SVSpriteNodePtr t_sp_node = MakeSharedPtr<SVSpriteNode>(mApp);
-//    t_sp_node->setMtl("normal2d");
-//    t_sp_node->setTexture("res/test1.png");
-//    addNode(t_sp_node);
-    SVFaceShapeNodePtr t_faceshape_node = MakeSharedPtr<SVFaceShapeNode>(mApp);
-    addNode(t_faceshape_node);
+
+    //
+    SVFacePointNodePtr t_facept_node = MakeSharedPtr<SVFacePointNode>(mApp);
+    addNode(t_facept_node);
     //
     SVCubePtr t_box_node = MakeSharedPtr<SVCube>(mApp);
     t_box_node->setRotation(45.0f, 45.0f, 45.0f);

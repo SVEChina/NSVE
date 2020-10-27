@@ -22,7 +22,7 @@ void SVPersonModule::initModule() {
     for (int i = 0; i < SUPPORT_MAX_PERSON_NUM; i++) {
         m_persons[i] = MakeSharedPtr<SVPerson>(mApp);
         m_persons[i]->setPersonID(i + 1);
-        //m_persons[i]->setDetectType(mApp->m_config.detectType);
+        m_persons[i]->setDetectType(DETECT_T_ST);
     }
 }
 
