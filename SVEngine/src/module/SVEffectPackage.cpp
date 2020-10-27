@@ -23,7 +23,6 @@
 #include "../basesys/SVDeformMgr.h"
 #include "../basesys/SVConfig.h"
 #include "../basesys/SVScene.h"
-#include "SVEffectMusic.h"
 
 using namespace sv;
 
@@ -117,7 +116,6 @@ SVEffectPackage::SVEffectPackage(SVInstPtr _app)
 
 SVEffectPackage::~SVEffectPackage(){
     m_lock = nullptr;
-    m_music = nullptr;
 }
 
 void SVEffectPackage::init(){
@@ -162,18 +160,6 @@ void SVEffectPackage::destroy(){
         t_deform->m_rule=1;
     }
     m_deformPool.destroy();
-    //
-    if (m_music) {
-        SVArray<SVString>t_musics;
-        m_music->getAllMusic(t_musics);
-        for (s32 i = 0; i<t_musics.size(); i++) {
-            SVString t_path = t_musics[i];
-            if (m_cb) {
-                SVString msg = SVString::format("sveffectmusic_unload_%s",t_path.c_str());
-                (*m_cb)(msg.c_str(), m_obj);
-            }
-        }
-    }
     m_lock->unlock();
     if (m_cb) {
         SVString msg = SVString::format("effectpackageremovesuccess_%s",m_module_name.c_str());
@@ -202,17 +188,9 @@ void SVEffectPackage::reset(){
 void SVEffectPackage::update(f32 _dt) {
     SVModuleBase::update(_dt);
     if (m_aniState == EFFECT_ANI_RUN) {
-        _updateTriggers(_dt);
         _updateEffectUnits(_dt);
     }
 }
-
-//void SVEffectPackage::_updateTriggers(f32 _dt){
-//    for (s32 i = 0; i < m_triggerPool.size(); i++) {
-//        SVAniTriggerPtr t_trigger = m_triggerPool[i];
-//        t_trigger->update(_dt);
-//    }
-//}
 
 void SVEffectPackage::_updateEffectUnits(f32 _dt){
     bool end = true;
@@ -234,31 +212,6 @@ void SVEffectPackage::_updateEffectUnits(f32 _dt){
 }
 
 bool SVEffectPackage::procEvent(SVEventPtr _event) {
-    if (_event->eventType == EVN_T_EFFECT_MUSIC_LOAD) {
-        SVEffectMusicEventPtr t_event = DYN_TO_SHAREPTR(SVEffectMusicEvent, _event);
-        if (t_event) {
-            if (m_cb) {
-                SVString msg = SVString::format("sveffectmusic_load_%s",t_event->path.c_str());
-                (*m_cb)(msg.c_str(), m_obj);
-            }
-        }
-    }else if (_event->eventType == EVN_T_EFFECT_MUSIC_PLAY) {
-        SVEffectMusicEventPtr t_event = DYN_TO_SHAREPTR(SVEffectMusicEvent, _event);
-        if (t_event) {
-            if (m_cb) {
-                SVString msg = SVString::format("sveffectmusic_play_%s",t_event->path.c_str());
-                (*m_cb)(msg.c_str(), m_obj);
-            }
-        }
-    }else if(_event->eventType == EVN_T_ANIMATE){
-//        SVAnimateEventPtr t_event = DYN_TO_SHAREPTR(SVAnimateEvent, _event);
-//        if (t_event) {
-//            for (s32 i = 0; i<m_triggerPool.size(); i++) {
-//                SVAniTriggerPtr t_trigger = m_triggerPool[i];
-//                t_trigger->noticeTriggerCondition(t_event->eventName);
-//            }
-//        }
-    }
     return  true;
 }
 
@@ -335,12 +288,6 @@ void SVEffectPackage::addDefrom(SVDeformImageMovePtr _deform){
 //    }
 //    return nullptr;
 //}
-
-void SVEffectPackage::setEffectMusic(SVEffectMusicPtr _music){
-    if (_music) {
-        m_music = _music;
-    }
-}
 
 
 

@@ -321,102 +321,6 @@ namespace sv {
     protected:
         void _process(f32 dt);
     };
-    
-    //
-    class SVOpOpenPen : public SVOpBase {
-    public:
-        SVOpOpenPen(SVInstPtr _app);
-        
-        ~SVOpOpenPen();
-        
-    protected:
-        void _process(f32 dt);
-    };
-    //
-    class SVOpSetPenEffcet : public SVOpBase {
-    public:
-        SVOpSetPenEffcet(SVInstPtr _app, cptr8 pStrPath);
-        
-        ~SVOpSetPenEffcet();
-        
-    protected:
-        void _process(f32 dt);
-        
-        SVString m_strPath;
-    };
-    //
-    class SVOpSavePenEffcet : public SVOpBase {
-    public:
-        SVOpSavePenEffcet(SVInstPtr _app, cptr8 pStrPath);
-        
-        ~SVOpSavePenEffcet();
-        
-    protected:
-        void _process(f32 dt);
-        
-        SVString m_strPath;
-    };
-    //
-    class SVOpClearPen : public SVOpBase {
-    public:
-        SVOpClearPen(SVInstPtr _app);
-        
-        ~SVOpClearPen();
-        
-    protected:
-        void _process(f32 dt);
-    };
-    //
-    class SVOpPenUndo : public SVOpBase {
-    public:
-        SVOpPenUndo(SVInstPtr _app);
-        
-        ~SVOpPenUndo();
-        
-    protected:
-        void _process(f32 dt);
-    };
-    //
-    class SVOpPenRedo : public SVOpBase {
-    public:
-        SVOpPenRedo(SVInstPtr _app);
-        
-        ~SVOpPenRedo();
-        
-    protected:
-        void _process(f32 dt);
-    };
-    //
-    class SVOpPenUndoIsEnable : public SVOpBase {
-    public:
-        SVOpPenUndoIsEnable(SVInstPtr _app);
-        
-        ~SVOpPenUndoIsEnable();
-        
-    protected:
-        void _process(f32 dt);
-    };
-    //
-    class SVOpPenRedoIsEnable : public SVOpBase {
-    public:
-        SVOpPenRedoIsEnable(SVInstPtr _app);
-        
-        ~SVOpPenRedoIsEnable();
-        
-    protected:
-        void _process(f32 dt);
-    };
-    //
-    class SVOpPenMode : public SVOpBase {
-    public:
-        SVOpPenMode(SVInstPtr _app, s32 _mode);
-        
-        ~SVOpPenMode();
-        
-    protected:
-        void _process(f32 dt);
-        s32 m_mode;
-    };
 
     class SVOpCreateGameZCMgr : public SVOpBase {
     public:
@@ -427,28 +331,6 @@ namespace sv {
     protected:
         void _process(f32 dt);
     };
-
-    //
-    class SVOpEnableTouchAnchor : public SVOpBase {
-    public:
-        SVOpEnableTouchAnchor(SVInstPtr _app);
-        
-        ~SVOpEnableTouchAnchor();
-        
-    protected:
-        void _process(f32 dt);
-    };
-
-    class SVOpDisableTouchAnchor : public SVOpBase {
-    public:
-        SVOpDisableTouchAnchor(SVInstPtr _app);
-        
-        ~SVOpDisableTouchAnchor();
-        
-    protected:
-        void _process(f32 dt);
-    };
-
 }//!namespace sv
 
 

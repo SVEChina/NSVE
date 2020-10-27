@@ -42,11 +42,8 @@
 #include "../file/SVLoaderGLTF.h"
 #include "../module/SVModuleSys.h"
 #include "../module/SVModuleBase.h"
-#include "../module/SVDivisonFilter.h"
 #include "../module/SVMark.h"
-#include "../module/SVARAnchor.h"
 #include "../module/SVEffectPackage.h"
-#include "../module/pendraw/SVPenDraw.h"
 #include "../detect/SVDetectMgr.h"
 #include "../detect/SVDetectBase.h"
 #include "../physics/SVPhysicsWorld.h"
@@ -268,15 +265,7 @@ SVOpCreateTest::~SVOpCreateTest(){
 }
 
 void SVOpCreateTest::_process(f32 dt) {
-    SVString t_name = "sv_aranchor_module";
-    SVModuleBasePtr t_modulePtr = mApp->getModuleSys()->getModule(t_name.c_str());
-    if (t_modulePtr == nullptr) {
-        t_modulePtr = MakeSharedPtr<SVARAnchor>(mApp);
-        t_modulePtr->init();
-        t_modulePtr->open();
-        t_modulePtr->setOpCallBack(m_pCB, m_obj);
-        mApp->getModuleSys()->regist(t_modulePtr, t_name.c_str());
-    }
+    
 }
 
 
@@ -475,200 +464,6 @@ void SVOpMarkEnableRandom::_process(f32 dt) {
     }
 }
 
-//about pen
-SVOpOpenPen::SVOpOpenPen(SVInstPtr _app) :  SVOpBase(_app){
-    
-}
-
-SVOpOpenPen::~SVOpOpenPen(){
-    
-}
-
-void SVOpOpenPen::_process(f32 dt) {
-    SVString t_name = "sv_pen_module";
-    SVModuleBasePtr t_modulePtr = mApp->getModuleSys()->getModule(t_name.c_str());
-    if (t_modulePtr == nullptr) {
-        t_modulePtr = MakeSharedPtr<SVPenDraw>(mApp);
-        SVGameBasePtr gameBasePtr = DYN_TO_SHAREPTR(SVGameBase, t_modulePtr);
-        if (gameBasePtr) {
-            gameBasePtr->init(nullptr, nullptr, nullptr);
-            gameBasePtr->open();
-            mApp->getModuleSys()->regist(gameBasePtr, t_name.c_str());
-        }
-
-    }
-}
-
-SVOpSetPenEffcet::SVOpSetPenEffcet(SVInstPtr _app,cptr8 pStrPath)
-: SVOpBase(_app)
-, m_strPath(pStrPath) {
-}
-
-SVOpSetPenEffcet::~SVOpSetPenEffcet() {
-}
-
-void SVOpSetPenEffcet::_process(f32 dt) {
-//    SVString t_name = "sv_pen_module";
-//    SVModuleBasePtr t_modulePtr = mApp->getModuleSys()->getModule(t_name.c_str());
-//    if (t_modulePtr) {
-//        SVParsePen t_parssPen(mApp);
-//        t_parssPen.parse(m_strPath.c_str(),123);
-//    }
-}
-
-
-SVOpSavePenEffcet::SVOpSavePenEffcet(SVInstPtr _app,cptr8 pStrPath)
-: SVOpBase(_app)
-, m_strPath(pStrPath) {
-}
-
-SVOpSavePenEffcet::~SVOpSavePenEffcet() {
-}
-
-void SVOpSavePenEffcet::_process(f32 dt) {
-    SVString result = "false";
-    SVString t_name = "sv_pen_module";
-    SVModuleBasePtr t_modulePtr = mApp->getModuleSys()->getModule(t_name.c_str());
-    if (t_modulePtr) {
-        SVPenDrawPtr t_penDraw = DYN_TO_SHAREPTR(SVPenDraw, t_modulePtr);
-        if (t_penDraw) {
-            if (t_penDraw->save(m_strPath)) {
-                result = "true";
-            }
-        }
-    }
-    if (m_pCB) {
-        (*m_pCB)(result, mApp.get());
-    }
-}
-
-SVOpClearPen::SVOpClearPen(SVInstPtr _app) :  SVOpBase(_app){
-    
-}
-
-SVOpClearPen::~SVOpClearPen(){
-    
-}
-
-void SVOpClearPen::_process(f32 dt) {
-    SVString t_name = "sv_pen_module";
-    SVModuleBasePtr t_modulePtr = mApp->getModuleSys()->getModule(t_name.c_str());
-    if (t_modulePtr) {
-        SVPenDrawPtr t_penDraw = DYN_TO_SHAREPTR(SVPenDraw, t_modulePtr);
-        if (t_penDraw) {
-            t_penDraw->clear();
-        }
-    }
-}
-
-SVOpPenUndo::SVOpPenUndo(SVInstPtr _app) :  SVOpBase(_app){
-    
-}
-
-SVOpPenUndo::~SVOpPenUndo(){
-    
-}
-
-void SVOpPenUndo::_process(f32 dt) {
-    SVString t_name = "sv_pen_module";
-    SVModuleBasePtr t_modulePtr = mApp->getModuleSys()->getModule(t_name.c_str());
-    if (t_modulePtr) {
-        SVPenDrawPtr t_penDraw = DYN_TO_SHAREPTR(SVPenDraw, t_modulePtr);
-        if (t_penDraw) {
-            t_penDraw->undo();
-        }
-    }
-}
-
-SVOpPenRedo::SVOpPenRedo(SVInstPtr _app) :  SVOpBase(_app){
-    
-}
-
-SVOpPenRedo::~SVOpPenRedo(){
-    
-}
-
-void SVOpPenRedo::_process(f32 dt) {
-    SVString t_name = "sv_pen_module";
-    SVModuleBasePtr t_modulePtr = mApp->getModuleSys()->getModule(t_name.c_str());
-    if (t_modulePtr) {
-        SVPenDrawPtr t_penDraw = DYN_TO_SHAREPTR(SVPenDraw, t_modulePtr);
-        if (t_penDraw) {
-            t_penDraw->redo();
-        }
-    }
-}
-
-SVOpPenUndoIsEnable::SVOpPenUndoIsEnable(SVInstPtr _app) :  SVOpBase(_app){
-    
-}
-
-SVOpPenUndoIsEnable::~SVOpPenUndoIsEnable(){
-    
-}
-
-void SVOpPenUndoIsEnable::_process(f32 dt) {
-    SVString result = "false";
-    SVString t_name = "sv_pen_module";
-    SVModuleBasePtr t_modulePtr = mApp->getModuleSys()->getModule(t_name.c_str());
-    if (t_modulePtr) {
-        SVPenDrawPtr t_penDraw = DYN_TO_SHAREPTR(SVPenDraw, t_modulePtr);
-        if (t_penDraw) {
-            if (t_penDraw->isUndoEnable()) {
-                result = "true";
-            }
-        }
-    }
-    if (m_pCB) {
-        (*m_pCB)(result, m_obj);
-    }
-}
-
-SVOpPenRedoIsEnable::SVOpPenRedoIsEnable(SVInstPtr _app) :  SVOpBase(_app){
-    
-}
-
-SVOpPenRedoIsEnable::~SVOpPenRedoIsEnable(){
-    
-}
-
-void SVOpPenRedoIsEnable::_process(f32 dt) {
-    SVString result = "false";
-    SVString t_name = "sv_pen_module";
-    SVModuleBasePtr t_modulePtr = mApp->getModuleSys()->getModule(t_name.c_str());
-    if (t_modulePtr) {
-        SVPenDrawPtr t_penDraw = DYN_TO_SHAREPTR(SVPenDraw, t_modulePtr);
-        if (t_penDraw) {
-            if (t_penDraw->isRedoEnable()) {
-                result = "true";
-            }
-        }
-    }
-    if (m_pCB) {
-        (*m_pCB)(result, m_obj);
-    }
-}
-
-SVOpPenMode::SVOpPenMode(SVInstPtr _app, s32 _mode) :  SVOpBase(_app){
-    m_mode = _mode;
-}
-
-SVOpPenMode::~SVOpPenMode(){
-    
-}
-
-void SVOpPenMode::_process(f32 dt) {
-    SVString result = "false";
-    SVString t_name = "sv_pen_module";
-    SVModuleBasePtr t_modulePtr = mApp->getModuleSys()->getModule(t_name.c_str());
-    if (t_modulePtr) {
-        SVPenDrawPtr t_penDraw = DYN_TO_SHAREPTR(SVPenDraw, t_modulePtr);
-        if (t_penDraw) {
-            t_penDraw->setPenMode(SVPENMODE(m_mode));
-        }
-    }
-}
-
 SVOpCreateGameZCMgr::SVOpCreateGameZCMgr(SVInstPtr _app) :  SVOpBase(_app){
     
 }
@@ -689,44 +484,4 @@ void SVOpCreateGameZCMgr::_process(f32 dt) {
 //            (*m_pCB)("", m_obj);
 //        }
 //    }
-}
-
-SVOpEnableTouchAnchor::SVOpEnableTouchAnchor(SVInstPtr _app)
-: SVOpBase(_app){
-    
-}
-
-SVOpEnableTouchAnchor::~SVOpEnableTouchAnchor(){
-    
-}
-
-void SVOpEnableTouchAnchor::_process(f32 dt) {
-    SVString t_name = "sv_aranchor_module";
-    SVModuleBasePtr t_modulePtr = mApp->getModuleSys()->getModule(t_name.c_str());
-    if (t_modulePtr == nullptr) {
-        t_modulePtr = MakeSharedPtr<SVARAnchor>(mApp);
-        t_modulePtr->init();
-        t_modulePtr->open();
-        t_modulePtr->setOpCallBack(m_pCB, m_obj);
-        mApp->getModuleSys()->regist(t_modulePtr, t_name.c_str());
-    }
-}
-
-SVOpDisableTouchAnchor::SVOpDisableTouchAnchor(SVInstPtr _app)
-: SVOpBase(_app){
-    
-}
-
-SVOpDisableTouchAnchor::~SVOpDisableTouchAnchor(){
-    
-}
-
-void SVOpDisableTouchAnchor::_process(f32 dt) {
-    SVString t_name = "sv_aranchor_module";
-    SVModuleBasePtr t_modulePtr = mApp->getModuleSys()->getModule(t_name.c_str());
-    if (t_modulePtr) {
-        t_modulePtr->close();
-        t_modulePtr->destroy();
-        mApp->getModuleSys()->unregist(t_name.c_str());
-    }
 }
