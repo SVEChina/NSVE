@@ -329,6 +329,7 @@ SVSkeletonPtr SVLoaderGLTFEx::_genSkin(SVInstPtr _app,
                                     tinygltf::Model* _model,
                                     s32 _index,
                                     cptr8 _path){
+    return nullptr;
     if(_index<0)
         return nullptr;
     tinygltf::Skin* t_skindata = &(_model->skins[_index]);
