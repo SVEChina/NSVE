@@ -3135,6 +3135,14 @@
 		5F3AC25524E3F2EF000D4019 /* SVARBackgroundMgr.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F3AC24F24E3F2EF000D4019 /* SVARBackgroundMgr.h */; };
 		5F3AC25624E3F2EF000D4019 /* SVARBackgroundMgr.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F3AC24F24E3F2EF000D4019 /* SVARBackgroundMgr.h */; };
 		5F3AC25724E3F2EF000D4019 /* SVARBackgroundMgr.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F3AC24F24E3F2EF000D4019 /* SVARBackgroundMgr.h */; };
+		5F3BC14B2547B5C800B74E35 /* SVFaceAnalyse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F3BC1492547B5C700B74E35 /* SVFaceAnalyse.cpp */; };
+		5F3BC14C2547B5C800B74E35 /* SVFaceAnalyse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F3BC1492547B5C700B74E35 /* SVFaceAnalyse.cpp */; };
+		5F3BC14D2547B5C800B74E35 /* SVFaceAnalyse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F3BC1492547B5C700B74E35 /* SVFaceAnalyse.cpp */; };
+		5F3BC14E2547B5C800B74E35 /* SVFaceAnalyse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F3BC1492547B5C700B74E35 /* SVFaceAnalyse.cpp */; };
+		5F3BC14F2547B5C800B74E35 /* SVFaceAnalyse.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F3BC14A2547B5C800B74E35 /* SVFaceAnalyse.h */; };
+		5F3BC1502547B5C800B74E35 /* SVFaceAnalyse.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F3BC14A2547B5C800B74E35 /* SVFaceAnalyse.h */; };
+		5F3BC1512547B5C800B74E35 /* SVFaceAnalyse.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F3BC14A2547B5C800B74E35 /* SVFaceAnalyse.h */; };
+		5F3BC1522547B5C800B74E35 /* SVFaceAnalyse.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F3BC14A2547B5C800B74E35 /* SVFaceAnalyse.h */; };
 		5F426926226F483A00965DB6 /* SVLoaderGLTF.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F426924226F483900965DB6 /* SVLoaderGLTF.h */; };
 		5F426927226F483A00965DB6 /* SVLoaderGLTF.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F426924226F483900965DB6 /* SVLoaderGLTF.h */; };
 		5F426928226F483A00965DB6 /* SVLoaderGLTF.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F426924226F483900965DB6 /* SVLoaderGLTF.h */; };
@@ -8926,6 +8934,8 @@
 		5F3AC23D24DBFDFF000D4019 /* SVSurface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVSurface.h; sourceTree = "<group>"; };
 		5F3AC24E24E3F2EE000D4019 /* SVARBackgroundMgr.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVARBackgroundMgr.cpp; sourceTree = "<group>"; };
 		5F3AC24F24E3F2EF000D4019 /* SVARBackgroundMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVARBackgroundMgr.h; sourceTree = "<group>"; };
+		5F3BC1492547B5C700B74E35 /* SVFaceAnalyse.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVFaceAnalyse.cpp; sourceTree = "<group>"; };
+		5F3BC14A2547B5C800B74E35 /* SVFaceAnalyse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVFaceAnalyse.h; sourceTree = "<group>"; };
 		5F426924226F483900965DB6 /* SVLoaderGLTF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVLoaderGLTF.h; sourceTree = "<group>"; };
 		5F426925226F483900965DB6 /* SVLoaderGLTF.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVLoaderGLTF.cpp; sourceTree = "<group>"; };
 		5F44285F21843BD400AF4A5B /* SVOutMission.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVOutMission.cpp; sourceTree = "<group>"; };
@@ -11291,6 +11301,15 @@
 			path = lib_stb_image;
 			sourceTree = "<group>";
 		};
+		5F3BC1432547B54700B74E35 /* analyse */ = {
+			isa = PBXGroup;
+			children = (
+				5F3BC1492547B5C700B74E35 /* SVFaceAnalyse.cpp */,
+				5F3BC14A2547B5C800B74E35 /* SVFaceAnalyse.h */,
+			);
+			path = analyse;
+			sourceTree = "<group>";
+		};
 		5F44285E21843BAC00AF4A5B /* out */ = {
 			isa = PBXGroup;
 			children = (
@@ -12534,6 +12553,7 @@
 		5F7D5D68215F407700803BCF /* basesys */ = {
 			isa = PBXGroup;
 			children = (
+				5F3BC1432547B54700B74E35 /* analyse */,
 				5F86EA4F253D8F6600966255 /* ani */,
 				5F44285E21843BAC00AF4A5B /* out */,
 				5F86E9EB253D6C7500966255 /* SVAniMgr.cpp */,
@@ -13638,6 +13658,7 @@
 				020C4CDF22DC5DD200201753 /* b3GeometryUtil.h in Headers */,
 				5F566821253FC80400670056 /* btBoxBoxDetector.h in Headers */,
 				020C473B22DC5DCE00201753 /* btConvex2dShape.h in Headers */,
+				5F3BC1522547B5C800B74E35 /* SVFaceAnalyse.h in Headers */,
 				020C452922DC5DCD00201753 /* btBoxBoxCollisionAlgorithm.h in Headers */,
 				020C448B22DC5DCC00201753 /* btGjkEpaPenetrationDepthSolver.h in Headers */,
 				02F27E7D21915B30007E85C3 /* SVSensorProcess.h in Headers */,
@@ -14735,6 +14756,7 @@
 				020C517122DCA24000201753 /* SVPhysicsShape.h in Headers */,
 				020C482122DC5DCE00201753 /* btDiscreteDynamicsWorldMt.h in Headers */,
 				02A16A5F2284427500FE2B99 /* SVParseMusic.h in Headers */,
+				5F3BC1502547B5C800B74E35 /* SVFaceAnalyse.h in Headers */,
 				5F7D691D215F407900803BCF /* SVPreDeclare.h in Headers */,
 				5F7D68C9215F407900803BCF /* SVListenBase.h in Headers */,
 				020C45A722DC5DCD00201753 /* btConvex2dConvex2dAlgorithm.h in Headers */,
@@ -16002,6 +16024,7 @@
 				020C444C22DC5DCC00201753 /* btDbvtBroadphase.h in Headers */,
 				020C498822DC5DCF00201753 /* btNNCGConstraintSolver.h in Headers */,
 				020C493022DC5DCF00201753 /* btHingeConstraint.h in Headers */,
+				5F3BC14F2547B5C800B74E35 /* SVFaceAnalyse.h in Headers */,
 				0288F9EF21788A310089E61C /* SVBMFont.h in Headers */,
 				5F7D6690215F407800803BCF /* SVMtlBeauty.h in Headers */,
 				5F7D68BC215F407900803BCF /* SVMap.spu.h in Headers */,
@@ -18038,6 +18061,7 @@
 				5F7D65CE215F407800803BCF /* SVRenderStream.h in Headers */,
 				020C452422DC5DCD00201753 /* btCollisionWorld.h in Headers */,
 				020C440422DC5DCC00201753 /* IDConfigEigen.hpp in Headers */,
+				5F3BC1512547B5C800B74E35 /* SVFaceAnalyse.h in Headers */,
 				5F566ECC253FC80900670056 /* rapidjson.h in Headers */,
 				5F566E80253FC80800670056 /* filereadstream.h in Headers */,
 				020C48E422DC5DCF00201753 /* btDantzigLCP.h in Headers */,
@@ -18926,6 +18950,7 @@
 				020C497F22DC5DCF00201753 /* btPoint2PointConstraint.cpp in Sources */,
 				5F7D6051215F407700803BCF /* SVCameraMgr.cpp in Sources */,
 				5F8268232282C456003D4476 /* SVMorphNode.cpp in Sources */,
+				5F3BC14E2547B5C800B74E35 /* SVFaceAnalyse.cpp in Sources */,
 				5F7D6687215F407800803BCF /* SVMtlFilterEx.cpp in Sources */,
 				020C497722DC5DCF00201753 /* btGeneric6DofSpring2Constraint.cpp in Sources */,
 				5F96BDCD24F907C60020F7C4 /* ldo.c in Sources */,
@@ -19866,6 +19891,7 @@
 				5F566D02253FC80700670056 /* b3Vector3.cpp in Sources */,
 				020C454222DC5DCD00201753 /* btGhostObject.cpp in Sources */,
 				5F7D6122215F407700803BCF /* SVSpine.cpp in Sources */,
+				5F3BC14B2547B5C800B74E35 /* SVFaceAnalyse.cpp in Sources */,
 				020812D322F42286006E653A /* SVStringHelper.cpp in Sources */,
 				5F7D6858215F407900803BCF /* SVQuat.cpp in Sources */,
 				5F566DEA253FC80800670056 /* b3OverlappingPairCache.cpp in Sources */,
@@ -20686,6 +20712,7 @@
 				020C44A622DC5DCC00201753 /* btConvexCast.cpp in Sources */,
 				5F5665B8253FC80200670056 /* PathConstraintData.c in Sources */,
 				5F566D04253FC80700670056 /* b3Vector3.cpp in Sources */,
+				5F3BC14D2547B5C800B74E35 /* SVFaceAnalyse.cpp in Sources */,
 				5F7D66C2215F407900803BCF /* SVMtlBasedOn.cpp in Sources */,
 				5F7D661E215F407800803BCF /* SVRTarget.cpp in Sources */,
 				020C463022DC5DCD00201753 /* gim_box_set.cpp in Sources */,
@@ -21506,6 +21533,7 @@
 				020C44A522DC5DCC00201753 /* btConvexCast.cpp in Sources */,
 				5F5665B7253FC80200670056 /* PathConstraintData.c in Sources */,
 				5F566D03253FC80700670056 /* b3Vector3.cpp in Sources */,
+				5F3BC14C2547B5C800B74E35 /* SVFaceAnalyse.cpp in Sources */,
 				5F7D66C1215F407900803BCF /* SVMtlBasedOn.cpp in Sources */,
 				5F7D661D215F407800803BCF /* SVRTarget.cpp in Sources */,
 				020C462F22DC5DCD00201753 /* gim_box_set.cpp in Sources */,
