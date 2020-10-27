@@ -531,7 +531,7 @@ SVAnimateSkinPtr SVLoaderGLTF::_buildAnimate(s32 _index){
         }
         //构建输入
         AnimationSampler* t_chn_samp = &(t_anidata->samplers[t_chn_data->sampler]);
-        SVChannelPtr t_sve_chn =  t_ani->getChannel(t_chn_data->target_node);
+        SVChannelPtr t_sve_chn =  nullptr;//t_ani->getChannel(t_chn_data->target_node);
         if(!t_sve_chn) {
             t_sve_chn = MakeSharedPtr<SVChannel>();
             t_sve_chn->m_target = t_chn_data->target_node;
@@ -560,7 +560,7 @@ SVAnimateSkinPtr SVLoaderGLTF::_buildAnimate(s32 _index){
                     s8* t_p = _getAccDataPointer(t_acc);
                     f32* t_pPos = (f32*)t_p;
                     for(s32 i=0;i<t_acc->count;i++) {
-                        SVASKeyPtr t_askey = t_sve_chn->m_keyPool[i];
+                        SVASKeyPosPtr t_askey = MakeSharedPtr<SVASKeyPos>();
                         t_askey->m_pos.x = *t_pPos;
                         t_pPos++;
                         t_askey->m_pos.y = *t_pPos;
@@ -569,6 +569,9 @@ SVAnimateSkinPtr SVLoaderGLTF::_buildAnimate(s32 _index){
                         t_pPos++;
                     }
                 }
+//                DECLARE_SHAREPTR(SVASKeyPos);
+//                DECLARE_SHAREPTR(SVASKeyRot);
+//                DECLARE_SHAREPTR(SVASKeyScale);
             }
         }else if( t_chn_data->target_path == "rotation") {
             //构建rot
@@ -579,7 +582,7 @@ SVAnimateSkinPtr SVLoaderGLTF::_buildAnimate(s32 _index){
                     s8* t_p = _getAccDataPointer(t_acc);
                     f32* t_pRot = (f32*)t_p;
                     for(s32 i=0;i<t_acc->count;i++) {
-                        SVASKeyPtr t_askey = t_sve_chn->m_keyPool[i];
+                        SVASKeyRotPtr t_askey = MakeSharedPtr<SVASKeyRot>();
                         t_askey->m_rot.x = *t_pRot;
                         t_pRot++;
                         t_askey->m_rot.y = *t_pRot;
@@ -600,7 +603,7 @@ SVAnimateSkinPtr SVLoaderGLTF::_buildAnimate(s32 _index){
                     s8* t_p = _getAccDataPointer(t_acc);
                     f32* t_pScale = (f32*)t_p;
                     for(s32 i=0;i<t_acc->count;i++) {
-                        SVASKeyPtr t_askey = t_sve_chn->m_keyPool[i];
+                        SVASKeyScalePtr t_askey = MakeSharedPtr<SVASKeyScale>();
                         t_askey->m_scale.x = *t_pScale;
                         t_pScale++;
                         t_askey->m_scale.y = *t_pScale;

@@ -347,7 +347,7 @@ void SVInst::test() {
     if(getSceneMgr()) {
         getSceneMgr()->test();
     }
-    //SVLoaderGLTFEx::loadFromFile(share(),"res/woniu_xiuxian/scene.gltf");
+    SVLoaderGLTFEx::loadFromFile(share(),"res/woniu_xiuxian/scene.gltf");
     //常见AR阶段
 //    if(m_ar_mgr) {
 //        m_ar_mgr->enable();

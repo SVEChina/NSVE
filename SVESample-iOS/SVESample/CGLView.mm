@@ -55,11 +55,11 @@
 
 -(void)renderGL {
     [[CGInst getInst] render];
-    //
-//    if(_test) {
-//        _test = false;
-//        [[CGInst getInst] test];
-//    }
+    
+    if(_test) {
+        _test = false;
+        [[CGInst getInst] test];
+    }
 }
 
 - (void)createGLLayerWithWidth:(int)width Height:(int)height{
