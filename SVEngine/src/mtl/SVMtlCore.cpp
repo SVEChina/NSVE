@@ -205,9 +205,7 @@ void SVMtlCore::setTexture(s32 _chn,s32 _stage,SVTexturePtr _texture) {
 //逻辑更新
 void SVMtlCore::update(f32 dt) {
     reloadShader();
-    //
     if(m_script!="") {
-        //mApp->
     }
 }
 
@@ -318,8 +316,12 @@ void SVMtlCore::fromJSON1(RAPIDJSON_NAMESPACE::Value& _item){
     if (_item.HasMember("ssdef") && _item["ssdef"].IsArray()) {
         RAPIDJSON_NAMESPACE::Document::Array t_array = _item["m_ssdef"].GetArray();
         for(s32 i=0;i<t_array.Size();i++) {
-            //宏定义表
-            //m_ssdef |= t_array[i];
+            //拼接shader宏
+            SVString t_def_str = t_array[i].GetString();
+            s32 t_def_value = mApp->getShaderMgr()->getDefValue(t_def_str.c_str());
+            if(t_def_value>0) {
+                m_ssdef |= t_def_value;
+            }
         }
     }
     //m_ssdef = 0;

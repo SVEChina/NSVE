@@ -147,6 +147,14 @@ void SVShaderMgr::_clearAllShader() {
     m_shaderMap.clear();
 }
 
+s32 SVShaderMgr::getDefValue(cptr8 _defname) {
+    DEFTBL::iterator it = m_deftbl.find(_defname);
+    if(it!=m_deftbl.end()) {
+        return it->second;
+    }
+    return 0;
+}
+
 SVShaderPtr SVShaderMgr::getShader(cptr8 _name,s32 _pbrdef) {
     SVString t_name = _name;
     SVString t_ext = SVString::format("_%d",_pbrdef);

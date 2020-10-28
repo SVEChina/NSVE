@@ -34,6 +34,8 @@ namespace sv {
         
         void loadSDSP(cptr8 _sdsp,cptr8 _language);
         
+        s32 getDefValue(cptr8 _defname);
+        
     private:
         void _loadShaderDef();
         
