@@ -19,7 +19,6 @@ namespace sv {
     //other
     DECLARE_SHAREPTR(SVEffectUnit);
     DECLARE_SHAREPTR(SVEffectPackage);
-    DECLARE_SHAREPTR(SVMark);
     
 }//!namespace sv
 
