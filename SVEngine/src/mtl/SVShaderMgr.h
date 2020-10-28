@@ -30,9 +30,9 @@ namespace sv {
         
         void loadDefault();
 
-        SVShaderPtr getShader(cptr8 _name);
+        SVShaderPtr getShader(cptr8 _name,s32 _pbrdef = 0);
         
-        SVShaderPtr getPBRShader(s32 _pbrdef);
+        //SVShaderPtr getPBRShader();
         
         void loadSDSP(cptr8 _sdsp,cptr8 _language);
         
