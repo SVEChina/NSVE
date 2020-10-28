@@ -35,22 +35,13 @@ namespace sv {
         SVDetectST(SVInstPtr _app);
         
         ~SVDetectST();
-        
-        virtual s32 transformIndex(s32 index);
        
         void pushData(void *_faceData);
         
         PERSON_STDATA *getData(s32 _personid);
-        
-        PERSON_STDATA *getDataOriginal(s32 _personid);
 
         PERSON_STDATA stData[SUPPORT_MAX_PERSON_NUM];
-
-        PERSON_STDATA stDataOriginal[SUPPORT_MAX_PERSON_NUM];
-        
     protected:
-        //修正到以屏幕中心为原点的坐标系。
-        void _transformFaceDataToCenter(PERSON_STDATA *_stData);
         void _parseData(void *data);
     };
 

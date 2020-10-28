@@ -314,7 +314,7 @@ void SVMtlCore::fromJSON1(RAPIDJSON_NAMESPACE::Value& _item){
     }
     m_ssdef = 0;
     if (_item.HasMember("ssdef") && _item["ssdef"].IsArray()) {
-        RAPIDJSON_NAMESPACE::Document::Array t_array = _item["m_ssdef"].GetArray();
+        RAPIDJSON_NAMESPACE::Document::Array t_array = _item["ssdef"].GetArray();
         for(s32 i=0;i<t_array.Size();i++) {
             //拼接shader宏
             SVString t_def_str = t_array[i].GetString();

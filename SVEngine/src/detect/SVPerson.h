@@ -16,11 +16,16 @@
 #include "../work/SVTdCore.h"
 #include "SVTrackerFace.h"
 
-//最大支持面部2000个点
-#define MAX_FACE_PT_NUM 2000
+//最大支持面部400个点
+#define MAX_FACE_PT_NUM 400
 
 namespace sv {
-    
+    enum SV_E_FACEDATA_TYPE{
+        SV_E_FACEDATA_NULL = 0,
+        SV_E_FACEDATA_SCREEN,//屏幕坐标系下的原始人脸识别数据
+        SV_E_FACEDATA_SCENE//场景坐标系下的原始人脸识别数据
+        //    SV_E_FACEDATA_SCREEN_EXT//屏幕坐标系下补过点的数据
+    };
     class SVPerson : public SVListenBase {
     public:
         SVPerson(SVInstPtr _app);
@@ -35,33 +40,17 @@ namespace sv {
         
         virtual void listenData(SVObjectPtr datagen);
         
-        void setFaceData(void* _pdata,s32 _len);
-        
-        void setFaceDataOriginal(void* _pdata,s32 _len);
-        
-        void setFaceRect(f32 _left,f32 _top,f32 _right,f32 _bottom);
-        
         SVRect getFaceRect();
-        
-        void setFaceRot(f32 _yaw,f32 _pitch,f32 _roll);
         
         FVec3 getFaceRot();
         
-        f32 *getFaceData();
+        f32 *getFaceData(s32 &_ptNum, SV_E_FACEDATA_TYPE _type);
         
         f32 getFaceDataX(s32 _index);
         
         f32 getFaceDataY(s32 _index);
         
-        f32 *getFaceDataOriginal();
-        
-        f32 getFaceDataOriginalX(s32 _index);
-        
-        f32 getFaceDataOriginalY(s32 _index);
-        
         s32 getFacePtNum();
-        
-        void setExist(bool _exist){ m_exist = _exist; }
         
         bool getExist(){ return m_exist; }
         
@@ -70,16 +59,20 @@ namespace sv {
         s32  getPersonID();
         
     protected:
+        void _setExist(bool _exist){ m_exist = _exist; }
+        void _setFaceRot(f32 _yaw,f32 _pitch,f32 _roll);
+        void _setFaceRect(f32 _left,f32 _top,f32 _right,f32 _bottom);
+        void _setFaceData(void* _pdata,s32 _len);
         void _listenData_ST(SVDetectSTPtr detect);
+        void _transDataToCener(f32 *_pOData, f32 *_pData);
         bool m_dirty;
         SVTrackerFacePtr m_pTracker;
         DETECTTYPE m_detectType;    //识别数据类型
         bool m_exist;
-        bool m_personDirty;
-        s32 m_facePtNum;                            //识别面部顶点数
-        f32 m_pFaceData[MAX_FACE_PT_NUM*2];         //识别数据
-        f32 m_pFaceDataOriginal[MAX_FACE_PT_NUM*2]; 
         s32 m_personID;
+        s32 m_facePtNum; //识别面部顶点数
+        f32 *m_pFaceData;//识别数据
+        f32 *m_pOFaceData;//原始识别数据
         FVec3 m_facerot;
         SVRect m_facerect;
         SVLock m_dataLock;

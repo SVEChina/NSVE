@@ -129,7 +129,8 @@ void SVMtlFaceShape::update(f32 dt){
     f32 fHeight =  mApp->m_global_param.sv_height;
     SVPersonPtr t_person = mApp->getDetectMgr()->getPersonModule()->getPerson(1);
     if(t_person){
-        ST_PT *faceData = (ST_PT*)t_person->getFaceDataOriginal();
+        s32 t_ptNum = 0;
+        ST_PT *faceData = (ST_PT*)t_person->getFaceData(t_ptNum, SV_E_FACEDATA_SCREEN);
         m_location0[0] = faceData[5].x / fWidth;
         m_location0[1] = faceData[5].y / fHeight;
         

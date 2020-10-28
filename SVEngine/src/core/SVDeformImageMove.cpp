@@ -239,7 +239,8 @@ void SVDeformImageMove::update(f32 _dt){
         for(int i=1;i<=4;i++){
             SVPersonPtr t_person = mApp->getDetectMgr()->getPersonModule()->getPerson(i);
             if( t_person && t_person->getExist()){
-                V2 *t_data = (V2*)t_person->getFaceDataOriginal();
+                s32 t_ptNum = 0;
+                V2 *t_data = (V2*)t_person->getFaceData(t_ptNum, SV_E_FACEDATA_SCREEN);
                 _updateControl(t_data);
             }
         }
