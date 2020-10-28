@@ -8877,29 +8877,6 @@
 		5F56600F253FC7FF00670056 /* InterpolateCubic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterpolateCubic.h; sourceTree = "<group>"; };
 		5F566010253FC7FF00670056 /* AAFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AAFilter.cpp; sourceTree = "<group>"; };
 		5F566011253FC7FF00670056 /* SoundTouch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoundTouch.cpp; sourceTree = "<group>"; };
-		5F566013253FC7FF00670056 /* pnginfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pnginfo.h; sourceTree = "<group>"; };
-		5F566014253FC7FF00670056 /* pngtest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngtest.c; sourceTree = "<group>"; };
-		5F566015253FC7FF00670056 /* pngrio.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngrio.c; sourceTree = "<group>"; };
-		5F566016253FC7FF00670056 /* pngerror.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngerror.c; sourceTree = "<group>"; };
-		5F566017253FC7FF00670056 /* pngwio.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngwio.c; sourceTree = "<group>"; };
-		5F566018253FC7FF00670056 /* pngstruct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pngstruct.h; sourceTree = "<group>"; };
-		5F566019253FC7FF00670056 /* pngtrans.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngtrans.c; sourceTree = "<group>"; };
-		5F56601A253FC7FF00670056 /* pngpriv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pngpriv.h; sourceTree = "<group>"; };
-		5F56601B253FC7FF00670056 /* pngwrite.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngwrite.c; sourceTree = "<group>"; };
-		5F56601C253FC7FF00670056 /* png.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = png.h; sourceTree = "<group>"; };
-		5F56601D253FC7FF00670056 /* pngwutil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngwutil.c; sourceTree = "<group>"; };
-		5F56601E253FC7FF00670056 /* pngwtran.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngwtran.c; sourceTree = "<group>"; };
-		5F56601F253FC7FF00670056 /* pnglibconf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pnglibconf.h; sourceTree = "<group>"; };
-		5F566020253FC7FF00670056 /* pngconf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pngconf.h; sourceTree = "<group>"; };
-		5F566021253FC7FF00670056 /* pngpread.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngpread.c; sourceTree = "<group>"; };
-		5F566022253FC7FF00670056 /* pngdebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pngdebug.h; sourceTree = "<group>"; };
-		5F566023253FC7FF00670056 /* pngread.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngread.c; sourceTree = "<group>"; };
-		5F566024253FC7FF00670056 /* pngmem.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngmem.c; sourceTree = "<group>"; };
-		5F566025253FC7FF00670056 /* pngget.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngget.c; sourceTree = "<group>"; };
-		5F566026253FC7FF00670056 /* png.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = png.c; sourceTree = "<group>"; };
-		5F566027253FC7FF00670056 /* pngrtran.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngrtran.c; sourceTree = "<group>"; };
-		5F566028253FC7FF00670056 /* pngrutil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngrutil.c; sourceTree = "<group>"; };
-		5F566029253FC7FF00670056 /* pngset.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pngset.c; sourceTree = "<group>"; };
 		5F56602B253FC7FF00670056 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		5F56602C253FC7FF00670056 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		5F56602E253FC7FF00670056 /* logo.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = logo.gif; sourceTree = "<group>"; };
@@ -11225,7 +11202,6 @@
 			isa = PBXGroup;
 			children = (
 				5F565FF4253FC7FF00670056 /* soundtouch */,
-				5F566012253FC7FF00670056 /* libpng */,
 				5F56602A253FC7FF00670056 /* lua-5.4.0 */,
 				5F566078253FC7FF00670056 /* spine4 */,
 				5F5660CD253FC7FF00670056 /* gltf */,
@@ -11269,36 +11245,6 @@
 				5F566011253FC7FF00670056 /* SoundTouch.cpp */,
 			);
 			path = soundtouch;
-			sourceTree = "<group>";
-		};
-		5F566012253FC7FF00670056 /* libpng */ = {
-			isa = PBXGroup;
-			children = (
-				5F566013253FC7FF00670056 /* pnginfo.h */,
-				5F566014253FC7FF00670056 /* pngtest.c */,
-				5F566015253FC7FF00670056 /* pngrio.c */,
-				5F566016253FC7FF00670056 /* pngerror.c */,
-				5F566017253FC7FF00670056 /* pngwio.c */,
-				5F566018253FC7FF00670056 /* pngstruct.h */,
-				5F566019253FC7FF00670056 /* pngtrans.c */,
-				5F56601A253FC7FF00670056 /* pngpriv.h */,
-				5F56601B253FC7FF00670056 /* pngwrite.c */,
-				5F56601C253FC7FF00670056 /* png.h */,
-				5F56601D253FC7FF00670056 /* pngwutil.c */,
-				5F56601E253FC7FF00670056 /* pngwtran.c */,
-				5F56601F253FC7FF00670056 /* pnglibconf.h */,
-				5F566020253FC7FF00670056 /* pngconf.h */,
-				5F566021253FC7FF00670056 /* pngpread.c */,
-				5F566022253FC7FF00670056 /* pngdebug.h */,
-				5F566023253FC7FF00670056 /* pngread.c */,
-				5F566024253FC7FF00670056 /* pngmem.c */,
-				5F566025253FC7FF00670056 /* pngget.c */,
-				5F566026253FC7FF00670056 /* png.c */,
-				5F566027253FC7FF00670056 /* pngrtran.c */,
-				5F566028253FC7FF00670056 /* pngrutil.c */,
-				5F566029253FC7FF00670056 /* pngset.c */,
-			);
-			path = libpng;
 			sourceTree = "<group>";
 		};
 		5F56602A253FC7FF00670056 /* lua-5.4.0 */ = {

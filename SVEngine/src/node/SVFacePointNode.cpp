@@ -48,10 +48,10 @@ void SVFacePointNode::update(f32 _dt){
 
 void SVFacePointNode::render(){
     SVNode::render();
-    s32 t_width = mApp->m_global_param.sv_width;
-    s32 t_height = mApp->m_global_param.sv_height;
+    s32 t_width = mApp->m_global_param.sv_width*0.5;
+    s32 t_height = mApp->m_global_param.sv_height*0.5;
     SVSurfacePtr t_surface = MakeSharedPtr<SVSurface>();
-    FVec2 t_scale = FVec2(1.0f/t_width,-1.0f/t_height);
+    FVec2 t_scale = FVec2(1.0f/t_width, 1.0f/t_height);
     t_surface->setParam("u_scale", t_scale);
     FVec2 t_off = FVec2(0.0f, 0.0f);
     t_surface->setParam("u_off", t_off);
@@ -65,7 +65,7 @@ void SVFacePointNode::render(){
     SVRenderMeshPtr t_mesh = mApp->getComData()->faceMesh();
     SVPersonPtr t_person = mApp->getDetectMgr()->getPersonModule()->getPerson(1);
     if( t_person && t_person->getExist() ){
-        f32 *t_keyPt = t_person->getFaceDataOriginal();
+        f32 *t_keyPt = t_person->getFaceData();
         //顶点描述
         SVVertStreamDspPtr t_vert_dsp= t_mesh->getStreamDsp();
         t_vert_dsp->setBufType(E_BFT_DYNAMIC_DRAW);

@@ -91,11 +91,11 @@ PERSON_STDATA *SVDetectST::getDataOriginal(s32 _personid) {
 }
 
 void SVDetectST::_transformFaceDataToCenter(PERSON_STDATA *_stData){
-    f32 t_camera_w = mApp->m_config.getCameraWidth()*1.0f;
-    f32 t_camera_h = mApp->m_config.getCameraHeight()*1.0f;
+    f32 t_camera_half_w = mApp->m_global_param.sv_width*0.5f;
+    f32 t_camera_half_h = mApp->m_global_param.sv_height*0.5f;
     for (s32 j=0; j<106; j++) {
-        _stData->pointdata[j].x = (_stData->pointdata[j].x - t_camera_w*0.5);
-        _stData->pointdata[j].y =  (t_camera_h*0.5 - _stData->pointdata[j].y);
+        _stData->pointdata[j].x = (_stData->pointdata[j].x - t_camera_half_w);
+        _stData->pointdata[j].y =  (t_camera_half_h - _stData->pointdata[j].y);
     }
 }
 
