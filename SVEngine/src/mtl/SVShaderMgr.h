@@ -35,6 +35,8 @@ namespace sv {
         void loadSDSP(cptr8 _sdsp,cptr8 _language);
         
     private:
+        void _loadShaderDef();
+        
         void _loadAllShader();
         
         void _clearAllShader();
@@ -43,6 +45,9 @@ namespace sv {
         //普通shader池子
         typedef std::map<SVString,SVShaderPtr> SHADERPOOL;
         SHADERPOOL m_shaderMap;
+        
+        typedef std::map<SVString,s32> DEFTBL;
+        DEFTBL m_deftbl;
     };
     
 }//!namespace sv

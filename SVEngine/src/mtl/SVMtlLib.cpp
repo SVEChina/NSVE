@@ -146,37 +146,6 @@ SVMtlCorePtr SVMtlLib::createMtlFromFile(cptr8 _fname) {
         return nullptr;
     }
     return createMtlFromJson( doc, _fname);
-//    //
-//    SVString t_version = "1.0";
-//    if (doc.HasMember("version")) {
-//        t_version = doc["version"].GetString();
-//    }
-//    //获取材质名称
-//    SVString t_mtl_name = _fname;
-//    s32 t_pos = t_mtl_name.rfind('.');
-//    if(t_pos>0) {
-//        t_mtl_name = SVString::substr(t_mtl_name.c_str(), 0, t_pos);
-//    }
-//    t_pos = t_mtl_name.rfind('\\');
-//    if(t_pos>0) {
-//       t_mtl_name = SVString::substr(t_mtl_name.c_str(), t_pos+1);
-//    }
-//    t_pos = t_mtl_name.rfind('/');
-//    if(t_pos>0) {
-//       t_mtl_name = SVString::substr(t_mtl_name.c_str(), t_pos+1);
-//    }
-//    //
-//    MTLPOOL::iterator it = m_mtlPool.find(t_mtl_name);
-//    if( it == m_mtlPool.end() ) {
-//        if(t_version == "1.0") {
-//            SVMtlCorePtr t_mtl = MakeSharedPtr<SVMtlCore>(mApp);
-//            t_mtl->m_mtl_name = t_mtl_name;
-//            t_mtl->fromJSON1(doc);
-//            m_mtlPool.insert(std::make_pair(t_mtl_name, t_mtl));
-//            return t_mtl;
-//        }
-//    }
-    return nullptr;
 }
 
 SVMtlCorePtr SVMtlLib::createMtlFromJson(RAPIDJSON_NAMESPACE::Value& _obj,cptr8 _mtlname) {

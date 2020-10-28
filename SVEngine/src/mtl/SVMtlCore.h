@@ -87,6 +87,8 @@ namespace sv {
         SVString m_shader_name;
         //绑定脚本
         SVString m_script;
+        //
+        s32 m_ssdef;
         //MTLFLAG0;
         s32 m_LogicMtlFlag0;
         //融合参数

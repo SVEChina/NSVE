@@ -64,6 +64,7 @@ SVMtlCore::SVMtlCore(SVInstPtr _app)
 SVMtlCore::SVMtlCore(SVInstPtr _app, cptr8 _shader)
 :SVGBaseEx(_app)
 ,m_shader_name(_shader){
+    m_ssdef = 0;
     m_shader_obj = nullptr;
     reset();
 }
@@ -71,11 +72,13 @@ SVMtlCore::SVMtlCore(SVInstPtr _app, cptr8 _shader)
 SVMtlCore::SVMtlCore(SVInstPtr _app, SVShaderPtr _shader)
 :SVGBaseEx(_app)
 ,m_shader_obj(_shader){
+    m_ssdef = 0;
     reset();
 }
 
 SVMtlCore::SVMtlCore(SVMtlCore* _mtl)
 :SVGBaseEx(_mtl->mApp){
+    m_ssdef = 0;
     reset();
 }
 
@@ -211,8 +214,8 @@ void SVMtlCore::update(f32 dt) {
 void SVMtlCore::reloadShader(){
     if(m_shader_obj)
         return ;
-    if(mApp->getShaderMgr()) {
-        m_shader_obj = mApp->getShaderMgr()->getShader(m_shader_name.c_str());
+    if( mApp->getShaderMgr() ) {
+        m_shader_obj = mApp->getShaderMgr()->getShader(m_shader_name.c_str(),m_ssdef);
     }
 }
 
@@ -304,7 +307,6 @@ void SVMtlCore::setStencilSfail(s32 _method) {
 }
 
 void SVMtlCore::fromJSON1(RAPIDJSON_NAMESPACE::Value& _item){
-    
     //对应的shader
     if (_item.HasMember("shader") && _item["shader"].IsString()) {
         RAPIDJSON_NAMESPACE::Value &t_value = _item["shader"];
@@ -312,7 +314,16 @@ void SVMtlCore::fromJSON1(RAPIDJSON_NAMESPACE::Value& _item){
     }else{
         return ;
     }
-    
+    m_ssdef = 0;
+    if (_item.HasMember("ssdef") && _item["ssdef"].IsArray()) {
+        RAPIDJSON_NAMESPACE::Document::Array t_array = _item["m_ssdef"].GetArray();
+        for(s32 i=0;i<t_array.Size();i++) {
+            //宏定义表
+            //m_ssdef |= t_array[i];
+        }
+    }
+    //m_ssdef = 0;
+    //"ssdef" :[]
     //texture参数
     if (_item.HasMember("textures") && _item["textures"].IsArray()) {
         RAPIDJSON_NAMESPACE::Document::Array t_texs = _item["textures"].GetArray();

@@ -35,7 +35,35 @@ void SVShaderMgr::destroy() {
 }
 
 void SVShaderMgr::loadDefault() {
+    _loadShaderDef();
     _loadAllShader();    //加载表
+}
+
+void SVShaderMgr::_loadShaderDef() {
+    SVDataChunk tDataStream;
+    SV_LOG_ERROR("load shaderdef.json begin\n");
+    bool tflag = mApp->m_file_sys->loadFileContentStr(&tDataStream, "shader/shaderdef.json");
+    if (!tflag) {
+        SV_LOG_INFO("error not find shaderdef.json!n");
+        return;
+    }
+    RAPIDJSON_NAMESPACE::Document doc;
+    doc.Parse<0>(tDataStream.getPointerChar());
+    if (doc.HasParseError()) {
+        RAPIDJSON_NAMESPACE::ParseErrorCode code = doc.GetParseError();
+        SV_LOG_ERROR("rapidjson error code:%d \n", code);
+        return;
+    }
+    RAPIDJSON_NAMESPACE::Value &def = doc["def"];
+    if( def.IsObject() ) {
+        RAPIDJSON_NAMESPACE::Document::MemberIterator it = def.MemberBegin();
+        while(it!=def.MemberEnd()) {
+            SVString t_key = it->name.GetString();
+            s32 t_value = it->value.GetInt();
+            m_deftbl.insert(std::make_pair(t_key,t_value));
+            it++;
+        }
+    }
 }
 
 void SVShaderMgr::_loadAllShader() {
