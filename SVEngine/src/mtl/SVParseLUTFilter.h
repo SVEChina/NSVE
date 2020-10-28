@@ -9,7 +9,7 @@
 #ifndef SV_PARSELUTFILTER_H
 #define SV_PARSELUTFILTER_H
 
-#include "../../file/SVParseData.h"
+#include "../file/SVParseData.h"
 
 namespace sv {
     

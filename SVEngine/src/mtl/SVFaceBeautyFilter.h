@@ -10,8 +10,8 @@
 
 
 #include "SVFilterBase.h"
-#include "../../mtl/SVMtlDeclare.h"
-#include "../../node/SVNodeDeclare.h"
+#include "../mtl/SVMtlDeclare.h"
+#include "../node/SVNodeDeclare.h"
 
 namespace sv {
 
