@@ -188,8 +188,7 @@ u32 SVRShaderGL::_loadShader(SVInstPtr _app,
         _def_str = "#define HAS_OCCLUSIONMAP \n";
         tNewStream.push( (void*)(_def_str.c_str()), _def_str.size());
     }
-    
-    //
+    //推送源码
     tNewStream.push( (void*)t_shader_res, (s32)(tDataStream.getRealSize()) );
     t_shader_res = tNewStream.getPointerChar();
     //自动补充精度

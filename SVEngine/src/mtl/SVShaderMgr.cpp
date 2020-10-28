@@ -119,18 +119,23 @@ void SVShaderMgr::_clearAllShader() {
     m_pbr_shaderMap.clear();
 }
 
-SVShaderPtr SVShaderMgr::getShader(cptr8 _name) {
-    SHADERPOOL::iterator it = m_shaderMap.find(_name);
-    if(it!=m_shaderMap.end()) {
-        return it->second;
+SVShaderPtr SVShaderMgr::getShader(cptr8 _name,s32 _pbrdef) {
+    if( _pbrdef == 0) {
+        SHADERPOOL::iterator it = m_shaderMap.find(_name);
+        if(it!=m_shaderMap.end()) {
+            return it->second;
+        }
+    }else{
+        //load shader
+        
     }
     return nullptr;
 }
 
-SVShaderPtr SVShaderMgr::getPBRShader(s32 _pbrdef) {
-    PBRSHADERPOOL::iterator it = m_pbr_shaderMap.find(_pbrdef);
-    if(it!=m_pbr_shaderMap.end()) {
-        return it->second;
-    }
-    return nullptr;
-}
+//SVShaderPtr SVShaderMgr::getPBRShader(s32 _pbrdef) {
+//    PBRSHADERPOOL::iterator it = m_pbr_shaderMap.find(_pbrdef);
+//    if(it!=m_pbr_shaderMap.end()) {
+//        return it->second;
+//    }
+//    return nullptr;
+//}
