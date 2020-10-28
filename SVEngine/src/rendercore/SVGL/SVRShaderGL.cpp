@@ -138,7 +138,9 @@ u32 SVRShaderGL::_loadShader(SVInstPtr _app,SVRendererPtr _renderer,cptr8 _filen
             c8 *log = (c8 *) malloc(logLen);
             GLsizei written;
             glGetShaderInfoLog(t_shader_id, logLen, &written, log);
-            SV_LOG_DEBUG("shader compile error log : \n %s fname:%s \n", log, _filename);
+            SV_LOG_DEBUG("shader compile error log : \n %s fname:%s \n",
+                         log,
+                         _fname.c_str());
             free(log);
         }
         t_shader_id = 0;
