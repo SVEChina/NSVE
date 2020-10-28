@@ -80,7 +80,7 @@ u32 SVRShaderGL::_loadShader(SVInstPtr _app,SVRendererPtr _renderer,cptr8 _filen
     //自动补充版本号
     SVString _fname = _filename;
     SVString _aim_str = "code";
-    SVString _new_str = "code31";
+    SVString _new_str = "code3";
     SVString version_str = "";
     if( t_renderGL->m_gl_version == 2 ) {
         //version_str = "#version 100 es"
