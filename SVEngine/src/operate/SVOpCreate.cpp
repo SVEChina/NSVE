@@ -39,7 +39,6 @@
 #include "../node/SVFrameAniNode.h"
 #include "../file/SVParseMain.h"
 #include "../file/SVBMFontLoader.h"
-#include "../file/SVLoaderGLTF.h"
 #include "../module/SVModuleSys.h"
 #include "../module/SVModuleBase.h"
 #include "../module/SVMark.h"

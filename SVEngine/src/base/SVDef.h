@@ -123,7 +123,18 @@ namespace sv {
     #define SV_STAGE_TSE    4
     #define SV_STAGE_CS     5
 
-    
+    enum SV_SHADER_DEF {
+        E_HAS_NORMALS = 0x0000001,
+        E_HAS_TANGENTS = 0x0000002,
+        E_HAS_UV = 0x0000004,
+        E_USE_IBL = 0x0000008,
+        E_HAS_BASECOLORMAP = 0x0000010,
+        E_HAS_NORMALMAP = 0x0000020,
+        E_HAS_EMISSIVEMAP = 0x0000040,
+        E_HAS_METALROUGHNESSMAP = 0x0000080,
+        E_HAS_OCCLUSIONMAP = 0x0000100
+    };
+
     //相机图片格式
     enum SV_PIC_FORMATE {
         SV_PF_GRAY8 = 0,

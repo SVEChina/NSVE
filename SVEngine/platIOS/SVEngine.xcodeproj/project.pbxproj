@@ -3092,14 +3092,6 @@
 		5F3BC1502547B5C800B74E35 /* SVFaceAnalyse.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F3BC14A2547B5C800B74E35 /* SVFaceAnalyse.h */; };
 		5F3BC1512547B5C800B74E35 /* SVFaceAnalyse.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F3BC14A2547B5C800B74E35 /* SVFaceAnalyse.h */; };
 		5F3BC1522547B5C800B74E35 /* SVFaceAnalyse.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F3BC14A2547B5C800B74E35 /* SVFaceAnalyse.h */; };
-		5F426926226F483A00965DB6 /* SVLoaderGLTF.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F426924226F483900965DB6 /* SVLoaderGLTF.h */; };
-		5F426927226F483A00965DB6 /* SVLoaderGLTF.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F426924226F483900965DB6 /* SVLoaderGLTF.h */; };
-		5F426928226F483A00965DB6 /* SVLoaderGLTF.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F426924226F483900965DB6 /* SVLoaderGLTF.h */; };
-		5F426929226F483A00965DB6 /* SVLoaderGLTF.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F426924226F483900965DB6 /* SVLoaderGLTF.h */; };
-		5F42692A226F483A00965DB6 /* SVLoaderGLTF.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F426925226F483900965DB6 /* SVLoaderGLTF.cpp */; };
-		5F42692B226F483A00965DB6 /* SVLoaderGLTF.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F426925226F483900965DB6 /* SVLoaderGLTF.cpp */; };
-		5F42692C226F483A00965DB6 /* SVLoaderGLTF.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F426925226F483900965DB6 /* SVLoaderGLTF.cpp */; };
-		5F42692D226F483A00965DB6 /* SVLoaderGLTF.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F426925226F483900965DB6 /* SVLoaderGLTF.cpp */; };
 		5F44286121843BD400AF4A5B /* SVOutMission.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F44285F21843BD400AF4A5B /* SVOutMission.cpp */; };
 		5F44286221843BD400AF4A5B /* SVOutMission.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F44286021843BD400AF4A5B /* SVOutMission.h */; };
 		5F44286521843C5900AF4A5B /* SVOutMissionNor.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F44286321843C5900AF4A5B /* SVOutMissionNor.h */; };
@@ -8852,8 +8844,6 @@
 		5F3AC24F24E3F2EF000D4019 /* SVARBackgroundMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVARBackgroundMgr.h; sourceTree = "<group>"; };
 		5F3BC1492547B5C700B74E35 /* SVFaceAnalyse.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVFaceAnalyse.cpp; sourceTree = "<group>"; };
 		5F3BC14A2547B5C800B74E35 /* SVFaceAnalyse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVFaceAnalyse.h; sourceTree = "<group>"; };
-		5F426924226F483900965DB6 /* SVLoaderGLTF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVLoaderGLTF.h; sourceTree = "<group>"; };
-		5F426925226F483900965DB6 /* SVLoaderGLTF.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVLoaderGLTF.cpp; sourceTree = "<group>"; };
 		5F44285F21843BD400AF4A5B /* SVOutMission.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVOutMission.cpp; sourceTree = "<group>"; };
 		5F44286021843BD400AF4A5B /* SVOutMission.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVOutMission.h; sourceTree = "<group>"; };
 		5F44286321843C5900AF4A5B /* SVOutMissionNor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVOutMissionNor.h; sourceTree = "<group>"; };
@@ -12594,8 +12584,6 @@
 				5F7D5DC2215F407700803BCF /* SVFileWriter.h */,
 				5F6598C223C33C980075A17C /* SVLoaderBat.cpp */,
 				5F6598C123C33C970075A17C /* SVLoaderBat.h */,
-				5F426925226F483900965DB6 /* SVLoaderGLTF.cpp */,
-				5F426924226F483900965DB6 /* SVLoaderGLTF.h */,
 				5F3312472542C7DD0074DAE1 /* SVLoaderGLTFEx.cpp */,
 				5F3312482542C7DD0074DAE1 /* SVLoaderGLTFEx.h */,
 				024E0DA824D51E4E006B15E3 /* SVLoaderImage.cpp */,
@@ -14021,7 +14009,6 @@
 				5F566E89253FC80800670056 /* stringbuffer.h in Headers */,
 				020C516822DCA1AC00201753 /* SVPhysicsBody.h in Headers */,
 				5F7D67D3215F407900803BCF /* SVFaceShapeNode.h in Headers */,
-				5F426929226F483A00965DB6 /* SVLoaderGLTF.h in Headers */,
 				020C483B22DC5DCE00201753 /* btSimpleDynamicsWorld.h in Headers */,
 				5F5667FD253FC80300670056 /* btPointCollector.h in Headers */,
 				5F56659D253FC80200670056 /* AnimationState.h in Headers */,
@@ -15215,7 +15202,6 @@
 				5F566D43253FC80700670056 /* btPolarDecomposition.h in Headers */,
 				5F566CD7253FC80700670056 /* b3Quat.h in Headers */,
 				5F7D67D1215F407900803BCF /* SVFaceShapeNode.h in Headers */,
-				5F426927226F483A00965DB6 /* SVLoaderGLTF.h in Headers */,
 				020C483922DC5DCE00201753 /* btSimpleDynamicsWorld.h in Headers */,
 				020C4CBD22DC5DD200201753 /* btHashMap.h in Headers */,
 				020C438522DC5DCC00201753 /* btSoftBodyRigidBodyCollisionConfiguration.h in Headers */,
@@ -16674,7 +16660,6 @@
 				5F566682253FC80200670056 /* btSoftBodySolverVertexBuffer.h in Headers */,
 				020C46B822DC5DCD00201753 /* btUniformScalingShape.h in Headers */,
 				5F7D68A8215F407900803BCF /* SVRect.h in Headers */,
-				5F426926226F483A00965DB6 /* SVLoaderGLTF.h in Headers */,
 				5F574D4824B85AF10035AB08 /* SVShader.h in Headers */,
 				5F0E630E24F3B97B002620DC /* SkeletonData.h in Headers */,
 				020C466222DC5DCD00201753 /* gim_math.h in Headers */,
@@ -17635,7 +17620,6 @@
 				5F566D44253FC80700670056 /* btPolarDecomposition.h in Headers */,
 				5F566CD8253FC80700670056 /* b3Quat.h in Headers */,
 				5F7D67D2215F407900803BCF /* SVFaceShapeNode.h in Headers */,
-				5F426928226F483A00965DB6 /* SVLoaderGLTF.h in Headers */,
 				020C483A22DC5DCE00201753 /* btSimpleDynamicsWorld.h in Headers */,
 				020C4CBE22DC5DD200201753 /* btHashMap.h in Headers */,
 				020C438622DC5DCC00201753 /* btSoftBodyRigidBodyCollisionConfiguration.h in Headers */,
@@ -18958,7 +18942,6 @@
 				5F0E637924F3B97B002620DC /* IkConstraint.c in Sources */,
 				5F7D6049215F407700803BCF /* SVFontProcess.cpp in Sources */,
 				5F566353253FC80000670056 /* FIRFilter.cpp in Sources */,
-				5F42692D226F483A00965DB6 /* SVLoaderGLTF.cpp in Sources */,
 				5F566C25253FC80700670056 /* btContactConstraint.cpp in Sources */,
 				5F7D6045215F407700803BCF /* SVStreamOut.cpp in Sources */,
 				5F566A25253FC80500670056 /* btTetrahedronShape.cpp in Sources */,
@@ -19648,7 +19631,6 @@
 				020C480C22DC5DCE00201753 /* b3Serializer.cpp in Sources */,
 				5F5665CE253FC80200670056 /* SkeletonData.c in Sources */,
 				5F566A56253FC80500670056 /* btTriangleBuffer.cpp in Sources */,
-				5F42692A226F483A00965DB6 /* SVLoaderGLTF.cpp in Sources */,
 				5F5665EE253FC80200670056 /* SkeletonBounds.c in Sources */,
 				5F7D6880215F407900803BCF /* SVIDPool.cpp in Sources */,
 				020C444022DC5DCC00201753 /* btDbvt.cpp in Sources */,
@@ -20580,7 +20562,6 @@
 				5F5667D8253FC80300670056 /* btPersistentManifold.cpp in Sources */,
 				5F56643C253FC80100670056 /* lmathlib.c in Sources */,
 				5F5666D8253FC80300670056 /* b3Point2PointConstraint.cpp in Sources */,
-				5F42692C226F483A00965DB6 /* SVLoaderGLTF.cpp in Sources */,
 				5F56699C253FC80500670056 /* gim_memory.cpp in Sources */,
 				5F5669FC253FC80500670056 /* btShapeHull.cpp in Sources */,
 				5F7D6044215F407700803BCF /* SVStreamOut.cpp in Sources */,
@@ -21392,7 +21373,6 @@
 				5F5667D7253FC80300670056 /* btPersistentManifold.cpp in Sources */,
 				5F56643B253FC80100670056 /* lmathlib.c in Sources */,
 				5F5666D7253FC80300670056 /* b3Point2PointConstraint.cpp in Sources */,
-				5F42692B226F483A00965DB6 /* SVLoaderGLTF.cpp in Sources */,
 				5F56699B253FC80500670056 /* gim_memory.cpp in Sources */,
 				5F5669FB253FC80500670056 /* btShapeHull.cpp in Sources */,
 				5F7D6043215F407700803BCF /* SVStreamOut.cpp in Sources */,

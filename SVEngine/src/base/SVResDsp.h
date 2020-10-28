@@ -322,6 +322,7 @@ struct ParamTblDsp {
 struct ShaderDsp {
     ShaderDsp() {
         m_dsp = 0;
+        m_pbr_def = 0;
         m_programme_fname = "null";
         m_vs_fname = "null";
         m_fs_fname = "null";
@@ -334,6 +335,7 @@ struct ShaderDsp {
     };
     //
     s32 m_dsp;
+    s32 m_pbr_def;
     //顶点描述
     std::vector<s32> m_vft;
     SVString m_programme_fname;
