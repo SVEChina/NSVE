@@ -32,8 +32,6 @@ namespace sv {
 
         SVShaderPtr getShader(cptr8 _name,s32 _pbrdef = 0);
         
-        //SVShaderPtr getPBRShader();
-        
         void loadSDSP(cptr8 _sdsp,cptr8 _language);
         
     private:
@@ -45,9 +43,6 @@ namespace sv {
         //普通shader池子
         typedef std::map<SVString,SVShaderPtr> SHADERPOOL;
         SHADERPOOL m_shaderMap;
-        //PBR拼接shader池子
-        typedef std::map<s32,SVShaderPtr> PBRSHADERPOOL;
-        PBRSHADERPOOL m_pbr_shaderMap;
     };
     
 }//!namespace sv
