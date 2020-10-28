@@ -1,11 +1,11 @@
 precision mediump float;
 
-attribute vec3 aPosition;
-attribute vec3 aNormal;
-attribute vec2 aTexcoord0;
+layout(location = 0) in vec3 aPosition;
+layout(location = 1) in vec3 aNormal;
+layout(location = 2) in vec2 aTexcoord0;
 
-varying vec3 v_Normal;
-varying vec2 v_texcoord0;
+out vec3 v_Normal;
+out vec2 v_texcoord0;
 
 uniform mat4 matw;
 uniform mat4 matvp;

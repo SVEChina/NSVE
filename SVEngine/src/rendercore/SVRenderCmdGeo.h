@@ -23,7 +23,7 @@ namespace sv {
         
         ~SVRenderCmdGeo();
         
-        virtual void render(SVRendererPtr _renderer,SVRTargetPtr _target);
+        virtual bool render(SVRendererPtr _renderer,SVRTargetPtr _target);
         
     protected:
         virtual void _render();

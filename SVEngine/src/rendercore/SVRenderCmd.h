@@ -25,7 +25,7 @@ namespace sv {
         
         ~SVRenderCmd();
         
-        virtual void render(SVRendererPtr _renderer,SVRTargetPtr _target);
+        virtual bool render(SVRendererPtr _renderer,SVRTargetPtr _target);
         
         SVString mTag;
     };
@@ -37,7 +37,7 @@ namespace sv {
         
         ~SVRCmdNor();
         
-        void render(SVRendererPtr _renderer,SVRTargetPtr _target);
+        bool render(SVRendererPtr _renderer,SVRTargetPtr _target);
         
         void setMesh(SVRenderMeshPtr _mesh);
         
@@ -58,7 +58,7 @@ namespace sv {
         
         ~SVRCmdPass();
 
-        void render(SVRendererPtr _renderer,SVRTargetPtr _target);
+        bool render(SVRendererPtr _renderer,SVRTargetPtr _target);
         
         //设置目标
         void setSwapTarget(SV_TEXIN _aim);
@@ -79,7 +79,7 @@ namespace sv {
         
         ~SVRCmdTargetResize();
         
-        void render(SVRendererPtr _renderer,SVRTargetPtr _target);
+        bool render(SVRendererPtr _renderer,SVRTargetPtr _target);
         
     protected:
         SVRFboPtr m_fbo;
@@ -94,7 +94,7 @@ namespace sv {
         
         ~SVRCmdTransGPU();
         
-        void render(SVRendererPtr _renderer,SVRTargetPtr _target);
+        bool render(SVRendererPtr _renderer,SVRTargetPtr _target);
         
     protected:
         SVTransPtr m_trans;
@@ -110,7 +110,7 @@ namespace sv {
         
         void setWinSize(s32 _w,s32 _h);
         
-        void render(SVRendererPtr _renderer,SVRTargetPtr _target);
+        bool render(SVRendererPtr _renderer,SVRTargetPtr _target);
         
     protected:
         s32 m_winWidth;

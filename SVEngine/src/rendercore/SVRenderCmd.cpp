@@ -29,7 +29,8 @@ SVRenderCmd::SVRenderCmd() {
 SVRenderCmd::~SVRenderCmd() {
 }
 
-void SVRenderCmd::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
+bool SVRenderCmd::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
+    return false;
 }
 
 //普通渲染指令
@@ -57,21 +58,23 @@ void SVRCmdNor::setSurface(SVSurfacePtr _surface) {
     m_pSurface = _surface;
 }
 
-void SVRCmdNor::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
+bool SVRCmdNor::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
     if ( _renderer && _target && m_pMtl && m_pMesh ) {
         bool t_ret = false;
         //激活材质
         t_ret =_renderer->processMtl(m_pMtl,m_pSurface);
         if(!t_ret){
-            return ;
+            return false;
         }
         //处理MESH
         t_ret = _renderer->processMesh(m_pMesh);
         if(!t_ret){
-            return ;
+            return false;
         }
         _renderer->drawMesh(m_pMesh);
+        return true;
     }
+    return false;
 }
 
 //自动拿辅助纹理
@@ -94,21 +97,23 @@ void SVRCmdPass::setUseTarget(SV_TEXIN _aim) {
     m_aim_use = _aim;
 }
 
-void SVRCmdPass::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
+bool SVRCmdPass::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
+    bool t_flag = false;
     //获取辅助target
     SVRTargetPtr t_target = _renderer->getTarget(m_aim_use);
     if(t_target && t_target->getResFbo()) {
         //绑定
         t_target->getResFbo()->bind(_renderer);
         //执行命令
-        SVRCmdNor::render(_renderer, t_target);
+        t_flag = SVRCmdNor::render(_renderer, t_target);
         //解绑定
         t_target->getResFbo()->unbind(_renderer);
         //交换纹理....
-        if( m_aim_swap != E_TEX_END ) {
+        if( m_aim_swap != E_TEX_END && t_flag) {
             _renderer->swapInTexture(m_aim_swap,m_aim_use);
         }
     }
+    return t_flag;
 }
 
 //fbo 重置大小
@@ -122,10 +127,11 @@ SVRCmdTargetResize::~SVRCmdTargetResize(){
     m_fbo = nullptr;
 }
 
-void SVRCmdTargetResize::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
+bool SVRCmdTargetResize::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
     if (m_fbo) {
         m_fbo->resize(m_width,m_height,_renderer);
     }
+    return true;
 }
 
 //
@@ -138,11 +144,12 @@ SVRCmdTransGPU::~SVRCmdTransGPU() {
     m_trans = nullptr;
 }
 
-void SVRCmdTransGPU::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
+bool SVRCmdTransGPU::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
 //    if (m_trans) {
 //        m_trans->update(0.0f);
 //        m_trans->render();
 //    }
+    return true;
 }
 
 //
@@ -159,9 +166,10 @@ void SVRCmdAdapt::setWinSize(s32 _w,s32 _h){
     m_winHeight = _h;
 }
 
-void SVRCmdAdapt::render(SVRendererPtr _renderer,SVRTargetPtr _target){
+bool SVRCmdAdapt::render(SVRendererPtr _renderer,SVRTargetPtr _target){
  //   glViewport( 0, 0,m_winWidth,m_winHeight);
 //    m_pRenderer->svClearColor(m_color_r,m_color_g,m_color_b,m_color_a);
 //    m_pRenderer->svClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
     SVRenderCmd::render(_renderer,_target);
+    return true;
 }

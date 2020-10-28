@@ -85,9 +85,7 @@ u32 SVRShaderGL::_loadShader(SVInstPtr _app,SVRendererPtr _renderer,cptr8 _filen
     if( t_renderGL->m_gl_version == 2 ) {
         //version_str = "#version 100 es"
     }else if( t_renderGL->m_gl_version == 3 ) {
-        version_str = "#version 310 es \n";
-        // ios glse3.1
-        // andriod gles3.2
+        version_str = "#version 300 es \n";
         _fname = SVString::replace(_fname.c_str(),_aim_str.c_str(),_new_str.c_str());
     }
     SVDataChunk tDataStream;

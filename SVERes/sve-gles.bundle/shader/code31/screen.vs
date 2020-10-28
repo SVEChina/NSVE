@@ -1,11 +1,9 @@
-#ifdef GL_ES
 precision mediump float;
-#endif
 
-attribute vec2 aPosition;
-attribute vec2 aTexcoord0;
+layout(location = 0) in vec3 aPosition;
+layout(location = 1) in vec2 aTexcoord0;
 
-varying vec2 v_texcoord0;
+out vec2 v_texcoord0;
 
 void main(){
     v_texcoord0 = aTexcoord0;

@@ -363,7 +363,7 @@ void SVInst::test() {
 //            t_surface->setTexture(1, 1, _tex_img);
 //        }
 //    }
-    SVFilterLib::openFilter( share() ,FILTER_HDR);
+    //SVFilterLib::openFilter( share() ,FILTER_HDR);
     //
 }
 

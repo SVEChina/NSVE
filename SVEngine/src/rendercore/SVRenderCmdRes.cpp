@@ -26,7 +26,7 @@ SVRCmdCreateMesh::~SVRCmdCreateMesh() {
     m_rendermesh = nullptr;
 }
 
-void SVRCmdCreateMesh::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
+bool SVRCmdCreateMesh::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
     if(m_rendermesh && _renderer) {
         SVRMeshResPtr t_rbuffer = _renderer->createResBuf() ;
         m_rendermesh->bindRes(t_rbuffer->m_pool_id);
@@ -36,6 +36,7 @@ void SVRCmdCreateMesh::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
                         m_rendermesh->getInstanceDsp(),
                         m_rendermesh->getRMeshDsp());
     }
+    return true;
 }
 
 //
@@ -48,12 +49,13 @@ SVRCmdCreateShader::~SVRCmdCreateShader() {
     m_shader = nullptr;
 }
 
-void SVRCmdCreateShader::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
+bool SVRCmdCreateShader::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
     if(m_shader && _renderer) {
         SVRShaderPtr t_rshader = _renderer->createResShader() ;
         m_shader->bindRes(t_rshader->m_pool_id);
         t_rshader->load( _renderer,m_shader->getShaderDsp() );
     }
+    return true;
 }
 
 //
@@ -66,12 +68,13 @@ SVRCmdCreateTex::~SVRCmdCreateTex(){
     m_texture = nullptr;
 }
 
-void SVRCmdCreateTex::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
+bool SVRCmdCreateTex::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
     if(m_texture && _renderer) {
         SVRTexPtr t_rtex = _renderer->createResTexture() ;
         m_texture->bindRes(t_rtex->m_pool_id);
         t_rtex->load( _renderer,m_texture->getTextureDsp() );
     }
+    return true;
 }
 
 //
@@ -84,7 +87,7 @@ SVRCmdCreateTarget::~SVRCmdCreateTarget(){
     m_rtarget = nullptr;
 }
 
-void SVRCmdCreateTarget::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
+bool SVRCmdCreateTarget::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
     if(m_rtarget && _renderer) {
         SVRFboPtr t_rfbo = _renderer->createResFbo() ;
         if(t_rfbo) {
@@ -92,5 +95,6 @@ void SVRCmdCreateTarget::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
             t_rfbo->load(_renderer,m_rtarget->getTargetDsp());
         }
     }
+    return true;
 }
 

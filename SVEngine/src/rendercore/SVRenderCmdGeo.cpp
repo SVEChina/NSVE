@@ -21,13 +21,14 @@ SVRenderCmdGeo::~SVRenderCmdGeo() {
     m_pMtl = nullptr;
 }
 
-void SVRenderCmdGeo::render(SVRendererPtr _renderer,SVRTargetPtr _target){
+bool SVRenderCmdGeo::render(SVRendererPtr _renderer,SVRTargetPtr _target){
 //    if (m_pMtl ) {
 //        if (m_pMtl->submitMtl()) {
 //           _render();
 //            m_pMtl->recoverMtl();
 //        }
 //    }
+    return true;
 }
 
 void SVRenderCmdGeo::_render(){
