@@ -73,21 +73,37 @@ void SVComData::loadDefault() {
     m_screenMesh->setDrawVertNum(6);
     m_screenMesh->dispatch();
     //
-    m_faceMesh = SVComData::createFaceMeshSt(mApp,false);
+    m_faceMesh = SVComData::createFaceMeshSt(mApp,SV_E_FACEMESH_SIMPILITY);
 }
 
-SVRenderMeshPtr SVComData::createFaceMeshSt(SVInstPtr _app,bool _simp) {
-    if(_simp) {
+SVRenderMeshPtr SVComData::createFaceMeshSt(SVInstPtr _app, SV_E_FACEMESH_TYPE _meshType) {
+    if(_meshType == SV_E_FACEMESH_SIMPILITY) {
         return _loadFaceMesh(_app,
-                             "facemesh_st_simplify.json",
-                             "standerface_st_simplify.json",
+                             "mesh_face_simplity.json",
+                             "texcoord_face_simplity.json",
                              2);
-    }else{
+    }else if(_meshType == SV_E_FACEMESH_HEAD){
         return _loadFaceMesh(_app,
-                             "facemesh_st_normal.json",
-                             "standerface_st_normal.json",
+                             "mesh_face_head.json",
+                             "texcoord_face_head.json",
+                             2);
+    }else if(_meshType == SV_E_FACEMESH_WHOLE){
+        return _loadFaceMesh(_app,
+                             "mesh_face.json",
+                             "texcoord_face.json",
+                             2);
+    }else if(_meshType == SV_E_FACEMESH_EYE){
+        return _loadFaceMesh(_app,
+                             "mesh_eye.json",
+                             "texcoord_eye.json",
+                             2);
+    }else if(_meshType == SV_E_FACEMESH_BROW){
+        return _loadFaceMesh(_app,
+                             "mesh_eyebrow.json",
+                             "texcoord_eyebrow.json",
                              2);
     }
+    return nullptr;
 }
 
 SVRenderMeshPtr SVComData::createFaceMeshFp(SVInstPtr _app,bool _simp) {

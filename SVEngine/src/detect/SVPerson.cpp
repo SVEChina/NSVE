@@ -9,7 +9,7 @@
 #include "SVTrackerFace.h"
 #include "SVDetectMgr.h"
 #include "SVDetectST.h"
-
+#include "SVKeyPointExt.h"
 using namespace sv;
 
 SVPerson::SVPerson(SVInstPtr _app)
