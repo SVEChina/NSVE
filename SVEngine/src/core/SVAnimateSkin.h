@@ -31,7 +31,7 @@ namespace sv {
     class SVBone :public SVObject {
     public:
         SVBone();
-        s32 m_id;       //对应的node_id
+        s32 m_id;           //骨头ID
         s32 m_nodeid;       //对应的node_id
         FVec3 m_tran;
         FVec3 m_scale;

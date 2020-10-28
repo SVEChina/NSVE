@@ -28,6 +28,7 @@ SVShaderMgr::~SVShaderMgr() {
 }
 
 void SVShaderMgr::init() {
+    m_pbr_shaderMap.clear();
 }
 
 void SVShaderMgr::destroy() {
@@ -101,6 +102,7 @@ void SVShaderMgr::loadSDSP(cptr8 _sdsp,cptr8 _language) {
     if(t_pos>0) {
        t_s_name = SVString::substr(t_s_name.c_str(), t_pos+1);
     }
+    
     //防止重名的shader
     SHADERPOOL::iterator it = m_shaderMap.find(t_s_name);
     if( it == m_shaderMap.end() ) {
@@ -114,11 +116,20 @@ void SVShaderMgr::loadSDSP(cptr8 _sdsp,cptr8 _language) {
 
 void SVShaderMgr::_clearAllShader() {
     m_shaderMap.clear();
+    m_pbr_shaderMap.clear();
 }
 
 SVShaderPtr SVShaderMgr::getShader(cptr8 _name) {
     SHADERPOOL::iterator it = m_shaderMap.find(_name);
     if(it!=m_shaderMap.end()) {
+        return it->second;
+    }
+    return nullptr;
+}
+
+SVShaderPtr SVShaderMgr::getPBRShader(s32 _pbrdef) {
+    PBRSHADERPOOL::iterator it = m_pbr_shaderMap.find(_pbrdef);
+    if(it!=m_pbr_shaderMap.end()) {
         return it->second;
     }
     return nullptr;
