@@ -12,7 +12,7 @@
             "tbl" : [
                         { "name" : "matModel", "type" : "fmat4", "value" : "null" },
                         { "name" : "matV", "type" : "fmat4", "value" : "null" },
-                        { "name" : "matp", "type" : "fmat4", "value" : "null" }
+                        { "name" : "matP", "type" : "fmat4", "value" : "null" }
                     ]
         }
     ]
