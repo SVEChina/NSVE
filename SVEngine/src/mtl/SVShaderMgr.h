@@ -32,9 +32,9 @@ namespace sv {
 
         SVShaderPtr getShader(cptr8 _name,s32 _sdef = 0);
         
-        void loadSDSP(cptr8 _sdsp);
+        SVShaderPtr loadSDSP(cptr8 _sdsp);
         
-        void loadSDSP(cptr8 _sdsp,std::vector<SVString>& _defs);
+        SVShaderPtr loadSDSP(cptr8 _sdsp,std::vector<SVString>& _defs);
         
         s32 getDefValue(cptr8 _defname);
         

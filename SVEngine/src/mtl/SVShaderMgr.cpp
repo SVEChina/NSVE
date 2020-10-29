@@ -100,19 +100,19 @@ void SVShaderMgr::_loadAllShader() {
     SV_LOG_DEBUG("load shader end\n");
 }
 
-void SVShaderMgr::loadSDSP(cptr8 _sdsp) {
+SVShaderPtr SVShaderMgr::loadSDSP(cptr8 _sdsp) {
     SVDataChunk tDataStream;
     bool tflag = mApp->m_file_sys->loadFileContentStr(&tDataStream, _sdsp);
     if (!tflag) {
         SV_LOG_INFO("not find _sdsp file!please check shader file path!\n");
-        return ;
+        return nullptr;
     }
     RAPIDJSON_NAMESPACE::Document doc;
     doc.Parse<0>(tDataStream.getPointerChar());
     if (doc.HasParseError()) {
         RAPIDJSON_NAMESPACE::ParseErrorCode code = doc.GetParseError();
         SV_LOG_ERROR("rapidjson error code:%d \n", code);
-        return ;
+        return nullptr;
     }
     //
     SVString t_s_name = _sdsp;
@@ -127,7 +127,7 @@ void SVShaderMgr::loadSDSP(cptr8 _sdsp) {
         SVString t_ext = SVString::format("_%d",t_code);
         t_s_name += t_ext;
     }else{
-        return ;
+        return nullptr;
     }
     //防止重名的shader
     SHADERPOOL::iterator it = m_shaderMap.find(t_s_name);
@@ -135,21 +135,21 @@ void SVShaderMgr::loadSDSP(cptr8 _sdsp) {
         m_shaderMap.insert(std::make_pair(t_s_name, t_shader));
         t_shader->dispatch();
     }
-    t_shader = nullptr;
+    return t_shader;
 }
 
-void SVShaderMgr::loadSDSP(cptr8 _sdsp,std::vector<SVString>& _defs) {
+SVShaderPtr SVShaderMgr::loadSDSP(cptr8 _sdsp,std::vector<SVString>& _defs) {
     SVDataChunk tDataStream;
     bool tflag = mApp->m_file_sys->loadFileContentStr(&tDataStream, _sdsp);
     if (!tflag) {
-        return ;
+        return nullptr;
     }
     RAPIDJSON_NAMESPACE::Document doc;
     doc.Parse<0>(tDataStream.getPointerChar());
     if (doc.HasParseError()) {
         RAPIDJSON_NAMESPACE::ParseErrorCode code = doc.GetParseError();
         SV_LOG_ERROR("rapidjson error code:%d \n", code);
-        return ;
+        return nullptr;
     }
     SVString t_s_name = _sdsp;
     s32 t_pos = t_s_name.rfind('.');
@@ -169,7 +169,7 @@ void SVShaderMgr::loadSDSP(cptr8 _sdsp,std::vector<SVString>& _defs) {
         SVString t_ext = SVString::format("_%d",t_code);
         t_s_name += t_ext;
     }else{
-        return ;
+        return nullptr;
     }
     //防止重名的shader
     SHADERPOOL::iterator it = m_shaderMap.find(t_s_name);
@@ -177,7 +177,7 @@ void SVShaderMgr::loadSDSP(cptr8 _sdsp,std::vector<SVString>& _defs) {
         m_shaderMap.insert(std::make_pair(t_s_name, t_shader));
         t_shader->dispatch();
     }
-    t_shader = nullptr;
+    return t_shader;
 }
 
 void SVShaderMgr::_clearAllShader() {
