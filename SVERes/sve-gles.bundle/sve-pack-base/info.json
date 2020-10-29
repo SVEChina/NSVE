@@ -22,7 +22,7 @@
         {
             "version" : "1.0",
             "name" : "back",
-            "shader" : "back",
+            "shader" : "shader/dsp/back.dsp",
             "textures" :[
                 { "chn": 0 , "from" : "file", "path" : "res/sve.png", "stage": "fs" }
             ],

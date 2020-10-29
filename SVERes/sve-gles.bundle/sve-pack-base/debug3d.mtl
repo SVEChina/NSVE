@@ -1,5 +1,5 @@
 {
     "version" : "1.0",
     "name" : "debug3d",
-    "shader" : "debug3d"
+    "shader" : "shader/dsp/debug3d.dsp"
 }

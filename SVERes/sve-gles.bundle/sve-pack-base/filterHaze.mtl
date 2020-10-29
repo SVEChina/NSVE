@@ -1,7 +1,7 @@
 {
     "version" : "1.0",
     "name" : "filterHaze",
-    "shader" : "filterHaze",
+    "shader" : "shader/dsp/filterHaze.dsp",
     "textures" :[
         { "chn": 0 , "from" : "file", "path" : "res/sve.png", "stage": "fs" }
     ],

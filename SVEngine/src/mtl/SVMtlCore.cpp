@@ -313,6 +313,10 @@ void SVMtlCore::fromJSON1(RAPIDJSON_NAMESPACE::Value& _item){
     if (_item.HasMember("shader") && _item["shader"].IsString()) {
         RAPIDJSON_NAMESPACE::Value &t_value = _item["shader"];
         m_shader_name = t_value.GetString();
+        s32 t_pos = m_shader_name.rfind('.');
+        if(t_pos>0) {
+            m_shader_name = SVString::substr(m_shader_name.c_str(), 0, t_pos);
+        }
     }else{
         return ;
     }
