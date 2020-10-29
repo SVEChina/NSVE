@@ -72,8 +72,8 @@ SVSurfacePtr SVShader::createSurface() {
 //    if(t_surface) {
 //        FMat4 t_mat;
 //        t_mat.setIdentity();
-//        m_surface->m_tbl->addParam("matw",t_mat);
-//        m_surface->m_tbl->addParam("matv",t_mat);
+//        m_surface->m_tbl->addParam("matModel",t_mat);
+//        m_surface->m_tbl->addParam("matV",t_mat);
 //        m_surface->m_tbl->addParam("matp",t_mat);
 //    }
     return t_surface;

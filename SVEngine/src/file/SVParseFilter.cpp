@@ -6,14 +6,8 @@
 //
 
 #include "SVParseFilter.h"
-#include "../mtl/SVFilterShinning.h"
 #include "../mtl/SVADFilterBase.h"
-#include "../mtl/SVMtlShinning.h"
-#include "../mtl/SVMtlStreak.h"
-#include "../mtl/SVMtlRainbowColor.h"
-#include "../mtl/SVMtlFlash.h"
 #include "../mtl/SVMtlGlitch.h"
-#include "../mtl/SVMtlDistorted.h"
 
 using namespace sv;
 

@@ -9,7 +9,6 @@
 #include "SVTexMgr.h"
 #include "SVTexture.h"
 #include "SVMtlBasedOn.h"
-#include "SVMtlShinning.h"
 #include "../rendercore/SVRenderer.h"
 #include "../rendercore/SVRenderMgr.h"
 

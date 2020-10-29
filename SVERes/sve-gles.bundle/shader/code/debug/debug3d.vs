@@ -4,10 +4,10 @@ precision mediump float;
 
 attribute vec3 aPosition;
 
-uniform mat4 matw;
-uniform mat4 matvp;
+uniform mat4 matModel;
+uniform mat4 matVP;
 
 void main(){
-    gl_Position = matvp*matw*vec4(aPosition.xyz,1.0);
+    gl_Position = matVP*matModel*vec4(aPosition.xyz,1.0);
     gl_PointSize = 3.0;
 }
