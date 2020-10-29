@@ -1,17 +1,17 @@
 precision mediump float;
 
-layout(location = 0) in vec4 aPosition;
+layout(location = 0) in vec3 aPosition;
 
 #ifdef HAS_NORMALS
-layout(location = 1) in vec4 aNormal;
+layout(location = 1) in vec3 aNormal;
 #endif
 
 #ifdef HAS_TANGENTS
-layout(location = 2) in vec4 aTangent;
+layout(location = 2) in vec3 aTangent;
 #endif
 
 #ifdef HAS_UV
-ayout(location = 3) in vec2 aUV;
+layout(location = 3) in vec2 aUV;
 #endif
 
 uniform mat4 matVP;
@@ -29,9 +29,8 @@ out vec3 v_Normal;
 #endif
 #endif
 
-
 void main(){
-    vec4 pos = matModel * aPosition;
+    vec4 pos = matModel * vec4(aPosition,1.0f);
     v_Position = vec3(pos.xyz) / pos.w;
 #ifdef HAS_NORMALS
 #ifdef HAS_TANGENTS
@@ -49,6 +48,7 @@ void main(){
 #else
     v_UV = vec2(0.,0.);
 #endif
-    gl_Position = matVP * aPosition; // needs w for proper perspective correction
+    gl_Position = matVP * vec4(aPosition,1.0f);
+    // needs w for proper perspective correction
 }
 
