@@ -1,6 +1,7 @@
 {
     "language" : "gl",
     "dspfiles": [
+        "shader/dsp/pbr.dsp",
         "shader/dsp/normal2d.dsp",
         "shader/dsp/normal3d.dsp",
         "shader/dsp/debug2d.dsp",

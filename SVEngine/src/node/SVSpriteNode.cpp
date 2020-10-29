@@ -128,9 +128,9 @@ void SVSpriteNode::update(f32 _dt) {
         if( mApp->m_rcore == E_R_METAL_OSX || mApp->m_rcore == E_R_METAL_IOS ) {
             //metal需要转至一下矩阵
             FMat4 tt = transpose(m_localMat);
-            m_surface->setParam("matw",tt);
+            m_surface->setParam("matModel",tt);
         }else{
-            m_surface->setParam("matw",m_localMat);
+            m_surface->setParam("matModel",m_localMat);
         }
     }
 }

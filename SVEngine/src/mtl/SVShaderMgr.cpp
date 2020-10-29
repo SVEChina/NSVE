@@ -28,6 +28,7 @@ SVShaderMgr::~SVShaderMgr() {
 }
 
 void SVShaderMgr::init() {
+    m_language = "";
 }
 
 void SVShaderMgr::destroy() {
@@ -83,10 +84,9 @@ void SVShaderMgr::_loadAllShader() {
         return;
     }
     //
-    SVString t_language = "";
     RAPIDJSON_NAMESPACE::Value &language = doc["language"];
     if( language.IsString() ) {
-        t_language = language.GetString();
+        m_language = language.GetString();
     }
     //获取文件列表
     RAPIDJSON_NAMESPACE::Value &dspfiles = doc["dspfiles"];
@@ -94,25 +94,25 @@ void SVShaderMgr::_loadAllShader() {
         RAPIDJSON_NAMESPACE::Document::Array t_files = dspfiles.GetArray();
         for(s32 i=0;i<t_files.Size();i++) {
             SVString t_filename = t_files[i].GetString();
-            loadSDSP(t_filename.c_str(),t_language.c_str());
+            loadSDSP(t_filename.c_str());
         }
     }
     SV_LOG_DEBUG("load shader end\n");
 }
 
-void SVShaderMgr::loadSDSP(cptr8 _sdsp,cptr8 _language) {
+SVShaderPtr SVShaderMgr::loadSDSP(cptr8 _sdsp) {
     SVDataChunk tDataStream;
     bool tflag = mApp->m_file_sys->loadFileContentStr(&tDataStream, _sdsp);
     if (!tflag) {
         SV_LOG_INFO("not find _sdsp file!please check shader file path!\n");
-        return ;
+        return nullptr;
     }
     RAPIDJSON_NAMESPACE::Document doc;
     doc.Parse<0>(tDataStream.getPointerChar());
     if (doc.HasParseError()) {
         RAPIDJSON_NAMESPACE::ParseErrorCode code = doc.GetParseError();
         SV_LOG_ERROR("rapidjson error code:%d \n", code);
-        return ;
+        return nullptr;
     }
     //
     SVString t_s_name = _sdsp;
@@ -120,20 +120,14 @@ void SVShaderMgr::loadSDSP(cptr8 _sdsp,cptr8 _language) {
     if(t_pos>0) {
         t_s_name = SVString::substr(t_s_name.c_str(), 0, t_pos);
     }
-//    t_pos = t_s_name.rfind('\\');
-//    if(t_pos>0) {
-//       t_s_name = SVString::substr(t_s_name.c_str(), t_pos+1);
-//    }
-//    t_pos = t_s_name.rfind('/');
-//    if(t_pos>0) {
-//       t_s_name = SVString::substr(t_s_name.c_str(), t_pos+1);
-//    }
     //解析
     SVShaderPtr t_shader = MakeSharedPtr<SVShader>(mApp);
-    if( t_shader->fromJSON( doc ,_language) ) {
+    if( t_shader->fromJSON( doc ,m_language.c_str()) ) {
         s32 t_code = t_shader->getShaderDsp()->getDefCode();
         SVString t_ext = SVString::format("_%d",t_code);
         t_s_name += t_ext;
+    }else{
+        return nullptr;
     }
     //防止重名的shader
     SHADERPOOL::iterator it = m_shaderMap.find(t_s_name);
@@ -141,7 +135,49 @@ void SVShaderMgr::loadSDSP(cptr8 _sdsp,cptr8 _language) {
         m_shaderMap.insert(std::make_pair(t_s_name, t_shader));
         t_shader->dispatch();
     }
-    t_shader = nullptr;
+    return t_shader;
+}
+
+SVShaderPtr SVShaderMgr::loadSDSP(cptr8 _sdsp,std::vector<SVString>& _defs) {
+    SVDataChunk tDataStream;
+    bool tflag = mApp->m_file_sys->loadFileContentStr(&tDataStream, _sdsp);
+    if (!tflag) {
+        return nullptr;
+    }
+    RAPIDJSON_NAMESPACE::Document doc;
+    doc.Parse<0>(tDataStream.getPointerChar());
+    if (doc.HasParseError()) {
+        RAPIDJSON_NAMESPACE::ParseErrorCode code = doc.GetParseError();
+        SV_LOG_ERROR("rapidjson error code:%d \n", code);
+        return nullptr;
+    }
+    SVString t_s_name = _sdsp;
+    s32 t_pos = t_s_name.rfind('.');
+    if(t_pos>0) {
+        t_s_name = SVString::substr(t_s_name.c_str(), 0, t_pos);
+    }
+    //解析
+    SVShaderPtr t_shader = MakeSharedPtr<SVShader>(mApp);
+    if( t_shader->fromJSON( doc ,m_language.c_str()) ) {
+        //送入宏
+        t_shader->getShaderDsp()->m_defs.clear();
+        for(s32 i=0;i<_defs.size();i++) {
+            t_shader->getShaderDsp()->m_defs.push_back(_defs[i]);
+        }
+        //重新构建shader名字
+        s32 t_code = t_shader->getShaderDsp()->getDefCode();
+        SVString t_ext = SVString::format("_%d",t_code);
+        t_s_name += t_ext;
+    }else{
+        return nullptr;
+    }
+    //防止重名的shader
+    SHADERPOOL::iterator it = m_shaderMap.find(t_s_name);
+    if( it == m_shaderMap.end() ) {
+        m_shaderMap.insert(std::make_pair(t_s_name, t_shader));
+        t_shader->dispatch();
+    }
+    return t_shader;
 }
 
 void SVShaderMgr::_clearAllShader() {

@@ -10,9 +10,9 @@
             "stage" : 0,
             "bufID" : 1,
             "tbl" : [
-                        { "name" : "matw", "type" : "fmat4", "value" : "null" },
-                        { "name" : "matv", "type" : "fmat4", "value" : "null" },
-                        { "name" : "matp", "type" : "fmat4", "value" : "null" }
+                        { "name" : "matModel", "type" : "fmat4", "value" : "null" },
+                        { "name" : "matV", "type" : "fmat4", "value" : "null" },
+                        { "name" : "matP", "type" : "fmat4", "value" : "null" }
                     ]
         }
     ]

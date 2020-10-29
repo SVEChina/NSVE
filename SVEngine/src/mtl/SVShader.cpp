@@ -72,9 +72,9 @@ SVSurfacePtr SVShader::createSurface() {
 //    if(t_surface) {
 //        FMat4 t_mat;
 //        t_mat.setIdentity();
-//        m_surface->m_tbl->addParam("matw",t_mat);
-//        m_surface->m_tbl->addParam("matv",t_mat);
-//        m_surface->m_tbl->addParam("matp",t_mat);
+//        m_surface->m_tbl->addParam("matModel",t_mat);
+//        m_surface->m_tbl->addParam("matV",t_mat);
+//        m_surface->m_tbl->addParam("matP",t_mat);
 //    }
     return t_surface;
 }
@@ -155,8 +155,10 @@ bool SVShader::toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator,
 
 bool SVShader::fromJSON(RAPIDJSON_NAMESPACE::Value &item,cptr8 _language) {
     assert(item.IsObject());
+    if( strcmp(_language,"") == 0 ) {
+        return false;
+    }
     //language = 1
-    //
     if( strcmp(_language, "gl") == 0 ) {
         //shader函数入口还有各个文件名称
         if (item.HasMember("vs") && item["vs"].IsString() ) {

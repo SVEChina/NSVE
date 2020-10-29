@@ -57,12 +57,7 @@ namespace sv {
     //滤镜
     DECLARE_SHAREPTR(SVMtlBasedOn);
     DECLARE_SHAREPTR(SVMtlAcutance);
-    DECLARE_SHAREPTR(SVMtlShinning);
-    DECLARE_SHAREPTR(SVMtlStreak);
-    DECLARE_SHAREPTR(SVMtlRainbowColor);
-    DECLARE_SHAREPTR(SVMtlFlash);
     DECLARE_SHAREPTR(SVMtlGlitch);
-    DECLARE_SHAREPTR(SVMtlDistorted);
     DECLARE_SHAREPTR(SVMtlDark);
     DECLARE_SHAREPTR(SVMtlADFilterBase);
 

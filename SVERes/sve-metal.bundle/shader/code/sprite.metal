@@ -18,9 +18,9 @@ struct Vertex {
 
 //
 struct Uniforms {
-    float4x4 matw;
-    float4x4 matv;
-    float4x4 matp;
+    float4x4 matModel;
+    float4x4 matV;
+    float4x4 matP;
 };
 
 //
@@ -43,7 +43,7 @@ struct FSOutput{
 //
 vertex VertexOut vsMain(Vertex input [[stage_in]] ,constant Uniforms & uniforms [[ buffer(1) ]] ) {
     VertexOut vert;
-    vert.position = float4(input.position,0.0,1.0) * uniforms.matw * uniforms.matv * uniforms.matp;
+    vert.position = float4(input.position,0.0,1.0) * uniforms.matModel * uniforms.matV * uniforms.matP;
     vert.position = vert.position/vert.position.w;
     vert.texcoord0 = input.texcoord0;
     return vert;

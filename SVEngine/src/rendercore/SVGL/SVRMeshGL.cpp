@@ -168,7 +168,7 @@ s32 SVRMeshGL::process(SVRendererPtr _renderer){
         glBindBuffer(GL_ARRAY_BUFFER,m_instanceID);
         glBufferSubData(GL_ARRAY_BUFFER,0,t_len,t_pointer);
     }
-    
+    //
     if( m_vert_dsp ) {
         if( m_vert_dsp->_bufMode == E_BFM_AOS ) {
             //混合流模式
@@ -398,5 +398,9 @@ void SVRMeshGL::draw(SVRendererPtr _renderer) {
         }else {
             glDrawArrays(t_method, 0, m_rmesh_dsp->m_draw_num);
         }
+    }
+    //该关闭关闭
+    for(s32 i=0;i<8;i++) {
+        glDisableVertexAttribArray(i);
     }
 }

@@ -81,9 +81,9 @@ void SVDispatch::dispatchMeshDraw(SVInstPtr _app,
             FMat4 t_mat_v = t_target->viewMat();
             FMat4 t_mat_p = t_target->projMat();
             FMat4 t_mat_vp = t_target->vpMat();
-            _surface->setParam("matvp", t_mat_vp);
-            _surface->setParam("matv", t_mat_v);
-            _surface->setParam("matp", t_mat_p);
+            _surface->setParam("matVP", t_mat_vp);
+            _surface->setParam("matV", t_mat_v);
+            _surface->setParam("matP", t_mat_p);
         }
         //投递命令
         if(_mtl) {
@@ -111,9 +111,9 @@ void SVDispatch::dispatchMeshDraw(SVInstPtr _app,
             FMat4 t_mat_v = _target->viewMat();
             FMat4 t_mat_p = _target->projMat();
             FMat4 t_mat_vp = _target->vpMat();
-            _surface->setParam("matvp", t_mat_vp);
-            _surface->setParam("matv", t_mat_v);
-            _surface->setParam("matp", t_mat_p);
+            _surface->setParam("matVP", t_mat_vp);
+            _surface->setParam("matV", t_mat_v);
+            _surface->setParam("matP", t_mat_p);
         }
         if(_mtl) {
             SVRCmdNorPtr t_cmd_nor = MakeSharedPtr<SVRCmdNor>();
@@ -138,9 +138,9 @@ void SVDispatch::dispatchMeshDrawPre(SVInstPtr _app,
             FMat4 t_mat_v = t_target->viewMat();
             FMat4 t_mat_p = t_target->projMat();
             FMat4 t_mat_vp = t_target->vpMat();
-            _surface->setParam("matvp", t_mat_vp);
-            _surface->setParam("matv", t_mat_v);
-            _surface->setParam("matp", t_mat_p);
+            _surface->setParam("matVP", t_mat_vp);
+            _surface->setParam("matV", t_mat_v);
+            _surface->setParam("matP", t_mat_p);
         }
         if(_mtl) {
             SVRCmdNorPtr t_cmd_nor = MakeSharedPtr<SVRCmdNor>();
@@ -165,9 +165,9 @@ void SVDispatch::dispatchMeshDrawPre(SVInstPtr _app,
             FMat4 t_mat_v = _target->viewMat();
             FMat4 t_mat_p = _target->projMat();
             FMat4 t_mat_vp = _target->vpMat();
-            _surface->setParam("matvp", t_mat_vp);
-            _surface->setParam("matv", t_mat_v);
-            _surface->setParam("matp", t_mat_p);
+            _surface->setParam("matVP", t_mat_vp);
+            _surface->setParam("matV", t_mat_v);
+            _surface->setParam("matP", t_mat_p);
         }
         if(_mtl) {
             SVRCmdNorPtr t_cmd_nor = MakeSharedPtr<SVRCmdNor>();
@@ -192,9 +192,9 @@ void SVDispatch::dispatchMeshDrawAfter(SVInstPtr _app,
             FMat4 t_mat_v = t_target->viewMat();
             FMat4 t_mat_p = t_target->projMat();
             FMat4 t_mat_vp = t_target->vpMat();
-            _surface->setParam("matvp", t_mat_vp);
-            _surface->setParam("matv", t_mat_v);
-            _surface->setParam("matp", t_mat_p);
+            _surface->setParam("matVP", t_mat_vp);
+            _surface->setParam("matV", t_mat_v);
+            _surface->setParam("matP", t_mat_p);
         }
         if(_mtl) {
             SVRCmdNorPtr t_cmd_nor = MakeSharedPtr<SVRCmdNor>();
@@ -219,9 +219,9 @@ void SVDispatch::dispatchMeshDrawAfter(SVInstPtr _app,
             FMat4 t_mat_v = _target->viewMat();
             FMat4 t_mat_p = _target->projMat();
             FMat4 t_mat_vp = _target->vpMat();
-            _surface->setParam("matvp", t_mat_vp);
-            _surface->setParam("matv", t_mat_v);
-            _surface->setParam("matp", t_mat_p);
+            _surface->setParam("matVP", t_mat_vp);
+            _surface->setParam("matV", t_mat_v);
+            _surface->setParam("matP", t_mat_p);
         }
         if(_mtl) {
             SVRCmdNorPtr t_cmd_nor = MakeSharedPtr<SVRCmdNor>();

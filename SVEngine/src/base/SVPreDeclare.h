@@ -213,7 +213,6 @@ namespace sv {
     DECLARE_SHAREPTR(SVGenLUTParam);
     DECLARE_SHAREPTR(SVDataFilter);
     DECLARE_SHAREPTR(SVFilterGenLUT);
-    DECLARE_SHAREPTR(SVFilterClarity);
     DECLARE_SHAREPTR(SVFilterGof);
     DECLARE_SHAREPTR(SVFilterGlow);
     DECLARE_SHAREPTR(SVFilterBlur);
@@ -222,7 +221,6 @@ namespace sv {
     DECLARE_SHAREPTR(SVAni2DStickersMgr);
     DECLARE_SHAREPTR(SVAni2DBase);
     DECLARE_SHAREPTR(SVAni2DScreen);
-    DECLARE_SHAREPTR(SVFilterShinning);
     DECLARE_SHAREPTR(SVADFilterBase);
 
     //物理部分

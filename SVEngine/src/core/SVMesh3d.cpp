@@ -78,7 +78,7 @@ void SVMesh3d::setMatrix(FMat4& _mat) {
 void SVMesh3d::update(f32 _dt,FMat4& _mat) {
     if(m_surface) {
         FMat4 t_mat = _mat*m_absoluteMat;
-        m_surface->setParam("matw", t_mat);
+        m_surface->setParam("matModel", t_mat);
     }
     if(m_mtl) {
         m_mtl->update(_dt);

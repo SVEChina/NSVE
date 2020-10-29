@@ -7,8 +7,8 @@
         {
             "stage" : 0,
             "bufID" : 1,
-            "tbl" : [ { "name" : "matw", "type" : "fmat4", "value" : "null" },
-                      { "name" : "matvp", "type" : "fmat4", "value" : "null" },
+            "tbl" : [ { "name" : "matModel", "type" : "fmat4", "value" : "null" },
+                      { "name" : "matVP", "type" : "fmat4", "value" : "null" },
                       { "name" : "u_color", "type" : "fvec3", "value" : "0.0,1.0,0.0" } ]
         }
     ]

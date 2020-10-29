@@ -32,7 +32,9 @@ namespace sv {
 
         SVShaderPtr getShader(cptr8 _name,s32 _sdef = 0);
         
-        void loadSDSP(cptr8 _sdsp,cptr8 _language);
+        SVShaderPtr loadSDSP(cptr8 _sdsp);
+        
+        SVShaderPtr loadSDSP(cptr8 _sdsp,std::vector<SVString>& _defs);
         
         s32 getDefValue(cptr8 _defname);
         
@@ -52,6 +54,8 @@ namespace sv {
         
         typedef std::map<SVString,s32> DEFTBL;
         DEFTBL m_deftbl;
+        
+        SVString m_language;
     };
     
 }//!namespace sv
