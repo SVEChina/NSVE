@@ -41,7 +41,7 @@ namespace sv {
         void loadDefault();
         
         //动态初始化
-        SVRenderMeshPtr faceMesh() { return m_faceMesh; }
+        SVRenderMeshPtr faceMesh(SV_E_FACEMESH_TYPE _meshType);
         
         //引擎创建初始化
         SVRenderMeshPtr screenMesh() { return m_screenMesh; }
