@@ -45,23 +45,20 @@ uniform vec4 u_ScaleDiffBaseMR;
 uniform vec4 u_ScaleFGDSpec;
 uniform vec4 u_ScaleIBLAmbient;
 
-varying vec3 v_Position;
-
-varying vec2 v_UV;
+in vec3 v_Position;
+in vec2 v_UV;
 
 #ifdef HAS_NORMALS
 #ifdef HAS_TANGENTS
-varying mat3 v_TBN;
+in mat3 v_TBN;
 #else
-varying vec3 v_Normal;
+in vec3 v_Normal;
 #endif
 #endif
 
-// Encapsulate the various inputs used by the various functions in the shading equation
-// We store values in this struct to simplify the integration of alternative implementations
-// of the shading terms, outlined in the Readme.MD Appendix.
-struct PBRInfo
-{
+out vec4 color0;
+
+struct PBRInfo{
     float NdotL;                  // cos angle between normal and light direction
     float NdotV;                  // cos angle between normal and view direction
     float NdotH;                  // cos angle between normal and half vector
@@ -79,8 +76,7 @@ struct PBRInfo
 const float M_PI = 3.141592653589793;
 const float c_MinRoughness = 0.04;
 
-vec4 SRGBtoLINEAR(vec4 srgbIn)
-{
+vec4 SRGBtoLINEAR(vec4 srgbIn){
     #ifdef MANUAL_SRGB
     #ifdef SRGB_FAST_APPROXIMATION
     vec3 linOut = pow(srgbIn.xyz,vec3(2.2));
@@ -96,8 +92,7 @@ vec4 SRGBtoLINEAR(vec4 srgbIn)
 
 // Find the normal for this fragment, pulling either from a predefined normal map
 // or from the interpolated mesh normal and tangent attributes.
-vec3 getNormal()
-{
+vec3 getNormal() {
     // Retrieve the tangent space matrix
 #ifndef HAS_TANGENTS
     vec3 pos_dx = dFdx(v_Position);
@@ -134,8 +129,7 @@ vec3 getNormal()
 // Precomputed Environment Maps are required uniform inputs and are computed as outlined in [1].
 // See our README.md on Environment Maps [3] for additional discussion.
 #ifdef USE_IBL
-vec3 getIBLContribution(PBRInfo pbrInputs, vec3 n, vec3 reflection)
-{
+vec3 getIBLContribution(PBRInfo pbrInputs, vec3 n, vec3 reflection) {
     float mipCount = 9.0; // resolution of 512x512
     float lod = (pbrInputs.perceptualRoughness * mipCount);
     // retrieve a scale and bias to F0. See [1], Figure 3
@@ -162,15 +156,13 @@ vec3 getIBLContribution(PBRInfo pbrInputs, vec3 n, vec3 reflection)
 // Basic Lambertian diffuse
 // Implementation from Lambert's Photometria https://archive.org/details/lambertsphotome00lambgoog
 // See also [1], Equation 1
-vec3 diffuse(PBRInfo pbrInputs)
-{
+vec3 diffuse(PBRInfo pbrInputs){
     return pbrInputs.diffuseColor / M_PI;
 }
 
 // The following equation models the Fresnel reflectance term of the spec equation (aka F())
 // Implementation of fresnel from [4], Equation 15
-vec3 specularReflection(PBRInfo pbrInputs)
-{
+vec3 specularReflection(PBRInfo pbrInputs) {
     return pbrInputs.reflectance0 + (pbrInputs.reflectance90 - pbrInputs.reflectance0) * pow(clamp(1.0 - pbrInputs.VdotH, 0.0, 1.0), 5.0);
 }
 
@@ -178,8 +170,7 @@ vec3 specularReflection(PBRInfo pbrInputs)
 // where rougher material will reflect less light back to the viewer.
 // This implementation is based on [1] Equation 4, and we adopt their modifications to
 // alphaRoughness as input as originally proposed in [2].
-float geometricOcclusion(PBRInfo pbrInputs)
-{
+float geometricOcclusion(PBRInfo pbrInputs) {
     float NdotL = pbrInputs.NdotL;
     float NdotV = pbrInputs.NdotV;
     float r = pbrInputs.alphaRoughness;
@@ -192,8 +183,7 @@ float geometricOcclusion(PBRInfo pbrInputs)
 // The following equation(s) model the distribution of microfacet normals across the area being drawn (aka D())
 // Implementation from "Average Irregularity Representation of a Roughened Surface for Ray Reflection" by T. S. Trowbridge, and K. P. Reitz
 // Follows the distribution function recommended in the SIGGRAPH 2013 course notes from EPIC Games [1], Equation 3.
-float microfacetDistribution(PBRInfo pbrInputs)
-{
+float microfacetDistribution(PBRInfo pbrInputs) {
     float roughnessSq = pbrInputs.alphaRoughness * pbrInputs.alphaRoughness;
     float f = (pbrInputs.NdotH * roughnessSq - pbrInputs.NdotH) * pbrInputs.NdotH + 1.0;
     return roughnessSq / (M_PI * f * f);
@@ -304,6 +294,6 @@ void main() {
     color = mix(color, baseColor.rgb, u_ScaleDiffBaseMR.y);
     color = mix(color, vec3(metallic), u_ScaleDiffBaseMR.z);
     color = mix(color, vec3(perceptualRoughness), u_ScaleDiffBaseMR.w);
-
-    gl_FragColor = vec4(pow(color,vec3(1.0/2.2)), baseColor.a);
+    //
+    color0 = vec4(pow(color,vec3(1.0/2.2)), baseColor.a);
 }

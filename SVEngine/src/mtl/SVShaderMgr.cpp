@@ -131,7 +131,8 @@ void SVShaderMgr::loadSDSP(cptr8 _sdsp,cptr8 _language) {
     //解析
     SVShaderPtr t_shader = MakeSharedPtr<SVShader>(mApp);
     if( t_shader->fromJSON( doc ,_language) ) {
-        SVString t_ext = SVString::format("_%d",t_shader->getShaderDsp()->m_pbr_def);
+        s32 t_code = t_shader->getShaderDsp()->getDefCode();
+        SVString t_ext = SVString::format("_%d",t_code);
         t_s_name += t_ext;
     }
     //防止重名的shader
