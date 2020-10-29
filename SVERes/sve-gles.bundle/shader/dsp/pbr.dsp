@@ -1,5 +1,5 @@
 {
-    "vdsp" : ["E_V2","E_T0"],
+    "vdsp" : ["E_V3","E_T0"],
     "pass" : "direct",
     "vs" : "shader/code/pbr/pbr.vs",
     "fs" : "shader/code/pbr/pbr.fs",

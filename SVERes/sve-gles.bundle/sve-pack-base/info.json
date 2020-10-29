@@ -1,6 +1,7 @@
 {
     "pack-name" : "base",
     "pack-files": [
+        "pbr.mtl",
         "screen.mtl",
         "normal2d.mtl",
         "normal3d.mtl",
