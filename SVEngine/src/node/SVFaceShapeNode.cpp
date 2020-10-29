@@ -94,24 +94,7 @@ void SVFaceShapeNode::update(f32 _dt){
 
 void SVFaceShapeNode::render(){
     SVNode::render();
-    SVSurfacePtr t_surface = MakeSharedPtr<SVSurface>();
-    FVec2 t_scale = FVec2(1.0f/700.0f,1.0f/1004.0f);
-    t_surface->setParam("u_scale", t_scale);
-    FVec2 t_off = FVec2(-350.0f,-502.0f);
-    t_surface->setParam("u_off", t_off);
-    FVec3 t_color = FVec3(0.0f,1.0f,0.0f);
-    t_surface->setParam("u_color", t_color);
-    SVMtlCorePtr _mtl = mApp->getMtlLib()->getMtl("debug2d");
-    if(_mtl) {
-        _mtl->reloadShader();
-    }
-    //
-    mApp->getComData()->faceMesh()->setDrawMethod(E_DRAW_POINTS);
-    SVDispatch::dispatchMeshDraw(mApp,
-                                 mApp->getComData()->faceMesh(),
-                                 _mtl,
-                                 t_surface,
-                                 E_RSM_SOLID);
+    
 }
 
 bool SVFaceShapeNode::procEvent(SVEventPtr _event){

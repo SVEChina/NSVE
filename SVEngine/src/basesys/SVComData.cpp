@@ -72,8 +72,11 @@ void SVComData::loadDefault() {
     m_screenMesh->setDrawMethod(E_DRAW_TRIANGLES);
     m_screenMesh->setDrawVertNum(6);
     m_screenMesh->dispatch();
-    //
-    m_faceMesh = SVComData::createFaceMeshSt(mApp,SV_E_FACEMESH_SIMPILITY);
+}
+
+SVRenderMeshPtr SVComData::faceMesh(SV_E_FACEMESH_TYPE _meshType){
+    m_faceMesh = SVComData::createFaceMeshSt(mApp,_meshType);
+    return m_faceMesh;
 }
 
 SVRenderMeshPtr SVComData::createFaceMeshSt(SVInstPtr _app, SV_E_FACEMESH_TYPE _meshType) {

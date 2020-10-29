@@ -19,19 +19,25 @@ SVPerson::SVPerson(SVInstPtr _app)
     m_exist = false;
     m_detectType = DETECT_T_NULL;
     m_pTracker = MakeSharedPtr<SVTrackerFace>(mApp);
-    m_pOFaceData= new f32[MAX_FACE_PT_NUM * 2];
-    memset(m_pOFaceData, 0, sizeof(f32) * 2 * MAX_FACE_PT_NUM);
-    m_pFaceData= new f32[MAX_FACE_PT_NUM * 2];
-    memset(m_pFaceData, 0, sizeof(f32) * 2 * MAX_FACE_PT_NUM);
+    m_pFaceDataScreen= new f32[MAX_FACE_PT_NUM * 2];
+    memset(m_pFaceDataScreen, 0, sizeof(f32) * 2 * MAX_FACE_PT_NUM);
+    m_pFaceDataScene= new f32[MAX_FACE_PT_NUM * 2];
+    memset(m_pFaceDataScene, 0, sizeof(f32) * 2 * MAX_FACE_PT_NUM);
+    m_pFaceDataExt= new f32[MAX_FACE_PT_NUM * 2];
+    memset(m_pFaceDataExt, 0, sizeof(f32) * 2 * MAX_FACE_PT_NUM);
+    
 }
 
 SVPerson::~SVPerson() {
     m_pTracker = nullptr;
-    if (m_pOFaceData) {
-        delete m_pOFaceData;
+    if (m_pFaceDataScreen) {
+        delete m_pFaceDataScreen;
     }
-    if (m_pFaceData) {
-        delete m_pFaceData;
+    if (m_pFaceDataScene) {
+        delete m_pFaceDataScene;
+    }
+    if (m_pFaceDataExt) {
+        delete m_pFaceDataExt;
     }
 }
 
@@ -45,13 +51,13 @@ void SVPerson::update(f32 _dt) {
     }else if(m_detectType == DETECT_T_FP){
         
     }else if(m_detectType == DETECT_T_ST){
-        m_pTracker->track_st(m_pFaceData,
-                             m_facePtNum,
-                             m_facerect,
-                             m_facerot.x,
-                             m_facerot.y,
-                             m_facerot.z,
-                             m_personID);
+//        m_pTracker->track_st(m_pFaceData,
+//                             m_facePtNum,
+//                             m_facerect,
+//                             m_facerot.x,
+//                             m_facerot.y,
+//                             m_facerot.z,
+//                             m_personID);
     }
     m_dataLock.unlock();
 }
@@ -78,7 +84,8 @@ void SVPerson::setDetectType(DETECTTYPE type) {
 void SVPerson::_setFaceData(void* _pdata,s32 _len) {
     if(_len>0 && _len<sizeof(f32)*2*MAX_FACE_PT_NUM) {
         m_dataLock.lock();
-        memcpy(m_pOFaceData, _pdata, _len);
+        memcpy(m_pFaceDataScreen, _pdata, _len);
+        _transDataToScene(m_pFaceDataScreen, m_facePtNum,  m_pFaceDataScene);
         m_dataLock.unlock();
     }
 }
@@ -109,27 +116,29 @@ FVec3 SVPerson::getFaceRot(){
 }
 
 f32 *SVPerson::getFaceData(s32 &_ptNum, SV_E_FACEDATA_TYPE _type) {
-    if (_type == SV_E_FACEDATA_SCENE) {
+    if (_type == SV_E_FACEDATA_SIMPLITY) {
         _ptNum = m_facePtNum;
-        _transDataToCener(m_pOFaceData, m_pFaceData);
-        return m_pFaceData;
-    }else if(_type == SV_E_FACEDATA_SCREEN){
+        return m_pFaceDataScene;
+    }else if(_type == SV_E_FACEDATA_ORIGINAL){
         _ptNum = m_facePtNum;
-        return m_pOFaceData;
+        return m_pFaceDataScreen;
+    }else if(_type == SV_E_FACEDATA_BROW){
+        _transDataToBrow(m_pFaceDataScene, m_facePtNum, m_pFaceDataExt, _ptNum);
+        return m_pFaceDataExt;
     }
     return nullptr;
 }
 
 f32 SVPerson::getFaceDataX(s32 _index) {
     if (_index >= 0 && _index < m_facePtNum) {
-        return m_pFaceData[2 * _index];
+        return m_pFaceDataScene[2 * _index];
     }
     return 0.0f;
 }
 
 f32 SVPerson::getFaceDataY(s32 _index) {
     if (_index >= 0 && _index < m_facePtNum) {
-        return m_pFaceData[2 * _index + 1];
+        return m_pFaceDataScene[2 * _index + 1];
     }
     return 0.0f;
 }
@@ -147,7 +156,7 @@ void SVPerson::listenData(SVObjectPtr datagen) {
     if (m_detectType == DETECT_T_AS) {
         
     } else if (m_detectType == DETECT_T_ST) {
-        m_facePtNum = 106;
+        m_facePtNum = ST_POINT_NUM;
         SVDetectSTPtr t_detectST = std::dynamic_pointer_cast<SVDetectST>(datagen);
         if (t_detectST) {
             _listenData_ST(t_detectST);
@@ -173,20 +182,25 @@ void SVPerson::_listenData_ST(SVDetectSTPtr detect) {
         _setFaceRot(personData->yaw, personData->pitch, personData->roll);
         _setFaceRect(personData->rectleft, personData->recttop, personData->rectright, personData->rectbottom);
         _setFaceData(personData->pointdata, sizeof(f32) * 2 * ST_POINT_NUM);
-        if (m_pTracker) {
-            m_pTracker->track_st(m_pFaceData, m_facePtNum, m_facerect, m_facerot.y, m_facerot.x, m_facerot.z, m_personID);
-        }
+//        if (m_pTracker) {
+//            m_pTracker->track_st(m_pFaceData, m_facePtNum, m_facerect, m_facerot.y, m_facerot.x, m_facerot.z, m_personID);
+//        }
     }
     //通知其他监听者更新数据
     _notice(0);
 }
 
-void SVPerson::_transDataToCener(f32 *_pOData, f32 *_pData){
-    memcpy(_pData, _pOData, m_facePtNum*2*sizeof(f32));
+void SVPerson::_transDataToScene(f32 *_pInData, s32 _inNum, f32 *_pOutData){
     f32 t_camera_half_w = mApp->m_global_param.sv_width*0.5f;
     f32 t_camera_half_h = mApp->m_global_param.sv_height*0.5f;
-    for (s32 i=0; i<m_facePtNum; i++) {
-        _pData[2*i] = (_pOData[2*i] - t_camera_half_w);
-        _pData[2*i+1] =  (t_camera_half_h - _pOData[2*i+1]);
+    for (s32 i=0; i<_inNum; i++) {
+        _pOutData[2*i] = (_pInData[2*i] - t_camera_half_w);
+        _pOutData[2*i+1] =  (t_camera_half_h - _pInData[2*i+1]);
     }
+}
+
+void SVPerson::_transDataToBrow(f32 *_pInData, s32 _inNum, f32 *_pOutData, s32 &_outNum){
+    s32 t_ptNum = 0;
+    SVKeyPointExt::faceDataForEyeBrow(_pInData, _pOutData, t_ptNum);
+    _outNum = t_ptNum;
 }
