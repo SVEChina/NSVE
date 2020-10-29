@@ -2243,6 +2243,14 @@
 		0221A372254992BB00BDD2F9 /* SVKeyPointExt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0221A36C254992BB00BDD2F9 /* SVKeyPointExt.cpp */; };
 		0221A373254992BB00BDD2F9 /* SVKeyPointExt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0221A36C254992BB00BDD2F9 /* SVKeyPointExt.cpp */; };
 		0221A374254992BB00BDD2F9 /* SVKeyPointExt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0221A36C254992BB00BDD2F9 /* SVKeyPointExt.cpp */; };
+		0221A383254A6F2700BDD2F9 /* SVFaceTuneNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0221A381254A6F2600BDD2F9 /* SVFaceTuneNode.cpp */; };
+		0221A384254A6F2700BDD2F9 /* SVFaceTuneNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0221A381254A6F2600BDD2F9 /* SVFaceTuneNode.cpp */; };
+		0221A385254A6F2700BDD2F9 /* SVFaceTuneNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0221A381254A6F2600BDD2F9 /* SVFaceTuneNode.cpp */; };
+		0221A386254A6F2700BDD2F9 /* SVFaceTuneNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0221A381254A6F2600BDD2F9 /* SVFaceTuneNode.cpp */; };
+		0221A387254A6F2700BDD2F9 /* SVFaceTuneNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 0221A382254A6F2700BDD2F9 /* SVFaceTuneNode.h */; };
+		0221A388254A6F2700BDD2F9 /* SVFaceTuneNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 0221A382254A6F2700BDD2F9 /* SVFaceTuneNode.h */; };
+		0221A389254A6F2700BDD2F9 /* SVFaceTuneNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 0221A382254A6F2700BDD2F9 /* SVFaceTuneNode.h */; };
+		0221A38A254A6F2700BDD2F9 /* SVFaceTuneNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 0221A382254A6F2700BDD2F9 /* SVFaceTuneNode.h */; };
 		022C1B342175EFD300FA5884 /* SVBMFontLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 022C1B322175EFD200FA5884 /* SVBMFontLoader.cpp */; };
 		022C1B352175EFD300FA5884 /* SVBMFontLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 022C1B322175EFD200FA5884 /* SVBMFontLoader.cpp */; };
 		022C1B362175EFD300FA5884 /* SVBMFontLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 022C1B322175EFD200FA5884 /* SVBMFontLoader.cpp */; };
@@ -8628,6 +8636,8 @@
 		0219DD8D2330D64500F02C9A /* SVPhysicsWorldMgr.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVPhysicsWorldMgr.cpp; sourceTree = "<group>"; };
 		0221A36B254992BB00BDD2F9 /* SVKeyPointExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVKeyPointExt.h; sourceTree = "<group>"; };
 		0221A36C254992BB00BDD2F9 /* SVKeyPointExt.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVKeyPointExt.cpp; sourceTree = "<group>"; };
+		0221A381254A6F2600BDD2F9 /* SVFaceTuneNode.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVFaceTuneNode.cpp; sourceTree = "<group>"; };
+		0221A382254A6F2700BDD2F9 /* SVFaceTuneNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVFaceTuneNode.h; sourceTree = "<group>"; };
 		022C1B322175EFD200FA5884 /* SVBMFontLoader.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVBMFontLoader.cpp; sourceTree = "<group>"; };
 		022C1B332175EFD300FA5884 /* SVBMFontLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVBMFontLoader.h; sourceTree = "<group>"; };
 		023574B020E514F500F29FB8 /* libsve_s_mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libsve_s_mac.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -12910,6 +12920,8 @@
 		5F7D5F47215F407700803BCF /* node */ = {
 			isa = PBXGroup;
 			children = (
+				0221A381254A6F2600BDD2F9 /* SVFaceTuneNode.cpp */,
+				0221A382254A6F2700BDD2F9 /* SVFaceTuneNode.h */,
 				5F7D5F7D215F407700803BCF /* SV2DFaceMaskSTNode.cpp */,
 				5F7D5F53215F407700803BCF /* SV2DFaceMaskSTNode.h */,
 				5F7D5F60215F407700803BCF /* SVBGRAInstreamNode.cpp */,
@@ -14169,6 +14181,7 @@
 				5F566E2D253FC80800670056 /* b3Collidable.h in Headers */,
 				5F7D6411215F407800803BCF /* error.h in Headers */,
 				020C44E722DC5DCC00201753 /* btPersistentManifold.h in Headers */,
+				0221A38A254A6F2700BDD2F9 /* SVFaceTuneNode.h in Headers */,
 				020C4CB322DC5DD200201753 /* btMatrix3x3.h in Headers */,
 				5F566CD5253FC80700670056 /* b3Int2.h in Headers */,
 				020C46A722DC5DCD00201753 /* btOptimizedBvh.h in Headers */,
@@ -14496,6 +14509,7 @@
 				020C44B922DC5DCC00201753 /* btPolyhedralContactClipping.h in Headers */,
 				5F566A8F253FC80500670056 /* btTriangleInfoMap.h in Headers */,
 				5F7D65D1215F407800803BCF /* SVRenderCmdGeo.h in Headers */,
+				0221A388254A6F2700BDD2F9 /* SVFaceTuneNode.h in Headers */,
 				5F7D6589215F407800803BCF /* SVCtxIOS.h in Headers */,
 				5F56693B253FC80400670056 /* btClipPolygon.h in Headers */,
 				5F566CF3253FC80700670056 /* b3Scalar.h in Headers */,
@@ -16280,6 +16294,7 @@
 				020C4BF022DC5DD100201753 /* b3FileUtils.h in Headers */,
 				020C472822DC5DCE00201753 /* btTriangleIndexVertexMaterialArray.h in Headers */,
 				020C495022DC5DCF00201753 /* btGearConstraint.h in Headers */,
+				0221A387254A6F2700BDD2F9 /* SVFaceTuneNode.h in Headers */,
 				5F566E9A253FC80800670056 /* diyfp.h in Headers */,
 				5F7D63DA215F407800803BCF /* itoa.h in Headers */,
 				5F7D6760215F407900803BCF /* SVCube.h in Headers */,
@@ -17878,6 +17893,7 @@
 				5F566326253FC80000670056 /* FIFOSampleBuffer.h in Headers */,
 				5F5668B4253FC80400670056 /* btConvexPlaneCollisionAlgorithm.h in Headers */,
 				5F566464253FC80100670056 /* lcode.h in Headers */,
+				0221A389254A6F2700BDD2F9 /* SVFaceTuneNode.h in Headers */,
 				020C439C22DC5DCC00201753 /* btBulletCollisionCommon.h in Headers */,
 				5F5666E8253FC80300670056 /* b3Generic6DofConstraint.h in Headers */,
 				5F0E632024F3B97B002620DC /* extension.h in Headers */,
@@ -18514,6 +18530,7 @@
 				5F566A09253FC80500670056 /* btCollisionShape.cpp in Sources */,
 				5F7D61D9215F407700803BCF /* SVParseSprite.cpp in Sources */,
 				5F7D668F215F407800803BCF /* SVMtlCore.cpp in Sources */,
+				0221A386254A6F2700BDD2F9 /* SVFaceTuneNode.cpp in Sources */,
 				020C455D22DC5DCD00201753 /* btSphereBoxCollisionAlgorithm.cpp in Sources */,
 				5F7D6001215F407700803BCF /* SVDetectBase.cpp in Sources */,
 				5F96BD7524F907C60020F7C4 /* lgc.c in Sources */,
@@ -19767,6 +19784,7 @@
 				5F0E63B224F3B97C002620DC /* Atlas.c in Sources */,
 				5C0C6068219BFF790052A826 /* BPMDetect.cpp in Sources */,
 				5F7D67D4215F407900803BCF /* SVParticlesWorld.cpp in Sources */,
+				0221A383254A6F2700BDD2F9 /* SVFaceTuneNode.cpp in Sources */,
 				5F566390253FC80000670056 /* SoundTouch.cpp in Sources */,
 				020C452E22DC5DCD00201753 /* btUnionFind.cpp in Sources */,
 				020C479022DC5DCE00201753 /* btUniformScalingShape.cpp in Sources */,
@@ -20578,6 +20596,7 @@
 				5F566A78253FC80500670056 /* btConvexPolyhedron.cpp in Sources */,
 				5F566860253FC80400670056 /* btSphereBoxCollisionAlgorithm.cpp in Sources */,
 				020C477622DC5DCE00201753 /* btConvexPolyhedron.cpp in Sources */,
+				0221A385254A6F2700BDD2F9 /* SVFaceTuneNode.cpp in Sources */,
 				020C454C22DC5DCD00201753 /* btSphereTriangleCollisionAlgorithm.cpp in Sources */,
 				0288FA0F217B04090089E61C /* SVParseBMFont.cpp in Sources */,
 				5F7D665E215F407800803BCF /* SVThreadPool.cpp in Sources */,
@@ -21389,6 +21408,7 @@
 				5F566A77253FC80500670056 /* btConvexPolyhedron.cpp in Sources */,
 				5F56685F253FC80400670056 /* btSphereBoxCollisionAlgorithm.cpp in Sources */,
 				020C477522DC5DCE00201753 /* btConvexPolyhedron.cpp in Sources */,
+				0221A384254A6F2700BDD2F9 /* SVFaceTuneNode.cpp in Sources */,
 				020C454B22DC5DCD00201753 /* btSphereTriangleCollisionAlgorithm.cpp in Sources */,
 				0288FA0E217B04090089E61C /* SVParseBMFont.cpp in Sources */,
 				5F7D665D215F407800803BCF /* SVThreadPool.cpp in Sources */,
