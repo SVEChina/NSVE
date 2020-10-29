@@ -64,7 +64,7 @@ void SVFilterBase::update(f32 _dt) {
     SVRTargetPtr t_target = mApp->getTargetMgr()->getTarget(m_target_quene);
     if(t_target && m_mtl) {
         m_mtl->update(_dt);
-        //产生pass 投递到不同的目标
+        //产生pass投递到不同的目标
         SVRCmdPassPtr t_pass = MakeSharedPtr<SVRCmdPass>();
         t_pass->setSwapTarget(m_target_swap);
         t_pass->setUseTarget(m_target_use);

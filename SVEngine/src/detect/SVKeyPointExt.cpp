@@ -648,7 +648,6 @@ void SVKeyPointExt::faceDataForFaceTune(SV_S_FACETUNE_RATIO &_attribute, f32 *fa
     }
     if (_attribute.eyes_down_ratio != 0) {
         //眼睑下至
-        //
         FVec2 t_pt_104(faceTunePts[2*104], faceTunePts[2*104+1]);
         FVec2 t_pt_57(faceTunePts[2*57], faceTunePts[2*57+1]);
         FVec2 t_vec_left_dir = (t_pt_57 - t_pt_104).normalize();
@@ -675,23 +674,23 @@ void SVKeyPointExt::faceDataForFaceTune(SV_S_FACETUNE_RATIO &_attribute, f32 *fa
     }
     if (_attribute.eyes_in_corner_ratio != 0) {
         FVec2 t_pt_55(faceTunePts[2*55], faceTunePts[2*55+1]);
-        FVec2 t_n_pt = t_pt_55 + horizontal_dir_right*t_noiseLen*_attribute.eyes_in_corner_ratio*0.8;
+        FVec2 t_n_pt = t_pt_55 + horizontal_dir_right*t_noiseLen*_attribute.eyes_in_corner_ratio*0.08;
         faceTunePts[2*55] = t_n_pt.x;
         faceTunePts[2*55+1] = t_n_pt.y;
         //
         FVec2 t_pt_58(faceTunePts[2*58], faceTunePts[2*58+1]);
-        t_n_pt = t_pt_58 + horizontal_dir_left*t_noiseLen*_attribute.eyes_in_corner_ratio*0.8;
+        t_n_pt = t_pt_58 + horizontal_dir_left*t_noiseLen*_attribute.eyes_in_corner_ratio*0.08;
         faceTunePts[2*58] = t_n_pt.x;
         faceTunePts[2*58+1] = t_n_pt.y;
     }
     if (_attribute.eyes_out_corner_ratio != 0) {
         FVec2 t_pt_52(faceTunePts[2*52], faceTunePts[2*52+1]);
-        FVec2 t_n_pt = t_pt_52 + horizontal_dir_left*t_noiseLen*_attribute.eyes_out_corner_ratio*0.8;
+        FVec2 t_n_pt = t_pt_52 + horizontal_dir_left*t_noiseLen*_attribute.eyes_out_corner_ratio*0.08;
         faceTunePts[2*52] = t_n_pt.x;
         faceTunePts[2*52+1] = t_n_pt.y;
         //
         FVec2 t_pt_61(faceTunePts[2*61], faceTunePts[2*61+1]);
-        t_n_pt = t_pt_61 + horizontal_dir_right*t_noiseLen*_attribute.eyes_out_corner_ratio*0.8;
+        t_n_pt = t_pt_61 + horizontal_dir_right*t_noiseLen*_attribute.eyes_out_corner_ratio*0.08;
         faceTunePts[2*61] = t_n_pt.x;
         faceTunePts[2*61+1] = t_n_pt.y;
     }

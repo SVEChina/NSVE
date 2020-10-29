@@ -31,12 +31,12 @@ namespace sv {
             void _clearPass();
             typedef SVArray<SVPassPtr> PASSPOOL;
             PASSPOOL m_passPool;
-//            SVRenderMeshDvidPtr m_pFaceMesh;
-//            SVRenderTexturePtr m_fbo;
+            SVRenderMeshPtr m_pFaceMesh;
+            SVMtlCorePtr m_maskMtl;
             SVDataSwapPtr m_pIndexs;
             SVDataSwapPtr m_pVerts;
             SVDataSwapPtr m_pT0;
-            SVMtlCorePtr m_maskMtl;
+            
             u32 m_meshsize;
             f32 m_tex0width;
             f32 m_tex0height;
