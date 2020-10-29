@@ -90,10 +90,7 @@ vec4 SRGBtoLINEAR(vec4 srgbIn){
 #endif //MANUAL_SRGB
 }
 
-// Find the normal for this fragment, pulling either from a predefined normal map
-// or from the interpolated mesh normal and tangent attributes.
 vec3 getNormal() {
-    // Retrieve the tangent space matrix
 #ifndef HAS_TANGENTS
     vec3 pos_dx = dFdx(v_Position);
     vec3 pos_dy = dFdy(v_Position);
@@ -214,15 +211,12 @@ void main() {
 #else
     vec4 baseColor = u_BaseColorFactor;
 #endif
-
     vec3 f0 = vec3(0.04);
     vec3 diffuseColor = baseColor.rgb * (vec3(1.0) - f0);
     diffuseColor *= 1.0 - metallic;
     vec3 specularColor = mix(f0, baseColor.rgb, metallic);
-
     // Compute reflectance.
     float reflectance = max(max(specularColor.r, specularColor.g), specularColor.b);
-
     // For typical incident reflectance range (between 4% to 100%) set the grazing reflectance to 100% for typical fresnel effect.
     // For very low reflectance range on highly diffuse objects (below 4%), incrementally reduce grazing reflecance to 0%.
     float reflectance90 = clamp(reflectance * 25.0, 0.0, 1.0);
