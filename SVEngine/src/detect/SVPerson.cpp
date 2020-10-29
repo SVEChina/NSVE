@@ -18,11 +18,11 @@ SVPerson::SVPerson(SVInstPtr _app)
     m_personID = 0;
     m_exist = false;
     m_detectType = DETECT_T_NULL;
-    m_face_attribute.mouth_noise_ratio = 0.00f;
+    m_face_attribute.mouth_noise_ratio = 1.00f;
     m_face_attribute.tip_thickness_ratio = 0.00f;
     m_face_attribute.eyes_down_ratio = 0.00f;
-    m_face_attribute.eyes_in_corner_ratio = 0.00f;
-    m_face_attribute.eyes_in_corner_ratio = 0.00f;
+    m_face_attribute.eyes_in_corner_ratio = 1.00f;
+    m_face_attribute.eyes_out_corner_ratio = 1.00f;
     m_pTracker = MakeSharedPtr<SVTrackerFace>(mApp);
     m_pFaceDataScreen= new f32[MAX_FACE_PT_NUM * 2];
     memset(m_pFaceDataScreen, 0, sizeof(f32) * 2 * MAX_FACE_PT_NUM);
@@ -144,7 +144,7 @@ f32 *SVPerson::getFaceData(s32 &_ptNum, SV_E_FACEDATA_TYPE _type) {
     }else if(_type == SV_E_FACEDATA_TUNE){
         s32 t_faceTunePtNum = 0;
         _transDataToFaceTune(m_pFaceDataScene, m_facePtNum, m_pFaceDataTune, t_faceTunePtNum);
-        _transDataToTune(m_pFaceDataTune, m_pFaceDataScene, m_pFaceDataExt, _ptNum);
+        _transDataToTune(m_pFaceDataScene, m_pFaceDataTune, m_pFaceDataExt, _ptNum);
         return m_pFaceDataExt;
     }
     return nullptr;

@@ -33,57 +33,6 @@ void SVOpDestroyEffect::_process(float dt) {
     }
 }
 
-
-SVOpDestroyDivision::SVOpDestroyDivision(SVInstPtr _app)
-:SVOpBase(_app) {
-    
-}
-
-void SVOpDestroyDivision::_process(float dt) {
-    SVString t_name = "sv_filter_division";
-    SVModuleBasePtr t_module = mApp->getModuleSys()->getModule(t_name.c_str());
-    if (t_module) {
-        mApp->getModuleSys()->unregist(t_name.c_str());
-        t_module->close();
-        t_module->destroy();
-    }
-    
-}
-
-SVOpDestroyMark::SVOpDestroyMark(SVInstPtr _app)
-:SVOpBase(_app) {
-    
-}
-
-void SVOpDestroyMark::_process(float dt) {
-    SVString t_name = "sv_mark_module";
-    SVModuleBasePtr t_module = mApp->getModuleSys()->getModule(t_name.c_str());
-    if (t_module) {
-        mApp->getModuleSys()->unregist(t_name.c_str());
-        t_module->close();
-        t_module->destroy();
-    }
-    
-}
-
-
-
-SVOpClosePen::SVOpClosePen(SVInstPtr _app)
-:SVOpBase(_app) {
-    
-}
-
-void SVOpClosePen::_process(float dt) {
-    SVString t_name = "sv_pen_module";
-    SVModuleBasePtr t_module = mApp->getModuleSys()->getModule(t_name.c_str());
-    if (t_module) {
-        mApp->getModuleSys()->unregist(t_name.c_str());
-        t_module->close();
-        t_module->destroy();
-    }
-    
-}
-
 SVOpDestroyGameZCMgr::SVOpDestroyGameZCMgr(SVInstPtr _app)
 :SVOpBase(_app) {
     

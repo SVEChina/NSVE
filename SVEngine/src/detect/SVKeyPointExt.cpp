@@ -615,11 +615,11 @@ void SVKeyPointExt::faceDataForFaceTune(SV_S_FACETUNE_RATIO &_attribute, f32 *fa
             FVec2 t_pt(faceTunePts[2*t_index], faceTunePts[2*t_index+1]);
             f32 t_ratio = 1.0;
             if (t_index == 84 || t_index == 90) {
-                t_ratio = t_noiseLen*_attribute.mouth_noise_ratio*0.3;
+                t_ratio = t_noiseLen*_attribute.mouth_noise_ratio*0.03;
             }else if (t_index == 85 || t_index == 89){
-                t_ratio = t_noiseLen*_attribute.mouth_noise_ratio*0.4;
+                t_ratio = t_noiseLen*_attribute.mouth_noise_ratio*0.04;
             }else{
-                t_ratio = t_noiseLen*_attribute.mouth_noise_ratio*0.9;
+                t_ratio = t_noiseLen*_attribute.mouth_noise_ratio*0.09;
             }
             FVec2 t_n_pt = t_pt + vertical_dir_up*t_ratio;
             faceTunePts[2*t_index] = t_n_pt.x;
@@ -632,7 +632,7 @@ void SVKeyPointExt::faceDataForFaceTune(SV_S_FACETUNE_RATIO &_attribute, f32 *fa
         for (s32 i = 0; i<5; i++) {
             s32 t_index = t_toptip1_ptsIndex[i];
             FVec2 t_pt(faceTunePts[2*t_index], faceTunePts[2*t_index+1]);
-            FVec2 t_n_pt = t_pt + vertical_dir_down*t_noiseLen*_attribute.tip_thickness_ratio;
+            FVec2 t_n_pt = t_pt + vertical_dir_down*t_noiseLen*_attribute.tip_thickness_ratio*0.15;
             faceTunePts[2*t_index] = t_n_pt.x;
             faceTunePts[2*t_index+1] = t_n_pt.y;
         }
@@ -641,7 +641,7 @@ void SVKeyPointExt::faceDataForFaceTune(SV_S_FACETUNE_RATIO &_attribute, f32 *fa
         for (s32 i = 0; i<5; i++) {
             s32 t_index = t_toptip2_ptsIndex[i];
             FVec2 t_pt(faceTunePts[2*t_index], faceTunePts[2*t_index+1]);
-            FVec2 t_n_pt = t_pt + vertical_dir_up*t_noiseLen*_attribute.tip_thickness_ratio;
+            FVec2 t_n_pt = t_pt + vertical_dir_up*t_noiseLen*_attribute.tip_thickness_ratio*0.15;
             faceTunePts[2*t_index] = t_n_pt.x;
             faceTunePts[2*t_index+1] = t_n_pt.y;
         }
@@ -652,46 +652,46 @@ void SVKeyPointExt::faceDataForFaceTune(SV_S_FACETUNE_RATIO &_attribute, f32 *fa
         FVec2 t_pt_104(faceTunePts[2*104], faceTunePts[2*104+1]);
         FVec2 t_pt_57(faceTunePts[2*57], faceTunePts[2*57+1]);
         FVec2 t_vec_left_dir = (t_pt_57 - t_pt_104).normalize();
-        FVec2 t_n_pt = t_pt_57 + t_vec_left_dir*t_noiseLen*_attribute.eyes_down_ratio*1.2;
+        FVec2 t_n_pt = t_pt_57 + t_vec_left_dir*t_noiseLen*_attribute.eyes_down_ratio*0.96;
         faceTunePts[2*57] = t_n_pt.x;
         faceTunePts[2*57+1] = t_n_pt.y;
         FVec2 t_pt_73(faceTunePts[2*73], faceTunePts[2*73+1]);
         FVec2 t_vec_left_dir1 = (t_pt_73 - t_pt_104).normalize();
-        t_n_pt = t_pt_73 + t_vec_left_dir1*t_noiseLen*_attribute.eyes_down_ratio*0.5;
+        t_n_pt = t_pt_73 + t_vec_left_dir1*t_noiseLen*_attribute.eyes_down_ratio*0.4;
         faceTunePts[2*73] = t_n_pt.x;
         faceTunePts[2*73+1] = t_n_pt.y;
         //
         FVec2 t_pt_105(faceTunePts[2*105], faceTunePts[2*105+1]);
         FVec2 t_pt_62(faceTunePts[2*62], faceTunePts[2*62+1]);
         FVec2 t_vec_right_dir = (t_pt_62 - t_pt_105).normalize();
-        t_n_pt = t_pt_62 + t_vec_right_dir*t_noiseLen*_attribute.eyes_down_ratio*1.2;
+        t_n_pt = t_pt_62 + t_vec_right_dir*t_noiseLen*_attribute.eyes_down_ratio*0.96;
         faceTunePts[2*62] = t_n_pt.x;
         faceTunePts[2*62+1] = t_n_pt.y;
         FVec2 t_pt_76(faceTunePts[2*76], faceTunePts[2*76+1]);
         FVec2 t_vec_right_dir1 = (t_pt_76 - t_pt_105).normalize();
-        t_n_pt = t_pt_76 + t_vec_right_dir1*t_noiseLen*_attribute.eyes_down_ratio*0.5;
+        t_n_pt = t_pt_76 + t_vec_right_dir1*t_noiseLen*_attribute.eyes_down_ratio*0.4;
         faceTunePts[2*76] = t_n_pt.x;
         faceTunePts[2*76+1] = t_n_pt.y;
     }
     if (_attribute.eyes_in_corner_ratio != 0) {
         FVec2 t_pt_55(faceTunePts[2*55], faceTunePts[2*55+1]);
-        FVec2 t_n_pt = t_pt_55 + horizontal_dir_right*t_noiseLen*_attribute.eyes_in_corner_ratio;
+        FVec2 t_n_pt = t_pt_55 + horizontal_dir_right*t_noiseLen*_attribute.eyes_in_corner_ratio*0.8;
         faceTunePts[2*55] = t_n_pt.x;
         faceTunePts[2*55+1] = t_n_pt.y;
         //
         FVec2 t_pt_58(faceTunePts[2*58], faceTunePts[2*58+1]);
-        t_n_pt = t_pt_58 + horizontal_dir_left*t_noiseLen*_attribute.eyes_in_corner_ratio;
+        t_n_pt = t_pt_58 + horizontal_dir_left*t_noiseLen*_attribute.eyes_in_corner_ratio*0.8;
         faceTunePts[2*58] = t_n_pt.x;
         faceTunePts[2*58+1] = t_n_pt.y;
     }
     if (_attribute.eyes_out_corner_ratio != 0) {
         FVec2 t_pt_52(faceTunePts[2*52], faceTunePts[2*52+1]);
-        FVec2 t_n_pt = t_pt_52 + horizontal_dir_left*t_noiseLen*_attribute.eyes_out_corner_ratio;
+        FVec2 t_n_pt = t_pt_52 + horizontal_dir_left*t_noiseLen*_attribute.eyes_out_corner_ratio*0.8;
         faceTunePts[2*52] = t_n_pt.x;
         faceTunePts[2*52+1] = t_n_pt.y;
         //
         FVec2 t_pt_61(faceTunePts[2*61], faceTunePts[2*61+1]);
-        t_n_pt = t_pt_61 + horizontal_dir_right*t_noiseLen*_attribute.eyes_out_corner_ratio;
+        t_n_pt = t_pt_61 + horizontal_dir_right*t_noiseLen*_attribute.eyes_out_corner_ratio*0.8;
         faceTunePts[2*61] = t_n_pt.x;
         faceTunePts[2*61+1] = t_n_pt.y;
     }
