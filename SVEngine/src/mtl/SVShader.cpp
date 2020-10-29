@@ -155,8 +155,10 @@ bool SVShader::toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator,
 
 bool SVShader::fromJSON(RAPIDJSON_NAMESPACE::Value &item,cptr8 _language) {
     assert(item.IsObject());
+    if( strcmp(_language,"") == 0 ) {
+        return false;
+    }
     //language = 1
-    //
     if( strcmp(_language, "gl") == 0 ) {
         //shader函数入口还有各个文件名称
         if (item.HasMember("vs") && item["vs"].IsString() ) {

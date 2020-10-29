@@ -217,6 +217,7 @@ void SVMtlCore::reloadShader(){
         m_shader_obj = mApp->getShaderMgr()->getShader(m_shader_name.c_str(),t_code);
         if(!m_shader_obj) {
             //需要加载新的shader
+            mApp->getShaderMgr()->loadSDSP(m_shader_name.c_str(),m_shader_defs);
         }
     }
 }
