@@ -88,8 +88,6 @@ namespace sv {
         //绑定脚本
         SVString m_script;
         //
-        s32 m_ssdef;
-        //MTLFLAG0;
         s32 m_LogicMtlFlag0;
         //融合参数
         s32 m_blend_enable;
@@ -132,7 +130,9 @@ namespace sv {
         //纹理参数
         TexUnit m_vs_texUnit[MAX_TEXUNIT];
         TexUnit m_fs_texUnit[MAX_TEXUNIT];
-        //
+        //shader宏
+        std::vector<SVString> m_shader_defs;
+        //shader对象
         SVShaderPtr m_shader_obj;
         
     public:
