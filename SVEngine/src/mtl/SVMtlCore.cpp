@@ -64,21 +64,21 @@ SVMtlCore::SVMtlCore(SVInstPtr _app)
 SVMtlCore::SVMtlCore(SVInstPtr _app, cptr8 _shader)
 :SVGBaseEx(_app)
 ,m_shader_name(_shader){
-    m_ssdef = 0;
     m_shader_obj = nullptr;
+    m_shader_defs.clear();
     reset();
 }
 
 SVMtlCore::SVMtlCore(SVInstPtr _app, SVShaderPtr _shader)
 :SVGBaseEx(_app)
 ,m_shader_obj(_shader){
-    m_ssdef = 0;
+    m_shader_defs.clear();
     reset();
 }
 
 SVMtlCore::SVMtlCore(SVMtlCore* _mtl)
 :SVGBaseEx(_mtl->mApp){
-    m_ssdef = 0;
+    m_shader_defs.clear();
     reset();
 }
 
@@ -213,7 +213,11 @@ void SVMtlCore::reloadShader(){
     if(m_shader_obj)
         return ;
     if( mApp->getShaderMgr() ) {
-        m_shader_obj = mApp->getShaderMgr()->getShader(m_shader_name.c_str(),m_ssdef);
+        s32 t_code =  mApp->getShaderMgr()->getDefCode(m_shader_defs);
+        m_shader_obj = mApp->getShaderMgr()->getShader(m_shader_name.c_str(),t_code);
+        if(!m_shader_obj) {
+            //需要加载新的shader
+        }
     }
 }
 
@@ -309,23 +313,22 @@ void SVMtlCore::fromJSON1(RAPIDJSON_NAMESPACE::Value& _item){
     if (_item.HasMember("shader") && _item["shader"].IsString()) {
         RAPIDJSON_NAMESPACE::Value &t_value = _item["shader"];
         m_shader_name = t_value.GetString();
+        s32 t_pos = m_shader_name.rfind('.');
+        if(t_pos>0) {
+            m_shader_name = SVString::substr(m_shader_name.c_str(), 0, t_pos);
+        }
     }else{
         return ;
     }
-    m_ssdef = 0;
+    //ssdef参数
     if (_item.HasMember("ssdef") && _item["ssdef"].IsArray()) {
         RAPIDJSON_NAMESPACE::Document::Array t_array = _item["ssdef"].GetArray();
         for(s32 i=0;i<t_array.Size();i++) {
             //拼接shader宏
             SVString t_def_str = t_array[i].GetString();
-            s32 t_def_value = mApp->getShaderMgr()->getDefValue(t_def_str.c_str());
-            if(t_def_value>0) {
-                m_ssdef |= t_def_value;
-            }
+            m_shader_defs.push_back(t_def_str);
         }
     }
-    //m_ssdef = 0;
-    //"ssdef" :[]
     //texture参数
     if (_item.HasMember("textures") && _item["textures"].IsArray()) {
         RAPIDJSON_NAMESPACE::Document::Array t_texs = _item["textures"].GetArray();

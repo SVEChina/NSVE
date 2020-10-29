@@ -120,18 +120,19 @@ void SVShaderMgr::loadSDSP(cptr8 _sdsp,cptr8 _language) {
     if(t_pos>0) {
         t_s_name = SVString::substr(t_s_name.c_str(), 0, t_pos);
     }
-    t_pos = t_s_name.rfind('\\');
-    if(t_pos>0) {
-       t_s_name = SVString::substr(t_s_name.c_str(), t_pos+1);
-    }
-    t_pos = t_s_name.rfind('/');
-    if(t_pos>0) {
-       t_s_name = SVString::substr(t_s_name.c_str(), t_pos+1);
-    }
+//    t_pos = t_s_name.rfind('\\');
+//    if(t_pos>0) {
+//       t_s_name = SVString::substr(t_s_name.c_str(), t_pos+1);
+//    }
+//    t_pos = t_s_name.rfind('/');
+//    if(t_pos>0) {
+//       t_s_name = SVString::substr(t_s_name.c_str(), t_pos+1);
+//    }
     //解析
     SVShaderPtr t_shader = MakeSharedPtr<SVShader>(mApp);
     if( t_shader->fromJSON( doc ,_language) ) {
-        SVString t_ext = SVString::format("_%d",t_shader->getShaderDsp()->m_pbr_def);
+        s32 t_code = t_shader->getShaderDsp()->getDefCode();
+        SVString t_ext = SVString::format("_%d",t_code);
         t_s_name += t_ext;
     }
     //防止重名的shader
@@ -155,10 +156,21 @@ s32 SVShaderMgr::getDefValue(cptr8 _defname) {
     return 0;
 }
 
-SVShaderPtr SVShaderMgr::getShader(cptr8 _name,s32 _pbrdef) {
+s32 SVShaderMgr::getDefCode(std::vector<SVString>& _defs) {
+    if(_defs.size() == 0) {
+        return 0;
+    }
+    s32 t_ret = 0;
+    for(s32 i=0;i<_defs.size();i++) {
+        s32 t_value = getDefValue( _defs[i].c_str() );
+        t_ret |= t_value;
+    }
+    return t_ret;
+}
+
+SVShaderPtr SVShaderMgr::getShader(cptr8 _name,s32 _sdef) {
     SVString t_name = _name;
-    SVString t_ext = SVString::format("_%d",_pbrdef);
-    t_name += t_ext;
+    t_name = SVString::format("%s_%d",t_name.c_str(),_sdef);
     SHADERPOOL::iterator it = m_shaderMap.find(t_name.c_str());
     if(it!=m_shaderMap.end()) {
         return it->second;

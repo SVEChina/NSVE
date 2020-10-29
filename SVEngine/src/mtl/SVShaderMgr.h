@@ -30,11 +30,13 @@ namespace sv {
         
         void loadDefault();
 
-        SVShaderPtr getShader(cptr8 _name,s32 _pbrdef = 0);
+        SVShaderPtr getShader(cptr8 _name,s32 _sdef = 0);
         
         void loadSDSP(cptr8 _sdsp,cptr8 _language);
         
         s32 getDefValue(cptr8 _defname);
+        
+        s32 getDefCode(std::vector<SVString>& _defs);
         
     private:
         void _loadShaderDef();

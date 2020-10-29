@@ -47,57 +47,44 @@ void SVRShaderGL::load(SVRendererPtr _renderer,ShaderDsp* _shader_dsp) {
         return ;
     }
     if( m_shader_dsp->m_dsp & SV_E_TECH_VS ) {
-         m_vs = _loadShader(mApp,
-                            _renderer,
+         m_vs = _loadShader(_renderer,
+                            m_shader_dsp,
                             m_shader_dsp->m_vs_fname.c_str(),
-                            m_shader_dsp->m_pbr_def,
                             SV_E_TECH_VS);
     }
     if( m_shader_dsp->m_dsp & SV_E_TECH_FS ) {
-        m_fs = _loadShader(mApp,
-                           _renderer,
+        m_fs = _loadShader(_renderer,
+                           m_shader_dsp,
                            m_shader_dsp->m_fs_fname.c_str(),
-                           m_shader_dsp->m_pbr_def,
                            SV_E_TECH_FS);
     }
     if( m_shader_dsp->m_dsp & SV_E_TECH_GS ) {
-       m_gs = _loadShader(mApp,
-                          _renderer,
+       m_gs = _loadShader(_renderer,
+                          m_shader_dsp,
                           m_shader_dsp->m_gs_fname.c_str(),
-                          m_shader_dsp->m_pbr_def,
                           SV_E_TECH_GS);
     }
     if( m_shader_dsp->m_dsp & SV_E_TECH_TSE ) {
-        m_tsc = _loadShader(mApp,
-                            _renderer,
+        m_tsc = _loadShader(_renderer,
+                            m_shader_dsp,
                             m_shader_dsp->m_tse_fname.c_str(),
-                            m_shader_dsp->m_pbr_def,
                             SV_E_TECH_TSE);
     }
     if( m_shader_dsp->m_dsp & SV_E_TECH_TSD ) {
-        m_tse = _loadShader(mApp,
-                            _renderer,
+        m_tse = _loadShader(_renderer,
+                            m_shader_dsp,
                             m_shader_dsp->m_tsd_fname.c_str(),
-                            m_shader_dsp->m_pbr_def,
                             SV_E_TECH_TSD);
     }
     m_programm = _createProgram();
-    //创建采样器
-    //生成uniform-buf
-//    for(s32 i=0;i<m_shader_dsp->m_paramtbl.size();i++) {
-//        //合并参数表
-//        SVParamTblPtr t_p_tbl = m_shader_dsp->m_paramtbl[i].m_tbl;
-//    }
-    //生产program后就删除shader资源
     _clearShaderRes();
 }
 
 //在加载shader的时候 可以补充宏定义
 
-u32 SVRShaderGL::_loadShader(SVInstPtr _app,
-                             SVRendererPtr _renderer,
+u32 SVRShaderGL::_loadShader(SVRendererPtr _renderer,
+                             ShaderDsp* _shader_dsp,
                              cptr8 _filename,
-                             s32 _pbrdef,
                              s32 _shaderType){
     SVRendererGLPtr t_renderGL = std::dynamic_pointer_cast<SVRendererGL>(_renderer);
     if(!t_renderGL) {
@@ -118,7 +105,7 @@ u32 SVRShaderGL::_loadShader(SVInstPtr _app,
     u32 t_id = 0;
     bool t_flag=false;
     if(!t_id){
-        t_flag = _app->m_file_sys->loadFileContentStr(&tDataStream, _fname.c_str());
+        t_flag = mApp->m_file_sys->loadFileContentStr(&tDataStream, _fname.c_str());
     }else{
         return t_id;
     }
@@ -150,45 +137,12 @@ u32 SVRShaderGL::_loadShader(SVInstPtr _app,
     SVDataChunk tNewStream;
     //push head
     tNewStream.push( (void*)(version_str.c_str()), version_str.size());
-    //
-    SVString _def_str = "";
-    if( _pbrdef & E_HAS_NORMALS ) {
-        _def_str = "#define HAS_NORMALS \n";
-        tNewStream.push( (void*)(_def_str.c_str()), _def_str.size());
+    //push def
+    for(s32 i=0;i<_shader_dsp->m_defs.size();i++) {
+        SVString t_def_str = SVString::format("#define %s \n", _shader_dsp->m_defs[i].c_str());
+        tNewStream.push( (void*)(t_def_str.c_str()), t_def_str.size());
     }
-    if( _pbrdef & E_HAS_TANGENTS ) {
-        _def_str = "#define HAS_TANGENTS \n";
-        tNewStream.push( (void*)(_def_str.c_str()), _def_str.size());
-    }
-    if( _pbrdef & E_HAS_UV ) {
-        _def_str = "#define HAS_UV \n";
-        tNewStream.push( (void*)(_def_str.c_str()), _def_str.size());
-    }
-    if( _pbrdef & E_USE_IBL ) {
-        _def_str = "#define USE_IBL \n";
-        tNewStream.push( (void*)(_def_str.c_str()), _def_str.size());
-    }
-    if( _pbrdef & E_HAS_BASECOLORMAP ) {
-        _def_str = "#define HAS_BASECOLORMAP \n";
-        tNewStream.push( (void*)(_def_str.c_str()), _def_str.size());
-    }
-    if( _pbrdef & E_HAS_NORMALMAP ) {
-        _def_str = "#define HAS_NORMALMAP \n";
-        tNewStream.push( (void*)(_def_str.c_str()), _def_str.size());
-    }
-    if( _pbrdef & E_HAS_EMISSIVEMAP ) {
-        _def_str = "#define HAS_EMISSIVEMAP \n";
-        tNewStream.push( (void*)(_def_str.c_str()), _def_str.size());
-    }
-    if( _pbrdef & E_HAS_METALROUGHNESSMAP ) {
-        _def_str = "#define HAS_METALROUGHNESSMAP \n";
-        tNewStream.push( (void*)(_def_str.c_str()), _def_str.size());
-    }
-    if( _pbrdef & E_HAS_OCCLUSIONMAP ) {
-        _def_str = "#define HAS_OCCLUSIONMAP \n";
-        tNewStream.push( (void*)(_def_str.c_str()), _def_str.size());
-    }
-    //推送源码
+    //push code
     tNewStream.push( (void*)t_shader_res, (s32)(tDataStream.getRealSize()) );
     t_shader_res = tNewStream.getPointerChar();
     //自动补充精度

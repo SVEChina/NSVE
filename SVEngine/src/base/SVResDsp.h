@@ -322,7 +322,6 @@ struct ParamTblDsp {
 struct ShaderDsp {
     ShaderDsp() {
         m_dsp = 0;
-        m_pbr_def = 0;
         m_programme_fname = "null";
         m_vs_fname = "null";
         m_fs_fname = "null";
@@ -333,9 +332,14 @@ struct ShaderDsp {
         m_pass = "null";
         m_vft.clear();
     };
+    s32 getDefCode() {
+        if(m_defs.size() == 0) {
+            return 0;
+        }
+        return 0;
+    };
     //
     s32 m_dsp;
-    s32 m_pbr_def;
     //顶点描述
     std::vector<s32> m_vft;
     SVString m_programme_fname;
@@ -345,12 +349,12 @@ struct ShaderDsp {
     SVString m_cs_fname;
     SVString m_tsd_fname;
     SVString m_tse_fname;
+    //宏定义
+    std::vector<SVString> m_defs;
     //使用的pass
     SVString m_pass;
-    
     //采样器
     std::vector<SamplerDsp> m_samplers;
-    
     //参数表
     std::vector<ParamTblDsp> m_paramtbl;
 };
