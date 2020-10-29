@@ -22,32 +22,6 @@ namespace sv {
     };
 
     //
-    class SVOpDestroyDivision : public SVOpBase {
-    public:
-        SVOpDestroyDivision(SVInstPtr _app);
-        
-    protected:
-        void _process(f32 dt);
-    };
-    
-    //
-    class SVOpDestroyMark : public SVOpBase {
-    public:
-        SVOpDestroyMark(SVInstPtr _app);
-        
-    protected:
-        void _process(f32 dt);
-    };
-    //
-    class SVOpClosePen : public SVOpBase {
-    public:
-        SVOpClosePen(SVInstPtr _app);
-        
-    protected:
-        void _process(f32 dt);
-    };
-
-    //
     class SVOpDestroyGameZCMgr : public SVOpBase {
     public:
         SVOpDestroyGameZCMgr(SVInstPtr _app);

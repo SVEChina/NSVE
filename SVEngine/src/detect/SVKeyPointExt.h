@@ -22,6 +22,16 @@ namespace sv {
             
             static void faceDataForWhole(f32 *faceLandMark, f32 *facePts, s32 &facePtsCount);
             
+            struct SV_S_FACETUNE_RATIO{
+                f32 mouth_noise_ratio;//嘴到人中比例
+                f32 tip_thickness_ratio;//嘴唇厚度
+                f32 eyes_down_ratio;//眼睑下至
+                f32 eyes_in_corner_ratio;//内眼角
+                f32 eyes_out_corner_ratio;//外眼角
+            };
+            
+            static void faceDataForFaceTune(SV_S_FACETUNE_RATIO &_attribute, f32 *faceLandMark, s32 keyPtNum, f32 *faceTunePts, s32 &facePtsCount);
+            
             static void faceDataForTune(f32 *faceLandMarkTune, f32 *faceLandMark, f32 *facePts, s32 &facePtsCount);
         protected:
             static void _generateDirPt(V2 &_ptO, V2 &_ptT, V2 &_tar, f32 _len);

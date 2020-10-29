@@ -132,7 +132,6 @@ namespace sv {
     DECLARE_SHAREPTR(SVOpTexAttachment);
     
     DECLARE_SHAREPTR(SVOpDestroyEffect);
-    DECLARE_SHAREPTR(SVOpDestroyDivision);
     
     DECLARE_SHAREPTR(SVOpResizeRenderder);
     DECLARE_SHAREPTR(SVOpSetRenderTarget);
@@ -188,8 +187,6 @@ namespace sv {
     DECLARE_SHAREPTR(SVFontProcess);
 
     //功能部分
-    DECLARE_SHAREPTR(SVAni2DBase);
-    DECLARE_SHAREPTR(SVAni2DStickersMgr);
     DECLARE_SHAREPTR(SVStreamIn);
     DECLARE_SHAREPTR(SVStreamOut);
     //parse部分
@@ -218,10 +215,6 @@ namespace sv {
     DECLARE_SHAREPTR(SVFilterBlur);
     DECLARE_SHAREPTR(SVRGBToneCurveFilter);
     DECLARE_SHAREPTR(SVFilterPicmodify);
-    DECLARE_SHAREPTR(SVAni2DStickersMgr);
-    DECLARE_SHAREPTR(SVAni2DBase);
-    DECLARE_SHAREPTR(SVAni2DScreen);
-    DECLARE_SHAREPTR(SVADFilterBase);
 
     //物理部分
     DECLARE_SHAREPTR(SVPhysicsWorldBase);

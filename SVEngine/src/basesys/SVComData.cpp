@@ -105,6 +105,11 @@ SVRenderMeshPtr SVComData::createFaceMeshSt(SVInstPtr _app, SV_E_FACEMESH_TYPE _
                              "mesh_eyebrow.json",
                              "texcoord_eyebrow.json",
                              2);
+    }else if(_meshType == SV_E_FACEMESH_TUNE){
+        return _loadFaceMesh(_app,
+                             "mesh_face_tune.json",
+                             "texcoord_face_tune.json",
+                             2);
     }
     return nullptr;
 }

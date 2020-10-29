@@ -25,7 +25,8 @@ namespace sv {
         SV_E_FACEMESH_HEAD,//带额头的人脸mesh
         SV_E_FACEMESH_WHOLE,//带额头补过嘴的人脸mesh
         SV_E_FACEMESH_EYE,//眼睛部位的mesh
-        SV_E_FACEMESH_BROW//眉毛部位的mesh
+        SV_E_FACEMESH_BROW,//眉毛部位的mesh
+        SV_E_FACEMESH_TUNE//面部微整形的mesh
     };
 
     class SVComData: public SVEventProc {

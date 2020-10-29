@@ -40,7 +40,6 @@ namespace sv {
     DECLARE_SHAREPTR(SVMtlRGB2YUV);
     DECLARE_SHAREPTR(SVMtl3D);
     DECLARE_SHAREPTR(SVMtlBillboard);
-    DECLARE_SHAREPTR(SVMtlPenStrokeGlow);
     DECLARE_SHAREPTR(SVMtlShadowMapping);
 
     //美颜
@@ -57,10 +56,6 @@ namespace sv {
     //滤镜
     DECLARE_SHAREPTR(SVMtlBasedOn);
     DECLARE_SHAREPTR(SVMtlAcutance);
-    DECLARE_SHAREPTR(SVMtlGlitch);
-    DECLARE_SHAREPTR(SVMtlDark);
-    DECLARE_SHAREPTR(SVMtlADFilterBase);
-
     //texture
     DECLARE_SHAREPTR(SVTexture);
     DECLARE_SHAREPTR(SVTexturePList);
