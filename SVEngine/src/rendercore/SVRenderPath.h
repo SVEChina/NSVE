@@ -36,12 +36,17 @@ namespace sv {
         
         void closePreZ();
         
-        bool m_prez;
+        void openShadow();
+        
+        void closeShadow();
         
     public:
+        bool m_prez;
         
-        //
+        bool m_has_shadow;
+        
         SVRTargetPtr m_target_preZ;
+        SVRTargetPtr m_target_shadow;
         //处理消息
         static void procSysEvent(SVObjectPtr _caller,SVEventPtr _event);
     };

@@ -19,10 +19,13 @@ using namespace sv;
 SVRenderPath::SVRenderPath(SVInstPtr _app)
 :SVSysBase(_app){
     m_prez = false;
+    m_has_shadow = false;
     m_target_preZ = nullptr;
 }
 
 SVRenderPath::~SVRenderPath(){
+    m_prez = false;
+    m_has_shadow = false;
     m_target_preZ = nullptr;
 }
 
@@ -30,7 +33,7 @@ void SVRenderPath::openPreZ() {
     if(!m_prez) {
         m_prez = true;
         //创建Z-target
-        m_target_preZ = mApp->getTargetMgr()->createTarget(E_TEX_DEPTH,true,true);
+        m_target_preZ = mApp->getTargetMgr()->createTarget(E_TEX_DEPTH,false,false);
         if(m_target_preZ) {
             m_target_preZ->pushStreamQuene(E_RSM_SOLID);
             m_target_preZ->setClearColor(1.0f, 1.0f, 1.0f, 1.0f);
@@ -44,6 +47,27 @@ void SVRenderPath::closePreZ() {
         m_prez = false;
         mApp->getRenderMgr()->removeRTarget(m_target_preZ);
         m_target_preZ = nullptr;
+    }
+}
+
+void SVRenderPath::openShadow() {
+    if(!m_has_shadow) {
+        m_has_shadow = true;
+        //创建Z-target
+        m_target_shadow = mApp->getTargetMgr()->createTarget(E_TEX_DEPTH,false,false);
+        if(m_target_shadow) {
+            m_target_shadow->pushStreamQuene(E_RSM_SOLID);
+            m_target_shadow->setClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+            mApp->getRenderMgr()->addRTarget(m_target_shadow,true);
+        }
+    }
+}
+
+void SVRenderPath::closeShadow() {
+    if(m_has_shadow) {
+        m_has_shadow = false;
+        mApp->getRenderMgr()->removeRTarget(m_target_shadow);
+        m_target_shadow = nullptr;
     }
 }
 
