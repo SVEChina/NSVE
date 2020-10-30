@@ -1,5 +1,8 @@
 {
     "version" : "1.0",
     "name" : "pbr",
-    "shader" : "shader/dsp/pbr.dsp"
+    "shader" : "shader/dsp/pbr.dsp",
+    "blend-param" : {
+        "enable" : 1
+    }
 }

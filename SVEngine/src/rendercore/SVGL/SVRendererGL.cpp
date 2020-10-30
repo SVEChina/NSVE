@@ -204,6 +204,7 @@ bool SVRendererGL::processMtl(SVMtlCorePtr _mtl,SVSurfacePtr _surface) {
             //blend
             if( _mtl->m_blend_enable ) {
                 glEnable(GL_BLEND);
+                glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
             }else{
                 glDisable(GL_BLEND);
             }

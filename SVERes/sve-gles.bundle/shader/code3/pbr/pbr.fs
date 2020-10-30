@@ -49,11 +49,11 @@ in vec3 v_Position;
 in vec2 v_UV;
 
 #ifdef HAS_NORMALS
-#ifdef HAS_TANGENTS
-in mat3 v_TBN;
-#else
-in vec3 v_Normal;
-#endif
+    #ifdef HAS_TANGENTS
+        in mat3 v_TBN;
+    #else
+        in vec3 v_Normal;
+    #endif
 #endif
 
 out vec4 color0;
@@ -98,12 +98,11 @@ vec3 getNormal() {
     vec3 tex_dy = dFdy(vec3(v_UV, 0.0));
     vec3 t = (tex_dy.t * pos_dx - tex_dx.t * pos_dy) / (tex_dx.s * tex_dy.t - tex_dy.s * tex_dx.t);
 
-#ifdef HAS_NORMALS
+    #ifdef HAS_NORMALS
     vec3 ng = normalize(v_Normal);
-#else
+    #else
     vec3 ng = cross(pos_dx, pos_dy);
-#endif
-
+    #endif
     t = normalize(t - ng * dot(ng, t));
     vec3 b = normalize(cross(ng, t));
     mat3 tbn = mat3(t, b, ng);
@@ -118,13 +117,13 @@ vec3 getNormal() {
     // The tbn matrix is linearly interpolated, so we need to re-normalize
     vec3 n = normalize(tbn[2].xyz);
 #endif
-
     return n;
 }
 
 // Calculation of the lighting contribution from an optional Image Based Light source.
 // Precomputed Environment Maps are required uniform inputs and are computed as outlined in [1].
 // See our README.md on Environment Maps [3] for additional discussion.
+
 #ifdef USE_IBL
 vec3 getIBLContribution(PBRInfo pbrInputs, vec3 n, vec3 reflection) {
     float mipCount = 9.0; // resolution of 512x512
@@ -171,7 +170,6 @@ float geometricOcclusion(PBRInfo pbrInputs) {
     float NdotL = pbrInputs.NdotL;
     float NdotV = pbrInputs.NdotV;
     float r = pbrInputs.alphaRoughness;
-
     float attenuationL = 2.0 * NdotL / (NdotL + sqrt(r * r + (1.0 - r * r) * (NdotL * NdotL)));
     float attenuationV = 2.0 * NdotV / (NdotV + sqrt(r * r + (1.0 - r * r) * (NdotV * NdotV)));
     return attenuationL * attenuationV;
@@ -207,7 +205,7 @@ void main() {
 
     // The albedo may be defined from a base texture or a flat color
 #ifdef HAS_BASECOLORMAP
-    vec4 baseColor = SRGBtoLINEAR(texture(u_BaseColorSampler, v_UV)) * u_BaseColorFactor;
+    vec4 baseColor = SRGBtoLINEAR( texture(u_BaseColorSampler, v_UV) ) * u_BaseColorFactor;
 #else
     vec4 baseColor = u_BaseColorFactor;
 #endif
@@ -222,7 +220,6 @@ void main() {
     float reflectance90 = clamp(reflectance * 25.0, 0.0, 1.0);
     vec3 specularEnvironmentR0 = specularColor.rgb;
     vec3 specularEnvironmentR90 = vec3(1.0, 1.0, 1.0) * reflectance90;
-
     vec3 n = getNormal();                             // normal at surface point
     vec3 v = normalize(u_Camera - v_Position);        // Vector from surface point to camera
     vec3 l = normalize(u_LightDirection);             // Vector from surface point to light
@@ -256,34 +253,35 @@ void main() {
     float D = microfacetDistribution(pbrInputs);
 
     // Calculation of analytical lighting contribution
+    //漫反射贡献
     vec3 diffuseContrib = (1.0 - F) * diffuse(pbrInputs);
+    //镜面光贡献
     vec3 specContrib = F * G * D / (4.0 * NdotL * NdotV);
     // Obtain final intensity as reflectance (BRDF) scaled by the energy of the light (cosine law)
+    //
     vec3 color = NdotL * u_LightColor * (diffuseContrib + specContrib);
-
-    // Calculate lighting contribution from image based lighting source (IBL)
 #ifdef USE_IBL
+    //IBL贡献
     color += getIBLContribution(pbrInputs, n, reflection);
 #endif
-
-    // Apply optional PBR terms for additional (optional) shading
+    
 #ifdef HAS_OCCLUSIONMAP
+    //AO贡献 // Apply optional PBR terms for additional (optional) shading
     float ao = texture(u_OcclusionSampler, v_UV).r;
     color = mix(color, color * ao, u_OcclusionStrength);
 #endif
 
 #ifdef HAS_EMISSIVEMAP
+    //自发光贡献
     vec3 emissive = SRGBtoLINEAR(texture(u_EmissiveSampler, v_UV)).rgb * u_EmissiveFactor;
     color += emissive;
 #endif
-
     // This section uses mix to override final color for reference app visualization
     // of various parameters in the lighting equation.
     color = mix(color, F, u_ScaleFGDSpec.x);
     color = mix(color, vec3(G), u_ScaleFGDSpec.y);
     color = mix(color, vec3(D), u_ScaleFGDSpec.z);
     color = mix(color, specContrib, u_ScaleFGDSpec.w);
-
     color = mix(color, diffuseContrib, u_ScaleDiffBaseMR.x);
     color = mix(color, baseColor.rgb, u_ScaleDiffBaseMR.y);
     color = mix(color, vec3(metallic), u_ScaleDiffBaseMR.z);
