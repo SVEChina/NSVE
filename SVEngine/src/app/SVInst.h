@@ -156,6 +156,7 @@ namespace sv {
         SVRTargetMgrPtr getTargetMgr();
         SVMtlLibPtr getMtlLib();
         SVRenderMgrPtr getRenderMgr();
+        SVRenderPathPtr getRenderPath();
         SVDetectMgrPtr getDetectMgr();
         SVDeformMgrPtr getDeformMgr();
         SVComDataPtr getComData();

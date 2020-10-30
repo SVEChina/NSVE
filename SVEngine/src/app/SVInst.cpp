@@ -443,6 +443,10 @@ SVRenderMgrPtr SVInst::getRenderMgr(){
     return m_render_mgr;
 }
 
+SVRenderPathPtr SVInst::getRenderPath(){
+    return m_render_path;
+}
+
 SVDetectMgrPtr SVInst::getDetectMgr(){
     if(!m_global_mgr)
         return nullptr;

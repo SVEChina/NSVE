@@ -16,6 +16,7 @@
 #include "../rendercore/SVRenderer.h"
 #include "../rendercore/SVRenderCmd.h"
 #include "../rendercore/SVRenderMgr.h"
+#include "../rendercore/SVRenderPath.h"
 #include "../rendercore/SVRTarget.h"
 #include "../rendercore/SVRShader.h"
 #include "../rendercore/SVRFbo.h"
@@ -63,6 +64,32 @@ void SVDispatch::dispatchTargetResize(SVInstPtr _app,SVRTargetPtr _target) {
             SVRCmdTargetResizePtr t_cmd = MakeSharedPtr<SVRCmdTargetResize>(t_rfbo,t_w,t_h);
             _app->getRenderMgr()->pushRCmdCreate(t_cmd);
         }
+    }
+}
+
+void SVDispatch::dispatchMeshPreZ(SVInstPtr _app,
+                                  SVRenderMeshPtr _mesh,
+                                  SVSurfacePtr _surface) {
+    SVRendererPtr t_renderer = _app->getRenderer();
+    SVRTargetPtr t_z_target = _app->getRenderPath()->m_target_preZ;
+    SVRTargetPtr t_main_target = _app->getRenderMgr()->getMainRT();
+    SVMtlCorePtr t_z_mtl = _app->getMtlLib()->getMtl("preZ");
+    if(t_renderer && _mesh && _surface && t_z_target && t_main_target && t_z_mtl) {
+        //投递到主目标，在这里更新VP矩阵
+        if(_surface) {
+            FMat4 t_mat_v = t_main_target->viewMat();
+            FMat4 t_mat_p = t_main_target->projMat();
+            FMat4 t_mat_vp = t_main_target->vpMat();
+            _surface->setParam("matVP", t_mat_vp);
+            _surface->setParam("matV", t_mat_v);
+            _surface->setParam("matP", t_mat_p);
+        }
+        //投递命令
+        SVRCmdNorPtr t_cmd_nor = MakeSharedPtr<SVRCmdNor>();
+        t_cmd_nor->setMesh(_mesh);
+        t_cmd_nor->setMaterial(t_z_mtl);
+        t_cmd_nor->setSurface(_surface);
+        t_z_target->pushCommand(t_cmd_nor,E_RSM_SOLID);
     }
 }
 

@@ -38,8 +38,14 @@ namespace sv {
         //target 大小重置
         static void dispatchTargetResize(SVInstPtr _app,SVRTargetPtr _target);
         
+       /*
+        投递PreZMesh
+        */
+        static void dispatchMeshPreZ(SVInstPtr _app,
+                                     SVRenderMeshPtr _mesh,
+                                     SVSurfacePtr _surface);
+        
         /*普通mesh绘制*/
-        //投递rendermesh
         static void dispatchMeshDraw(SVInstPtr _app,
                                      SVRenderMeshPtr _mesh,
                                      SVMtlCorePtr _mtl,
