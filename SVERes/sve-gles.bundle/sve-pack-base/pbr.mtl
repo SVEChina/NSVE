@@ -2,6 +2,7 @@
     "version" : "1.0",
     "name" : "pbr",
     "shader" : "shader/dsp/pbr.dsp",
+    "ssdef" : ["HAS_NORMALS"],
     "blend-param" : {
         "enable" : 1
     }

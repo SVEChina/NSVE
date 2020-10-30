@@ -332,12 +332,13 @@ struct ShaderDsp {
         m_pass = "null";
         m_vft.clear();
     };
-    s32 getDefCode() {
-        if(m_defs.size() == 0) {
-            return 0;
-        }
-        return 0;
-    };
+//    s32 getDefCode() {
+//        if(m_defs.size() == 0) {
+//            return 0;
+//        }
+//        
+//        return 0;
+//    };
     //
     s32 m_dsp;
     //顶点描述

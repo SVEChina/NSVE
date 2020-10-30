@@ -123,9 +123,8 @@ SVShaderPtr SVShaderMgr::loadSDSP(cptr8 _sdsp) {
     //解析
     SVShaderPtr t_shader = MakeSharedPtr<SVShader>(mApp);
     if( t_shader->fromJSON( doc ,m_language.c_str()) ) {
-        s32 t_code = t_shader->getShaderDsp()->getDefCode();
-        SVString t_ext = SVString::format("_%d",t_code);
-        t_s_name += t_ext;
+        s32 t_code = getDefCode(t_shader->getShaderDsp()->m_defs);
+        t_s_name = SVString::format("%s_%d",t_s_name.c_str(),t_code);
     }else{
         return nullptr;
     }
@@ -139,8 +138,9 @@ SVShaderPtr SVShaderMgr::loadSDSP(cptr8 _sdsp) {
 }
 
 SVShaderPtr SVShaderMgr::loadSDSP(cptr8 _sdsp,std::vector<SVString>& _defs) {
+    SVString t_fname = SVString::format("%s.dsp", _sdsp);
     SVDataChunk tDataStream;
-    bool tflag = mApp->m_file_sys->loadFileContentStr(&tDataStream, _sdsp);
+    bool tflag = mApp->m_file_sys->loadFileContentStr(&tDataStream, t_fname.c_str());
     if (!tflag) {
         return nullptr;
     }
@@ -165,9 +165,8 @@ SVShaderPtr SVShaderMgr::loadSDSP(cptr8 _sdsp,std::vector<SVString>& _defs) {
             t_shader->getShaderDsp()->m_defs.push_back(_defs[i]);
         }
         //重新构建shader名字
-        s32 t_code = t_shader->getShaderDsp()->getDefCode();
-        SVString t_ext = SVString::format("_%d",t_code);
-        t_s_name += t_ext;
+        s32 t_code = getDefCode(t_shader->getShaderDsp()->m_defs);
+        t_s_name = SVString::format("%s_%d",t_s_name.c_str(),t_code);
     }else{
         return nullptr;
     }
