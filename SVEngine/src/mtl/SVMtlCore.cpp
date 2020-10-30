@@ -360,13 +360,77 @@ void SVMtlCore::fromJSON1(RAPIDJSON_NAMESPACE::Value& _item){
     if (_item.HasMember("blend-param") && _item["blend-param"].IsObject()) {
         RAPIDJSON_NAMESPACE::Document::Object t_value_obj = _item["blend-param"].GetObject();
         m_blend_enable = t_value_obj["enable"].GetInt();
-//        m_blend_src_param = 0;
-//        m_blend_dst_param = 0;
+        SVString t_src_str = t_value_obj["src"].GetString();
+        SVString t_dst_str = t_value_obj["dst"].GetString();
+        //
+        if(t_src_str == "BLEND_NONE" ) {
+            m_blend_src_param = BLEND_NONE;
+        }else if(t_src_str == "BLEND_ZERO" ) {
+            m_blend_src_param = BLEND_ZERO;
+        }else if(t_src_str == "BLEND_ONE" ) {
+            m_blend_src_param = BLEND_ONE;
+        }else if(t_src_str == "BLEND_SRC_COLOR" ) {
+            m_blend_src_param = BLEND_SRC_COLOR;
+        }else if(t_src_str == "BLEND_ONE_MINUS_SRC_COLOR" ) {
+            m_blend_src_param = BLEND_ONE_MINUS_SRC_COLOR;
+        }else if(t_src_str == "BLEND_SRC_ALPHA" ) {
+            m_blend_src_param = BLEND_SRC_ALPHA;
+        }else if(t_src_str == "BLEND_ONE_MINUS_SRC_ALPHA" ) {
+            m_blend_src_param = BLEND_ONE_MINUS_SRC_ALPHA;
+        }else if(t_src_str == "BLEND_DST_COLOR" ) {
+            m_blend_src_param = BLEND_DST_COLOR;
+        }else if(t_src_str == "BLEND_ONE_MINUS_DST_COLOR" ) {
+            m_blend_src_param = BLEND_ONE_MINUS_DST_COLOR;
+        }else if(t_src_str == "BLEND_DST_ALPHA" ) {
+            m_blend_src_param = BLEND_DST_ALPHA;
+        }else if(t_src_str == "BLEND_ONE_MINUS_DEST_ALPHA" ) {
+            m_blend_src_param = BLEND_ONE_MINUS_DEST_ALPHA;
+        }else if(t_src_str == "BLEND_SRC1_COLOR" ) {
+            m_blend_src_param = BLEND_SRC1_COLOR;
+        }else if(t_src_str == "BLEND_ONE_MINUS_SRC1_COLOR" ) {
+            m_blend_src_param = BLEND_ONE_MINUS_SRC1_COLOR;
+        }else if(t_src_str == "BLEND_SRC1_ALPHA" ) {
+            m_blend_src_param = BLEND_SRC1_ALPHA;
+        }else if(t_src_str == "BLEND_ONE_MINUS_SRC1_ALPHA" ) {
+            m_blend_src_param = BLEND_ONE_MINUS_SRC1_ALPHA;
+        }
+        //
+        if(t_dst_str == "BLEND_NONE" ) {
+            m_blend_dst_param = BLEND_NONE;
+        }else if(t_dst_str == "BLEND_ZERO" ) {
+            m_blend_dst_param = BLEND_ZERO;
+        }else if(t_dst_str == "BLEND_ONE" ) {
+            m_blend_dst_param = BLEND_ONE;
+        }else if(t_dst_str == "BLEND_SRC_COLOR" ) {
+            m_blend_dst_param = BLEND_SRC_COLOR;
+        }else if(t_dst_str == "BLEND_ONE_MINUS_SRC_COLOR" ) {
+            m_blend_dst_param = BLEND_ONE_MINUS_SRC_COLOR;
+        }else if(t_dst_str == "BLEND_SRC_ALPHA" ) {
+            m_blend_dst_param = BLEND_SRC_ALPHA;
+        }else if(t_dst_str == "BLEND_ONE_MINUS_SRC_ALPHA" ) {
+            m_blend_dst_param = BLEND_ONE_MINUS_SRC_ALPHA;
+        }else if(t_dst_str == "BLEND_DST_COLOR" ) {
+            m_blend_dst_param = BLEND_DST_COLOR;
+        }else if(t_dst_str == "BLEND_ONE_MINUS_DST_COLOR" ) {
+            m_blend_dst_param = BLEND_ONE_MINUS_DST_COLOR;
+        }else if(t_dst_str == "BLEND_DST_ALPHA" ) {
+            m_blend_dst_param = BLEND_DST_ALPHA;
+        }else if(t_dst_str == "BLEND_ONE_MINUS_DEST_ALPHA" ) {
+            m_blend_dst_param = BLEND_ONE_MINUS_DEST_ALPHA;
+        }else if(t_dst_str == "BLEND_SRC1_COLOR" ) {
+            m_blend_dst_param = BLEND_SRC1_COLOR;
+        }else if(t_dst_str == "BLEND_ONE_MINUS_SRC1_COLOR" ) {
+            m_blend_dst_param = BLEND_ONE_MINUS_SRC1_COLOR;
+        }else if(t_dst_str == "BLEND_SRC1_ALPHA" ) {
+            m_blend_dst_param = BLEND_SRC1_ALPHA;
+        }else if(t_dst_str == "BLEND_ONE_MINUS_SRC1_ALPHA" ) {
+            m_blend_dst_param = BLEND_ONE_MINUS_SRC1_ALPHA;
+        }
     }else{
         //默认blend
         m_blend_enable = 0;
-        m_blend_src_param = 0;
-        m_blend_dst_param = 0;
+        m_blend_src_param = BLEND_SRC_ALPHA;
+        m_blend_dst_param = BLEND_ONE_MINUS_SRC_COLOR;
     }
     
     //stencil param
