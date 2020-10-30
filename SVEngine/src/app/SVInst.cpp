@@ -125,12 +125,11 @@ void SVInst::init(bool async) {
     //资源管理加载
     m_res_mgr = MakeSharedPtr<SVResMgr>( share() );
     m_res_mgr->init();
-    //注册
     m_render_mgr->registRenderHelper(m_res_mgr);
-    //创建渲染路径
-    m_render_path = MakeSharedPtr<SVRenderPath>( share() );;
-    //监听
     m_event_sys->listenSysEvent(m_res_mgr,SVResMgr::procSysEvent);
+    //创建渲染路径
+    m_render_path = MakeSharedPtr<SVRenderPath>( share() );
+    m_event_sys->listenSysEvent(m_render_path,SVRenderPath::procSysEvent);
     //材质库
     m_mtl_lib = MakeSharedPtr<SVMtlLib>( share() );
     m_mtl_lib->init();

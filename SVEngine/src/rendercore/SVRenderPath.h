@@ -8,7 +8,7 @@
 #ifndef SV_RENDERPATH_H
 #define SV_RENDERPATH_H
 
-#include "../base/SVGbase.h"
+#include "../basesys/SVSysBase.h"
 #include "SVRenderDeclare.h"
 
 namespace sv {
@@ -26,7 +26,7 @@ namespace sv {
      由渲染路径产出指令，所以这是个逻辑概念
      */
     //不同RPath 需要设定不同的流
-    class SVRenderPath : public SVGBaseEx {
+    class SVRenderPath : public SVSysBase {
     public:
         SVRenderPath(SVInstPtr _app);
         
@@ -37,6 +37,13 @@ namespace sv {
         void closePreZ();
         
         bool m_prez;
+        
+    public:
+        
+        //
+        SVRTargetPtr m_target_preZ;
+        //处理消息
+        static void procSysEvent(SVObjectPtr _caller,SVEventPtr _event);
     };
 
 }//!namespace sv
