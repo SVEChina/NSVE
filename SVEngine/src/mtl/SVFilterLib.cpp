@@ -29,7 +29,6 @@ SVFilterBasePtr SVFilterLib::openFilter(SVInstPtr _app,FTTYPE _name,SV_TEXIN _te
             t_surface->setTexture(1, 0, _tex);
             FVec2 t_invert = FVec2(1.0f,1.0f);
             t_surface->setParam("u_invert", t_invert);
-            
         }
         _app->getSceneMgr()->addFilter("filterGray", t_filter);
     }else if(_name == FILTER_HAZE) {

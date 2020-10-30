@@ -19,7 +19,7 @@ SVPerson::SVPerson(SVInstPtr _app)
     m_exist = false;
     m_detectType = DETECT_T_NULL;
     m_face_attribute.mouth_noise_ratio = 1.00f;
-    m_face_attribute.tip_thickness_ratio = 0.00f;
+    m_face_attribute.tip_thickness_ratio = 1.00f;
     m_face_attribute.eyes_down_ratio = 0.00f;
     m_face_attribute.eyes_in_corner_ratio = 1.00f;
     m_face_attribute.eyes_out_corner_ratio = 1.00f;

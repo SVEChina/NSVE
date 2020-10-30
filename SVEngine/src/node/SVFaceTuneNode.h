@@ -26,20 +26,9 @@ namespace sv {
             
             void fromJSON(RAPIDJSON_NAMESPACE::Value &item);
         protected:
-            
-            void _addPass(SVPassPtr _pass);
-            void _clearPass();
-            typedef SVArray<SVPassPtr> PASSPOOL;
-            PASSPOOL m_passPool;
-//            SVRenderMeshDvidPtr m_pFaceMesh;
-//            SVRenderTexturePtr m_fbo;
-            SVDataSwapPtr m_pIndexs;
-            SVDataSwapPtr m_pVerts;
-            SVDataSwapPtr m_pT0;
-            SVMtlCorePtr m_maskMtl;
-            u32 m_meshsize;
-            f32 m_tex0width;
-            f32 m_tex0height;
+            SVRenderMeshPtr m_tuneMesh;
+            SVMtlCorePtr m_tuneMtl;
+            SVSurfacePtr m_tuneSurface;
         };
 }//!namespace sv
 
