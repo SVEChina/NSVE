@@ -16,7 +16,7 @@
 #include "../node/SVNode.h"
 #include "../node/SVCube.h"
 #include "../node/SVSpriteNode.h"
-#include "../node/SVFaceShapeNode.h"
+#include "../node/SVFaceTuneNode.h"
 #include "../node/SVFacePointNode.h"
 
 #include "../app/SVGlobalMgr.h"
@@ -324,6 +324,9 @@ void SVScene::test() {
     //
     SVFacePointNodePtr t_facept_node = MakeSharedPtr<SVFacePointNode>(mApp);
     addNode(t_facept_node);
+    
+    SVFaceTuneNodePtr t_faceTuneNode = MakeSharedPtr<SVFaceTuneNode>(mApp);
+    addNode(t_faceTuneNode);
     //
     SVCubePtr t_box_node = MakeSharedPtr<SVCube>(mApp);
     t_box_node->setRotation(45.0f, 45.0f, 45.0f);

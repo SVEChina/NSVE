@@ -17,27 +17,28 @@
 #include "../mtl/SVMtlCore.h"
 #include "../mtl/SVTexMgr.h"
 
-#include "../basesys/SVConfig.h"
+#include "../detect/SVDetectMgr.h"
+#include "../detect/SVDetectST.h"
 
 #include "../rendercore/SVRenderMesh.h"
 #include "../rendercore/SVRTarget.h"
 #include "../rendercore/SVRTargetMgr.h"
-
+#include "../rendercore/SVRenderCmd.h"
 using namespace sv;
 
 SVFaceTuneNode::SVFaceTuneNode(SVInstPtr _app)
 : SVNode(_app) {
     ntype = "SVFaceTuneNode";
     m_name = "SVFaceTuneNode";
-    m_maskMtl = mApp->getMtlLib()->getMtl("normal2d");
-    if(m_maskMtl) {
-        m_maskMtl->reloadShader();
+    m_tuneMtl = mApp->getMtlLib()->getMtl("normal2d");
+    if(m_tuneMtl) {
+        m_tuneMtl->reloadShader();
     }
-    m_pFaceMesh = mApp->getComData()->faceMesh(SV_E_FACEMESH_TUNE);
-    if (m_pFaceMesh) {
-        m_pFaceMesh->setDrawMethod(E_DRAW_TRIANGLES);
+    m_tuneMesh = mApp->getComData()->faceMesh(SV_E_FACEMESH_TUNE);
+    if (m_tuneMesh) {
+        m_tuneMesh->setDrawMethod(E_DRAW_TRIANGLES);
     }
-    
+    m_tuneSurface = MakeSharedPtr<SVSurface>();
     SVRTargetPtr t_use = mApp->getTargetMgr()->getTarget(E_TEX_HELP0);
     if(!t_use) {
         s32 t_w = mApp->m_global_param.sv_width;
@@ -47,43 +48,51 @@ SVFaceTuneNode::SVFaceTuneNode(SVInstPtr _app)
 }
 
 SVFaceTuneNode::~SVFaceTuneNode() {
-    m_maskMtl = nullptr;
-    m_pFaceMesh = nullptr;
-}
-
-void SVFaceTuneNode::_addPass(SVPassPtr _pass) {
-    if(_pass){
-//        m_passPool.append(_pass);
-    }
-}
-
-void SVFaceTuneNode::_clearPass() {
-    m_passPool.destroy();
+    m_tuneMtl = nullptr;
+    m_tuneMesh = nullptr;
+    m_tuneSurface = nullptr;
 }
 
 void SVFaceTuneNode::update(f32 dt){
-
+    SVTexturePtr _tex = mApp->getTexMgr()->getInTexture(E_TEX_MAIN);
+    m_tuneSurface->setTexture(1, 0, _tex);
+    FVec2 t_invert = FVec2(1.0f,1.0f);
+    m_tuneSurface->setParam("u_invert", t_invert);
+    //
+    SVPersonPtr t_person = mApp->getDetectMgr()->getPersonModule()->getPerson(1);
+    if( t_person && t_person->getExist() && m_tuneMesh){
+        //顶点描述
+        SVVertStreamDspPtr t_vert_dsp= m_tuneMesh->getStreamDsp();
+        t_vert_dsp->setBufType(E_BFT_DYNAMIC_DRAW);
+        s32 t_ptNum = 0;
+        f32 *t_vertexPts = t_person->getFaceData(t_ptNum, SV_E_FACEDATA_TUNE);
+        t_vert_dsp->setVertCnt(t_ptNum);
+        t_vert_dsp->setSigleStreamData(E_VF_V2, t_vertexPts, t_ptNum*2*sizeof(f32));
+        f32 *t_keyPts = t_person->getFaceData(t_ptNum, SV_E_FACEDATA_ORIGINAL);
+        f32 t_texcoordPts[t_ptNum*2];
+        memcpy(t_texcoordPts, t_keyPts, t_ptNum*2*sizeof(f32));
+        s32 t_w = mApp->m_global_param.sv_width;
+        s32 t_h = mApp->m_global_param.sv_height;
+        for (s32 i = 0; i<t_ptNum; i++) {
+            t_texcoordPts[2*i] = t_texcoordPts[2*i]/(t_w*1.0);
+            t_texcoordPts[2*i+1] = (t_h-t_texcoordPts[2*i+1])/(t_h*1.0);
+        }
+        t_vert_dsp->setSigleStreamData(E_VF_T0, t_texcoordPts, t_ptNum*2*sizeof(f32));
+    }
 }
 
 void SVFaceTuneNode::render(){
-//    if (!mApp->m_pGlobalParam->m_curScene)
-//        return;
-//    SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
-//    SVPersonPtr t_person = mApp->getDetectMgr()->getPersonModule()->getPerson(1);
-//    if( t_person && t_person->getExist() && t_person->getIsTuned()){
-//        for(s32 i=0;i<m_passPool.size();i++){
-//            if(m_passPool[i]->m_pMtl){
-//                SVRenderCmdPassPtr t_cmd = MakeSharedPtr<SVRenderCmdPass>();
-//                t_cmd->mTag = "SVFaceTuneNode";
-//                t_cmd->setClear(m_passPool[i]->m_isClear);
-//                t_cmd->setFbo(m_fbo);
-//                t_cmd->setTexture(m_passPool[i]->m_outTex);
-//                t_cmd->setMesh(m_passPool[i]->m_pMesh);
-//                t_cmd->setMaterial(m_passPool[i]->m_pMtl);
-//                t_rs->pushRenderCmd(RST_FACEMORPH, t_cmd);
-//            }
-//        }
-//    }
+    SVRTargetPtr t_target = mApp->getTargetMgr()->getTarget(E_TEX_MAIN);
+    if(t_target && m_tuneMesh && m_tuneMtl) {
+        //
+        SVRCmdPassPtr t_pass1 = MakeSharedPtr<SVRCmdPass>();
+        t_pass1->setSwapTarget(E_TEX_MAIN);
+        t_pass1->setUseTarget(E_TEX_HELP0);
+        t_pass1->setMesh(m_tuneMesh);
+        t_pass1->setSurface(m_tuneSurface);
+        t_pass1->setMaterial(m_tuneMtl);
+        t_target->pushCommand(t_pass1, E_RSM_PRE);
+    }
 }
 
 //序列化接口
