@@ -29,6 +29,7 @@ namespace sv {
             SVRenderMeshPtr m_tuneMesh;
             SVMtlCorePtr m_tuneMtl;
             SVSurfacePtr m_tuneSurface;
+            SVRTargetPtr m_faceTuneTarget;
         };
 }//!namespace sv
 

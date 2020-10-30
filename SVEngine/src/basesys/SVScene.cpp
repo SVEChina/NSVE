@@ -321,8 +321,8 @@ void SVScene::fromJSON(RAPIDJSON_NAMESPACE::Value &item) {
 void SVScene::test() {
     SVTexturePtr t_tex = mApp->getTexMgr()->getTexture("res/test2.jpeg");
     //
-    SVFacePointNodePtr t_facept_node = MakeSharedPtr<SVFacePointNode>(mApp);
-    addNode(t_facept_node);
+//    SVFacePointNodePtr t_facept_node = MakeSharedPtr<SVFacePointNode>(mApp);
+//    addNode(t_facept_node);
     
     SVFaceTuneNodePtr t_faceTuneNode = MakeSharedPtr<SVFaceTuneNode>(mApp);
     addNode(t_faceTuneNode);
@@ -365,8 +365,8 @@ void SVScene::test() {
         FVec4 u_ScaleIBLAmbient = FVec4(0.5f,0.5f,0.5f,0.5f);
         t_surface->setParam("u_ScaleIBLAmbient", u_ScaleIBLAmbient);
     }
-    addNode(t_box_node);
+//    addNode(t_box_node);
     //
-    SVAniUnitRotPtr t_rot = MakeSharedPtr<SVAniUnitRot>(mApp);
-    mApp->getAniMgr()->addAni(t_box_node,t_rot);
+//    SVAniUnitRotPtr t_rot = MakeSharedPtr<SVAniUnitRot>(mApp);
+//    mApp->getAniMgr()->addAni(t_box_node,t_rot);
 }

@@ -8,6 +8,7 @@
 #include "SVFaceTuneNode.h"
 #include "SVScene.h"
 
+#include "../app/SVDispatch.h"
 #include "../basesys/SVComData.h"
 #include "../core/SVPass.h"
 
@@ -24,6 +25,7 @@
 #include "../rendercore/SVRTarget.h"
 #include "../rendercore/SVRTargetMgr.h"
 #include "../rendercore/SVRenderCmd.h"
+#include "../rendercore/SVRenderMgr.h"
 using namespace sv;
 
 SVFaceTuneNode::SVFaceTuneNode(SVInstPtr _app)
@@ -36,14 +38,16 @@ SVFaceTuneNode::SVFaceTuneNode(SVInstPtr _app)
     }
     m_tuneMesh = mApp->getComData()->faceMesh(SV_E_FACEMESH_TUNE);
     if (m_tuneMesh) {
-        m_tuneMesh->setDrawMethod(E_DRAW_TRIANGLES);
+        m_tuneMesh->setDrawMethod(E_DRAW_POINTS);
     }
     m_tuneSurface = MakeSharedPtr<SVSurface>();
-    SVRTargetPtr t_use = mApp->getTargetMgr()->getTarget(E_TEX_HELP0);
-    if(!t_use) {
+    m_faceTuneTarget = mApp->getTargetMgr()->getTarget(E_TEX_HELP0);
+    if(!m_faceTuneTarget) {
         s32 t_w = mApp->m_global_param.sv_width;
         s32 t_h = mApp->m_global_param.sv_height;
-        mApp->getTargetMgr()->createTarget(E_TEX_HELP0, t_w, t_h, false, false);
+        m_faceTuneTarget = mApp->getTargetMgr()->createTarget(E_TEX_HELP0, t_w, t_h, false, false);
+        m_faceTuneTarget->pushStreamQuene(E_RSM_SOLID);
+        mApp->getRenderMgr()->addRTarget(m_faceTuneTarget,true);
     }
 }
 
@@ -82,16 +86,22 @@ void SVFaceTuneNode::update(f32 dt){
 }
 
 void SVFaceTuneNode::render(){
-    SVRTargetPtr t_target = mApp->getTargetMgr()->getTarget(E_TEX_MAIN);
-    if(t_target && m_tuneMesh && m_tuneMtl) {
-        //
-        SVRCmdPassPtr t_pass1 = MakeSharedPtr<SVRCmdPass>();
-        t_pass1->setSwapTarget(E_TEX_MAIN);
-        t_pass1->setUseTarget(E_TEX_HELP0);
-        t_pass1->setMesh(m_tuneMesh);
-        t_pass1->setSurface(m_tuneSurface);
-        t_pass1->setMaterial(m_tuneMtl);
-        t_target->pushCommand(t_pass1, E_RSM_PRE);
+    if(m_faceTuneTarget && m_tuneMesh && m_tuneMtl) {
+        SVDispatch::dispatchMeshDraw(mApp,
+                                     m_tuneMesh,
+                                     m_tuneMtl,
+                                     m_tuneSurface,
+                                     m_faceTuneTarget,
+                                     E_RSM_SOLID,
+                                     "SVDrawFaceTune");
+//        SVRCmdPassPtr t_pass1 = MakeSharedPtr<SVRCmdPass>();
+//        t_pass1->mTag = "SVFaceTuneNode";
+//        t_pass1->setSwapTarget(E_TEX_MAIN);
+//        t_pass1->setUseTarget(E_TEX_HELP0);
+//        t_pass1->setMesh(m_tuneMesh);
+//        t_pass1->setSurface(m_tuneSurface);
+//        t_pass1->setMaterial(m_tuneMtl);
+//        t_target->pushCommand(t_pass1, E_RSM_SOLID);
     }
 }
 

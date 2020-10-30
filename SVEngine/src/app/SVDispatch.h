@@ -50,19 +50,22 @@ namespace sv {
                                      SVRenderMeshPtr _mesh,
                                      SVMtlCorePtr _mtl,
                                      SVSurfacePtr _surface,
-                                     SV_RSTREAM _stype);
+                                     SV_RSTREAM _stype,
+                                     SVString _tag = "SVDrawMesh");
         
         //投递rendermesh-pre
         static void dispatchMeshDrawPre(SVInstPtr _app,
                                         SVRenderMeshPtr _mesh,
                                         SVMtlCorePtr _mtl,
-                                        SVSurfacePtr _surface);
+                                        SVSurfacePtr _surface,
+                                        SVString _tag = "SVDrawMeshPre");
         
         //投递rendermesh-after
         static void dispatchMeshDrawAfter(SVInstPtr _app,
                                           SVRenderMeshPtr _mesh,
                                           SVMtlCorePtr _mtl,
-                                          SVSurfacePtr _surface);
+                                          SVSurfacePtr _surface,
+                                          SVString _tag = "SVDrawMeshAfter");
         
         //投递rendermesh
         static void dispatchMeshDraw(SVInstPtr _app,
@@ -70,21 +73,24 @@ namespace sv {
                                      SVMtlCorePtr _mtl,
                                      SVSurfacePtr _surface,
                                      SVRTargetPtr _target,
-                                     SV_RSTREAM _stype);
+                                     SV_RSTREAM _stype,
+                                     SVString _tag = "SVDrawMesh");
         
         //投递rendermesh-pre
         static void dispatchMeshDrawPre(SVInstPtr _app,
                                         SVRenderMeshPtr _mesh,
                                         SVMtlCorePtr _mtl,
                                         SVSurfacePtr _surface,
-                                        SVRTargetPtr _target);
+                                        SVRTargetPtr _target,
+                                        SVString _tag = "SVDrawMeshPre");
         
         //投递rendermesh-after
         static void dispatchMeshDrawAfter(SVInstPtr _app,
                                           SVRenderMeshPtr _mesh,
                                           SVMtlCorePtr _mtl,
                                           SVSurfacePtr _surface,
-                                          SVRTargetPtr _target);
+                                          SVRTargetPtr _target,
+                                          SVString _tag = "SVDrawMeshAfter");
     };
     
 }//!namespace sv

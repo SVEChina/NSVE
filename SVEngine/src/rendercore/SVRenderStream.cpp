@@ -36,6 +36,18 @@ void SVRenderStream::clearRenderCmd() {
     m_lock->unlock();
 }
 
+#if  defined(SV_IOS)
+void SVRenderStream::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
+    m_lock->lock();
+    for (s32 i = 0; i < m_cmdArray.size(); i++) {
+        glPushGroupMarkerEXT(0, m_cmdArray[i]->mTag.c_str());
+        m_cmdArray[i]->render(_renderer,_target);
+        glPopGroupMarkerEXT();
+    }
+    m_cmdArray.clear();
+    m_lock->unlock();
+}
+#else
 void SVRenderStream::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
     m_lock->lock();
     for (s32 i = 0; i < m_cmdArray.size(); i++) {
@@ -44,4 +56,7 @@ void SVRenderStream::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
     m_cmdArray.clear();
     m_lock->unlock();
 }
+#endif
+
+
 
