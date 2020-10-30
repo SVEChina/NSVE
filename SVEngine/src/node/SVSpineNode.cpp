@@ -165,7 +165,7 @@ void SVSpineNode::update(f32 dt) {
 //                    break;
 //                }
 //                case SP_BLEND_MODE_MULTIPLY:{
-//                    t_mtl->setBlendState(MTL_BLEND_DEST_COLOR, MTL_BLEND_ONE_MINUS_SRC_ALPHA);
+//                    t_mtl->setBlendState(MTL_BLEND_DST_COLOR, MTL_BLEND_ONE_MINUS_SRC_ALPHA);
 //                    t_mtl->setBlendMode(SVMtlAni2D::SV_MTL_BLENDMODE_MULTIPLY);
 //                    break;
 //                }

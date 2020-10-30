@@ -42,6 +42,7 @@
 #include "../rendercore/SVRTargetMgr.h"
 #include "../rendercore/SVRenderer.h"
 #include "../rendercore/SVRenderMgr.h"
+#include "../rendercore/SVRenderPath.h"
 #include "../rendercore/SVMetal/SVRendererMetal.h"
 #include "../rendercore/SVGL/SVRendererGL.h"
 
@@ -72,6 +73,7 @@ SVInst::SVInst() {
     m_ctx = nullptr;
     m_file_sys = nullptr;
     m_render_mgr = nullptr;
+    m_render_path = nullptr;
     m_event_sys = nullptr;
     m_res_mgr = nullptr;
     m_ar_mgr = nullptr;
@@ -82,6 +84,7 @@ SVInst::~SVInst() {
     m_file_sys = nullptr;
     m_mtl_lib = nullptr;
     m_render_mgr = nullptr;
+    m_render_path = nullptr;
     m_event_sys = nullptr;
     m_res_mgr = nullptr;
     m_ar_mgr = nullptr;
@@ -122,10 +125,11 @@ void SVInst::init(bool async) {
     //资源管理加载
     m_res_mgr = MakeSharedPtr<SVResMgr>( share() );
     m_res_mgr->init();
-    //注册
     m_render_mgr->registRenderHelper(m_res_mgr);
-    //监听
     m_event_sys->listenSysEvent(m_res_mgr,SVResMgr::procSysEvent);
+    //创建渲染路径
+    m_render_path = MakeSharedPtr<SVRenderPath>( share() );
+    m_event_sys->listenSysEvent(m_render_path,SVRenderPath::procSysEvent);
     //材质库
     m_mtl_lib = MakeSharedPtr<SVMtlLib>( share() );
     m_mtl_lib->init();
@@ -347,7 +351,7 @@ void SVInst::test() {
     if(getSceneMgr()) {
         getSceneMgr()->test();
     }
-    SVLoaderGLTFEx::loadFromFile(share(),"res/woniu_xiuxian/scene.gltf");
+    //SVLoaderGLTFEx::loadFromFile(share(),"res/woniu_xiuxian/scene.gltf");
     //常见AR阶段
 //    if(m_ar_mgr) {
 //        m_ar_mgr->enable();
@@ -437,6 +441,10 @@ SVMtlLibPtr SVInst::getMtlLib() {
 
 SVRenderMgrPtr SVInst::getRenderMgr(){
     return m_render_mgr;
+}
+
+SVRenderPathPtr SVInst::getRenderPath(){
+    return m_render_path;
 }
 
 SVDetectMgrPtr SVInst::getDetectMgr(){

@@ -21,8 +21,9 @@ SVFaceAnalyse::SVFaceAnalyse()
 SVFaceAnalyse::~SVFaceAnalyse() {
 }
 
-//分析人脸
+//分析脸型
 s32 SVFaceAnalyse::analyseFace(SVInstPtr _inst,std::vector<FVec2>& points) {
+    
     return 0;
 }
 

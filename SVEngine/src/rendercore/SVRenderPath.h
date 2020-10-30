@@ -1,5 +1,5 @@
 //
-// SVRPath.h
+// SVRenderPath.h
 // SVEngine
 // Copyright 2017-2020
 // yizhou Fu,long Yin,longfei Lin,ziyu Xu,xiaofan Li,daming Li
@@ -8,7 +8,7 @@
 #ifndef SV_RENDERPATH_H
 #define SV_RENDERPATH_H
 
-#include "../base/SVGbase.h"
+#include "../basesys/SVSysBase.h"
 #include "SVRenderDeclare.h"
 
 namespace sv {
@@ -22,45 +22,33 @@ namespace sv {
      5. forward+
      等等
      */
-
     /*
      由渲染路径产出指令，所以这是个逻辑概念
      */
-
     //不同RPath 需要设定不同的流
-    class SVRPath : public SVGBaseEx {
+    class SVRenderPath : public SVSysBase {
     public:
-        SVRPath(SVInstPtr _app):SVGBaseEx(_app){}
+        SVRenderPath(SVInstPtr _app);
         
-        ~SVRPath(){}
+        ~SVRenderPath();
         
-        virtual void init(){};
+        void openPreZ();
         
-        void render(f32 _dt){};
-    };
-
-    //普通Path
-    class SVRPathNor : public SVRPath {
+        void closePreZ();
+        
+        void openShadow();
+        
+        void closeShadow();
+        
     public:
-        SVRPathNor(SVInstPtr _app);
+        bool m_prez;
         
-        ~SVRPathNor();
+        bool m_has_shadow;
         
-        virtual void init();
-        
-        void render(f32 _dt);
-    };
-
-    //延时渲染路径
-    class SVRPathDef : public SVRPath {
-    public:
-        SVRPathDef(SVInstPtr _app);
-        
-        ~SVRPathDef();
-        
-        virtual void init();
-        
-        void render(f32 _dt);
+        SVRTargetPtr m_target_preZ;
+        SVRTargetPtr m_target_shadow;
+        //处理消息
+        static void procSysEvent(SVObjectPtr _caller,SVEventPtr _event);
     };
 
 }//!namespace sv

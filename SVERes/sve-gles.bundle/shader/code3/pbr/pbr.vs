@@ -11,7 +11,7 @@ layout(location = 2) in vec3 aTangent;
 #endif
 
 #ifdef HAS_UV
-layout(location = 3) in vec2 aUV;
+layout(location = 3) in vec2 aTexcoord0;
 #endif
 
 uniform mat4 matVP;
@@ -44,7 +44,7 @@ void main(){
 #endif
 
 #ifdef HAS_UV
-    v_UV = a_UV;
+    v_UV = aTexcoord0;
 #else
     v_UV = vec2(0.,0.);
 #endif

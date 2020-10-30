@@ -204,6 +204,70 @@ bool SVRendererGL::processMtl(SVMtlCorePtr _mtl,SVSurfacePtr _surface) {
             //blend
             if( _mtl->m_blend_enable ) {
                 glEnable(GL_BLEND);
+                s32 src_param = GL_SRC_ALPHA;
+                s32 dst_param = GL_ONE_MINUS_SRC_COLOR;
+                switch( _mtl->m_blend_src_param )  {
+                    case BLEND_ZERO:
+                        src_param = GL_ZERO; break;
+                    case BLEND_ONE:
+                        src_param = GL_ONE; break;
+                    case BLEND_SRC_COLOR:
+                        src_param = GL_SRC_COLOR; break;
+                    case BLEND_ONE_MINUS_SRC_COLOR:
+                        src_param = GL_ONE_MINUS_SRC_COLOR; break;
+                    case BLEND_SRC_ALPHA:
+                        src_param = GL_SRC_ALPHA; break;
+                    case BLEND_ONE_MINUS_SRC_ALPHA:
+                        src_param = GL_ONE_MINUS_SRC_ALPHA; break;
+                    case BLEND_DST_COLOR:
+                        src_param = GL_DST_COLOR; break;
+                    case BLEND_ONE_MINUS_DST_COLOR:
+                        src_param = GL_ONE_MINUS_DST_COLOR; break;
+                    case BLEND_DST_ALPHA:
+                        src_param = GL_DST_ALPHA; break;
+                    case BLEND_ONE_MINUS_DEST_ALPHA:
+                        src_param = GL_ONE_MINUS_DST_ALPHA; break;
+                    case BLEND_SRC1_COLOR:
+                        src_param = GL_ONE; break;
+                    case BLEND_ONE_MINUS_SRC1_COLOR:
+                        src_param = GL_ONE; break;
+                    case BLEND_SRC1_ALPHA:
+                        src_param = GL_ONE; break;
+                    case BLEND_ONE_MINUS_SRC1_ALPHA:
+                        src_param = GL_ONE; break;
+                }
+                //
+                switch( _mtl->m_blend_dst_param )  {
+                    case BLEND_ZERO:
+                        dst_param = GL_ZERO; break;
+                    case BLEND_ONE:
+                        dst_param = GL_ONE; break;
+                    case BLEND_SRC_COLOR:
+                        dst_param = GL_SRC_COLOR; break;
+                    case BLEND_ONE_MINUS_SRC_COLOR:
+                        dst_param = GL_ONE_MINUS_SRC_COLOR; break;
+                    case BLEND_SRC_ALPHA:
+                        dst_param = GL_SRC_ALPHA; break;
+                    case BLEND_ONE_MINUS_SRC_ALPHA:
+                        dst_param = GL_ONE_MINUS_SRC_ALPHA; break;
+                    case BLEND_DST_COLOR:
+                        dst_param = GL_DST_COLOR; break;
+                    case BLEND_ONE_MINUS_DST_COLOR:
+                        dst_param = GL_ONE_MINUS_DST_COLOR; break;
+                    case BLEND_DST_ALPHA:
+                        dst_param = GL_DST_ALPHA; break;
+                    case BLEND_ONE_MINUS_DEST_ALPHA:
+                        dst_param = GL_ONE_MINUS_DST_ALPHA; break;
+                    case BLEND_SRC1_COLOR:
+                        dst_param = GL_ONE; break;
+                    case BLEND_ONE_MINUS_SRC1_COLOR:
+                        dst_param = GL_ONE; break;
+                    case BLEND_SRC1_ALPHA:
+                        dst_param = GL_ONE; break;
+                    case BLEND_ONE_MINUS_SRC1_ALPHA:
+                        dst_param = GL_ONE; break;
+                }
+                glBlendFunc(src_param,dst_param);
             }else{
                 glDisable(GL_BLEND);
             }
