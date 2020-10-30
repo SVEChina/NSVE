@@ -132,6 +132,8 @@ namespace sv {
         SVGlobalParam m_global_param;
         //渲染器 renderer
         SVRendererPtr m_renderer;
+        //渲染路径
+        SVRenderPathPtr m_render_path;
         //渲染环境
         SVCtxBasePtr m_ctx;
         //状态

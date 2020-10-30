@@ -1,5 +1,5 @@
 //
-// SVRPath.h
+// SVRenderPath.h
 // SVEngine
 // Copyright 2017-2020
 // yizhou Fu,long Yin,longfei Lin,ziyu Xu,xiaofan Li,daming Li
@@ -22,45 +22,21 @@ namespace sv {
      5. forward+
      等等
      */
-
     /*
      由渲染路径产出指令，所以这是个逻辑概念
      */
-
     //不同RPath 需要设定不同的流
-    class SVRPath : public SVGBaseEx {
+    class SVRenderPath : public SVGBaseEx {
     public:
-        SVRPath(SVInstPtr _app):SVGBaseEx(_app){}
+        SVRenderPath(SVInstPtr _app);
         
-        ~SVRPath(){}
+        ~SVRenderPath();
         
-        virtual void init(){};
+        void openPreZ();
         
-        void render(f32 _dt){};
-    };
-
-    //普通Path
-    class SVRPathNor : public SVRPath {
-    public:
-        SVRPathNor(SVInstPtr _app);
+        void closePreZ();
         
-        ~SVRPathNor();
-        
-        virtual void init();
-        
-        void render(f32 _dt);
-    };
-
-    //延时渲染路径
-    class SVRPathDef : public SVRPath {
-    public:
-        SVRPathDef(SVInstPtr _app);
-        
-        ~SVRPathDef();
-        
-        virtual void init();
-        
-        void render(f32 _dt);
+        bool m_prez;
     };
 
 }//!namespace sv

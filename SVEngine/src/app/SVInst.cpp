@@ -42,6 +42,7 @@
 #include "../rendercore/SVRTargetMgr.h"
 #include "../rendercore/SVRenderer.h"
 #include "../rendercore/SVRenderMgr.h"
+#include "../rendercore/SVRenderPath.h"
 #include "../rendercore/SVMetal/SVRendererMetal.h"
 #include "../rendercore/SVGL/SVRendererGL.h"
 
@@ -72,6 +73,7 @@ SVInst::SVInst() {
     m_ctx = nullptr;
     m_file_sys = nullptr;
     m_render_mgr = nullptr;
+    m_render_path = nullptr;
     m_event_sys = nullptr;
     m_res_mgr = nullptr;
     m_ar_mgr = nullptr;
@@ -82,6 +84,7 @@ SVInst::~SVInst() {
     m_file_sys = nullptr;
     m_mtl_lib = nullptr;
     m_render_mgr = nullptr;
+    m_render_path = nullptr;
     m_event_sys = nullptr;
     m_res_mgr = nullptr;
     m_ar_mgr = nullptr;
@@ -124,6 +127,8 @@ void SVInst::init(bool async) {
     m_res_mgr->init();
     //注册
     m_render_mgr->registRenderHelper(m_res_mgr);
+    //创建渲染路径
+    m_render_path = MakeSharedPtr<SVRenderPath>( share() );;
     //监听
     m_event_sys->listenSysEvent(m_res_mgr,SVResMgr::procSysEvent);
     //材质库

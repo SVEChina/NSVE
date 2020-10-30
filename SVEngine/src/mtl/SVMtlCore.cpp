@@ -492,4 +492,5 @@ void SVMtlCore::fromJSON1(RAPIDJSON_NAMESPACE::Value& _item){
 //
 void SVMtlCore::toJSON(RAPIDJSON_NAMESPACE::Document::AllocatorType &_allocator,
                        RAPIDJSON_NAMESPACE::Value &_objValue) {
+    
 }
