@@ -263,6 +263,7 @@ SVRenderMeshPtr SVGeoGen::genAABB(SVInstPtr _app,SVBoundBox& _aabb){
         FVec3 _nor;
         if(i == 0) {
             //max-z
+            _nor = FVec3(0.0f,0.0f,1.0f);
             m_verts[base_v].x = _min.x;
             m_verts[base_v].y = _min.y;
             m_verts[base_v].z = _max.z;
@@ -277,6 +278,7 @@ SVRenderMeshPtr SVGeoGen::genAABB(SVInstPtr _app,SVBoundBox& _aabb){
             m_verts[base_v + 3].z = _max.z;
         }else if(i == 1) {
             //min-z
+            _nor = FVec3(0.0f,0.0f,-1.0f);
             m_verts[base_v].x = _max.x;
             m_verts[base_v].y = _min.y;
             m_verts[base_v].z = _min.z;
@@ -291,6 +293,7 @@ SVRenderMeshPtr SVGeoGen::genAABB(SVInstPtr _app,SVBoundBox& _aabb){
             m_verts[base_v + 3].z = _min.z;
         }else if(i == 2) {
             //max-x
+            _nor = FVec3(1.0f,0.0f,0.0f);
             m_verts[base_v].x = _max.x;
             m_verts[base_v].y = _min.y;
             m_verts[base_v].z = _max.z;
@@ -305,6 +308,7 @@ SVRenderMeshPtr SVGeoGen::genAABB(SVInstPtr _app,SVBoundBox& _aabb){
             m_verts[base_v + 3].z = _min.z;
         }else if(i == 3) {
             //min-x
+            _nor = FVec3(-1.0f,0.0f,0.0f);
             m_verts[base_v].x = _min.x;
             m_verts[base_v].y = _min.y;
             m_verts[base_v].z = _min.z;
@@ -319,6 +323,7 @@ SVRenderMeshPtr SVGeoGen::genAABB(SVInstPtr _app,SVBoundBox& _aabb){
             m_verts[base_v + 3].z = _max.z;
         }else if(i == 4) {
             //max-y
+            _nor = FVec3(0.0f,1.0f,0.0f);
             m_verts[base_v].x = _min.x;
             m_verts[base_v].y = _max.y;
             m_verts[base_v].z = _max.z;
@@ -333,6 +338,7 @@ SVRenderMeshPtr SVGeoGen::genAABB(SVInstPtr _app,SVBoundBox& _aabb){
             m_verts[base_v + 3].z = _min.z;
         }else if(i == 5) {
             //min-y
+            _nor = FVec3(0.0f,-1.0f,0.0f);
             m_verts[base_v].x = _min.x;
             m_verts[base_v].y = _min.y;
             m_verts[base_v].z = _min.z;
