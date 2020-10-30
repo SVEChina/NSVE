@@ -201,21 +201,6 @@ bool SVRendererGL::processMtl(SVMtlCorePtr _mtl,SVSurfacePtr _surface) {
                 }
             }
             //设置状态
-//            BLEND_NONE = 0,
-//            BLEND_ZERO,
-//            ,
-//            ,
-//            ,
-//            ,
-//            ,
-//            ,
-//            ,
-//            ,
-//            ,
-//            ,
-//            ,
-//            ,
-//            ,
             //blend
             if( _mtl->m_blend_enable ) {
                 glEnable(GL_BLEND);
