@@ -346,7 +346,7 @@ SVMesh3dPtr SVLoaderGLTFEx::_genMeshPri(SVInstPtr _app,
             }
         }
         t_rMesh->setIndexDsp(t_index_dsp);
-        t_rMesh->setDrawVertNum(indexNum/2);
+        t_rMesh->setDrawVertNum(indexNum);
     }
 //    t_rMesh->setDrawMethod(_prim->mode);    //定义恰好是一一对应关系
     if(_prim->mode == TINYGLTF_MODE_POINTS) {
