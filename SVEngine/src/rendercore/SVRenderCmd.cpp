@@ -61,6 +61,9 @@ void SVRCmdNor::setSurface(SVSurfacePtr _surface) {
 bool SVRCmdNor::render(SVRendererPtr _renderer,SVRTargetPtr _target) {
     if ( _renderer && _target && m_pMtl && m_pMesh ) {
         bool t_ret = false;
+        if(mTag == "SVMesh3d" ) {
+            int a = 0;
+        }
         //激活材质
         t_ret =_renderer->processMtl(m_pMtl,m_pSurface);
         if(!t_ret){

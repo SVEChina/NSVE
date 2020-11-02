@@ -58,6 +58,8 @@ namespace sv {
         //重置大小
         virtual void resize(s32 _w,s32 _h);
         
+        virtual void info(){};
+        
         //创建纹理资源
         virtual SVRTexPtr createResTexture() { return nullptr; }
         

@@ -59,6 +59,12 @@ void SVRendererGL::init(s32 _version,bool _offline) {
     m_gl_version = _version;
 }
 
+void SVRendererGL::info() {
+    const GLubyte* tt1 = glGetString(GL_VERSION);
+    const GLubyte* tt2 = glGetString(GL_VENDOR);
+    const GLubyte* tt3 = glGetString(GL_RENDERER);
+}
+
 void SVRendererGL::resize(s32 _w,s32 _h) {
 }
 

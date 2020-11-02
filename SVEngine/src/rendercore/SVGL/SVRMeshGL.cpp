@@ -382,18 +382,44 @@ void SVRMeshGL::draw(SVRendererPtr _renderer) {
         if(m_instance_dsp->_instCnt>0) {
             if( m_index_dsp ) {
                 //索引方式
+                s32 t_index_formate;
+                if(m_index_dsp->_dataType == 16) {
+                    t_index_formate = GL_UNSIGNED_SHORT;
+                }else{
+                    t_index_formate = GL_UNSIGNED_INT;
+                }
+                //
                 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexID);
-                glDrawElementsInstanced(t_method, m_rmesh_dsp->m_draw_num, GL_UNSIGNED_SHORT, 0, m_instance_dsp->_instCnt);
+                glDrawElementsInstanced(t_method,
+                                        m_rmesh_dsp->m_draw_num,
+                                        t_index_formate,
+                                        0,
+                                        m_instance_dsp->_instCnt);
             }else{
                 //非索引方式
-                glDrawArraysInstanced(t_method, 0, m_rmesh_dsp->m_draw_num, m_instance_dsp->_instCnt);
+                glDrawArraysInstanced(t_method,
+                                      0,
+                                      m_rmesh_dsp->m_draw_num,
+                                      m_instance_dsp->_instCnt);
             }
         }
     } else {
         if( m_index_dsp ) {
+            s32 t_index_formate;
+            if(m_index_dsp->_dataType == 16) {
+                t_index_formate = GL_UNSIGNED_SHORT;
+            }else{
+                t_index_formate = GL_UNSIGNED_INT;
+            }
             if( m_indexID>0) {
                 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexID);
-                glDrawElements(t_method, m_rmesh_dsp->m_draw_num, GL_UNSIGNED_SHORT, 0);
+                glDrawElements(t_method, m_rmesh_dsp->m_draw_num,t_index_formate, 0);
+//                s32 t_error = glGetError();
+//                if(t_error>GL_NO_ERROR) {
+//                    if(t_error!=GL_INVALID_ENUM) {
+//                        int a = 0;
+//                    }
+//                }
             }
         }else {
             glDrawArrays(t_method, 0, m_rmesh_dsp->m_draw_num);

@@ -92,6 +92,11 @@ void SVMesh3d::update(f32 _dt,FMat4& _mat) {
 void SVMesh3d::render() {
     //先渲染自己
     if(m_rendermesh && m_mtl && m_surface) {
-        SVDispatch::dispatchMeshDraw(mApp, m_rendermesh, m_mtl, m_surface,E_RSM_SOLID);
+        SVDispatch::dispatchMeshDraw(mApp,
+                                     m_rendermesh,
+                                     m_mtl,
+                                     m_surface,
+                                     E_RSM_SOLID,
+                                     "SVMesh3d");
     }
 }

@@ -63,6 +63,9 @@ bool SVCtxIOSGLES::activeContext(SVRendererPtr _renderer){
         if(m_gl_context) {
             ret = [EAGLContext setCurrentContext:m_gl_context];
         }
+        //
+        _renderer->info();
+        //
         if( m_gl_layer ) {
             glGenFramebuffers(1, &m_frameBuf);
             glBindFramebuffer(GL_FRAMEBUFFER, m_frameBuf);
