@@ -304,28 +304,49 @@ SVMesh3dPtr SVLoaderGLTFEx::_genMeshPri(SVInstPtr _app,
                 t_u_size = sizeof(s16);
             }else if(_acc_index->componentType == TINYGLTF_COMPONENT_TYPE_UNSIGNED_SHORT) {
                 t_u_size = sizeof(u16);
+                SVDataSwapPtr t_i_dataswap = MakeSharedPtr<SVDataSwap>();
+                t_i_dataswap->resize(indexNum*sizeof(u16));
+                s32* tt_i_p = (s32*)t_index_p;
+                for(s32 i=0;i<indexNum;i++) {
+                    u16 t_value = (u16)(*tt_i_p);
+                    t_i_dataswap->appendData(&t_value, sizeof(u16));
+                    tt_i_p++;
+                }
+                t_index_dsp->setStreamData(t_i_dataswap);
             }else if(_acc_index->componentType == TINYGLTF_COMPONENT_TYPE_INT) {
                 t_u_size = sizeof(s32);
+                t_index_dsp->setDataType(32);
+                SVDataSwapPtr t_i_dataswap = MakeSharedPtr<SVDataSwap>();
+                t_i_dataswap->resize(indexNum*sizeof(s32));
+                s32* tt_i_p = (s32*)t_index_p;
+                for(s32 i=0;i<indexNum;i++) {
+                    s32 t_value = (s32)(*tt_i_p);
+                    t_i_dataswap->appendData(&t_value, sizeof(s32));
+                    tt_i_p++;
+                }
+                t_index_dsp->setStreamData(t_i_dataswap);
+                t_i_dataswap = nullptr;
             }else if(_acc_index->componentType == TINYGLTF_COMPONENT_TYPE_UNSIGNED_INT) {
                 t_u_size = sizeof(u32);
+                t_index_dsp->setDataType(32);
+                SVDataSwapPtr t_i_dataswap = MakeSharedPtr<SVDataSwap>();
+                t_i_dataswap->resize(indexNum*sizeof(u32));
+                u32* tt_i_p = (u32*)t_index_p;
+                for(s32 i=0;i<indexNum;i++) {
+                    u32 t_value = (u32)(*tt_i_p);
+                    t_i_dataswap->appendData(&t_value, sizeof(u32));
+                    tt_i_p++;
+                }
+                t_index_dsp->setStreamData(t_i_dataswap);
+                t_i_dataswap = nullptr;
             }else if(_acc_index->componentType == TINYGLTF_COMPONENT_TYPE_FLOAT) {
                 t_u_size = sizeof(s32);
             }else if(_acc_index->componentType == TINYGLTF_COMPONENT_TYPE_DOUBLE) {
                 t_u_size = sizeof(s64);
             }
-            SVDataSwapPtr t_i_dataswap = MakeSharedPtr<SVDataSwap>();
-            t_i_dataswap->resize(indexNum*sizeof(u16));
-            u32* tt_i_p = (u32*)t_index_p;
-            for(s32 i=0;i<indexNum;i++) {
-                u16 t_value = (u16)(*tt_i_p);
-                t_i_dataswap->appendData(&t_value, sizeof(u16));
-                tt_i_p++;
-            }
-            t_index_dsp->setStreamData(t_i_dataswap);
-            t_i_dataswap = nullptr;
         }
         t_rMesh->setIndexDsp(t_index_dsp);
-        t_rMesh->setDrawVertNum(1000);
+        t_rMesh->setDrawVertNum(indexNum/2);
     }
 //    t_rMesh->setDrawMethod(_prim->mode);    //定义恰好是一一对应关系
     if(_prim->mode == TINYGLTF_MODE_POINTS) {
