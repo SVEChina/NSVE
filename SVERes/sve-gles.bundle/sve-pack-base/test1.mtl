@@ -1,0 +1,8 @@
+{
+    "version" : "1.0",
+    "name" : "test1",
+    "shader" : "shader/dsp/test1.dsp",
+    "textures" :[
+        { "chn": 0 , "from" : "file", "path" : "res/sve.png", "stage": "fs" }
+    ]
+}

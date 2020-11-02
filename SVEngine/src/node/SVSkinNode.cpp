@@ -12,13 +12,23 @@
 #include "../basesys/SVConfig.h"
 #include "../core/SVModel.h"
 #include "../core/SVAnimateSkin.h"
+#include "../mtl/SVMtlCore.h"
+#include "../mtl/SVSurface.h"
+
+#include "../app/SVDispatch.h"
+#include "../rendercore/SVRenderMesh.h"
+#include "../rendercore/SVRenderMgr.h"
+#include "../core/SVGeoGen.h"
+#include "../core/SVMesh3d.h"
 
 using namespace sv;
 
 SVSkinNode::SVSkinNode(SVInstPtr _app)
 :SVNode(_app){
     ntype = "SVSkinNode";
-    m_pModel = nullptr;
+    m_pModels = {};
+    m_pSurfaces = {};
+    m_pMtls = {};
     m_pSke = nullptr;
     m_pActAni = nullptr;
     m_aniPool.clear();
@@ -26,7 +36,9 @@ SVSkinNode::SVSkinNode(SVInstPtr _app)
 
 SVSkinNode::~SVSkinNode() {
     clearAni();
-    m_pModel = nullptr;
+    m_pModels.clear();
+    m_pSurfaces.clear();
+    m_pMtls.clear();
     m_pSke = nullptr;
     m_pActAni = nullptr;
 }
@@ -41,15 +53,25 @@ void SVSkinNode::update(f32 dt) {
         m_pSke->refresh();
     }
     //
-    if(m_pModel) {
-        m_pModel->update(dt,m_absolutMat);
+    int t_modelLen = m_pModels.size();
+    for (int i = 0; i < t_modelLen; i++) {
+        SVModelPtr _modelPtr = m_pModels[i];
+        _modelPtr->update(dt, m_absolutMat);
+    }
+    //
+    int t_mtlLen = m_pMtls.size();
+    for (int i = 0; i < t_mtlLen; i++) {
+        SVMtlCorePtr _ptr = m_pMtls[i];
+        _ptr->update(dt);
     }
 }
 
 void SVSkinNode::render() {
     SVNode::render();
-    if(m_pModel) {
-        m_pModel->render();
+    int t_modelLen = m_pModels.size();
+    for (int i = 0; i < t_modelLen; i++) {
+        SVModelPtr _modelPtr = m_pModels[i];
+        _modelPtr->render();
     }
 }
 
@@ -67,37 +89,65 @@ void SVSkinNode::pause() {
 void SVSkinNode::stop() {
 }
 
-SVModelPtr SVSkinNode::getModel() {
-    return m_pModel;
+std::vector<SVModelPtr> &SVSkinNode::getModel() {
+    return m_pModels;
 }
 
-void SVSkinNode::setModel(SVModelPtr _model) {
-    m_pModel = _model;
-    if(m_pModel) {
-        m_pModel->bindSke(m_pSke);
-        m_aabbBox = m_pModel->getBox();
-    }
+void SVSkinNode::setModel(std::vector<SVModelPtr> &_models) {
+    m_pModels = _models;
+//    if(m_pModel) {
+//        m_pModel->bindSke(m_pSke);
+//        m_aabbBox = m_pModel->getBox();
+//    }
 }
 
 void SVSkinNode::clearModel() {
-    if(m_pModel) {
-        m_pModel->unbindSke();
-        m_pModel = nullptr;
+    int t_len = m_pModels.size();
+    for (int i = 0; i < t_len; i++) {
+        SVModelPtr _modelPtr = m_pModels[i];
+        _modelPtr->unbindSke();
     }
+    m_pModels.clear();
+}
+
+std::vector<SVSurfacePtr> &SVSkinNode::getSurface() {
+    return m_pSurfaces;
+}
+
+void SVSkinNode::setSurface(std::vector<SVSurfacePtr> &_surfaces) {
+    m_pSurfaces = _surfaces;
+}
+
+void SVSkinNode::clearSurface() {
+    m_pSurfaces.clear();
+}
+
+std::vector<SVMtlCorePtr> &SVSkinNode::getMaterial() {
+    return m_pMtls;
+}
+
+void SVSkinNode::setMaterial(std::vector<SVMtlCorePtr> &_mtls) {
+    m_pMtls = _mtls;
+}
+
+void SVSkinNode::clearMaterial() {
+    m_pMtls.clear();
 }
 
 //
 void SVSkinNode::setSke(SVSkeletonPtr _ske) {
     m_pSke = _ske;
-    ANIPOOL::Iterator it = m_aniPool.begin();
-    while(it!=m_aniPool.end()) {
-        SVAnimateSkinPtr t_ani = it->data;
-        //t_ani->bind(_ske);
-        it++;
-    }
-    if(m_pModel) {
-        m_pModel->bindSke(m_pSke);
-    }
+//    ANIPOOL::Iterator it = m_aniPool.begin();
+//    while(it!=m_aniPool.end()) {
+//        SVAnimateSkinPtr t_ani = it->data;
+//        //t_ani->bind(_ske);
+//        it++;
+//    }
+//    size_t t_modelLen = m_pModels.size();
+//    for (size_t i = 0; i < t_modelLen; i++) {
+//        SVModelPtr _modelPtr = m_pModels[i];
+//        _modelPtr->bindSke(m_pSke);
+//    }
 }
 
 void SVSkinNode::clearSke() {
@@ -108,8 +158,10 @@ void SVSkinNode::clearSke() {
         it++;
     }
     //
-    if(m_pModel) {
-        m_pModel->unbindSke();
+    size_t t_modelLen = m_pModels.size();
+    for (size_t i = 0; i < t_modelLen; i++) {
+        SVModelPtr _modelPtr = m_pModels[i];
+        _modelPtr->unbindSke();
     }
     //
     m_pSke = nullptr;

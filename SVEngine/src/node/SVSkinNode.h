@@ -29,11 +29,17 @@ namespace sv {
         //渲染
         virtual void render();
         
-        SVModelPtr getModel();
-        
-        void setModel(SVModelPtr _model);
-        
+        std::vector<SVModelPtr> &getModel();
+        void setModel(std::vector<SVModelPtr> &_models);
         void clearModel();
+        
+        std::vector<SVSurfacePtr> &getSurface();
+        void setSurface(std::vector<SVSurfacePtr> &_surfaces);
+        void clearSurface();
+        
+        std::vector<SVMtlCorePtr> &getMaterial();
+        void setMaterial(std::vector<SVMtlCorePtr> &_mtls);
+        void clearMaterial();
         
         //
         void setSke(SVSkeletonPtr _ske);
@@ -55,7 +61,9 @@ namespace sv {
         void stop();
 
     protected:
-        SVModelPtr m_pModel;
+        std::vector<SVModelPtr> m_pModels;
+        std::vector<SVSurfacePtr> m_pSurfaces;
+        std::vector<SVMtlCorePtr> m_pMtls;
         
         SVSkeletonPtr m_pSke;
         

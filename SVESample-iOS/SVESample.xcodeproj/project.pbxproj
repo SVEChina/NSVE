@@ -520,7 +520,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+<<<<<<< Updated upstream
 				DEVELOPMENT_TEAM = BW96G54658;
+=======
+				DEVELOPMENT_TEAM = 5UJ5U6NFPA;
+>>>>>>> Stashed changes
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../SVEngine\"";
 				INFOPLIST_FILE = SVESample/Info.plist;
@@ -529,7 +533,11 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../../NSVERes/ios/st_mobile/ios_os\"";
+<<<<<<< Updated upstream
 				PRODUCT_BUNDLE_IDENTIFIER = com.sve.SVESample;
+=======
+				PRODUCT_BUNDLE_IDENTIFIER = com.sve.SVESample2;
+>>>>>>> Stashed changes
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -542,7 +550,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+<<<<<<< Updated upstream
 				DEVELOPMENT_TEAM = BW96G54658;
+=======
+				DEVELOPMENT_TEAM = 5UJ5U6NFPA;
+>>>>>>> Stashed changes
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../SVEngine\"";
 				INFOPLIST_FILE = SVESample/Info.plist;
@@ -551,7 +563,11 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../../NSVERes/ios/st_mobile/ios_os\"";
+<<<<<<< Updated upstream
 				PRODUCT_BUNDLE_IDENTIFIER = com.sve.SVESample;
+=======
+				PRODUCT_BUNDLE_IDENTIFIER = com.sve.SVESample2;
+>>>>>>> Stashed changes
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;

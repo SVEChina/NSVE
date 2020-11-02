@@ -51,6 +51,10 @@ SVMtlCorePtr SVMesh3d::getMtl(){
     return m_mtl;
 }
 
+void SVMesh3d::setSurface(SVSurfacePtr _surface) {
+    m_surface = _surface;
+}
+
 SVSurfacePtr SVMesh3d::getSurface() {
     return m_surface;
 }

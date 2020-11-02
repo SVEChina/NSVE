@@ -260,6 +260,17 @@ void SVMtlCore::setBlendEnable(bool _enable){
      m_blend_enable = _enable;
 }
 
+void SVMtlCore::setBlendSeparateEnable(bool _enable) {
+    m_blend_separate_enable = _enable;
+}
+void SVMtlCore::setBlendSeparateState(s32 _srcRGB, s32 _dstRGB, s32 _srcAlpha, s32 _dstAlpha, s32 _equation) {
+    m_blend_separate_src_rgb = _srcRGB;
+    m_blend_separate_dst_rgb = _dstRGB;
+    m_blend_separate_src_alpha = _srcAlpha;
+    m_blend_separate_dst_alpha = _dstAlpha;
+    m_blend_separate_equation = _equation;
+}
+
 void SVMtlCore::setCullEnable(bool _enable){
      m_cull_enable = _enable;
 }
@@ -271,6 +282,10 @@ void SVMtlCore::setCullFace(s32 _frontFace, s32 _cullFace){
 
 void SVMtlCore::setDepthEnable(bool _enable){
     m_depth_enable = _enable;
+}
+
+void SVMtlCore::setDepthMethod(s32 _method) {
+    m_depth_method = _method;
 }
 
 void SVMtlCore::setZOffEnable(bool _enable) {

@@ -26,6 +26,7 @@
 #include "../mtl/SVMtl3D.h"
 #include "../mtl/SVMtlGLTF.h"
 #include "../mtl/SVSurface.h"
+#include "../mtl/SVMtlCore.h"
 
 #include "../node/SVSkinNode.h"
 #include "../node/SVModelNode.h"
@@ -43,6 +44,8 @@
 #include "../rendercore/SVRMeshRes.h"
 #include "../rendercore/SVRenderMesh.h"
 
+#include "../node/SVSkinNode.h"
+
 #include <map>
 #include <vector>
 
@@ -55,8 +58,7 @@ SVLoaderGLTFEx::SVLoaderGLTFEx(SVInstPtr _app)
 SVLoaderGLTFEx::~SVLoaderGLTFEx() {
 }
 
-bool SVLoaderGLTFEx::loadFromFile(SVInstPtr _app,
-                                  cptr8 _filename){
+bool SVLoaderGLTFEx::loadFromFile(SVInstPtr _app, cptr8 _filename, SVSkinNodePtr _nodePtr) {
     tinygltf::TinyGLTF tiny;
     tinygltf::Model t_model;
     std::string t_err,t_warn;
@@ -66,7 +68,7 @@ bool SVLoaderGLTFEx::loadFromFile(SVInstPtr _app,
     if(t_ret) {
         //用各种模型接入
         SVString t_path = _app->m_file_sys->getPath(tt.c_str());
-        building(_app,&t_model,t_path.c_str());
+        building(_app,&t_model,t_path.c_str(), _nodePtr);
     }
     return t_ret;
 }
@@ -74,36 +76,63 @@ bool SVLoaderGLTFEx::loadFromFile(SVInstPtr _app,
 //
 void SVLoaderGLTFEx::building(SVInstPtr _app,
                               tinygltf::Model* _model,
-                              cptr8 _path) {
+                              cptr8 _path,
+                              SVSkinNodePtr _nodePtr) {
     //构建动画
     for(s32 i=0;i<_model->animations.size();i++) {
         SVAnimateSkinPtr t_ani = _genAnimate(_app,_model,i,_path);
         int a = 0;
     }
+    
     //构建skin
     for(s32 i=0;i<_model->skins.size();i++) {
         SVSkeletonPtr t_ske = _genSkin(_app,_model,i,_path);
     }
+    
     //构建mtl
-    std::map<s32,SVSurfacePtr> _surface_pool;
+    std::vector<SVMtlCorePtr> _mtlPool;
+    std::vector<SVSurfacePtr> _surfacePool;
+    _mtlPool.resize(_model->materials.size());
+    _surfacePool.resize(_model->materials.size());
     for(s32 i=0;i<_model->materials.size();i++) {
-        SVSurfacePtr t_surface = _genMtl(_app,_model,i,_path);
-        if(t_surface) {
-            _surface_pool.insert( std::make_pair(i,t_surface) );
+        _mtlPool[i] = _genMtl(_app, _model, i, _path);
+        _surfacePool[i] = _genSurface(_app, _model, i,  _path);
+    }
+    _nodePtr->setMaterial(_mtlPool);
+    _nodePtr->setSurface(_surfacePool);
+    
+    //构建MESH
+    std::vector<SVModelPtr> t_modelsPtr{};
+    t_modelsPtr.resize(_model->meshes.size());
+    for(s32 i=0;i<_model->meshes.size();i++) {
+         t_modelsPtr[i] = _genModel(_app, _model, i, _path);
+        
+        //整理mesh对应的mtl
+        
+        int meshNum = t_modelsPtr[i]->getMeshNum();
+        for (s32 j = 0; j < meshNum; j++) {
+            SVMesh3dPtr meshPtr = t_modelsPtr[i]->getMesh(j);
+            
+            tinygltf::Primitive &primitive = _model->meshes[j].primitives[j];
+            meshPtr->setMtl(_mtlPool[primitive.material]);
+            meshPtr->setSurface(_surfacePool[primitive.material]);
+        }
+        
+        
+        
+    }
+    _nodePtr->setModel(t_modelsPtr);
+    
+    
+    
+    //构建节点
+    for(s32 i=0;i<_model->scenes.size();i++) {
+        tinygltf::Scene* t_scene = &(_model->scenes[i]);
+        for(s32 j=0;j<t_scene->nodes.size();j++) {
+            s32 t_node_id = t_scene->nodes[j];
+            //genNode(_app,_model,t_node_id);
         }
     }
-    //构建MESH
-    for(s32 i=0;i<_model->meshes.size();i++) {
-        SVModelPtr t_model = _genModel(_app,_model,i,_path);
-    }
-//    //构建节点
-//    for(s32 i=0;i<_model->scenes.size();i++) {
-//        tinygltf::Scene* t_scene = &(_model->scenes[i]);
-//        for(s32 j=0;j<t_scene->nodes.size();j++) {
-//            s32 t_node_id = t_scene->nodes[j];
-//            //genNode(_app,_model,t_node_id);
-//        }
-//    }
 }
 
 void SVLoaderGLTFEx::genNode(SVInstPtr _app,
@@ -189,6 +218,7 @@ SVMesh3dPtr SVLoaderGLTFEx::_genMeshPri(SVInstPtr _app,
     s64 vertNum = 0;
     SVBoundBox vertBox;
     std::vector<QueneUnit> _quene;
+    
     std::map<std::string,int>::iterator it= _prim->attributes.begin();
     while( it!=_prim->attributes.end() ) {
         QueneUnit _unit;
@@ -326,7 +356,6 @@ SVMesh3dPtr SVLoaderGLTFEx::_genMeshPri(SVInstPtr _app,
     //SVMtlCorePtr t_mtl = _buildMtl(_app,_model,_prim);
     SVMesh3dPtr t_mesh = MakeSharedPtr<SVMesh3d>(_app);
     t_mesh->setRenderMesh(t_rMesh);
-    //t_mesh->setMtl();
     return t_mesh;
 }
 
@@ -514,21 +543,52 @@ SVAnimateSkinPtr SVLoaderGLTFEx::_genAnimate(SVInstPtr _app,
     return t_ani;
 }
 
-//    Material* t_mtl = &(m_gltf.materials[_index]);
-//    SVMtlGLTFPtr tMtl = nullptr;
-//    if (_vtf & E_VF_BONE) {
-//        tMtl = MakeSharedPtr<SVMtlGLTFSkin>(mApp);
-//    }else{
-//        tMtl = MakeSharedPtr<SVMtlGLTF>(mApp);
-//    }
-
-SVSurfacePtr SVLoaderGLTFEx::_genMtl(SVInstPtr _app,
-                                     tinygltf::Model* _model,
-                                     s32 _index,
-                                     cptr8 _path){
-    if(_index<0) {
-        return nullptr;
+#include "../mtl/SVMtlLib.h"
+SVMtlCorePtr SVLoaderGLTFEx::_genMtl(SVInstPtr _app, tinygltf::Model* _model, s32 _index, cptr8 _path) {
+    tinygltf::Material* _mat = &(_model->materials[_index]);
+    SVMtlCorePtr _mtlPtr = _app->getMtlLib()->getMtl("test1");
+    tinygltf::ParameterMap &_additionalValues = _mat->additionalValues;
+    
+    //
+    _mtlPtr->setDepthEnable(true);
+    _mtlPtr->setDepthMethod(GL_LEQUAL);
+    
+    //
+    auto doubleSided = _additionalValues.find("doubleSided");
+    if (doubleSided != _additionalValues.end()) {
+        if (doubleSided->second.bool_value) {
+            _mtlPtr->setCullEnable(false);
+        } else {
+            _mtlPtr->setCullEnable(true);
+            _mtlPtr->setCullFace(GL_CCW, GL_BACK);
+        }
     }
+    
+    //
+    _mtlPtr->setDepthEnable(false);
+    _mtlPtr->setBlendSeparateEnable(false);
+    auto alphaMode = _additionalValues.find("alphaMode");
+    if (alphaMode != _additionalValues.end()) {
+        if (strcmp(alphaMode->second.string_value.c_str(), "BLEND") == 0) {
+            _mtlPtr->setBlendSeparateEnable(true);
+            _mtlPtr->setBlendSeparateState(
+               GL_SRC_ALPHA,
+               GL_ONE_MINUS_SRC_ALPHA,
+               GL_ONE,
+               GL_ONE_MINUS_SRC_ALPHA,
+               GL_FUNC_ADD
+           );
+        }
+    }
+
+    
+    
+    
+    
+    return _mtlPtr;
+}
+
+SVSurfacePtr SVLoaderGLTFEx::_genSurface(SVInstPtr _app, tinygltf::Model* _model, s32 _index, cptr8 _path) {
     tinygltf::Material* _material = &(_model->materials[_index]);
     SVSurfacePtr t_surface = MakeSharedPtr<SVSurface>();
     /*

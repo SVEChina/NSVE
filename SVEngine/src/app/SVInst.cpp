@@ -346,12 +346,24 @@ void SVInst::inputKeyData(u8 *_keyData){
 }
 
 #include "../file/SVLoaderGLTFEx.h"
+#include "../node/SVSkinNode.h"
 
 void SVInst::test() {
     if(getSceneMgr()) {
         getSceneMgr()->test();
     }
-    //SVLoaderGLTFEx::loadFromFile(share(),"res/woniu_xiuxian/scene.gltf");
+    
+//    SVSkinNodePtr skinNode = MakeSharedPtr<SVSkinNode>(this);
+//    SVLoaderGLTFEx::loadFromFile(share(),"res/woniu_xiuxian/scene.gltf", skinNode)
+    
+//    SVCubePtr t_box_node = MakeSharedPtr<SVCube>(mApp);
+//    t_box_node->setRotation(45.0f, 45.0f, 45.0f);
+//    t_box_node->setMtl("normal3d");
+//    SVSurfacePtr t_surface = t_box_node->getSurface();
+//    if(t_surface) {
+//        t_surface->setTexture(1, 0, t_tex);
+//    }
+    
     //常见AR阶段
 //    if(m_ar_mgr) {
 //        m_ar_mgr->enable();
