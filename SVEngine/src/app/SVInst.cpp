@@ -352,10 +352,8 @@ void SVInst::test() {
     if(getSceneMgr()) {
         getSceneMgr()->test();
     }
-    
-//    SVSkinNodePtr skinNode = MakeSharedPtr<SVSkinNode>(this);
+//    SVSkinNodePtr skinNode = MakeSharedPtr<SVSkinNode>(share());
 //    SVLoaderGLTFEx::loadFromFile(share(),"res/woniu_xiuxian/scene.gltf", skinNode)
-    
 //    SVCubePtr t_box_node = MakeSharedPtr<SVCube>(mApp);
 //    t_box_node->setRotation(45.0f, 45.0f, 45.0f);
 //    t_box_node->setMtl("normal3d");

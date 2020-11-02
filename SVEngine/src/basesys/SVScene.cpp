@@ -379,7 +379,6 @@ void SVScene::test() {
     
     SVSkinNodePtr skinNode = MakeSharedPtr<SVSkinNode>(mApp);
     if(SVLoaderGLTFEx::loadFromFile(mApp, "res/woniu_xiuxian/scene.gltf", skinNode)) {
-
         addNode(skinNode);
     }
     

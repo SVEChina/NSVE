@@ -106,20 +106,14 @@ void SVLoaderGLTFEx::building(SVInstPtr _app,
     t_modelsPtr.resize(_model->meshes.size());
     for(s32 i=0;i<_model->meshes.size();i++) {
          t_modelsPtr[i] = _genModel(_app, _model, i, _path);
-        
         //整理mesh对应的mtl
-        
         int meshNum = t_modelsPtr[i]->getMeshNum();
         for (s32 j = 0; j < meshNum; j++) {
             SVMesh3dPtr meshPtr = t_modelsPtr[i]->getMesh(j);
-            
             tinygltf::Primitive &primitive = _model->meshes[j].primitives[j];
             meshPtr->setMtl(_mtlPool[primitive.material]);
             meshPtr->setSurface(_surfacePool[primitive.material]);
         }
-        
-        
-        
     }
     _nodePtr->setModel(t_modelsPtr);
     
@@ -331,7 +325,7 @@ SVMesh3dPtr SVLoaderGLTFEx::_genMeshPri(SVInstPtr _app,
             t_i_dataswap = nullptr;
         }
         t_rMesh->setIndexDsp(t_index_dsp);
-        t_rMesh->setDrawVertNum(indexNum);
+        t_rMesh->setDrawVertNum(1000);
     }
 //    t_rMesh->setDrawMethod(_prim->mode);    //定义恰好是一一对应关系
     if(_prim->mode == TINYGLTF_MODE_POINTS) {
