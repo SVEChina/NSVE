@@ -28,6 +28,8 @@ namespace sv {
         void init(s32 _version,bool _offline);
 
         void resize(s32 _w,s32 _);
+        
+        void info();
     
         //create-texture
         SVRTexPtr createResTexture() ;

@@ -28,10 +28,10 @@ namespace sv {
         ~SVRMeshGL();
         
         void load(SVRendererPtr _renderer,
-                    SVIndexStreamDspPtr _indexdsp,
-                    SVVertStreamDspPtr _streamdsp,
-                    SVInstStreamDspPtr _instdsp,
-                    SVRMeshDsp* _SVRMeshDsp);
+                  SVIndexStreamDspPtr _indexdsp,
+                  SVVertStreamDspPtr _streamdsp,
+                  SVInstStreamDspPtr _instdsp,
+                  SVRMeshDsp* _SVRMeshDsp);
 
         void unload();
 
