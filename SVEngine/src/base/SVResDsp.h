@@ -280,9 +280,11 @@ struct SVRMeshDsp {
     SVRMeshDsp() {
         m_draw_method = 0;
         m_draw_num = 0;
+        m_draw_buffer_type = 0;
     }
     s32 m_draw_method;
     s32 m_draw_num;
+    s32 m_draw_buffer_type;
 };
 
 /*

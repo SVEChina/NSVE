@@ -27,6 +27,7 @@
 #include "../mtl/SVMtlGLTF.h"
 #include "../mtl/SVSurface.h"
 #include "../mtl/SVMtlCore.h"
+#include "../mtl/SVMtlLib.h"
 
 #include "../node/SVSkinNode.h"
 #include "../node/SVModelNode.h"
@@ -58,7 +59,7 @@ SVLoaderGLTFEx::SVLoaderGLTFEx(SVInstPtr _app)
 SVLoaderGLTFEx::~SVLoaderGLTFEx() {
 }
 
-bool SVLoaderGLTFEx::loadFromFile(SVInstPtr _app, cptr8 _filename, SVSkinNodePtr _nodePtr) {
+SVSkinNodePtr SVLoaderGLTFEx::loadFromFile(SVInstPtr _app, cptr8 _filename) {
     tinygltf::TinyGLTF tiny;
     tinygltf::Model t_model;
     std::string t_err,t_warn;
@@ -68,16 +69,16 @@ bool SVLoaderGLTFEx::loadFromFile(SVInstPtr _app, cptr8 _filename, SVSkinNodePtr
     if(t_ret) {
         //用各种模型接入
         SVString t_path = _app->m_file_sys->getPath(tt.c_str());
-        building(_app,&t_model,t_path.c_str(), _nodePtr);
+        return building(_app,&t_model,t_path.c_str());
     }
-    return t_ret;
+    return nullptr;
 }
 
 //
-void SVLoaderGLTFEx::building(SVInstPtr _app,
+SVSkinNodePtr SVLoaderGLTFEx::building(SVInstPtr _app,
                               tinygltf::Model* _model,
-                              cptr8 _path,
-                              SVSkinNodePtr _nodePtr) {
+                              cptr8 _path) {
+    SVSkinNodePtr _nodePtr = MakeSharedPtr<SVSkinNode>(_app);
     //构建动画
     for(s32 i=0;i<_model->animations.size();i++) {
         SVAnimateSkinPtr t_ani = _genAnimate(_app,_model,i,_path);
@@ -117,8 +118,6 @@ void SVLoaderGLTFEx::building(SVInstPtr _app,
     }
     _nodePtr->setModel(t_modelsPtr);
     
-    
-    
     //构建节点
     for(s32 i=0;i<_model->scenes.size();i++) {
         tinygltf::Scene* t_scene = &(_model->scenes[i]);
@@ -127,6 +126,7 @@ void SVLoaderGLTFEx::building(SVInstPtr _app,
             //genNode(_app,_model,t_node_id);
         }
     }
+    return _nodePtr;
 }
 
 void SVLoaderGLTFEx::genNode(SVInstPtr _app,
@@ -292,6 +292,7 @@ SVMesh3dPtr SVLoaderGLTFEx::_genMeshPri(SVInstPtr _app,
         t_index_dsp->setBufType(E_BFT_STATIC_DRAW);
         tinygltf::Accessor* _acc_index = &(_model->accessors[_prim->indices]);
         s32 indexNum = _acc_index->count;
+        
         t_index_dsp->setIndexCnt(indexNum);
         s8* t_index_p = _getAccDataPointer(_model,_acc_index,_path);
         if(t_index_p!=nullptr) {
@@ -318,12 +319,7 @@ SVMesh3dPtr SVLoaderGLTFEx::_genMeshPri(SVInstPtr _app,
                 t_index_dsp->setDataType(32);
                 SVDataSwapPtr t_i_dataswap = MakeSharedPtr<SVDataSwap>();
                 t_i_dataswap->resize(indexNum*sizeof(s32));
-                s32* tt_i_p = (s32*)t_index_p;
-                for(s32 i=0;i<indexNum;i++) {
-                    s32 t_value = (s32)(*tt_i_p);
-                    t_i_dataswap->appendData(&t_value, sizeof(s32));
-                    tt_i_p++;
-                }
+                t_i_dataswap->writeData(t_index_p, indexNum*sizeof(u32));
                 t_index_dsp->setStreamData(t_i_dataswap);
                 t_i_dataswap = nullptr;
             }else if(_acc_index->componentType == TINYGLTF_COMPONENT_TYPE_UNSIGNED_INT) {
@@ -332,11 +328,7 @@ SVMesh3dPtr SVLoaderGLTFEx::_genMeshPri(SVInstPtr _app,
                 SVDataSwapPtr t_i_dataswap = MakeSharedPtr<SVDataSwap>();
                 t_i_dataswap->resize(indexNum*sizeof(u32));
                 u32* tt_i_p = (u32*)t_index_p;
-                for(s32 i=0;i<indexNum;i++) {
-                    u32 t_value = (u32)(*tt_i_p);
-                    t_i_dataswap->appendData(&t_value, sizeof(u32));
-                    tt_i_p++;
-                }
+                t_i_dataswap->writeData(t_index_p, indexNum*sizeof(u32));
                 t_index_dsp->setStreamData(t_i_dataswap);
                 t_i_dataswap = nullptr;
             }else if(_acc_index->componentType == TINYGLTF_COMPONENT_TYPE_FLOAT) {
@@ -348,7 +340,7 @@ SVMesh3dPtr SVLoaderGLTFEx::_genMeshPri(SVInstPtr _app,
         t_rMesh->setIndexDsp(t_index_dsp);
         t_rMesh->setDrawVertNum(indexNum);
     }
-//    t_rMesh->setDrawMethod(_prim->mode);    //定义恰好是一一对应关系
+    t_rMesh->setDrawMethod(_prim->mode);    //定义恰好是一一对应关系
     if(_prim->mode == TINYGLTF_MODE_POINTS) {
         t_rMesh->setDrawMethod(E_DRAW_POINTS);
     }else if(_prim->mode == TINYGLTF_MODE_LINE) {
@@ -558,7 +550,7 @@ SVAnimateSkinPtr SVLoaderGLTFEx::_genAnimate(SVInstPtr _app,
     return t_ani;
 }
 
-#include "../mtl/SVMtlLib.h"
+
 SVMtlCorePtr SVLoaderGLTFEx::_genMtl(SVInstPtr _app, tinygltf::Model* _model, s32 _index, cptr8 _path) {
     tinygltf::Material* _mat = &(_model->materials[_index]);
     SVMtlCorePtr _mtlPtr = _app->getMtlLib()->getMtl("test1");
@@ -768,20 +760,23 @@ SVTexturePtr SVLoaderGLTFEx::_genTexture(SVInstPtr _app,
 s8* SVLoaderGLTFEx::_getAccDataPointer(tinygltf::Model* _model,
                                        tinygltf::Accessor* acc,
                                        cptr8 _path) {
-    s32 t_acc_off = acc->byteOffset;
-    s32 t_viewID = acc->bufferView;
-    tinygltf::BufferView* t_bufview = &(_model->bufferViews[t_viewID]);
+//    s32 t_acc_off = acc->byteOffset;
+//    s32 t_viewID = acc->bufferView;
+    tinygltf::BufferView* t_bufview = &(_model->bufferViews[acc->bufferView]);
     if(t_bufview) {
-        s32 t_bufID = t_bufview->buffer;
-        s32 t_view_off = t_bufview->byteOffset;
-        s32 t_len = t_bufview->byteLength;
-        s32 t_view_stride = t_bufview->byteStride;
-        tinygltf::Buffer* t_buf = &(_model->buffers[t_bufID]);
-        if(t_view_off + t_acc_off>=t_buf->data.size()) {
-            return nullptr;
-        }
-        s8* p = ((s8*)(&(t_buf->data[0]))) + t_view_off + t_acc_off;
-        return p;
+//        tinygltf::Buffer* t_buf = &(_model->buffers[t_bufview->buffer]);
+        return (s8*)(_model->buffers[t_bufview->buffer].data.data() + (t_bufview->byteOffset + acc->byteOffset));
+        
+//        s32 t_bufID = t_bufview->buffer;
+//        s32 t_view_off = t_bufview->byteOffset;
+//        s32 t_len = t_bufview->byteLength;
+//        s32 t_view_stride = t_bufview->byteStride;
+//        tinygltf::Buffer* t_buf = &(_model->buffers[t_bufID]);
+//        if(t_view_off + t_acc_off>=t_buf->data.size()) {
+//            return nullptr;
+//        }
+//        s8* p = ((s8*)(&(t_buf->data[0]))) + t_view_off + t_acc_off;
+//        return p;
     }
     return nullptr;
 }
