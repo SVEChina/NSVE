@@ -90,6 +90,8 @@ namespace sv {
         static s8* _getAccDataPointer(tinygltf::Model* _model,
                                       tinygltf::Accessor* acc,
                                       cptr8 _path);
+        
+        static s32 _getAccLen(tinygltf::Accessor* acc);
     };
     
 
