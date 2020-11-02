@@ -7,122 +7,109 @@
 
 #include "SV2DMaskNode.h"
 #include "SVScene.h"
+
+#include "../app/SVDispatch.h"
+#include "../basesys/SVComData.h"
 #include "../core/SVPass.h"
-#include "../core/SVVertDef.h"
+
+#include "../mtl/SVMtlLib.h"
+#include "../mtl/SVSurface.h"
 #include "../mtl/SVTexture.h"
-//#include "../mtl/SVMtlMask.h"
 #include "../mtl/SVMtlCore.h"
 #include "../mtl/SVTexMgr.h"
-#include "../basesys/SVConfig.h"
-#include "../rendercore/SVRenderMgr.h"
-#include "../rendercore/SVRenderMesh.h"
-#include "../rendercore/SVRenderCmd.h"
+
 #include "../detect/SVDetectMgr.h"
+#include "../detect/SVDetectST.h"
+
+#include "../rendercore/SVRenderMesh.h"
+#include "../rendercore/SVRTarget.h"
+#include "../rendercore/SVRTargetMgr.h"
+#include "../rendercore/SVRenderCmd.h"
+#include "../rendercore/SVRenderMgr.h"
 
 using namespace sv;
 
 SV2DMaskNode::SV2DMaskNode(SVInstPtr _app)
 : SVNode(_app) {
     ntype = "SV2DMaskNode";
+    m_name = "SV2DMaskNode";
+    m_maskMtl = mApp->getMtlLib()->getMtl("mask2d");
+    if(m_maskMtl) {
+        m_maskMtl->reloadShader();
+    }
+    m_maskMesh = mApp->getComData()->faceMesh(SV_E_FACEMESH_SIMPILITY);
+    if (m_maskMesh) {
+        m_maskMesh->setDrawMethod(E_DRAW_TRIANGLES);
+        SVVertStreamDspPtr t_vert_dsp= m_maskMesh->getStreamDsp();
+        t_vert_dsp->push(E_VF_V2);
+        t_vert_dsp->push(E_VF_T0);
+        t_vert_dsp->push(E_VF_T1);
+//        t_vert_dsp->push(E_VF_C0);
+    }
+    m_maskSurface = MakeSharedPtr<SVSurface>();
+    m_maskTarget = mApp->getTargetMgr()->getTarget(E_TEX_HELP0);
+    if(!m_maskTarget) {
+        s32 t_w = mApp->m_global_param.sv_width;
+        s32 t_h = mApp->m_global_param.sv_height;
+        m_maskTarget = mApp->getTargetMgr()->createTarget(E_TEX_HELP0, t_w, t_h, false, false);
+        m_maskTarget->pushStreamQuene(E_RSM_SOLID);
+        mApp->getRenderMgr()->addRTarget(m_maskTarget,true);
+    }
 }
 
 SV2DMaskNode::~SV2DMaskNode() {
-
+    m_maskMtl = nullptr;
+    m_maskMesh = nullptr;
+    m_maskSurface = nullptr;
 }
 
 void SV2DMaskNode::update(f32 dt){
-//    SVPersonPtr t_person = mApp->getDetectMgr()->getPersonModule()->getPerson(m_personID);
-//    if( m_maskTex && t_person && t_person->getExist() && (m_intensity != 0)){
-//        m_pFaceMesh->setvisible(true);
-//        s32 t_ptnum = 0;
-//        s32 t_texcoordnum = 0;
-//        if (m_maskType == SV_E_2DMASK_FACE) {
-//            f32 *ptsData = t_person->getFaceWithMouthMeshData(t_ptnum, SV_E_FACEDATA_SCENE);
-//            if (ptsData) {
-//                m_pVerts->writeData(ptsData, t_ptnum * 2 * sizeof(f32));
-//            }
-//            f32 *texcoordData = t_person->getFaceWithMouthMeshData(t_texcoordnum, SV_E_FACEDATA_SCREEN);
-//            if (texcoordData) {
-//                m_pT1->writeData(texcoordData, t_texcoordnum * 2 * sizeof(f32));
-//            }
-//            //颜色
-//            C color[t_ptnum];
-//            memset(&color[0], 250, sizeof(C)*t_ptnum);
-//            m_pC->writeData(&color[0], sizeof(C)*t_ptnum);
-//
-//        }else if (m_maskType == SV_E_2DMASK_EYEBROW){
-//            f32 *ptsData = t_person->getEyebrowMeshData(t_ptnum, SV_E_FACEDATA_SCENE);
-//            if (ptsData) {
-//                m_pVerts->writeData(ptsData, t_ptnum * 2 * sizeof(f32));
-//            }
-//            f32 *texcoordData = t_person->getEyebrowMeshData(t_texcoordnum, SV_E_FACEDATA_SCREEN);
-//            if (texcoordData) {
-//                m_pT1->writeData(texcoordData, t_texcoordnum * 2 * sizeof(f32));
-//            }
-//            //颜色
-//            C color[t_ptnum];
-//            memset(&color[0], 250, sizeof(C)*t_ptnum);
-//            m_pC->writeData(&color[0], sizeof(C)*t_ptnum);
-//
-//        }else if (m_maskType == SV_E_2DMASK_EYELASH || m_maskType == SV_E_2DMASK_EYELID){
-//            f32 *ptsData = t_person->getEyeMeshData(t_ptnum, SV_E_FACEDATA_SCENE);
-//            if (ptsData) {
-//                m_pVerts->writeData(ptsData, t_ptnum * 2 * sizeof(f32));
-//            }
-//            f32 *texcoordData = t_person->getEyeMeshData(t_texcoordnum, SV_E_FACEDATA_SCREEN);
-//            if (texcoordData) {
-//                m_pT1->writeData(texcoordData, t_texcoordnum * 2 * sizeof(f32));
-//            }
-//            //颜色
-//            C color[t_ptnum];
-//            memset(&color[0], 250, sizeof(C)*t_ptnum);
-//            //这里处理了下！！！！！！！！！!!!!!后16点个透明度为0
-//            for (s32 i = 0; i<16; i++) {
-//                color[t_ptnum-i-1].a = 0;
-//            }
-//            m_pC->writeData(&color[0], sizeof(C)*t_ptnum);
-//        }
-//        m_pFaceMesh->setVertex2Data(m_pVerts);
-//        m_pFaceMesh->setTexcoord1Data(m_pT1);
-//        m_pFaceMesh->setColor0Data(m_pC);
-//        //update material
-//        m_pMtl->setBlendEnable(true);
-//        m_pMtl->setBlendState(MTL_BLEND_ONE, MTL_BLEND_ONE_MINUS_SRC_ALPHA);
-//        m_pMtl->setTexcoordFlip(1.0, 1.0);
-//        //
-//        m_maskMtl->update(dt);
-//        m_maskMtl->setBlendEnable(true);
-//        m_maskMtl->setBlendState(MTL_BLEND_ONE, MTL_BLEND_ONE_MINUS_SRC_ALPHA);
-//        m_maskMtl->setIntensity(m_intensity);
-//        m_maskMtl->setModelMatrix(m_absolutMat.get());
-//        m_maskMtl->setTexture(0, m_maskTex);
-//        m_maskMtl->setTexcoordFlip(1.0, 1.0);
-//        m_maskMtl->setTexSizeIndex(0, 1.0f/m_tex0width, 1.0f/m_tex0height);
-//        m_maskMtl->setTexSizeIndex(1, 1.0f/(m_tex1width), 1.0f/m_tex1height);
-//    }else{
-//        m_pFaceMesh->setvisible(false);
-//    }
+    SVTexturePtr _tex = mApp->getTexMgr()->getInTexture(E_TEX_MAIN);
+    m_maskSurface->setTexture(1, 1, _tex);
+//    FVec2 t_invert = FVec2(1.0f,1.0f);
+//    m_maskSurface->setParam("uInvert0", t_invert);
+    //
+    SVPersonPtr t_person = mApp->getDetectMgr()->getPersonModule()->getPerson(1);
+    if( t_person && t_person->getExist() && m_maskMesh && m_maskMtl && m_surface){
+        //顶点描述
+        SVVertStreamDspPtr t_vert_dsp= m_maskMesh->getStreamDsp();
+        t_vert_dsp->setBufType(E_BFT_DYNAMIC_DRAW);
+        s32 t_ptNum = 0;
+        f32 *t_vertexPts = t_person->getFaceDataScene(t_ptNum, SV_E_FACEDATA_SIMPLITY);
+        t_vert_dsp->setVertCnt(t_ptNum);
+        t_vert_dsp->setSigleStreamData(E_VF_V2, t_vertexPts, t_ptNum*2*sizeof(f32));
+        f32 *t_keyPts = t_person->getFaceDataScreen(t_ptNum, SV_E_FACEDATA_SIMPLITY);
+        f32 t_texcoordPts[t_ptNum*2];
+        memcpy(t_texcoordPts, t_keyPts, t_ptNum*2*sizeof(f32));
+        s32 t_w = mApp->m_global_param.sv_width;
+        s32 t_h = mApp->m_global_param.sv_height;
+        for (s32 i = 0; i<t_ptNum; i++) {
+            t_texcoordPts[2*i] = t_texcoordPts[2*i]/(t_w*1.0);
+            t_texcoordPts[2*i+1] = (t_h-t_texcoordPts[2*i+1])/(t_h*1.0);
+        }
+        t_vert_dsp->setSigleStreamData(E_VF_T1, t_texcoordPts, t_ptNum*2*sizeof(f32));
+    }
 }
 
 void SV2DMaskNode::render(){
-//    if (!mApp->m_pGlobalParam->m_curScene)
-//        return;
-//    SVRenderScenePtr t_rs = mApp->getRenderMgr()->getRenderScene();
-//    SVPersonPtr t_person = mApp->getDetectMgr()->getPersonModule()->getPerson(m_personID);
-//    if( m_maskTex && t_person && t_person->getExist() && (m_intensity != 0) && m_maskTex){
-//        for(s32 i=0;i<m_passPool.size();i++){
-//            if(m_passPool[i]->m_pMtl){
-//                SVRenderCmdPassPtr t_cmd = MakeSharedPtr<SVRenderCmdPass>();
-//                t_cmd->mTag = m_name;
-//                t_cmd->setClear(m_passPool[i]->m_isClear);
-//                t_cmd->setFbo(m_fbo);
-//                t_cmd->setTexture(m_passPool[i]->m_outTex);
-//                t_cmd->setMesh(m_passPool[i]->m_pMesh);
-//                t_cmd->setMaterial(m_passPool[i]->m_pMtl);
-//                t_rs->pushRenderCmd(RST_MASK2D, t_cmd);
-//            }
-//        }
-//    }
+    if (m_maskMtl && m_maskSurface && m_maskMesh && m_maskTarget) {
+        SVDispatch::dispatchMeshDraw(mApp,
+                                     m_maskMesh,
+                                     m_maskMtl,
+                                     m_maskSurface,
+                                     m_maskTarget,
+                                     E_RSM_SOLID,
+                                     "SV2DMaskNode");
+//        SVRTargetPtr t_target = mApp->getTargetMgr()->getTarget(E_TEX_MAIN);
+//        SVRCmdPassPtr t_pass1 = MakeSharedPtr<SVRCmdPass>();
+//        t_pass1->mTag = "SV2DMaskNode";
+//        t_pass1->setSwapTarget(E_TEX_MAIN);
+//        t_pass1->setUseTarget(E_TEX_HELP0);
+//        t_pass1->setMesh(m_maskMesh);
+//        t_pass1->setSurface(m_maskSurface);
+//        t_pass1->setMaterial(m_maskMtl);
+//        t_target->pushCommand(t_pass1, E_RSM_SOLID);
+    }
 }
 
 //序列化接口

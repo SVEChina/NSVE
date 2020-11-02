@@ -17,6 +17,7 @@
 #include "../node/SVCube.h"
 #include "../node/SVSpriteNode.h"
 #include "../node/SVFaceTuneNode.h"
+#include "../node/SV2DMaskNode.h"
 #include "../node/SVFacePointNode.h"
 
 #include "../app/SVGlobalMgr.h"
@@ -328,8 +329,7 @@ void SVScene::test() {
 //    SVFacePointNodePtr t_facept_node = MakeSharedPtr<SVFacePointNode>(mApp);
 //    addNode(t_facept_node);
     
-//    SVFaceTuneNodePtr t_faceTuneNode = MakeSharedPtr<SVFaceTuneNode>(mApp);
-//    addNode(t_faceTuneNode);
+
     //
 //    SVCubePtr t_box_node = MakeSharedPtr<SVCube>(mApp);
 //    t_box_node->setRotation(45.0f, 45.0f, 45.0f);
@@ -377,19 +377,24 @@ void SVScene::test() {
 //=======
     
     
-    SVSkinNodePtr skinNode = MakeSharedPtr<SVSkinNode>(mApp);
-    if(SVLoaderGLTFEx::loadFromFile(mApp, "res/woniu_xiuxian/scene.gltf", skinNode)) {
-
-        addNode(skinNode);
-    }
+//    SVSkinNodePtr skinNode = MakeSharedPtr<SVSkinNode>(mApp);
+//    if(SVLoaderGLTFEx::loadFromFile(mApp, "res/woniu_xiuxian/scene.gltf", skinNode)) {
+//
+//        addNode(skinNode);
+//    }
     
     
 //    SVTexturePtr t_tex = mApp->getTexMgr()->getTexture("res/test2.jpeg");
 
     //
-//    SVFacePointNodePtr t_facept_node = MakeSharedPtr<SVFacePointNode>(mApp);
-//    addNode(t_facept_node);
-    //
+    SVFacePointNodePtr t_facept_node = MakeSharedPtr<SVFacePointNode>(mApp);
+    addNode(t_facept_node);
+    
+//    SV2DMaskNodePtr t_maskNode = MakeSharedPtr<SV2DMaskNode>(mApp);
+//    addNode(t_maskNode);
+    
+//    SVFaceTuneNodePtr t_faceTuneNode = MakeSharedPtr<SVFaceTuneNode>(mApp);
+//    addNode(t_faceTuneNode);
 //
 //    SVCubePtr t_box_node = MakeSharedPtr<SVCube>(mApp);
 //    t_box_node->setRotation(45.0f, 45.0f, 45.0f);

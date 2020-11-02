@@ -414,10 +414,10 @@ struct SVTargetDsp {
         memset(m_color_texid,0,sizeof(s32)*SV_SUPPORT_MAX_TAREGT);
         m_use_depth = true;
         m_use_stencil = true;
-        m_color_r = 0.0f;
-        m_color_g = 0.0f;
-        m_color_b = 0.0f;
-        m_color_a = 1.0f;
+        m_color_r = 1.0f;
+        m_color_g = 1.0f;
+        m_color_b = 1.0f;
+        m_color_a = 0.0f;
         m_depth_value = 1.0f;
         m_stencil_value = 0;
     }

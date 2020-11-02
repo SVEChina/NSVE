@@ -20,14 +20,10 @@
 
 namespace sv {
     enum SV_E_FACEDATA_TYPE{
-        SV_E_FACEDATA_NULL = 0,
-        SV_E_FACEDATA_ORIGINAL,//屏幕坐标系下的原始人脸识别数据
-        SV_E_FACEDATA_SIMPLITY,//场景坐标系下的原始人脸识别数据
-        SV_E_FACEDATA_FACETUNE,//场景坐标系下微整形过的人脸识别数据
-        SV_E_FACEDATA_BROW,//场景坐标系下眉毛部位数据
-        SV_E_FACEDATA_EYE,//场景坐标系下眼睛部位数据
-        SV_E_FACEDATA_TUNE//场景坐标系下微整形的数据
-        //    SV_E_FACEDATA_SCREEN_EXT//屏幕坐标系下补过点的数据
+        SV_E_FACEDATA_SIMPLITY = 1,//全脸的数据
+        SV_E_FACEDATA_BROW,//眉毛部位数据
+        SV_E_FACEDATA_EYE,//眼睛部位数据
+        SV_E_FACEDATA_TUNED//微整形部位的数据
     };
 
     struct SV_S_FACE_ATTRIBUTE{
@@ -61,9 +57,10 @@ namespace sv {
         SVRect& getFaceRect();
         
         FVec3& getFaceRot();
-        
-        f32 *getFaceData(s32 &_ptNum, SV_E_FACEDATA_TYPE _type);
-        
+        //获取场景坐标系下的坐标点（原点在中心）
+        f32 *getFaceDataScene(s32 &_ptNum, SV_E_FACEDATA_TYPE _type, bool _isTuned = false);
+        //获取屏幕坐标系下的坐标点（原点在左上角）
+        f32 *getFaceDataScreen(s32 &_ptNum, SV_E_FACEDATA_TYPE _type, bool _isTuned = false);
     protected:
         void _setExist(bool _exist){ m_exist = _exist; }
         void _setFaceRot(f32 _yaw,f32 _pitch,f32 _roll);
@@ -86,7 +83,7 @@ namespace sv {
         s32 m_facePtNum; //识别面部顶点数
         f32 *m_pFaceDataScreen;//原始识别数据
         f32 *m_pFaceDataScene;//场景坐标系识别数据
-        f32 *m_pFaceDataTune;//场景坐标系下微整形的数据
+        f32 *m_pFaceDataTuned;
         f32 *m_pFaceDataExt;//
         FVec3 m_facerot;
         SVRect m_facerect;

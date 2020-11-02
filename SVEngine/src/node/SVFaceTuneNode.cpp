@@ -10,6 +10,7 @@
 
 #include "../app/SVDispatch.h"
 #include "../basesys/SVComData.h"
+#include "../basesys/SVCameraMgr.h"
 #include "../core/SVPass.h"
 
 #include "../mtl/SVMtlLib.h"
@@ -26,6 +27,7 @@
 #include "../rendercore/SVRTargetMgr.h"
 #include "../rendercore/SVRenderCmd.h"
 #include "../rendercore/SVRenderMgr.h"
+#include "../rendercore/SVRenderer.h"
 using namespace sv;
 
 SVFaceTuneNode::SVFaceTuneNode(SVInstPtr _app)
@@ -34,19 +36,24 @@ SVFaceTuneNode::SVFaceTuneNode(SVInstPtr _app)
     m_name = "SVFaceTuneNode";
     m_tuneMtl = mApp->getMtlLib()->getMtl("normal2d");
     if(m_tuneMtl) {
+        m_tuneMtl->setBlendEnable(true);
+        m_tuneMtl->setBlendState(MTL_BLEND_ONE, MTL_BLEND_ONE_MINUS_SRC_ALPHA);
         m_tuneMtl->reloadShader();
     }
     m_tuneMesh = mApp->getComData()->faceMesh(SV_E_FACEMESH_TUNE);
     if (m_tuneMesh) {
-        m_tuneMesh->setDrawMethod(E_DRAW_POINTS);
+        m_tuneMesh->setDrawMethod(E_DRAW_TRIANGLES);
     }
     m_tuneSurface = MakeSharedPtr<SVSurface>();
+    m_tuneSurface->setParam("matModel",m_localMat);
     m_faceTuneTarget = mApp->getTargetMgr()->getTarget(E_TEX_HELP0);
     if(!m_faceTuneTarget) {
         s32 t_w = mApp->m_global_param.sv_width;
         s32 t_h = mApp->m_global_param.sv_height;
         m_faceTuneTarget = mApp->getTargetMgr()->createTarget(E_TEX_HELP0, t_w, t_h, false, false);
-        m_faceTuneTarget->pushStreamQuene(E_RSM_SOLID);
+        m_faceTuneTarget->setClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+        m_faceTuneTarget->bindCamera(mApp->getCameraMgr()->getMainCamera());
+        m_faceTuneTarget->pushStreamQuene(E_RSM_FACEMORPH);
         mApp->getRenderMgr()->addRTarget(m_faceTuneTarget,true);
     }
 }
@@ -58,10 +65,10 @@ SVFaceTuneNode::~SVFaceTuneNode() {
 }
 
 void SVFaceTuneNode::update(f32 dt){
-    SVTexturePtr _tex = mApp->getTexMgr()->getInTexture(E_TEX_MAIN);
+    SVTexturePtr _tex = mApp->getTexMgr()->getInTexture(E_TEX_CAMERA);
     m_tuneSurface->setTexture(1, 0, _tex);
     FVec2 t_invert = FVec2(1.0f,1.0f);
-    m_tuneSurface->setParam("u_invert", t_invert);
+    m_tuneSurface->setParam("uInvert", t_invert);
     //
     SVPersonPtr t_person = mApp->getDetectMgr()->getPersonModule()->getPerson(1);
     if( t_person && t_person->getExist() && m_tuneMesh){
@@ -69,10 +76,10 @@ void SVFaceTuneNode::update(f32 dt){
         SVVertStreamDspPtr t_vert_dsp= m_tuneMesh->getStreamDsp();
         t_vert_dsp->setBufType(E_BFT_DYNAMIC_DRAW);
         s32 t_ptNum = 0;
-        f32 *t_vertexPts = t_person->getFaceData(t_ptNum, SV_E_FACEDATA_TUNE);
+        f32 *t_vertexPts = t_person->getFaceDataScene(t_ptNum, SV_E_FACEDATA_TUNED);
         t_vert_dsp->setVertCnt(t_ptNum);
         t_vert_dsp->setSigleStreamData(E_VF_V2, t_vertexPts, t_ptNum*2*sizeof(f32));
-        f32 *t_keyPts = t_person->getFaceData(t_ptNum, SV_E_FACEDATA_ORIGINAL);
+        f32 *t_keyPts = t_person->getFaceDataScreen(t_ptNum, SV_E_FACEDATA_TUNED);
         f32 t_texcoordPts[t_ptNum*2];
         memcpy(t_texcoordPts, t_keyPts, t_ptNum*2*sizeof(f32));
         s32 t_w = mApp->m_global_param.sv_width;
@@ -92,8 +99,24 @@ void SVFaceTuneNode::render(){
                                      m_tuneMtl,
                                      m_tuneSurface,
                                      m_faceTuneTarget,
-                                     E_RSM_SOLID,
+                                     E_RSM_FACEMORPH,
                                      "SVDrawFaceTune");
+        
+        SVMtlCorePtr t_mtl = mApp->getMtlLib()->getMtl("screen");
+        if(t_mtl) {
+            SVSurfacePtr t_surface = MakeSharedPtr<SVSurface>();
+            SVTexturePtr t_help0_tex = mApp->getRenderer()->getInTexture(E_TEX_HELP0);
+            t_surface->setTexture(1,0,t_help0_tex);
+            FVec2 t_invert = FVec2(1.0f, -1.0f);
+            t_surface->setParam("u_invert", t_invert);
+            SVDispatch::dispatchMeshDraw(mApp,
+                                         mApp->getComData()->screenMesh(),
+                                         t_mtl,
+                                         t_surface,
+                                         E_RSM_SOLID,
+                                         "SVDrawFaceTuneBack");
+        }
+//        SVRTargetPtr t_target = mApp->getTargetMgr()->getTarget(E_TEX_MAIN);
 //        SVRCmdPassPtr t_pass1 = MakeSharedPtr<SVRCmdPass>();
 //        t_pass1->mTag = "SVFaceTuneNode";
 //        t_pass1->setSwapTarget(E_TEX_MAIN);

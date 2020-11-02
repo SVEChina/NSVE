@@ -9,8 +9,8 @@ uniform mat4 matModel;
 uniform mat4 matVP;
 uniform vec2 uTex0size;
 uniform vec2 uTex1size;
-uniform vec2 uTtexcoord0Clip;
-uniform vec2 uTtexcoord1Clip;
+uniform vec2 uInvert0;
+uniform vec2 uInvert1;
 
 out vec2 vTexcoord0;
 out vec2 vTexcoord1;

@@ -8,6 +8,7 @@
         "normal3d.mtl",
         "debug2d.mtl",
         "debug3d.mtl",
+        "mask2d.mtl",
         "filterGray.mtl",
         "filterHaze.mtl",
         "filterHue.mtl",

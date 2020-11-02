@@ -44,6 +44,10 @@ public:
     
     void fromJSON(RAPIDJSON_NAMESPACE::Value &item);
 protected:
+    SVRenderMeshPtr m_maskMesh;
+    SVMtlCorePtr    m_maskMtl;
+    SVSurfacePtr    m_maskSurface;
+    SVRTargetPtr    m_maskTarget;
 };
 
 }//!namespace sv

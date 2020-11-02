@@ -26,7 +26,7 @@ void main()
     vec3 color = blendModel(srcColor.rgb, clamp(maskColor.rgb * (1.0 / maskColor.a), 0.0, 1.0));
     float opacity = vColor.a;
     color = mix(srcColor.rgb, color, maskColor.a);
-    color = mix(srcColor.rgb, color, intensity * opacity);
+    color = mix(srcColor.rgb, color, intensity);
     color0 = vec4(color, 1.0);
 //    color0 = vec4(1.0, 0.0, 0.0, 1.0);
 }

@@ -2,6 +2,9 @@
     "version" : "1.0",
     "name" : "screen",
     "shader" : "shader/dsp/mask2d.dsp",
+    "textures" :[
+        { "chn": 0 , "from" : "file", "path" : "res/lip.png", "stage": "fs" }
+    ],
     "blend-param" : {
         "enable" : 1
     },
