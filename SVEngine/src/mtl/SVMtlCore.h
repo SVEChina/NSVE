@@ -95,6 +95,14 @@ namespace sv {
         s32 m_blend_enable;
         s32 m_blend_src_param;
         s32 m_blend_dst_param;
+        
+        s32 m_blend_separate_enable;
+        s32 m_blend_separate_src_rgb;
+        s32 m_blend_separate_dst_rgb;
+        s32 m_blend_separate_src_alpha;
+        s32 m_blend_separate_dst_alpha;
+        s32 m_blend_separate_equation;
+        
         //裁剪面参数
         s32 m_cull_enable;
         s32 m_frontFace;
@@ -144,9 +152,13 @@ namespace sv {
         
         void setBlendEnable(bool _bBlendEnable);
         
-        void setBlendState(s32 _src , s32 _dst);
+        void setBlendState(s32 _src, s32 _dst);
         
-        void setDepthEnable(bool _bDepthEnable);
+        void setBlendSeparateEnable(bool _enable);
+        void setBlendSeparateState(s32 _srcRGB, s32 _dstRGB, s32 _srcAlpha, s32 _dstAlpha, s32 _equation);
+        
+        void setDepthEnable(bool _enable);
+        void setDepthMethod(s32 _method);
         
         void setCullEnable(bool _bCullEnable);
         

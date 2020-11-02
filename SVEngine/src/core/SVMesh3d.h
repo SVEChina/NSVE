@@ -40,6 +40,8 @@ namespace sv {
         
         SVMtlCorePtr getMtl();
         
+        void setSurface(SVSurfacePtr _surface);
+        
         SVSurfacePtr getSurface();
         
         void setData(SVDataSwapPtr _data,VFTYPE _vtf,s32 _count,s32 _seqMode);

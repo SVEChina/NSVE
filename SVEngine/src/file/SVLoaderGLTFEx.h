@@ -26,18 +26,23 @@
 
 namespace sv {
     
+    typedef struct SVGLTF {
+//        std::vec
+    }SVGLTF;
+    
     class SVLoaderGLTFEx : public SVGBaseEx{
     public:
         SVLoaderGLTFEx(SVInstPtr _app);
         
         ~SVLoaderGLTFEx();
         
-        static bool loadFromFile(SVInstPtr _app,cptr8 _filename);
+        static bool loadFromFile(SVInstPtr _app,cptr8 _filename, SVSkinNodePtr _nodePtr);
         
     protected:
         static void building(SVInstPtr _app,
                              tinygltf::Model* _model,
-                             cptr8 _path);
+                             cptr8 _path,
+                             SVSkinNodePtr _nodePtr);
         
         static void genNode(SVInstPtr _app,
                             tinygltf::Model* _model,
@@ -69,10 +74,8 @@ namespace sv {
                                             cptr8 _path);
 
         //生成材质
-        static SVSurfacePtr _genMtl(SVInstPtr _app,
-                                    tinygltf::Model* _model,
-                                    s32 _index,
-                                    cptr8 _path);
+        static SVMtlCorePtr _genMtl(SVInstPtr _app, tinygltf::Model* _model, s32 _index, cptr8 _path);
+        static SVSurfacePtr _genSurface(SVInstPtr _app, tinygltf::Model* _model, s32 _index, cptr8 _path);
         
         static SVTexturePtr _genTexture(SVInstPtr _app,
                                         tinygltf::Model* _model,

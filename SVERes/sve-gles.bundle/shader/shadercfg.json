@@ -18,6 +18,7 @@
         "shader/dsp/filterCurveAdjst.dsp",
         "shader/dsp/filterCurveAdjstTex.dsp",
         "shader/dsp/filterGamma.dsp",
-        "shader/dsp/filterHDR.dsp"
+        "shader/dsp/filterHDR.dsp",
+        "shader/dsp/test1.dsp"
     ]
 }
