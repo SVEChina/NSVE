@@ -1,0 +1,17 @@
+{
+    "version" : "1.0",
+    "name" : "screen",
+    "shader" : "shader/dsp/mask2d.dsp",
+    "blend-param" : {
+        "enable" : 1
+    },
+    "stencil-param" : {
+        "enable" : 0
+    },
+    "alpha-param" : {
+        "enable" : 1
+    },
+    "depth-param" : {
+        "enable" : 0
+    }
+}
