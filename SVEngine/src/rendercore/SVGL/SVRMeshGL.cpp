@@ -414,6 +414,12 @@ void SVRMeshGL::draw(SVRendererPtr _renderer) {
             if( m_indexID>0) {
                 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexID);
                 glDrawElements(t_method, m_rmesh_dsp->m_draw_num,t_index_formate, 0);
+//                s32 t_error = glGetError();
+//                if(t_error>GL_NO_ERROR) {
+//                    if(t_error!=GL_INVALID_ENUM) {
+//                        int a = 0;
+//                    }
+//                }
             }
         }else {
             glDrawArrays(t_method, 0, m_rmesh_dsp->m_draw_num);
