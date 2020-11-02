@@ -176,6 +176,7 @@ public:
 class SVIndexStreamDsp :public SVObject {
 public:
     SVIndexStreamDsp() {
+        _dataType = 16;
         _bufSize = 0;
         _bufData = nullptr;
     };
@@ -191,6 +192,12 @@ public:
     //设置索引个数
     void setIndexCnt(s32 _cnt) {
         _indexCnt = _cnt;
+    }
+    
+    //设置流数据
+    bool setDataType(s32 _size) {
+        _dataType = _size;
+        return true;
     }
     
     //设置流数据
@@ -213,6 +220,8 @@ public:
     s32 _indexCnt;
     //buf 尺寸
     s32 _bufSize;
+    //数据类型
+    s32 _dataType;
     //BUFFER类型
     BUFFERTYPE _bufType;
     //数据
