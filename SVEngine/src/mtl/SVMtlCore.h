@@ -78,6 +78,8 @@ namespace sv {
                
         void setTexture(s32 _chn,s32 _stage,sv::SV_TEXIN _from);
         
+        void setShader(ptr8 _sname,std::vector<SVString>& _sdef);
+        
         SVShaderPtr getShader() { return m_shader_obj; }
         
     protected:
@@ -134,6 +136,8 @@ namespace sv {
         std::vector<SVString> m_shader_defs;
         //shader对象
         SVShaderPtr m_shader_obj;
+        //
+        bool m_shader_dirty;
         
     public:
         void swap();

@@ -91,6 +91,7 @@ SVMtlCorePtr SVMtlCore::clone() {
 }
 
 void SVMtlCore::reset() {
+    m_shader_dirty = true;
     m_LogicMtlFlag0 = 0;
     for(s32 i=0;i<MAX_TEXUNIT;i++){
         m_vs_texUnit[i].reset();
@@ -210,6 +211,10 @@ void SVMtlCore::update(f32 dt) {
 }
 
 void SVMtlCore::reloadShader(){
+    if(m_shader_dirty) {
+        m_shader_dirty = false;
+        m_shader_obj = nullptr;
+    }
     if(m_shader_obj)
         return ;
     if( mApp->getShaderMgr() ) {
@@ -220,6 +225,15 @@ void SVMtlCore::reloadShader(){
             m_shader_obj = mApp->getShaderMgr()->loadSDSP(m_shader_name.c_str(),m_shader_defs);
         }
     }
+}
+
+void SVMtlCore::setShader(ptr8 _sname,std::vector<SVString>& _sdef) {
+    m_shader_name = _sname;
+    m_shader_defs.clear();
+    for(s32 i=0;i<_sdef.size();i++) {
+        m_shader_defs.push_back(_sdef[i]);
+    }
+    m_shader_dirty = true;
 }
 
 //提交参数到GPU
