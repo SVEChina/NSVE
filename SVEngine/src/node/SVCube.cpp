@@ -57,7 +57,12 @@ void SVCube::update(f32 _dt) {
 
 void SVCube::render() {
     if ( m_visible && m_cube_mesh && m_mtl){
-        SVDispatch::dispatchMeshDraw(mApp, m_cube_mesh, m_mtl ,m_surface,E_RSM_SOLID);
+        SVDispatch::dispatchMeshDraw(mApp,
+                                     m_cube_mesh,
+                                     m_mtl ,
+                                     m_surface,
+                                     E_RSM_SOLID,
+                                     "SVCube");
     }
     SVNode::render();
 }

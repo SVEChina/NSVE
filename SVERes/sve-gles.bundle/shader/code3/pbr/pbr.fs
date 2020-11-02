@@ -97,11 +97,10 @@ vec3 getNormal() {
     vec3 tex_dx = dFdx(vec3(v_UV, 0.0));
     vec3 tex_dy = dFdy(vec3(v_UV, 0.0));
     vec3 t = (tex_dy.t * pos_dx - tex_dx.t * pos_dy) / (tex_dx.s * tex_dy.t - tex_dy.s * tex_dx.t);
-
     #ifdef HAS_NORMALS
-    vec3 ng = normalize(v_Normal);
+        vec3 ng = normalize(v_Normal);
     #else
-    vec3 ng = cross(pos_dx, pos_dy);
+        vec3 ng = cross(pos_dx, pos_dy);
     #endif
     t = normalize(t - ng * dot(ng, t));
     vec3 b = normalize(cross(ng, t));
@@ -188,8 +187,8 @@ void main() {
     // Metallic and Roughness material properties are packed together
     // In glTF, these factors can be specified by fixed scalar values
     // or from a metallic-roughness map
-    float perceptualRoughness = u_MetallicRoughnessValues.y;
     float metallic = u_MetallicRoughnessValues.x;
+    float perceptualRoughness = u_MetallicRoughnessValues.y;
 #ifdef HAS_METALROUGHNESSMAP
     // Roughness is stored in the 'g' channel, metallic is stored in the 'b' channel.
     // This layout intentionally reserves the 'r' channel for (optional) occlusion map data
@@ -202,7 +201,6 @@ void main() {
     // Roughness is authored as perceptual roughness; as is convention,
     // convert to material roughness by squaring the perceptual roughness [2].
     float alphaRoughness = perceptualRoughness * perceptualRoughness;
-
     // The albedo may be defined from a base texture or a flat color
 #ifdef HAS_BASECOLORMAP
     vec4 baseColor = SRGBtoLINEAR( texture(u_BaseColorSampler, v_UV) ) * u_BaseColorFactor;
@@ -220,18 +218,23 @@ void main() {
     float reflectance90 = clamp(reflectance * 25.0, 0.0, 1.0);
     vec3 specularEnvironmentR0 = specularColor.rgb;
     vec3 specularEnvironmentR90 = vec3(1.0, 1.0, 1.0) * reflectance90;
-    vec3 n = getNormal();                             // normal at surface point
-    vec3 v = normalize(u_Camera - v_Position);        // Vector from surface point to camera
-    vec3 l = normalize(u_LightDirection);             // Vector from surface point to light
-    vec3 h = normalize(l+v);                          // Half vector between both l and v
+    //物体表面法线
+    vec3 n = getNormal();
+    //点到相机向量
+    vec3 v = normalize(u_Camera - v_Position);
+    //世界方向光方向
+    vec3 l = normalize(u_LightDirection);
+    //l和v的半向量
+    vec3 h = normalize(l+v);
+    //反射向量
     vec3 reflection = -normalize(reflect(v, n));
-
+    //
     float NdotL = clamp(dot(n, l), 0.001, 1.0);
     float NdotV = clamp(abs(dot(n, v)), 0.001, 1.0);
     float NdotH = clamp(dot(n, h), 0.0, 1.0);
     float LdotH = clamp(dot(l, h), 0.0, 1.0);
     float VdotH = clamp(dot(v, h), 0.0, 1.0);
-
+    //
     PBRInfo pbrInputs = PBRInfo(
         NdotL,
         NdotV,
@@ -246,13 +249,11 @@ void main() {
         diffuseColor,
         specularColor
     );
-
+    
     // Calculate the shading terms for the microfacet specular shading model
     vec3 F = specularReflection(pbrInputs);
     float G = geometricOcclusion(pbrInputs);
     float D = microfacetDistribution(pbrInputs);
-
-    // Calculation of analytical lighting contribution
     //漫反射贡献
     vec3 diffuseContrib = (1.0 - F) * diffuse(pbrInputs);
     //镜面光贡献

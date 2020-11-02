@@ -29,7 +29,7 @@ SVCameraNode::SVCameraNode(SVInstPtr _app)
     m_height = 1280.0f;
     m_fovy = 60.0f;
     //
-    m_pos.set(0.0f,1000.0f,500.0f);
+    m_pos.set(0.0f,500.0f,500.0f);
     m_up.set(0.0f, 1.0f, 0.0f);
     m_target.set(0.0f,0.0f,0.0f);    //m_target 就是target
     m_distance = 100.0f;
