@@ -18,16 +18,14 @@ SVPerson::SVPerson(SVInstPtr _app)
     m_personID = 0;
     m_exist = false;
     m_detectType = DETECT_T_NULL;
-    m_face_attribute.mouth_noise_ratio = 1.00f;
-    m_face_attribute.tip_thickness_ratio = 1.00f;
-    m_face_attribute.eyes_down_ratio = 0.00f;
-    m_face_attribute.eyes_in_corner_ratio = 1.00f;
-    m_face_attribute.eyes_out_corner_ratio = 1.00f;
+    m_face_attribute.mouth_noise_ratio = 0.80f;
+    m_face_attribute.tip_thickness_ratio = 0.80f;
+    m_face_attribute.eyes_down_ratio = 1.00f;
+    m_face_attribute.eyes_in_corner_ratio = 0.20f;
+    m_face_attribute.eyes_out_corner_ratio = 0.20f;
     m_pTracker = MakeSharedPtr<SVTrackerFace>(mApp);
-    m_pFaceDataScreen= new f32[MAX_FACE_PT_NUM * 2];
-    memset(m_pFaceDataScreen, 0, sizeof(f32) * 2 * MAX_FACE_PT_NUM);
-    m_pFaceDataScene= new f32[MAX_FACE_PT_NUM * 2];
-    memset(m_pFaceDataScene, 0, sizeof(f32) * 2 * MAX_FACE_PT_NUM);
+    m_pFaceData= new f32[MAX_FACE_PT_NUM * 2];
+    memset(m_pFaceData, 0, sizeof(f32) * 2 * MAX_FACE_PT_NUM);
     m_pFaceDataTuned= new f32[MAX_FACE_PT_NUM * 2];
     memset(m_pFaceDataTuned, 0, sizeof(f32) * 2 * MAX_FACE_PT_NUM);
     m_pFaceDataExt= new f32[MAX_FACE_PT_NUM * 2];
@@ -37,11 +35,8 @@ SVPerson::SVPerson(SVInstPtr _app)
 
 SVPerson::~SVPerson() {
     m_pTracker = nullptr;
-    if (m_pFaceDataScreen) {
-        delete m_pFaceDataScreen;
-    }
-    if (m_pFaceDataScene) {
-        delete m_pFaceDataScene;
+    if (m_pFaceData) {
+        delete m_pFaceData;
     }
     if (m_pFaceDataTuned) {
         delete m_pFaceDataTuned;
@@ -94,8 +89,7 @@ void SVPerson::setDetectType(DETECTTYPE type) {
 void SVPerson::_setFaceData(void* _pdata,s32 _len) {
     if(_len>0 && _len<sizeof(f32)*2*MAX_FACE_PT_NUM) {
         m_dataLock.lock();
-        memcpy(m_pFaceDataScreen, _pdata, _len);
-        _transDataToScene(m_pFaceDataScreen, m_facePtNum,  m_pFaceDataScene);
+        memcpy(m_pFaceData, _pdata, _len);
         m_dataLock.unlock();
     }
 }
@@ -125,14 +119,14 @@ FVec3& SVPerson::getFaceRot(){
     return m_facerot;
 }
 
-f32 *SVPerson::getFaceDataScene(s32 &_ptNum, SV_E_FACEDATA_TYPE _type, bool _isTuned) {
+f32 *SVPerson::getFaceData(s32 &_ptNum, SV_E_FACEDATA_TYPE _type,  bool _isTuned){
     f32 *t_tarFaceData;
     if (_isTuned) {
         s32 t_ptNum = 0;
-        _transDataToFaceTune(m_pFaceDataScene, m_facePtNum, m_pFaceDataTuned, t_ptNum);
+        _transDataToFaceTune(m_pFaceData, m_facePtNum, m_pFaceDataTuned, t_ptNum);
         t_tarFaceData = m_pFaceDataTuned;
     }else{
-        t_tarFaceData = m_pFaceDataScene;
+        t_tarFaceData = m_pFaceData;
     }
     if (_type == SV_E_FACEDATA_SIMPLITY) {
         _ptNum = m_facePtNum;
@@ -144,32 +138,7 @@ f32 *SVPerson::getFaceDataScene(s32 &_ptNum, SV_E_FACEDATA_TYPE _type, bool _isT
         _transDataToEye(t_tarFaceData, m_facePtNum, m_pFaceDataExt, _ptNum);
         return m_pFaceDataExt;
     }else if(_type == SV_E_FACEDATA_TUNED){
-        _transDataToTune(m_pFaceDataScene, t_tarFaceData, m_pFaceDataExt, _ptNum);
-        return m_pFaceDataExt;
-    }
-    return nullptr;
-}
-
-f32 *SVPerson::getFaceDataScreen(s32 &_ptNum, SV_E_FACEDATA_TYPE _type,  bool _isTuned){
-    f32 *t_tarFaceData;
-    if (_isTuned) {
-        s32 t_ptNum = 0;
-        _transDataToFaceTune(m_pFaceDataScreen, m_facePtNum, m_pFaceDataTuned, t_ptNum);
-        t_tarFaceData = m_pFaceDataTuned;
-    }else{
-        t_tarFaceData = m_pFaceDataScreen;
-    }
-    if (_type == SV_E_FACEDATA_SIMPLITY) {
-        _ptNum = m_facePtNum;
-        return t_tarFaceData;
-    }else if(_type == SV_E_FACEDATA_BROW){
-        _transDataToBrow(t_tarFaceData, m_facePtNum, m_pFaceDataExt, _ptNum);
-        return m_pFaceDataExt;
-    }else if(_type == SV_E_FACEDATA_EYE){
-        _transDataToEye(t_tarFaceData, m_facePtNum, m_pFaceDataExt, _ptNum);
-        return m_pFaceDataExt;
-    }else if(_type == SV_E_FACEDATA_TUNED){
-        _transDataToTune(m_pFaceDataScreen, t_tarFaceData, m_pFaceDataExt, _ptNum);
+        _transDataToTuned(m_pFaceData, t_tarFaceData, m_pFaceDataExt, _ptNum);
         return m_pFaceDataExt;
     }
     return nullptr;
@@ -240,6 +209,6 @@ void SVPerson::_transDataToFaceTune(f32 *_pInData, s32 _inNum, f32 *_pOutData, s
     SVKeyPointExt::faceDataForFaceTune(t_tuneRatio, _pInData, _inNum, _pOutData, _outNum);
 }
 
-void SVPerson::_transDataToTune(f32 *_pInData, f32 *_pInTuneData, f32 *_pOutData, s32 &_outNum){
+void SVPerson::_transDataToTuned(f32 *_pInData, f32 *_pInTuneData, f32 *_pOutData, s32 &_outNum){
     SVKeyPointExt::faceDataForTune(_pInTuneData, _pInData, _pOutData, _outNum);
 }

@@ -53,7 +53,7 @@ void SVRTexGL::load(SVRendererPtr _renderer,SVTextureDsp* _tex_dsp) {
     SVRTex::load(_renderer,_tex_dsp);
     SVRendererGLPtr t_rm = std::dynamic_pointer_cast<SVRendererGL>(_renderer);
     if(t_rm && m_texture_dsp) {
-        SV_LOG_INFO("SVRTexGL create %d ",m_res_id);
+        SV_LOG_INFO("SVRTexGL create %d\n",m_res_id);
         //数据格式
         m_dataformate = GL_RGBA;
         m_informate = GL_RGBA;

@@ -34,7 +34,7 @@ SVFaceTuneNode::SVFaceTuneNode(SVInstPtr _app)
 : SVNode(_app) {
     ntype = "SVFaceTuneNode";
     m_name = "SVFaceTuneNode";
-    m_tuneMtl = mApp->getMtlLib()->getMtl("normal2d");
+    m_tuneMtl = mApp->getMtlLib()->getMtl("mask2d");
     if(m_tuneMtl) {
         m_tuneMtl->setBlendEnable(true);
         m_tuneMtl->setBlendState(MTL_BLEND_ONE, MTL_BLEND_ONE_MINUS_SRC_ALPHA);
@@ -45,7 +45,7 @@ SVFaceTuneNode::SVFaceTuneNode(SVInstPtr _app)
         m_tuneMesh->setDrawMethod(E_DRAW_TRIANGLES);
     }
     m_tuneSurface = MakeSharedPtr<SVSurface>();
-    m_tuneSurface->setParam("matModel",m_localMat);
+    //
     m_faceTuneTarget = mApp->getTargetMgr()->getTarget(E_TEX_HELP0);
     if(!m_faceTuneTarget) {
         s32 t_w = mApp->m_global_param.sv_width;
@@ -62,33 +62,33 @@ SVFaceTuneNode::~SVFaceTuneNode() {
     m_tuneMtl = nullptr;
     m_tuneMesh = nullptr;
     m_tuneSurface = nullptr;
+    m_faceTuneTarget = nullptr;
 }
 
 void SVFaceTuneNode::update(f32 dt){
-    SVTexturePtr _tex = mApp->getTexMgr()->getInTexture(E_TEX_CAMERA);
-    m_tuneSurface->setTexture(1, 0, _tex);
-    FVec2 t_invert = FVec2(1.0f,1.0f);
-    m_tuneSurface->setParam("uInvert", t_invert);
     //
     SVPersonPtr t_person = mApp->getDetectMgr()->getPersonModule()->getPerson(1);
     if( t_person && t_person->getExist() && m_tuneMesh){
+        SVTexturePtr _tex = mApp->getTexMgr()->getInTexture(E_TEX_CAMERA);
+        m_tuneSurface->setTexture(1, 0, _tex);
+        s32 t_width = mApp->m_global_param.sv_width;
+        s32 t_height = mApp->m_global_param.sv_height;
+        FVec2 t_resolution = FVec2(t_width, t_height);
+        m_tuneSurface->setParam("uResolution", t_resolution);
+        m_tuneSurface->setParam("uTex0size", t_resolution);
+        m_tuneSurface->setParam("uTex1size", t_resolution);
+        FVec2 t_invert = FVec2(1.0f,1.0f);
+        m_tuneSurface->setParam("uInvert0", t_invert);
+        m_tuneSurface->setParam("uInvert1", t_invert);
         //顶点描述
         SVVertStreamDspPtr t_vert_dsp= m_tuneMesh->getStreamDsp();
         t_vert_dsp->setBufType(E_BFT_DYNAMIC_DRAW);
         s32 t_ptNum = 0;
-        f32 *t_vertexPts = t_person->getFaceDataScene(t_ptNum, SV_E_FACEDATA_TUNED);
+        f32 *t_vertexPts = t_person->getFaceData(t_ptNum, SV_E_FACEDATA_TUNED, true);
         t_vert_dsp->setVertCnt(t_ptNum);
         t_vert_dsp->setSigleStreamData(E_VF_V2, t_vertexPts, t_ptNum*2*sizeof(f32));
-        f32 *t_keyPts = t_person->getFaceDataScreen(t_ptNum, SV_E_FACEDATA_TUNED);
-        f32 t_texcoordPts[t_ptNum*2];
-        memcpy(t_texcoordPts, t_keyPts, t_ptNum*2*sizeof(f32));
-        s32 t_w = mApp->m_global_param.sv_width;
-        s32 t_h = mApp->m_global_param.sv_height;
-        for (s32 i = 0; i<t_ptNum; i++) {
-            t_texcoordPts[2*i] = t_texcoordPts[2*i]/(t_w*1.0);
-            t_texcoordPts[2*i+1] = (t_h-t_texcoordPts[2*i+1])/(t_h*1.0);
-        }
-        t_vert_dsp->setSigleStreamData(E_VF_T0, t_texcoordPts, t_ptNum*2*sizeof(f32));
+        f32 *t_keyPts = t_person->getFaceData(t_ptNum, SV_E_FACEDATA_TUNED);
+        t_vert_dsp->setSigleStreamData(E_VF_T0, t_keyPts, t_ptNum*2*sizeof(f32));
     }
 }
 

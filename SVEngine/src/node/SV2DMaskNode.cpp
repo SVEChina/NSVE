@@ -75,10 +75,10 @@ void SV2DMaskNode::update(f32 dt){
         SVVertStreamDspPtr t_vert_dsp= m_maskMesh->getStreamDsp();
         t_vert_dsp->setBufType(E_BFT_DYNAMIC_DRAW);
         s32 t_ptNum = 0;
-        f32 *t_vertexPts = t_person->getFaceDataScene(t_ptNum, SV_E_FACEDATA_SIMPLITY);
+        f32 *t_vertexPts = t_person->getFaceData(t_ptNum, SV_E_FACEDATA_SIMPLITY);
         t_vert_dsp->setVertCnt(t_ptNum);
         t_vert_dsp->setSigleStreamData(E_VF_V2, t_vertexPts, t_ptNum*2*sizeof(f32));
-        f32 *t_keyPts = t_person->getFaceDataScreen(t_ptNum, SV_E_FACEDATA_SIMPLITY);
+        f32 *t_keyPts = t_person->getFaceData(t_ptNum, SV_E_FACEDATA_SIMPLITY);
         f32 t_texcoordPts[t_ptNum*2];
         memcpy(t_texcoordPts, t_keyPts, t_ptNum*2*sizeof(f32));
         s32 t_w = mApp->m_global_param.sv_width;
