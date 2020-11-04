@@ -8,6 +8,7 @@
 #include "SVModel.h"
 #include "SVMesh3d.h"
 #include "../mtl/SVMtlGLTF.h"
+#include "../core/SVAnimateSkin.h"
 
 using namespace sv;
 
@@ -43,7 +44,7 @@ SVMesh3dPtr SVModel::getMesh(s32 _index) {
     return m_meshPool[_index];
 }
 
-s32  SVModel::getMeshNum(){
+s32 SVModel::getMeshNum(){
     return m_meshPool.size();
 }
 
@@ -57,6 +58,9 @@ SVBoundBox SVModel::getBox() {
 
 void SVModel::update(f32 _dt,FMat4& _mat) {
     for (s32 i = 0; i < m_meshPool.size(); i++) {
+        if (m_ske) {
+            m_meshPool[i]->setBoneMatrix(m_ske->m_mats);
+        }
         m_meshPool[i]->update(_dt,_mat);
     }
 }
@@ -74,13 +78,7 @@ void SVModel::createShadow() {
 }
 
 void SVModel::bindSke(SVSkeletonPtr _ske) {
-//    for (s32 i = 0; i < m_meshPool.size(); i++) {
-//        SVMtlCorePtr t_mtl = m_meshPool[i]->getMtl();
-//        SVMtlGLTFSkinPtr skin_mtl = DYN_TO_SHAREPTR(SVMtlGLTFSkin, t_mtl);
-//        if(skin_mtl) {
-//            skin_mtl->bindSke(_ske);
-//        }
-//    }
+    m_ske = _ske;
 }
 
 void SVModel::unbindSke() {

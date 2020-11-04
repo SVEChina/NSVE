@@ -53,7 +53,7 @@ namespace sv {
     protected:
         SVString m_name;
         SVBoundBox m_box;
-        
+        SVSkeletonPtr m_ske;
         //一个模型包含多个mesh
         typedef std::vector<SVMesh3dPtr> MESHPOOL;
         MESHPOOL m_meshPool;

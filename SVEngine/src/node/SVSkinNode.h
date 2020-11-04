@@ -41,11 +41,6 @@ namespace sv {
         void setMaterial(std::vector<SVMtlCorePtr> &_mtls);
         void clearMaterial();
         
-        //
-        void setSke(SVSkeletonPtr _ske);
-        
-        void clearSke();
-        
         //动画操作
         void addAni(SVAnimateSkinPtr _ani);
         
@@ -64,8 +59,6 @@ namespace sv {
         std::vector<SVModelPtr> m_pModels;
         std::vector<SVSurfacePtr> m_pSurfaces;
         std::vector<SVMtlCorePtr> m_pMtls;
-        
-        SVSkeletonPtr m_pSke;
         
         typedef SVMap<SVString,SVAnimateSkinPtr> ANIPOOL;
         ANIPOOL m_aniPool;

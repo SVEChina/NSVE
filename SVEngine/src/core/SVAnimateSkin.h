@@ -72,7 +72,7 @@ namespace sv {
         SVString m_name;
         
         SVBonePtr m_root;
-        
+        SVArray<FMat4> m_mats;
         typedef SVArray<SVBonePtr> BONEPOOL;
         BONEPOOL m_boneArray;
     };
@@ -86,6 +86,7 @@ namespace sv {
         ~SVASKey(){
         }
         f32 m_time;
+        
     };
 
     //
@@ -128,11 +129,11 @@ namespace sv {
         
         ~SVChannel();
         
-        void update(f32 _dt,f32 _acct,s32 _rate,SVSkeletonPtr _ske);
+        void update(f32 _dt,f32 _acct,s32 _rate, SVBonePtr _bone);
         
         s32 findPreKey(f32 _acct,s32 _rate);
         
-        s32 m_target;       //目标id
+        s32 m_target_node;       //目标id
         s32 m_intertype_trans;    //插值方式 linear
         s32 m_intertype_rot;    //插值方式 linear
         s32 m_intertype_scale;    //插值方式 linear
@@ -142,11 +143,11 @@ namespace sv {
         //数据关系
         typedef SVArray<SVASKeyPtr> ASKEYPOOL;
         ASKEYPOOL m_keyPool;
-        
+        SVString m_target_path;        //动作名称
     private:
-        FVec3 _lerp_trans(s32 _mod,f32 _timepre,f32 _timenxt,f32 _timecur,FVec3 _pos1,FVec3 _pos2);
-        FVec3 _lerp_scale(s32 _mod,f32 _timepre,f32 _timenxt,f32 _timecur,FVec3 _scale1,FVec3 _scale2);
-        FVec4 _lerp_rot(s32 _mod,f32 _timepre,f32 _timenxt,f32 _timecur,FVec4 _rot1,FVec4 _rot2);
+        FVec3 _lerp_trans(s32 _mod, f32 _timepre, f32 _timenxt, f32 _timecur, FVec3 &_pos1,FVec3 &_pos2);
+        FVec3 _lerp_scale(s32 _mod, f32 _timepre, f32 _timenxt, f32 _timecur, FVec3 &_scale1,FVec3 &_scale2);
+        FVec4 _lerp_rot(s32 _mod, f32 _timepre, f32 _timenxt, f32 _timecur, FVec4 &_rot1, FVec4 &_rot2);
         f32 _lerp_weights();
     };
         
@@ -168,7 +169,7 @@ namespace sv {
         
         void update(f32 _dt);
         
-        void addSke(SVSkeletonPtr _ske);
+        void setSkes(std::vector<SVSkeletonPtr> &_skes);
         
         void clearSke();
 

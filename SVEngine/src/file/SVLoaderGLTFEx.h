@@ -41,6 +41,8 @@ namespace sv {
     protected:
         static SVSkinNodePtr building(SVInstPtr _app, tinygltf::Model* _model, cptr8 _path);
         
+        static s32 getSkinIndexForMeshId(SVInstPtr _app, tinygltf::Model* _model, s32 _meshId);
+        
         static void genNode(SVInstPtr _app, tinygltf::Model* _model, s32 _nodeid, cptr8 _path);
         
         //生成rmesh

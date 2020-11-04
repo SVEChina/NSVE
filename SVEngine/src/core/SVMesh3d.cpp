@@ -79,8 +79,15 @@ void SVMesh3d::setMatrix(FMat4& _mat) {
     m_absoluteMat = _mat;
 }
 
+void SVMesh3d::setBoneMatrix(SVArray<FMat4> &_mats) {
+    m_boneMatrixs = _mats;
+}
+
 void SVMesh3d::update(f32 _dt,FMat4& _mat) {
     if(m_surface) {
+        //骨头矩阵
+        m_surface->setParamArray("bones", (FMat4*)m_boneMatrixs.get(), m_boneMatrixs.size());
+        
         FMat4 t_mat = _mat*m_absoluteMat;
         m_surface->setParam("matModel", t_mat);
     }
@@ -92,11 +99,6 @@ void SVMesh3d::update(f32 _dt,FMat4& _mat) {
 void SVMesh3d::render() {
     //先渲染自己
     if(m_rendermesh && m_mtl && m_surface) {
-        SVDispatch::dispatchMeshDraw(mApp,
-                                     m_rendermesh,
-                                     m_mtl,
-                                     m_surface,
-                                     E_RSM_SOLID,
-                                     "SVMesh3d");
+        SVDispatch::dispatchMeshDraw(mApp, m_rendermesh, m_mtl, m_surface, E_RSM_SOLID, "SVMesh3d");
     }
 }

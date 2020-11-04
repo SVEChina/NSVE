@@ -56,6 +56,7 @@ namespace sv {
         
         void setMatrix(FMat4& _mat);
         
+        void setBoneMatrix(SVArray<FMat4> &_mats);
     protected:
         SVString m_name;
         SVBoundBox m_box;
@@ -63,6 +64,7 @@ namespace sv {
         SVMtlCorePtr m_mtl;
         SVSurfacePtr m_surface;
         FMat4 m_absoluteMat;    //渲染的绝对矩阵
+        SVArray<FMat4> m_boneMatrixs;
     };
 
 }//!namespace sv

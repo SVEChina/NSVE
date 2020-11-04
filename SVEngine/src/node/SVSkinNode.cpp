@@ -29,7 +29,6 @@ SVSkinNode::SVSkinNode(SVInstPtr _app)
     m_pModels = {};
     m_pSurfaces = {};
     m_pMtls = {};
-    m_pSke = nullptr;
     m_pActAni = nullptr;
     m_aniPool.clear();
 }
@@ -39,37 +38,30 @@ SVSkinNode::~SVSkinNode() {
     m_pModels.clear();
     m_pSurfaces.clear();
     m_pMtls.clear();
-    m_pSke = nullptr;
     m_pActAni = nullptr;
 }
 
 void SVSkinNode::update(f32 dt) {
     SVNode::update(dt);
-    //更新动画
-    if(m_pActAni) {
+    
+    if(m_pActAni != nullptr) {
         m_pActAni->update(dt);
     }
-    if(m_pSke){
-        m_pSke->refresh();
-    }
+    
     //
-    int t_modelLen = m_pModels.size();
+    size_t t_modelLen = m_pModels.size();
     for (int i = 0; i < t_modelLen; i++) {
         SVModelPtr _modelPtr = m_pModels[i];
         _modelPtr->update(dt, m_absolutMat);
     }
-    //
-    int t_mtlLen = m_pMtls.size();
-    for (int i = 0; i < t_mtlLen; i++) {
-        SVMtlCorePtr _ptr = m_pMtls[i];
-        _ptr->update(dt);
-    }
+    
+   
 }
 
 void SVSkinNode::render() {
     SVNode::render();
-    int t_modelLen = m_pModels.size();
-    for (int i = 0; i < t_modelLen; i++) {
+    size_t t_modelLen = m_pModels.size();
+    for (size_t i = 0; i < t_modelLen; i++) {
         SVModelPtr _modelPtr = m_pModels[i];
         _modelPtr->render();
     }
@@ -102,8 +94,8 @@ void SVSkinNode::setModel(std::vector<SVModelPtr> &_models) {
 }
 
 void SVSkinNode::clearModel() {
-    int t_len = m_pModels.size();
-    for (int i = 0; i < t_len; i++) {
+    size_t t_len = m_pModels.size();
+    for (size_t i = 0; i < t_len; i++) {
         SVModelPtr _modelPtr = m_pModels[i];
         _modelPtr->unbindSke();
     }
@@ -134,47 +126,14 @@ void SVSkinNode::clearMaterial() {
     m_pMtls.clear();
 }
 
-//
-void SVSkinNode::setSke(SVSkeletonPtr _ske) {
-    m_pSke = _ske;
-//    ANIPOOL::Iterator it = m_aniPool.begin();
-//    while(it!=m_aniPool.end()) {
-//        SVAnimateSkinPtr t_ani = it->data;
-//        //t_ani->bind(_ske);
-//        it++;
-//    }
-//    size_t t_modelLen = m_pModels.size();
-//    for (size_t i = 0; i < t_modelLen; i++) {
-//        SVModelPtr _modelPtr = m_pModels[i];
-//        _modelPtr->bindSke(m_pSke);
-//    }
-}
-
-void SVSkinNode::clearSke() {
-    ANIPOOL::Iterator it = m_aniPool.begin();
-    while(it!=m_aniPool.end()) {
-        SVAnimateSkinPtr t_ani = it->data;
-        //t_ani->unbind();
-        it++;
-    }
-    //
-    size_t t_modelLen = m_pModels.size();
-    for (size_t i = 0; i < t_modelLen; i++) {
-        SVModelPtr _modelPtr = m_pModels[i];
-        _modelPtr->unbindSke();
-    }
-    //
-    m_pSke = nullptr;
-}
-
 //动画操作
 void SVSkinNode::addAni(SVAnimateSkinPtr _ani) {
-    m_aniPool.append(_ani->getName(),_ani);
-    if(m_pSke) {
+    m_aniPool.append(_ani->getName(), _ani);
+//    if(m_pSke) {
         //_ani->bind(m_pSke);
-    }
+//    }
     //test
-    m_pActAni = _ani;
+//    m_pActAni = _ani;
 }
 
 void SVSkinNode::delAni(cptr8 _name) {

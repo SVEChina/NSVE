@@ -79,16 +79,19 @@ SVSkinNodePtr SVLoaderGLTFEx::building(SVInstPtr _app,
                               tinygltf::Model* _model,
                               cptr8 _path) {
     SVSkinNodePtr _nodePtr = MakeSharedPtr<SVSkinNode>(_app);
-    //构建动画
-    for(s32 i=0;i<_model->animations.size();i++) {
-        SVAnimateSkinPtr t_ani = _genAnimate(_app,_model,i,_path);
-        int a = 0;
-    }
-    
     //构建skin
+    std::vector<SVSkeletonPtr> t_skeArray;
     for(s32 i=0;i<_model->skins.size();i++) {
         SVSkeletonPtr t_ske = _genSkin(_app,_model,i,_path);
+        t_skeArray.push_back(t_ske);
     }
+    
+    //构建动画
+     for(s32 i=0;i<_model->animations.size();i++) {
+         SVAnimateSkinPtr t_ani = _genAnimate(_app,_model,i,_path);
+         t_ani->setSkes(t_skeArray);
+         _nodePtr->addAni(t_ani);
+     }
     
     //构建mtl
     std::vector<SVMtlCorePtr> _mtlPool;
@@ -106,15 +109,22 @@ SVSkinNodePtr SVLoaderGLTFEx::building(SVInstPtr _app,
     std::vector<SVModelPtr> t_modelsPtr{};
     t_modelsPtr.resize(_model->meshes.size());
     for(s32 i=0;i<_model->meshes.size();i++) {
+        //
          t_modelsPtr[i] = _genModel(_app, _model, i, _path);
         //整理mesh对应的mtl
         int meshNum = t_modelsPtr[i]->getMeshNum();
         for (s32 j = 0; j < meshNum; j++) {
             SVMesh3dPtr meshPtr = t_modelsPtr[i]->getMesh(j);
+            
             tinygltf::Primitive &primitive = _model->meshes[j].primitives[j];
             meshPtr->setMtl(_mtlPool[primitive.material]);
             meshPtr->setSurface(_surfacePool[primitive.material]);
         }
+        
+        //Model绑定skin
+        s32 _skinIndex = getSkinIndexForMeshId(_app, _model, i);
+        t_modelsPtr[i]->bindSke(t_skeArray[_skinIndex]);
+        
     }
     _nodePtr->setModel(t_modelsPtr);
     
@@ -123,10 +133,19 @@ SVSkinNodePtr SVLoaderGLTFEx::building(SVInstPtr _app,
         tinygltf::Scene* t_scene = &(_model->scenes[i]);
         for(s32 j=0;j<t_scene->nodes.size();j++) {
             s32 t_node_id = t_scene->nodes[j];
-            //genNode(_app,_model,t_node_id);
+//            genNode(_app,_model,t_node_id);
         }
     }
     return _nodePtr;
+}
+
+s32 SVLoaderGLTFEx::getSkinIndexForMeshId(SVInstPtr _app, tinygltf::Model* _model, s32 _meshId) {
+    for(s32 i=0; i<_model->nodes.size(); i++) {
+        if (_model->nodes[i].mesh == _meshId) {
+            return _model->nodes[i].skin;
+        }
+    }
+    return 0;
 }
 
 void SVLoaderGLTFEx::genNode(SVInstPtr _app,
@@ -391,11 +410,12 @@ SVSkeletonPtr SVLoaderGLTFEx::_genSkin(SVInstPtr _app,
                                     cptr8 _path){
     if(_index<0)
         return nullptr;
+    
     tinygltf::Skin* t_skindata = &(_model->skins[_index]);
     SVSkeletonPtr t_ske = MakeSharedPtr<SVSkeleton>();
     s32 t_node_index = t_skindata->skeleton;
     //创建根骨骼,并构建骨架
-    SVBonePtr t_root = _genBone(_app,_model,t_skindata,t_node_index,nullptr,t_ske);
+    t_ske->m_root = _genBone(_app, _model, t_skindata, t_node_index,  nullptr, t_ske);
     //初始化骨架基本数据
     tinygltf::Accessor* t_acc = &(_model->accessors[t_skindata->inverseBindMatrices]);
     s8* t_imb_p = _getAccDataPointer(_model,t_acc,_path);
@@ -482,23 +502,21 @@ static sv_inline s32 _getInterpolationMode(SVString _interpolation){
     return 3;
 }
 
-SVAnimateSkinPtr SVLoaderGLTFEx::_genAnimate(SVInstPtr _app,
-                                             tinygltf::Model* _model,
-                                             s32 _aniIndex,
-                                             cptr8 _path){
-    if(_aniIndex<0)
+SVAnimateSkinPtr SVLoaderGLTFEx::_genAnimate(SVInstPtr _app, tinygltf::Model* _model, s32 _aniIndex, cptr8 _path){
+    if(_aniIndex<0) {
         return nullptr;
+    }
     tinygltf::Animation* _data = &(_model->animations[_aniIndex]);
     SVAnimateSkinPtr t_ani = MakeSharedPtr<SVAnimateSkin>(_app,_data->name.c_str());
     //构建轨道
     for(s32 i=0;i<_data->channels.size();i++) {
         tinygltf::AnimationChannel* t_chn = &(_data->channels[i]);
-        if(t_chn->sampler<0) {
+        if (t_chn->sampler < 0) {
             continue;
         }
         SVChannelPtr chn_obj = MakeSharedPtr<SVChannel>();
-        chn_obj->m_target = t_chn->target_node;
-        t_ani->addChannel(chn_obj);
+        chn_obj->m_target_node = t_chn->target_node;
+        chn_obj->m_target_path = t_chn->target_path.c_str();
         //输入和输出是一对
         //构建通道和KEY
         tinygltf::AnimationSampler* t_samp = &(_data->samplers[t_chn->sampler]);
@@ -565,6 +583,9 @@ SVAnimateSkinPtr SVLoaderGLTFEx::_genAnimate(SVInstPtr _app,
             //构建weight
             s32 a = 0;
         }
+        
+        //加入到通道中
+        t_ani->addChannel(chn_obj);
     }
     return t_ani;
 }

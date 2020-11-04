@@ -6,6 +6,7 @@
 //
 
 #include "SVAnimateSkin.h"
+#include "../base/SVPreDeclare.h"
 
 //清理
 using namespace sv;
@@ -60,6 +61,7 @@ SVSkeleton::SVSkeleton(){
     m_name = "ske";
     m_root = nullptr;
     m_boneArray.clear();
+    m_mats.clear();
 }
 
 void SVSkeleton::refresh() {
@@ -67,7 +69,15 @@ void SVSkeleton::refresh() {
     if(m_root) {
         m_root->update();
     }
-    //传递数值
+    //
+    if (m_mats.size() != m_boneArray.size()) {
+        m_mats.clear();
+        m_mats.resize(m_boneArray.size());
+    }
+    s32 len = m_boneArray.size();
+    for (s32 i = 0; i < len; i++) {
+        m_mats[i] = m_boneArray[i]->m_resultMat;
+    }
     
 }
 
@@ -118,7 +128,7 @@ void SVSkeleton::destroy() {
 
 //专门用于骨骼动画的时间轴
 SVChannel::SVChannel() {
-    m_target = 0;
+    m_target_node = 0;
     m_intertype_trans = -1;    //插值方式 linear
     m_intertype_rot = -1;    //插值方式 linear
     m_intertype_scale = -1;    //插值方式 linear
@@ -130,68 +140,56 @@ SVChannel::SVChannel() {
 SVChannel::~SVChannel() {
     m_keyPool.destroy();
 }
-
-void SVChannel::update(f32 _dt,f32 _acct,s32 _rate,SVSkeletonPtr _ske) {
-    SVBonePtr t_bone = _ske->getBoneByNodeID(m_target);
-    if(!t_bone)
-        return ;
+    
+void SVChannel::update(f32 _dt,f32 _acct,s32 _rate, SVBonePtr _bone) {
     //二分法取key
     s32 t_preKey = findPreKey(_acct,_rate);
     s32 t_aftKey = t_preKey+1;
     if(t_aftKey>=m_keyPool.size()) {
         t_aftKey = t_preKey;
     }
-    //取key测试
-    if(m_target == 8) {
-        f32 t_pt = m_keyPool[t_preKey]->m_time;
-        f32 t_at = m_keyPool[t_aftKey]->m_time;
-        if(_acct<t_pt){
-            SV_LOG_INFO("astime pt error \n");
-            return ;
-        }
-        
-        if(_acct>t_at) {
-            if(t_preKey!=t_aftKey) {
-                SV_LOG_INFO("astime at error \n");
-            }
-            return ;
-        }
-        SV_LOG_INFO("astime %f frame %d time(%f,%f) \n",_acct,t_preKey,t_pt,t_at);
-    }
+
     //插值
     SVASKeyPtr pKey = m_keyPool[t_preKey];
     SVASKeyPtr aKey = m_keyPool[t_aftKey];
-    f32 t_pre_t = m_keyPool[t_preKey]->m_time;
-    f32 t_aft_t = m_keyPool[t_aftKey]->m_time;
-//    //
-//    FVec3 t_pos = _lerp_trans(0,t_pre_t,t_aft_t,_acct,pKey->m_pos,aKey->m_pos);
-//    FVec3 t_sc = _lerp_scale(0,t_pre_t,t_aft_t,_acct,pKey->m_scale,aKey->m_scale);
-//    FVec4 t_rot = _lerp_rot(0,t_pre_t,t_aft_t,_acct,pKey->m_rot,aKey->m_rot);
-//    //
-//    t_bone->m_tran = t_pos;
-//    t_bone->m_scale = t_sc;
-//    t_bone->m_rot = t_rot;
-//    if(m_target == 8) {
-//        SV_LOG_INFO("aim 8 pos (%f,%f,%f) \n",t_pos.x,t_pos.y,t_pos.z);
-//    }
+    //
+    
+    if (m_target_path == "translation") {
+        SVASKeyPosPtr p0 = DYN_TO_SHAREPTR(SVASKeyPos, pKey);
+        SVASKeyPosPtr p1 = DYN_TO_SHAREPTR(SVASKeyPos, aKey);
+        _bone->m_tran = _lerp_trans(0, pKey->m_time, aKey->m_time, _acct, p0->m_pos, p1->m_pos);
+    } else if(m_target_path == "rotation") {
+        SVASKeyRotPtr p0 = DYN_TO_SHAREPTR(SVASKeyRot, pKey);
+        SVASKeyRotPtr p1 = DYN_TO_SHAREPTR(SVASKeyRot, aKey);
+        _bone->m_rot = _lerp_rot(0, pKey->m_time, aKey->m_time, _acct, p0->m_rot, p1->m_rot);
+    } else if(m_target_path == "scale") {
+        SVASKeyScalePtr p0 = DYN_TO_SHAREPTR(SVASKeyScale, pKey);
+        SVASKeyScalePtr p1 = DYN_TO_SHAREPTR(SVASKeyScale, aKey);
+        _bone->m_scale = _lerp_scale(0, pKey->m_time, aKey->m_time, _acct, p0->m_scale, p1->m_scale);
+    } else if(m_target_path == "weights") {
+//        SVASKeyScalePtr p0 = DYN_TO_SHAREPTR(SVASKeyScale, pKey);
+//        SVASKeyScalePtr p1 = DYN_TO_SHAREPTR(SVASKeyScale, aKey);
+        
+    }
+    
 }
 
 //平移插值
-FVec3 SVChannel::_lerp_trans(s32 _mod,f32 _timepre,f32 _timenxt,f32 _timecur,FVec3 _pos1,FVec3 _pos2) {
+FVec3 SVChannel::_lerp_trans(s32 _mod, f32 _timepre, f32 _timenxt, f32 _timecur, FVec3 &_pos1, FVec3 &_pos2) {
     f32 t_dert = (_timecur - _timepre)/(_timenxt - _timepre);
     FVec3 t_result = _pos1 *(1.0f-t_dert) + _pos2*t_dert;
     return t_result;
 }
 
 //缩放插值
-FVec3 SVChannel::_lerp_scale(s32 _mod,f32 _timepre,f32 _timenxt,f32 _timecur,FVec3 _scale1,FVec3 _scale2) {
+FVec3 SVChannel::_lerp_scale(s32 _mod, f32 _timepre, f32 _timenxt, f32 _timecur, FVec3 &_scale1, FVec3 &_scale2) {
     f32 t_dert = (_timecur - _timepre)/(_timenxt - _timepre);
     FVec3 t_result = _scale1 *(1.0f-t_dert) + _scale2*t_dert;
     return t_result;
 }
 
 //旋转插值
-FVec4 SVChannel::_lerp_rot(s32 _mod,f32 _timepre,f32 _timenxt,f32 _timecur,FVec4 _rot1,FVec4 _rot2) {
+FVec4 SVChannel::_lerp_rot(s32 _mod, f32 _timepre, f32 _timenxt, f32 _timecur, FVec4 &_rot1, FVec4 &_rot2) {
     //四元数差值
     f32 t_dert = (_timecur - _timepre)/(_timenxt - _timepre);
     SVQuat q1(_rot1);
@@ -291,10 +289,8 @@ void SVAnimateSkin::clearChannel() {
     m_chnPool.clear();
 }
 
-void SVAnimateSkin::addSke(SVSkeletonPtr _ske){
-    if(_ske) {
-        m_skePool.push_back(_ske);
-    }
+void SVAnimateSkin::setSkes(std::vector<SVSkeletonPtr> &_skes) {
+    m_skePool = _skes;
 }
 
 void SVAnimateSkin::clearSke(){
@@ -309,15 +305,29 @@ void SVAnimateSkin::update(f32 _dt) {
         m_accTime = m_totalTime;
         t_end = true;
     }
-    if(m_skePool.size() == 0){
+    
+    if(m_skePool.size() == 0) {
         //没有骨架就不用跑动画了
         return ;
     }
-    //每个轨道都走
-    for(s32 i=0;i<m_chnPool.size();i++) {
-        SVChannelPtr t_chan = m_chnPool[i];
-        //t_chan->update(_dt,m_accTime,30,m_pSke);    //24帧率
+            
+    //根据Skeleton更新所有的Bone信息
+    for (int sIndex = 0; sIndex < m_skePool.size(); sIndex++) {
+        SVSkeletonPtr _ske = m_skePool[sIndex];
+        //
+        for(s32 i=0;i<m_chnPool.size();i++) {
+            SVChannelPtr _channel = m_chnPool[i];
+            SVBonePtr _bone = _ske->getBoneByNodeID(_channel->m_target_node);
+            if (!_bone) {
+                continue;
+            }
+            _channel->update(_dt, m_accTime, 30, _bone);
+        }
+        //更新
+        _ske->refresh();
     }
+    
+    
     if(t_end) {
         m_accTime = 0;
     }
