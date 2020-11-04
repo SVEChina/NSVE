@@ -36,18 +36,12 @@ namespace sv {
         
         ~SVLoaderGLTFEx();
         
-        static bool loadFromFile(SVInstPtr _app,cptr8 _filename, SVSkinNodePtr _nodePtr);
+        static SVSkinNodePtr loadFromFile(SVInstPtr _app,cptr8 _filename);
         
     protected:
-        static void building(SVInstPtr _app,
-                             tinygltf::Model* _model,
-                             cptr8 _path,
-                             SVSkinNodePtr _nodePtr);
+        static SVSkinNodePtr building(SVInstPtr _app, tinygltf::Model* _model, cptr8 _path);
         
-        static void genNode(SVInstPtr _app,
-                            tinygltf::Model* _model,
-                            s32 _nodeid,
-                            cptr8 _path);
+        static void genNode(SVInstPtr _app, tinygltf::Model* _model, s32 _nodeid, cptr8 _path);
         
         //生成rmesh
         static SVModelPtr _genModel(SVInstPtr _app,

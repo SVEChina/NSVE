@@ -322,8 +322,62 @@ void SVScene::fromJSON(RAPIDJSON_NAMESPACE::Value &item) {
 #include "../node/SVSkinNode.h"
 
 void SVScene::test() {
-    SVSkinNodePtr skinNode = MakeSharedPtr<SVSkinNode>(mApp);
-    if(SVLoaderGLTFEx::loadFromFile(mApp, "res/woniu_xiuxian/scene.gltf", skinNode)) {
+//    SVTexturePtr t_tex = mApp->getTexMgr()->getTexture("res/test2.jpeg");
+    //
+//    SVFacePointNodePtr t_facept_node = MakeSharedPtr<SVFacePointNode>(mApp);
+//    addNode(t_facept_node);
+    
+//    SVFaceTuneNodePtr t_faceTuneNode = MakeSharedPtr<SVFaceTuneNode>(mApp);
+//    addNode(t_faceTuneNode);
+    //
+//    SVCubePtr t_box_node = MakeSharedPtr<SVCube>(mApp);
+//    t_box_node->setRotation(45.0f, 45.0f, 45.0f);
+//    t_box_node->setMtl("pbr");
+//    SVSurfacePtr t_surface = t_box_node->getSurface();
+//    if(t_surface) {
+//        FVec3 u_LightDirection = FVec3(-1.0f,1.0f,0.0f);
+//        t_surface->setParam("u_LightDirection", u_LightDirection);
+//        //
+//        FVec3 u_LightColor = FVec3(0.0f,1.0f,0.0f);
+//        t_surface->setParam("u_LightColor", u_LightColor);
+//        //
+//        f32 u_NormalScale = 0.1;
+//        t_surface->setParam("u_NormalScale", u_NormalScale);
+//        //
+//        FVec3 u_EmissiveFactor = FVec3(1.0f,1.0f,1.0f);
+//        t_surface->setParam("u_EmissiveFactor", u_EmissiveFactor);
+//        //
+//        f32 u_OcclusionStrength = 0.5;
+//        t_surface->setParam("u_OcclusionStrength", u_OcclusionStrength);
+//        //
+//        FVec2 u_MetallicRoughnessValues = FVec2(0.0f,0.6f);
+//        t_surface->setParam("u_MetallicRoughnessValues", u_MetallicRoughnessValues);
+//        //
+//        FVec4 u_BaseColorFactor = FVec4(0.0f,1.0f,0.0f,1.0f);
+//        t_surface->setParam("u_BaseColorFactor", u_BaseColorFactor);
+//        //
+//        FVec3 u_Camera = FVec3(0.0f,500.0f,500.0f);
+//        t_surface->setParam("u_Camera", u_Camera);
+//        //
+//        FVec4 u_ScaleDiffBaseMR = FVec4(1.0f,1.0f,1.0f,1.0f);
+//        t_surface->setParam("u_ScaleDiffBaseMR", u_ScaleDiffBaseMR);
+//        //
+//        FVec4 u_ScaleFGDSpec = FVec4(1.0f,1.0f,1.0f,1.0f);
+//        t_surface->setParam("u_ScaleFGDSpec", u_ScaleFGDSpec);
+//        //
+//        FVec4 u_ScaleIBLAmbient = FVec4(0.5f,0.5f,0.5f,0.5f);
+//        t_surface->setParam("u_ScaleIBLAmbient", u_ScaleIBLAmbient);
+//    }
+//    //
+//    SVAniUnitRotPtr t_rot = MakeSharedPtr<SVAniUnitRot>(mApp);
+//    mApp->getAniMgr()->addAni(t_box_node,t_rot);
+//    //
+//    addNode(t_box_node);
+//=======
+    
+    
+    SVSkinNodePtr skinNode = SVLoaderGLTFEx::loadFromFile(mApp, "res/taidi/scene.gltf");
+    if(skinNode) {
         addNode(skinNode);
     }
 //    SVTexturePtr t_tex = mApp->getTexMgr()->getTexture("res/test2.jpeg");
