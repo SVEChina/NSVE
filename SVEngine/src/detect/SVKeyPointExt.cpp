@@ -651,24 +651,24 @@ void SVKeyPointExt::faceDataForFaceTune(SV_S_FACETUNE_RATIO &_attribute, f32 *fa
         FVec2 t_pt_104(faceTunePts[2*104], faceTunePts[2*104+1]);
         FVec2 t_pt_57(faceTunePts[2*57], faceTunePts[2*57+1]);
         FVec2 t_vec_left_dir = (t_pt_57 - t_pt_104).normalize();
-        FVec2 t_n_pt = t_pt_57 + t_vec_left_dir*t_noiseLen*_attribute.eyes_down_ratio*0.96;
+        FVec2 t_n_pt = t_pt_57 + t_vec_left_dir*t_noiseLen*_attribute.eyes_down_ratio*0.06;
         faceTunePts[2*57] = t_n_pt.x;
         faceTunePts[2*57+1] = t_n_pt.y;
         FVec2 t_pt_73(faceTunePts[2*73], faceTunePts[2*73+1]);
         FVec2 t_vec_left_dir1 = (t_pt_73 - t_pt_104).normalize();
-        t_n_pt = t_pt_73 + t_vec_left_dir1*t_noiseLen*_attribute.eyes_down_ratio*0.4;
+        t_n_pt = t_pt_73 + t_vec_left_dir1*t_noiseLen*_attribute.eyes_down_ratio*0.03;
         faceTunePts[2*73] = t_n_pt.x;
         faceTunePts[2*73+1] = t_n_pt.y;
         //
         FVec2 t_pt_105(faceTunePts[2*105], faceTunePts[2*105+1]);
         FVec2 t_pt_62(faceTunePts[2*62], faceTunePts[2*62+1]);
         FVec2 t_vec_right_dir = (t_pt_62 - t_pt_105).normalize();
-        t_n_pt = t_pt_62 + t_vec_right_dir*t_noiseLen*_attribute.eyes_down_ratio*0.96;
+        t_n_pt = t_pt_62 + t_vec_right_dir*t_noiseLen*_attribute.eyes_down_ratio*0.06;
         faceTunePts[2*62] = t_n_pt.x;
         faceTunePts[2*62+1] = t_n_pt.y;
         FVec2 t_pt_76(faceTunePts[2*76], faceTunePts[2*76+1]);
         FVec2 t_vec_right_dir1 = (t_pt_76 - t_pt_105).normalize();
-        t_n_pt = t_pt_76 + t_vec_right_dir1*t_noiseLen*_attribute.eyes_down_ratio*0.4;
+        t_n_pt = t_pt_76 + t_vec_right_dir1*t_noiseLen*_attribute.eyes_down_ratio*0.03;
         faceTunePts[2*76] = t_n_pt.x;
         faceTunePts[2*76+1] = t_n_pt.y;
     }

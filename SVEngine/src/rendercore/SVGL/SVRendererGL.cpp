@@ -354,6 +354,9 @@ void SVRendererGL::drawScreen(SV_TEXIN _texid) {
     if(!t_tex){
         return ;
     }
+#if  defined(SV_IOS)
+    glPushGroupMarkerEXT(0,"drawScreen");
+#endif    
     SVSurfacePtr t_surface = MakeSharedPtr<SVSurface>();
     t_surface->setTexture(1,0,t_tex);
     FVec2 t_invert = FVec2(1.0f,1.0f);
@@ -366,16 +369,25 @@ void SVRendererGL::drawScreen(SV_TEXIN _texid) {
         bool t_ret = processMtl(t_mtl,t_surface);
         if(!t_ret) {
             t_surface = nullptr;
+#if  defined(SV_IOS)
+    glPopGroupMarkerEXT();
+#endif
             return ;
         }
         t_ret = processMesh(t_mesh);
         if(!t_ret) {
             t_surface = nullptr;
+#if  defined(SV_IOS)
+    glPopGroupMarkerEXT();
+#endif
             return ;
         }
         drawMesh(t_mesh);
     }
     t_surface = nullptr;
+#if  defined(SV_IOS)
+    glPopGroupMarkerEXT();
+#endif
 }
 
 void SVRendererGL::debugMesh2d(SVRenderMeshPtr _mesh) {

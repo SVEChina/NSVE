@@ -102,7 +102,7 @@ void SVMtlFaceShapeVaried::update(f32 dt){
     SVPersonPtr t_person = mApp->getDetectMgr()->getPersonModule()->getPerson(1);
     if( t_person && t_person->getExist() ){
         s32 t_ptNum = 0;
-        V2 *t_data = (V2*)t_person->getFaceData(t_ptNum, SV_E_FACEDATA_ORIGINAL);
+        V2 *t_data = (V2*)t_person->getFaceData(t_ptNum, SV_E_FACEDATA_SIMPLITY);
         for(s32 i  = 0 ; i < 106 ; i++){
             m_outlinePoints[i*2]   = t_data[i].x;
             m_outlinePoints[i*2+1] = mApp->m_global_param.sv_height-t_data[i].y;

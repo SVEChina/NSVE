@@ -69,7 +69,7 @@ void SVFacePointNode::render(){
         SVPersonPtr t_person = mApp->getDetectMgr()->getPersonModule()->getPerson(1);
         if( t_person && t_person->getExist() ){
             s32 t_ptNum = 0;
-            f32 *t_keyPt = t_person->getFaceData(t_ptNum, SV_E_FACEDATA_TUNE);
+            f32 *t_keyPt = t_person->getFaceData(t_ptNum, SV_E_FACEDATA_TUNED, true);
             //顶点描述
             SVVertStreamDspPtr t_vert_dsp= m_pMesh->getStreamDsp();
             t_vert_dsp->setBufType(E_BFT_DYNAMIC_DRAW);

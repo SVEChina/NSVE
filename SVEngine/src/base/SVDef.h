@@ -89,6 +89,7 @@ namespace sv {
     enum SV_RSTREAM {
         E_RSM_NOR = 0,          //普通流
         E_RSM_SKY,              //天空-背景
+        E_RSM_FACEMORPH,          //面部微整
         E_RSM_SOLID,
         E_RSM_TRANSLATE,
         E_RSM_PRE,              //前向流

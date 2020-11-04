@@ -322,7 +322,6 @@ void SVScene::fromJSON(RAPIDJSON_NAMESPACE::Value &item) {
 #include "../node/SVSkinNode.h"
 
 void SVScene::test() {
-//<<<<<<< Updated upstream
 //    SVTexturePtr t_tex = mApp->getTexMgr()->getTexture("res/test2.jpeg");
     //
 //    SVFacePointNodePtr t_facept_node = MakeSharedPtr<SVFacePointNode>(mApp);
@@ -377,17 +376,16 @@ void SVScene::test() {
 //=======
     
     
-    SVSkinNodePtr skinNode = SVLoaderGLTFEx::loadFromFile(mApp, "res/woniu_xiuxian/scene.gltf");
+    SVSkinNodePtr skinNode = SVLoaderGLTFEx::loadFromFile(mApp, "res/taidi/scene.gltf");
     if(skinNode) {
         addNode(skinNode);
     }
-    
-    
 //    SVTexturePtr t_tex = mApp->getTexMgr()->getTexture("res/test2.jpeg");
-
-    //
 //    SVFacePointNodePtr t_facept_node = MakeSharedPtr<SVFacePointNode>(mApp);
 //    addNode(t_facept_node);
+    
+//    SVFaceTuneNodePtr t_tune_node = MakeSharedPtr<SVFaceTuneNode>(mApp);
+//    addNode(t_tune_node);
     //
 //
 //    SVCubePtr t_box_node = MakeSharedPtr<SVCube>(mApp);
@@ -445,5 +443,4 @@ void SVScene::test() {
 //    SVAniUnitRotPtr t_rot = MakeSharedPtr<SVAniUnitRot>(mApp);
 //    mApp->getAniMgr()->addAni(t_box_node,t_rot);
 
-//>>>>>>> Stashed changes
 }
