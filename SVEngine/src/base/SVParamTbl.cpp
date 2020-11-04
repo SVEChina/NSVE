@@ -324,15 +324,6 @@ bool SVParamTbl::setParam(cptr8 _name,FMat4& _value) {
     return addParam(_name, _value);
 }
 
-s32 SVParamTbl::_getParamIndex(cptr8 _name) {
-    for(s32 i=0;i<m_param_dsps.size();i++) {
-        if( m_param_names[i] == _name ) {
-            return i;
-        }
-    }
-    return -1;
-}
-
 void SVParamTbl::getParam(cptr8 _name,s32& _value) {
     u64 t_off = _getParamOff(_name);
     m_param_values->get(t_off, _value);
@@ -371,6 +362,244 @@ void SVParamTbl::getParam(cptr8 _name,FMat3& _value) {
 void SVParamTbl::getParam(cptr8 _name,FMat4& _value) {
     u64 t_off = _getParamOff(_name);
     m_param_values->get(t_off, _value);
+}
+
+/*
+ param array
+ */
+
+bool SVParamTbl::addParamArray(cptr8 _name,s32* _value,s32 _cnt) {
+    bool ret = hasParam(_name);
+    if( !ret ) {
+        ret = true;
+        SVParamDsp t_param;
+        t_param.m_type = SV_INT;
+        t_param.m_size = sizeof(s32)*_cnt;
+        t_param.m_cnt = _cnt;
+        t_param.m_off = m_param_values->push(_value,t_param.m_size);
+        m_param_dsps.push_back(t_param);
+        m_param_names.push_back(_name);
+    }
+    return ret;
+}
+
+bool SVParamTbl::addParamArray(cptr8 _name,f32* _value,s32 _cnt) {
+    bool ret = hasParam(_name);
+    if( !ret ) {
+        ret = true;
+        SVParamDsp t_param;
+        t_param.m_type = SV_FLOAT;
+        t_param.m_size = sizeof(f32)*_cnt;
+        t_param.m_cnt = _cnt;
+        t_param.m_off = m_param_values->push(_value,t_param.m_size);
+        m_param_dsps.push_back(t_param);
+        m_param_names.push_back(_name);
+    }
+    return ret;
+}
+
+bool SVParamTbl::addParamArray(cptr8 _name,FVec2* _value,s32 _cnt){
+    bool ret = hasParam(_name);
+    if( !ret ) {
+        ret = true;
+        SVParamDsp t_param;
+        t_param.m_type = SV_FVEC2;
+        t_param.m_size = sizeof(FVec2)*_cnt;
+        t_param.m_cnt = _cnt;
+        t_param.m_off = m_param_values->push(_value,t_param.m_size);
+        m_param_dsps.push_back(t_param);
+        m_param_names.push_back(_name);
+    }
+    return ret;
+}
+
+
+bool SVParamTbl::addParamArray(cptr8 _name,FVec3* _value,s32 _cnt){
+    bool ret = hasParam(_name);
+    if( !ret ) {
+        SVParamDsp t_param;
+        t_param.m_type = SV_FVEC3;
+        t_param.m_size = sizeof(FVec3)*_cnt;
+        t_param.m_cnt = _cnt;
+        t_param.m_off = m_param_values->push(_value,t_param.m_size);
+        m_param_dsps.push_back(t_param);
+        m_param_names.push_back(_name);
+    }
+    return ret;
+}
+
+
+bool SVParamTbl::addParamArray(cptr8 _name,FVec4* _value,s32 _cnt){
+    bool ret = hasParam(_name);
+    if( !ret ) {
+        SVParamDsp t_param;
+        t_param.m_type = SV_FVEC4;
+        t_param.m_size = sizeof(FVec4)*_cnt;
+        t_param.m_cnt = _cnt;
+        t_param.m_off = m_param_values->push(_value,t_param.m_size);
+        m_param_dsps.push_back(t_param);
+        m_param_names.push_back(_name);
+    }
+    return ret;
+}
+
+
+bool SVParamTbl::addParamArray(cptr8 _name,FMat2* _value,s32 _cnt){
+    bool ret = hasParam(_name);
+    if( !ret ) {
+        SVParamDsp t_param;
+        t_param.m_type = SV_FMAT2;
+        t_param.m_size = sizeof(FMat2)*_cnt;
+        t_param.m_cnt = _cnt;
+        t_param.m_off = m_param_values->push(_value,t_param.m_size);
+        m_param_dsps.push_back(t_param);
+        m_param_names.push_back(_name);
+    }
+    return ret;
+}
+
+
+bool SVParamTbl::addParamArray(cptr8 _name,FMat3* _value,s32 _cnt){
+    bool ret = hasParam(_name);
+    if( !ret ) {
+        SVParamDsp t_param;
+        t_param.m_type = SV_FMAT3;
+        t_param.m_size = sizeof(FMat3)*_cnt;
+        t_param.m_cnt = _cnt;
+        t_param.m_off = m_param_values->push(_value,t_param.m_size);
+        m_param_dsps.push_back(t_param);
+        m_param_names.push_back(_name);
+    }
+    return ret;
+}
+
+
+bool SVParamTbl::SVParamTbl::addParamArray(cptr8 _name,FMat4* _value,s32 _cnt){
+    bool ret = hasParam(_name);
+    if( !ret ) {
+        SVParamDsp t_param;
+        t_param.m_type = SV_FMAT4;
+        t_param.m_size = sizeof(FMat4)*_cnt;
+        t_param.m_cnt = _cnt;
+        t_param.m_off = m_param_values->push(_value,t_param.m_size);
+        m_param_dsps.push_back(t_param);
+        m_param_names.push_back(_name);
+    }
+    return ret;
+}
+
+bool SVParamTbl::setParamArray(cptr8 _name,s32* _value,s32 _cnt) {
+    s32 t_index = _getParamIndex(_name);
+    if( t_index>=0 ) {
+        m_param_values->set(m_param_dsps[t_index].m_off,_value,_cnt*sizeof(s32));
+        return true;
+    }
+    return addParamArray(_name, _value,_cnt);
+}
+
+bool SVParamTbl::setParamArray(cptr8 _name,f32* _value,s32 _cnt) {
+    s32 t_index = _getParamIndex(_name);
+    if( t_index>=0 ) {
+        m_param_values->set(m_param_dsps[t_index].m_off,_value,_cnt*sizeof(f32));
+        return true;
+    }
+    return addParamArray(_name, _value,_cnt);
+}
+
+bool SVParamTbl::setParamArray(cptr8 _name,FVec2* _value,s32 _cnt) {
+    s32 t_index = _getParamIndex(_name);
+    if( t_index>=0 ) {
+        m_param_values->set(m_param_dsps[t_index].m_off,_value,_cnt*sizeof(FVec2));
+        return true;
+    }
+    return addParamArray(_name, _value,_cnt);
+}
+
+bool SVParamTbl::setParamArray(cptr8 _name,FVec3* _value,s32 _cnt) {
+    s32 t_index = _getParamIndex(_name);
+    if( t_index>=0 ) {
+        m_param_values->set(m_param_dsps[t_index].m_off,_value,_cnt*sizeof(FVec3));
+        return true;
+    }
+    return addParamArray(_name, _value,_cnt);
+}
+
+bool SVParamTbl::setParamArray(cptr8 _name,FVec4* _value,s32 _cnt) {
+    s32 t_index = _getParamIndex(_name);
+    if( t_index>=0 ) {
+        m_param_values->set(m_param_dsps[t_index].m_off,_value,_cnt*sizeof(FVec4));
+        return true;
+    }
+    return addParamArray(_name, _value,_cnt);
+}
+
+bool SVParamTbl::setParamArray(cptr8 _name,FMat2* _value,s32 _cnt) {
+    s32 t_index = _getParamIndex(_name);
+    if( t_index>=0 ) {
+        m_param_values->set(m_param_dsps[t_index].m_off,_value,_cnt*sizeof(FMat2));
+        return true;
+    }
+    return addParamArray(_name, _value,_cnt);
+}
+
+bool SVParamTbl::setParamArray(cptr8 _name,FMat3* _value,s32 _cnt) {
+    s32 t_index = _getParamIndex(_name);
+    if( t_index>=0 ) {
+        m_param_values->set(m_param_dsps[t_index].m_off,_value,_cnt*sizeof(FMat3));
+        return true;
+    }
+    return addParamArray(_name, _value,_cnt);
+}
+
+bool SVParamTbl::setParamArray(cptr8 _name,FMat4* _value,s32 _cnt) {
+    s32 t_index = _getParamIndex(_name);
+    if( t_index>=0 ) {
+        m_param_values->set(m_param_dsps[t_index].m_off,_value,_cnt*sizeof(FMat4));
+        return true;
+    }
+    return addParamArray(_name, _value,_cnt);
+}
+
+void SVParamTbl::getParamArray(cptr8 _name,s32* _value,s32 _cnt) {
+    
+}
+
+void SVParamTbl::getParamArray(cptr8 _name,f32* _value,s32 _cnt){
+    
+}
+
+void SVParamTbl::getParamArray(cptr8 _name,FVec2* _value,s32 _cnt){
+    
+}
+
+void SVParamTbl::getParamArray(cptr8 _name,FVec3* _value,s32 _cnt){
+    
+}
+
+void SVParamTbl::getParamArray(cptr8 _name,FVec4* _value,s32 _cnt){
+    
+}
+
+void SVParamTbl::getParamArray(cptr8 _name,FMat2* _value,s32 _cnt){
+    
+}
+
+void SVParamTbl::getParamArray(cptr8 _name,FMat3* _value,s32 _cnt){
+    
+}
+
+void SVParamTbl::getParamArray(cptr8 _name,FMat4* _value,s32 _cnt){
+    
+}
+
+//
+s32 SVParamTbl::_getParamIndex(cptr8 _name) {
+    for(s32 i=0;i<m_param_dsps.size();i++) {
+        if( m_param_names[i] == _name ) {
+            return i;
+        }
+    }
+    return -1;
 }
 
 u64 SVParamTbl::_getParamOff(cptr8 _name) {

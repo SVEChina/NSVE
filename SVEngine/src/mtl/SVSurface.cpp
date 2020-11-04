@@ -75,6 +75,55 @@ void SVSurface::setParam(cptr8 _name,FMat4& _value) {
     }
 }
 
+//
+void SVSurface::setParamArray(cptr8 _name,s32* _value,s32 _cnt) {
+    if(m_tbl) {
+        m_tbl->setParamArray(_name, _value,_cnt);
+    }
+}
+
+void SVSurface::setParamArray(cptr8 _name,f32* _value,s32 _cnt) {
+    if(m_tbl) {
+        m_tbl->setParamArray(_name, _value,_cnt);
+    }
+}
+
+void SVSurface::setParamArray(cptr8 _name,FVec2* _value,s32 _cnt){
+    if(m_tbl) {
+        m_tbl->setParamArray(_name, _value,_cnt);
+    }
+}
+
+void SVSurface::setParamArray(cptr8 _name,FVec3* _value,s32 _cnt){
+    if(m_tbl) {
+        m_tbl->setParamArray(_name, _value,_cnt);
+    }
+}
+
+void SVSurface::setParamArray(cptr8 _name,FVec4* _value,s32 _cnt){
+    if(m_tbl) {
+        m_tbl->setParamArray(_name, _value,_cnt);
+    }
+}
+
+void SVSurface::setParamArray(cptr8 _name,FMat2* _value,s32 _cnt){
+    if(m_tbl) {
+        m_tbl->setParamArray(_name, _value,_cnt);
+    }
+}
+
+void SVSurface::setParamArray(cptr8 _name,FMat3* _value,s32 _cnt){
+    if(m_tbl) {
+        m_tbl->setParamArray(_name, _value,_cnt);
+    }
+}
+
+void SVSurface::setParamArray(cptr8 _name,FMat4* _value,s32 _cnt){
+    if(m_tbl) {
+        m_tbl->setParamArray(_name, _value,_cnt);
+    }
+}
+
 void SVSurface::setTexture(s32 _stage,s32 _chn,SVTexturePtr _tex) {
     if(_chn>=0 && _chn<MAX_TEXUNIT) {
         if(_stage == 0) {

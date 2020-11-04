@@ -46,6 +46,23 @@ namespace sv {
 
         void setParam(cptr8 _name,FMat4& _value);
         
+        //
+        void setParamArray(cptr8 _name,s32* _value,s32 _cnt);
+
+        void setParamArray(cptr8 _name,f32* _value,s32 _cnt);
+
+        void setParamArray(cptr8 _name,FVec2* _value,s32 _cnt);
+
+        void setParamArray(cptr8 _name,FVec3* _value,s32 _cnt);
+
+        void setParamArray(cptr8 _name,FVec4* _value,s32 _cnt);
+
+        void setParamArray(cptr8 _name,FMat2* _value,s32 _cnt);
+
+        void setParamArray(cptr8 _name,FMat3* _value,s32 _cnt);
+
+        void setParamArray(cptr8 _name,FMat4* _value,s32 _cnt);
+        
         //参数表，一个就够用了啊
         SVParamTblPtr m_tbl;
         

@@ -63,6 +63,8 @@ namespace sv {
         bool addParam(cptr8 _name,FMat3& _value);
 
         bool addParam(cptr8 _name,FMat4& _value);
+        //
+        bool addParam(cptr8 _name,s32* _value);
 
         //设置参数值 主要是针对uniform
         bool setParam(cptr8 _name,s32& _value);
@@ -96,6 +98,57 @@ namespace sv {
         void getParam(cptr8 _name,FMat3& _value);
 
         void getParam(cptr8 _name,FMat4& _value);
+        
+        /*
+         array
+         */
+        bool addParamArray(cptr8 _name,s32* _value,s32 _cnt);
+        
+        bool addParamArray(cptr8 _name,f32* _value,s32 _cnt);
+
+        bool addParamArray(cptr8 _name,FVec2* _value,s32 _cnt);
+
+        bool addParamArray(cptr8 _name,FVec3* _value,s32 _cnt);
+
+        bool addParamArray(cptr8 _name,FVec4* _value,s32 _cnt);
+
+        bool addParamArray(cptr8 _name,FMat2* _value,s32 _cnt);
+
+        bool addParamArray(cptr8 _name,FMat3* _value,s32 _cnt);
+
+        bool addParamArray(cptr8 _name,FMat4* _value,s32 _cnt);
+        
+        bool setParamArray(cptr8 _name,s32* _value,s32 _cnt);
+
+        bool setParamArray(cptr8 _name,f32* _value,s32 _cnt);
+
+        bool setParamArray(cptr8 _name,FVec2* _value,s32 _cnt);
+
+        bool setParamArray(cptr8 _name,FVec3* _value,s32 _cnt);
+
+        bool setParamArray(cptr8 _name,FVec4* _value,s32 _cnt);
+        
+        bool setParamArray(cptr8 _name,FMat2* _value,s32 _cnt);
+
+        bool setParamArray(cptr8 _name,FMat3* _value,s32 _cnt);
+
+        bool setParamArray(cptr8 _name,FMat4* _value,s32 _cnt);
+        
+        void getParamArray(cptr8 _name,s32* _value,s32 _cnt);
+
+        void getParamArray(cptr8 _name,f32* _value,s32 _cnt);
+
+        void getParamArray(cptr8 _name,FVec2* _value,s32 _cnt);
+
+        void getParamArray(cptr8 _name,FVec3* _value,s32 _cnt);
+
+        void getParamArray(cptr8 _name,FVec4* _value,s32 _cnt);
+
+        void getParamArray(cptr8 _name,FMat2* _value,s32 _cnt);
+
+        void getParamArray(cptr8 _name,FMat3* _value,s32 _cnt);
+
+        void getParamArray(cptr8 _name,FMat4* _value,s32 _cnt);
         
         void* getParamData(cptr8 _name);
         
