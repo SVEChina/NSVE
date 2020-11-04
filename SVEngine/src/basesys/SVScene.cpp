@@ -326,16 +326,12 @@ void SVScene::test() {
     if(SVLoaderGLTFEx::loadFromFile(mApp, "res/woniu_xiuxian/scene.gltf", skinNode)) {
         addNode(skinNode);
     }
-    
-    
 //    SVTexturePtr t_tex = mApp->getTexMgr()->getTexture("res/test2.jpeg");
-
-    //
 //    SVFacePointNodePtr t_facept_node = MakeSharedPtr<SVFacePointNode>(mApp);
 //    addNode(t_facept_node);
     
-    SVFaceTuneNodePtr t_tune_node = MakeSharedPtr<SVFaceTuneNode>(mApp);
-    addNode(t_tune_node);
+//    SVFaceTuneNodePtr t_tune_node = MakeSharedPtr<SVFaceTuneNode>(mApp);
+//    addNode(t_tune_node);
     //
 //
 //    SVCubePtr t_box_node = MakeSharedPtr<SVCube>(mApp);
