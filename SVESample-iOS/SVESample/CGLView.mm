@@ -1,6 +1,6 @@
 //
 //  CGLView.m
-//  SVESample
+//  IMISample
 //
 //  Created by 付一洲 on 2020/10/14.
 //  Copyright © 2020 李晓帆. All rights reserved.
@@ -11,7 +11,7 @@
 #import "CGLView.h"
 #import <QuartzCore/CAMetalLayer.h>
 #import "CGInst.h"
-#include "src/app/SVInst.h"
+#include "src/app/IMIInst.h"
 
 @interface CGLView () {
     EAGLContext *_eaglContext; // OpenGL context,管理使用opengl es进行绘制的状态,命令及资源

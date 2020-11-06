@@ -281,7 +281,7 @@ typedef struct {
 // 7.8.2.2 The imaxdiv function
 
 // This is modified version of div() function from Microsoft's div.c found
-// in %MSVC.NET%\crt\src\div.c
+// in %MIMIC.NET%\crt\src\div.c
 #ifdef STATIC_IMAXDIV // [
 static
 #else // STATIC_IMAXDIV ][

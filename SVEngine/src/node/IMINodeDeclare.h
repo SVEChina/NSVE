@@ -1,0 +1,83 @@
+//
+// IMINodeDeclare.h
+// IMIngine
+// Copyright 2017-2020
+// yizhou.Fu
+//
+
+#ifndef IMI_NODEDECLARE_H
+#define IMI_NODEDECLARE_H
+
+#include "../base/IMIPreDeclare.h"
+
+namespace imi {
+
+    DECLARE_SHAREPTR(IMIProject);
+    DECLARE_SHAREPTR(IMIOrtho);
+    DECLARE_SHAREPTR(IMIARProj);
+    //
+    DECLARE_SHAREPTR(IMICamCtrlProj);
+    DECLARE_SHAREPTR(IMICamCtrlAttr);
+    DECLARE_SHAREPTR(IMICamCtrlOrtho);
+    DECLARE_SHAREPTR(IMINodeCtrlCamera);
+    DECLARE_SHAREPTR(IMICtrlCamera2D);
+    DECLARE_SHAREPTR(IMICtrlCamereAR);
+    DECLARE_SHAREPTR(IMICtrlCamereFollow2DTop);
+
+    //visit
+    DECLARE_SHAREPTR(IMIVisitorBase);
+    DECLARE_SHAREPTR(IMIVisitCollectResID);
+    DECLARE_SHAREPTR(IMISpineNodeNameVisitor);
+    DECLARE_SHAREPTR(IMIVisitCollectAllNode);
+    DECLARE_SHAREPTR(IMIVisitRayPick);
+    DECLARE_SHAREPTR(IMIVisitRayPickUI);
+    DECLARE_SHAREPTR(IMIVisitorNodeName);
+
+    //
+    DECLARE_SHAREPTR(IMITreeLeaf);
+    DECLARE_SHAREPTR(IMISceneTree);
+    DECLARE_SHAREPTR(IMIScene);
+
+    //node
+    DECLARE_SHAREPTR(IMINode);
+    DECLARE_SHAREPTR(IMICube);
+    DECLARE_SHAREPTR(IMIBitFontNode);
+    DECLARE_SHAREPTR(IMIBMFontNode);
+    DECLARE_SHAREPTR(IMICameraNode);
+    DECLARE_SHAREPTR(IMICoordGridNode);
+    DECLARE_SHAREPTR(IMIDummyNode);
+    DECLARE_SHAREPTR(IMIFrameOutNode);
+    DECLARE_SHAREPTR(IMIFreeTypeNode);
+    DECLARE_SHAREPTR(IMIGameWrapNode);
+    DECLARE_SHAREPTR(IMISkinNode);
+    DECLARE_SHAREPTR(IMISkyNode);
+    DECLARE_SHAREPTR(IMISpineNode);
+    DECLARE_SHAREPTR(IMISpriteNode);
+    DECLARE_SHAREPTR(IMIBillboardNode);
+    DECLARE_SHAREPTR(IMIFaceShapeNode);
+    DECLARE_SHAREPTR(IMIFacePointNode);
+    DECLARE_SHAREPTR(IMIFaceTuneNode);
+    DECLARE_SHAREPTR(IMI2DMaskNode);
+    DECLARE_SHAREPTR(IMIDeformNode);
+    DECLARE_SHAREPTR(IMISkinNode);
+    DECLARE_SHAREPTR(IMIModelNode);
+    DECLARE_SHAREPTR(IMIMorphNode);
+    DECLARE_SHAREPTR(IMIShapeVariedNode);
+    DECLARE_SHAREPTR(IMIParticlesWorld);
+    DECLARE_SHAREPTR(IMIParticlesNode);
+    DECLARE_SHAREPTR(IMIFrameAniNode);
+    //
+    DECLARE_SHAREPTR(IMIUIBase);
+    DECLARE_SHAREPTR(IMIUIPanel);
+    DECLARE_SHAREPTR(IMIUINetElem);
+    DECLARE_SHAREPTR(IMIUINetGrid);
+    DECLARE_SHAREPTR(IMIUIButton);
+    
+    
+}//!namespace imi
+
+
+
+
+
+#endif //IMI_NODEDECLARE_H

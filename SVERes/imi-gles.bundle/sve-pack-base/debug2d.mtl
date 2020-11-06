@@ -1,0 +1,6 @@
+{
+    "version" : "1.0",
+    "name" : "debug2d",
+    "shader" : "shader/dsp/debug2d.dsp",
+    "ssdef" :[]
+}

@@ -1,0 +1,25 @@
+{
+    "language" : "gl",
+    "dspfiles": [
+        "shader/dsp/pbr.dsp",
+        "shader/dsp/normal2d.dsp",
+        "shader/dsp/normal3d.dsp",
+        "shader/dsp/debug2d.dsp",
+        "shader/dsp/debug3d.dsp",
+        "shader/dsp/mask2d.dsp",
+        "shader/dsp/screen.dsp",
+        "shader/dsp/filterLUT.dsp",
+        "shader/dsp/filterPM.dsp",
+        "shader/dsp/filterGray.dsp",
+        "shader/dsp/filterHue.dsp",
+        "shader/dsp/filterHaze.dsp",
+        "shader/dsp/filterBrightness.dsp",
+        "shader/dsp/filterColorLevel.dsp",
+        "shader/dsp/filterContrast.dsp",
+        "shader/dsp/filterCurveAdjst.dsp",
+        "shader/dsp/filterCurveAdjstTex.dsp",
+        "shader/dsp/filterGamma.dsp",
+        "shader/dsp/filterHDR.dsp",
+        "shader/dsp/test1.dsp"
+    ]
+}

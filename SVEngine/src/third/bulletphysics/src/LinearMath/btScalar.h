@@ -21,10 +21,10 @@ subject to the following restrictions:
 #endif
 
 #include <math.h>
-#include <stdlib.h>  //size_t for MSVC 6.0
+#include <stdlib.h>  //size_t for MIMIC 6.0
 #include <float.h>
 
-/* SVN $Revision$ on $Date$ from http://bullet.googlecode.com*/
+/* IMIN $Revision$ on $Date$ from http://bullet.googlecode.com*/
 #define BT_BULLET_VERSION 288
 
 inline int btGetVersion()

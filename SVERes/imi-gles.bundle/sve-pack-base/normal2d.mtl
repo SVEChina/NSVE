@@ -1,0 +1,20 @@
+{
+    "version" : "1.0",
+    "name" : "normal2d",
+    "shader" : "shader/dsp/normal2d.dsp",
+    "textures" :[
+        { "chn": 0 , "from" : "file", "path" : "res/sve.png", "stage": "fs" }
+    ],
+    "blend-param" : {
+        "enable" : 1
+    },
+    "stencil-param" : {
+        "enable" : 0
+    },
+    "alpha-param" : {
+        "enable" : 1
+    },
+    "depth-param" : {
+        "enable" : 0
+    }
+}

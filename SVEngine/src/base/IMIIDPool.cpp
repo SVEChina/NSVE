@@ -1,0 +1,55 @@
+#include "IMIIDPool.h"
+
+using namespace imi;
+
+IMIIDPool::IMIIDPool(){
+    m_initialized = 0;
+    m_seed = 0;
+}
+
+IMIIDPool::~IMIIDPool() {
+    m_idpool.destroy();
+}
+
+u32 IMIIDPool::applyUID() {
+    u32 tmpID = _createID();
+    m_idpool.append(tmpID); //表示已经存在的ID
+    return tmpID;
+}
+
+void IMIIDPool::returnUID(u32 uid) {
+    for(s32 i=0;i<m_idpool.size();i++){
+        if(m_idpool[i] == uid){
+            m_idpool.remove(i);
+        }
+    }
+}
+
+u32 IMIIDPool::_random8() {
+    if(m_initialized == 0) {
+        m_seed = time(NULL);
+        m_initialized = 1;
+    }
+    m_seed = m_seed * 1664525 + 1013904223;
+    return (s32)((m_seed >> 20) & 0xff);
+}
+
+u32 IMIIDPool::_createID() {
+    s32 t_id;
+    do {
+        t_id = _random8();
+        t_id |= _random8() << 8;
+        t_id |= _random8() << 16;
+        t_id |= (_random8() & 0x7f) << 24;
+    } while(_hasID(t_id));
+    return t_id;
+}
+
+bool IMIIDPool::_hasID(u32 _uid) {
+    for(s32 i=0;i<m_idpool.size();i++) {
+        if(m_idpool[i] == _uid) {
+            return true;
+        }
+    }
+    return false;
+}

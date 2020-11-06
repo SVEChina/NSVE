@@ -1,21 +1,21 @@
 //
 // fast_atof.h
-// SVEngine
+// IMIngine
 // Copyright 2017-2020
-// yizhou Fu,long Yin,longfei Lin,ziyu Xu,xiaofan Li,daming Li
+// yizhou.Fu
 // copy from irr
 //
 
 #ifndef FAST_ATOF_H
 #define FAST_ATOF_H
 
-#include "SVCoreMath.h"
+#include "IMICoreMath.h"
 
-namespace sv {
+namespace imi {
     //! Selection of characters which count as decimal point in fast_atof
     // TODO: This should probably also be used in irr::core::string, but
     // the float-to-string code used there has to be rewritten first.
-    SV_API extern sv::SVString LOCALE_DECIMAL_POINTS;
+    IMI_API extern imi::IMIString LOCALE_DECIMAL_POINTS;
 
 // we write [17] here instead of [] to work around a swig bug
     const float fast_atof_table[17] = {
@@ -263,7 +263,7 @@ namespace sv {
         return ret;
     }
 
-}//!namespace sv
+}//!namespace imi
 
 #endif
 

@@ -16,8 +16,8 @@
 	#include <ppu_intrinsics.h>
 #endif
 
-#include "SVBase.h"
-#include "SVHalf.h"
+#include "IMIBase.h"
+#include "IMIHalf.h"
 
 //
 #ifdef PI
@@ -146,7 +146,7 @@
 #endif
 
 
-namespace sv {
+namespace imi {
     
    
 
@@ -173,7 +173,7 @@ namespace sv {
         
     
     
-}//!namespace sv
+}//!namespace imi
 
 
 #endif /* __MATH_LIB_H__ */

@@ -1,0 +1,149 @@
+//
+// IMIPhysicsSoftRigidWorld.cpp
+// IMIngine
+// Copyright 2017-2020
+// yizhou.Fu
+//
+#include "IMIPhysicsSoftRigidWorld.h"
+#include "bodies/IMIPhysicsBodySoft.h"
+#include "../work/IMITdCore.h"
+
+using namespace imi;
+
+IMIPhysicsSoftRigidWorld::IMIPhysicsSoftRigidWorld(IMIInstPtr _app):IMIPhysicsWorldBase(_app) {
+    m_type = E_PHYSICS_WORLD_SOFT_RIGID;
+    m_broadPhase = nullptr;
+    m_collisionConfiguration = nullptr;
+    m_collisionDispatcher = nullptr;
+    m_solver = nullptr;
+    m_softWorld = nullptr;
+    m_gravity = FVec3(0.0f, -9.8f, 0.0f);
+}
+
+IMIPhysicsSoftRigidWorld::~IMIPhysicsSoftRigidWorld() {
+    m_broadPhase = nullptr;
+    m_collisionConfiguration = nullptr;
+    m_collisionDispatcher = nullptr;
+    m_solver = nullptr;
+    m_softWorld = nullptr;
+}
+
+void IMIPhysicsSoftRigidWorld::init(){
+    m_collisionConfiguration =  new btSoftBodyRigidBodyCollisionConfiguration();
+    m_collisionDispatcher = new btCollisionDispatcher(m_collisionConfiguration);
+    m_broadPhase = new btDbvtBroadphase();
+    m_solver =  new btSequentialImpulseConstraintSolver();
+//    mSoftBodySolver
+    m_softWorld =
+    new btSoftRigidDynamicsWorld(m_collisionDispatcher, m_broadPhase, m_solver, m_collisionConfiguration);
+//    m_softWorld->setWorldUserInfo(THIS_TO_SHAREPTR(IMIPhysicsSoftRigidWorld));
+    m_softWorld->setGravity(btVector3(m_gravity.x, m_gravity.y, m_gravity.z));
+}
+
+void IMIPhysicsSoftRigidWorld::destroy(){
+    removeAllSoftBodies();
+    //
+    if (m_collisionConfiguration) {
+        delete m_collisionConfiguration;
+    }
+    if (m_collisionDispatcher) {
+        delete m_collisionDispatcher;
+    }
+    if (m_broadPhase) {
+        delete m_broadPhase;
+    }
+    if (m_solver) {
+        delete m_solver;
+    }
+    if (m_softWorld) {
+        delete m_softWorld;
+    }
+}
+
+void IMIPhysicsSoftRigidWorld::update(f32 _dt){
+    if (m_softWorld) {
+        m_softWorld->stepSimulation(PHYSICSWORLDSTEP, 5);
+    }
+    for (s32 i = 0; i < m_bodies.size(); i++) {
+        IMIPhysicsBodySoftPtr t_body = m_bodies[i];
+        t_body->update(_dt);
+    }
+}
+
+btSoftBodyWorldInfo& IMIPhysicsSoftRigidWorld::getWorldInfo(){
+    return m_softWorld->getWorldInfo();
+}
+
+void IMIPhysicsSoftRigidWorld::setGravity(const FVec3 &_gravity){
+    m_gravity = _gravity;
+    if (m_softWorld) {
+        m_softWorld->setGravity(btVector3(m_gravity.x, m_gravity.y, m_gravity.z));
+    }
+}
+
+const FVec3& IMIPhysicsSoftRigidWorld::getGravity() const{
+    return m_gravity;
+}
+
+void IMIPhysicsSoftRigidWorld::addSoftBody(IMIPhysicsBodySoftPtr _body){
+    if (!_body || !m_softWorld) {
+        return;
+    }
+    if (!_hasSoftBody(_body)) {
+        m_lock->lock();
+        m_softWorld->addSoftBody(_body->getBody());
+        m_bodies.append(_body);
+        m_lock->unlock();
+    }
+}
+
+bool IMIPhysicsSoftRigidWorld::removeSoftBody(IMIPhysicsBodySoftPtr _body){
+    if (!_body || !m_softWorld) {
+        return false;
+    }
+    bool t_ret = false;
+    if (_hasSoftBody(_body)) {
+        m_lock->lock();
+        for (s32 i = 0; i < m_bodies.size(); i++) {
+            IMIPhysicsBodySoftPtr t_body = m_bodies[i];
+            if (t_body == _body) {
+                t_body->destroy();
+                m_bodies.removeForce(i);
+                t_ret = true;
+                break;
+            }
+        }
+        if (t_ret) {
+            m_softWorld->removeSoftBody(_body->getBody());
+        }
+        m_lock->unlock();
+    }
+    return t_ret;
+}
+
+bool IMIPhysicsSoftRigidWorld::removeAllSoftBodies(){
+    bool t_ret = false;
+    if (m_bodies.size() > 0) {
+        t_ret = true;
+        for (s32 i = 0; i<m_bodies.size(); i++) {
+            IMIPhysicsBodySoftPtr t_body = m_bodies[i];
+            t_body->destroy();
+        }
+        m_bodies.destroy();
+    }
+    return t_ret;
+}
+
+bool IMIPhysicsSoftRigidWorld::_hasSoftBody(IMIPhysicsBodySoftPtr _body){
+    bool t_ret = false;
+    m_lock->lock();
+    for (s32 i = 0; i<m_bodies.size(); i++) {
+        IMIPhysicsBodySoftPtr t_body = m_bodies[i];
+        if (t_body == _body) {
+            t_ret = true;
+            break;
+        }
+    }
+    m_lock->unlock();
+    return t_ret;
+}

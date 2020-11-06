@@ -1,0 +1,18 @@
+{
+    "version" : "1.0",
+    "shader" : "screen",
+    "textures" :[
+        { "chn": 0 , "from" : "file", "path" : "res/sve.png", "stage": "fs" }
+    ],
+    "blend-param" : {
+        "enable" : 0,
+        "src" : "IMI_ONE",
+        "dst" : "IMI_ZERO"
+    },
+    "stencil-param" : {
+        "enable" : 0
+    },
+    "alpha-param" : {
+        "enable" : 0
+    }
+}

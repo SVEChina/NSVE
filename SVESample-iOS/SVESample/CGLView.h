@@ -1,6 +1,6 @@
 //
 //  CGLView.h
-//  SVESample
+//  IMISample
 //
 //  Created by 付一洲 on 2020/10/14.
 //  Copyright © 2020 李晓帆. All rights reserved.

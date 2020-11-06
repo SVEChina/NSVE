@@ -7,10 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		024428922546A81A000B59F5 /* sve-metal.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0244288E2546A81A000B59F5 /* sve-metal.bundle */; };
-		024428932546A81A000B59F5 /* sve-gles.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0244288F2546A81A000B59F5 /* sve-gles.bundle */; };
-		024428942546A81A000B59F5 /* sve-gl.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 024428902546A81A000B59F5 /* sve-gl.bundle */; };
-		024428952546A81A000B59F5 /* sve-vk.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 024428912546A81A000B59F5 /* sve-vk.bundle */; };
+		024428922546A81A000B59F5 /* imi-metal.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0244288E2546A81A000B59F5 /* imi-metal.bundle */; };
+		024428932546A81A000B59F5 /* imi-gles.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0244288F2546A81A000B59F5 /* imi-gles.bundle */; };
+		024428942546A81A000B59F5 /* imi-gl.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 024428902546A81A000B59F5 /* imi-gl.bundle */; };
 		024428992546AA5A000B59F5 /* CGDetectMgr.mm in Sources */ = {isa = PBXBuildFile; fileRef = 024428972546AA5A000B59F5 /* CGDetectMgr.mm */; };
 		0263A6A4254051AC00AC8AC4 /* CGCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 0263A6A3254051AC00AC8AC4 /* CGCamera.m */; };
 		0263A6BD2541814000AC8AC4 /* CGBaseSys.m in Sources */ = {isa = PBXBuildFile; fileRef = 0263A6BC2541814000AC8AC4 /* CGBaseSys.m */; };
@@ -65,10 +64,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0244288E2546A81A000B59F5 /* sve-metal.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "sve-metal.bundle"; sourceTree = "<group>"; };
-		0244288F2546A81A000B59F5 /* sve-gles.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "sve-gles.bundle"; sourceTree = "<group>"; };
-		024428902546A81A000B59F5 /* sve-gl.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "sve-gl.bundle"; sourceTree = "<group>"; };
-		024428912546A81A000B59F5 /* sve-vk.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "sve-vk.bundle"; sourceTree = "<group>"; };
+		0244288E2546A81A000B59F5 /* imi-metal.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "imi-metal.bundle"; sourceTree = "<group>"; };
+		0244288F2546A81A000B59F5 /* imi-gles.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "imi-gles.bundle"; sourceTree = "<group>"; };
+		024428902546A81A000B59F5 /* imi-gl.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "imi-gl.bundle"; sourceTree = "<group>"; };
 		024428972546AA5A000B59F5 /* CGDetectMgr.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CGDetectMgr.mm; sourceTree = "<group>"; };
 		024428982546AA5A000B59F5 /* CGDetectMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGDetectMgr.h; sourceTree = "<group>"; };
 		0263A69E25403B0600AC8AC4 /* CGDef.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CGDef.h; sourceTree = "<group>"; };
@@ -129,10 +127,9 @@
 		0244288D2546A81A000B59F5 /* SVERes */ = {
 			isa = PBXGroup;
 			children = (
-				0244288E2546A81A000B59F5 /* sve-metal.bundle */,
-				0244288F2546A81A000B59F5 /* sve-gles.bundle */,
-				024428902546A81A000B59F5 /* sve-gl.bundle */,
-				024428912546A81A000B59F5 /* sve-vk.bundle */,
+				0244288E2546A81A000B59F5 /* imi-metal.bundle */,
+				0244288F2546A81A000B59F5 /* imi-gles.bundle */,
+				024428902546A81A000B59F5 /* imi-gl.bundle */,
 			);
 			name = SVERes;
 			path = ../SVERes;
@@ -351,11 +348,10 @@
 				028B5C5E248F62A4002E6A9D /* LaunchScreen.storyboard in Resources */,
 				A5FB383425483626003BCAB1 /* SENSEME.lic in Resources */,
 				028B5C5B248F62A4002E6A9D /* Assets.xcassets in Resources */,
-				024428932546A81A000B59F5 /* sve-gles.bundle in Resources */,
-				024428952546A81A000B59F5 /* sve-vk.bundle in Resources */,
-				024428922546A81A000B59F5 /* sve-metal.bundle in Resources */,
+				024428932546A81A000B59F5 /* imi-gles.bundle in Resources */,
+				024428922546A81A000B59F5 /* imi-metal.bundle in Resources */,
 				028B5C59248F62A1002E6A9D /* Main.storyboard in Resources */,
-				024428942546A81A000B59F5 /* sve-gl.bundle in Resources */,
+				024428942546A81A000B59F5 /* imi-gl.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -520,7 +516,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = BW96G54658;
+				DEVELOPMENT_TEAM = K9H559M465;
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../SVEngine\"";
 				INFOPLIST_FILE = SVESample/Info.plist;
@@ -529,7 +525,7 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../../NSVERes/ios/st_mobile/ios_os\"";
-				PRODUCT_BUNDLE_IDENTIFIER = com.sve.SVESample;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sve.SVESample3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -542,7 +538,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5UJ5U6NFPA;
+				DEVELOPMENT_TEAM = K9H559M465;
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../SVEngine\"";
 				INFOPLIST_FILE = SVESample/Info.plist;
@@ -551,7 +547,7 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../../NSVERes/ios/st_mobile/ios_os\"";
-				PRODUCT_BUNDLE_IDENTIFIER = com.sve.SVESample2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sve.SVESample3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;

@@ -4142,7 +4142,7 @@ static int stbi__parse_uncompressed_block(stbi__zbuf *a)
    // drain the bit-packed data into header
    k = 0;
    while (a->num_bits > 0) {
-      header[k++] = (stbi_uc) (a->code_buffer & 255); // suppress MSVC run-time check
+      header[k++] = (stbi_uc) (a->code_buffer & 255); // suppress MIMIC run-time check
       a->code_buffer >>= 8;
       a->num_bits -= 8;
    }
@@ -7396,11 +7396,11 @@ STBIDEF int stbi_is_16_bit_from_callbacks(stbi_io_callbacks const *c, void *user
       1.46  (2014-08-26)
               fix broken tRNS chunk (colorkey-style transparency) in non-paletted PNG
       1.45  (2014-08-16)
-              fix MSVC-ARM internal compiler error by wrapping malloc
+              fix MIMIC-ARM internal compiler error by wrapping malloc
       1.44  (2014-08-07)
               various warning fixes from Ronny Chevalier
       1.43  (2014-07-15)
-              fix MSVC-only compiler problem in code changed in 1.42
+              fix MIMIC-only compiler problem in code changed in 1.42
       1.42  (2014-07-09)
               don't define _CRT_SECURE_NO_WARNINGS (affects user code)
               fixes to stbi__cleanup_jpeg path
@@ -7414,7 +7414,7 @@ STBIDEF int stbi_is_16_bit_from_callbacks(stbi_io_callbacks const *c, void *user
               fix to GIF loading because BMP wasn't rewinding (whoops, no GIFs in my test suite)
               add support for BMP version 5 (more ignored fields)
       1.38  (2014-06-06)
-              suppress MSVC warnings on integer casts truncating values
+              suppress MIMIC warnings on integer casts truncating values
               fix accidental rename of 'skip' field of I/O
       1.37  (2014-06-04)
               remove duplicate typedef

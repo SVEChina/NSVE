@@ -1,0 +1,43 @@
+{
+    "pack-name" : "base",
+    "pack-files": [
+        "pbr.mtl",
+        "test1.mtl",
+        "screen.mtl",
+        "normal2d.mtl",
+        "normal3d.mtl",
+        "debug2d.mtl",
+        "debug3d.mtl",
+        "mask2d.mtl",
+        "filterGray.mtl",
+        "filterHaze.mtl",
+        "filterHue.mtl",
+        "filterLUT.mtl",
+        "filterBrightness.mtl",
+        "filterColorBalance.mtl",
+        "filterColorLevel.mtl",
+        "filterConstrast.mtl",
+        "filterCurveAdjst.mtl",
+        "filterGamma.mtl",
+        "filterHDR.mtl"
+    ],
+    "pack-mtls" : [
+        {
+            "version" : "1.0",
+            "name" : "back",
+            "shader" : "shader/dsp/back.dsp",
+            "textures" :[
+                { "chn": 0 , "from" : "file", "path" : "res/sve.png", "stage": "fs" }
+            ],
+            "blend-param" : {
+                "enable" : 0
+            },
+            "stencil-param" : {
+                "enable" : 0
+            },
+            "alpha-param" : {
+                "enable" : 0
+            }
+        }
+    ]
+}

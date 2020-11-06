@@ -1,0 +1,82 @@
+//
+// IMIPhysicsBodyRigid.h
+// IMIngine
+// Copyright 2017-2020
+// yizhou.Fu
+//
+
+#ifndef IMI_PHYSICSBODYRIGID_H
+#define IMI_PHYSICSBODYRIGID_H
+#include "IMIPhysicsBody.h"
+#include "../../base/IMIVec3.h"
+#include "btBulletDynamicsCommon.h"
+namespace imi {
+    
+    
+        
+        class IMIPhysicsBodyRigid : public IMIPhysicsBody {
+        public:
+            IMIPhysicsBodyRigid(IMIInstPtr _app);
+            
+            IMIPhysicsBodyRigid(IMIInstPtr _app , IMIPhysicsShapePtr _shape);
+            
+            ~IMIPhysicsBodyRigid();
+            
+            virtual void init();
+            
+            virtual void destroy();
+            
+            virtual void update(f32 _dt);
+            
+            inline void setOrigin(FVec3 _origin) {
+                m_origin = _origin;
+            }
+            
+            inline FVec3 getOrigin() {
+                return m_origin;
+            }
+            
+            btRigidBody *getBody();
+            
+            void setApplyCentralForce(FVec3 _pos);
+            
+            void setApplyTorque(FVec3 _pos);
+            
+            void addConstraint();
+            
+            void setConstraintXY(f32 _x ,f32 _y ,f32 _z);
+            
+            void removeConstraint();
+            
+            void setRestitution(f32 _dis);
+            
+            void setFriction(f32 _dis);
+            
+            void setBindNode(bool isbind);
+            
+            PHYSICSBODYTYPE getType();
+            
+        protected:
+            FVec3 m_origin;
+            
+            btRigidBody *m_pBody;
+            
+            IMIPhysicsShapePtr m_pShape;
+            
+            btDefaultMotionState* m_pMyMotionState;
+            
+            btPoint2PointConstraint* p2p;
+            
+            bool m_isBindNode;
+            
+            s32 m_savedState;
+            
+        };
+            
+    
+    
+}//!namespace imi
+
+
+
+#endif //IMI_PHYSICSBODYRIGID_H

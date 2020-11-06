@@ -344,7 +344,7 @@ public:
     typedef typename EncodingType::Ch Ch;
     typedef SchemaValidationContext<SchemaDocumentType> Context;
     typedef Schema<SchemaDocumentType> SchemaType;
-    typedef GenericValue<EncodingType, AllocatorType> SValue;
+    typedef GenericValue<EncodingType, AllocatorType> IMIalue;
     friend class GenericSchemaDocument<ValueType, AllocatorType>;
 
     Schema(SchemaDocumentType* schemaDocument, const PointerType& p, const ValueType& value, const ValueType& document, AllocatorType* allocator) :
@@ -428,7 +428,7 @@ public:
         const ValueType* dependencies = GetMember(value, GetDependenciesString());
         {
             // Gather properties from properties/required/dependencies
-            SValue allProperties(kArrayType);
+            IMIalue allProperties(kArrayType);
 
             if (properties && properties->IsObject())
                 for (ConstMemberIterator itr = properties->MemberBegin(); itr != properties->MemberEnd(); ++itr)
@@ -1192,7 +1192,7 @@ private:
     struct Property {
         Property() : schema(), dependenciesSchema(), dependenciesValidatorIndex(), dependencies(), required(false) {}
         ~Property() { AllocatorType::Free(dependencies); }
-        SValue name;
+        IMIalue name;
         const SchemaType* schema;
         const SchemaType* dependenciesSchema;
         SizeType dependenciesValidatorIndex;
@@ -1249,9 +1249,9 @@ private:
     SizeType minLength_;
     SizeType maxLength_;
 
-    SValue minimum_;
-    SValue maximum_;
-    SValue multipleOf_;
+    IMIalue minimum_;
+    IMIalue maximum_;
+    IMIalue multipleOf_;
     bool exclusiveMinimum_;
     bool exclusiveMaximum_;
 };

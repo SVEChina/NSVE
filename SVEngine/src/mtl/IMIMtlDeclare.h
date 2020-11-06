@@ -1,0 +1,66 @@
+//
+// IMIMtlDeclare.h
+// IMIngine
+// Copyright 2017-2020
+// yizhou.Fu
+//
+
+#ifndef IMI_MTLDECLARE_H
+#define IMI_MTLDECLARE_H
+
+#include "../base/IMIPreDeclare.h"
+
+namespace imi {
+
+    DECLARE_SHAREPTR(IMIMtlCore);
+    DECLARE_SHAREPTR(IMISurface);
+    DECLARE_SHAREPTR(IMIMtlPack);
+    DECLARE_SHAREPTR(IMIMtlLib);
+
+    //
+    DECLARE_SHAREPTR(IMIMtlGLTF);
+    DECLARE_SHAREPTR(IMIMtlGLTFSkin);
+    DECLARE_SHAREPTR(IMIMtlBrightnessContrast);
+    DECLARE_SHAREPTR(IMIMtlSaturation);
+    DECLARE_SHAREPTR(IMIMtlVibrance);
+    DECLARE_SHAREPTR(IMIMtlWhiteBalance);
+    DECLARE_SHAREPTR(IMIMtlExposure);
+    DECLARE_SHAREPTR(IMIMtlGamma);
+    DECLARE_SHAREPTR(IMIMtlShadowHighlight);
+    DECLARE_SHAREPTR(IMIMtlWhiteBlackLevel);
+    DECLARE_SHAREPTR(IMIMtlColorBalance);
+    DECLARE_SHAREPTR(IMIMtlSmooth);
+    DECLARE_SHAREPTR(IMIMtlHSL);
+    DECLARE_SHAREPTR(IMIMtlGeo3d);
+    DECLARE_SHAREPTR(IMIMtlCoord);
+    DECLARE_SHAREPTR(IMIMtlNetGrid);
+    DECLARE_SHAREPTR(IMIMtlBeauty);
+    DECLARE_SHAREPTR(IMIMtlGradientMap);
+    DECLARE_SHAREPTR(IMIMtlMask);
+    DECLARE_SHAREPTR(IMIMtlRGB2YUV);
+    DECLARE_SHAREPTR(IMIMtl3D);
+    DECLARE_SHAREPTR(IMIMtlBillboard);
+    DECLARE_SHAREPTR(IMIMtlShadowMapping);
+
+    //美颜
+    DECLARE_SHAREPTR(IMIMtlFilterBrilaterl);
+    DECLARE_SHAREPTR(IMIMtlFilterBrilaterl2);
+    DECLARE_SHAREPTR(IMIMtlGaussian);
+    DECLARE_SHAREPTR(IMIMtlBlurFair);
+    DECLARE_SHAREPTR(IMIMtlFairLtraLow);
+    DECLARE_SHAREPTR(IMIMtlFaceShape);
+    DECLARE_SHAREPTR(IMIMtlFaceShapeVaried);
+    DECLARE_SHAREPTR(IMIMtlBlur);
+    DECLARE_SHAREPTR(IMIMtlParticleAni);
+
+    //滤镜
+    DECLARE_SHAREPTR(IMIMtlBasedOn);
+    DECLARE_SHAREPTR(IMIMtlAcutance);
+    //texture
+    DECLARE_SHAREPTR(IMITexture);
+    DECLARE_SHAREPTR(IMITexturePList);
+
+}//!namespace imi
+
+
+#endif //IMI_MTLDECLARE_H

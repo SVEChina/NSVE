@@ -1,0 +1,11 @@
+{
+    "version" : "1.0",
+    "name" : "filterColorBalance",
+    "shader" : "shader/dsp/filterColorBalance.dsp",
+    "textures" :[
+        { "chn": 0 , "from" : "file", "path" : "res/sve.png", "stage": "fs" }
+    ],
+    "depth-param": {
+        "enable" : 0
+    }
+}

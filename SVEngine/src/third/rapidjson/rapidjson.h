@@ -508,7 +508,7 @@ RAPIDJSON_NAMESPACE_END
 
 #elif defined(_MSC_VER)
 
-// pragma (MSVC specific)
+// pragma (MIMIC specific)
 #define RAPIDJSON_PRAGMA(x) __pragma(x)
 #define RAPIDJSON_DIAG_PRAGMA(x) RAPIDJSON_PRAGMA(warning(x))
 

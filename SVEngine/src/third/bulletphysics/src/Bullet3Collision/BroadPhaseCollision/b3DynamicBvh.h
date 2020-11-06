@@ -55,7 +55,7 @@ subject to the following restrictions:
 
 // Specific methods implementation
 
-//SSE gives errors on a MSVC 7.1
+//SSE gives errors on a MIMIC 7.1
 #if defined(B3_USE_SSE)  //&& defined (_WIN32)
 #define B3_DBVT_SELECT_IMPL B3_DBVT_IMPL_SSE
 #define B3_DBVT_MERGE_IMPL B3_DBVT_IMPL_SSE

@@ -3259,7 +3259,7 @@ void btSoftBody::defaultCollisionHandler(const btCollisionObjectWrapper* pcoWrap
 void btSoftBody::defaultCollisionHandler(btSoftBody* psb)
 {
 	const int cf = m_cfg.collisions & psb->m_cfg.collisions;
-	switch (cf & fCollision::SVSmask)
+	switch (cf & fCollision::IMISmask)
 	{
 		case fCollision::CL_SS:
 		{

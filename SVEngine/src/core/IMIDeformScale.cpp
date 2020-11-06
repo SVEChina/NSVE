@@ -1,0 +1,56 @@
+//
+//  IMIDeformScale.cpp
+//  IMIngine
+//
+//  Created by 徐子昱 on 2019/5/9.
+//  Copyright © 2019 李晓帆. All rights reserved.
+//
+
+#include "IMIDeformScale.h"
+#include "../work/IMITdCore.h"
+
+using namespace imi;
+
+IMIDeformScale::IMIDeformScale(){
+    m_lock=MakeSharedPtr<IMILock>();
+    m_smooth=0.0;
+    clearCtl();
+}
+
+IMIDeformScale::~IMIDeformScale(){
+    clearCtl();
+}
+
+void IMIDeformScale::setSmooth(f32 _smooth){
+    m_smooth = _smooth;
+}
+
+void IMIDeformScale::pushCtl(f32 x , f32 y , f32 z){
+    m_lock->lock();
+    m_controlArray.append(FVec3(x,y,z));
+    m_lock->unlock();
+}
+
+void IMIDeformScale::clearCtl(){
+    m_lock->lock();
+    m_controlArray.clear();
+    m_lock->unlock();
+}
+
+FVec2 IMIDeformScale::getScalePostion(const FVec2& t){
+    m_lock->lock();
+    FVec2 t_newCoord=t;
+    //f32 t_aspect=0.5625;
+    f32 t_weight=0.0;
+    for(s32 i = 0; i<m_controlArray.size(); i++){
+        FVec2 t_control = FVec2(m_controlArray[i].x, m_controlArray[i].y);
+        f32 t_dis = getDistanceFrom(FVec2(t_newCoord.x*0.5625,t_newCoord.y), FVec2(t_control.x*0.5625,t_control.y));
+        if(t_dis < m_controlArray[i].z){
+            t_weight=pow(t_dis/m_controlArray[i].z, m_smooth);
+            t_newCoord.x = t_control.x +(t_newCoord.x - t_control.x) * t_weight;
+            t_newCoord.y = t_control.y +(t_newCoord.y - t_control.y) * t_weight;
+        }
+    }
+    m_lock->unlock();
+    return t_newCoord;
+}

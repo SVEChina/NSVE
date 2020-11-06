@@ -1,0 +1,11 @@
+{
+    "language" : "metal",
+    "dspfiles": [
+        "shader/dsp/nor.dsp",
+        "shader/dsp/back.dsp",
+        "shader/dsp/screen.dsp",
+        "shader/dsp/sprite.dsp",
+        "shader/dsp/filter-lut.dsp",
+        "shader/dsp/filter-pm.dsp"
+    ]
+}

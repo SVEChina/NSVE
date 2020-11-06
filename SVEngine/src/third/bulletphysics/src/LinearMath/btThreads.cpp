@@ -58,8 +58,8 @@ subject to the following restrictions:
 
 #elif defined(_MSC_VER)
 
-// on MSVC, use intrinsics instead
-#define USE_MSVC_INTRINSICS 1
+// on MIMIC, use intrinsics instead
+#define USE_MIMIC_INTRINSICS 1
 
 #elif defined(__GNUC__) && (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 7))
 
@@ -103,7 +103,7 @@ void btSpinMutex::unlock()
 	std::atomic_store_explicit(aDest, int(0), std::memory_order_release);
 }
 
-#elif USE_MSVC_INTRINSICS
+#elif USE_MIMIC_INTRINSICS
 
 #define WIN32_LEAN_AND_MEAN
 
@@ -184,11 +184,11 @@ void btSpinMutex::unlock()
 	__sync_fetch_and_and(&mLock, int(0));
 }
 
-#else  //#elif USE_MSVC_INTRINSICS
+#else  //#elif USE_MIMIC_INTRINSICS
 
 #error "no threading primitives defined -- unknown platform"
 
-#endif  //#else //#elif USE_MSVC_INTRINSICS
+#endif  //#else //#elif USE_MIMIC_INTRINSICS
 
 #else  //#if BT_THREADSAFE
 
@@ -712,7 +712,7 @@ public:
 		// PPL dispatch
 		ForBodyAdapter pplBody(&body, grainSize, iEnd);
 		btPushThreadsAreRunning();
-		// note: MSVC 2010 doesn't support partitioner args, so avoid them
+		// note: MIMIC 2010 doesn't support partitioner args, so avoid them
 		concurrency::parallel_for(iBegin,
 								  iEnd,
 								  grainSize,
@@ -740,7 +740,7 @@ public:
 		m_sum.clear();
 		SumBodyAdapter pplBody(&body, &m_sum, grainSize, iEnd);
 		btPushThreadsAreRunning();
-		// note: MSVC 2010 doesn't support partitioner args, so avoid them
+		// note: MIMIC 2010 doesn't support partitioner args, so avoid them
 		concurrency::parallel_for(iBegin,
 								  iEnd,
 								  grainSize,

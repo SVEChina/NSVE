@@ -1,6 +1,6 @@
 //
 //  CGBaseSys.h
-//  SVESample
+//  IMISample
 //
 //  Created by 李晓帆 on 22/10/2020.
 //  Copyright © 2020 李晓帆. All rights reserved.

@@ -1,6 +1,6 @@
 //
 //  ViewController.m
-//  SVESample
+//  IMISample
 //
 //  Created by 李晓帆 on 9/6/2020.
 //  Copyright © 2020 李晓帆. All rights reserved.
@@ -30,11 +30,11 @@
     [[CGInst getInst] cgInit];
     //
     CGCamera *camera = [[CGBaseSys getInst] getCamera];
-    if(SVE_CORE == SVE_GLES) {
+    if(IMI_CORE == IMI_GLES) {
         glview = [[CGLView alloc] initWithFrame:self.view.bounds];
         [glview createGLLayerWithWidth:[camera getFrameWidth] Height:[camera getFrameHeight]];
         [self.view addSubview:glview];
-    }else if(SVE_CORE == SVE_METAL){
+    }else if(IMI_CORE == IMI_METAL){
         metalview = [[CMetalView alloc] initWithFrame:self.view.bounds];
         [metalview createMetalLayerWithWidth:[camera getFrameWidth] Height:[camera getFrameHeight]];
         [self.view addSubview:metalview];

@@ -610,12 +610,12 @@ Implementation of two C++17 constructs: conjunction, negation. This is needed
 to avoid evaluating all the traits in a condition
 
 For example: not std::is_same<void, T>::value and has_value_type<T>::value
-will not compile when T = void (on MSVC at least). Whereas
+will not compile when T = void (on MIMIC at least). Whereas
 conjunction<negation<std::is_same<void, T>>, has_value_type<T>>::value will
 stop evaluating if negation<...>::value == false
 
 Please note that those constructs must be used with caution, since symbols can
-become very long quickly (which can slow down compilation and cause MSVC
+become very long quickly (which can slow down compilation and cause MIMIC
 internal compiler errors). Only use it when you have to (see example ahead).
 */
 template<class...> struct conjunction : std::true_type {};
@@ -3583,7 +3583,7 @@ difference_type m_it = (std::numeric_limits<std::ptrdiff_t>::min)();
 /*!
 @brief an iterator value
 
-@note This structure could easily be a union, but MSVC currently does not allow
+@note This structure could easily be a union, but MIMIC currently does not allow
 unions members with complex constructors, see https://github.com/nlohmann/json/pull/105.
 */
 template<typename BasicJsonType> struct internal_iterator
@@ -7295,7 +7295,7 @@ friend class ::nlohmann::detail::binary_writer;
 template<typename BasicJsonType>
 friend class ::nlohmann::detail::binary_reader;
 
-/// workaround type for MSVC
+/// workaround type for MIMIC
 using basic_json_t = NLOHMANN_BASIC_JSON_TPL;
 
 // convenience aliases for types residing in namespace detail;
@@ -12584,7 +12584,7 @@ return static_cast<number_integer_t>(lhs.m_value.number_unsigned) < rhs.m_value.
 
 // We only reach this line if we cannot compare values. In that case,
 // we compare types. Note we have to call the operator explicitly,
-// because MSVC has problems otherwise.
+// because MIMIC has problems otherwise.
 return operator<(lhs_type, rhs_type);
 }
 

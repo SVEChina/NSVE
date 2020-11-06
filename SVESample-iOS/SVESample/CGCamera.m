@@ -174,7 +174,7 @@
             }else {
                 //YUV 数据要这么取！！！！！！！！！！！！！！！！！！！
 //                GLubyte* bufferPtr0 = (GLubyte  *)CVPixelBufferGetBaseAddressOfPlane(_pixelBuf, 0);
-//                SVStreamInPtr t_streamIn = t_app->getBasicSys()->getStreamIn();
+//                IMIStreamInPtr t_streamIn = t_app->getBasicSys()->getStreamIn();
 //                if(t_streamIn){
 //                    t_streamIn->pushStreamData([SCENENAME UTF8String], bufferPtr0, (s32)width, (s32)height, pixelFormat, 0);
 //                }

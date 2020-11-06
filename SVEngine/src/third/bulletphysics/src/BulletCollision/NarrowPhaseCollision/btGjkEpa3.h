@@ -134,13 +134,13 @@ template <typename btConvexTemplate>
 struct GJK
 {
 	/* Types		*/
-	struct sSV
+	struct sIMI
 	{
 		btVector3 d, w;
 	};
 	struct sSimplex
 	{
-		sSV* c[4];
+		sIMI* c[4];
 		btScalar p[4];
 		U rank;
 	};
@@ -151,8 +151,8 @@ struct GJK
 	btVector3 m_ray;
 	btScalar m_distance;
 	sSimplex m_simplices[2];
-	sSV m_store[4];
-	sSV* m_free[4];
+	sIMI m_store[4];
+	sIMI* m_free[4];
 	U m_nfree;
 	U m_current;
 	sSimplex* m_simplex;
@@ -375,7 +375,7 @@ struct GJK
 		return (false);
 	}
 	/* Internals	*/
-	void getsupport(const btVector3& d, sSV& sv) const
+	void getsupport(const btVector3& d, sIMI& sv) const
 	{
 		sv.d = d / d.length();
 		sv.w = m_shape.Support(sv.d);
@@ -549,7 +549,7 @@ struct EPA
 	{
 		btVector3 n;
 		btScalar d;
-		typename GJK<btConvexTemplate>::sSV* c[3];
+		typename GJK<btConvexTemplate>::sIMI* c[3];
 		sFace* f[3];
 		sFace* l[2];
 		U1 e[3];
@@ -574,7 +574,7 @@ struct EPA
 	typename GJK<btConvexTemplate>::sSimplex m_result;
 	btVector3 m_normal;
 	btScalar m_depth;
-	typename GJK<btConvexTemplate>::sSV m_sv_store[EPA_MAX_VERTICES];
+	typename GJK<btConvexTemplate>::sIMI m_sv_store[EPA_MAX_VERTICES];
 	sFace m_fc_store[EPA_MAX_FACES];
 	U m_nextsv;
 	sList m_hull;
@@ -664,7 +664,7 @@ struct EPA
 					if (m_nextsv < EPA_MAX_VERTICES)
 					{
 						sHorizon horizon;
-						typename GJK<btConvexTemplate>::sSV* w = &m_sv_store[m_nextsv++];
+						typename GJK<btConvexTemplate>::sIMI* w = &m_sv_store[m_nextsv++];
 						bool valid = true;
 						best->pass = (U1)(++pass);
 						gjk.getsupport(best->n, *w);
@@ -740,7 +740,7 @@ struct EPA
 		m_result.p[0] = 1;
 		return (m_status);
 	}
-	bool getedgedist(sFace* face, typename GJK<btConvexTemplate>::sSV* a, typename GJK<btConvexTemplate>::sSV* b, btScalar& dist)
+	bool getedgedist(sFace* face, typename GJK<btConvexTemplate>::sIMI* a, typename GJK<btConvexTemplate>::sIMI* b, btScalar& dist)
 	{
 		const btVector3 ba = b->w - a->w;
 		const btVector3 n_ab = btCross(ba, face->n);   // Outward facing edge normal direction, on triangle plane
@@ -776,7 +776,7 @@ struct EPA
 
 		return false;
 	}
-	sFace* newface(typename GJK<btConvexTemplate>::sSV* a, typename GJK<btConvexTemplate>::sSV* b, typename GJK<btConvexTemplate>::sSV* c, bool forced)
+	sFace* newface(typename GJK<btConvexTemplate>::sIMI* a, typename GJK<btConvexTemplate>::sIMI* b, typename GJK<btConvexTemplate>::sIMI* c, bool forced)
 	{
 		if (m_stock.root)
 		{
@@ -835,7 +835,7 @@ struct EPA
 		}
 		return (minf);
 	}
-	bool expand(U pass, typename GJK<btConvexTemplate>::sSV* w, sFace* f, U e, sHorizon& horizon)
+	bool expand(U pass, typename GJK<btConvexTemplate>::sIMI* w, sFace* f, U e, sHorizon& horizon)
 	{
 		static const U i1m3[] = {1, 2, 0};
 		static const U i2m3[] = {2, 0, 1};

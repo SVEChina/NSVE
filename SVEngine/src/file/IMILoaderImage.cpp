@@ -1,0 +1,110 @@
+//
+// IMILoaderImage.cpp
+// IMIngine
+// Copyright 2017-2020
+// yizhou.Fu
+//
+
+#include "IMILoaderImage.h"
+#include "IMIFileMgr.h"
+#include "../core/IMIImage.h"
+#include "../base/IMIDataChunk.h"
+#include "../mtl/IMITexMgr.h"
+#include "../app/IMIInst.h"
+
+#define STB_IMAGE_IMPLEMENTATION
+#include "../third/lib_stb_image/stb_image.h"
+
+using namespace imi;
+
+s32 IMILoaderImage::check(cptr8 _name) {
+    cptr8 ext = strrchr(_name,'.');
+    if(ext && (!strcmp(ext,".tga") || !strcmp(ext,".TGA")))
+        return 1;
+    if(ext && (!strcmp(ext,".jpg") || !strcmp(ext,".JPG")))
+        return 1;
+    if(ext && (!strcmp(ext,".jpeg") || !strcmp(ext,".JPEG")))
+        return 1;
+    if(ext && (!strcmp(ext,".png") || !strcmp(ext,".PNG")))
+        return 1;
+    if(ext && (!strcmp(ext,".dds") || !strcmp(ext,".DDS")))
+        return 0;
+    if(ext && (!strcmp(ext,".psd") || !strcmp(ext,".PSD")))
+        return 0;
+    return 0;
+}
+
+s32 IMILoaderImage::load(IMIInstPtr _app,IMIImagePtr _image, cptr8 _name) {
+    StbRef _stbRef;
+    IMIString t_fname = _app->m_file_sys->getFileFullName(_name);
+    if( check(t_fname) == 0 ) {
+        //可能会走压缩纹理
+        return 0;
+    }
+    FILE *f = stbi__fopen(t_fname.c_str(), "rb");
+    if (f) {
+        if (stbi_is_16_bit_from_file(f) == 1) {
+            _stbRef.bit = 16;
+            _stbRef.data = stbi_load_from_file_16(
+                    f,
+                    &_stbRef.width,
+                    &_stbRef.height,
+                    &_stbRef.channels,
+                    0
+            );
+        } else {
+            _stbRef.bit = 8;
+            _stbRef.data = stbi_load_from_file(
+                    f,
+                    &_stbRef.width,
+                    &_stbRef.height,
+                    &_stbRef.channels,
+                    0
+            );
+        }
+        fclose(f);
+        if (_stbRef.data) {
+            _stbRef.dataLen = _stbRef.width * _stbRef.height * _stbRef.channels * (_stbRef.bit/8);
+            _image->fill(&_stbRef);
+            free(_stbRef.data);
+            return 1;
+        }
+        return 1;
+    }
+    return 0;
+}
+
+s32 IMILoaderImage::load(IMIInstPtr _app,IMIImagePtr _image, cptr8 _name, s32 _offset) {
+    //_image.clear();
+    cptr8 ext = strrchr(_name,'.');
+    if(ext && (!strcmp(ext,".dds") || !strcmp(ext,".DDS")))
+        return 0;//IMIImageFileDDS::load(image,name,offset);
+    return 0;
+}
+
+s32 IMILoaderImage::load(IMIInstPtr _app,IMIImagePtr _image, cptru8 _data, s32 _size) {
+    //_image.clear();
+    if(_size > 2 && _data[0] == 0xff && _data[1] == 0xd8) return 0;//IMIImageFileJPEG::load(image,data,size);
+    if(_size > 3 && _data[0] == 0x89 && _data[1] == 0x50 && _data[2] == 0x4e && _data[3] == 0x47) {
+//        IMILoaderImagePNG loaderPNG(mApp);
+//        return loaderPNG.load(_image,_data,_size);
+        return 0;
+    }
+    
+    return 0;
+}
+
+s32 IMILoaderImage::save(IMIInstPtr _app,const IMIImagePtr _image, cptr8 _name, f32 _quality) {
+//    if(_image.isLoaded() == 0) {
+//        return 0;
+//    }
+    cptr8 ext = strrchr(_name,'.');
+    
+    if(ext && (!strcmp(ext,".tga") || !strcmp(ext,".TGA"))) return 0;//IMIImageFileTGA::save(image,name);
+    if(ext && (!strcmp(ext,".jpg") || !strcmp(ext,".JPG"))) return 0;//IMIImageFileJPEG::save(image,name,quality);
+    if(ext && (!strcmp(ext,".png") || !strcmp(ext,".PNG"))) return 0;//IMIImageFilePNG::save(image,name);
+    if(ext && (!strcmp(ext,".dds") || !strcmp(ext,".DDS"))) return 0;//IMIImageFileDDS::save(image,name);
+    if(ext && (!strcmp(ext,".psd") || !strcmp(ext,".PSD"))) return 0;//IMIImageFilePSD::save(image,name);
+    
+    return 0;
+}

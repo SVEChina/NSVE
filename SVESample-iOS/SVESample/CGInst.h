@@ -1,6 +1,6 @@
 //
 //  CGInst.h
-//  SVESample
+//  IMISample
 //
 //  Created by 李晓帆 on 9/6/2020.
 //  Copyright © 2020 李晓帆. All rights reserved.
@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 //
 -(void)cgDestroy;
 //
--(void*)getSVE;
+-(void*)getIMI;
 //
 -(void)createRM:(id<MTLDevice>)_device drawable:(id<CAMetalDrawable>)_drawable;
 //
