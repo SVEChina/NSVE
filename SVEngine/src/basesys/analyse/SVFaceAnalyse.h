@@ -43,11 +43,7 @@ enum  MOUTHTYPE{
 };
 
 class SVFaceAnalyse: public SVObject {
-public:
-    SVFaceAnalyse();
-    
-    ~SVFaceAnalyse();
-    
+public:    
     //分析人脸
     static s32 analyseFace(SVInstPtr _inst,std::vector<FVec2>& points);
     
