@@ -12,8 +12,9 @@
             "bufID" : 1,
             "tbl" :[ { "name" : "uTex0size", "type" : "fvec2", "value" : "720.0, 1280.0" },
                      { "name" : "uTex1size", "type" : "fvec2", "value" : "720.0, 1280.0" },
-                     { "name" : "uInvert0", "type" : "fvec2", "value" : "1.0,1.0" },
-                     { "name" : "uInvert1", "type" : "fvec2", "value" : "1.0,1.0" },
+                     { "name" : "texcoord0Clip", "type" : "fvec2", "value" : "1.0, 1.0" },
+                     { "name" : "texcoord1Clip", "type" : "fvec2", "value" : "1.0, 1.0" },
+                     { "name" : "uInvert", "type" : "fvec2", "value" : "1.0,1.0" },
                      { "name" : "uResolution", "type" : "fvec2", "value" : "720.0,1280.0" }
             ]
         }
