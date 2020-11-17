@@ -99,33 +99,33 @@ void SVGlobalMgr::destroy() {
 void SVGlobalMgr::update(f32 dt) {
     if(m_ani_mgr) {
         m_ani_mgr->update(dt);
-        timeTag(false,"ani cost");
+//        timeTag(false,"ani cost");
     }
     if(m_camera_mgr) {
         //相机更新
         m_camera_mgr->update(dt);
-        timeTag(false,"camera cost");
+//        timeTag(false,"camera cost");
     }
     if(m_scene_mgr) {
         //场景更新(节点系统)
         m_scene_mgr->update(dt);
-        timeTag(false,"scene cost");
+//        timeTag(false,"scene cost");
     }
     if (m_detect_mgr) {
         m_detect_mgr->update(dt);
-        timeTag(false,"detect cost");
+//        timeTag(false,"detect cost");
     }
 }
 
 void SVGlobalMgr::timeTag(bool _clear,cptr8 _tag){
     if(_clear){
         gettimeofday(&timTagLast, nullptr);
-        SV_LOG_INFO("timeTag reset %s \n",_tag);
+//        SV_LOG_INFO("timeTag reset %s \n",_tag);
     }else{
         timeval timTagCur;
         gettimeofday(&timTagCur, nullptr);
         s32 dt = s32((timTagCur.tv_sec - timTagLast.tv_sec) * 1000.0f + (timTagCur.tv_usec - timTagLast.tv_usec) * 0.001f);
         timTagLast = timTagCur;
-        SV_LOG_INFO("timeTag %d %s\n",dt,_tag);
+//        SV_LOG_INFO("timeTag %d %s\n",dt,_tag);
     }
 }

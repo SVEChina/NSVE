@@ -86,7 +86,25 @@ void SVMesh3d::setBoneMatrix(SVArray<FMat4> &_mats) {
 void SVMesh3d::update(f32 _dt,FMat4& _mat) {
     if(m_surface) {
         //骨头矩阵
-        m_surface->setParamArray("bones", (FMat4*)m_boneMatrixs.get(), m_boneMatrixs.size());
+        
+//        for (int i = 0; i < m_boneMatrixs.size(); i++) {
+//            FMat4 mat4 = m_boneMatrixs[i];
+//            f32 *data = mat4.get();
+//            NSLog(@"aaaaaaaaaaaa %d     %f  %f  %f  %f   %f  %f  %f  %f   %f  %f  %f  %f   %f  %f  %f  %f  ",
+//                  i,
+//                  data[0],data[1],data[2],data[3],
+//                  data[4],data[5],data[6],data[7],
+//                  data[8],data[9],data[10],data[11],
+//                  data[12],data[13],data[14],data[15]
+//            );
+//        }
+        
+        
+        FMat4* aaa = (FMat4*)m_boneMatrixs.get();
+        
+        
+        
+        m_surface->setParamArray("aBones", (FMat4*)m_boneMatrixs.get(), m_boneMatrixs.size());
         
         FMat4 t_mat = _mat*m_absoluteMat;
         m_surface->setParam("matModel", t_mat);

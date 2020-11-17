@@ -130,6 +130,14 @@ void SVDataChunk::get(u64 _off,FMat4& _value) {
     _value.setIdentity();
 }
 
+bool SVDataChunk::get(u64 _off,void* _value,s32 _size) {
+     if(_off + _size <= m_realsize ) {
+         memcpy(_value, m_data + _off, _size);
+         return true;
+     }
+     return false;
+}
+
 //
 u64 SVDataChunk::push(s32 _value) {
     return push(&_value,sizeof(s32));

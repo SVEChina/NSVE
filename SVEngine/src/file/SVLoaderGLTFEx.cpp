@@ -83,6 +83,7 @@ SVSkinNodePtr SVLoaderGLTFEx::building(SVInstPtr _app,
     std::vector<SVSkeletonPtr> t_skeArray;
     for(s32 i=0;i<_model->skins.size();i++) {
         SVSkeletonPtr t_ske = _genSkin(_app,_model,i,_path);
+        t_ske->refresh();
         t_skeArray.push_back(t_ske);
     }
     
