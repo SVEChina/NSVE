@@ -139,10 +139,16 @@ void SVShader::submitParam(SVParamTblPtr _param) {
                 m_shader_dsp.m_paramtbl[j].m_tbl->setParam(t_param_name, t_value);
             }
         }else if(t_dsp->m_type == SV_FMAT4) {
-            FMat4 t_value;
-            _param->m_param_values->get(t_dsp->m_off, t_value);
-            for(s32 j=0;j<m_shader_dsp.m_paramtbl.size();j++) {
-                m_shader_dsp.m_paramtbl[j].m_tbl->setParam(t_param_name, t_value);
+            SVArray<FMat4> t_value;
+            t_value.resize(t_dsp->m_cnt);
+            void *t_ret = (void *)t_value.get();
+            _param->m_param_values->get(t_dsp->m_off, t_ret, t_dsp->m_cnt * sizeof(FMat4));
+            for (s32 j=0;j<m_shader_dsp.m_paramtbl.size();j++) {
+                if (t_dsp->m_cnt > 1) {
+                    m_shader_dsp.m_paramtbl[j].m_tbl->setParamArray(t_param_name, (FMat4*)t_value.get(), t_dsp->m_cnt);
+                } else {
+                    m_shader_dsp.m_paramtbl[j].m_tbl->setParam(t_param_name, t_value[0]);
+                }
             }
         }
     }

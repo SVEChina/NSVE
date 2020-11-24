@@ -138,7 +138,7 @@ static CGDetectMgr *mInst;
         gettimeofday(&timTagCur, nullptr);
         int dt = int((timTagCur.tv_sec - timTagLast.tv_sec) * 1000.0f + (timTagCur.tv_usec - timTagLast.tv_usec) * 0.001f);
         timTagLast = timTagCur;
-        NSLog(@"detect timeTag %d\n",dt);
+//        NSLog(@"detect timeTag %d\n",dt);
     }
 }
 

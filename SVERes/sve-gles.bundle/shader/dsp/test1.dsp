@@ -1,5 +1,5 @@
 {
-    "vdsp" : ["E_V3","E_T0"],
+    "vdsp" : ["E_V3","E_T0","E_BONE","E_BONEW"],
     "pass" : "nor",
     "vs" : "shader/code/test1.vs",
     "fs" : "shader/code/test1.fs",

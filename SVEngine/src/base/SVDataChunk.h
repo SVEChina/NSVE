@@ -59,6 +59,8 @@ namespace sv {
         
         void get(u64 _off,FMat4& _value);
         
+        bool get(u64 _off,void* _value,s32 _size);
+        
         u64 push(s32 _value);
         
         u64 push(f32 _value);

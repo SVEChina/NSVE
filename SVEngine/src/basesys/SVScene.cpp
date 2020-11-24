@@ -325,6 +325,7 @@ void SVScene::test() {
     SVSkinNodePtr skinNode = SVLoaderGLTFEx::loadFromFile(mApp, "res/taidi/scene.gltf");
     if(skinNode) {
         addNode(skinNode);
+        skinNode->play("Take 001");
     }
 //    SVTexturePtr t_tex = mApp->getTexMgr()->getTexture("res/test2.jpeg");
 //    SVFacePointNodePtr t_facept_node = MakeSharedPtr<SVFacePointNode>(mApp);
