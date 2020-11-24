@@ -66,7 +66,7 @@ namespace sv {
         //创建材质
         SVMtlCorePtr createMtlFromFile(cptr8 _fname);
         
-        //
+        //从JSON创建材质
         SVMtlCorePtr createMtlFromJson(RAPIDJSON_NAMESPACE::Value& _obj,cptr8 _mtlname);
         
         //处理消息

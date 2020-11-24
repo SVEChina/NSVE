@@ -12,16 +12,11 @@
 
 namespace sv {
     
-    
-        
-        class SVParseMask : public SVParseData {
-        public:
-            static SVNodePtr parseMask(SVInstPtr _app, RAPIDJSON_NAMESPACE::Value &item, s32 _resid, cptr8 _path);
-        };
+    class SVParseMask : public SVParseData {
+    public:
+        static SVNodePtr parseMask(SVInstPtr _app, RAPIDJSON_NAMESPACE::Value &item, s32 _resid, cptr8 _path);
+    };
 
-        
-    
-    
 }//!namespace sv
 
 

@@ -7929,6 +7929,14 @@
 		5FD9B0622265F5A700522317 /* SVRShaderGL.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FD9B05C2265F5A600522317 /* SVRShaderGL.h */; };
 		5FD9B0632265F5A700522317 /* SVRShaderGL.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FD9B05C2265F5A600522317 /* SVRShaderGL.h */; };
 		5FD9B0642265F5A700522317 /* SVRShaderGL.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FD9B05C2265F5A600522317 /* SVRShaderGL.h */; };
+		5FDD4412255CF0A300A1BF1D /* SVJson.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FDD4410255CF0A300A1BF1D /* SVJson.h */; };
+		5FDD4413255CF0A300A1BF1D /* SVJson.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FDD4410255CF0A300A1BF1D /* SVJson.h */; };
+		5FDD4414255CF0A300A1BF1D /* SVJson.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FDD4410255CF0A300A1BF1D /* SVJson.h */; };
+		5FDD4415255CF0A300A1BF1D /* SVJson.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FDD4410255CF0A300A1BF1D /* SVJson.h */; };
+		5FDD4416255CF0A300A1BF1D /* SVJson.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FDD4411255CF0A300A1BF1D /* SVJson.cpp */; };
+		5FDD4417255CF0A300A1BF1D /* SVJson.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FDD4411255CF0A300A1BF1D /* SVJson.cpp */; };
+		5FDD4418255CF0A300A1BF1D /* SVJson.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FDD4411255CF0A300A1BF1D /* SVJson.cpp */; };
+		5FDD4419255CF0A300A1BF1D /* SVJson.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FDD4411255CF0A300A1BF1D /* SVJson.cpp */; };
 		5FF2B7FD24B8750500FC0BC9 /* SVShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F574D4724B85AF10035AB08 /* SVShader.cpp */; };
 		5FF2B7FE24B8750500FC0BC9 /* SVShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F574D4724B85AF10035AB08 /* SVShader.cpp */; };
 		5FF2B7FF24B8750600FC0BC9 /* SVShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F574D4724B85AF10035AB08 /* SVShader.cpp */; };
@@ -9970,6 +9978,8 @@
 		5FD9B04022647D2900522317 /* SVRMeshRes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVRMeshRes.h; sourceTree = "<group>"; };
 		5FD9B05B2265F5A600522317 /* SVRShaderGL.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVRShaderGL.cpp; sourceTree = "<group>"; };
 		5FD9B05C2265F5A600522317 /* SVRShaderGL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVRShaderGL.h; sourceTree = "<group>"; };
+		5FDD4410255CF0A300A1BF1D /* SVJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVJson.h; sourceTree = "<group>"; };
+		5FDD4411255CF0A300A1BF1D /* SVJson.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVJson.cpp; sourceTree = "<group>"; };
 		5FF2B80D24C166D900FC0BC9 /* SVRenderCmdRes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVRenderCmdRes.h; sourceTree = "<group>"; };
 		5FF2B80E24C166D900FC0BC9 /* SVRenderCmdRes.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = SVRenderCmdRes.cpp; sourceTree = "<group>"; };
 		5FF2B83824CBC1C600FC0BC9 /* SVMetalDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVMetalDef.h; sourceTree = "<group>"; };
@@ -12408,6 +12418,8 @@
 				5F7D5DCE215F407700803BCF /* SVFileMgr.h */,
 				5F7D5DE0215F407700803BCF /* SVFileWriter.cpp */,
 				5F7D5DC2215F407700803BCF /* SVFileWriter.h */,
+				5FDD4411255CF0A300A1BF1D /* SVJson.cpp */,
+				5FDD4410255CF0A300A1BF1D /* SVJson.h */,
 				5F6598C223C33C980075A17C /* SVLoaderBat.cpp */,
 				5F6598C123C33C970075A17C /* SVLoaderBat.h */,
 				5F3312472542C7DD0074DAE1 /* SVLoaderGLTFEx.cpp */,
@@ -14241,6 +14253,7 @@
 				5F566EC1253FC80900670056 /* schema.h in Headers */,
 				5F566A89253FC80500670056 /* btConvexShape.h in Headers */,
 				5F7D63F5215F407800803BCF /* schema.h in Headers */,
+				5FDD4415255CF0A300A1BF1D /* SVJson.h in Headers */,
 				5F566333253FC80000670056 /* FIRFilter.h in Headers */,
 				5F566B35253FC80600670056 /* btActionInterface.h in Headers */,
 				5F566891253FC80400670056 /* btConvexConvexAlgorithm.h in Headers */,
@@ -14865,6 +14878,7 @@
 				020C4D3522DC5DD200201753 /* b3RigidBodyData.h in Headers */,
 				020C43E722DC5DCC00201753 /* b3JacobianEntry.h in Headers */,
 				5F7D655D215F407800803BCF /* SVRendererGL.h in Headers */,
+				5FDD4413255CF0A300A1BF1D /* SVJson.h in Headers */,
 				020C464322DC5DCD00201753 /* btGImpactCollisionAlgorithm.h in Headers */,
 				020C4BDF22DC5DD100201753 /* b3Logging.h in Headers */,
 				020C4C3B22DC5DD200201753 /* btPolarDecomposition.h in Headers */,
@@ -15861,6 +15875,7 @@
 				5F566D9A253FC80800670056 /* btSpatialAlgebra.h in Headers */,
 				020C463622DC5DCD00201753 /* btClipPolygon.h in Headers */,
 				5F56693A253FC80400670056 /* btClipPolygon.h in Headers */,
+				5FDD4412255CF0A300A1BF1D /* SVJson.h in Headers */,
 				5F5669D6253FC80500670056 /* btTriangleShape.h in Headers */,
 				5F566E56253FC80800670056 /* b3NewContactReduction.h in Headers */,
 				5F566ECE253FC80900670056 /* document.h in Headers */,
@@ -17221,6 +17236,7 @@
 				020C448E22DC5DCC00201753 /* btSimplexSolverInterface.h in Headers */,
 				5F566A4C253FC80500670056 /* btConvexPolyhedron.h in Headers */,
 				5F566A80253FC80500670056 /* btMiniSDF.h in Headers */,
+				5FDD4414255CF0A300A1BF1D /* SVJson.h in Headers */,
 				5F7D6008215F407700803BCF /* SVDetectBase.h in Headers */,
 				5F566A3C253FC80500670056 /* btConvex2dShape.h in Headers */,
 				5F7D6862215F407900803BCF /* SVMat4d.h in Headers */,
@@ -18128,6 +18144,7 @@
 				020C4C8922DC5DD200201753 /* btPolarDecomposition.cpp in Sources */,
 				5F96BD5924F907C60020F7C4 /* ltable.c in Sources */,
 				5F7D6973215F407900803BCF /* SVColor.cpp in Sources */,
+				5FDD4419255CF0A300A1BF1D /* SVJson.cpp in Sources */,
 				020C476722DC5DCE00201753 /* btOptimizedBvh.cpp in Sources */,
 				5F566741253FC80300670056 /* btQuantizedBvh.cpp in Sources */,
 				5F5665A9253FC80200670056 /* AttachmentLoader.c in Sources */,
@@ -19163,6 +19180,7 @@
 				5F7D60BE215F407700803BCF /* SVRecycleProcess.cpp in Sources */,
 				5F566642253FC80200670056 /* RegionAttachment.c in Sources */,
 				020C46C822DC5DCE00201753 /* btConvexShape.cpp in Sources */,
+				5FDD4416255CF0A300A1BF1D /* SVJson.cpp in Sources */,
 				5F7D687C215F407900803BCF /* SVDataChunk.cpp in Sources */,
 				5F0E636E24F3B97B002620DC /* SkeletonData.c in Sources */,
 				020C472022DC5DCE00201753 /* btTetrahedronShape.cpp in Sources */,
@@ -19962,6 +19980,7 @@
 				5F7D6038215F407700803BCF /* SVBasicSys.cpp in Sources */,
 				5F566850253FC80400670056 /* btSphereTriangleCollisionAlgorithm.cpp in Sources */,
 				020C498622DC5DCF00201753 /* btFixedConstraint.cpp in Sources */,
+				5FDD4418255CF0A300A1BF1D /* SVJson.cpp in Sources */,
 				020C494A22DC5DCF00201753 /* btSliderConstraint.cpp in Sources */,
 				5F566644253FC80200670056 /* RegionAttachment.c in Sources */,
 				020791A82302AF2A0029B759 /* SVImage.cpp in Sources */,
@@ -20761,6 +20780,7 @@
 				5F7D6037215F407700803BCF /* SVBasicSys.cpp in Sources */,
 				5F56684F253FC80400670056 /* btSphereTriangleCollisionAlgorithm.cpp in Sources */,
 				020C498522DC5DCF00201753 /* btFixedConstraint.cpp in Sources */,
+				5FDD4417255CF0A300A1BF1D /* SVJson.cpp in Sources */,
 				020C494922DC5DCF00201753 /* btSliderConstraint.cpp in Sources */,
 				5F566643253FC80200670056 /* RegionAttachment.c in Sources */,
 				020791A72302AF2A0029B759 /* SVImage.cpp in Sources */,
