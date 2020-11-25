@@ -594,16 +594,21 @@ SVAnimateSkinPtr SVLoaderGLTFEx::_genAnimate(SVInstPtr _app, tinygltf::Model* _m
 
 
 SVMtlCorePtr SVLoaderGLTFEx::_genMtl(SVInstPtr _app, tinygltf::Model* _model, s32 _index, cptr8 _path) {
+    //构建JSON串，然后从JSON，创建材质
+    //
+    //SVMtlCorePtr createMtlFromJson(RAPIDJSON_NAMESPACE::Value& _obj,cptr8 _mtlname);
+    //
     tinygltf::Material* _mat = &(_model->materials[_index]);
     SVMtlCorePtr _mtlPtr = _app->getMtlLib()->getMtl("test1");
+    if(!_mtlPtr) {
+        return nullptr;
+    }
     tinygltf::ParameterMap &_additionalValues = _mat->additionalValues;
-    
-    //
     _mtlPtr->setDepthEnable(true);
     _mtlPtr->setDepthMethod(SV_LEQUAL);
     _mtlPtr->setStencilEnable(true);
     
-    //
+    //双面渲染
     auto doubleSided = _additionalValues.find("doubleSided");
     if (doubleSided != _additionalValues.end()) {
         if (doubleSided->second.bool_value) {
@@ -613,6 +618,7 @@ SVMtlCorePtr SVLoaderGLTFEx::_genMtl(SVInstPtr _app, tinygltf::Model* _model, s3
             _mtlPtr->setCullFace(SV_CCW, SV_BACK);
         }
     }
+    
     //
     _mtlPtr->setBlendEnable(false);
     _mtlPtr->setBlendSeparateEnable(false);
@@ -629,11 +635,6 @@ SVMtlCorePtr SVLoaderGLTFEx::_genMtl(SVInstPtr _app, tinygltf::Model* _model, s3
            );
         }
     }
-
-    
-    
-    
-    
     return _mtlPtr;
 }
 
@@ -643,6 +644,8 @@ SVSurfacePtr SVLoaderGLTFEx::_genSurface(SVInstPtr _app, tinygltf::Model* _model
     /*
      value
      */
+    std::vector<SVString> shaderDef;
+    //
     tinygltf::ParameterMap::iterator it1 = _material->values.begin();
     while (it1!=_material->values.end()) {
         SVString t_key = it1->first.c_str();

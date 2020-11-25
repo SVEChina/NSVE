@@ -11,14 +11,10 @@
 #include "SVParseData.h"
 namespace sv {
     
-    
-        
-        class SVParseParticles : public SVParseData {
-        public:
-            static SVNodePtr parseParticles(SVInstPtr app, RAPIDJSON_NAMESPACE::Value &item, s32 _resid, cptr8 _path);
-        };
-        
-    
-    
+    class SVParseParticles : public SVParseData {
+    public:
+        static SVNodePtr parseParticles(SVInstPtr app, RAPIDJSON_NAMESPACE::Value &item, s32 _resid, cptr8 _path);
+    };
+
 }//!namespace sv
 #endif //SV_PARSEPARTICLES_H

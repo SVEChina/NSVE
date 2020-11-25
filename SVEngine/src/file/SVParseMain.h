@@ -14,34 +14,29 @@
 
 namespace sv {
     
-    
+    class SVParseMain : public SVGBaseEx {
+    public:
+        SVParseMain(SVInstPtr _app);
         
-        class SVParseMain : public SVGBaseEx {
-        public:
-            SVParseMain(SVInstPtr _app);
-            
-            virtual ~SVParseMain();
-            
-            SVModuleBasePtr parse(cptr8 _path, s32 resid);
-
-        protected:
-            void _registDictionary(cptr8 _type, prase_content_fun fun);
-            
-            void _unregistDictionary(cptr8 _type);
-            
-            bool _hasRegist(cptr8 _type );
-            
-            SVNodePtr _callTypeParse(cptr8 _type, RAPIDJSON_NAMESPACE::Value &item, s32 resid, cptr8 _path);
-            
-        protected:
-            typedef SVMap<SVString, prase_content_fun> PARSEPOOL;
-            PARSEPOOL parse_dictionary;
-            SVInstPtr m_app;
-        };
-
+        virtual ~SVParseMain();
         
-    
-    
+        SVModuleBasePtr parse(cptr8 _path, s32 resid);
+
+    protected:
+        void _registDictionary(cptr8 _type, prase_content_fun fun);
+        
+        void _unregistDictionary(cptr8 _type);
+        
+        bool _hasRegist(cptr8 _type );
+        
+        SVNodePtr _callTypeParse(cptr8 _type, RAPIDJSON_NAMESPACE::Value &item, s32 resid, cptr8 _path);
+        
+    protected:
+        typedef SVMap<SVString, prase_content_fun> PARSEPOOL;
+        PARSEPOOL parse_dictionary;
+        SVInstPtr m_app;
+    };
+
 }//!namespace sv
 
 
