@@ -24,7 +24,6 @@ mat4 getSkinningMatrix() {
 //
 void main(){
     v_texcoord0 = aTexcoord0;
-    
     mat4 skinningMat4 = getSkinningMatrix();
     vec4 pos = skinningMat4*vec4(aPosition.xyz, 1.0);
     

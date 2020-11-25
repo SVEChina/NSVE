@@ -50,6 +50,8 @@ namespace sv {
         //设置正交
         void setOrtho();
         
+        void setFovy(f32 _fovy);
+        
         FVec3 getPosition();
         
         FMat4 projectMat();
@@ -66,6 +68,21 @@ namespace sv {
             m_active = false;
         }
 
+        inline void setPos(f32 x, f32 y, f32 z) {
+            m_pos.x = x;
+            m_pos.y = y;
+            m_pos.z = z;
+        }
+        inline void setUp(f32 x, f32 y, f32 z) {
+            m_up.x = x;
+            m_up.y = y;
+            m_up.z = z;
+        }
+        inline void setTarget(f32 x, f32 y, f32 z) {
+            m_target.x = x;
+            m_target.y = y;
+            m_target.z = z;
+        }
     protected:
         void _updateProj();
         

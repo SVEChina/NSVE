@@ -20,7 +20,6 @@ namespace sv {
     class SVSkinNode : public SVNode {
     public:
         SVSkinNode(SVInstPtr _app);
-        
         ~SVSkinNode();
         
         //更新
@@ -42,7 +41,7 @@ namespace sv {
         void clearMaterial();
         
         //动画操作
-        void addAni(SVAnimateSkinPtr _ani);
+        void addAni(cptr8 _name, SVAnimateSkinPtr _ani);
         
         void delAni(cptr8 _name);
         
@@ -65,6 +64,8 @@ namespace sv {
         
         //当前动画
         SVAnimateSkinPtr m_pActAni;
+        SVRTargetPtr mRTargetPtr;
+        SVCameraNodePtr mCameraNodePtr;
         
     public:
         FVec3 m_filePos;

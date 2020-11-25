@@ -106,6 +106,8 @@ void SVMtlCore::reset() {
     m_cull_enable = 0;
     m_frontFace = SV_CCW;
     m_cullFace = SV_BACK;
+    
+    m_blend_separate_enable = 0;
 //    //深度参数
 //    m_depth_clear;
 //    m_depth_enable;        //开启深度测试

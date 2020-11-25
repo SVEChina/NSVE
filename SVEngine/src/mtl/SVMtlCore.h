@@ -82,6 +82,8 @@ namespace sv {
         
         SVShaderPtr getShader() { return m_shader_obj; }
         
+        s32 sv2glEnum(s32 _enum);
+        
     protected:
         //材质名称
         SVString m_mtl_name;

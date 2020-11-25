@@ -274,17 +274,27 @@ bool SVRendererGL::processMtl(SVMtlCorePtr _mtl,SVSurfacePtr _surface) {
                         dst_param = GL_ONE; break;
                 }
                 glBlendFunc(src_param,dst_param);
-            }else{
+            } else if(_mtl->m_blend_separate_enable) {
+                glEnable(GL_BLEND);
+                glBlendFuncSeparate(
+                    sv2glEnum(_mtl->m_blend_separate_src_rgb),
+                    sv2glEnum(_mtl->m_blend_separate_dst_rgb),
+                    sv2glEnum(_mtl->m_blend_separate_src_alpha),
+                    sv2glEnum(_mtl->m_blend_separate_dst_alpha)
+                );
+                glBlendEquation(sv2glEnum(_mtl->m_blend_separate_equation));
+            } else {
                 glDisable(GL_BLEND);
             }
+            
             //stencil
-            if( _mtl->m_stencil_enable ) {
+            if(_mtl->m_stencil_enable) {
                 glEnable(GL_STENCIL);
             }else{
                 glDisable(GL_STENCIL);
             }
             //cull
-            if( _mtl->m_cull_enable ) {
+            if(_mtl->m_cull_enable) {
                 glEnable(GL_CULL_FACE);
                 if( _mtl->m_frontFace == SV_CCW) {
                     glFrontFace(GL_CCW);
@@ -299,14 +309,15 @@ bool SVRendererGL::processMtl(SVMtlCorePtr _mtl,SVSurfacePtr _surface) {
             }else{
                 glDisable(GL_CULL_FACE);
             }
+            
             //alpha
-            if( _mtl->m_alpha_enable ) {
+            if(_mtl->m_alpha_enable) {
                 
             }else{
                 
             }
             //depth
-            if( _mtl->m_depth_enable ) {
+            if(_mtl->m_depth_enable) {
                 glEnable(GL_DEPTH_TEST);
                 //m_depth_method
             }else{

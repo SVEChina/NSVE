@@ -8,8 +8,9 @@
 #include "SVSkinNode.h"
 #include "../basesys/SVCameraNode.h"
 #include "../basesys/SVScene.h"
-#include "../event/SVEventMgr.h"
 #include "../basesys/SVConfig.h"
+#include "../basesys/SVCameraMgr.h"
+#include "../event/SVEventMgr.h"
 #include "../core/SVModel.h"
 #include "../core/SVAnimateSkin.h"
 #include "../mtl/SVMtlCore.h"
@@ -18,8 +19,12 @@
 #include "../app/SVDispatch.h"
 #include "../rendercore/SVRenderMesh.h"
 #include "../rendercore/SVRenderMgr.h"
+#include "../rendercore/SVRTargetMgr.h"
 #include "../core/SVGeoGen.h"
 #include "../core/SVMesh3d.h"
+
+
+
 
 using namespace sv;
 
@@ -31,6 +36,9 @@ SVSkinNode::SVSkinNode(SVInstPtr _app)
     m_pMtls = {};
     m_pActAni = nullptr;
     m_aniPool.clear();
+    
+    mRTargetPtr = nullptr;
+    mCameraNodePtr = nullptr;
 }
 
 SVSkinNode::~SVSkinNode() {
@@ -39,7 +47,12 @@ SVSkinNode::~SVSkinNode() {
     m_pSurfaces.clear();
     m_pMtls.clear();
     m_pActAni = nullptr;
+    mRTargetPtr = nullptr;
+    mCameraNodePtr = nullptr;
 }
+
+#include "../basesys/SVSceneMgr.h"
+#include "../basesys/SVScene.h"
 
 void SVSkinNode::update(f32 dt) {
     SVNode::update(dt);
@@ -47,6 +60,19 @@ void SVSkinNode::update(f32 dt) {
     if(m_pActAni != nullptr) {
         m_pActAni->update(dt);
     }
+    
+    mRTargetPtr = mApp->getRenderMgr()->getMainRT();
+    if (mCameraNodePtr == nullptr) {
+        mCameraNodePtr = mApp->getCameraMgr()->createCamera(101);
+        mCameraNodePtr->setProject();
+        mCameraNodePtr->setPos(0.0f, 0.0f, 500.0f);
+        mCameraNodePtr->active();
+        mCameraNodePtr->setSize(mRTargetPtr->getTargetDsp()->m_width, mRTargetPtr->getTargetDsp()->m_height);
+        mCameraNodePtr->setZ(200.1f, 500.0f);
+        mCameraNodePtr->setFovy(45.0f);
+        mCameraNodePtr->update(dt);
+    }
+    mRTargetPtr->bindCamera(mCameraNodePtr);
     
     //
     size_t t_modelLen = m_pModels.size();
@@ -63,7 +89,8 @@ void SVSkinNode::render() {
     size_t t_modelLen = m_pModels.size();
     for (size_t i = 0; i < t_modelLen; i++) {
         SVModelPtr _modelPtr = m_pModels[i];
-        _modelPtr->render();
+        _modelPtr->render(mRTargetPtr);
+//        _modelPtr->render();
     }
 }
 
@@ -127,13 +154,8 @@ void SVSkinNode::clearMaterial() {
 }
 
 //动画操作
-void SVSkinNode::addAni(SVAnimateSkinPtr _ani) {
-    m_aniPool.append(_ani->getName(), _ani);
-//    if(m_pSke) {
-        //_ani->bind(m_pSke);
-//    }
-    //test
-//    m_pActAni = _ani;
+void SVSkinNode::addAni(cptr8 _name, SVAnimateSkinPtr _ani) {
+    m_aniPool.append(_name, _ani);
 }
 
 void SVSkinNode::delAni(cptr8 _name) {

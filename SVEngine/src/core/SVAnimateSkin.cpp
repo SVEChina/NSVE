@@ -278,6 +278,10 @@ cptr8 SVAnimateSkin::getName() {
     return m_name.c_str();
 }
 
+void SVAnimateSkin::setName(cptr8 ptr) {
+    m_name = ptr;
+}
+
 void SVAnimateSkin::addChannel(SVChannelPtr _chan) {
     if(_chan) {
         m_totalTime = m_totalTime>_chan->m_maxTime?m_totalTime:_chan->m_maxTime;

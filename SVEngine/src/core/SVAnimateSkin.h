@@ -174,6 +174,7 @@ namespace sv {
         void clearSke();
 
         cptr8 getName();
+        void setName(cptr8 ptr);
         
         void addChannel(SVChannelPtr _chan);
         

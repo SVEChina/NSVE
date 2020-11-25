@@ -51,6 +51,18 @@ namespace sv {
 #define SV_BACK     1
 #define SV_FRONT    2
 
+#define SV_ZERO                                          0
+#define SV_ONE                                           1
+#define SV_SRC_COLOR                                     2
+#define SV_ONE_MINUS_SRC_COLOR                           3
+#define SV_SRC_ALPHA                                     4
+#define SV_ONE_MINUS_SRC_ALPHA                           5
+#define SV_DST_ALPHA                                     6
+#define SV_ONE_MINUS_DST_ALPHA                           7
+#define SV_FUNC_ADD                                      8
+#define SV_BLEND_EQUATION                                9
+#define SV_BLEND_EQUATION_RGB                            10    /* same as BLEND_EQUATION */
+#define SV_BLEND_EQUATION_ALPHA                          11
 
 struct BlendParam{
     bool enable;
@@ -256,6 +268,53 @@ struct FtParamPic {
     f32 m_tint;
 };
 
+    
+    
+s32 sv2glEnum(s32 _enum) {
+    s32 mode;
+    switch (_enum) {
+        case SV_ZERO:
+            mode = GL_ZERO;
+            break;
+        case SV_ONE:
+            mode = GL_ONE;
+            break;
+        case SV_SRC_COLOR:
+            mode = GL_SRC_COLOR;
+            break;
+        case SV_ONE_MINUS_SRC_COLOR:
+            mode = GL_ONE_MINUS_SRC_COLOR;
+            break;
+        case SV_SRC_ALPHA:
+            mode = GL_SRC_ALPHA;
+            break;
+        case SV_ONE_MINUS_SRC_ALPHA:
+            mode = GL_ONE_MINUS_SRC_ALPHA;
+            break;
+        case SV_DST_ALPHA:
+            mode = GL_DST_ALPHA;
+            break;
+        case SV_ONE_MINUS_DST_ALPHA:
+            mode = GL_ONE_MINUS_DST_ALPHA;
+            break;
+        case SV_FUNC_ADD:
+            mode = GL_FUNC_ADD;
+            break;
+        case SV_BLEND_EQUATION:
+            mode = GL_BLEND_EQUATION;
+            break;
+        case SV_BLEND_EQUATION_RGB:
+            mode = GL_BLEND_EQUATION_RGB;
+            break;
+        case SV_BLEND_EQUATION_ALPHA:
+            mode = GL_BLEND_EQUATION_ALPHA;
+            break;
+        default://SV_ZERO
+            mode = GL_ZERO;
+            break;
+    }
+    return mode;
+}
 }//!namespace sv
 
 

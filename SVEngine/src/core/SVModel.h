@@ -11,7 +11,7 @@
 #include "../base/SVGBase.h"
 #include "../base/SVPreDeclare.h"
 #include "../base/SVBounds.h"
-
+#include "../rendercore/SVRTarget.h"
 #include <vector>
 
 namespace sv {
@@ -43,6 +43,7 @@ namespace sv {
         void update(f32 _dt,FMat4& _mat);
         
         void render();
+        void render(SVRTargetPtr _target);
         
         void createShadow();
         

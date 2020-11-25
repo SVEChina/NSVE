@@ -91,7 +91,8 @@ SVSkinNodePtr SVLoaderGLTFEx::building(SVInstPtr _app,
      for(s32 i=0;i<_model->animations.size();i++) {
          SVAnimateSkinPtr t_ani = _genAnimate(_app,_model,i,_path);
          t_ani->setSkes(t_skeArray);
-         _nodePtr->addAni(t_ani);
+         std::string _name = "default"+std::to_string(i);
+         _nodePtr->addAni(_name.c_str(), t_ani);
      }
     
     //构建mtl
@@ -508,7 +509,7 @@ SVAnimateSkinPtr SVLoaderGLTFEx::_genAnimate(SVInstPtr _app, tinygltf::Model* _m
         return nullptr;
     }
     tinygltf::Animation* _data = &(_model->animations[_aniIndex]);
-    SVAnimateSkinPtr t_ani = MakeSharedPtr<SVAnimateSkin>(_app,_data->name.c_str());
+    SVAnimateSkinPtr t_ani = MakeSharedPtr<SVAnimateSkin>(_app, _data->name.c_str());
     //构建轨道
     for(s32 i=0;i<_data->channels.size();i++) {
         tinygltf::AnimationChannel* t_chn = &(_data->channels[i]);
@@ -599,7 +600,8 @@ SVMtlCorePtr SVLoaderGLTFEx::_genMtl(SVInstPtr _app, tinygltf::Model* _model, s3
     
     //
     _mtlPtr->setDepthEnable(true);
-    _mtlPtr->setDepthMethod(GL_LEQUAL);
+    _mtlPtr->setDepthMethod(SV_LEQUAL);
+    _mtlPtr->setStencilEnable(true);
     
     //
     auto doubleSided = _additionalValues.find("doubleSided");
@@ -608,23 +610,22 @@ SVMtlCorePtr SVLoaderGLTFEx::_genMtl(SVInstPtr _app, tinygltf::Model* _model, s3
             _mtlPtr->setCullEnable(false);
         } else {
             _mtlPtr->setCullEnable(true);
-            _mtlPtr->setCullFace(GL_CCW, GL_BACK);
+            _mtlPtr->setCullFace(SV_CCW, SV_BACK);
         }
     }
-    
     //
-    _mtlPtr->setDepthEnable(false);
+    _mtlPtr->setBlendEnable(false);
     _mtlPtr->setBlendSeparateEnable(false);
     auto alphaMode = _additionalValues.find("alphaMode");
     if (alphaMode != _additionalValues.end()) {
         if (strcmp(alphaMode->second.string_value.c_str(), "BLEND") == 0) {
             _mtlPtr->setBlendSeparateEnable(true);
             _mtlPtr->setBlendSeparateState(
-               GL_SRC_ALPHA,
-               GL_ONE_MINUS_SRC_ALPHA,
-               GL_ONE,
-               GL_ONE_MINUS_SRC_ALPHA,
-               GL_FUNC_ADD
+               SV_SRC_ALPHA,
+               SV_ONE_MINUS_SRC_ALPHA,
+               SV_ONE,
+               SV_ONE_MINUS_SRC_ALPHA,
+               SV_FUNC_ADD
            );
         }
     }
@@ -651,7 +652,8 @@ SVSurfacePtr SVLoaderGLTFEx::_genSurface(SVInstPtr _app, tinygltf::Model* _model
                 s32 _texIndex = t_param->TextureIndex();
                 SVTexturePtr t_tex = _genTexture(_app,_model,_texIndex,_path);
                 if(t_tex) {
-                    t_surface->setTexture(t_key, t_tex);
+                    t_surface->setTexture("aTexture0", t_tex);
+//                    t_surface->setTexture(t_key, t_tex);
                 }
             }
         }else if(t_key == "baseColorFactor") {

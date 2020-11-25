@@ -86,16 +86,14 @@ void SVCameraNode::updateForce() {
 
 void SVCameraNode::_updateProj() {
     if(m_is_ortho) {
-        m_mat_p = ortho(-m_width*0.5f,m_width*0.5f,
-                        -m_height*0.5f,m_height*0.5f,
-                        m_znear,m_zfar);
+        m_mat_p = ortho(-m_width*0.5f, m_width*0.5f, -m_height*0.5f, m_height*0.5f, m_znear, m_zfar);
         if(mApp->m_rcore == E_R_METAL_OSX || mApp->m_rcore == E_R_METAL_IOS) {
             m_mat_p = hardwareProjectionMetal(m_mat_p);
             m_mat_p = transpose(m_mat_p);
         }
     }else{
         f32 t_aspect = m_width/m_height;
-        m_mat_p = perspective(m_fovy,t_aspect,m_znear,m_zfar);
+        m_mat_p = perspective(m_fovy, t_aspect, m_znear, m_zfar);
         if(mApp->m_rcore == E_R_METAL_OSX || mApp->m_rcore == E_R_METAL_IOS) {
             m_mat_p = hardwareProjectionMetal(m_mat_p);
             m_mat_p = transpose(m_mat_p);
@@ -113,6 +111,13 @@ void SVCameraNode::setProject() {
 void SVCameraNode::setOrtho() {
     m_res_lock->lock();
     m_is_ortho = true;
+    _updateProj();
+    m_res_lock->unlock();
+}
+
+void SVCameraNode::setFovy(f32 _fovy) {
+    m_res_lock->lock();
+    m_fovy = _fovy;
     _updateProj();
     m_res_lock->unlock();
 }

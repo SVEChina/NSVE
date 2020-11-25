@@ -71,6 +71,12 @@ void SVModel::render() {
     }
 }
 
+void SVModel::render(SVRTargetPtr _target) {
+    for (s32 i = 0; i < m_meshPool.size(); i++) {
+        m_meshPool[i]->render(_target);
+    }
+}
+
 void SVModel::createShadow() {
 //    for (s32 i = 0; i < m_meshPool.size(); i++) {
 //        m_meshPool[i]->createShadow();
